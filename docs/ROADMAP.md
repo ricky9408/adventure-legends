@@ -47,7 +47,9 @@ This milestone establishes a coherent playable baseline while the larger systems
 
 Acceptance: each shipped representative is normally obtainable, its evolution and ability work in the real ROM, traversal cannot be stranded by party/equipment decisions, and the reported counts match the actual acquisition graph.
 
-Implemented in the first eight-form slice: original evolutions and portraits; native roster, XP/bond and command selection; inherited field powers; optional environmental trials; transactional save5 and published-save migration; true full-screen HUD/camera; fresh, minimal and migrated controller routes. Twelve forms are designed in the authoring catalog, eight are enabled. Numerical phase damage rules, exposed storage management, Water/Metal recruits and the legendary trial are not yet shipped. Player media avoids secrets and endings.
+The quick-companion update adds a held-L directional selector and journal assignment/reordering from actually owned instances, with meaningful empty slots and safe immediate assignment saves. The story collection remains recoverable; historical evolved forms are not cloned into extra companions.
+
+Implemented in the first eight-form slice: original evolutions and portraits; native roster, XP/bond and command selection; inherited field powers; optional environmental trials; transactional save5 and published-save migration; true full-screen HUD/camera; fresh, minimal and migrated controller routes. Twelve forms are designed in the authoring catalog, eight are enabled. Numerical phase damage rules, recruitment/release beyond the story collection, Water/Metal recruits and the legendary trial are not yet shipped. Player media avoids secrets and endings.
 
 ## Then: equipment and action roles
 

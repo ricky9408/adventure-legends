@@ -15,7 +15,7 @@
   "INTRO1B": "奥の祠で、守り神が眠れずにいる。",
   "INTRO2A": "この剣と、ふたつの契約を授けよう。",
   "INTRO2B": "ホムラは炎。ミドリは芽吹きの精。",
-  "INTRO3A": "Bで呼び出し、Lで仲間を選ぶ。",
+  "INTRO3A": "Bで呼び出し、L＋十字で選ぶ。",
   "INTRO3B": "Rで力を借りる。Aで剣を振る。",
   "INTRO4A": "北へ。川ではミドリを頼りなさい。",
   "INTRO4B": "祠の灯は、ホムラで灯すのだ。",
@@ -42,7 +42,7 @@
   "RETRY": "A  祠の記憶から再挑戦",
   "PAUSE": "旅のしおり",
   "CONTROL1": "十字キー  移動     A  剣・会話",
-  "CONTROL2": "B  召喚・帰還     L  仲間を切替",
+  "CONTROL2": "B  召喚・帰還   L＋十字  仲間",
   "CONTROL3": "R  仲間の力       START  続ける",
   "CONTROL4": "ミドリは橋を育て、傷を癒す",
   "CONTROL5": "ホムラは炎で台座と鎧を破る",
@@ -343,5 +343,13 @@
   "T_ALREADY": "この願いは、もうかなった",
   "T_RESET": "仕掛けを元に戻した",
   "T_BLOCKED": "こちらには押せない",
-  "E_NEXT_GROWTH": "A 成長へ    B 戻る"
+  "E_NEXT_GROWTH": "A 成長へ    B 戻る",
+  "Q_CHOOSE": "L＋十字で仲間を選ぶ",
+  "Q_RELEASE": "Lを離して決定",
+  "Q_CANCEL": "B やめる",
+  "Q_PARTY": "仲間の編成",
+  "Q_EMPTY": "空き枠",
+  "Q_MENU_MOVE": "←→ 枠を選ぶ  ↑↓ 仲間",
+  "Q_MENU_ASSIGN": "R 入替  SELECT 外す",
+  "Q_LAST_MEMBER": "仲間はひとり以上必要"
 }

@@ -12,7 +12,7 @@ texts={
  'ELDER':'灯守り リュマ','FOX':'ホムラ','LEAF':'ミドリ',
  'INTRO1A':'森の灯が、消えかけている。','INTRO1B':'奥の祠で、守り神が眠れずにいる。',
  'INTRO2A':'この剣と、ふたつの契約を授けよう。','INTRO2B':'ホムラは炎。ミドリは芽吹きの精。',
- 'INTRO3A':'Bで呼び出し、Lで仲間を選ぶ。','INTRO3B':'Rで力を借りる。Aで剣を振る。',
+ 'INTRO3A':'Bで呼び出し、L＋十字で選ぶ。','INTRO3B':'Rで力を借りる。Aで剣を振る。',
  'INTRO4A':'北へ。川ではミドリを頼りなさい。','INTRO4B':'祠の灯は、ホムラで灯すのだ。',
  'VILLAGETALK1':'光は、ひとりでは取り戻せない。','VILLAGETALK2':'傷ついたら、ここへお帰り。',
  'BRIDGE1':'ミドリの力で、根が橋になった！','BRIDGE2':'川を渡り、北の祠を目指そう。',
@@ -24,7 +24,7 @@ texts={
  'WIN3':'里に、あたたかな灯が戻った。','WIN4':'ふたりの仲間と、次の旅へ。',
  'COMPLETE':'灯をつなぐ者', 'THANKS':'冒険してくれて、ありがとう', 'RESTART':'START  タイトルへ',
  'DEAD':'灯は、まだ消えない', 'RETRY':'A  祠の記憶から再挑戦',
- 'PAUSE':'旅のしおり', 'CONTROL1':'十字キー  移動     A  剣・会話', 'CONTROL2':'B  召喚・帰還     L  仲間を切替',
+ 'PAUSE':'旅のしおり', 'CONTROL1':'十字キー  移動     A  剣・会話', 'CONTROL2':'B  召喚・帰還   L＋十字  仲間',
  'CONTROL3':'R  仲間の力       START  続ける', 'CONTROL4':'ミドリは橋を育て、傷を癒す', 'CONTROL5':'ホムラは炎で台座と鎧を破る',
  'QUEST0':'目的：里を北へ出る', 'QUEST1':'目的：ミドリで川に橋を育てる', 'QUEST2':'目的：北東の祠へ進む',
  'QUEST3':'目的：ホムラで２つの台座に点火', 'QUEST4':'目的：北の扉へ進む', 'QUEST5':'目的：炎で鎧を砕き、剣で攻撃',
@@ -53,6 +53,7 @@ texts.update({'E_HOMURA':'ホムラ・炉守','E_MIDORI':'ミドリ・樹冠','E
 texts.update({'E_WISH_FIRE':'森の忘れ火に、小さな炎を','E_WISH_ROOT':'森の枯れ芽を、三つ育てよう','E_WISH_WIND':'風待ちの尾根の、風の工房へ','E_WISH_STONE':'夕灯の坂の、石の作業場へ','E_MOVE_FIRE':'技：火のしずく','E_MOVE_HEAL':'技：芽吹きの癒し','E_MOVE_WIND':'技：ひとひらの風','E_MOVE_STONE':'技：小さな石の守り','E_MOVE_HEARTH':'技：三つの炉火','E_MOVE_CANOPY':'技：根の庇護','E_MOVE_REFLECT':'技：返し風','E_MOVE_ARCH':'技：岩門の構え','E_LEVEL_UP':'仲間が成長した！'})
 texts.update({'T_ROOM_WIND':'風織りの庭','T_ROOM_STONE':'琥珀の工房','T_WIND_HINT1':'風を、金の糸へつなごう。','T_WIND_HINT2':'Rで風車の向きが変わる。','T_STONE_HINT1':'ふたつの印に、重みを集めよう。','T_STONE_HINT2':'Aで押して、最後に石の力を。','T_COMPLETE1':'仲間の願いが、かなった！','T_COMPLETE2':'里のしおりで、新たな一歩を。','T_FIRE_HINT1':'忘れられた炉に、火の気配。','T_FIRE_HINT2':'ホムラは、小さく尾を揺らした。','T_ROOT_HINT1':'枯れた根に、芽吹きの気配。','T_ROOT_HINT2':'ミドリは、そっと葉を広げた。','T_RESTORED':'小さな場所に、灯が戻った','T_NEED_PLATES':'ふたつの印が、重みを待つ','T_ALREADY':'この願いは、もうかなった','T_RESET':'仕掛けを元に戻した','T_BLOCKED':'こちらには押せない'})
 texts.update({'E_NEXT_GROWTH':'A 成長へ    B 戻る'})
+texts.update({'Q_CHOOSE':'L＋十字で仲間を選ぶ','Q_RELEASE':'Lを離して決定','Q_CANCEL':'B やめる','Q_PARTY':'仲間の編成','Q_EMPTY':'空き枠','Q_MENU_MOVE':'←→ 枠を選ぶ  ↑↓ 仲間','Q_MENU_ASSIGN':'R 入替  SELECT 外す','Q_LAST_MEMBER':'仲間はひとり以上必要'})
 items=[]
 for name,text in texts.items():
     f=small if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL') else font

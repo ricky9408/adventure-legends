@@ -30,7 +30,7 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     library=Path(temp)/'game-host.so'
     modules=['game','assets','ui','world','campaign_art','campaign_rules','save4',
              'creatures','creature_data','save5','progression','evolution_art',
-             'advanced_powers','trials','trial_art']
+             'advanced_powers','trials','trial_art','quickparty']
     subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
         '-shared','-fPIC','-O0','-std=c99','-fno-builtin','-Wno-attributes',
         '-Wno-pointer-to-int-cast','-Wno-int-to-pointer-cast',
@@ -185,6 +185,32 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     live.quest_reserved[0]=0;lib.save5_test_fail_after(-1)
     lib.save_game();assert get('toast_ticks')==get('save_failure_notice')==0
     drain(PAUSE);assert get('save_failed')==0
+    # New party panel: the real R assignment path shares the same failure
+    # notice and transactional recovery, without changing any owned instance.
+    put('game_state',PAUSE);put('journal_tab',2)
+    put('quickparty_menu_slot',0)
+    put('quickparty_menu_candidate',live.roster.party[1])
+    old_party=bytes(live.roster.party);owned_before=bytes(live.roster.instances)
+    prior=load();before=bytes(sram)
+    lib.save5_test_fail_after(0);update(256)
+    new_party=bytes(live.roster.party)
+    assert new_party!=old_party and get('save_requested')==1
+    assert bytes(live.roster.instances)==owned_before
+    drain(PAUSE);wait_updates(140)
+    assert get('save_failed')==get('save_failure_notice')==1
+    assert get('toast_ticks')==0 and lib.save_notice_visible()==1
+    assert bytes(sram)==before and bytes(load().roster.party)==old_party
+    assert bytes(live.roster.instances)==owned_before
+    update(2)
+    assert get('game_state')==PLAY and get('save_failure_notice')==0
+    assert get('save_failed')==1
+    lib.save5_test_fail_after(-1);lib.save_game();drain()
+    recovered=load()
+    assert bytes(recovered.roster.party)==new_party
+    assert bytes(recovered.roster.instances)==owned_before
+    assert recovered.campaign.sequence==prior.campaign.sequence+1
+    assert get('save_failed')==get('save_failure_notice')==0
+
     print(json.dumps({'passed':True,
                       'scope':'Synthetic host C state/SRAM fault injection plus actual notice/glyph/OBJ helpers',
                       'failed_write_preserves_prior_bank':True,'failure_feedback_retained':True,
@@ -194,4 +220,6 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
                       'successful_retry_clears_stale_error':True,
                       'rendered_modal_states':modal_states,'verified_glyph_pixels':len(glyph_pixels),
                       'hud_and_world_obj_cannot_obscure_notice':True,'normal_play_has_no_notice_bar':True,
+                      'party_assignment_failure_visible_after_wait':True,
+                      'party_assignment_retry_preserves_ownership':True,
                       'native_rom_gameplay':False,'emulator_game_ram_injection':False},indent=2))

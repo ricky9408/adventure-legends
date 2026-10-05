@@ -1,0 +1,22 @@
+[
+  {
+    "scene": "fullscreen-grove-scroll",
+    "hardware_frames": 360,
+    "native_hz": 59.72750056960583,
+    "simulation_updates": 360,
+    "display_flips": 360,
+    "maximum_cycles": 112622,
+    "frame_budget_cycles": 280896,
+    "source": "emulated GBA VBlank and displayed DISPCNT page, never wall-clock host FPS"
+  },
+  {
+    "scene": "fullscreen-eight-hearts-companion",
+    "hardware_frames": 360,
+    "native_hz": 59.72750056960583,
+    "simulation_updates": 360,
+    "display_flips": 360,
+    "maximum_cycles": 27037,
+    "frame_budget_cycles": 280896,
+    "source": "emulated GBA VBlank and displayed DISPCNT page, never wall-clock host FPS"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "transition": "dialog-ending-replay-cold",
+    "snapshot": "ending-replay-page-0",
+    "controller_key": 0,
+    "hardware_frames": 60,
+    "first_target_state_frame": 1,
+    "updates": 60,
+    "page_flips": 60,
+    "exceeds_single_frame_cycle_budget": false,
+    "strict_one_update_and_present_per_frame": true,
+    "strict_one_frame_cycle_budget": true,
+    "invalid_reason": null,
+    "trace": "dialog-ending-replay-cold-frames.json"
+  }
+]

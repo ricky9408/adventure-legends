@@ -22,9 +22,9 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o
 
-.PHONY: all clean tools assets test-tools test test-campaign test-systems gameplay-video developer-video
+.PHONY: all clean tools assets test-tools test test-campaign test-systems test-quickparty test-quickparty-evolved quickparty-video gameplay-video developer-video
 all: $(TARGET).gba
 
 $(BUILD):
@@ -69,8 +69,10 @@ test: all
 	$(PYTHON) tests/test_creatures.py
 	$(PYTHON) tests/test_trials.py
 	$(PYTHON) tests/test_save_feedback.py
-	$(MAKE) test-campaign
 	$(MAKE) test-systems
+	$(MAKE) test-quickparty
+	$(MAKE) test-quickparty-evolved
+	$(MAKE) test-campaign
 
 # State fixtures and timing evidence are always produced by this exact ROM.
 test-campaign: all
@@ -103,3 +105,14 @@ clean:
 	rm -f $(BUILD)/*.o $(BUILD)/*.d $(TARGET).elf $(TARGET).gba $(TARGET).map $(TARGET).sym
 
 -include $(OBJECTS:.o=.d)
+
+test-quickparty: all
+	$(PYTHON) tests/quickparty_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/quickparty-qa
+	$(PYTHON) tests/quickparty_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --synthetic-interruptions --output build/quickparty-synthetic-qa
+
+# Requires the matching controller journey produced by test-systems.
+test-quickparty-evolved: all
+	$(PYTHON) tests/quickparty_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --journey build/evolution-qa/evolution-report.json --output build/quickparty-evolved-qa
+
+quickparty-video: all
+	$(PYTHON) tests/capture_quickparty_demo.py
