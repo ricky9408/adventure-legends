@@ -1,0 +1,127 @@
+{
+  "verification": "Independent PR4 review corrections",
+  "date": "2026-10-05",
+  "original_head": "de2e1c55f9eceeddee5b1aaec850bc8a64ddafaf",
+  "original_rom_sha256": "d19e9b93df294e0d54de277ab90e3d2571c402adc68e82d8adb0a4a6114e6a45",
+  "rom_sha256": "63a1161f35ad728f2d72134f0d3183ee5d6449389dbc46e375bd0ebcc236261d",
+  "rom_bytes": 1823228,
+  "symbols_sha256": "8f98f35b4fa0d0ec68f39743bdbbb6bfc936d6209435cfb06b38ce2a5530e2fa",
+  "iwram_code_bytes": 26712,
+  "ewram_bytes": 44984,
+  "corrections": [
+    "Use and assert valid v5 CRC32 in all six native malformed-save cases.",
+    "Reset expedition credit on actual village departures, retaining ledgers during independent checkpoint reload.",
+    "Keep save failure visible on paused/modal panels until acknowledgement or a new save attempt."
+  ],
+  "verification_commands": [
+    "make test",
+    "make test-tools"
+  ],
+  "reports": {
+    "first-chapter": {
+      "report": "build/qa/playthrough.json",
+      "report_sha256": "f044fc6105b9f6c2e2815cf66473884192ddddb1f238dc3bb2636b26d58ea1a6",
+      "passed_assertions": 24,
+      "failures": 0
+    },
+    "review": {
+      "report": "build/review/review-tests.json",
+      "report_sha256": "067136083ddd9056e1066169863ba9e09440751ee39a28f79a1f4b22214c5df0",
+      "passed_assertions": 20,
+      "failures": 0
+    },
+    "exploration": {
+      "report": "build/exploration/exploration-tests.json",
+      "report_sha256": "8fbdea86ff9ae10f10cd82a188482621a705edecda6dbad8185b199ee7ccfce0",
+      "passed_assertions": 141,
+      "failures": 0
+    },
+    "campaign-minimal": {
+      "report": "build/campaign-qa/campaign-report.json",
+      "report_sha256": "61096389b0b18bc0d059c3a60fd45f942623e42b23b86f25217360377ff8e641",
+      "passed_assertions": 3425,
+      "failures": 0
+    },
+    "campaign-optional": {
+      "report": "build/campaign-optional/campaign-report.json",
+      "report_sha256": "ca6ddf1104837d157d28a5b1e3f0a13b60293a43b18d2faccb4173867abd3399",
+      "passed_assertions": 3481,
+      "failures": 0
+    },
+    "expedition": {
+      "report": "build/expedition-qa/expedition-report.json",
+      "report_sha256": "75d6dd3bdee436446f96070eb4bf525d443ec0e616eb5a1d6ef1ce246a7dd35d",
+      "passed_assertions": 115,
+      "failures": 0
+    },
+    "fullscreen": {
+      "report": "build/fullscreen-qa/fullscreen-report.json",
+      "report_sha256": "d04629a25f03b5f8fcf824ec1a4c758e1955427f0fb07eee4336935cfe053c84",
+      "passed_assertions": 97,
+      "failures": 0
+    },
+    "evolution-eight": {
+      "report": "build/evolution-qa/evolution-report.json",
+      "report_sha256": "01f6c4d4441033f73ee217d0cf3f6112c278fd86ebc0cabe1404cfa63cda0358",
+      "passed_assertions": 1137,
+      "failures": 0
+    },
+    "evolution-six": {
+      "report": "build/evolution-six-hearts/evolution-report.json",
+      "report_sha256": "10c94346d79096b580a290292c63a081da578cde62a14fabd923017b29203711",
+      "passed_assertions": 1106,
+      "failures": 0
+    },
+    "evolution-migrated": {
+      "report": "build/evolution-migrated/evolution-report.json",
+      "report_sha256": "a2a93c382dfffb9c336d46d35b553c3f67d8d510f34c4ca53b818cfbfc01e8e5",
+      "passed_assertions": 698,
+      "failures": 0
+    },
+    "advanced-powers": {
+      "report": "build/advanced-power-qa/advanced-power-report.json",
+      "report_sha256": "b060423f76889781105bde82967cdc5021bef6b0dd79f3847c093976d9dfc1f8",
+      "passed_assertions": 480,
+      "failures": 0
+    },
+    "cadence-minimal": {
+      "report": "build/campaign-performance-minimal/campaign-performance.json",
+      "report_sha256": "5946d05717c888db19a791136a9105f9c421642e5ce66c351ed09c4ce61813b9",
+      "strict_native_cadence_passed": true,
+      "steady_scenes": 60,
+      "steady_frames": 20460,
+      "cold_windows": 28,
+      "cold_frames": 1680,
+      "max_render_cycles": 217148
+    },
+    "cadence-optional": {
+      "report": "build/campaign-performance-optional/campaign-performance.json",
+      "report_sha256": "5e490e784f38b3fcfd2b7065195182217bff4a7b96c8f32494723dd7fbe11cb1",
+      "strict_native_cadence_passed": true,
+      "steady_scenes": 60,
+      "steady_frames": 20460,
+      "cold_windows": 28,
+      "cold_frames": 1680,
+      "max_render_cycles": 217690
+    }
+  },
+  "native_assertions_total": 10724,
+  "native_assertion_scope": "Native emulator assertions include controller journeys and explicitly labelled malformed SRAM input cases; host fault-injection cases are separate.",
+  "save_windows_checked": 480,
+  "max_steady_save_cycles": 262978,
+  "host_checks": [
+    "save4",
+    "save5",
+    "creatures",
+    "trials",
+    "asynchronous save failure/paused wait/close/retry",
+    "advanced-power source contracts"
+  ],
+  "historical_artifacts": "Existing docs/systems evidence, player preview and original source ZIP describe the original delivered milestone ROM; they remain unchanged. This report identifies the corrected ROM independently.",
+  "known_limits": [
+    "Cold checkpoint decode is a blocking load transition, separate from strict gameplay/incremental-writer cadence.",
+    "No hosted CI configured.",
+    "Physical GBA hardware, other compiler/emulator releases and the macOS bridge path are unverified.",
+    "8 obtainable forms; 12 designed forms; 128 reserved identities. Numerical phase modifiers are not applied to legacy encounters."
+  ]
+}

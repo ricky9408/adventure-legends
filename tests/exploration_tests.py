@@ -465,7 +465,10 @@ class ExplorationRun:
             for bank in banks:
                 base = bank['offset']
                 data[base + offset] = value
-                data[base + 30:base + 32] = binascii.crc_hqx(data[base:base + 16], 0xffff).to_bytes(2, 'little')
+                crc = bank_crc5(data[base:base + BANK_SIZE])
+                data[base + 16:base + 20] = crc.to_bytes(4, 'little')
+            assert len(committed_banks(data)) == len(banks), (
+                f'version 5 malformed {label} fixture must retain valid full-bank CRC32 checksums')
             invalid = self.out / ('v5-invalid-' + label.replace(' ', '-') + '.sav')
             invalid.write_bytes(data)
             self.reopen(invalid)

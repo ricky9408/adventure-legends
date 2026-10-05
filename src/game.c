@@ -33,6 +33,8 @@ typedef unsigned char u8; typedef unsigned short u16; typedef unsigned int u32;
 #define SAVE_PENDING 6
 #define EVOLVE_CONFIRM 7
 #define EVOLVE_ANIM 8
+#define SAVE_NOTICE_Y 8
+#define SAVE_NOTICE_H 19
 /* These UI palette slots are reconciled with the art manifest at build time. */
 #define INK 1
 #define CREAM PAL_GOLD4
@@ -69,6 +71,10 @@ volatile unsigned int chapter_flags,room_flags,optional_flags,story_seen;
 volatile int boss_state,boss_phase,boss_state_ticks,boss_hp_max,stone_guard,guard_invuln,transition_lock,save_failed,checkpoint_spawn;
 int boss_aimx,boss_aimy,boss_dx,boss_dy,boss_pattern,hazard_mode,power_effect;
 int dialogue_action,dialogue_seen,dialog_speakers[6];
+/* Acknowledging the notice does not turn a failed write into a successful one. */
+int save_failure_notice;
+int save_notice_visible(void){return save_failure_notice&&game_state!=PLAY&&game_state!=TITLE&&game_state!=SAVE_PENDING;}
+int save_notice_left(void){return (240-ui_texts[TX_C_SAVE_FAILED].width-10)/2;}
 
 int gfx_props_room=-1;u32 gfx_props_progress=0xFFFFFFFF;
 COLD void enter_room(int,int);
@@ -94,8 +100,12 @@ void *memcpy(void *d,const void*s,unsigned int n){u8*a=d;const u8*b=s;while(n--)
 void pix(int x,int y,u8 c){if((unsigned)x>=240||(unsigned)y>=160)return;u16 *p=screen+y*120+(x>>1);u16 v=*p;*p=(x&1)?((v&255)|(c<<8)):((v&0xFF00)|c);}
 void rect(int x,int y,int w,int h,u8 c){int yy,xx;u32 fill=(u32)c*0x01010101u;if(x<0){w+=x;x=0;}if(y<0){h+=y;y=0;}if(x+w>240)w=240-x;if(y+h>160)h=160-y;if(w<1||h<1)return;
  for(yy=y;yy<y+h;yy++){int left=x,right=x+w;if(left&1)pix(left++,yy,c);if(right&1)pix(--right,yy,c);u16 *p=screen+yy*120+(left>>1);
+  /* Host pixel tests use the same CPU fill without accessing DMA registers. */
+#ifndef GAME_HOST_TEST
   if(right-left>=32){if(left&2){*p++=(u16)fill;left+=2;}if((right-left)&2){screen[yy*120+(right>>1)-1]=(u16)fill;right-=2;}REG32(0x040000D4)=(u32)&fill;REG32(0x040000D8)=(u32)p;REG32(0x040000DC)=0x85000000|((right-left)>>2);}
-  else for(xx=left;xx<right;xx+=2)*p++=(u16)fill;
+  else
+#endif
+  for(xx=left;xx<right;xx+=2)*p++=(u16)fill;
  }}
 void box(int x,int y,int w,int h){rect(x,y,w,h,UI_BG);rect(x,y,w,1,UI_BORDER);rect(x,y+h-1,w,1,UI_BORDER);rect(x,y,1,h,UI_BORDER);rect(x+w-1,y,1,h,UI_BORDER);}
 void text(int id,int x,int y,int col){const UiText *t=&ui_texts[id];const UiRun*r=t->runs[x&1];int n=t->count[x&1];u16 *base=screen+y*120+(x>>1),color=col|(col<<8);
@@ -129,7 +139,7 @@ int px_q8,py_q8,cx_q8,cy_q8,walk_phase,hitstop,transition;
 int cached_armor[2]={-1,-1};
 int gfx_hud_code=-1,gfx_hud_bar=-1,gfx_ending_revision=-1,area_ticks;
 /* Exact cache fields avoid packed-key collisions as rooms/text/catalog grow. */
-#define CACHE_FIELDS 21
+#define CACHE_FIELDS 22
 int cache_valid[2];u32 cache_fields[2][CACHE_FIELDS];
 #define OBJ_HERO 6144
 #define OBJ_COMPANION 6400
@@ -173,6 +183,9 @@ void obj_add(int off,int x,int y,int w,int h,int priority,int depth,int flip){in
  if(room==1&&(priority==1||priority==2)){x-=camera_x;y-=camera_y;}
 
  if(obj_count>=120||x<=-w||x>=240||y<=-h||y>=160)return;
+ /* The exceptional notice sits above modal panels; even corner HUD OBJ must
+  * not cover its glyphs. Normal gameplay keeps its transparent floating HUD. */
+ if(save_notice_visible()){int left=save_notice_left();if(x+w>left&&x<240-left&&y+h>SAVE_NOTICE_Y&&y<SAVE_NOTICE_Y+SAVE_NOTICE_H)return;}
  /* Menus are background pixels: hide actors where a panel covers them. */
  if(priority==1||priority==2){if(game_state==PAUSE||game_state==DEAD||game_state==EVOLVE_CONFIRM||game_state==EVOLVE_ANIM)return;if(game_state==DIALOG&&y+h>99)return;if(game_state==SAVE_PENDING&&x+w>37&&x<203&&y+h>77&&y<111)return;}
  if(w==16&&h==16)size=1;else if(w==32&&h==32)size=2;else if(w==32&&h==16){shape=1;size=2;}else if(w==32&&h==8){shape=1;size=1;}else if(w==16&&h==8){shape=1;size=0;}
@@ -243,16 +256,17 @@ void sound_init(void){REG16(0x04000084)=0x80;REG16(0x04000080)=0x3377;REG16(0x04
 void sfx(int id){REG16(0x04000060)=id==1?0x21:0;REG16(0x04000062)=id==3?0xA180:0x8180;REG16(0x04000064)=0x8000|(id==1?1850:id==2?1700:id==3?1200:1950);}
 void music(void){static const u16 notes[]={1547,1750,1840,1750,1602,1750,1820,1750,1673,1800,1874,1800,1602,1700,1750,1602};if(++music_tick>=24){music_tick=0;REG16(0x04000068)=0x2080;REG16(0x0400006C)=0x8000|(notes[music_step++&15]+(room>=9?-60:room>=4?70:0));}}
 void toast(int id){toast_id=id;toast_ticks=110;}
+void acknowledge_save_failure(void){save_failure_notice=0;if(toast_id==TX_C_SAVE_FAILED)toast_ticks=0;}
 void dialogue(int a,int b,int next){dialog_lines[0]=a;dialog_lines[1]=b;dialog_speakers[0]=room==0?TX_ELDER:room==3?TX_BOSS:TX_SUBTITLE;dpage=0;dcount=1;dafter=next;dialogue_action=dialogue_seen=0;game_state=DIALOG;}
 void addpage(int a,int b){if(dcount>=6)return;dialog_lines[dcount*2]=a;dialog_lines[dcount*2+1]=b;dialog_speakers[dcount]=dialog_speakers[0];dcount++;}
 COLD void make_save(CampaignSave *v,int r,int spawn){zero(v,sizeof *v);v->room=r;v->spawn=spawn;v->chapter_flags=chapter_flags;v->bridge=bridge_open;v->torches=torches;v->relic=relic_found;v->camp=camp_unlocked;v->room_flags=room_flags;v->optional_flags=optional_flags;v->story_seen=story_seen;v->spirit=spirit;}
-COLD void save_at(int r,int spawn){if(r>=14){r=0;spawn=3;}make_save(&adventure_save.campaign,r,spawn);if(save_failed&&toast_id==TX_C_SAVE_FAILED)toast_ticks=0;save_failed=0;save_requested=1;saved_room=r;}
+COLD void save_at(int r,int spawn){if(r>=14){r=0;spawn=3;}make_save(&adventure_save.campaign,r,spawn);acknowledge_save_failure();save_failed=0;save_requested=1;saved_room=r;}
 COLD void save_game(void){save_at(room,checkpoint_spawn);}
 COLD int check_save(void){return save5_has_valid();}
-COLD void save_frame(void){if(save_requested&&game_state!=SAVE_PENDING){save_requested=0;if(progression_save_begin()){save_resume_state=game_state;game_state=SAVE_PENDING;}else{save_failed=1;toast(TX_C_SAVE_FAILED);}}}
+COLD void save_frame(void){if(save_requested&&game_state!=SAVE_PENDING){save_requested=0;if(progression_save_begin()){save_resume_state=game_state;game_state=SAVE_PENDING;}else{save_failed=save_failure_notice=1;toast(TX_C_SAVE_FAILED);}}}
 COLD void show_scene(int id,int action,unsigned seen){const CampaignDialogue*d=&campaign_dialogues[id];int i;dpage=0;dcount=d->pages;dafter=PLAY;dialogue_action=action;dialogue_seen=seen;for(i=0;i<dcount;i++){dialog_lines[i*2]=d->lines[i*2];dialog_lines[i*2+1]=d->lines[i*2+1];dialog_speakers[i]=d->speaker;}game_state=DIALOG;}
 COLD void append_scene(int id){const CampaignDialogue*d=&campaign_dialogues[id];int i;for(i=0;i<d->pages&&dcount<6;i++){dialog_lines[dcount*2]=d->lines[i*2];dialog_lines[dcount*2+1]=d->lines[i*2+1];dialog_speakers[dcount++]=d->speaker;}}
-COLD void finish_dialogue(void){story_seen|=dialogue_seen;game_state=dafter;if(dialogue_action==1)enter_room(0,3);else if(dialogue_action==2){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);game_state=WIN;}else if(dialogue_seen)save_game();dialogue_action=dialogue_seen=0;}
+COLD void finish_dialogue(void){story_seen|=dialogue_seen;game_state=dafter;if(dialogue_action==1)enter_room(0,3);else if(dialogue_action==2){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);game_state=WIN;}else if(dialogue_seen)save_game();if(game_state==PLAY)acknowledge_save_failure();dialogue_action=dialogue_seen=0;}
 void camera_update(int snap){int tx,ty;if(room!=1){camera_x=camera_y=camera_fx=camera_fy=0;return;}
  tx=px-120;ty=py-80;if(tx<0)tx=0;if(tx>WORLD_W-240)tx=WORLD_W-240;if(ty<0)ty=0;if(ty>WORLD_H-160)ty=WORLD_H-160;
  if(snap){camera_fx=tx*256;camera_fy=ty*256;}else{if(ab(tx*256-camera_fx)<4)camera_fx=tx*256;else camera_fx+=(tx*256-camera_fx)/4;if(ab(ty*256-camera_fy)<4)camera_fy=ty*256;else camera_fy+=(ty*256-camera_fy)/4;}
@@ -263,7 +277,7 @@ COLD void spawn_enemies(void){zero(enemies,sizeof enemies);zero(shots,sizeof sho
  if(room==2){enemies[0]=(Enemy){55,113,2,0,1};enemies[1]=(Enemy){184,110,2,0,1};}
  if(room>=4&&room<14){const CampaignRoom*d=&campaign_rooms[room-4];int i;if(room==6&&(room_flags&CF_SKY_PATROL_CLEAR))return;for(i=0;i<d->enemy_count;i++)enemies[i]=(Enemy){d->enemies[i].x,d->enemies[i].y,d->enemies[i].hp,0,d->enemies[i].kind};}}
 
-COLD void enter_room(int r,int fromnorth){int oldroom=room;if((unsigned)r>=16)return;if(r==1&&room==0&&!restoring_checkpoint)creatures_begin_expedition(&adventure_save.roster);room=r;trials_enter(r);checkpoint_spawn=fromnorth;px=120;py=fromnorth==1?40:139;invuln=90;boss_time=0;roll_ticks=roll_cd=attack_buffer=combo_timer=combo_step=0;swing=sword_cd=hitstop=0;spawn_enemies();
+COLD void enter_room(int r,int fromnorth){int oldroom=room;if((unsigned)r>=16)return;if(room==0&&r!=0&&!restoring_checkpoint)creatures_begin_expedition(&adventure_save.roster);room=r;trials_enter(r);checkpoint_spawn=fromnorth;px=120;py=fromnorth==1?40:139;invuln=90;boss_time=0;roll_ticks=roll_cd=attack_buffer=combo_timer=combo_step=0;swing=sword_cd=hitstop=0;spawn_enemies();
  if(r==0){px=fromnorth==4?180:fromnorth==5?76:120;py=fromnorth==3?118:128;hp=max_hp;if(fromnorth==1||fromnorth==2)checkpoint_spawn=0;}
  if(r>=2&&fromnorth==2)checkpoint_spawn=0;
  if(r>=4){px=120;py=fromnorth==1?52:132;}
@@ -356,11 +370,11 @@ void update_boss(void){int i;if(!boss_active())return;if(room>=4&&room<14){campa
 void update_shots(void){int i;for(i=0;i<12;i++){Shot*s=&shots[i];if(!s->life)continue;s->life--;s->x+=s->dx;s->y+=s->dy;if(s->x<8||s->x>(room==1?WORLD_W-8:232)||s->y<(room==1?8:26)||s->y>(room==1?WORLD_H-8:151)||((room==1||room>=4)&&solid(s->x,s->y))){s->life=0;continue;}if(s->owner&&near(px,py,s->x,s->y,11)){damage();s->life=0;}if(!s->owner&&shot_effects[i]==SHOT_EFFECT_FIRE&&room==3&&boss_active()&&!boss_armor&&near(s->x,s->y,boss_x,boss_y,25)){boss_armor=210;boss_flash=10;s->life=0;}
  if(!s->owner&&shot_effects[i]==SHOT_EFFECT_FIRE&&room==2){int old=torches;if(near(s->x,s->y,64,64,14)){torches|=1;s->life=0;}if(near(s->x,s->y,176,64,14)){torches|=2;s->life=0;}if(torches!=old){save_game();if(torches==3)dialogue(TX_GATE1,TX_GATE2,PLAY);}}}}
 void update(void){int dx=0,dy=0;frame++;music();if(transition)transition--;if(toast_ticks)toast_ticks--;if(game_state==TITLE){if(pressed&KEY_START)start_game(has_save);else if(pressed&KEY_SELECT)start_game(0);return;}
- if(game_state==SAVE_PENDING){int status=progression_save_step();if(status==SAVE5_DONE){save_failed=0;has_save=1;game_state=save_resume_state;}else if(status==SAVE5_FAILED){save_failed=1;game_state=save_resume_state;toast(TX_C_SAVE_FAILED);}return;}
+ if(game_state==SAVE_PENDING){int status=progression_save_step();if(status==SAVE5_DONE){save_failed=0;acknowledge_save_failure();has_save=1;game_state=save_resume_state;}else if(status==SAVE5_FAILED){save_failed=save_failure_notice=1;game_state=save_resume_state;toast(TX_C_SAVE_FAILED);}return;}
  if(game_state==EVOLVE_CONFIRM){progression_confirm_input(pressed);return;}
  if(game_state==EVOLVE_ANIM){progression_evolution_tick();return;}
  if(game_state==DIALOG){if(pressed&KEY_A){sfx(4);if(++dpage>=dcount)finish_dialogue();}return;}
- if(game_state==PAUSE){if(progression_menu_input(pressed))return;if((pressed&KEY_R)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);return;}if(pressed&KEY_A)journal_tab=(journal_tab+1)%4;if(pressed&KEY_L){unsigned m=save4_unlock_mask(chapter_flags);do{spirit=(spirit+1)&3;}while(!(m&(1u<<spirit)));gfx_companion_frame=-1;progression_select(spirit);}if(pressed&(KEY_START|KEY_SELECT|KEY_B))game_state=PLAY;return;}
+ if(game_state==PAUSE){if(progression_menu_input(pressed))return;if((pressed&KEY_R)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);return;}if(pressed&KEY_A)journal_tab=(journal_tab+1)%4;if(pressed&KEY_L){unsigned m=save4_unlock_mask(chapter_flags);do{spirit=(spirit+1)&3;}while(!(m&(1u<<spirit)));gfx_companion_frame=-1;progression_select(spirit);}if(pressed&(KEY_START|KEY_SELECT|KEY_B)){acknowledge_save_failure();game_state=PLAY;}return;}
  if(game_state==DEAD){if(pressed&KEY_A){hp=max_hp;ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,2);}return;}
  if(game_state==WIN){if(pressed&KEY_START){game_state=PLAY;enter_room(0,3);}return;}
  ticks++;{int i;for(i=0;i<6;i++)if(impacts[i].life)impacts[i].life--;}if(hitstop){hitstop--;return;}if(pressed&KEY_START){journal_tab=room==1?1:0;game_state=PAUSE;return;}if(area_ticks)area_ticks--;if(invuln)invuln--;if(swing)swing--;if(sword_cd)sword_cd--;if(ability_cd)ability_cd--;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;advanced_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;if(roll_cd)roll_cd--;if(combo_timer)combo_timer--;if(attack_buffer)attack_buffer--;
@@ -401,6 +415,7 @@ void wordmark(void){const char*s="EMBERBOND";int i,x,y;for(i=0;i<9;i++)for(y=0;y
 COLD void draw_route_map(void){int i;const int names[]={TX_C_MAP_GROVE,TX_C_MAP_SKY,TX_C_MAP_CORE};int selected=room==14?1:room>=9?2:room>=4?1:0;box(8,31,224,122);centered(TX_C_MAP_ROUTE,35,GOLD);line(48,78,192,78,PAL_GOLD2);for(i=0;i<3;i++){int x=48+i*72;rect(x-9,66,18,22,(chapter_flags&(1u<<i))?PAL_GOLD3:PAL_STONE1);rect(x-5,70,10,14,(chapter_flags&(1u<<i))?PAL_FIRE2:PAL_STONE3);if(selected==i){rect(x-12,62,24,2,TEAL);rect(x-12,92,24,2,TEAL);}text(names[i],x-ui_texts[names[i]].width/2,100,CREAM);}centered(TX_C_MAP_RETURN,120,CREAM);centered(TX_C_MAP_NEXT,136,TEAL);}
 COLD void draw_companion_journal(void){int i;unsigned unlocked=save4_unlock_mask(chapter_flags);const int names[]={TX_FOX,TX_LEAF,TX_C_WIND,TX_C_STONE};const int help[]={TX_CONTROL5,TX_CONTROL4,TX_C_WIND_HELP,TX_C_STONE_HELP};box(8,31,224,122);centered(TX_C_SELECTED,35,GOLD);for(i=0;i<4;i++){int x=45+i*50;if(i==spirit){rect(x-11,56,22,22,GOLD);rect(x-10,57,20,20,INK);}if(unlocked&(1u<<i))sprite(companion_pixels(i,0,0),x-8,59,16,16,0);else rect(x-5,64,10,10,PAL_SLATE);text((unlocked&(1u<<i))?names[i]:TX_C_UNKNOWN,x-18,81,CREAM);}centered(help[spirit],104,TEAL);centered(TX_C_CONTROL_CYCLE,121,CREAM);centered(TX_E_NEXT_GROWTH,138,TEAL);}
 int quest_id(void){if(room==14)return TX_T_WIND_HINT1;if(room==15)return TX_T_STONE_HINT1;if(room<4&&(chapter_flags&SAVE4_CORE_CLEAR))return chapter_flags&SAVE4_ENDING_SEEN?TX_C_QUEST_COMPLETE:TX_C_QUEST_RETURN;if(room<4&&(chapter_flags&SAVE4_SKY_CLEAR))return TX_C_QUEST_ACT3;if(room<4&&(chapter_flags&SAVE4_GROVE_CLEAR))return TX_C_QUEST_ACT2;if(room==0)return TX_QUEST0;if(room==1)return bridge_open?TX_QUEST2:TX_QUEST1;if(room==2)return torches==3?TX_QUEST4:TX_QUEST3;if(room==3)return TX_QUEST5;{const int q[]={TX_C_QUEST_ACT2,TX_C_QUEST_SKY_VANE,TX_C_QUEST_SKY_PATROL,TX_C_QUEST_SKY_RELAY,TX_C_QUEST_SKY_BOSS,TX_C_QUEST_ACT3,TX_C_QUEST_CORE_WEIGHTS,TX_C_QUEST_CORE_ROOTS,TX_C_QUEST_CORE_LAMPS,TX_C_QUEST_CORE_BOSS};return q[room-4];}}
+COLD void draw_save_failure_notice(void){if(save_notice_visible()){int left=save_notice_left();box(left,SAVE_NOTICE_Y,240-left*2,SAVE_NOTICE_H);centered(TX_C_SAVE_FAILED,SAVE_NOTICE_Y+2,CREAM);}}
 COLD void render_static(void){screen=(u16*)(page?0x0600A000:0x06000000);if(game_state==TITLE){copy_bg(BACK_TITLE);wordmark();centered(TX_SUBTITLE,60,CREAM);centered(TX_TAGLINE,84,CREAM);box(43,112,154,36);centered(has_save?TX_CONTINUE:TX_START,114,GOLD);if(has_save)centered(TX_NEW,130,CREAM);else centered(TX_BUILD,132,CREAM);return;}
  draw_world();if(game_state==DIALOG){box(5,99,230,56);text(dialog_speakers[dpage],13,103,GOLD);text(dialog_lines[dpage*2],13,120,CREAM);text(dialog_lines[dpage*2+1],13,136,CREAM);text(TX_NEXT,207,102,GOLD);}
  if(game_state==PAUSE&&journal_tab==1){if(room==1)draw_map();else draw_route_map();}
@@ -411,9 +426,10 @@ COLD void render_static(void){screen=(u16*)(page?0x0600A000:0x06000000);if(game_
  if(game_state==EVOLVE_CONFIRM)progression_draw_confirm();
  if(game_state==EVOLVE_ANIM)progression_draw_evolution();
  if(game_state==DEAD){box(22,60,196,57);centered(TX_DEAD,69,GOLD);centered(TX_RETRY,94,CREAM);}
- if(game_state==WIN){copy_bg(BACK_TITLE);box(17,40,206,103);centered(TX_COMPLETE,49,GOLD);centered(TX_THANKS,75,CREAM);centered(TX_C_POSTGAME,122,CREAM);centered(TX_C_FINAL_SMALL,149,GOLD);}}
+ if(game_state==WIN){copy_bg(BACK_TITLE);box(17,40,206,103);centered(TX_COMPLETE,49,GOLD);centered(TX_THANKS,75,CREAM);centered(TX_C_POSTGAME,122,CREAM);centered(TX_C_FINAL_SMALL,149,GOLD);}
+ draw_save_failure_notice();}
 int boss_banner(void){if(room==3)return boss_armor?TX_EXPOSED:TX_ARMORED;if(boss_state==5)return TX_C_BOSS_EXPOSED;if(room==8)return boss_state==4?TX_C_WIND_WINDOW:TX_C_BOSS_WARN;if(boss_state==6)return TX_C_PHASE_CHANGE;if(boss_state!=4)return TX_C_BOSS_WARN;return boss_phase==0?TX_C_NEED_STONE:boss_phase==1?TX_C_NEED_WIND:TX_C_NEED_FIRE;}
-void render(void){u32 key[CACHE_FIELDS]={room,game_state,spirit,summoned,bridge_open,torches,dpage,game_state==PLAY&&toast_ticks>0,game_state==PLAY?toast_id:0,has_save,journal_tab,room_flags,chapter_flags,optional_flags,game_state==DIALOG?dialog_lines[dpage*2]:-1,game_state==DIALOG?dialog_lines[dpage*2+1]:-1,game_state==DIALOG?dialog_speakers[dpage]:-1,room==1?camera_x:0,room==1?camera_y:0,progression_revision,area_ticks>0};int i,changed=!cache_valid[page];
+void render(void){u32 key[CACHE_FIELDS]={room,game_state,spirit,summoned,bridge_open,torches,dpage,game_state==PLAY&&toast_ticks>0,game_state==PLAY?toast_id:0,has_save,journal_tab,room_flags,chapter_flags,optional_flags,game_state==DIALOG?dialog_lines[dpage*2]:-1,game_state==DIALOG?dialog_lines[dpage*2+1]:-1,game_state==DIALOG?dialog_speakers[dpage]:-1,room==1?camera_x:0,room==1?camera_y:0,progression_revision,area_ticks>0,save_notice_visible()};int i,changed=!cache_valid[page];
  screen=(u16*)(page?0x0600A000:0x06000000);for(i=0;i<CACHE_FIELDS;i++)if(cache_fields[page][i]!=key[i])changed=1;
  if(changed){render_static();cached_armor[page]=-1;cache_valid[page]=1;for(i=0;i<CACHE_FIELDS;i++)cache_fields[page][i]=key[i];}
  if(game_state==PLAY&&boss_active()){rect(57,153,126,5,INK);rect(59,154,boss_hp*120/boss_hp_max,3,boss_armor?GOLD:GREEN);}
