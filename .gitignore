@@ -16,3 +16,11 @@ __pycache__/
 !tests/fixtures/legacy/*/*.sav
 
 !tests/fixtures/v4/*.sav
+
+!tests/fixtures/v5-revision1/*.sav
+
+# Reproducible large overview sheets; individual art and camera crops ship.
+/assets/region/region_preview_native.png
+/assets/region/region_preview_2x.png
+/assets/region/native_camera_sheet.png
+/assets/region/native_camera_sheet_2x.png

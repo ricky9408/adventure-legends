@@ -2,13 +2,14 @@
 #define EMBERBOND_SAVE5_H
 #include "save4.h"
 #include "creatures.h"
+#include "equipment.h"
 
 /* v5 never writes SRAM 0..0x1ff, including every v2/v3 byte and both v4 banks.
  * Every multibyte wire field is explicitly little endian. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
     SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5056,
-    SAVE5_CONTENT_REVISION = 1, SAVE5_COMMIT = 0xA5,
+    SAVE5_CONTENT_REVISION = 2, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,
@@ -17,13 +18,27 @@ enum {
     SAVE5_RECOMMENDED_BUDGET = 1024, SAVE5_MAX_BUDGET = 3072,
     SAVE5_IDLE = 0, SAVE5_BUSY = 1, SAVE5_DONE = 2, SAVE5_FAILED = 3
 };
+enum {
+    SAVE5_QUEST_CAPACITY = 64, SAVE5_QUEST_BYTES = 264,
+    SAVE5_QUEST_INACTIVE = 0, SAVE5_QUEST_ACTIVE = 1,
+    SAVE5_QUEST_READY = 2, SAVE5_QUEST_CLAIMED = 3
+};
+/* Fixed quest allocation; objectives are explicitly little-endian on wire.
+ * State uses two bits per quest. Only authored IDs/masks are accepted. */
+typedef struct Save5Quests {
+    Save4U8 states[16];
+    Save4U16 objectives[64];
+    Save4U8 rewards[8], variables[64], region_flags[32], anchors[16];
+} Save5Quests;
+unsigned save5_quest_state(const Save5Quests *quests, unsigned quest_id);
+int save5_quest_set_state(Save5Quests *quests, unsigned quest_id, unsigned state);
+int save5_quests_validate(const Save5Quests *quests);
+
 typedef struct Save5State {
     CampaignSave campaign;
     CreatureRoster roster;
-    /* Unimplemented quest/equipment bytes must all be zero in content rev1.
-     * These named allocations are not arbitrary persisted junk. */
-    Save4U8 quest_reserved[264];
-    Save4U8 equipment_reserved[512];
+    Save5Quests quests;
+    EquipmentState equipment;
 } Save5State;
 
 /* Read-only, blocking startup/transition operation. Failure leaves out intact.
@@ -39,8 +54,8 @@ int save5_campaign_validate(const CampaignSave *campaign);
 /* begin snapshots the complete state; caller may change it immediately after
  * success. begin performs no SRAM read/write and no CRC. Busy begin is refused
  * without altering the current transaction. Basic validation may reject begin;
- * roster validation is incremental and may later return FAILED, before ANY
- * SRAM write. step counts bytes and conservative semantic-work charges against
+ * Roster, quest and equipment validation is incremental and may later return
+ * FAILED, before any SRAM write. step counts bytes and conservative semantic-work charges against
  * budget, capped at 3072 (zero does no work), plus bounded record-end checks.
  * Call once per display update, preferably not on the same heavy frame as begin. */
 int save5_begin(const Save5State *state);

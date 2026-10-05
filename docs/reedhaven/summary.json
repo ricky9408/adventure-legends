@@ -1,0 +1,584 @@
+{
+  "schema": 1,
+  "rom_sha256": "0ba77d82ce15619784c35a67be83950f924265b604a47495a8987afb21963e90",
+  "symbols_sha256": "2e44714072837c06db32f7b019afbdd0555f82904166da6d980bf8394ccfb2ac",
+  "rom_bytes": 3085056,
+  "save5_content_revision": 2,
+  "normal_game_ram_writes": 0,
+  "native_assertions": 20547,
+  "suites": {
+    "first-chapter": {
+      "report": "build/qa/playthrough.json",
+      "report_sha256": "8e96728b72187b4107c20dba4baf24ab0a7f15e3579dac5cd343bac6d7d7766a",
+      "passes": 24,
+      "failures": 0
+    },
+    "review": {
+      "report": "build/review/review-tests.json",
+      "report_sha256": "419ffe48464807406e12eb3289a88d6ced918d4ead8fd3ceaabb3b836ab21c71",
+      "passes": 20,
+      "failures": 0
+    },
+    "exploration": {
+      "report": "build/exploration/exploration-tests.json",
+      "report_sha256": "ed0af0737def4aa14f5015f8c64811dd79fa4c51fa71d35ad08eaa18f0f67d81",
+      "passes": 143,
+      "failures": 0
+    },
+    "campaign-minimal": {
+      "report": "build/campaign-qa/campaign-report.json",
+      "report_sha256": "82249e7a3ebe9822748089940caa862a9b65f140a943e6811496461aeb98bac3",
+      "passes": 3425,
+      "failures": 0
+    },
+    "campaign-optional": {
+      "report": "build/campaign-optional/campaign-report.json",
+      "report_sha256": "8ba67d14650030b9e93db4c8fbe901d192645d0de641654e2927b29a2b07f9db",
+      "passes": 3481,
+      "failures": 0
+    },
+    "fullscreen": {
+      "report": "build/fullscreen-qa/fullscreen-report.json",
+      "report_sha256": "67aec876f87e2b1a76baa4886c97fbcb346a1e62a3b5f0b9e8026fccfceb9b56",
+      "passes": 97,
+      "failures": 0
+    },
+    "evolution-eight": {
+      "report": "build/evolution-qa/evolution-report.json",
+      "report_sha256": "e26eebbd8695272c3bbff87fed3f4068d8fd9113097a328795e0d799af36d4de",
+      "passes": 1237,
+      "failures": 0
+    },
+    "evolution-six": {
+      "report": "build/evolution-six-hearts/evolution-report.json",
+      "report_sha256": "8e76cf024abc05c28857858bb842c9f7e6a55d68f66c0618e7616496929791db",
+      "passes": 1206,
+      "failures": 0
+    },
+    "evolution-migrated": {
+      "report": "build/evolution-migrated/evolution-report.json",
+      "report_sha256": "7c02753f58b84180929d3f16a413d99b530ee7211ac1e0b99f4043e1665c5887",
+      "passes": 798,
+      "failures": 0
+    },
+    "advanced-powers": {
+      "report": "build/advanced-power-qa/advanced-power-report.json",
+      "report_sha256": "5e9315c9ce05aa148db038013fc898d847f0e17c9074b43b4ef8ea6a2960ffb0",
+      "passes": 504,
+      "failures": 0
+    },
+    "quickparty": {
+      "report": "build/quickparty-qa/quickparty-report.json",
+      "report_sha256": "b6c2185f51fff23f93c277081d7393871a66cdd6a80c17d01909330e7dd83e9f",
+      "passes": 573,
+      "failures": 0
+    },
+    "quickparty-evolved": {
+      "report": "build/quickparty-evolved-qa/quickparty-report.json",
+      "report_sha256": "e0b79f892426b755bca025231803e432cf96913f978fc4184c754fafd7eb5ec4",
+      "passes": 388,
+      "failures": 0
+    },
+    "expeditions": {
+      "report": "build/expedition-qa/expedition-report.json",
+      "report_sha256": "139e0b5d2069b65900c737e4297e38663535a011bff7a0e0d3847d12e4aff9af",
+      "passes": 115,
+      "failures": 0
+    },
+    "pr5-migration": {
+      "report": "build/pr5-quickparty-migration-qa/quickparty-migration-report.json",
+      "report_sha256": "73440d18d55b90212faa56ac1f908cbdd8cfa478c1de386f05806ca51e6aeb46",
+      "passes": 91,
+      "failures": 0
+    },
+    "regional-journey": {
+      "report": "build/region-journey/region-journey.json",
+      "report_sha256": "1acdae2b4370bbf7e6855188f81dc6e0f8c26b12b57846d43cd139d83804620d",
+      "passes": 5684,
+      "failures": 0
+    },
+    "regional-combat": {
+      "report": "build/region-combat/region-combat.json",
+      "report_sha256": "92643a92f661c6cf037b75694777c3c9c5a8ff7924b9f16ee648fcac992b5df8",
+      "passes": 2761,
+      "failures": 0
+    }
+  },
+  "timing": {
+    "exploration": {
+      "windows": 4,
+      "maximum_cycles": 158693
+    },
+    "campaign-minimal": {
+      "strict_pass": true,
+      "report_sha256": "6a3cb4198ff6ff6fd76f160fe32711038f5c12ce3ef8840c70e637bd9fe13b97",
+      "coverage": {
+        "required": [
+          "room-0",
+          "room-1",
+          "room-2",
+          "room-3",
+          "room-4",
+          "room-5",
+          "room-6",
+          "room-7",
+          "room-8",
+          "room-9",
+          "room-10",
+          "room-11",
+          "room-12",
+          "room-13",
+          "game-state-0",
+          "game-state-2",
+          "game-state-3",
+          "game-state-5",
+          "camera-moving",
+          "ability-homura",
+          "ability-midori",
+          "ability-fuuri",
+          "ability-kohaku",
+          "journal-tab-0",
+          "journal-tab-1",
+          "journal-tab-2",
+          "journal-selected-homura",
+          "journal-selected-midori",
+          "journal-selected-fuuri",
+          "journal-selected-kohaku",
+          "boss-8-phase-0-state-0",
+          "boss-8-phase-0-state-1",
+          "boss-8-phase-0-state-2",
+          "boss-8-phase-0-state-3",
+          "boss-8-phase-0-state-4",
+          "boss-8-phase-0-state-5",
+          "boss-8-phase-0-projectiles",
+          "boss-13-phase-0-state-0",
+          "boss-13-phase-0-state-4",
+          "boss-13-phase-0-state-5",
+          "boss-13-phase-0-hazard-1",
+          "boss-13-phase-0-hazard-2",
+          "boss-13-phase-0-hazard-3",
+          "boss-13-phase-0-hazard-4",
+          "boss-13-phase-1-state-0",
+          "boss-13-phase-1-state-4",
+          "boss-13-phase-1-state-5",
+          "boss-13-phase-1-hazard-5",
+          "boss-13-phase-2-state-0",
+          "boss-13-phase-2-state-4",
+          "boss-13-phase-2-state-5",
+          "boss-13-phase-2-hazard-1",
+          "boss-13-phase-2-hazard-2",
+          "boss-13-phase-2-hazard-3",
+          "boss-13-phase-2-hazard-4",
+          "boss-13-phase-2-hazard-6",
+          "boss-13-phase-2-hazard-7",
+          "boss-13-phase-1-projectiles",
+          "kazane-enraged",
+          "kazane-six-projectiles"
+        ],
+        "observed_hardware_frames": {
+          "room-0": 4680,
+          "game-state-0": 360,
+          "game-state-2": 3960,
+          "game-state-1": 11460,
+          "game-state-3": 4320,
+          "journal-tab-0": 1800,
+          "room-1": 1800,
+          "journal-tab-1": 720,
+          "room-8": 3000,
+          "room-12": 4320,
+          "journal-tab-2": 1800,
+          "journal-selected-homura": 720,
+          "journal-selected-midori": 360,
+          "journal-selected-fuuri": 360,
+          "journal-selected-kohaku": 360,
+          "room-13": 3240,
+          "summoned": 11100,
+          "swing": 2451,
+          "toast_ticks": 1248,
+          "projectiles": 1781,
+          "enemy-projectiles": 1275,
+          "companion-homura": 2460,
+          "camera-moving": 1307,
+          "player-projectiles": 710,
+          "ability-homura": 1468,
+          "roll_ticks": 132,
+          "room-2": 360,
+          "companion-midori": 720,
+          "room-3": 540,
+          "room-4": 360,
+          "companion-fuuri": 2400,
+          "room-5": 360,
+          "room-6": 360,
+          "room-7": 360,
+          "room-9": 360,
+          "companion-kohaku": 1560,
+          "room-10": 360,
+          "room-11": 360,
+          "boss-8-phase-0-state-0": 310,
+          "boss-8-phase-0-state-1": 323,
+          "boss-8-phase-0-projectiles": 372,
+          "boss-8-phase-0-state-2": 449,
+          "boss-8-phase-0-state-3": 257,
+          "boss-8-phase-0-state-4": 821,
+          "ability-fuuri": 442,
+          "boss-8-phase-0-state-5": 120,
+          "boss-13-phase-0-state-0": 337,
+          "boss-13-phase-0-hazard-1": 106,
+          "boss-13-phase-0-hazard-2": 24,
+          "boss-13-phase-0-hazard-3": 108,
+          "boss-13-phase-0-hazard-4": 24,
+          "boss-13-phase-0-state-4": 383,
+          "ability-kohaku": 371,
+          "boss-13-phase-0-state-5": 120,
+          "boss-13-phase-1-state-0": 264,
+          "boss-13-phase-1-hazard-5": 140,
+          "boss-13-phase-1-projectiles": 196,
+          "boss-13-phase-1-state-4": 456,
+          "boss-13-phase-1-state-5": 120,
+          "boss-13-phase-2-state-0": 278,
+          "boss-13-phase-2-hazard-6": 43,
+          "boss-13-phase-2-hazard-7": 10,
+          "boss-13-phase-2-state-4": 442,
+          "boss-13-phase-2-hazard-1": 70,
+          "boss-13-phase-2-hazard-2": 16,
+          "boss-13-phase-2-hazard-3": 72,
+          "boss-13-phase-2-hazard-4": 16,
+          "boss-13-phase-2-state-5": 120,
+          "kazane-enraged": 360,
+          "kazane-six-projectiles": 6,
+          "ability-midori": 300,
+          "power_effect": 112,
+          "stone_guard": 144,
+          "game-state-5": 360
+        },
+        "missing": []
+      }
+    },
+    "campaign-optional": {
+      "strict_pass": true,
+      "report_sha256": "3d6da0b3717b0aeba4261fabce39b62633fc4bc1d5cd53bd31ab05f03d92ee44",
+      "coverage": {
+        "required": [
+          "room-0",
+          "room-1",
+          "room-2",
+          "room-3",
+          "room-4",
+          "room-5",
+          "room-6",
+          "room-7",
+          "room-8",
+          "room-9",
+          "room-10",
+          "room-11",
+          "room-12",
+          "room-13",
+          "game-state-0",
+          "game-state-2",
+          "game-state-3",
+          "game-state-5",
+          "camera-moving",
+          "ability-homura",
+          "ability-midori",
+          "ability-fuuri",
+          "ability-kohaku",
+          "journal-tab-0",
+          "journal-tab-1",
+          "journal-tab-2",
+          "journal-selected-homura",
+          "journal-selected-midori",
+          "journal-selected-fuuri",
+          "journal-selected-kohaku",
+          "boss-8-phase-0-state-0",
+          "boss-8-phase-0-state-1",
+          "boss-8-phase-0-state-2",
+          "boss-8-phase-0-state-3",
+          "boss-8-phase-0-state-4",
+          "boss-8-phase-0-state-5",
+          "boss-8-phase-0-projectiles",
+          "boss-13-phase-0-state-0",
+          "boss-13-phase-0-state-4",
+          "boss-13-phase-0-state-5",
+          "boss-13-phase-0-hazard-1",
+          "boss-13-phase-0-hazard-2",
+          "boss-13-phase-0-hazard-3",
+          "boss-13-phase-0-hazard-4",
+          "boss-13-phase-1-state-0",
+          "boss-13-phase-1-state-4",
+          "boss-13-phase-1-state-5",
+          "boss-13-phase-1-hazard-5",
+          "boss-13-phase-2-state-0",
+          "boss-13-phase-2-state-4",
+          "boss-13-phase-2-state-5",
+          "boss-13-phase-2-hazard-1",
+          "boss-13-phase-2-hazard-2",
+          "boss-13-phase-2-hazard-3",
+          "boss-13-phase-2-hazard-4",
+          "boss-13-phase-2-hazard-6",
+          "boss-13-phase-2-hazard-7",
+          "boss-13-phase-1-projectiles",
+          "kazane-enraged",
+          "kazane-six-projectiles"
+        ],
+        "observed_hardware_frames": {
+          "room-0": 4680,
+          "game-state-0": 360,
+          "game-state-2": 3960,
+          "game-state-1": 11460,
+          "game-state-3": 4320,
+          "journal-tab-0": 1800,
+          "room-1": 1800,
+          "journal-tab-1": 720,
+          "room-8": 3000,
+          "room-12": 4320,
+          "journal-tab-2": 1800,
+          "journal-selected-homura": 720,
+          "journal-selected-midori": 360,
+          "journal-selected-fuuri": 360,
+          "journal-selected-kohaku": 360,
+          "room-13": 3240,
+          "summoned": 10740,
+          "swing": 2451,
+          "toast_ticks": 1248,
+          "projectiles": 1781,
+          "enemy-projectiles": 1275,
+          "companion-homura": 2460,
+          "camera-moving": 1307,
+          "player-projectiles": 710,
+          "ability-homura": 1468,
+          "roll_ticks": 132,
+          "room-2": 360,
+          "companion-midori": 720,
+          "room-3": 540,
+          "room-4": 360,
+          "companion-fuuri": 2040,
+          "room-5": 360,
+          "room-6": 360,
+          "room-7": 360,
+          "room-9": 360,
+          "companion-kohaku": 1560,
+          "room-10": 360,
+          "room-11": 360,
+          "boss-8-phase-0-state-0": 310,
+          "boss-8-phase-0-state-1": 323,
+          "boss-8-phase-0-projectiles": 372,
+          "boss-8-phase-0-state-2": 449,
+          "boss-8-phase-0-state-3": 257,
+          "boss-8-phase-0-state-4": 821,
+          "ability-fuuri": 442,
+          "boss-8-phase-0-state-5": 120,
+          "boss-13-phase-0-state-0": 337,
+          "boss-13-phase-0-hazard-1": 106,
+          "boss-13-phase-0-hazard-2": 24,
+          "boss-13-phase-0-hazard-3": 108,
+          "boss-13-phase-0-hazard-4": 24,
+          "boss-13-phase-0-state-4": 383,
+          "ability-kohaku": 371,
+          "boss-13-phase-0-state-5": 120,
+          "boss-13-phase-1-state-0": 264,
+          "boss-13-phase-1-hazard-5": 140,
+          "boss-13-phase-1-projectiles": 196,
+          "boss-13-phase-1-state-4": 456,
+          "boss-13-phase-1-state-5": 120,
+          "boss-13-phase-2-state-0": 278,
+          "boss-13-phase-2-hazard-6": 43,
+          "boss-13-phase-2-hazard-7": 10,
+          "boss-13-phase-2-state-4": 442,
+          "boss-13-phase-2-hazard-1": 70,
+          "boss-13-phase-2-hazard-2": 16,
+          "boss-13-phase-2-hazard-3": 72,
+          "boss-13-phase-2-hazard-4": 16,
+          "boss-13-phase-2-state-5": 120,
+          "kazane-enraged": 360,
+          "kazane-six-projectiles": 6,
+          "ability-midori": 300,
+          "power_effect": 112,
+          "stone_guard": 144,
+          "game-state-5": 360
+        },
+        "missing": []
+      }
+    },
+    "fullscreen": {
+      "windows": 2,
+      "maximum_cycles": 114548
+    },
+    "fullscreen-saves": {
+      "windows": 4,
+      "maximum_cycles": 208956
+    },
+    "evolution-eight": {
+      "windows": 6,
+      "maximum_cycles": 159581
+    },
+    "evolution-eight-saves": {
+      "windows": 197,
+      "maximum_cycles": 2061314
+    },
+    "evolution-six": {
+      "windows": 6,
+      "maximum_cycles": 158313
+    },
+    "evolution-six-saves": {
+      "windows": 193,
+      "maximum_cycles": 2059845
+    },
+    "evolution-migrated": {
+      "windows": 4,
+      "maximum_cycles": 159504
+    },
+    "evolution-migrated-saves": {
+      "windows": 146,
+      "maximum_cycles": 2061325
+    },
+    "advanced-powers": {
+      "windows": 10,
+      "maximum_cycles": 214410
+    },
+    "quickparty": {
+      "windows": 7,
+      "maximum_cycles": 193849
+    },
+    "quickparty-saves": {
+      "windows": 29,
+      "maximum_cycles": 2041216
+    },
+    "quickparty-evolved": {
+      "windows": 7,
+      "maximum_cycles": 208556
+    },
+    "quickparty-evolved-saves": {
+      "windows": 15,
+      "maximum_cycles": 259424
+    },
+    "pr5-migration-saves": {
+      "windows": 3,
+      "maximum_cycles": 249821
+    },
+    "regional-journey": {
+      "town_idle": {
+        "hardware_frames": 180,
+        "game_updates": 180,
+        "page_flips": 180,
+        "max_render_cycles": 94101,
+        "cycles_per_hardware_frame": 280896,
+        "measurement": "actual emulated GBA hardware frames; not host elapsed time"
+      },
+      "basin_idle": {
+        "hardware_frames": 180,
+        "game_updates": 180,
+        "page_flips": 180,
+        "max_render_cycles": 136860,
+        "cycles_per_hardware_frame": 280896,
+        "measurement": "actual emulated GBA hardware frames; not host elapsed time"
+      }
+    },
+    "regional-combat": [
+      {
+        "case": "crowded-fractional-two-arrow-cadence",
+        "frames": 200,
+        "updates": 200,
+        "page_flips": 200,
+        "peak_cycles": 118095,
+        "peak_objects": 36,
+        "two_arrow_frames": 16,
+        "fractional_frames": 200,
+        "max_live_enemies": 5,
+        "max_hostile_shots": 0,
+        "max_visible_enemies": 2,
+        "strict_60hz": true
+      }
+    ]
+  },
+  "content": {
+    "enabled_forms": 11,
+    "controller_obtained_and_reloaded_forms": 11,
+    "live_families": 6,
+    "evolution_edges": 5,
+    "player_weapon_classes": 3,
+    "equipment_slots": 5,
+    "earnable_items": 13,
+    "regional_quests": 11,
+    "total_areas": 22,
+    "regional_areas": 6,
+    "legendary_forms_obtainable": 0,
+    "target_forms": 128
+  },
+  "collection": {
+    "forms": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16
+    ],
+    "live_forms": [
+      2,
+      5,
+      8,
+      11,
+      14,
+      16
+    ],
+    "instance_count": 6,
+    "sram_sha256": "74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106",
+    "scope": "Single controller-earned file, all eleven regional quests retained, saved and rebooted"
+  },
+  "synthetic_faults": {
+    "faults": [
+      {
+        "kind": "synthetic-game-state-interruption",
+        "target": "DIALOG",
+        "game_ram_writes": 1,
+        "address": "0x2000080",
+        "value": 2,
+        "emulator_frame": 303,
+        "provenance": "deliberately injected state, not reachable-transition evidence"
+      },
+      {
+        "kind": "synthetic-game-state-interruption",
+        "target": "PAUSE",
+        "game_ram_writes": 1,
+        "address": "0x2000080",
+        "value": 3,
+        "emulator_frame": 303,
+        "provenance": "deliberately injected state, not reachable-transition evidence"
+      },
+      {
+        "kind": "synthetic-game-state-interruption",
+        "target": "DEAD",
+        "game_ram_writes": 1,
+        "address": "0x2000080",
+        "value": 4,
+        "emulator_frame": 303,
+        "provenance": "deliberately injected state, not reachable-transition evidence"
+      }
+    ],
+    "game_ram_writes": 3,
+    "separate_from_native_assertions": true
+  },
+  "player_teaser": {
+    "seconds": 18.517433166503906,
+    "frames": 1106,
+    "video_sha256": "1aaaad727daacd4cbbcfab98fb7baf2fcbb066126c15d7e75ac265f3a48d3f4a"
+  },
+  "memory_bytes": {
+    "iwram": 27664,
+    "data": 80,
+    "bss": 47240
+  },
+  "limits": [
+    "mGBA 0.10.5 only; physical GBA/flash cartridges are not verified",
+    "Cold Continue checkpoint decoding is a separate blocking load transition",
+    "Native timing windows are representative, not exhaustive maximal crowd proof",
+    "The regional two-arrow window has five live enemies but at most two visible and no hostile projectiles",
+    "Host/synthetic save corruption and sanitizer checks are separate from controller-only gameplay",
+    "Eleven forms are obtainable; the 128-form roster and four additional regional cultures remain unfinished"
+  ]
+}

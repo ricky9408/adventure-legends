@@ -1,0 +1,1332 @@
+[
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1284
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 1284
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1291
+  },
+  {
+    "label": "actual Earth ranger projectile enters Fuuri reflection cone",
+    "passed": true,
+    "frame": 1340
+  },
+  {
+    "label": "actual reflected projectile changes owner and becomes Wood phase",
+    "passed": true,
+    "frame": 1341
+  },
+  {
+    "label": "Wood reflected shot deals40Q4 to Earth ranger",
+    "passed": true,
+    "frame": 1341
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1344
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 200
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 232
+  },
+  {
+    "label": "owned gear item33 is selectable in slot1",
+    "passed": true,
+    "frame": 242
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 272
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "real equipment menu equips item33",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "half-heart armor adds capacity without healing on real menu",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 284
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 284
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 329
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 332
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 332
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 337
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 337
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 342
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 342
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 347
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 347
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 352
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 352
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 357
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 357
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 362
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 362
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 367
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 367
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 372
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 372
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 377
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 377
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 382
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 382
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 387
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 387
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 392
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 392
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 397
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 397
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 402
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 402
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 407
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 407
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 412
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 412
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 417
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 417
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 422
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 422
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 427
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 427
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 432
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 432
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 437
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 437
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 442
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 442
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 447
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 447
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 452
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 452
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 457
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 457
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 462
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 462
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 467
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 467
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 472
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 472
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 477
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 477
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 482
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 482
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 487
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 487
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 492
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 492
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 497
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 497
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 502
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 502
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 507
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 507
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 512
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 512
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 517
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 517
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 522
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 522
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 527
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 527
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 532
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 532
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 537
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 537
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 542
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 542
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 547
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 547
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 552
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 552
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 567
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 567
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 582
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 582
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 589
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 589
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 594
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 594
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 599
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 599
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 604
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 604
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 609
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 609
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 614
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 614
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 619
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 619
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 624
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 624
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 639
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 639
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 654
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 654
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 669
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 669
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 684
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 684
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 699
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 699
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 714
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 714
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 729
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 729
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 744
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 744
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 759
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 759
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 774
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 774
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 787
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 787
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 798
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 798
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 831
+  },
+  {
+    "label": "north gate enters basin",
+    "passed": true,
+    "frame": 831
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 834
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 834
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 849
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 849
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 856
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 856
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 871
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 871
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 886
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 886
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 901
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 901
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 912
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 912
+  },
+  {
+    "label": "ordinary enemy hit subtracts14Q4 with defense2",
+    "passed": true,
+    "frame": 915
+  },
+  {
+    "label": "health remains fractional rather than rounded to hearts",
+    "passed": true,
+    "frame": 915
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 918
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 950
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 955
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 960
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 965
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 970
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 975
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 980
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 985
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 990
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 995
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1000
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1005
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1010
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1015
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1020
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1025
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1030
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1035
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1040
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1045
+  },
+  {
+    "label": "hovering equipment preserves exact fractional HP",
+    "passed": true,
+    "frame": 1050
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1059
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1062
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 200
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 232
+  },
+  {
+    "label": "owned gear item33 is selectable in slot1",
+    "passed": true,
+    "frame": 242
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 272
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "real equipment menu equips item33",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 281
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 284
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 284
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 329
+  },
+  {
+    "label": "legitimate sanctuary rest fills half-heart capacity",
+    "passed": true,
+    "frame": 329
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 332
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 364
+  },
+  {
+    "label": "owned gear item0 is selectable in slot1",
+    "passed": true,
+    "frame": 374
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 404
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 413
+  },
+  {
+    "label": "real equipment menu equips item0",
+    "passed": true,
+    "frame": 413
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 413
+  },
+  {
+    "label": "unequipping clamps fractional max health downward",
+    "passed": true,
+    "frame": 413
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 416
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 448
+  },
+  {
+    "label": "owned gear item33 is selectable in slot1",
+    "passed": true,
+    "frame": 453
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 483
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 492
+  },
+  {
+    "label": "real equipment menu equips item33",
+    "passed": true,
+    "frame": 492
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 492
+  },
+  {
+    "label": "reequipping armor cannot farm its half heart",
+    "passed": true,
+    "frame": 492
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 495
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 527
+  },
+  {
+    "label": "owned gear item0 is selectable in slot1",
+    "passed": true,
+    "frame": 537
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 567
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 576
+  },
+  {
+    "label": "real equipment menu equips item0",
+    "passed": true,
+    "frame": 576
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 576
+  },
+  {
+    "label": "repeated unequip remains96Q4",
+    "passed": true,
+    "frame": 576
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 579
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 611
+  },
+  {
+    "label": "owned gear item33 is selectable in slot1",
+    "passed": true,
+    "frame": 616
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 646
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 655
+  },
+  {
+    "label": "real equipment menu equips item33",
+    "passed": true,
+    "frame": 655
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 655
+  },
+  {
+    "label": "reequipping armor cannot farm its half heart",
+    "passed": true,
+    "frame": 655
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 658
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 690
+  },
+  {
+    "label": "owned gear item0 is selectable in slot1",
+    "passed": true,
+    "frame": 700
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 730
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 739
+  },
+  {
+    "label": "real equipment menu equips item0",
+    "passed": true,
+    "frame": 739
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 739
+  },
+  {
+    "label": "repeated unequip remains96Q4",
+    "passed": true,
+    "frame": 739
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 742
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 774
+  },
+  {
+    "label": "owned gear item33 is selectable in slot1",
+    "passed": true,
+    "frame": 779
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 809
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 818
+  },
+  {
+    "label": "real equipment menu equips item33",
+    "passed": true,
+    "frame": 818
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 818
+  },
+  {
+    "label": "reequipping armor cannot farm its half heart",
+    "passed": true,
+    "frame": 818
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 821
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 853
+  },
+  {
+    "label": "owned gear item0 is selectable in slot1",
+    "passed": true,
+    "frame": 863
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 893
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 902
+  },
+  {
+    "label": "real equipment menu equips item0",
+    "passed": true,
+    "frame": 902
+  },
+  {
+    "label": "equipping never increases current q4 health",
+    "passed": true,
+    "frame": 902
+  },
+  {
+    "label": "repeated unequip remains96Q4",
+    "passed": true,
+    "frame": 902
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 905
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 200
+  },
+  {
+    "label": "journal tab4 opens",
+    "passed": true,
+    "frame": 232
+  },
+  {
+    "label": "owned gear item17 is selectable in slot0",
+    "passed": true,
+    "frame": 242
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 272
+  }
+]

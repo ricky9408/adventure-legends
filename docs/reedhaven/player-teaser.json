@@ -1,0 +1,56 @@
+{
+  "rom_sha256": "0ba77d82ce15619784c35a67be83950f924265b604a47495a8987afb21963e90",
+  "symbols_sha256": "2e44714072837c06db32f7b019afbdd0555f82904166da6d980bf8394ccfb2ac",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "captured_savestate_restores": 0,
+  "captured_sram_reloads": 0,
+  "scope": "Continuous opening town and one lance training hit with Homura. No new recruit/evolution, secret route, puzzle solution, reward claim or ending.",
+  "captured_frames": 1106,
+  "frame_rate": 59.72750056960583,
+  "hardware_clock_ratio": "16777216/280896",
+  "duration_seconds": 18.517433166503906,
+  "state_frame_counts": {
+    "1": 1083,
+    "6": 23
+  },
+  "native_resolution": [
+    240,
+    160
+  ],
+  "video_resolution": [
+    960,
+    640
+  ],
+  "scaling": "4x nearest neighbor; no interpolated frames",
+  "audio": "Actual emulator PSG recording, retained as native WAV; MP4 uses48kHz AAC resampling",
+  "native_audio": {
+    "sample_rate": 32768,
+    "channels": 2,
+    "samples": 606778,
+    "duration_seconds": 18.51739501953125
+  },
+  "files": {
+    "reedhaven-native-teaser.mp4": {
+      "sha256": "1aaaad727daacd4cbbcfab98fb7baf2fcbb066126c15d7e75ac265f3a48d3f4a",
+      "bytes": 950661
+    },
+    "native-psg.wav": {
+      "sha256": "37efe4d591cff710490b65800d1cb1e0f0cd9cf491a3ff557464cc9e40290c1e",
+      "bytes": 2427156
+    },
+    "native-town.png": {
+      "sha256": "b583dca4561473e7a2c5ca96ff59f1506b92e2a18e134bc8e2c5247268e0d931",
+      "bytes": 7293
+    },
+    "native-gear.png": {
+      "sha256": "2a93a9a303de73cd8544eee4a8cb255d5cba157e0bffc3c8356505424bc244cf",
+      "bytes": 5366
+    },
+    "native-practice.png": {
+      "sha256": "3fe475939fc0d892fcabef3f21ae5555c5ee3d9c315f2e7ef410a3a83d80cfc0",
+      "bytes": 7823
+    }
+  },
+  "failures": []
+}

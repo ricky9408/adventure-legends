@@ -45,7 +45,7 @@ STUBS = r'''
 #include "trials.h"
 #include "progression.h"
 Save5State adventure_save;
-unsigned progression_forms[4], progression_revision;
+unsigned progression_forms[PROGRESSION_SPIRIT_COUNT], progression_revision;
 volatile int room,px,py,spirit;
 int face,frame,save_requested,save_resume_state,game_state;
 volatile unsigned chapter_flags;

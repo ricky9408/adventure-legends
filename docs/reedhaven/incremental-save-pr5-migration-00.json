@@ -1,0 +1,32 @@
+[
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 99,
+    "frames": 20,
+    "display_flips": 20,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 249821,
+    "start_frame": 128,
+    "frames": 20,
+    "display_flips": 20,
+    "max_cycles": 249821,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  }
+]

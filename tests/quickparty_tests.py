@@ -411,7 +411,7 @@ class QuickPartyRun(EvolutionRun):
         if self.get('game_state') == PLAY:
             self.tap('START')
         self.check(self.get('game_state') == PAUSE, 'Start opens journal for party assignment')
-        for _ in range(4):
+        for _ in range(6):
             if self.get('journal_tab') == 2:
                 break
             self.tap('A')
@@ -545,10 +545,11 @@ class QuickPartyRun(EvolutionRun):
     def persist_case(self):
         before = bytes(self.roster())
         selection = self.selection()
-        saved = self.save('assigned-party-revision1')
+        revision = int(re.search(r'SAVE5_CONTENT_REVISION\s*=\s*(\d+)', (ROOT/'src/save5.h').read_text()).group(1))
+        saved = self.save('assigned-party-revision'+str(revision))
         banks = self.valid_banks(saved.read_bytes())
-        self.check(bool(banks) and all(b['revision'] == 1 for b in banks),
-                   'assignment uses CRC-valid save5 content revision1 banks')
+        self.check(bool(banks) and all(b['revision'] == revision for b in banks),
+                   f'assignment uses CRC-valid save5 content revision{revision} banks')
         self.observations['assignment_banks'] = banks
         self.reopen(saved)
         self.dialogs()

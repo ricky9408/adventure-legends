@@ -16,8 +16,41 @@ static int bit_get(const CreatureU8 *bits, unsigned n) {
 static void bit_set(CreatureU8 *bits, unsigned n) {
     bits[n >> 3] |= (CreatureU8)(1u << (n & 7));
 }
-static unsigned family_trial(unsigned legacy) {
-    return legacy < 4 ? 1u << legacy : 0;
+/* Reviewed identity policy is separate from generated authored data. It keeps
+ * malformed historical rows invalid and does not assume alternating pairs. */
+typedef struct CreatureFormPolicy {
+    CreatureU8 id, family, tier, signature;
+    CreatureU8 learn_offset, learn_count, edge_offset, edge_count;
+} CreatureFormPolicy;
+typedef struct CreatureFamilyPolicy {
+    CreatureU8 phase, polarity, trial, reserved;
+    CreatureU32 base_caps, added_caps;
+} CreatureFamilyPolicy;
+static const CreatureFormPolicy form_policy[CREATURE_ENABLED_COUNT] = {
+    {1, 1, 1, 1, 0, 1, 0, 1}, {2, 1, 2, 5, 1, 2, 0, 0},
+    {4, 2, 1, 2, 3, 1, 1, 1}, {5, 2, 2, 6, 4, 2, 0, 0},
+    {7, 3, 1, 3, 6, 1, 2, 1}, {8, 3, 2, 7, 7, 2, 0, 0},
+    {10, 4, 1, 4, 9, 1, 3, 1}, {11, 4, 2, 8, 10, 2, 0, 0},
+    {13, 5, 1, 9, 12, 1, 4, 1}, {14, 5, 2, 10, 13, 2, 0, 0},
+    {16, 6, 1, 11, 15, 1, 0, 0}
+};
+static const CreatureFamilyPolicy family_policy[] = {
+    {CREATURE_FIRE, CREATURE_YANG, CREATURE_TRIAL_HEARTH, 0, FIELD_HOMURA, 0},
+    {CREATURE_WOOD, CREATURE_YIN, CREATURE_TRIAL_CANOPY, 0, FIELD_MIDORI, 0},
+    {CREATURE_WOOD, CREATURE_YANG, CREATURE_TRIAL_WIND_LOOM, 0, FIELD_FUURI, 0},
+    {CREATURE_EARTH, CREATURE_YIN, CREATURE_TRIAL_AMBER_ARCH, 0, FIELD_KOHAKU, 0},
+    {CREATURE_WATER, CREATURE_YIN, CREATURE_TRIAL_PAIRED_POOLS, 0, FIELD_DEWSPINDLE, FIELD_LINK_POOLS},
+    {CREATURE_METAL, CREATURE_YANG, 0, 0, FIELD_CHIMECLASP, 0}
+};
+static unsigned family_trial(const CreatureForm *f) {
+    if (!f || f->family < 1 || f->family > sizeof(family_policy) / sizeof(family_policy[0])) return 0;
+    return family_policy[f->family - 1].trial;
+}
+static const CreatureEvolution *incoming_evolution(unsigned id) {
+    unsigned i;
+    for (i = 0; i < CREATURE_EVOLUTION_COUNT; ++i)
+        if (creature_evolutions[i].to == id) return &creature_evolutions[i];
+    return 0;
 }
 
 int creatures_form_id_valid(unsigned id) { return id >= 1 && id <= 128; }
@@ -28,12 +61,12 @@ const CreatureForm *creatures_form(unsigned id) {
     return 0;
 }
 const CreatureAbility *creatures_ability(unsigned id) {
-    if (id < 1 || id > 8 || creature_abilities[id - 1].id != id) return 0;
+    if (id < 1 || id > CREATURE_ABILITY_COUNT || creature_abilities[id - 1].id != id) return 0;
     return &creature_abilities[id - 1];
 }
 unsigned creatures_legacy_spirit(unsigned id) {
     unsigned i;
-    for (i = 0; i < 4; ++i)
+    for (i = 0; i < CREATURE_LEGACY_COUNT; ++i)
         if (id == creature_legacy_forms[i] || id == creature_legacy_forms[i] + 1u)
             return i;
     return CREATURE_EMPTY_SLOT;
@@ -77,7 +110,7 @@ int creatures_command_learned(unsigned id, unsigned level, unsigned ability) {
     const CreatureForm *f = creatures_form(id);
     unsigned j;
     if (!f || level < 1 || level > 50 || !creatures_ability(ability) ||
-        f->learnset_offset + f->learnset_count > 12) return 0;
+        f->learnset_offset + f->learnset_count > CREATURE_LEARNSET_COUNT) return 0;
     for (j = 0; j < f->learnset_count; ++j) {
         const CreatureLearn *l = &creature_learnsets[f->learnset_offset + j];
         if (l->ability_id == ability && l->level <= level) return 1;
@@ -86,70 +119,89 @@ int creatures_command_learned(unsigned id, unsigned level, unsigned ability) {
 }
 const CreatureEvolution *creatures_evolution(unsigned id) {
     unsigned i;
-    for (i = 0; i < 4; ++i)
+    for (i = 0; i < CREATURE_EVOLUTION_COUNT; ++i)
         if (creature_evolutions[i].from == id) return &creature_evolutions[i];
     return 0;
 }
 int creatures_catalog_validate(void) {
-    static const CreatureU8 ids[8] = {1, 2, 4, 5, 7, 8, 10, 11};
-    static const CreatureU8 phases[4] = {CREATURE_FIRE, CREATURE_WOOD, CREATURE_WOOD, CREATURE_EARTH};
-    static const CreatureU8 polarities[4] = {CREATURE_YANG, CREATURE_YIN, CREATURE_YANG, CREATURE_YIN};
-    static const CreatureU32 caps[4] = {FIELD_HOMURA, FIELD_MIDORI, FIELD_FUURI, FIELD_KOHAKU};
+    static const CreatureEvolution expected_edges[CREATURE_EVOLUTION_COUNT] = {
+        {1, 2, 12, 40, CREATURE_TRIAL_HEARTH, CREATURE_GROVE_CLEAR},
+        {4, 5, 12, 40, CREATURE_TRIAL_CANOPY, CREATURE_GROVE_CLEAR},
+        {7, 8, 16, 55, CREATURE_TRIAL_WIND_LOOM, CREATURE_SKY_CLEAR},
+        {10, 11, 20, 60, CREATURE_TRIAL_AMBER_ARCH, CREATURE_CORE_CLEAR},
+        {13, 14, 15, 45, CREATURE_TRIAL_PAIRED_POOLS, CREATURE_REED_RESTORED}
+    };
+    static const CreatureU16 cooldowns[CREATURE_ABILITY_COUNT] = {75,75,75,75,105,120,105,120,90,120,90};
+    static const FormId legacy_ids[CREATURE_LEGACY_COUNT] = {1,4,7,10};
     unsigned i, j, k;
-    for (i = 0; i < 8; ++i) {
+    for (i = 0; i < CREATURE_LEGACY_COUNT; ++i)
+        if (creature_legacy_forms[i] != legacy_ids[i]) return 0;
+    for (i = 0; i < CREATURE_ENABLED_COUNT; ++i) {
         const CreatureForm *f = &creature_forms[i];
-        unsigned total = 0, legacy = i >> 1;
-        if (f->id != ids[i] || f->family != legacy + 1 ||
-            f->phase != phases[legacy] || f->polarity != polarities[legacy] ||
-            f->tier != 1 + (i & 1) || f->rarity != 0 ||
-            f->field_caps != caps[legacy] || f->flags != 1 ||
-            !f->learnset_count || f->learnset_count > 8 ||
-            f->learnset_offset + f->learnset_count > 12 ||
-            f->evolution_count != ((i & 1) ? 0 : 1) ||
-            (f->evolution_count && (f->evolution_offset >= 4 ||
-              creature_evolutions[f->evolution_offset].from != f->id))) return 0;
-        for (j = 0; j < 5; ++j) total += f->stats[j];
-        if (total != ((i & 1) ? 240u : 180u)) return 0;
+        const CreatureFormPolicy *p = &form_policy[i];
+        const CreatureFamilyPolicy *family = &family_policy[p->family - 1];
+        CreatureU32 caps = family->base_caps | (p->tier > 1 ? family->added_caps : 0);
+        unsigned total = 0;
+        if (f->id != p->id || f->family != p->family ||
+            f->phase != family->phase || f->polarity != family->polarity ||
+            f->tier != p->tier || f->rarity != 0 || f->field_caps != caps ||
+            f->flags != 1 || f->name_id != f->id || f->portrait_id != f->id ||
+            f->sprite_offset || f->signature_ability != p->signature ||
+            f->learnset_count != p->learn_count || f->learnset_offset != p->learn_offset ||
+            f->learnset_offset + f->learnset_count > CREATURE_LEARNSET_COUNT ||
+            f->evolution_count != p->edge_count || f->evolution_offset != p->edge_offset ||
+            f->evolution_offset + f->evolution_count > CREATURE_EVOLUTION_COUNT ||
+            (f->evolution_count && creature_evolutions[f->evolution_offset].from != f->id)) return 0;
+        for (j = 0; j < CREATURE_PHASE_COUNT; ++j) {
+            if (!f->stats[j] || f->stats[j] > 100) return 0;
+            total += f->stats[j];
+        }
+        if (total != (f->tier == 1 ? 180u : 240u)) return 0;
         if (creature_learnsets[f->learnset_offset].level != 1 ||
-            !creatures_command_learned(f->id, 50, f->signature_ability)) return 0;
+            !creatures_command_learned(f->id, CREATURE_MAX_LEVEL, f->signature_ability)) return 0;
         for (j = 0; j < f->learnset_count; ++j) {
             const CreatureLearn *l = &creature_learnsets[f->learnset_offset + j];
             const CreatureAbility *a = creatures_ability(l->ability_id);
-            if (!a || a->phase != f->phase || a->field_caps != f->field_caps ||
-                l->level < 1 || l->level > 50 ||
+            if (!a || a->phase != f->phase || (a->field_caps & caps) != a->field_caps ||
+                (a->id == f->signature_ability && a->field_caps != caps) ||
+                l->level < 1 || l->level > CREATURE_MAX_LEVEL ||
                 (j && l->level < creature_learnsets[f->learnset_offset + j - 1].level)) return 0;
             for (k = 0; k < j; ++k)
                 if (creature_learnsets[f->learnset_offset + k].ability_id == l->ability_id) return 0;
         }
     }
-    for (i = 0; i < 8; ++i) {
+    for (i = 0; i < CREATURE_ABILITY_COUNT; ++i) {
         const CreatureAbility *a = &creature_abilities[i];
-        if (a->id != i + 1 || a->phase >= 5 || a->cooldown_updates < 60 ||
-            a->cooldown_updates > 240) return 0;
+        if (a->id != i + 1 || a->phase >= CREATURE_PHASE_COUNT ||
+            a->cooldown_updates != cooldowns[i]) return 0;
     }
-    for (i = 0; i < 4; ++i) {
-        const CreatureEvolution *e = &creature_evolutions[i];
+    for (i = 0; i < CREATURE_EVOLUTION_COUNT; ++i) {
+        const CreatureEvolution *e = &creature_evolutions[i], *expected = &expected_edges[i];
         const CreatureForm *a = creatures_form(e->from), *b = creatures_form(e->to);
         unsigned id = e->to;
-        if (!a || !b || e->from == e->to || a->family != b->family ||
-            b->tier <= a->tier || e->min_level < 1 || e->min_level > 50 ||
-            e->min_bond > 100 || !e->chapter_flags || (e->chapter_flags & ~7u) ||
-            e->trial_flag != family_trial(creatures_legacy_spirit(e->from)) ||
+        if (e->from != expected->from || e->to != expected->to ||
+            e->min_level != expected->min_level || e->min_bond != expected->min_bond ||
+            e->trial_flag != expected->trial_flag || e->chapter_flags != expected->chapter_flags ||
+            !a || !b || e->from == e->to || a->family != b->family ||
+            b->tier <= a->tier || e->min_level < 1 || e->min_level > CREATURE_MAX_LEVEL ||
+            e->min_bond > CREATURE_MAX_BOND || !e->chapter_flags ||
+            (e->chapter_flags & ~CREATURE_EVOLUTION_CONTEXT_MASK) ||
+            e->trial_flag != family_trial(a) ||
             (a->field_caps & b->field_caps) != a->field_caps ||
             !creatures_command_learned(b->id, e->min_level, b->signature_ability)) return 0;
         for (j = 0; j < a->learnset_count; ++j) {
             const CreatureLearn *l = &creature_learnsets[a->learnset_offset + j];
             if (!creatures_command_learned(b->id, l->level, l->ability_id)) return 0;
         }
-        for (j = 0; j < 8; ++j) {
+        for (j = 0; j < CREATURE_ENABLED_COUNT; ++j) {
             const CreatureEvolution *next = creatures_evolution(id);
             if (id == e->from) return 0;
             if (!next) break;
             id = next->to;
         }
-        if (j == 8) return 0;
+        if (j == CREATURE_ENABLED_COUNT) return 0;
         for (j = 0; j < i; ++j)
-            if (creature_evolutions[j].from == e->from) return 0;
+            if (creature_evolutions[j].from == e->from || creature_evolutions[j].to == e->to) return 0;
     }
     return 1;
 }
@@ -168,13 +220,14 @@ int creatures_instance_validate(const CreatureInstance *c) {
         c->level < 1 || c->level > 50 || c->bond > 100 || c->xp > CREATURE_XP_CAP ||
         c->level != creatures_level_for_xp(c->xp) || !c->instance_id ||
         c->instance_id == U32_MAX_VALUE || c->nickname_id > CREATURE_NICKNAME_MAX ||
-        (c->trial_flags & ~family_trial(legacy)) || c->polarity != f->polarity ||
+        (c->trial_flags & ~family_trial(f)) ||
+        ((c->flags & CREATURE_STORY_LOCKED) && legacy >= CREATURE_LEGACY_COUNT) || c->polarity != f->polarity ||
         c->selected_command > 1 || !c->equipped[c->selected_command] ||
         (c->equipped[0] && c->equipped[0] == c->equipped[1])) return 0;
     for (j = 0; j < 2; ++j)
         if (c->equipped[j] && !creatures_command_learned(c->form_id, c->level, c->equipped[j])) return 0;
     if (f->tier > 1) {
-        const CreatureEvolution *e = creatures_evolution(creature_legacy_forms[legacy]);
+        const CreatureEvolution *e = incoming_evolution(c->form_id);
         if (!e || c->level < e->min_level) return 0;
     }
     return 1;
@@ -414,37 +467,40 @@ int creatures_credit_event(CreatureRoster *r, unsigned event, CreatureU32 xp, un
 int creatures_mark_trial(CreatureInstance *c, unsigned flag) {
     unsigned required;
     if (!c || !c->form_id || !creatures_instance_validate(c)) return 0;
-    required = family_trial(creatures_legacy_spirit(c->form_id));
-    if (flag != required) return 0;
+    required = family_trial(creatures_form(c->form_id));
+    if (!required || flag != required) return 0;
     c->trial_flags |= (CreatureU16)flag;
     return 1;
 }
-unsigned creatures_can_evolve(const CreatureInstance *c, unsigned chapters, int sanctuary) {
+unsigned creatures_can_evolve(const CreatureInstance *c, unsigned context, int sanctuary) {
     const CreatureEvolution *e;
-    if (!c || !c->form_id || !creatures_instance_validate(c)) return CREATURE_EVOLVE_INVALID;
+    if (!c || !c->form_id || !creatures_instance_validate(c) ||
+        (context & ~CREATURE_EVOLUTION_CONTEXT_MASK)) return CREATURE_EVOLVE_INVALID;
     e = creatures_evolution(c->form_id);
     if (!e) return CREATURE_EVOLVE_NO_EDGE;
     if (c->level < e->min_level) return CREATURE_EVOLVE_LEVEL;
     if (c->bond < e->min_bond) return CREATURE_EVOLVE_BOND;
-    if ((chapters & e->chapter_flags) != e->chapter_flags) return CREATURE_EVOLVE_STORY;
+    if ((context & e->chapter_flags) != e->chapter_flags) return CREATURE_EVOLVE_STORY;
     if ((c->trial_flags & e->trial_flag) != e->trial_flag) return CREATURE_EVOLVE_TRIAL;
     if (!sanctuary) return CREATURE_EVOLVE_SANCTUARY;
     return CREATURE_EVOLVE_READY;
 }
-unsigned creatures_evolve(CreatureRoster *r, unsigned slot, unsigned chapters, int sanctuary, int confirmed) {
-    CreatureInstance *c;
+unsigned creatures_evolve(CreatureRoster *r, unsigned slot, unsigned context, int sanctuary, int confirmed) {
+    CreatureInstance *c, candidate;
     const CreatureEvolution *e;
     const CreatureForm *target;
     unsigned result;
     if (!r || slot >= 160 || !creatures_roster_validate(r)) return CREATURE_EVOLVE_INVALID;
     c = &r->instances[slot];
-    result = creatures_can_evolve(c, chapters, sanctuary);
+    result = creatures_can_evolve(c, context, sanctuary);
     if (result != CREATURE_EVOLVE_READY) return result;
     if (!confirmed) return CREATURE_EVOLVE_DEFERRED;
     e = creatures_evolution(c->form_id); target = creatures_form(e->to);
     if (!target || (creatures_capabilities(c->form_id) & target->field_caps) != creatures_capabilities(c->form_id))
         return CREATURE_EVOLVE_INVALID;
-    c->form_id = target->id; c->polarity = target->polarity;
+    candidate = *c; candidate.form_id = target->id; candidate.polarity = target->polarity;
+    if (!creatures_instance_validate(&candidate)) return CREATURE_EVOLVE_INVALID;
+    *c = candidate;
     bit_set(r->seen, c->form_id - 1); bit_set(r->obtained, c->form_id - 1);
     return CREATURE_EVOLVE_READY;
 }

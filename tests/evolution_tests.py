@@ -49,6 +49,13 @@ class EvolutionRun(CampaignRun):
 
     def step(self, count, keys=0):
         self.raw_step(count, keys)
+        # Continue decoding is a documented blocking load, not a steady-game
+        # frame. Wait for it explicitly before measuring incremental writes.
+        if self.auto_save:
+            for _ in range(180):
+                if not (self.get('game_state')==PLAY and self.get('frame')==0):break
+                self.raw_step(1,0)
+            else:raise AssertionError('Cold Continue did not finish')
         if self.auto_save and self.get('game_state') == SAVE_PENDING:
             self.settle_save()
 
@@ -153,7 +160,7 @@ class EvolutionRun(CampaignRun):
     def growth(self,family):
         if self.get('game_state')==PLAY:self.tap('START')
         self.check(self.get('game_state')==PAUSE,'Start opens journal for companion growth')
-        for _ in range(4):
+        for _ in range(6):
             if self.get('journal_tab')==3:break
             self.tap('A')
         self.check(self.get('journal_tab')==3,'growth is the fourth journal tab')

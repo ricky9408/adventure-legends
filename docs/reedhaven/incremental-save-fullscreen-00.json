@@ -1,0 +1,42 @@
+[
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 204449,
+    "start_frame": 94,
+    "frames": 14,
+    "display_flips": 14,
+    "max_cycles": 204449,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 205517,
+    "start_frame": 377,
+    "frames": 18,
+    "display_flips": 18,
+    "max_cycles": 205517,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 208956,
+    "start_frame": 661,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 208956,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 206288,
+    "start_frame": 895,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 206288,
+    "input_stress": false,
+    "resume_state": 2
+  }
+]

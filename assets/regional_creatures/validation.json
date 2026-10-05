@@ -1,0 +1,83 @@
+{
+  "pixel_validation": {
+    "field_dimensions": [
+      3,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      3,
+      4,
+      2,
+      256
+    ],
+    "portrait_dimensions": [
+      3,
+      1024
+    ],
+    "existing_actor_palette_only": true,
+    "palette_indices": [
+      0,
+      1,
+      6,
+      7,
+      25,
+      29,
+      33,
+      43,
+      44,
+      45,
+      46,
+      47,
+      52,
+      53,
+      54,
+      55,
+      56,
+      59,
+      60,
+      96
+    ],
+    "transparent_zero": true,
+    "four_distinct_walk_frames_per_direction": true,
+    "articulated_walk_silhouettes": true,
+    "four_distinct_direction_silhouettes": true,
+    "two_additional_distinct_ability_poses": true,
+    "three_distinct_form_silhouettes": true,
+    "tidewheel_apertures_clear": true,
+    "independent_portraits": true
+  },
+  "deterministic_regeneration": true,
+  "output_sha256": {
+    "assets/regional_creatures/CREDITS.txt": "1c45a0b99682cabbd32715b3e117f05c2df093c24644cb68ff1636d93aef417d",
+    "assets/regional_creatures/ability_sheet.png": "0c13e0826ff7d645434230892da82082b3a626a8d5d8a0c9f6e095c4eb4c027f",
+    "assets/regional_creatures/chimeclasp_ability.png": "595592173a691f57ef10a002f112e13f341a1587190af599f40433f02e4a87b5",
+    "assets/regional_creatures/chimeclasp_portrait.png": "44d399ae3b4fa76293bf1d6b9fcc86337ee88816ae68bdecafd6b883d7fe6b46",
+    "assets/regional_creatures/chimeclasp_walk.png": "beff9d5979508846de35888ddb7c3bacf530241939da6a8d11ec9e88530bb677",
+    "assets/regional_creatures/contact_sheet.png": "29e200f23dac7dddf207cb3c3fd674ff9a5908bd89d326c86c7e46b47ea8a4f7",
+    "assets/regional_creatures/dewspindle_ability.png": "0d8741a03d58576471ef0780fe583611404ed8a3a3aa0e91eeb81a417851ad8c",
+    "assets/regional_creatures/dewspindle_portrait.png": "a5a6f56c6323f32a0feb51928990439d36750d20bb47f38a81858d244a482dac",
+    "assets/regional_creatures/dewspindle_walk.png": "e802bc0f678ce43b6c16bd7bf78367e441b20e6f59d847f565e0a194fd801a74",
+    "assets/regional_creatures/directional_silhouettes.png": "9e10cb3c4d5631a539195839ac0636861bc24c459626b87667bcd1ab90004cf6",
+    "assets/regional_creatures/manifest.json": "262fd745d3da06b2105bcc040c5e4298e303e1ce3cf34f06281f1d029a9699db",
+    "assets/regional_creatures/motion_native.gif": "2100bf63c9737e5a068810e4b574f81d9c20c555f98953bdb67ba7f25ab70a76",
+    "assets/regional_creatures/native_dark_light.png": "0407ffb6317207dbd13f68c482ab41ac79000cde7032f680dc9336ffb6c4216c",
+    "assets/regional_creatures/native_dark_light_3x.png": "cecbd145d37bafeff1890b9f11a87766dede9ff46fd56b99dbcfc25bb7845b55",
+    "assets/regional_creatures/tidewheel_ability.png": "17cf7babd0ea66f82735281e32378edaee97a6ad3baa6b597b7a4f2b8633fdbb",
+    "assets/regional_creatures/tidewheel_portrait.png": "896af0467592f37780f4bab791ac45384809795ac5232d4a73361dc27eebe3c5",
+    "assets/regional_creatures/tidewheel_walk.png": "6e18fac3a8de261dca20e45e0555cffa779e50da62b5b6e66c6679cbdeed1e60",
+    "assets/regional_creatures/walk_sheet.png": "5a3f97894fb69d29d6cbc115ad07e69391c99505c10be6d029e36e439a41a37a",
+    "src/regional_creature_art_data/part_000.inc": "8b592d2bab32fdee57ddf01395504ffa4efea26bb5e875399bd2a98130bd6fbe",
+    "src/regional_creature_art_data/part_001.inc": "3ad9ce975d616d37b496da1eede7fffd18717767f80ec8c5794f024c55c60e5f",
+    "src/regional_creature_art.c": "10f8c830e15457452546013cb099c497369e74303ab5ecd512c79db041f89b38",
+    "src/regional_creature_art.h": "064b91582957d10d6e09afa0e1b988f361aab54220b88de4a0c9ab6a7fb8c95a"
+  },
+  "max_include_bytes": 31958,
+  "host_compile_and_lookup_tests": "passed",
+  "arm_compile": "passed",
+  "arm_rom_object_bytes": 21707,
+  "arm_data_bytes": 0,
+  "arm_bss_bytes": 0,
+  "arm_size_output": "text\t   data\t    bss\t    dec\t    hex\tfilename\n  21707\t      0\t      0\t  21707\t   54cb\tregional_creature_art.o"
+}

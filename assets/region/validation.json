@@ -1,0 +1,1211 @@
+{
+  "foot_radius": 5,
+  "movement": "four cardinal neighbors at one-pixel steps; no diagonal corner clipping",
+  "routes": {
+    "reedhaven": {
+      "all_dynamic_open": {
+        "reachable_pixels": 69395,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              240,
+              52
+            ],
+            "cardinal_steps": 232
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              104,
+              232
+            ],
+            "cardinal_steps": 188
+          },
+          {
+            "target": "spawn_3",
+            "point": [
+              344,
+              152
+            ],
+            "cardinal_steps": 240
+          },
+          {
+            "target": "spawn_4",
+            "point": [
+              88,
+              128
+            ],
+            "cardinal_steps": 308
+          },
+          {
+            "target": "spawn_5",
+            "point": [
+              344,
+              248
+            ],
+            "cardinal_steps": 140
+          },
+          {
+            "target": "exit_south_road",
+            "point": [
+              240,
+              304
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "exit_north_basin",
+            "point": [
+              240,
+              28
+            ],
+            "cardinal_steps": 256
+          },
+          {
+            "target": "exit_bellfoundry",
+            "point": [
+              344,
+              148
+            ],
+            "cardinal_steps": 240
+          },
+          {
+            "target": "exit_mira_storehouse",
+            "point": [
+              88,
+              124
+            ],
+            "cardinal_steps": 312
+          },
+          {
+            "target": "exit_surestep_garden",
+            "point": [
+              344,
+              230
+            ],
+            "cardinal_steps": 158
+          },
+          {
+            "target": "object_smith",
+            "point": [
+              320,
+              150
+            ],
+            "cardinal_steps": 214
+          },
+          {
+            "target": "object_mira",
+            "point": [
+              88,
+              136
+            ],
+            "cardinal_steps": 300
+          },
+          {
+            "target": "object_warden",
+            "point": [
+              264,
+              252
+            ],
+            "cardinal_steps": 56
+          },
+          {
+            "target": "object_rest",
+            "point": [
+              104,
+              232
+            ],
+            "cardinal_steps": 188
+          },
+          {
+            "target": "object_apprentice",
+            "point": [
+              416,
+              280
+            ],
+            "cardinal_steps": 200
+          },
+          {
+            "target": "object_market_keeper",
+            "point": [
+              182,
+              250
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_sword_rack",
+            "point": [
+              408,
+              256
+            ],
+            "cardinal_steps": 196
+          },
+          {
+            "target": "object_lance_rack",
+            "point": [
+              432,
+              256
+            ],
+            "cardinal_steps": 220
+          },
+          {
+            "target": "object_bow_rack",
+            "point": [
+              456,
+              256
+            ],
+            "cardinal_steps": 244
+          },
+          {
+            "target": "object_practice_target",
+            "point": [
+              440,
+              296
+            ],
+            "cardinal_steps": 240
+          },
+          {
+            "target": "object_workshop_sign",
+            "point": [
+              400,
+              152
+            ],
+            "cardinal_steps": 292
+          },
+          {
+            "target": "object_weaver_sign",
+            "point": [
+              64,
+              140
+            ],
+            "cardinal_steps": 320
+          },
+          {
+            "target": "object_garden_sign",
+            "point": [
+              376,
+              260
+            ],
+            "cardinal_steps": 160
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 69395,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              240,
+              52
+            ],
+            "cardinal_steps": 232
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              104,
+              232
+            ],
+            "cardinal_steps": 188
+          },
+          {
+            "target": "spawn_3",
+            "point": [
+              344,
+              152
+            ],
+            "cardinal_steps": 240
+          },
+          {
+            "target": "spawn_4",
+            "point": [
+              88,
+              128
+            ],
+            "cardinal_steps": 308
+          },
+          {
+            "target": "spawn_5",
+            "point": [
+              344,
+              248
+            ],
+            "cardinal_steps": 140
+          },
+          {
+            "target": "exit_south_road",
+            "point": [
+              240,
+              304
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "exit_north_basin",
+            "point": [
+              240,
+              28
+            ],
+            "cardinal_steps": 256
+          },
+          {
+            "target": "exit_bellfoundry",
+            "point": [
+              344,
+              148
+            ],
+            "cardinal_steps": 240
+          },
+          {
+            "target": "exit_mira_storehouse",
+            "point": [
+              88,
+              124
+            ],
+            "cardinal_steps": 312
+          },
+          {
+            "target": "exit_surestep_garden",
+            "point": [
+              344,
+              230
+            ],
+            "cardinal_steps": 158
+          },
+          {
+            "target": "object_smith",
+            "point": [
+              320,
+              150
+            ],
+            "cardinal_steps": 214
+          },
+          {
+            "target": "object_mira",
+            "point": [
+              88,
+              136
+            ],
+            "cardinal_steps": 300
+          },
+          {
+            "target": "object_warden",
+            "point": [
+              264,
+              252
+            ],
+            "cardinal_steps": 56
+          },
+          {
+            "target": "object_rest",
+            "point": [
+              104,
+              232
+            ],
+            "cardinal_steps": 188
+          },
+          {
+            "target": "object_apprentice",
+            "point": [
+              416,
+              280
+            ],
+            "cardinal_steps": 200
+          },
+          {
+            "target": "object_market_keeper",
+            "point": [
+              182,
+              250
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_sword_rack",
+            "point": [
+              408,
+              256
+            ],
+            "cardinal_steps": 196
+          },
+          {
+            "target": "object_lance_rack",
+            "point": [
+              432,
+              256
+            ],
+            "cardinal_steps": 220
+          },
+          {
+            "target": "object_bow_rack",
+            "point": [
+              456,
+              256
+            ],
+            "cardinal_steps": 244
+          },
+          {
+            "target": "object_practice_target",
+            "point": [
+              440,
+              296
+            ],
+            "cardinal_steps": 240
+          },
+          {
+            "target": "object_workshop_sign",
+            "point": [
+              400,
+              152
+            ],
+            "cardinal_steps": 292
+          },
+          {
+            "target": "object_weaver_sign",
+            "point": [
+              64,
+              140
+            ],
+            "cardinal_steps": 320
+          },
+          {
+            "target": "object_garden_sign",
+            "point": [
+              376,
+              260
+            ],
+            "cardinal_steps": 160
+          }
+        ]
+      }
+    },
+    "reedbasin": {
+      "all_dynamic_open": {
+        "reachable_pixels": 76632,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              360,
+              72
+            ],
+            "cardinal_steps": 332
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              120,
+              232
+            ],
+            "cardinal_steps": 172
+          },
+          {
+            "target": "exit_south_reedhaven",
+            "point": [
+              240,
+              304
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "exit_tide_courtyard",
+            "point": [
+              360,
+              56
+            ],
+            "cardinal_steps": 348
+          },
+          {
+            "target": "object_basin_rest",
+            "point": [
+              120,
+              232
+            ],
+            "cardinal_steps": 172
+          },
+          {
+            "target": "object_sluice_handle",
+            "point": [
+              264,
+              216
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_west_tide_pool",
+            "point": [
+              296,
+              140
+            ],
+            "cardinal_steps": 200
+          },
+          {
+            "target": "object_east_tide_pool",
+            "point": [
+              424,
+              124
+            ],
+            "cardinal_steps": 344
+          },
+          {
+            "target": "object_weaver_nook",
+            "point": [
+              72,
+              44
+            ],
+            "cardinal_steps": 408
+          },
+          {
+            "target": "object_reed_screen",
+            "point": [
+              98,
+              44
+            ],
+            "cardinal_steps": 382
+          },
+          {
+            "target": "object_basin_bond",
+            "point": [
+              184,
+              88
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_basin_warden",
+            "point": [
+              348,
+              284
+            ],
+            "cardinal_steps": 152
+          },
+          {
+            "target": "object_tide_sign",
+            "point": [
+              384,
+              96
+            ],
+            "cardinal_steps": 332
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 75628,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              360,
+              72
+            ],
+            "cardinal_steps": 386
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              120,
+              232
+            ],
+            "cardinal_steps": 172
+          },
+          {
+            "target": "exit_south_reedhaven",
+            "point": [
+              240,
+              304
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "exit_tide_courtyard",
+            "point": [
+              360,
+              56
+            ],
+            "cardinal_steps": 402
+          },
+          {
+            "target": "object_basin_rest",
+            "point": [
+              120,
+              232
+            ],
+            "cardinal_steps": 172
+          },
+          {
+            "target": "object_sluice_handle",
+            "point": [
+              264,
+              216
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_west_tide_pool",
+            "point": [
+              296,
+              140
+            ],
+            "cardinal_steps": 382
+          },
+          {
+            "target": "object_east_tide_pool",
+            "point": [
+              424,
+              124
+            ],
+            "cardinal_steps": 344
+          },
+          {
+            "target": "object_weaver_nook",
+            "point": [
+              72,
+              44
+            ],
+            "cardinal_steps": 442
+          },
+          {
+            "target": "object_reed_screen",
+            "point": [
+              98,
+              44
+            ],
+            "cardinal_steps": 416
+          },
+          {
+            "target": "object_basin_bond",
+            "point": [
+              184,
+              88
+            ],
+            "cardinal_steps": 384
+          },
+          {
+            "target": "object_basin_warden",
+            "point": [
+              348,
+              284
+            ],
+            "cardinal_steps": 152
+          },
+          {
+            "target": "object_tide_sign",
+            "point": [
+              384,
+              96
+            ],
+            "cardinal_steps": 338
+          }
+        ]
+      }
+    },
+    "bellfoundry": {
+      "all_dynamic_open": {
+        "reachable_pixels": 19038,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_bell",
+            "point": [
+              96,
+              80
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_forge",
+            "point": [
+              48,
+              72
+            ],
+            "cardinal_steps": 132
+          },
+          {
+            "target": "object_metal_latch",
+            "point": [
+              184,
+              72
+            ],
+            "cardinal_steps": 124
+          },
+          {
+            "target": "object_west_plate",
+            "point": [
+              80,
+              120
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_east_plate",
+            "point": [
+              152,
+              120
+            ],
+            "cardinal_steps": 44
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              128
+            ],
+            "cardinal_steps": 76
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 19038,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_bell",
+            "point": [
+              96,
+              80
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_forge",
+            "point": [
+              48,
+              72
+            ],
+            "cardinal_steps": 132
+          },
+          {
+            "target": "object_metal_latch",
+            "point": [
+              184,
+              72
+            ],
+            "cardinal_steps": 124
+          },
+          {
+            "target": "object_west_plate",
+            "point": [
+              80,
+              120
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_east_plate",
+            "point": [
+              152,
+              120
+            ],
+            "cardinal_steps": 44
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              128
+            ],
+            "cardinal_steps": 76
+          }
+        ]
+      }
+    },
+    "tide_courtyard": {
+      "all_dynamic_open": {
+        "reachable_pixels": 22652,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_west_pool",
+            "point": [
+              64,
+              86
+            ],
+            "cardinal_steps": 102
+          },
+          {
+            "target": "object_east_pool",
+            "point": [
+              176,
+              86
+            ],
+            "cardinal_steps": 102
+          },
+          {
+            "target": "object_west_sluice",
+            "point": [
+              64,
+              130
+            ],
+            "cardinal_steps": 58
+          },
+          {
+            "target": "object_east_sluice",
+            "point": [
+              176,
+              130
+            ],
+            "cardinal_steps": 58
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 19916,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_west_pool",
+            "point": [
+              64,
+              86
+            ],
+            "cardinal_steps": 102
+          },
+          {
+            "target": "object_east_pool",
+            "point": [
+              176,
+              86
+            ],
+            "cardinal_steps": 102
+          },
+          {
+            "target": "object_west_sluice",
+            "point": [
+              64,
+              130
+            ],
+            "cardinal_steps": 58
+          },
+          {
+            "target": "object_east_sluice",
+            "point": [
+              176,
+              130
+            ],
+            "cardinal_steps": 58
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          }
+        ]
+      }
+    },
+    "mira_storehouse": {
+      "all_dynamic_open": {
+        "reachable_pixels": 19463,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_west_crate",
+            "point": [
+              80,
+              104
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_east_crate",
+            "point": [
+              144,
+              104
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_west_plate",
+            "point": [
+              80,
+              72
+            ],
+            "cardinal_steps": 100
+          },
+          {
+            "target": "object_east_plate",
+            "point": [
+              160,
+              120
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_spindle",
+            "point": [
+              208,
+              96
+            ],
+            "cardinal_steps": 124
+          },
+          {
+            "target": "object_latch",
+            "point": [
+              120,
+              56
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              128
+            ],
+            "cardinal_steps": 76
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 18311,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_west_crate",
+            "point": [
+              80,
+              104
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_east_crate",
+            "point": [
+              144,
+              104
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_west_plate",
+            "point": [
+              80,
+              72
+            ],
+            "cardinal_steps": 100
+          },
+          {
+            "target": "object_east_plate",
+            "point": [
+              160,
+              120
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_spindle",
+            "point": [
+              208,
+              96
+            ],
+            "cardinal_steps": 124
+          },
+          {
+            "target": "object_latch",
+            "point": [
+              120,
+              56
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              128
+            ],
+            "cardinal_steps": 76
+          }
+        ]
+      }
+    },
+    "surestep_garden": {
+      "all_dynamic_open": {
+        "reachable_pixels": 18610,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_step_west",
+            "point": [
+              72,
+              88
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_step_center",
+            "point": [
+              120,
+              88
+            ],
+            "cardinal_steps": 44
+          },
+          {
+            "target": "object_step_east",
+            "point": [
+              168,
+              120
+            ],
+            "cardinal_steps": 60
+          },
+          {
+            "target": "object_garden_gong",
+            "point": [
+              184,
+              64
+            ],
+            "cardinal_steps": 132
+          },
+          {
+            "target": "object_garden_start",
+            "point": [
+              64,
+              136
+            ],
+            "cardinal_steps": 60
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 18610,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_return_door",
+            "point": [
+              120,
+              149
+            ],
+            "cardinal_steps": 17
+          },
+          {
+            "target": "object_step_west",
+            "point": [
+              72,
+              88
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_step_center",
+            "point": [
+              120,
+              88
+            ],
+            "cardinal_steps": 44
+          },
+          {
+            "target": "object_step_east",
+            "point": [
+              168,
+              120
+            ],
+            "cardinal_steps": 60
+          },
+          {
+            "target": "object_garden_gong",
+            "point": [
+              184,
+              64
+            ],
+            "cardinal_steps": 132
+          },
+          {
+            "target": "object_garden_start",
+            "point": [
+              64,
+              136
+            ],
+            "cardinal_steps": 60
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          }
+        ]
+      }
+    }
+  },
+  "palette_unchanged": true,
+  "opaque_backgrounds": true,
+  "native_camera_checks": 2892,
+  "budget": {
+    "bitmap_bytes": 768000,
+    "sprite_bytes": 10240,
+    "collision_bytes": 896,
+    "arm32_room_table_bytes": 120,
+    "rom_payload_bytes": 779256,
+    "chunks": 98,
+    "largest_chunk_bytes": 31998,
+    "chunk_limit_bytes": 32000
+  }
+}

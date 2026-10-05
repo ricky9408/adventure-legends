@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "generator": "assets/generate_regional_creatures.py",
+  "names": [
+    "Dewspindle",
+    "Tidewheel",
+    "Chimeclasp"
+  ],
+  "form_ids": [
+    13,
+    14,
+    16
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "rights": "Original code-native pixel art. No external art, extracted game assets, traced characters, or raster inputs.",
+  "status": "ART ONLY / DEVELOPER REVIEW. Acquisition, runtime rendering and ability behavior are separate engine work. Keep companion sheets out of player-facing media.",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 21507,
+  "runtime_data_bytes": 0,
+  "runtime_bss_bytes": 0,
+  "include_bytes": [
+    31958,
+    26599
+  ],
+  "max_include_bytes": 31958,
+  "anchor": [
+    8,
+    8
+  ],
+  "frame_ticks_suggestion": 8,
+  "ability_poses": [
+    "gather_or_coil",
+    "release"
+  ],
+  "motions": [
+    "Two reed stilts alternate under a soft spiral droplet",
+    "Water hoop turns above level spoon feet; droplet face stays forward",
+    "Three unequal prongs step; suspended tuning tongue sways inside bronze jaws"
+  ],
+  "validation": {
+    "field_dimensions": [
+      3,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      3,
+      4,
+      2,
+      256
+    ],
+    "portrait_dimensions": [
+      3,
+      1024
+    ],
+    "existing_actor_palette_only": true,
+    "palette_indices": [
+      0,
+      1,
+      6,
+      7,
+      25,
+      29,
+      33,
+      43,
+      44,
+      45,
+      46,
+      47,
+      52,
+      53,
+      54,
+      55,
+      56,
+      59,
+      60,
+      96
+    ],
+    "transparent_zero": true,
+    "four_distinct_walk_frames_per_direction": true,
+    "articulated_walk_silhouettes": true,
+    "four_distinct_direction_silhouettes": true,
+    "two_additional_distinct_ability_poses": true,
+    "three_distinct_form_silhouettes": true,
+    "tidewheel_apertures_clear": true,
+    "independent_portraits": true
+  }
+}

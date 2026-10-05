@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "release": "Merged PR5 quick-companion selector",
+  "candidate": {
+    "rom_sha256": "1e76b1d5f3a65557b47f7445710d448b0a316fdd9e810a2d1dcc49ea4f7a45aa",
+    "symbols_sha256": "c68705786801aefb8b84dd0cf5e1b1193f7cf327fd941e3448d3139be6326064",
+    "rom_bytes": 1837636
+  },
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "source_failures": [],
+  "source_native_assertions": 386,
+  "source_report": "adventure-legends-quickparty/build/quickparty-evolved-qa/quickparty-report.json",
+  "source_report_sha256": "22ef1d17614801eb6706054fe7810de76c44e6f3abc2ca71b199d65096c19719",
+  "source_controller_inputs_sha256": "10b2663cace20953c4bd37026b6c5e0628987b7dd4a295fb600b7ebda5824ccb",
+  "source_snapshot_name": "evolved-reversed-party",
+  "snapshot": {
+    "path": "adventure-legends-quickparty/build/quickparty-evolved-qa/evolved-reversed-party.state",
+    "sram_path": "adventure-legends-quickparty/build/quickparty-evolved-qa/evolved-reversed-party.state.sav",
+    "status": {
+      "game_state": 1,
+      "room": 0,
+      "px": 143,
+      "py": 125,
+      "hp": 8,
+      "max_hp": 8,
+      "spirit": 0,
+      "summoned": 1,
+      "room_flags": 65535,
+      "chapter_flags": 7,
+      "optional_flags": 1,
+      "story_seen": 62,
+      "bridge_open": 1,
+      "torches": 3,
+      "boss_hp": 12,
+      "boss_armor": 0,
+      "boss_state": 0,
+      "boss_phase": 0,
+      "boss_timer": 0,
+      "ability_cd": 0,
+      "heal_cd": 0,
+      "guard_ticks": 0,
+      "camera_x": 0,
+      "camera_y": 0,
+      "roll_ticks": 0,
+      "relic_found": 1,
+      "camp_unlocked": 1,
+      "dialog_speaker": 0,
+      "dpage": 0,
+      "dcount": 0,
+      "frame": 364,
+      "quickparty_open": 0,
+      "quickparty_candidate": 255,
+      "quickparty_hold_updates": 0,
+      "quickparty_revision": 31,
+      "quickparty_menu_slot": 0,
+      "quickparty_menu_candidate": 0
+    },
+    "provenance": "controller-reached; no game RAM writes",
+    "state_sha256": "9f53e3bfe03166e904278f239b49c27674da570aefa028e4ffb7ba65d50b19fc",
+    "sram_sha256": "806283f8ee36f4eb139822d74e8c176cf4c2e08f30c9e27ed5da82ae5f21d4d1",
+    "candidate": {
+      "rom_sha256": "1e76b1d5f3a65557b47f7445710d448b0a316fdd9e810a2d1dcc49ea4f7a45aa",
+      "symbols_sha256": "c68705786801aefb8b84dd0cf5e1b1193f7cf327fd941e3448d3139be6326064",
+      "rom_bytes": 1837636
+    },
+    "progression_forms": [
+      2,
+      5,
+      8,
+      11
+    ]
+  },
+  "fixture": "pr5-evolved-reversed-party.sav",
+  "sram_sha256": "806283f8ee36f4eb139822d74e8c176cf4c2e08f30c9e27ed5da82ae5f21d4d1",
+  "sram_bytes": 32768,
+  "fixture_policy": "Unmodified full cartridge SRAM copied from the hash-verified controller-produced PR5 snapshot. Both banks retained; no host-fabricated rows or repaired CRCs. Source machine state was hash-verified for provenance only, never loaded into R5 and not included. Sibling source paths are historical provenance, not test dependencies.",
+  "original_native_continue": {
+    "method": "Matching PR5 ROM boots source SRAM at title and presses Continue; read-only symbols/roster observation, no machine-state load",
+    "game_ram_writes": 0,
+    "machine_state_loads": 0,
+    "roster_sha256": "026ab1547463c2ea8f7395873fa88e6041c394db07500df7f3b490dddd1ac066",
+    "spirit": 0,
+    "party": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "selected_party": 3,
+    "owned_forms": [
+      2,
+      5,
+      8,
+      11
+    ],
+    "owned_instance_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "commands": [
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "wire_bank_summary": [
+    {
+      "offset": 512,
+      "sequence": 93,
+      "revision": 1
+    },
+    {
+      "offset": 6656,
+      "sequence": 92,
+      "revision": 1
+    }
+  ]
+}

@@ -1,0 +1,495 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "key": "ITEM_001",
+      "name": "Wayfarer Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "sword",
+      "protected": true,
+      "description": [
+        "A trusty close-range sword.",
+        "Cannot be discarded."
+      ]
+    },
+    {
+      "id": 2,
+      "key": "ITEM_002",
+      "name": "Reedguard Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 4,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "sword",
+      "description": [
+        "A sturdier close-range cut.",
+        "Attack +4; defense +1."
+      ]
+    },
+    {
+      "id": 9,
+      "key": "ITEM_009",
+      "name": "Practice Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "lance",
+      "description": [
+        "A narrow, committed thrust.",
+        "Long reach; watch your sides."
+      ]
+    },
+    {
+      "id": 10,
+      "key": "ITEM_010",
+      "name": "Copperleaf Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 4,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "weapon_class": "lance",
+      "description": [
+        "Copperleaf tips hold firm.",
+        "Attack +4; stagger +1."
+      ]
+    },
+    {
+      "id": 17,
+      "key": "ITEM_017",
+      "name": "Travel Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "bow",
+      "description": [
+        "Aim and release to fire.",
+        "Arrows carry no field magic."
+      ]
+    },
+    {
+      "id": 18,
+      "key": "ITEM_018",
+      "name": "Tidewood Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 4,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "bow",
+      "description": [
+        "A steady bow for long roads.",
+        "Attack +4 on each arrow."
+      ]
+    },
+    {
+      "id": 33,
+      "key": "ITEM_033",
+      "name": "Patchwork Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 2,
+        "hp_q4": 8,
+        "speed_q8_delta": -4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A half-heart of padding.",
+        "Defense +2; speed -4."
+      ]
+    },
+    {
+      "id": 34,
+      "key": "ITEM_034",
+      "name": "Hearthscale Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 4,
+        "hp_q4": 16,
+        "speed_q8_delta": -8,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A heart of layered armor.",
+        "Defense +4; speed -8."
+      ]
+    },
+    {
+      "id": 49,
+      "key": "ITEM_049",
+      "name": "Trail Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 8,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Light soles for the trail.",
+        "Walking speed +8."
+      ]
+    },
+    {
+      "id": 50,
+      "key": "ITEM_050",
+      "name": "Surestep Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 3,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Sure footing after a dodge.",
+        "Roll cooldown -3."
+      ]
+    },
+    {
+      "id": 65,
+      "key": "ITEM_065",
+      "name": "Woven Belt",
+      "slot": "belt",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 8,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A packmaker's sturdy belt.",
+        "Maximum health +half-heart."
+      ]
+    },
+    {
+      "id": 81,
+      "key": "ITEM_081",
+      "name": "Resonance Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 4,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A clear note for companions.",
+        "Power cooldown -4."
+      ]
+    },
+    {
+      "id": 82,
+      "key": "ITEM_082",
+      "name": "Steady Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "description": [
+        "A ring that steadies the hand.",
+        "Defense +1; stagger +1."
+      ]
+    }
+  ],
+  "weapon_classes": [
+    {
+      "id": 1,
+      "key": "sword",
+      "attack_edge": "press",
+      "geometry": "forward_sweep",
+      "moves": [
+        {
+          "name": "cut_1",
+          "windup": 2,
+          "active": 1,
+          "recovery": 14,
+          "damage_q4": 32,
+          "reach_px": 29,
+          "half_width_px": 18
+        },
+        {
+          "name": "cut_2",
+          "windup": 2,
+          "active": 1,
+          "recovery": 14,
+          "damage_q4": 32,
+          "reach_px": 29,
+          "half_width_px": 18
+        },
+        {
+          "name": "cut_3",
+          "windup": 3,
+          "active": 1,
+          "recovery": 20,
+          "damage_q4": 48,
+          "reach_px": 35,
+          "half_width_px": 20
+        }
+      ],
+      "combo_window": 44,
+      "buffer": 8,
+      "lunge_q8": 384
+    },
+    {
+      "id": 2,
+      "key": "lance",
+      "attack_edge": "press",
+      "geometry": "forward_rectangle",
+      "moves": [
+        {
+          "name": "thrust",
+          "windup": 6,
+          "active": 3,
+          "recovery": 20,
+          "damage_q4": 48,
+          "reach_px": 43,
+          "half_width_px": 6
+        }
+      ],
+      "combo_window": 0,
+      "buffer": 6,
+      "lunge_q8": 256
+    },
+    {
+      "id": 3,
+      "key": "bow",
+      "attack_edge": "release",
+      "geometry": "swept_projectile",
+      "moves": [
+        {
+          "name": "tap",
+          "windup": 4,
+          "active": 1,
+          "recovery": 23,
+          "damage_q4": 32,
+          "reach_px": 112,
+          "half_width_px": 3
+        },
+        {
+          "name": "charge",
+          "windup": 24,
+          "active": 1,
+          "recovery": 23,
+          "damage_q4": 48,
+          "reach_px": 144,
+          "half_width_px": 3
+        }
+      ],
+      "combo_window": 0,
+      "buffer": 0,
+      "lunge_q8": 0,
+      "charge_min_updates": 24,
+      "charge_max_updates": 45,
+      "projectile_speed_q8": 1024,
+      "max_live_arrows": 2,
+      "ammo": "unlimited",
+      "field_caps": []
+    }
+  ],
+  "stat_bounds": {
+    "attack_q4": [
+      0,
+      24
+    ],
+    "defense_q4": [
+      0,
+      8
+    ],
+    "hp_q4": [
+      0,
+      32
+    ],
+    "speed_q8_delta": [
+      -16,
+      16
+    ],
+    "roll_reduction": [
+      0,
+      6
+    ],
+    "power_reduction": [
+      0,
+      8
+    ],
+    "reach_px": [
+      0,
+      4
+    ],
+    "stagger": [
+      0,
+      3
+    ]
+  },
+  "schema_version": 1,
+  "description": "Authored equipment definitions and weapon parameters; enabled data is not evidence of an in-game acquisition route.",
+  "reward_sources": [
+    {
+      "source_id": 0,
+      "item_id": 1
+    },
+    {
+      "source_id": 1,
+      "item_id": 2
+    },
+    {
+      "source_id": 2,
+      "item_id": 9
+    },
+    {
+      "source_id": 3,
+      "item_id": 10
+    },
+    {
+      "source_id": 4,
+      "item_id": 17
+    },
+    {
+      "source_id": 5,
+      "item_id": 18
+    },
+    {
+      "source_id": 6,
+      "item_id": 33
+    },
+    {
+      "source_id": 7,
+      "item_id": 34
+    },
+    {
+      "source_id": 8,
+      "item_id": 49
+    },
+    {
+      "source_id": 9,
+      "item_id": 50
+    },
+    {
+      "source_id": 10,
+      "item_id": 65
+    },
+    {
+      "source_id": 11,
+      "item_id": 81
+    },
+    {
+      "source_id": 12,
+      "item_id": 82
+    }
+  ]
+}

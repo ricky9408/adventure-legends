@@ -22,9 +22,9 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o $(BUILD)/equipment.o $(BUILD)/equipment_data.o $(BUILD)/combat_rules.o $(BUILD)/weapon_actions.o $(BUILD)/gear_runtime.o $(BUILD)/gear_menu.o $(BUILD)/regional_quests.o $(BUILD)/regional_creature_art.o $(BUILD)/regional_powers.o $(BUILD)/region_art.o $(BUILD)/region_game.o
 
-.PHONY: all clean tools assets test-tools test test-campaign test-systems test-quickparty test-quickparty-evolved quickparty-video gameplay-video developer-video
+.PHONY: all clean tools assets test-tools test test-campaign test-systems test-quickparty test-quickparty-evolved test-equipment test-regional quickparty-video gameplay-video developer-video
 all: $(TARGET).gba
 
 $(BUILD):
@@ -56,6 +56,9 @@ assets:
 	$(PYTHON) assets/creatures/generate_data.py
 	$(PYTHON) assets/generate_evolutions.py
 	$(PYTHON) assets/generate_trials.py
+	$(PYTHON) assets/equipment/generate_data.py
+	$(PYTHON) assets/generate_region.py
+	$(PYTHON) assets/generate_regional_creatures.py
 
 tools:
 	./tools/install_tools.sh
@@ -69,13 +72,16 @@ test: all
 	$(PYTHON) tests/test_creatures.py
 	$(PYTHON) tests/test_trials.py
 	$(PYTHON) tests/test_save_feedback.py
+	$(MAKE) test-equipment
 	$(MAKE) test-systems
 	$(MAKE) test-quickparty
 	$(MAKE) test-quickparty-evolved
 	$(MAKE) test-campaign
+	$(MAKE) test-regional
 
 # State fixtures and timing evidence are always produced by this exact ROM.
 test-campaign: all
+	$(PYTHON) tools/archive_test_output.py build/campaign-performance-minimal build/campaign-performance-optional
 	$(PYTHON) tests/campaign_tests.py --output build/campaign-qa
 	$(PYTHON) tests/campaign_tests.py --optional --output build/campaign-optional
 	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-qa/campaign-report.json --output build/campaign-performance-minimal --strict-cold
@@ -84,6 +90,7 @@ test-campaign: all
 # New-system routes include deliberate declines, interrupted commits and native
 # full-screen/OAM/cadence checks. Legacy input is a pinned real prior-ROM save.
 test-systems: all
+	$(PYTHON) tests/quickparty_migration_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/pr5-quickparty-migration-qa
 	$(PYTHON) tests/expedition_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/expedition-qa
 	$(PYTHON) tests/fullscreen_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/fullscreen-qa
 	$(PYTHON) tests/evolution_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/evolution-qa
@@ -92,7 +99,7 @@ test-systems: all
 	$(PYTHON) tests/advanced_power_tests.py --journey build/evolution-qa/evolution-report.json --output build/advanced-power-qa --source-contracts
 
 gameplay-video: all
-	$(PYTHON) tests/capture_player_teaser.py
+	$(PYTHON) tests/capture_region_teaser.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/region-teaser
 
 # Spoiler-bearing full route is development evidence, not the default trailer.
 developer-video: all
@@ -116,3 +123,19 @@ test-quickparty-evolved: all
 
 quickparty-video: all
 	$(PYTHON) tests/capture_quickparty_demo.py
+
+# Host/core/art contracts are distinct from controller-only native journeys.
+test-equipment:
+	$(PYTHON) tests/test_equipment.py
+	$(PYTHON) tests/test_weapon_actions.py
+	$(PYTHON) tests/test_gear_runtime.py
+	$(PYTHON) tests/test_regional_quests.py
+	$(PYTHON) tests/test_regional_adapters.py
+	$(PYTHON) tests/test_region_art.py
+	$(PYTHON) tests/test_regional_creature_art.py
+	$(PYTHON) tests/test_region_game.py
+
+# Controller-only regional journey seeds the same-ROM combat/collection suite.
+test-regional: all
+	$(PYTHON) tests/region_journey.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/region-journey
+	$(PYTHON) tests/region_combat_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --source-report build/region-journey/region-journey.json --output build/region-combat

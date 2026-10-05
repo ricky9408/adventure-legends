@@ -30,7 +30,9 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     library=Path(temp)/'game-host.so'
     modules=['game','assets','ui','world','campaign_art','campaign_rules','save4',
              'creatures','creature_data','save5','progression','evolution_art',
-             'advanced_powers','trials','trial_art','quickparty']
+             'advanced_powers','trials','trial_art','quickparty','equipment','equipment_data',
+             'combat_rules','weapon_actions','gear_runtime','gear_menu','regional_quests',
+             'regional_creature_art','regional_powers','region_art','region_game']
     subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
         '-shared','-fPIC','-O0','-std=c99','-fno-builtin','-Wno-attributes',
         '-Wno-pointer-to-int-cast','-Wno-int-to-pointer-cast',
@@ -48,6 +50,7 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     old=(C.c_ubyte*256).in_dll(lib,'save4_test_sram');old[:]=b'\xff'*256
     live=Save.in_dll(lib,'adventure_save')
     assert lib.creatures_migrate_legacy(C.byref(live.roster),1,2)==1
+    lib.equipment_init(C.byref(live.equipment))
     for n,v in {'room':7,'game_state':1,'checkpoint_spawn':0,'chapter_flags':1,
                 'bridge_open':1,'torches':3,'room_flags':7,'story_seen':2,
                 'spirit':2,'px':56,'py':112,'pressed':0}.items():put(n,v)
@@ -91,7 +94,9 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     assert lib.creatures_evolve(C.byref(live.roster),0,1,1,1)==0
     for n,v in {'room':0,'spirit':0,'checkpoint_spawn':3,'game_state':PAUSE,
                 'journal_tab':3,'px':120,'py':128}.items():put(n,v)
-    lib.progression_refresh();lib.save_game();drain(PAUSE)
+    # This is a synthetic fixture: select the actual owned fox instance.
+    # Engine adapter `spirit` alone no longer overrides the authoritative party.
+    lib.progression_select(0);lib.progression_refresh();lib.save_game();drain(PAUSE)
     prior=load();before=bytes(sram);old_command=lib.progression_command()
     lib.save5_test_fail_after(0)
     assert lib.progression_menu_input(256)==1
@@ -102,7 +107,7 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     assert get('save_failure_notice')==1,'paused timeout must not dismiss failure'
     # Other modal feedback and page changes cannot overwrite the failure.
     lib.toast(ids.index('TX_E_GROWN'));wait_updates(140)
-    for _ in range(4):
+    for _ in range(6):
         update(1);assert get('save_failure_notice')==1
     assert get('journal_tab')==3 and bytes(sram)==before
 
@@ -178,13 +183,18 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     lib.finish_dialogue()
     assert get('game_state')==PLAY and get('save_failure_notice')==0 and get('save_failed')==1
     # Validation rejection before SAVE_PENDING also exposes the same notice.
-    put('game_state',PAUSE);live.quest_reserved[0]=1
+    put('game_state',PAUSE);prior_chapter=get('chapter_flags');put('chapter_flags',2)
     before=bytes(sram);lib.save_game();lib.save_frame()
     assert get('game_state')==PAUSE and get('save_failed')==get('save_failure_notice')==1
     assert bytes(sram)==before
-    live.quest_reserved[0]=0;lib.save5_test_fail_after(-1)
+    put('chapter_flags',prior_chapter);lib.save5_test_fail_after(-1)
     lib.save_game();assert get('toast_ticks')==get('save_failure_notice')==0
     drain(PAUSE);assert get('save_failed')==0
+    # Revision2 validates typed quest reservation incrementally, before writes.
+    before=bytes(sram);live.quests.variables[63]=1;lib.save_game();drain(PAUSE)
+    assert get('save_failed')==get('save_failure_notice')==1 and bytes(sram)==before
+    live.quests.variables[63]=0;lib.save_game();drain(PAUSE)
+    assert get('save_failed')==get('save_failure_notice')==0
     # New party panel: the real R assignment path shares the same failure
     # notice and transactional recovery, without changing any owned instance.
     put('game_state',PAUSE);put('journal_tab',2)

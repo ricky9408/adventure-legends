@@ -1,0 +1,58 @@
+[
+  {
+    "scene": "scrolling-horizontal-sprites",
+    "hardware_frames": 360,
+    "simulation_updates": 360,
+    "display_page_flips": 360,
+    "updates_per_emulated_second": 59.72750056960583,
+    "cycles_max": 155610,
+    "cycles_median": 128499,
+    "cycles_max_frame_fraction": 0.5539772727272727,
+    "camera_changes": 339,
+    "peak_projectiles": 1,
+    "scene_stayed_valid": true,
+    "one_update_and_present_per_frame": true
+  },
+  {
+    "scene": "scrolling-vertical-sprites",
+    "hardware_frames": 360,
+    "simulation_updates": 360,
+    "display_page_flips": 360,
+    "updates_per_emulated_second": 59.72750056960583,
+    "cycles_max": 154703,
+    "cycles_median": 129197,
+    "cycles_max_frame_fraction": 0.5507483196627934,
+    "camera_changes": 301,
+    "peak_projectiles": 1,
+    "scene_stayed_valid": true,
+    "one_update_and_present_per_frame": true
+  },
+  {
+    "scene": "scrolling-diagonal-sprites",
+    "hardware_frames": 360,
+    "simulation_updates": 360,
+    "display_page_flips": 360,
+    "updates_per_emulated_second": 59.72750056960583,
+    "cycles_max": 158693,
+    "cycles_median": 127655,
+    "cycles_max_frame_fraction": 0.5649528651173388,
+    "camera_changes": 320,
+    "peak_projectiles": 1,
+    "scene_stayed_valid": true,
+    "one_update_and_present_per_frame": true
+  },
+  {
+    "scene": "scrolling-dodge-roll",
+    "hardware_frames": 360,
+    "simulation_updates": 360,
+    "display_page_flips": 360,
+    "updates_per_emulated_second": 59.72750056960583,
+    "cycles_max": 153056,
+    "cycles_median": 129631,
+    "cycles_max_frame_fraction": 0.5448849396217817,
+    "camera_changes": 356,
+    "peak_projectiles": 1,
+    "scene_stayed_valid": true,
+    "one_update_and_present_per_frame": true
+  }
+]

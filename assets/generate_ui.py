@@ -54,6 +54,12 @@ texts.update({'E_WISH_FIRE':'森の忘れ火に、小さな炎を','E_WISH_ROOT'
 texts.update({'T_ROOM_WIND':'風織りの庭','T_ROOM_STONE':'琥珀の工房','T_WIND_HINT1':'風を、金の糸へつなごう。','T_WIND_HINT2':'Rで風車の向きが変わる。','T_STONE_HINT1':'ふたつの印に、重みを集めよう。','T_STONE_HINT2':'Aで押して、最後に石の力を。','T_COMPLETE1':'仲間の願いが、かなった！','T_COMPLETE2':'里のしおりで、新たな一歩を。','T_FIRE_HINT1':'忘れられた炉に、火の気配。','T_FIRE_HINT2':'ホムラは、小さく尾を揺らした。','T_ROOT_HINT1':'枯れた根に、芽吹きの気配。','T_ROOT_HINT2':'ミドリは、そっと葉を広げた。','T_RESTORED':'小さな場所に、灯が戻った','T_NEED_PLATES':'ふたつの印が、重みを待つ','T_ALREADY':'この願いは、もうかなった','T_RESET':'仕掛けを元に戻した','T_BLOCKED':'こちらには押せない'})
 texts.update({'E_NEXT_GROWTH':'A 成長へ    B 戻る'})
 texts.update({'Q_CHOOSE':'L＋十字で仲間を選ぶ','Q_RELEASE':'Lを離して決定','Q_CANCEL':'B やめる','Q_PARTY':'仲間の編成','Q_EMPTY':'空き枠','Q_MENU_MOVE':'←→ 枠を選ぶ  ↑↓ 仲間','Q_MENU_ASSIGN':'R 入替  SELECT 外す','Q_LAST_MEMBER':'仲間はひとり以上必要'})
+for extra in ('equipment','creatures','region'):
+    additions=ROOT/'assets'/extra/'ui_additions.json'
+    if additions.exists():
+        for key,value in json.loads(additions.read_text()).items():
+            assert key not in texts or texts[key]==value,key
+            texts[key]=value
 items=[]
 for name,text in texts.items():
     f=small if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL') else font

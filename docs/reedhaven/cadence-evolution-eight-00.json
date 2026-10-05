@@ -1,0 +1,54 @@
+[
+  {
+    "scene": "evolution-0-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 156868
+  },
+  {
+    "scene": "evolution-1-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 157580
+  },
+  {
+    "scene": "sky-relay-stable",
+    "frames": 180,
+    "simulation_updates": 180,
+    "display_flips": 180,
+    "cycles_max": 21301,
+    "cycles_median": 16303,
+    "cycles_max_frame_fraction": 0.075832336523126,
+    "peak_projectiles": 0,
+    "peak_objects": 22,
+    "one_update_and_present_per_frame": true
+  },
+  {
+    "scene": "evolution-2-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 159581
+  },
+  {
+    "scene": "four-lights-stable",
+    "frames": 180,
+    "simulation_updates": 180,
+    "display_flips": 180,
+    "cycles_max": 21612,
+    "cycles_median": 16131,
+    "cycles_max_frame_fraction": 0.07693950786056049,
+    "peak_projectiles": 0,
+    "peak_objects": 21,
+    "one_update_and_present_per_frame": true
+  },
+  {
+    "scene": "evolution-3-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 157881
+  }
+]

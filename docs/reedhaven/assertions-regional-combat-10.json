@@ -1,0 +1,392 @@
+[
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1482
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1483
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1484
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1485
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1486
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1487
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1488
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1489
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1490
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1491
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1492
+  },
+  {
+    "label": "stress window remains active basin gameplay",
+    "passed": true,
+    "frame": 1493
+  },
+  {
+    "label": "stress window includes simultaneous real arrows",
+    "passed": true,
+    "frame": 1493
+  },
+  {
+    "label": "stress window includes fractional health and at least four typed enemies",
+    "passed": true,
+    "frame": 1493
+  },
+  {
+    "label": "crowded combat sustains one update and page flip per hardware frame",
+    "passed": true,
+    "frame": 1493
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1496
+  },
+  {
+    "label": "form1 is available in active party",
+    "passed": true,
+    "frame": 197
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 205
+  },
+  {
+    "label": "L direction selects party slot0",
+    "passed": true,
+    "frame": 205
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 208
+  },
+  {
+    "label": "journal tab3 opens",
+    "passed": true,
+    "frame": 234
+  },
+  {
+    "label": "form1 opens explicit sanctuary evolution confirmation",
+    "passed": true,
+    "frame": 239
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 347
+  },
+  {
+    "label": "controller confirmation evolves form1 to2",
+    "passed": true,
+    "frame": 347
+  },
+  {
+    "label": "evolution retains identity XP bond flags and equipped command bytes",
+    "passed": true,
+    "frame": 347
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 356
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 359
+  },
+  {
+    "label": "journal tab2 opens",
+    "passed": true,
+    "frame": 379
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 444
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 453
+  },
+  {
+    "label": "owned form4 assigned to party slot3",
+    "passed": true,
+    "frame": 453
+  },
+  {
+    "label": "form4 is available in active party",
+    "passed": true,
+    "frame": 453
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 461
+  },
+  {
+    "label": "L direction selects party slot3",
+    "passed": true,
+    "frame": 461
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 464
+  },
+  {
+    "label": "journal tab3 opens",
+    "passed": true,
+    "frame": 490
+  },
+  {
+    "label": "form4 opens explicit sanctuary evolution confirmation",
+    "passed": true,
+    "frame": 495
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 603
+  },
+  {
+    "label": "controller confirmation evolves form4 to5",
+    "passed": true,
+    "frame": 603
+  },
+  {
+    "label": "evolution retains identity XP bond flags and equipped command bytes",
+    "passed": true,
+    "frame": 603
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 612
+  },
+  {
+    "label": "form7 is available in active party",
+    "passed": true,
+    "frame": 612
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 620
+  },
+  {
+    "label": "L direction selects party slot2",
+    "passed": true,
+    "frame": 620
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 623
+  },
+  {
+    "label": "journal tab3 opens",
+    "passed": true,
+    "frame": 649
+  },
+  {
+    "label": "form7 opens explicit sanctuary evolution confirmation",
+    "passed": true,
+    "frame": 654
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 762
+  },
+  {
+    "label": "controller confirmation evolves form7 to8",
+    "passed": true,
+    "frame": 762
+  },
+  {
+    "label": "evolution retains identity XP bond flags and equipped command bytes",
+    "passed": true,
+    "frame": 762
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 771
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 774
+  },
+  {
+    "label": "journal tab2 opens",
+    "passed": true,
+    "frame": 794
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 834
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 843
+  },
+  {
+    "label": "owned form10 assigned to party slot3",
+    "passed": true,
+    "frame": 843
+  },
+  {
+    "label": "form10 is available in active party",
+    "passed": true,
+    "frame": 843
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 851
+  },
+  {
+    "label": "L direction selects party slot3",
+    "passed": true,
+    "frame": 851
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 854
+  },
+  {
+    "label": "journal tab3 opens",
+    "passed": true,
+    "frame": 880
+  },
+  {
+    "label": "form10 opens explicit sanctuary evolution confirmation",
+    "passed": true,
+    "frame": 885
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 993
+  },
+  {
+    "label": "controller confirmation evolves form10 to11",
+    "passed": true,
+    "frame": 993
+  },
+  {
+    "label": "evolution retains identity XP bond flags and equipped command bytes",
+    "passed": true,
+    "frame": 993
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1002
+  },
+  {
+    "label": "one controller-earned collection contains exactly all eleven enabled forms",
+    "passed": true,
+    "frame": 1002
+  },
+  {
+    "label": "eleven historical forms retain only six original family instances",
+    "passed": true,
+    "frame": 1002
+  },
+  {
+    "label": "live collection has six evolved-or-final enabled companions and no placeholder",
+    "passed": true,
+    "frame": 1002
+  },
+  {
+    "label": "all eleven earned quests remain claimed after original evolutions",
+    "passed": true,
+    "frame": 1002
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1005
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 1005
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1050
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1053
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 190
+  },
+  {
+    "label": "independent SRAM reboot preserves exact eleven-form collection roster and commands",
+    "passed": true,
+    "frame": 190
+  },
+  {
+    "label": "all eleven obtained forms survive ordinary save and reboot",
+    "passed": true,
+    "frame": 190
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 193
+  }
+]

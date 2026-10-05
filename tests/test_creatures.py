@@ -2,6 +2,7 @@
 """Native C host tests. No emulator RAM injection and no Python rule surrogate."""
 import ctypes as C
 import json
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -9,6 +10,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
+ENABLED = [1,2,4,5,7,8,10,11,13,14,16]
 U8, U16, U32 = C.c_ubyte, C.c_ushort, C.c_uint
 
 class Instance(C.Structure):
@@ -53,6 +55,8 @@ def build(directory, data=None, tag='good'):
         'creatures_party_set': (C.c_int, [C.POINTER(Roster), C.POINTER(U8), U32]),
         'creatures_party_capabilities': (U32, [C.POINTER(Roster)]),
         'creatures_form': (C.POINTER(Form), [C.c_uint]),
+        'creatures_ability': (C.c_void_p, [C.c_uint]),
+        'creatures_command_learned': (C.c_int, [C.c_uint, C.c_uint, C.c_uint]),
         'creatures_xp_threshold': (U32, [C.c_uint]),
         'creatures_level_for_xp': (C.c_uint, [U32]),
         'creatures_capabilities': (U32, [C.c_uint]),
@@ -101,8 +105,8 @@ class CreatureTests(unittest.TestCase):
     def test_valid_reserved_is_not_enabled(self):
         for i in range(256):
             self.assertEqual(bool(self.lib.creatures_form_id_valid(i)),1<=i<=128)
-            self.assertEqual(bool(self.lib.creatures_form(i)),i in [1,2,4,5,7,8,10,11])
-        for i in [0,3,13,14,16,121,128,255,256]:
+            self.assertEqual(bool(self.lib.creatures_form(i)),i in ENABLED)
+        for i in [0,3,6,9,12,15,17,121,128,255,256]:
             before=bytes(self.r)
             self.assertEqual(self.grant(i),255)
             self.assertEqual(bytes(self.r),before)
@@ -328,7 +332,199 @@ class CreatureTests(unittest.TestCase):
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),1,0),7)
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),1,1),0)
     def test_evolved_forms_cannot_be_granted_below_evolution_level(self):
-        for form in [2,5,8,11]:self.assertEqual(self.grant(form,1),255)
+        for form in [2,5,8,11,14]:self.assertEqual(self.grant(form,1),255)
+    def test_new_enabled_data_has_exact_authored_identity_and_commands(self):
+        expected={13:(5,4,0,1,9,0x8100),14:(5,4,0,2,10,0xa100),16:(6,3,1,1,11,0x10004)}
+        for form,(family,phase,polarity,tier,signature,caps) in expected.items():
+            f=self.lib.creatures_form(form).contents
+            self.assertEqual((f.family,f.phase,f.polarity,f.tier,f.signature_ability,f.field_caps),
+                             (family,phase,polarity,tier,signature,caps))
+            self.assertEqual(self.lib.creatures_legacy_spirit(form),255)
+        for command in range(256):
+            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=11)
+        self.assertTrue(self.lib.creatures_command_learned(14,15,9))
+        self.assertTrue(self.lib.creatures_command_learned(14,15,10))
+        self.assertFalse(self.lib.creatures_command_learned(14,14,10))
+        self.assertFalse(self.lib.creatures_command_learned(13,50,10))
+        self.assertFalse(self.lib.creatures_command_learned(16,50,9))
+
+    def test_data_manifest_is_not_native_obtainability_evidence(self):
+        result=json.loads(subprocess.check_output(['python3',str(ROOT/'assets/creatures/validate_catalog.py')]))
+        self.assertEqual((result['reserved_identities'],result['authored_designs'],
+                          result['enabled_native_core_forms'],result['enabled_evolution_edges'],
+                          result['enabled_abilities']),(128,12,11,5,11))
+        self.assertEqual(result['disabled_authored_forms'],[121])
+        self.assertIn('separate native acquisition',result['native_obtainability'])
+        # Host grants test data APIs; they do not navigate any acquisition route.
+        manifest=json.loads((ROOT/'assets/creatures/enabled.json').read_text())
+        self.assertEqual(manifest['enabled_form_ids'],ENABLED)
+
+    def test_manifest_mutations_rejected_and_generator_is_deterministic(self):
+        import sys, copy
+        sys.path.insert(0,str(ROOT/'assets/creatures'))
+        try:
+            import generate_data, validate_catalog
+            catalog=validate_catalog.load_json(ROOT/'assets/creatures/catalog.json')
+            manifest=validate_catalog.load_json(ROOT/'assets/creatures/enabled.json')
+            self.assertEqual(generate_data.generate(),generate_data.generate())
+            self.assertEqual(generate_data.generate(),(ROOT/'src/creature_data.c').read_text())
+            mutations=[('content_revision',1),('content_revision',True),
+                       ('enabled_form_ids',ENABLED+[121]),('enabled_form_ids',ENABLED[:-1]),
+                       ('enabled_form_ids',[True]+ENABLED[1:]),
+                       ('enabled_ability_ids',list(range(1,13))),
+                       ('enabled_evolutions',manifest['enabled_evolutions'][:-1])]
+            for key,value in mutations:
+                changed=copy.deepcopy(manifest);changed[key]=value
+                self.assertTrue(validate_catalog.validate_enabled(catalog,changed),(key,value))
+            changed=copy.deepcopy(catalog)
+            changed['forms']=[f for f in changed['forms'] if f['id']!=13]
+            self.assertTrue(validate_catalog.validate_enabled(changed,manifest))
+        finally:sys.path.pop(0)
+
+    def test_legacy_migration_and_evolution_bytes_are_pinned(self):
+        # SHA256 from the pre-revision-2 native core, captured before this change.
+        # All roster bytes, IDs, commands, party, collection and credits are covered.
+        expected={0:(1,'f3e7c130fe499e60e41d382cc718fe64eaa880d725b71a9388182b2e364a238b'),
+                  1:(2,'66624d79efc9ef81fd8b17f0f399818b2baa125df846cd0f623e5e353e314072'),
+                  3:(3,'cdb1a0ab5c30f37c6638f99282ded7185b56a0c315abb076f9cc1963ad40063a'),
+                  7:(3,'fdb0cef10161b1fe00f87cdc21bec88a548fbc0473216e22a057eafe518d10e0'),
+                  15:(3,'fdb0cef10161b1fe00f87cdc21bec88a548fbc0473216e22a057eafe518d10e0')}
+        for chapter,(selected,digest) in expected.items():
+            self.migrate(chapter,selected)
+            self.assertEqual(hashlib.sha256(bytes(self.r)).hexdigest(),digest)
+        self.migrate(7,3)
+        for slot in range(4):
+            c=self.r.instances[slot]
+            self.lib.creatures_mark_trial(C.byref(c),1<<slot);c.bond=100
+            self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),slot,7,1,1),0)
+            self.lib.creatures_equip(C.byref(c),1,slot+5)
+            self.lib.creatures_select_command(C.byref(c),1)
+        self.assertEqual(hashlib.sha256(bytes(self.r)).hexdigest(),
+                         'e0b9f24e16858b192d54164e852d60e1e79216b6c2674da68cb493ca53b82b46')
+
+    def test_regional_recruits_keep_party_story_instances_and_stay_owned(self):
+        self.migrate(7,3)
+        stories=bytes(self.r.instances)[:4*24];party=bytes(self.r.party)
+        selected=self.r.selected_party
+        self.assertEqual(self.grant(13,10,20,0,5),4)
+        self.assertEqual(self.grant(16,10,20,0,6),5)
+        self.assertEqual(bytes(self.r.instances)[:4*24],stories)
+        self.assertEqual((bytes(self.r.party),self.r.selected_party),(party,selected))
+        self.assertEqual([c.flags for c in self.r.instances[4:6]],[1,1])
+        self.assertEqual([list(c.equipped) for c in self.r.instances[4:6]],[[9,0],[11,0]])
+        recruits=bytes(self.r.instances)[4*24:6*24]
+        all_story_caps=self.lib.creatures_party_capabilities(C.byref(self.r))
+        before=bytes(self.r)
+        self.assertEqual(self.lib.creatures_party_set(C.byref(self.r),(U8*4)(4,5,0,1),all_story_caps),0)
+        self.assertEqual(bytes(self.r),before)
+        self.assertEqual(self.lib.creatures_party_set(C.byref(self.r),(U8*4)(4,5,0,1),0),1)
+        self.valid()
+        for spirit in range(4):
+            self.assertEqual(self.lib.creatures_grant_story(C.byref(self.r),spirit,7),spirit)
+        self.assertEqual(bytes(self.r.instances)[:4*24],stories)
+        self.assertEqual(self.lib.creatures_party_set(C.byref(self.r),(U8*4)(0,1,2,3),all_story_caps),1)
+        self.assertEqual(bytes(self.r.instances)[4*24:6*24],recruits)
+        self.assertEqual(self.lib.creatures_roster_count(C.byref(self.r)),6)
+        self.valid()
+
+    def test_regional_grant_failures_leave_every_byte_unchanged(self):
+        self.migrate(7)
+        for form,reward in [(13,5),(16,6)]:
+            before=bytes(self.r)
+            for flags,bad_reward in [(2,reward),(2,1),(0,1),(0,4)]:
+                self.assertEqual(self.grant(form,10,20,flags,bad_reward),255)
+                self.assertEqual(bytes(self.r),before)
+            self.assertLess(self.grant(form,10,20,0,reward),160)
+            before=bytes(self.r)
+            self.assertEqual(self.grant(form,10,20,0,reward),255)
+            self.assertEqual(bytes(self.r),before)
+        while self.lib.creatures_roster_count(C.byref(self.r))<160:self.grant()
+        before=bytes(self.r)
+        for form in [13,14,16]:self.assertEqual(self.grant(form,50,100,0,7),255)
+        self.assertEqual(bytes(self.r),before)
+        self.valid()
+
+    def test_trial_flags_are_exactly_family_specific_including_zero(self):
+        trials={1:1,2:1,4:2,5:2,7:4,8:4,10:8,11:8,13:16,14:16,16:0}
+        for form,trial in trials.items():
+            self.lib.creatures_roster_init(C.byref(self.r))
+            self.assertEqual(self.grant(form,50,100),0)
+            good=bytes(self.r.instances[0])
+            for flag in range(64):
+                c=Instance.from_buffer_copy(good)
+                result=self.lib.creatures_mark_trial(C.byref(c),flag)
+                self.assertEqual(bool(result),bool(trial and flag==trial),(form,flag))
+                if not result:self.assertEqual(bytes(c),good)
+                c=Instance.from_buffer_copy(good);c.trial_flags=flag
+                self.assertEqual(bool(self.lib.creatures_instance_validate(C.byref(c))),flag in (0,trial),(form,flag))
+            c=Instance.from_buffer_copy(good);c.flags|=2
+            self.assertEqual(bool(self.lib.creatures_instance_validate(C.byref(c))),form<13)
+
+    def test_water_evolution_requires_separate_context_and_all_conditions(self):
+        self.assertEqual(self.grant(13,10,20,0,5),0)
+        c=self.r.instances[0]
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),8,1),3)
+        self.lib.creatures_add_xp(C.byref(c),4*14**3-c.xp)
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),8,1),4)
+        c.bond=45
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),7,1),5)
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),8,1),6)
+        self.assertEqual(self.lib.creatures_mark_trial(C.byref(c),16),1)
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),8,0),7)
+        # Campaign ENDING_SEEN must be stripped; only quest2 claimed sets bit3.
+        campaign_chapters=15
+        context=lambda claimed:(campaign_chapters&7)|(8 if claimed else 0)
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(False),1),5)
+        self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(True),1),0)
+        before=bytes(self.r)
+        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,1),(0x10000,1,1,1)]:
+            self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,ctx,sanctuary,confirmed),result)
+            self.assertEqual(bytes(self.r),before)
+        identity=bytes(c);party=bytes(self.r.party)
+        self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,8,1,1),0)
+        expected=bytearray(identity);expected[0]=14
+        self.assertEqual(bytes(c),bytes(expected))
+        self.assertEqual(bytes(self.r.party),party)
+        self.assertEqual(c.flags,1)
+        self.assertEqual(self.r.obtained[1]&0x30,0x30)
+        self.assertEqual(self.lib.creatures_equip(C.byref(c),1,10),1)
+        self.assertEqual(list(c.equipped),[9,10])
+        self.assertEqual(self.lib.creatures_select_command(C.byref(c),1),1)
+        self.valid()
+        before=bytes(self.r)
+        self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,8,1,1),2)
+        self.assertEqual(bytes(self.r),before)
+
+    def test_evolved_water_invalid_level_and_party_members_rejected(self):
+        self.assertEqual(self.grant(14,14,45),255)
+        self.assertEqual(self.grant(14,15,45),0)
+        self.valid()
+        good=bytes(self.r)
+        for mutate in [lambda r:setattr(r.instances[0],'flags',3),
+                       lambda r:setattr(r.instances[0],'trial_flags',1),
+                       lambda r:setattr(r.instances[0],'polarity',1),
+                       lambda r:r.instances[0].equipped.__setitem__(0,11),
+                       lambda r:r.party.__setitem__(1,0),
+                       lambda r:r.party.__setitem__(0,159),
+                       lambda r:r.obtained.__setitem__(1,0)]:
+            r=Roster.from_buffer_copy(good);mutate(r)
+            self.assertEqual(self.lib.creatures_roster_validate(C.byref(r)),0)
+        r=Roster.from_buffer_copy(good);r.instances[0].level=14;r.instances[0].xp=4*13**3
+        self.assertEqual(self.lib.creatures_instance_validate(C.byref(r.instances[0])),0)
+        self.assertEqual(self.lib.creatures_party_capabilities(C.byref(r)),0)
+
+    def test_evolution_candidate_rejects_lost_command_without_mutation(self):
+        source=(ROOT/'src/creature_data.c').read_text()
+        broken=source.replace('{1, 9},\n    {15, 10}', '{1, 11},\n    {15, 10}',1)
+        self.assertNotEqual(source,broken)
+        lib=build(self.tmp.name,broken,'lost-water-command')
+        self.assertEqual(lib.creatures_catalog_validate(),0)
+        self.assertEqual(self.grant(13,15,45,0,5),0)
+        self.lib.creatures_mark_trial(C.byref(self.r.instances[0]),16)
+        before=bytes(self.r)
+        self.assertEqual(lib.creatures_evolve(C.byref(self.r),0,8,1,1),1)
+        self.assertEqual(bytes(self.r),before)
+
     def test_catalog_c_mutation_rejection(self):
         source=(ROOT/'src/creature_data.c').read_text()
         mutations=[('wrong_phase','{1, 1, 1, 1, 1, 0,','{1, 1, 4, 1, 1, 0,'),
@@ -338,7 +534,25 @@ class CreatureTests(unittest.TestCase):
                    ('disabled_target','{1, 2, 12, 40, 1, 1}','{1, 3, 12, 40, 1, 1}'),
                    ('wrong_family','{1, 2, 12, 40, 1, 1}','{1, 5, 12, 40, 1, 1}'),
                    ('missing_learned','{12, 5}','{12, 2}'),
-                   ('bad_bond','{1, 2, 12, 40, 1, 1}','{1, 2, 12, 101, 1, 1}')]
+                   ('bad_bond','{1, 2, 12, 40, 1, 1}','{1, 2, 12, 101, 1, 1}'),
+                   ('weakened_old_level','{1, 2, 12, 40, 1, 1}','{1, 2, 11, 40, 1, 1}'),
+                   ('wrong_water_trial','{13, 14, 15, 45, 16, 8}','{13, 14, 15, 45, 1, 8}'),
+                   ('wrong_water_gate','{13, 14, 15, 45, 16, 8}','{13, 14, 15, 45, 16, 4}'),
+                   ('water_cycle','{13, 14, 15, 45, 16, 8}','{14, 13, 15, 45, 16, 8}'),
+                   ('metal_evolution','{13, 14, 15, 45, 16, 8}','{13, 16, 15, 45, 16, 8}'),
+                   ('water_inherited_command','{1, 9},\n    {15, 10}', '{1, 10},\n    {15, 10}'),
+                   ('water_delayed_signature','{15, 10}', '{16, 10}'),
+                   ('water_missing_link','0x0000a100u','0x00008100u'),
+                   ('water_polarity','{13, 5, 4, 0, 1, 0,','{13, 5, 4, 1, 1, 0,'),
+                   ('metal_phase','{16, 6, 3, 1, 1, 0,','{16, 6, 4, 1, 1, 0,'),
+                   ('metal_legendary','{16, 6, 3, 1, 1, 0,','{16, 6, 3, 1, 1, 1,'),
+                   ('enabled_placeholder','{16, 6, 3, 1, 1, 0,','{121, 6, 3, 1, 1, 0,'),
+                   ('bad_stat_range','{35, 20, 30, 55, 40}','{0, 55, 30, 55, 40}'),
+                   ('ability_id_gap','{11, 3, 90,','{12, 3, 90,'),
+                   ('ability_cooldown','{9, 4, 90,','{9, 4, 89,'),
+                   ('legacy_mapping','{1, 4, 7, 10}', '{1, 4, 7, 13}'),
+                   ('bad_learn_range','13, 12, 1, 1, 4, 0, 13, 1','13, 255, 1, 1, 4, 0, 13, 1'),
+                   ('orphan_edge_offset','13, 12, 1, 1, 4, 0, 13, 1','13, 12, 1, 1, 0, 0, 13, 1')]
         for tag,old,new in mutations:
             self.assertIn(old,source,tag)
             lib=build(self.tmp.name,source.replace(old,new,1),tag)

@@ -1,5 +1,6 @@
 {
-  "scope": "Creature core only; full ROM integration and emulator timing are separate checks.",
+  "scope": "Eleven enabled creature core definitions only; native obtainability, artwork, handlers, full ROM cadence and full-engine stack use require separate integration evidence.",
+  "content_revision": 2,
   "enabled_forms": [
     1,
     2,
@@ -8,20 +9,89 @@
     7,
     8,
     10,
+    11,
+    13,
+    14,
+    16
+  ],
+  "enabled_abilities": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
     11
   ],
-  "native_host_tests": 23,
-  "compiled_data_mutations": 8,
-  "sanitizer": "AddressSanitizer and UndefinedBehaviorSanitizer: 12000 deterministic mixed operations passed; leak checking disabled because host ptrace is incompatible with LeakSanitizer. The subsystem performs no allocation.",
-  "arm_target": "ARM7TDMI Thumb, -O2, freestanding C99",
+  "enabled_evolutions": [
+    [
+      1,
+      2
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      13,
+      14
+    ]
+  ],
+  "authored_design_count": 12,
+  "reserved_identity_count": 128,
+  "disabled_authored_forms": [
+    121
+  ],
+  "native_host_tests": 33,
+  "compiled_data_mutation_rejections": 26,
+  "additional_corrupt_evolution_atomicity_test": 1,
+  "legacy_exact_roster_sha256_vectors": 6,
+  "related_host_regressions": {
+    "save4": 26,
+    "save5": 31,
+    "legacy_trials": 12,
+    "regional_quests_strict": 571,
+    "regional_quests_asan_ubsan": 571
+  },
+  "sanitizer": {
+    "address_sanitizer": "passed",
+    "undefined_behavior_sanitizer": "passed",
+    "deterministic_mixed_operations": 24000,
+    "roster_single_bit_mutations": 33120,
+    "all_enabled_instance_byte_value_probes": 67584,
+    "leak_checking": "disabled for host environment; core has no allocation"
+  },
+  "arm_target": "ARM7TDMI Thumb, -O2, freestanding C99, -Wall -Wextra -Werror",
+  "compiler": "arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119",
   "arm_object_bytes": {
-    "creatures_text": 5452,
+    "creatures_text": 5892,
+    "creatures_rodata": 236,
+    "creature_data_text": 56,
+    "creature_data_rodata": 939,
+    "total_rom": 7123,
+    "data": 0,
+    "bss": 0
+  },
+  "baseline_rebuilt_same_compiler_flags": {
+    "creatures_text": 5484,
     "creatures_rodata": 44,
     "creature_data_text": 56,
     "creature_data_rodata": 698,
-    "total_rom": 6250,
-    "data": 0,
-    "bss": 0
+    "total_rom": 6282,
+    "delta_rom": 841,
+    "note": "Exact pre-change source rebuilt; supersedes the older archived 6250-byte report."
   },
   "runtime_layout_bytes": {
     "instance": 24,
@@ -30,6 +100,94 @@
     "form_rom_row": 32
   },
   "largest_individual_arm_stack_frame": 72,
+  "stack_scope": "Compiler-reported individual frame, not call-chain high-water",
   "additional_iwram_code": 0,
-  "dynamic_allocation": false
+  "dynamic_allocation": false,
+  "libc_imports": false,
+  "integration_contract": {
+    "evolution_chapter_mask": 7,
+    "reed_restored_context_bit": 8,
+    "context_mask": 15,
+    "water_personal_trial_bit": 16,
+    "quest2_grant": [
+      13,
+      10,
+      20,
+      0,
+      5
+    ],
+    "quest3_grant": [
+      16,
+      10,
+      20,
+      0,
+      6
+    ],
+    "water_evolution_requirements": "level15, bond45, quest2 claimed context, quest4 trial, sanctuary and confirmation",
+    "campaign_bit3": "ENDING_SEEN, stripped before composing separate evolution context",
+    "default_commands": {
+      "13": 9,
+      "16": 11
+    },
+    "evolved_water_signature": 10,
+    "no_auto_equip_or_party_replacement": true
+  },
+  "source_sha256": {
+    "src/creatures.h": "a27c9d473263d2d25c8e2752dd6a69988fb69157214e812939ae5a617f69adbb",
+    "src/creatures.c": "720ce3d3a08413109e5956c6f059660ef989820674207bbe5f8e4eae40eac530",
+    "src/creature_data.c": "c54c8b5a0445f30674c785a588dd80a993e5da2de38bf96e57e71d6eb64c67cd",
+    "assets/creatures/enabled.json": "cb1574bf20e281fdb79d517e5d9ce8596993ada58c3f437ec144d6136a92fbb8",
+    "assets/creatures/generate_data.py": "30b5d0b95405e73b02fabc139c5d2bb3c184381c1eab2816824483d2b10b7ee4",
+    "assets/creatures/validate_catalog.py": "24273ff17759a123061baf2826bb139130c43d315d1a1f4b889f209de136f0db",
+    "tests/test_creatures.py": "d3901ed30bbdd37e93ea2a3c06025dc16dc14447c53412adf15b840b3a8b1202",
+    "tests/creatures_sanitizer.c": "d2859710762edf30fddb09fa2fbdc21bb5084d9e7df585eeb9eb22280b58d2cc",
+    "src/save5.c": "6ec0e1b27556d1408af0e2c6f52e2b6241f8f867bbf98b5fc53f10044a208e52",
+    "tests/test_save5.py": "c474b7e27caaafcaf0e9d6e27b2ea5fa96eae2b4758b4cf92f04518bd72688be"
+  },
+  "baseline_source_sha256": {
+    "creature_data.c": "8bcea65295da5471dddd7489961dc2ee64ec96dd9b2239349d40103f092a02ee",
+    "creatures.c": "aff5a024764aab3c2e7db9e5482ccc53370f83fa7431a855a0ed200f4e792300"
+  },
+  "save5_retention_revision2": {
+    "required_owned_forms_by_claimed_quest": {
+      "2": [
+        13,
+        14
+      ],
+      "3": [
+        16
+      ]
+    },
+    "blocking_and_streamed_validation": "shared claim predicate; incrementally accumulated two-bit valid-owned mask",
+    "generic_rewards_and_story_locked_rules": "unchanged",
+    "malformed_snapshot_zero_write_budget_tests": [
+      1,
+      7,
+      31,
+      1024,
+      3072,
+      4294967295
+    ],
+    "crc_valid_malformed_banks": "rejected read-only; valid predecessor retained; invalid newer bank safely replaced by a valid transaction",
+    "recruitment_write_cut_checks": {
+      "quest2": 6146,
+      "quest3": 6146
+    },
+    "sanitized_round_trip_cycles_full_roster_all11_claimed_quests": 1000,
+    "revision1_controller_fixture": "roster, equipped commands, collection and credits byte-preserved",
+    "arm_save5_rom_bytes": 11504,
+    "arm_save5_rom_delta": 124,
+    "arm_save5_mutable_ewram_bytes": 7244,
+    "arm_save5_ewram_delta": 4,
+    "arm_save5_largest_individual_stack_frame": 120,
+    "arm_timing_scenarios_per_budget": 18,
+    "arm_max_begin_cycles": 21627,
+    "arm_max_step_cycles": {
+      "1024": 64688,
+      "3072": 190540,
+      "4096_clamped_to3072": 190536
+    },
+    "timing_report": "build/save5-retention-timing/save5-timing.json",
+    "scope": "Isolated real-ARM save subsystem measurements; full-engine cadence remains separately required"
+  }
 }

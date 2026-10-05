@@ -15,7 +15,9 @@ Every roster release will separately report:
 3. Obtainable: a normal player can acquire the form in the shipped world
 4. Verified: evolution/acquisition, field actions, combat, saves and performance are tested
 
-At the current creature milestone, there are **8 implemented, obtainable and controller-verified forms**, four confirmed/deferred evolution paths, and one sword weapon. Homura, Midori, Fuuri and Kohaku each have a different field and combat power. Their fire/nature/wind/stone power labels are not yet a five-phase battle system. There are 16 areas, one village hub, three dungeon arcs, optional personal trials and a complete first story arc with a post-ending village. Regional cities, equipment inventory, the full monster roster and a side-quest framework remain ahead.
+At the current river-region milestone, **11 forms are implemented, obtainable and controller-verified**. There are six live companion families, five optional evolution paths, three player weapon classes, five equipment slots, 13 earnable items, 22 areas and 11 regional side quests. All 11 forms fit a single controller-earned/reloaded collection, without duplicated family instances or fabricated history.
+
+The first three-lantern story remains a completed foundation. One Asian-inspired riverside town/field and four local activity rooms are now playable. Northern-European, southern-island, magma-mountain and underwater regions remain planned; the complete 128-form roster and legendary progression are not finished. Twelve forms are designed, eleven enabled, zero legendaries obtainable.
 
 ## Completed exploration foundation
 
@@ -36,12 +38,12 @@ At the current creature milestone, there are **8 implemented, obtainable and con
 
 This milestone establishes a coherent playable baseline while the larger systems are designed.
 
-## Current milestone: monster-system vertical slice
+## Completed: representative monster systems
 
 - Stable 1–128 catalog identifiers (0 means empty) with explicit unimplemented slots; data-driven family, phase, polarity, stats, learnsets and acquisition conditions
 - Wood, Fire, Earth, Metal and Water phases, with Yin/Yang as a separate dimension; research cited in the system design and numerical battle rules identified as original game interpretation
 - Party/storage, experience, learnable abilities and explicit evolution choices; preserve required traversal powers through evolution and party changes
-- Initially 8–12 substantive representative forms across all five phases, including genuine evolutions and at least one gated rare encounter
+- Eleven substantive representative forms across all five phases, including genuine evolutions; rare/legendary encounter progression is still a later milestone
 - Journal/catalog, field selection and intelligible feedback at 240×160
 - Save expansion with non-overwriting migration, bounded storage and old-save fixtures; no newly mandatory grinding in the existing story
 
@@ -49,9 +51,9 @@ Acceptance: each shipped representative is normally obtainable, its evolution an
 
 The quick-companion update adds a held-L directional selector and journal assignment/reordering from actually owned instances, with meaningful empty slots and safe immediate assignment saves. The story collection remains recoverable; historical evolved forms are not cloned into extra companions.
 
-Implemented in the first eight-form slice: original evolutions and portraits; native roster, XP/bond and command selection; inherited field powers; optional environmental trials; transactional save5 and published-save migration; true full-screen HUD/camera; fresh, minimal and migrated controller routes. Twelve forms are designed in the authoring catalog, eight are enabled. Numerical phase damage rules, recruitment/release beyond the story collection, Water/Metal recruits and the legendary trial are not yet shipped. Player media avoids secrets and endings.
+The first slice delivered eight story forms and the full-screen/quick-party foundation. The river milestone adds Water/Metal recruitment, Water evolution, actual regional five-phase damage, retained learned commands and collection reassignment. New recruits remain retained owned instances even when unequipped. Save5 content revision 2 migrates prior released saves and couples one-time quests, equipment and traversal-critical ownership.
 
-## Then: equipment and action roles
+## Completed: initial equipment and action roles
 
 - Sword, lance and bow with distinct readable range/timing patterns under consistent controls
 - Weapon, mail/body, boots, belt and ring slots; bounded integer parameters and clear equip comparison
@@ -60,7 +62,9 @@ Implemented in the first eight-form slice: original evolutions and portraits; na
 
 Acceptance: each weapon has combat/traversal tests, each slot changes the documented parameter, and migrating or unequipping cannot corrupt a save or create an unwinnable required encounter.
 
-## Then: regions, towns and side quests
+Delivered: three native weapon state machines, attack snapshots, safe projectile ownership/tags, fractional-health armor, clear equipment comparisons, 13 meaningful rewards and controller-verified training/combat. Expansion should build on this tested set, not add inert catalog rows.
+
+## Ongoing: regions, towns and side quests
 
 - Connected original Asian-inspired, Northern-European-inspired, southern-island, magma-mountain and underwater regions, with researched visual reference and distinct original architecture/ecology
 - Town services, named NPCs, legible routes, revisitable quest state and meaningful non-repeating rewards

@@ -2,6 +2,8 @@
 
 typedef char save5_u32_width[(sizeof(Save4U32) == 4) ? 1 : -1];
 typedef char save5_instance_width[(sizeof(CreatureInstance) == 24) ? 1 : -1];
+typedef char save5_quest_width[(sizeof(Save5Quests) == 264) ? 1 : -1];
+typedef char save5_equipment_width[(sizeof(EquipmentState) == 512) ? 1 : -1];
 typedef char save5_state_fits[(sizeof(Save5State) <= SAVE5_RESERVED_OFFSET) ? 1 : -1];
 typedef char save5_state_word_size[(sizeof(Save5State) % 4 == 0) ? 1 : -1];
 typedef Save4U32 Save5AliasU32 __attribute__((__may_alias__));
@@ -160,7 +162,8 @@ int save5_campaign_validate(const CampaignSave *s) {
     if (!s) return 0;
     f = s->room_flags;
     unsigned chapter = s->chapter_flags, seen = s->story_seen;
-    if (s->room > 13 || s->spawn > SAVE4_SPAWN_WEST_TRAIL ||
+    if ((s->room > 13 && (s->room < 16 || s->room > 21)) ||
+        s->spawn > SAVE4_SPAWN_WEST_TRAIL ||
         s->bridge > 1 || s->torches > 3 || s->relic > 1 || s->camp > 1 ||
         s->optional_flags > 1 || (seen & ~0x7Fu) || (f & ~0xFFFFu)) return 0;
     if (chapter != 0 && chapter != 1 && chapter != 3 && chapter != 7 && chapter != 15)
@@ -188,7 +191,13 @@ int save5_campaign_validate(const CampaignSave *s) {
     if ((f & ALL_LAMPS) && !has_all(f, CORE_ROOTS)) return 0;
 
     if (s->room >= 4 && s->room <= 8 && !(chapter & SAVE4_GROVE_CLEAR)) return 0;
-    if (s->room >= 9 && !(chapter & SAVE4_SKY_CLEAR)) return 0;
+    if (s->room >= 9 && s->room <= 13 && !(chapter & SAVE4_SKY_CLEAR)) return 0;
+    if (s->room >= 16) {
+        if (!(chapter & SAVE4_GROVE_CLEAR)) return 0;
+        if (s->room == 16) return s->spawn <= 5;
+        if (s->room == 17) return s->spawn <= 2;
+        return s->spawn == 0;
+    }
     if (!has_all(f, entry_requirements(s->room))) return 0;
     if (s->room == 0) {
         if (s->spawn != SAVE4_SPAWN_SOUTH && s->spawn != SAVE4_SPAWN_ELDER &&
@@ -207,8 +216,9 @@ int save5_campaign_validate(const CampaignSave *s) {
     return 1;
 }
 
-static void normalize_resume(CampaignSave *s) {
-    if ((s->chapter_flags & SAVE4_CORE_CLEAR) ||
+static void normalize_resume(CampaignSave *s, unsigned revision) {
+    if (((s->chapter_flags & SAVE4_CORE_CLEAR) &&
+         (revision == 1 || !(s->chapter_flags & SAVE4_ENDING_SEEN))) ||
         ((s->chapter_flags & SAVE4_SKY_CLEAR) && !(s->story_seen & SAVE4_SEEN_STONE_JOIN)) ||
         ((s->chapter_flags & SAVE4_GROVE_CLEAR) && !(s->story_seen & SAVE4_SEEN_WIND_JOIN))) {
         s->room = 0; s->spawn = SAVE4_SPAWN_ELDER;
@@ -243,30 +253,168 @@ static void decode_instance(CreatureInstance *s, const Save4U8 *b) {
     s->polarity = b[18]; s->selected_command = b[19];
     s->cosmetic_seed = get32(b + 20);
 }
-int save5_validate(const Save5State *s) {
-    if (!s || !save5_campaign_validate(&s->campaign) ||
-        !creatures_roster_validate(&s->roster) ||
-        !zero_bytes(s->quest_reserved, sizeof s->quest_reserved) ||
-        !zero_bytes(s->equipment_reserved, sizeof s->equipment_reserved)) return 0;
+/* Authored quest policy. Disabled IDs and all unassigned fields stay zero;
+ * room/event handlers cannot turn reserved bits into implicit content. */
+/* assets/region/contract.json schema1. Keep identities stable; rooms14/15
+ * remain the separate personal trials and are not regional checkpoints. */
+static const Save4U8 quest_masks[11] = {7,3,7,7,3,1,1,1,3,7,1};
+static const signed char equipment_source_quest[13] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6};
+static unsigned quest_objective_mask(unsigned id) {
+    return id < 11 ? quest_masks[id] : 0;
+}
+unsigned save5_quest_state(const Save5Quests *q, unsigned id) {
+    if (!q || id >= SAVE5_QUEST_CAPACITY) return SAVE5_QUEST_INACTIVE;
+    return (q->states[id >> 2] >> ((id & 3u) * 2u)) & 3u;
+}
+int save5_quest_set_state(Save5Quests *q, unsigned id, unsigned state) {
+    unsigned shift;
+    if (!q || id >= SAVE5_QUEST_CAPACITY || state > SAVE5_QUEST_CLAIMED) return 0;
+    shift = (id & 3u) * 2u;
+    q->states[id >> 2] = (Save4U8)((q->states[id >> 2] & ~(3u << shift)) | (state << shift));
     return 1;
 }
-/* Preserve small metadata above the used wire allocation, then move each
- * explicit 24-byte instance backwards into its wire position. This transforms
- * the immutable runtime snapshot in place without a second roster buffer. */
+static int quest_objective_validate(const Save5Quests *q, unsigned id) {
+    unsigned state = save5_quest_state(q, id), mask = quest_objective_mask(id);
+    unsigned objectives = q->objectives[id];
+    if (!mask) return !state && !objectives;
+    if (objectives & ~mask) return 0;
+    if (state == SAVE5_QUEST_INACTIVE) return !objectives;
+    if (state == SAVE5_QUEST_ACTIVE) return objectives != mask;
+    return objectives == mask;
+}
+static int quest_reward_validate(const Save5Quests *q, unsigned index) {
+    unsigned i;
+    for (i = 0; i < 8; ++i)
+        if (((q->rewards[index] >> i) & 1u) !=
+            (save5_quest_state(q, index * 8u + i) == SAVE5_QUEST_CLAIMED)) return 0;
+    return 1;
+}
+static int quest_fields_validate(const Save5Quests *q) {
+    unsigned i;
+    for (i = 0; i < 64; ++i) {
+        if (i == 3 || i == 9) {
+            if (q->variables[i] > 3 ||
+                (q->variables[i] && !save5_quest_state(q, i))) return 0;
+        } else if (q->variables[i]) return 0;
+    }
+    if ((q->region_flags[0] & ~63u) ||
+        (q->region_flags[0] && !(q->region_flags[0] & 1u)) ||
+        !zero_bytes(q->region_flags + 1, 31) || (q->anchors[0] & ~3u) ||
+        !zero_bytes(q->anchors + 1, 15)) return 0;
+    if ((q->anchors[0] & 1u) && !(q->region_flags[0] & 1u)) return 0;
+    if ((q->anchors[0] & 2u) && !(q->region_flags[0] & 2u)) return 0;
+    return 1;
+}
+int save5_quests_validate(const Save5Quests *q) {
+    unsigned i;
+    if (!q || !quest_fields_validate(q)) return 0;
+    for (i = 0; i < SAVE5_QUEST_CAPACITY; ++i)
+        if (!quest_objective_validate(q, i)) return 0;
+    for (i = 0; i < 8; ++i) if (!quest_reward_validate(q, i)) return 0;
+    return 1;
+}
+static int quest_campaign_validate(const CampaignSave *c, const Save5Quests *q) {
+    unsigned room = c->room, i;
+    if (q->region_flags[0] && !(c->chapter_flags & SAVE4_GROVE_CLEAR)) return 0;
+    for (i = 0; i < 16; ++i)
+        if (q->states[i] && (!(c->chapter_flags & SAVE4_GROVE_CLEAR) ||
+                             !(q->region_flags[0] & 1u))) return 0;
+    if (room < 16) return 1;
+    if (!(q->region_flags[0] & (1u << (room - 16)))) return 0;
+    if ((room == 18 || room == 19) && save5_quest_state(q, 2) != SAVE5_QUEST_CLAIMED) return 0;
+    if (c->spawn == 2 && ((room == 16 && !(q->anchors[0] & 1u)) ||
+                         (room == 17 && !(q->anchors[0] & 2u)))) return 0;
+    return 1;
+}
+/* Only call after the instance/roster validator has accepted the rows. These
+ * two one-time recruits cannot be released in content revision 2; collection
+ * history alone must not strand the player without a traversal capability. */
+static unsigned retained_creature_bit(unsigned form) {
+    return form == 13 || form == 14 ? 1u : (form == 16 ? 2u : 0u);
+}
+static unsigned retained_creatures(const CreatureRoster *r) {
+    unsigned i, mask = 0;
+    for (i = 0; i < CREATURE_ROSTER_CAPACITY; ++i)
+        mask |= retained_creature_bit(r->instances[i].form_id);
+    return mask;
+}
+static int quest_creatures_validate(const Save5Quests *q, const Save4U8 *obtained,
+                                    const Save4U8 *rewards, unsigned retained) {
+    /* Require enabled data, earned history and at least one valid owned family
+     * member. Storage/evolution is allowed; an active-party slot is not needed.
+     * Generic reward 5..128 semantics and legacy story flags stay unchanged. */
+    if (save5_quest_state(q, 2) == SAVE5_QUEST_CLAIMED) {
+        unsigned water = (creatures_form(13) && (obtained[1] & 16u)) ||
+                         (creatures_form(14) && (obtained[1] & 32u));
+        if (!(rewards[0] & 16u) || !water || !(retained & 1u)) return 0;
+    }
+    if (save5_quest_state(q, 3) == SAVE5_QUEST_CLAIMED &&
+        (!(rewards[0] & 32u) || !creatures_form(16) || !(obtained[1] & 128u) ||
+         !(retained & 2u))) return 0;
+    return 1;
+}
+static int quest_equipment_validate(const Save5Quests *q, const EquipmentState *e) {
+    unsigned source;
+    if ((e->reward_claims[0] & 20u) && !(q->region_flags[0] & 1u)) return 0;
+    /* Seen/record/reserved checks are already streamed. This bounded source
+     * ledger check does not call the whole-inventory validator. */
+    for (source = 0; source < EQUIPMENT_REWARD_CAPACITY; ++source) {
+        unsigned claimed = (e->reward_claims[source >> 3] >> (source & 7u)) & 1u;
+        unsigned id = equipment_reward_item(source);
+        if (claimed && (!id || !equipment_seen(e, id))) return 0;
+        if (source < 13 && equipment_source_quest[source] >= 0 && claimed !=
+            (save5_quest_state(q, (unsigned)equipment_source_quest[source]) == SAVE5_QUEST_CLAIMED)) return 0;
+    }
+    return 1;
+}
+static void encode_equipment_record(Save4U8 *b, const EquipmentRecord *r) {
+    put16(b, r->item_id); b[2] = r->rank; b[3] = r->flags; b[4] = r->quantity;
+    b[5] = r->reserved[0]; b[6] = r->reserved[1]; b[7] = r->reserved[2];
+}
+static void decode_equipment_record(EquipmentRecord *r, const Save4U8 *b) {
+    r->item_id = get16(b); r->rank = b[2]; r->flags = b[3]; r->quantity = b[4];
+    r->reserved[0] = b[5]; r->reserved[1] = b[6]; r->reserved[2] = b[7];
+}
+static Save4U8 quest_wire_byte(const Save5Quests *q, unsigned p) {
+    if (p < 16) return q->states[p];
+    if (p < 144) return (Save4U8)(q->objectives[(p - 16) >> 1] >> ((p & 1u) * 8u));
+    if (p < 152) return q->rewards[p - 144];
+    if (p < 216) return q->variables[p - 152];
+    if (p < 248) return q->region_flags[p - 216];
+    return q->anchors[p - 248];
+}
+static Save4U8 equipment_tail_byte(const EquipmentState *e, unsigned p) {
+    if (p < 389) return e->equipped[p - 384];
+    if (p < 400) return e->settings_reserved[p - 389];
+    if (p < 464) return e->seen[p - 400];
+    if (p < 480) return e->wallet_key_reserved[p - 464];
+    if (p < 488) return e->reward_claims[p - 480];
+    return e->reserved[p - 488];
+}
+int save5_validate(const Save5State *s) {
+    return s && save5_campaign_validate(&s->campaign) &&
+        creatures_roster_validate(&s->roster) && save5_quests_validate(&s->quests) &&
+        quest_campaign_validate(&s->campaign, &s->quests) &&
+        quest_creatures_validate(&s->quests, s->roster.obtained, s->roster.rewards,
+                                 retained_creatures(&s->roster)) &&
+        equipment_validate(&s->equipment) && quest_equipment_validate(&s->quests, &s->equipment);
+}
+/* Tight metadata packing uses all 1088 canonical-padding bytes temporarily:
+ * campaign15 + party5 + next4 + collection48 + credits240 + quests264 + gear512.
+ * No second full roster or bank exists. Every typed field is explicitly encoded. */
+enum { META_QUEST = 312, META_EQUIPMENT = 576 };
 static void snapshot_metadata(void) {
     Save5State *s = &scratch.state;
     Save4U8 *b = scratch.bytes + SAVE5_RESERVED_OFFSET;
-    clear_bytes(b, 320);
     encode_campaign(b, &s->campaign);
-    copy_bytes(b + 16, s->roster.party, 4);
-    b[20] = s->roster.selected_party;
-    put32(b + 24, s->roster.next_instance_id);
-    copy_bytes(b + 32, s->roster.seen, 16);
-    copy_bytes(b + 48, s->roster.obtained, 16);
-    copy_bytes(b + 64, s->roster.rewards, 16);
-    copy_bytes(b + 80, s->roster.expedition_bond, 160);
-    copy_bytes(b + 240, s->roster.expedition_events, 64);
-    copy_bytes(b + 304, s->roster.lifetime_field_aid, 16);
+    copy_bytes(b + 15, s->roster.party, 4); b[19] = s->roster.selected_party;
+    put32(b + 20, s->roster.next_instance_id);
+    copy_bytes(b + 24, s->roster.seen, 16);
+    copy_bytes(b + 40, s->roster.obtained, 16);
+    copy_bytes(b + 56, s->roster.rewards, 16);
+    copy_bytes(b + 72, s->roster.expedition_bond, 160);
+    copy_bytes(b + 232, s->roster.expedition_events, 64);
+    copy_bytes(b + 296, s->roster.lifetime_field_aid, 16);
 }
 static void snapshot_finish(void) {
     Save4U8 *b = scratch.bytes, *m = b + SAVE5_RESERVED_OFFSET;
@@ -274,28 +422,41 @@ static void snapshot_finish(void) {
     b[0] = 0x45; b[1] = 0x42; b[2] = 5; b[3] = 32;
     put16(b + 4, SAVE5_BANK_SIZE); put16(b + 6, SAVE5_USED_SIZE);
     put16(b + 12, SAVE5_CONTENT_REVISION);
-    copy_bytes(b + 32, m, 15);
-    copy_bytes(b + 96, m + 32, 48);
+    copy_bytes(b + 32, m, 15); copy_bytes(b + 96, m + 24, 48);
     clear_bytes(b + 4000, 1056);
-    copy_bytes(b + 4000, m + 16, 12);
-    copy_bytes(b + 4296, m + 80, 160);
-    copy_bytes(b + 4456, m + 240, 64);
-    copy_bytes(b + 4520, m + 304, 16);
+    copy_bytes(b + 4000, m + 15, 5); copy_bytes(b + 4008, m + 20, 4);
+    copy_bytes(b + 4032, m + META_QUEST, 264);
+    copy_bytes(b + 4296, m + 72, 160);
+    copy_bytes(b + 4456, m + 232, 64);
+    copy_bytes(b + 4520, m + 296, 16);
+    copy_bytes(b + 4544, m + META_EQUIPMENT, 512);
 }
 
-/* Streaming validation is shared by loader and writer. There is never a
- * second full bank/roster allocation or a full-bank CRC hidden in begin(). */
+/* Streaming checks never call the whole-inventory validator. Quest objectives
+ * and equipment records are checked one at a time, with conservative charges. */
 typedef struct BankScan {
-    Save4U8 block[64], collection[48], occupied[20];
+    Save4U8 block[64], collection[48], occupied[20], item_owned[64];
+    Save5Quests quests;
+    EquipmentState equipment;
+    CampaignSave campaign;
     Save4U32 crc, expected_crc, sequence, max_id;
-    unsigned offset, position, valid, story_mask, stage, boundary, base, slot, memory;
+    unsigned offset, position, valid, story_mask, stage, boundary, base, slot, memory, revision;
+    unsigned retained_creatures; /* streamed, validated owned Water/Metal bits */
 } BankScan;
 static BankScan scan;
 static unsigned writer_status, writer_phase, writer_position, writer_progress;
 static unsigned writer_destination, bank_valid[2];
 static Save4U32 bank_sequence[2], writer_crc;
-enum { PHASE_META, PHASE_ENCODE, PHASE_FINISH, PHASE_CHECK_SNAPSHOT, PHASE_SCAN_A, PHASE_SCAN_B, PHASE_PREPARE, PHASE_CRC,
+enum { PHASE_META, PHASE_QUEST, PHASE_EQUIPMENT, PHASE_ENCODE, PHASE_FINISH,
+       PHASE_CHECK_SNAPSHOT, PHASE_SCAN_A, PHASE_SCAN_B, PHASE_PREPARE, PHASE_CRC,
        PHASE_INVALIDATE, PHASE_CHECK_INVALIDATE, PHASE_WRITE, PHASE_VERIFY, PHASE_COMMIT, PHASE_FINAL };
+enum { SCAN_HEADER, SCAN_CAMPAIGN, SCAN_COLLECTION, SCAN_COLLECTION_RESERVED,
+       SCAN_INSTANCE, SCAN_PARTY, SCAN_QUEST_LEGACY, SCAN_QUEST_STATES,
+       SCAN_QUEST_OBJECTIVE, SCAN_QUEST_REWARDS, SCAN_QUEST_VARIABLES,
+       SCAN_QUEST_FLAGS, SCAN_QUEST_ANCHORS, SCAN_BOND, SCAN_EVENTS,
+       SCAN_CREDIT_RESERVED, SCAN_EQUIPMENT_RECORD, SCAN_EQUIPMENT_REFS,
+       SCAN_EQUIPMENT_SETTINGS, SCAN_EQUIPMENT_SEEN, SCAN_EQUIPMENT_WALLET,
+       SCAN_EQUIPMENT_CLAIMS, SCAN_EQUIPMENT_RESERVED, SCAN_PADDING };
 
 static int bit(const Save4U8 *p, unsigned n) { return (p[n >> 3] >> (n & 7)) & 1; }
 static void set_bit(Save4U8 *p, unsigned n) { p[n >> 3] |= (Save4U8)(1u << (n & 7)); }
@@ -309,18 +470,23 @@ static int scan_header(void) {
     const Save4U8 *b = scan.block;
     if (b[0] != 0x45 || b[1] != 0x42 || b[2] != 5 || b[3] != 32 ||
         get16(b + 4) != SAVE5_BANK_SIZE || get16(b + 6) != SAVE5_USED_SIZE ||
-        get16(b + 12) != SAVE5_CONTENT_REVISION ||
+        (get16(b + 12) != 1 && get16(b + 12) != SAVE5_CONTENT_REVISION) ||
         b[20] != (scan.memory ? 0 : SAVE5_COMMIT) ||
         !zero_bytes(b + 14, 2) || !zero_bytes(b + 21, 11)) return 0;
     scan.expected_crc = get32(b + 16); scan.sequence = get32(b + 8);
+    scan.revision = get16(b + 12);
     return 1;
+}
+static int revision_form_allowed(unsigned id) {
+    if (scan.revision != 1) return creatures_form(id) != 0;
+    return id == 1 || id == 2 || id == 4 || id == 5 || id == 7 || id == 8 || id == 10 || id == 11;
 }
 static int scan_collection(void) {
     unsigned i;
     /* Collection discovery is revisioned content, not permission to use a
      * reserved form. Reward bits remain an explicit 128-bit authored ledger. */
     for (i = 0; i < 128; ++i) {
-        if (bit(scan.collection, i) && !creatures_form(i + 1)) return 0;
+        if (bit(scan.collection, i) && !revision_form_allowed(i + 1)) return 0;
         if (bit(scan.collection + 16, i) && !bit(scan.collection, i)) return 0;
     }
     return 1;
@@ -331,12 +497,14 @@ static int scan_instance(unsigned slot) {
     Save4U8 *ids = scratch.bytes + SAVE5_RESERVED_OFFSET;
     decode_instance(&c, scan.block);
     if (!creatures_instance_validate(&c)) return 0;
+    if (c.form_id && !revision_form_allowed(c.form_id)) return 0;
     if (!(c.flags & CREATURE_OCCUPIED)) return 1;
     if (!bit(scan.collection + 16, c.form_id - 1)) return 0;
     for (i = 0; i < slot; ++i)
         if (get32(ids + i * 4) == c.instance_id) return 0;
     put32(ids + slot * 4, c.instance_id);
     set_bit(scan.occupied, slot);
+    scan.retained_creatures |= retained_creature_bit(c.form_id);
     if (c.instance_id > scan.max_id) scan.max_id = c.instance_id;
     legacy = creatures_legacy_spirit(c.form_id);
     if (c.flags & CREATURE_STORY_LOCKED) {
@@ -362,80 +530,155 @@ static int scan_party(void) {
     if (!count) return b[4] == CREATURE_EMPTY_SLOT;
     return b[4] < 4 && b[b[4]] != CREATURE_EMPTY_SLOT;
 }
-/* Chunk loops avoid per-byte division and phase dispatch on ARM7TDMI.
- * Record checks are charged conservative byte-equivalent work as well. This
- * prevents a full roster from concentrating all validation in one update. */
+static int scan_equipment_record(unsigned slot) {
+    EquipmentRecord *r = &scan.equipment.bag[slot];
+    decode_equipment_record(r, scan.block);
+    if (!equipment_record_validate(r)) return 0;
+    if (!slot && (r->item_id != EQUIPMENT_STARTER_ID || r->flags != EQUIPMENT_PROTECTED)) return 0;
+    if (r->item_id) {
+        if (bit(scan.item_owned, r->item_id)) return 0;
+        set_bit(scan.item_owned, r->item_id);
+    }
+    return 1;
+}
+static int equipment_seen_byte(unsigned index, unsigned value) {
+    unsigned i;
+    if ((value & scan.item_owned[index]) != scan.item_owned[index]) return 0;
+    for (i = 0; i < 8; ++i)
+        if ((value & (1u << i)) && !equipment_definition(index * 8u + i)) return 0;
+    return 1;
+}
+static void scan_next(unsigned stage, unsigned size) {
+    scan.stage = stage; scan.base = scan.position; scan.boundary = scan.position + size;
+}
+/* Byte loops avoid divisions and expensive checks. Record-end semantic work
+ * is bounded independently of bag/roster occupancy and charged to the budget. */
 static unsigned scan_run(unsigned budget) {
     unsigned used = 0;
     while (scan.valid && scan.position < SAVE5_BANK_SIZE && used < budget) {
         unsigned p = scan.position, n = scan.boundary - p, i, any = 0;
         Save4U32 crc = scan.crc;
-        unsigned zero = scan.stage == 3 || scan.stage == 6 || scan.stage == 9;
+        unsigned zero = scan.stage == SCAN_COLLECTION_RESERVED ||
+            scan.stage == SCAN_QUEST_LEGACY || scan.stage == SCAN_CREDIT_RESERVED ||
+            scan.stage == SCAN_EQUIPMENT_SETTINGS || scan.stage == SCAN_EQUIPMENT_WALLET ||
+            scan.stage == SCAN_EQUIPMENT_RESERVED || scan.stage == SCAN_PADDING;
         const volatile Save4U8 *src;
         if (n > budget - used) n = budget - used;
         if (scan.memory && zero && p < SAVE5_RESERVED_OFFSET &&
             p + n > SAVE5_RESERVED_OFFSET) n = SAVE5_RESERVED_OFFSET - p;
         src = scan.memory ? scratch.bytes + p : SRAM + scan.offset + p;
-        if (scan.stage == 0) {
+        if (scan.stage == SCAN_HEADER) {
             for (i = 0; i < n; ++i) {
-                Save4U8 v = src[i];
-                scan.block[p + i] = v;
+                Save4U8 v = src[i]; scan.block[p + i] = v;
                 if (!scan.memory) crc = crc_byte(crc, p+i >= 16 && p+i <= 20 ? 0 : v);
             }
-        } else if (scan.stage == 1 || scan.stage == 4 || scan.stage == 5) {
-            Save4U8 *dst = scan.block + p - scan.base;
-            if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
-            else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
-        } else if (scan.stage == 2) {
+        } else if (scan.stage == SCAN_COLLECTION) {
             Save4U8 *dst = scan.collection + p - 96;
             if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
             else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
-        } else if (scan.stage == 7) {
+        } else if (scan.stage == SCAN_BOND) {
             for (i = 0; i < n; ++i) {
                 Save4U8 v = src[i];
                 if (!scan.memory) crc = crc_byte(crc, v);
                 if (v > 10 || (v && !bit(scan.occupied, p + i - 4296))) scan.valid = 0;
             }
         } else if (zero) {
-            /* Scanner's temporary IDs overlap the memory snapshot's trailing
-             * reserve. Those bytes are zeroed before CRC/writes, and never
-             * originate in user-controlled persisted fields. */
-            if (scan.memory && p >= SAVE5_RESERVED_OFFSET) {
-                i = n;
-            } else {
+            /* ID scratch overlaps only canonical trailing padding. */
+            if (!(scan.memory && p >= SAVE5_RESERVED_OFFSET)) {
                 for (i = 0; i < n; ++i) { Save4U8 v = src[i]; any |= v; if (!scan.memory) crc = crc_byte(crc, v); }
                 if (any) scan.valid = 0;
             }
-        } else if (!scan.memory) {
-            for (i = 0; i < n; ++i) crc = crc_byte(crc, src[i]);
+        } else if (scan.stage == SCAN_EVENTS) {
+            if (!scan.memory) for (i = 0; i < n; ++i) crc = crc_byte(crc, src[i]);
+        } else {
+            Save4U8 *dst = scan.block + p - scan.base;
+            if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
+            else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
         }
         scan.crc = crc; scan.position += n; used += n;
         if (scan.position == scan.boundary) {
             unsigned charge = 0;
-            if (scan.stage == 0) {
+            switch (scan.stage) {
+            case SCAN_HEADER:
                 if (!scan_header()) scan.valid = 0;
-                scan.stage = 1; scan.base = 32; scan.boundary = 96;
-            } else if (scan.stage == 1) {
+                scan_next(SCAN_CAMPAIGN, 64); break;
+            case SCAN_CAMPAIGN: {
                 CampaignSave c;
                 decode_campaign(&c, scan.block);
-                if (!save5_campaign_validate(&c) || !zero_bytes(scan.block+15, 49)) scan.valid = 0;
-                scan.stage = 2; scan.boundary = 144; charge = 32;
-            } else if (scan.stage == 2) {
+                scan.campaign = c;
+                if (!save5_campaign_validate(&c) || (scan.revision == 1 && c.room > 13) ||
+                    !zero_bytes(scan.block+15, 49)) scan.valid = 0;
+                scan_next(SCAN_COLLECTION, 48); charge = 32; break;
+            }
+            case SCAN_COLLECTION:
                 if (!scan_collection()) scan.valid = 0;
-                scan.stage = 3; scan.boundary = 160; charge = 128;
-            } else if (scan.stage == 3) {
-                scan.stage = 4; scan.base = 160; scan.boundary = 184;
-            } else if (scan.stage == 4) {
+                scan_next(SCAN_COLLECTION_RESERVED, 16); charge = 128; break;
+            case SCAN_COLLECTION_RESERVED:
+                scan.slot = 0; scan_next(SCAN_INSTANCE, 24); break;
+            case SCAN_INSTANCE:
                 charge = scan.block[0] ? 128 : 16;
                 if (!scan_instance(scan.slot++)) scan.valid = 0;
-                scan.base += 24; scan.boundary += 24;
-                if (scan.slot == 160) { scan.stage = 5; scan.base = 4000; scan.boundary = 4032; }
-            } else if (scan.stage == 5) {
+                scan_next(scan.slot == 160 ? SCAN_PARTY : SCAN_INSTANCE, scan.slot == 160 ? 32 : 24); break;
+            case SCAN_PARTY:
                 if (!scan_party()) scan.valid = 0;
-                scan.stage = 6; scan.boundary = 4296; charge = 32;
-            } else if (scan.stage == 6) { scan.stage = 7; scan.boundary = 4456; }
-            else if (scan.stage == 7) { scan.stage = 8; scan.boundary = 4536; }
-            else if (scan.stage == 8) { scan.stage = 9; scan.boundary = SAVE5_BANK_SIZE; }
+                scan_next(scan.revision == 1 ? SCAN_QUEST_LEGACY : SCAN_QUEST_STATES,
+                          scan.revision == 1 ? 264 : 16); charge = 32; break;
+            case SCAN_QUEST_LEGACY: scan_next(SCAN_BOND, 160); break;
+            case SCAN_QUEST_STATES:
+                copy_bytes(scan.quests.states, scan.block, 16);
+                scan.slot = 0; scan_next(SCAN_QUEST_OBJECTIVE, 2); break;
+            case SCAN_QUEST_OBJECTIVE:
+                scan.quests.objectives[scan.slot] = get16(scan.block);
+                if (!quest_objective_validate(&scan.quests, scan.slot)) scan.valid = 0;
+                ++scan.slot;
+                scan_next(scan.slot == 64 ? SCAN_QUEST_REWARDS : SCAN_QUEST_OBJECTIVE,
+                          scan.slot == 64 ? 8 : 2); charge = 16; break;
+            case SCAN_QUEST_REWARDS:
+                copy_bytes(scan.quests.rewards, scan.block, 8);
+                for (i = 0; i < 8; ++i) if (!quest_reward_validate(&scan.quests, i)) scan.valid = 0;
+                scan_next(SCAN_QUEST_VARIABLES, 64); charge = 128; break;
+            case SCAN_QUEST_VARIABLES:
+                copy_bytes(scan.quests.variables, scan.block, 64);
+                scan_next(SCAN_QUEST_FLAGS, 32); break;
+            case SCAN_QUEST_FLAGS:
+                copy_bytes(scan.quests.region_flags, scan.block, 32);
+                scan_next(SCAN_QUEST_ANCHORS, 16); break;
+            case SCAN_QUEST_ANCHORS:
+                copy_bytes(scan.quests.anchors, scan.block, 16);
+                if (!quest_fields_validate(&scan.quests) ||
+                    !quest_campaign_validate(&scan.campaign, &scan.quests) ||
+                    !quest_creatures_validate(&scan.quests, scan.collection + 16, scan.collection + 32,
+                                              scan.retained_creatures)) scan.valid = 0;
+                scan_next(SCAN_BOND, 160); charge = 128; break;
+            case SCAN_BOND: scan_next(SCAN_EVENTS, 80); break;
+            case SCAN_EVENTS: scan_next(SCAN_CREDIT_RESERVED, 8); break;
+            case SCAN_CREDIT_RESERVED:
+                scan.slot = 0;
+                scan_next(scan.revision == 1 ? SCAN_PADDING : SCAN_EQUIPMENT_RECORD,
+                          scan.revision == 1 ? 1600 : 8); break;
+            case SCAN_EQUIPMENT_RECORD:
+                if (!scan_equipment_record(scan.slot++)) scan.valid = 0;
+                scan_next(scan.slot == 48 ? SCAN_EQUIPMENT_REFS : SCAN_EQUIPMENT_RECORD,
+                          scan.slot == 48 ? 5 : 8); charge = 32; break;
+            case SCAN_EQUIPMENT_REFS:
+                copy_bytes(scan.equipment.equipped, scan.block, 5);
+                if (!equipment_refs_validate(&scan.equipment)) scan.valid = 0;
+                scan_next(SCAN_EQUIPMENT_SETTINGS, 11); charge = 64; break;
+            case SCAN_EQUIPMENT_SETTINGS: scan.slot = 0; scan_next(SCAN_EQUIPMENT_SEEN, 1); break;
+            case SCAN_EQUIPMENT_SEEN:
+                scan.equipment.seen[scan.slot] = scan.block[0];
+                if (!equipment_seen_byte(scan.slot, scan.block[0])) scan.valid = 0;
+                ++scan.slot;
+                scan_next(scan.slot == 64 ? SCAN_EQUIPMENT_WALLET : SCAN_EQUIPMENT_SEEN,
+                          scan.slot == 64 ? 16 : 1); charge = 16; break;
+            case SCAN_EQUIPMENT_WALLET: scan_next(SCAN_EQUIPMENT_CLAIMS, 8); break;
+            case SCAN_EQUIPMENT_CLAIMS:
+                copy_bytes(scan.equipment.reward_claims, scan.block, 8);
+                if (!quest_equipment_validate(&scan.quests, &scan.equipment)) scan.valid = 0;
+                scan_next(SCAN_EQUIPMENT_RESERVED, 24); charge = 128; break;
+            case SCAN_EQUIPMENT_RESERVED: scan_next(SCAN_PADDING, 1088); break;
+            default: break;
+            }
             if (charge > budget - used) charge = budget - used;
             used += charge;
         }
@@ -464,8 +707,9 @@ static void read_bytes(Save4U8 *out, unsigned offset, unsigned size) {
 }
 static void decode_valid_bank(Save5State *s, unsigned offset, Save4U32 sequence) {
     Save4U8 b[32];
-    unsigned i;
+    unsigned i, revision;
     clear_bytes(s, sizeof *s);
+    read_bytes(b, offset + 12, 2); revision = get16(b);
     read_bytes(b, offset + 32, 15); decode_campaign(&s->campaign, b);
     s->campaign.sequence = sequence;
     read_bytes(s->roster.seen, offset + 96, 16);
@@ -481,7 +725,26 @@ static void decode_valid_bank(Save5State *s, unsigned offset, Save4U32 sequence)
     read_bytes(s->roster.expedition_bond, offset + 4296, 160);
     read_bytes(s->roster.expedition_events, offset + 4456, 64);
     read_bytes(s->roster.lifetime_field_aid, offset + 4520, 16);
-    normalize_resume(&s->campaign);
+    if (revision == 1) equipment_init(&s->equipment);
+    else {
+        read_bytes(s->quests.states, offset + 4032, 16);
+        for (i = 0; i < 64; ++i) {
+            read_bytes(b, offset + 4048 + i * 2, 2);
+            s->quests.objectives[i] = get16(b);
+        }
+        read_bytes(s->quests.rewards, offset + 4176, 8);
+        read_bytes(s->quests.variables, offset + 4184, 64);
+        read_bytes(s->quests.region_flags, offset + 4248, 32);
+        read_bytes(s->quests.anchors, offset + 4280, 16);
+        for (i = 0; i < 48; ++i) {
+            read_bytes(b, offset + 4544 + i * 8, 8);
+            decode_equipment_record(&s->equipment.bag[i], b);
+        }
+        read_bytes(s->equipment.equipped, offset + 4928, 5);
+        read_bytes(s->equipment.seen, offset + 4944, 64);
+        read_bytes(s->equipment.reward_claims, offset + 5024, 8);
+    }
+    normalize_resume(&s->campaign, revision);
 }
 static int load_internal(Save5State *out) {
     CampaignSave legacy;
@@ -501,6 +764,7 @@ static int load_internal(Save5State *out) {
         if (!save4_load(&legacy)) return 0;
         clear_bytes(&scratch.state, sizeof scratch.state);
         scratch.state.campaign = legacy;
+        equipment_init(&scratch.state.equipment);
         if (!creatures_migrate_legacy(&scratch.state.roster, legacy.chapter_flags, legacy.spirit) ||
             !save5_validate(&scratch.state)) return 0;
     }
@@ -517,9 +781,7 @@ int save5_has_valid(void) {
 }
 int save5_begin(const Save5State *s) {
     if (writer_status == SAVE5_BUSY) return 0;
-    if (!s || !save5_campaign_validate(&s->campaign) ||
-        !zero_bytes(s->quest_reserved, sizeof s->quest_reserved) ||
-        !zero_bytes(s->equipment_reserved, sizeof s->equipment_reserved)) {
+    if (!s || !save5_campaign_validate(&s->campaign)) {
         writer_status = SAVE5_FAILED; return 0;
     }
     copy_state(&scratch.state, s);
@@ -540,8 +802,30 @@ unsigned save5_step(unsigned budget) {
     while (writer_status == SAVE5_BUSY && used < budget) {
         unsigned available = budget - used;
         if (writer_phase == PHASE_META) {
-            snapshot_metadata(); writer_position = 160; writer_phase = PHASE_ENCODE;
-            used += available < 64 ? available : 64;
+            snapshot_metadata(); writer_position = 0; writer_phase = PHASE_QUEST;
+            used += available < 312 ? available : 312;
+        } else if (writer_phase == PHASE_QUEST) {
+            unsigned n = 264 - writer_position, i;
+            if (n > available) n = available;
+            for (i = 0; i < n; ++i)
+                scratch.bytes[SAVE5_RESERVED_OFFSET + META_QUEST + writer_position + i] =
+                    quest_wire_byte(&scratch.state.quests, writer_position + i);
+            writer_position += n; used += n;
+            if (writer_position == 264) { writer_position = 0; writer_phase = PHASE_EQUIPMENT; }
+        } else if (writer_phase == PHASE_EQUIPMENT) {
+            if (writer_position < 384) {
+                encode_equipment_record(scratch.bytes + SAVE5_RESERVED_OFFSET + META_EQUIPMENT + writer_position,
+                    &scratch.state.equipment.bag[writer_position / 8]);
+                writer_position += 8; used += available < 8 ? available : 8;
+            } else {
+                unsigned n = 512 - writer_position, i;
+                if (n > available) n = available;
+                for (i = 0; i < n; ++i)
+                    scratch.bytes[SAVE5_RESERVED_OFFSET + META_EQUIPMENT + writer_position + i] =
+                        equipment_tail_byte(&scratch.state.equipment, writer_position + i);
+                writer_position += n; used += n;
+            }
+            if (writer_position == 512) { writer_position = 160; writer_phase = PHASE_ENCODE; }
         } else if (writer_phase == PHASE_ENCODE) {
             unsigned n = available / 4u, i;
             if (!n) n = 1;
@@ -554,7 +838,7 @@ unsigned save5_step(unsigned budget) {
             if (!writer_position) writer_phase = PHASE_FINISH;
         } else if (writer_phase == PHASE_FINISH) {
             snapshot_finish(); scan_start(0, 1); writer_phase = PHASE_CHECK_SNAPSHOT;
-            used += available < 256 ? available : 256;
+            used += available < 1088 ? available : 1088;
         } else if (writer_phase == PHASE_CHECK_SNAPSHOT) {
             used += scan_run(available);
             if (!scan.valid) writer_status = SAVE5_FAILED;

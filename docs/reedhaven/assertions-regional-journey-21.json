@@ -1,0 +1,92 @@
+[
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 745
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 760
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 760
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 767
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 767
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 782
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 782
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 797
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 797
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 812
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 812
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 823
+  },
+  {
+    "label": "walking occurs in active gameplay",
+    "passed": true,
+    "frame": 823
+  },
+  {
+    "label": "ordinary enemy damage reaches death without injected HP",
+    "passed": true,
+    "frame": 1243
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1278
+  },
+  {
+    "label": "normal death retry reenters valid basin checkpoint",
+    "passed": true,
+    "frame": 1278
+  },
+  {
+    "label": "death retry duplicates no reward and loses no quest",
+    "passed": true,
+    "frame": 1278
+  },
+  {
+    "label": "autosave remains valid",
+    "passed": true,
+    "frame": 1281
+  }
+]

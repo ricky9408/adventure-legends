@@ -182,15 +182,56 @@ def validate(data,identity=None,schema=None):
     check(sprite_bytes+tables<=B['incremental_rom_cap_bytes'],'budget: graphics and tables exceed ROM allowance')
     return sorted(set(errors))
 
-def summary(data):
+def validate_enabled(data, enabled):
+    """Review boundary for ROM data, independent of gameplay obtainability."""
+    errors = []
+    if not isinstance(enabled, dict):
+        return ['enabled: expected manifest object']
+    expected_ids = [1,2,4,5,7,8,10,11,13,14,16]
+    expected_edges = [[1,2],[4,5],[7,8],[10,11],[13,14]]
+    if type(enabled.get('content_revision')) is not int or enabled['content_revision'] != 2:
+        errors.append('enabled: expected content revision 2')
+    for key, expected in [('enabled_form_ids', expected_ids),
+                          ('enabled_evolutions', expected_edges),
+                          ('enabled_ability_ids', list(range(1,12)))]:
+        # JSON canonical equality also rejects bool aliases for integer IDs.
+        if json.dumps(enabled.get(key)) != json.dumps(expected):
+            errors.append(f'enabled: {key} differs from reviewed core')
+    forms = [f for f in data['forms'] if f['id'] in expected_ids]
+    if [f['id'] for f in forms] != expected_ids:
+        errors.append('enabled: every form requires an authored definition')
+    if sum(len(f['learnset']) for f in forms) != 16:
+        errors.append('enabled: expected exactly 16 learnset entries')
+    if sorted({l['ability_id'] for f in forms for l in f['learnset']}) != list(range(1,12)):
+        errors.append('enabled: learned commands differ from reviewed core')
+    edges = [[e['from'],e['to']] for e in data['evolutions']
+             if e['from'] in expected_ids or e['to'] in expected_ids]
+    if edges != expected_edges:
+        errors.append('enabled: evolution graph differs from reviewed core')
+    return errors
+
+def summary(data, enabled=None):
     b=data['budget'];canonical=json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
-    return {'valid':True,'scope':data['scope'],'reserved_forms':len(data['slots']),'designed_forms':len(data['forms']),'legacy_engine_forms':len(data['implemented_legacy_form_ids']),'new_engine_forms_implemented':0,'reserved_only_forms':sum(s['status']=='reserved' for s in data['slots']),'families':len(data['families']),'proposed_executable_evolutions':len(data['evolutions']),'evolutions_implemented_in_engine':0,'save_payload_bytes':sum(b['save_blocks'].values()),'save_bank_bytes':b['save_bank_bytes'],'catalog_sha256':hashlib.sha256(canonical).hexdigest()}
+    enabled = enabled or load_json(ROOT/'enabled.json')
+    return {'valid':True,'scope':'Authored design catalog and separately reviewed native core data; not a gameplay acceptance result',
+            'original_authoring_scope':data['scope'],'reserved_identities':len(data['slots']),
+            'authored_designs':len(data['forms']),'enabled_native_core_forms':len(enabled['enabled_form_ids']),
+            'enabled_form_ids':enabled['enabled_form_ids'],'enabled_abilities':len(enabled['enabled_ability_ids']),
+            'enabled_evolution_edges':len(enabled['enabled_evolutions']),
+            'native_obtainability':'Must be verified by separate native acquisition, art, ability and UI tests',
+            'disabled_authored_forms':sorted(set(f['id'] for f in data['forms'])-set(enabled['enabled_form_ids'])),
+            'reserved_only_forms':sum(s['status']=='reserved' for s in data['slots']),
+            'families':len(data['families']),'authored_evolutions':len(data['evolutions']),
+            'save_payload_bytes':sum(b['save_blocks'].values()),'save_bank_bytes':b['save_bank_bytes'],
+            'catalog_sha256':hashlib.sha256(canonical).hexdigest()}
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('catalog',nargs='?',type=Path,default=ROOT/'catalog.json');p.add_argument('--identity-lock',type=Path,default=ROOT/'identity-lock.json');p.add_argument('--report',type=Path);args=p.parse_args()
     try:
         data=load_json(args.catalog);errors=validate(data,load_json(args.identity_lock))
-        result={'valid':False,'errors':errors} if errors else summary(data)
+        enabled=load_json(ROOT/'enabled.json')
+        if not errors: errors += validate_enabled(data, enabled)
+        result={'valid':False,'errors':errors} if errors else summary(data, enabled)
     except (CatalogError,ValueError,OSError) as e:result={'valid':False,'errors':[str(e)]}
     out=json.dumps(result,ensure_ascii=False,indent=2)+'\n';print(out,end='')
     if args.report:args.report.write_text(out,encoding='utf-8')

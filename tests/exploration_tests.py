@@ -99,8 +99,8 @@ class ExplorationRun:
         self.inputs.append({'emulator_frame': self.e.frame, 'frames': count, 'keys': keys})
         self.e.frames(count, keys)
         for _ in range(180):
-            if self.get('game_state')!=6:break
-            self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':0,'reason':'SAVE_PENDING'})
+            if self.get('game_state')!=6 and not (self.get('game_state')==PLAY and self.get('frame')==0):break
+            self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':0,'reason':'SAVE_PENDING' if self.get('game_state')==6 else 'COLD_CONTINUE'})
             self.e.frames(1,0)
         else:raise AssertionError('Transactional save did not finish')
         if 'camera_x' in self.sym and self.get('room') == 1:
@@ -534,7 +534,11 @@ class ExplorationRun:
         self.tap('A', 4, 4)
         self.check(self.get('journal_tab') == 3, 'journal includes companion growth as its fourth tab')
         self.tap('A',4,4)
-        self.check(self.get('journal_tab') == before, 'journal cycles through four tabs and returns to quest controls')
+        self.check(self.get('journal_tab') == 4, 'journal includes equipment as its fifth tab')
+        self.tap('A',4,4)
+        self.check(self.get('journal_tab') == 5, 'journal includes regional quests as its sixth tab')
+        self.tap('A',4,4)
+        self.check(self.get('journal_tab') == before, 'journal cycles through six tabs and returns to quest controls')
         self.shot('01-journal-controls')
         self.tap('B', 4, 4)
         self.nextroom(1)
