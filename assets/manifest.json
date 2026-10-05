@@ -1,0 +1,1053 @@
+{
+  "canvas": [
+    240,
+    160
+  ],
+  "sprite_size": [
+    16,
+    16
+  ],
+  "sprite_anchor": "center; blit at position minus (8,8)",
+  "boss_size": [
+    32,
+    32
+  ],
+  "palette": "shared RGB555; index 0 transparent; all backgrounds opaque nonzero",
+  "hud_safe_strip": [
+    0,
+    0,
+    240,
+    17
+  ],
+  "village": {
+    "spawn": [
+      120,
+      126
+    ],
+    "solid_rectangles": [
+      [
+        22,
+        44,
+        67,
+        53
+      ],
+      [
+        151,
+        47,
+        67,
+        50
+      ],
+      [
+        40,
+        115,
+        27,
+        36
+      ],
+      [
+        163,
+        139,
+        46,
+        14
+      ],
+      [
+        97,
+        27,
+        4,
+        24
+      ],
+      [
+        140,
+        27,
+        4,
+        24
+      ],
+      [
+        94,
+        80,
+        11,
+        15
+      ],
+      [
+        138,
+        80,
+        11,
+        15
+      ],
+      [
+        0,
+        0,
+        21,
+        43
+      ],
+      [
+        23,
+        0,
+        22,
+        34
+      ],
+      [
+        49,
+        0,
+        25,
+        34
+      ],
+      [
+        77,
+        0,
+        22,
+        31
+      ],
+      [
+        141,
+        0,
+        22,
+        31
+      ],
+      [
+        167,
+        0,
+        28,
+        34
+      ],
+      [
+        201,
+        0,
+        25,
+        37
+      ],
+      [
+        227,
+        1,
+        13,
+        44
+      ],
+      [
+        0,
+        72,
+        21,
+        40
+      ],
+      [
+        224,
+        74,
+        16,
+        40
+      ]
+    ],
+    "north_exit": [
+      108,
+      18,
+      24,
+      14
+    ],
+    "props": {
+      "houses": [
+        [
+          25,
+          47,
+          61,
+          47
+        ],
+        [
+          154,
+          50,
+          61,
+          45
+        ]
+      ],
+      "shrine": [
+        53,
+        141
+      ],
+      "lamps": [
+        [
+          99,
+          91
+        ],
+        [
+          143,
+          91
+        ]
+      ],
+      "elder_suggested": [
+        120,
+        92
+      ]
+    },
+    "tree_positions": [
+      [
+        7,
+        40,
+        1.1
+      ],
+      [
+        34,
+        32,
+        0.9
+      ],
+      [
+        61,
+        31,
+        1.0
+      ],
+      [
+        88,
+        29,
+        0.85
+      ],
+      [
+        152,
+        29,
+        0.85
+      ],
+      [
+        181,
+        31,
+        1.1
+      ],
+      [
+        213,
+        34,
+        1
+      ],
+      [
+        241,
+        42,
+        1.1
+      ],
+      [
+        8,
+        109,
+        1
+      ],
+      [
+        236,
+        111,
+        1
+      ]
+    ]
+  },
+  "forest": {
+    "spawn": [
+      120,
+      140
+    ],
+    "solid_rectangles": [
+      [
+        92,
+        19,
+        11,
+        24
+      ],
+      [
+        138,
+        19,
+        11,
+        24
+      ],
+      [
+        85,
+        37,
+        11,
+        17
+      ],
+      [
+        145,
+        37,
+        11,
+        17
+      ],
+      [
+        223,
+        21,
+        17,
+        139
+      ],
+      [
+        0,
+        0,
+        21,
+        47
+      ],
+      [
+        17,
+        0,
+        28,
+        46
+      ],
+      [
+        46,
+        0,
+        30,
+        36
+      ],
+      [
+        79,
+        0,
+        22,
+        29
+      ],
+      [
+        139,
+        0,
+        25,
+        28
+      ],
+      [
+        166,
+        0,
+        30,
+        39
+      ],
+      [
+        198,
+        2,
+        28,
+        44
+      ],
+      [
+        3,
+        40,
+        30,
+        48
+      ],
+      [
+        36,
+        37,
+        25,
+        40
+      ],
+      [
+        187,
+        42,
+        25,
+        40
+      ],
+      [
+        0,
+        86,
+        25,
+        52
+      ],
+      [
+        32,
+        103,
+        28,
+        44
+      ],
+      [
+        186,
+        103,
+        28,
+        44
+      ],
+      [
+        220,
+        100,
+        20,
+        48
+      ],
+      [
+        13,
+        133,
+        28,
+        27
+      ],
+      [
+        61,
+        135,
+        28,
+        25
+      ],
+      [
+        155,
+        133,
+        28,
+        27
+      ],
+      [
+        202,
+        132,
+        30,
+        28
+      ]
+    ],
+    "north_exit": [
+      107,
+      19,
+      26,
+      14
+    ],
+    "south_exit": [
+      107,
+      150,
+      26,
+      10
+    ],
+    "props": {
+      "gate_opening": [
+        106,
+        20,
+        29,
+        23
+      ],
+      "lamps": [
+        [
+          90,
+          47
+        ],
+        [
+          150,
+          47
+        ]
+      ],
+      "river": [
+        0,
+        78,
+        240,
+        13
+      ],
+      "bridge_zone": [
+        108,
+        76,
+        24,
+        18
+      ],
+      "bridge_requires_leaf": true
+    },
+    "tree_positions": [
+      [
+        5,
+        44,
+        1.3
+      ],
+      [
+        31,
+        43,
+        1.15
+      ],
+      [
+        61,
+        33,
+        1.2
+      ],
+      [
+        90,
+        27,
+        0.9
+      ],
+      [
+        151,
+        25,
+        1
+      ],
+      [
+        181,
+        36,
+        1.2
+      ],
+      [
+        212,
+        43,
+        1.1
+      ],
+      [
+        18,
+        85,
+        1.2
+      ],
+      [
+        48,
+        74,
+        1
+      ],
+      [
+        199,
+        79,
+        1
+      ],
+      [
+        9,
+        135,
+        1.3
+      ],
+      [
+        46,
+        144,
+        1.1
+      ],
+      [
+        200,
+        144,
+        1.1
+      ],
+      [
+        235,
+        145,
+        1.2
+      ],
+      [
+        27,
+        174,
+        1.1
+      ],
+      [
+        75,
+        176,
+        1.1
+      ],
+      [
+        169,
+        174,
+        1.1
+      ],
+      [
+        217,
+        177,
+        1.2
+      ]
+    ],
+    "dynamic_rectangles": [
+      {
+        "kind": "river",
+        "rect": [
+          0,
+          76,
+          240,
+          18
+        ],
+        "exception_when_bridge_open": [
+          108,
+          76,
+          24,
+          18
+        ]
+      }
+    ],
+    "suggested_enemy_centers": [
+      [
+        77,
+        120
+      ],
+      [
+        174,
+        118
+      ],
+      [
+        167,
+        65
+      ]
+    ]
+  },
+  "temple": {
+    "spawn": [
+      120,
+      140
+    ],
+    "solid_rectangles": [
+      [
+        0,
+        0,
+        24,
+        160
+      ],
+      [
+        216,
+        0,
+        24,
+        160
+      ],
+      [
+        24,
+        0,
+        79,
+        31
+      ],
+      [
+        138,
+        0,
+        78,
+        31
+      ],
+      [
+        34,
+        36,
+        13,
+        15
+      ],
+      [
+        189,
+        36,
+        13,
+        15
+      ],
+      [
+        35,
+        129,
+        13,
+        15
+      ],
+      [
+        190,
+        129,
+        13,
+        15
+      ]
+    ],
+    "north_exit": [
+      107,
+      16,
+      26,
+      17
+    ],
+    "south_exit": [
+      106,
+      150,
+      28,
+      10
+    ],
+    "props": {
+      "braziers": [
+        [
+          64,
+          64
+        ],
+        [
+          176,
+          64
+        ]
+      ],
+      "gate": [
+        103,
+        12,
+        35,
+        20
+      ],
+      "gate_closed_is_visual_only": true,
+      "ritual_disc": [
+        120,
+        106
+      ]
+    },
+    "tree_positions": [],
+    "dynamic_rectangles": [
+      {
+        "kind": "brazier",
+        "rect": [
+          55,
+          56,
+          18,
+          18
+        ]
+      },
+      {
+        "kind": "brazier",
+        "rect": [
+          167,
+          56,
+          18,
+          18
+        ]
+      },
+      {
+        "kind": "closed_gate",
+        "rect": [
+          103,
+          12,
+          35,
+          20
+        ]
+      }
+    ]
+  },
+  "boss": {
+    "spawn": [
+      120,
+      139
+    ],
+    "solid_rectangles": [
+      [
+        11,
+        46,
+        27,
+        36
+      ],
+      [
+        203,
+        46,
+        27,
+        36
+      ],
+      [
+        11,
+        105,
+        27,
+        36
+      ],
+      [
+        203,
+        105,
+        27,
+        36
+      ],
+      [
+        0,
+        0,
+        19,
+        50
+      ],
+      [
+        17,
+        0,
+        30,
+        33
+      ],
+      [
+        52,
+        0,
+        30,
+        20
+      ],
+      [
+        93,
+        0,
+        25,
+        12
+      ],
+      [
+        125,
+        0,
+        25,
+        13
+      ],
+      [
+        161,
+        0,
+        30,
+        21
+      ],
+      [
+        196,
+        0,
+        30,
+        34
+      ],
+      [
+        222,
+        3,
+        18,
+        52
+      ],
+      [
+        0,
+        58,
+        17,
+        48
+      ],
+      [
+        222,
+        57,
+        18,
+        48
+      ],
+      [
+        0,
+        116,
+        20,
+        44
+      ],
+      [
+        20,
+        146,
+        30,
+        14
+      ],
+      [
+        58,
+        154,
+        30,
+        6
+      ],
+      [
+        152,
+        154,
+        30,
+        6
+      ],
+      [
+        192,
+        148,
+        30,
+        12
+      ],
+      [
+        224,
+        115,
+        16,
+        45
+      ]
+    ],
+    "south_exit": [
+      108,
+      150,
+      24,
+      10
+    ],
+    "props": {
+      "boss_spawn": [
+        120,
+        67
+      ],
+      "central_arena_clear": [
+        40,
+        40,
+        160,
+        100
+      ]
+    },
+    "tree_positions": [
+      [
+        3,
+        47,
+        1.3
+      ],
+      [
+        32,
+        30,
+        1.2
+      ],
+      [
+        67,
+        17,
+        1.2
+      ],
+      [
+        105,
+        9,
+        1
+      ],
+      [
+        137,
+        10,
+        1
+      ],
+      [
+        176,
+        18,
+        1.2
+      ],
+      [
+        211,
+        31,
+        1.2
+      ],
+      [
+        238,
+        52,
+        1.3
+      ],
+      [
+        2,
+        103,
+        1.2
+      ],
+      [
+        237,
+        102,
+        1.2
+      ],
+      [
+        5,
+        161,
+        1.2
+      ],
+      [
+        35,
+        191,
+        1.2
+      ],
+      [
+        73,
+        199,
+        1.2
+      ],
+      [
+        167,
+        199,
+        1.2
+      ],
+      [
+        207,
+        193,
+        1.2
+      ],
+      [
+        239,
+        160,
+        1.2
+      ]
+    ]
+  },
+  "title": {
+    "text_safe_zone": [
+      20,
+      32,
+      137,
+      70
+    ]
+  },
+  "credits": "All character, environment, and prop artwork is original code-native pixel art authored for Emberbond. No third-party art assets used.",
+  "collision_notes": "Static obstacle rectangles approximate opaque geometry. Engine should add world bounds and dynamic river/bridge, gate, and brazier obstacles. Small bushes, grass, floor rings, flowers, and fallen branch are decorative and walkable. Tree rects are inset slightly from foliage. Coordinates are x,y,width,height.",
+  "art_direction": {
+    "revision": 3,
+    "principles": [
+      "Layered scalloped leaf volumes and visible trunk roots",
+      "Warm sunlit planes against cool contour shadows",
+      "Sparse clustered floor detail and unobstructed routes",
+      "Original auburn-haired teal-coat hero with golden trailing scarf",
+      "Four directional contact/passing walk poses; directional fox and hovering leaf companion"
+    ],
+    "reference_links": [
+      {
+        "kind": "Official screenshot page",
+        "url": "https://www.nintendo.com/jp/games/feature/nintendo-classics/a-8665_j/index.html"
+      },
+      {
+        "kind": "Official Nintendo UK trailer",
+        "url": "https://www.youtube.com/watch?v=cSIDghMWVMA"
+      },
+      {
+        "kind": "Official product page",
+        "url": "https://www.nintendo.com/en-gb/Games/Game-Boy-Advance/The-Legend-of-Zelda-The-Minish-Cap-267486.html"
+      }
+    ],
+    "rights": "Reference pages were used for high-level aesthetic research only. No screenshot pixels, maps, sprites, audio, ROMs, or animation frames are included or traced.",
+    "background_palette": {
+      "style": "Sunlit grass and foliage, warm cream paths, lighter temple stone, warm twilight",
+      "method": "Hand-authored per-material scene ramps; palette-index remapping only",
+      "colors_used": 178,
+      "palette_capacity": 256,
+      "preserved_base_indices": [
+        0,
+        96
+      ],
+      "scenes": {
+        "village": "sunlit",
+        "forest": "sunlit",
+        "temple": "temple",
+        "boss": "sunlit",
+        "title": "twilight"
+      },
+      "preservation": "All original sprite, UI, combat-effect and shadow colors remain unchanged. Title actors are composited after remapping. Foreground canopies use the matching room ramp. Background geometry and collision rectangles are unchanged."
+    }
+  },
+  "animation": {
+    "direction_order": [
+      "down",
+      "up",
+      "left",
+      "right"
+    ],
+    "hero_frames": [
+      4,
+      4,
+      256
+    ],
+    "companion_frames": [
+      2,
+      4,
+      256
+    ],
+    "companion_direction_frames": [
+      2,
+      4,
+      4,
+      256
+    ],
+    "walk_phase": [
+      "idle/passing",
+      "left contact",
+      "raised passing",
+      "right contact"
+    ],
+    "suggested_frame_ticks": 6,
+    "hero_shadow": [
+      16,
+      16
+    ],
+    "boss_shadow": [
+      32,
+      16
+    ],
+    "foreground_canopies": [
+      {
+        "room": 0,
+        "position": [
+          0,
+          112
+        ],
+        "size": [
+          32,
+          32
+        ]
+      },
+      {
+        "room": 0,
+        "position": [
+          208,
+          112
+        ],
+        "size": [
+          32,
+          32
+        ]
+      },
+      {
+        "room": 1,
+        "position": [
+          0,
+          112
+        ],
+        "size": [
+          32,
+          32
+        ]
+      },
+      {
+        "room": 1,
+        "position": [
+          208,
+          112
+        ],
+        "size": [
+          32,
+          32
+        ]
+      },
+      {
+        "room": 3,
+        "position": [
+          0,
+          112
+        ],
+        "size": [
+          32,
+          32
+        ]
+      },
+      {
+        "room": 3,
+        "position": [
+          208,
+          112
+        ],
+        "size": [
+          32,
+          32
+        ]
+      }
+    ],
+    "transparency_index": 0,
+    "added_rom_data_bytes": 21284
+  }
+}

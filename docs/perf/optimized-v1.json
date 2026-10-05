@@ -1,0 +1,1355 @@
+{
+  "rom": "build/perf-optimized-v1/emberbond.gba",
+  "rom_sha256": "210384d00b74723959b9452743c5b667dbe84c83f2fd8ffb6808d13923f15cae",
+  "rom_bytes": 231420,
+  "symbols": "build/perf-optimized-v1/emberbond.sym",
+  "symbols_sha256": "c7d63b443d060cc01ddafc5553ba8be0a681f2dd4c19629848f32bc63374f2db",
+  "emulator": "mGBA 0.10 through tools/mgba_runner.Emulator",
+  "hardware_refresh_hz": 59.72750056960583,
+  "hardware_cycles_per_frame": 280896,
+  "method": "One Emulator.frames(1) call, then read frame symbol and DISPCNT page bit; no wall-clock FPS",
+  "controller_only_scene_setup": true,
+  "game_ram_injection": false,
+  "savestate_policy": "Snapshots made only after controller-only traversal; restored only to resume that traversal after independent measurements",
+  "scope": "Representative repeatable scene windows; not exhaustive all-frame worst-case proof or physical-hardware validation",
+  "route_checks": [
+    "booted title",
+    "controller transition open_intro",
+    "opened introduction",
+    "entered village gameplay",
+    "controller transition open_pause",
+    "opened pause",
+    "controller transition close_pause",
+    "closed pause",
+    "controller entered room 1",
+    "nature companion opened bridge",
+    "controller entered room 2",
+    "opened temple dialogue",
+    "lit first brazier",
+    "lit second brazier",
+    "controller entered room 3",
+    "opened boss dialogue",
+    "fire companion exposed boss"
+  ],
+  "all_targets_met": false,
+  "motion": {
+    "probes": [
+      {
+        "input": "RIGHT",
+        "emulated_frames": 24,
+        "updates": 24,
+        "dx": 30,
+        "dy": 0,
+        "distance_pixels": 30.0,
+        "per_frame_dx_dy_histogram": {
+          "1:0": 18,
+          "2:0": 6
+        },
+        "gameplay_stayed_valid": true
+      },
+      {
+        "input": "LEFT",
+        "emulated_frames": 24,
+        "updates": 24,
+        "dx": -30,
+        "dy": 0,
+        "distance_pixels": 30.0,
+        "per_frame_dx_dy_histogram": {
+          "-2:0": 6,
+          "-1:0": 18
+        },
+        "gameplay_stayed_valid": true
+      },
+      {
+        "input": "UP",
+        "emulated_frames": 24,
+        "updates": 24,
+        "dx": 0,
+        "dy": -30,
+        "distance_pixels": 30.0,
+        "per_frame_dx_dy_histogram": {
+          "0:-2": 6,
+          "0:-1": 18
+        },
+        "gameplay_stayed_valid": true
+      },
+      {
+        "input": "RIGHT+UP",
+        "emulated_frames": 24,
+        "updates": 24,
+        "dx": 21,
+        "dy": -22,
+        "distance_pixels": 30.4138126514911,
+        "per_frame_dx_dy_histogram": {
+          "0:-1": 1,
+          "1:-1": 21,
+          "0:0": 2
+        },
+        "gameplay_stayed_valid": true
+      },
+      {
+        "input": "LEFT+UP",
+        "emulated_frames": 24,
+        "updates": 24,
+        "dx": -22,
+        "dy": -22,
+        "distance_pixels": 31.11269837220809,
+        "per_frame_dx_dy_histogram": {
+          "-1:-1": 22,
+          "0:0": 2
+        },
+        "gameplay_stayed_valid": true
+      }
+    ],
+    "diagonal_to_cardinal_distance_ratio": 1.0254418503949865,
+    "diagonal_axes_differ_by_at_most_one_pixel": true,
+    "target_ratio": [
+      0.95,
+      1.05
+    ],
+    "target_met": true
+  },
+  "transitions": [
+    {
+      "transition": "open_intro",
+      "controller_input": "START",
+      "emulated_frames": 60,
+      "expected_state": 2,
+      "first_expected_state_hardware_frame": 1,
+      "frame_counter_resets": 1,
+      "update_intervals_hardware_frames": {
+        "1": 55,
+        "2": 2
+      },
+      "longest_update_interval_frames": 2,
+      "longest_stall_frames_without_update": 1,
+      "state_sequence": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "target": {
+        "maximum_input_latency_hardware_frames": 2,
+        "maximum_update_gap_hardware_frames": 2,
+        "met": true
+      }
+    },
+    {
+      "transition": "open_pause",
+      "controller_input": "START",
+      "emulated_frames": 60,
+      "expected_state": 3,
+      "first_expected_state_hardware_frame": 1,
+      "frame_counter_resets": 0,
+      "update_intervals_hardware_frames": {
+        "1": 51,
+        "4": 2
+      },
+      "longest_update_interval_frames": 4,
+      "longest_stall_frames_without_update": 3,
+      "state_sequence": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "target": {
+        "maximum_input_latency_hardware_frames": 2,
+        "maximum_update_gap_hardware_frames": 2,
+        "met": false
+      }
+    },
+    {
+      "transition": "close_pause",
+      "controller_input": "B",
+      "emulated_frames": 60,
+      "expected_state": 1,
+      "first_expected_state_hardware_frame": 1,
+      "frame_counter_resets": 0,
+      "update_intervals_hardware_frames": {
+        "1": 59
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "state_sequence": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "target": {
+        "maximum_input_latency_hardware_frames": 2,
+        "maximum_update_gap_hardware_frames": 2,
+        "met": true
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "scene": "title",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "0:0": 360
+      },
+      "activity_hardware_frames": {},
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 0,
+        "room": 0,
+        "px": 0,
+        "py": 0,
+        "hp": 0,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 0,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 98
+      },
+      "final": {
+        "game_state": 0,
+        "room": 0,
+        "px": 0,
+        "py": 0,
+        "hp": 0,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 0,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 458
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "intro_dialog",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "2:0": 360
+      },
+      "activity_hardware_frames": {},
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 2,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 69
+      },
+      "final": {
+        "game_state": 2,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 429
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "village_idle",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:0": 360
+      },
+      "activity_hardware_frames": {},
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 1,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 155
+      },
+      "final": {
+        "game_state": 1,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 515
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "village_motion",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:0": 360
+      },
+      "activity_hardware_frames": {},
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 1,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 167
+      },
+      "final": {
+        "game_state": 1,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 527
+      },
+      "controller_input": "scripted, see scenario definition"
+    },
+    {
+      "scene": "pause",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "3:0": 360
+      },
+      "activity_hardware_frames": {},
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 3,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 233
+      },
+      "final": {
+        "game_state": 3,
+        "room": 0,
+        "px": 120,
+        "py": 126,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 593
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "forest_combat",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:1": 360
+      },
+      "activity_hardware_frames": {},
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 1,
+        "room": 1,
+        "px": 120,
+        "py": 99,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 425
+      },
+      "final": {
+        "game_state": 1,
+        "room": 1,
+        "px": 120,
+        "py": 94,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 0,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 785
+      },
+      "controller_input": "scripted, see scenario definition"
+    },
+    {
+      "scene": "forest_summon_toast",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:1": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360,
+        "toast_frames": 78
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 1,
+        "room": 1,
+        "px": 120,
+        "py": 99,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 79,
+        "frame": 457
+      },
+      "final": {
+        "game_state": 1,
+        "room": 1,
+        "px": 120,
+        "py": 94,
+        "hp": 6,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 0,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 817
+      },
+      "controller_input": "scripted, see scenario definition"
+    },
+    {
+      "scene": "bridge_dialog",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 358,
+      "updates_per_emulated_second": 59.39568112199691,
+      "update_intervals_hardware_frames": {
+        "1": 355,
+        "2": 2
+      },
+      "update_deltas_per_hardware_frame": {
+        "0": 2,
+        "1": 358
+      },
+      "longest_update_interval_frames": 2,
+      "longest_stall_frames_without_update": 1,
+      "longest_stall_ms": 16.742706298828125,
+      "display_page_flip_count": 358,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 355,
+        "2": 2
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "2:1": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360,
+        "toast_frames": 28,
+        "cooldown_frames": 360
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 2,
+        "room": 1,
+        "px": 120,
+        "py": 99,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 75,
+        "toast_ticks": 29,
+        "frame": 507
+      },
+      "final": {
+        "game_state": 2,
+        "room": 1,
+        "px": 120,
+        "py": 99,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 75,
+        "toast_ticks": 0,
+        "frame": 865
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "forest_companion",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:1": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360,
+        "cooldown_frames": 49
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 1,
+        "room": 1,
+        "px": 120,
+        "py": 99,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 44,
+        "toast_ticks": 0,
+        "frame": 539
+      },
+      "final": {
+        "game_state": 1,
+        "room": 1,
+        "px": 120,
+        "py": 75,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 899
+      },
+      "controller_input": "scripted, see scenario definition"
+    },
+    {
+      "scene": "temple_dialog",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "2:2": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 2,
+        "room": 2,
+        "px": 120,
+        "py": 139,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 609
+      },
+      "final": {
+        "game_state": 2,
+        "room": 2,
+        "px": 120,
+        "py": 139,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 969
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "temple_combat",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:2": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 1,
+        "room": 2,
+        "px": 120,
+        "py": 139,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 641
+      },
+      "final": {
+        "game_state": 1,
+        "room": 2,
+        "px": 120,
+        "py": 115,
+        "hp": 6,
+        "spirit": 1,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 0,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 1001
+      },
+      "controller_input": "scripted, see scenario definition"
+    },
+    {
+      "scene": "gate_dialog",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "2:2": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360,
+        "cooldown_frames": 360
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 2,
+        "room": 2,
+        "px": 176,
+        "py": 84,
+        "hp": 5,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 75,
+        "toast_ticks": 0,
+        "frame": 1295
+      },
+      "final": {
+        "game_state": 2,
+        "room": 2,
+        "px": 176,
+        "py": 84,
+        "hp": 5,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 75,
+        "toast_ticks": 0,
+        "frame": 1655
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "boss_dialog",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 360,
+      "updates_per_emulated_second": 59.72750056960583,
+      "update_intervals_hardware_frames": {
+        "1": 359
+      },
+      "update_deltas_per_hardware_frame": {
+        "1": 360
+      },
+      "longest_update_interval_frames": 1,
+      "longest_stall_frames_without_update": 0,
+      "longest_stall_ms": 0.0,
+      "display_page_flip_count": 360,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 359
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 2,
+        "minimum_updates_per_emulated_second": 29.863750284802915,
+        "met": true
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "2:3": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360
+      },
+      "peak_live_projectiles": 0,
+      "initial": {
+        "game_state": 2,
+        "room": 3,
+        "px": 120,
+        "py": 139,
+        "hp": 5,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 1443
+      },
+      "final": {
+        "game_state": 2,
+        "room": 3,
+        "px": 120,
+        "py": 139,
+        "hp": 5,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 1803
+      },
+      "controller_input": "none"
+    },
+    {
+      "scene": "boss_armored",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 358,
+      "updates_per_emulated_second": 59.39568112199691,
+      "update_intervals_hardware_frames": {
+        "1": 355,
+        "2": 2
+      },
+      "update_deltas_per_hardware_frame": {
+        "0": 2,
+        "1": 358
+      },
+      "longest_update_interval_frames": 2,
+      "longest_stall_frames_without_update": 1,
+      "longest_stall_ms": 16.742706298828125,
+      "display_page_flip_count": 358,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 355,
+        "2": 2
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": false
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:3": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360,
+        "projectile_frames": 150
+      },
+      "peak_live_projectiles": 8,
+      "initial": {
+        "game_state": 1,
+        "room": 3,
+        "px": 120,
+        "py": 139,
+        "hp": 5,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 1474
+      },
+      "final": {
+        "game_state": 1,
+        "room": 3,
+        "px": 145,
+        "py": 139,
+        "hp": 4,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 1832
+      },
+      "controller_input": "scripted, see scenario definition"
+    },
+    {
+      "scene": "boss_exposed",
+      "emulated_frames": 360,
+      "emulated_seconds": 6.027374267578125,
+      "update_count": 356,
+      "updates_per_emulated_second": 59.06386167438799,
+      "update_intervals_hardware_frames": {
+        "1": 351,
+        "2": 4
+      },
+      "update_deltas_per_hardware_frame": {
+        "0": 4,
+        "1": 356
+      },
+      "longest_update_interval_frames": 2,
+      "longest_stall_frames_without_update": 1,
+      "longest_stall_ms": 16.742706298828125,
+      "display_page_flip_count": 356,
+      "display_page_flip_intervals_hardware_frames": {
+        "1": 351,
+        "2": 4
+      },
+      "target": {
+        "maximum_interval_hardware_frames": 1,
+        "minimum_updates_per_emulated_second": 59.72750056960583,
+        "met": false
+      },
+      "scene_stayed_valid": true,
+      "observed_state_room_frames": {
+        "1:3": 360
+      },
+      "activity_hardware_frames": {
+        "summoned_frames": 360,
+        "toast_frames": 80,
+        "cooldown_frames": 45,
+        "boss_exposed_frames": 184,
+        "projectile_frames": 70
+      },
+      "peak_live_projectiles": 8,
+      "initial": {
+        "game_state": 1,
+        "room": 3,
+        "px": 120,
+        "py": 101,
+        "hp": 4,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 185,
+        "ability_cd": 46,
+        "toast_ticks": 81,
+        "frame": 1696
+      },
+      "final": {
+        "game_state": 1,
+        "room": 3,
+        "px": 120,
+        "py": 101,
+        "hp": 2,
+        "spirit": 0,
+        "summoned": 1,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 12,
+        "boss_armor": 0,
+        "ability_cd": 0,
+        "toast_ticks": 0,
+        "frame": 2052
+      },
+      "controller_input": "none"
+    }
+  ]
+}
