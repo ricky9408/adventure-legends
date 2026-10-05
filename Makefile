@@ -22,7 +22,7 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o
 
 .PHONY: all clean tools assets test-tools test gameplay-video
 all: $(TARGET).gba
@@ -50,6 +50,7 @@ $(TARGET).gba: $(TARGET).elf tools/fix_header.py
 assets:
 	$(PYTHON) assets/generate_assets.py
 	$(PYTHON) assets/generate_ui.py
+	$(PYTHON) assets/generate_world.py
 
 tools:
 	./tools/install_tools.sh
@@ -58,6 +59,7 @@ test: all
 	$(PYTHON) tests/playthrough.py
 	$(PYTHON) tests/review_tests.py
 	$(PYTHON) tests/performance_tests.py --strict
+	$(PYTHON) tests/exploration_tests.py
 
 gameplay-video: all
 	$(PYTHON) tests/playthrough.py --video

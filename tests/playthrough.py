@@ -39,7 +39,7 @@ class Play:
  def defend(self,n):
   for _ in range((n+23)//24):
    living=[]
-   for i in range(4):
+   for i in range(6):
     a=sym['enemies']+i*20;x=self.e.read(a);y=self.e.read(a+4);h=self.e.read(a+8)
     if h:living.append((abs(x-self.get('px'))+abs(y-self.get('py')),x,y))
    if living:
@@ -48,6 +48,8 @@ class Play:
     self.step(2,key);self.tap('A');self.step(2)
    else:self.step(24)
  def nextroom(self,target):
+  if self.get('room')==1 and target==2:
+   self.goto(x=240);self.goto(y=92);self.goto(x=368)
   for _ in range(400):
    if self.get('room')==target:break
    self.step(2,'UP')
@@ -55,7 +57,7 @@ class Play:
  def play(self):
   self.step(90);self.check(self.get('game_state')==0,'booted title');self.shot('01-title');self.tap('START');self.check(self.get('game_state')==2,'Japanese introduction');self.shot('02-story');self.dialogs();self.check(self.get('game_state')==1,'dialogue returns to play');self.shot('03-village')
   self.tap('START');self.check(self.get('game_state')==3,'pause opened');old=self.get('px');self.step(24,'LEFT');self.check(self.get('px')==old,'pause blocks movement');self.shot('04-controls');self.tap('B');self.check(self.get('game_state')==1,'B closes pause')
-  self.nextroom(1);self.goto(y=98);self.tap('R');self.check(self.get('bridge_open')==0,'unsummoned ability cannot solve puzzle');self.step(35,'UP');self.check(self.get('py')==94,'river blocks passage before puzzle');self.tap('B');self.check(self.get('summoned')==1,'summoned fire companion');self.tap('L');self.check(self.get('spirit')==1,'switched to nature companion');self.tap('R');self.check(self.get('bridge_open')==1,'nature power grows bridge');self.dialogs();self.shot('05-grown-bridge');self.nextroom(2);self.dialogs();self.check(self.get('torches')==0,'temple begins sealed');self.shot('06-temple')
+  self.nextroom(1);self.goto(y=180);self.tap('R');self.check(self.get('bridge_open')==0,'unsummoned ability cannot solve puzzle');self.step(35,'UP');self.check(176<=self.get('py')<=180,'river blocks passage before puzzle');self.tap('B');self.check(self.get('summoned')==1,'summoned fire companion');self.tap('L');self.check(self.get('spirit')==1,'switched to nature companion');self.tap('R');self.check(self.get('bridge_open')==1,'nature power grows bridge');self.dialogs();self.shot('05-grown-bridge');self.nextroom(2);self.dialogs();self.check(self.get('torches')==0,'temple begins sealed');self.shot('06-temple')
   self.tap('L');self.goto(y=94);self.goto(x=64);self.goto(y=84)
   self.defend(160);self.goto(x=64,y=84);self.tap('R');self.check(self.get('torches')==1,'first brazier lights');self.goto(y=94);self.goto(x=176);self.goto(y=84);self.defend(160);self.goto(x=176,y=84);self.tap('R');self.check(self.get('torches')==3,'second brazier opens gate');self.dialogs();self.shot('07-open-gate');self.goto(y=94);self.goto(x=120);self.nextroom(3);self.dialogs();self.shot('08-guardian')
   self.goto(y=100);self.step(160);self.tap('R');self.check(self.get('boss_armor')>0,'fire breaks guardian armor');self.goto(y=92)

@@ -18,7 +18,7 @@ def shot(p,n):p.e.screenshot(OUT/(n+'.png'))
 def fresh():
  p=P();p.step(90);p.tap('SELECT');p.dialogs();return p
 # Real damage/death and checkpoint retry, no injections.
-p=fresh();p.nextroom(1);p.goto(y=119)
+p=fresh();p.nextroom(1);p.goto(y=248);p.goto(x=180);p.goto(y=230)
 for i in range(200):
  p.step(12)
  if p.get('game_state')==4:break
@@ -28,7 +28,7 @@ ok(p,(p.get('px'),p.get('py'))==old,'death blocks player movement')
 p.tap('A');ok(p,p.get('game_state')==1 and p.get('hp')==6 and p.get('room')==1,'A retries current room with six hearts')
 ok(p,p.get('summoned')==0 and p.get('ability_cd')==0 and p.get('heal_cd')==0,'retry recalls spirit and clears ability/heal cooldowns');shot(p,'retry')
 # Use bridge then attempt immediate second power to confirm cooldown.
-p.goto(y=94);p.tap('L');p.tap('B');p.tap('R');p.dialogs()
+p.goto(x=240);p.goto(y=180);p.tap('L');p.tap('B');p.tap('R');p.dialogs()
 ok(p,p.get('bridge_open')==1,'input-only checkpoint puzzle solved')
 oldcd=p.get('ability_cd');p.tap('R')
 ok(p,0<p.get('ability_cd')<oldcd,'immediate repeat power is blocked by shared cooldown')
@@ -66,7 +66,7 @@ ok(p,p.get('game_state')==4,'guardian fight can naturally cause death');shot(p,'
 p.tap('A');ok(p,p.get('game_state')==1 and p.get('hp')==6 and p.get('room')==3 and p.get('boss_hp')==12 and p.get('boss_armor')==0,'boss death retry resets guardian and restores hearts')
 ok(p,p.get('bridge_open')==1 and p.get('torches')==3,'boss retry preserves puzzle progression');shot(p,'boss-retry');p.e.close()
 # Explicit malformed-save input: mutate a copy, never RAM.
-corrupt=OUT/'corrupt-copy.sav';b=bytearray(save.read_bytes());b[8]^=1;corrupt.write_bytes(b)
+corrupt=OUT/'corrupt-copy.sav';b=bytearray(save.read_bytes());b[12]^=1;corrupt.write_bytes(b)
 p=P();p.e.load_save(corrupt);p.e.reset();p.step(90)
 ok(p,p.get('has_save')==0,'corrupted SRAM checksum is rejected');p.e.close()
 report['corrupted_save_case']='Checksum byte in copied SRAM file intentionally changed; no RAM injection'

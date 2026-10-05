@@ -9,3 +9,6 @@ __pycache__/
 *.log
 smoke_tests/*
 !smoke_tests/test_bridge.py
+
+# Local shared toolchain may be a symlink during development.
+/sysroot
