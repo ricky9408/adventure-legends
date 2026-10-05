@@ -62,13 +62,15 @@ test: all
 	$(PYTHON) tests/review_tests.py
 	$(PYTHON) tests/exploration_tests.py
 	$(PYTHON) tests/test_save4.py
+	$(PYTHON) tests/test_save_feedback.py
 	$(MAKE) test-campaign
 
 # State fixtures and timing evidence are always produced by this exact ROM.
 test-campaign: all
 	$(PYTHON) tests/campaign_tests.py --output build/campaign-qa
-	$(PYTHON) tests/campaign_tests.py --optional --quick --output build/campaign-optional
-	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-qa/campaign-report.json --campaign build/campaign-optional/campaign-report.json --strict-cold
+	$(PYTHON) tests/campaign_tests.py --optional --output build/campaign-optional
+	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-qa/campaign-report.json --output build/campaign-performance-minimal --strict-cold
+	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-optional/campaign-report.json --output build/campaign-performance-optional --strict-cold
 
 gameplay-video: all
 	$(PYTHON) tests/capture_campaign_video.py

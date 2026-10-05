@@ -1,5 +1,19 @@
 # Three-lantern campaign foundation — verification
 
+## Save-feedback follow-up — 2026-10-05
+
+The current source includes a focused fix after frozen campaign commit `5de9e978fd9c01ae8a2c24e3797d5f131ebc7749`: failed checkpoint writes now keep their failure notification instead of being overwritten by a success toast on resume or no-dialogue puzzle completion. The new host integration regression confirms the previous bank survives a failed relay save, the failure remains visible, and a later successful checkpoint persists that relay.
+
+- Current ROM: **1,583,628 bytes**, SHA-256 `b2bb22b39a9da5173c02da1f8a3447a038ef52d0e6ae04f94c53630db07de4aa`
+- Clean ARM rebuild, complete `make test`, bridge smoke and the focused save-feedback regression pass
+- The aggregate now runs both routes exhaustively and measures their cadence separately: **7,090 gameplay assertions** (3,425 minimal, 3,481 optional, 24 first-chapter, 20 review and 140 exploration), plus 26 save-host groups
+- Each route passes 60 steady scenes / 20,460 frames and 28 cold transitions / 1,680 frames with exactly one update and presentation per hardware frame
+- Worst sampled current cold work: **228,540 cycles**; steady work: **119,221 cycles**
+
+The original source ZIP and the checked-in `docs/campaign` capture/evidence remain unchanged and describe the original ROM below. They are not new captures of this follow-up ROM. Current raw reports regenerate under `build/campaign-performance-minimal` and `build/campaign-performance-optional`; the next player release will include this fix.
+
+## Original frozen campaign verification
+
 Verified 2026-10-05. This is a coherent story foundation within the larger requested project, not completion of evolution, equipment, regional cities or 128 monster forms.
 
 - ROM: **1,583,620 bytes**

@@ -272,7 +272,7 @@ COLD void start_game(int resume){int oldsave=has_save;zero(enemies,sizeof enemie
   else if((chapter_flags&SAVE4_SKY_CLEAR)&&!(story_seen&SAVE4_SEEN_STONE_JOIN))show_scene(CD_STONE_JOIN,1,SAVE4_SEEN_STONE_JOIN|SAVE4_SEEN_WIND_JOIN);
   else if((chapter_flags&SAVE4_GROVE_CLEAR)&&!(story_seen&SAVE4_SEEN_WIND_JOIN)){show_scene(loaded_save_version<4?CD_LEGACY_RECAP:CD_WIND_JOIN,1,SAVE4_SEEN_WIND_JOIN|(loaded_save_version<4?SAVE4_SEEN_LEGACY_RECAP:0));}
  }else game_state=PLAY;
- if(game_state==PLAY)toast(TX_SAVED);
+ if(game_state==PLAY&&!save_failed)toast(TX_SAVED);
  }
  else {quest_started=1;dialogue(TX_INTRO1A,TX_INTRO1B,PLAY);addpage(TX_INTRO2A,TX_INTRO2B);addpage(TX_INTRO3A,TX_INTRO3B);addpage(TX_INTRO4A,TX_INTRO4B);addpage(TX_EXPLORE1,TX_EXPLORE2);addpage(TX_CAMP_GUIDE1,TX_CAMP_GUIDE2);save_game();}}
 
@@ -402,7 +402,7 @@ int campaign_power(void){int i,nearest=-1,dist=999,wrong=0;unsigned pr=progress_
   if(nearest>=0){const CampaignObject*o=&d->objects[nearest];if((pr&o->requires)!=o->requires){toast(TX_C_NEED_WELL);return 1;}room_flags|=o->set;optional_flags|=o->optional;save_game();gfx_props_room=-1;
    if(room==7&&(room_flags&(CF_RELAY_LEFT|CF_RELAY_RIGHT|CF_RELAY_FIRE))==(CF_RELAY_LEFT|CF_RELAY_RIGHT|CF_RELAY_FIRE))show_scene(CD_RELAY_COMPLETE,0,0);
    else if(room==12&&(room_flags&0xF000)==0xF000)show_scene(CD_FOUR_LIGHTS,0,0);
-   else if(o->dialogue>=0)show_scene(o->dialogue,0,0);else toast(TX_SAVED);
+   else if(o->dialogue>=0)show_scene(o->dialogue,0,0);else if(!save_failed)toast(TX_SAVED);
    return 1;}
   if(wrong){toast(TX_C_POWER_MISMATCH);return 1;}
  }
