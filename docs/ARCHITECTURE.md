@@ -1,33 +1,37 @@
-# Engine notes
+# Engine architecture
 
-The cartridge is a freestanding ARM7TDMI program. `startup.s` enters ARM System mode with interrupts disabled, copies Thumb gameplay functions into fast IWRAM, copies initialized data into EWRAM, zeroes BSS, then calls `main`. The linker leaves the palette, backgrounds, sprites and text masks in ROM. No target C runtime or libgba is required.
+## Native execution and budgets
 
-Rendering uses GBA video Mode 4: two 240×160 indexed-color pages in VRAM, a shared RGB555 palette and VBlank page flips. Static backgrounds and UI are cached independently per page. Frequently changing hearts use hardware OBJ; boss bars and status text update small regions. Text uses aligned paired-pixel writes instead of a function call for every opaque pixel. Panels fill their interior once, then draw border strips.
+The cartridge is a freestanding ARM7TDMI program. `startup.s` enters ARM System mode, copies hot Thumb gameplay code to IWRAM, initializes EWRAM and calls `main`. Cold setup/save/dialogue functions stay in ROM using `.text.rom`. No target libc or libgba is required. The linker reserves at least 4 KiB of IWRAM for the stack and limits cartridge ROM to 32 MiB.
 
-Moving actors use 8bpp hardware OBJ tiles beginning at bitmap-mode tile index 512. Legacy graphics upload once; current directional hero/companion frames upload only when their pose changes. The software converts row-major art into the GBA's 8×8 tile ordering. Actors are y-sorted, shadows use a lower object priority, and two small foreground canopy masks frame each natural area. Modal panels hide intersecting actors/foreground masks. Sprite positions and OAM are committed with the page flip at VBlank.
+The GBA display cadence is approximately 59.7275 Hz (16,777,216 /280,896 cycles). Hardware timers measure input/update/render execution independently of VBlank wait. Tests also count actual bitmap page changes after each emulated frame; host execution speed is not used as a frame-rate claim.
 
-Movement uses Q8 subpixel positions: cardinal speed is 320/256 pixels per update and diagonal components are 226/256 each, avoiding diagonal acceleration. Companion follow positions ease toward a trailing target. Sword strikes add a short collision-checked lunge, a changing crescent, three intentional hit-stop updates on impact and particle sparks. Area entry uses a short brightness fade. Rooms remain single-screen rather than a new scrolling overworld.
+## Rendering and original assets
 
-The nominal update follows the GBA display cadence (~59.7275 Hz). Hardware timers 2 and 3 measure update+render execution cycles, separate from VBlank waiting. All 15 representative steady scene windows passed one-update/one-presentation-per-frame checks; cold intro/pause builds had at most a two-frame interval. See `docs/perf` for exact tested scope and cycle budget. This does not establish all-frame worst-case or physical-cartridge timing.
+Mode 4 uses two 240×160 indexed VRAM pages and a shared RGB555 palette. Moving actors use 8 bpp hardware OBJ tiles beginning at bitmap-mode tile index 512. Assets upload on pose/room/progress changes. Software y-sorting, shadow priority and foreground canopy masks provide depth; modal panels hide intersecting actors. OAM and the bitmap page commit at VBlank.
 
-Static environment collision comes from the artwork's generated `asset_collisions.h`. Dynamic rules enforce the river gap, unlit temple gate and brazier pedestals. Movement is collision-tested on both axes. The room's clear center corridor connects transitions. The quest screen derives its objective from room and persistent puzzle flags.
+Static page caching compares exact fields, including room, state, companion, dialogue text/speaker, progression and camera; it does not pack growing identifiers into overlapping bit ranges. HUD/toast pixels use independent EWRAM caches. Long aligned rectangle spans use fixed-source DMA fills. Japanese text is generated into nonzero paired-pixel spans for both halfword alignments, with pixel-exact reconstruction assertions. This avoids decoding thousands of blank glyph bits on a cold menu opening. Generated data stays in deterministic text chunks below 32 KiB rather than giant C blobs.
 
-The selected companion follows the player when summoned. Fire lights nearby pedestals or breaks armor; otherwise it emits a facing-directed projectile. Nature creates the river crossing and supplies cooldown-limited healing plus a short-range push. Sword hits use directional range tests; enemies and the boss have hit flash/invulnerability windows. Contact and enemy projectiles damage the player with a separate invulnerability window.
+The grove is a 480×320 continuous world. The 240×136 world viewport leaves a 24-pixel HUD; camera clamps to x 0..240/y 0..184. Even/odd immutable source atlases permit aligned row DMA16 transfers at every camera-x parity. This consumes extra ROM but avoids costly per-frame shifts. Tests compare all four modulo 4 viewport alignments against source pixels.
 
-SRAM uses a small versioned record with magic bytes, room, bridge/torch completion, ending flag and checksum. Areas/puzzles update checkpoints. Resume and retry restore a full-health entrance, not an exact mid-combat snapshot. Emulator save states are independent of this cartridge SRAM format.
+## Movement, combat and content
 
-Sound uses GBA PSG square channels: an original ambient phrase and event effects. It does not stream sampled music.
+Player movement uses Q8 positions: cardinal 320/256 pixels/update and diagonal 226/256 per component. Camera and companion follow ease at subpixel precision. Collision checks all four foot corners and sweeps dodge/lunge movement. Sword combat includes three strikes, bounded buffering, three intentional hit-stop updates on impact and visible particles. Enemy warnings lock aim before firing.
 
-For expansion, separate room-specific scripting from `game.c`, introduce a scrolling tile-background renderer, add data-driven dialogue/enemy definitions, and expand the SRAM schema with version migration before adding inventory or additional chapters.
+`campaign_rules.*` is generated from editable JSON: 10 new fixed rooms with blocks, gated exits, monotonic puzzle objects, enemies and dialogue; original rooms 0..3 remain separately implemented. Combined requirement masks use room bits 0..15 and chapter bits 16..19. Room transitions clear transient attacks/projectiles and use an entrance lock to prevent bouncing.
 
-## Scrolling exploration milestone
+Four current powers have distinct roles: fire projectiles/lighting/armor, nature roots/push/cooldown healing, wind vanes/projectile removal/stagger, and stone weights/one-hit guard/pulse. Power cooldown is shared across selection changes. Bosses expose only during explicitly timed recovery, cannot have vulnerability extended indefinitely, and reset living encounters on retreat. The final core clamps damage at each of its three phase boundaries. Cleared bosses do not respawn.
 
-The grove is a continuous 480×320 world. Player/entity positions and collisions are world coordinates; camera coordinates clamp to (0..240,0..184), leaving a 24-pixel fixed HUD and a 240×136 world viewport. Q8 camera easing snaps at a subpixel remainder below four units to avoid endpoint undershoot. Ordinary transitions retain physical entry locations; retries/continues can use the activated campfire's safe offset.
+All content, sprites, dialogue and PSG music are original. Audio uses an ambient square-wave phrase and event effects, not streamed samples.
 
-The generator emits two immutable row-major atlases: original and a one-pixel shifted version. Even camera positions use the original; odd positions use the shifted atlas with an even source offset. DMA16 copies each visible row. This trades 153,600 extra ROM bytes for stable aligned transfer cost and removes per-frame CPU bit shifts. All four alignments are checked against source pixels in the real emulator.
+## Persistence
 
-Forest HUD/toast pixels cache in EWRAM with independent keys. Expiring a toast does not redraw an identical HUD. Sword arcs are precomputed and tile-swizzled at boot, then uploaded by DMA. EWRAM use remains below 256 KiB; IWRAM code remains separate from the stack. Hardware timers record update/render cycles and the tests also count actual display-page flips.
+`save4.*` owns the serialized cartridge contract. Two 32-byte banks at SRAM 0x40 and 0x80 contain a version, sequence, progression, safe spawn, companion selection and CRC16-CCITT-FALSE. Writes commit an inactive bank and mark it valid last. The newest valid sequence wins using wrap-safe comparison; corruption falls back to the other bank. Legacy bytes 0..12 remain untouched.
 
-Save format 3 retains the published prefix and adds relic, camp and maximum-health fields plus validation/checksum. Valid format-2 records load and are rewritten on continue; malformed flags and inconsistent health are rejected. The optional chest is permanent and idempotent. Legacy completed chapters retain their ending until a future campaign migration explicitly advances them.
+Formats 2/3 are read and normalized without changing their source record. A former completed chapter becomes the first lantern plus the wind companion, not completion of the expanded campaign. Reward saves point to a safe village checkpoint before multi-page dialogue finishes. Ending completion and prior unlocks persist independently. Retry/load restores full health at a safe entrance or recorded camp, not an exact mid-combat snapshot.
 
-Combat adds collision-swept dodge, bounded three-strike chains, short input buffering near sword recovery, and stationary seed-spitters with locked aim and a 30-update warning. Dodge invulnerability is separate from hurt invulnerability. The enemy record remains five integers for stable inspection; clocks/warnings use separate arrays.
+Host serialization tests cover interrupted writes, every stored-bit corruption, invalid progression and sequence wrap. Real-ROM tests cover the gameplay timing of saves and migration from authenticated prior-ROM fixtures. Emulator save states are a different mechanism; test branches explicitly pair them with matching SRAM.
+
+## Expansion boundaries
+
+The current 14-area/four-companion campaign is a foundation. Creature evolution/catalog/party, equipment, regional quests and 128 forms are not silently implied by this architecture. The next milestone introduces stable data-driven IDs and a larger non-overwriting save schema before expanding those systems. Required traversal powers must survive evolution and party management. ROM/RAM/OBJ limits and cold as well as steady frame cadence remain release gates.

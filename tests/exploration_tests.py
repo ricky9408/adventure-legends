@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent real-ROM tests for the scrolling-grove milestone.
+"""Independent real-ROM exploration and save-contract tests for the full campaign.
 
 All ordinary setup and gameplay uses controller inputs. Read-only symbol probes
 observe the running ARM program. Savestates preserve only controller-reached
@@ -9,6 +9,7 @@ frames and display-page flips, never host execution speed.
 """
 from __future__ import annotations
 import argparse
+import binascii
 from collections import Counter
 import hashlib
 import json
@@ -22,6 +23,34 @@ from mgba_runner import Emulator
 CYCLES_PER_FRAME = 280896
 REFRESH_HZ = 16777216 / CYCLES_PER_FRAME
 PLAY, DIALOG, PAUSE, DEAD, WIN = 1, 2, 3, 4, 5
+BANK_A, BANK_B, BANK_SIZE = 0x40, 0x80, 32
+GROVE_CLEAR, SKY_CLEAR, CORE_CLEAR, ENDING_SEEN = 1, 2, 4, 8
+SEEN_LEGACY_RECAP, SEEN_WIND_JOIN = 1, 2
+LEGACY_FIXTURES = ROOT / 'tests/fixtures/legacy'
+
+
+def committed_banks(data):
+    """Inspect the serialized contract independently of the running ROM."""
+    result = []
+    for offset in (BANK_A, BANK_B):
+        b = data[offset:offset + BANK_SIZE]
+        if (len(b) == BANK_SIZE and b[:5] == b'EB\x04\x20\xa5'
+                and binascii.crc_hqx(b[:30], 0xffff) == int.from_bytes(b[30:32], 'little')):
+            result.append({'offset': offset, 'sequence': int.from_bytes(b[5:9], 'little'),
+                           'room': b[9], 'spawn': b[10], 'chapter_flags': b[11],
+                           'bridge': b[12], 'torches': b[13], 'relic': b[14], 'camp': b[15],
+                           'room_flags': int.from_bytes(b[16:20], 'little'),
+                           'optional_flags': b[20], 'story_seen': int.from_bytes(b[21:23], 'little'),
+                           'spirit': b[23]})
+    return result
+
+
+def newest_bank(banks):
+    if len(banks) == 1:
+        return banks[0]
+    a, b = banks
+    delta = (b['sequence'] - a['sequence']) & 0xffffffff
+    return b if 0 < delta < 0x80000000 else a
 
 
 def symbols(path):
@@ -56,7 +85,9 @@ class ExplorationRun:
         names = ('game_state', 'room', 'px', 'py', 'hp', 'max_hp', 'spirit',
                  'summoned', 'bridge_open', 'torches', 'boss_hp', 'boss_armor',
                  'ability_cd', 'heal_cd', 'camera_x', 'camera_y', 'roll_ticks',
-                 'roll_cd', 'relic_found', 'camp_unlocked', 'combo_step', 'frame')
+                 'roll_cd', 'relic_found', 'camp_unlocked', 'combo_step', 'frame',
+                 'chapter_flags', 'room_flags', 'optional_flags', 'story_seen',
+                 'loaded_save_version', 'checkpoint_spawn', 'completed')
         return {name: self.get(name) for name in names if name in self.sym}
 
     def step(self, count, keys=0):
@@ -133,9 +164,13 @@ class ExplorationRun:
     def snapshot(self, name):
         path = self.out / f'{name}.state'
         self.e.state(path)
+        # Raw mGBA machine states do not include SRAM. Branching tests must
+        # restore the checkpoint bytes paired with the controller-reached state.
+        path.with_suffix('.state.sav').write_bytes(self.e.bytes(0x0e000000, 32768))
         return path
 
     def restore(self, path):
+        self.e.load_save(path.with_suffix('.state.sav'))
         self.e.state(path, load=True)
 
     def save(self, name):
@@ -282,73 +317,173 @@ class ExplorationRun:
         self.shot('10-ranger-fired')
         self.restore(state)
 
-    def migration_cases(self):
-        # This explicit legacy-input case is separate from ordinary gameplay.
-        # When supplied, the authentic fixture must have come from the old ROM.
-        source = self.v2_save
-        if source is None:
-            source = self.out / 'explicit-v2-bridge.sav'
-            header = [0x45, 0x42, 2, 1, 1, 0, 0, 1]
-            source.write_bytes(bytes(header + [sum(header) & 255]) + bytes([255]) * (32768-9))
-            origin = 'Explicit version-2 SRAM format fixture, not gameplay progress injection'
-        else:
-            origin = 'Caller-supplied authentic prior-ROM SRAM fixture'
-        digest_before = hashlib.sha256(source.read_bytes()).hexdigest()
+    def fixture(self, name):
+        path = LEGACY_FIXTURES / name
+        manifest = json.loads((LEGACY_FIXTURES / 'manifest.json').read_text())
+        expected = next(item for item in manifest['fixtures'] if item['file'] == name)
+        data = path.read_bytes()
+        self.check(len(data) == manifest['size_bytes_each']
+                   and hashlib.sha256(data).hexdigest() == expected['sha256'],
+                   f'authentic legacy fixture has its pinned size and hash: {name}')
+        return path
+
+    def legacy_case(self, source, version, complete=False):
+        source = Path(source)
+        original = source.read_bytes()
+        digest = hashlib.sha256(original).hexdigest()
         self.reopen(source)
-        self.check(self.get('has_save') == 1, 'version 2 bridge checkpoint is recognized')
+        self.check(self.get('has_save') == 1, f'version {version} checkpoint is recognized: {source.name}')
         self.tap('START', 4, 4)
-        self.check(self.get('room') == 1 and self.get('bridge_open') == 1,
-                   'version 2 migration preserves area and bridge progression')
-        self.check(self.get('max_hp') == 6 and self.get('relic_found') == 0 and self.get('camp_unlocked') == 0,
-                   'version 2 migration supplies safe six-heart and exploration defaults')
-        self.check(self.e.bytes(0x0e000000, 3) == b'EB\x03',
-                   'continued version 2 checkpoint is rewritten as version 3')
-        migrated = self.save('migrated-v3')
-        self.shot('migration-v2-forest')
+        self.check(self.get('loaded_save_version') == version and self.get('quest_started') == 1,
+                   f'version {version} migration records its source and starts the quest')
+        if complete:
+            self.check(self.get('game_state') == DIALOG and self.get('room') == 0
+                       and self.get('chapter_flags') == GROVE_CLEAR and self.get('completed') == 0,
+                       f'completed version {version} resumes the pending grove recap in the village')
+            self.check(self.get('story_seen') & (SEEN_LEGACY_RECAP | SEEN_WIND_JOIN) == 0,
+                       f'completed version {version} does not mark its recap seen prematurely')
+        else:
+            self.check(self.get('room') == original[3] and self.get('bridge_open') == original[4]
+                       and self.get('torches') == original[5],
+                       f'version {version} migration preserves area and puzzle progression')
+        relic, camp = (original[8], original[9]) if version == 3 else (0, 0)
+        self.check(self.get('max_hp') == (8 if relic else 6)
+                   and self.get('relic_found') == relic and self.get('camp_unlocked') == camp,
+                   f'version {version} migration preserves or safely defaults exploration rewards')
+        self.check(self.e.bytes(0x0e000000, 13) == original[:13],
+                   f'version {version} migration leaves all legacy bytes untouched')
+        banks = committed_banks(self.e.bytes(0x0e000000, 256))
+        self.check(bool(banks), f'continued version {version} checkpoint creates a committed version 4 bank')
+        if complete:
+            self.dialogs()
+            self.check(self.get('game_state') == PLAY and self.get('room') == 0
+                       and self.get('chapter_flags') == GROVE_CLEAR and self.get('completed') == 0
+                       and self.get('story_seen') & 3 == 3,
+                       f'completed version {version} continues the campaign after its recap')
+            spirits = []
+            for _ in range(3):
+                self.tap('L', 4, 4)
+                spirits.append(self.get('spirit'))
+            self.check(spirits == [1, 2, 0],
+                       f'completed version {version} unlocks wind while stone remains locked')
+        elif camp:
+            self.check(self.get('px') == 120 and self.get('py') == 264,
+                       'legacy camp checkpoint migrates to the explicit version 4 camp spawn')
+        name = f'migrated-v{version}-' + ('completed' if complete else 'relic-camp' if relic else 'bridge')
+        migrated = self.save(name)
+        self.shot(name)
         self.reopen(migrated)
         self.tap('START', 4, 4)
-        self.check(self.get('room') == 1 and self.get('bridge_open') == 1 and self.get('max_hp') == 6,
-                   'migrated checkpoint survives an independent version 3 reopen')
-        self.check(hashlib.sha256(source.read_bytes()).hexdigest() == digest_before,
-                   'loading a legacy save leaves the source input file unchanged')
-        self.observations['legacy_save'] = {'origin': origin, 'sha256': digest_before,
-                                             'source_header': list(source.read_bytes()[:9])}
-        complete = self.completed_v2_save
-        if complete is None:
-            complete = self.out / 'explicit-v2-completed.sav'
-            header = [0x45, 0x42, 2, 3, 1, 3, 1, 1]
-            complete.write_bytes(bytes(header+[sum(header)&255]) + bytes([255])*(32768-9))
-        self.reopen(complete)
+        self.check(self.get('loaded_save_version') == 4 and self.get('game_state') == PLAY
+                   and self.get('room') == (0 if complete else original[3])
+                   and self.get('max_hp') == (8 if relic else 6)
+                   and self.get('bridge_open') == original[4],
+                   f'migrated version {version} checkpoint survives an independent version 4 reopen')
+        self.check(hashlib.sha256(source.read_bytes()).hexdigest() == digest,
+                   f'loading version {version} leaves its source input file unchanged')
+        self.observations.setdefault('legacy_saves', []).append({
+            'source': str(source.relative_to(ROOT) if source.is_relative_to(ROOT) else source),
+            'sha256': digest, 'source_header': list(original[:13]),
+            'version': version, 'completed_chapter': complete,
+            'v4_banks_after_continue': banks})
+        return migrated
+
+    def migration_cases(self):
+        # Authentic, hash-pinned SRAM inputs are distinct from the ordinary
+        # controller-only route above. CLI overrides remain supported.
+        source = self.v2_save or self.fixture('baseline-v2-bridge.sav')
+        migrated = self.legacy_case(source, 2)
+        complete = self.completed_v2_save or self.fixture('v2-completed/checkpoint.sav')
+        self.legacy_case(complete, 2, complete=True)
+        self.legacy_case(self.fixture('migrated-v3.sav'), 3)
+        self.legacy_case(self.fixture('relic-camp-checkpoint.sav'), 3)
+        self.legacy_case(self.fixture('full-journey/checkpoint.sav'), 3, complete=True)
+
+        # Preserve the legacy checksum/field-validation regressions. These
+        # fixtures contain no v4 banks, so no valid newer bank can mask them.
+        for name, label in [
+            ('explicit-corrupt-copy.sav', 'corrupted legacy version 3 checksum'),
+            ('invalid-out-of-range-room.sav', 'legacy version 3 out-of-range room'),
+            ('invalid-invalid-camp-flag.sav', 'legacy version 3 invalid camp flag'),
+            ('invalid-inconsistent-maximum-health.sav', 'legacy version 3 inconsistent maximum health'),
+            ('invalid-unknown-reserved-flag.sav', 'legacy version 3 unknown reserved flag'),
+        ]:
+            self.reopen(self.fixture(name))
+            self.check(self.get('has_save') == 0, f'rejects {label}')
+
+        # Corrupt v4 records, not the preserved legacy checksum. A checkpoint
+        # earned in this run has no valid legacy fallback and has both banks.
+        checkpoint = self.out / 'relic-camp-checkpoint.sav'
+        original = checkpoint.read_bytes()
+        banks = committed_banks(original)
+        self.check(len(banks) == 2 and original[:2] != b'EB',
+                   'fresh controller-earned checkpoint has two version 4 banks and no legacy fallback')
+        latest = newest_bank(banks)
+        older = next(bank for bank in banks if bank is not latest)
+        data = bytearray(original)
+        data[latest['offset'] + 30] ^= 1
+        fallback = self.out / 'v4-newest-bank-corrupt.sav'
+        fallback.write_bytes(data)
+        self.reopen(fallback)
+        self.check(self.get('has_save') == 1, 'one corrupt version 4 bank preserves the older checkpoint')
         self.tap('START', 4, 4)
-        self.check(self.get('game_state') == WIN and self.get('completed') == 1,
-                   'version 2 completed checkpoint still opens the ending')
-        self.shot('migration-v2-ending')
-        corrupt = self.out / 'explicit-corrupt-copy.sav'
-        data = bytearray(migrated.read_bytes()); data[4] ^= 1
+        self.check(self.get('loaded_save_version') == 4 and self.get('room') == older['room']
+                   and self.get('checkpoint_spawn') == older['spawn']
+                   and self.get('relic_found') == older['relic']
+                   and self.get('camp_unlocked') == older['camp']
+                   and self.get('bridge_open') == older['bridge'],
+                   'version 4 corruption fallback restores the older bank progression and spawn')
+        for bank in banks:
+            data[bank['offset'] + 30] = original[bank['offset'] + 30] ^ 1
+        corrupt = self.out / 'v4-both-banks-corrupt.sav'
         corrupt.write_bytes(data)
         self.reopen(corrupt)
-        self.check(self.get('has_save') == 0, 'corrupted version 3 checksum is rejected')
-        self.observations['corrupt_save'] = 'Only byte 4 of a copied SRAM file was changed; game RAM was never written'
-        for label, offset, value in [('out-of-range room', 3, 4), ('invalid camp flag', 9, 2),
-                                     ('inconsistent maximum health', 10, 8), ('unknown reserved flag', 11, 1)]:
-            data = bytearray(migrated.read_bytes())
-            data[offset] = value
-            data[12] = (sum(data[:12]) + 0x3d) & 255
-            invalid = self.out / ('invalid-' + label.replace(' ', '-') + '.sav')
+        self.check(self.get('has_save') == 0, 'corrupted checksums in both version 4 banks are rejected')
+        self.observations['version4_corruption'] = {
+            'source_banks': banks, 'newest_corrupted_offset': latest['offset'],
+            'fallback_bank': older,
+            'method': 'Explicit SRAM-file copies only; newest bank CRC, then both bank CRCs are corrupted'}
+        for label, offset, value in [
+            ('out-of-range room', 9, 14), ('invalid camp flag', 15, 2),
+            ('unknown reserved flag', 24, 1), ('nonsequential chapter flags', 11, 2),
+            ('locked spirit selection', 23, 3), ('invalid grove spawn', 10, 5),
+        ]:
+            data = bytearray(original)
+            for bank in banks:
+                base = bank['offset']
+                data[base + offset] = value
+                data[base + 30:base + 32] = binascii.crc_hqx(data[base:base + 30], 0xffff).to_bytes(2, 'little')
+            invalid = self.out / ('v4-invalid-' + label.replace(' ', '-') + '.sav')
             invalid.write_bytes(data)
             self.reopen(invalid)
             self.check(self.get('has_save') == 0,
-                       f'version 3 rejects {label} even with a valid checksum')
-        self.reopen(self.out / 'relic-camp-checkpoint.sav')
+                       f'version 4 rejects {label} in both banks even with valid checksums')
+
+        # Migration keeps a last-resort legacy copy even if every new bank is
+        # damaged. This is separate from rejection without a legacy fallback.
+        data = bytearray(migrated.read_bytes())
+        for bank in committed_banks(data):
+            data[bank['offset'] + 30] ^= 1
+        legacy_fallback = self.out / 'v4-corrupt-with-legacy-fallback.sav'
+        legacy_fallback.write_bytes(data)
+        self.reopen(legacy_fallback)
+        self.check(self.get('has_save') == 1, 'both damaged version 4 banks retain a valid legacy fallback')
+        self.tap('START', 4, 4)
+        self.check(self.get('loaded_save_version') == 2 and self.get('bridge_open') == 1,
+                   'damaged migrated banks recover the preserved legacy bridge checkpoint')
+
+        self.reopen(checkpoint)
         self.tap('SELECT', 4, 4)
         self.dialogs()
         self.check(self.get('room') == 0 and self.get('max_hp') == 6
-                   and self.get('relic_found') == self.get('camp_unlocked') == self.get('bridge_open') == 0,
-                   'title Select starts fresh and clears upgraded exploration progression')
+                   and self.get('relic_found') == self.get('camp_unlocked') == self.get('bridge_open') == 0
+                   and self.get('chapter_flags') == self.get('room_flags') == self.get('story_seen') == 0,
+                   'title Select starts fresh and clears upgraded exploration and campaign progression')
         self.e.reset()
         self.step(90)
         self.tap('START', 4, 4)
-        self.check(self.get('room') == 0 and self.get('max_hp') == 6 and self.get('relic_found') == 0,
+        self.check(self.get('room') == 0 and self.get('max_hp') == 6 and self.get('relic_found') == 0
+                   and self.get('loaded_save_version') == 4,
                    'fresh-adventure replacement checkpoint persists after another boot')
 
     def write_report(self):
@@ -358,7 +493,7 @@ class ExplorationRun:
                   'emulator': 'mGBA 0.10.5 ARM ROM execution',
                   'ordinary_gameplay_controller_only': True,
                   'game_ram_injection': False,
-                  'savestate_policy': 'Only states first reached by controller inputs are restored',
+                  'savestate_policy': 'Controller-reached machine states are restored with their paired SRAM snapshots',
                   'pacing_method': 'One emulated GBA frame, read simulation frame and DISPCNT page flip',
                   'scope_limit': 'Representative emulator tests, not exhaustive or physical-hardware validation',
                   'passes': self.passes, 'failures': self.failures,
@@ -376,6 +511,12 @@ class ExplorationRun:
         self.tap('A', 4, 4)
         self.check(self.get('game_state') == PAUSE and self.get('journal_tab') != before,
                    'journal A switches the selected guide tab')
+        self.shot('01-journal-map')
+        self.tap('A', 4, 4)
+        self.check(self.get('journal_tab') == 2, 'journal includes the companion guide as its third tab')
+        self.shot('01-journal-companions')
+        self.tap('A', 4, 4)
+        self.check(self.get('journal_tab') == before, 'journal cycles through three tabs and returns to quest controls')
         self.shot('01-journal-controls')
         self.tap('B', 4, 4)
         self.nextroom(1)
@@ -388,7 +529,7 @@ class ExplorationRun:
         self.shot('02-forest-map')
         self.tap('A', 4, 4)
         self.check(self.e.screenshot().tobytes() != before_map,
-                   'forest journal switches between the map and controls')
+                   'forest journal switches from the map to the companion guide')
         self.tap('B', 4, 4)
         arrival = self.snapshot('arrival')
         self.goto(y=248)
@@ -465,16 +606,29 @@ class ExplorationRun:
         self.nextroom(1, 'DOWN')
         self.check(self.get('px') == 368 and self.get('py') == 43,
                    'returning from the temple arrives at the northeast forest gate')
+        entrance = self.save('north-entrance-checkpoint')
+        self.reopen(entrance)
+        self.tap('START', 4, 4)
+        self.check(self.get('room') == 1 and self.get('px') == 368 and self.get('py') == 43,
+                   'version 4 reload preserves the recorded north entrance instead of moving to an older camp')
+        self.goto(y=92)
+        self.goto(x=240)
+        self.goto(y=248)
+        self.goto(x=118)
+        self.tap('A', 4, 4)
+        self.dialogs()
+        self.check(self.get('checkpoint_spawn') == 2,
+                   'revisiting the campfire records the explicit camp checkpoint spawn')
         save = self.save('relic-camp-checkpoint')
         self.reopen(save)
-        self.check(self.get('has_save') == 1, 'independent emulator recognizes the version 3 checkpoint')
+        self.check(self.get('has_save') == 1, 'independent emulator recognizes the version 4 checkpoint')
         self.tap('START', 4, 4)
         self.check(self.get('room') == 1 and self.get('px') == 120 and self.get('py') == 264,
                    'continued forest checkpoint resumes at the activated campfire')
         self.check(self.get('relic_found') == 1 and self.get('max_hp') == 8 and self.get('hp') == 8,
-                   'version 3 reload preserves relic capacity and restores full health')
+                   'version 4 reload preserves relic capacity and restores full health')
         self.check(self.get('bridge_open') == 1 and self.get('camp_unlocked') == 1,
-                   'version 3 reload preserves bridge and camp progression')
+                   'version 4 reload preserves bridge and camp progression')
         self.shot('07-reloaded-camp')
         self.goto(y=248)
         self.goto(x=240)
@@ -557,7 +711,7 @@ def main():
     p.add_argument('--rom', type=Path, default=ROOT/'build/emberbond.gba')
     p.add_argument('--symbols', type=Path, default=ROOT/'build/emberbond.sym')
     p.add_argument('--output', type=Path, default=ROOT/'build/exploration')
-    p.add_argument('--v2-save', type=Path, help='Authentic v2 SRAM from the prior ROM; otherwise use explicit migration fixture')
+    p.add_argument('--v2-save', type=Path, help='Authentic v2 bridge SRAM override; defaults to the hash-pinned portable legacy fixture')
     p.add_argument('--v2-completed-save', type=Path, help='Optional authentic completed version 2 SRAM')
     a = p.parse_args()
     run = ExplorationRun(a.rom, a.symbols, a.output, a.v2_save)

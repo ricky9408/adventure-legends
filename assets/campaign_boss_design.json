@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "timing": "Frame counts are initial design parameters, not measured balance. Use engine update frames; do not advance while paused or in dialogue.",
+  "shared_limits": {
+    "enemy_slots": 6,
+    "projectile_slots": 12,
+    "hazard_rectangles": 4,
+    "bosses_at_once": 1,
+    "max_hostile_shots_per_pattern": 6
+  },
+  "bosses": {
+    "KAZANE": {
+      "name_ja": "空織りの番人 カザネ",
+      "room": 8,
+      "sprite_size": [
+        32,
+        32
+      ],
+      "spawn": [
+        120,
+        68
+      ],
+      "hp": 20,
+      "phase2_at_hp": 10,
+      "contact_damage": 1,
+      "move_bounds": [
+        40,
+        52,
+        160,
+        72
+      ],
+      "reward": {
+        "set_chapter_flag": "SKY_CLEAR",
+        "derive_unlock": "KOHAKU",
+        "heal": "full",
+        "safe_resume_room": 0,
+        "dialogue": [
+          "SKY_BOSS_CLEAR",
+          "STONE_JOIN"
+        ],
+        "after_dialogue": "village elder spawn"
+      },
+      "states": [
+        {
+          "id": "AIM",
+          "frames": 36,
+          "action": "Face the player; show three pale arrow lines. Capture aim at state entry; never retarget after the warning."
+        },
+        {
+          "id": "VOLLEY",
+          "frames": 36,
+          "action": "At frame 0 fire 3 cardinal/diagonal shots at speed 2. In phase 2 fire another 3 at frame 18; second fan uses the same captured direction. Avoid floating point."
+        },
+        {
+          "id": "DIVE_WARN",
+          "frames": 45,
+          "action": "Show a wide straight ribbon toward captured player foot position; capture target once."
+        },
+        {
+          "id": "DIVE",
+          "frames": 32,
+          "action": "Move up to 2 px/frame along the captured segment, clamped to move_bounds. Stop early at target. Cannot bend toward the player."
+        },
+        {
+          "id": "RECOVER",
+          "frames": 90,
+          "action": "Stationary; wind-knot symbol blinks. Fuuri R within Manhattan 64 changes state to EXPOSED. Wrong power cannot remove the veil. Otherwise loop to AIM."
+        },
+        {
+          "id": "EXPOSED",
+          "frames": 180,
+          "action": "Clear hostile shots, stop contact damage for first 30 frames, hold position. Sword hits deal 1/2 for normal/third combo hit, with existing 18-frame boss hurt lock. Wind cannot extend this window; after timeout return to AIM."
+        }
+      ],
+      "phase_transition": "At <=10 HP, finish the current exposure; subsequent loops use the second volley. Show an extra ribbon, not only a color change.",
+      "safety": "South retreat always open; no pits, resource costs, summon losses, or combat adds. At least one full dodge-width lane remains clear in every volley."
+    },
+    "CLOSED_CORE": {
+      "name_ja": "閉ざされた灯核",
+      "room": 13,
+      "sprite_size": [
+        32,
+        32
+      ],
+      "spawn": [
+        120,
+        68
+      ],
+      "hp": 24,
+      "contact_damage": 1,
+      "phases": [
+        {
+          "id": "STONE_SHELL",
+          "hp_range": [
+            17,
+            24
+          ],
+          "required_power": "KOHAKU",
+          "symbol": "cracked hexagon",
+          "dialogue": "CORE_STONE_HINT",
+          "attack": "Mark horizontal bands [16,96,208,12] then [16,120,208,12]. Each band warns 36 frames, hurts for 8, then disappears; a 24-frame gap separates bands. A band damages at most once per activation. Stone guard or dodge can block it."
+        },
+        {
+          "id": "WIND_SHROUD",
+          "hp_range": [
+            9,
+            16
+          ],
+          "required_power": "FUURI",
+          "symbol": "tied spiral",
+          "dialogue": "CORE_WIND_HINT",
+          "attack": "Warn 36 frames, fire a 5-shot fan toward a captured direction at speed 2, wait 36 frames. Wind removes nearby hostile shots; do not create a projectile ring with no gap."
+        },
+        {
+          "id": "COLD_HEART",
+          "hp_range": [
+            1,
+            8
+          ],
+          "required_power": "HOMURA",
+          "symbol": "unlit flame",
+          "dialogue": "CORE_FIRE_HINT",
+          "attack": "Warn two fixed vertical columns [56,44,16,92] and [168,44,16,92] for 36 frames, active for 10 frames, then clear. Center and side lanes remain safe. Next loop uses horizontal bands from phase 1 instead."
+        }
+      ],
+      "cycle": [
+        {
+          "id": "PATTERN",
+          "action": "Run the phase attack, then enter RECOVER."
+        },
+        {
+          "id": "RECOVER",
+          "frames": 120,
+          "action": "Required-power symbol and shell opening pulse. Required R within Manhattan 64 exposes core for 180 frames. Homura uses explicit boss-target ignition on R, not a projectile that can accidentally hit a prior phase. If missed, loop PATTERN."
+        },
+        {
+          "id": "EXPOSED",
+          "frames": 180,
+          "action": "No phase attacks; clear remaining hostile shots. Sword deals 1/2 as above. Clamp damage at HP 16 and HP 8 so one hit cannot skip a phase. Power casts cannot extend exposure."
+        },
+        {
+          "id": "PHASE_CHANGE",
+          "frames": 45,
+          "action": "Harmless pause, clear all hazards, display the next symbol and one-line hint, reset cooldown to 0. Do not take damage during the transition."
+        }
+      ],
+      "reward": {
+        "set_chapter_flag": "CORE_CLEAR",
+        "clear_pending_attacks": true,
+        "heal": "full",
+        "safe_resume_room": 0,
+        "dialogue": [
+          "CORE_RELEASE"
+        ],
+        "after_dialogue": "village elder spawn; ELDER_FINAL + ENDING_FRIENDS earns ENDING_SEEN"
+      },
+      "ending_resume": "If power is interrupted after CORE_CLEAR, continue in the peaceful village; the elder still provides the ending. The core never respawns.",
+      "safety": "All phases repeat indefinitely without spending resources. The bottom escape remains open. No need to tank damage, have the optional health relic, or execute a perfect three-hit chain."
+    }
+  }
+}

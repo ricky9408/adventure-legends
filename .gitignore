@@ -10,3 +10,7 @@ __pycache__/
 *.gba
 *.map
 *.sym
+
+# Deliberate prior-ROM save fixtures, not developer/user runtime saves.
+!tests/fixtures/legacy/*.sav
+!tests/fixtures/legacy/*/*.sav

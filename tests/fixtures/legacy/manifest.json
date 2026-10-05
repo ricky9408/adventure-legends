@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "size_bytes_each": 32768,
+  "purpose": "Real v2/v3 cartridge save migration integration; ordinary gameplay never receives injected progress",
+  "fixtures": [
+    {
+      "file": "baseline-v2-bridge.sav",
+      "sha256": "b4d25b2475fdd3b597b4829972422f621bedb7b05e481926f00c4da3ca155d68",
+      "header_hex": "45420201010000018cffffffff",
+      "valid": true,
+      "origin": "Controller-only published milestone ROM session"
+    },
+    {
+      "file": "v2-completed/checkpoint.sav",
+      "sha256": "335785eab2716aa28440d92b0c28a6063c046049836ce7a5893e5c8b2641e09f",
+      "header_hex": "454202030103010192ffffffff",
+      "valid": true,
+      "origin": "Controller-only published milestone ROM session"
+    },
+    {
+      "file": "full-journey/checkpoint.sav",
+      "sha256": "cd08082f4f8f5761b3a7d7a3f9623f06135be503fa4a80020093d4ad397a92f2",
+      "header_hex": "454203030103010100000600d6",
+      "valid": true,
+      "origin": "Controller-only published milestone ROM session"
+    },
+    {
+      "file": "migrated-v3.sav",
+      "sha256": "d12f787508277a7289668055c929f674f5991b6e9b1950041f7dc69d9a1ff8ed",
+      "header_hex": "454203010100000100000600d0",
+      "valid": true,
+      "origin": "Controller-only published milestone ROM session"
+    },
+    {
+      "file": "relic-camp-checkpoint.sav",
+      "sha256": "0d8833ed2b0b38eab32158cd597211b9770796d03a07e4665d6330d9cda8cf14",
+      "header_hex": "454203010100000101010800d4",
+      "valid": true,
+      "origin": "Controller-only published milestone ROM session"
+    },
+    {
+      "file": "explicit-corrupt-copy.sav",
+      "sha256": "53c93b9141641e1fd092dccf4144f32418f11332dbfa65e34973b071358533e2",
+      "header_hex": "454203010000000100000600d0",
+      "valid": false,
+      "origin": "Explicit corruption copy of a milestone controller-session SRAM"
+    },
+    {
+      "file": "invalid-inconsistent-maximum-health.sav",
+      "sha256": "9085bdd69e3061191e13459e8389e7eb2a69672f472712c0bc0db60bdc42f503",
+      "header_hex": "454203010100000100000800d2",
+      "valid": false,
+      "origin": "Explicit corruption copy of a milestone controller-session SRAM"
+    },
+    {
+      "file": "invalid-invalid-camp-flag.sav",
+      "sha256": "beafec5bf5fbb69196da5f05bad1be6be71593749849ac6e4e07b34e0f4aeabd",
+      "header_hex": "454203010100000100020600d2",
+      "valid": false,
+      "origin": "Explicit corruption copy of a milestone controller-session SRAM"
+    },
+    {
+      "file": "invalid-out-of-range-room.sav",
+      "sha256": "d5c34101722b283fa0851511f9b65e77397ef165c358c5eb49f7845b88bd296c",
+      "header_hex": "454203040100000100000600d3",
+      "valid": false,
+      "origin": "Explicit corruption copy of a milestone controller-session SRAM"
+    },
+    {
+      "file": "invalid-unknown-reserved-flag.sav",
+      "sha256": "5c20534505204efe0f495e59a5f63d9e3a1edbe862234e1d3e30cce6c0cd4877",
+      "header_hex": "454203010100000100000601d1",
+      "valid": false,
+      "origin": "Explicit corruption copy of a milestone controller-session SRAM"
+    }
+  ]
+}

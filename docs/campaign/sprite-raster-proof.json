@@ -1,0 +1,14 @@
+{
+  "all7modalScreensPixelExact": true,
+  "screens": [
+    "controls",
+    "routes",
+    "companion0",
+    "companion1",
+    "companion2",
+    "companion3",
+    "companion0again"
+  ],
+  "old_rom": "f95815af63ae79713e3f48850be768132e6bf293d1b5ce94a0370330366c354a",
+  "new_rom": "0ded4a979de99fa32e152ca0b541189df330f8c3ca8dcae14988d181c027f1d7"
+}

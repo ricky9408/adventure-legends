@@ -4,14 +4,15 @@ The corrupted-save rejection case alters a COPY of the cartridge save file;
 no test writes emulated RAM. Outputs stay under build/review.
 """
 from pathlib import Path
-import sys,json,hashlib
+import sys,json,hashlib,os
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tests'))
 import playthrough
-OUT=ROOT/'build/review';OUT.mkdir(exist_ok=True)
+OUT=Path(os.environ.get('EMBERBOND_REVIEW_OUTPUT',ROOT/'build/review')).resolve();OUT.mkdir(parents=True,exist_ok=True)
+PRIMARY_OUT=Path(os.environ.get('EMBERBOND_PRIMARY_OUTPUT',playthrough.OUT)).resolve()
 playthrough.OUT=OUT
 P=playthrough.Play
-report={'controller_only':True,'ram_injection':False,'passes':[],'rom_sha256':hashlib.sha256((ROOT/'build/emberbond.gba').read_bytes()).hexdigest()}
+report={'controller_only':True,'ram_injection':False,'passes':[],'rom_sha256':hashlib.sha256(playthrough.ROM.read_bytes()).hexdigest()}
 def ok(p,condition,label):
  p.check(condition,label);report['passes'].append(label)
 def shot(p,n):p.e.screenshot(OUT/(n+'.png'))
@@ -39,17 +40,28 @@ save=OUT/'forest-checkpoint.sav';save.write_bytes(p.e.bytes(0x0E000000,32768));p
 p=P();p.e.load_save(save);p.e.reset();p.step(90)
 ok(p,p.get('has_save')==1,'new emulator recognizes real SRAM checkpoint');p.tap('START')
 ok(p,p.get('room')==1 and p.get('bridge_open')==1 and p.get('hp')==6,'continue restores room and puzzle progress');shot(p,'continue');p.e.close()
-# Completed save made by primary controller-only playthrough.
-completed=ROOT/'build/qa/checkpoint.sav'
+# First-lantern save made by the primary controller-only regression.
+completed=PRIMARY_OUT/'checkpoint.sav'
+if not completed.exists():
+ raise FileNotFoundError('First-lantern checkpoint missing; run tests/playthrough.py first or set EMBERBOND_PRIMARY_OUTPUT: '+str(completed))
 if completed.exists():
  p=P();p.e.load_save(completed);p.e.reset();p.step(90);p.tap('START')
- ok(p,p.get('game_state')==5 and p.get('completed')==1,'completed SRAM reopens ending');shot(p,'completed-resume')
- p.tap('START');ok(p,p.get('game_state')==0,'ending Start returns to title')
- p.tap('SELECT');ok(p,p.get('completed')==0 and p.get('bridge_open')==0 and p.get('torches')==0 and p.get('room')==0 and p.get('game_state')==2,'title Select starts fresh and clears completed progress')
+ p.dialogs()
+ ok(p,p.get('game_state')==1 and p.get('room')==0 and p.get('chapter_flags')==1 and p.get('completed')==0,'first-lantern SRAM reopens continuing village');shot(p,'grove-cleared-resume')
+ for _ in range(3):
+  if p.get('spirit')==2:break
+  p.tap('L')
+ ok(p,p.get('spirit')==2,'first-lantern resume preserves earned wind companion')
+ p.e.reset();p.step(90)
+ p.tap('SELECT');ok(p,p.get('chapter_flags')==0 and p.get('completed')==0 and p.get('bridge_open')==0 and p.get('torches')==0 and p.get('room')==0 and p.get('game_state')==2,'title Select starts fresh and clears prior chapter progress')
  p.e.reset();p.step(90);p.tap('START')
  ok(p,p.get('completed')==0 and p.get('room')==0,'fresh Select persists replacement checkpoint');p.e.close()
 # Walk from our real forest checkpoint into the guardian encounter.
 p=P();p.e.load_save(save);p.e.reset();p.step(90);p.tap('START');p.nextroom(2);p.dialogs();p.tap('B')
+for _ in range(4):
+ if p.get('spirit')==0:break
+ p.tap('L')
+ok(p,p.get('spirit')==0,'review explicitly selects Homura after saved companion restoration')
 p.goto(y=94);p.goto(x=64);p.goto(y=84);p.defend(160);p.goto(x=64,y=84);p.tap('R')
 p.goto(y=94);p.goto(x=176);p.goto(y=84);p.defend(160);p.goto(x=176,y=84);p.tap('R');p.dialogs()
 p.goto(y=94);p.goto(x=120);p.nextroom(3);p.dialogs();p.goto(y=94);p.step(2,'UP');p.step(2)
@@ -66,9 +78,9 @@ ok(p,p.get('game_state')==4,'guardian fight can naturally cause death');shot(p,'
 p.tap('A');ok(p,p.get('game_state')==1 and p.get('hp')==6 and p.get('room')==3 and p.get('boss_hp')==12 and p.get('boss_armor')==0,'boss death retry resets guardian and restores hearts')
 ok(p,p.get('bridge_open')==1 and p.get('torches')==3,'boss retry preserves puzzle progression');shot(p,'boss-retry');p.e.close()
 # Explicit malformed-save input: mutate a copy, never RAM.
-corrupt=OUT/'corrupt-copy.sav';b=bytearray(save.read_bytes());b[12]^=1;corrupt.write_bytes(b)
+corrupt=OUT/'corrupt-copy.sav';b=bytearray(save.read_bytes());b[0x40+30]^=1;b[0x80+30]^=1;corrupt.write_bytes(b)
 p=P();p.e.load_save(corrupt);p.e.reset();p.step(90)
-ok(p,p.get('has_save')==0,'corrupted SRAM checksum is rejected');p.e.close()
-report['corrupted_save_case']='Checksum byte in copied SRAM file intentionally changed; no RAM injection'
+ok(p,p.get('has_save')==0,'corrupted v4 bank checksums are rejected');p.e.close()
+report['corrupted_save_case']='CRC byte in both v4 banks of a copied SRAM file intentionally changed; no RAM injection'
 (OUT/'review-tests.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))

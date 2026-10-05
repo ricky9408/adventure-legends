@@ -1,0 +1,478 @@
+{
+  "schema": 1,
+  "language": "ja-JP",
+  "layout": {
+    "font": "NotoSansCJK-Bold.ttc 12px, index 0",
+    "dialogue_max_pages": 6,
+    "lines_per_page": 2,
+    "line_max_rendered_width": 214,
+    "positions": {
+      "speaker": [
+        13,
+        103
+      ],
+      "line1": [
+        13,
+        120
+      ],
+      "line2": [
+        13,
+        136
+      ]
+    },
+    "generator_rule": "Flatten keys to TX_<DIALOGUE>_<PAGE>_<LINE>; assert text widths before rasterizing. Never silently crop."
+  },
+  "dialogue": {
+    "ACT1_OPEN": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "森の灯が、消えかけている。",
+          "守り神を、深い眠りへ戻そう。"
+        ],
+        [
+          "ホムラは炎。ミドリは芽吹き。",
+          "小さな力を、つないでおくれ。"
+        ]
+      ]
+    },
+    "ELDER_ACT1": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "川にはミドリ、祠にはホムラ。",
+          "傷ついたら、里へお帰り。"
+        ]
+      ]
+    },
+    "GROVE_CLEAR": {
+      "speaker": "森の守り神",
+      "pages": [
+        [
+          "森を縛る闇が、ほどけてゆく。",
+          "あたたかな灯が、またともった。"
+        ]
+      ]
+    },
+    "WIND_JOIN": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "ぼくはフウリ。風の道案内さ。",
+          "森の灯が、ぼくを起こしたんだ。"
+        ],
+        [
+          "でも、空の灯はまだ眠ってる。",
+          "里の東から、尾根へ行こう！"
+        ],
+        [
+          "ぼくの風は、帆や風車を回すよ。",
+          "飛んでくる弾も、吹き消せる。"
+        ]
+      ]
+    },
+    "LEGACY_RECAP": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "森の灯は、君が取り戻した。",
+          "その記録は、ここに残っている。"
+        ],
+        [
+          "風の仲間フウリも、力を貸す。",
+          "東の尾根で、次の灯を探そう。"
+        ]
+      ]
+    },
+    "ELDER_ACT2": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "灯は森と空、地の底を巡る。",
+          "空の道が、まだ閉じている。"
+        ],
+        [
+          "フウリと東の尾根へ行きなさい。",
+          "帰り道の灯は、消さずにおこう。"
+        ]
+      ]
+    },
+    "SKY_PATH_SIGN": {
+      "speaker": "尾根の道しるべ",
+      "pages": [
+        [
+          "北へ進むと、空織りの祠。",
+          "風車の印には、フウリの風を。"
+        ]
+      ]
+    },
+    "OPTIONAL_CHIME": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "ミドリの花に、鈴が咲いた！",
+          "この音も、里へ連れて帰ろう。"
+        ]
+      ]
+    },
+    "SKY_INTRO": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "帆橋が、結び目で眠ってる。",
+          "近くの風車に、ぼくの風を！"
+        ]
+      ]
+    },
+    "SAIL_BRIDGE": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "帆橋がひらいた。もう戻らない。",
+          "向こうの風車も、起こそう。"
+        ]
+      ]
+    },
+    "SKY_VANE_OPEN": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "扉の結び目が、ほどけたよ！",
+          "次の部屋では、弾に気をつけて。"
+        ]
+      ]
+    },
+    "PATROL_HINT": {
+      "speaker": "風の刻み文字",
+      "pages": [
+        [
+          "光ってから、弾が飛んでくる。",
+          "回避か風で、近づく道を作れ。"
+        ]
+      ]
+    },
+    "PATROL_CLEAR": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "静かになった。風も通れるね。",
+          "この道は、もう閉じないよ。"
+        ]
+      ]
+    },
+    "RELAY_HINT": {
+      "speaker": "風の刻み文字",
+      "pages": [
+        [
+          "左右の風車で、火の道を作れ。",
+          "真ん中の灯には、炎の力を。"
+        ]
+      ]
+    },
+    "RELAY_COMPLETE": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "風が、ホムラの火を運んだ！",
+          "ふたつの灯が、扉を開くよ。"
+        ]
+      ]
+    },
+    "SKY_PREBOSS": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "ここで休もう。奥には番人だ。",
+          "突進のあと、風の守りが薄れる。"
+        ]
+      ]
+    },
+    "SKY_BOSS_INTRO": {
+      "speaker": "空織りの番人 カザネ",
+      "pages": [
+        [
+          "風を閉じよ。灯を守れ。",
+          "この結び目は、ほどかせぬ。"
+        ]
+      ]
+    },
+    "SKY_BOSS_CLEAR": {
+      "speaker": "カザネ",
+      "pages": [
+        [
+          "風を止めれば、火も息を失う。",
+          "守ることを、忘れていたのか。"
+        ]
+      ]
+    },
+    "STONE_JOIN": {
+      "speaker": "コハク",
+      "pages": [
+        [
+          "私はコハク。灯を支える石の精。",
+          "空の灯に、眠りを預けていた。"
+        ],
+        [
+          "灯の巡りを止めたのは、灯核。",
+          "ひとつで、すべてを守るつもり。"
+        ],
+        [
+          "ひびのある石は、私が砕こう。",
+          "重しの印には、石を残せるよ。"
+        ]
+      ]
+    },
+    "ELDER_ACT3": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "昔、大嵐から灯を守るため、",
+          "私たちは灯核の道を閉じた。"
+        ],
+        [
+          "そのままでは、灯は巡れない。",
+          "西の坂へ。今度は道を開こう。"
+        ]
+      ]
+    },
+    "CORE_PATH_SIGN": {
+      "speaker": "坂の道しるべ",
+      "pages": [
+        [
+          "ひび割れた門には、石の力。",
+          "四つの契約を、地の底へ。"
+        ]
+      ]
+    },
+    "CORE_ARCH": {
+      "speaker": "コハク",
+      "pages": [
+        [
+          "道は、まだここにあったんだ。",
+          "先の重し台にも、力を貸そう。"
+        ]
+      ]
+    },
+    "WEIGHTS_HINT": {
+      "speaker": "コハク",
+      "pages": [
+        [
+          "左右の印に、私の力を置こう。",
+          "仲間を替えても、石は残るよ。"
+        ]
+      ]
+    },
+    "ROOT_HINT": {
+      "speaker": "コハク",
+      "pages": [
+        [
+          "あの井戸は、石でふさがれた。",
+          "水を戻せば、根も目を覚ます。"
+        ]
+      ]
+    },
+    "ROOTS_GROWN": {
+      "speaker": "ミドリ",
+      "pages": [
+        [
+          "水の声、ちゃんと聞こえたよ。",
+          "根の橋を渡って、灯をつなごう。"
+        ]
+      ]
+    },
+    "FOUR_LIGHTS_HINT": {
+      "speaker": "四つの灯座",
+      "pages": [
+        [
+          "炎と芽吹き、風と石。",
+          "それぞれの印へ、力を分けよ。"
+        ]
+      ]
+    },
+    "FOUR_LIGHTS": {
+      "speaker": "コハク",
+      "pages": [
+        [
+          "四つの灯が、同じ道につながる。",
+          "灯核にも、このぬくもりを。"
+        ]
+      ]
+    },
+    "LAST_REST": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "最後の扉だ。ゆっくり休もう。",
+          "石、風、炎。印をよく見てね。"
+        ]
+      ]
+    },
+    "CORE_INTRO": {
+      "speaker": "閉ざされた灯核",
+      "pages": [
+        [
+          "こぼれぬように。消えぬように。",
+          "灯は、ここから出してはならぬ。"
+        ]
+      ]
+    },
+    "CORE_STONE_HINT": {
+      "speaker": "コハク",
+      "pages": [
+        [
+          "殻に、ひびが見える。",
+          "大きく揺れたあと、私の力を！"
+        ]
+      ]
+    },
+    "CORE_WIND_HINT": {
+      "speaker": "フウリ",
+      "pages": [
+        [
+          "黒い風が、灯をふさいでる。",
+          "弾のあと、ぼくが吹き払うよ！"
+        ]
+      ]
+    },
+    "CORE_FIRE_HINT": {
+      "speaker": "ホムラ",
+      "pages": [
+        [
+          "芯は、まだ冷たく凍えている。",
+          "静まったとき、炎を届けよう。"
+        ]
+      ]
+    },
+    "CORE_RELEASE": {
+      "speaker": "灯核",
+      "pages": [
+        [
+          "外にも、こんなに灯がある。",
+          "ひとりで、抱えなくてもいい。"
+        ],
+        [
+          "閉ざした道を、もう一度ひらく。",
+          "このぬくもりを、里へ。"
+        ]
+      ]
+    },
+    "ELDER_FINAL": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "森も空も、地の底も、",
+          "今は同じ灯で、息をしている。"
+        ],
+        [
+          "炎は温め、芽吹きは癒し、",
+          "風は運び、石は支える。"
+        ],
+        [
+          "君は、四つの力をつないだ。",
+          "さあ、みんなで灯を迎えよう。"
+        ]
+      ]
+    },
+    "ENDING_FRIENDS": {
+      "speaker": "四つの契約",
+      "pages": [
+        [
+          "フウリ「次は、どこへ行こう？」",
+          "コハク「今夜は、ここにいよう」"
+        ],
+        [
+          "ミドリ「里に、花を咲かせよう」",
+          "ホムラ「火の番なら、任せて！」"
+        ]
+      ]
+    },
+    "ELDER_POSTGAME": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "お帰り。灯は今日もあたたかい。",
+          "旅の話を、何度でも聞かせて。"
+        ]
+      ]
+    },
+    "ELDER_CHIME": {
+      "speaker": "灯守り リュマ",
+      "pages": [
+        [
+          "尾根の鈴が、風に歌っている。",
+          "里に、すてきな音が増えたね。"
+        ]
+      ]
+    },
+    "GROVE_POSTCLEAR": {
+      "speaker": "森の守り神",
+      "pages": [
+        [
+          "森の灯は、静かに息をしている。",
+          "仲間とともに、先へ進むがよい。"
+        ]
+      ]
+    }
+  },
+  "labels": {
+    "WIND": "フウリ",
+    "STONE": "コハク",
+    "CHAPTER1_CLEAR": "第一章　森の灯",
+    "CHAPTER2_CLEAR": "第二章　空の灯",
+    "CHAPTER3_CLEAR": "終章　つながる灯",
+    "FINAL_COMPLETE": "灯をつなぐ者",
+    "FINAL_SMALL": "EMBERBOND / THE END",
+    "POSTGAME": "START  里へ戻る",
+    "ENDING_REPLAY": "R  灯の物語をもう一度",
+    "QUEST_ACT2": "目的：里の東から、空の祠へ",
+    "QUEST_SKY_VANE": "目的：風車を回して帆橋を渡る",
+    "QUEST_SKY_PATROL": "目的：回廊の影をすべて払う",
+    "QUEST_SKY_RELAY": "目的：風と炎で、左右の灯をともす",
+    "QUEST_SKY_BOSS": "目的：突進のあと、風で守りを解く",
+    "QUEST_ACT3": "目的：里の西から、灯核へ",
+    "QUEST_CORE_WEIGHTS": "目的：左右の台に石の重しを置く",
+    "QUEST_CORE_ROOTS": "目的：井戸を開き、根の橋を育てる",
+    "QUEST_CORE_LAMPS": "目的：四つの印に仲間の力を",
+    "QUEST_CORE_BOSS": "目的：殻の印に合う力を使う",
+    "QUEST_RETURN": "目的：里のリュマに話しかける",
+    "QUEST_COMPLETE": "三つの灯は、つながった",
+    "BOSS_WIND_READY": "風の守りがゆるんだ！",
+    "BOSS_STONE_READY": "石の殻に、ひびが走る！",
+    "BOSS_FIRE_READY": "冷たい芯へ、炎を！",
+    "BOSS_EXPOSED": "剣で闇を払おう！",
+    "WIND_GUARD": "風で弾を吹き消した",
+    "STONE_GUARD": "石の守りが、一撃を受け止めた",
+    "POWER_MISMATCH": "印に合う仲間を、Lで選ぼう",
+    "NEED_WELL": "先に、井戸の石を取り除こう",
+    "CHIME_RECORD": "尾根の花鈴：見つけた",
+    "CHIME_UNKNOWN": "尾根の花鈴：まだ見つけていない",
+    "BRIDGE_STAYS": "橋と重しは、そのまま残る",
+    "CONTROL_CYCLE": "L  次の仲間へ　R  仲間の力",
+    "CONTROL_SUMMON": "B  召喚・帰還　A  剣・会話",
+    "CONTROL_DODGE": "SELECT  回避　START  しおり",
+    "RETRY_ROOM": "A  部屋の入口から再挑戦"
+  },
+  "npc_priority": [
+    {
+      "when": "CORE_CLEAR and not ENDING_SEEN",
+      "elder": "ELDER_FINAL then ENDING_FRIENDS; enter final card"
+    },
+    {
+      "when": "ENDING_SEEN",
+      "elder": "ELDER_POSTGAME; offer ending replay in journal"
+    },
+    {
+      "when": "SKY_CLEAR",
+      "elder": "ELDER_ACT3"
+    },
+    {
+      "when": "GROVE_CLEAR",
+      "elder": "ELDER_ACT2"
+    },
+    {
+      "when": "otherwise",
+      "elder": "ELDER_ACT1"
+    }
+  ],
+  "npc_optional": "If RIDGE_CHIME is present, append ELDER_CHIME once to the next ordinary elder conversation, never before a mandatory ending conversation."
+}
