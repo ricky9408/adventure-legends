@@ -1,0 +1,30 @@
+[
+  {
+    "scene": "evolution-0-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 154459
+  },
+  {
+    "scene": "evolution-1-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 154939
+  },
+  {
+    "scene": "evolution-2-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 155754
+  },
+  {
+    "scene": "evolution-3-animation",
+    "hardware_frames": 78,
+    "simulation_updates": 78,
+    "display_flips": 78,
+    "maximum_cycles": 153731
+  }
+]

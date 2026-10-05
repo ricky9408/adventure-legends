@@ -13,12 +13,15 @@ Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulato
 | D-pad | Move and face; diagonals have normalized speed |
 | A | Sword, talk, examine, advance dialogue; successive strikes form a three-hit chain |
 | B | Call/recall your companion; close the journal |
-| L | Choose an unlocked companion |
+| Hold L + D-pad, release L | Choose a quick-slot companion; B cancels |
+| Tap L | Cycle assigned companions (a short tap only) |
 | R | Your summoned companion's selected power |
 | Select | Dodge |
 | Start | Open/close your journal |
 
-In the journal, **A changes pages**. The growth page shows level, bond and the next step. **R changes a learned command; Select offers evolution** when its conditions are met at a resting place. Evolution has a separate confirmation and can be deferred. B returns to play.
+Hold **L** for the temporary four-slot selector: **up, right, down, left** match its four slots. Choose a direction and release L to switch. The world and power recovery pause while selecting. A summoned companion is replaced immediately; an uncalled companion stays uncalled. A short L tap still cycles your assigned companions. Looking without choosing for longer leaves the current companion unchanged.
+
+In the journal, **A changes pages**. On the party page, **left/right chooses a slot**, **up/down browses owned companions or an empty slot**, **R assigns/swaps**, and **Select clears a slot**. At least one companion stays assigned. This never releases or duplicates a companion: all owned companions remain available here, including powers you need along the route. Assignments save immediately; field selection is remembered at the next normal checkpoint. The growth page shows level, bond and the next step. **R changes a learned command; Select offers evolution** when its conditions are met at a resting place. Evolution has a separate confirmation and can be deferred. B returns to play.
 
 The corner icon shows B when a companion can be called and R while it is summoned. Its small bar shows power recovery. Area names appear briefly on entry and are available in the journal.
 
@@ -27,6 +30,9 @@ Keep the emulator's `.sav` file. Progress records automatically. A short saving 
 [日本語の遊び方、ネタバレなし](docs/PLAY_JA.md)
 
 ## This update
+
+- Hold-L cross selector with direct summoned-companion replacement
+- Journal party assignments from actual owned companions, including swaps and empty slots
 
 - Full-screen exploration with a compact floating HUD
 - Optional companion growth, explicit evolution choices and retained familiar commands
@@ -38,7 +44,7 @@ The player preview and default video show only opening areas. Technical tests, s
 
 ## Development status
 
-The current ROM has **8 implemented, obtainable and controller-verified forms**, a four-companion party, 16 areas, three story dungeon arcs and optional personal trials. The broader requested game is still in development: the 128-form roster, equipment/weapon variety, regional towns and a larger quest campaign are not claimed as finished.
+The current ROM has **8 implemented, obtainable and controller-verified forms**, four assignable quick-companion slots, 16 areas, three story dungeon arcs and optional personal trials. The broader requested game is still in development: the 128-form roster, equipment/weapon variety, regional towns and a larger quest campaign are not claimed as finished.
 
 The catalog reserves 128 stable identities and has 12 authored designs. Only eight are enabled. Five-phase/polarity definitions and matchup reference rules exist; numerical phase battle modifiers are not yet applied to the legacy combat encounters. There is no claim that 128 reserved rows are 128 playable monsters.
 

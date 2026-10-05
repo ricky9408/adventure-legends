@@ -452,18 +452,23 @@ class AdvancedRun(EvolutionRun):
         before = self.get('ability_cd')
         self.update_once('R')
         self.check(self.get('ability_cd') == before-1, 'unsummoned R cannot recast')
-        before = self.get('ability_cd')
+        before = self.get('ability_cd'); effect = self.frozen()
         self.update_once('L')
-        self.check(self.get('spirit') == (family+1)%4 and self.get('ability_cd') == before-1,
-                   'companion switch never resets cooldown')
-        self.update_once(0); self.update_once('B'); self.update_once(0)
+        self.check(self.get('quickparty_open') and self.get('spirit') == family
+                   and self.frozen() == effect,
+                   'held L previews without selecting and freezes cooldown and active effects')
+        self.update_once(0)
+        self.check(self.get('spirit') == (family+1)%4 and self.get('ability_cd') == before
+                   and self.frozen() == effect,
+                   'release commits one short-tap switch without resetting or advancing cooldown/effects')
+        self.update_once('B'); self.update_once(0)
         before = self.get('ability_cd')
         self.update_once('R')
         self.check(self.get('ability_cd') == before-1, 'new companion cannot bypass shared cooldown')
         self.check(self.get('advanced_kind') == family+5,
                    'cast effect retains original identity after recall/switch')
-        self.check(self.get('advanced_time_left') == EFFECT_LENGTH[family+5]-8,
-                   'cast effect continues its original duration across recall and switch')
+        self.check(self.get('advanced_time_left') == EFFECT_LENGTH[family+5]-6,
+                   'cast effect continues its original duration across recall and switch, excluding two frozen picker updates')
 
     def guard_speed_case(self):
         self.reset_case(3)

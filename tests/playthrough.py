@@ -3,7 +3,7 @@
 The complete three-lantern route lives in campaign_tests.py.
 """
 from pathlib import Path
-import sys, subprocess, json, os
+import sys, subprocess, json, os, hashlib
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'tools'))
 from mgba_runner import Emulator
 ROM=Path(os.environ.get('EMBERBOND_TEST_ROM',ROOT/'build/emberbond.gba')).resolve()
@@ -78,7 +78,7 @@ class Play:
    if i==2:self.shot('09-sword-boss')
    print('BOSS',i,self.status(),flush=True)
   self.check(self.get('boss_hp')==0,'guardian defeated with sword');self.check(self.get('chapter_flags')==1,'first lantern reward committed before dialogue');self.dialogs();self.check(self.get('game_state')==1 and self.get('room')==0,'first chapter continues safely in village');self.check(self.get('completed')==0,'first guardian is not the campaign ending');self.tap('L');self.tap('L');self.check(self.get('spirit')==2,'earned Fuuri is selectable');self.check(self.get('save_failed')==0,'first chapter save transaction succeeded');self.shot('10-wind-joins-village');self.step(90)
-  (OUT/'playthrough.json').write_text(json.dumps({'passes':self.logs,'final':self.status(),'emulator_frames':self.e.frame,'controller_only':True},indent=2)+'\n')
+  (OUT/'playthrough.json').write_text(json.dumps({'rom_sha256':hashlib.sha256(ROM.read_bytes()).hexdigest(),'symbols_sha256':hashlib.sha256(SYMBOLS.read_bytes()).hexdigest(),'passes':self.logs,'final':self.status(),'emulator_frames':self.e.frame,'controller_only':True},indent=2)+'\n')
   # Persist real SRAM for an independent new emulator instance.
   (OUT/'checkpoint.sav').write_bytes(self.e.bytes(0x0E000000,32768))
   if self.video:

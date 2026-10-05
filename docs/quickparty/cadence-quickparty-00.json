@@ -1,0 +1,59 @@
+[
+  {
+    "scene": "opening-two-companion-cold-overlay",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 147195,
+    "frame_budget_cycles": 280896,
+    "opening_evidence": null
+  },
+  {
+    "scene": "village-live-projectile-quick-picker",
+    "hardware_frames": 80,
+    "simulation_updates": 80,
+    "display_flips": 80,
+    "maximum_cycles": 13076,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "grove-live-projectile-quick-picker",
+    "hardware_frames": 80,
+    "simulation_updates": 80,
+    "display_flips": 80,
+    "maximum_cycles": 18765,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "opening-grove-immediate-open-alignment-1",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 191480,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "opening-grove-immediate-open-alignment-2",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 191480,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "opening-grove-immediate-open-alignment-3",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 191480,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "opening-grove-immediate-open-alignment-0",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 191305,
+    "frame_budget_cycles": 280896
+  }
+]

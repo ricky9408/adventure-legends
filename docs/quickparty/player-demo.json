@@ -1,0 +1,171 @@
+{
+  "rom_sha256": "1e76b1d5f3a65557b47f7445710d448b0a316fdd9e810a2d1dcc49ea4f7a45aa",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "savestate_restores": 0,
+  "scope": "Opening village and two starting companions only. No evolved forms, secret locations, boss fights or ending.",
+  "frames": 906,
+  "frame_rate": 59.72750056960583,
+  "seconds": 15.168891906738281,
+  "native_image": "240x160 untouched, plus separate20px input-caption margin, integer-upscaled4x",
+  "audio": "Actual native emulator PSG audio",
+  "video_sha256": "7b60a93d6cd8878c883dba0d5b7034b495e5b230b5646028a440719f68c28855",
+  "cues": [
+    {
+      "frame": 0,
+      "frames": 65,
+      "keys": 0,
+      "caption": "B: companion is already called"
+    },
+    {
+      "frame": 65,
+      "frames": 45,
+      "keys": "L",
+      "caption": "Hold L: the world waits"
+    },
+    {
+      "frame": 110,
+      "frames": 90,
+      "keys": "L+RIGHT",
+      "caption": "L + RIGHT: choose this slot"
+    },
+    {
+      "frame": 200,
+      "frames": 70,
+      "keys": 0,
+      "caption": "Release L: companion changes directly"
+    },
+    {
+      "frame": 270,
+      "frames": 65,
+      "keys": "L+UP",
+      "caption": "L + UP: choose another slot"
+    },
+    {
+      "frame": 335,
+      "frames": 55,
+      "keys": 0,
+      "caption": "Release L: no extra B needed"
+    },
+    {
+      "frame": 390,
+      "frames": 35,
+      "keys": "L+RIGHT",
+      "caption": "Choose a slot, then cancel"
+    },
+    {
+      "frame": 425,
+      "frames": 15,
+      "keys": "L+B",
+      "caption": "B: cancel"
+    },
+    {
+      "frame": 440,
+      "frames": 20,
+      "keys": "L",
+      "caption": "Keep holding: no second selection"
+    },
+    {
+      "frame": 460,
+      "frames": 45,
+      "keys": 0,
+      "caption": "Release L: original companion stays"
+    },
+    {
+      "frame": 505,
+      "frames": 6,
+      "keys": "L",
+      "caption": "Short L tap"
+    },
+    {
+      "frame": 511,
+      "frames": 65,
+      "keys": 0,
+      "caption": "Cycle assigned companions"
+    },
+    {
+      "frame": 576,
+      "frames": 2,
+      "keys": "START",
+      "caption": "START: open journal"
+    },
+    {
+      "frame": 578,
+      "frames": 4,
+      "keys": 0,
+      "caption": "A: change journal page"
+    },
+    {
+      "frame": 582,
+      "frames": 2,
+      "keys": "A",
+      "caption": "A: change journal page"
+    },
+    {
+      "frame": 584,
+      "frames": 4,
+      "keys": 0,
+      "caption": "A: change journal page"
+    },
+    {
+      "frame": 588,
+      "frames": 2,
+      "keys": "A",
+      "caption": "A: open party assignment"
+    },
+    {
+      "frame": 590,
+      "frames": 45,
+      "keys": 0,
+      "caption": "LEFT/RIGHT: slot; UP/DOWN: owned ally"
+    },
+    {
+      "frame": 635,
+      "frames": 2,
+      "keys": "DOWN",
+      "caption": "DOWN: browse owned companions"
+    },
+    {
+      "frame": 637,
+      "frames": 35,
+      "keys": 0,
+      "caption": "R: swap these two assigned slots"
+    },
+    {
+      "frame": 672,
+      "frames": 2,
+      "keys": "R",
+      "caption": "R: assign and save"
+    },
+    {
+      "frame": 674,
+      "frames": 70,
+      "keys": 0,
+      "caption": "Assignments save safely"
+    },
+    {
+      "frame": 744,
+      "frames": 2,
+      "keys": "B",
+      "caption": "B: return to play"
+    },
+    {
+      "frame": 746,
+      "frames": 25,
+      "keys": 0,
+      "caption": "The whole world returns"
+    },
+    {
+      "frame": 771,
+      "frames": 65,
+      "keys": "L+UP",
+      "caption": "L + UP: use the reordered slot"
+    },
+    {
+      "frame": 836,
+      "frames": 70,
+      "keys": 0,
+      "caption": "Release L: ready to explore"
+    }
+  ]
+}
