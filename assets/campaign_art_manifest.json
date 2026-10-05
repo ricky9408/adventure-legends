@@ -1,0 +1,579 @@
+{
+  "schema": 1,
+  "generator": "assets/generate_campaign.py",
+  "rights": "Original code-native pixel art. No third-party images, screenshots, sprite extractions, ROM data, or raster model inputs.",
+  "palette_count": 178,
+  "palette_slots_preserved": [
+    0,
+    177
+  ],
+  "actor_palette_slots": [
+    0,
+    96
+  ],
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "layout_sha256": "1c329c511ce5778f82e0fc43e3eddbe3180d3baf828240dd4c292eaf8312fa1d",
+  "backgrounds": {
+    "4": {
+      "key": "sky_path",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "819e80e85df61c9178c0cf050b07c03023b00106c464dd170198d07e32aad1ef",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          64,
+          72,
+          32,
+          24
+        ],
+        [
+          152,
+          96,
+          32,
+          24
+        ]
+      ],
+      "dynamic_solids": []
+    },
+    "5": {
+      "key": "sky_vanes",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "0558407ddda9d9f8098bf820d8f424a3ebe692ee39e9388a681f20304feb4e30",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          8,
+          88,
+          88,
+          16
+        ],
+        [
+          144,
+          88,
+          88,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "folded_sail_bridge",
+          "rect": [
+            96,
+            88,
+            48,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_BRIDGE"
+          ]
+        },
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_VANE"
+          ]
+        }
+      ]
+    },
+    "6": {
+      "key": "sky_patrol",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "8d0fdef833c43500c057ff0a13b0e59a1118637a969f1190c24ee3b8f22ee4c2",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          72,
+          76,
+          16,
+          32
+        ],
+        [
+          152,
+          76,
+          16,
+          32
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_PATROL_CLEAR"
+          ]
+        }
+      ]
+    },
+    "7": {
+      "key": "sky_relay",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "6439f37f3d8dd333e1a7acb95e05dca3073a5aa10ff1c11f8a9ceffabf654449",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          104,
+          72,
+          32,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "RELAY_LEFT",
+            "RELAY_RIGHT",
+            "RELAY_FIRE"
+          ]
+        }
+      ]
+    },
+    "8": {
+      "key": "sky_boss",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "015385da0d2a89437faede098600cfc082e8175ea3147904b1143bd806709dee",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_CLEAR"
+          ]
+        }
+      ]
+    },
+    "9": {
+      "key": "core_path",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "c9fc9569d3b8e7003e73c09f61bb86d9b697493d7e858c9a80ec049d871552f2",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          8,
+          80,
+          96,
+          16
+        ],
+        [
+          136,
+          80,
+          96,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "cracked_arch",
+          "rect": [
+            104,
+            80,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "CORE_PATH_OPEN"
+          ]
+        }
+      ]
+    },
+    "10": {
+      "key": "core_weights",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "75280a453ccb06a252cfc0df0e9807a562811ba8279e281e14faaa17adb3e7d9",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          104,
+          60,
+          32,
+          56
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "WEIGHT_WEST",
+            "WEIGHT_EAST"
+          ]
+        }
+      ]
+    },
+    "11": {
+      "key": "core_roots",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "b0659b9ed94066c5397bb90d308a6770d8d1af953d252db63675fd752876370a",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          8,
+          84,
+          96,
+          20
+        ],
+        [
+          136,
+          84,
+          96,
+          20
+        ],
+        [
+          8,
+          56,
+          88,
+          12
+        ],
+        [
+          144,
+          56,
+          88,
+          12
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "well_cap",
+          "rect": [
+            40,
+            104,
+            24,
+            24
+          ],
+          "blocking_unless_all": [
+            "WELL_UNCAPPED"
+          ]
+        },
+        {
+          "id": "root_bridge_gap",
+          "rect": [
+            104,
+            84,
+            32,
+            20
+          ],
+          "blocking_unless_all": [
+            "ROOT_CHANNEL"
+          ]
+        },
+        {
+          "id": "dry_thorns",
+          "rect": [
+            96,
+            56,
+            48,
+            12
+          ],
+          "blocking_unless_all": [
+            "THORNS_BURNED"
+          ]
+        }
+      ]
+    },
+    "12": {
+      "key": "core_lamps",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "7d0b53de924775228baf56e897c86f0f62772ff5aec91cec8326fa45668b64f6",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          104,
+          72,
+          32,
+          24
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "LAMP_FIRE",
+            "LAMP_NATURE",
+            "LAMP_WIND",
+            "LAMP_STONE"
+          ]
+        }
+      ]
+    },
+    "13": {
+      "key": "core_boss",
+      "size": [
+        240,
+        160
+      ],
+      "sha256": "e37291b9c58fceccdf3a804bd2569b6b6943b6d6171b772e8390bee553d57b16",
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "CORE_CLEAR"
+          ]
+        }
+      ]
+    }
+  },
+  "sprites": {
+    "companions": [
+      "Fuuri",
+      "Kohaku"
+    ],
+    "directions": [
+      "down",
+      "up",
+      "left",
+      "right"
+    ],
+    "frames_per_direction": 4,
+    "base_palette_only": true,
+    "bosses": [
+      "Kazane",
+      "Closed Core keeper"
+    ],
+    "prop_order": [
+      "VANE",
+      "WEIGHT",
+      "WELL",
+      "FIRE_SOCKET",
+      "NATURE_SOCKET",
+      "WIND_SOCKET",
+      "STONE_SOCKET",
+      "BRAZIER",
+      "LAMP",
+      "REST",
+      "SIGN",
+      "CHIME"
+    ],
+    "prop_states": [
+      "off",
+      "on"
+    ],
+    "transparent_index": 0
+  },
+  "closed_pits": [
+    {
+      "room": 5,
+      "rect": [
+        8,
+        88,
+        224,
+        16
+      ],
+      "engine_bridge_rect": [
+        96,
+        88,
+        48,
+        16
+      ]
+    },
+    {
+      "room": 11,
+      "rect": [
+        8,
+        84,
+        224,
+        20
+      ],
+      "engine_bridge_rect": [
+        104,
+        84,
+        32,
+        20
+      ]
+    }
+  ],
+  "engine_contract": "Backgrounds contain floor below dynamic gates, cracked arches, well caps and thorns; engine must draw/erase these. Pits are closed voids until engine paints the bridge. Interactive props are not baked in. Flat decorative pads and inlaid channels are walkable. Top 17px may be covered by HUD. Scenery uses exact static footprint rectangles from campaign_layouts.json.",
+  "data_bytes": 400384,
+  "pointer_bytes_gba": 40,
+  "rom_bytes_total_gba": 400424,
+  "generated_c_chunks": 47,
+  "max_chunk_bytes": 32767,
+  "verification": {
+    "opaque_backgrounds": true,
+    "palette_unchanged": true,
+    "all_sprite_colors_in_base_palette": true,
+    "four_distinct_frames_per_direction": true,
+    "geometry_copied_from_master": true
+  }
+}

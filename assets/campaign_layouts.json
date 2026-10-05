@@ -1,0 +1,2017 @@
+{
+  "schema": 1,
+  "coordinate_contract": {
+    "rectangles": "half-open [x,y,w,h]",
+    "points": "player foot-center or object center in screen pixels",
+    "solid_test": "player center plus four +/-4 pixel foot-corner samples; pits count as solid",
+    "bounds": "the entire 4-pixel-radius foot must remain inside play_bounds",
+    "north_spawn": [
+      120,
+      52
+    ],
+    "south_spawn": [
+      120,
+      132
+    ],
+    "exit_activation": "fresh overlap while walking toward exit; 20-frame transition lock and arrival spawn outside trigger",
+    "world_scroll": "Only existing room 1 is 480x320; all new rooms are 240x160 with no camera.",
+    "geometry_check_scope": "Static and dynamic navigation only; combat timing and engine implementation still require emulator testing."
+  },
+  "flags": {
+    "SKY_BRIDGE": 0,
+    "SKY_VANE": 1,
+    "SKY_PATROL_CLEAR": 2,
+    "RELAY_LEFT": 3,
+    "RELAY_RIGHT": 4,
+    "RELAY_FIRE": 5,
+    "CORE_PATH_OPEN": 6,
+    "WEIGHT_WEST": 7,
+    "WEIGHT_EAST": 8,
+    "WELL_UNCAPPED": 9,
+    "ROOT_CHANNEL": 10,
+    "THORNS_BURNED": 11,
+    "LAMP_FIRE": 12,
+    "LAMP_NATURE": 13,
+    "LAMP_WIND": 14,
+    "LAMP_STONE": 15
+  },
+  "legacy_rooms": {
+    "0": "village",
+    "1": "grove",
+    "2": "grove shrine",
+    "3": "grove guardian"
+  },
+  "hub_links": [
+    {
+      "from_room": 0,
+      "marker": [
+        196,
+        128
+      ],
+      "input": "A",
+      "requires_all": [
+        "GROVE_CLEAR"
+      ],
+      "to_room": 4,
+      "to_spawn": "south",
+      "return_spawn": "east_trail",
+      "return_point": [
+        180,
+        128
+      ]
+    },
+    {
+      "from_room": 0,
+      "marker": [
+        80,
+        128
+      ],
+      "input": "A",
+      "requires_all": [
+        "SKY_CLEAR"
+      ],
+      "to_room": 9,
+      "to_spawn": "south",
+      "return_spawn": "west_trail",
+      "return_point": [
+        76,
+        128
+      ]
+    }
+  ],
+  "hub_note": "Engine markers at (196,128) and (80,128), with clear collision-safe returns (180,128) and (76,128). The west marker is offset from the existing shrine. North exit and elder unchanged.",
+  "rooms": [
+    {
+      "id": 4,
+      "key": "sky_path",
+      "name_ja": "風待ちの尾根",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          64,
+          72,
+          32,
+          24
+        ],
+        [
+          152,
+          96,
+          32,
+          24
+        ]
+      ],
+      "dynamic_solids": [],
+      "objects": [
+        {
+          "id": "trail_rest",
+          "kind": "rest",
+          "at": [
+            48,
+            120
+          ],
+          "input": "A",
+          "heal": "full"
+        },
+        {
+          "id": "flower_chime",
+          "kind": "optional",
+          "at": [
+            184,
+            64
+          ],
+          "input": "R",
+          "companion": "MIDORI",
+          "range_manhattan": 28,
+          "sets_optional": "RIDGE_CHIME",
+          "dialogue": "OPTIONAL_CHIME"
+        },
+        {
+          "id": "ridge_sign",
+          "kind": "sign",
+          "at": [
+            48,
+            56
+          ],
+          "input": "A",
+          "dialogue": "SKY_PATH_SIGN"
+        }
+      ],
+      "enemies": [
+        {
+          "kind": "ranger",
+          "at": [
+            176,
+            128
+          ],
+          "hp": 4
+        },
+        {
+          "kind": "slime",
+          "at": [
+            56,
+            64
+          ],
+          "hp": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 0,
+          "to_spawn": "east_trail",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 5,
+          "to_spawn": "south",
+          "requires_all": []
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "traverse",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        },
+        {
+          "name": "optional_chime",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            184,
+            80
+          ],
+          "reachable": true
+        },
+        {
+          "name": "rest",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            48,
+            120
+          ],
+          "reachable": true
+        }
+      ],
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 5,
+      "key": "sky_vanes",
+      "name_ja": "ほどける帆橋",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          8,
+          88,
+          88,
+          16
+        ],
+        [
+          144,
+          88,
+          88,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "folded_sail_bridge",
+          "rect": [
+            96,
+            88,
+            48,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_BRIDGE"
+          ]
+        },
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_VANE"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "south_vane",
+          "kind": "wind_vane",
+          "at": [
+            64,
+            120
+          ],
+          "input": "R",
+          "companion": "FUURI",
+          "range_manhattan": 28,
+          "sets_flag": "SKY_BRIDGE",
+          "dialogue": "SAIL_BRIDGE"
+        },
+        {
+          "id": "north_vane",
+          "kind": "wind_vane",
+          "at": [
+            176,
+            64
+          ],
+          "input": "R",
+          "companion": "FUURI",
+          "range_manhattan": 28,
+          "sets_flag": "SKY_VANE",
+          "dialogue": "SKY_VANE_OPEN"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 4,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 6,
+          "to_spawn": "south",
+          "requires_all": [
+            "SKY_VANE"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "south_vane_ready",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            64,
+            120
+          ],
+          "reachable": true
+        },
+        {
+          "name": "closed_bridge",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            176,
+            64
+          ],
+          "reachable": false
+        },
+        {
+          "name": "bridge_to_second_vane",
+          "flags": [
+            "SKY_BRIDGE"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            176,
+            64
+          ],
+          "reachable": true
+        },
+        {
+          "name": "exit_open",
+          "flags": [
+            "SKY_BRIDGE",
+            "SKY_VANE"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        },
+        {
+          "name": "return_path",
+          "flags": [
+            "SKY_BRIDGE",
+            "SKY_VANE"
+          ],
+          "start": [
+            120,
+            52
+          ],
+          "goal": [
+            120,
+            144
+          ],
+          "reachable": true
+        }
+      ],
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 6,
+      "key": "sky_patrol",
+      "name_ja": "矢風の回廊",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          72,
+          76,
+          16,
+          32
+        ],
+        [
+          152,
+          76,
+          16,
+          32
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_PATROL_CLEAR"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "patrol_sign",
+          "kind": "sign",
+          "at": [
+            120,
+            112
+          ],
+          "input": "A",
+          "dialogue": "PATROL_HINT"
+        }
+      ],
+      "enemies": [
+        {
+          "kind": "ranger",
+          "at": [
+            48,
+            64
+          ],
+          "hp": 4
+        },
+        {
+          "kind": "ranger",
+          "at": [
+            192,
+            64
+          ],
+          "hp": 4
+        },
+        {
+          "kind": "slime",
+          "at": [
+            112,
+            80
+          ],
+          "hp": 2
+        },
+        {
+          "kind": "slime",
+          "at": [
+            128,
+            80
+          ],
+          "hp": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 5,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 7,
+          "to_spawn": "south",
+          "requires_all": [
+            "SKY_PATROL_CLEAR"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "west_enemy",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            48,
+            80
+          ],
+          "reachable": true
+        },
+        {
+          "name": "east_enemy",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            192,
+            80
+          ],
+          "reachable": true
+        },
+        {
+          "name": "locked_exit",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": false
+        },
+        {
+          "name": "cleared_exit",
+          "flags": [
+            "SKY_PATROL_CLEAR"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "on_all_enemies_defeated": {
+        "sets_flag": "SKY_PATROL_CLEAR",
+        "save": true,
+        "dialogue": "PATROL_CLEAR"
+      },
+      "on_reenter_if_flag": "SKY_PATROL_CLEAR: spawn no enemies; gate stays open",
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 7,
+      "key": "sky_relay",
+      "name_ja": "灯風の導き",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          104,
+          72,
+          32,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "RELAY_LEFT",
+            "RELAY_RIGHT",
+            "RELAY_FIRE"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "left_vane",
+          "kind": "wind_vane",
+          "at": [
+            56,
+            112
+          ],
+          "input": "R",
+          "companion": "FUURI",
+          "range_manhattan": 28,
+          "sets_flag": "RELAY_LEFT"
+        },
+        {
+          "id": "right_vane",
+          "kind": "wind_vane",
+          "at": [
+            184,
+            112
+          ],
+          "input": "R",
+          "companion": "FUURI",
+          "range_manhattan": 28,
+          "sets_flag": "RELAY_RIGHT"
+        },
+        {
+          "id": "source_brazier",
+          "kind": "brazier",
+          "at": [
+            120,
+            112
+          ],
+          "input": "R",
+          "companion": "HOMURA",
+          "range_manhattan": 28,
+          "sets_flag": "RELAY_FIRE"
+        },
+        {
+          "id": "left_receiver",
+          "kind": "lamp",
+          "at": [
+            56,
+            56
+          ],
+          "lit_if_all": [
+            "RELAY_FIRE",
+            "RELAY_LEFT"
+          ]
+        },
+        {
+          "id": "right_receiver",
+          "kind": "lamp",
+          "at": [
+            184,
+            56
+          ],
+          "lit_if_all": [
+            "RELAY_FIRE",
+            "RELAY_RIGHT"
+          ]
+        },
+        {
+          "id": "rest_lamp",
+          "kind": "rest",
+          "at": [
+            120,
+            56
+          ],
+          "input": "A",
+          "heal": "full",
+          "dialogue": "SKY_PREBOSS"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 6,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 8,
+          "to_spawn": "south",
+          "requires_all": [
+            "RELAY_LEFT",
+            "RELAY_RIGHT",
+            "RELAY_FIRE"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "left_vane",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            56,
+            112
+          ],
+          "reachable": true
+        },
+        {
+          "name": "right_vane",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            184,
+            112
+          ],
+          "reachable": true
+        },
+        {
+          "name": "source",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            112
+          ],
+          "reachable": true
+        },
+        {
+          "name": "rest",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            56
+          ],
+          "reachable": true
+        },
+        {
+          "name": "solved_exit",
+          "flags": [
+            "RELAY_LEFT",
+            "RELAY_RIGHT",
+            "RELAY_FIRE"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "puzzle": "Any activation order is accepted. Recompute receiver lights after every flag change. Never consume the source flame or turn a vane off.",
+      "on_puzzle_complete": {
+        "dialogue": "RELAY_COMPLETE",
+        "save": true
+      },
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 8,
+      "key": "sky_boss",
+      "name_ja": "空織りの座",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "SKY_CLEAR"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "return_lantern",
+          "kind": "return_lantern",
+          "at": [
+            120,
+            36
+          ],
+          "visible_if": "SKY_CLEAR"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 7,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "return_lantern",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 0,
+          "to_spawn": "elder",
+          "requires_all": [
+            "SKY_CLEAR"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "retreat",
+          "flags": [],
+          "start": [
+            120,
+            100
+          ],
+          "goal": [
+            120,
+            144
+          ],
+          "reachable": true
+        },
+        {
+          "name": "victory_return",
+          "flags": [
+            "SKY_CLEAR"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "boss": "KAZANE",
+      "retreat": "South exit remains usable during the fight. Leaving resets boss HP/phase and clears hostile shots. Entry gives 90 invulnerable frames.",
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 9,
+      "key": "core_path",
+      "name_ja": "夕灯の坂",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          8,
+          80,
+          96,
+          16
+        ],
+        [
+          136,
+          80,
+          96,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "cracked_arch",
+          "rect": [
+            104,
+            80,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "CORE_PATH_OPEN"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "cracked_arch",
+          "kind": "cracked_stone",
+          "at": [
+            120,
+            88
+          ],
+          "input": "R",
+          "companion": "KOHAKU",
+          "range_manhattan": 32,
+          "sets_flag": "CORE_PATH_OPEN",
+          "dialogue": "CORE_ARCH"
+        },
+        {
+          "id": "slope_rest",
+          "kind": "rest",
+          "at": [
+            56,
+            120
+          ],
+          "input": "A",
+          "heal": "full"
+        },
+        {
+          "id": "stone_sign",
+          "kind": "sign",
+          "at": [
+            184,
+            120
+          ],
+          "input": "A",
+          "dialogue": "CORE_PATH_SIGN"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 0,
+          "to_spawn": "west_trail",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 10,
+          "to_spawn": "south",
+          "requires_all": []
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "arch_activation",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            112
+          ],
+          "reachable": true
+        },
+        {
+          "name": "blocked_arch",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": false
+        },
+        {
+          "name": "open_arch",
+          "flags": [
+            "CORE_PATH_OPEN"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 10,
+      "key": "core_weights",
+      "name_ja": "沈み石の門",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          104,
+          60,
+          32,
+          56
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "WEIGHT_WEST",
+            "WEIGHT_EAST"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "west_weight",
+          "kind": "weight_socket",
+          "at": [
+            56,
+            80
+          ],
+          "input": "R",
+          "companion": "KOHAKU",
+          "range_manhattan": 24,
+          "sets_flag": "WEIGHT_WEST"
+        },
+        {
+          "id": "east_weight",
+          "kind": "weight_socket",
+          "at": [
+            184,
+            80
+          ],
+          "input": "R",
+          "companion": "KOHAKU",
+          "range_manhattan": 24,
+          "sets_flag": "WEIGHT_EAST"
+        },
+        {
+          "id": "weight_sign",
+          "kind": "sign",
+          "at": [
+            120,
+            128
+          ],
+          "input": "A",
+          "dialogue": "WEIGHTS_HINT"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 9,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 11,
+          "to_spawn": "south",
+          "requires_all": [
+            "WEIGHT_WEST",
+            "WEIGHT_EAST"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "west_socket",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            56,
+            80
+          ],
+          "reachable": true
+        },
+        {
+          "name": "east_socket",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            184,
+            80
+          ],
+          "reachable": true
+        },
+        {
+          "name": "solved_exit",
+          "flags": [
+            "WEIGHT_WEST",
+            "WEIGHT_EAST"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "puzzle": "Kohaku produces one fixed stone weight inside each socket. It remains after changing or dismissing companions. Both sides are accessible from the entrance; there are no pushable crates.",
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 11,
+      "key": "core_roots",
+      "name_ja": "根の水路",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          8,
+          84,
+          96,
+          20
+        ],
+        [
+          136,
+          84,
+          96,
+          20
+        ],
+        [
+          8,
+          56,
+          88,
+          12
+        ],
+        [
+          144,
+          56,
+          88,
+          12
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "well_cap",
+          "rect": [
+            40,
+            104,
+            24,
+            24
+          ],
+          "blocking_unless_all": [
+            "WELL_UNCAPPED"
+          ]
+        },
+        {
+          "id": "root_bridge_gap",
+          "rect": [
+            104,
+            84,
+            32,
+            20
+          ],
+          "blocking_unless_all": [
+            "ROOT_CHANNEL"
+          ]
+        },
+        {
+          "id": "dry_thorns",
+          "rect": [
+            96,
+            56,
+            48,
+            12
+          ],
+          "blocking_unless_all": [
+            "THORNS_BURNED"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "well_cap",
+          "kind": "cracked_stone",
+          "at": [
+            52,
+            116
+          ],
+          "input": "R",
+          "companion": "KOHAKU",
+          "range_manhattan": 32,
+          "sets_flag": "WELL_UNCAPPED"
+        },
+        {
+          "id": "dry_well",
+          "kind": "root_socket",
+          "at": [
+            52,
+            116
+          ],
+          "input": "R",
+          "companion": "MIDORI",
+          "range_manhattan": 28,
+          "requires_all": [
+            "WELL_UNCAPPED"
+          ],
+          "sets_flag": "ROOT_CHANNEL",
+          "dialogue": "ROOTS_GROWN"
+        },
+        {
+          "id": "dry_thorns",
+          "kind": "burnable",
+          "at": [
+            120,
+            62
+          ],
+          "input": "R",
+          "companion": "HOMURA",
+          "range_manhattan": 32,
+          "sets_flag": "THORNS_BURNED"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 10,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 12,
+          "to_spawn": "south",
+          "requires_all": [
+            "ROOT_CHANNEL",
+            "THORNS_BURNED"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "reach_capped_well",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            76,
+            120
+          ],
+          "reachable": true
+        },
+        {
+          "name": "gap_blocks",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            76
+          ],
+          "reachable": false
+        },
+        {
+          "name": "well_after_break",
+          "flags": [
+            "WELL_UNCAPPED"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            52,
+            116
+          ],
+          "reachable": true
+        },
+        {
+          "name": "bridge_to_thorns",
+          "flags": [
+            "WELL_UNCAPPED",
+            "ROOT_CHANNEL"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            76
+          ],
+          "reachable": true
+        },
+        {
+          "name": "thorns_block",
+          "flags": [
+            "WELL_UNCAPPED",
+            "ROOT_CHANNEL"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": false
+        },
+        {
+          "name": "solved_exit",
+          "flags": [
+            "WELL_UNCAPPED",
+            "ROOT_CHANNEL",
+            "THORNS_BURNED"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "puzzle": "Stone uncaps the well; Midori grows a permanent bridge; Homura burns the final thorn screen. If a projectile burns thorns early, keep that progress: the missing bridge still prevents crossing.",
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 12,
+      "key": "core_lamps",
+      "name_ja": "四つの灯座",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ],
+        [
+          104,
+          72,
+          32,
+          24
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "LAMP_FIRE",
+            "LAMP_NATURE",
+            "LAMP_WIND",
+            "LAMP_STONE"
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "id": "fire_lamp",
+          "kind": "bond_socket",
+          "at": [
+            56,
+            64
+          ],
+          "input": "R",
+          "companion": "HOMURA",
+          "range_manhattan": 24,
+          "sets_flag": "LAMP_FIRE"
+        },
+        {
+          "id": "nature_lamp",
+          "kind": "bond_socket",
+          "at": [
+            184,
+            64
+          ],
+          "input": "R",
+          "companion": "MIDORI",
+          "range_manhattan": 24,
+          "sets_flag": "LAMP_NATURE"
+        },
+        {
+          "id": "wind_lamp",
+          "kind": "bond_socket",
+          "at": [
+            56,
+            112
+          ],
+          "input": "R",
+          "companion": "FUURI",
+          "range_manhattan": 24,
+          "sets_flag": "LAMP_WIND"
+        },
+        {
+          "id": "stone_lamp",
+          "kind": "bond_socket",
+          "at": [
+            184,
+            112
+          ],
+          "input": "R",
+          "companion": "KOHAKU",
+          "range_manhattan": 24,
+          "sets_flag": "LAMP_STONE"
+        },
+        {
+          "id": "last_rest",
+          "kind": "rest",
+          "at": [
+            120,
+            124
+          ],
+          "input": "A",
+          "heal": "full",
+          "dialogue": "LAST_REST"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 11,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "north",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 13,
+          "to_spawn": "south",
+          "requires_all": [
+            "LAMP_FIRE",
+            "LAMP_NATURE",
+            "LAMP_WIND",
+            "LAMP_STONE"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "fire_socket",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            56,
+            64
+          ],
+          "reachable": true
+        },
+        {
+          "name": "nature_socket",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            184,
+            64
+          ],
+          "reachable": true
+        },
+        {
+          "name": "wind_socket",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            56,
+            112
+          ],
+          "reachable": true
+        },
+        {
+          "name": "stone_socket",
+          "flags": [],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            184,
+            112
+          ],
+          "reachable": true
+        },
+        {
+          "name": "solved_exit",
+          "flags": [
+            "LAMP_FIRE",
+            "LAMP_NATURE",
+            "LAMP_WIND",
+            "LAMP_STONE"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "puzzle": "All four powers in any order; one stable light per bond. Symbol plus distinct silhouette identifies each socket; never rely on color alone. No timer, enemy, consumable, or false reset.",
+      "on_puzzle_complete": {
+        "dialogue": "FOUR_LIGHTS",
+        "save": true
+      },
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    },
+    {
+      "id": 13,
+      "key": "core_boss",
+      "name_ja": "灯核の間",
+      "size": [
+        240,
+        160
+      ],
+      "play_bounds": [
+        8,
+        28,
+        224,
+        124
+      ],
+      "spawn": {
+        "south": [
+          120,
+          132
+        ],
+        "north": [
+          120,
+          52
+        ]
+      },
+      "static_solids": [
+        [
+          8,
+          28,
+          96,
+          16
+        ],
+        [
+          136,
+          28,
+          96,
+          16
+        ]
+      ],
+      "dynamic_solids": [
+        {
+          "id": "north_gate",
+          "rect": [
+            104,
+            28,
+            32,
+            16
+          ],
+          "blocking_unless_all": [
+            "CORE_CLEAR"
+          ]
+        }
+      ],
+      "objects": [],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "south",
+          "rect": [
+            104,
+            140,
+            32,
+            12
+          ],
+          "to_room": 12,
+          "to_spawn": "north",
+          "requires_all": []
+        },
+        {
+          "id": "return_lantern",
+          "rect": [
+            104,
+            28,
+            32,
+            12
+          ],
+          "to_room": 0,
+          "to_spawn": "elder",
+          "requires_all": [
+            "CORE_CLEAR"
+          ]
+        }
+      ],
+      "route_checks": [
+        {
+          "name": "retreat",
+          "flags": [],
+          "start": [
+            120,
+            100
+          ],
+          "goal": [
+            120,
+            144
+          ],
+          "reachable": true
+        },
+        {
+          "name": "victory_return",
+          "flags": [
+            "CORE_CLEAR"
+          ],
+          "start": [
+            120,
+            132
+          ],
+          "goal": [
+            120,
+            36
+          ],
+          "reachable": true
+        }
+      ],
+      "boss": "CLOSED_CORE",
+      "retreat": "South exit is always available; leaving resets the living boss. A cleared core never respawns, including after a power interruption during the ending.",
+      "retry_spawn": "south",
+      "save_on": "room entry, each new permanent flag, rest, boss reward",
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+    }
+  ]
+}

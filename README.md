@@ -1,57 +1,55 @@
 # Adventure Legends: Emberbond — 灯の契約
 
-An original native Game Boy Advance action-adventure in active development. This milestone adds a continuous scrolling grove, optional discoveries and richer combat to the first playable chapter. It includes Japanese dialogue, original bright pixel art, hardware sprite animation, PSG audio and persistent SRAM checkpoints.
+An original native Game Boy Advance action-adventure in active development. This foundation contains a continuous scrolling grove,14 areas,4 field companions,3 dungeon arcs,3 bosses and a complete first story with a post-ending village. It has Japanese dialogue, bright original pixel art, directional animation, PSG audio and persistent SRAM checkpoints.
 
-The build is a real `.gba` ROM, not a browser recreation. The finite completion plan is in [ROADMAP.md](docs/ROADMAP.md); additional dungeon/companion arcs and the final campaign ending are still ahead.
+The requested larger game is still being built: monster evolution, a 128-form roster, five-phase/polarity systems, equipment, regional towns and side quests are planned in [ROADMAP.md](docs/ROADMAP.md). They are not claimed as implemented by this ROM.
 
 ## Play
 
-Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulator. Configure the emulator's keyboard/gamepad mappings as needed. No commercial-game ROM or extracted assets are required. [日本語の遊び方](docs/PLAY_JA.md)
+Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulator. Configure keyboard/gamepad mappings there. No commercial-game ROM or extracted assets are required. [日本語の遊び方](docs/PLAY_JA.md)
 
 | GBA button | Action |
 | --- | --- |
-| D-pad | Move / face; diagonal speed is normalized |
-| A | Sword / interact / advance dialogue; successive attacks chain into a stronger third strike |
-| B | Summon or recall the selected companion; close the journal |
-| L | Switch Homura (fire fox) / Midori (nature spirit) |
-| R | Use the summoned companion's power |
-| Select, while playing | Collision-safe dodge roll with a cooldown |
-| Start | Open / close the quest and controls journal |
-| A, in journal | Switch map / controls; the map is available in the grove |
+| D-pad | Move/face; diagonal speed is normalized |
+| A | Sword/interact/dialogue; successive attacks chain into a stronger third strike |
+| B | Summon/recall selected companion; close journal |
+| L | Cycle unlocked companions, including while paused |
+| R | Summoned companion's power |
+| Select, during play | Collision-safe dodge with cooldown |
+| Start | Open/close journal |
+| A, journal | Cycle objectives/controls, map, companion powers |
+| R, completed-game journal | Replay the ending |
 | Start, title | New game or continue checkpoint |
-| Select, title | Fresh adventure, replacing previous progress |
+| Select, title | Fresh adventure, replacing prior progress |
 
-Fire lights braziers, attacks enemies and exposes the guardian's armored core. Nature grows the river bridge, pushes nearby foes and heals a heart when its longer healing cooldown is ready. Powers share a short cooldown, including after companion changes.
+### Companions and first story
 
-### First-chapter route and discoveries
+Homura uses fire for projectiles, braziers and armor. Midori grows roots, pushes nearby foes and supplies slower cooldown-limited healing. After the grove guardian, Fuuri joins with wind-driven traversal, projectile clearing and stagger. After the sky guardian, Kohaku joins with stone mechanisms, a pulse and a short one-hit guard. Switching companions does not reset the shared power cooldown.
 
-1. Read the elder's introduction, then leave the village to the north
-2. Explore the 480×320 grove. The campfire west of the southern path heals and records a checkpoint when you press A nearby
-3. Follow the center path to the river. Summon Midori and use R from the bank to grow the crossing
-4. Across the river, the west path leads to an optional chest that permanently adds two hearts. The northeast path leads to the temple
-5. Use Homura near both temple braziers, allowing the ability cooldown to recover. Sword attacks and dodge help handle nearby enemies
-6. Enter the north gate. Break the guardian's armor with Homura, then strike its exposed core with the sword. Keep outside contact range, and repeat after the armor reforms
-7. If defeated, press A to retry with full health. Grove retries/continues use an activated campfire; ordinary area transitions keep their physical entrances
+1. Leave the village north. Grow the grove's river bridge with Midori and find the northeast shrine. Homura lights both braziers and exposes the first guardian
+2. Return to the village and interact with the eastern sign. Follow the sky route: wind vanes, a patrol, and two wind relays plus a fire source. Kazane becomes vulnerable to wind during recovery
+3. After Kohaku joins, use the village's western stone marker. Open the arch, set weights, uncover the well, grow roots and burn thorns. Activate four power sockets in any order
+4. The final core has stone, wind and fire phases. Watch its warnings, use the required power during recovery, then strike. Return to the elder for the story payoff; Start on the ending card returns to peaceful exploration
 
-Ranged seed-spitters visibly charge for 30 updates before firing toward your earlier position. Their aim locks during the warning, so movement and dodge are useful. The third sword strike has extra range/damage; holding one button is not an automatic combo.
+Optional grove camp/rest, an eight-heart relic and a ridge chime reward exploration. Current puzzles are companion-dependent mechanisms with persistent progress; richer movable-object/clue/quest dungeons and more hidden field discoveries are future milestones.
 
-Progress saves at area transitions, puzzle completion, the campfire and the optional chest. Keep the emulator's `.sav` file beside the ROM. Save format 3 loads the published format 2 and migrates it on continue. An already completed old chapter still opens its ending; a later campaign milestone will migrate chapter completion into continuing story progress.
+Progress records at transitions, puzzle completions, rests and rewards. Retrying restores health at a safe entrance or the recorded camp. Save format 4 uses two transactional CRC-protected banks. It loads published formats 2/3 without overwriting their original bytes; an old completed first chapter continues into the new sky route. Keep the emulator's `.sav` file.
 
 ## Build
 
-Requires GNU Make, Python 3 and ARM bare-metal GCC. The checked-in generated C data allows ROM builds without art-generation dependencies.
+Requires GNU Make, Python 3 and ARM bare-metal GCC. Checked-in generated data permits builds without art-generation dependencies.
 
-- Use the official [devkitPro GBA toolchain](https://devkitpro.org/wiki/Getting_Started), set `DEVKITARM`, and run `make`
-- Or use compatible `arm-none-eabi-gcc` / `arm-none-eabi-objcopy` on PATH
-- Or run `make ARM_PREFIX=/absolute/path/to/arm-none-eabi-`
+- Official [devkitPro GBA toolchain](https://devkitpro.org/wiki/Getting_Started): set `DEVKITARM` and run `make`
+- Or compatible `arm-none-eabi-gcc`/`arm-none-eabi-objcopy` on PATH
+- Or `make ARM_PREFIX=/absolute/path/to/arm-none-eabi-`
 
-Output: `build/emberbond.gba`, plus matching ELF/map/symbol files. `make clean` removes build products only. [Tool setup](tools/README.md) documents the isolated official Debian compiler/mGBA packages used for verification.
+Output: `build/emberbond.gba` plus matching ELF/map/symbols. [Tool setup](tools/README.md) documents the isolated official Debian packages used in verification.
 
-`make assets` regenerates original art, text and world data. It needs Pillow and Noto Sans CJK at the font path in `assets/generate_ui.py`. Generated pixel data remains in deterministic small `src/asset_data/` and `src/world_data/` includes; do not replace them with a large monolithic source file.
+`make assets` regenerates original art, geometry and Japanese text. It needs Pillow and Noto Sans CJK at the generator's documented path. Generated arrays stay in deterministic small includes in `src/asset_data`, `world_data`, `campaign_art_data` and `ui_data`; do not replace them with a giant monolith.
 
-## Test
+## Test and capture
 
-Install native mGBA development headers/library and Pillow, then:
+With native mGBA development headers/library and Pillow:
 
 ```sh
 make
@@ -60,37 +58,27 @@ make test
 make test-tools
 ```
 
-`make test` covers the full journey, independent edge cases, frame pacing and exploration. Normal gameplay checks use actual GBA buttons and read-only symbol inspection, not injected game progress. Optional video recording needs ffmpeg:
+The aggregate retains scrolling/combat regressions and adds host serialization tests, full minimal/optional campaign routes and real display-cadence measurements. Ordinary progress uses GBA controls and read-only symbol inspection, never injected game RAM. Save-corruption fixtures are explicitly labeled and separate.
 
 ```sh
-make gameplay-video
-python3 tests/capture_milestone_video.py
+make gameplay-video  # requires ffmpeg; continuous controller-only campaign + actual audio
 ```
 
-## Verified milestone
+[Verification](docs/VERIFICATION.md) records exact hashes, coverage and limitations. Frame-rate claims concern actual emulated GBA updates/page presentations, not host emulator throughput.
 
-- 20 full-journey checks, 19 independent edge checks and 74 exploration checks pass
-- All 19 measured cadence scenes pass, including four moving-camera/companion/sword/projectile/roll windows
-- The four scrolling stress windows produced 1,440 updates and 1,440 presentations in 1,440 GBA frames (~59.73 Hz)
-- Worst sampled scrolling update/render cost is 44.6% of one hardware frame, before OAM commit
-- All four viewport alignments match the source atlas exactly; authentic older SRAM saves migrate correctly
+## Source layout
 
-[Verification](docs/VERIFICATION.md) gives hashes, scope and reproduction. These are representative mGBA measurements, not an exhaustive timing proof or physical-hardware certification.
-
-## Project layout
-
-- `src/game.c`: gameplay, camera, cached bitmap renderer, hardware objects, audio, input and save handling
-- `src/startup.s`, `linker.ld`: ARM7TDMI startup and cartridge memory layout
-- `src/assets.*`, `src/asset_data/`: original room/sprite/palette data
-- `src/world.*`, `src/world_data/`: continuous grove, collision data, props and even/odd viewport atlases
-- `src/ui.*`: Japanese text masks
-- `assets/`: editable generators, manifests, art previews and route proofs
-- `tools/`: cartridge header utility and actual mGBA-core automation
-- `tests/`: controller-only gameplay, exploration, migration and performance checks
-- `docs/`: architecture, player guide, measured evidence and completion roadmap
+- `src/game.c`: input, gameplay, camera, compositor, audio and orchestration
+- `src/campaign_rules.*`: generated room geometry, mechanisms and dialogue definitions
+- `src/save4.*`: transactional save serialization and prior-version migration
+- `src/assets.*`, `world.*`, `campaign_art.*`, `ui.*`: generated original graphics/text
+- `src/startup.s`, `linker.ld`: cartridge entry and hardware memory budgets
+- `assets/`: editable generators, data and visual proofs
+- `tests/`: controller-only gameplay/performance, persistence, authentic prior-ROM fixtures
+- `docs/`: player guide, architecture, evidence and expanded development roadmap
 
 ## Scope and credits
 
-Original world, story, characters, artwork, tune and code, under the repository's existing Apache license. The high-level visual/motion reference is handheld top-down adventures; no Nintendo characters, maps, music or extracted game assets are included. The standard boot-identification header is used for GBA cartridge compatibility.
+Original world, characters, artwork, story, tune and code under the repository's existing Apache license. Handheld top-down adventures inspire readability and motion; no Nintendo characters, maps, music or extracted assets are included. The standard cartridge boot-identification header is present for GBA compatibility.
 
-This remains the first chapter: four areas including one scrolling grove, two companions and one dungeon boss. Physical GBA hardware, flash cartridges, other emulators, alternate compiler releases and the macOS bridge-build path have not been tested. More campaign content is in development through separate reviewable milestones.
+This is a foundation release in a continuing project, not 128 finished monsters or commercial-game parity. Physical GBA hardware, flash cartridges, other emulators/compiler releases and the macOS bridge-build path remain untested. Remote hosted CI is not currently configured.

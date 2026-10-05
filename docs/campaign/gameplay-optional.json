@@ -1,0 +1,136 @@
+{
+  "rom_sha256": "0ded4a979de99fa32e152ca0b541189df330f8c3ca8dcae14988d181c027f1d7",
+  "symbol_sha256": "5f0fe9d755668b7508e48deba518dd6a30bb34ce793f0b5689d2c943d743c051",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "route": "optional",
+  "exhaustive": false,
+  "failures": [],
+  "visited_rooms": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      13,
+      0
+    ]
+  ],
+  "permutations": {
+    "relay": [],
+    "sockets": []
+  },
+  "final": {
+    "game_state": 1,
+    "room": 0,
+    "px": 120,
+    "py": 118,
+    "hp": 8,
+    "max_hp": 8,
+    "spirit": 0,
+    "summoned": 1,
+    "room_flags": 65535,
+    "chapter_flags": 15,
+    "optional_flags": 1,
+    "story_seen": 62,
+    "bridge_open": 1,
+    "torches": 3,
+    "boss_hp": 0,
+    "boss_armor": 15,
+    "boss_state": 5,
+    "boss_phase": 2,
+    "boss_timer": 165,
+    "ability_cd": 0,
+    "heal_cd": 0,
+    "guard_ticks": 0,
+    "camera_x": 0,
+    "camera_y": 0,
+    "roll_ticks": 0,
+    "relic_found": 1,
+    "camp_unlocked": 1,
+    "dialog_speaker": 0,
+    "dpage": 5,
+    "dcount": 5,
+    "frame": 9669
+  },
+  "emulator_frame": 9762,
+  "assertions_passed": 369,
+  "raw_report_sha256": "9960b162aa6c9d9ba2cb493482ca16e3857bcb2671de5fb93ec4dd7bb4c935d5",
+  "reproduce": "python3 tests/campaign_tests.py --optional --quick"
+}

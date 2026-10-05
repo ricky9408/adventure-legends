@@ -22,9 +22,9 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o
 
-.PHONY: all clean tools assets test-tools test gameplay-video
+.PHONY: all clean tools assets test-tools test test-campaign gameplay-video
 all: $(TARGET).gba
 
 $(BUILD):
@@ -51,6 +51,8 @@ assets:
 	$(PYTHON) assets/generate_assets.py
 	$(PYTHON) assets/generate_ui.py
 	$(PYTHON) assets/generate_world.py
+	$(PYTHON) assets/generate_campaign.py
+	$(PYTHON) assets/generate_campaign_rules.py
 
 tools:
 	./tools/install_tools.sh
@@ -58,11 +60,18 @@ tools:
 test: all
 	$(PYTHON) tests/playthrough.py
 	$(PYTHON) tests/review_tests.py
-	$(PYTHON) tests/performance_tests.py --strict
 	$(PYTHON) tests/exploration_tests.py
+	$(PYTHON) tests/test_save4.py
+	$(MAKE) test-campaign
+
+# State fixtures and timing evidence are always produced by this exact ROM.
+test-campaign: all
+	$(PYTHON) tests/campaign_tests.py --output build/campaign-qa
+	$(PYTHON) tests/campaign_tests.py --optional --quick --output build/campaign-optional
+	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-qa/campaign-report.json --campaign build/campaign-optional/campaign-report.json --strict-cold
 
 gameplay-video: all
-	$(PYTHON) tests/playthrough.py --video
+	$(PYTHON) tests/capture_campaign_video.py
 
 test-tools:
 	$(PYTHON) tools/smoke_tests/test_bridge.py

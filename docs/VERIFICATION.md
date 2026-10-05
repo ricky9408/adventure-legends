@@ -1,36 +1,49 @@
-# Scrolling exploration milestone — verification
+# Three-lantern campaign foundation — verification
 
-Verified 2026-10-05 against actual merged main `120a1062f9849cdf0b642989318ca36ec2309b92`.
+Verified 2026-10-05. This is a coherent story foundation within the larger requested project, not completion of evolution, equipment, regional cities or 128 monster forms.
 
-- ROM: **571,408 bytes**
-- SHA-256: `a0c68c5ecde39b75b7bbafff4e19467d1e6cc901bb1c99b92af60492d3de375c`
-- Clean GCC 14.2.1 build, valid GBA header/checksum, no `-Wall -Wextra` warnings
-- Source and asset regeneration deterministic, retaining the published small-include packaging
+- ROM: **1,583,620 bytes**
+- SHA-256: `0ded4a979de99fa32e152ca0b541189df330f8c3ca8dcae14988d181c027f1d7`
+- GNU ARM GCC 14.2.1, valid native GBA header, no `-Wall -Wextra` warnings
+- Full asset regeneration changes no source bytes and rebuilds the exact tested ROM
+- mGBA 0.10.5 native core with HLE BIOS; normal gameplay uses only GBA buttons and read-only state inspection
 
 ## Gameplay and persistence
 
-113 checks pass: 20 full-journey assertions, 19 independent edge assertions and 74 exploration assertions. Tests execute the real `.gba` using mGBA 0.10.5 with its HLE BIOS, controller input and read-only symbol inspection. They do not inject normal gameplay progress into RAM.
+**3,978 assertions pass:** 3,425 exhaustive campaign, 369 optional route, 24 preserved first-chapter, 20 independent review and 140 scrolling/exploration regressions. Another 26 host save-test groups cover serialization faults independently of the emulator.
 
-Coverage includes:
+Coverage includes all 14 areas, four companions, three bosses and the elder ending/postgame. The six-heart route uses ordinary one-damage sword strikes without the optional relic/chime or a required combat-healing wait loop. The optional route collects the permanent eight-heart relic and flower chime.
 
-- Complete existing chapter without the optional health upgrade
-- Both camera axes, all clamp boundaries, physical entrance/return paths, fixed HUD and journal map
-- River gating, companion power, adjacent blocked banks and collision-safe dodge
-- Camp healing, safe checkpoint offset, ordinary travel versus retry/continue semantics
-- One-time chest, permanent eight-heart maximum, death/retry and SRAM reopening
-- Three-strike combo, locked ranged aim and exactly 30 update warnings before a shot
-- Authentic format-2 bridge and completed saves created by playing the published ROM, migrated and reopened as format 3
-- Explicit corrupt/checksummed-invalid fixture rejection, fresh-game reset and ending persistence
+- All 6 wind-relay orders and 24 four-socket orders
+- Wrong, absent and repeated powers; intended prerequisite chains; safe reentry and reload
+- Closed exits, cracked arch, root gap and thorns resist straight/diagonal movement and swept dodge
+- Natural deaths/retries in seven threat rooms; every Kazane state and every core phase/transition can retreat safely
+- Reward/ending page interruptions, replay interruptions and postgame visits; earned companions and clear flags never duplicate or disappear
+- Authentic prior-ROM formats 2/3 migrate to dual-bank format 4, preserving optional upgrades; sequence wrap, latest-record selection and corruption fallback
+- Every journal tab and all unlocked companion selections render distinct, stable content
+- Original camera boundaries, all four viewport alignments, ranged warnings, combo/damage and camp semantics remain tested
 
-The optional-route video also uses only controls: camp, map, bridge, relic, ranged encounter, temple, guardian and chapter ending. It records native emulator frames at real GBA cadence with actual emulator audio.
+The camp regression found and fixed a real integration bug: resting after arriving from the north now records the camp spawn, while ordinary north-side reentry still preserves its physical entrance.
 
-## Frame pacing and exact pixels
+## Frame pacing
 
-All 19 cadence scenes pass. The four new moving-camera stress windows combine following companions, sword attacks, toast UI, ranged warning/projectiles, diagonal motion and dodge. They produce **1,440/1,440 updates and presentations**, with no missed hot frames.
+Both minimal and optional-eight-heart fixture runs pass strict cold and steady cadence:
 
-Worst sampled scrolling update/render work: **125,325 cycles (44.6%)** of the 280,896-cycle display-frame budget, before the small OAM commit. The display cadence is ~59.7275 Hz, not the host's emulation speed. Original menu cold-build tests retain their bounded two-frame transition target.
+- Per run: **60 steady scenes, 20,460 updates and 20,460 presentations in 20,460 hardware frames**
+- Per run: **28 cold transitions, 1,680 updates and 1,680 presentations in 1,680 hardware frames**
+- All 14 rooms, four powers, three journal tabs, all selected-companion panels, every boss phase and a genuine six-projectile enraged Kazane window are covered
+- Worst sampled cold update/render: **229,908 cycles**, leaving **18.15%** of the 280,896-cycle display-frame budget
+- Worst sampled steady update/render: **120,501 cycles**
 
-For every camera-x modulo-4 alignment, **28,560 displayed VRAM background pixels** match the original atlas exactly, with zero mismatches. This specifically guards the aligned even/odd DMA viewport path.
+These are actual emulated GBA frames at 16,777,216/280,896≈59.7275 Hz, not host FPS. Timings exclude VBlank waiting/OAM commit; independent page-flip cadence verifies final presentation. This is representative measured coverage, not an exhaustive all-frame proof or physical-hardware certification.
+
+The initially measured cold journal could take two frames. Fixed-source panel DMA, precompiled paired-pixel text spans and a paired-pixel static sprite renderer remove that overrun. Both text alignments reconstruct exact original glyph pixels. Seven complete journal/companion screens match the pre-optimization renderer pixel-for-pixel.
+
+## Capture and evidence
+
+The full video is a continuous **254.74-second** controller-only run through the optional route, all bosses, ending and peaceful village, with actual emulator audio. It uses no RAM injection, save reload or savestate rewind. This scripted route duration is not an estimated human play length.
+
+[Summary](campaign/summary.json), [minimal gameplay](campaign/gameplay-minimal.json), [optional gameplay](campaign/gameplay-optional.json), [minimal cadence](campaign/performance-minimal.json), [optional cadence](campaign/performance-optional.json), [capture](campaign/capture.json), and bounded assertion-audit files are checked in. Raw controller traces/state fixtures regenerate under ignored `build/`. Older `docs/milestone1`, `docs/perf` and polish evidence are historical tests of prior ROMs, not this release's timing report.
 
 ## Reproduce
 
@@ -41,19 +54,11 @@ make test
 make test-tools
 make assets
 make
+make gameplay-video  # ffmpeg required
 ```
 
-Optional footage: `python3 tests/capture_milestone_video.py` (ffmpeg required). Detailed generated traces and save fixtures live under ignored `build/`; concise committed evidence is in [milestone1/summary.json](milestone1/summary.json), [exploration-results.json](milestone1/exploration-results.json) and [performance results](perf/final.json).
-
-## Screens
-
-![Scrolling grove](milestone1/02-forest-arrival.png)
-![Journal map](milestone1/02-forest-map.png)
-![Campfire](milestone1/03-campfire.png)
-![Optional relic](milestone1/05-relic-chest.png)
-![Safe camp reload](milestone1/07-reloaded-camp.png)
-![Ranged warning](milestone1/09-ranger-telegraph.png)
+Save-host tests include explicit corruption/interruption fixtures; those are distinguished from ordinary controller-only progression. Test save states are paired with their authentic SRAM to prevent accidental cross-branch progress.
 
 ## Limits
 
-Physical GBA hardware, flash cartridges, other emulators, compiler versions and the macOS native bridge build remain untested. These are representative reproducible emulator tests, not an exhaustive worst-case timing proof. The game remains the first chapter; the completion roadmap's later dungeon/companion arcs and final campaign ending are not yet implemented. No remote CI is configured in this repository.
+Physical GBA hardware, flash cartridges, other emulator/compiler releases and the macOS native bridge path remain untested. There is no hosted CI configured. Current puzzles are largely persistent companion mechanisms; movable-object/clue quests, richer regional interactivity and hidden discoveries are upcoming work. Current roster: 4 implemented/obtainable companion forms; evolution and equipment inventory are not yet implemented.

@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""Controller-only playthrough of the real GBA ROM using the mGBA core."""
+"""Controller-only first-chapter regression of the real campaign GBA ROM.
+The complete three-lantern route lives in campaign_tests.py.
+"""
 from pathlib import Path
-import sys, subprocess, json
+import sys, subprocess, json, os
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'tools'))
 from mgba_runner import Emulator
-sym={w[2]:int(w[0],16) for ln in (ROOT/'build/emberbond.sym').read_text().splitlines() if len(w:=ln.split())==3}
-OUT=ROOT/'build/qa';OUT.mkdir(exist_ok=True)
+ROM=Path(os.environ.get('EMBERBOND_TEST_ROM',ROOT/'build/emberbond.gba')).resolve()
+SYMBOLS=Path(os.environ.get('EMBERBOND_TEST_SYMBOLS',ROOT/'build/emberbond.sym')).resolve()
+sym={w[2]:int(w[0],16) for ln in SYMBOLS.read_text().splitlines() if len(w:=ln.split())==3}
+OUT=Path(os.environ.get('EMBERBOND_TEST_OUTPUT',ROOT/'build/qa')).resolve();OUT.mkdir(parents=True,exist_ok=True)
 class Play:
  def __init__(self,video=False):
-  self.e=Emulator(ROOT/'build/emberbond.gba');self.video=video;self.logs=[];self.frames=[]
+  self.e=Emulator(ROM);self.video=video;self.logs=[];self.frames=[]
   if video:self.e.audio_start(OUT/'playthrough.wav')
  def get(self,n):return self.e.read(sym[n])
  def step(self,n,key=0):
@@ -17,10 +21,10 @@ class Play:
     self.e.frames(1,key)
     self.frames.append(self.e.screenshot())
   else:self.e.frames(n,key)
- def tap(self,key):self.step(10,key);self.step(10)
+ def tap(self,key,hold=10,release=10):self.step(hold,key);self.step(release)
  def check(self,b,label):
   assert b,label+' '+str(self.status());self.logs.append(label);print('PASS',label,flush=True)
- def status(self):return {n:self.get(n) for n in ['game_state','room','px','py','hp','spirit','summoned','bridge_open','torches','boss_hp','boss_armor','ability_cd','frame']}
+ def status(self):return {n:self.get(n) for n in ['game_state','room','px','py','hp','spirit','summoned','bridge_open','torches','boss_hp','boss_armor','ability_cd','chapter_flags','room_flags','story_seen','save_failed','frame']}
  def shot(self,name):self.e.screenshot(OUT/(name+'.png'))
  def dialogs(self):
   for _ in range(8):
@@ -60,15 +64,15 @@ class Play:
   self.nextroom(1);self.goto(y=180);self.tap('R');self.check(self.get('bridge_open')==0,'unsummoned ability cannot solve puzzle');self.step(35,'UP');self.check(176<=self.get('py')<=180,'river blocks passage before puzzle');self.tap('B');self.check(self.get('summoned')==1,'summoned fire companion');self.tap('L');self.check(self.get('spirit')==1,'switched to nature companion');self.tap('R');self.check(self.get('bridge_open')==1,'nature power grows bridge');self.dialogs();self.shot('05-grown-bridge');self.nextroom(2);self.dialogs();self.check(self.get('torches')==0,'temple begins sealed');self.shot('06-temple')
   self.tap('L');self.goto(y=94);self.goto(x=64);self.goto(y=84)
   self.defend(160);self.goto(x=64,y=84);self.tap('R');self.check(self.get('torches')==1,'first brazier lights');self.goto(y=94);self.goto(x=176);self.goto(y=84);self.defend(160);self.goto(x=176,y=84);self.tap('R');self.check(self.get('torches')==3,'second brazier opens gate');self.dialogs();self.shot('07-open-gate');self.goto(y=94);self.goto(x=120);self.nextroom(3);self.dialogs();self.shot('08-guardian')
-  self.goto(y=100);self.step(160);self.tap('R');self.check(self.get('boss_armor')>0,'fire breaks guardian armor');self.goto(y=92)
+  self.goto(y=100);self.step(self.get('ability_cd')+2);self.tap('R',2,2);self.check(self.get('boss_armor')>0,'fire breaks guardian armor');self.goto(y=92)
   for i in range(30):
    if self.get('game_state')==2:break
-   if self.get('boss_armor')<50 and self.get('ability_cd')==0:self.tap('R')
+   if self.get('boss_armor')==0 and self.get('ability_cd')==0:self.tap('R',2,2)
    # Face up, stay outside contact range, swing each cooldown.
-   self.goto(x=self.get('boss_x'),y=self.get('boss_y')+28);self.step(2,'UP');self.step(2);self.tap('A');self.step(22)
+   self.goto(x=self.get('boss_x'),y=self.get('boss_y')+30);self.step(1,'UP');self.tap('A',2,2);self.step(18)
    if i==2:self.shot('09-sword-boss')
    print('BOSS',i,self.status(),flush=True)
-  self.check(self.get('boss_hp')==0,'guardian defeated with sword');self.dialogs();self.check(self.get('game_state')==5,'ending reached');self.shot('10-ending');self.step(90)
+  self.check(self.get('boss_hp')==0,'guardian defeated with sword');self.check(self.get('chapter_flags')==1,'first lantern reward committed before dialogue');self.dialogs();self.check(self.get('game_state')==1 and self.get('room')==0,'first chapter continues safely in village');self.check(self.get('completed')==0,'first guardian is not the campaign ending');self.tap('L');self.tap('L');self.check(self.get('spirit')==2,'earned Fuuri is selectable');self.check(self.get('save_failed')==0,'first chapter save transaction succeeded');self.shot('10-wind-joins-village');self.step(90)
   (OUT/'playthrough.json').write_text(json.dumps({'passes':self.logs,'final':self.status(),'emulator_frames':self.e.frame,'controller_only':True},indent=2)+'\n')
   # Persist real SRAM for an independent new emulator instance.
   (OUT/'checkpoint.sav').write_bytes(self.e.bytes(0x0E000000,32768))

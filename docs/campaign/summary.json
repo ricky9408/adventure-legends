@@ -1,0 +1,19 @@
+{
+  "rom_sha256": "0ded4a979de99fa32e152ca0b541189df330f8c3ca8dcae14988d181c027f1d7",
+  "rom_bytes": 1583620,
+  "campaign_assertions": 3425,
+  "optional_assertions": 369,
+  "first_chapter_assertions": 24,
+  "review_assertions": 20,
+  "exploration_assertions": 140,
+  "total_gameplay_assertions": 3978,
+  "save_host_test_groups": 26,
+  "regeneration_changed_source_files": 0,
+  "bridge_smoke_pass": true,
+  "prior_github_base": "501eef0c1834388d52ebed850845925118d9038f",
+  "physical_hardware_tested": false,
+  "hosted_ci_configured": false,
+  "iwram_code_bytes": 24880,
+  "ewram_bytes": 71912,
+  "reserved_stack_minimum": 4096
+}
