@@ -15,7 +15,7 @@ Every roster release will separately report:
 3. Obtainable: a normal player can acquire the form in the shipped world
 4. Verified: evolution/acquisition, field actions, combat, saves and performance are tested
 
-At this foundation milestone, there are **4 implemented and obtainable companion forms**, no evolution system, and one sword weapon. Homura, Midori, Fuuri and Kohaku each have a different field and combat power. Their fire/nature/wind/stone power labels are not yet a five-phase battle system. There are 14 areas, one village hub, three dungeon arcs and a complete first story arc with a post-ending village. Regional cities, equipment inventory, the full monster roster and a side-quest framework remain ahead.
+At the current creature milestone, there are **8 implemented, obtainable and controller-verified forms**, four confirmed/deferred evolution paths, and one sword weapon. Homura, Midori, Fuuri and Kohaku each have a different field and combat power. Their fire/nature/wind/stone power labels are not yet a five-phase battle system. There are 16 areas, one village hub, three dungeon arcs, optional personal trials and a complete first story arc with a post-ending village. Regional cities, equipment inventory, the full monster roster and a side-quest framework remain ahead.
 
 ## Completed exploration foundation
 
@@ -25,7 +25,7 @@ At this foundation milestone, there are **4 implemented and obtainable companion
 - Format-3 migration from published format-2 saves
 - 113 gameplay/edge/exploration checks and 19 cadence scenes verified on that immutable milestone ROM
 
-## Current milestone: three-lantern campaign foundation
+## Completed: three-lantern campaign foundation
 
 - Sky route, wind vanes, patrol encounter, three-way relay and Kazane boss
 - Stone route, weighted sockets, well/root/fire sequence, four-power chamber and three-phase final core
@@ -36,7 +36,7 @@ At this foundation milestone, there are **4 implemented and obtainable companion
 
 This milestone establishes a coherent playable baseline while the larger systems are designed.
 
-## Next: monster-system vertical slice
+## Current milestone: monster-system vertical slice
 
 - Stable 1–128 catalog identifiers (0 means empty) with explicit unimplemented slots; data-driven family, phase, polarity, stats, learnsets and acquisition conditions
 - Wood, Fire, Earth, Metal and Water phases, with Yin/Yang as a separate dimension; research cited in the system design and numerical battle rules identified as original game interpretation
@@ -46,6 +46,8 @@ This milestone establishes a coherent playable baseline while the larger systems
 - Save expansion with non-overwriting migration, bounded storage and old-save fixtures; no newly mandatory grinding in the existing story
 
 Acceptance: each shipped representative is normally obtainable, its evolution and ability work in the real ROM, traversal cannot be stranded by party/equipment decisions, and the reported counts match the actual acquisition graph.
+
+Implemented in the first eight-form slice: original evolutions and portraits; native roster, XP/bond and command selection; inherited field powers; optional environmental trials; transactional save5 and published-save migration; true full-screen HUD/camera; fresh, minimal and migrated controller routes. Twelve forms are designed in the authoring catalog, eight are enabled. Numerical phase damage rules, exposed storage management, Water/Metal recruits and the legendary trial are not yet shipped. Player media avoids secrets and endings.
 
 ## Then: equipment and action roles
 
@@ -84,4 +86,4 @@ Acceptance: a machine-checked acquisition/evolution graph reaches all 128 forms,
 - Clean reproducible source build and deterministic asset generation; native `.gba`, player guide, credits and test evidence
 - Known limitations stated, including untested physical hardware or emulator/platform combinations
 
-Each meaningful milestone is a separate draft PR. The owner merges unless they explicitly authorize otherwise. Work can continue while review is pending; later commits must be reconciled with the actual main branch or clearly stacked on the earlier PR.
+Each meaningful milestone is a separate reviewable PR. The owner has authorized self-review and merge for this repository only; exact-head tests and an independent review still precede merge. Work can continue while review is pending; later commits must be reconciled with the actual main branch or clearly stacked on the earlier PR.

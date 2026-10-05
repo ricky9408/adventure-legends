@@ -1,0 +1,6 @@
+{
+  "content_revision": 1,
+  "enabled_form_ids": [1, 2, 4, 5, 7, 8, 10, 11],
+  "enabled_evolutions": [[1, 2], [4, 5], [7, 8], [10, 11]],
+  "note": "Eight-form systems milestone. The source catalog retains twelve design proposals and 128 reserved identities; only this explicit list has runtime definitions. No Water, Metal or legendary recruits are enabled."
+}

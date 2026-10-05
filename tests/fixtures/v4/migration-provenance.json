@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "failures": [],
+  "rom_sha256": "f95815af63ae79713e3f48850be768132e6bf293d1b5ce94a0370330366c354a",
+  "source_report_sha256": "728c5e257eefd7e063ec3cd76e74a5d04678789b944f89619c7fc9e54e122102",
+  "snapshots": {
+    "migration-checkpoint": {
+      "sram_path": "migration-campaign-complete.sav",
+      "status": {
+        "game_state": 1,
+        "room": 0,
+        "px": 120,
+        "py": 118,
+        "hp": 8,
+        "max_hp": 8,
+        "spirit": 0,
+        "summoned": 1,
+        "room_flags": 65535,
+        "chapter_flags": 7,
+        "optional_flags": 1,
+        "story_seen": 62,
+        "bridge_open": 1,
+        "torches": 3,
+        "boss_hp": 0,
+        "boss_armor": 15,
+        "boss_state": 5,
+        "boss_phase": 2,
+        "boss_timer": 165,
+        "ability_cd": 0,
+        "heal_cd": 0,
+        "guard_ticks": 0,
+        "camera_x": 0,
+        "camera_y": 0,
+        "roll_ticks": 0,
+        "relic_found": 1,
+        "camp_unlocked": 1,
+        "dialog_speaker": 0,
+        "dpage": 2,
+        "dcount": 2,
+        "frame": 9617
+      },
+      "provenance": "controller-reached; no game RAM writes",
+      "sram_sha256": "044464309c5296f6f8a0ab49897740d69919c3b935e299cb1d5f5f21dc9ddbf3"
+    }
+  },
+  "note": "Portable provenance subset of passing controller report; paired machine state is not required to load cartridge SRAM."
+}

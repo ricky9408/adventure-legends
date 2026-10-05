@@ -1,0 +1,159 @@
+{
+  "art": "Original deterministic code-native pixel art; exact existing nativeGBA palette; no external art",
+  "rooms": {
+    "14": {
+      "name": "Wind-loom courtyard",
+      "bounds": [
+        12,
+        44,
+        216,
+        104
+      ],
+      "entrance": [
+        4,
+        204,
+        64
+      ],
+      "return": [
+        204,
+        86
+      ],
+      "arrival": [
+        120,
+        132
+      ],
+      "reset": [
+        32,
+        120
+      ],
+      "vanes": [
+        [
+          88,
+          64
+        ],
+        [
+          88,
+          112
+        ],
+        [
+          168,
+          112
+        ]
+      ],
+      "source": [
+        40,
+        64
+      ],
+      "receiver": [
+        168,
+        48
+      ]
+    },
+    "15": {
+      "name": "Amber workshop",
+      "bounds": [
+        12,
+        44,
+        216,
+        104
+      ],
+      "entrance": [
+        9,
+        208,
+        120
+      ],
+      "return": [
+        208,
+        140
+      ],
+      "arrival": [
+        120,
+        132
+      ],
+      "reset": [
+        32,
+        120
+      ],
+      "parcels": [
+        [
+          88,
+          88
+        ],
+        [
+          136,
+          88
+        ]
+      ],
+      "plates": [
+        [
+          88,
+          56
+        ],
+        [
+          152,
+          104
+        ]
+      ],
+      "arch": [
+        200,
+        64
+      ],
+      "parcel_grid": [
+        72,
+        56,
+        7,
+        4,
+        16
+      ]
+    }
+  },
+  "grove_aids": [
+    {
+      "x": 184,
+      "y": 280,
+      "family": 0,
+      "lifetime_bit": 0
+    },
+    {
+      "x": 296,
+      "y": 208,
+      "family": 0,
+      "lifetime_bit": 1
+    },
+    {
+      "x": 320,
+      "y": 72,
+      "family": 0,
+      "lifetime_bit": 2
+    },
+    {
+      "x": 80,
+      "y": 136,
+      "family": 1,
+      "lifetime_bit": 3
+    },
+    {
+      "x": 400,
+      "y": 136,
+      "family": 1,
+      "lifetime_bit": 4
+    },
+    {
+      "x": 304,
+      "y": 280,
+      "family": 1,
+      "lifetime_bit": 5
+    }
+  ],
+  "palette_count": 178,
+  "chunks": 10,
+  "rom_pixel_bytes": 82944,
+  "sha256": {
+    "trial_background_wind": "0cb7db9509457369fb842b50f030c4bedf64582b557b9db62d11cdacf34aa317",
+    "trial_background_stone": "0fea61570b3aaa92337fff15729f55c5fa87f27bc22e4739c413731ce854b712",
+    "trial_aid_sprites": "12159375105e5b98b6ae0622c066434dfabc481c43c9edae0fb938d7792de01e",
+    "trial_vane_sprites": "35c59f90503a4bb7da03e49cd8f67eff337daa53c568bb53d9018ad91a6fdbf3",
+    "trial_misc_sprites": "a59e1f164756e9f39c7e5bca1bd5bf0c62fe6c19519f4e123189b3c25e46fe51"
+  },
+  "reward": "First restoration credits field aid once. Completed personal quest grants180XP and10bond to matching story companion independent of ordinary expedition cap; trial bit prevents repetition. No save5 reserved bytes used."
+}

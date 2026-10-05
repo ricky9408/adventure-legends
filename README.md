@@ -1,84 +1,79 @@
 # Adventure Legends: Emberbond — 灯の契約
 
-An original native Game Boy Advance action-adventure in active development. This foundation contains a continuous scrolling grove,14 areas,4 field companions,3 dungeon arcs,3 bosses and a complete first story with a post-ending village. It has Japanese dialogue, bright original pixel art, directional animation, PSG audio and persistent SRAM checkpoints.
+An original, evolving Game Boy Advance action-adventure about a small light and the companions who travel beside you.
 
-The requested larger game is still being built: monster evolution, a 128-form roster, five-phase/polarity systems, equipment, regional towns and side quests are planned in [ROADMAP.md](docs/ROADMAP.md). They are not claimed as implemented by this ROM.
+The world now fills the native **240×160 screen**, with floating corner controls instead of a permanent menu strip. Explore, fight with your sword, call a companion, and pay attention to the little things along the path. Companions can grow, learn new commands and change form through optional personal journeys. You can wait before evolving, and their familiar field powers remain yours.
 
-## Play
+## Start playing
 
-Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulator. Configure keyboard/gamepad mappings there. No commercial-game ROM or extracted assets are required. [日本語の遊び方](docs/PLAY_JA.md)
+Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulator. Set keyboard/controller mappings there and press **Start**. No commercial-game ROM or extracted assets are needed.
 
-| GBA button | Action |
+| Button | Action |
 | --- | --- |
-| D-pad | Move/face; diagonal speed is normalized |
-| A | Sword/interact/dialogue; successive attacks chain into a stronger third strike |
-| B | Summon/recall selected companion; close journal |
-| L | Cycle unlocked companions, including while paused |
-| R | Summoned companion's power |
-| Select, during play | Collision-safe dodge with cooldown |
-| Start | Open/close journal |
-| A, journal | Cycle objectives/controls, map, companion powers |
-| R, completed-game journal | Replay the ending |
-| Start, title | New game or continue checkpoint |
-| Select, title | Fresh adventure, replacing prior progress |
+| D-pad | Move and face; diagonals have normalized speed |
+| A | Sword, talk, examine, advance dialogue; successive strikes form a three-hit chain |
+| B | Call/recall your companion; close the journal |
+| L | Choose an unlocked companion |
+| R | Your summoned companion's selected power |
+| Select | Dodge |
+| Start | Open/close your journal |
 
-### Companions and first story
+In the journal, **A changes pages**. The growth page shows level, bond and the next step. **R changes a learned command; Select offers evolution** when its conditions are met at a resting place. Evolution has a separate confirmation and can be deferred. B returns to play.
 
-Homura uses fire for projectiles, braziers and armor. Midori grows roots, pushes nearby foes and supplies slower cooldown-limited healing. After the grove guardian, Fuuri joins with wind-driven traversal, projectile clearing and stagger. After the sky guardian, Kohaku joins with stone mechanisms, a pulse and a short one-hit guard. Switching companions does not reset the shared power cooldown.
+The corner icon shows B when a companion can be called and R while it is summoned. Its small bar shows power recovery. Area names appear briefly on entry and are available in the journal.
 
-1. Leave the village north. Grow the grove's river bridge with Midori and find the northeast shrine. Homura lights both braziers and exposes the first guardian
-2. Return to the village and interact with the eastern sign. Follow the sky route: wind vanes, a patrol, and two wind relays plus a fire source. Kazane becomes vulnerable to wind during recovery
-3. After Kohaku joins, use the village's western stone marker. Open the arch, set weights, uncover the well, grow roots and burn thorns. Activate four power sockets in any order
-4. The final core has stone, wind and fire phases. Watch its warnings, use the required power during recovery, then strike. Return to the elder for the story payoff; Start on the ending card returns to peaceful exploration
+Keep the emulator's `.sav` file. Progress records automatically. A short saving state preserves your progress before reward dialogue continues; world actions pause during that state. Title-screen Select starts a new adventure and replaces prior progress. Published saves from formats 2–4 continue into this version; keep a backup before returning to an older ROM, which cannot see new format-5 progress.
 
-Optional grove camp/rest, an eight-heart relic and a ridge chime reward exploration. Current puzzles are companion-dependent mechanisms with persistent progress; richer movable-object/clue/quest dungeons and more hidden field discoveries are future milestones.
+[日本語の遊び方、ネタバレなし](docs/PLAY_JA.md)
 
-Progress records at transitions, puzzle completions, rests and rewards. Retrying restores health at a safe entrance or the recorded camp. Save format 4 uses two transactional CRC-protected banks. It loads published formats 2/3 without overwriting their original bytes; an old completed first chapter continues into the new sky route. Keep the emulator's `.sav` file.
+## This update
+
+- Full-screen exploration with a compact floating HUD
+- Optional companion growth, explicit evolution choices and retained familiar commands
+- New personal discoveries and resettable environmental puzzles
+- More distinctive field/combat powers and readable movement tradeoffs
+- Transactional save upgrades, older-save migration, interruption recovery and repeat-reward protection
+
+The player preview and default video show only opening areas. Technical tests, source data and developer guides contain spoilers.
+
+## Development status
+
+The current ROM has **8 implemented, obtainable and controller-verified forms**, a four-companion party, 16 areas, three story dungeon arcs and optional personal trials. The broader requested game is still in development: the 128-form roster, equipment/weapon variety, regional towns and a larger quest campaign are not claimed as finished.
+
+The catalog reserves 128 stable identities and has 12 authored designs. Only eight are enabled. Five-phase/polarity definitions and matchup reference rules exist; numerical phase battle modifiers are not yet applied to the legacy combat encounters. There is no claim that 128 reserved rows are 128 playable monsters.
+
+[Roadmap](docs/ROADMAP.md) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Save format](docs/SAVE5.md)
 
 ## Build
 
-Requires GNU Make, Python 3 and ARM bare-metal GCC. Checked-in generated data permits builds without art-generation dependencies.
+Requires GNU Make, Python 3 and ARM bare-metal GCC. Generated data ships with source, so a ROM build does not require art fonts/Pillow.
 
-- Official [devkitPro GBA toolchain](https://devkitpro.org/wiki/Getting_Started): set `DEVKITARM` and run `make`
-- Or compatible `arm-none-eabi-gcc`/`arm-none-eabi-objcopy` on PATH
+- With the official [devkitPro GBA toolchain](https://devkitpro.org/wiki/Getting_Started), set `DEVKITARM` and run `make`
+- Or use compatible `arm-none-eabi-gcc` / `arm-none-eabi-objcopy` on PATH
 - Or `make ARM_PREFIX=/absolute/path/to/arm-none-eabi-`
 
-Output: `build/emberbond.gba` plus matching ELF/map/symbols. [Tool setup](tools/README.md) documents the isolated official Debian packages used in verification.
+Output: `build/emberbond.gba`, plus ELF/map/symbols. [Tool setup](tools/README.md) describes the isolated official Debian packages used in verification.
 
-`make assets` regenerates original art, geometry and Japanese text. It needs Pillow and Noto Sans CJK at the generator's documented path. Generated arrays stay in deterministic small includes in `src/asset_data`, `world_data`, `campaign_art_data` and `ui_data`; do not replace them with a giant monolith.
+`make assets` regenerates original graphics, text, creature tables and puzzle data. It needs Pillow and the Noto Sans CJK font used by the generator. Generated C arrays remain in bounded include chunks; do not combine them into huge monolithic files.
 
 ## Test and capture
 
-With native mGBA development headers/library and Pillow:
+With mGBA development headers/library and Pillow installed:
 
 ```sh
 make
 ./tools/build_mgba_bridge.sh
 make test
 make test-tools
+make gameplay-video  # ffmpeg; spoiler-free player teaser
 ```
 
-The aggregate retains scrolling/combat regressions and adds host serialization tests, full minimal/optional campaign routes and real display-cadence measurements. Ordinary progress uses GBA controls and read-only symbol inspection, never injected game RAM. Save-corruption fixtures are explicitly labeled and separate.
+`make test` includes native-controller journeys, full-screen pixel/OAM checks, older-save migration, fault-injected host persistence tests, personal trials, all enabled evolutions, command effects and actual emulated display cadence. Synthetic host fixtures are labeled separately from normal controller gameplay. Raw traces are generated under ignored `build/`.
 
-```sh
-make gameplay-video  # requires ffmpeg; continuous controller-only campaign + actual audio
-```
+`make developer-video` produces a spoiler-bearing campaign recording for development review. `python3 tools/package_source.py` makes a deterministic source ZIP and file-integrity manifest.
 
-[Verification](docs/VERIFICATION.md) records exact hashes, coverage and limitations. Frame-rate claims concern actual emulated GBA updates/page presentations, not host emulator throughput.
+## Credits and limits
 
-## Source layout
+Original world, characters, pixel art, story, music and code, under the repository's Apache license. Handheld top-down adventures inspire readability and movement; no Nintendo characters, maps, music or extracted game art are included. The standard cartridge boot-identification header is included for GBA compatibility.
 
-- `src/game.c`: input, gameplay, camera, compositor, audio and orchestration
-- `src/campaign_rules.*`: generated room geometry, mechanisms and dialogue definitions
-- `src/save4.*`: transactional save serialization and prior-version migration
-- `src/assets.*`, `world.*`, `campaign_art.*`, `ui.*`: generated original graphics/text
-- `src/startup.s`, `linker.ld`: cartridge entry and hardware memory budgets
-- `assets/`: editable generators, data and visual proofs
-- `tests/`: controller-only gameplay/performance, persistence, authentic prior-ROM fixtures
-- `docs/`: player guide, architecture, evidence and expanded development roadmap
-
-## Scope and credits
-
-Original world, characters, artwork, story, tune and code under the repository's existing Apache license. Handheld top-down adventures inspire readability and motion; no Nintendo characters, maps, music or extracted assets are included. The standard cartridge boot-identification header is present for GBA compatibility.
-
-This is a foundation release in a continuing project, not 128 finished monsters or commercial-game parity. Physical GBA hardware, flash cartridges, other emulators/compiler releases and the macOS bridge-build path remain untested. Remote hosted CI is not currently configured.
+Physical GBA hardware, flash cartridges, other emulator/compiler releases and the macOS native bridge-build path are not yet verified. Cold checkpoint decoding is a short blocking load transition, distinct from the measured steady gameplay and incremental-save cadence. There is no hosted CI configured yet.

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "names": [
+    "Homura Hearthkeeper",
+    "Midori Canopykeeper",
+    "Fuuri Windweaver",
+    "Kohaku Archwarden"
+  ],
+  "form_ids": [
+    2,
+    5,
+    8,
+    11
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "generator": "assets/generate_evolutions.py",
+  "rights": "Original code-native pixel art. No external art, extracted characters, traced silhouettes, or raster model input.",
+  "status": "Art assets only; playable evolution and journal integration are separate engine work.",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 20484,
+  "runtime_bss_bytes": 0,
+  "max_include_bytes": 32762,
+  "include_bytes": [
+    32762,
+    21072
+  ],
+  "frame_ticks_suggestion": 8,
+  "anchor": [
+    8,
+    8
+  ],
+  "motions": [
+    "Mantle plants, paired paw beats, single tail sways",
+    "Three leaves open in sequence; suspended seed and root hem sway",
+    "Four silk sails tilt sequentially around a spindle; woven loop trails",
+    "Four pillar feet step in opposing pairs; open amber vault rises and locks"
+  ],
+  "validation": {
+    "field_dimensions": [
+      4,
+      4,
+      4,
+      256
+    ],
+    "portrait_dimensions": [
+      4,
+      1024
+    ],
+    "palette_indices": [
+      0,
+      1,
+      4,
+      6,
+      7,
+      9,
+      10,
+      12,
+      13,
+      25,
+      26,
+      28,
+      29,
+      39,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      56,
+      58,
+      59,
+      60,
+      65,
+      67,
+      69,
+      73,
+      78,
+      79,
+      80
+    ],
+    "transparent_zero": true,
+    "existing_actor_palette_only": true,
+    "four_distinct_frames_per_direction": true,
+    "articulated_silhouette_motion": true,
+    "four_distinct_idle_views": true,
+    "independent_portraits": true,
+    "arch_aperture_clear_all_16_frames": true,
+    "loop_interior_clear": true,
+    "base_evolved_silhouettes_distinct": true
+  }
+}

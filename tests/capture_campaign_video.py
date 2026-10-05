@@ -20,11 +20,19 @@ class Movie(T.CampaignRun):
         self.encoder=subprocess.Popen(['ffmpeg','-y','-f','rawvideo','-pix_fmt','rgb24','-s','240x160','-r',str(T.REFRESH_HZ),'-i','-','-vf','scale=960:640:flags=neighbor','-c:v','libx264','-preset','fast','-crf','22','-pix_fmt','yuv420p',str(OUT/'silent.mp4')],stdin=subprocess.PIPE,stderr=subprocess.DEVNULL)
         self.e.audio_start(OUT/'gameplay.wav')
         self.recorded_frames=0
+    def one_frame(self,keys):
+        previous=self.get('room')
+        self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':keys})
+        self.e.frames(1,keys)
+        current=self.get('room')
+        if current!=previous:self.edges.append([previous,current])
+        if current not in self.visits:self.visits.append(current)
+        if self.get('save_failed'):raise AssertionError('Capture encountered a failed save')
+        self.encoder.stdin.write(self.e.screenshot().tobytes())
+        self.recorded_frames+=1
     def step(self,count,keys=0):
-        for _ in range(count):
-            super().step(1,keys)
-            self.encoder.stdin.write(self.e.screenshot().tobytes())
-            self.recorded_frames+=1
+        for _ in range(count):self.one_frame(keys)
+        while self.get('game_state')==6:self.one_frame(0)
     def dialogs(self,reward=None):
         for _ in range(32):
             if self.get('game_state')!=T.DIALOG:return

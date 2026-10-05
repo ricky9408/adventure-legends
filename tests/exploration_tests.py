@@ -10,6 +10,7 @@ frames and display-page flips, never host execution speed.
 from __future__ import annotations
 import argparse
 import binascii
+import zlib
 from collections import Counter
 import hashlib
 import json
@@ -23,25 +24,29 @@ from mgba_runner import Emulator
 CYCLES_PER_FRAME = 280896
 REFRESH_HZ = 16777216 / CYCLES_PER_FRAME
 PLAY, DIALOG, PAUSE, DEAD, WIN = 1, 2, 3, 4, 5
-BANK_A, BANK_B, BANK_SIZE = 0x40, 0x80, 32
+BANK_A, BANK_B, BANK_SIZE = 0x200, 0x1a00, 6144
 GROVE_CLEAR, SKY_CLEAR, CORE_CLEAR, ENDING_SEEN = 1, 2, 4, 8
 SEEN_LEGACY_RECAP, SEEN_WIND_JOIN = 1, 2
 LEGACY_FIXTURES = ROOT / 'tests/fixtures/legacy'
 
 
+def bank_crc5(data):
+    b=bytearray(data);b[16:21]=bytes(5)
+    return zlib.crc32(b)&0xffffffff
+
+
 def committed_banks(data):
-    """Inspect the serialized contract independently of the running ROM."""
-    result = []
-    for offset in (BANK_A, BANK_B):
-        b = data[offset:offset + BANK_SIZE]
-        if (len(b) == BANK_SIZE and b[:5] == b'EB\x04\x20\xa5'
-                and binascii.crc_hqx(b[:30], 0xffff) == int.from_bytes(b[30:32], 'little')):
-            result.append({'offset': offset, 'sequence': int.from_bytes(b[5:9], 'little'),
-                           'room': b[9], 'spawn': b[10], 'chapter_flags': b[11],
-                           'bridge': b[12], 'torches': b[13], 'relic': b[14], 'camp': b[15],
-                           'room_flags': int.from_bytes(b[16:20], 'little'),
-                           'optional_flags': b[20], 'story_seen': int.from_bytes(b[21:23], 'little'),
-                           'spirit': b[23]})
+    """Independently inspect the current explicitly encoded save5 contract."""
+    result=[]
+    for offset in (BANK_A,BANK_B):
+        b=data[offset:offset+BANK_SIZE]
+        if len(b)==BANK_SIZE and b[:4]==b'EB\x05\x20' and b[20]==0xa5 and bank_crc5(b)==int.from_bytes(b[16:20],'little'):
+            c=b[32:96]
+            result.append({'offset':offset,'sequence':int.from_bytes(b[8:12],'little'),
+                           'room':c[0],'spawn':c[1],'chapter_flags':c[2],'bridge':c[3],
+                           'torches':c[4],'relic':c[5],'camp':c[6],'optional_flags':c[7],
+                           'room_flags':int.from_bytes(c[8:12],'little'),
+                           'story_seen':int.from_bytes(c[12:14],'little'),'spirit':c[14]})
     return result
 
 
@@ -93,9 +98,14 @@ class ExplorationRun:
     def step(self, count, keys=0):
         self.inputs.append({'emulator_frame': self.e.frame, 'frames': count, 'keys': keys})
         self.e.frames(count, keys)
+        for _ in range(180):
+            if self.get('game_state')!=6:break
+            self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':0,'reason':'SAVE_PENDING'})
+            self.e.frames(1,0)
+        else:raise AssertionError('Transactional save did not finish')
         if 'camera_x' in self.sym and self.get('room') == 1:
             cx, cy = self.get('camera_x'), self.get('camera_y')
-            if not (0 <= cx <= 240 and 0 <= cy <= 184):
+            if not (0 <= cx <= 240 and 0 <= cy <= 160):
                 raise AssertionError(f'Camera escaped bounds: {cx}, {cy}')
             self.camera_trace.append({'frame': self.get('frame'), 'x': cx, 'y': cy,
                                       'player_x': self.get('px'), 'player_y': self.get('py')})
@@ -250,22 +260,25 @@ class ExplorationRun:
         """Compare displayed bitmap VRAM with the original ROM atlas exactly.
 
         Hardware sprites are composited separately, so they cannot hide a bad
-        background copy. The selected southern viewport contains no bridge;
-        fixed HUD rows and the toast strip are deliberately excluded.
+        background copy. All160 rows participate; only the small authored
+        bridge/trial floor-decoration bounds are masked. Transient text expires
+        before comparison, and no HUD or unused strip is excluded.
         """
         state = self.snapshot('viewport-alignment-start')
         self.goto(y=280)
         atlas = self.e.bytes(self.sym['overworld_bitmap'], 480*320)
         observed = {}
         for _ in range(14):
-            self.step(40)
+            self.step(150)
             cx, cy = self.get('camera_x'), self.get('camera_y')
             phase = cx % 4
             if phase not in observed:
                 page = 0x0600a000 if self.e.read(0x04000000, 2) & 0x10 else 0x06000000
-                actual = self.e.bytes(page + 24*240, 119*240)
-                expected = b''.join(atlas[(cy+y)*480+cx:(cy+y)*480+cx+240] for y in range(119))
-                mismatch = sum(a != b for a,b in zip(actual, expected))
+                actual = self.e.bytes(page, 160*240)
+                expected = b''.join(atlas[(cy+y)*480+cx:(cy+y)*480+cx+240] for y in range(160))
+                from fullscreen_tests import FullscreenRun
+                mask=FullscreenRun.bitmap_mask(self,cx,cy)
+                mismatch = sum(a != b for i,(a,b) in enumerate(zip(actual, expected)) if not mask[i])
                 observed[phase] = {'camera': [cx,cy], 'compared_pixels': len(actual),
                                    'mismatched_pixels': mismatch}
                 self.check(mismatch == 0,
@@ -352,8 +365,8 @@ class ExplorationRun:
                    f'version {version} migration preserves or safely defaults exploration rewards')
         self.check(self.e.bytes(0x0e000000, 13) == original[:13],
                    f'version {version} migration leaves all legacy bytes untouched')
-        banks = committed_banks(self.e.bytes(0x0e000000, 256))
-        self.check(bool(banks), f'continued version {version} checkpoint creates a committed version 4 bank')
+        banks = committed_banks(self.e.bytes(0x0e000000, 32768))
+        self.check(bool(banks), f'continued version {version} checkpoint creates a committed version 5 bank')
         if complete:
             self.dialogs()
             self.check(self.get('game_state') == PLAY and self.get('room') == 0
@@ -368,24 +381,24 @@ class ExplorationRun:
                        f'completed version {version} unlocks wind while stone remains locked')
         elif camp:
             self.check(self.get('px') == 120 and self.get('py') == 264,
-                       'legacy camp checkpoint migrates to the explicit version 4 camp spawn')
+                       'legacy camp checkpoint migrates to the explicit version 5 camp spawn')
         name = f'migrated-v{version}-' + ('completed' if complete else 'relic-camp' if relic else 'bridge')
         migrated = self.save(name)
         self.shot(name)
         self.reopen(migrated)
         self.tap('START', 4, 4)
-        self.check(self.get('loaded_save_version') == 4 and self.get('game_state') == PLAY
+        self.check(self.get('loaded_save_version') == 5 and self.get('game_state') == PLAY
                    and self.get('room') == (0 if complete else original[3])
                    and self.get('max_hp') == (8 if relic else 6)
                    and self.get('bridge_open') == original[4],
-                   f'migrated version {version} checkpoint survives an independent version 4 reopen')
+                   f'migrated version {version} checkpoint survives an independent version 5 reopen')
         self.check(hashlib.sha256(source.read_bytes()).hexdigest() == digest,
                    f'loading version {version} leaves its source input file unchanged')
         self.observations.setdefault('legacy_saves', []).append({
             'source': str(source.relative_to(ROOT) if source.is_relative_to(ROOT) else source),
             'sha256': digest, 'source_header': list(original[:13]),
             'version': version, 'completed_chapter': complete,
-            'v4_banks_after_continue': banks})
+            'v5_banks_after_continue': banks})
         return migrated
 
     def migration_cases(self):
@@ -400,7 +413,7 @@ class ExplorationRun:
         self.legacy_case(self.fixture('full-journey/checkpoint.sav'), 3, complete=True)
 
         # Preserve the legacy checksum/field-validation regressions. These
-        # fixtures contain no v4 banks, so no valid newer bank can mask them.
+        # fixtures contain no v5 banks, so no valid newer bank can mask them.
         for name, label in [
             ('explicit-corrupt-copy.sav', 'corrupted legacy version 3 checksum'),
             ('invalid-out-of-range-room.sav', 'legacy version 3 out-of-range room'),
@@ -411,63 +424,66 @@ class ExplorationRun:
             self.reopen(self.fixture(name))
             self.check(self.get('has_save') == 0, f'rejects {label}')
 
-        # Corrupt v4 records, not the preserved legacy checksum. A checkpoint
+        # Corrupt v5 records, not the preserved legacy checksum. A checkpoint
         # earned in this run has no valid legacy fallback and has both banks.
         checkpoint = self.out / 'relic-camp-checkpoint.sav'
         original = checkpoint.read_bytes()
         banks = committed_banks(original)
         self.check(len(banks) == 2 and original[:2] != b'EB',
-                   'fresh controller-earned checkpoint has two version 4 banks and no legacy fallback')
+                   'fresh controller-earned checkpoint has two version 5 banks and no legacy fallback')
         latest = newest_bank(banks)
         older = next(bank for bank in banks if bank is not latest)
         data = bytearray(original)
-        data[latest['offset'] + 30] ^= 1
-        fallback = self.out / 'v4-newest-bank-corrupt.sav'
+        data[latest['offset'] + 16] ^= 1
+        fallback = self.out / 'v5-newest-bank-corrupt.sav'
         fallback.write_bytes(data)
         self.reopen(fallback)
-        self.check(self.get('has_save') == 1, 'one corrupt version 4 bank preserves the older checkpoint')
+        self.check(self.get('has_save') == 1, 'one corrupt version 5 bank preserves the older checkpoint')
         self.tap('START', 4, 4)
-        self.check(self.get('loaded_save_version') == 4 and self.get('room') == older['room']
+        self.check(self.get('loaded_save_version') == 5 and self.get('room') == older['room']
                    and self.get('checkpoint_spawn') == older['spawn']
                    and self.get('relic_found') == older['relic']
                    and self.get('camp_unlocked') == older['camp']
                    and self.get('bridge_open') == older['bridge'],
-                   'version 4 corruption fallback restores the older bank progression and spawn')
+                   'version 5 corruption fallback restores the older bank progression and spawn')
         for bank in banks:
-            data[bank['offset'] + 30] = original[bank['offset'] + 30] ^ 1
-        corrupt = self.out / 'v4-both-banks-corrupt.sav'
+            data[bank['offset'] + 16] = original[bank['offset'] + 16] ^ 1
+        corrupt = self.out / 'v5-both-banks-corrupt.sav'
         corrupt.write_bytes(data)
         self.reopen(corrupt)
-        self.check(self.get('has_save') == 0, 'corrupted checksums in both version 4 banks are rejected')
+        self.check(self.get('has_save') == 0, 'corrupted checksums in both version 5 banks are rejected')
         self.observations['version4_corruption'] = {
             'source_banks': banks, 'newest_corrupted_offset': latest['offset'],
             'fallback_bank': older,
             'method': 'Explicit SRAM-file copies only; newest bank CRC, then both bank CRCs are corrupted'}
         for label, offset, value in [
-            ('out-of-range room', 9, 14), ('invalid camp flag', 15, 2),
-            ('unknown reserved flag', 24, 1), ('nonsequential chapter flags', 11, 2),
-            ('locked spirit selection', 23, 3), ('invalid grove spawn', 10, 5),
+            ('out-of-range room', 32, 14), ('invalid camp flag', 38, 2),
+            ('unknown reserved flag', 47, 1), ('nonsequential chapter flags', 34, 2),
+            ('locked spirit selection', 46, 3), ('invalid grove spawn', 33, 5),
         ]:
             data = bytearray(original)
             for bank in banks:
                 base = bank['offset']
                 data[base + offset] = value
-                data[base + 30:base + 32] = binascii.crc_hqx(data[base:base + 30], 0xffff).to_bytes(2, 'little')
-            invalid = self.out / ('v4-invalid-' + label.replace(' ', '-') + '.sav')
+                crc = bank_crc5(data[base:base + BANK_SIZE])
+                data[base + 16:base + 20] = crc.to_bytes(4, 'little')
+            assert len(committed_banks(data)) == len(banks), (
+                f'version 5 malformed {label} fixture must retain valid full-bank CRC32 checksums')
+            invalid = self.out / ('v5-invalid-' + label.replace(' ', '-') + '.sav')
             invalid.write_bytes(data)
             self.reopen(invalid)
             self.check(self.get('has_save') == 0,
-                       f'version 4 rejects {label} in both banks even with valid checksums')
+                       f'version 5 rejects {label} in both banks even with valid checksums')
 
         # Migration keeps a last-resort legacy copy even if every new bank is
         # damaged. This is separate from rejection without a legacy fallback.
         data = bytearray(migrated.read_bytes())
         for bank in committed_banks(data):
-            data[bank['offset'] + 30] ^= 1
-        legacy_fallback = self.out / 'v4-corrupt-with-legacy-fallback.sav'
+            data[bank['offset'] + 16] ^= 1
+        legacy_fallback = self.out / 'v5-corrupt-with-legacy-fallback.sav'
         legacy_fallback.write_bytes(data)
         self.reopen(legacy_fallback)
-        self.check(self.get('has_save') == 1, 'both damaged version 4 banks retain a valid legacy fallback')
+        self.check(self.get('has_save') == 1, 'both damaged version 5 banks retain a valid legacy fallback')
         self.tap('START', 4, 4)
         self.check(self.get('loaded_save_version') == 2 and self.get('bridge_open') == 1,
                    'damaged migrated banks recover the preserved legacy bridge checkpoint')
@@ -483,7 +499,7 @@ class ExplorationRun:
         self.step(90)
         self.tap('START', 4, 4)
         self.check(self.get('room') == 0 and self.get('max_hp') == 6 and self.get('relic_found') == 0
-                   and self.get('loaded_save_version') == 4,
+                   and self.get('loaded_save_version') == 5,
                    'fresh-adventure replacement checkpoint persists after another boot')
 
     def write_report(self):
@@ -516,13 +532,15 @@ class ExplorationRun:
         self.check(self.get('journal_tab') == 2, 'journal includes the companion guide as its third tab')
         self.shot('01-journal-companions')
         self.tap('A', 4, 4)
-        self.check(self.get('journal_tab') == before, 'journal cycles through three tabs and returns to quest controls')
+        self.check(self.get('journal_tab') == 3, 'journal includes companion growth as its fourth tab')
+        self.tap('A',4,4)
+        self.check(self.get('journal_tab') == before, 'journal cycles through four tabs and returns to quest controls')
         self.shot('01-journal-controls')
         self.tap('B', 4, 4)
         self.nextroom(1)
         self.check(self.get('px') == 240 and self.get('py') > 270,
                    'forest arrival uses scrolling-world coordinates')
-        self.check(self.get('camera_y') == 184, 'camera clamps at the south edge')
+        self.check(self.get('camera_y') == 160, 'camera clamps at the south edge')
         self.shot('02-forest-arrival')
         self.tap('START', 4, 4)
         before_map = self.e.screenshot().tobytes()
@@ -575,7 +593,7 @@ class ExplorationRun:
         self.goto(x=240)
         self.goto(y=92)
         self.check(self.get('py') < 156, 'grown bridge permits crossing to the north bank')
-        self.check(self.get('camera_y') < 184, 'camera follows northward movement')
+        self.check(self.get('camera_y') < 160, 'camera follows northward movement')
         self.goto(x=92)
         self.goto(y=72)
         self.tap('A', 4, 4)
@@ -583,7 +601,7 @@ class ExplorationRun:
         self.check(self.get('relic_found') == 1 and self.get('max_hp') == 8 and self.get('hp') == 8,
                    'optional grove chest grants two permanent hearts and full healing')
         self.shot('05-relic-chest')
-        hud = self.e.screenshot().crop((144, 0, 240, 24)).tobytes()
+        hud = [(self.e.read(0x07000000+i*8+2,2)&511,self.e.read(0x07000000+i*8,2)&255) for i in range(11)]
         self.step(30)
         self.tap('A', 4, 4)
         self.dialogs()
@@ -596,8 +614,8 @@ class ExplorationRun:
         self.goto(y=48)
         self.step(30)
         self.check(self.get('camera_y') == 0, 'camera clamps at the north edge')
-        self.check(self.e.screenshot().crop((144, 0, 240, 24)).tobytes() == hud,
-                   'forest HUD location label and border remain fixed while the world scrolls')
+        self.check([(self.e.read(0x07000000+i*8+2,2)&511,self.e.read(0x07000000+i*8,2)&255) for i in range(11)] == hud,
+                   'floating hearts, companion and action remain fixed while the world scrolls')
         self.shot('06-northeast-temple-gate')
         self.nextroom(2)
         self.dialogs()
@@ -610,7 +628,7 @@ class ExplorationRun:
         self.reopen(entrance)
         self.tap('START', 4, 4)
         self.check(self.get('room') == 1 and self.get('px') == 368 and self.get('py') == 43,
-                   'version 4 reload preserves the recorded north entrance instead of moving to an older camp')
+                   'version 5 reload preserves the recorded north entrance instead of moving to an older camp')
         self.goto(y=92)
         self.goto(x=240)
         self.goto(y=248)
@@ -621,14 +639,14 @@ class ExplorationRun:
                    'revisiting the campfire records the explicit camp checkpoint spawn')
         save = self.save('relic-camp-checkpoint')
         self.reopen(save)
-        self.check(self.get('has_save') == 1, 'independent emulator recognizes the version 4 checkpoint')
+        self.check(self.get('has_save') == 1, 'independent emulator recognizes the version 5 checkpoint')
         self.tap('START', 4, 4)
         self.check(self.get('room') == 1 and self.get('px') == 120 and self.get('py') == 264,
                    'continued forest checkpoint resumes at the activated campfire')
         self.check(self.get('relic_found') == 1 and self.get('max_hp') == 8 and self.get('hp') == 8,
-                   'version 4 reload preserves relic capacity and restores full health')
+                   'version 5 reload preserves relic capacity and restores full health')
         self.check(self.get('bridge_open') == 1 and self.get('camp_unlocked') == 1,
-                   'version 4 reload preserves bridge and camp progression')
+                   'version 5 reload preserves bridge and camp progression')
         self.shot('07-reloaded-camp')
         self.goto(y=248)
         self.goto(x=240)
@@ -682,7 +700,7 @@ class ExplorationRun:
         self.check(vertical['one_update_and_present_per_frame'],
                    'vertical scrolling with active sprites presents every hardware frame', fatal=False)
         diagonal = self.cadence('scrolling-diagonal-sprites',
-                               lambda n: ('UP+RIGHT' if (n//48)%2 == 0 else 'DOWN+LEFT') + ('+A' if n%24 < 2 else ''))
+                               lambda n: ('UP+LEFT' if (n//48)%2 == 0 else 'DOWN+RIGHT') + ('+A' if n%24 < 2 else ''))
         self.check(diagonal['camera_x_range'][1]-diagonal['camera_x_range'][0] > 15
                    and diagonal['camera_y_range'][1]-diagonal['camera_y_range'][0] > 15,
                    'diagonal stress window scrolls both camera axes together')

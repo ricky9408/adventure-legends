@@ -22,9 +22,9 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o
 
-.PHONY: all clean tools assets test-tools test test-campaign gameplay-video
+.PHONY: all clean tools assets test-tools test test-campaign test-systems gameplay-video developer-video
 all: $(TARGET).gba
 
 $(BUILD):
@@ -53,6 +53,9 @@ assets:
 	$(PYTHON) assets/generate_world.py
 	$(PYTHON) assets/generate_campaign.py
 	$(PYTHON) assets/generate_campaign_rules.py
+	$(PYTHON) assets/creatures/generate_data.py
+	$(PYTHON) assets/generate_evolutions.py
+	$(PYTHON) assets/generate_trials.py
 
 tools:
 	./tools/install_tools.sh
@@ -62,8 +65,12 @@ test: all
 	$(PYTHON) tests/review_tests.py
 	$(PYTHON) tests/exploration_tests.py
 	$(PYTHON) tests/test_save4.py
+	$(PYTHON) tests/test_save5.py
+	$(PYTHON) tests/test_creatures.py
+	$(PYTHON) tests/test_trials.py
 	$(PYTHON) tests/test_save_feedback.py
 	$(MAKE) test-campaign
+	$(MAKE) test-systems
 
 # State fixtures and timing evidence are always produced by this exact ROM.
 test-campaign: all
@@ -72,7 +79,21 @@ test-campaign: all
 	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-qa/campaign-report.json --output build/campaign-performance-minimal --strict-cold
 	$(PYTHON) tests/campaign_performance.py --campaign build/campaign-optional/campaign-report.json --output build/campaign-performance-optional --strict-cold
 
+# New-system routes include deliberate declines, interrupted commits and native
+# full-screen/OAM/cadence checks. Legacy input is a pinned real prior-ROM save.
+test-systems: all
+	$(PYTHON) tests/expedition_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/expedition-qa
+	$(PYTHON) tests/fullscreen_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/fullscreen-qa
+	$(PYTHON) tests/evolution_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --output build/evolution-qa
+	$(PYTHON) tests/evolution_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --six-hearts --output build/evolution-six-hearts
+	$(PYTHON) tests/evolution_tests.py --rom $(TARGET).gba --symbols $(TARGET).sym --legacy-save tests/fixtures/v4/migration-campaign-complete.sav --legacy-report tests/fixtures/v4/migration-provenance.json --output build/evolution-migrated
+	$(PYTHON) tests/advanced_power_tests.py --journey build/evolution-qa/evolution-report.json --output build/advanced-power-qa --source-contracts
+
 gameplay-video: all
+	$(PYTHON) tests/capture_player_teaser.py
+
+# Spoiler-bearing full route is development evidence, not the default trailer.
+developer-video: all
 	$(PYTHON) tests/capture_campaign_video.py
 
 test-tools:

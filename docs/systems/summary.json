@@ -1,0 +1,296 @@
+{
+  "rom_sha256": "d19e9b93df294e0d54de277ab90e3d2571c402adc68e82d8adb0a4a6114e6a45",
+  "rom_bytes": 1822892,
+  "base_main": "cda9ccd8ecc30778ba46ff9c5c3bbf96d77c6de0",
+  "enabled_forms": 8,
+  "designed_forms": 12,
+  "reserved_form_capacity": 128,
+  "physical_hardware_tested": false,
+  "reports": {
+    "first-chapter": {
+      "passes": 24,
+      "failures": 0,
+      "raw_report_sha256": "f044fc6105b9f6c2e2815cf66473884192ddddb1f238dc3bb2636b26d58ea1a6"
+    },
+    "review": {
+      "passes": 20,
+      "failures": 0,
+      "raw_report_sha256": "853b9bf76e5be26c4a006f6c60b2574e1b27b47537b5fd11eac6fa1d12104d11"
+    },
+    "exploration": {
+      "passes": 141,
+      "failures": 0,
+      "raw_report_sha256": "b10cb2aa2a6226b7a565a00ee042df4eda98a62081a113f5a733f5bb09f58166"
+    },
+    "campaign-minimal": {
+      "passes": 3425,
+      "failures": 0,
+      "raw_report_sha256": "7e0f469b151c78de084846cacd0e38db010fc7e8c2a537affce3d45e2827f516"
+    },
+    "campaign-optional": {
+      "passes": 3481,
+      "failures": 0,
+      "raw_report_sha256": "6ba56e860280f483e3ebcb41f369edb5aa73589852e4c20c1019a555623d0bb2"
+    },
+    "evolution-eight": {
+      "passes": 1137,
+      "failures": 0,
+      "raw_report_sha256": "6bd2f46617a77efe5bed46d95d4699eade2fd1ece84da16adaa9d5335b5b7d7a"
+    },
+    "evolution-six": {
+      "passes": 1106,
+      "failures": 0,
+      "raw_report_sha256": "90200535153c9a9ada7218f6e31baf4af0e0a77c93d3eb06c7cc151a5bf3596c"
+    },
+    "evolution-migrated": {
+      "passes": 698,
+      "failures": 0,
+      "raw_report_sha256": "95785663ee3d981b68bff6cc58c3418bf3417c0ced7137d7dd4a6ac188257526"
+    },
+    "fullscreen": {
+      "passes": 97,
+      "failures": 0,
+      "raw_report_sha256": "1692943198ec27eb896d25b7a03b68c8ec042e6b274c6acb475d0d47e50f7681"
+    },
+    "advanced-powers": {
+      "passes": 480,
+      "failures": 0,
+      "raw_report_sha256": "f26ca122119f1386fad4f63bf281717f76dd2d51c15adc3226230b3698458d32"
+    },
+    "cadence-minimal": {
+      "steady_scenes": 60,
+      "steady_frames": 20460,
+      "cold_windows": 28,
+      "cold_frames": 1680,
+      "max_render_cycles": 216741,
+      "failures": 0
+    },
+    "cadence-optional": {
+      "steady_scenes": 60,
+      "steady_frames": 20460,
+      "cold_windows": 28,
+      "cold_frames": 1680,
+      "max_render_cycles": 217237,
+      "failures": 0
+    }
+  },
+  "known_limitations": [
+    "Cold checkpoint decoding is a blocking load transition; its overlapping sample is reported separately from steady gameplay/save-writer cadence.",
+    "Phase/polarity catalog and reference formulas exist; numerical phase damage multipliers are not enabled in legacy combat.",
+    "Storage/release UI, equipment and larger regional cities are not yet implemented."
+  ],
+  "evolution_and_writer_timing": {
+    "evolution_fresh_eight": {
+      "writer_windows": 177,
+      "writer_peak_cycles": 259997,
+      "cold_load_overlap_samples": 74,
+      "evolution_animation_frames": 312,
+      "evolution_animation_updates": 312,
+      "evolution_animation_presents": 312
+    },
+    "evolution_migrated_v4": {
+      "writer_windows": 126,
+      "writer_peak_cycles": 262188,
+      "cold_load_overlap_samples": 70,
+      "evolution_animation_frames": 312,
+      "evolution_animation_updates": 312,
+      "evolution_animation_presents": 312
+    },
+    "evolution_fresh_six": {
+      "writer_windows": 173,
+      "writer_peak_cycles": 259427,
+      "cold_load_overlap_samples": 73,
+      "evolution_animation_frames": 312,
+      "evolution_animation_updates": 312,
+      "evolution_animation_presents": 312
+    }
+  },
+  "advanced_timing": [
+    {
+      "family": 0,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 120,
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 203689,
+      "peak_frame_budget_fraction": 0.725140265436318,
+      "strict_60hz": true,
+      "trace": "stress-0-frames.json"
+    },
+    {
+      "family": 1,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 180,
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 112474,
+      "peak_frame_budget_fraction": 0.4004115402141718,
+      "strict_60hz": true,
+      "trace": "stress-1-frames.json"
+    },
+    {
+      "family": 2,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 50,
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 114612,
+      "peak_frame_budget_fraction": 0.4080228981544771,
+      "strict_60hz": true,
+      "trace": "stress-2-frames.json"
+    },
+    {
+      "family": 3,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 144,
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 139128,
+      "peak_frame_budget_fraction": 0.49530075187969924,
+      "strict_60hz": true,
+      "trace": "stress-3-frames.json"
+    },
+    {
+      "family": 0,
+      "room": 13,
+      "boss_phase": 1,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 120,
+      "peak_live_projectiles": 5,
+      "observed_hazards": [
+        0,
+        5
+      ],
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 145295,
+      "peak_frame_budget_fraction": 0.5172554966962861,
+      "strict_60hz": true,
+      "trace": "boss-phase1-power0-frames.json"
+    },
+    {
+      "family": 1,
+      "room": 13,
+      "boss_phase": 1,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 180,
+      "peak_live_projectiles": 5,
+      "observed_hazards": [
+        0,
+        5
+      ],
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 56789,
+      "peak_frame_budget_fraction": 0.20217091023012077,
+      "strict_60hz": true,
+      "trace": "boss-phase1-power1-frames.json"
+    },
+    {
+      "family": 2,
+      "room": 13,
+      "boss_phase": 1,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 50,
+      "peak_live_projectiles": 5,
+      "observed_hazards": [
+        0,
+        5
+      ],
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 41681,
+      "peak_frame_budget_fraction": 0.14838587947140577,
+      "strict_60hz": true,
+      "trace": "boss-phase1-power2-frames.json"
+    },
+    {
+      "family": 0,
+      "room": 13,
+      "boss_phase": 2,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 120,
+      "peak_live_projectiles": 0,
+      "observed_hazards": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7
+      ],
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 151107,
+      "peak_frame_budget_fraction": 0.5379464285714286,
+      "strict_60hz": true,
+      "trace": "boss-phase2-power0-frames.json"
+    },
+    {
+      "family": 1,
+      "room": 13,
+      "boss_phase": 2,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 180,
+      "peak_live_projectiles": 0,
+      "observed_hazards": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7
+      ],
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 43854,
+      "peak_frame_budget_fraction": 0.15612183868762816,
+      "strict_60hz": true,
+      "trace": "boss-phase2-power1-frames.json"
+    },
+    {
+      "family": 2,
+      "room": 13,
+      "boss_phase": 2,
+      "hardware_frames": 240,
+      "max_hp": 8,
+      "effect_active_frames": 50,
+      "peak_live_projectiles": 0,
+      "observed_hazards": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7
+      ],
+      "updates": 240,
+      "page_flips": 240,
+      "peak_cycles": 46332,
+      "peak_frame_budget_fraction": 0.1649436090225564,
+      "strict_60hz": true,
+      "trace": "boss-phase2-power2-frames.json"
+    }
+  ],
+  "total_native_assertions": 10609,
+  "host_tests": {
+    "save4_groups": 26,
+    "save5_groups": 16,
+    "creature_groups": 23,
+    "trial_groups": 12,
+    "advanced_contract_checks": 39,
+    "async_save_feedback_regression": "passed"
+  },
+  "deterministic_regeneration_changed_source_files": 0,
+  "iwram_code_bytes": 26528,
+  "ewram_bytes": 44968
+}

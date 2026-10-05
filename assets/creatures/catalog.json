@@ -1,0 +1,2794 @@
+{
+  "schema_version": 1,
+  "scope": "DESIGN_ONLY_NOT_IN_ROM",
+  "reserved_form_count": 128,
+  "implemented_legacy_form_ids": [
+    1,
+    4,
+    7,
+    10
+  ],
+  "phase_order": [
+    "wood",
+    "fire",
+    "earth",
+    "metal",
+    "water"
+  ],
+  "generation_cycle": [
+    [
+      "wood",
+      "fire"
+    ],
+    [
+      "fire",
+      "earth"
+    ],
+    [
+      "earth",
+      "metal"
+    ],
+    [
+      "metal",
+      "water"
+    ],
+    [
+      "water",
+      "wood"
+    ]
+  ],
+  "control_cycle": [
+    [
+      "wood",
+      "earth"
+    ],
+    [
+      "earth",
+      "water"
+    ],
+    [
+      "water",
+      "fire"
+    ],
+    [
+      "fire",
+      "metal"
+    ],
+    [
+      "metal",
+      "wood"
+    ]
+  ],
+  "polarity_values": [
+    "yin",
+    "yang"
+  ],
+  "field_capabilities": [
+    "break_crack",
+    "burn_thorns",
+    "draw_ore",
+    "drive_sail",
+    "earth_socket",
+    "expose_fire",
+    "expose_stone",
+    "expose_wind",
+    "fill_basin",
+    "fire_socket",
+    "grow_bridge",
+    "grow_roots",
+    "ignite",
+    "link_pools",
+    "press_weight",
+    "reveal_current",
+    "tune_latch",
+    "turn_vane",
+    "uncap_well",
+    "wind_socket",
+    "wood_socket"
+  ],
+  "stat_budgets": {
+    "tier_1": 180,
+    "tier_2": 240,
+    "tier_3": 285,
+    "legendary": 330
+  },
+  "limits": {
+    "max_level": 50,
+    "max_bond": 100,
+    "party_slots": 4,
+    "instance_slots": 160,
+    "equipped_abilities": 2,
+    "max_learnset": 8,
+    "max_ability_id": 63,
+    "max_active_legendaries": 1
+  },
+  "families": [
+    {
+      "id": "F001",
+      "shape": "linear_three",
+      "form_ids": [
+        1,
+        2,
+        3
+      ],
+      "planned_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "F002",
+      "shape": "linear_three",
+      "form_ids": [
+        4,
+        5,
+        6
+      ],
+      "planned_edges": [
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "F003",
+      "shape": "linear_three",
+      "form_ids": [
+        7,
+        8,
+        9
+      ],
+      "planned_edges": [
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ]
+      ]
+    },
+    {
+      "id": "F004",
+      "shape": "linear_three",
+      "form_ids": [
+        10,
+        11,
+        12
+      ],
+      "planned_edges": [
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "F005",
+      "shape": "linear_three",
+      "form_ids": [
+        13,
+        14,
+        15
+      ],
+      "planned_edges": [
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "F006",
+      "shape": "linear_three",
+      "form_ids": [
+        16,
+        17,
+        18
+      ],
+      "planned_edges": [
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          18
+        ]
+      ]
+    },
+    {
+      "id": "F007",
+      "shape": "linear_three",
+      "form_ids": [
+        19,
+        20,
+        21
+      ],
+      "planned_edges": [
+        [
+          19,
+          20
+        ],
+        [
+          20,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "F008",
+      "shape": "linear_three",
+      "form_ids": [
+        22,
+        23,
+        24
+      ],
+      "planned_edges": [
+        [
+          22,
+          23
+        ],
+        [
+          23,
+          24
+        ]
+      ]
+    },
+    {
+      "id": "F009",
+      "shape": "linear_three",
+      "form_ids": [
+        25,
+        26,
+        27
+      ],
+      "planned_edges": [
+        [
+          25,
+          26
+        ],
+        [
+          26,
+          27
+        ]
+      ]
+    },
+    {
+      "id": "F010",
+      "shape": "linear_three",
+      "form_ids": [
+        28,
+        29,
+        30
+      ],
+      "planned_edges": [
+        [
+          28,
+          29
+        ],
+        [
+          29,
+          30
+        ]
+      ]
+    },
+    {
+      "id": "F011",
+      "shape": "linear_three",
+      "form_ids": [
+        31,
+        32,
+        33
+      ],
+      "planned_edges": [
+        [
+          31,
+          32
+        ],
+        [
+          32,
+          33
+        ]
+      ]
+    },
+    {
+      "id": "F012",
+      "shape": "linear_three",
+      "form_ids": [
+        34,
+        35,
+        36
+      ],
+      "planned_edges": [
+        [
+          34,
+          35
+        ],
+        [
+          35,
+          36
+        ]
+      ]
+    },
+    {
+      "id": "F013",
+      "shape": "branch_three",
+      "form_ids": [
+        37,
+        38,
+        39
+      ],
+      "planned_edges": [
+        [
+          37,
+          38
+        ],
+        [
+          37,
+          39
+        ]
+      ]
+    },
+    {
+      "id": "F014",
+      "shape": "branch_three",
+      "form_ids": [
+        40,
+        41,
+        42
+      ],
+      "planned_edges": [
+        [
+          40,
+          41
+        ],
+        [
+          40,
+          42
+        ]
+      ]
+    },
+    {
+      "id": "F015",
+      "shape": "branch_three",
+      "form_ids": [
+        43,
+        44,
+        45
+      ],
+      "planned_edges": [
+        [
+          43,
+          44
+        ],
+        [
+          43,
+          45
+        ]
+      ]
+    },
+    {
+      "id": "F016",
+      "shape": "branch_three",
+      "form_ids": [
+        46,
+        47,
+        48
+      ],
+      "planned_edges": [
+        [
+          46,
+          47
+        ],
+        [
+          46,
+          48
+        ]
+      ]
+    },
+    {
+      "id": "F017",
+      "shape": "branch_three",
+      "form_ids": [
+        49,
+        50,
+        51
+      ],
+      "planned_edges": [
+        [
+          49,
+          50
+        ],
+        [
+          49,
+          51
+        ]
+      ]
+    },
+    {
+      "id": "F018",
+      "shape": "branch_three",
+      "form_ids": [
+        52,
+        53,
+        54
+      ],
+      "planned_edges": [
+        [
+          52,
+          53
+        ],
+        [
+          52,
+          54
+        ]
+      ]
+    },
+    {
+      "id": "F019",
+      "shape": "branch_three",
+      "form_ids": [
+        55,
+        56,
+        57
+      ],
+      "planned_edges": [
+        [
+          55,
+          56
+        ],
+        [
+          55,
+          57
+        ]
+      ]
+    },
+    {
+      "id": "F020",
+      "shape": "branch_three",
+      "form_ids": [
+        58,
+        59,
+        60
+      ],
+      "planned_edges": [
+        [
+          58,
+          59
+        ],
+        [
+          58,
+          60
+        ]
+      ]
+    },
+    {
+      "id": "F021",
+      "shape": "branch_three",
+      "form_ids": [
+        61,
+        62,
+        63
+      ],
+      "planned_edges": [
+        [
+          61,
+          62
+        ],
+        [
+          61,
+          63
+        ]
+      ]
+    },
+    {
+      "id": "F022",
+      "shape": "branch_three",
+      "form_ids": [
+        64,
+        65,
+        66
+      ],
+      "planned_edges": [
+        [
+          64,
+          65
+        ],
+        [
+          64,
+          66
+        ]
+      ]
+    },
+    {
+      "id": "F023",
+      "shape": "branch_three",
+      "form_ids": [
+        67,
+        68,
+        69
+      ],
+      "planned_edges": [
+        [
+          67,
+          68
+        ],
+        [
+          67,
+          69
+        ]
+      ]
+    },
+    {
+      "id": "F024",
+      "shape": "branch_three",
+      "form_ids": [
+        70,
+        71,
+        72
+      ],
+      "planned_edges": [
+        [
+          70,
+          71
+        ],
+        [
+          70,
+          72
+        ]
+      ]
+    },
+    {
+      "id": "F025",
+      "shape": "linear_two",
+      "form_ids": [
+        73,
+        74
+      ],
+      "planned_edges": [
+        [
+          73,
+          74
+        ]
+      ]
+    },
+    {
+      "id": "F026",
+      "shape": "linear_two",
+      "form_ids": [
+        75,
+        76
+      ],
+      "planned_edges": [
+        [
+          75,
+          76
+        ]
+      ]
+    },
+    {
+      "id": "F027",
+      "shape": "linear_two",
+      "form_ids": [
+        77,
+        78
+      ],
+      "planned_edges": [
+        [
+          77,
+          78
+        ]
+      ]
+    },
+    {
+      "id": "F028",
+      "shape": "linear_two",
+      "form_ids": [
+        79,
+        80
+      ],
+      "planned_edges": [
+        [
+          79,
+          80
+        ]
+      ]
+    },
+    {
+      "id": "F029",
+      "shape": "linear_two",
+      "form_ids": [
+        81,
+        82
+      ],
+      "planned_edges": [
+        [
+          81,
+          82
+        ]
+      ]
+    },
+    {
+      "id": "F030",
+      "shape": "linear_two",
+      "form_ids": [
+        83,
+        84
+      ],
+      "planned_edges": [
+        [
+          83,
+          84
+        ]
+      ]
+    },
+    {
+      "id": "F031",
+      "shape": "linear_two",
+      "form_ids": [
+        85,
+        86
+      ],
+      "planned_edges": [
+        [
+          85,
+          86
+        ]
+      ]
+    },
+    {
+      "id": "F032",
+      "shape": "linear_two",
+      "form_ids": [
+        87,
+        88
+      ],
+      "planned_edges": [
+        [
+          87,
+          88
+        ]
+      ]
+    },
+    {
+      "id": "F033",
+      "shape": "linear_two",
+      "form_ids": [
+        89,
+        90
+      ],
+      "planned_edges": [
+        [
+          89,
+          90
+        ]
+      ]
+    },
+    {
+      "id": "F034",
+      "shape": "linear_two",
+      "form_ids": [
+        91,
+        92
+      ],
+      "planned_edges": [
+        [
+          91,
+          92
+        ]
+      ]
+    },
+    {
+      "id": "F035",
+      "shape": "linear_two",
+      "form_ids": [
+        93,
+        94
+      ],
+      "planned_edges": [
+        [
+          93,
+          94
+        ]
+      ]
+    },
+    {
+      "id": "F036",
+      "shape": "linear_two",
+      "form_ids": [
+        95,
+        96
+      ],
+      "planned_edges": [
+        [
+          95,
+          96
+        ]
+      ]
+    },
+    {
+      "id": "F037",
+      "shape": "linear_two",
+      "form_ids": [
+        97,
+        98
+      ],
+      "planned_edges": [
+        [
+          97,
+          98
+        ]
+      ]
+    },
+    {
+      "id": "F038",
+      "shape": "linear_two",
+      "form_ids": [
+        99,
+        100
+      ],
+      "planned_edges": [
+        [
+          99,
+          100
+        ]
+      ]
+    },
+    {
+      "id": "F039",
+      "shape": "linear_two",
+      "form_ids": [
+        101,
+        102
+      ],
+      "planned_edges": [
+        [
+          101,
+          102
+        ]
+      ]
+    },
+    {
+      "id": "F040",
+      "shape": "linear_two",
+      "form_ids": [
+        103,
+        104
+      ],
+      "planned_edges": [
+        [
+          103,
+          104
+        ]
+      ]
+    },
+    {
+      "id": "F041",
+      "shape": "linear_two",
+      "form_ids": [
+        105,
+        106
+      ],
+      "planned_edges": [
+        [
+          105,
+          106
+        ]
+      ]
+    },
+    {
+      "id": "F042",
+      "shape": "linear_two",
+      "form_ids": [
+        107,
+        108
+      ],
+      "planned_edges": [
+        [
+          107,
+          108
+        ]
+      ]
+    },
+    {
+      "id": "F043",
+      "shape": "linear_two",
+      "form_ids": [
+        109,
+        110
+      ],
+      "planned_edges": [
+        [
+          109,
+          110
+        ]
+      ]
+    },
+    {
+      "id": "F044",
+      "shape": "linear_two",
+      "form_ids": [
+        111,
+        112
+      ],
+      "planned_edges": [
+        [
+          111,
+          112
+        ]
+      ]
+    },
+    {
+      "id": "F045",
+      "shape": "single",
+      "form_ids": [
+        113
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F046",
+      "shape": "single",
+      "form_ids": [
+        114
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F047",
+      "shape": "single",
+      "form_ids": [
+        115
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F048",
+      "shape": "single",
+      "form_ids": [
+        116
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F049",
+      "shape": "single",
+      "form_ids": [
+        117
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F050",
+      "shape": "single",
+      "form_ids": [
+        118
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F051",
+      "shape": "single",
+      "form_ids": [
+        119
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F052",
+      "shape": "single",
+      "form_ids": [
+        120
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F053",
+      "shape": "legendary_single",
+      "form_ids": [
+        121
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F054",
+      "shape": "legendary_single",
+      "form_ids": [
+        122
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F055",
+      "shape": "legendary_single",
+      "form_ids": [
+        123
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F056",
+      "shape": "legendary_single",
+      "form_ids": [
+        124
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F057",
+      "shape": "legendary_single",
+      "form_ids": [
+        125
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F058",
+      "shape": "legendary_single",
+      "form_ids": [
+        126
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F059",
+      "shape": "legendary_single",
+      "form_ids": [
+        127
+      ],
+      "planned_edges": []
+    },
+    {
+      "id": "F060",
+      "shape": "legendary_single",
+      "form_ids": [
+        128
+      ],
+      "planned_edges": []
+    }
+  ],
+  "slots": [
+    {
+      "id": 1,
+      "key": "FORM_001",
+      "family_id": "F001",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "legacy_reference"
+    },
+    {
+      "id": 2,
+      "key": "FORM_002",
+      "family_id": "F001",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 3,
+      "key": "FORM_003",
+      "family_id": "F001",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 4,
+      "key": "FORM_004",
+      "family_id": "F002",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "legacy_reference"
+    },
+    {
+      "id": 5,
+      "key": "FORM_005",
+      "family_id": "F002",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 6,
+      "key": "FORM_006",
+      "family_id": "F002",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 7,
+      "key": "FORM_007",
+      "family_id": "F003",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "legacy_reference"
+    },
+    {
+      "id": 8,
+      "key": "FORM_008",
+      "family_id": "F003",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 9,
+      "key": "FORM_009",
+      "family_id": "F003",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 10,
+      "key": "FORM_010",
+      "family_id": "F004",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "legacy_reference"
+    },
+    {
+      "id": 11,
+      "key": "FORM_011",
+      "family_id": "F004",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 12,
+      "key": "FORM_012",
+      "family_id": "F004",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 13,
+      "key": "FORM_013",
+      "family_id": "F005",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 14,
+      "key": "FORM_014",
+      "family_id": "F005",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 15,
+      "key": "FORM_015",
+      "family_id": "F005",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 16,
+      "key": "FORM_016",
+      "family_id": "F006",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "proposed"
+    },
+    {
+      "id": 17,
+      "key": "FORM_017",
+      "family_id": "F006",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 18,
+      "key": "FORM_018",
+      "family_id": "F006",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 19,
+      "key": "FORM_019",
+      "family_id": "F007",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 20,
+      "key": "FORM_020",
+      "family_id": "F007",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 21,
+      "key": "FORM_021",
+      "family_id": "F007",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 22,
+      "key": "FORM_022",
+      "family_id": "F008",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 23,
+      "key": "FORM_023",
+      "family_id": "F008",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 24,
+      "key": "FORM_024",
+      "family_id": "F008",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 25,
+      "key": "FORM_025",
+      "family_id": "F009",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 26,
+      "key": "FORM_026",
+      "family_id": "F009",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 27,
+      "key": "FORM_027",
+      "family_id": "F009",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 28,
+      "key": "FORM_028",
+      "family_id": "F010",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 29,
+      "key": "FORM_029",
+      "family_id": "F010",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 30,
+      "key": "FORM_030",
+      "family_id": "F010",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 31,
+      "key": "FORM_031",
+      "family_id": "F011",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 32,
+      "key": "FORM_032",
+      "family_id": "F011",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 33,
+      "key": "FORM_033",
+      "family_id": "F011",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 34,
+      "key": "FORM_034",
+      "family_id": "F012",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 35,
+      "key": "FORM_035",
+      "family_id": "F012",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 36,
+      "key": "FORM_036",
+      "family_id": "F012",
+      "tier": 3,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 37,
+      "key": "FORM_037",
+      "family_id": "F013",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 38,
+      "key": "FORM_038",
+      "family_id": "F013",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 39,
+      "key": "FORM_039",
+      "family_id": "F013",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 40,
+      "key": "FORM_040",
+      "family_id": "F014",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 41,
+      "key": "FORM_041",
+      "family_id": "F014",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 42,
+      "key": "FORM_042",
+      "family_id": "F014",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 43,
+      "key": "FORM_043",
+      "family_id": "F015",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 44,
+      "key": "FORM_044",
+      "family_id": "F015",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 45,
+      "key": "FORM_045",
+      "family_id": "F015",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 46,
+      "key": "FORM_046",
+      "family_id": "F016",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 47,
+      "key": "FORM_047",
+      "family_id": "F016",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 48,
+      "key": "FORM_048",
+      "family_id": "F016",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 49,
+      "key": "FORM_049",
+      "family_id": "F017",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 50,
+      "key": "FORM_050",
+      "family_id": "F017",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 51,
+      "key": "FORM_051",
+      "family_id": "F017",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 52,
+      "key": "FORM_052",
+      "family_id": "F018",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 53,
+      "key": "FORM_053",
+      "family_id": "F018",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 54,
+      "key": "FORM_054",
+      "family_id": "F018",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 55,
+      "key": "FORM_055",
+      "family_id": "F019",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 56,
+      "key": "FORM_056",
+      "family_id": "F019",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 57,
+      "key": "FORM_057",
+      "family_id": "F019",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 58,
+      "key": "FORM_058",
+      "family_id": "F020",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 59,
+      "key": "FORM_059",
+      "family_id": "F020",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 60,
+      "key": "FORM_060",
+      "family_id": "F020",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 61,
+      "key": "FORM_061",
+      "family_id": "F021",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 62,
+      "key": "FORM_062",
+      "family_id": "F021",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 63,
+      "key": "FORM_063",
+      "family_id": "F021",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 64,
+      "key": "FORM_064",
+      "family_id": "F022",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 65,
+      "key": "FORM_065",
+      "family_id": "F022",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 66,
+      "key": "FORM_066",
+      "family_id": "F022",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 67,
+      "key": "FORM_067",
+      "family_id": "F023",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 68,
+      "key": "FORM_068",
+      "family_id": "F023",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 69,
+      "key": "FORM_069",
+      "family_id": "F023",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 70,
+      "key": "FORM_070",
+      "family_id": "F024",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 71,
+      "key": "FORM_071",
+      "family_id": "F024",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 72,
+      "key": "FORM_072",
+      "family_id": "F024",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 73,
+      "key": "FORM_073",
+      "family_id": "F025",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 74,
+      "key": "FORM_074",
+      "family_id": "F025",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 75,
+      "key": "FORM_075",
+      "family_id": "F026",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 76,
+      "key": "FORM_076",
+      "family_id": "F026",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 77,
+      "key": "FORM_077",
+      "family_id": "F027",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 78,
+      "key": "FORM_078",
+      "family_id": "F027",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 79,
+      "key": "FORM_079",
+      "family_id": "F028",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 80,
+      "key": "FORM_080",
+      "family_id": "F028",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 81,
+      "key": "FORM_081",
+      "family_id": "F029",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 82,
+      "key": "FORM_082",
+      "family_id": "F029",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 83,
+      "key": "FORM_083",
+      "family_id": "F030",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 84,
+      "key": "FORM_084",
+      "family_id": "F030",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 85,
+      "key": "FORM_085",
+      "family_id": "F031",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 86,
+      "key": "FORM_086",
+      "family_id": "F031",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 87,
+      "key": "FORM_087",
+      "family_id": "F032",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 88,
+      "key": "FORM_088",
+      "family_id": "F032",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 89,
+      "key": "FORM_089",
+      "family_id": "F033",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 90,
+      "key": "FORM_090",
+      "family_id": "F033",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 91,
+      "key": "FORM_091",
+      "family_id": "F034",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 92,
+      "key": "FORM_092",
+      "family_id": "F034",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 93,
+      "key": "FORM_093",
+      "family_id": "F035",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 94,
+      "key": "FORM_094",
+      "family_id": "F035",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 95,
+      "key": "FORM_095",
+      "family_id": "F036",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 96,
+      "key": "FORM_096",
+      "family_id": "F036",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 97,
+      "key": "FORM_097",
+      "family_id": "F037",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 98,
+      "key": "FORM_098",
+      "family_id": "F037",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 99,
+      "key": "FORM_099",
+      "family_id": "F038",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 100,
+      "key": "FORM_100",
+      "family_id": "F038",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 101,
+      "key": "FORM_101",
+      "family_id": "F039",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 102,
+      "key": "FORM_102",
+      "family_id": "F039",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 103,
+      "key": "FORM_103",
+      "family_id": "F040",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 104,
+      "key": "FORM_104",
+      "family_id": "F040",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 105,
+      "key": "FORM_105",
+      "family_id": "F041",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 106,
+      "key": "FORM_106",
+      "family_id": "F041",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 107,
+      "key": "FORM_107",
+      "family_id": "F042",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 108,
+      "key": "FORM_108",
+      "family_id": "F042",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 109,
+      "key": "FORM_109",
+      "family_id": "F043",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 110,
+      "key": "FORM_110",
+      "family_id": "F043",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 111,
+      "key": "FORM_111",
+      "family_id": "F044",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 112,
+      "key": "FORM_112",
+      "family_id": "F044",
+      "tier": 2,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 113,
+      "key": "FORM_113",
+      "family_id": "F045",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 114,
+      "key": "FORM_114",
+      "family_id": "F046",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 115,
+      "key": "FORM_115",
+      "family_id": "F047",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 116,
+      "key": "FORM_116",
+      "family_id": "F048",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 117,
+      "key": "FORM_117",
+      "family_id": "F049",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 118,
+      "key": "FORM_118",
+      "family_id": "F050",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 119,
+      "key": "FORM_119",
+      "family_id": "F051",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 120,
+      "key": "FORM_120",
+      "family_id": "F052",
+      "tier": 1,
+      "rarity": "ordinary",
+      "status": "reserved"
+    },
+    {
+      "id": 121,
+      "key": "FORM_121",
+      "family_id": "F053",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "proposed"
+    },
+    {
+      "id": 122,
+      "key": "FORM_122",
+      "family_id": "F054",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    },
+    {
+      "id": 123,
+      "key": "FORM_123",
+      "family_id": "F055",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    },
+    {
+      "id": 124,
+      "key": "FORM_124",
+      "family_id": "F056",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    },
+    {
+      "id": 125,
+      "key": "FORM_125",
+      "family_id": "F057",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    },
+    {
+      "id": 126,
+      "key": "FORM_126",
+      "family_id": "F058",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    },
+    {
+      "id": 127,
+      "key": "FORM_127",
+      "family_id": "F059",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    },
+    {
+      "id": 128,
+      "key": "FORM_128",
+      "family_id": "F060",
+      "tier": 1,
+      "rarity": "legendary",
+      "status": "reserved"
+    }
+  ],
+  "abilities": [
+    {
+      "id": 1,
+      "name": "Ember Dart",
+      "phase": "fire",
+      "handler": "ember_dart",
+      "cooldown_updates": 75,
+      "effect": "A narrow ember shot; preserves Homura's current bolt and armor exposure.",
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Root Circle",
+      "phase": "wood",
+      "handler": "root_circle",
+      "cooldown_updates": 75,
+      "effect": "Radial push and one-heart heal with a separate 360-update heal lock; preserves Midori.",
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Gust Fan",
+      "phase": "wood",
+      "handler": "gust_fan",
+      "cooldown_updates": 75,
+      "effect": "Directional projectile clearing and wind-up interruption; preserves Fuuri.",
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Stone Guard",
+      "phase": "earth",
+      "handler": "stone_guard",
+      "cooldown_updates": 75,
+      "effect": "A 36-update one-hit guard and short-range interrupt; preserves Kohaku.",
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Hearthline",
+      "phase": "fire",
+      "handler": "hearthline",
+      "cooldown_updates": 105,
+      "effect": "Trace three warm floor cells; after a 24-update warning they flare once. No lingering multi-hit stacking.",
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Canopy Knot",
+      "phase": "wood",
+      "handler": "canopy_knot",
+      "cooldown_updates": 120,
+      "effect": "Root a target in a small patch for 60 updates and shield the hero from one projectile; does not stack with Stone Guard.",
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Slipstream Loom",
+      "phase": "wood",
+      "handler": "slipstream_loom",
+      "cooldown_updates": 105,
+      "effect": "Place a 48-update curved air lane; bends hostile shots sideways, without reflecting damage or changing collision.",
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Vaultstep",
+      "phase": "earth",
+      "handler": "vaultstep",
+      "cooldown_updates": 120,
+      "effect": "Plant an arch-shaped shield for 48 updates; hold one additional hit, but forbid attacking during its 12-update root.",
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Dew Ring",
+      "phase": "water",
+      "handler": "dew_ring",
+      "cooldown_updates": 90,
+      "effect": "Lay a small water ring that slows ordinary enemy movement for 60 updates; bosses are not immobilized.",
+      "field_caps": [
+        "fill_basin",
+        "reveal_current"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Tide Stitch",
+      "phase": "water",
+      "handler": "tide_stitch",
+      "cooldown_updates": 120,
+      "effect": "Connect two marked pools for a single dash-back rescue; never crosses unmarked walls or story gates.",
+      "field_caps": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Chime Pin",
+      "phase": "metal",
+      "handler": "chime_pin",
+      "cooldown_updates": 90,
+      "effect": "Send a returning tuning pin that cancels one telegraphed attack; misses have a long recovery.",
+      "field_caps": [
+        "tune_latch",
+        "draw_ore"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Quiet Orbit",
+      "phase": "water",
+      "handler": "quiet_orbit",
+      "cooldown_updates": 240,
+      "effect": "Place three orbiting drops that cancel at most three projectiles over 120 updates; each saved drop becomes one counter-shot on expiry.",
+      "field_caps": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": 1,
+      "name": "Homura",
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 50,
+        "guard": 25,
+        "focus": 40,
+        "haste": 35
+      },
+      "stat_total": 180,
+      "signature_ability": 1,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 1
+        }
+      ],
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ],
+      "silhouette": "Compact fox with one curled wick tail and a low forward body line; keep the existing original sprite.",
+      "motion": "Quick two-step scurry; tail settles a beat later.",
+      "role": "Precise ranged opener",
+      "acquisition": {
+        "kind": "story",
+        "gate": "new_game",
+        "repeatable": false
+      },
+      "legacy_spirit_index": 0
+    },
+    {
+      "id": 2,
+      "name": "Homura Hearthkeeper",
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 42,
+        "power": 61,
+        "guard": 35,
+        "focus": 58,
+        "haste": 44
+      },
+      "stat_total": 240,
+      "signature_ability": 5,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 1
+        },
+        {
+          "level": 12,
+          "ability_id": 5
+        }
+      ],
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ],
+      "silhouette": "Longer low fox with a broad ceramic hearth mantle and three ash fins, retaining its single tail; never add multiple tails.",
+      "motion": "Plants the mantle before tracing a deliberate floor line.",
+      "role": "Telegraphed area denial",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 4,
+      "name": "Midori",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 45,
+        "power": 20,
+        "guard": 35,
+        "focus": 50,
+        "haste": 30
+      },
+      "stat_total": 180,
+      "signature_ability": 2,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 2
+        }
+      ],
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ],
+      "silhouette": "The existing hovering leaf spirit, with its broad leaf body and visible seed core.",
+      "motion": "Soft side-to-side float with an asymmetric leaf fold.",
+      "role": "Healing and safe crowd displacement",
+      "acquisition": {
+        "kind": "story",
+        "gate": "new_game",
+        "repeatable": false
+      },
+      "legacy_spirit_index": 1
+    },
+    {
+      "id": 5,
+      "name": "Midori Canopykeeper",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 62,
+        "power": 25,
+        "guard": 51,
+        "focus": 67,
+        "haste": 35
+      },
+      "stat_total": 240,
+      "signature_ability": 6,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 2
+        },
+        {
+          "level": 12,
+          "ability_id": 6
+        }
+      ],
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ],
+      "silhouette": "An inverted umbrella of three leaves with a suspended seed and visible braided root hem.",
+      "motion": "Opens the canopy, then anchors roots before a shield appears.",
+      "role": "Ally shelter and target control",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 7,
+      "name": "Fuuri",
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 25,
+        "power": 25,
+        "guard": 25,
+        "focus": 45,
+        "haste": 60
+      },
+      "stat_total": 180,
+      "signature_ability": 3,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 3
+        }
+      ],
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ],
+      "silhouette": "Keep the cream moth-spirit, lavender feather-like wings and split ribbon tail already in the campaign.",
+      "motion": "Unequal wingbeats create a visible gust; ribbon follows the turn.",
+      "role": "Interrupts and projectile clearance",
+      "acquisition": {
+        "kind": "story",
+        "gate": "grove_clear",
+        "repeatable": false
+      },
+      "legacy_spirit_index": 2
+    },
+    {
+      "id": 8,
+      "name": "Fuuri Windweaver",
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 34,
+        "guard": 32,
+        "focus": 64,
+        "haste": 76
+      },
+      "stat_total": 240,
+      "signature_ability": 7,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 3
+        },
+        {
+          "level": 16,
+          "ability_id": 7
+        }
+      ],
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ],
+      "silhouette": "A spindle-bodied silk moth with four narrow sail panels and a woven open loop trailing below.",
+      "motion": "Tilts the panels in sequence to draw curved air paths.",
+      "role": "Projectile-path manipulation",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 10,
+      "name": "Kohaku",
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 35,
+        "guard": 55,
+        "focus": 20,
+        "haste": 20
+      },
+      "stat_total": 180,
+      "signature_ability": 4,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 4
+        }
+      ],
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ],
+      "silhouette": "Keep the three segmented amber plates, two moss sprouts and tiny feet; it is not a turtle.",
+      "motion": "Short deliberate steps; the three plates compress during guard.",
+      "role": "Close-range protection and interruption",
+      "acquisition": {
+        "kind": "story",
+        "gate": "sky_clear",
+        "repeatable": false
+      },
+      "legacy_spirit_index": 3
+    },
+    {
+      "id": 11,
+      "name": "Kohaku Archwarden",
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 67,
+        "power": 44,
+        "guard": 76,
+        "focus": 26,
+        "haste": 27
+      },
+      "stat_total": 240,
+      "signature_ability": 8,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 4
+        },
+        {
+          "level": 20,
+          "ability_id": 8
+        }
+      ],
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ],
+      "silhouette": "Four pillar feet carry an open amber arch with a hollow center and moss lintel, not a larger solid shell.",
+      "motion": "Pillars spread and the arch locks; rocks chime once on impact.",
+      "role": "Stationary two-hit defense with a mobility cost",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 13,
+      "name": "Dewspindle",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 35,
+        "power": 20,
+        "guard": 30,
+        "focus": 55,
+        "haste": 40
+      },
+      "stat_total": 180,
+      "signature_ability": 9,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 9
+        }
+      ],
+      "field_caps": [
+        "fill_basin",
+        "reveal_current"
+      ],
+      "silhouette": "A translucent spiral droplet suspended from two reed-like legs, with no fish or amphibian outline.",
+      "motion": "Alternating stilt steps draw tiny circular ripples.",
+      "role": "Enemy-speed control",
+      "acquisition": {
+        "kind": "bond_trial",
+        "gate": "reed_basin_restored",
+        "repeatable": true
+      }
+    },
+    {
+      "id": 14,
+      "name": "Tidewheel",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 45,
+        "power": 30,
+        "guard": 40,
+        "focus": 70,
+        "haste": 55
+      },
+      "stat_total": 240,
+      "signature_ability": 10,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 9
+        },
+        {
+          "level": 15,
+          "ability_id": 10
+        }
+      ],
+      "field_caps": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ],
+      "silhouette": "A vertical ring of water turns around a hollow reed axle; two spoon-shaped feet skim pools.",
+      "motion": "Wheel rotates while feet stay level, then unwinds into a linking strand.",
+      "role": "Rescue positioning",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": true
+      }
+    },
+    {
+      "id": 16,
+      "name": "Chimeclasp",
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 50,
+        "guard": 40,
+        "focus": 35,
+        "haste": 25
+      },
+      "stat_total": 180,
+      "signature_ability": 11,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 11
+        }
+      ],
+      "field_caps": [
+        "tune_latch",
+        "draw_ore"
+      ],
+      "silhouette": "A spring-jawed bronze clasp on three unequal prongs, with one suspended tuning tongue.",
+      "motion": "Coils, releases a tuning pin, then catches it with an audible clasp.",
+      "role": "Single-target counter timing",
+      "acquisition": {
+        "kind": "bond_trial",
+        "gate": "bell_foundry_reopened",
+        "repeatable": true
+      }
+    },
+    {
+      "id": 121,
+      "name": "Stilltide Orrery",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 70,
+        "power": 45,
+        "guard": 65,
+        "focus": 95,
+        "haste": 55
+      },
+      "stat_total": 330,
+      "signature_ability": 12,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 9
+        },
+        {
+          "level": 30,
+          "ability_id": 12
+        }
+      ],
+      "field_caps": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ],
+      "silhouette": "Three independent water arcs revolve around a small dark pebble, with a clear central void and no animal head.",
+      "motion": "Each arc slows separately when absorbing a shot, then realigns into a quiet orbit.",
+      "role": "Legendary projectile defense and delayed counterplay",
+      "acquisition": {
+        "kind": "legendary_trial",
+        "gate": "stilltide_covenant",
+        "repeatable": false
+      }
+    }
+  ],
+  "evolutions": [
+    {
+      "from": 1,
+      "to": 2,
+      "min_level": 12,
+      "min_bond": 40,
+      "required_gate": "grove_clear",
+      "required_trial": "restore_hearth",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "min_level": 12,
+      "min_bond": 40,
+      "required_gate": "grove_clear",
+      "required_trial": "restore_canopy",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "min_level": 16,
+      "min_bond": 55,
+      "required_gate": "sky_clear",
+      "required_trial": "mend_wind_loom",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "min_level": 20,
+      "min_bond": 60,
+      "required_gate": "core_clear",
+      "required_trial": "raise_amber_arch",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "min_level": 15,
+      "min_bond": 45,
+      "required_gate": "reed_basin_restored",
+      "required_trial": "join_two_pools",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    }
+  ],
+  "gates": [
+    {
+      "id": "bell_foundry_reopened",
+      "kind": "side_quest",
+      "requires": [
+        "sky_clear"
+      ]
+    },
+    {
+      "id": "core_clear",
+      "kind": "story",
+      "requires": [
+        "sky_clear"
+      ]
+    },
+    {
+      "id": "ending_seen",
+      "kind": "story",
+      "requires": [
+        "core_clear"
+      ]
+    },
+    {
+      "id": "five_phase_shrines",
+      "kind": "side_quest",
+      "requires": [
+        "ending_seen",
+        "reed_basin_restored",
+        "bell_foundry_reopened"
+      ]
+    },
+    {
+      "id": "grove_clear",
+      "kind": "story",
+      "requires": [
+        "new_game"
+      ]
+    },
+    {
+      "id": "new_game",
+      "kind": "story",
+      "requires": []
+    },
+    {
+      "id": "reed_basin_restored",
+      "kind": "side_quest",
+      "requires": [
+        "grove_clear"
+      ]
+    },
+    {
+      "id": "sky_clear",
+      "kind": "story",
+      "requires": [
+        "grove_clear"
+      ]
+    },
+    {
+      "id": "stilltide_covenant",
+      "kind": "legendary",
+      "requires": [
+        "five_phase_shrines"
+      ]
+    }
+  ],
+  "trials": [
+    {
+      "id": "join_two_pools",
+      "description": "Reconnect the paired marked pools in the reed-basin side quest."
+    },
+    {
+      "id": "mend_wind_loom",
+      "description": "Complete the fixed three-vane no-projectile-hit wind-loom challenge after Sky clear; retries cost nothing."
+    },
+    {
+      "id": "raise_amber_arch",
+      "description": "Brace the two restoration pillars in one timed trial after Core clear; retries cost nothing."
+    },
+    {
+      "id": "restore_canopy",
+      "description": "Restore three distinct damaged root beds; repeated healing never counts."
+    },
+    {
+      "id": "restore_hearth",
+      "description": "Light three distinct abandoned hearths once each, then choose to nurture Homura at the sanctuary."
+    },
+    {
+      "id": "stilltide_covenant",
+      "description": "Complete the five-phase relay, then survive 90 active-play seconds using two opposite-polarity support switches; failure resets only the trial."
+    }
+  ],
+  "legendary_gates": [
+    {
+      "form_id": 121,
+      "gate": "stilltide_covenant",
+      "trial": "stilltide_covenant",
+      "min_level": 30,
+      "required_phase_count": 5,
+      "opposite_polarity_switches": 2,
+      "repeatable": false
+    }
+  ],
+  "budget": {
+    "baseline_rom_bytes": 1583388,
+    "baseline_ewram_bytes": 71908,
+    "baseline_iwram_bytes": 24576,
+    "rom_limit_bytes": 33554432,
+    "incremental_rom_cap_bytes": 1048576,
+    "incremental_ewram_cap_bytes": 16384,
+    "ewram_limit_bytes": 262144,
+    "iwram_code_limit_bytes": 28672,
+    "incremental_iwram_cap_bytes": 2048,
+    "sram_limit_bytes": 32768,
+    "save_bank_offsets": [
+      512,
+      6656
+    ],
+    "save_bank_bytes": 6144,
+    "save_blocks": {
+      "header": 32,
+      "campaign": 64,
+      "collection_bits": 64,
+      "instances": 3840,
+      "party_and_settings": 32,
+      "quest_and_bond_counters": 512,
+      "equipment_reserved": 512
+    },
+    "instance_bytes": 24,
+    "form_rom_record_bytes": 32,
+    "ability_rom_record_bytes": 24,
+    "learnset_pair_bytes": 2,
+    "sprite_w": 16,
+    "sprite_h": 16,
+    "sprite_bpp": 8,
+    "sprite_directions": 4,
+    "sprite_frames_per_direction": 4
+  }
+}
