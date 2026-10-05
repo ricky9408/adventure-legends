@@ -57,3 +57,16 @@ Selection updates `roster.selected_party`, the legacy power-family `spirit` and 
 Journal assignment validates occupied roster references, swaps existing members instead of duplicating them and requires at least one assigned member. `creatures_party_set` retains selected instance identity when possible. Required capability mask0 is intentional: all owned instances remain recoverable in the journal, and no release/delete UI exists. Assignment requests the existing paused incremental save transaction. Ordinary field selection waits for a normal checkpoint. Save5 revision1 party bytes and legacy migration are unchanged.
 
 Failed writes keep the prior committed bank intact. A separate modal failure notice survives toast expiry and unrelated feedback, renders above modal panels, and excludes intersecting HUD/world OBJ. Its visibility is an exact cache key independent from picker revisions. Explicit return to play acknowledges the notice without clearing the failure result; new save attempts clear stale feedback, and only successful completion clears the failed-write result. The party-panel assignment path has its own synthetic failure/wait/close/retry regression.
+
+## River-region and equipment extension
+
+- `weapon_actions` owns bounded transient sword/lance/bow clocks, one-hit ledgers and two swept arrows. Modal entry cancels an un-fired bow draw and preserves committed recovery.
+- `gear_runtime` caches derived gear stats and uses authoritative sixteenths-of-heart health. The old `hp`, enemy `hp` and `boss_hp` symbols are ceiling-heart observation caches; `max_hp` remains the permanent6/8-heart base. New combat tests read the q4 fields directly.
+- Friendly shots snapshot their phase separately from explicit field-effect tags. Mundane arrows cannot ignite a torch merely because they are friendly.
+- `obj_layout.h` reserves non-overlapping region actor, partial-heart, arrow, Metal-pin, phase-marker and Water-effect tiles below the16KiB bitmap-mode OBJ limit.
+- `region_art` supplies two480×320 aligned/parity worlds and four240×160 interiors. `region_game` owns interaction/puzzle state; `regional_quests` owns atomic in-memory reward/quest transitions; Save5 alone owns persistence.
+- Transient unsolved crate/valve/roll arrangements reset on reentry; completed objectives and unique rewards persist. Every reachable crate configuration retains a reset and an exit.
+- `progression`/`quickparty` render actual selected instances. Legacy campaign spirit0..3 is only a compatibility fallback; roster-selected Water/Metal remains authoritative after load.
+- Yin/Yang and phases are independent catalog axes. Combat multipliers are original game rules, not a claim about canonical traditional numerical values.
+
+Whole-ROM frame cadence, save interruption and source reproducibility remain release gates. Core host/fault fixtures, native controller gameplay and cold blocking load measurements are reported separately.

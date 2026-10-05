@@ -1,0 +1,62 @@
+{
+  "rom_sha256": "d19e9b93df294e0d54de277ab90e3d2571c402adc68e82d8adb0a4a6114e6a45",
+  "symbol_sha256": "9151569e31dcc2dfa5be52da0831467aef5adeadd091ae5586e14ae50a7284d5",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "fixture_policy": "controller evidence only; no synthetic roster or game RAM injection",
+  "source_report": "adventure-legends-systems/build/evolution-qa-c4-final/evolution-report.json",
+  "source_report_sha256": "2332f78727d6e700b6c396208af5877f0f7003a92516be8b5c3d5b26f524af41",
+  "fixture": "all-evolved-village.sav",
+  "sram_sha256": "26d271e3c37d456f5eefcda9900be10d702eb60aa43ebc108eec96f0740f50a8",
+  "snapshot": {
+    "path": "adventure-legends-systems/build/evolution-qa-c4-final/all-evolved-village.state",
+    "sram_path": "adventure-legends-systems/build/evolution-qa-c4-final/all-evolved-village.state.sav",
+    "status": {
+      "game_state": 1,
+      "room": 0,
+      "px": 76,
+      "py": 128,
+      "hp": 8,
+      "max_hp": 8,
+      "spirit": 3,
+      "summoned": 1,
+      "room_flags": 65535,
+      "chapter_flags": 7,
+      "optional_flags": 1,
+      "story_seen": 62,
+      "bridge_open": 1,
+      "torches": 3,
+      "boss_hp": 0,
+      "boss_armor": 15,
+      "boss_state": 5,
+      "boss_phase": 2,
+      "boss_timer": 165,
+      "ability_cd": 0,
+      "heal_cd": 0,
+      "guard_ticks": 0,
+      "camera_x": 0,
+      "camera_y": 0,
+      "roll_ticks": 0,
+      "relic_found": 1,
+      "camp_unlocked": 1,
+      "dialog_speaker": 0,
+      "dpage": 1,
+      "dcount": 1,
+      "frame": 15897
+    },
+    "provenance": "controller-reached; no game RAM writes",
+    "state_sha256": "cf98402f346a53c9bd2d5c7f2e851991dbc075b706baeceda9ee922e48f32b67",
+    "sram_sha256": "26d271e3c37d456f5eefcda9900be10d702eb60aa43ebc108eec96f0740f50a8",
+    "candidate": {
+      "rom_sha256": "d19e9b93df294e0d54de277ab90e3d2571c402adc68e82d8adb0a4a6114e6a45",
+      "symbols_sha256": "9151569e31dcc2dfa5be52da0831467aef5adeadd091ae5586e14ae50a7284d5",
+      "rom_bytes": 1822892
+    },
+    "progression_forms": [
+      2,
+      5,
+      8,
+      11
+    ]
+  }
+}

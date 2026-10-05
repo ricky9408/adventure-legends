@@ -1,6 +1,7 @@
 #ifndef EMBER_QUICKPARTY_H
 #define EMBER_QUICKPARTY_H
-/* Field selector and owned-instance journal. ROM-resident, no save schema change. */
+/* Field selector and owned-instance journal. ROM-resident, no save schema change.
+ * Supports every enabled engine adapter through actual owned-instance refs. */
 extern int quickparty_open,quickparty_candidate,quickparty_hold_updates;
 extern unsigned quickparty_revision;
 extern int quickparty_menu_slot,quickparty_menu_candidate;

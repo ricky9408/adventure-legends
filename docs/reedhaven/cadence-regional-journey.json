@@ -1,0 +1,18 @@
+{
+  "town_idle": {
+    "hardware_frames": 180,
+    "game_updates": 180,
+    "page_flips": 180,
+    "max_render_cycles": 94101,
+    "cycles_per_hardware_frame": 280896,
+    "measurement": "actual emulated GBA hardware frames; not host elapsed time"
+  },
+  "basin_idle": {
+    "hardware_frames": 180,
+    "game_updates": 180,
+    "page_flips": 180,
+    "max_render_cycles": 136860,
+    "cycles_per_hardware_frame": 280896,
+    "measurement": "actual emulated GBA hardware frames; not host elapsed time"
+  }
+}

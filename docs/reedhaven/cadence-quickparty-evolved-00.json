@@ -1,0 +1,61 @@
+[
+  {
+    "scene": "evolved-four-portrait-cold-overlay",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 168984,
+    "frame_budget_cycles": 280896,
+    "opening_evidence": null
+  },
+  {
+    "scene": "evolved-four-portrait-grove-cold-overlay",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 175677,
+    "frame_budget_cycles": 280896,
+    "opening_evidence": null
+  },
+  {
+    "scene": "evolved-grove-immediate-open-alignment-1",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 208282,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "evolved-grove-immediate-open-alignment-2",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 208289,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "evolved-grove-immediate-open-alignment-3",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 208366,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "evolved-grove-immediate-open-alignment-0",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 208556,
+    "frame_budget_cycles": 280896
+  },
+  {
+    "scene": "live-core-boss-four-portrait-cold-overlay",
+    "hardware_frames": 18,
+    "simulation_updates": 18,
+    "display_flips": 18,
+    "maximum_cycles": 169849,
+    "frame_budget_cycles": 280896,
+    "opening_evidence": null
+  }
+]

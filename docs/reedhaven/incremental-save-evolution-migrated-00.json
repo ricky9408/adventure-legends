@@ -1,0 +1,1092 @@
+[
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 174347,
+    "start_frame": 98,
+    "frames": 14,
+    "display_flips": 14,
+    "max_cycles": 174347,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 246381,
+    "start_frame": 186,
+    "frames": 18,
+    "display_flips": 18,
+    "max_cycles": 246381,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 207839,
+    "start_frame": 369,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 207839,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201290,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201290,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 212462,
+    "start_frame": 694,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 212462,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201290,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201290,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 207481,
+    "start_frame": 1074,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 207481,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201290,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201290,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 213623,
+    "start_frame": 1488,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 213623,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201375,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201375,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 208846,
+    "start_frame": 1956,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 208846,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201375,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201375,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 209123,
+    "start_frame": 2441,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 209123,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201375,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201375,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 203729,
+    "start_frame": 2633,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 203729,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 253188,
+    "start_frame": 2803,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 253188,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 253120,
+    "start_frame": 2831,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 253120,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 253188,
+    "start_frame": 2858,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 253188,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 253120,
+    "start_frame": 2885,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 253120,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208009,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2055719,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208009,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2055719,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208009,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2055719,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208009,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2055719,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201323,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201323,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 256995,
+    "start_frame": 3028,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 256995,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 255353,
+    "start_frame": 3056,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 255353,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 256995,
+    "start_frame": 3083,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 256995,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 255353,
+    "start_frame": 3110,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 255353,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208094,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2057400,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208094,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2057400,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208094,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2057400,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 208094,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2057400,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 210353,
+    "start_frame": 3205,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 210353,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 203554,
+    "start_frame": 3372,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 203554,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201408,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201408,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 208814,
+    "start_frame": 3800,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 208814,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201460,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201460,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 210889,
+    "start_frame": 3950,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 210889,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 203811,
+    "start_frame": 4112,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 203811,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 258569,
+    "start_frame": 4270,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 258569,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 254465,
+    "start_frame": 4298,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 254465,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 258813,
+    "start_frame": 4325,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 258813,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 254542,
+    "start_frame": 4352,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 254542,
+    "input_stress": false,
+    "resume_state": 3
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 206963,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2059262,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 206963,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2059262,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 206963,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2059262,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 1,
+    "steady_max_cycles": 206963,
+    "start_frame": 97,
+    "frames": 19,
+    "display_flips": 18,
+    "max_cycles": 2059262,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 207954,
+    "start_frame": 4466,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 207954,
+    "input_stress": false,
+    "resume_state": 1
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 208102,
+    "start_frame": 4592,
+    "frames": 22,
+    "display_flips": 22,
+    "max_cycles": 208102,
+    "input_stress": false,
+    "resume_state": 2
+  },
+  {
+    "cold_load_overlap_samples": 0,
+    "steady_max_cycles": 201493,
+    "start_frame": 100,
+    "frames": 23,
+    "display_flips": 23,
+    "max_cycles": 201493,
+    "input_stress": false,
+    "resume_state": 1
+  }
+]

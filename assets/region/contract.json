@@ -1,0 +1,298 @@
+{
+  "schema": 1,
+  "status": "Implementation contract; quest content not yet shipped",
+  "state_values": {
+    "unseen": 0,
+    "active": 1,
+    "ready": 2,
+    "claimed": 3
+  },
+  "quest_reward_ledger": "bits0..10 mirror claimed quest states; all other bits zero",
+  "quests": [
+    {
+      "id": 0,
+      "key": "workshop_practice",
+      "objective_mask": 7,
+      "equipment_sources": [
+        6
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 1,
+      "key": "a_dry_road_home",
+      "objective_mask": 3,
+      "equipment_sources": [
+        8
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 2,
+      "key": "reed_basin_bond",
+      "objective_mask": 7,
+      "equipment_sources": [],
+      "creature_reward_id": 5
+    },
+    {
+      "id": 3,
+      "key": "bell_foundry_bond",
+      "objective_mask": 7,
+      "equipment_sources": [],
+      "creature_reward_id": 6
+    },
+    {
+      "id": 4,
+      "key": "paired_tide_pools",
+      "objective_mask": 3,
+      "equipment_sources": [
+        5
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 5,
+      "key": "weavers_hidden_nook",
+      "objective_mask": 1,
+      "equipment_sources": [
+        10
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 6,
+      "key": "four_friendships",
+      "objective_mask": 1,
+      "equipment_sources": [
+        3,
+        12
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 7,
+      "key": "tuning_latch",
+      "objective_mask": 1,
+      "equipment_sources": [
+        1
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 8,
+      "key": "hearthplate_craft",
+      "objective_mask": 3,
+      "equipment_sources": [
+        7
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 9,
+      "key": "surestep_garden",
+      "objective_mask": 7,
+      "equipment_sources": [
+        9
+      ],
+      "creature_reward_id": null
+    },
+    {
+      "id": 10,
+      "key": "resonance_repair",
+      "objective_mask": 1,
+      "equipment_sources": [
+        11
+      ],
+      "creature_reward_id": null
+    }
+  ],
+  "variables": {
+    "3": {
+      "min": 0,
+      "max": 3
+    },
+    "9": {
+      "min": 0,
+      "max": 3
+    }
+  },
+  "other_variables": "zero",
+  "region_flags": {
+    "byte0_allowed_mask": 63,
+    "meaning": "visited rooms16..21; visiting any requires room16 visited; all other bytes zero"
+  },
+  "anchors": {
+    "byte0_allowed_mask": 3,
+    "bit0": "town rest discovered",
+    "bit1": "basin rest discovered",
+    "other_bytes": "zero"
+  },
+  "equipment_sources_without_quest": [
+    0,
+    2,
+    4
+  ],
+  "equipment_source_items": [
+    1,
+    2,
+    9,
+    10,
+    17,
+    18,
+    33,
+    34,
+    49,
+    50,
+    65,
+    81,
+    82
+  ],
+  "rooms": [
+    {
+      "id": 16,
+      "name": "Reedhaven town",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          240,
+          52
+        ],
+        "2": [
+          104,
+          232
+        ],
+        "3": [
+          344,
+          152
+        ],
+        "4": [
+          88,
+          128
+        ],
+        "5": [
+          344,
+          248
+        ]
+      },
+      "requires_chapter_mask": 1,
+      "requires_quest_claimed": null,
+      "rest_spawn": 2,
+      "rest_anchor_bit": 0
+    },
+    {
+      "id": 17,
+      "name": "Reed basin",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          360,
+          72
+        ],
+        "2": [
+          120,
+          232
+        ]
+      },
+      "requires_chapter_mask": 1,
+      "requires_quest_claimed": null,
+      "rest_spawn": 2,
+      "rest_anchor_bit": 1
+    },
+    {
+      "id": 18,
+      "name": "Bell foundry",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "requires_chapter_mask": 1,
+      "requires_quest_claimed": 2,
+      "rest_spawn": null
+    },
+    {
+      "id": 19,
+      "name": "Tide courtyard",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "requires_chapter_mask": 1,
+      "requires_quest_claimed": 2,
+      "rest_spawn": null
+    },
+    {
+      "id": 20,
+      "name": "Mira storehouse",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "requires_chapter_mask": 1,
+      "requires_quest_claimed": null,
+      "rest_spawn": null
+    },
+    {
+      "id": 21,
+      "name": "Surestep garden",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "requires_chapter_mask": 1,
+      "requires_quest_claimed": null,
+      "rest_spawn": null
+    }
+  ],
+  "checkpoint_policy": "Before ending, preserve pending core reward normalization. After ENDING_SEEN, valid region checkpoints remain in region. Revision1 conversion retains old safe checkpoint; no automatic new region visits.",
+  "invariants": [
+    "unseen quests have zero objectives/variables/reward bit",
+    "ready or claimed requires full objective mask",
+    "claimed quest requires corresponding equipment acquisition claims and/or authored creature reward bit",
+    "equipment claim bits tied to quests imply that quest claimed; free starter/lance/bow sources are exceptions",
+    "reject unimplemented quest IDs and unused bits, rather than silently normalize"
+  ],
+  "future_creature_forms": [
+    13,
+    14,
+    16
+  ],
+  "future_creature_note": "Enabling these still requires authored native data/art/abilities and compatibility review; current codec can wait for those definitions."
+}

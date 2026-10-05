@@ -1,0 +1,5 @@
+Original code-native pixel art. No external art, extracted game assets, traced characters, or raster inputs.
+Authored at native size with deterministic Python/Pillow geometry.
+Existing RGB555 game_palette reused verbatim; no extra palette.
+Art previews are not emulator screenshots or evidence of playable acquisition.
+Developer review only. Keep future companion sheets out of player-facing media.

@@ -43,7 +43,7 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
     output = Path(output); output.mkdir(parents=True,exist_ok=True)
     source = (ROOT/'src/game.c').read_text()
     def body(name):
-        match = re.search(r'void '+name+r'\([^;{}]*\)\s*\{',source)
+        match = re.search(r'(?:void|int) '+name+r'\([^;{}]*\)\s*\{',source)
         if match is None: raise ValueError('Missing source function '+name)
         start = match.start()
         opening = source.index('{',start); depth = 1; end = opening+1
@@ -55,6 +55,9 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
     shim = r'''
 #include <string.h>
 #include "advanced_powers.h"
+#include "gear_runtime.h"
+#include "combat_rules.h"
+#include "regional_powers.h"
 #include "ui.h"
 #define MAX_ENEMIES 6
 #define PLAY 1
@@ -70,6 +73,22 @@ int invuln,roll_ticks,game_state,hp,max_hp,deaths,summoned,room;
 int boss_armor,boss_flash,boss_x,boss_y,torches,save_calls,dialogue_calls;
 int swing,combo_step,swing_damage,hitstop,enemy_clocks[6],enemy_aimx[6],enemy_aimy[6];
 int kills,wall_x,wall_y,wall_w,wall_h,sword_connect;
+EquipmentStats gear_stats;WeaponAttack weapon_action;
+unsigned char enemy_phases[6],enemy_stagger_ticks[6],slowed_enemies[6];
+int hero_hp_q4;
+/* This fixture isolates advanced commands and exact game dispatch. Fractional
+ * health, weapon geometry and gear mutation have dedicated actual-C suites. */
+void game_enemy_hurt(unsigned i,unsigned base,unsigned bonus,unsigned phase){(void)bonus;(void)phase;enemies[i].hp-=(int)(base/16);}
+void game_enemy_stagger(unsigned i,unsigned bonus){(void)i;(void)bonus;}
+void game_health_heal(unsigned amount){hp+=(int)(amount/16);hero_hp_q4=hp*16;}
+void game_health_hurt(unsigned amount,unsigned phase){(void)phase;hp-=(int)(amount/16);hero_hp_q4=hp*16;}
+void game_attacks_reset(void){}
+unsigned game_companion_phase(void){return CREATURE_FIRE;}
+unsigned game_power_cooldown(unsigned base){return base;}
+int game_melee_hit(unsigned id,int x,int y,int boss){(void)id;(void)x;(void)y;(void)boss;return sword_connect&&swing==11;}
+int scrolling_room(void){return room==1;}
+int world_width(void){return room==1?480:240;}
+int world_height(void){return room==1?320:160;}
 int ab(int x){return x<0?-x:x;}
 int sign(int x){return x<0?-1:x>0;}
 int near(int a,int b,int c,int d,int r){return ab(a-c)+ab(b-d)<r;}
@@ -85,14 +104,14 @@ int sword_hits(int x,int y,int r){(void)x;(void)y;(void)r;return sword_connect;}
 void progression_encounter(unsigned a,unsigned b){(void)a;(void)b;}
 void obj_add(int a,int b,int c,int d,int e,int f,int g,int h){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;(void)h;}
 '''
-    shim += '\n'.join(body(n) for n in ('kill_enemy','damage','fire_shot','update_shots','update_enemies'))
+    shim += '\n'.join(body(n) for n in ('kill_enemy','damage_phase','damage','fire_shot','update_shots','update_enemies'))
     shim += r'''
 void source_reset(void){
  memset(enemies,0,sizeof enemies);memset(shots,0,sizeof shots);
  memset(shot_effects,0,12);memset(enemy_windups,0,sizeof enemy_windups);
  memset(enemy_clocks,0,sizeof enemy_clocks);
  px=py=100;face=3;frame=0;spirit=0;stone_guard=guard_invuln=0;
- invuln=roll_ticks=deaths=summoned=room=0;game_state=1;hp=max_hp=8;
+ invuln=roll_ticks=deaths=summoned=room=0;game_state=1;hp=max_hp=8;hero_hp_q4=128;gear_stats.max_hp_q4=128;weapon_action.damage_q4=32;weapon_action.attack_q4=0;weapon_action.stagger=0;weapon_action.element=255;
  boss_armor=boss_flash=torches=save_calls=dialogue_calls=0;
  boss_x=boss_y=0;swing=combo_step=swing_damage=hitstop=0;
  kills=wall_x=wall_y=wall_w=wall_h=sword_connect=0;advanced_reset();

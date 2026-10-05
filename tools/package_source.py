@@ -17,6 +17,11 @@ ROOT_FILES=('.gitignore','LICENSE','Makefile','README.md','linker.ld')
 SOURCE_ROOTS=('src','assets','docs','tests','tools')
 EXTENSIONS={'.c','.h','.s','.inc','.py','.sh','.md','.json','.png','.gif','.txt','.sav'}
 EXCLUDED={'build','dist','downloads','sysroot','__pycache__','.git'}
+# Redundant large contact sheets are reproducible with make assets. Individual
+# region/camera PNGs remain included; these are not ROM inputs or test fixtures.
+GENERATED_OVERVIEWS={
+ 'assets/region/region_preview_native.png','assets/region/region_preview_2x.png',
+ 'assets/region/native_camera_sheet.png','assets/region/native_camera_sheet_2x.png'}
 
 def source_files():
     files=[ROOT/p for p in ROOT_FILES]
@@ -24,6 +29,7 @@ def source_files():
         for p in (ROOT/name).rglob('*'):
             rel=p.relative_to(ROOT)
             if p.is_symlink() or not p.is_file() or EXCLUDED.intersection(rel.parts):continue
+            if rel.as_posix() in GENERATED_OVERVIEWS:continue
             if p.name=='.gitignore':files.append(p);continue
             if p.suffix not in EXTENSIONS:continue
             if p.suffix=='.sav' and not str(rel).startswith('tests/fixtures/'):continue

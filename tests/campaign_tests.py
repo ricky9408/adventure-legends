@@ -110,8 +110,8 @@ class CampaignRun:
         # Test callers wait for the committed state before advancing dialogue.
         if not getattr(self,'manual_save_control',False):
             for _ in range(180):
-                if self.get('game_state')!=6:break
-                self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':0,'reason':'SAVE_PENDING'})
+                if self.get('game_state')!=6 and not (self.get('game_state')==PLAY and self.get('frame')==0):break
+                self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':0,'reason':'SAVE_PENDING' if self.get('game_state')==6 else 'COLD_CONTINUE'})
                 self.e.frames(1,0)
             else:raise AssertionError('Transactional save did not finish')
         current = self.get('room')
@@ -422,7 +422,7 @@ class CampaignRun:
         self.check(all(im==images[0] for im in images),name+': journal stable across both display pages')
         self.shot(name+'-journal')
         first_tab=self.get('journal_tab');tab_images={first_tab:self.e.screenshot().crop((8,31,232,153)).tobytes()}
-        for i in range(4):
+        for i in range(6):
             self.tap('A');self.step(6);tab=self.get('journal_tab')
             if tab==first_tab:break
             tab_images[tab]=self.e.screenshot().crop((8,31,232,153)).tobytes()
@@ -431,7 +431,7 @@ class CampaignRun:
         self.check(self.get('journal_tab')==first_tab and len(tab_images)>=2,name+': A cycles all journal tabs and returns')
         self.check(len(set(tab_images.values()))==len(tab_images),name+': every journal tab has distinct visible content')
         companion_tab=2 if 2 in tab_images else 1
-        for _ in range(3):
+        for _ in range(6):
             if self.get('journal_tab')==companion_tab:break
             self.tap('A');self.step(6)
         if len(tab_images)>=3:

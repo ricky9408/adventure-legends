@@ -8,7 +8,9 @@ typedef unsigned int CreatureU32;
 typedef CreatureU8 FormId;
 
 enum {
-    CREATURE_FORM_CAPACITY = 128, CREATURE_ENABLED_COUNT = 8,
+    CREATURE_FORM_CAPACITY = 128, CREATURE_ENABLED_COUNT = 11,
+    CREATURE_LEARNSET_COUNT = 16, CREATURE_EVOLUTION_COUNT = 5,
+    CREATURE_ABILITY_COUNT = 11, CREATURE_LEGACY_COUNT = 4,
     CREATURE_ROSTER_CAPACITY = 160, CREATURE_PARTY_CAPACITY = 4,
     CREATURE_EMPTY_SLOT = 255, CREATURE_MAX_LEVEL = 50,
     CREATURE_MAX_BOND = 100, CREATURE_EXPEDITION_BOND_CAP = 10,
@@ -16,9 +18,16 @@ enum {
     CREATURE_OCCUPIED = 1, CREATURE_STORY_LOCKED = 2, CREATURE_FAVORITE = 4,
     CREATURE_FLAGS_MASK = 7,
     CREATURE_GROVE_CLEAR = 1, CREATURE_SKY_CLEAR = 2, CREATURE_CORE_CLEAR = 4,
+    /* Evolution-context namespace, NOT CampaignSave.chapter_flags. Bit 3 in
+     * CampaignSave means ENDING_SEEN and must never be passed through here.
+     * Supply (chapter_flags & CREATURE_EVOLUTION_CHAPTER_MASK) |
+     *         (quest2_claimed ? CREATURE_REED_RESTORED : 0).
+     * Legacy migration/story APIs still accept original campaign flags. */
+    CREATURE_EVOLUTION_CHAPTER_MASK = 7, CREATURE_REED_RESTORED = 8,
+    CREATURE_EVOLUTION_CONTEXT_MASK = 15,
     CREATURE_TRIAL_HEARTH = 1, CREATURE_TRIAL_CANOPY = 2,
     CREATURE_TRIAL_WIND_LOOM = 4, CREATURE_TRIAL_AMBER_ARCH = 8,
-    CREATURE_TRIAL_MASK = 15,
+    CREATURE_TRIAL_PAIRED_POOLS = 16, CREATURE_TRIAL_MASK = 31,
     CREATURE_EVENT_CAPACITY = 512, CREATURE_FIELD_EVENT_BASE = 384,
     CREATURE_NICKNAME_MAX = 0 /* Named presets are not authored yet. */
 };
@@ -45,6 +54,9 @@ enum FieldCapability {
 #define FIELD_MIDORI (FIELD_GROW_BRIDGE | FIELD_GROW_ROOTS | FIELD_WOOD_SOCKET)
 #define FIELD_FUURI (FIELD_TURN_VANE | FIELD_DRIVE_SAIL | FIELD_WIND_SOCKET | FIELD_EXPOSE_WIND)
 #define FIELD_KOHAKU (FIELD_BREAK_CRACK | FIELD_PRESS_WEIGHT | FIELD_UNCAP_WELL | FIELD_EARTH_SOCKET | FIELD_EXPOSE_STONE)
+#define FIELD_DEWSPINDLE (FIELD_FILL_BASIN | FIELD_REVEAL_CURRENT)
+#define FIELD_TIDEWHEEL (FIELD_DEWSPINDLE | FIELD_LINK_POOLS)
+#define FIELD_CHIMECLASP (FIELD_TUNE_LATCH | FIELD_DRAW_ORE)
 
 typedef struct CreatureInstance {
     CreatureU8 form_id, flags, level, bond;
@@ -79,6 +91,8 @@ typedef struct CreatureForm {
 } CreatureForm;
 typedef struct CreatureEvolution {
     CreatureU8 from, to, min_level, min_bond;
+    /* chapter_flags stores evolution context bits, including REED_RESTORED;
+     * the field name/layout is retained for source compatibility. */
     CreatureU16 trial_flag, chapter_flags;
 } CreatureEvolution;
 typedef struct CreatureAbility {
@@ -87,12 +101,13 @@ typedef struct CreatureAbility {
     CreatureU32 field_caps;
 } CreatureAbility;
 extern const CreatureForm creature_forms[CREATURE_ENABLED_COUNT];
-extern const CreatureLearn creature_learnsets[12];
-extern const CreatureEvolution creature_evolutions[4];
-extern const CreatureAbility creature_abilities[8];
-extern const FormId creature_legacy_forms[4];
+extern const CreatureLearn creature_learnsets[CREATURE_LEARNSET_COUNT];
+extern const CreatureEvolution creature_evolutions[CREATURE_EVOLUTION_COUNT];
+extern const CreatureAbility creature_abilities[CREATURE_ABILITY_COUNT];
+extern const FormId creature_legacy_forms[CREATURE_LEGACY_COUNT];
 
-/* Valid identity is not enabled content. 3, 13, 121 and 128 remain disabled. */
+/* Enabled core data is not proof of a native acquisition/art/ability route.
+ * 13/14/16 are enabled; every other unlisted form (including 121) is disabled. */
 int creatures_form_id_valid(unsigned form_id);
 const CreatureForm *creatures_form(unsigned form_id);
 const CreatureAbility *creatures_ability(unsigned ability_id);
@@ -118,7 +133,11 @@ int creatures_party_set(CreatureRoster *roster, const CreatureU8 party[4], Creat
 /* Adds an enabled form; callers author acquisition gates. Returns slot or 255.
  * reward_id 1..4 is reserved for matching story families; 5..128 is a
  * general one-time transaction; 0 means repeatable. At capacity
- * nothing changes, including the reward ledger. Story grants use the API below. */
+ * nothing changes, including the reward ledger. Story grants use the API below.
+ * Regional recruits are ordinary owned instances (flags 0), never STORY_LOCKED.
+ * Full parties are never replaced; a new companion remains in storage.
+ * Quest 2 authors grant(13, 10, 20, 0, 5); quest 3 authors reward 6/form 16.
+ * This API does not mark quests complete or verify the external recruit gate. */
 unsigned creatures_grant(CreatureRoster *roster, unsigned form_id, unsigned level,
                          unsigned bond, unsigned flags, unsigned reward_id);
 unsigned creatures_grant_story(CreatureRoster *roster, unsigned legacy_spirit,
@@ -142,6 +161,9 @@ enum CreatureCreditKind { CREATURE_CREDIT_ENCOUNTER = 0, CREATURE_CREDIT_FIELD_A
  * prevent swapping members to re-credit. Encounter/quest IDs must be <384. */
 int creatures_credit_event(CreatureRoster *roster, unsigned event_id,
                            CreatureU32 xp, unsigned kind);
+/* Legacy family trials 1/2/4/8 are unchanged. PAIRED_POOLS (16) belongs only
+ * to Dewspindle/Tidewheel and is awarded by regional personal quest 4.
+ * Zero, combined flags and trials for another family are rejected. */
 int creatures_mark_trial(CreatureInstance *instance, unsigned trial_flag);
 
 enum CreatureEvolutionStatus {
@@ -153,10 +175,11 @@ enum CreatureEvolutionStatus {
 };
 const CreatureEvolution *creatures_evolution(unsigned form_id);
 /* READY ignores confirmation so UI can show eligibility; evolve requires it.
- * Deferring is explicit and leaves every roster byte unchanged. */
-unsigned creatures_can_evolve(const CreatureInstance *instance, unsigned chapter_flags,
+ * Deferring is explicit and leaves every roster byte unchanged. evolution_context
+ * uses the separate masked namespace documented above, never raw campaign flags. */
+unsigned creatures_can_evolve(const CreatureInstance *instance, unsigned evolution_context,
                               int at_sanctuary);
 unsigned creatures_evolve(CreatureRoster *roster, unsigned roster_slot,
-                          unsigned chapter_flags, int at_sanctuary, int confirmed);
+                          unsigned evolution_context, int at_sanctuary, int confirmed);
 unsigned creatures_defer_evolution(const CreatureInstance *instance);
 #endif

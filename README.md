@@ -2,7 +2,7 @@
 
 An original, evolving Game Boy Advance action-adventure about a small light and the companions who travel beside you.
 
-The world now fills the native **240×160 screen**, with floating corner controls instead of a permanent menu strip. Explore, fight with your sword, call a companion, and pay attention to the little things along the path. Companions can grow, learn new commands and change form through optional personal journeys. You can wait before evolving, and their familiar field powers remain yours.
+The world now fills the native **240×160 screen**, with floating corner controls instead of a permanent menu strip. Explore, choose a sword, lance or bow, call a companion, and pay attention to the little things along the path. Companions can grow, learn new commands and change form through optional personal journeys. You can wait before evolving, and their familiar field powers remain yours.
 
 ## Start playing
 
@@ -11,7 +11,7 @@ Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulato
 | Button | Action |
 | --- | --- |
 | D-pad | Move and face; diagonals have normalized speed |
-| A | Sword, talk, examine, advance dialogue; successive strikes form a three-hit chain |
+| A | Attack, talk or examine; with a bow, hold to aim and release to shoot |
 | B | Call/recall your companion; close the journal |
 | Hold L + D-pad, release L | Choose a quick-slot companion; B cancels |
 | Tap L | Cycle assigned companions (a short tap only) |
@@ -23,30 +23,34 @@ Hold **L** for the temporary four-slot selector: **up, right, down, left** match
 
 In the journal, **A changes pages**. On the party page, **left/right chooses a slot**, **up/down browses owned companions or an empty slot**, **R assigns/swaps**, and **Select clears a slot**. At least one companion stays assigned. This never releases or duplicates a companion: all owned companions remain available here, including powers you need along the route. Assignments save immediately; field selection is remembered at the next normal checkpoint. The growth page shows level, bond and the next step. **R changes a learned command; Select offers evolution** when its conditions are met at a resting place. Evolution has a separate confirmation and can be deferred. B returns to play.
 
+On the equipment page, **up/down chooses a body slot**, **left/right previews owned gear**, **R equips**, and **Select removes it** (a removed weapon falls back to your starter sword). Attacks, recovery, rolling and your live projectiles must finish before equipment can change. Equipping never restores health. The quest page keeps requests and readable hints together.
+
+Swords link three cuts, lances commit to a narrow longer thrust, and bows can be charged. Roll or open a menu/selector to cancel an un-fired bow draw. Attack/defense are game stat points; health is shown in hearts, and walking speed uses an index with the normal pace at 100. Power recovery depends on the contextual field action or combat command; recovery gear affects future uses without resetting an existing timer.
+
 The corner icon shows B when a companion can be called and R while it is summoned. Its small bar shows power recovery. Area names appear briefly on entry and are available in the journal.
 
-Keep the emulator's `.sav` file. Progress records automatically. A short saving state preserves your progress before reward dialogue continues; world actions pause during that state. Title-screen Select starts a new adventure and replaces prior progress. Published saves from formats 2–4 continue into this version; keep a backup before returning to an older ROM, which cannot see new format-5 progress.
+Keep the emulator's `.sav` file. Progress records automatically. A short saving state preserves your progress before reward dialogue continues; world actions pause during that state. Title-screen Select starts a new adventure and replaces prior progress. Published saves from formats 2–4 and the earlier format 5 revision 1 continue into this version. Back up your `.sav` before upgrading or returning to an older ROM: older builds cannot understand the new equipment, quests and recruits.
 
 [日本語の遊び方、ネタバレなし](docs/PLAY_JA.md)
 
 ## This update
 
-- Hold-L cross selector with direct summoned-companion replacement
-- Journal party assignments from actual owned companions, including swaps and empty slots
+- A bright, inhabited riverside town and six connected new areas
+- Sword, lance and bow, with five equipment slots and 13 earnable items
+- Eleven side quests, resettable puzzles and visually hinted discoveries
+- New companions, an optional evolution and all five phases active in regional combat
+- Continued full-screen exploration and hold-L party switching
+- Forward save migration, retained traversal companions and one-time rewards
 
-- Full-screen exploration with a compact floating HUD
-- Optional companion growth, explicit evolution choices and retained familiar commands
-- New personal discoveries and resettable environmental puzzles
-- More distinctive field/combat powers and readable movement tradeoffs
-- Transactional save upgrades, older-save migration, interruption recovery and repeat-reward protection
-
-The player preview and default video show only opening areas. Technical tests, source data and developer guides contain spoilers.
+The player preview and default video show ordinary opening-town play with a starting companion. Source data, test traces and developer guides contain spoilers.
 
 ## Development status
 
-The current ROM has **8 implemented, obtainable and controller-verified forms**, four assignable quick-companion slots, 16 areas, three story dungeon arcs and optional personal trials. The broader requested game is still in development: the 128-form roster, equipment/weapon variety, regional towns and a larger quest campaign are not claimed as finished.
+The current ROM has **11 implemented, obtainable and controller-verified forms** in six companion families, four assignable quick slots, 22 areas, three original story dungeon arcs, optional personal trials, 13 equipment items and 11 regional quests. All 11 forms have also been obtained in one normally played and reloaded progress file. The larger requested game remains in development.
 
-The catalog reserves 128 stable identities and has 12 authored designs. Only eight are enabled. Five-phase/polarity definitions and matchup reference rules exist; numerical phase battle modifiers are not yet applied to the legacy combat encounters. There is no claim that 128 reserved rows are 128 playable monsters.
+The catalog reserves 128 stable identities and contains 12 authored designs. Eleven are enabled; the designed legendary is not enabled or obtainable. The remaining regional cultures, full 128-form roster and legendary progression are still ahead. A reserved row is not a playable monster, and an evolved form is counted within the provisional 128-form target.
+
+Wood, Fire, Earth, Metal and Water are separate from Yin/Yang polarity. The numerical battle rules are original game design; the legacy untyped encounters retain their prior balance. Regional enemies display phase markers, and all five controlling matchups are verified in the native ROM.
 
 [Roadmap](docs/ROADMAP.md) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Save format](docs/SAVE5.md)
 
@@ -74,7 +78,7 @@ make test-tools
 make gameplay-video  # ffmpeg; spoiler-free player teaser
 ```
 
-`make test` includes native-controller journeys, full-screen pixel/OAM checks, older-save migration, fault-injected host persistence tests, personal trials, all enabled evolutions, command effects and actual emulated display cadence. Synthetic host fixtures are labeled separately from normal controller gameplay. Raw traces are generated under ignored `build/`.
+`make test` includes native-controller journeys, full-screen pixel/OAM checks, older-save migration, fault-injected host persistence tests, personal trials, all enabled evolutions, regional quests/collection, weapon/gear/phase effects and actual emulated display cadence. Synthetic host fixtures are labeled separately from normal controller gameplay. Raw traces are generated under ignored `build/`.
 
 `make developer-video` produces a spoiler-bearing campaign recording for development review. `python3 tools/package_source.py` makes a deterministic source ZIP and file-integrity manifest.
 

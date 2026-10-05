@@ -1,0 +1,16 @@
+[
+  {
+    "case": "crowded-fractional-two-arrow-cadence",
+    "frames": 200,
+    "updates": 200,
+    "page_flips": 200,
+    "peak_cycles": 118095,
+    "peak_objects": 36,
+    "two_arrow_frames": 16,
+    "fractional_frames": 200,
+    "max_live_enemies": 5,
+    "max_hostile_shots": 0,
+    "max_visible_enemies": 2,
+    "strict_60hz": true
+  }
+]

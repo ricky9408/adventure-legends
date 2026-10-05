@@ -1,0 +1,2625 @@
+{
+  "schema": 1,
+  "art": "Original geometric pixel art with unmodified RGB555 palette; no outside artwork.",
+  "coordinate_contract": "All positions are world pixel centers. Rectangles are [x,y,width,height], half-open. Actor sprites center at x-8,y-8. Five-pixel feet use cardinal-only route proofs.",
+  "palette": {
+    "source": "assets/generate_assets.py",
+    "entries": 178,
+    "palette_rgb_bytes_sha256": "acad21683ec7b2f85d996a8590b407470aa20cb6c9b6a6038a96af08ed17fae8",
+    "transparent_index": 0,
+    "native_rgb555_preview": true,
+    "ramp": "sunlit"
+  },
+  "background_rules": "Opaque immutable native backgrounds. No moving actors or stateful mechanisms are baked. Foreground export is intentionally absent: silhouettes and clear routes do not require foreground compositing.",
+  "sprites": {
+    "size": [
+      16,
+      16
+    ],
+    "layout": "row-major",
+    "names": [
+      "NPC_SMITH",
+      "NPC_WEAVER",
+      "NPC_WARDEN",
+      "NPC_REST_KEEPER",
+      "NPC_APPRENTICE",
+      "NPC_MERCHANT",
+      "RACK_SWORD",
+      "RACK_LANCE",
+      "RACK_BOW",
+      "TARGET_READY",
+      "TARGET_HIT",
+      "RESET_IDLE",
+      "RESET_LIT",
+      "SLUICE_CLOSED",
+      "SLUICE_OPEN",
+      "BELL_IDLE",
+      "BELL_RING",
+      "LATCH_CLOSED",
+      "LATCH_OPEN",
+      "CRATE",
+      "PLATE_UP",
+      "PLATE_DOWN",
+      "POOL_LOW",
+      "POOL_HIGH",
+      "BRIDGE_WOOD",
+      "BRIDGE_ROOT",
+      "REST_IDLE",
+      "REST_LIT",
+      "SIGN_WORKSHOP",
+      "SIGN_WEAVER",
+      "SIGN_GARDEN",
+      "SIGN_TIDE",
+      "REED_SCREEN",
+      "REED_PARTED",
+      "SPINDLE_IDLE",
+      "SPINDLE_LIT",
+      "FURNACE_IDLE",
+      "FURNACE_LIT",
+      "STEP_IDLE",
+      "STEP_LIT"
+    ],
+    "indices": {
+      "NPC_SMITH": 0,
+      "NPC_WEAVER": 1,
+      "NPC_WARDEN": 2,
+      "NPC_REST_KEEPER": 3,
+      "NPC_APPRENTICE": 4,
+      "NPC_MERCHANT": 5,
+      "RACK_SWORD": 6,
+      "RACK_LANCE": 7,
+      "RACK_BOW": 8,
+      "TARGET_READY": 9,
+      "TARGET_HIT": 10,
+      "RESET_IDLE": 11,
+      "RESET_LIT": 12,
+      "SLUICE_CLOSED": 13,
+      "SLUICE_OPEN": 14,
+      "BELL_IDLE": 15,
+      "BELL_RING": 16,
+      "LATCH_CLOSED": 17,
+      "LATCH_OPEN": 18,
+      "CRATE": 19,
+      "PLATE_UP": 20,
+      "PLATE_DOWN": 21,
+      "POOL_LOW": 22,
+      "POOL_HIGH": 23,
+      "BRIDGE_WOOD": 24,
+      "BRIDGE_ROOT": 25,
+      "REST_IDLE": 26,
+      "REST_LIT": 27,
+      "SIGN_WORKSHOP": 28,
+      "SIGN_WEAVER": 29,
+      "SIGN_GARDEN": 30,
+      "SIGN_TIDE": 31,
+      "REED_SCREEN": 32,
+      "REED_PARTED": 33,
+      "SPINDLE_IDLE": 34,
+      "SPINDLE_LIT": 35,
+      "FURNACE_IDLE": 36,
+      "FURNACE_LIT": 37,
+      "STEP_IDLE": 38,
+      "STEP_LIT": 39
+    },
+    "anchor": "center",
+    "transparency_index": 0
+  },
+  "rooms": [
+    {
+      "id": 16,
+      "key": "reedhaven",
+      "name": "Reedhaven town",
+      "width": 480,
+      "height": 320,
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          240,
+          52
+        ],
+        "2": [
+          104,
+          232
+        ],
+        "3": [
+          344,
+          152
+        ],
+        "4": [
+          88,
+          128
+        ],
+        "5": [
+          344,
+          248
+        ]
+      },
+      "solids": [
+        {
+          "kind": "west_world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "east_world_edge",
+          "rect": [
+            472,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "north_edge_left",
+          "rect": [
+            8,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "north_edge_right",
+          "rect": [
+            256,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_left",
+          "rect": [
+            8,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_right",
+          "rect": [
+            256,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "canal_water",
+          "rect": [
+            8,
+            166,
+            88,
+            25
+          ]
+        },
+        {
+          "kind": "canal_water",
+          "rect": [
+            128,
+            166,
+            96,
+            25
+          ]
+        },
+        {
+          "kind": "canal_water",
+          "rect": [
+            256,
+            166,
+            112,
+            25
+          ]
+        },
+        {
+          "kind": "canal_water",
+          "rect": [
+            400,
+            166,
+            72,
+            25
+          ]
+        },
+        {
+          "kind": "tributary_water",
+          "rect": [
+            274,
+            8,
+            20,
+            28
+          ]
+        },
+        {
+          "kind": "tributary_water",
+          "rect": [
+            274,
+            60,
+            20,
+            68
+          ]
+        },
+        {
+          "kind": "tributary_water",
+          "rect": [
+            274,
+            156,
+            20,
+            10
+          ]
+        },
+        {
+          "kind": "weaver_cottage",
+          "rect": [
+            45,
+            51,
+            86,
+            62
+          ]
+        },
+        {
+          "kind": "workshop",
+          "rect": [
+            299,
+            68,
+            94,
+            69
+          ]
+        },
+        {
+          "kind": "canal_residence",
+          "rect": [
+            153,
+            13,
+            66,
+            56
+          ]
+        },
+        {
+          "kind": "tea_house",
+          "rect": [
+            361,
+            11,
+            90,
+            57
+          ]
+        },
+        {
+          "kind": "market_counter",
+          "rect": [
+            163,
+            100,
+            44,
+            29
+          ]
+        },
+        {
+          "kind": "market_counter",
+          "rect": [
+            162,
+            196,
+            44,
+            29
+          ]
+        },
+        {
+          "kind": "rest_pavilion_post",
+          "rect": [
+            67,
+            183,
+            5,
+            26
+          ]
+        },
+        {
+          "kind": "rest_pavilion_post",
+          "rect": [
+            136,
+            183,
+            5,
+            26
+          ]
+        },
+        {
+          "kind": "rest_pavilion_roof",
+          "rect": [
+            68,
+            175,
+            73,
+            12
+          ]
+        },
+        {
+          "kind": "garden_gate_pillar",
+          "rect": [
+            313,
+            210,
+            6,
+            23
+          ]
+        },
+        {
+          "kind": "garden_gate_pillar",
+          "rect": [
+            371,
+            210,
+            6,
+            23
+          ]
+        },
+        {
+          "kind": "garden_gate_crown",
+          "rect": [
+            314,
+            200,
+            62,
+            8
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            11,
+            11,
+            33,
+            53
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            11,
+            76,
+            28,
+            44
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            17,
+            222,
+            31,
+            49
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            41,
+            262,
+            31,
+            49
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            139,
+            270,
+            28,
+            42
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            275,
+            276,
+            25,
+            36
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            440,
+            64,
+            23,
+            35
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            455,
+            264,
+            17,
+            48
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            304,
+            8,
+            23,
+            25
+          ]
+        },
+        {
+          "kind": "canal_bench",
+          "rect": [
+            155,
+            147,
+            35,
+            9
+          ]
+        },
+        {
+          "kind": "north_gate_post",
+          "rect": [
+            209,
+            11,
+            6,
+            26
+          ]
+        },
+        {
+          "kind": "north_gate_post",
+          "rect": [
+            267,
+            11,
+            6,
+            26
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "smith",
+          "type": "npc",
+          "center": [
+            320,
+            150
+          ],
+          "approach": [
+            320,
+            150
+          ],
+          "sprite": "NPC_SMITH",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Outside the tiled workshop by its water wheel.",
+          "sprite_index": 0,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "mira",
+          "type": "npc",
+          "center": [
+            88,
+            136
+          ],
+          "approach": [
+            88,
+            136
+          ],
+          "sprite": "NPC_WEAVER",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "The teal-thread sign marks the weaver cottage.",
+          "sprite_index": 1,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "warden",
+          "type": "npc",
+          "center": [
+            264,
+            236
+          ],
+          "approach": [
+            264,
+            252
+          ],
+          "sprite": "NPC_WARDEN",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 2,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "rest",
+          "type": "rest",
+          "center": [
+            104,
+            216
+          ],
+          "approach": [
+            104,
+            232
+          ],
+          "sprite": "REST_IDLE",
+          "state_sprites": [
+            "REST_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "An open-sided lantern pavilion beside the west bridge.",
+          "sprite_index": 26,
+          "state_sprite_indices": [
+            27
+          ]
+        },
+        {
+          "key": "apprentice",
+          "type": "npc",
+          "center": [
+            416,
+            264
+          ],
+          "approach": [
+            416,
+            280
+          ],
+          "sprite": "NPC_APPRENTICE",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 4,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "market_keeper",
+          "type": "npc",
+          "center": [
+            182,
+            234
+          ],
+          "approach": [
+            182,
+            250
+          ],
+          "sprite": "NPC_REST_KEEPER",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 3,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "sword_rack",
+          "type": "equipment_practice",
+          "center": [
+            408,
+            240
+          ],
+          "approach": [
+            408,
+            256
+          ],
+          "sprite": "RACK_SWORD",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 6,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "lance_rack",
+          "type": "equipment_practice",
+          "center": [
+            432,
+            240
+          ],
+          "approach": [
+            432,
+            256
+          ],
+          "sprite": "RACK_LANCE",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 7,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "bow_rack",
+          "type": "equipment_practice",
+          "center": [
+            456,
+            240
+          ],
+          "approach": [
+            456,
+            256
+          ],
+          "sprite": "RACK_BOW",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 8,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "practice_target",
+          "type": "equipment_practice",
+          "center": [
+            440,
+            280
+          ],
+          "approach": [
+            440,
+            296
+          ],
+          "sprite": "TARGET_READY",
+          "state_sprites": [
+            "TARGET_HIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 9,
+          "state_sprite_indices": [
+            10
+          ]
+        },
+        {
+          "key": "workshop_sign",
+          "type": "sign",
+          "center": [
+            400,
+            152
+          ],
+          "approach": [
+            400,
+            152
+          ],
+          "sprite": "SIGN_WORKSHOP",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 28,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "weaver_sign",
+          "type": "sign",
+          "center": [
+            64,
+            128
+          ],
+          "approach": [
+            64,
+            140
+          ],
+          "sprite": "SIGN_WEAVER",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 29,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "garden_sign",
+          "type": "sign",
+          "center": [
+            376,
+            248
+          ],
+          "approach": [
+            376,
+            260
+          ],
+          "sprite": "SIGN_GARDEN",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 30,
+          "state_sprite_indices": []
+        }
+      ],
+      "exits": [
+        {
+          "key": "south_road",
+          "rect": [
+            224,
+            298,
+            32,
+            14
+          ],
+          "approach": [
+            240,
+            304
+          ],
+          "target": {
+            "room": "previous_region",
+            "spawn": "parent_owned"
+          }
+        },
+        {
+          "key": "north_basin",
+          "rect": [
+            224,
+            14,
+            32,
+            20
+          ],
+          "approach": [
+            240,
+            28
+          ],
+          "target": {
+            "room": 17,
+            "spawn": 0
+          }
+        },
+        {
+          "key": "bellfoundry",
+          "rect": [
+            332,
+            138,
+            24,
+            10
+          ],
+          "approach": [
+            344,
+            148
+          ],
+          "target": {
+            "room": 18,
+            "spawn": 0
+          }
+        },
+        {
+          "key": "mira_storehouse",
+          "rect": [
+            76,
+            115,
+            24,
+            10
+          ],
+          "approach": [
+            88,
+            124
+          ],
+          "target": {
+            "room": 20,
+            "spawn": 0
+          }
+        },
+        {
+          "key": "surestep_garden",
+          "rect": [
+            332,
+            218,
+            24,
+            17
+          ],
+          "approach": [
+            344,
+            230
+          ],
+          "target": {
+            "room": 21,
+            "spawn": 0
+          }
+        }
+      ],
+      "landmarks": [
+        {
+          "kind": "weaver_cottage",
+          "bounds": [
+            41,
+            48,
+            94,
+            72
+          ],
+          "door": [
+            88,
+            112
+          ]
+        },
+        {
+          "kind": "workshop",
+          "bounds": [
+            295,
+            65,
+            102,
+            79
+          ],
+          "door": [
+            344,
+            136
+          ]
+        },
+        {
+          "kind": "canal_residence",
+          "bounds": [
+            149,
+            10,
+            74,
+            66
+          ],
+          "door": [
+            186,
+            68
+          ]
+        },
+        {
+          "kind": "tea_house",
+          "bounds": [
+            357,
+            8,
+            98,
+            67
+          ],
+          "door": [
+            406,
+            67
+          ]
+        }
+      ],
+      "camera_crops": [
+        [
+          0,
+          40
+        ],
+        [
+          240,
+          56
+        ],
+        [
+          0,
+          160
+        ],
+        [
+          240,
+          160
+        ],
+        [
+          120,
+          0
+        ],
+        [
+          120,
+          160
+        ]
+      ],
+      "bitmap_sha256": "29279428471c71f98acf644eaa7e32df966a1367d7301e489ca7d869f6f36755",
+      "odd_bitmap_sha256": "57e1b82f6bda3d54740d4f455b2982922f95f1eeece9dde22e3d60ac7e86c852",
+      "dma_camera_checks": 1446
+    },
+    {
+      "id": 17,
+      "key": "reedbasin",
+      "name": "Reed basin",
+      "width": 480,
+      "height": 320,
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          360,
+          72
+        ],
+        "2": [
+          120,
+          232
+        ]
+      },
+      "solids": [
+        {
+          "kind": "west_world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "east_world_edge",
+          "rect": [
+            472,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "north_edge_left",
+          "rect": [
+            8,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "north_edge_right",
+          "rect": [
+            256,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_left",
+          "rect": [
+            8,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_right",
+          "rect": [
+            256,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "north_basin_boundary",
+          "rect": [
+            224,
+            0,
+            32,
+            8
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            8,
+            144,
+            84,
+            40
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            124,
+            144,
+            100,
+            40
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            256,
+            160,
+            124,
+            24
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            412,
+            160,
+            60,
+            24
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            24,
+            80,
+            54,
+            64
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            78,
+            80,
+            52,
+            38
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            306,
+            184,
+            76,
+            28
+          ]
+        },
+        {
+          "kind": "basin_water",
+          "rect": [
+            412,
+            184,
+            44,
+            28
+          ]
+        },
+        {
+          "kind": "tide_gate_post",
+          "rect": [
+            330,
+            24,
+            6,
+            26
+          ]
+        },
+        {
+          "kind": "tide_gate_post",
+          "rect": [
+            384,
+            24,
+            6,
+            26
+          ]
+        },
+        {
+          "kind": "tide_gate_lintel",
+          "rect": [
+            332,
+            14,
+            56,
+            12
+          ]
+        },
+        {
+          "kind": "tide_ruin",
+          "rect": [
+            307,
+            34,
+            15,
+            12
+          ]
+        },
+        {
+          "kind": "tide_ruin",
+          "rect": [
+            400,
+            36,
+            25,
+            12
+          ]
+        },
+        {
+          "kind": "tide_ruin",
+          "rect": [
+            318,
+            52,
+            13,
+            12
+          ]
+        },
+        {
+          "kind": "tide_ruin",
+          "rect": [
+            398,
+            53,
+            18,
+            12
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            199,
+            11,
+            37,
+            60
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            439,
+            29,
+            33,
+            57
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            10,
+            14,
+            28,
+            44
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            139,
+            11,
+            23,
+            37
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            10,
+            207,
+            33,
+            53
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            43,
+            250,
+            31,
+            49
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            152,
+            274,
+            28,
+            38
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            284,
+            268,
+            31,
+            44
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            437,
+            253,
+            33,
+            53
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            435,
+            215,
+            28,
+            44
+          ]
+        },
+        {
+          "kind": "tree_island",
+          "rect": [
+            302,
+            38,
+            23,
+            35
+          ]
+        },
+        {
+          "kind": "basin_boulder",
+          "rect": [
+            167,
+            186,
+            24,
+            18
+          ]
+        },
+        {
+          "kind": "basin_boulder",
+          "rect": [
+            296,
+            224,
+            31,
+            19
+          ]
+        },
+        {
+          "kind": "basin_boulder",
+          "rect": [
+            57,
+            202,
+            22,
+            17
+          ]
+        },
+        {
+          "kind": "basin_boulder",
+          "rect": [
+            422,
+            38,
+            25,
+            17
+          ]
+        },
+        {
+          "kind": "basin_boulder",
+          "rect": [
+            271,
+            35,
+            19,
+            14
+          ]
+        },
+        {
+          "kind": "standing_stone",
+          "rect": [
+            161,
+            58,
+            12,
+            20
+          ]
+        },
+        {
+          "kind": "standing_stone",
+          "rect": [
+            199,
+            59,
+            12,
+            20
+          ]
+        },
+        {
+          "kind": "basin_rest_bench",
+          "rect": [
+            155,
+            214,
+            32,
+            9
+          ]
+        }
+      ],
+      "dynamic_rectangles": [
+        {
+          "key": "dry_road_bridge",
+          "rect": [
+            224,
+            152,
+            32,
+            32
+          ],
+          "closed_by_default": true,
+          "access_hint": "Closed water can be bypassed by either permanent loop bridge; engine may tile BRIDGE_WOOD after repair."
+        }
+      ],
+      "objects": [
+        {
+          "key": "basin_rest",
+          "type": "rest",
+          "center": [
+            120,
+            216
+          ],
+          "approach": [
+            120,
+            232
+          ],
+          "sprite": "REST_IDLE",
+          "state_sprites": [
+            "REST_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 26,
+          "state_sprite_indices": [
+            27
+          ]
+        },
+        {
+          "key": "sluice_handle",
+          "type": "mechanism",
+          "center": [
+            264,
+            200
+          ],
+          "approach": [
+            264,
+            216
+          ],
+          "sprite": "SLUICE_CLOSED",
+          "state_sprites": [
+            "SLUICE_OPEN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "The dry road has two visible permanent ways around it.",
+          "sprite_index": 13,
+          "state_sprite_indices": [
+            14
+          ]
+        },
+        {
+          "key": "west_tide_pool",
+          "type": "pool",
+          "center": [
+            296,
+            120
+          ],
+          "approach": [
+            296,
+            140
+          ],
+          "sprite": "POOL_LOW",
+          "state_sprites": [
+            "POOL_HIGH"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Paired rim markings match the second pool across the eastern path.",
+          "sprite_index": 22,
+          "state_sprite_indices": [
+            23
+          ]
+        },
+        {
+          "key": "east_tide_pool",
+          "type": "pool",
+          "center": [
+            424,
+            104
+          ],
+          "approach": [
+            424,
+            124
+          ],
+          "sprite": "POOL_LOW",
+          "state_sprites": [
+            "POOL_HIGH"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 22,
+          "state_sprite_indices": [
+            23
+          ]
+        },
+        {
+          "key": "weaver_nook",
+          "type": "discovery",
+          "center": [
+            60,
+            40
+          ],
+          "approach": [
+            72,
+            44
+          ],
+          "sprite": "SPINDLE_IDLE",
+          "state_sprites": [
+            "SPINDLE_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Pale flowers and a break in the reed line continue the upland path.",
+          "sprite_index": 34,
+          "state_sprite_indices": [
+            35
+          ]
+        },
+        {
+          "key": "reed_screen",
+          "type": "visual_state",
+          "center": [
+            84,
+            44
+          ],
+          "approach": [
+            98,
+            44
+          ],
+          "sprite": "REED_SCREEN",
+          "state_sprites": [
+            "REED_PARTED"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 32,
+          "state_sprite_indices": [
+            33
+          ]
+        },
+        {
+          "key": "basin_bond",
+          "type": "discovery",
+          "center": [
+            184,
+            72
+          ],
+          "approach": [
+            184,
+            88
+          ],
+          "sprite": "BELL_IDLE",
+          "state_sprites": [
+            "BELL_RING"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "The two uneven standing stones frame a quiet clearing.",
+          "sprite_index": 15,
+          "state_sprite_indices": [
+            16
+          ]
+        },
+        {
+          "key": "basin_warden",
+          "type": "npc",
+          "center": [
+            348,
+            268
+          ],
+          "approach": [
+            348,
+            284
+          ],
+          "sprite": "NPC_WARDEN",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 2,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "tide_sign",
+          "type": "sign",
+          "center": [
+            384,
+            80
+          ],
+          "approach": [
+            384,
+            96
+          ],
+          "sprite": "SIGN_TIDE",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 31,
+          "state_sprite_indices": []
+        }
+      ],
+      "exits": [
+        {
+          "key": "south_reedhaven",
+          "rect": [
+            224,
+            298,
+            32,
+            14
+          ],
+          "approach": [
+            240,
+            304
+          ],
+          "target": {
+            "room": 16,
+            "spawn": 1
+          }
+        },
+        {
+          "key": "tide_courtyard",
+          "rect": [
+            348,
+            45,
+            24,
+            15
+          ],
+          "approach": [
+            360,
+            56
+          ],
+          "target": {
+            "room": 19,
+            "spawn": 0
+          }
+        }
+      ],
+      "landmarks": [
+        {
+          "kind": "central_repairable_crossing",
+          "bounds": [
+            222,
+            140,
+            36,
+            56
+          ]
+        }
+      ],
+      "camera_crops": [
+        [
+          0,
+          0
+        ],
+        [
+          240,
+          0
+        ],
+        [
+          0,
+          160
+        ],
+        [
+          240,
+          160
+        ],
+        [
+          120,
+          96
+        ],
+        [
+          120,
+          160
+        ]
+      ],
+      "bitmap_sha256": "474ca1d4d13ed9f581e9c2b2d62308f6f4d5153be0297c6d5c26e41df77fe0d8",
+      "odd_bitmap_sha256": "1a2e7c296abca0b88c4c6ca9e26902d1a2305cb4e1b14590d986fe0168d4db03",
+      "dma_camera_checks": 1446
+    },
+    {
+      "id": 18,
+      "key": "bellfoundry",
+      "name": "Bell foundry",
+      "width": 240,
+      "height": 160,
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "solids": [
+        {
+          "kind": "west_world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "east_world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_room_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_wall_left",
+          "rect": [
+            8,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "south_wall_right",
+          "rect": [
+            132,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "forge_masonry",
+          "rect": [
+            17,
+            30,
+            48,
+            29
+          ]
+        },
+        {
+          "kind": "smith_bench",
+          "rect": [
+            17,
+            79,
+            30,
+            29
+          ]
+        },
+        {
+          "kind": "quenching_basin",
+          "rect": [
+            192,
+            100,
+            28,
+            20
+          ]
+        },
+        {
+          "kind": "bell_gantry",
+          "rect": [
+            76,
+            33,
+            4,
+            23
+          ]
+        },
+        {
+          "kind": "bell_gantry",
+          "rect": [
+            112,
+            33,
+            4,
+            23
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "bell",
+          "type": "mechanism",
+          "center": [
+            96,
+            64
+          ],
+          "approach": [
+            96,
+            80
+          ],
+          "sprite": "BELL_IDLE",
+          "state_sprites": [
+            "BELL_RING"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 15,
+          "state_sprite_indices": [
+            16
+          ]
+        },
+        {
+          "key": "forge",
+          "type": "mechanism",
+          "center": [
+            48,
+            56
+          ],
+          "approach": [
+            48,
+            72
+          ],
+          "sprite": "FURNACE_IDLE",
+          "state_sprites": [
+            "FURNACE_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 36,
+          "state_sprite_indices": [
+            37
+          ]
+        },
+        {
+          "key": "metal_latch",
+          "type": "mechanism",
+          "center": [
+            184,
+            56
+          ],
+          "approach": [
+            184,
+            72
+          ],
+          "sprite": "LATCH_CLOSED",
+          "state_sprites": [
+            "LATCH_OPEN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 17,
+          "state_sprite_indices": [
+            18
+          ]
+        },
+        {
+          "key": "west_plate",
+          "type": "pressure_plate",
+          "center": [
+            80,
+            104
+          ],
+          "approach": [
+            80,
+            120
+          ],
+          "sprite": "PLATE_UP",
+          "state_sprites": [
+            "PLATE_DOWN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 20,
+          "state_sprite_indices": [
+            21
+          ]
+        },
+        {
+          "key": "east_plate",
+          "type": "pressure_plate",
+          "center": [
+            152,
+            104
+          ],
+          "approach": [
+            152,
+            120
+          ],
+          "sprite": "PLATE_UP",
+          "state_sprites": [
+            "PLATE_DOWN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 20,
+          "state_sprite_indices": [
+            21
+          ]
+        },
+        {
+          "key": "reset",
+          "type": "reset",
+          "center": [
+            32,
+            128
+          ],
+          "approach": [
+            48,
+            128
+          ],
+          "sprite": "RESET_IDLE",
+          "state_sprites": [
+            "RESET_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 11,
+          "state_sprite_indices": [
+            12
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "key": "return_door",
+          "rect": [
+            108,
+            143,
+            24,
+            13
+          ],
+          "approach": [
+            120,
+            149
+          ],
+          "target": {
+            "room": 16,
+            "spawn": 3
+          }
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "ac8548b8565f8958c889617bec101ab9768f10384b41787bc727cdd87ec08d55"
+    },
+    {
+      "id": 19,
+      "key": "tide_courtyard",
+      "name": "Tide courtyard",
+      "width": 240,
+      "height": 160,
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "solids": [
+        {
+          "kind": "west_world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "east_world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_room_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_wall_left",
+          "rect": [
+            8,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "south_wall_right",
+          "rect": [
+            132,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "reed_planter",
+          "rect": [
+            17,
+            38,
+            19,
+            18
+          ]
+        },
+        {
+          "kind": "reed_planter",
+          "rect": [
+            207,
+            116,
+            19,
+            18
+          ]
+        }
+      ],
+      "dynamic_rectangles": [
+        {
+          "key": "pool_64",
+          "rect": [
+            50,
+            48,
+            28,
+            26
+          ],
+          "closed_by_default": true,
+          "access_hint": "Raised rim water zone; approach the lower lip at y88. State never blocks the reset corridor."
+        },
+        {
+          "key": "pool_176",
+          "rect": [
+            162,
+            48,
+            28,
+            26
+          ],
+          "closed_by_default": true,
+          "access_hint": "Raised rim water zone; approach the lower lip at y88. State never blocks the reset corridor."
+        }
+      ],
+      "objects": [
+        {
+          "key": "west_pool",
+          "type": "pool",
+          "center": [
+            64,
+            64
+          ],
+          "approach": [
+            64,
+            86
+          ],
+          "sprite": "POOL_LOW",
+          "state_sprites": [
+            "POOL_HIGH"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 22,
+          "state_sprite_indices": [
+            23
+          ]
+        },
+        {
+          "key": "east_pool",
+          "type": "pool",
+          "center": [
+            176,
+            64
+          ],
+          "approach": [
+            176,
+            86
+          ],
+          "sprite": "POOL_LOW",
+          "state_sprites": [
+            "POOL_HIGH"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 22,
+          "state_sprite_indices": [
+            23
+          ]
+        },
+        {
+          "key": "west_sluice",
+          "type": "mechanism",
+          "center": [
+            64,
+            112
+          ],
+          "approach": [
+            64,
+            130
+          ],
+          "sprite": "SLUICE_CLOSED",
+          "state_sprites": [
+            "SLUICE_OPEN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 13,
+          "state_sprite_indices": [
+            14
+          ]
+        },
+        {
+          "key": "east_sluice",
+          "type": "mechanism",
+          "center": [
+            176,
+            112
+          ],
+          "approach": [
+            176,
+            130
+          ],
+          "sprite": "SLUICE_CLOSED",
+          "state_sprites": [
+            "SLUICE_OPEN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 13,
+          "state_sprite_indices": [
+            14
+          ]
+        },
+        {
+          "key": "reset",
+          "type": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "approach": [
+            48,
+            132
+          ],
+          "sprite": "RESET_IDLE",
+          "state_sprites": [
+            "RESET_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 11,
+          "state_sprite_indices": [
+            12
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "key": "return_door",
+          "rect": [
+            108,
+            143,
+            24,
+            13
+          ],
+          "approach": [
+            120,
+            149
+          ],
+          "target": {
+            "room": 17,
+            "spawn": 1
+          }
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "7975a9a4c8f236aa45679fb7ecb3d378edcfa542eac877372ec491d1a941043b"
+    },
+    {
+      "id": 20,
+      "key": "mira_storehouse",
+      "name": "Mira storehouse",
+      "width": 240,
+      "height": 160,
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "solids": [
+        {
+          "kind": "west_world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "east_world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_room_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_wall_left",
+          "rect": [
+            8,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "south_wall_right",
+          "rect": [
+            132,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "textile_shelf",
+          "rect": [
+            16,
+            40,
+            25,
+            64
+          ]
+        },
+        {
+          "kind": "textile_shelf",
+          "rect": [
+            199,
+            35,
+            26,
+            26
+          ]
+        },
+        {
+          "kind": "textile_shelf",
+          "rect": [
+            196,
+            110,
+            28,
+            22
+          ]
+        }
+      ],
+      "dynamic_rectangles": [
+        {
+          "key": "west_crate",
+          "rect": [
+            73,
+            81,
+            14,
+            14
+          ],
+          "closed_by_default": true,
+          "access_hint": "Movable 16px parcel. Reset returns it to (80,88)."
+        },
+        {
+          "key": "east_crate",
+          "rect": [
+            137,
+            81,
+            14,
+            14
+          ],
+          "closed_by_default": true,
+          "access_hint": "Movable 16px parcel. Reset returns it to (144,88)."
+        }
+      ],
+      "objects": [
+        {
+          "key": "west_crate",
+          "type": "crate",
+          "center": [
+            80,
+            88
+          ],
+          "approach": [
+            80,
+            104
+          ],
+          "sprite": "CRATE",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 19,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "east_crate",
+          "type": "crate",
+          "center": [
+            144,
+            88
+          ],
+          "approach": [
+            144,
+            104
+          ],
+          "sprite": "CRATE",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 19,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "west_plate",
+          "type": "pressure_plate",
+          "center": [
+            80,
+            56
+          ],
+          "approach": [
+            80,
+            72
+          ],
+          "sprite": "PLATE_UP",
+          "state_sprites": [
+            "PLATE_DOWN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 20,
+          "state_sprite_indices": [
+            21
+          ]
+        },
+        {
+          "key": "east_plate",
+          "type": "pressure_plate",
+          "center": [
+            160,
+            104
+          ],
+          "approach": [
+            160,
+            120
+          ],
+          "sprite": "PLATE_UP",
+          "state_sprites": [
+            "PLATE_DOWN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 20,
+          "state_sprite_indices": [
+            21
+          ]
+        },
+        {
+          "key": "spindle",
+          "type": "mechanism",
+          "center": [
+            208,
+            80
+          ],
+          "approach": [
+            208,
+            96
+          ],
+          "sprite": "SPINDLE_IDLE",
+          "state_sprites": [
+            "SPINDLE_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 34,
+          "state_sprite_indices": [
+            35
+          ]
+        },
+        {
+          "key": "latch",
+          "type": "mechanism",
+          "center": [
+            120,
+            40
+          ],
+          "approach": [
+            120,
+            56
+          ],
+          "sprite": "LATCH_CLOSED",
+          "state_sprites": [
+            "LATCH_OPEN"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 17,
+          "state_sprite_indices": [
+            18
+          ]
+        },
+        {
+          "key": "reset",
+          "type": "reset",
+          "center": [
+            32,
+            128
+          ],
+          "approach": [
+            48,
+            128
+          ],
+          "sprite": "RESET_IDLE",
+          "state_sprites": [
+            "RESET_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 11,
+          "state_sprite_indices": [
+            12
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "key": "return_door",
+          "rect": [
+            108,
+            143,
+            24,
+            13
+          ],
+          "approach": [
+            120,
+            149
+          ],
+          "target": {
+            "room": 16,
+            "spawn": 4
+          }
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "06be101bb93affea7cb869a26f5a9445d3a6fb26f043dc4be0a994cada127f5a"
+    },
+    {
+      "id": 21,
+      "key": "surestep_garden",
+      "name": "Surestep garden",
+      "width": 240,
+      "height": 160,
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "solids": [
+        {
+          "kind": "west_world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "east_world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_room_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_wall_left",
+          "rect": [
+            8,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "south_wall_right",
+          "rect": [
+            132,
+            152,
+            100,
+            8
+          ]
+        },
+        {
+          "kind": "raised_flower_bed",
+          "rect": [
+            17,
+            34,
+            32,
+            48
+          ]
+        },
+        {
+          "kind": "raised_flower_bed",
+          "rect": [
+            87,
+            91,
+            25,
+            20
+          ]
+        },
+        {
+          "kind": "raised_flower_bed",
+          "rect": [
+            138,
+            38,
+            26,
+            20
+          ]
+        },
+        {
+          "kind": "raised_flower_bed",
+          "rect": [
+            191,
+            94,
+            30,
+            22
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "step_west",
+          "type": "step",
+          "center": [
+            72,
+            72
+          ],
+          "approach": [
+            72,
+            88
+          ],
+          "sprite": "STEP_IDLE",
+          "state_sprites": [
+            "STEP_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 38,
+          "state_sprite_indices": [
+            39
+          ]
+        },
+        {
+          "key": "step_center",
+          "type": "step",
+          "center": [
+            120,
+            72
+          ],
+          "approach": [
+            120,
+            88
+          ],
+          "sprite": "STEP_IDLE",
+          "state_sprites": [
+            "STEP_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 38,
+          "state_sprite_indices": [
+            39
+          ]
+        },
+        {
+          "key": "step_east",
+          "type": "step",
+          "center": [
+            168,
+            104
+          ],
+          "approach": [
+            168,
+            120
+          ],
+          "sprite": "STEP_IDLE",
+          "state_sprites": [
+            "STEP_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 38,
+          "state_sprite_indices": [
+            39
+          ]
+        },
+        {
+          "key": "garden_gong",
+          "type": "mechanism",
+          "center": [
+            184,
+            48
+          ],
+          "approach": [
+            184,
+            64
+          ],
+          "sprite": "BELL_IDLE",
+          "state_sprites": [
+            "BELL_RING"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 15,
+          "state_sprite_indices": [
+            16
+          ]
+        },
+        {
+          "key": "garden_start",
+          "type": "sign",
+          "center": [
+            64,
+            120
+          ],
+          "approach": [
+            64,
+            136
+          ],
+          "sprite": "SIGN_GARDEN",
+          "state_sprites": [],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 30,
+          "state_sprite_indices": []
+        },
+        {
+          "key": "reset",
+          "type": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "approach": [
+            48,
+            132
+          ],
+          "sprite": "RESET_IDLE",
+          "state_sprites": [
+            "RESET_LIT"
+          ],
+          "interaction_radius": 24,
+          "access_hint": "Approach on the pale walkable floor; state and rewards are engine-owned.",
+          "sprite_index": 11,
+          "state_sprite_indices": [
+            12
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "key": "return_door",
+          "rect": [
+            108,
+            143,
+            24,
+            13
+          ],
+          "approach": [
+            120,
+            149
+          ],
+          "target": {
+            "room": 16,
+            "spawn": 5
+          }
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "eae8cd01c8ccda8bd2ddfc6faa1cd3eb437c35ad2f5ce23daa956286990e19fb"
+    }
+  ],
+  "generated": {
+    "bitmap_bytes": 768000,
+    "sprite_bytes": 10240,
+    "collision_bytes": 896,
+    "arm32_room_table_bytes": 120,
+    "rom_payload_bytes": 779256,
+    "chunks": 98,
+    "largest_chunk_bytes": 31998,
+    "chunk_limit_bytes": 32000
+  },
+  "proof_file": "validation.json",
+  "public_preview": "region_preview_native.png"
+}
