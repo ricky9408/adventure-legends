@@ -1,0 +1,22 @@
+[
+  "enemy damage leads to death",
+  "death blocks player movement",
+  "A retries current room with six hearts",
+  "retry recalls spirit and clears ability/heal cooldowns",
+  "input-only checkpoint puzzle solved",
+  "immediate repeat power is blocked by shared cooldown",
+  "switching spirits does not bypass shared cooldown",
+  "new emulator recognizes real SRAM checkpoint",
+  "continue restores room and puzzle progress",
+  "first-lantern SRAM reopens continuing village",
+  "first-lantern resume preserves earned wind companion",
+  "title Select starts fresh and clears prior chapter progress",
+  "fresh Select persists replacement checkpoint",
+  "review explicitly selects Homura after saved companion restoration",
+  "sword cannot damage armored guardian",
+  "fire exposure permits sword damage",
+  "guardian fight can naturally cause death",
+  "boss death retry resets guardian and restores hearts",
+  "boss retry preserves puzzle progression",
+  "corrupted v5 bank checksums are rejected"
+]

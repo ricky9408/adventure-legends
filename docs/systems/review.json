@@ -1,0 +1,8 @@
+{
+  "rom_sha256": "d19e9b93df294e0d54de277ab90e3d2571c402adc68e82d8adb0a4a6114e6a45",
+  "controller_only": true,
+  "assertions_passed": 20,
+  "failures": [],
+  "raw_report_sha256": "853b9bf76e5be26c4a006f6c60b2574e1b27b47537b5fd11eac6fa1d12104d11",
+  "reproduce_report": "build/review/review-tests.json"
+}

@@ -106,6 +106,14 @@ class CampaignRun:
         self.inputs.append({'emulator_frame': self.e.frame, 'frames': count, 'keys': keys})
         previous = self.get('room')
         self.e.frames(count, keys)
+        # Saves intentionally keep the renderer alive while gameplay is paused.
+        # Test callers wait for the committed state before advancing dialogue.
+        if not getattr(self,'manual_save_control',False):
+            for _ in range(180):
+                if self.get('game_state')!=6:break
+                self.inputs.append({'emulator_frame':self.e.frame,'frames':1,'keys':0,'reason':'SAVE_PENDING'})
+                self.e.frames(1,0)
+            else:raise AssertionError('Transactional save did not finish')
         current = self.get('room')
         if self.has('save_failed') and self.get('save_failed'):
             raise AssertionError(f'Engine attempted an invalid/failed save: {self.status()}')
@@ -426,7 +434,7 @@ class CampaignRun:
         for _ in range(3):
             if self.get('journal_tab')==companion_tab:break
             self.tap('A');self.step(6)
-        if len(tab_images)==3:
+        if len(tab_images)>=3:
             unlocked=4 if self.flags(['SKY_CLEAR']) else 3 if self.flags(['GROVE_CLEAR']) else 2
             original=self.get('spirit');visited=set()
             for _ in range(unlocked):
@@ -915,12 +923,12 @@ class CampaignRun:
                     self.check(self.get('room')==0 and self.get('game_state')!=WIN,
                                'completed legacy save continues from village without replay: '+relative)
                     self.dialogs();self.select(2);self.hub(4)
-                self.check(self.get('save_failed')==0,'legacy migration stores a valid v4 transaction: '+relative)
+                self.check(self.get('save_failed')==0,'legacy migration stores a valid v5 transaction: '+relative)
                 self.check(self.e.bytes(0x0e000000,len(bytes.fromhex(header)))==data[:len(bytes.fromhex(header))],
                            'migration leaves original legacy bytes untouched: '+relative)
                 upgraded=self.save('migrated-'+relative.replace('/','-'))
                 self.reopen(upgraded)
-                self.check(self.get('loaded_save_version')==4,'independent reopen uses v4: '+relative)
+                self.check(self.get('loaded_save_version')==5,'independent reopen uses v5: '+relative)
             evidence.append({'path':str(source),'sha256':digest,'valid':valid,
                              'provenance':'actual prior-ROM controller run or its explicitly labelled corruption fixture'})
         self.observations['legacy_fixtures']=evidence
@@ -935,12 +943,12 @@ class CampaignRun:
         self.check(self.get('chapter_flags')==0 and self.get('room_flags')==0,
                    'newer fresh-game sequence beats older completed bank')
         raw=bytearray(new.read_bytes())
-        newest=max((0x40,0x80),key=lambda off:int.from_bytes(raw[off+5:off+9],'little'))
+        newest=max((0x200,0x1a00),key=lambda off:int.from_bytes(raw[off+8:off+12],'little'))
         raw[newest+16]^=1
         corrupted=self.out/'explicit-corrupted-newest-bank.sav';corrupted.write_bytes(raw)
         self.e.close();self.e=Emulator(self.rom);self.e.load_save(corrupted);self.e.reset();self.step(90)
-        self.check(self.get('has_save')==1,'one corrupt v4 bank falls back to the other bank')
-        raw[0x40+4]=raw[0x80+4]=0
+        self.check(self.get('has_save')==1,'one corrupt v5 bank falls back to the other bank')
+        raw[0x200+20]=raw[0x1a00+20]=0
         invalid=self.out/'explicit-no-valid-banks.sav';invalid.write_bytes(raw)
         self.e.close();self.e=Emulator(self.rom);self.e.load_save(invalid);self.e.reset();self.step(90)
         self.check(self.get('has_save')==0,'two uncommitted banks do not invent a save')

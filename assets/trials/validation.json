@@ -1,0 +1,51 @@
+{
+  "scope": "Actual C host rules, generated pixel assets, and ARM compilation. Integrated cartridge/controller playthrough remains parent-owned.",
+  "host_tests": {
+    "command": "python tests/test_trials.py",
+    "passed": 12,
+    "wind_states": 64,
+    "wind_rotation_edges": 192,
+    "amber_reachable_labeled_states": 756,
+    "amber_push_edges": 4544,
+    "amber_integer_pixel_push_stances": 672606,
+    "all_reachable_states_have_reset_and_exit": true,
+    "completed_stone_state_immutable_via_A": true,
+    "grove_reachable_integer_pixel_centers": 85782,
+    "authored_grove_objects_reachable": 6,
+    "mandatory_routes_unchanged": true,
+    "reward_idempotence": true,
+    "quest_equipment_reservations_unchanged": true
+  },
+  "art": {
+    "native_palette_count": 178,
+    "pixel_bytes": 82944,
+    "chunk_count": 10,
+    "maximum_chunk_bytes": 31979,
+    "opaque_backgrounds": true,
+    "transparent_sprites": true,
+    "distinct_before_after_aids": true,
+    "distinct_rotating_vanes": 4,
+    "deterministic_regeneration": true,
+    "visual_review": [
+      "contact_sheet.png",
+      "sprites_6x.png",
+      "grove_discovery_preview.png"
+    ],
+    "reset_silhouette": "Cool steel T-handle lever with paired rewind chevrons; no fire-colored knob"
+  },
+  "arm": {
+    "flags": "-mcpu=arm7tdmi -mthumb-interwork -mthumb -O2 -std=c99 -ffreestanding -fno-builtin -Wall -Wextra -Werror",
+    "trials_rom_bytes": 3947,
+    "trials_data_bytes": 8,
+    "trials_bss_bytes": 16,
+    "art_rom_bytes": 82944,
+    "art_ram_bytes": 0
+  },
+  "source_sha256": {
+    "src/trials.c": "e1f46abeaa3866cabf8766e4864c4dec8ec28e9e0512834a054b0f7ec6b8d7dd",
+    "src/trials.h": "b498f63d2d4fe4ca4aa2f4ad628318ed9e288fda640d5be33026a4219a676100",
+    "src/trial_art.h": "749261c22eeed3cfdb1dbaee37d94df8508ab772ccdfd79840700e26988a7e64",
+    "assets/generate_trials.py": "ca1ff7efd4f69efd945a9071d0ee6cd96c46e671ca0fcb5699fe7626fa3535db",
+    "tests/test_trials.py": "07d05d7f28167bc869117005fe297d8bc81e4e25c53bbd28694a2de09fa4e88d"
+  }
+}

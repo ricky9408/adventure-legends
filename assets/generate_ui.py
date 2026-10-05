@@ -37,7 +37,7 @@ texts={
  'CAMP1':'たき火のぬくもりが、傷を癒す。', 'CAMP2':'次はここから、旅を続けられる。',
  'RELIC1':'命のかけらを見つけた！', 'RELIC2':'ハートの最大数が、２つ増えた。',
  'MAP':'こもれびの森の地図', 'MAP_KEYS':'A 仲間へ     B 戻る',
- 'ROLL_CONTROL':'SELECT 回避   A 地図・仲間',
+ 'ROLL_CONTROL':'SELECT 回避   A ページ切替',
  'CAMP_GUIDE1':'たき火でA。休んで、記録しよう。', 'CAMP_GUIDE2':'剣は三連撃。最後の一撃が強い。'
 }
 campaign=json.loads((ROOT/'assets/campaign_dialogue.json').read_text())
@@ -49,6 +49,10 @@ for name,t in campaign['labels'].items():texts['C_'+name]=t
 for room in json.loads((ROOT/'assets/campaign_layouts.json').read_text())['rooms']:texts['C_ROOM_'+str(room['id'])]=room['name_ja']
 texts.update({'C_SELECTED':'仲間の力', 'C_JOURNAL_HINT':'A  地図・仲間    B  戻る', 'C_HUB_EAST':'東：空織りの祠', 'C_HUB_WEST':'西：灯核の祠', 'C_SAVE_FAILED':'記録できませんでした', 'C_BOSS_WARN':'攻撃の印に気をつけよう', 'C_WIND_WINDOW':'風で結び目をほどこう！', 'C_ALL_FOUR':'四つの力で、灯をつなごう', 'C_UNKNOWN':'？？？', 'C_WIND_HELP':'風で帆を開き、弾を吹き消す', 'C_STONE_HELP':'石の重しと、一撃を防ぐ守り', 'C_NEED_STONE':'石の印：コハクの力を', 'C_NEED_WIND':'風の印：フウリの力を', 'C_NEED_FIRE':'炎の印：ホムラの力を', 'C_PHASE_CHANGE':'次の印が、浮かび上がる'})
 texts.update({'C_MAP_ROUTE':'三つの灯をつなぐ道','C_MAP_GROVE':'森の灯','C_MAP_SKY':'空の灯','C_MAP_CORE':'核の灯','C_MAP_RETURN':'里から東へ空、西へ核','C_MAP_NEXT':'A 仲間へ   B 戻る'})
+texts.update({'E_HOMURA':'ホムラ・炉守','E_MIDORI':'ミドリ・樹冠','E_FUURI':'フウリ・風織','E_KOHAKU':'コハク・岩門','E_WOOD':'木','E_FIRE':'火','E_EARTH':'土','E_METAL':'金','E_WATER':'水','E_YIN':'陰','E_YANG':'陽','E_GROWTH':'仲間の成長','E_LEVEL':'レベル','E_BOND':'きずな','E_READY':'進化の準備が整った','E_LEVEL_MORE':'冒険で経験を積もう','E_BOND_MORE':'いっしょに絆を育てよう','E_STORY_MORE':'先の旅が力を呼び覚ます','E_TRIAL_MORE':'仲間の願いをかなえよう','E_SANCTUARY':'里か休憩所で進化できる','E_GROWN':'新たな姿で、次の旅へ','E_COMMAND_NEW':'新しい技を選択中','E_COMMAND_OLD':'いつもの技を選択中','E_KEYS':'R 技変更  SELECT 進化','E_CONFIRM':'新しい姿へ進化しますか','E_KEEP_POWER':'大切な力と絆は引き継ぐ','E_CHOICE':'今は待つこともできる','E_CONFIRM_KEYS':'A 進化する   B いまは待つ','E_BOND_LIGHT':'きずなが、光になる','E_SAVING':'冒険を記録しています'})
+texts.update({'E_WISH_FIRE':'森の忘れ火に、小さな炎を','E_WISH_ROOT':'森の枯れ芽を、三つ育てよう','E_WISH_WIND':'風待ちの尾根の、風の工房へ','E_WISH_STONE':'夕灯の坂の、石の作業場へ','E_MOVE_FIRE':'技：火のしずく','E_MOVE_HEAL':'技：芽吹きの癒し','E_MOVE_WIND':'技：ひとひらの風','E_MOVE_STONE':'技：小さな石の守り','E_MOVE_HEARTH':'技：三つの炉火','E_MOVE_CANOPY':'技：根の庇護','E_MOVE_REFLECT':'技：返し風','E_MOVE_ARCH':'技：岩門の構え','E_LEVEL_UP':'仲間が成長した！'})
+texts.update({'T_ROOM_WIND':'風織りの庭','T_ROOM_STONE':'琥珀の工房','T_WIND_HINT1':'風を、金の糸へつなごう。','T_WIND_HINT2':'Rで風車の向きが変わる。','T_STONE_HINT1':'ふたつの印に、重みを集めよう。','T_STONE_HINT2':'Aで押して、最後に石の力を。','T_COMPLETE1':'仲間の願いが、かなった！','T_COMPLETE2':'里のしおりで、新たな一歩を。','T_FIRE_HINT1':'忘れられた炉に、火の気配。','T_FIRE_HINT2':'ホムラは、小さく尾を揺らした。','T_ROOT_HINT1':'枯れた根に、芽吹きの気配。','T_ROOT_HINT2':'ミドリは、そっと葉を広げた。','T_RESTORED':'小さな場所に、灯が戻った','T_NEED_PLATES':'ふたつの印が、重みを待つ','T_ALREADY':'この願いは、もうかなった','T_RESET':'仕掛けを元に戻した','T_BLOCKED':'こちらには押せない'})
+texts.update({'E_NEXT_GROWTH':'A 成長へ    B 戻る'})
 items=[]
 for name,text in texts.items():
     f=small if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL') else font

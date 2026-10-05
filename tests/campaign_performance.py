@@ -370,7 +370,9 @@ class CampaignPerformance:
 
     def grove_case(self, direction):
         self.load('grove-south-entry')
-        self.goto(y=248)
+        # Keep sword presses outside the newly authored hearth interaction radius.
+        # The same diagonal scrolling/combat workload is retained.
+        self.goto(y=228 if direction=='diagonal' else 248)
         self.select(0)
         self.step(2,'UP')
         def control(n):

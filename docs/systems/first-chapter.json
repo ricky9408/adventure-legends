@@ -1,0 +1,26 @@
+{
+  "controller_only": true,
+  "final": {
+    "game_state": 1,
+    "room": 0,
+    "px": 120,
+    "py": 118,
+    "hp": 6,
+    "spirit": 2,
+    "summoned": 1,
+    "bridge_open": 1,
+    "torches": 3,
+    "boss_hp": 0,
+    "boss_armor": 170,
+    "ability_cd": 0,
+    "chapter_flags": 1,
+    "room_flags": 0,
+    "story_seen": 2,
+    "save_failed": 0,
+    "frame": 2220
+  },
+  "assertions_passed": 24,
+  "failures": [],
+  "raw_report_sha256": "f044fc6105b9f6c2e2815cf66473884192ddddb1f238dc3bb2636b26d58ea1a6",
+  "reproduce_report": "build/qa/playthrough.json"
+}

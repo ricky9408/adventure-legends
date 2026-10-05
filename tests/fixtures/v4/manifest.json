@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "purpose": "Unmodified save4 bytes earned by actual prior-ROM controller routes; no creature data fabricated",
+  "fixtures": [
+    {
+      "file": "grove-complete.sav",
+      "sha256": "505c3c89dc61b783ecef644b54afd751953796c1a5c69c69a194b97f889cf7c1",
+      "origin": "Controller-only three-lantern campaign route",
+      "prior_rom_sha256": "b2bb22b39a9da5173c02da1f8a3447a038ef52d0e6ae04f94c53630db07de4aa"
+    },
+    {
+      "file": "sky-complete.sav",
+      "sha256": "c77f7ac55c0103d4ad454dd642469f50318b5356ba76489c8802a608c896381d",
+      "origin": "Controller-only three-lantern campaign route",
+      "prior_rom_sha256": "b2bb22b39a9da5173c02da1f8a3447a038ef52d0e6ae04f94c53630db07de4aa"
+    },
+    {
+      "file": "core-complete-ending-pending.sav",
+      "sha256": "fff8f7fe9eef088f1ecbdc97acb7e8b7d00b44dd8a0a646ff0a34a6ead781bc9",
+      "origin": "Controller-only three-lantern campaign route",
+      "prior_rom_sha256": "b2bb22b39a9da5173c02da1f8a3447a038ef52d0e6ae04f94c53630db07de4aa"
+    },
+    {
+      "file": "finished-ending.sav",
+      "sha256": "8f603dff9d9893675b2864a900f77a4608d7de43b85fa1464ad3b5f820607809",
+      "origin": "Controller-only three-lantern campaign route",
+      "prior_rom_sha256": "b2bb22b39a9da5173c02da1f8a3447a038ef52d0e6ae04f94c53630db07de4aa"
+    },
+    {
+      "file": "migration-campaign-complete.sav",
+      "sha256": "044464309c5296f6f8a0ab49897740d69919c3b935e299cb1d5f5f21dc9ddbf3",
+      "prior_rom_sha256": "f95815af63ae79713e3f48850be768132e6bf293d1b5ce94a0370330366c354a",
+      "origin": "Unchanged paired SRAM from passing prior-ROM optional controller route"
+    }
+  ]
+}

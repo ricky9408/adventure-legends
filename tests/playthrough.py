@@ -21,6 +21,11 @@ class Play:
     self.e.frames(1,key)
     self.frames.append(self.e.screenshot())
   else:self.e.frames(n,key)
+  for _ in range(180):
+   if self.get('game_state')!=6:break
+   self.e.frames(1,0)
+   if self.video:self.frames.append(self.e.screenshot())
+  else:raise AssertionError('Transactional save did not finish')
  def tap(self,key,hold=10,release=10):self.step(hold,key);self.step(release)
  def check(self,b,label):
   assert b,label+' '+str(self.status());self.logs.append(label);print('PASS',label,flush=True)

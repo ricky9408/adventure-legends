@@ -26,7 +26,7 @@ def source_files():
             if p.is_symlink() or not p.is_file() or EXCLUDED.intersection(rel.parts):continue
             if p.name=='.gitignore':files.append(p);continue
             if p.suffix not in EXTENSIONS:continue
-            if p.suffix=='.sav' and not str(rel).startswith('tests/fixtures/legacy/'):continue
+            if p.suffix=='.sav' and not str(rel).startswith('tests/fixtures/'):continue
             files.append(p)
     return sorted(set(files),key=lambda p:p.relative_to(ROOT).as_posix())
 

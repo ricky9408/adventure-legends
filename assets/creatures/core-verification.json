@@ -1,0 +1,35 @@
+{
+  "scope": "Creature core only; full ROM integration and emulator timing are separate checks.",
+  "enabled_forms": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    11
+  ],
+  "native_host_tests": 23,
+  "compiled_data_mutations": 8,
+  "sanitizer": "AddressSanitizer and UndefinedBehaviorSanitizer: 12000 deterministic mixed operations passed; leak checking disabled because host ptrace is incompatible with LeakSanitizer. The subsystem performs no allocation.",
+  "arm_target": "ARM7TDMI Thumb, -O2, freestanding C99",
+  "arm_object_bytes": {
+    "creatures_text": 5452,
+    "creatures_rodata": 44,
+    "creature_data_text": 56,
+    "creature_data_rodata": 698,
+    "total_rom": 6250,
+    "data": 0,
+    "bss": 0
+  },
+  "runtime_layout_bytes": {
+    "instance": 24,
+    "instances_160": 3840,
+    "roster_including_ledgers": 4140,
+    "form_rom_row": 32
+  },
+  "largest_individual_arm_stack_frame": 72,
+  "additional_iwram_code": 0,
+  "dynamic_allocation": false
+}

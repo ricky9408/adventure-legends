@@ -78,9 +78,9 @@ ok(p,p.get('game_state')==4,'guardian fight can naturally cause death');shot(p,'
 p.tap('A');ok(p,p.get('game_state')==1 and p.get('hp')==6 and p.get('room')==3 and p.get('boss_hp')==12 and p.get('boss_armor')==0,'boss death retry resets guardian and restores hearts')
 ok(p,p.get('bridge_open')==1 and p.get('torches')==3,'boss retry preserves puzzle progression');shot(p,'boss-retry');p.e.close()
 # Explicit malformed-save input: mutate a copy, never RAM.
-corrupt=OUT/'corrupt-copy.sav';b=bytearray(save.read_bytes());b[0x40+30]^=1;b[0x80+30]^=1;corrupt.write_bytes(b)
+corrupt=OUT/'corrupt-copy.sav';b=bytearray(save.read_bytes());b[0x200+16]^=1;b[0x1a00+16]^=1;corrupt.write_bytes(b)
 p=P();p.e.load_save(corrupt);p.e.reset();p.step(90)
-ok(p,p.get('has_save')==0,'corrupted v4 bank checksums are rejected');p.e.close()
-report['corrupted_save_case']='CRC byte in both v4 banks of a copied SRAM file intentionally changed; no RAM injection'
+ok(p,p.get('has_save')==0,'corrupted v5 bank checksums are rejected');p.e.close()
+report['corrupted_save_case']='CRC byte in both v5 banks of a copied SRAM file intentionally changed; no RAM injection'
 (OUT/'review-tests.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
