@@ -1,0 +1,122 @@
+{
+  "palette": {
+    "before": 97,
+    "after": 178,
+    "base_0_96_preserved": true,
+    "free_slots": 78,
+    "base_palette_sha256": "3899f52dfe86de5bf7102337cef9cf01796cadad2a920c1bb80e2d88d6a51d04"
+  },
+  "protected_array_sha256": {
+    "sprite_data": "426483165343d73a4f79b7863acc6c35e641dda616cabd6db843499fe6b0dd91",
+    "boss_data": "3b12133820669793523f4acaee6459eee1f2f21f3fbbbb79d9f2657171488e6a",
+    "hero_frames": "4530ff068cb3bf440f19ade86d0d4eea9df420f0b0d80dee061c4aa6b871fc92",
+    "companion_frames": "5234524537d03ccf55adf19317a62ea43ae45cc9c30811276668bbcd01f832ad",
+    "companion_direction_frames": "9b0fa9f7a9aed53cb7baad65fde9dd53c80d813f1b27f4e99f3927ff19d18e1f",
+    "hero_shadow": "ab84a2d0d11096b38769c5d3bcb8dfd4e21182053a3ef6c5392f49bdc17a7ad4",
+    "boss_shadow": "841da5b1a461dd5b0d50f1c3f90ef1f8ff8adfde4d3c523713ebd7bf39124659",
+    "foreground_canopies": "290a89e89399b0f8e3ed9ac295811fc27655f4d878eb4bc1746c97c17f35b056"
+  },
+  "array_declarations_unchanged": true,
+  "existing_header_api_exact": true,
+  "collision_header_sha256": "eba7feeae339b3e4aa68fdd834c8ac92b0c8ea50d49231ec2e3aed9e30474942",
+  "manifest_geometry_exact": true,
+  "canopy_geometry_transparency_exact": true,
+  "deterministic_all_generated_outputs": true,
+  "backgrounds": {
+    "village": {
+      "before": {
+        "mean_luma_0_255": 104.7449,
+        "mean_linear_luminance": 0.176992,
+        "minimum_luma": 30.4034,
+        "maximum_luma": 245.5308,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "after": {
+        "mean_luma_0_255": 139.3454,
+        "mean_linear_luminance": 0.308279,
+        "minimum_luma": 30.4034,
+        "maximum_luma": 245.5308,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "luma_increase_percent": 33.03,
+      "linear_luminance_increase_percent": 74.18,
+      "geometry_exact_palette_remap": true
+    },
+    "forest": {
+      "before": {
+        "mean_luma_0_255": 96.8715,
+        "mean_linear_luminance": 0.151507,
+        "minimum_luma": 48.2834,
+        "maximum_luma": 245.5308,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "after": {
+        "mean_luma_0_255": 133.4678,
+        "mean_linear_luminance": 0.279902,
+        "minimum_luma": 53.5568,
+        "maximum_luma": 245.5308,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "luma_increase_percent": 37.78,
+      "linear_luminance_increase_percent": 84.75,
+      "geometry_exact_palette_remap": true
+    },
+    "temple": {
+      "before": {
+        "mean_luma_0_255": 94.4689,
+        "mean_linear_luminance": 0.122839,
+        "minimum_luma": 49.6818,
+        "maximum_luma": 221.2904,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "after": {
+        "mean_luma_0_255": 148.0256,
+        "mean_linear_luminance": 0.315809,
+        "minimum_luma": 53.5568,
+        "maximum_luma": 242.5664,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "luma_increase_percent": 56.69,
+      "linear_luminance_increase_percent": 157.09,
+      "geometry_exact_palette_remap": true
+    },
+    "boss": {
+      "before": {
+        "mean_luma_0_255": 84.7131,
+        "mean_linear_luminance": 0.108227,
+        "minimum_luma": 30.4034,
+        "maximum_luma": 242.5706,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "after": {
+        "mean_luma_0_255": 122.9943,
+        "mean_linear_luminance": 0.226422,
+        "minimum_luma": 30.4034,
+        "maximum_luma": 242.5706,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "luma_increase_percent": 45.19,
+      "linear_luminance_increase_percent": 109.21,
+      "geometry_exact_palette_remap": true
+    },
+    "title": {
+      "before": {
+        "mean_luma_0_255": 72.8739,
+        "mean_linear_luminance": 0.085645,
+        "minimum_luma": 30.4034,
+        "maximum_luma": 245.5308,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "after": {
+        "mean_luma_0_255": 99.9394,
+        "mean_linear_luminance": 0.156207,
+        "minimum_luma": 30.4034,
+        "maximum_luma": 245.5308,
+        "near_white_pixels_rgb_at_least_240": 0
+      },
+      "luma_increase_percent": 37.14,
+      "linear_luminance_increase_percent": 82.39,
+      "geometry_exact_palette_remap": true
+    }
+  }
+}

@@ -1,0 +1,174 @@
+03000078 <pix>:
+ 3000078:	b510      	push	{r4, lr}
+ 300007a:	28ef      	cmp	r0, #239	@ 0xef
+ 300007c:	d812      	bhi.n	30000a4 <pix+0x2c>
+ 300007e:	299f      	cmp	r1, #159	@ 0x9f
+ 3000080:	d810      	bhi.n	30000a4 <pix+0x2c>
+ 3000082:	010b      	lsls	r3, r1, #4
+ 3000084:	4c0b      	ldr	r4, [pc, #44]	@ (30000b4 <pix+0x3c>)
+ 3000086:	1a5b      	subs	r3, r3, r1
+ 3000088:	00db      	lsls	r3, r3, #3
+ 300008a:	1041      	asrs	r1, r0, #1
+ 300008c:	185b      	adds	r3, r3, r1
+ 300008e:	6821      	ldr	r1, [r4, #0]
+ 3000090:	005b      	lsls	r3, r3, #1
+ 3000092:	18cc      	adds	r4, r1, r3
+ 3000094:	5acb      	ldrh	r3, [r1, r3]
+ 3000096:	21ff      	movs	r1, #255	@ 0xff
+ 3000098:	07c0      	lsls	r0, r0, #31
+ 300009a:	d506      	bpl.n	30000aa <pix+0x32>
+ 300009c:	400b      	ands	r3, r1
+ 300009e:	0212      	lsls	r2, r2, #8
+ 30000a0:	431a      	orrs	r2, r3
+ 30000a2:	8022      	strh	r2, [r4, #0]
+ 30000a4:	bc10      	pop	{r4}
+ 30000a6:	bc01      	pop	{r0}
+ 30000a8:	4700      	bx	r0
+ 30000aa:	438b      	bics	r3, r1
+ 30000ac:	431a      	orrs	r2, r3
+ 30000ae:	8022      	strh	r2, [r4, #0]
+ 30000b0:	e7f8      	b.n	30000a4 <pix+0x2c>
+ 30000b2:	46c0      	nop			@ (mov r8, r8)
+ 30000b4:	02000000 	.word	0x02000000
+
+03000230 <text>:
+ 3000230:	b5f0      	push	{r4, r5, r6, r7, lr}
+ 3000232:	464e      	mov	r6, r9
+ 3000234:	46de      	mov	lr, fp
+ 3000236:	4657      	mov	r7, sl
+ 3000238:	4645      	mov	r5, r8
+ 300023a:	b5e0      	push	{r5, r6, r7, lr}
+ 300023c:	b085      	sub	sp, #20
+ 300023e:	9300      	str	r3, [sp, #0]
+ 3000240:	4b24      	ldr	r3, [pc, #144]	@ (30002d4 <text+0xa4>)
+ 3000242:	00c0      	lsls	r0, r0, #3
+ 3000244:	181c      	adds	r4, r3, r0
+ 3000246:	4689      	mov	r9, r1
+ 3000248:	78a1      	ldrb	r1, [r4, #2]
+ 300024a:	2900      	cmp	r1, #0
+ 300024c:	d00b      	beq.n	3000266 <text+0x36>
+ 300024e:	5a1b      	ldrh	r3, [r3, r0]
+ 3000250:	469a      	mov	sl, r3
+ 3000252:	2300      	movs	r3, #0
+ 3000254:	469b      	mov	fp, r3
+ 3000256:	4653      	mov	r3, sl
+ 3000258:	4690      	mov	r8, r2
+ 300025a:	2b00      	cmp	r3, #0
+ 300025c:	d10c      	bne.n	3000278 <text+0x48>
+ 300025e:	465b      	mov	r3, fp
+ 3000260:	3301      	adds	r3, #1
+ 3000262:	428b      	cmp	r3, r1
+ 3000264:	dbfc      	blt.n	3000260 <text+0x30>
+ 3000266:	b005      	add	sp, #20
+ 3000268:	bcf0      	pop	{r4, r5, r6, r7}
+ 300026a:	46bb      	mov	fp, r7
+ 300026c:	46b2      	mov	sl, r6
+ 300026e:	46a9      	mov	r9, r5
+ 3000270:	46a0      	mov	r8, r4
+ 3000272:	bcf0      	pop	{r4, r5, r6, r7}
+ 3000274:	bc01      	pop	{r0}
+ 3000276:	4700      	bx	r0
+ 3000278:	4657      	mov	r7, sl
+ 300027a:	6863      	ldr	r3, [r4, #4]
+ 300027c:	9301      	str	r3, [sp, #4]
+ 300027e:	78e3      	ldrb	r3, [r4, #3]
+ 3000280:	9103      	str	r1, [sp, #12]
+ 3000282:	9302      	str	r3, [sp, #8]
+ 3000284:	9b02      	ldr	r3, [sp, #8]
+ 3000286:	465d      	mov	r5, fp
+ 3000288:	435d      	muls	r5, r3
+ 300028a:	9b01      	ldr	r3, [sp, #4]
+ 300028c:	469c      	mov	ip, r3
+ 300028e:	9b00      	ldr	r3, [sp, #0]
+ 3000290:	061b      	lsls	r3, r3, #24
+ 3000292:	0e1b      	lsrs	r3, r3, #24
+ 3000294:	2400      	movs	r4, #0
+ 3000296:	2607      	movs	r6, #7
+ 3000298:	469a      	mov	sl, r3
+ 300029a:	4465      	add	r5, ip
+ 300029c:	e002      	b.n	30002a4 <text+0x74>
+ 300029e:	3401      	adds	r4, #1
+ 30002a0:	42bc      	cmp	r4, r7
+ 30002a2:	da0f      	bge.n	30002c4 <text+0x94>
+ 30002a4:	0032      	movs	r2, r6
+ 30002a6:	10e3      	asrs	r3, r4, #3
+ 30002a8:	5ceb      	ldrb	r3, [r5, r3]
+ 30002aa:	4022      	ands	r2, r4
+ 30002ac:	4113      	asrs	r3, r2
+ 30002ae:	07db      	lsls	r3, r3, #31
+ 30002b0:	d5f5      	bpl.n	300029e <text+0x6e>
+ 30002b2:	464b      	mov	r3, r9
+ 30002b4:	4652      	mov	r2, sl
+ 30002b6:	18e0      	adds	r0, r4, r3
+ 30002b8:	4641      	mov	r1, r8
+ 30002ba:	3401      	adds	r4, #1
+ 30002bc:	f7ff fedc 	bl	3000078 <pix>
+ 30002c0:	42bc      	cmp	r4, r7
+ 30002c2:	dbef      	blt.n	30002a4 <text+0x74>
+ 30002c4:	2301      	movs	r3, #1
+ 30002c6:	469c      	mov	ip, r3
+ 30002c8:	9b03      	ldr	r3, [sp, #12]
+ 30002ca:	44e3      	add	fp, ip
+ 30002cc:	44e0      	add	r8, ip
+ 30002ce:	455b      	cmp	r3, fp
+ 30002d0:	dcd8      	bgt.n	3000284 <text+0x54>
+ 30002d2:	e7c8      	b.n	3000266 <text+0x36>
+ 30002d4:	08030fe4 	.word	0x08030fe4
+
+03000300 <sprite>:
+ 3000300:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 3000302:	46de      	mov	lr, fp
+ 3000304:	464e      	mov	r6, r9
+ 3000306:	4645      	mov	r5, r8
+ 3000308:	4657      	mov	r7, sl
+ 300030a:	b5e0      	push	{r5, r6, r7, lr}
+ 300030c:	4699      	mov	r9, r3
+ 300030e:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+ 3000310:	4698      	mov	r8, r3
+ 3000312:	9b0a      	ldr	r3, [sp, #40]	@ 0x28
+ 3000314:	468b      	mov	fp, r1
+ 3000316:	2b00      	cmp	r3, #0
+ 3000318:	dd0b      	ble.n	3000332 <sprite+0x32>
+ 300031a:	9b0a      	ldr	r3, [sp, #40]	@ 0x28
+ 300031c:	469a      	mov	sl, r3
+ 300031e:	0017      	movs	r7, r2
+ 3000320:	1a45      	subs	r5, r0, r1
+ 3000322:	4492      	add	sl, r2
+ 3000324:	464b      	mov	r3, r9
+ 3000326:	2b00      	cmp	r3, #0
+ 3000328:	dc0b      	bgt.n	3000342 <sprite+0x42>
+ 300032a:	3701      	adds	r7, #1
+ 300032c:	444d      	add	r5, r9
+ 300032e:	4557      	cmp	r7, sl
+ 3000330:	d1f8      	bne.n	3000324 <sprite+0x24>
+ 3000332:	bcf0      	pop	{r4, r5, r6, r7}
+ 3000334:	46bb      	mov	fp, r7
+ 3000336:	46b2      	mov	sl, r6
+ 3000338:	46a9      	mov	r9, r5
+ 300033a:	46a0      	mov	r8, r4
+ 300033c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 300033e:	bc01      	pop	{r0}
+ 3000340:	4700      	bx	r0
+ 3000342:	464e      	mov	r6, r9
+ 3000344:	445e      	add	r6, fp
+ 3000346:	465c      	mov	r4, fp
+ 3000348:	5d2a      	ldrb	r2, [r5, r4]
+ 300034a:	2a00      	cmp	r2, #0
+ 300034c:	d007      	beq.n	300035e <sprite+0x5e>
+ 300034e:	4643      	mov	r3, r8
+ 3000350:	2b00      	cmp	r3, #0
+ 3000352:	d000      	beq.n	3000356 <sprite+0x56>
+ 3000354:	2207      	movs	r2, #7
+ 3000356:	0039      	movs	r1, r7
+ 3000358:	0020      	movs	r0, r4
+ 300035a:	f7ff fe8d 	bl	3000078 <pix>
+ 300035e:	3401      	adds	r4, #1
+ 3000360:	42b4      	cmp	r4, r6
+ 3000362:	d1f1      	bne.n	3000348 <sprite+0x48>
+ 3000364:	3701      	adds	r7, #1
+ 3000366:	444d      	add	r5, r9
+ 3000368:	4557      	cmp	r7, sl
+ 300036a:	d1ec      	bne.n	3000346 <sprite+0x46>
+ 300036c:	e7e1      	b.n	3000332 <sprite+0x32>
+ 300036e:	46c0      	nop			@ (mov r8, r8)
+

@@ -1,0 +1,11 @@
+# Host tools and generated diagnostics are not source or player deliverables.
+downloads/
+sysroot/
+__pycache__/
+*.deb
+*.so
+*.so.tmp.*
+*.dylib
+*.log
+smoke_tests/*
+!smoke_tests/test_bridge.py

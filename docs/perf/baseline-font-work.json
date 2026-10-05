@@ -1,0 +1,410 @@
+{
+  "TX_SUBTITLE": {
+    "width": 49,
+    "height": 15,
+    "tested_pixels": 735,
+    "opaque_pixels": 235
+  },
+  "TX_START": {
+    "width": 92,
+    "height": 15,
+    "tested_pixels": 1380,
+    "opaque_pixels": 338
+  },
+  "TX_CONTINUE": {
+    "width": 104,
+    "height": 15,
+    "tested_pixels": 1560,
+    "opaque_pixels": 354
+  },
+  "TX_NEW": {
+    "width": 111,
+    "height": 15,
+    "tested_pixels": 1665,
+    "opaque_pixels": 454
+  },
+  "TX_TAGLINE": {
+    "width": 144,
+    "height": 15,
+    "tested_pixels": 2160,
+    "opaque_pixels": 514
+  },
+  "TX_VILLAGE": {
+    "width": 61,
+    "height": 15,
+    "tested_pixels": 915,
+    "opaque_pixels": 259
+  },
+  "TX_FOREST": {
+    "width": 73,
+    "height": 15,
+    "tested_pixels": 1095,
+    "opaque_pixels": 271
+  },
+  "TX_TEMPLE": {
+    "width": 73,
+    "height": 15,
+    "tested_pixels": 1095,
+    "opaque_pixels": 280
+  },
+  "TX_BOSS": {
+    "width": 49,
+    "height": 15,
+    "tested_pixels": 735,
+    "opaque_pixels": 251
+  },
+  "TX_ELDER": {
+    "width": 76,
+    "height": 15,
+    "tested_pixels": 1140,
+    "opaque_pixels": 240
+  },
+  "TX_FOX": {
+    "width": 36,
+    "height": 15,
+    "tested_pixels": 540,
+    "opaque_pixels": 108
+  },
+  "TX_LEAF": {
+    "width": 37,
+    "height": 15,
+    "tested_pixels": 555,
+    "opaque_pixels": 101
+  },
+  "TX_INTRO1A": {
+    "width": 157,
+    "height": 15,
+    "tested_pixels": 2355,
+    "opaque_pixels": 537
+  },
+  "TX_INTRO1B": {
+    "width": 193,
+    "height": 15,
+    "tested_pixels": 2895,
+    "opaque_pixels": 703
+  },
+  "TX_INTRO2A": {
+    "width": 204,
+    "height": 15,
+    "tested_pixels": 3060,
+    "opaque_pixels": 713
+  },
+  "TX_INTRO2B": {
+    "width": 192,
+    "height": 15,
+    "tested_pixels": 2880,
+    "opaque_pixels": 674
+  },
+  "TX_INTRO3A": {
+    "width": 172,
+    "height": 15,
+    "tested_pixels": 2580,
+    "opaque_pixels": 622
+  },
+  "TX_INTRO3B": {
+    "width": 173,
+    "height": 15,
+    "tested_pixels": 2595,
+    "opaque_pixels": 640
+  },
+  "TX_INTRO4A": {
+    "width": 193,
+    "height": 15,
+    "tested_pixels": 2895,
+    "opaque_pixels": 626
+  },
+  "TX_INTRO4B": {
+    "width": 168,
+    "height": 15,
+    "tested_pixels": 2520,
+    "opaque_pixels": 575
+  },
+  "TX_VILLAGETALK1": {
+    "width": 181,
+    "height": 15,
+    "tested_pixels": 2715,
+    "opaque_pixels": 626
+  },
+  "TX_VILLAGETALK2": {
+    "width": 157,
+    "height": 15,
+    "tested_pixels": 2355,
+    "opaque_pixels": 476
+  },
+  "TX_BRIDGE1": {
+    "width": 181,
+    "height": 15,
+    "tested_pixels": 2715,
+    "opaque_pixels": 602
+  },
+  "TX_BRIDGE2": {
+    "width": 168,
+    "height": 15,
+    "tested_pixels": 2520,
+    "opaque_pixels": 629
+  },
+  "TX_BRIDGEHINT1": {
+    "width": 145,
+    "height": 15,
+    "tested_pixels": 2175,
+    "opaque_pixels": 450
+  },
+  "TX_BRIDGEHINT2": {
+    "width": 197,
+    "height": 15,
+    "tested_pixels": 2955,
+    "opaque_pixels": 662
+  },
+  "TX_TEMPLE1": {
+    "width": 193,
+    "height": 15,
+    "tested_pixels": 2895,
+    "opaque_pixels": 715
+  },
+  "TX_TEMPLE2": {
+    "width": 176,
+    "height": 15,
+    "tested_pixels": 2640,
+    "opaque_pixels": 597
+  },
+  "TX_GATE1": {
+    "width": 181,
+    "height": 15,
+    "tested_pixels": 2715,
+    "opaque_pixels": 611
+  },
+  "TX_GATE2": {
+    "width": 193,
+    "height": 15,
+    "tested_pixels": 2895,
+    "opaque_pixels": 787
+  },
+  "TX_BOSS1": {
+    "width": 180,
+    "height": 15,
+    "tested_pixels": 2700,
+    "opaque_pixels": 655
+  },
+  "TX_BOSS2": {
+    "width": 180,
+    "height": 15,
+    "tested_pixels": 2700,
+    "opaque_pixels": 735
+  },
+  "TX_WIN1": {
+    "width": 169,
+    "height": 15,
+    "tested_pixels": 2535,
+    "opaque_pixels": 677
+  },
+  "TX_WIN2": {
+    "width": 169,
+    "height": 15,
+    "tested_pixels": 2535,
+    "opaque_pixels": 630
+  },
+  "TX_WIN3": {
+    "width": 169,
+    "height": 15,
+    "tested_pixels": 2535,
+    "opaque_pixels": 577
+  },
+  "TX_WIN4": {
+    "width": 157,
+    "height": 15,
+    "tested_pixels": 2355,
+    "opaque_pixels": 550
+  },
+  "TX_COMPLETE": {
+    "width": 73,
+    "height": 15,
+    "tested_pixels": 1095,
+    "opaque_pixels": 276
+  },
+  "TX_THANKS": {
+    "width": 155,
+    "height": 15,
+    "tested_pixels": 2325,
+    "opaque_pixels": 527
+  },
+  "TX_RESTART": {
+    "width": 104,
+    "height": 15,
+    "tested_pixels": 1560,
+    "opaque_pixels": 311
+  },
+  "TX_DEAD": {
+    "width": 109,
+    "height": 15,
+    "tested_pixels": 1635,
+    "opaque_pixels": 383
+  },
+  "TX_RETRY": {
+    "width": 122,
+    "height": 15,
+    "tested_pixels": 1830,
+    "opaque_pixels": 551
+  },
+  "TX_PAUSE": {
+    "width": 61,
+    "height": 15,
+    "tested_pixels": 915,
+    "opaque_pixels": 237
+  },
+  "TX_CONTROL1": {
+    "width": 153,
+    "height": 15,
+    "tested_pixels": 2295,
+    "opaque_pixels": 525
+  },
+  "TX_CONTROL2": {
+    "width": 161,
+    "height": 15,
+    "tested_pixels": 2415,
+    "opaque_pixels": 619
+  },
+  "TX_CONTROL3": {
+    "width": 160,
+    "height": 15,
+    "tested_pixels": 2400,
+    "opaque_pixels": 574
+  },
+  "TX_CONTROL4": {
+    "width": 156,
+    "height": 15,
+    "tested_pixels": 2340,
+    "opaque_pixels": 600
+  },
+  "TX_CONTROL5": {
+    "width": 156,
+    "height": 15,
+    "tested_pixels": 2340,
+    "opaque_pixels": 637
+  },
+  "TX_QUEST0": {
+    "width": 109,
+    "height": 15,
+    "tested_pixels": 1635,
+    "opaque_pixels": 397
+  },
+  "TX_QUEST1": {
+    "width": 169,
+    "height": 15,
+    "tested_pixels": 2535,
+    "opaque_pixels": 600
+  },
+  "TX_QUEST2": {
+    "width": 109,
+    "height": 15,
+    "tested_pixels": 1635,
+    "opaque_pixels": 419
+  },
+  "TX_QUEST3": {
+    "width": 180,
+    "height": 15,
+    "tested_pixels": 2700,
+    "opaque_pixels": 619
+  },
+  "TX_QUEST4": {
+    "width": 109,
+    "height": 15,
+    "tested_pixels": 1635,
+    "opaque_pixels": 437
+  },
+  "TX_QUEST5": {
+    "width": 168,
+    "height": 15,
+    "tested_pixels": 2520,
+    "opaque_pixels": 692
+  },
+  "TX_ARMORED": {
+    "width": 145,
+    "height": 15,
+    "tested_pixels": 2175,
+    "opaque_pixels": 593
+  },
+  "TX_EXPOSED": {
+    "width": 136,
+    "height": 15,
+    "tested_pixels": 2040,
+    "opaque_pixels": 583
+  },
+  "TX_BHUD": {
+    "width": 36,
+    "height": 15,
+    "tested_pixels": 540,
+    "opaque_pixels": 154
+  },
+  "TX_RHUD": {
+    "width": 24,
+    "height": 15,
+    "tested_pixels": 360,
+    "opaque_pixels": 85
+  },
+  "TX_LHUD": {
+    "width": 35,
+    "height": 15,
+    "tested_pixels": 525,
+    "opaque_pixels": 142
+  },
+  "TX_NEXT": {
+    "width": 23,
+    "height": 15,
+    "tested_pixels": 345,
+    "opaque_pixels": 83
+  },
+  "TX_SAVED": {
+    "width": 73,
+    "height": 15,
+    "tested_pixels": 1095,
+    "opaque_pixels": 264
+  },
+  "TX_HEALED": {
+    "width": 61,
+    "height": 15,
+    "tested_pixels": 915,
+    "opaque_pixels": 268
+  },
+  "TX_NEEDSUMMON": {
+    "width": 117,
+    "height": 15,
+    "tested_pixels": 1755,
+    "opaque_pixels": 483
+  },
+  "TX_COOLDOWN": {
+    "width": 97,
+    "height": 15,
+    "tested_pixels": 1455,
+    "opaque_pixels": 301
+  },
+  "TX_SUMMONED": {
+    "width": 97,
+    "height": 15,
+    "tested_pixels": 1455,
+    "opaque_pixels": 268
+  },
+  "TX_FIREHINT": {
+    "width": 145,
+    "height": 15,
+    "tested_pixels": 2175,
+    "opaque_pixels": 560
+  },
+  "TX_TOUCHHINT": {
+    "width": 145,
+    "height": 15,
+    "tested_pixels": 2175,
+    "opaque_pixels": 571
+  },
+  "TX_ENDINGSMALL": {
+    "width": 124,
+    "height": 10,
+    "tested_pixels": 1240,
+    "opaque_pixels": 303
+  },
+  "TX_BUILD": {
+    "width": 133,
+    "height": 10,
+    "tested_pixels": 1330,
+    "opaque_pixels": 301
+  }
+}

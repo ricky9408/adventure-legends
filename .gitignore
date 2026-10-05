@@ -1,0 +1,12 @@
+/build/
+/dist/
+__pycache__/
+*.sav
+*.srm
+*.state
+*.o
+*.d
+*.elf
+*.gba
+*.map
+*.sym
