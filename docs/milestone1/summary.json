@@ -1,0 +1,96 @@
+{
+  "rom_sha256": "a0c68c5ecde39b75b7bbafff4e19467d1e6cc901bb1c99b92af60492d3de375c",
+  "rom_bytes": 571408,
+  "exploration_checks": 74,
+  "exploration_failures": [],
+  "review_checks": 19,
+  "independent_journey_checks": 20,
+  "independent_journey_ending": {
+    "game_state": 5,
+    "room": 3,
+    "px": 120,
+    "py": 88,
+    "hp": 2,
+    "spirit": 0,
+    "summoned": 1,
+    "bridge_open": 1,
+    "torches": 3,
+    "boss_hp": 0,
+    "boss_armor": 80,
+    "ability_cd": 0,
+    "frame": 2602
+  },
+  "existing_performance_scenes": 15,
+  "existing_performance_all_targets_met": true,
+  "scrolling_stress_scenes": 4,
+  "scrolling_total_frames": 1440,
+  "scrolling_total_updates": 1440,
+  "scrolling_total_presents": 1440,
+  "scrolling_max_cycles": 125325,
+  "scrolling_max_frame_budget_fraction": 0.44616156869446344,
+  "pixel_alignment": {
+    "0": {
+      "camera": [
+        120,
+        184
+      ],
+      "compared_pixels": 28560,
+      "mismatched_pixels": 0
+    },
+    "1": {
+      "camera": [
+        121,
+        184
+      ],
+      "compared_pixels": 28560,
+      "mismatched_pixels": 0
+    },
+    "2": {
+      "camera": [
+        122,
+        184
+      ],
+      "compared_pixels": 28560,
+      "mismatched_pixels": 0
+    },
+    "3": {
+      "camera": [
+        123,
+        184
+      ],
+      "compared_pixels": 28560,
+      "mismatched_pixels": 0
+    }
+  },
+  "diagonal_to_cardinal_speed_ratio": 1.0254418503949865,
+  "sram_v2_provenance": {
+    "source_rom_sha256": "91da6f939d18037a0f4c164d9c2c4b0b9f41782e6f2f4a9b253212b5fec0dddf",
+    "source_rom_bytes": 254576,
+    "input_only": true,
+    "ram_injection": false,
+    "frames": 381,
+    "status": {
+      "game_state": 1,
+      "room": 1,
+      "bridge_open": 1,
+      "torches": 0,
+      "hp": 6,
+      "px": 120,
+      "py": 95
+    },
+    "save_header": [
+      69,
+      66,
+      2,
+      1,
+      1,
+      0,
+      0,
+      1,
+      140
+    ],
+    "save_sha256": "b4d25b2475fdd3b597b4829972422f621bedb7b05e481926f00c4da3ca155d68"
+  },
+  "controller_only": true,
+  "game_ram_injection": false
+}

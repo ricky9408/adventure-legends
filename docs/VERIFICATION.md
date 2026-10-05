@@ -1,25 +1,36 @@
-# Verification — visual and motion polish, 2026-10-05
+# Scrolling exploration milestone — verification
 
-ROM: `91da6f939d18037a0f4c164d9c2c4b0b9f41782e6f2f4a9b253212b5fec0dddf` (SHA-256), 254,576 bytes. Native ARM7TDMI header/checksum valid. Build succeeds with `-Wall -Wextra` and no warnings. No gameplay RAM injection is used by the normal tests.
+Verified 2026-10-05 against actual merged main `120a1062f9849cdf0b642989318ca36ec2309b92`.
 
-## Actual-emulator gameplay
+- ROM: **571,408 bytes**
+- SHA-256: `a0c68c5ecde39b75b7bbafff4e19467d1e6cc901bb1c99b92af60492d3de375c`
+- Clean GCC 14.2.1 build, valid GBA header/checksum, no `-Wall -Wextra` warnings
+- Source and asset regeneration deterministic, retaining the published small-include packaging
 
-The native mGBA 0.10.5 core executes the final `.gba` ROM with HLE BIOS. The tests use GBA button inputs and read-only inspection of symbols from the matching ELF.
+## Gameplay and persistence
 
-- 20 primary assertions pass from title through Japanese dialogue, summoning, nature bridge, temple braziers, guardian fire/sword fight and ending
-- 19 independent assertions pass for natural death/retry, input blocking while dead, cooldowns, SRAM reopened in a new emulator, ending/fresh-game persistence, armor immunity and exposed-core damage
-- Corrupted save rejection intentionally modifies a copy of an SRAM file, not emulator RAM
-- Original-ROM SRAM compatibility verified with a real controller-created checkpoint from the first playable build
-- Recorded full playthrough: 2,447 hardware frames, approximately 41 seconds; native frames captured at ~59.7275 Hz with actual GBA audio
-- Split-screen motion comparison: 15 seconds at real GBA cadence using independently controller-reached original/revised states; no interpolated frames
+113 checks pass: 20 full-journey assertions, 19 independent edge assertions and 74 exploration assertions. Tests execute the real `.gba` using mGBA 0.10.5 with its HLE BIOS, controller input and read-only symbol inspection. They do not inject normal gameplay progress into RAM.
 
-## Frame pacing
+Coverage includes:
 
-The strict [performance suite](perf/README.md) passes all 15 steady scenes: each has 360 updates and 360 presentations across 360 emulated hardware frames. Representative boss windows include eight simultaneous projectiles. No measured hot frame missed presentation.
+- Complete existing chapter without the optional health upgrade
+- Both camera axes, all clamp boundaries, physical entrance/return paths, fixed HUD and journal map
+- River gating, companion power, adjacent blocked banks and collision-safe dodge
+- Camp healing, safe checkpoint offset, ordinary travel versus retry/continue semantics
+- One-time chest, permanent eight-heart maximum, death/retry and SRAM reopening
+- Three-strike combo, locked ranged aim and exactly 30 update warnings before a shot
+- Authentic format-2 bridge and completed saves created by playing the published ROM, migrated and reopened as format 3
+- Explicit corrupt/checksummed-invalid fixture rejection, fresh-game reset and ending persistence
 
-Cold intro/pause entry recognizes input within one hardware frame and has at most a two-frame update interval while rasterizing uncached UI. The largest measured gameplay update+render workload is 206,060 cycles (73.4% of a 280,896-cycle frame, before OAM commit). Diagonal normalization and equal-axis heading pass. Two complete performance captures produced identical results.
+The optional-route video also uses only controls: camp, map, bridge, relic, ranged encounter, temple, guardian and chapter ending. It records native emulator frames at real GBA cadence with actual emulator audio.
 
-The three-update sword hit-stop is intentional combat feedback and does not stop rendering. Scope is representative repeated windows, not an exhaustive worst-case proof.
+## Frame pacing and exact pixels
+
+All 19 cadence scenes pass. The four new moving-camera stress windows combine following companions, sword attacks, toast UI, ranged warning/projectiles, diagonal motion and dodge. They produce **1,440/1,440 updates and presentations**, with no missed hot frames.
+
+Worst sampled scrolling update/render work: **125,325 cycles (44.6%)** of the 280,896-cycle display-frame budget, before the small OAM commit. The display cadence is ~59.7275 Hz, not the host's emulation speed. Original menu cold-build tests retain their bounded two-frame transition target.
+
+For every camera-x modulo-4 alignment, **28,560 displayed VRAM background pixels** match the original atlas exactly, with zero mismatches. This specifically guards the aligned even/odd DMA viewport path.
 
 ## Reproduce
 
@@ -27,25 +38,22 @@ The three-update sword hit-stop is intentional combat feedback and does not stop
 make
 ./tools/build_mgba_bridge.sh
 make test
-make gameplay-video  # optional; needs ffmpeg
+make test-tools
+make assets
+make
 ```
 
-`make test` runs primary gameplay, independent edge cases and strict performance tests. The primary test creates the completed SRAM used by the independent tests. Generated outputs stay under ignored `build/`.
+Optional footage: `python3 tests/capture_milestone_video.py` (ffmpeg required). Detailed generated traces and save fixtures live under ignored `build/`; concise committed evidence is in [milestone1/summary.json](milestone1/summary.json), [exploration-results.json](milestone1/exploration-results.json) and [performance results](perf/final.json).
 
-Machine-readable gameplay results: [verification-results.json](verification-results.json). Exact performance provenance: [perf/final.json](perf/final.json).
+## Screens
 
-## Visual checks
-
-![Village](screenshots/03-village.png)
-![Nature-grown bridge](screenshots/05-grown-bridge.png)
-![Temple gate open](screenshots/07-open-gate.png)
-![Guardian](screenshots/08-guardian.png)
-![Ending](screenshots/10-ending.png)
+![Scrolling grove](milestone1/02-forest-arrival.png)
+![Journal map](milestone1/02-forest-map.png)
+![Campfire](milestone1/03-campfire.png)
+![Optional relic](milestone1/05-relic-chest.png)
+![Safe camp reload](milestone1/07-reloaded-camp.png)
+![Ranged warning](milestone1/09-ranger-telegraph.png)
 
 ## Limits
 
-Physical GBA hardware, flash cartridges, alternative emulators and alternate compiler releases have not been tested. This remains a short first chapter: four compact fixed-screen areas, two companions and one boss, with original pixel art. It does not claim the breadth or commercial-level polish of its reference game.
-
-## Source packaging
-
-Generated C pixel data is stored as line-aligned include chunks for review and upload. The generator reproduces that layout. A clean build from these sources produces the identical ROM hash shown above; gameplay and strict performance tests were rerun. The performance JSON is compacted without changing its parsed values.
+Physical GBA hardware, flash cartridges, other emulators, compiler versions and the macOS native bridge build remain untested. These are representative reproducible emulator tests, not an exhaustive worst-case timing proof. The game remains the first chapter; the completion roadmap's later dungeon/companion arcs and final campaign ending are not yet implemented. No remote CI is configured in this repository.

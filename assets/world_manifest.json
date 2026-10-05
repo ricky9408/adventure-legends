@@ -1,0 +1,1764 @@
+{
+  "name": "Sunmere Grove",
+  "canvas": [
+    480,
+    320
+  ],
+  "seed": 73419,
+  "art": "Original code-native indexed pixel art. One continuously composed scrolling landscape; no imported or traced artwork, baked actors, or repeated room panels.",
+  "palette": {
+    "source": "assets/generate_assets.py",
+    "count": 178,
+    "unchanged": true,
+    "transparency_index": 0,
+    "background_opaque": true,
+    "scene_ramp": "sunlit"
+  },
+  "landmarks": {
+    "spawn": [
+      240,
+      287
+    ],
+    "village_exit": [
+      240,
+      304
+    ],
+    "bridge": [
+      240,
+      166
+    ],
+    "camp": [
+      120,
+      248
+    ],
+    "chest": [
+      92,
+      72
+    ],
+    "temple": [
+      368,
+      24
+    ]
+  },
+  "temple_entrance": [
+    352,
+    28,
+    33,
+    8
+  ],
+  "suggested_enemy_centers": [
+    [
+      180,
+      230
+    ],
+    [
+      318,
+      245
+    ],
+    [
+      290,
+      100
+    ],
+    [
+      400,
+      90
+    ]
+  ],
+  "dynamic_rectangles": [
+    {
+      "kind": "river",
+      "rect": [
+        0,
+        156,
+        480,
+        20
+      ],
+      "exception_when_bridge_open": [
+        228,
+        156,
+        24,
+        20
+      ]
+    }
+  ],
+  "engine_owned": [
+    "bridge animation",
+    "campfire/checkpoint",
+    "optional relic chest",
+    "all actors and effects"
+  ],
+  "static_collision_rectangles": [
+    [
+      331,
+      1,
+      23,
+      36
+    ],
+    [
+      383,
+      1,
+      23,
+      36
+    ],
+    [
+      352,
+      0,
+      33,
+      20
+    ],
+    [
+      291,
+      44,
+      32,
+      11
+    ],
+    [
+      411,
+      43,
+      30,
+      11
+    ],
+    [
+      291,
+      55,
+      15,
+      11
+    ],
+    [
+      66,
+      0,
+      24,
+      22
+    ],
+    [
+      225,
+      0,
+      28,
+      23
+    ],
+    [
+      203,
+      0,
+      24,
+      23
+    ],
+    [
+      93,
+      0,
+      26,
+      25
+    ],
+    [
+      278,
+      0,
+      24,
+      25
+    ],
+    [
+      303,
+      0,
+      26,
+      27
+    ],
+    [
+      149,
+      0,
+      26,
+      29
+    ],
+    [
+      422,
+      0,
+      28,
+      30
+    ],
+    [
+      122,
+      0,
+      28,
+      31
+    ],
+    [
+      253,
+      0,
+      28,
+      32
+    ],
+    [
+      42,
+      0,
+      24,
+      32
+    ],
+    [
+      15,
+      0,
+      26,
+      34
+    ],
+    [
+      173,
+      0,
+      30,
+      34
+    ],
+    [
+      0,
+      0,
+      20,
+      39
+    ],
+    [
+      447,
+      0,
+      28,
+      40
+    ],
+    [
+      471,
+      0,
+      9,
+      49
+    ],
+    [
+      180,
+      13,
+      26,
+      42
+    ],
+    [
+      155,
+      16,
+      24,
+      39
+    ],
+    [
+      36,
+      18,
+      24,
+      38
+    ],
+    [
+      126,
+      23,
+      24,
+      37
+    ],
+    [
+      12,
+      22,
+      30,
+      48
+    ],
+    [
+      0,
+      30,
+      16,
+      45
+    ],
+    [
+      435,
+      34,
+      28,
+      44
+    ],
+    [
+      461,
+      40,
+      19,
+      49
+    ],
+    [
+      12,
+      63,
+      30,
+      48
+    ],
+    [
+      0,
+      68,
+      14,
+      46
+    ],
+    [
+      36,
+      89,
+      26,
+      42
+    ],
+    [
+      436,
+      90,
+      28,
+      44
+    ],
+    [
+      465,
+      95,
+      15,
+      48
+    ],
+    [
+      0,
+      105,
+      26,
+      44
+    ],
+    [
+      128,
+      119,
+      18,
+      29
+    ],
+    [
+      150,
+      118,
+      20,
+      31
+    ],
+    [
+      175,
+      119,
+      18,
+      30
+    ],
+    [
+      79,
+      172,
+      24,
+      37
+    ],
+    [
+      106,
+      170,
+      26,
+      43
+    ],
+    [
+      380,
+      172,
+      26,
+      41
+    ],
+    [
+      52,
+      176,
+      24,
+      39
+    ],
+    [
+      353,
+      182,
+      24,
+      37
+    ],
+    [
+      447,
+      174,
+      28,
+      46
+    ],
+    [
+      25,
+      177,
+      28,
+      46
+    ],
+    [
+      420,
+      180,
+      28,
+      44
+    ],
+    [
+      0,
+      182,
+      27,
+      50
+    ],
+    [
+      474,
+      186,
+      6,
+      47
+    ],
+    [
+      23,
+      218,
+      26,
+      43
+    ],
+    [
+      0,
+      221,
+      23,
+      46
+    ],
+    [
+      407,
+      229,
+      26,
+      43
+    ],
+    [
+      432,
+      226,
+      30,
+      49
+    ],
+    [
+      459,
+      230,
+      21,
+      52
+    ],
+    [
+      50,
+      242,
+      26,
+      41
+    ],
+    [
+      14,
+      249,
+      31,
+      50
+    ],
+    [
+      464,
+      283,
+      16,
+      37
+    ],
+    [
+      66,
+      290,
+      28,
+      30
+    ],
+    [
+      133,
+      290,
+      28,
+      30
+    ],
+    [
+      361,
+      293,
+      28,
+      27
+    ],
+    [
+      394,
+      290,
+      30,
+      30
+    ],
+    [
+      294,
+      294,
+      28,
+      26
+    ],
+    [
+      0,
+      292,
+      18,
+      28
+    ],
+    [
+      27,
+      292,
+      30,
+      28
+    ],
+    [
+      98,
+      295,
+      28,
+      25
+    ],
+    [
+      327,
+      294,
+      28,
+      26
+    ],
+    [
+      432,
+      292,
+      30,
+      28
+    ],
+    [
+      165,
+      300,
+      26,
+      20
+    ],
+    [
+      264,
+      300,
+      28,
+      20
+    ],
+    [
+      72,
+      235,
+      13,
+      15
+    ],
+    [
+      337,
+      270,
+      13,
+      15
+    ],
+    [
+      168,
+      185,
+      20,
+      11
+    ],
+    [
+      399,
+      198,
+      22,
+      12
+    ],
+    [
+      322,
+      127,
+      16,
+      10
+    ],
+    [
+      70,
+      112,
+      13,
+      9
+    ],
+    [
+      304,
+      294,
+      16,
+      9
+    ]
+  ],
+  "static_props": [
+    {
+      "kind": "temple_pillar",
+      "rect": [
+        331,
+        1,
+        23,
+        36
+      ]
+    },
+    {
+      "kind": "temple_pillar",
+      "rect": [
+        383,
+        1,
+        23,
+        36
+      ]
+    },
+    {
+      "kind": "temple_lintel",
+      "rect": [
+        352,
+        0,
+        33,
+        20
+      ]
+    },
+    {
+      "kind": "ruined_wall",
+      "rect": [
+        291,
+        44,
+        32,
+        11
+      ]
+    },
+    {
+      "kind": "ruined_wall",
+      "rect": [
+        411,
+        43,
+        30,
+        11
+      ]
+    },
+    {
+      "kind": "ruined_wall",
+      "rect": [
+        291,
+        55,
+        15,
+        11
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        66,
+        0,
+        24,
+        22
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        225,
+        0,
+        28,
+        23
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        203,
+        0,
+        24,
+        23
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        93,
+        0,
+        26,
+        25
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        278,
+        0,
+        24,
+        25
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        303,
+        0,
+        26,
+        27
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        149,
+        0,
+        26,
+        29
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        422,
+        0,
+        28,
+        30
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        122,
+        0,
+        28,
+        31
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        253,
+        0,
+        28,
+        32
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        42,
+        0,
+        24,
+        32
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        15,
+        0,
+        26,
+        34
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        173,
+        0,
+        30,
+        34
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        0,
+        20,
+        39
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        447,
+        0,
+        28,
+        40
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        471,
+        0,
+        9,
+        49
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        180,
+        13,
+        26,
+        42
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        155,
+        16,
+        24,
+        39
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        36,
+        18,
+        24,
+        38
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        126,
+        23,
+        24,
+        37
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        12,
+        22,
+        30,
+        48
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        30,
+        16,
+        45
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        435,
+        34,
+        28,
+        44
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        461,
+        40,
+        19,
+        49
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        12,
+        63,
+        30,
+        48
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        68,
+        14,
+        46
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        36,
+        89,
+        26,
+        42
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        436,
+        90,
+        28,
+        44
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        465,
+        95,
+        15,
+        48
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        105,
+        26,
+        44
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        128,
+        119,
+        18,
+        29
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        150,
+        118,
+        20,
+        31
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        175,
+        119,
+        18,
+        30
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        79,
+        172,
+        24,
+        37
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        106,
+        170,
+        26,
+        43
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        380,
+        172,
+        26,
+        41
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        52,
+        176,
+        24,
+        39
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        353,
+        182,
+        24,
+        37
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        447,
+        174,
+        28,
+        46
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        25,
+        177,
+        28,
+        46
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        420,
+        180,
+        28,
+        44
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        182,
+        27,
+        50
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        474,
+        186,
+        6,
+        47
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        23,
+        218,
+        26,
+        43
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        221,
+        23,
+        46
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        407,
+        229,
+        26,
+        43
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        432,
+        226,
+        30,
+        49
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        459,
+        230,
+        21,
+        52
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        50,
+        242,
+        26,
+        41
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        14,
+        249,
+        31,
+        50
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        464,
+        283,
+        16,
+        37
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        66,
+        290,
+        28,
+        30
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        133,
+        290,
+        28,
+        30
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        361,
+        293,
+        28,
+        27
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        394,
+        290,
+        30,
+        30
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        294,
+        294,
+        28,
+        26
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        0,
+        292,
+        18,
+        28
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        27,
+        292,
+        30,
+        28
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        98,
+        295,
+        28,
+        25
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        327,
+        294,
+        28,
+        26
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        432,
+        292,
+        30,
+        28
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        165,
+        300,
+        26,
+        20
+      ]
+    },
+    {
+      "kind": "tree_canopy",
+      "rect": [
+        264,
+        300,
+        28,
+        20
+      ]
+    },
+    {
+      "kind": "stump",
+      "rect": [
+        72,
+        235,
+        13,
+        15
+      ]
+    },
+    {
+      "kind": "stump",
+      "rect": [
+        337,
+        270,
+        13,
+        15
+      ]
+    },
+    {
+      "kind": "boulder",
+      "rect": [
+        168,
+        185,
+        20,
+        11
+      ]
+    },
+    {
+      "kind": "boulder",
+      "rect": [
+        399,
+        198,
+        22,
+        12
+      ]
+    },
+    {
+      "kind": "boulder",
+      "rect": [
+        322,
+        127,
+        16,
+        10
+      ]
+    },
+    {
+      "kind": "boulder",
+      "rect": [
+        70,
+        112,
+        13,
+        9
+      ]
+    },
+    {
+      "kind": "boulder",
+      "rect": [
+        304,
+        294,
+        16,
+        9
+      ]
+    }
+  ],
+  "tree_positions": [
+    [
+      78,
+      20,
+      0.95
+    ],
+    [
+      239,
+      20,
+      1.15
+    ],
+    [
+      215,
+      21,
+      0.98
+    ],
+    [
+      106,
+      22,
+      1.05
+    ],
+    [
+      290,
+      23,
+      0.92
+    ],
+    [
+      316,
+      24,
+      1.05
+    ],
+    [
+      162,
+      26,
+      1.04
+    ],
+    [
+      436,
+      27,
+      1.12
+    ],
+    [
+      136,
+      28,
+      1.12
+    ],
+    [
+      267,
+      29,
+      1.12
+    ],
+    [
+      54,
+      30,
+      0.95
+    ],
+    [
+      28,
+      31,
+      1.05
+    ],
+    [
+      188,
+      31,
+      1.2
+    ],
+    [
+      4,
+      36,
+      1.25
+    ],
+    [
+      461,
+      37,
+      1.15
+    ],
+    [
+      487,
+      46,
+      1.3
+    ],
+    [
+      193,
+      52,
+      1.04
+    ],
+    [
+      167,
+      53,
+      0.99
+    ],
+    [
+      48,
+      54,
+      0.95
+    ],
+    [
+      138,
+      58,
+      0.93
+    ],
+    [
+      27,
+      67,
+      1.2
+    ],
+    [
+      2,
+      72,
+      1.13
+    ],
+    [
+      449,
+      75,
+      1.1
+    ],
+    [
+      476,
+      86,
+      1.23
+    ],
+    [
+      27,
+      108,
+      1.2
+    ],
+    [
+      0,
+      111,
+      1.15
+    ],
+    [
+      49,
+      128,
+      1.05
+    ],
+    [
+      450,
+      131,
+      1.1
+    ],
+    [
+      480,
+      140,
+      1.2
+    ],
+    [
+      12,
+      146,
+      1.1
+    ],
+    [
+      137,
+      146,
+      0.72
+    ],
+    [
+      160,
+      147,
+      0.78
+    ],
+    [
+      184,
+      147,
+      0.74
+    ],
+    [
+      91,
+      207,
+      0.92
+    ],
+    [
+      119,
+      210,
+      1.08
+    ],
+    [
+      393,
+      210,
+      1.01
+    ],
+    [
+      64,
+      213,
+      0.99
+    ],
+    [
+      365,
+      217,
+      0.92
+    ],
+    [
+      461,
+      217,
+      1.15
+    ],
+    [
+      39,
+      220,
+      1.15
+    ],
+    [
+      434,
+      221,
+      1.1
+    ],
+    [
+      11,
+      229,
+      1.25
+    ],
+    [
+      489,
+      230,
+      1.18
+    ],
+    [
+      36,
+      258,
+      1.07
+    ],
+    [
+      9,
+      264,
+      1.15
+    ],
+    [
+      420,
+      269,
+      1.08
+    ],
+    [
+      447,
+      272,
+      1.22
+    ],
+    [
+      475,
+      279,
+      1.3
+    ],
+    [
+      63,
+      280,
+      1.02
+    ],
+    [
+      29,
+      296,
+      1.25
+    ],
+    [
+      479,
+      329,
+      1.23
+    ],
+    [
+      80,
+      333,
+      1.14
+    ],
+    [
+      147,
+      333,
+      1.14
+    ],
+    [
+      375,
+      334,
+      1.09
+    ],
+    [
+      409,
+      335,
+      1.21
+    ],
+    [
+      308,
+      336,
+      1.13
+    ],
+    [
+      3,
+      337,
+      1.2
+    ],
+    [
+      42,
+      337,
+      1.2
+    ],
+    [
+      112,
+      337,
+      1.12
+    ],
+    [
+      341,
+      337,
+      1.14
+    ],
+    [
+      447,
+      337,
+      1.2
+    ],
+    [
+      178,
+      339,
+      1.03
+    ],
+    [
+      278,
+      341,
+      1.1
+    ]
+  ],
+  "collision_notes": "Rectangles are [x,y,width,height], half-open and slightly inset from real solid scenery. Grass, flowers, reeds, flat paving, small bushes and riverbanks are walkable. Add world bounds and dynamic river collision in the engine. A closed bridge is provably impassable; the open crossing and all destination routes are tested with a 4-pixel square foot radius.",
+  "interactable_clear_radius": {
+    "camp": 24,
+    "chest": 24
+  },
+  "camp_clear_radius": 24,
+  "sprites": {
+    "size": [
+      16,
+      16
+    ],
+    "anchor": "center; blit at x-8,y-8",
+    "transparency_index": 0,
+    "names": [
+      "CAMP_IDLE",
+      "CAMP_LIT",
+      "CHEST_CLOSED",
+      "CHEST_OPEN",
+      "RANGER_IDLE",
+      "RANGER_WINDUP"
+    ],
+    "bytes": 1536
+  },
+  "route_proofs": [
+    {
+      "name": "south_to_bridge_bank",
+      "from": [
+        240,
+        287
+      ],
+      "to": [
+        240,
+        184
+      ],
+      "bridge_open": false,
+      "reachable": true,
+      "expected": true,
+      "steps": 103,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "south_to_camp",
+      "from": [
+        240,
+        287
+      ],
+      "to": [
+        120,
+        248
+      ],
+      "bridge_open": false,
+      "reachable": true,
+      "expected": true,
+      "steps": 159,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "south_to_north_before_bridge",
+      "from": [
+        240,
+        287
+      ],
+      "to": [
+        240,
+        146
+      ],
+      "bridge_open": false,
+      "reachable": false,
+      "expected": false,
+      "steps": null,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "south_to_north_after_bridge",
+      "from": [
+        240,
+        287
+      ],
+      "to": [
+        240,
+        146
+      ],
+      "bridge_open": true,
+      "reachable": true,
+      "expected": true,
+      "steps": 141,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "bridge_to_temple",
+      "from": [
+        240,
+        146
+      ],
+      "to": [
+        368,
+        31
+      ],
+      "bridge_open": true,
+      "reachable": true,
+      "expected": true,
+      "steps": 243,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "bridge_to_chest",
+      "from": [
+        240,
+        146
+      ],
+      "to": [
+        92,
+        72
+      ],
+      "bridge_open": true,
+      "reachable": true,
+      "expected": true,
+      "steps": 222,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "south_to_west_combat",
+      "from": [
+        240,
+        287
+      ],
+      "to": [
+        180,
+        230
+      ],
+      "bridge_open": false,
+      "reachable": true,
+      "expected": true,
+      "steps": 117,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "south_to_east_combat",
+      "from": [
+        240,
+        287
+      ],
+      "to": [
+        318,
+        245
+      ],
+      "bridge_open": false,
+      "reachable": true,
+      "expected": true,
+      "steps": 120,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "bridge_to_north_combat",
+      "from": [
+        240,
+        146
+      ],
+      "to": [
+        290,
+        100
+      ],
+      "bridge_open": true,
+      "reachable": true,
+      "expected": true,
+      "steps": 96,
+      "player_foot_radius": 4,
+      "passed": true
+    },
+    {
+      "name": "bridge_to_east_combat",
+      "from": [
+        240,
+        146
+      ],
+      "to": [
+        400,
+        90
+      ],
+      "bridge_open": true,
+      "reachable": true,
+      "expected": true,
+      "steps": 216,
+      "player_foot_radius": 4,
+      "passed": true
+    }
+  ],
+  "generated": {
+    "bitmap_bytes": 153600,
+    "bitmap_sha256": "f0e98ea0bd5cad023f69626eedf350bd4558e69f6b396fc7139c5701268f1de9",
+    "odd_bitmap_bytes": 153600,
+    "odd_bitmap_sha256": "f12c5df136d7d6aece154a83fd37733cdbbd9d6a37ef8fe1fe226b1a7570f53d",
+    "odd_bitmap_shift": "Each row: odd[x]=original[min(x+1,W-1)]. Rows never bleed into the next row.",
+    "bitmap_alignment_bytes": 4,
+    "chunks": 37,
+    "largest_chunk_bytes": 32767,
+    "chunk_limit_bytes": 32768
+  },
+  "previews": [
+    "overworld.png",
+    "overworld_3x.png",
+    "overworld_collision_routes.png",
+    "overworld_camera_previews.png",
+    "overworld_sprites.png"
+  ]
+}

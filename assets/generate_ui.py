@@ -26,13 +26,19 @@ texts={
  'DEAD':'灯は、まだ消えない', 'RETRY':'A  祠の記憶から再挑戦',
  'PAUSE':'旅のしおり', 'CONTROL1':'十字キー  移動     A  剣・会話', 'CONTROL2':'B  召喚・帰還     L  仲間を切替',
  'CONTROL3':'R  仲間の力       START  続ける', 'CONTROL4':'ミドリは橋を育て、傷を癒す', 'CONTROL5':'ホムラは炎で台座と鎧を破る',
- 'QUEST0':'目的：里を北へ出る', 'QUEST1':'目的：ミドリで川に橋を育てる', 'QUEST2':'目的：北の祠へ進む',
+ 'QUEST0':'目的：里を北へ出る', 'QUEST1':'目的：ミドリで川に橋を育てる', 'QUEST2':'目的：北東の祠へ進む',
  'QUEST3':'目的：ホムラで２つの台座に点火', 'QUEST4':'目的：北の扉へ進む', 'QUEST5':'目的：炎で鎧を砕き、剣で攻撃',
  'ARMORED':'苔の守り神：炎で鎧を砕け', 'EXPOSED':'鎧が崩れた！ 剣で攻撃！',
  'BHUD':'B 召喚', 'RHUD':'R 力', 'LHUD':'L 切替', 'NEXT':'A ▼', 'SAVED':'記録しました', 'HEALED':'傷が癒えた',
  'NEEDSUMMON':'Bで仲間を呼び出そう', 'COOLDOWN':'力をためている…', 'SUMMONED':'いっしょに行こう',
  'FIREHINT':'炎は台座の近くから放とう', 'TOUCHHINT':'炎を当てると、鎧が崩れる',
- 'ENDINGSMALL':'EMBERBOND / FIRST CHAPTER', 'BUILD':'ORIGINAL GBA HOMEBREW  v0.1'
+ 'ENDINGSMALL':'EMBERBOND / FIRST CHAPTER', 'BUILD':'ORIGINAL GBA HOMEBREW  v0.2',
+ 'EXPLORE1':'STARTで地図、SELECTで回避。', 'EXPLORE2':'寄り道には、小さな発見がある。',
+ 'CAMP1':'たき火のぬくもりが、傷を癒す。', 'CAMP2':'次はここから、旅を続けられる。',
+ 'RELIC1':'命のかけらを見つけた！', 'RELIC2':'ハートの最大数が、２つ増えた。',
+ 'MAP':'こもれびの森の地図', 'MAP_KEYS':'A 操作へ     B 戻る',
+ 'ROLL_CONTROL':'SELECT 回避    A連打で３連撃',
+ 'CAMP_GUIDE1':'たき火でA。休んで、記録しよう。', 'CAMP_GUIDE2':'剣は三連撃。最後の一撃が強い。'
 }
 items=[]
 for name,text in texts.items():

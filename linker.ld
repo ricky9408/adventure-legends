@@ -13,3 +13,5 @@ SECTIONS {
  .bss (NOLOAD) : { . = ALIGN(4); __bss_start = .; *(.bss*) *(COMMON) . = ALIGN(4); __bss_end = .; } > EWRAM
  /DISCARD/ : { *(.comment) *(.note*) *(.ARM.exidx*) *(.ARM.extab*) }
 }
+/* Keep a real stack reserve as the campaign grows. */
+ASSERT(__iwram_end <= 0x03007000, "IWRAM code overlaps reserved stack space");

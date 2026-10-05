@@ -96,6 +96,10 @@ class PerformanceRun:
         self.step(4)
 
     def nextroom(self, target):
+        if self.get('room') == 1 and target == 2:
+            self.goto(x=240)
+            self.goto(y=92)
+            self.goto(x=368)
         for _ in range(450):
             if self.get('room') == target:
                 break
@@ -106,7 +110,7 @@ class PerformanceRun:
     def defend(self, frames):
         for _ in range((frames + 23) // 24):
             living = []
-            for i in range(4):
+            for i in range(6):
                 address = self.sym['enemies'] + i * 20
                 x, y, hp = [self.e.read(address + offset) for offset in (0, 4, 8)]
                 if hp:
@@ -340,7 +344,7 @@ class PerformanceRun:
         self.measure_transition('close_pause', 'B', 1)
         self.require(self.get('game_state') == 1, 'closed pause')
         self.nextroom(1)
-        self.goto(y=98)
+        self.goto(y=180)
         self.measure('forest_combat', controls=lambda n: 'A' if n % 24 < 10 else 0)
         self.tap('B')
         self.measure('forest_summon_toast', controls=lambda n: 'A' if n % 24 < 10 else 0)
@@ -384,7 +388,8 @@ class PerformanceRun:
         self.step(160)
         self.tap('R')
         self.require(self.get('boss_armor') > 0, 'fire companion exposed boss')
-        self.measure('boss_exposed')
+        self.goto(y=139)
+        self.measure('boss_exposed', controls=lambda n: 'LEFT' if (n // 48) % 2 else 'RIGHT')
         self.write_report()
 
 

@@ -142,68 +142,12 @@ first frame but does not remove it.
 The final immutable ROM results below verify the resolved hot-path and
 cold-transition budgets.
 
-## Final result: strict pass
+## Current result: scrolling milestone strict pass
 
-Final ROM SHA-256:
-`91da6f939d18037a0f4c164d9c2c4b0b9f41782e6f2f4a9b253212b5fec0dddf`
-(254,576 bytes). The immutable measured copy is
-`build/perf-optimized-v3/emberbond.gba`; its matching symbols are beside it.
-`final.json` contains the final measurements. Two separate complete final runs
-produced identical JSON, including every recorded event offset and cycle value.
+The current native ROM is 571,408 bytes, SHA-256 `a0c68c5ecde39b75b7bbafff4e19467d1e6cc901bb1c99b92af60492d3de375c`. All 15 existing steady-scene windows pass, plus four new scrolling/companion/attack/projectile/dodge windows. The new windows produce 1,440 updates and 1,440 presentations in 1,440 hardware frames. Maximum sampled scrolling update/render cost is 125,325 cycles, or 44.6% of a frame before OAM commit.
 
-**All 15 scene windows had exactly 360 updates and 360 presentation flips in
-360 hardware display frames. Every observed interval was one hardware frame.**
-That includes both guardian windows, eight simultaneous projectiles, fire and
-nature companions, summon toasts, ability cooldowns, sword animation, title,
-all sampled dialogues, and idle pause.
+Scrolling uses two precomputed even/odd pixel atlases with aligned DMA16 row transfers, rather than CPU byte shifts. Forest HUD/toast caches have independent invalidation keys, and sword tiles precompute at boot. Every camera alignment is checked against original atlas pixels: 28,560 pixels per alignment, no mismatches.
 
-Cold overlay behavior is separately bounded:
+The original baseline above remains historical evidence of earlier optimization; the current primary report is `final.json`, and the additional moving-camera coverage is [milestone1/exploration-results.json](../milestone1/exploration-results.json), summarized in [milestone1/summary.json](../milestone1/summary.json).
 
-| Transition | Input recognized | Longest update gap | Maximum timed work |
-|---|---:|---:|---:|
-| Open introduction | 1 display frame | 2 display frames | 378,315 cycles |
-| Open pause | 1 display frame | 2 display frames | 512,165 cycles |
-| Close pause | 1 display frame | 1 display frame | 126,973 cycles |
-
-One hardware frame is approximately 16.743 ms; a two-frame interval is
-approximately 33.485 ms. The input-latency number records the internal state
-change, not the completion time of the first visible new panel. Steady overlays
-then run at one update per display frame.
-
-The final engine instruments the input/update/render region with cascaded GBA
-hardware timers. These counts **exclude VBlank waiting and the subsequent OAM
-commit**. They are workload-region measurements, not whole-frame utilization.
-The independent presentation cadence test verifies that the full observed hot
-path, including presentation, still fits each hardware frame.
-
-| Gameplay window | Largest sampled timed work | Fraction of 280,896-cycle frame |
-|---|---:|---:|
-| Village motion | 12,180 | 4.3% |
-| Forest sword/combat | 89,440 | 31.8% |
-| Summon + toast | 206,060 | 73.4% |
-| Nature companion/cooldown | 92,683 | 33.0% |
-| Temple sword/combat | 87,251 | 31.1% |
-| Armored guardian/projectiles | 28,272 | 10.1% |
-| Exposed guardian | 191,975 | 68.3% |
-
-The largest sampled hot workload is 206,060 cycles. Cold pause work is larger
-than one frame but below two, and the measured transition obeys the two-frame
-budget. The final implementation removes redundant panel overdraw, uses paired
-font writes, prevents hidden toast expiry from invalidating a dialogue, draws
-hearts as hardware objects, and updates the guardian banner regionally.
-
-Final motion probes move 30 pixels cardinally over 24 updates. Diagonal axes
-remain within one pixel of each other and their average Euclidean distance is
-1.0254 times the cardinal distance, within the 5% integer-readback tolerance.
-The underlying movement uses Q8 state and a normalized diagonal step. The
-engine's deliberate three-update sword hit-stop is a gameplay effect; the
-`frame` counter measures update invocation even during that effect.
-
-Selected native-resolution before/after captures:
-
-- [Original pause](baseline-pause.png), [final pause](final-pause.png)
-- [Original guardian](baseline-boss_armored.png), [final guardian](final-boss_armored.png)
-- [Original summon](baseline-forest_summon_toast.png), [final summon](final-forest_summon_toast.png)
-
-These are screenshots of real emulation at input-reached waypoints. Static
-images do not demonstrate frame rate; the JSON and reproducible test do.
+Use `make test` to run the full journey, edge cases, performance suite and exploration checks. Representative measurements do not establish an exhaustive worst-case bound or physical-GBA validation. Intentional sword hit-stop remains distinct from missed rendering frames.

@@ -19,3 +19,15 @@ SRAM uses a small versioned record with magic bytes, room, bridge/torch completi
 Sound uses GBA PSG square channels: an original ambient phrase and event effects. It does not stream sampled music.
 
 For expansion, separate room-specific scripting from `game.c`, introduce a scrolling tile-background renderer, add data-driven dialogue/enemy definitions, and expand the SRAM schema with version migration before adding inventory or additional chapters.
+
+## Scrolling exploration milestone
+
+The grove is a continuous 480×320 world. Player/entity positions and collisions are world coordinates; camera coordinates clamp to (0..240,0..184), leaving a 24-pixel fixed HUD and a 240×136 world viewport. Q8 camera easing snaps at a subpixel remainder below four units to avoid endpoint undershoot. Ordinary transitions retain physical entry locations; retries/continues can use the activated campfire's safe offset.
+
+The generator emits two immutable row-major atlases: original and a one-pixel shifted version. Even camera positions use the original; odd positions use the shifted atlas with an even source offset. DMA16 copies each visible row. This trades 153,600 extra ROM bytes for stable aligned transfer cost and removes per-frame CPU bit shifts. All four alignments are checked against source pixels in the real emulator.
+
+Forest HUD/toast pixels cache in EWRAM with independent keys. Expiring a toast does not redraw an identical HUD. Sword arcs are precomputed and tile-swizzled at boot, then uploaded by DMA. EWRAM use remains below 256 KiB; IWRAM code remains separate from the stack. Hardware timers record update/render cycles and the tests also count actual display-page flips.
+
+Save format 3 retains the published prefix and adds relic, camp and maximum-health fields plus validation/checksum. Valid format-2 records load and are rewritten on continue; malformed flags and inconsistent health are rejected. The optional chest is permanent and idempotent. Legacy completed chapters retain their ending until a future campaign migration explicitly advances them.
+
+Combat adds collision-swept dodge, bounded three-strike chains, short input buffering near sword recovery, and stationary seed-spitters with locked aim and a 30-update warning. Dodge invulnerability is separate from hurt invulnerability. The enemy record remains five integers for stable inspection; clocks/warnings use separate arrays.
