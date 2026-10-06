@@ -198,7 +198,7 @@ class MagmaSaveTests(base.Save5Tests):
    self.assertEqual(self.lib.save5_validate_revision(C.byref(s),4),1)
    self.store(s);self.assertEqual(compare_state(self.load()),compare_state(s))
    latest=max((A,B),key=lambda o:int.from_bytes(bytes(self.sram[o+8:o+12]),'little'))
-   self.assertEqual(bytes(self.sram[latest+12:latest+14]),b'\x05\x00')
+   self.assertEqual(bytes(self.sram[latest+12:latest+14]),b'\x06\x00')
  def test_magma_crc_valid_bad_sources_trials_history_and_reserved_bits(self):
   s=self.completed();self.reset();self.store(s);bank=bytearray(self.sram[A:A+SIZE])
   cases=[]
@@ -224,7 +224,11 @@ class MagmaSaveTests(base.Save5Tests):
     self.assertEqual(self.lib.save5_validate(C.byref(t)),1);self.store(t);self.assertEqual(compare_state(self.load()),compare_state(t))
   for index in (4,5,6,7,10,11,12,13,14,15,17,20,21,22,23,24,25,26,27,28,29,30,31):
    for bit in range(8):
-    t=Save.from_buffer_copy(bytes(s));t.quests.region_flags[index]=1<<bit;self.reject(t)
+    t=Save.from_buffer_copy(bytes(s));t.quests.region_flags[index]=1<<bit
+    # Revision5 reserved bytes remain frozen even as revision6 appends its
+    # explicitly reviewed namespace. Current reserved-byte coverage remains.
+    self.assertEqual(self.lib.save5_validate_revision(C.byref(t),5),0)
+    if index not in (4,10,17,20,21):self.reject(t)
   for bit in (4,8,16,32,64,128):
    t=Save.from_buffer_copy(bytes(s));t.quests.anchors[3]|=bit;self.reject(t)
  def test_magma_FULL_discovery_stays_READY_and_trial_can_finish(self):

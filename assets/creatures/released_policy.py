@@ -14,8 +14,21 @@ def frozen():
     if hashlib.sha256(blob).hexdigest()!=SHA256:raise ValueError('Released creature relation snapshot changed')
     return json.loads(blob)
 
+V5_PATH=PATH.with_name('released-creature-relations-v5.json')
+V5_SHA256='8c0c5b7d68b3ac335054aa184f3455cd38393912c8402bff706d5fc3ecf8234b'
+
+def frozen_v5():
+    blob=V5_PATH.read_bytes()
+    if hashlib.sha256(blob).hexdigest()!=V5_SHA256:raise ValueError('Released revision5 relation snapshot changed')
+    return json.loads(blob)
+
 def validate_compatibility(catalog, revision=4):
-    lock=frozen();errors=[]
+    errors=_validate_snapshot(catalog, revision, frozen())
+    if revision>=5:errors+=_validate_snapshot(catalog, revision, frozen_v5())
+    return sorted(set(errors))
+
+def _validate_snapshot(catalog, revision, lock):
+    errors=[]
     forms={f['id']:f for f in catalog['forms']};abilities={a['id']:a for a in catalog['abilities']}
     edges={(e['from'],e['to']):e for e in catalog['evolutions']};trials={t['trial_id']:t for t in catalog.get('trial_bindings',[])}
     released={f['id'] for f in lock['forms'] if f['introduced']<=revision}

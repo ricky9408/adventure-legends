@@ -31,16 +31,17 @@ FLAGS = ["-std=c99", "-O1", "-g", "-Wall", "-Wextra", "-Werror", "-fPIC",
          "-DSAVE4_HOST_TEST", "-DSAVE5_HOST_TEST", "-Isrc"]
 if os.environ.get("MAGMA_EVOLUTION_SANITIZERS"):
     FLAGS += ["-fsanitize=" + os.environ["MAGMA_EVOLUTION_SANITIZERS"], "-fno-omit-frame-pointer"]
-# Function instrumentation is confined to the actual core object. It counts
-# internal full-roster/catalog validation as well as UI-facing calls.
-subprocess.run([CC, *FLAGS, "-finstrument-functions", "-fno-inline", "-c",
-                "src/creatures.c", "-o", str(OUT / "creatures.o")], cwd=ROOT, check=True)
-MODULES = ["progression", "creature_data", "equipment", "equipment_data", "save4", "save5",
-           "magma_quests", "southern_quests", "northern_quests", "regional_quests",
+# Function instrumentation covers production core and Save5 objects. It counts
+# internal validation, bounded slices and final exact checks without stubbing them.
+for module in ("creatures", "save5"):
+    subprocess.run([CC, *FLAGS, "-finstrument-functions", "-fno-inline", "-c",
+                    f"src/{module}.c", "-o", str(OUT / f"{module}.o")], cwd=ROOT, check=True)
+MODULES = ["progression", "creature_data", "equipment", "equipment_data", "save4",
+           "underwater_quests", "magma_quests", "southern_quests", "northern_quests", "regional_quests",
            "campaign_rules", "progression_events", "evolution_art", "regional_creature_art",
-           "northern_creature_art", "southern_creature_art", "magma_creature_art", "ui", "assets"]
+           "northern_creature_art", "southern_creature_art", "magma_creature_art", "underwater_creature_art", "ui", "assets"]
 subprocess.run([CC, *FLAGS, "-shared", "-Wl,-Bsymbolic", "tests/magma_evolution_ui_host.c",
-                str(OUT / "creatures.o"), *[f"src/{m}.c" for m in MODULES],
+                str(OUT / "creatures.o"), str(OUT / "save5.o"), *[f"src/{m}.c" for m in MODULES],
                 "-o", str(OUT / "test.so")], cwd=ROOT, check=True)
 L = C.CDLL(str(OUT / "test.so"))
 
@@ -100,8 +101,21 @@ class EvolutionUI(unittest.TestCase):
     def setUp(self):
         self.fresh()
 
+    def settle(self):
+        for steps in range(250):
+            if not L.progression_evolution_busy():
+                return steps
+            L.progression_confirm_input(0)
+        self.fail("bounded evolution preparation did not terminate in 250 frames")
+
+    def press(self, pressed):
+        L.progression_confirm_input(pressed)
+        self.settle()
+
     def open(self):
         self.assertEqual(L.progression_menu_input(SELECT), 1)
+        self.assertEqual(iv("game_state"), CONFIRM)
+        self.settle()
         self.assertEqual(iv("game_state"), CONFIRM)
 
     def unchanged(self):
@@ -133,7 +147,7 @@ class EvolutionUI(unittest.TestCase):
                     self.open()
                     self.state(target)
                     self.unchanged()
-                    L.progression_confirm_input(A)
+                    self.press(A)
                     self.assertEqual(L.host_form(0), target)
                     self.assertEqual(iv("game_state"), ANIM)
                     self.assertEqual(L.host_valid(), 1)
@@ -143,17 +157,17 @@ class EvolutionUI(unittest.TestCase):
             self.fresh(base, 1)
             self.open()
             L.host_snapshot()
-            L.progression_confirm_input(RIGHT)
+            self.press(RIGHT)
             self.state(base + 2, TRIAL)
             self.unchanged()
-            L.progression_confirm_input(A)
+            self.press(A)
             self.state(base + 2, TRIAL)
             self.unchanged()
             L.host_reset_draw()
             L.progression_draw_confirm()
             self.assertEqual([d.id for d in draws(2)], [base + 1, base + 2])
             self.assertIn(L.host_reason_name(TRIAL), [d.id for d in draws(1)])
-            L.progression_confirm_input(LEFT)
+            self.press(LEFT)
             self.state(base + 1)
             self.unchanged()
 
@@ -162,36 +176,36 @@ class EvolutionUI(unittest.TestCase):
         L.host_snapshot()
         self.open()
         self.state(38, TRIAL)
-        L.progression_confirm_input(LEFT)
+        self.press(LEFT)
         self.state(39, TRIAL)
-        L.progression_confirm_input(A)
+        self.press(A)
         self.unchanged()
         self.assertEqual(iv("game_state"), CONFIRM)
 
     def test_previously_locked_target_rechecks_new_trial_on_confirm(self):
         self.fresh(37, 1)
         self.open()
-        L.progression_confirm_input(RIGHT)
+        self.press(RIGHT)
         self.state(39, TRIAL)
         L.host_mutate(6, 0, 3)
-        L.progression_confirm_input(A)
+        self.press(A)
         self.assertEqual(L.host_form(0), 39)
         self.assertEqual(iv("game_state"), ANIM)
 
     def test_reopen_resets_choice_and_binds_current_individual(self):
         self.open()
-        L.progression_confirm_input(RIGHT)
+        self.press(RIGHT)
         self.state(39)
-        L.progression_confirm_input(B)
+        self.press(B)
         self.open()
         self.state(38)
-        L.progression_confirm_input(START)
+        self.press(START)
         other = L.host_add(40, 2)
         L.host_select(other)
         self.open()
         self.state(42)
         self.assertEqual(u("progression_evolution_slot"), other)
-        L.progression_confirm_input(A)
+        self.press(A)
         self.assertEqual(L.host_form(0), 37)
         self.assertEqual(L.host_form(other), 42)
 
@@ -214,7 +228,7 @@ class EvolutionUI(unittest.TestCase):
         self.open()
         self.assertEqual(u("progression_evolution_slot"), other)
         self.state(39)
-        L.progression_confirm_input(A)
+        self.press(A)
         self.assertEqual(L.host_form(other), 39)
         self.assertEqual(L.host_identity(other), identity)
         self.assertEqual(L.host_instance_unchanged(0), 1)
@@ -230,7 +244,7 @@ class EvolutionUI(unittest.TestCase):
                 self.open()
                 L.host_snapshot()
                 L.host_reset_counts()
-                L.progression_confirm_input(mask)
+                self.press(mask)
                 self.assertEqual(iv("game_state"), PAUSE)
                 self.unchanged()
                 self.assertEqual(u("host_commits"), 0)
@@ -247,7 +261,7 @@ class EvolutionUI(unittest.TestCase):
                         target = u("progression_evolution_target")
                         L.host_snapshot()
                         L.host_reset_counts()
-                        L.progression_confirm_input(mask)
+                        self.press(mask)
                         self.assertEqual(iv("game_state"), CONFIRM)
                         self.unchanged()
                         self.assertEqual(u("host_commits"), 0)
@@ -272,7 +286,7 @@ class EvolutionUI(unittest.TestCase):
                     L.host_mutate(3, 0, 0)
                 L.host_snapshot()
                 L.host_reset_counts()
-                L.progression_confirm_input(A)
+                self.press(A)
                 self.assertEqual(iv("game_state"), PAUSE)
                 self.assertEqual(u("host_toast"), L.host_source_changed_name())
                 self.unchanged()
@@ -282,7 +296,7 @@ class EvolutionUI(unittest.TestCase):
         self.open()
         L.host_mutate(2, 0, 255)
         L.host_snapshot()
-        L.progression_confirm_input(A | B)
+        self.press(A | B)
         self.assertEqual(iv("game_state"), PAUSE)
         self.assertEqual(u("host_toast"), 0xffffffff)
         self.unchanged()
@@ -303,20 +317,21 @@ class EvolutionUI(unittest.TestCase):
         L.host_reset_counts()
         self.open()
         self.state(39)
-        self.assertEqual(u("host_admission_checks"), 2)
-        self.assertEqual(u("host_roster_checks"), 2)
+        self.assertEqual(u("host_admission_checks"), 0)
+        self.assertEqual(u("host_roster_checks"), 0)
+        self.assertEqual(u("host_bounded_steps"), 80)
         self.unchanged()
-        L.progression_confirm_input(LEFT)
+        self.press(LEFT)
         self.state(38, RESERVED)
-        L.progression_confirm_input(A)
+        self.press(A)
         self.state(38, RESERVED)
         self.unchanged()
         L.host_reset_draw()
         L.progression_draw_confirm()
         self.assertIn(L.host_reason_name(RESERVED), [d.id for d in draws(1)])
         capture("reserved-first-branch")
-        L.progression_confirm_input(RIGHT)
-        L.progression_confirm_input(A)
+        self.press(RIGHT)
+        self.press(A)
         self.assertEqual(L.host_form(0), 39)
         self.assertEqual(L.host_excess(), 88)
 
@@ -329,7 +344,7 @@ class EvolutionUI(unittest.TestCase):
         self.assertEqual(L.host_excess(), 88)
         self.assertEqual(L.host_status(0, 38), RESERVED)
         L.host_snapshot()
-        L.progression_confirm_input(A)
+        self.press(A)
         self.state(38, RESERVED)
         self.unchanged()
 
@@ -347,7 +362,7 @@ class EvolutionUI(unittest.TestCase):
                 elif issue == "sanctuary": iv("room", 40)
                 else: L.host_mutate(0, other, L.host_identity(0))
                 L.host_snapshot()
-                L.progression_confirm_input(A)
+                self.press(A)
                 self.state(38, expected)
                 self.unchanged()
                 L.host_reset_draw()
@@ -372,7 +387,7 @@ class EvolutionUI(unittest.TestCase):
                     elif issue == "trial": L.host_mutate(6, 0, 0)
                     else: iv("room", 40)
                     L.host_snapshot()
-                    if late: L.progression_confirm_input(A)
+                    if late: self.press(A)
                     else: self.assertEqual(L.progression_menu_input(SELECT), 1)
                     self.assertEqual(iv("game_state"), PAUSE)
                     self.assertEqual(u("host_toast"), L.host_reason_name(expected))
@@ -383,7 +398,7 @@ class EvolutionUI(unittest.TestCase):
             self.fresh(base, 1)
             identity = L.host_identity(0)
             self.open()
-            L.progression_confirm_input(A)
+            self.press(A)
             self.assertEqual(L.host_form(0), base + 1)
             self.assertEqual(L.host_trial(0), 1)
             for _ in range(80): L.progression_evolution_tick()
@@ -396,7 +411,7 @@ class EvolutionUI(unittest.TestCase):
             L.host_mutate(6, 0, 3)
             self.open()
             self.state(base + 2)
-            L.progression_confirm_input(A)
+            self.press(A)
             self.assertEqual(L.host_form(0), base + 2)
             self.assertEqual(L.host_identity(0), identity)
             self.assertEqual(L.host_valid(), 1)
@@ -407,16 +422,16 @@ class EvolutionUI(unittest.TestCase):
             self.open()
             self.state(base + 1)
             self.assertEqual(u("progression_evolution_count"), 1)
-            L.progression_confirm_input(A)
+            self.press(A)
             self.assertEqual(L.host_form(0), base + 1)
             self.assertEqual(L.host_valid(), 1)
 
     def test_branch_art_names_layout_and_highlight_at_240x160(self):
-        for base in BRANCHES:
+        for base in (*BRANCHES, *range(49, 73, 3)):
             for right in (False, True):
                 self.fresh(base, 3)
                 self.open()
-                if right: L.progression_confirm_input(RIGHT)
+                if right: self.press(RIGHT)
                 L.host_reset_draw()
                 L.progression_draw_confirm()
                 self.assertEqual(u("host_bad_bounds"), 0)
@@ -442,8 +457,8 @@ class EvolutionUI(unittest.TestCase):
 
     def test_animation_uses_exact_before_and_selected_target_art(self):
         self.open()
-        L.progression_confirm_input(RIGHT)
-        L.progression_confirm_input(A)
+        self.press(RIGHT)
+        self.press(A)
         for tick, expected in ((0, 37), (35, 37), (36, 39), (79, 39)):
             if tick:
                 for _ in range(tick - previous): L.progression_evolution_tick()
@@ -471,14 +486,15 @@ class EvolutionUI(unittest.TestCase):
         self.unchanged()
         for counter in ("host_roster_checks", "host_catalog_checks", "host_admission_checks", "host_commits"):
             self.assertEqual(u(counter), 0, counter)
-        L.progression_confirm_input(LEFT)
-        self.assertGreater(u("host_admission_checks"), 0)
-        self.assertGreater(u("host_roster_checks"), 0)
+        self.press(LEFT)
+        self.assertEqual(u("host_admission_checks"), 0)
+        self.assertEqual(u("host_roster_checks"), 0)
+        self.assertEqual(u("host_bounded_steps"), 0)
         self.assertEqual(u("host_catalog_checks"), 0)
 
     def test_animation_render_and_ticks_do_not_repeat_core_validation(self):
         self.open()
-        L.progression_confirm_input(A)
+        self.press(A)
         L.host_reset_counts()
         L.host_snapshot()
         for _ in range(79):
@@ -505,6 +521,284 @@ class EvolutionUI(unittest.TestCase):
         L.host_reset_draw()
         L.progression_draw_tab()
         self.assertEqual(u("host_bad_bounds"), 0)
+
+
+    def test_all_underwater_pairs_use_real_bounded_preflight_and_exact_target(self):
+        for base in range(49, 73, 3):
+            for trial, target in ((1, base+1), (2, base+2), (3, base+1)):
+                with self.subTest(base=base, trial=trial):
+                    self.fresh(base, trial)
+                    self.assertEqual(L.host_save_valid(), 1)
+                    self.open()
+                    self.state(target)
+                    before = u("host_selection_notifications")
+                    L.host_reset_counts()
+                    self.press(A)
+                    self.assertEqual(L.host_form(0), target)
+                    self.assertEqual(iv("game_state"), ANIM)
+                    self.assertEqual(L.host_save_valid(), 1)
+                    self.assertEqual(u("host_selection_notifications"), before + 1)
+                    self.assertEqual(u("host_commits"), 0)
+                    self.assertEqual(u("host_bounded_commits"), 1)
+                    self.assertEqual(u("host_roster_checks"), 1)  # explicit host_save_valid above
+
+    def test_all_earlier_edges_have_no_underwater_unlock_gate(self):
+        for base, trial in ((1, 1), (4, 2), (7, 4), (10, 8)):
+            with self.subTest(story=base):
+                self.assertEqual(L.host_story_fresh(base, trial, 7), 1)
+                self.assertEqual(L.host_quest(32), 0)
+                self.open()
+                self.state(base+1)
+                self.press(A)
+                self.assertEqual(L.host_form(0), base+1)
+                self.assertEqual(L.host_save_valid(), 1)
+        old_regions = ((13,16),(19,32),(22,64),(73,128),(75,256),(77,512),
+                       (25,1),(28,1),(79,1),(81,1),(83,1),(85,1),(87,1),(89,1),(91,1),(93,1))
+        for base, trial in old_regions:
+            with self.subTest(region=base):
+                self.assertEqual(L.host_old_region_fresh(base, trial), 1)
+                self.assertEqual(L.host_quest(32), 0)
+                self.open()
+                self.state(base+1)
+                self.press(A)
+                self.assertEqual(L.host_form(0), base+1)
+                self.assertEqual(L.host_save_valid(), 1)
+
+    def test_preparing_draws_both_branches_without_work_or_mutation(self):
+        self.assertEqual(L.progression_menu_input(SELECT), 1)
+        self.assertEqual(L.progression_evolution_busy(), 1)
+        L.host_reset_counts()
+        L.host_snapshot()
+        for _ in range(120):
+            L.host_reset_draw()
+            L.progression_draw_confirm()
+            self.assertEqual([d.id for d in draws(2)], [38, 39])
+            self.assertIn(L.host_preparing_name(), [d.id for d in draws(1)])
+            self.assertEqual(u("host_bad_bounds"), 0)
+        self.unchanged()
+        for name in ("host_roster_checks", "host_catalog_checks", "host_admission_checks", "host_commits", "host_bounded_steps", "host_bounded_commits"):
+            self.assertEqual(u(name), 0, name)
+        self.settle()
+
+    def test_a_during_open_preparation_requires_release_and_fresh_confirmation(self):
+        self.assertEqual(L.progression_menu_input(SELECT), 1)
+        L.host_snapshot()
+        for _ in range(250):
+            L.progression_confirm_input(A)
+        self.assertEqual(L.progression_evolution_busy(), 0)
+        self.assertEqual(iv("game_state"), CONFIRM)
+        self.unchanged()
+        L.progression_confirm_input(0)
+        L.progression_confirm_input(A)
+        self.assertEqual(L.progression_evolution_busy(), 1)
+        self.assertEqual(L.host_form(0), 37)
+        for _ in range(250):
+            L.progression_confirm_input(A)
+        self.assertEqual(L.host_form(0), 38)
+        self.assertEqual(iv("game_state"), ANIM)
+        self.assertEqual(u("host_bounded_commits"), 1)
+        self.assertEqual(u("host_saves"), 0)
+
+    def test_cancel_and_direction_chords_revoke_pending_confirmation(self):
+        for mask in range(1, 256):
+            if not mask & (B | SELECT | START | RIGHT | LEFT | UP | DOWN):
+                continue
+            with self.subTest(mask=mask):
+                self.fresh()
+                self.open()
+                L.progression_confirm_input(A)
+                self.assertEqual(L.progression_evolution_busy(), 1)
+                L.host_snapshot()
+                L.host_reset_counts()
+                L.progression_confirm_input(mask)
+                self.assertEqual(L.progression_evolution_busy(), 0)
+                self.assertEqual(L.save5_preflight_active(), 0)
+                for _ in range(3): L.progression_confirm_input(0)
+                self.unchanged()
+                self.assertEqual(u("host_bounded_commits"), 0)
+                self.assertEqual(u("host_roster_checks"), 0)
+
+    def test_new_load_writer_and_external_exit_revoke_ownership(self):
+        for operation in ("new", "load", "writer", "exit"):
+            with self.subTest(operation=operation):
+                self.fresh()
+                self.open()
+                L.progression_confirm_input(A)
+                self.assertEqual(L.save5_preflight_active(), 1)
+                if operation == "new": L.progression_new()
+                elif operation == "load":
+                    (C.c_ubyte*32768).in_dll(L, "save5_test_sram")[:] = bytes([255])*32768
+                    self.assertEqual(L.progression_load(), 0)
+                elif operation == "writer":
+                    self.assertEqual(L.progression_save_begin(), 1)
+                    L.save5_test_reset_writer()
+                else:
+                    iv("game_state", PAUSE)
+                    L.progression_confirm_input(0)
+                self.assertEqual(L.progression_evolution_busy(), 0)
+                self.assertEqual(L.save5_preflight_active(), 0)
+
+    def test_selected_command_and_equipped_changes_revoke_frozen_identity(self):
+        for mutation in (7,8,9):
+            self.fresh()
+            self.open()
+            L.host_mutate(mutation, 0, 1)
+            L.host_snapshot()
+            self.press(A)
+            self.assertEqual(iv("game_state"), PAUSE)
+            self.assertEqual(u("host_toast"), L.host_source_changed_name())
+            self.unchanged()
+
+    def test_every_live_save_byte_change_during_preparation_fails_closed(self):
+        for offset in range(L.host_state_bytes()):
+            with self.subTest(offset=offset):
+                self.fresh()
+                self.open()
+                L.progression_confirm_input(A)
+                L.host_mutate_byte(offset, 1)
+                L.host_snapshot()
+                self.settle()
+                self.unchanged()
+                self.assertNotEqual(iv("game_state"), ANIM)
+                self.assertEqual(L.save5_preflight_active(), 0)
+
+    def test_context_and_sanctuary_mutations_during_proof_fail_closed(self):
+        for field, value in (("room", 40), ("px", 121), ("py", 121), ("chapter_flags", 1)):
+            self.fresh()
+            self.open()
+            L.progression_confirm_input(A)
+            if field == "chapter_flags": C.c_uint.in_dll(L, field).value = value
+            else: iv(field, value)
+            L.host_snapshot()
+            self.settle()
+            self.assertEqual(iv("game_state"), PAUSE)
+            self.unchanged()
+
+    def test_bounded_160_roster_never_calls_synchronous_validation(self):
+        self.fresh()
+        while L.host_count() < 160:
+            self.assertLess(L.host_add(1, 0), 160)
+        self.assertEqual(L.host_save_valid(), 1)
+        L.host_reset_counts()
+        self.assertEqual(L.progression_menu_input(SELECT), 1)
+        steps = self.settle()
+        self.assertGreater(steps, 30)
+        self.assertLess(steps, 60)
+        self.state(38)
+        L.progression_confirm_input(A)
+        steps = self.settle()
+        self.assertGreater(steps, 25)
+        self.assertLess(steps, 45)
+        self.assertEqual(L.host_form(0), 38)
+        for name in ("host_roster_checks", "host_catalog_checks", "host_admission_checks", "host_commits"):
+            self.assertEqual(u(name), 0, name)
+        self.assertEqual(u("host_bounded_commits"), 1)
+
+
+    def test_cancel_every_pending_frame_and_foreign_scratch_is_preserved(self):
+        self.fresh()
+        self.open()
+        L.progression_confirm_input(A)
+        frames = self.settle()
+        self.assertEqual(iv("game_state"), ANIM)
+        for wait in range(frames):
+            self.fresh()
+            self.open()
+            L.progression_confirm_input(A)
+            for _ in range(wait): L.progression_confirm_input(0)
+            self.assertEqual(L.progression_evolution_busy(), 1)
+            L.host_snapshot()
+            L.progression_confirm_input(B | A)
+            self.assertEqual(L.save5_preflight_active(), 0)
+            for _ in range(3): L.progression_confirm_input(0)
+            self.unchanged()
+            self.assertEqual(iv("game_state"), PAUSE)
+        # Another valid owner cannot be displaced by SELECT or our cancellation.
+        self.fresh()
+        state = (C.c_ubyte * L.host_state_bytes()).in_dll(L, "adventure_save")
+        token = L.save5_preflight_begin(C.byref(state))
+        self.assertNotEqual(token, 0)
+        self.assertEqual(L.progression_menu_input(SELECT), 1)
+        self.assertEqual(L.save5_preflight_active(), 1)
+        L.progression_evolution_cancel()
+        self.assertEqual(L.save5_preflight_status(token), 1)
+        L.save5_preflight_cancel()
+
+    def test_replaced_core_cursor_and_revoked_save_token_cannot_commit(self):
+        for revoke in (L.creatures_admission_job_cancel, L.save5_preflight_cancel):
+            self.fresh()
+            self.open()
+            L.progression_confirm_input(A)
+            while u("host_bounded_steps") < 81:
+                L.progression_confirm_input(0)
+            revoke()
+            L.host_snapshot()
+            self.settle()
+            self.unchanged()
+            self.assertNotEqual(iv("game_state"), ANIM)
+            self.assertEqual(L.save5_preflight_active(), 0)
+
+
+    def test_stale_target_choice_and_count_never_redirect_confirmation(self):
+        for name, value in (("progression_evolution_target", 39), ("progression_evolution_choice", 1),
+                            ("progression_evolution_count", 1), ("progression_evolution_choice", 255)):
+            for pending in (False, True):
+                self.fresh()
+                self.open()
+                if pending: L.progression_confirm_input(A)
+                C.c_uint.in_dll(L, name).value = value
+                L.host_snapshot()
+                L.progression_confirm_input(0 if pending else A)
+                self.settle()
+                self.unchanged()
+                self.assertEqual(iv("game_state"), PAUSE)
+
+
+    def test_public_cancellation_invalidates_frozen_menu_binding(self):
+        self.open()
+        L.progression_evolution_cancel()
+        L.host_snapshot()
+        L.progression_confirm_input(A)
+        self.assertEqual(iv("game_state"), PAUSE)
+        self.unchanged()
+
+
+    def test_explicit_branch_chosen_during_opening_overrides_default_preference(self):
+        L.progression_menu_input(SELECT)
+        L.progression_confirm_input(RIGHT | A)
+        self.settle()
+        self.state(39)
+        self.assertEqual(L.host_form(0), 37)
+        self.press(A)
+        self.assertEqual(L.host_form(0), 39)
+
+
+    def test_every_update_has_at_most_three_slices_and_commit_stays_separate(self):
+        for retained in (34, 50, 160):
+            self.fresh()
+            while L.host_count() < retained:
+                self.assertLess(L.host_add(1, 0), 160)
+            self.assertEqual(L.host_save_valid(), 1)
+            for confirm in (False, True):
+                L.host_reset_counts()
+                if confirm: L.progression_confirm_input(A)
+                else: self.assertEqual(L.progression_menu_input(SELECT), 1)
+                self.assertEqual(u("host_preflight_steps") + u("host_bounded_steps"), 0)
+                updates = 0
+                while L.progression_evolution_busy():
+                    before = u("host_preflight_steps") + u("host_bounded_steps")
+                    exact_before, commit_before = u("host_exact_checks"), u("host_bounded_commits")
+                    L.progression_confirm_input(0)
+                    delta = u("host_preflight_steps") + u("host_bounded_steps") - before
+                    self.assertLessEqual(delta, 3)
+                    if updates < 2: self.assertEqual(delta, 0, "cold-page warmup did preparation work")
+                    if u("host_exact_checks") != exact_before or u("host_bounded_commits") != commit_before:
+                        self.assertEqual(delta, 0, "exact final check or commit shared a batched update")
+                    updates += 1
+                    self.assertLess(updates, 60)
+                self.assertEqual(iv("game_state"), ANIM if confirm else CONFIRM)
+                self.assertEqual(u("host_exact_checks"), 1)
+                self.assertEqual(u("host_bounded_commits"), int(confirm))
 
 
 if __name__ == "__main__":

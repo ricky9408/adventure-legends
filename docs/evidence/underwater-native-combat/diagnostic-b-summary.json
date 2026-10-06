@@ -1,0 +1,446 @@
+{
+  "status": "diagnostic-only; excluded from final acceptance",
+  "candidate": "B",
+  "rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "native_damage_commands_verified": [
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90
+  ],
+  "commands_equipped_and_cast": [
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90
+  ],
+  "mechanism_failure": "77 admits real directional entry but cannot complete19px crossing in36 active updates at ordinary AI speed",
+  "positive_native_controls": [
+    "all50 retained individual IDs visited in journal",
+    "cold/hot L+D-pad freezes gameplay and commits same-family branches",
+    "away-and-back field rights invalidated",
+    "legacy Magma43 resumes after lease/cooldown release",
+    "all24 forms native body bytes match anticipation/release/settle/recovery"
+  ],
+  "timing": {
+    "window_count": 101,
+    "failing_window_count": 51,
+    "highest_cycles": 710888,
+    "bad_windows": [
+      {
+        "name": "command77-natural-entry-crossing",
+        "hardware_frames": 65,
+        "updates": 64,
+        "page_flips": 64,
+        "max_cycles": 317292
+      },
+      {
+        "name": "direct-68-facing1",
+        "hardware_frames": 43,
+        "updates": 42,
+        "page_flips": 42,
+        "max_cycles": 292038
+      },
+      {
+        "name": "direct-69-facing1",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 312628
+      },
+      {
+        "name": "direct-71-facing1",
+        "hardware_frames": 59,
+        "updates": 54,
+        "page_flips": 54,
+        "max_cycles": 435191
+      },
+      {
+        "name": "direct-73-facing1",
+        "hardware_frames": 45,
+        "updates": 44,
+        "page_flips": 44,
+        "max_cycles": 275267
+      },
+      {
+        "name": "direct-74-facing1",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 293590
+      },
+      {
+        "name": "direct-75-facing1",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 282814
+      },
+      {
+        "name": "direct-78-facing1",
+        "hardware_frames": 39,
+        "updates": 37,
+        "page_flips": 37,
+        "max_cycles": 687271
+      },
+      {
+        "name": "direct-82-facing1",
+        "hardware_frames": 43,
+        "updates": 42,
+        "page_flips": 42,
+        "max_cycles": 289063
+      },
+      {
+        "name": "direct-83-facing1",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 280206
+      },
+      {
+        "name": "direct-84-facing1",
+        "hardware_frames": 51,
+        "updates": 39,
+        "page_flips": 39,
+        "max_cycles": 301603
+      },
+      {
+        "name": "direct-87-facing1",
+        "hardware_frames": 57,
+        "updates": 51,
+        "page_flips": 51,
+        "max_cycles": 630676
+      },
+      {
+        "name": "direct-89-facing1",
+        "hardware_frames": 57,
+        "updates": 55,
+        "page_flips": 55,
+        "max_cycles": 383112
+      },
+      {
+        "name": "direct-90-facing1",
+        "hardware_frames": 43,
+        "updates": 41,
+        "page_flips": 41,
+        "max_cycles": 615296
+      },
+      {
+        "name": "alternate-68-single",
+        "hardware_frames": 43,
+        "updates": 42,
+        "page_flips": 42,
+        "max_cycles": 290821
+      },
+      {
+        "name": "alternate-68-diagonal",
+        "hardware_frames": 43,
+        "updates": 42,
+        "page_flips": 42,
+        "max_cycles": 290821
+      },
+      {
+        "name": "alternate-68-opposed",
+        "hardware_frames": 43,
+        "updates": 42,
+        "page_flips": 42,
+        "max_cycles": 290821
+      },
+      {
+        "name": "alternate-69-single",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 311527
+      },
+      {
+        "name": "alternate-69-diagonal",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 311527
+      },
+      {
+        "name": "alternate-69-opposed",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 311527
+      },
+      {
+        "name": "alternate-83-single",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 282771
+      },
+      {
+        "name": "alternate-83-diagonal",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 282771
+      },
+      {
+        "name": "alternate-83-opposed",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 282771
+      },
+      {
+        "name": "alternate-90-single",
+        "hardware_frames": 43,
+        "updates": 41,
+        "page_flips": 41,
+        "max_cycles": 666623
+      },
+      {
+        "name": "gap-69-facing1",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 312759
+      },
+      {
+        "name": "gap-74-facing1",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 296229
+      },
+      {
+        "name": "gap-75-facing1",
+        "hardware_frames": 53,
+        "updates": 52,
+        "page_flips": 52,
+        "max_cycles": 281897
+      },
+      {
+        "name": "gap-78-facing1",
+        "hardware_frames": 39,
+        "updates": 37,
+        "page_flips": 37,
+        "max_cycles": 687197
+      },
+      {
+        "name": "gap-82-facing1",
+        "hardware_frames": 43,
+        "updates": 42,
+        "page_flips": 42,
+        "max_cycles": 290496
+      },
+      {
+        "name": "gap-83-facing1",
+        "hardware_frames": 49,
+        "updates": 48,
+        "page_flips": 48,
+        "max_cycles": 280386
+      },
+      {
+        "name": "gap-89-facing1",
+        "hardware_frames": 57,
+        "updates": 55,
+        "page_flips": 55,
+        "max_cycles": 385612
+      },
+      {
+        "name": "gap-90-facing1",
+        "hardware_frames": 43,
+        "updates": 41,
+        "page_flips": 41,
+        "max_cycles": 618569
+      },
+      {
+        "name": "walking-camera-cast-68",
+        "hardware_frames": 46,
+        "updates": 44,
+        "page_flips": 44,
+        "max_cycles": 298608
+      },
+      {
+        "name": "walking-camera-cast-71",
+        "hardware_frames": 62,
+        "updates": 37,
+        "page_flips": 37,
+        "max_cycles": 588090
+      },
+      {
+        "name": "walking-camera-cast-73",
+        "hardware_frames": 48,
+        "updates": 47,
+        "page_flips": 47,
+        "max_cycles": 282583
+      },
+      {
+        "name": "walking-camera-cast-74",
+        "hardware_frames": 52,
+        "updates": 51,
+        "page_flips": 51,
+        "max_cycles": 302209
+      },
+      {
+        "name": "walking-camera-cast-75",
+        "hardware_frames": 56,
+        "updates": 55,
+        "page_flips": 55,
+        "max_cycles": 290178
+      },
+      {
+        "name": "walking-camera-cast-77",
+        "hardware_frames": 66,
+        "updates": 40,
+        "page_flips": 40,
+        "max_cycles": 468288
+      },
+      {
+        "name": "walking-camera-cast-78",
+        "hardware_frames": 42,
+        "updates": 40,
+        "page_flips": 40,
+        "max_cycles": 710888
+      },
+      {
+        "name": "walking-camera-cast-79",
+        "hardware_frames": 44,
+        "updates": 40,
+        "page_flips": 40,
+        "max_cycles": 297121
+      },
+      {
+        "name": "walking-camera-cast-80",
+        "hardware_frames": 58,
+        "updates": 56,
+        "page_flips": 56,
+        "max_cycles": 276847
+      },
+      {
+        "name": "walking-camera-cast-82",
+        "hardware_frames": 46,
+        "updates": 34,
+        "page_flips": 34,
+        "max_cycles": 299829
+      },
+      {
+        "name": "walking-camera-cast-83",
+        "hardware_frames": 52,
+        "updates": 45,
+        "page_flips": 45,
+        "max_cycles": 290808
+      },
+      {
+        "name": "walking-camera-cast-84",
+        "hardware_frames": 54,
+        "updates": 37,
+        "page_flips": 37,
+        "max_cycles": 410236
+      },
+      {
+        "name": "walking-camera-cast-87",
+        "hardware_frames": 60,
+        "updates": 55,
+        "page_flips": 55,
+        "max_cycles": 526703
+      },
+      {
+        "name": "walking-camera-cast-88",
+        "hardware_frames": 44,
+        "updates": 37,
+        "page_flips": 37,
+        "max_cycles": 298327
+      },
+      {
+        "name": "walking-camera-cast-89",
+        "hardware_frames": 60,
+        "updates": 57,
+        "page_flips": 57,
+        "max_cycles": 395777
+      },
+      {
+        "name": "walking-camera-cast-90",
+        "hardware_frames": 46,
+        "updates": 44,
+        "page_flips": 44,
+        "max_cycles": 636690
+      },
+      {
+        "name": "direct-71-facing1",
+        "hardware_frames": 59,
+        "updates": 55,
+        "page_flips": 55,
+        "max_cycles": 546788
+      },
+      {
+        "name": "direct-84-facing1",
+        "hardware_frames": 51,
+        "updates": 38,
+        "page_flips": 38,
+        "max_cycles": 305648
+      },
+      {
+        "name": "direct-87-facing1",
+        "hardware_frames": 57,
+        "updates": 51,
+        "page_flips": 51,
+        "max_cycles": 630835
+      }
+    ]
+  },
+  "test_refinements": [
+    "Initial71 foe already inside capture box; corrected by ordinary movement and genuine later entry",
+    "Thin80/81/84 initial point mismatched by1pixel; exact controller-position planning obtains expected damage, not a claim of easy player aiming",
+    "87 expiry initially observed too early because hardware cadence missed; continued until actual simulation expiry and verified one hit",
+    "Pause-tab0 R legitimately opens existing ending recap; stimulus corrected for later runs"
+  ],
+  "reports": [
+    {
+      "path": "build/underwater-b-combat-diagnostic01/underwater-combat-native.json",
+      "sha256": "601f3bf12dd39b77b74f58fb5c55a9fb414d1ea8751d47fe941682d596398bc1"
+    },
+    {
+      "path": "build/underwater-b-precision-diagnostic01/underwater-combat-native.json",
+      "sha256": "f86e4174bad23374dcb7be61cf1aa36760e7bef861070a1e51a45f7474e22c48"
+    }
+  ]
+}

@@ -84,3 +84,32 @@ TRIAL_PREREQUISITES = {'magma_one_hearth_three_uses': 1, 'magma_the_unbroken_cro
 REVISION_POLICY[5] = {'forms':REVISION_POLICY[4]['forms'] + MAGMA_FORMS,
     'abilities':REVISION_POLICY[4]['abilities'] + list(range(43,67)),
     'edges':REVISION_POLICY[4]['edges'] + MAGMA_EDGES, 'learns':102}
+
+# Reviewed Underwater current-only append; revisions1–5 above remain frozen.
+UNDERWATER_FORMS = [49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72]
+UNDERWATER_EDGES = [[49, 50], [49, 51], [52, 53], [52, 54], [55, 56], [55, 57], [58, 59], [58, 60], [61, 62], [61, 63], [64, 65], [64, 66], [67, 68], [67, 69], [70, 71], [70, 72]]
+FIELD_CAPABILITIES += ['echo_outline', 'shift_ballast', 'inscribe_trace', 'unfold_screen']
+CAPABILITY_MASKS.update({'echo_outline': 67108864, 'shift_ballast': 134217728, 'inscribe_trace': 268435456, 'unfold_screen': 536870912})
+GATE_MASKS.update({'underwater_ready':1024, 'palinode_open':2048})
+CURRENT_POLARITY_OVERRIDES.update({49: 'yin', 50: 'yin', 51: 'yang', 52: 'yang', 53: 'yin', 54: 'yang', 55: 'yang', 56: 'yang', 57: 'yin', 58: 'yin', 59: 'yin', 60: 'yang', 61: 'yang', 62: 'yin', 63: 'yang', 64: 'yin', 65: 'yin', 66: 'yang', 67: 'yang', 68: 'yang', 69: 'yin', 70: 'yin', 71: 'yin', 72: 'yang'})
+TRIAL_POLICY.update({
+    'uw_read_the_missing_edge':('F017', 1, 1, 6, (49,)),
+    'uw_leave_a_silent_margin':('F017', 2, 2, 6, (49,)),
+    'uw_one_low_one_high':('F018', 1, 1, 6, (52,)),
+    'uw_hold_the_middle_depth':('F018', 2, 2, 6, (52,)),
+    'uw_draw_an_open_ladder':('F019', 1, 1, 6, (55,)),
+    'uw_make_a_nested_bower':('F019', 2, 2, 6, (55,)),
+    'uw_roll_the_near_edge':('F020', 1, 1, 6, (58,)),
+    'uw_leave_two_windows':('F020', 2, 2, 6, (58,)),
+    'uw_warm_the_outer_crown':('F021', 1, 1, 6, (61,)),
+    'uw_write_a_warm_path':('F021', 2, 2, 6, (61,)),
+    'uw_turn_the_five_petals':('F022', 1, 1, 6, (64,)),
+    'uw_fold_without_overlap':('F022', 2, 2, 6, (64,)),
+    'uw_keep_the_hinge_clear':('F023', 1, 1, 6, (67,)),
+    'uw_cross_once_return_once':('F023', 2, 2, 6, (67,)),
+    'uw_keep_the_diagonal_open':('F024', 1, 1, 6, (70,)),
+    'uw_frame_the_empty_center':('F024', 2, 2, 6, (70,)),
+})
+REVISION_POLICY[6] = {"forms":REVISION_POLICY[5]["forms"] + UNDERWATER_FORMS,
+    "abilities":REVISION_POLICY[5]["abilities"] + list(range(67,91)),
+    "edges":REVISION_POLICY[5]["edges"] + UNDERWATER_EDGES, "learns":142}

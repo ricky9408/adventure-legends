@@ -1,7 +1,7 @@
 #ifndef ADVENTURE_LEGENDS_CREATURES_H
 #define ADVENTURE_LEGENDS_CREATURES_H
 /* Freestanding C99. Only explicit byte encoding in save5 may persist these
- * records. All definitions and lookups live in ROM; no malloc or hidden state. */
+ * records. All definitions and lookups live in ROM; no malloc. Bounded admission jobs own one explicitly documented private cursor. */
 typedef unsigned char CreatureU8;
 typedef unsigned short CreatureU16;
 typedef unsigned int CreatureU32;
@@ -10,9 +10,9 @@ typedef CreatureU16 CreatureCapabilityId;
 
 enum {
     CREATURE_FORM_CAPACITY = 128, CREATURE_FAMILY_CAPACITY = 60,
-    CREATURE_ENABLED_COUNT = 65,
-    CREATURE_LEARNSET_COUNT = 102, CREATURE_EVOLUTION_COUNT = 35,
-    CREATURE_ABILITY_COUNT = 65, CREATURE_LEGACY_COUNT = 4,
+    CREATURE_ENABLED_COUNT = 89,
+    CREATURE_LEARNSET_COUNT = 142, CREATURE_EVOLUTION_COUNT = 51,
+    CREATURE_ABILITY_COUNT = 89, CREATURE_LEGACY_COUNT = 4,
     CREATURE_ROSTER_CAPACITY = 160, CREATURE_PARTY_CAPACITY = 4,
     CREATURE_EMPTY_SLOT = 255, CREATURE_MAX_LEVEL = 50,
     CREATURE_MAX_BOND = 100, CREATURE_EXPEDITION_BOND_CAP = 10,
@@ -31,8 +31,14 @@ enum {
     CREATURE_NORTH_HARBOR_READY = 16, CREATURE_COUNTERWORKS_STABLE = 32,
     CREATURE_SOUTH_READY = 64, CREATURE_SUNWELL_OPEN = 128,
     CREATURE_MAGMA_READY = 256, CREATURE_CALDERA_OPEN = 512,
-    CREATURE_EVOLUTION_CONTEXT_MASK = 1023,
-    CREATURE_CONTENT_REVISION = 5, CREATURE_ROUTE_REQUIREMENTS_MAX = 8,
+    CREATURE_UNDERWATER_READY = 1024, CREATURE_PALINODE_OPEN = 2048,
+    CREATURE_EVOLUTION_CONTEXT_MASK = 4095,
+    CREATURE_CONTENT_REVISION = 6, CREATURE_ROUTE_REQUIREMENTS_MAX = 8,
+    CREATURE_UNDERWATER_FIRST_FORM = 49, CREATURE_UNDERWATER_LAST_FORM = 72,
+    CREATURE_UNDERWATER_FIRST_FAMILY = 17, CREATURE_UNDERWATER_FAMILY_COUNT = 8,
+    /* Explicit target choice uses evolution_at(base, choice); no first-edge fallback. */
+    CREATURE_BRANCH_CHOICE_FIRST = 0, CREATURE_BRANCH_CHOICE_SECOND = 1,
+    CREATURE_UNDERWATER_TRIAL_FIRST = 1, CREATURE_UNDERWATER_TRIAL_SECOND = 2,
     CREATURE_TRIAL_HEARTH = 1, CREATURE_TRIAL_CANOPY = 2,
     CREATURE_TRIAL_WIND_LOOM = 4, CREATURE_TRIAL_AMBER_ARCH = 8,
     CREATURE_TRIAL_PAIRED_POOLS = 16,
@@ -62,7 +68,9 @@ enum FieldCapability {
     FIELD_WOOD_SOCKET = 1u << 20,
     FIELD_REEL_LOAD = 1u << 21, FIELD_STORE_HEAT = 1u << 22,
     FIELD_FLOAT_LOAD = 1u << 23, FIELD_ALIGN_RAIL = 1u << 24,
-    FIELD_REFRACT_BEAM = 1u << 25
+    FIELD_REFRACT_BEAM = 1u << 25,
+    FIELD_ECHO_OUTLINE = 1u << 26, FIELD_SHIFT_BALLAST = 1u << 27,
+    FIELD_INSCRIBE_TRACE = 1u << 28, FIELD_UNFOLD_SCREEN = 1u << 29
 };
 #define FIELD_HOMURA (FIELD_IGNITE | FIELD_BURN_THORNS | FIELD_FIRE_SOCKET | FIELD_EXPOSE_FIRE)
 #define FIELD_MIDORI (FIELD_GROW_BRIDGE | FIELD_GROW_ROOTS | FIELD_WOOD_SOCKET)
@@ -232,6 +240,32 @@ enum CreatureAdmissionStatus creatures_grant_admitted(
     CreatureRoster *roster, unsigned form_id, unsigned level, unsigned bond,
     unsigned flags, unsigned reward_id, unsigned *out_slot);
 int creatures_admission_allowed(enum CreatureAdmissionStatus status);
+
+/* Single frame-bounded operation; snapshot is exclusively owned and immutable
+ * through completion. Begin supersedes the previous job and returns a fresh
+ * token (0 invalid). No caller-supplied validation flags. Step performs actual
+ * full roster validation and coverage, at most four records per call including
+ * each record's bounded prior-ID checks. It returns -1 invalid token/budget,
+ * 0 pending, 1 complete. Result is INVALID until complete. Commit requires a
+ * distinct live roster byte-identical to the snapshot and consumes the token
+ * once. Caller separately validates its typed quest/source/attempt/context and
+ * all non-roster state, and cancels on load, death, scene change or decline.
+ * No additional full-save or roster copy, and synchronous APIs stay unchanged. */
+enum { CREATURE_ADMISSION_JOB_ERROR = -1, CREATURE_ADMISSION_JOB_PENDING = 0,
+       CREATURE_ADMISSION_JOB_COMPLETE = 1, CREATURE_ADMISSION_JOB_RECORDS_MAX = 4 };
+unsigned creatures_admission_job_bytes(void);
+CreatureU32 creatures_admission_job_begin(const CreatureRoster *snapshot,
+    unsigned target_form, unsigned replaced_slot); /*255 means grant*/
+int creatures_admission_job_step(CreatureU32 token, unsigned records);
+enum CreatureAdmissionStatus creatures_admission_job_result(CreatureU32 token,
+    CreatureAdmission *detail);
+void creatures_admission_job_cancel(void);
+enum CreatureAdmissionStatus creatures_admission_job_commit_grant(CreatureU32 token,
+    CreatureRoster *live, unsigned level, unsigned bond, unsigned flags,
+    unsigned reward_id, unsigned *out_slot);
+unsigned creatures_admission_job_commit_evolution(CreatureU32 token,
+    CreatureRoster *live, unsigned context, int sanctuary, int confirmed);
+
 
 unsigned creatures_grant(CreatureRoster *roster, unsigned form_id, unsigned level,
                          unsigned bond, unsigned flags, unsigned reward_id);

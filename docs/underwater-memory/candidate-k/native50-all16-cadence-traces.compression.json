@@ -1,0 +1,16 @@
+{
+  "format": "deterministic gzip of exact raw JSON bytes",
+  "compressed_file": "native50-all16-cadence-traces.json.gz",
+  "compressed_bytes": 4370,
+  "compressed_sha256": "c2784df1930446401f0667f6fc0fcbd13a8ae8172334d21ba6d956ca5a225e8b",
+  "uncompressed_original_filename": "native50-all16-cadence-traces.json",
+  "uncompressed_bytes": 249956,
+  "uncompressed_sha256": "284ee721f6854f8979eb9726db07b7c22064779902320302f6e4b6227159a0a8",
+  "gzip_mtime": 0,
+  "gzip_original_filename": "",
+  "gzip_compression_level": 9,
+  "decompression_byte_exact": true,
+  "raw_original_retained_in_build": "build/underwater-memory-observe50-k-all16/diagnostic-cadence-traces.json",
+  "raw_docs_path_omitted_from_publication_only": "docs/underwater-memory/candidate-k/native50-all16-cadence-traces.json",
+  "measurement_transformation": "none; no JSON parsing, reformatting or minification was applied before compression"
+}

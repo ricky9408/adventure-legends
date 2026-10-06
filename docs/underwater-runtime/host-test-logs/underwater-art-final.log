@@ -1,0 +1,13 @@
+test_actual_runtime_a_targets_have_reachable_facing_approaches (__main__.UnderwaterArt.test_actual_runtime_a_targets_have_reachable_facing_approaches) ... ok
+test_budgets_and_deterministic_regeneration (__main__.UnderwaterArt.test_budgets_and_deterministic_regeneration) ... ok
+test_collision_table_matches_every_expanded_solid_pixel (__main__.UnderwaterArt.test_collision_table_matches_every_expanded_solid_pixel) ... ok
+test_compiled_const_descriptors_and_lookup (__main__.UnderwaterArt.test_compiled_const_descriptors_and_lookup) ... ok
+test_every_scrolling_camera_column_alignment (__main__.UnderwaterArt.test_every_scrolling_camera_column_alignment) ... ok
+test_every_spawn_exit_interaction_and_enemy_reachable (__main__.UnderwaterArt.test_every_spawn_exit_interaction_and_enemy_reachable) ... ok
+test_frozen_native_palette_and_rom_source_identity (__main__.UnderwaterArt.test_frozen_native_palette_and_rom_source_identity) ... ok
+test_twenty_original_transparent_streamed_glyphs (__main__.UnderwaterArt.test_twenty_original_transparent_streamed_glyphs) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.847s
+
+OK

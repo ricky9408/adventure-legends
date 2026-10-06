@@ -1,0 +1,103 @@
+{
+  "status": "DESIGN_ONLY",
+  "reference": "../adventure-legends-magma",
+  "files": {
+    "CREATURE_CARDS.md": {
+      "bytes": 42911,
+      "sha256": "6d6b476ec59d91ddeba734101bd630fe9226e531074947b4f795d0da474c1f20"
+    },
+    "IMPLEMENTATION_AND_ACCEPTANCE.md": {
+      "bytes": 16976,
+      "sha256": "f4a75554075277750df93f904952a3c3b4478aaa588b46ad04ba3bce6ea615e1"
+    },
+    "README.md": {
+      "bytes": 2857,
+      "sha256": "e57665a5c8425ae72123908c6f7f495ee8edeeb109b1fa1777263250c9734275"
+    },
+    "TRIALS_AND_ACQUISITION.md": {
+      "bytes": 14991,
+      "sha256": "4e25a7bfd1efff111a79621ea4c485eca132c01bccae86873e846450e4819dec"
+    },
+    "UNDERWATER_CHAPTER_BRIEF.md": {
+      "bytes": 7763,
+      "sha256": "d8f4358fb3409947c017990f0a60eb75873fc54ac0115912da63f2f5b3de954a"
+    },
+    "ability_contracts.json": {
+      "bytes": 26455,
+      "sha256": "47344d22163889d305dc134b92000605603b491b83a668999db65846661f8889"
+    },
+    "acquisition_contracts.json": {
+      "bytes": 14620,
+      "sha256": "eebdc6bf9e47a1e5cb47bebb0f91a820b6b77177f38aed1d888a00c695a8c82d"
+    },
+    "allocation.schema.json": {
+      "bytes": 4723,
+      "sha256": "fb34f305ede24b32ff5808516fcae038d3105a07373bf681032317562973b1d2"
+    },
+    "build_design.py": {
+      "bytes": 53005,
+      "sha256": "9cec6ae85b3b32c47eb6c2ccf7926554a830f61e3a7b9c891c8faabe6b0c12c8"
+    },
+    "catalog_delta.json": {
+      "bytes": 20240,
+      "sha256": "78c8a6172107bc32f98f823f0b173f91f470419448d51fd5941798e961c3ae1b"
+    },
+    "completion_roadmap.json": {
+      "bytes": 2885,
+      "sha256": "d2f211f3b1189adfa4c0ebe90f911926e2130e519ab777bba143aefafbf762cd"
+    },
+    "creature_forms.json": {
+      "bytes": 14790,
+      "sha256": "71c8167482209c0783588f4bfc1e96e97488a3b1aacdb6608b1ddcddd84abd60"
+    },
+    "design_model.py": {
+      "bytes": 3707,
+      "sha256": "821e58f6a603684b262086b2f1b44892b8bb09df43ca678d94056b965c87dcb6"
+    },
+    "families.json": {
+      "bytes": 1995,
+      "sha256": "54a37482e9f05ec8323080479b5eb163bc58bc94ef0c1687ac69c62674c7eb3f"
+    },
+    "render_cards.py": {
+      "bytes": 5330,
+      "sha256": "6b63f937e9ebf21d6f671b375ad620007c057e623bd5227f9b0bd4ac4faa85ed"
+    },
+    "test_design.py": {
+      "bytes": 7583,
+      "sha256": "dc5bd3161a90c61d07d6aefba32bcb56f2b092cccab11bd479837a8edca78e41"
+    },
+    "trial_contracts.json": {
+      "bytes": 23121,
+      "sha256": "576f293b182b6b224e16e868e2a1797baebe29c3eadf231551634cac637baadb"
+    },
+    "underwater_allocation.json": {
+      "bytes": 13204,
+      "sha256": "0ad269b2dc6be3188d4da4c64a18e3899dcdb8c96287ac3bd9aae631407cdeee"
+    },
+    "unittest_report.txt": {
+      "bytes": 2141,
+      "sha256": "26f94deff3cd06f0275481c66fbff46b297c0332120818a35d27560ac8ca8eff"
+    },
+    "validate_design.py": {
+      "bytes": 13128,
+      "sha256": "b3612a6ce884b2435a16f88ca7382d9bf3ce471cafa077a46be6ac236cc2d00c"
+    },
+    "validation_report.json": {
+      "bytes": 906,
+      "sha256": "79565d4100feda56c2aa753db10d66fa5c0fb0fb7815bbe82c45073ddd7b4ba9"
+    },
+    "validation_stdout.txt": {
+      "bytes": 906,
+      "sha256": "79565d4100feda56c2aa753db10d66fa5c0fb0fb7815bbe82c45073ddd7b4ba9"
+    },
+    "world_plan.json": {
+      "bytes": 19045,
+      "sha256": "c26deaa0df1be371840acf85bcbf50a68b6d403919124b77f3325466241104e4"
+    }
+  },
+  "largest_file_bytes": 53005,
+  "host_design_tests_passed": 16,
+  "branch_choice_combinations_modeled": 256,
+  "native_underwater_tests_run": false,
+  "live_reference_files_modified": false
+}

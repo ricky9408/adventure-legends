@@ -1,0 +1,23 @@
+[
+  {
+    "artifact": "build/underwater-memory-observe34/underwater-journey.json",
+    "sha256": "bea5c659a22ddeb713ff37590b08863d0bcc183e44c6d9fd17ca6fd52d2ef991",
+    "checks": 4,
+    "failures": [],
+    "last_snapshot": "00-magma-forward-migration"
+  },
+  {
+    "artifact": "build/underwater-memory-observe42/underwater-journey.json",
+    "sha256": "ae68bee33886d7f48846dc55f34bde64c1066bfde2036a8c5ef759d174d20119",
+    "checks": 625,
+    "failures": [],
+    "last_snapshot": "diagnostic-finished"
+  },
+  {
+    "artifact": "build/underwater-memory-observe42-final/underwater-journey.json",
+    "sha256": "ce519fa469c81d334e0bd7495d2caa3a02f59355d9c45f652e2c048761da4fe9",
+    "checks": 625,
+    "failures": [],
+    "last_snapshot": "diagnostic-finished"
+  }
+]

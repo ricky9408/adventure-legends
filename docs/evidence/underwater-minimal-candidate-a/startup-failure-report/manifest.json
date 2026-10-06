@@ -1,0 +1,13 @@
+{
+  "source_filename": "underwater-minimal-review.json",
+  "source_sha256": "d5a5377bf0172b8239762fd9717e9f59c07d651b865b36c871f7b8c1212cb2ce",
+  "source_bytes": 9167,
+  "encoding": "UTF-8 JSON bytes, concatenate in listed order without separators",
+  "parts": [
+    {
+      "path": "part_000.txt",
+      "bytes": 9167,
+      "sha256": "d5a5377bf0172b8239762fd9717e9f59c07d651b865b36c871f7b8c1212cb2ce"
+    }
+  ]
+}

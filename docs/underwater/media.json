@@ -1,0 +1,1008 @@
+{
+  "suite": "underwater-spoiler-free-native-teaser",
+  "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+  "elf_sha256": "1fc2082a8cdc7cb56ca8e8ded59a7a322a4beacbb0adebad47d5169e9ea5dbe3",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "machine_state_loads": 0,
+  "capture_sram_reloads": 0,
+  "capture_cuts": 0,
+  "capture_reset_count": 0,
+  "scope": "Nacreway opening exterior and an ordinary bright stroll with retained Homura form 2. No Underwater creatures, recruits, evolutions, interactions, hidden routes, puzzle solutions, boss or ending.",
+  "preparation": "Hash-authenticated delivered Magma revision5 SRAM, one cold boot, revision5-to6 byte-preservation checks and ordinary controller lift travel to room46. No completed Underwater save or prior-ROM machine state.",
+  "source_sram_imports": 1,
+  "source_cold_resets": 1,
+  "retained_companion_form": 2,
+  "frozen_source_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "frozen_source_count": 1163,
+  "emulator_core": {
+    "name": "mGBA",
+    "version": "0.10.5",
+    "path": "/workspace/scratch/33ed39a77941/emberbond/tools/sysroot/usr/lib/x86_64-linux-gnu/libmgba.so.0.10.5",
+    "sha256": "a1d7713cc89e3a4e4eeaf2bc7a523115356ebe14e057805c06f5e9d4a328be63",
+    "path_status": "located_loaded_library_via_dladdr",
+    "host_platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "captured_frames": 1200,
+  "hardware_clock_ratio": "16777216/280896",
+  "frame_rate": 59.72750056960583,
+  "duration_seconds": 20.09124755859375,
+  "native_resolution": [
+    240,
+    160
+  ],
+  "video_resolution": [
+    960,
+    640
+  ],
+  "scaling": "4x nearest-neighbor, one encoded video frame per emulated hardware frame",
+  "capture_rgb_stream_sha256": "9aed1bbfbf304be4f25f670fe0a47a49d2ff64ca5243bebcdbba308771fa9c07",
+  "native_lossless_decoded_rgb_stream_sha256": "9aed1bbfbf304be4f25f670fe0a47a49d2ff64ca5243bebcdbba308771fa9c07",
+  "native_frame_stats": {
+    "hardware_frames": 1200,
+    "game_updates": 1200,
+    "display_page_flips": 1200,
+    "update_histogram": {
+      "1": 1200
+    },
+    "state_histogram": {
+      "1": 1200
+    },
+    "max_update_render_cycles": 174660,
+    "native_frame_budget_cycles": 280896,
+    "max_obj_count": 24,
+    "camera_x_range": [
+      58,
+      240
+    ],
+    "camera_y_range": [
+      8,
+      64
+    ],
+    "measurement": "Emulated hardware frames, live game update counter, displayed VRAM page bit and native update/render cycle timer; not host FPS. Timer excludes VBlank wait/OAM commit."
+  },
+  "audio": "Real emulator PSG stereo PCM, retained as native WAV; MP4 uses 48kHz AAC resampling",
+  "audio_samples_from_bridge": 658350,
+  "native_audio": {
+    "sample_rate": 32768,
+    "channels": 2,
+    "samples": 658350,
+    "duration_seconds": 20.09124755859375,
+    "peak_amplitude": 1536,
+    "rms_amplitude": 1086.7509858579185
+  },
+  "native_audio_minus_video_seconds": 0.0,
+  "preview_frame_offsets": {
+    "native-arrival-court.png": 79,
+    "native-shell-terrace.png": 200,
+    "native-east-street.png": 356,
+    "native-town-detail.png": 569,
+    "native-market-street.png": 696,
+    "native-nacreway-preview.png": 1199
+  },
+  "test_sources": {
+    "tests/underwater_journey.py": "e6ff183a9f2e178e954584eebdf54f51a5943100d0499fbad092cc2c7c6f6b6e",
+    "tests/region_journey.py": "6663ad0740f041ebfb9fca17f33e1283a2134899ae54c8fcab4882900dba9c2b",
+    "tests/northern_journey.py": "34e4c2dbeca41d41fd9f02193e88bd2c942d470d486178d9fa7fb9e99f7494aa",
+    "tests/southern_journey.py": "03c36f169e66eba05593e3b73364c019702cfbbb85fdb925fabbed83ee0ebae3",
+    "tests/magma_journey.py": "511f7ba84ef7d840c5f3edded805fffb9d53edb042ce0315a09469b5ed58dc07",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+    "tests/underwater_collection_route.py": "fcdba2f202c96214aad45ed711d6f211d5cfb383fddda8ba8a94bc2c132a2f89",
+    "tests/test_creatures.py": "8a129c92f626e5d64691641e4ac535dbb61d018f62587e0a36562ab63735f85e",
+    "tests/capture_northern_teaser.py": "54440847d27b16b6a587ccb7de29c25a559f490e49e74d13ddea98bc3a700767",
+    "tests/capture_underwater_teaser.py": "fe34c69af82a3f9bfd1e6087b0d8ea49d875b84be34c7b2386022255e7e5c8a5",
+    "tests/northern_sky_route.py": "411a3923a467bf88b9e83fe43b4de0619a665a1f64c29e9bf520efe768aeacb8",
+    "tools/mgba_bridge.c": "935986438f538c5bae5ae3ae733bf4db45bca991d1dd0e5b6e391992e93aeda8",
+    "tools/mgba_bridge.so": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3"
+  },
+  "checks": [
+    {
+      "label": "authenticated Magma checkpoint resumes normally",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "ordinary Continue autosave migrates to content revision6",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "revision5-to6 arrival preserves exact durable payload before new interactions",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "import retains exact prior individual and history counts, not new acquisitions",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 214
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 218
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 220
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 222
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 224
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 226
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 228
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 230
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 232
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 234
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 236
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 238
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 240
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 242
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 244
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 246
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 248
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 250
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 252
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 254
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 257
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 269
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 281
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 293
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 305
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 317
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 329
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 341
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 353
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 365
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 377
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 389
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 401
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 413
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 425
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 437
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 449
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 461
+    },
+    {
+      "label": "real shell-lift input reaches Nacreway after bounded visit",
+      "passed": true,
+      "frame": 555
+    },
+    {
+      "label": "only the new town visit is granted",
+      "passed": true,
+      "frame": 555
+    },
+    {
+      "label": "travel grants no new companion history",
+      "passed": true,
+      "frame": 555
+    },
+    {
+      "label": "nacreway-idle updates and presents once every native frame",
+      "passed": true,
+      "frame": 815
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 833
+    },
+    {
+      "label": "owned form2 assigned to party slot3",
+      "passed": true,
+      "frame": 923
+    },
+    {
+      "label": "form2 is available in active party",
+      "passed": true,
+      "frame": 923
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 928
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 932
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 944
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 956
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 968
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 980
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 992
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1004
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1016
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1028
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1040
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1047
+    },
+    {
+      "label": "Retained Magma Homura is selected without evolution",
+      "passed": true,
+      "frame": 1201
+    },
+    {
+      "label": "No Underwater quest or objective was prepared",
+      "passed": true,
+      "frame": 1201
+    },
+    {
+      "label": "Opening frame is free of transient text",
+      "passed": true,
+      "frame": 1201
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1281
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1291
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1293
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1295
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1297
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1299
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1301
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1303
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1305
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1307
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1309
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1311
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1313
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1315
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1317
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1319
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1321
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1323
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1325
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1327
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1329
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1331
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1333
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1335
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1337
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1402
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1414
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1426
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1433
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1445
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1457
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1469
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1481
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1493
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1558
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1570
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1582
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1594
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1601
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1613
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1625
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1637
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1649
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1661
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1673
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1685
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1697
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1706
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1771
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1783
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1785
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1787
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1789
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1791
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1793
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1795
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1797
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1799
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1801
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1803
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1805
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1807
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1809
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1811
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1813
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1815
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1817
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1819
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1821
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1823
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1825
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1827
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1829
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1831
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1833
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1898
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1910
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1922
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1929
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1941
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1953
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1965
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1977
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1989
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2001
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2013
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2025
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2037
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2049
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2061
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2073
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2084
+    },
+    {
+      "label": "Every emulated capture frame was recorded",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Every captured hardware frame updates and presents",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Every measured update/render remains within native frame budget",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "OAM remains within hardware budget",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "No recruit or evolution occurred",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "No quest, objective, hidden route or reward changed",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "No chapter completion or ending changed",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "The same retained Homura remains selected at the end",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Continuous clip lasts 18 to 24 seconds",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Mux and independent decoder preserve every native frame",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Mux preserves the exact hardware frame-rate ratio",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Player video is exactly four times native resolution",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Every native preview is an unmodified frame from the continuous recording",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "4x preview is exact nearest-neighbor native pixels",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Lossless native source decodes to the exact captured RGB stream",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Actual PSG audio is present and matches bridge sample count",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Native PSG/video endpoints differ by less than 50 milliseconds",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Muxed AAC/video endpoints remain synchronized",
+      "passed": true,
+      "frame": 2401
+    },
+    {
+      "label": "Captured ROM and symbols remain frozen",
+      "passed": true,
+      "frame": 2401
+    }
+  ],
+  "failures": [],
+  "full_report_sha256": "69cd2bc05da1657973aeb52b85e536569d5a5e3f0b0d9250600d8deeb00464fb",
+  "full_report_bytes": 153187,
+  "source_sram_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+  "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "files": {
+    "nacreway-native-teaser.mp4": {
+      "sha256": "74ac349712801cab2708838ac5a6fdc6fa8939f520abce92e2bcdb70912b71fd",
+      "bytes": 1002997
+    },
+    "native-frames.mkv": {
+      "sha256": "5383c7387bec98e648ea266c83923f73f48b8be21848a8c90c7963f2f93c251b",
+      "bytes": 24986819
+    },
+    "native-psg.wav": {
+      "sha256": "1a9689d766ad98bbbe42d1db068633a7f5ab9cb611e24353d93ba320124b867b",
+      "bytes": 2633444
+    },
+    "nacreway-preview-4x.png": {
+      "sha256": "2f30c80d46e4f4b144091bb642fb25d66554103adae6ed55a69d0147f8bb2c1e",
+      "bytes": 11490
+    },
+    "native-nacreway-preview.png": {
+      "sha256": "9b3730c575dc1eba02c0e331998b8123794a1477819d5198fe891e32f621ed82",
+      "bytes": 6373
+    }
+  }
+}

@@ -12,7 +12,7 @@ from pathlib import Path
 from southern_journey import SouthernJourney, ALL_FORMS, N5_SHA, N5_ROM
 from northern_journey import newest_bank, NorthernJourney
 from northern_combat_tests import NorthernCombat
-from region_journey import ROOT, PLAY, PAUSE, DIALOG, SAVING, digest
+from region_journey import ROOT, PLAY, PAUSE, DIALOG, SAVING, EVENT_PENDING, digest
 sys.path.insert(0,str(ROOT/'tools'))
 from arm_toolchain import resolve_arm_tools
 
@@ -58,7 +58,7 @@ def validate_source_report(path,rom_sha,sym_sha):
     rec=r['snapshots'][SNAPSHOT];save=artifact(path,rec['sram_path'],Path(rec['sram_path']).name)
     assert digest(save)==rec['sram_sha256'] and (not archived or rec['sram_sha256']==ARCHIVE['sram'])
     assert (rec['rom_sha256'],rec['symbols_sha256'])==(r['rom_sha256'],r['symbols_sha256'])
-    bank=newest_bank(save.read_bytes());assert int.from_bytes(bank[12:14],'little')==(4 if archived else 5)
+    bank=newest_bank(save.read_bytes());assert int.from_bytes(bank[12:14],'little')==(4 if archived else 6)
     live=[(bank[160+i*24],int.from_bytes(bank[168+i*24:172+i*24],'little')) for i in range(160) if bank[161+i*24]&1]
     obtained=[i+1 for i in range(128) if bank[112+(i>>3)]&(1<<(i&7))]
     quests=[(bank[4032+(i>>2)]>>((i&3)*2))&3 for i in range(30)]
@@ -370,13 +370,21 @@ class SouthernCombat(SouthernJourney):
         self.cases[-1]['passed']=True
     def dialogue_freeze(self):
         self.prepare(24,(112,225),1,False);self.approach('rest');self.step(1,'R');self.step(1);self.step(1,'A')
-        for _ in range(40):
+        # Rest now validates through the bounded event/save scheduler. Observe
+        # its actual terminal dialogue rather than assuming a fixed40 frames.
+        pending=self.row();previous=pending;preparation=[]
+        for _ in range(250):
             if self.get('game_state')==DIALOG:break
-            self.step(1)
+            self.check(self.get('game_state') in (EVENT_PENDING,SAVING),'rest preparation remains in an explicit bounded modal state')
+            self.step(1);row=self.row()
+            row['update_delta']=(row['game_frame']-previous['game_frame'])&0xffffffff
+            row['page_flip']=row['displayed_page']!=previous['displayed_page'];preparation.append(row);previous=row
+            self.check(row['power']==pending['power'] and row['enemies']==pending['enemies'],'rest preparation freezes the live effect and enemies')
+            self.check(row['update_delta']==1 and row['page_flip'] and row['render_cycles']<280896,'rest preparation updates and presents every native hardware frame')
         self.check(self.get('game_state')==DIALOG,'real rest interaction opens dialogue during active effect')
         before=self.row();self.step(45,'R');after=self.row()
         self.check(before['power']==after['power'] and before['enemies']==after['enemies'],'dialogue freezes effect and enemy state despite held R')
-        self.cases.append(dict(case='real-dialogue-effect-freeze',before=before,after=after,passed=True))
+        self.cases.append(dict(case='real-dialogue-effect-freeze',preparation=preparation,before=before,after=after,passed=True))
     def enemy_generation(self):
         self.prepare(24,(240,286),1);self.step(1,'R');before=self.row();self.step(24,'DOWN');self.settle();after=self.row()
         self.check(self.get('room')==22 and not after['power']['time'] and not after['power']['tile_owner'],'real room exit clears effect and shared lease')
@@ -477,7 +485,7 @@ class SouthernCombat(SouthernJourney):
         report=Path(self.provenance['path']);self.check(digest(report)==self.provenance['report_sha256'],'pre-boss producer report remains authenticated')
         producer=json.loads(report.read_text());record=producer['snapshots']['03-machine-ready'];save=artifact(report,record['sram_path'],Path(record['sram_path']).name)
         self.check(digest(save)==record['sram_sha256'] and record['rom_sha256']==producer['rom_sha256'] and record['symbols_sha256']==producer['symbols_sha256'],'exact pre-boss SRAM is paired with authenticated producer ROM/symbols')
-        bank=newest_bank(save.read_bytes());self.check(int.from_bytes(bank[12:14],'little')==5,'pre-boss source has CRC-valid current revision5 bank')
+        bank=newest_bank(save.read_bytes());self.check(int.from_bytes(bank[12:14],'little')==6,'pre-boss source has CRC-valid current revision6 bank')
         self.notes.append(dict(case='boss-no-retiming',source_snapshot='03-machine-ready',source_sram=str(save),source_sram_sha256=digest(save),producer_report_sha256=digest(report),source_machine_state_loaded=False,scope='Cold import controller-earned pre-boss progress; base81 is acquired normally on this target'))
         self.e.load_save(save);self.e.reset();self.step(150);self.tap('START',2,35);self.settle();self.to_town();self.entry(31);self.entry(33);self.use('sun_shutter');self.recruit_field('encounter2',81);self.leave_interior(31);self.owned_select(81);self.set_command(29);self.ready();self.entry(34)
         for target in (35,36,37):self.entry(target)

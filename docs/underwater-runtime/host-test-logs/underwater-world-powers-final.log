@@ -1,0 +1,20 @@
+test_all_eight_quests_and_side_route_gates (__main__.UnderwaterWorld.test_all_eight_quests_and_side_route_gates) ... ok
+test_all_sixteen_geometry_trials (__main__.UnderwaterWorld.test_all_sixteen_geometry_trials) ... ok
+test_changed_solids_refuse_to_overlap_the_player (__main__.UnderwaterWorld.test_changed_solids_refuse_to_overlap_the_player) ... ok
+test_deferred_anchor_preserves_exact_spawn_gate (__main__.UnderwaterWorld.test_deferred_anchor_preserves_exact_spawn_gate) ... ok
+test_eight_real_repeat_branches_and_fifty_retained (__main__.UnderwaterWorld.test_eight_real_repeat_branches_and_fifty_retained) ... ok
+test_every_field_source (__main__.UnderwaterWorld.test_every_field_source) ... ok
+test_geometry_and_spawn_contracts (__main__.UnderwaterWorld.test_geometry_and_spawn_contracts) ... ok
+test_main_two_base_route_and_codec (__main__.UnderwaterWorld.test_main_two_base_route_and_codec) ... ok
+test_modal_ticks_do_not_age_world_or_complete_walk_proof (__main__.UnderwaterWorld.test_modal_ticks_do_not_age_world_or_complete_walk_proof) ... ok
+test_pending_visit_keeps_old_checkpoint_and_cancel_is_unchanged (__main__.UnderwaterWorld.test_pending_visit_keeps_old_checkpoint_and_cancel_is_unchanged) ... ok
+test_reset_confirmation_isolated_and_every_small_puzzle_exit_reachable (__main__.UnderwaterWorld.test_reset_confirmation_isolated_and_every_small_puzzle_exit_reachable) ... ok
+test_selection_exit_and_reset_invalidate_trial (__main__.UnderwaterWorld.test_selection_exit_and_reset_invalidate_trial) ... ok
+test_trial_cancellation_delays_restoring_an_overlapping_solid (__main__.UnderwaterWorld.test_trial_cancellation_delays_restoring_an_overlapping_solid) ... ok
+test_trial_menu_selection_away_and_back_cannot_restore_proof (__main__.UnderwaterWorld.test_trial_menu_selection_away_and_back_cannot_restore_proof) ... ok
+test_wrong_commands_and_stale_tokens (__main__.UnderwaterWorld.test_wrong_commands_and_stale_tokens) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.349s
+
+OK

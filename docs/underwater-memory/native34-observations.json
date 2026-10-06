@@ -1,0 +1,88 @@
+{
+  "suite": "diagnostic-native-stack-canary",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "startup_reserved_stack_fill_only": true,
+  "cross_rom_machine_states_loaded": false,
+  "source_pairing": {
+    "source": "authenticated delivered Magma revision5 SRAM",
+    "sram_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+    "expected_individuals": 34,
+    "expected_history": 65
+  },
+  "diagnostic_rom_sha256": "28ba164f9a7a3962955e024e291c5720ecd1b4fe82bc07e5f937228ca823afc8",
+  "diagnostic_symbols_sha256": "d0855c06716fb8ed1529d7c52d3a8a96a450cb1090ac7403ee211feb1ec338cf",
+  "diagnostic_elf_sha256": "8e2c6ff95d95f750a3a373be1565a65c819b67f07b7ecdd631f30c477f88a55d",
+  "diagnostic_source_manifest_sha256": "3ddd478a21a596b582c1c8b9affbffefc933e6101be894a950d465dc6d8b7145",
+  "system_stack_range": [
+    "0x3007000",
+    "0x3007f00"
+  ],
+  "reserved_bytes": 3840,
+  "canary_word": "0xa55ac33c",
+  "observations": [
+    {
+      "label": "00-magma-forward-migration",
+      "hardware_frame": 202,
+      "status": {
+        "game_state": 1,
+        "room": 38,
+        "px": 112,
+        "py": 264,
+        "hp": 7,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 3,
+        "spirit": 26,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "retained_individuals": 34,
+      "obtained_history": 65,
+      "lowest_overwritten_word_address": "0x3007b4c",
+      "observed_overwritten_extent_bytes": 948,
+      "changed_word_bytes": 928,
+      "unmodified_prefix_bytes": 2892,
+      "bottom_64_bytes_intact": true,
+      "true_minimum_sp": "not measured"
+    },
+    {
+      "label": "cold-continue",
+      "hardware_frame": 202,
+      "status": {
+        "game_state": 1,
+        "room": 38,
+        "px": 112,
+        "py": 264,
+        "hp": 7,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 3,
+        "spirit": 26,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "retained_individuals": 34,
+      "obtained_history": 65,
+      "lowest_overwritten_word_address": "0x3007b4c",
+      "observed_overwritten_extent_bytes": 948,
+      "changed_word_bytes": 928,
+      "unmodified_prefix_bytes": 2892,
+      "bottom_64_bytes_intact": true,
+      "true_minimum_sp": "not measured"
+    }
+  ],
+  "timing_is_acceptance_evidence": false,
+  "limitations": [
+    "Overwritten extent is not true minimum SP: unused allocated slots can retain canary words, and matching writes can be invisible.",
+    "Sampled path coverage and native emulator only, not an exhaustive call-graph or physical-hardware proof.",
+    "Relocated diagnostic startup changes ROM addresses and boot timing; timing is not candidate-A evidence.",
+    "No native 160-individual roster is fabricated; 160-capacity reasoning is static only."
+  ]
+}

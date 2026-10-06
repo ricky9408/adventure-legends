@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "source_commit": "0a8b05c3e24d02bd350a11c32289fb5686641535",
+  "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "source_runtime_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "scope": "Exact accepted Magma source closure; synthetic codec differential only, not Underwater native evidence",
+  "files": [
+    {
+      "path": "src/creature_data.c",
+      "bytes": 19164,
+      "sha256": "7d34c17ada62635d3759bf23b84c401ab084b09d4cebc94b74acb153bd52b867"
+    },
+    {
+      "path": "src/creatures.c",
+      "bytes": 76472,
+      "sha256": "b5125cdc4007918f5d0ca7ff08a646c261e06a05663feec71a057875573746f8"
+    },
+    {
+      "path": "src/creatures.h",
+      "bytes": 18203,
+      "sha256": "dbf45cc6dbe037eddd10e683d7118a055c880aa6ca1b70a7a5d067b70ab3882c"
+    },
+    {
+      "path": "src/equipment.c",
+      "bytes": 15612,
+      "sha256": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec"
+    },
+    {
+      "path": "src/equipment.h",
+      "bytes": 8070,
+      "sha256": "b4c314753c3370baecf74aa8e9b824d78f09c8a2a2bacef5a7889bf44e0c7f7e"
+    },
+    {
+      "path": "src/equipment_data.c",
+      "bytes": 6886,
+      "sha256": "b7d27e403cfa1a5535b0ea9b7467eb8a34ebad33bff36251c6a02a47fe809202"
+    },
+    {
+      "path": "src/magma_quests.c",
+      "bytes": 12184,
+      "sha256": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617"
+    },
+    {
+      "path": "src/magma_quests.h",
+      "bytes": 3393,
+      "sha256": "844ae97ad9600b90b66debecc58865351b3960bdf6cdbd0a8aeafb877b4b75c1"
+    },
+    {
+      "path": "src/save4.c",
+      "bytes": 11982,
+      "sha256": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c"
+    },
+    {
+      "path": "src/save4.h",
+      "bytes": 3477,
+      "sha256": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2"
+    },
+    {
+      "path": "src/save5.c",
+      "bytes": 78651,
+      "sha256": "93c42b198a22914d1de853c4fd54093acf05a14c9705eca15b0ac14e2757d2b9"
+    },
+    {
+      "path": "src/save5.h",
+      "bytes": 4644,
+      "sha256": "6c13dfc930f0e1cb31be0c832239368ca1431045446f51b3ab09102f5d3bcf75"
+    },
+    {
+      "path": "src/save5_history_policy.h",
+      "bytes": 8216,
+      "sha256": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13"
+    },
+    {
+      "path": "src/southern_quests.c",
+      "bytes": 8670,
+      "sha256": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d"
+    },
+    {
+      "path": "src/southern_quests.h",
+      "bytes": 2990,
+      "sha256": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881"
+    }
+  ]
+}

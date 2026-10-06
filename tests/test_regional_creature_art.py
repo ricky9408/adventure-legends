@@ -19,6 +19,8 @@ from PIL import Image
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'assets/creatures'))
+from catalog_source import load_catalog
 SPEC = importlib.util.spec_from_file_location('regional_art_test_generator', ROOT / 'assets/generate_regional_creatures.py')
 ART = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(ART)
@@ -49,7 +51,7 @@ class RegionalCreatureArtTests(unittest.TestCase):
     def test_catalog_identity(self):
         self.assertEqual(ART.FORM_IDS, (13, 14, 16))
         self.assertEqual(ART.DIRECTIONS, ('down', 'up', 'left', 'right'))
-        catalog = json.loads((ROOT / 'assets/creatures/catalog.json').read_text())
+        catalog = load_catalog(ROOT / 'assets/creatures/catalog.json')
         names = {form['id']: form['name'] for form in catalog['forms']}
         self.assertEqual([names[i] for i in ART.FORM_IDS], list(ART.NAMES))
         ids = (C.c_ubyte * 3).in_dll(self.lib, 'regional_creature_form_ids')

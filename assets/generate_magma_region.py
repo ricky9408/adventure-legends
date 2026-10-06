@@ -15,7 +15,8 @@ NAMES=['RESSA','NEMI','OMI','TAVI','SEN','PELL','REST','REST_LIT','LIFT','BRICK'
 NPCS=set(NAMES[:6]);DYNAMIC=NPCS|{'REST','REST_LIT','LIFT','BRICK','BRICK_HOT','BAFFLE','SHOE','HOOD','HOOD_OPEN','GATE','REGULATOR','REG_WARN','REG_OPEN','REG_DONE','GRAB'}
 KEYS=['kilnstep_commons','pumice_terraces','potters_walk','cloudwell_grotto','intake_ledger','breathing_vault','return_flue_gallery','caldera_bell']
 TITLES=['Kilnstep Commons','Pumice Terraces','Potters Walk','Cloudwell Grotto','Intake Ledger','Breathing Vault','Return-Flue Gallery','Caldera Bell']
-SPAWNS=[{'0':[240,284],'1':[304,32],'2':[80,152],'3':[112,264]},{'0':[240,284],'1':[80,104],'2':[400,72],'3':[80,280]}]+[{'0':[120,136]} for _ in range(6)]
+# Current-r6 return landing only; all prior spawn rows and pixels are unchanged.
+SPAWNS=[{'0':[240,284],'1':[304,32],'2':[80,152],'3':[112,264],'4':[416,240]},{'0':[240,284],'1':[80,104],'2':[400,72],'3':[80,280]}]+[{'0':[120,136]} for _ in range(6)]
 ROOMS=[]
 def solid(r,key,b):r['solids'].append({'kind':key,'rect':list(b)})
 def obj(r,key,kind,x,y,approach=None,**extra):

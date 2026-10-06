@@ -1,0 +1,228 @@
+{
+  "candidate_rom_sha256": "8c216b7e36a241a713f2aae87d1c1e33cd7ff221c9279c305c150d9386f8ad9b",
+  "candidate_elf_sha256": "26be986c87033c63ad36a023e37fc61abaa0d0807e63975b61039c9808626e02",
+  "candidate_map_sha256": "5b405a35cc4abeb58455ab03659b48950ed9373f0387c2c99ecf5fee780b21cf",
+  "rom_bytes": 9777000,
+  "rom_hard_limit_bytes": 33554432,
+  "rom_hard_limit_remaining_bytes": 23777432,
+  "sections": {
+    "text": {
+      "start": 134217728,
+      "bytes": 9748560
+    },
+    "iwram": {
+      "start": 50331648,
+      "bytes": 28344
+    },
+    "data": {
+      "start": 33554432,
+      "bytes": 96
+    },
+    "bss": {
+      "start": 33554528,
+      "bytes": 49760
+    }
+  },
+  "ewram_data_plus_bss_bytes": 49856,
+  "ewram_remaining_bytes": 212288,
+  "iwram_code_bytes": 28344,
+  "gap_to_reserved_system_stack_bytes": 328,
+  "system_stack_reserved_bytes": 3840,
+  "hard_limit_assertions": {
+    "rom_within_32MiB_hardware_window": true,
+    "iwram_code_ends_at_or_before_reserved_stack_floor": true,
+    "ewram_data_and_bss_within_256KiB": true,
+    "system_stack_reserve_is_3840_bytes": true
+  },
+  "prior_magma_rom_bytes": 7495920,
+  "prior_magma_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "chapter_delta_bytes": 2281080,
+  "original_chapter_target_bytes": 2097152,
+  "original_chapter_target_met": false,
+  "original_target_exceeded_bytes": 183928,
+  "proposed_adjusted_chapter_budget_bytes": 2621440,
+  "proposed_adjusted_budget_would_fit": true,
+  "proposed_adjusted_budget_headroom_bytes": 340360,
+  "budget_status": "Original 2MiB chapter target exceeded. 2.5MiB is an explicit proposed adjustment, not a retroactive original-budget pass.",
+  "adjustment_rationale": "Four 480x320 maps plus four 240x160 maps, collision masks and localized room art, 196632 bytes of creature art, Japanese UI glyph masks, and chapter gameplay code. No map reduction or quality loss was silently substituted.",
+  "stack_usage_function_records": 914,
+  "non_static_stack_records": [],
+  "largest_individual_frames": [
+    {
+      "location": "src/game.c:209:11:obj_init",
+      "function": "obj_init",
+      "bytes": 832,
+      "qualifier": "static",
+      "object": "game"
+    },
+    {
+      "location": "src/magma_quests.c:115:5:magma_quest_claim",
+      "function": "magma_quest_claim",
+      "bytes": 576,
+      "qualifier": "static",
+      "object": "magma_quests"
+    },
+    {
+      "location": "src/southern_quests.c:108:5:southern_quest_claim",
+      "function": "southern_quest_claim",
+      "bytes": 568,
+      "qualifier": "static",
+      "object": "southern_quests"
+    },
+    {
+      "location": "src/underwater_quests.c:106:5:underwater_quest_claim",
+      "function": "underwater_quest_claim",
+      "bytes": 568,
+      "qualifier": "static",
+      "object": "underwater_quests"
+    },
+    {
+      "location": "src/equipment.c:208:10:equipment_claim_many",
+      "function": "equipment_claim_many",
+      "bytes": 544,
+      "qualifier": "static",
+      "object": "equipment"
+    },
+    {
+      "location": "src/magma_quests.c:152:12:teaching_gear_status",
+      "function": "teaching_gear_status",
+      "bytes": 520,
+      "qualifier": "static",
+      "object": "magma_quests"
+    },
+    {
+      "location": "src/game.c:262:6:draw_floating_hud",
+      "function": "draw_floating_hud",
+      "bytes": 360,
+      "qualifier": "static",
+      "object": "game"
+    },
+    {
+      "location": "src/gear_runtime.c:133:6:game_draw_health",
+      "function": "game_draw_health",
+      "bytes": 320,
+      "qualifier": "static",
+      "object": "gear_runtime"
+    },
+    {
+      "location": "src/regional_powers.c:23:5:regional_power",
+      "function": "regional_power",
+      "bytes": 304,
+      "qualifier": "static",
+      "object": "regional_powers"
+    },
+    {
+      "location": "src/creatures.c:1416:37:admission_query_validated",
+      "function": "admission_query_validated",
+      "bytes": 232,
+      "qualifier": "static",
+      "object": "creatures"
+    },
+    {
+      "location": "src/game.c:624:6:render",
+      "function": "render",
+      "bytes": 208,
+      "qualifier": "static",
+      "object": "game"
+    },
+    {
+      "location": "src/creatures.c:1401:5:creatures_collection_coverage",
+      "function": "creatures_collection_coverage",
+      "bytes": 152,
+      "qualifier": "static",
+      "object": "creatures"
+    },
+    {
+      "location": "src/gear_runtime.c:145:6:game_draw_weapon",
+      "function": "game_draw_weapon",
+      "bytes": 128,
+      "qualifier": "static",
+      "object": "gear_runtime"
+    },
+    {
+      "location": "src/save4.c:262:5:save4_store",
+      "function": "save4_store",
+      "bytes": 128,
+      "qualifier": "static",
+      "object": "save4"
+    },
+    {
+      "location": "src/save5.c:905:5:save5_validate_revision",
+      "function": "save5_validate_revision",
+      "bytes": 128,
+      "qualifier": "static",
+      "object": "save5"
+    },
+    {
+      "location": "src/magma_powers.c:255:13:damage_paths",
+      "function": "damage_paths",
+      "bytes": 120,
+      "qualifier": "static",
+      "object": "magma_powers"
+    },
+    {
+      "location": "src/magma_puzzle.inc:16:5:magma_puzzle_move",
+      "function": "magma_puzzle_move",
+      "bytes": 120,
+      "qualifier": "static",
+      "object": "magma_game"
+    },
+    {
+      "location": "src/save5.c:1124:17:scan_run",
+      "function": "scan_run",
+      "bytes": 120,
+      "qualifier": "static",
+      "object": "save5"
+    },
+    {
+      "location": "src/gear_menu.c:78:15:gear_menu_draw",
+      "function": "gear_menu_draw",
+      "bytes": 112,
+      "qualifier": "static",
+      "object": "gear_menu"
+    },
+    {
+      "location": "src/magma_game.c:122:10:magma_game_input",
+      "function": "magma_game_input",
+      "bytes": 112,
+      "qualifier": "static",
+      "object": "magma_game"
+    },
+    {
+      "location": "src/southern_powers.c:378:5:southern_powers_intercept_shot",
+      "function": "southern_powers_intercept_shot",
+      "bytes": 112,
+      "qualifier": "static",
+      "object": "southern_powers"
+    },
+    {
+      "location": "src/southern_powers.c:464:6:southern_powers_tick",
+      "function": "southern_powers_tick",
+      "bytes": 112,
+      "qualifier": "static",
+      "object": "southern_powers"
+    },
+    {
+      "location": "src/game.c:267:6:draw_actors",
+      "function": "draw_actors",
+      "bytes": 104,
+      "qualifier": "static",
+      "object": "game"
+    },
+    {
+      "location": "src/game.c:347:11:enter_room",
+      "function": "enter_room",
+      "bytes": 104,
+      "qualifier": "static",
+      "object": "game"
+    },
+    {
+      "location": "src/gear_runtime.c:78:6:game_attacks_reset",
+      "function": "game_attacks_reset",
+      "bytes": 104,
+      "qualifier": "static",
+      "object": "gear_runtime"
+    }
+  ],
+  "static_stack_limitation": "Individual GCC frames do not sum callees, capture unseen assembly/library paths, or prove the maximum call-chain depth."
+}

@@ -1,0 +1,100 @@
+{
+  "kind": "unreleased-underwater-combat-module-handoff",
+  "baseline_commit": "0a8b05c3e24d02bd350a11c32289fb5686641535",
+  "commands": [
+    67,
+    90
+  ],
+  "forms": [
+    49,
+    72
+  ],
+  "strict_and_sanitized_damage_assertions": 23181,
+  "arm_bss_bytes": 456,
+  "max_individual_stack_bytes": 104,
+  "rom_object_bytes": 26372,
+  "iwram_added_bytes": 0,
+  "resident_OBJ_added_bytes": 0,
+  "module_OAM_limit": 25,
+  "isolated_ARM_peak_cycles": {
+    "cast": 26491,
+    "tick": 61999,
+    "draw": 4002,
+    "busy": 99
+  },
+  "isolated_max_tick_plus_draw_cycles": 64597,
+  "full_engine_frame_budget_proven": false,
+  "controller_affordances_proven": false,
+  "native_earned_roster_proven": false,
+  "sources": {
+    "src/underwater_powers.c": "dfc2a1aa33083f5e88776401dbfba06591234a8b321fde538ffa3c40a0aa7727",
+    "src/underwater_powers.h": "8a352896dbbc250a9941e98621b585d70dd8ed45dbd4065fd758c7ff5a2197d8",
+    "src/underwater_power_art.c": "f59c74c5057eca8e8ec27bf7dc3f1d76f6473ed673ed5f58a42c67b2897b57dd",
+    "src/underwater_power_art.h": "f7623280ffda2d147f18c56da7a50121164b2c0db2f4720d7e26760eeaa69d38",
+    "src/underwater_tip_orbit.inc": "1a022314acec91364d766eea2aaeda7dba65d66c8f9356d56960fd82997ee5ff",
+    "src/northern_powers.c": "9b7ce7e202d3c33a923dec456fe65e505f4801b5d4f44f5d7bdcba95539244b3",
+    "src/northern_powers.h": "53bdd9d7b902a2b89d835c986b7f253c608db8b10a357f932057a703750fb52e",
+    "assets/generate_underwater_powers.py": "b0bc60f6905c14180c0245cc44c7e962b8e08cc05e94d4f5a1ea8d91d0096e2c",
+    "tests/underwater_powers_native.c": "3a50fdfa72371ea8e04dfbe882416837ec171b494135d76f51bc90db654a62b0",
+    "tests/test_underwater_powers.py": "a2a4233953309802974338eecb53abaa4d512c24261004c05432b5cb4541b3f3",
+    "tests/underwater_power_preview.c": "3ae2db31c88315543669b869eabf0ac00640326a2a2a3d314026faf63b0496cb",
+    "tests/preview_underwater_powers.py": "ed386c92ebd86efecea35103d83150b58f9c631421c061fe3ce18f970b73ead2",
+    "tests/magma_powers_native.c": "8142b057aa0f1add4288c4260acf647e62ae52fcce549a32897e1614825f5d26",
+    "docs/underwater-design/POWER_RUNTIME_IMPLEMENTATION.md": "4f29e926539477c94932ef6b98269d7643bb707c63c26e300fc88083d2a603a3",
+    "tests/test_underwater_geometry_equivalence.py": "f4d9ab45eae82c97c8f50bcb65b1383b5c3321ef9c64bd1d368feb272caf0d43",
+    "tests/test_underwater_field_overlap.py": "2d05468596fda5bed615836efe4041acbbacbde9d112baf7f665fbb8a4a358e6",
+    "tests/fixtures/underwater_powers_candidate_a.c": "e2ec1a0adcb188fe1e69c730d7bd02f17d22eed54484344dcf65e73792bfacd0",
+    "tests/fixtures/underwater_powers_candidate_d.c": "bef0ec007fbda6366e51b6566ab99a6012370dbfe62aa1a197f84ca0baee5d5a",
+    "src/creatures.c": "d87883e3a737c45be20217d62a534f06b47df7ddb31796d50418274554c56bd2",
+    "src/creature_data.c": "ca93dedb1a0bdd813556ad7d1c63656ff4990dfa4e7dd53156c7166e08661ad3",
+    "tests/test_underwater_supercover.py": "4977751972f41579f70e0009a689fef876694ced8c3543561d23a9e4d8605ae3",
+    "src/underwater_game.c": "68ec8abe91455cd768867e8eb72caa245bda45042cbdc2a58648f015bb935f4a",
+    "src/underwater_game.h": "0468fc76d6798f1f1cacbecd97e1ea9834bb487dbca04a4f008dc78a80e011d6",
+    "tests/build_underwater_power_profile.py": "caf0f0ae6ddcfa81a1f43c8da8989a140d08578e096596cbdac56309558c5ea1"
+  },
+  "evidence": {
+    "build/underwater-powers-host/report.json": "a416dc308a205d77b1b3618b2b876e30c09c2827a18f7db27ebd3010f5637266",
+    "build/underwater-powers-host/arm-timing.json": "1d2ff70ae89b9cec44ce77e5daae1429670704d04e9267e3882a54e57c2948c1",
+    "build/underwater-powers-host/source-pins.json": "72da3633f9abae611dd8ee1b47ffe57d9bbda7574c2d4b2ebf9fd7e20c76a385",
+    "build/underwater-powers-art/art-audit.json": "8ec9db208b85deb1c5b59ced40c1ce88419a7c47450936f386ef0eed2f417eb5",
+    "build/underwater-powers-art/runtime-shapes.json": "fce1a0c2f7b6aa60cbccfb59c20ddb3e23138e7cdae84e770f1af1bc51759d15",
+    "build/underwater-geometry-equivalence/report.json": "396364f1a71b0f9cad54c04cfa51a0b3f96d3c474510d8e419b10e4c18b29b8a",
+    "build/underwater-field-overlap/report.json": "b9e959e9ec57e6d887935d4520b5425bbad712eacc6be5e199e6a85a02e1e3b3",
+    "build/underwater-supercover/report.json": "6a71c144b33ac09f9874ecdd749e23b15433056195769c986a32232ffafcf387",
+    "build/underwater-clear-box/report.json": "f3412b7657613498b8f01aa036763bd046726fbcf297e64df3644621c0fa446d"
+  },
+  "geometry_equivalence": {
+    "frames": 36800,
+    "points_per_frame": 1386,
+    "directed_rays": 15135,
+    "frozen_candidate_A_sha256": "e2ec1a0adcb188fe1e69c730d7bd02f17d22eed54484344dcf65e73792bfacd0",
+    "frozen_candidate_D_sha256": "bef0ec007fbda6366e51b6566ab99a6012370dbfe62aa1a197f84ca0baee5d5a",
+    "collision_and_alternate_scenes": 8
+  },
+  "field_octagon_exact_oracle_cases": 13824,
+  "command77_cadence": {
+    "startup": 14,
+    "active": 132,
+    "lifetime": 154,
+    "cooldown": 180,
+    "native_pursuit_regression": "19 pixels in114 updates after entry; side/retreat still escape"
+  },
+  "native_optimization_acceptance": "Pending parent full-ROM measurements; isolated timings do not establish frame budget",
+  "world_supercover": {
+    "iwram_code_bytes_with_alignment": 712,
+    "public_function_code_bytes": 326,
+    "row_span_code_bytes": 384,
+    "public_function_stack_bytes": 96,
+    "row_span_stack_bytes": 36,
+    "context_stack_bytes": 36,
+    "total_parent_collision_hot_section_bytes": 1928,
+    "world_oracle_rays": 242566,
+    "world_configs": 15,
+    "persistent_state_added": 0,
+    "parent_owned_hot_section": true,
+    "stack_reserve_reduction": 0,
+    "sorted_disjoint_band_rows_verified": 1920,
+    "clear_box_oracle_checks": 1183690
+  },
+  "iwram_scope": "iwram_added_bytes is the power object only; world collision placement is accounted separately by parent link budget"
+}

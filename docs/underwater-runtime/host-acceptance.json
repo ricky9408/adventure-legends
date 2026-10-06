@@ -1,0 +1,41 @@
+{
+  "status": "WORLD_AUTHORED_HOST_TESTED_NATIVE_PENDING",
+  "world_tests": 15,
+  "art_tests": 8,
+  "actual_power_shape_world_tests": 15,
+  "host_collection": {
+    "retained": 50,
+    "history": 89,
+    "is_native_acquisition": false
+  },
+  "regional_actor_peaks": {
+    "46": 9,
+    "47": 7,
+    "48": 7,
+    "49": 10,
+    "50": 7,
+    "51": 7,
+    "52": 7,
+    "53": 8
+  },
+  "power_slot_reserve": 3,
+  "resident_obj_bytes_added": 0,
+  "art_rom_bytes": 1393216,
+  "arm_world_mutable_bytes": 192,
+  "native_controller_verified": false,
+  "native_cadence_verified": false,
+  "native_stack_verified": false,
+  "arm_world_text_and_rodata_bytes": 28496,
+  "arm_measurement_note": "Standalone ARM object using temporary text IDs, not final whole-ROM measurement",
+  "source_sha256": {
+    "src/underwater_game.c": "eeeef4e0bbfe4dfefa09166678d4b8df9aa21695a23306279eef02cffbd33935",
+    "src/underwater_game.h": "58402d2e78c6ee9e4f0252382c677f5faff2df02d07d372f15dcd6c029ae1095",
+    "src/underwater_events.inc": "e7f958def6b139e4d73bf51bba79cb0322dd724f966668f87491dca7ccb5aebc",
+    "src/underwater_trials.inc": "7754294a44b66e96c1c4ebf02e2b1fdf9d979caf3420b1ea14bb4797eea1e4c2",
+    "src/underwater_game_draw.inc": "0804d245a32cdb7ae9fb5dc356546325af7443a5c1895e94039ed1b5e4e3815d",
+    "assets/generate_underwater_region.py": "f3df669f71c2ec1ad6c159e8c088a86f70634f3e8a8212d8763a9b5f9382a3c8",
+    "assets/underwater_region/dialogue.json": "67a32a8e12bae0cfa451946c955663a8e0051259c026e7d68e04a240be8c2476"
+  },
+  "exact_dynamic_collision_configurations": 10,
+  "dynamic_collision_free_pixel_escape_proof": true
+}

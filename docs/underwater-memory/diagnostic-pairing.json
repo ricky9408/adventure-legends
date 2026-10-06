@@ -1,0 +1,28 @@
+{
+  "candidate_rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "candidate_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "diagnostic_source_root": "build/underwater-memory-diagnostic",
+  "runtime_source_changes": [
+    "src/startup.s"
+  ],
+  "instrumentation": "Fill reserved SYSTEM stack [0x03007000,0x03007F00) with 0xA55AC33C before the first C call. No game-state RAM writes; no machine-state imports.",
+  "sram_contract": "Save format5, content revision5 or6, two 6144-byte banks in 32768-byte SRAM. Controller-earned revision5 fixture migrates through ordinary Continue. Candidate A revision6 earned SRAM is cold-importable because no persisted schema or game logic is changed. ROM-specific machine states are never imported.",
+  "limitations": [
+    "Address relocation and boot timing differ from candidate A.",
+    "Canary overwritten extent is not true minimum SP and cannot prove all calls or physical hardware safety.",
+    "No 160-individual native fixture is fabricated."
+  ],
+  "diagnostic_rom_sha256": "28ba164f9a7a3962955e024e291c5720ecd1b4fe82bc07e5f937228ca823afc8",
+  "diagnostic_rom_bytes": 9770140,
+  "diagnostic_elf_sha256": "8e2c6ff95d95f750a3a373be1565a65c819b67f07b7ecdd631f30c477f88a55d",
+  "diagnostic_manifest_sha256": "3ddd478a21a596b582c1c8b9affbffefc933e6101be894a950d465dc6d8b7145",
+  "diagnostic_startup_sha256": "b13b0d7df09f0d6bc3f69af5e85dcfed668966bb6cc970a48c9ab8417ff185c4",
+  "compiler_flags": "-mcpu=arm7tdmi -mthumb-interwork -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -MMD -MP -fstack-usage",
+  "native34_observer_script_sha256": "fde8b6f9e56859fe9863f7fa1b5ee13922c468092413e88969a0820698b6fb68",
+  "native42_observer_script_sha256": "9a4a6de5bd153e8daa71bdc3059da6fa01e93202908bcabccb46b08210c66b3b",
+  "runtime_source_diff_verified": [
+    "src/startup.s"
+  ],
+  "diagnostic_manifest_inputs": 1161,
+  "compiler_version": "arm-none-eabi-gcc 14.2.1"
+}

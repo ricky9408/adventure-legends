@@ -1,0 +1,1021 @@
+{
+  "scope": "Targeted current legacy native regressions only; not full aggregate or Underwater89/50 acquisition acceptance",
+  "candidate": "A",
+  "accepted": false,
+  "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+  "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+  "source_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "runtime_sources_changed_after_measurement_at_summary": [],
+  "controller_only_gameplay": true,
+  "game_ram_writes": 0,
+  "cross_rom_machine_states": false,
+  "historical_input": "Pinned historical SRAM is cold-imported only. Same-ROM earned source supplies Southern21/41 workload. Existing explicitly corrupt migration fixtures remain separately labeled.",
+  "timing": "Every claimed window uses native emulator hardware-frame advance, one main-loop update and one displayed Mode4 page flip; renderer cycle instrumentation excludes VBlank/OAM commit, and alone does not prove60Hz.",
+  "suite_reports": [
+    {
+      "report": "build/underwater-legacy-a/southern-journey/southern-journey.json",
+      "report_sha256": "18095c44f2e07a914a6eca9db4cba81cdc2b4ca9d34bb8fec747de317ba6f9aa",
+      "checks": 16430,
+      "failures": [],
+      "passed": true,
+      "windows": [
+        {
+          "name": "town-early-idle",
+          "hardware_frames": 60,
+          "game_updates": 60,
+          "page_flips": 60,
+          "max_cycles": 32778,
+          "update_histogram": {
+            "1": 60
+          },
+          "frame_budget": 280896,
+          "bad_frames": []
+        }
+      ],
+      "evolution_waits": {
+        "report_sha256": "d7bae5c5c03fc63ce6d9f82a0690b2eedd752313cf04ef3f163859237bb64332",
+        "pairing": {
+          "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+          "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+          "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+          "matched_rom_bytes": 9769916,
+          "source_file": "progression.c",
+          "object": "evolution_job",
+          "address": 33595696,
+          "size": 72,
+          "phase_offset": 8,
+          "phase_bytes": 4
+        },
+        "waits": [
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 256954
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 257150
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 256951
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 256937
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 257218
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 257242
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 257083
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 256909
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 257216
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 32,
+            "maximum_cycles": 217763
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 33,
+            "maximum_cycles": 257006
+          }
+        ]
+      }
+    },
+    {
+      "report": "build/underwater-legacy-a/southern-performance/southern-combat.json",
+      "report_sha256": "751ef556c4a1d5eced1d671ab61b83e93edf8a416a414b39a2eefd389e4fc36a",
+      "checks": 543,
+      "failures": [
+        {
+          "case": "combat-42",
+          "error": "('five-body-new-effect-42 presents one update and page flip per actual hardware frame', {'game_state': 1, 'room': 23, 'px': 313, 'py': 125, 'hp': 6, 'chapter_flags': 15, 'camera_x': 193, 'camera_y': 45, 'save_failed': 0, 'checkpoint_spawn': 0, 'spirit': 20, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0})",
+          "status": {
+            "game_state": 1,
+            "room": 23,
+            "px": 313,
+            "py": 125,
+            "hp": 6,
+            "chapter_flags": 15,
+            "camera_x": 193,
+            "camera_y": 45,
+            "save_failed": 0,
+            "checkpoint_spawn": 0,
+            "spirit": 20,
+            "summoned": 1,
+            "ability_cd": 0,
+            "roll_cd": 0
+          }
+        }
+      ],
+      "passed": false,
+      "windows": [
+        {
+          "case": "five-body-new-effect-42",
+          "hardware_frames": 180,
+          "game_updates": 179,
+          "page_flips": 179,
+          "maximum_cycles": 266828,
+          "maximum_oam": 39,
+          "maximum_visible_enemy_bodies": 5,
+          "maximum_visible_hostile_shots": 2,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+          "camera_positions": 7,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": [
+            {
+              "index": 73,
+              "hardware_frame": 2750,
+              "game_frame": 2582,
+              "update_delta": 0,
+              "page_flip": false,
+              "cycles": 266828,
+              "camera": [
+                190,
+                45
+              ],
+              "obj_count": 39,
+              "state": 1,
+              "journal_tab": 3,
+              "live_enemies": 5,
+              "visible_enemy_bodies": 5,
+              "visible_hostile_shots": 2,
+              "player_arrows": 1,
+              "southern_effect": 29,
+              "southern_kind": 42,
+              "hp_q4": 108,
+              "keys": 0
+            }
+          ]
+        },
+        {
+          "case": "five-body-new-effect-30",
+          "hardware_frames": 180,
+          "game_updates": 180,
+          "page_flips": 180,
+          "maximum_cycles": 258642,
+          "maximum_oam": 50,
+          "maximum_visible_enemy_bodies": 5,
+          "maximum_visible_hostile_shots": 2,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+          "camera_positions": 7,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": []
+        }
+      ]
+    },
+    {
+      "report": "build/underwater-legacy-a/southern-performance-remaining/southern-combat.json",
+      "report_sha256": "93bfc4897bcc428775019c7e0c7a80fd99ff1fd76147cd9829d6a6060e25c9b3",
+      "checks": 808,
+      "failures": [],
+      "passed": true,
+      "windows": [
+        {
+          "case": "five-body-new-effect-38",
+          "hardware_frames": 180,
+          "game_updates": 180,
+          "page_flips": 180,
+          "maximum_cycles": 160494,
+          "maximum_oam": 46,
+          "maximum_visible_enemy_bodies": 5,
+          "maximum_visible_hostile_shots": 2,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+          "camera_positions": 7,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": []
+        },
+        {
+          "case": "five-body-new-effect-24",
+          "hardware_frames": 180,
+          "game_updates": 180,
+          "page_flips": 180,
+          "maximum_cycles": 213817,
+          "maximum_oam": 46,
+          "maximum_visible_enemy_bodies": 5,
+          "maximum_visible_hostile_shots": 2,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+          "camera_positions": 7,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": []
+        },
+        {
+          "case": "five-body-new-effect-32",
+          "hardware_frames": 180,
+          "game_updates": 180,
+          "page_flips": 180,
+          "maximum_cycles": 192582,
+          "maximum_oam": 38,
+          "maximum_visible_enemy_bodies": 5,
+          "maximum_visible_hostile_shots": 2,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+          "camera_positions": 7,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": []
+        }
+      ]
+    },
+    {
+      "report": "build/underwater-legacy-a/southern-cold-ui/southern-combat.json",
+      "report_sha256": "c1212ee2e0aaaf63e12e84fc4ca997ad8be7ad80be6e052b1cca8f8232ce731a",
+      "checks": 192,
+      "failures": [
+        {
+          "case": "cold-rest-save",
+          "error": "('cold-rest-save presents one update and page flip per actual hardware frame', {'game_state': 1, 'room': 30, 'px': 112, 'py': 209, 'hp': 8, 'chapter_flags': 15, 'camera_x': 0, 'camera_y': 129, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 16, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0})",
+          "status": {
+            "game_state": 1,
+            "room": 30,
+            "px": 112,
+            "py": 209,
+            "hp": 8,
+            "chapter_flags": 15,
+            "camera_x": 0,
+            "camera_y": 129,
+            "save_failed": 0,
+            "checkpoint_spawn": 2,
+            "spirit": 16,
+            "summoned": 1,
+            "ability_cd": 0,
+            "roll_cd": 0
+          }
+        }
+      ],
+      "passed": false,
+      "windows": [
+        {
+          "case": "cold-town-journal",
+          "hardware_frames": 95,
+          "game_updates": 95,
+          "page_flips": 95,
+          "maximum_cycles": 273642,
+          "maximum_oam": 26,
+          "maximum_visible_enemy_bodies": 0,
+          "maximum_visible_hostile_shots": 0,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 0,
+          "camera_positions": 1,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": []
+        },
+        {
+          "case": "cold-rest-save",
+          "hardware_frames": 160,
+          "game_updates": 157,
+          "page_flips": 157,
+          "maximum_cycles": 279769,
+          "maximum_oam": 26,
+          "maximum_visible_enemy_bodies": 0,
+          "maximum_visible_hostile_shots": 0,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 0,
+          "camera_positions": 1,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": [
+            {
+              "index": 36,
+              "hardware_frame": 651,
+              "game_frame": 488,
+              "update_delta": 0,
+              "page_flip": false,
+              "cycles": 274793,
+              "camera": [
+                0,
+                129
+              ],
+              "obj_count": 24,
+              "state": 2,
+              "journal_tab": 4,
+              "live_enemies": 0,
+              "visible_enemy_bodies": 0,
+              "visible_hostile_shots": 0,
+              "player_arrows": 0,
+              "southern_effect": 0,
+              "southern_kind": 0,
+              "hp_q4": 120,
+              "keys": 0
+            },
+            {
+              "index": 81,
+              "hardware_frame": 696,
+              "game_frame": 532,
+              "update_delta": 0,
+              "page_flip": false,
+              "cycles": 274937,
+              "camera": [
+                0,
+                129
+              ],
+              "obj_count": 19,
+              "state": 6,
+              "journal_tab": 4,
+              "live_enemies": 0,
+              "visible_enemy_bodies": 0,
+              "visible_hostile_shots": 0,
+              "player_arrows": 0,
+              "southern_effect": 0,
+              "southern_kind": 0,
+              "hp_q4": 120,
+              "keys": 0
+            },
+            {
+              "index": 117,
+              "hardware_frame": 732,
+              "game_frame": 567,
+              "update_delta": 0,
+              "page_flip": false,
+              "cycles": 279769,
+              "camera": [
+                0,
+                129
+              ],
+              "obj_count": 24,
+              "state": 2,
+              "journal_tab": 4,
+              "live_enemies": 0,
+              "visible_enemy_bodies": 0,
+              "visible_hostile_shots": 0,
+              "player_arrows": 0,
+              "southern_effect": 0,
+              "southern_kind": 0,
+              "hp_q4": 120,
+              "keys": 0
+            }
+          ]
+        },
+        {
+          "case": "cold-field-journal",
+          "hardware_frames": 95,
+          "game_updates": 95,
+          "page_flips": 95,
+          "maximum_cycles": 267300,
+          "maximum_oam": 26,
+          "maximum_visible_enemy_bodies": 2,
+          "maximum_visible_hostile_shots": 0,
+          "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 0,
+          "camera_positions": 1,
+          "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS",
+          "bad_frames": []
+        }
+      ]
+    },
+    {
+      "report": "build/underwater-legacy-a/southern-selector/southern-journey.json",
+      "report_sha256": "fa98385f8bb1264a5ac8c0e61a2a577b19c7022c003e9ff465e6b928282c7e99",
+      "checks": 42,
+      "failures": [
+        {
+          "error": "selector cadence or cycle budget missed",
+          "window": "earned21-storage-all-candidates",
+          "game_updates": 115,
+          "page_flips": 115,
+          "hardware_frames": 120,
+          "max_cycles": 276122
+        }
+      ],
+      "passed": false,
+      "windows": [
+        {
+          "name": "earned41-native-idle",
+          "hardware_frames": 120,
+          "game_updates": 120,
+          "page_flips": 120,
+          "max_cycles": 26201,
+          "bad_frames": []
+        },
+        {
+          "name": "earned41-party-journal",
+          "hardware_frames": 90,
+          "game_updates": 90,
+          "page_flips": 90,
+          "max_cycles": 8665,
+          "bad_frames": []
+        },
+        {
+          "name": "earned41-growth-journal",
+          "hardware_frames": 90,
+          "game_updates": 90,
+          "page_flips": 90,
+          "max_cycles": 8878,
+          "bad_frames": []
+        },
+        {
+          "name": "earned41-quick-selector",
+          "hardware_frames": 48,
+          "game_updates": 48,
+          "page_flips": 48,
+          "max_cycles": 173054,
+          "bad_frames": []
+        },
+        {
+          "name": "earned41-actual-save-dialog",
+          "hardware_frames": 180,
+          "game_updates": 180,
+          "page_flips": 180,
+          "max_cycles": 273129,
+          "bad_frames": []
+        },
+        {
+          "name": "earned41-first-journal-open-tabs-close",
+          "hardware_frames": 128,
+          "game_updates": 128,
+          "page_flips": 128,
+          "max_cycles": 273624,
+          "bad_frames": []
+        },
+        {
+          "name": "earned21-storage-all-candidates",
+          "hardware_frames": 120,
+          "game_updates": 115,
+          "page_flips": 115,
+          "max_cycles": 276122,
+          "bad_frames": [
+            {
+              "index": 26,
+              "hardware_frame": 1277,
+              "update_delta": 0,
+              "page_flip": false,
+              "render_cycles": 275686,
+              "obj_count": 11,
+              "selected_party": 1,
+              "selected_form": 86,
+              "quickparty_open": 0,
+              "menu_candidate": 7,
+              "candidate_form": 78,
+              "px": 112,
+              "py": 211
+            },
+            {
+              "index": 33,
+              "hardware_frame": 1284,
+              "update_delta": 0,
+              "page_flip": false,
+              "render_cycles": 275864,
+              "obj_count": 11,
+              "selected_party": 1,
+              "selected_form": 86,
+              "quickparty_open": 0,
+              "menu_candidate": 9,
+              "candidate_form": 74,
+              "px": 112,
+              "py": 211
+            },
+            {
+              "index": 35,
+              "hardware_frame": 1286,
+              "update_delta": 0,
+              "page_flip": false,
+              "render_cycles": 276122,
+              "obj_count": 11,
+              "selected_party": 1,
+              "selected_form": 86,
+              "quickparty_open": 0,
+              "menu_candidate": 9,
+              "candidate_form": 74,
+              "px": 112,
+              "py": 211
+            },
+            {
+              "index": 62,
+              "hardware_frame": 1313,
+              "update_delta": 0,
+              "page_flip": false,
+              "render_cycles": 275606,
+              "obj_count": 11,
+              "selected_party": 1,
+              "selected_form": 86,
+              "quickparty_open": 0,
+              "menu_candidate": 16,
+              "candidate_form": 90,
+              "px": 112,
+              "py": 211
+            },
+            {
+              "index": 114,
+              "hardware_frame": 1365,
+              "update_delta": 0,
+              "page_flip": false,
+              "render_cycles": 275686,
+              "obj_count": 11,
+              "selected_party": 1,
+              "selected_form": 86,
+              "quickparty_open": 0,
+              "menu_candidate": 7,
+              "candidate_form": 78,
+              "px": 112,
+              "py": 211
+            }
+          ]
+        },
+        {
+          "name": "earned21-four-slot-selector-commits",
+          "hardware_frames": 96,
+          "game_updates": 96,
+          "page_flips": 96,
+          "max_cycles": 180446,
+          "bad_frames": []
+        }
+      ]
+    },
+    {
+      "report": "build/underwater-legacy-a/southern-controls/southern-journey.json",
+      "report_sha256": "1836ab77f5c46e12a55dd0ab2ebed870444ded2dd868ef44e6e1dd861c9a3d5f",
+      "checks": 448,
+      "failures": [],
+      "passed": true,
+      "windows": [
+        {
+          "name": "town-early-idle",
+          "hardware_frames": 60,
+          "game_updates": 60,
+          "page_flips": 60,
+          "max_cycles": 32778,
+          "update_histogram": {
+            "1": 60
+          },
+          "frame_budget": 280896,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-0",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7791,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-1",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7791,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-2",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7843,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-3",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 8056,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-4",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7821,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-5",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7799,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-6",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7799,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-tab-7",
+          "hardware_frames": 30,
+          "game_updates": 30,
+          "page_flips": 30,
+          "max_cycles": 7799,
+          "bad_frames": []
+        },
+        {
+          "name": "journal-close-first-frames",
+          "hardware_frames": 8,
+          "game_updates": 8,
+          "page_flips": 8,
+          "max_cycles": 109660,
+          "bad_frames": []
+        },
+        {
+          "name": "quick-selector-open-cycle-close",
+          "hardware_frames": 48,
+          "game_updates": 48,
+          "page_flips": 48,
+          "max_cycles": 179534,
+          "bad_frames": []
+        },
+        {
+          "name": "actual-save-dialog",
+          "hardware_frames": 150,
+          "game_updates": 150,
+          "page_flips": 150,
+          "max_cycles": 267936,
+          "bad_frames": []
+        },
+        {
+          "name": "field-native-idle",
+          "hardware_frames": 120,
+          "game_updates": 120,
+          "page_flips": 120,
+          "max_cycles": 40921,
+          "bad_frames": []
+        }
+      ]
+    },
+    {
+      "report": "build/underwater-legacy-a/southern-render/southern-combat.json",
+      "report_sha256": "791771b88450faf96a1a75cdda7d8f2ca33fab36973b045378e6074f4e2e7706",
+      "checks": 343,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/evolution/evolution-report.json",
+      "report_sha256": "24fe1c3e77047aba7ecfed332052587712164e46ef16656e3ed5c01bc3e147be",
+      "checks": 1709,
+      "failures": [],
+      "passed": true,
+      "windows": [],
+      "evolution_waits": {
+        "report_sha256": "daf2e4b6e64ac3a8c85b8fb6c583c33350eba262ac8a5b24c13907cead7327eb",
+        "pairing": {
+          "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+          "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+          "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+          "matched_rom_bytes": 9769916,
+          "source_file": "progression.c",
+          "object": "evolution_job",
+          "address": 33595696,
+          "size": 72,
+          "phase_offset": 8,
+          "phase_bytes": 4
+        },
+        "waits": [
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 213699
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 213687
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 214241
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 214092
+          }
+        ]
+      }
+    },
+    {
+      "report": "build/underwater-legacy-a/evolution-six-hearts/evolution-report.json",
+      "report_sha256": "3062a832db824f594f9d2b55f47c59d13d9336ea257fcdf5fd70bb239b8ab660",
+      "checks": 1678,
+      "failures": [],
+      "passed": true,
+      "windows": [],
+      "evolution_waits": {
+        "report_sha256": "e74d97b5d867c683fa59bc1ffb797a08cae4edaede33d9234a2da23acb45f4a3",
+        "pairing": {
+          "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+          "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+          "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+          "matched_rom_bytes": 9769916,
+          "source_file": "progression.c",
+          "object": "evolution_job",
+          "address": 33595696,
+          "size": 72,
+          "phase_offset": 8,
+          "phase_bytes": 4
+        },
+        "waits": [
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 192476
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 212759
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 192476
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 212747
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 192476
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 213301
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 192476
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 213152
+          }
+        ]
+      }
+    },
+    {
+      "report": "build/underwater-legacy-a/evolution-migrated/evolution-report.json",
+      "report_sha256": "d21ed78eaef9d5cc642fdded179261da291a753399c7cf6b11b8914d2503b169",
+      "checks": 1270,
+      "failures": [],
+      "passed": true,
+      "windows": [],
+      "evolution_waits": {
+        "report_sha256": "80dda88ef458d5bba1175184af2de1e2c4621e5e118d8e9130c6759ee814a0c5",
+        "pairing": {
+          "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+          "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+          "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+          "matched_rom_bytes": 9769916,
+          "source_file": "progression.c",
+          "object": "evolution_job",
+          "address": 33595696,
+          "size": 72,
+          "phase_offset": 8,
+          "phase_bytes": 4
+        },
+        "waits": [
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 214045
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 214033
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 214241
+          },
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193493
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 214092
+          }
+        ]
+      }
+    },
+    {
+      "report": "build/underwater-legacy-a/advanced-powers/advanced-power-report.json",
+      "report_sha256": "620eafa31b903fc15773d196031fce62b63678cd012403fa0c98c87cae5ca9bd",
+      "checks": 540,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/quickparty/quickparty-report.json",
+      "report_sha256": "8f862824ddcccbcd5e941188f22d8899e4ca81892672d9de026edf073aade2e6",
+      "checks": 643,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/quickparty-evolved/quickparty-report.json",
+      "report_sha256": "aa3a0ea86054abb4a1757dbc53dc95492127d554f42f2153a92f8c2a1f788239",
+      "checks": 461,
+      "failures": [],
+      "passed": true,
+      "windows": [],
+      "evolution_waits": {
+        "report_sha256": "dee12d4ea95e18dbf7e92b42368aea45853314be70998928939306221b11da78",
+        "pairing": {
+          "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+          "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+          "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+          "matched_rom_bytes": 9769916,
+          "source_file": "progression.c",
+          "object": "evolution_job",
+          "address": 33595696,
+          "size": 72,
+          "phase_offset": 8,
+          "phase_bytes": 4
+        },
+        "waits": [
+          {
+            "target_state": 7,
+            "hardware_frames": 34,
+            "maximum_cycles": 193416
+          },
+          {
+            "target_state": 8,
+            "hardware_frames": 34,
+            "maximum_cycles": 213699
+          }
+        ]
+      }
+    },
+    {
+      "report": "build/underwater-legacy-a/quickparty-migration/quickparty-migration-report.json",
+      "report_sha256": "6d3dccf5e1dbdd8937f32f8dd1b65118b3f88614d06fc668ca9ec4dcc01a0045",
+      "checks": 91,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/northern-migration/northern-journey.json",
+      "report_sha256": "d3c7f469ad2c747d74fc12d762bb7865ac340aafec09eff0c07717db56a1c474",
+      "checks": 264,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/old-migrations/evolution-report.json",
+      "report_sha256": "c4ed0f073f65d15ef116d96f3238a30d7e74b18bd15c93a7d255e85a5045b341",
+      "checks": 108,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/fullscreen/fullscreen-report.json",
+      "report_sha256": "438481184b3332d6f84d20475ad5e6cf63d40a8205d8aab3e8ceeee89a89986f",
+      "checks": 96,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    },
+    {
+      "report": "build/underwater-legacy-a/new-game-confirmation/new-game-confirmation.json",
+      "report_sha256": "28ef50a720deefbe5da6430d4f81e042a2a44d5b55c808e81c3fe3d847c0c1be",
+      "checks": 53,
+      "failures": [],
+      "passed": true,
+      "windows": []
+    }
+  ],
+  "independent_same_rom_replay": {
+    "path": "build/underwater-legacy-a/southern42-repeat.json",
+    "sha256": "f0c27558535f84ceb9a260a84883cfbe4a93f73b6205d328301d058047ff2329",
+    "hardware_frames": 180,
+    "game_updates": 179,
+    "page_flips": 179,
+    "miss_index": 73,
+    "cycles_at_miss": 266828
+  },
+  "harness_files": {
+    "tests/quickparty_tests.py": "dcbc5ae2efe434b918e5447ded23e95ac2bca371ae5553a7d1200b14e851bd30",
+    "tests/magma_combat_tests.py": "99328410957c6e5da31569012d34d6b3958b5070b2174c2a7598fdba568e0797",
+    "tests/magma_journey.py": "511f7ba84ef7d840c5f3edded805fffb9d53edb042ce0315a09469b5ed58dc07",
+    "tests/northern_journey.py": "34e4c2dbeca41d41fd9f02193e88bd2c942d470d486178d9fa7fb9e99f7494aa",
+    "tests/region_journey.py": "e2883b1d1b811ef7927cd93186e635bb524ae7dd769eede748f6c3054dbda141",
+    "tests/southern_minimal_route.py": "032d6b3321eb4712569d97a0ec2435ceb1f9e13889c068f47f890bb5d1a1a3b9",
+    "tests/southern_journey.py": "03c36f169e66eba05593e3b73364c019702cfbbb85fdb925fabbed83ee0ebae3",
+    "tests/evolution_tests.py": "d0342d28a7e3bbac3e38ed27910d80ebfc0aa61c47496e2289225c3b0be7067c",
+    "tests/southern_combat_tests.py": "c3f2df49d693cd40be7695969a1cd5d0dba8673fd5d7f8aef6a630b5c4705557",
+    "tests/advanced_power_tests.py": "ef66d272261be1b7aaa7394b3b46f39ca042d0e4e54a8248b6a745a40ecf2a21",
+    "tests/magma_retained_controls.py": "db3ea0316363fe70059781e18dd75610610227643500983aaf4dc216ea5af99b"
+  }
+}

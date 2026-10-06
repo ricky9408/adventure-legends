@@ -1,0 +1,78 @@
+{
+  "scope": "Interim legacy harness integration; no production gameplay changes by this repair task",
+  "changes": {
+    "regional_adapter": "Link real Underwater quest/context and portrait modules; explicitly stub only absent regional world/power scheduler notifications; observe bounded evolution preparation and confirmed commit",
+    "collision_fingerprint": "Use real extracted engine fingerprint code with explicit synthetic world inputs; retain all old assertions and add Underwater room/input/callback isolation checks",
+    "advanced_power_source_fixture": "Missing Underwater-specific supercover hook returns its documented non-Underwater value -1, preserving production generic point-LOS fallback"
+  },
+  "observer_hashes": {
+    "tests/test_regional_adapters.py": "b3955ab9bc562762f76df5e2c464226fff2ec91dda4dbe02a2f0338c21ca0bad",
+    "tests/regional_adapters_native.c": "5aed8a29809a1cbd1f9d07962a7519ab0dc90a925da13dbd12717342e3b1cd01",
+    "tests/test_geometry_fingerprint.py": "bcf7ef7dd28250aa32c19b5733639160e0618c918d3487739efacc6d6ac7b6f0",
+    "tests/advanced_power_tests.py": "584e6e7857d09c6549cde810619b02d4f542bcde03ec6a422f376cf578d3b636",
+    "tests/region_combat_tests.py": "d7011bb49c402645bce28a82640489bfe73470fcdbd9b7c08fd73f4c3ad58c80",
+    "tests/northern_modal_pixels.py": "6c48b237c42ee43aae5b048774db6fa1a816ee75ede45a3de35ab895d1ed6dbb",
+    "tests/southern_combat_tests.py": "138c50938303199e566533d1a9771951bb8d64a5f5d23314c64f5112ffc12cfa"
+  },
+  "verified_commands": [
+    "python3 tests/test_regional_adapters.py (951 ASan/UBSan checks)",
+    "make test-equipment",
+    "make test-tools",
+    "make test-underwater-host",
+    "make test-northern-host (within combined North/South run)",
+    "Every make test-southern-host stage, split across initial aggregate and fixed tail (not a single final aggregate pass)",
+    "python3 tests/advanced_power_tests.py --source-contracts --output build/underwater-legacy-advanced-host"
+  ],
+  "preserved_failures": [
+    "Original missing adapter link symbols in build/underwater-g-legacy-aggregate.log",
+    "Missing Underwater fingerprint bridges in build/underwater-legacy-north-south-host-aggregate.log",
+    "Missing supercover bridge in build/underwater-h-isolated-systems.log"
+  ],
+  "log_sha256": {
+    "build/underwater-legacy-adapter-first.log": "052a5a3a105f191f4018612ebc7285abee536227d0328ee2ee7b61e23a4b68d7",
+    "build/underwater-legacy-equipment-aggregate.log": "87d5568bcba49dfa172c6b601058e890a8f805f6a0960a1fbabdacb4ad6787e8",
+    "build/underwater-legacy-tools-aggregate.log": "160b72e9b777dda64511aa99a01c3f98f3ea57bd28c5edca5e8ac2d2e351faeb",
+    "build/underwater-legacy-north-south-host-aggregate.log": "710241e1628d89cfb423b3344c8b01f41b5289a16e5b989fcc5c636102fa463e",
+    "build/underwater-legacy-southern-host-tail.log": "b34e1775994ab54b616e974a2d14a0ee432004dadd468eb1c2fdd6424c114950",
+    "build/underwater-legacy-advanced-host.log": "97874433bb544138d3e18b65ced222ddb8ac4663b3bc134ca91deb155d705c0d",
+    "build/underwater-legacy-underwater-host-aggregate.log": "f00109a66e12c98c2c8c9ebd101f3561934b1cf51166eb3a69ee89fe95cc3444"
+  },
+  "powerloss": {
+    "transactions": 70,
+    "cut_positions": 430220,
+    "complete_compile_include_closure_unchanged": true,
+    "report": "docs/evidence/underwater-save-powerloss.json"
+  },
+  "final_gate": "PASS: all final K aggregate targets exited 0; see final-k-aggregate.json. Separate output-only host reporter reruns also pass.",
+  "native_observer_repairs": {
+    "tests/region_combat_tests.py": "Wait for real bounded evolution readiness before fresh A, and for actual animation start in reflection and collection cases",
+    "tests/northern_modal_pixels.py": "Wait for real prepared confirmation and animation states without changing native pixel, OAM, or animation-tick assertions",
+    "tests/southern_combat_tests.py": "Observe bounded deferred rest until actual dialogue, retaining prior freeze assertions and adding per-frame pending state, effect/enemy freeze and native cadence assertions"
+  },
+  "diagnostic_candidate": {
+    "label": "H",
+    "rom_sha256": "e15e18ce4d8ad80524051577f4fa728448ecff290f7ec255358ffd7b45a40e98",
+    "isolated_workspace": "../underwater-legacy-h-qa",
+    "rebuild_verified": [
+      "ROM byte identity",
+      "symbol table byte identity",
+      "complete runtime manifest byte identity"
+    ],
+    "passed": [
+      "System stages through evolution, then repaired advanced-power continuation",
+      "Quickparty ordinary, interruption and evolved routes",
+      "Regional journey and unaffected combat cases; repaired reflection and collection cases in separate outputs",
+      "Northern full journey and repaired modal-pixel route",
+      "Southern full journey and minimal/targeting/optics/controls/selector stages"
+    ],
+    "provenance_note": "Original North/South producer receipts became stale after an imported diagnostic observer changed. Their intentional rejection is preserved. New producers are rerun into separate repaired output directories; no old receipt is edited.",
+    "additional_passed": [
+      "Fresh Northern producer and15-case provenance guard suite, sky/stress/boss controls and8,842-check combat",
+      "Southern combat except old40-frame rest assumption; fixed dialogue-freeze retest with82 strict native pending frames, peak182419 cycles",
+      "Southern performance1484 checks and render343 checks",
+      "H remaining Magma full-engine performance and teaching-boss stages"
+    ],
+    "production_failure": "H Magma lifetime66:296098 cycles, one dropped update/page flip; strict gate retained; see h-magma66-cadence-failure.json"
+  },
+  "production_failure_profile": "docs/evidence/underwater-legacy/i-magma66-verified-profile.json"
+}

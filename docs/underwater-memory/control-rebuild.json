@@ -1,0 +1,7 @@
+{
+  "control_rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "candidate_a_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "byte_identical": true,
+  "meaning": "All diagnostic C objects, including -fstack-usage, reproduce candidate A exactly when linked with its authenticated uninstrumented startup. Canary diagnostic changes startup only.",
+  "control_elf_sha256": "4045cf9ed731a384b069f4bd18ae494a88b30a6783c65be9f35d33451e49a736"
+}

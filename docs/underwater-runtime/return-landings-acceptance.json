@@ -1,0 +1,107 @@
+{
+  "status": "HOST_RETURN_LANDINGS_VERIFIED_NATIVE_RERUN_PENDING",
+  "changes": {
+    "magma": [
+      {
+        "area": 38,
+        "added": {
+          "4": [
+            416,
+            240
+          ]
+        },
+        "old_rows_unchanged": true
+      }
+    ],
+    "underwater": [
+      {
+        "area": 46,
+        "added": {
+          "3": [
+            448,
+            160
+          ]
+        },
+        "old_rows_unchanged": true
+      },
+      {
+        "area": 48,
+        "added": {
+          "2": [
+            448,
+            160
+          ]
+        },
+        "old_rows_unchanged": true
+      },
+      {
+        "area": 51,
+        "added": {
+          "2": [
+            32,
+            160
+          ]
+        },
+        "old_rows_unchanged": true
+      },
+      {
+        "area": 52,
+        "added": {
+          "2": [
+            32,
+            112
+          ]
+        },
+        "old_rows_unchanged": true
+      }
+    ]
+  },
+  "preexisting_pixel_and_c_art_files_unchanged": 454,
+  "pixel_and_c_art_changes": [],
+  "reciprocal_door_pairs": 9,
+  "focused_return_tests": 7,
+  "tests": {
+    "landings": {
+      "passed": true,
+      "log": "docs/underwater-runtime/host-test-logs/return-landings.log"
+    },
+    "world": {
+      "passed": true,
+      "log": "docs/underwater-runtime/host-test-logs/return-world.log"
+    },
+    "powers": {
+      "passed": true,
+      "log": "docs/underwater-runtime/host-test-logs/return-powers.log"
+    },
+    "magma-world": {
+      "passed": true,
+      "log": "docs/underwater-runtime/host-test-logs/return-magma-world.log"
+    },
+    "art": {
+      "passed": true,
+      "log": "docs/underwater-runtime/host-test-logs/return-art.log"
+    },
+    "magma-art": {
+      "passed": true,
+      "log": "docs/underwater-runtime/host-test-logs/return-magma-art.log"
+    }
+  },
+  "historical_policy_scope": "No revisions1\u20135 policy files edited by the world worker. Save worker owns raw-bank differential verification.",
+  "native_return_routes_retested": false,
+  "source_sha256": {
+    "src/magma_game.c": "960a861bdf86854ed33ae336d5cd3a94da30b20738eebe278992118ac051da3f",
+    "src/underwater_game.c": "b12c8c3b9e625758bf84b8f8ee04a00dedf7079e0f7e02109c6c0f62bf9cf599",
+    "assets/generate_magma_region.py": "227682a4e0beb5bc2d8650c04ad2f0a19c1f66e5e3c65761c19b463b09899b5e",
+    "assets/generate_underwater_region.py": "7a5bd5edd1fa5d8bb83a3ca141c0c732ad5ec4d8130fd1afbbff66f100318d84",
+    "assets/magma_region/layout.json": "77f2557c90289f10c2df570589dd469feb6ee2a3b0d424d2ec58d0cee8e16365",
+    "assets/underwater_region/layout.json": "16c51cec0614bf4eccd32acea502e4bca59679da2c06f4d690d05d559d32291b"
+  },
+  "magma_return_spawn_to_existing_anchor_roundtrip": true,
+  "focused_test_sources_sha256": {
+    "tests/test_underwater_landings.py": "5970bef5be4009c703c0f769ead90c8e95fd48643d13a093497d4275da50b748",
+    "tests/underwater_landing_magma_bridge.c": "15ad2e8de8cee4b0a60d4df412e2c347e8de0eba0a092335d2808a470b1de447"
+  },
+  "dispatch_source_condition_assertion": true,
+  "frozen_runtime_files_unchanged_during_test_addition": 1160,
+  "dispatch_source_sha256": "13461969d9f7d3e4e8fe14dcecf6e0a330143b7a545188e5f843a0fa00c682fb"
+}

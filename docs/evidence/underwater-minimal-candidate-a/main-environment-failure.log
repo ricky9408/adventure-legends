@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/underwater_journey.py", line 188, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/underwater_journey.py", line 181, in main
+    a=p.parse_args();r=UnderwaterJourney(a.rom,a.symbols,a.output,a.expected_rom_sha,a.expected_symbols_sha,fixture=a.source_sram,source_manifest=a.source_manifest)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/underwater_journey.py", line 45, in __init__
+    self.e=ReadOnlyGameEmulator(self.rom);self.e.load_save(self.fixture);self.e.reset();self.mask_cache={};self.descriptors={}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/underwater_journey.py", line 20, in __init__
+    super().__init__(*args,**kwargs)
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tools/mgba_runner.py", line 14, in __init__
+    self.lib=C.CDLL(str(HERE/'mgba_bridge.so'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ctypes/__init__.py", line 379, in __init__
+    self._handle = _dlopen(self._name, mode)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: libmgba.so.0.10: cannot open shared object file: No such file or directory

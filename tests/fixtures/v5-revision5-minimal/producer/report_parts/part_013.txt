@@ -1,0 +1,1583 @@
+keys": 0
+    },
+    {
+      "frame": 419,
+      "from": 30,
+      "to": 38,
+      "keys": "A"
+    },
+    {
+      "frame": 1993,
+      "from": 38,
+      "to": 39,
+      "keys": "UP"
+    },
+    {
+      "frame": 3575,
+      "from": 39,
+      "to": 42,
+      "keys": "A"
+    },
+    {
+      "frame": 4257,
+      "from": 42,
+      "to": 43,
+      "keys": "A"
+    },
+    {
+      "frame": 5361,
+      "from": 43,
+      "to": 44,
+      "keys": "A"
+    },
+    {
+      "frame": 6875,
+      "from": 44,
+      "to": 45,
+      "keys": "A"
+    },
+    {
+      "frame": 8463,
+      "from": 45,
+      "to": 38,
+      "keys": "A"
+    },
+    {
+      "frame": 187,
+      "from": 0,
+      "to": 38,
+      "keys": 0
+    },
+    {
+      "frame": 373,
+      "from": 38,
+      "to": 30,
+      "keys": "A"
+    }
+  ],
+  "cases": [
+    {
+      "name": "ordinary-combat",
+      "room": 42,
+      "weapon_item": 1,
+      "trace": [
+        {
+          "frame": 3931,
+          "enemy": 0,
+          "before": 64,
+          "after": 32
+        },
+        {
+          "frame": 3962,
+          "enemy": 0,
+          "before": 32,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 43,
+      "weapon_item": 1,
+      "trace": [
+        {
+          "frame": 4613,
+          "enemy": 0,
+          "before": 64,
+          "after": 32
+        },
+        {
+          "frame": 4644,
+          "enemy": 0,
+          "before": 32,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 44,
+      "weapon_item": 1,
+      "trace": [
+        {
+          "frame": 5717,
+          "enemy": 0,
+          "before": 64,
+          "after": 32
+        },
+        {
+          "frame": 5748,
+          "enemy": 0,
+          "before": 32,
+          "after": 0
+        },
+        {
+          "frame": 6123,
+          "enemy": 1,
+          "before": 64,
+          "after": 32
+        },
+        {
+          "frame": 6154,
+          "enemy": 1,
+          "before": 32,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "regulator-starter-sword",
+      "trace": [
+        {
+          "frame": 7588,
+          "before": 192,
+          "after": 160,
+          "stage": 3
+        },
+        {
+          "frame": 7615,
+          "before": 160,
+          "after": 128,
+          "stage": 3
+        },
+        {
+          "frame": 7642,
+          "before": 128,
+          "after": 80,
+          "stage": 3
+        },
+        {
+          "frame": 7669,
+          "before": 80,
+          "after": 48,
+          "stage": 4
+        },
+        {
+          "frame": 8248,
+          "before": 48,
+          "after": 16,
+          "stage": 3
+        },
+        {
+          "frame": 8295,
+          "before": 16,
+          "after": 0,
+          "stage": 5
+        }
+      ]
+    }
+  ],
+  "frame_windows": [
+    {
+      "name": "magma-town-idle",
+      "hardware_frames": 120,
+      "updates": 120,
+      "flips": 120,
+      "max_cycles": 118580,
+      "trace": [
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26039,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20124,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26039,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 25965,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26502,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26502,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 118580,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 111563,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26502,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26502,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26039,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20058,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20124,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 19595,
+          "state": 1,
+          "obj_count": 15
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26494,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20044,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20044,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20044,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20044,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 118500,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 112012,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26488,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20044,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20044,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 99005,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 98999,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26548,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 105491,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 99003,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20104,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20038,
+          "state": 1,
+          "obj_count": 16
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26482,
+          "state": 1,
+          "obj_count": 16
+        }
+      ]
+    }
+  ],
+  "main_route_selected_forms": [
+    31,
+    34
+  ],
+  "completed": true,
+  "machine_state_loads": 0,
+  "cold_sram_imports": [
+    {
+      "session": 0,
+      "path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/fixtures/v5-revision4/southern-minimal8-town.sav",
+      "sha256": "968066ed983bd48fc2af0d7ffeb79f635624037ef2099809fd00c97aaa04cc0c",
+      "machine_state_loaded": false
+    },
+    {
+      "session": 1,
+      "path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/08-minimal-main-cleared.sav",
+      "sha256": "17c143a3f0386156bb810d248f0525b4d2a809dda61b5951e707acdb3e9bfa3d",
+      "machine_state_loaded": false
+    }
+  ],
+  "field_commands": [
+    {
+      "frame": 4037,
+      "room": 42,
+      "form_id": 31,
+      "instance_id": 9,
+      "target": [
+        48,
+        68
+      ]
+    },
+    {
+      "frame": 5252,
+      "room": 43,
+      "form_id": 34,
+      "instance_id": 10,
+      "target": [
+        168,
+        104
+      ]
+    },
+    {
+      "frame": 6385,
+      "room": 44,
+      "form_id": 31,
+      "instance_id": 9,
+      "target": [
+        48,
+        68
+      ]
+    },
+    {
+      "frame": 6697,
+      "room": 44,
+      "form_id": 34,
+      "instance_id": 10,
+      "target": [
+        168,
+        104
+      ]
+    }
+  ],
+  "state_records": {
+    "before-new-teaching": {
+      "status": {
+        "game_state": 1,
+        "room": 38,
+        "px": 240,
+        "py": 284,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 120,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 16,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77,
+        79,
+        85
+      ],
+      "individuals": [
+        {
+          "instance_id": 1,
+          "form_id": 1,
+          "record_hex": "01031028bc340000010000000000000001000100b179379e"
+        },
+        {
+          "instance_id": 2,
+          "form_id": 4,
+          "record_hex": "04031028bc34000002000000000000000200000062f36e3c"
+        },
+        {
+          "instance_id": 3,
+          "form_id": 7,
+          "record_hex": "0703102dbc340000030000000000000003000100136da6da"
+        },
+        {
+          "instance_id": 4,
+          "form_id": 10,
+          "record_hex": "0a030e1454220000040000000000000004000000c4e6dd78"
+        },
+        {
+          "instance_id": 5,
+          "form_id": 19,
+          "record_hex": "13011014bc34000005000000000000000d00000075601517"
+        },
+        {
+          "instance_id": 6,
+          "form_id": 77,
+          "record_hex": "4d011014bc34000006000000000000001500000026da4cb5"
+        },
+        {
+          "instance_id": 7,
+          "form_id": 79,
+          "record_hex": "4f011214c44c000007000000000000001b000100d7538453"
+        },
+        {
+          "instance_id": 8,
+          "form_id": 85,
+          "record_hex": "55011214c44c000008000000000000002100010088cdbbf1"
+        }
+      ],
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objectives": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        15,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gear": [
+        1,
+        4
+      ],
+      "equipped": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_instance_progression_deltas": [
+        {
+          "instance_id": 1,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 2,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 3,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 4,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 5,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 6,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 7,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 8,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        }
+      ]
+    },
+    "main-cleared": {
+      "status": {
+        "game_state": 1,
+        "room": 38,
+        "px": 112,
+        "py": 261,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 3,
+        "spirit": 22,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        31,
+        34,
+        77,
+        79,
+        85
+      ],
+      "individuals": [
+        {
+          "instance_id": 1,
+          "form_id": 1,
+          "record_hex": "01031028bc340000010000000000000001000100b179379e"
+        },
+        {
+          "instance_id": 2,
+          "form_id": 4,
+          "record_hex": "04031028bc34000002000000000000000200000062f36e3c"
+        },
+        {
+          "instance_id": 3,
+          "form_id": 7,
+          "record_hex": "07031041c8370000030000000000000003000100136da6da"
+        },
+        {
+          "instance_id": 4,
+          "form_id": 10,
+          "record_hex": "0a030e2860250000040000000000000004000000c4e6dd78"
+        },
+        {
+          "instance_id": 5,
+          "form_id": 19,
+          "record_hex": "13011014bc34000005000000000000000d00000075601517"
+        },
+        {
+          "instance_id": 6,
+          "form_id": 77,
+          "record_hex": "4d011014bc34000006000000000000001500000026da4cb5"
+        },
+        {
+          "instance_id": 7,
+          "form_id": 79,
+          "record_hex": "4f01121e644d000007000000000000001b000100d7538453"
+        },
+        {
+          "instance_id": 8,
+          "form_id": 85,
+          "record_hex": "55011228044e000008000000000000002100010088cdbbf1"
+        },
+        {
+          "instance_id": 9,
+          "form_id": 31,
+          "record_hex": "1f01181e88c0000009000000000000002b0000003947f38f"
+        },
+        {
+          "instance_id": 10,
+          "form_id": 34,
+          "record_hex": "2201181ee8bf00000a000000000000002e000100eac02a2e"
+        }
+      ],
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objectives": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        15,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gear": [
+        1,
+        4,
+        20
+      ],
+      "equipped": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_instance_progression_deltas": [
+        {
+          "instance_id": 1,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 2,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 3,
+          "level": 0,
+          "bond": 20,
+          "xp": 780
+        },
+        {
+          "instance_id": 4,
+          "level": 0,
+          "bond": 20,
+          "xp": 780
+        },
+        {
+          "instance_id": 5,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 6,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 7,
+          "level": 0,
+          "bond": 10,
+          "xp": 160
+        },
+        {
+          "instance_id": 8,
+          "level": 0,
+          "bond": 20,
+          "xp": 320
+        }
+      ]
+    },
+    "independent-reboot": {
+      "status": {
+        "game_state": 1,
+        "room": 38,
+        "px": 112,
+        "py": 264,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 3,
+        

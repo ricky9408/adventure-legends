@@ -6,6 +6,8 @@ from pathlib import Path
 from PIL import Image, ImageChops
 sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'assets/creatures'))
+from catalog_source import load_catalog
 SPEC=importlib.util.spec_from_file_location('test_southern_art',ROOT/'assets/generate_southern_creatures.py')
 ART=importlib.util.module_from_spec(SPEC);SPEC.loader.exec_module(ART)
 class SouthernCreatureArtTests(unittest.TestCase):
@@ -24,7 +26,7 @@ class SouthernCreatureArtTests(unittest.TestCase):
         self.assertEqual(ART.FORM_IDS,(25,26,28,29,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94))
         self.assertEqual(ART.DIRECTIONS,('down','up','left','right'))
         self.assertEqual(bytes((C.c_ubyte*20).in_dll(self.lib,'southern_creature_form_ids')),bytes(ART.FORM_IDS))
-        catalog={f['id']:f for f in json.loads((ROOT/'assets/creatures/catalog.json').read_text())['forms']}
+        catalog={f['id']:f for f in load_catalog(ROOT/'assets/creatures/catalog.json')['forms']}
         for id,name in zip(ART.FORM_IDS,ART.NAMES):self.assertEqual(catalog[id]['name'],name)
         # Art has no dependency on a particular enablement/acquisition state.
     def test_exact_rgb555_palette_transparency_and_dimensions(self):

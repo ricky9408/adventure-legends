@@ -1,0 +1,1345 @@
+{
+  "suite": "underwater-native-controller-journey",
+  "development_bringup": true,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "player_facing": false,
+  "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+  "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+  "rom_bytes": 9770108,
+  "bridge_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+  "provenance": {
+    "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/fixtures/v5-revision5-minimal/magma-minimal10-town.sav",
+    "sram_sha256": "f584de3b29cb77731148b31b99dc40e0c7e4ec05f1aac42e0d38dd5b44612eeb",
+    "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "cross_rom_machine_state_loaded": false,
+    "minimal_prior_route": true
+  },
+  "source_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "test_sources": {
+    "tests/underwater_journey.py": "0ce885569b4af71a17853a9c0f373656756aa247a3a36f061d57336ca428611a",
+    "tests/region_journey.py": "e2883b1d1b811ef7927cd93186e635bb524ae7dd769eede748f6c3054dbda141",
+    "tests/northern_journey.py": "34e4c2dbeca41d41fd9f02193e88bd2c942d470d486178d9fa7fb9e99f7494aa",
+    "tests/southern_journey.py": "03c36f169e66eba05593e3b73364c019702cfbbb85fdb925fabbed83ee0ebae3",
+    "tests/magma_journey.py": "511f7ba84ef7d840c5f3edded805fffb9d53edb042ce0315a09469b5ed58dc07",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+  },
+  "checks": [
+    {
+      "label": "authenticated Magma checkpoint resumes normally",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "ordinary Continue autosave migrates to content revision6",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "revision5-to6 arrival preserves exact durable payload before new interactions",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "import retains exact prior individual and history counts, not new acquisitions",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 214
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 218
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 220
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 222
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 224
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 226
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 228
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 230
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 232
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 234
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 236
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 238
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 240
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 242
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 244
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 246
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 248
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 250
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 252
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 254
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 257
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 269
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 281
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 293
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 305
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 317
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 329
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 341
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 353
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 365
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 377
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 389
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 401
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 413
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 425
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 437
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 449
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 461
+    },
+    {
+      "label": "real shell-lift input reaches Nacreway after bounded visit",
+      "passed": true,
+      "frame": 551
+    },
+    {
+      "label": "only the new town visit is granted",
+      "passed": true,
+      "frame": 551
+    },
+    {
+      "label": "travel grants no new companion history",
+      "passed": true,
+      "frame": 551
+    },
+    {
+      "label": "nacreway-idle updates and presents once every native frame",
+      "passed": true,
+      "frame": 811
+    },
+    {
+      "label": "journal tab4 opens",
+      "passed": true,
+      "frame": 841
+    },
+    {
+      "label": "owned gear item1 is selectable in slot0",
+      "passed": true,
+      "frame": 841
+    },
+    {
+      "label": "real equipment menu equips item1",
+      "passed": true,
+      "frame": 882
+    },
+    {
+      "label": "equipping never increases current q4 health",
+      "passed": true,
+      "frame": 882
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 882
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 894
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 906
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 918
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 930
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 942
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 954
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 966
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 978
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 990
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1002
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1014
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1016
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1028
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1040
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1052
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1064
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1076
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1088
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1092
+    },
+    {
+      "label": "dotted plaque advances first teaching clue",
+      "passed": true,
+      "frame": 1187
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1187
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1199
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1211
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1223
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1231
+    },
+    {
+      "label": "keeper introduction earns real Inkbud",
+      "passed": true,
+      "frame": 1411
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1411
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1423
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1435
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1442
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1454
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1466
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1478
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1490
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1502
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1514
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1526
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1538
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1550
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1562
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1574
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1586
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1598
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1610
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1618
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1713
+    },
+    {
+      "label": "manual lever can rise and return before companion gate",
+      "passed": true,
+      "frame": 1808
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1808
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1820
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1832
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1840
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1842
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1844
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1846
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1848
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1850
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1852
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1854
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1856
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1858
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1860
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1862
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1864
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1866
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1868
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1870
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1872
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1874
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1876
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1878
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1880
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1882
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1884
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1886
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1888
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1890
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1892
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1894
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1896
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1898
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1900
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1902
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1904
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1906
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1908
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1910
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1912
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1914
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1916
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1918
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1920
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1922
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1924
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1926
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1928
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1930
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1932
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1934
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1936
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1938
+    },
+    {
+      "label": "actual exit reaches area47",
+      "passed": true,
+      "frame": 2024
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2024
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2036
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2048
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2060
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2072
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2084
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2096
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2108
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2120
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2123
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2135
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2147
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2159
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2171
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2171
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2183
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2195
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2207
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2219
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2231
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2243
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2255
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2267
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2267
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2279
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2289
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2291
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2293
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2295
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2297
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2299
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2301
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2303
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2305
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2307
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2309
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2311
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2313
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2315
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2317
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2319
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2321
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2323
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2325
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2327
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2413
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2415
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2417
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2419
+    },
+    {
+      "label": "ordinary walking proves the safe return circuit",
+      "passed": true,
+      "frame": 2419
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2419
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2431
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2443
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2455
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2467
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2479
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2491
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2503
+    },
+    {
+      "label": "actual exit reaches area46",
+      "passed": true,
+      "frame": 2543
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2543
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2555
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2567
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2579
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2589
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2601
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2613
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2625
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2627
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2638
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2650
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2662
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2674
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2686
+    },
+    {
+      "label": "shellwright earns real Bobclam without optional evolution",
+      "passed": true,
+      "frame": 2816
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2816
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2828
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2840
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2852
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2864
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2875
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2887
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2899
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2911
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2923
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2935
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2947
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2959
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 2971
+    },
+    {
+      "label": "actual exit reaches area47",
+      "passed": true,
+      "frame": 3007
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3007
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3019
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3031
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3043
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3055
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3067
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3079
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3091
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3103
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3115
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3127
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3139
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3151
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3163
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3175
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3187
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3199
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3211
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3223
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3235
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 3247
+    },
+    {
+ 

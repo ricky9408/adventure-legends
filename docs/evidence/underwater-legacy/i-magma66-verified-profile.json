@@ -1,0 +1,174 @@
+{
+  "scope": "Verified exact-I read-only emulator PC/function-return profile of strict native Magma66 failure. Inclusive nested times must not be added together.",
+  "rom_sha256": "e7015be4d1a4a97b382b06c02abc2de1bc86aaa808807c6e12213ab86c201055",
+  "source_manifest_sha256": "e2ac508e85ecffc3e5a40f773cc045212d004d6832d91b237ef03e5f1dd02dbe",
+  "source_producer_report_sha256": "4fb43c4ce2ffe01ab68492c7760bbd1b6fc553b0f808e41cf789eb237012b597",
+  "native_failure": {
+    "cycles": 296098,
+    "frame_budget": 280896,
+    "overrun": 15202,
+    "dropped_updates": 1,
+    "room": 38,
+    "hero": [
+      239,
+      221
+    ]
+  },
+  "verified_complete_emulator_state_bytes": 397312,
+  "complete_emulator_state_equal": true,
+  "state_diff_bytes": 0,
+  "matching_end_state_sha256": "ca8c45646a8d098b39cb5f8388df8fa614a4f1a914e3ed06945bd4a2db0f798e",
+  "records": 6143,
+  "lost_records": 0,
+  "unhandled_recursion": 0,
+  "update": {
+    "begin": 169147724,
+    "end": 169164239,
+    "probe": 0,
+    "entry_frame": 603,
+    "exit_frame": 603,
+    "entry_pc": 50344124,
+    "return_pc": 134218294,
+    "name": "update",
+    "cycles": 16515
+  },
+  "render": {
+    "begin": 169164536,
+    "end": 169443726,
+    "probe": 3,
+    "entry_frame": 603,
+    "exit_frame": 604,
+    "entry_pc": 50353512,
+    "return_pc": 134218302,
+    "name": "render",
+    "cycles": 279190
+  },
+  "nested_render_costs": {
+    "game_geometry_sync": {
+      "calls": 1,
+      "inclusive_cycles": 347,
+      "max_call_cycles": 347
+    },
+    "render": {
+      "calls": 1,
+      "inclusive_cycles": 279190,
+      "max_call_cycles": 279190
+    },
+    "render_static": {
+      "calls": 1,
+      "inclusive_cycles": 83467,
+      "max_call_cycles": 83467
+    },
+    "draw_world": {
+      "calls": 1,
+      "inclusive_cycles": 82565,
+      "max_call_cycles": 82565
+    },
+    "draw_actors": {
+      "calls": 1,
+      "inclusive_cycles": 192411,
+      "max_call_cycles": 192411
+    },
+    "draw_floating_hud": {
+      "calls": 1,
+      "inclusive_cycles": 9599,
+      "max_call_cycles": 9599
+    },
+    "draw_campaign_actors": {
+      "calls": 1,
+      "inclusive_cycles": 320,
+      "max_call_cycles": 320
+    },
+    "refresh_campaign_props": {
+      "calls": 1,
+      "inclusive_cycles": 153,
+      "max_call_cycles": 153
+    },
+    "magma_game_draw_overlay": {
+      "calls": 1,
+      "inclusive_cycles": 4634,
+      "max_call_cycles": 4634
+    },
+    "magma_game_draw_actors": {
+      "calls": 1,
+      "inclusive_cycles": 5630,
+      "max_call_cycles": 5630
+    },
+    "magma_powers_draw": {
+      "calls": 1,
+      "inclusive_cycles": 163367,
+      "max_call_cycles": 163367
+    },
+    "solid": {
+      "calls": 275,
+      "inclusive_cycles": 117873,
+      "max_call_cycles": 453
+    },
+    "magma_game_solid": {
+      "calls": 275,
+      "inclusive_cycles": 89548,
+      "max_call_cycles": 350
+    },
+    "magma_game_geometry_solid": {
+      "calls": 275,
+      "inclusive_cycles": 53303,
+      "max_call_cycles": 218
+    },
+    "obj_add": {
+      "calls": 30,
+      "inclusive_cycles": 12290,
+      "max_call_cycles": 467
+    },
+    "magma_powers.c:clear": {
+      "calls": 5,
+      "inclusive_cycles": 5560,
+      "max_call_cycles": 1112
+    },
+    "magma_powers.c:refresh_one": {
+      "calls": 15,
+      "inclusive_cycles": 143404,
+      "max_call_cycles": 33130
+    },
+    "magma_powers.c:draw_at": {
+      "calls": 10,
+      "inclusive_cycles": 5770,
+      "max_call_cycles": 577
+    },
+    "magma_powers.c:path_set.part.0": {
+      "calls": 5,
+      "inclusive_cycles": 1220,
+      "max_call_cycles": 272
+    },
+    "magma_powers.c:line": {
+      "calls": 5,
+      "inclusive_cycles": 2075,
+      "max_call_cycles": 443
+    },
+    "magma_powers.c:geometry": {
+      "calls": 1,
+      "inclusive_cycles": 2836,
+      "max_call_cycles": 2836
+    }
+  },
+  "following_obj_commit": {
+    "begin": 169702239,
+    "end": 169714406,
+    "probe": 7,
+    "entry_frame": 605,
+    "exit_frame": 605,
+    "entry_pc": 50335128,
+    "return_pc": 134218356,
+    "name": "obj_commit",
+    "cycles": 12167
+  },
+  "render_to_obj_commit_wait_cycles": 258513,
+  "measured_cost_location": "Five cold Magma66 geometry paths first refreshed during rendering;275 solid() probes cost117873 inclusive cycles. The global solid() routing/call layer accounts for28325 cycles above magma_game_solid, independently greater than15202 overrun.",
+  "production_source_modified": false,
+  "full_report": "/workspace/scratch/33ed39a77941/underwater-legacy-i-qa/build/magma-lifetime66-profile-v3/profile-report.json",
+  "full_report_sha256": "75e648d8445b4f39c6ae89c380a2707da5a98f1a72f1ca5b2a7585f52a20132d",
+  "observer_source": {
+    "/workspace/scratch/33ed39a77941/underwater-legacy-i-qa/build/magma-lifetime66-profile-v3/observer-source/profile_legacy_magma66.py": "43bb7479f3b4ccd4e6773dd4c80fcc93e1d634a558cfd2f8189f8ea0d176b0f7",
+    "/workspace/scratch/33ed39a77941/underwater-legacy-i-qa/build/magma-lifetime66-profile-v3/observer-source/legacy_mgba_profile.c": "8fb9d37af40f557072add2fd34da67c7a9d2c8ee905a600e1bc45c7db67b85b0"
+  },
+  "invalid_profile_note": "Initial v1 stopped one instruction beyond runFrame boundary and was rejected. v2/v3 drain pending emulation events at the correct boundary and reload both compared sessions from the same paired state; all397312 serialized bytes match."
+}

@@ -1,0 +1,69 @@
+{
+  "kind": "synthetic host render, developer-only, no controller/hardware claim",
+  "coverage": [
+    {
+      "trial": 0,
+      "different_channel_values": 1134
+    },
+    {
+      "trial": 1,
+      "different_channel_values": 609
+    },
+    {
+      "trial": 2,
+      "different_channel_values": 3779
+    },
+    {
+      "trial": 3,
+      "different_channel_values": 783
+    },
+    {
+      "trial": 4,
+      "different_channel_values": 246
+    },
+    {
+      "trial": 5,
+      "different_channel_values": 528
+    },
+    {
+      "trial": 6,
+      "different_channel_values": 654
+    },
+    {
+      "trial": 7,
+      "different_channel_values": 1161
+    },
+    {
+      "trial": 8,
+      "different_channel_values": 494
+    },
+    {
+      "trial": 9,
+      "different_channel_values": 1989
+    },
+    {
+      "trial": 10,
+      "different_channel_values": 1101
+    },
+    {
+      "trial": 11,
+      "different_channel_values": 630
+    },
+    {
+      "trial": 12,
+      "different_channel_values": 189
+    },
+    {
+      "trial": 13,
+      "different_channel_values": 1707
+    },
+    {
+      "trial": 14,
+      "different_channel_values": 886
+    },
+    {
+      "trial": 15,
+      "different_channel_values": 630
+    }
+  ]
+}

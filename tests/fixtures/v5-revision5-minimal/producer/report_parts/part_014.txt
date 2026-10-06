@@ -1,0 +1,493 @@
+"spirit": 22,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        31,
+        34,
+        77,
+        79,
+        85
+      ],
+      "individuals": [
+        {
+          "instance_id": 1,
+          "form_id": 1,
+          "record_hex": "01031028bc340000010000000000000001000100b179379e"
+        },
+        {
+          "instance_id": 2,
+          "form_id": 4,
+          "record_hex": "04031028bc34000002000000000000000200000062f36e3c"
+        },
+        {
+          "instance_id": 3,
+          "form_id": 7,
+          "record_hex": "07031041c8370000030000000000000003000100136da6da"
+        },
+        {
+          "instance_id": 4,
+          "form_id": 10,
+          "record_hex": "0a030e2860250000040000000000000004000000c4e6dd78"
+        },
+        {
+          "instance_id": 5,
+          "form_id": 19,
+          "record_hex": "13011014bc34000005000000000000000d00000075601517"
+        },
+        {
+          "instance_id": 6,
+          "form_id": 77,
+          "record_hex": "4d011014bc34000006000000000000001500000026da4cb5"
+        },
+        {
+          "instance_id": 7,
+          "form_id": 79,
+          "record_hex": "4f01121e644d000007000000000000001b000100d7538453"
+        },
+        {
+          "instance_id": 8,
+          "form_id": 85,
+          "record_hex": "55011228044e000008000000000000002100010088cdbbf1"
+        },
+        {
+          "instance_id": 9,
+          "form_id": 31,
+          "record_hex": "1f01181e88c0000009000000000000002b0000003947f38f"
+        },
+        {
+          "instance_id": 10,
+          "form_id": 34,
+          "record_hex": "2201181ee8bf00000a000000000000002e000100eac02a2e"
+        }
+      ],
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objectives": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        15,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gear": [
+        1,
+        4,
+        20
+      ],
+      "equipped": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_instance_progression_deltas": [
+        {
+          "instance_id": 1,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 2,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 3,
+          "level": 0,
+          "bond": 20,
+          "xp": 780
+        },
+        {
+          "instance_id": 4,
+          "level": 0,
+          "bond": 20,
+          "xp": 780
+        },
+        {
+          "instance_id": 5,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 6,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 7,
+          "level": 0,
+          "bond": 10,
+          "xp": 160
+        },
+        {
+          "instance_id": 8,
+          "level": 0,
+          "bond": 20,
+          "xp": 320
+        }
+      ]
+    },
+    "old-region-return": {
+      "status": {
+        "game_state": 1,
+        "room": 30,
+        "px": 288,
+        "py": 264,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 168,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 22,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        31,
+        34,
+        77,
+        79,
+        85
+      ],
+      "individuals": [
+        {
+          "instance_id": 1,
+          "form_id": 1,
+          "record_hex": "01031028bc340000010000000000000001000100b179379e"
+        },
+        {
+          "instance_id": 2,
+          "form_id": 4,
+          "record_hex": "04031028bc34000002000000000000000200000062f36e3c"
+        },
+        {
+          "instance_id": 3,
+          "form_id": 7,
+          "record_hex": "07031041c8370000030000000000000003000100136da6da"
+        },
+        {
+          "instance_id": 4,
+          "form_id": 10,
+          "record_hex": "0a030e2860250000040000000000000004000000c4e6dd78"
+        },
+        {
+          "instance_id": 5,
+          "form_id": 19,
+          "record_hex": "13011014bc34000005000000000000000d00000075601517"
+        },
+        {
+          "instance_id": 6,
+          "form_id": 77,
+          "record_hex": "4d011014bc34000006000000000000001500000026da4cb5"
+        },
+        {
+          "instance_id": 7,
+          "form_id": 79,
+          "record_hex": "4f01121e644d000007000000000000001b000100d7538453"
+        },
+        {
+          "instance_id": 8,
+          "form_id": 85,
+          "record_hex": "55011228044e000008000000000000002100010088cdbbf1"
+        },
+        {
+          "instance_id": 9,
+          "form_id": 31,
+          "record_hex": "1f01181e88c0000009000000000000002b0000003947f38f"
+        },
+        {
+          "instance_id": 10,
+          "form_id": 34,
+          "record_hex": "2201181ee8bf00000a000000000000002e000100eac02a2e"
+        }
+      ],
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objectives": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        15,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gear": [
+        1,
+        4,
+        20
+      ],
+      "equipped": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_instance_progression_deltas": [
+        {
+          "instance_id": 1,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 2,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 3,
+          "level": 0,
+          "bond": 20,
+          "xp": 780
+        },
+        {
+          "instance_id": 4,
+          "level": 0,
+          "bond": 20,
+          "xp": 780
+        },
+        {
+          "instance_id": 5,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 6,
+          "level": 0,
+          "bond": 0,
+          "xp": 0
+        },
+        {
+          "instance_id": 7,
+          "level": 0,
+          "bond": 10,
+          "xp": 160
+        },
+        {
+          "instance_id": 8,
+          "level": 0,
+          "bond": 20,
+          "xp": 320
+        }
+      ]
+    }
+  },
+  "synthetic_gameplay": false,
+  "enabled_rows_are_not_acquisition_evidence": true,
+  "coverage_scope": "Main-only minimal prerequisite proof; no optional acquisitions or evolutions claimed"
+}

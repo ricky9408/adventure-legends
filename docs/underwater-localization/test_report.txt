@@ -1,0 +1,12 @@
+test_dialogue_key_order_and_coverage (__main__.UnderwaterLocalizationTests.test_dialogue_key_order_and_coverage) ... ok
+test_english_source_unchanged_since_translation_review (__main__.UnderwaterLocalizationTests.test_english_source_unchanged_since_translation_review) ... ok
+test_form_names_are_unique_and_match_family_rows (__main__.UnderwaterLocalizationTests.test_form_names_are_unique_and_match_family_rows) ... ok
+test_gear_descriptions_match_actual_stat_vectors (__main__.UnderwaterLocalizationTests.test_gear_descriptions_match_actual_stat_vectors) ... ok
+test_native_pixel_width_and_raster_height (__main__.UnderwaterLocalizationTests.test_native_pixel_width_and_raster_height) ... ok
+test_player_facing_direction_order_and_guardian_language (__main__.UnderwaterLocalizationTests.test_player_facing_direction_order_and_guardian_language) ... ok
+test_ui_keys_exactly_cover_new_contract (__main__.UnderwaterLocalizationTests.test_ui_keys_exactly_cover_new_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.199s
+
+OK

@@ -31,6 +31,16 @@ void south_game_tick(void);
  * Ordinary entry resets room mechanisms but preserves pinned cross-room trial
  * evidence. Call reset after death/load/new game, before accepting input. */
 void south_game_reset(void);
+/* Exact old-state Southern rest validation. Anchor interaction requests first;
+ * engine warms both EVENT_PENDING pages, prepares one bounded slice/update,
+ * restores PLAY, then commits once. Commit performs the anchor/heal/checkpoint
+ * and existing dialogue/save request. Cancel on selection or any room entry.
+ * There is no caller-supplied validated flag or additional Save5 copy. */
+int south_game_request_rest(void);
+int south_game_rest_pending(void);
+unsigned south_game_prepare_rest(void);
+int south_game_commit_rest(void);
+void south_game_cancel_rest(void);
 void south_game_draw_actors(void);
 void south_game_draw_overlay(void);
 int south_game_name(void);

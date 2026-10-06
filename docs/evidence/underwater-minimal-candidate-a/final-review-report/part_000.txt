@@ -1,0 +1,1594 @@
+{
+  "suite": "underwater-independent-minimal-native-review",
+  "candidate_frozen": true,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "machine_state_loads": 0,
+  "source_main_report_sha256": "07f94cdb8c748bfeeceb2765b2212e6991211498aef975ff1d08f826fe189c88",
+  "source_main_report": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/underwater-journey.json",
+  "source_main_assertions": 762,
+  "source_main_terminal_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+  "helper_source_snapshot_sha256": "6c5ee26ee03840779c05fa114b1f660b52b6ed4dc428d501d0925aa4fc693faa",
+  "review_source_sha256": "da0637bc8eda9a2cb747e0e66bf3995a461f728652ec2b27cd151e060d044853",
+  "cold_boots": [
+    {
+      "label": "main-independent-cold-import",
+      "source_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/09-main-cleared-town.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "native-save-independent-reboot",
+      "source_sram_sha256": "76b356c19d72f451f600eccb968fe0d2807b938413890395e7e6192ef08a2651",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/lifecycle-03/11-main-native-save.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "surface-return-baseline",
+      "source_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/09-main-cleared-town.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "optional-ordinary-exits-baseline",
+      "source_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/09-main-cleared-town.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "archive-reciprocal-exits-baseline",
+      "source_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/09-main-cleared-town.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "death-retry-baseline",
+      "source_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/09-main-cleared-town.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "death-retry-independent-reboot",
+      "source_sram_sha256": "78267599b64378c7adb2580bef022998521782d505a192e16b5625650627664a",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/lifecycle-03/19-ordinary-underwater-retry.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 47,
+        "px": 64,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    },
+    {
+      "label": "cold-dialogs-baseline",
+      "source_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+      "source_sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/09-main-cleared-town.sav",
+      "fresh_emulator": true,
+      "machine_state_loaded": false,
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      }
+    }
+  ],
+  "exit_checks": [
+    {
+      "from": 46,
+      "to": 38,
+      "spawn": 4,
+      "position": [
+        416,
+        240
+      ],
+      "frame": 399
+    },
+    {
+      "from": 38,
+      "to": 46,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 457
+    },
+    {
+      "from": 46,
+      "to": 47,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 641
+    },
+    {
+      "from": 47,
+      "to": 46,
+      "spawn": 3,
+      "position": [
+        448,
+        160
+      ],
+      "frame": 707
+    },
+    {
+      "from": 46,
+      "to": 48,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 1091
+    },
+    {
+      "from": 48,
+      "to": 49,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 1412
+    },
+    {
+      "from": 49,
+      "to": 48,
+      "spawn": 1,
+      "position": [
+        240,
+        32
+      ],
+      "frame": 1469
+    },
+    {
+      "from": 48,
+      "to": 46,
+      "spawn": 1,
+      "position": [
+        240,
+        32
+      ],
+      "frame": 1740
+    },
+    {
+      "from": 46,
+      "to": 47,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 641
+    },
+    {
+      "from": 47,
+      "to": 50,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 1039
+    },
+    {
+      "from": 50,
+      "to": 47,
+      "spawn": 1,
+      "position": [
+        400,
+        48
+      ],
+      "frame": 1097
+    },
+    {
+      "from": 47,
+      "to": 50,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 1174
+    },
+    {
+      "from": 50,
+      "to": 51,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 1333
+    },
+    {
+      "from": 51,
+      "to": 50,
+      "spawn": 1,
+      "position": [
+        208,
+        112
+      ],
+      "frame": 1399
+    },
+    {
+      "from": 50,
+      "to": 51,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 1465
+    },
+    {
+      "from": 51,
+      "to": 52,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 1838
+    },
+    {
+      "from": 52,
+      "to": 51,
+      "spawn": 1,
+      "position": [
+        432,
+        112
+      ],
+      "frame": 1896
+    },
+    {
+      "from": 51,
+      "to": 48,
+      "spawn": 2,
+      "position": [
+        448,
+        160
+      ],
+      "frame": 2406
+    },
+    {
+      "from": 48,
+      "to": 51,
+      "spawn": 2,
+      "position": [
+        32,
+        160
+      ],
+      "frame": 2471
+    },
+    {
+      "from": 51,
+      "to": 52,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 2944
+    },
+    {
+      "from": 52,
+      "to": 49,
+      "spawn": 1,
+      "position": [
+        208,
+        112
+      ],
+      "frame": 3152
+    },
+    {
+      "from": 49,
+      "to": 52,
+      "spawn": 2,
+      "position": [
+        32,
+        112
+      ],
+      "frame": 3218
+    },
+    {
+      "from": 52,
+      "to": 53,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 3425
+    },
+    {
+      "from": 53,
+      "to": 52,
+      "spawn": 1,
+      "position": [
+        208,
+        112
+      ],
+      "frame": 3483
+    },
+    {
+      "from": 52,
+      "to": 53,
+      "spawn": 0,
+      "position": [
+        120,
+        140
+      ],
+      "frame": 3548
+    },
+    {
+      "from": 53,
+      "to": 46,
+      "spawn": 1,
+      "position": [
+        240,
+        32
+      ],
+      "frame": 3759
+    },
+    {
+      "from": 46,
+      "to": 47,
+      "spawn": 0,
+      "position": [
+        240,
+        288
+      ],
+      "frame": 641
+    }
+  ],
+  "damage_trace": [
+    {
+      "frame": 978,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 88,
+          "y": 177,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 988,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 89,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 998,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 91,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1008,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 93,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1018,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 94,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1028,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1038,
+      "state": 1,
+      "hp_q4": 80,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1048,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1058,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1068,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1078,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1088,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1098,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1108,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1118,
+      "state": 1,
+      "hp_q4": 64,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1128,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1138,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1148,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1158,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1168,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1178,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1188,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1198,
+      "state": 1,
+      "hp_q4": 48,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1208,
+      "state": 1,
+      "hp_q4": 32,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+     

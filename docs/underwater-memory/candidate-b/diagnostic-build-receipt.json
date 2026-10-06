@@ -1,0 +1,14 @@
+{
+  "candidate_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+  "candidate_source_manifest_sha256": "eab1962002f85dc65f6b754c0ff625dc9cc4eb0d937d29ebc9f1f5f7f0e62f80",
+  "control_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+  "control_byte_identical_to_candidate": true,
+  "diagnostic_rom_sha256": "c0e5574d98542f05a87f490d254b3008d36673c76061d2d3c1c6295cb502d2a7",
+  "diagnostic_source_manifest_sha256": "95f673259a0aa7dbe7218135330250072e14963f02fd1440a86083a0741cda6a",
+  "runtime_source_changes": [
+    "src/startup.s"
+  ],
+  "compiler_flags": "-mcpu=arm7tdmi -mthumb-interwork -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -MMD -MP -fstack-usage",
+  "source_inputs": 1161,
+  "script_sha256": "e1515d63d28c4e8070bc5901c67c3774655ecfbe5261328a50a5426ef6edc3bf"
+}

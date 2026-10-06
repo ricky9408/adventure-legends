@@ -1,0 +1,3 @@
+Original code-native pixel geometry. No Nintendo/Pokemon extraction, tracing, or third-party raster inputs.
+696 original indexed images. All16px fields leave a transparent one-pixel rim. Portraits separately composed at32px.
+Shared existing RGB555 palette unchanged. Art reviews are not emulator evidence.

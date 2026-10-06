@@ -1,0 +1,25 @@
+test_all_older_authored_rows_unchanged (__main__.SouthernAuthoringTests.test_all_older_authored_rows_unchanged) ... ok
+test_archive_schema_and_generation (__main__.SouthernAuthoringTests.test_archive_schema_and_generation) ... ok
+test_branch_duplicate_keys_masks_merge_and_cycle_fail (__main__.SouthernAuthoringTests.test_branch_duplicate_keys_masks_merge_and_cycle_fail) ... ok
+test_capability_projection_is_append_only (__main__.SouthernAuthoringTests.test_capability_projection_is_append_only) ... ok
+test_catalog_edge_order_does_not_change_manifest_table_order (__main__.SouthernAuthoringTests.test_catalog_edge_order_does_not_change_manifest_table_order) ... ok
+test_checked_in_generator_is_deterministic (__main__.SouthernAuthoringTests.test_checked_in_generator_is_deterministic) ... ok
+test_exact_enabled_revision_and_order (__main__.SouthernAuthoringTests.test_exact_enabled_revision_and_order) ... ok
+test_identity_and_schema1_byte_pins (__main__.SouthernAuthoringTests.test_identity_and_schema1_byte_pins) ... ok
+test_inheritance_and_graph_adversaries (__main__.SouthernAuthoringTests.test_inheritance_and_graph_adversaries) ... ok
+test_new_form_contract_and_offsets (__main__.SouthernAuthoringTests.test_new_form_contract_and_offsets) ... ok
+test_reviewed_branch_authoring_and_multi_edge_offsets (__main__.SouthernAuthoringTests.test_reviewed_branch_authoring_and_multi_edge_offsets) ... ok
+test_reviewed_current_catalog (__main__.SouthernAuthoringTests.test_reviewed_current_catalog) ... ok
+test_rom_index_bad_ids_counts_and_endpoints_fail_closed (__main__.SouthernAuthoringTests.test_rom_index_bad_ids_counts_and_endpoints_fail_closed) ... ok
+test_rom_index_byte_boundary_and_reordered_rows (__main__.SouthernAuthoringTests.test_rom_index_byte_boundary_and_reordered_rows) ... ok
+test_rom_indexes_are_complete_row_plus_one_maps (__main__.SouthernAuthoringTests.test_rom_indexes_are_complete_row_plus_one_maps) ... ok
+test_schema2_ceiling_is_not_runtime_enablement (__main__.SouthernAuthoringTests.test_schema2_ceiling_is_not_runtime_enablement) ... ok
+test_table_bounds_and_contiguous_edges (__main__.SouthernAuthoringTests.test_table_bounds_and_contiguous_edges) ... ok
+test_trial_bindings_preserve_legacy_masks (__main__.SouthernAuthoringTests.test_trial_bindings_preserve_legacy_masks) ... ok
+test_trial_wire_and_local_key_adversaries (__main__.SouthernAuthoringTests.test_trial_wire_and_local_key_adversaries) ... ok
+test_wrong_family_even_with_equal_trial_mask (__main__.SouthernAuthoringTests.test_wrong_family_even_with_equal_trial_mask) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.610s
+
+OK

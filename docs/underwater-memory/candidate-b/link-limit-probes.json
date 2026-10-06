@@ -1,0 +1,27 @@
+{
+  "production_artifacts_modified": false,
+  "linker_script_modified": false,
+  "probes": [
+    {
+      "probe": "iwram",
+      "additional_bytes": 512,
+      "exit_code": 1,
+      "expected_rejection_observed": true,
+      "expected_diagnostic": "IWRAM code overlaps reserved stack space"
+    },
+    {
+      "probe": "ewram",
+      "additional_bytes": 262144,
+      "exit_code": 1,
+      "expected_rejection_observed": true,
+      "expected_diagnostic": "EWRAM"
+    },
+    {
+      "probe": "rom",
+      "additional_bytes": 33554432,
+      "exit_code": 1,
+      "expected_rejection_observed": true,
+      "expected_diagnostic": "ROM"
+    }
+  ]
+}

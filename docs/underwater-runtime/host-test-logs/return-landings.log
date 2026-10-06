@@ -1,0 +1,12 @@
+test_all_nine_reciprocal_door_pairs_arrive_at_the_return_door (__main__.ReturnLandings.test_all_nine_reciprocal_door_pairs_arrive_at_the_return_door) ... ok
+test_exact_spawn_rows_reload_and_anchor_scope (__main__.ReturnLandings.test_exact_spawn_rows_reload_and_anchor_scope) ... ok
+test_frozen_dispatch_checks_magma_return_before_scene_checkpoint_mutation (__main__.ReturnLandings.test_frozen_dispatch_checks_magma_return_before_scene_checkpoint_mutation) ... ok
+test_layout_target_spawn_matches_runtime_routes (__main__.ReturnLandings.test_layout_target_spawn_matches_runtime_routes) ... ok
+test_magma_lift_append_preserves_old_rows_gate_and_a_targets (__main__.ReturnLandings.test_magma_lift_append_preserves_old_rows_gate_and_a_targets) ... ok
+test_nacreway_south_transition_requires_its_visible_door (__main__.ReturnLandings.test_nacreway_south_transition_requires_its_visible_door) ... ok
+test_new_optional_entrances_preserve_story_gates (__main__.ReturnLandings.test_new_optional_entrances_preserve_story_gates) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.040s
+
+OK

@@ -43,9 +43,10 @@ static unsigned short world_clock;
  * travel preserves evidence. Restart/death/load clears this entire record. */
 static unsigned char trial_index=255,trial_slot=255,trial_bits,trial_aux,trial_order;
 static CreatureU32 trial_id;
-static const short spawns[8][4][2]={{{240,284},{304,32},{80,152},{112,264}},{{240,284},{80,104},{400,72},{80,280}},{{120,136}},{{120,136}},{{120,136}},{{120,136}},{{120,136}},{{120,136}}};
+/* Current-r6 shell-lift return appends slot4; historical slots0..3 stay exact. */
+static const short spawns[8][5][2]={{{240,284},{304,32},{80,152},{112,264},{416,240}},{{240,284},{80,104},{400,72},{80,280}},{{120,136}},{{120,136}},{{120,136}},{{120,136}},{{120,136}},{{120,136}}};
 int magma_game_is_room(unsigned a){return a>=38&&a<=45;}
-unsigned magma_game_spawn_count(unsigned a){return !magma_game_is_room(a)?0:a<40?4:1;}
+unsigned magma_game_spawn_count(unsigned a){return !magma_game_is_room(a)?0:a==38?5:a==39?4:1;}
 int magma_game_spawn(unsigned a,unsigned s,int*x,int*y){if(s>=magma_game_spawn_count(a))return 0;if(x)*x=spawns[a-38][s][0];if(y)*y=spawns[a-38][s][1];return 1;}
 #include "magma_puzzle.inc"
 static int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<r;}
@@ -79,11 +80,24 @@ static void reset_scene(void){unsigned bi;branch_visible=0;for(bi=0;bi<160;bi++)
  * repair. This durable objective never supplies a trial or teaching proof. */
 screen_x=(unsigned char)((adventure_save.quests.objectives[35]&1)?176:128);hood=guide=seed=wind=brush=samples=hooks=bypass=basin=0;shelf=pot_hood=pots=clapper=sound=spill=second=door_notice=reg_divert=reg_hit=reg_window_hit=action_hits=0;action_token[0]=action_token[1]=action_token[2]=action_token[3]=0;reg_lane=0;world_clock=0;magma_game_machine_stage=(unsigned char)((adventure_save.quests.objectives[32]&8)?5:0);magma_game_machine_ticks=0;magma_game_machine_hp=(unsigned char)(magma_game_machine_stage==5?0:192);changed();}
 static void cancel_anchor_prepare(void){if(pending_anchor_area&&(unsigned)room==pending_anchor_area&&checkpoint_spawn==3)checkpoint_spawn=pending_anchor_checkpoint;pending_anchor_area=0;}
-COLD void magma_game_reset(void){cancel_anchor_prepare();carrying=0;clear_trial();reset_scene();}
+COLD void magma_game_reset(void){magma_game_cancel_return();cancel_anchor_prepare();carrying=0;clear_trial();reset_scene();}
 int magma_game_can_enter(unsigned a){sync();return magma_can_enter(&adventure_save,a);}
-COLD int magma_game_enter(unsigned a,unsigned s){int r,x,y;sync();if(!magma_game_spawn(a,s,&x,&y)||!magma_can_enter(&adventure_save,a))return 0;r=magma_visit(&adventure_save,a);if(r==MAGMA_INVALID||r==MAGMA_LOCKED)return 0;room=(int)a;checkpoint_spawn=(int)s;px=x;py=y;reset_scene();if(a>=42)offer(32);adventure_save.campaign.room=(Save4U8)a;adventure_save.campaign.spawn=(Save4U8)s;dirty=1;persist();return 1;}
+#include "magma_return_job.inc"
+COLD int magma_game_enter(unsigned a,unsigned s){int r,x,y;sync();if(!magma_game_spawn(a,s,&x,&y)||!magma_can_enter(&adventure_save,a)||(a==38&&s==4&&!(adventure_save.quests.region_flags[4]&1)))return 0;r=magma_return_consume(a,s)?MAGMA_UNCHANGED:magma_visit(&adventure_save,a);if(r==MAGMA_INVALID||r==MAGMA_LOCKED)return 0;room=(int)a;checkpoint_spawn=(int)s;px=x;py=y;reset_scene();if(a>=42)offer(32);adventure_save.campaign.room=(Save4U8)a;adventure_save.campaign.spawn=(Save4U8)s;dirty=1;persist();return 1;}
 static int trial_brick(void){return room==40&&(trial_index==0||trial_index==1);}
 int magma_game_solid(int x,int y){if(!magma_game_is_room((unsigned)room))return 0;if(room>=42&&room<=44)return magma_puzzle_solid(&magma_game_puzzle,(unsigned)room,x,y);if(trial_brick())return magma_puzzle_solid(&magma_game_puzzle,40,x,y);if(magma_game_geometry_solid((unsigned)room,x,y))return 1;if(room==38&&prop_hit(x,y,lesson_x,232))return 1;if(room==39&&prop_hit(x,y,screen_x,264))return 1;return 0;}
+COLD int magma_game_clear_box(int x0,int y0,int x1,int y1){const MagmaArtRoom*r;const unsigned short*previous=0;int y,ox,oy;
+ if((room!=38&&room!=39)||x0>x1||y0>y1)return 0;
+ r=&magma_art_rooms[room-38];if(x0<0||y0<0||x1>=r->width||y1>=r->height)return 0;
+ for(y=y0;y<=y1;y++){const unsigned short*b=r->collision_bands+r->collision_rows[y];unsigned n;
+  if(b==previous)continue;
+  previous=b;n=*b++;
+  /* The shared generator emits sorted, disjoint half-open intervals. */
+  while(n--){if(x1<b[0])break;if(x0<b[1])return 0;b+=2;}
+ }
+ ox=room==38?lesson_x:screen_x;oy=room==38?232:264;
+ return !(x1>=ox-11&&x0<ox+11&&y1>=oy-11&&y0<oy+11);
+}
 void magma_game_collision_inputs(unsigned out[3]){if(!out)return;out[0]=out[1]=out[2]=0;if(room>=42&&room<=44){out[0]=magma_game_puzzle.cell[0];out[1]=magma_puzzle_count((unsigned)room)>1?magma_game_puzzle.cell[1]:0;}else if(trial_brick()){out[0]=magma_game_puzzle.cell[0];out[2]=1;}else if(room==38)out[0]=lesson_x;else if(room==39)out[0]=screen_x;}
 unsigned magma_game_enemy_spawns(unsigned a,const MagmaEnemySpawn**out){static const MagmaEnemySpawn f[5]={{184,116,5,0,0},{256,264,5,0,1},{424,120,5,2,3},{328,56,5,0,4},{56,232,5,0,2}},g[2]={{56,120,4,0,3},{184,136,4,0,1}},one[1]={{24,88,4,0,2}},two[2]={{24,88,4,0,2},{216,88,4,0,0}};const MagmaEnemySpawn*p=a==39?f:a==41?g:a==42||a==43?one:a==44?two:0;if(out)*out=p;return a==39?5:a==41||a==44?2:a==42||a==43?1:0;}
 static COLD int door(unsigned dest,unsigned spawn){if(!magma_can_enter(&adventure_save,dest)){if(!door_notice){say(TX_MG_LOCKED,TX_MG_LOCKEDB);door_notice=40;}return 1;}persist();enter_room((int)dest,(int)spawn);return 1;}

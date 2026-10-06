@@ -20,7 +20,8 @@ U8, U16, U32, S16 = C.c_ubyte, C.c_ushort, C.c_uint, C.c_short
 LEGACY_IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
 SOUTHERN_IDS = [4, 12, 36, 52, 66, 84]
 MAGMA_IDS = [20, 37, 53, 67, 85, 5]
-IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS
+UNDERWATER_IDS = [6, 13, 38, 54, 68, 86]
+IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS + UNDERWATER_IDS
 OK, INVALID, BUSY, INCOMPATIBLE, FULL, DUPLICATE, ALREADY, PROTECTED, CONFIRM = range(9)
 
 
@@ -214,6 +215,25 @@ class EquipmentTests(unittest.TestCase):
         self.assertEqual(bytes(self.s), bytes(expected))
         self.assertEqual([self.lib.equipment_reward_item(i) for i in range(19)], LEGACY_IDS)
 
+    def test_accepted_magma_thirty_one_rows_are_immutable(self):
+        catalog = json.loads((ROOT / 'assets/equipment/catalog.json').read_text())
+        catalog['items'] = catalog['items'][:31]
+        catalog['reward_sources'] = catalog['reward_sources'][:31]
+        digest = hashlib.sha256(json.dumps(catalog, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        self.assertEqual(digest, 'a14644f3bd0580d47b102376e56271617844e629f52be77898b97243ccebe571')
+
+    def test_underwater_six_items_exact_source_vectors(self):
+        plan = json.loads((ROOT / 'docs/underwater-design/world_plan.json').read_text())
+        slots = ['weapon', 'body', 'boots', 'belt', 'ring']
+        for row in plan['equipment']:
+            item = row['item']; source = row['reward_source']
+            definition = self.lib.equipment_definition(item['id']).contents
+            self.assertEqual(self.lib.equipment_reward_item(source), item['id'])
+            self.assertEqual(self.lib.equipment_reward_source(item['id']), source)
+            self.assertEqual(definition.slot, slots.index(item['slot']))
+            self.assertEqual(definition.phase, 255)
+            self.assertEqual({key: getattr(definition.stats, key) for key, _ in Bonuses._fields_}, item['stats'])
+
     def test_southern_definitions_match_exact_sidegrade_contract(self):
         # All eight bonuses are explicit; an omitted design bonus must be zero.
         expected = [
@@ -236,7 +256,7 @@ class EquipmentTests(unittest.TestCase):
                 self.assertEqual(self.lib.equipment_name(item).decode(), name)
                 self.assertEqual(self.lib.equipment_reward_item(source), item)
                 self.assertEqual(self.lib.equipment_reward_source(item), source)
-        self.assertEqual(self.lib.equipment_reward_item(31), 0)
+        self.assertEqual(self.lib.equipment_reward_item(37), 0)
 
     def test_magma_six_exact_vectors_sources_and_derived_comparisons(self):
         allocation=json.loads((ROOT/'docs/magma-design/magma_allocation.json').read_text())

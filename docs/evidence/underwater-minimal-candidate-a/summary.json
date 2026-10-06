@@ -1,0 +1,1682 @@
+{
+  "candidate": {
+    "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+    "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+    "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+    "source_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+    "bridge_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3"
+  },
+  "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "minimal_input_sram_sha256": "f584de3b29cb77731148b31b99dc40e0c7e4ec05f1aac42e0d38dd5b44612eeb",
+  "main": {
+    "assertions": 762,
+    "failures": 0,
+    "native_windows": [
+      {
+        "name": "nacreway-idle",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 21474
+      },
+      {
+        "name": "vestibule-real-echo",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 171599
+      },
+      {
+        "name": "vestibule-real-ballast",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 179027
+      },
+      {
+        "name": "stacks-real-wide-handle",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 206483
+      },
+      {
+        "name": "stacks-real-return-handle",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 217550
+      },
+      {
+        "name": "listening-real-echo",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 194148
+      },
+      {
+        "name": "court-real-echo",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 197222
+      },
+      {
+        "name": "court-real-ballast",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 195807
+      }
+    ],
+    "histories_after_main": [
+      1,
+      4,
+      7,
+      10,
+      19,
+      31,
+      34,
+      49,
+      52,
+      77,
+      79,
+      85
+    ]
+  },
+  "final_review": {
+    "assertions": 1187,
+    "passing_assertions": 1177,
+    "timing_failures": 10,
+    "functional_failures": 0,
+    "acceptance_passed": false,
+    "cases": [
+      {
+        "case": "cold-native-save-reboot",
+        "passed": false
+      },
+      {
+        "case": "magma-surface-reciprocal-return",
+        "passed": false
+      },
+      {
+        "case": "ordinary-optional-garden-exits",
+        "passed": false
+      },
+      {
+        "case": "archive-and-shortcut-reciprocal-exits",
+        "passed": false
+      },
+      {
+        "case": "ordinary-death-retry-reboot",
+        "passed": false
+      },
+      {
+        "case": "cold-dialogs-and-ineligible-preview",
+        "passed": false
+      }
+    ],
+    "whole_action_hardware_frames": 6822,
+    "whole_action_windows": [
+      {
+        "name": "main-independent-cold-import-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220688,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "11-main-native-save",
+        "hardware_frames": 85,
+        "updates": 85,
+        "raw_modulo_delta_sum": 85,
+        "counter_resets": 0,
+        "flips": 85,
+        "max_cycles": 232492,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "native-save-independent-reboot-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220694,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "surface-return-baseline-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220688,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-46-to-38",
+        "hardware_frames": 197,
+        "updates": 196,
+        "raw_modulo_delta_sum": 196,
+        "counter_resets": 0,
+        "flips": 196,
+        "max_cycles": 295856,
+        "save_frames": 34,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-38-to-46",
+        "hardware_frames": 58,
+        "updates": 58,
+        "raw_modulo_delta_sum": 58,
+        "counter_resets": 0,
+        "flips": 58,
+        "max_cycles": 206942,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "optional-ordinary-exits-baseline-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220688,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-46-to-47",
+        "hardware_frames": 439,
+        "updates": 439,
+        "raw_modulo_delta_sum": 439,
+        "counter_resets": 0,
+        "flips": 439,
+        "max_cycles": 241363,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-47-to-46",
+        "hardware_frames": 66,
+        "updates": 66,
+        "raw_modulo_delta_sum": 66,
+        "counter_resets": 0,
+        "flips": 66,
+        "max_cycles": 210327,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-46-to-48",
+        "hardware_frames": 384,
+        "updates": 384,
+        "raw_modulo_delta_sum": 384,
+        "counter_resets": 0,
+        "flips": 384,
+        "max_cycles": 231935,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "whole-exit-48-to-49",
+        "hardware_frames": 321,
+        "updates": 321,
+        "raw_modulo_delta_sum": 321,
+        "counter_resets": 0,
+        "flips": 321,
+        "max_cycles": 198372,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "whole-exit-49-to-48",
+        "hardware_frames": 57,
+        "updates": 57,
+        "raw_modulo_delta_sum": 57,
+        "counter_resets": 0,
+        "flips": 57,
+        "max_cycles": 233262,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-48-to-46",
+        "hardware_frames": 271,
+        "updates": 271,
+        "raw_modulo_delta_sum": 271,
+        "counter_resets": 0,
+        "flips": 271,
+        "max_cycles": 210552,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "archive-reciprocal-exits-baseline-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220688,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-46-to-47",
+        "hardware_frames": 439,
+        "updates": 439,
+        "raw_modulo_delta_sum": 439,
+        "counter_resets": 0,
+        "flips": 439,
+        "max_cycles": 241363,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-47-to-50",
+        "hardware_frames": 398,
+        "updates": 398,
+        "raw_modulo_delta_sum": 398,
+        "counter_resets": 0,
+        "flips": 398,
+        "max_cycles": 207376,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-50-to-47",
+        "hardware_frames": 58,
+        "updates": 58,
+        "raw_modulo_delta_sum": 58,
+        "counter_resets": 0,
+        "flips": 58,
+        "max_cycles": 233331,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-47-to-50",
+        "hardware_frames": 77,
+        "updates": 77,
+        "raw_modulo_delta_sum": 77,
+        "counter_resets": 0,
+        "flips": 77,
+        "max_cycles": 207480,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-50-to-51",
+        "hardware_frames": 159,
+        "updates": 159,
+        "raw_modulo_delta_sum": 159,
+        "counter_resets": 0,
+        "flips": 159,
+        "max_cycles": 217904,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-51-to-50",
+        "hardware_frames": 66,
+        "updates": 66,
+        "raw_modulo_delta_sum": 66,
+        "counter_resets": 0,
+        "flips": 66,
+        "max_cycles": 207480,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-50-to-51",
+        "hardware_frames": 66,
+        "updates": 66,
+        "raw_modulo_delta_sum": 66,
+        "counter_resets": 0,
+        "flips": 66,
+        "max_cycles": 217468,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-51-to-52",
+        "hardware_frames": 373,
+        "updates": 373,
+        "raw_modulo_delta_sum": 373,
+        "counter_resets": 0,
+        "flips": 373,
+        "max_cycles": 217770,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-52-to-51",
+        "hardware_frames": 58,
+        "updates": 58,
+        "raw_modulo_delta_sum": 58,
+        "counter_resets": 0,
+        "flips": 58,
+        "max_cycles": 226281,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-51-to-48",
+        "hardware_frames": 510,
+        "updates": 510,
+        "raw_modulo_delta_sum": 510,
+        "counter_resets": 0,
+        "flips": 510,
+        "max_cycles": 234016,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "whole-exit-48-to-51",
+        "hardware_frames": 65,
+        "updates": 65,
+        "raw_modulo_delta_sum": 65,
+        "counter_resets": 0,
+        "flips": 65,
+        "max_cycles": 226220,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-51-to-52",
+        "hardware_frames": 473,
+        "updates": 473,
+        "raw_modulo_delta_sum": 473,
+        "counter_resets": 0,
+        "flips": 473,
+        "max_cycles": 217770,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-52-to-49",
+        "hardware_frames": 208,
+        "updates": 208,
+        "raw_modulo_delta_sum": 208,
+        "counter_resets": 0,
+        "flips": 208,
+        "max_cycles": 191856,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "whole-exit-49-to-52",
+        "hardware_frames": 66,
+        "updates": 66,
+        "raw_modulo_delta_sum": 66,
+        "counter_resets": 0,
+        "flips": 66,
+        "max_cycles": 218279,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-52-to-53",
+        "hardware_frames": 207,
+        "updates": 207,
+        "raw_modulo_delta_sum": 207,
+        "counter_resets": 0,
+        "flips": 207,
+        "max_cycles": 216119,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-53-to-52",
+        "hardware_frames": 58,
+        "updates": 58,
+        "raw_modulo_delta_sum": 58,
+        "counter_resets": 0,
+        "flips": 58,
+        "max_cycles": 218279,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-52-to-53",
+        "hardware_frames": 65,
+        "updates": 65,
+        "raw_modulo_delta_sum": 65,
+        "counter_resets": 0,
+        "flips": 65,
+        "max_cycles": 216628,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-53-to-46",
+        "hardware_frames": 211,
+        "updates": 211,
+        "raw_modulo_delta_sum": 211,
+        "counter_resets": 0,
+        "flips": 211,
+        "max_cycles": 210701,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "death-retry-baseline-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220688,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "whole-exit-46-to-47",
+        "hardware_frames": 439,
+        "updates": 439,
+        "raw_modulo_delta_sum": 439,
+        "counter_resets": 0,
+        "flips": 439,
+        "max_cycles": 241363,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "17-commons-safe-rest",
+        "hardware_frames": 85,
+        "updates": 85,
+        "raw_modulo_delta_sum": 85,
+        "counter_resets": 0,
+        "flips": 85,
+        "max_cycles": 242150,
+        "save_frames": 33,
+        "event_frames": 51
+      },
+      {
+        "name": "ordinary-death-retry-native",
+        "hardware_frames": 34,
+        "updates": 34,
+        "raw_modulo_delta_sum": 34,
+        "counter_resets": 0,
+        "flips": 34,
+        "max_cycles": 236555,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "death-retry-independent-reboot-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2226970,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "cold-dialogs-baseline-whole-continue",
+        "hardware_frames": 52,
+        "updates": 44,
+        "raw_modulo_delta_sum": 4294967212,
+        "counter_resets": 1,
+        "flips": 45,
+        "max_cycles": 2220688,
+        "save_frames": 33,
+        "event_frames": 0
+      },
+      {
+        "name": "cold-keeper-return-dialog",
+        "hardware_frames": 189,
+        "updates": 189,
+        "raw_modulo_delta_sum": 189,
+        "counter_resets": 0,
+        "flips": 189,
+        "max_cycles": 173453,
+        "save_frames": 0,
+        "event_frames": 0
+      },
+      {
+        "name": "cold-shellwright-return-dialog",
+        "hardware_frames": 194,
+        "updates": 194,
+        "raw_modulo_delta_sum": 194,
+        "counter_resets": 0,
+        "flips": 194,
+        "max_cycles": 171347,
+        "save_frames": 0,
+        "event_frames": 0
+      },
+      {
+        "name": "cold-ineligible-base-evolution-preview",
+        "hardware_frames": 30,
+        "updates": 29,
+        "raw_modulo_delta_sum": 29,
+        "counter_resets": 0,
+        "flips": 29,
+        "max_cycles": 286896,
+        "save_frames": 0,
+        "event_frames": 0
+      }
+    ],
+    "failures": [
+      {
+        "case": "main-independent-cold-import-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('main-independent-cold-import-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220688,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "native-save-independent-reboot-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('native-save-independent-reboot-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220694,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "surface-return-baseline-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('surface-return-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220688,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "whole-exit-46-to-38",
+        "kind": "whole-action-native-timing",
+        "error": "('whole-exit-46-to-38 updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 38, 'px': 416, 'py': 240, 'hp': 6, 'chapter_flags': 3, 'camera_x': 240, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 4, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 38,
+          "px": 416,
+          "py": 240,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 240,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 4,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 366,
+            "frame_before": 207,
+            "frame_after": 207,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 295856,
+            "state": 6,
+            "room": 38
+          }
+        ]
+      },
+      {
+        "case": "optional-ordinary-exits-baseline-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('optional-ordinary-exits-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220688,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "archive-reciprocal-exits-baseline-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('archive-reciprocal-exits-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220688,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "death-retry-baseline-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('death-retry-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220688,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "death-retry-independent-reboot-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('death-retry-independent-reboot-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 47, 'px': 64, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 47,
+          "px": 64,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2226970,
+            "state": 6,
+            "room": 47
+          }
+        ]
+      },
+      {
+        "case": "cold-dialogs-baseline-whole-continue",
+        "kind": "whole-action-native-timing",
+        "error": "('cold-dialogs-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 80,
+          "py": 272,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 0,
+          "camera_y": 160,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 31,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 151,
+            "frame_before": 128,
+            "frame_after": 0,
+            "counter_reset": true,
+            "delta": 4294967168,
+            "flip": true,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 152,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 153,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 154,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 155,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 156,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 157,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 3158,
+            "state": 1,
+            "room": 0
+          },
+          {
+            "hardware_frame": 158,
+            "frame_before": 0,
+            "frame_after": 0,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 2220688,
+            "state": 6,
+            "room": 46
+          }
+        ]
+      },
+      {
+        "case": "cold-ineligible-base-evolution-preview",
+        "kind": "whole-action-native-timing",
+        "error": "('cold-ineligible-base-evolution-preview updates and page-flips every native hardware frame within budget', {'game_state': 7, 'room': 46, 'px': 340, 'py': 85, 'hp': 6, 'chapter_flags': 3, 'camera_x': 219, 'camera_y': 5, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+        "status": {
+          "game_state": 7,
+          "room": 46,
+          "px": 340,
+          "py": 85,
+          "hp": 6,
+          "chapter_flags": 3,
+          "camera_x": 219,
+          "camera_y": 5,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 30,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        },
+        "bad_frames": [
+          {
+            "hardware_frame": 750,
+            "frame_before": 590,
+            "frame_after": 590,
+            "counter_reset": false,
+            "delta": 0,
+            "flip": false,
+            "cycles": 286896,
+            "state": 7,
+            "room": 46
+          }
+        ]
+      }
+    ],
+    "directed_edges": [
+      [
+        38,
+        46
+      ],
+      [
+        46,
+        38
+      ],
+      [
+        46,
+        47
+      ],
+      [
+        46,
+        48
+      ],
+      [
+        47,
+        46
+      ],
+      [
+        47,
+        50
+      ],
+      [
+        48,
+        46
+      ],
+      [
+        48,
+        49
+      ],
+      [
+        48,
+        51
+      ],
+      [
+        49,
+        48
+      ],
+      [
+        49,
+        52
+      ],
+      [
+        50,
+        47
+      ],
+      [
+        50,
+        51
+      ],
+      [
+        51,
+        48
+      ],
+      [
+        51,
+        50
+      ],
+      [
+        51,
+        52
+      ],
+      [
+        52,
+        49
+      ],
+      [
+        52,
+        51
+      ],
+      [
+        52,
+        53
+      ],
+      [
+        53,
+        46
+      ],
+      [
+        53,
+        52
+      ]
+    ],
+    "exit_traversals": 27,
+    "cold_boot_count": 8,
+    "evolution_scope": "Ineligible two-branch preview and cancel only; no eligible preparation, evolution, or trial progress fabricated"
+  },
+  "authenticity": {
+    "minimal_packaged_verifier": "passed",
+    "all65_packaged_verifier": "passed",
+    "minimal_original_run_and_original_runtime_reverified": true,
+    "all65_original_runtime_reverified": true,
+    "target_runtime_source_files_verified": 1161,
+    "original_magma_runtime_files_verified": 893,
+    "helper_snapshot_immutable": true,
+    "game_ram_writes": 0,
+    "machine_state_loads": 0
+  },
+  "preserved_attempts": {
+    "main-environment-failure.log": "Initial emulator launch failed before gameplay because libmgba search path was absent; rerun uses existing pinned bridge and existing sysroot",
+    "startup-failure-report": "Review driver initially called assertion before emulator allocation; five cases did not execute. Fixed assertion ordering only. Exact failed source and report retained",
+    "first-review-report": "Timing violations plus two controller route attempts ending before the existing twenty-frame transition debounce expired. Final review waits for actual lock to clear; destination, timing and retention assertions remain strict"
+  },
+  "reports": {
+    "main-report": {
+      "path": "main-report/manifest.json",
+      "sha256": "9b82848623345f71ca7b0c1648c9da19363f471cbe69557c1c45f6e11ced301e",
+      "source_sha256": "07f94cdb8c748bfeeceb2765b2212e6991211498aef975ff1d08f826fe189c88",
+      "bytes": 446980,
+      "parts": 15
+    },
+    "startup-failure-report": {
+      "path": "startup-failure-report/manifest.json",
+      "sha256": "5b33c61c97dea0410a83c54e852da1a1698a4c4a78b2c6ec6bd409c12cce5490",
+      "source_sha256": "d5a5377bf0172b8239762fd9717e9f59c07d651b865b36c871f7b8c1212cb2ce",
+      "bytes": 9167,
+      "parts": 1
+    },
+    "first-review-report": {
+      "path": "first-review-report/manifest.json",
+      "sha256": "0deb69a47ab2108d89efd0ef42c52304132750eb4308c3b66611a6d4288e17d5",
+      "source_sha256": "594477be74364fd6ad12c23b3197d200cb50a82601283250e543f4e7c4dc96fa",
+      "bytes": 951335,
+      "parts": 32
+    },
+    "final-review-report": {
+      "path": "final-review-report/manifest.json",
+      "sha256": "dc21be11230f5d7a74c894c5704d5af0cecdc8436e2dad93c8085767d4f9cd33",
+      "source_sha256": "b11dcf29fe4458fff9b0a5ca1496f6c0df61db0150cd6209545a696f4af1b86b",
+      "bytes": 2577817,
+      "parts": 86
+    },
+    "candidate-runtime-sources": {
+      "path": "candidate-source-manifest/manifest.json",
+      "sha256": "c84f94e5522b5d759da12ef2d234656f68880590f90eeed94d3897c5469293c9",
+      "source_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+      "bytes": 120164,
+      "parts": 5
+    }
+  },
+  "limitations": [
+    "Emulator evidence only; no physical handheld testing",
+    "No all65-derived target lifecycle was run by this minimal-player suite",
+    "No optional acquisition or personal trial was completed; ineligible evolution UI only",
+    "The source helper main report labels itself development_bringup; exact frozen ROM and paired ELF/symbol/source hashes are supplied and verified",
+    "Eight title Continue timing failures include a deliberate runtime frame-counter reset and seven no-flip intervals each; reports distinguish the reset from forward updates and keep strict failure status",
+    "Full machine states were saved for observation but never loaded; only hash-verified candidate-generated SRAM was cold-imported"
+  ]
+}

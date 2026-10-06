@@ -82,7 +82,8 @@ class SouthernCoreTests(unittest.TestCase):
             self.assertEqual(c.trial_flags,mask)
     def test_revision_whitelists_cover_every_form_command_and_trial(self):
         allowed={1:OLD[:8],2:OLD[:11],3:OLD,4:OLD+[x for b,*_ in PAIRS for x in (b,b+1)]}
-        allowed[5]=CURRENT_ENABLED
+        allowed[5]=[id for id in CURRENT_ENABLED if not 49<=id<=72]
+        allowed[6]=CURRENT_ENABLED
         for revision in [0,1,2,3,4,5,6,255,256,0xffffffff]:
             for form in list(range(130))+[256,0xffffffff]:
                 self.assertEqual(bool(self.lib.creatures_form_allowed_revision(form,revision)),form in allowed.get(revision,[]),(form,revision))
@@ -142,7 +143,7 @@ class SouthernCoreTests(unittest.TestCase):
             self.lib.creatures_mark_trial_qualified(C.byref(c),family,1);before=bytes(self.r)
             for target,result in [(0,1),(121,1),(256+base+1,1),(0xffffffff,1),(1,2),(base,2)]:
                 self.assertEqual(self.lib.creatures_evolve_to(C.byref(self.r),0,target,64,1,1),result);self.assertEqual(bytes(self.r),before)
-            for context,sanctuary,confirm,result in [(0,1,1,5),(1024,1,1,1),(64,0,1,7),(64,1,0,8)]:
+            for context,sanctuary,confirm,result in [(0,1,1,5),(1024,1,1,5),(2048,1,1,5),(4096,1,1,1),(64,0,1,7),(64,1,0,8)]:
                 self.assertEqual(self.lib.creatures_evolve_to(C.byref(self.r),0,base+1,context,sanctuary,confirm),result);self.assertEqual(bytes(self.r),before)
             identity=bytearray(bytes(c));identity[0]=base+1
             self.assertEqual(self.lib.creatures_evolve_to(C.byref(self.r),0,base+1,64,1,1),0)

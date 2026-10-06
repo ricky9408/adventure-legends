@@ -1,0 +1,19 @@
+{
+  "omit_only_redundant_uncompressed_docs_paths": [
+    "docs/underwater-memory/candidate-b/native50-all16-cadence-traces.json",
+    "docs/underwater-memory/candidate-g/native50-all16-cadence-traces.json",
+    "docs/underwater-memory/candidate-k/native50-all16-cadence-traces.json"
+  ],
+  "keep_raw_build_originals": [
+    "build/underwater-memory-b-all16-powers/diagnostic-cadence-traces.json",
+    "build/underwater-memory-observe50-g-all16/diagnostic-cadence-traces.json",
+    "build/underwater-memory-observe50-k-all16/diagnostic-cadence-traces.json"
+  ],
+  "required_tsv_paths": [
+    "docs/underwater-memory/stack-usage.tsv",
+    "docs/underwater-memory/candidate-b/stack-usage.tsv",
+    "docs/underwater-memory/candidate-g/stack-usage.tsv",
+    "docs/underwater-memory/candidate-k/stack-usage.tsv"
+  ],
+  "checksum_policy": "CHECKSUMS.json includes each shipped .json.gz and compression receipt, and excludes only the three redundant uncompressed docs trace paths. Exact uncompressed hashes remain in the receipts. Build originals are retained unchanged."
+}

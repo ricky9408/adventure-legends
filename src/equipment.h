@@ -9,7 +9,7 @@ typedef signed short EquipmentS16;
 typedef EquipmentU16 EquipmentItemId;
 
 enum {
-    EQUIPMENT_DEFINITION_CAPACITY = 512, EQUIPMENT_AUTHORED_COUNT = 31,
+    EQUIPMENT_DEFINITION_CAPACITY = 512, EQUIPMENT_AUTHORED_COUNT = 37,
     EQUIPMENT_BAG_CAPACITY = 48, EQUIPMENT_SLOT_COUNT = 5,
     EQUIPMENT_EMPTY_REF = 255, EQUIPMENT_STARTER_ID = 1,
     EQUIPMENT_REWARD_CAPACITY = 64, EQUIPMENT_SAVE_BYTES = 512,
@@ -110,13 +110,13 @@ void equipment_init(EquipmentState *state);
 unsigned equipment_count(const EquipmentState *state);
 unsigned equipment_find(const EquipmentState *state, unsigned item_id);
 int equipment_seen(const EquipmentState *state, unsigned item_id);
-/* Fixed acquisition namespace: sources 0..30 map stable authored source order.
- * The original 0..24 mapping is unchanged; it is NOT sorted by item ID.
+/* Fixed acquisition namespace: sources 0..36 map stable authored source order.
+ * The original 0..30 mapping is unchanged; it is NOT sorted by item ID.
  * Other source IDs are reserved; this is independent of quest IDs. */
 unsigned equipment_reward_item(unsigned reward_id); /* 0 invalid */
 unsigned equipment_reward_source(unsigned item_id); /* 255 invalid */
 int equipment_reward_claimed(const EquipmentState *state, unsigned reward_id);
-/* reward_id is an enabled acquisition source 0..30, matching item_id.
+/* reward_id is an enabled acquisition source 0..36, matching item_id.
  * It is ALWAYS one-time. A FULL result changes no byte:
  * leave the source READY and retry after a confirmed discard. A previously
  * owned unique item marks the source claimed without granting a second copy,

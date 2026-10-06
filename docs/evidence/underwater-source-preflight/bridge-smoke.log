@@ -1,0 +1,2 @@
+python3 tools/smoke_tests/test_bridge.py
+PASS: native core video, key bitmask, frame stepping, memory, savestate

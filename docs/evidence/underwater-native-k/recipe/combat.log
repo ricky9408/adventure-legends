@@ -1,0 +1,164 @@
+combat-town-source {'game_state': 1, 'room': 46, 'px': 80, 'py': 269, 'hp': 7, 'chapter_flags': 15, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 37, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+BEGIN command77
+END command77 PASS
+BEGIN direct-67
+END direct-67 PASS
+BEGIN direct-68
+END direct-68 PASS
+BEGIN direct-69
+END direct-69 PASS
+BEGIN direct-70
+END direct-70 PASS
+BEGIN direct-71
+END direct-71 PASS
+BEGIN direct-72
+END direct-72 PASS
+BEGIN direct-73
+END direct-73 PASS
+BEGIN direct-74
+END direct-74 PASS
+BEGIN direct-75
+END direct-75 PASS
+BEGIN direct-76
+END direct-76 PASS
+BEGIN direct-78
+END direct-78 PASS
+BEGIN direct-79
+END direct-79 PASS
+BEGIN direct-80
+END direct-80 PASS
+BEGIN direct-81
+END direct-81 PASS
+BEGIN direct-82
+END direct-82 PASS
+BEGIN direct-83
+END direct-83 PASS
+BEGIN direct-84
+END direct-84 PASS
+BEGIN direct-85
+END direct-85 PASS
+BEGIN direct-86
+END direct-86 PASS
+BEGIN direct-87
+END direct-87 PASS
+BEGIN direct-88
+END direct-88 PASS
+BEGIN direct-89
+END direct-89 PASS
+BEGIN direct-90
+END direct-90 PASS
+BEGIN alternate-67
+alternate-ready-67 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-67 PASS
+BEGIN alternate-68
+alternate-ready-68 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-68 PASS
+BEGIN alternate-69
+alternate-ready-69 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-69 PASS
+BEGIN alternate-71
+alternate-ready-71 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-71 PASS
+BEGIN alternate-77
+alternate-ready-77 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 33, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-77 PASS
+BEGIN alternate-81
+alternate-ready-81 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 34, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-81 PASS
+BEGIN alternate-83
+alternate-ready-83 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 35, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-83 PASS
+BEGIN alternate-90
+alternate-ready-90 {'game_state': 1, 'room': 46, 'px': 240, 'py': 198, 'hp': 7, 'chapter_flags': 15, 'camera_x': 118, 'camera_y': 118, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 37, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END alternate-90 PASS
+BEGIN facing-0
+END facing-0 PASS
+BEGIN facing-2
+END facing-2 PASS
+BEGIN facing-3
+END facing-3 PASS
+BEGIN gap-69
+END gap-69 PASS
+BEGIN gap-72
+END gap-72 PASS
+BEGIN gap-74
+END gap-74 PASS
+BEGIN gap-75
+END gap-75 PASS
+BEGIN gap-78
+END gap-78 PASS
+BEGIN gap-80
+END gap-80 PASS
+BEGIN gap-82
+END gap-82 PASS
+BEGIN gap-83
+END gap-83 PASS
+BEGIN gap-84
+END gap-84 PASS
+BEGIN gap-88
+END gap-88 PASS
+BEGIN gap-89
+END gap-89 PASS
+BEGIN gap-90
+END gap-90 PASS
+BEGIN selector
+selector-ready {'game_state': 1, 'room': 47, 'px': 380, 'py': 158, 'hp': 7, 'chapter_flags': 15, 'camera_x': 239, 'camera_y': 78, 'save_failed': 0, 'checkpoint_spawn': 0, 'spirit': 30, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+END selector PASS
+BEGIN storage
+END storage PASS
+BEGIN form-pixels
+END form-pixels PASS
+BEGIN cooldown
+END cooldown PASS
+BEGIN wall
+END wall PASS
+BEGIN modal-freeze
+END modal-freeze PASS
+BEGIN workload-67
+END workload-67 PASS
+BEGIN workload-68
+END workload-68 PASS
+BEGIN workload-69
+END workload-69 PASS
+BEGIN workload-70
+END workload-70 PASS
+BEGIN workload-71
+END workload-71 PASS
+BEGIN workload-72
+END workload-72 PASS
+BEGIN workload-73
+END workload-73 PASS
+BEGIN workload-74
+END workload-74 PASS
+BEGIN workload-75
+END workload-75 PASS
+BEGIN workload-76
+END workload-76 PASS
+BEGIN workload-77
+END workload-77 PASS
+BEGIN workload-78
+END workload-78 PASS
+BEGIN workload-79
+END workload-79 PASS
+BEGIN workload-80
+END workload-80 PASS
+BEGIN workload-81
+END workload-81 PASS
+BEGIN workload-82
+END workload-82 PASS
+BEGIN workload-83
+END workload-83 PASS
+BEGIN workload-84
+END workload-84 PASS
+BEGIN workload-85
+END workload-85 PASS
+BEGIN workload-86
+END workload-86 PASS
+BEGIN workload-87
+END workload-87 PASS
+BEGIN workload-88
+END workload-88 PASS
+BEGIN workload-89
+END workload-89 PASS
+BEGIN workload-90
+END workload-90 PASS

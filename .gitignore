@@ -34,3 +34,16 @@ __pycache__/
 !tests/fixtures/v5-revision5/*.sav
 # Immutable generated Southern-policy oracle regression saves.
 !tests/fixtures/southern-policy-oracle/tests/fixtures/*/*.sav
+
+# Authenticated final-D minimal-prerequisite Magma SRAM.
+!tests/fixtures/v5-revision5-minimal/magma-minimal10-town.sav
+
+# Exact raw report copies remain local; deterministic gzip and dual hashes ship.
+/docs/evidence/underwater-engine-review/candidate-d-magma-return.json
+/docs/evidence/underwater-engine-review/candidate-d-southern-rest.json
+/docs/evidence/underwater-engine-review/candidate-k-magma-return.json
+/docs/evidence/underwater-engine-review/candidate-k-southern-rest.json
+/docs/evidence/underwater-host-k/runtime-source-hashes.json
+/docs/underwater-memory/candidate-b/native50-all16-cadence-traces.json
+/docs/underwater-memory/candidate-g/native50-all16-cadence-traces.json
+/docs/underwater-memory/candidate-k/native50-all16-cadence-traces.json

@@ -52,7 +52,7 @@ class MagmaRetainedControls(MagmaControls):
         if not same_rom:assert source['sram_sha256']==PREDECESSOR_C_SRAM
         self.source_sram=self.out/'earned34-source.sav';shutil.copyfile(sram,self.source_sram)
         self.source_sram_sha=source['sram_sha256'];self.source_earned_bank=newest_bank(self.source_sram.read_bytes())
-        assert int.from_bytes(self.source_earned_bank[12:14],'little')==5
+        assert int.from_bytes(self.source_earned_bank[12:14],'little')==(6 if same_rom else 5)
         self.provenance.update(earned_source_report=str(report_path),earned_source_report_sha256=digest(report_path),
                                earned_source_snapshot=source_snapshot,earned_source_sram_sha256=self.source_sram_sha,
                                earned_source_rom_sha256=producer['rom_sha256'],earned_source_symbols_sha256=producer['symbols_sha256'],

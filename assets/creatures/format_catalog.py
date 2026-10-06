@@ -17,15 +17,25 @@ def format_catalog(data):
         entries.append('  ' + json.dumps(key) + ': ' + rendered)
     return '{\n' + ',\n'.join(entries) + '\n}\n'
 
+def format_fragment(value):
+    if isinstance(value,dict):return format_catalog(value)
+    if not isinstance(value,list):raise ValueError('Expected catalog object or row array')
+    return '[\n'+',\n'.join('  '+json.dumps(row,ensure_ascii=False,separators=(',',':')) for row in value)+'\n]\n'
+
 if __name__ == '__main__':
-    old = PATH.read_text()
-    data = json.loads(old)
-    result = format_catalog(data)
-    assert json.loads(result) == data
-    if '--check' in sys.argv:
-        if old != result:
-            raise SystemExit('Run assets/creatures/format_catalog.py to normalize authoring JSON')
-        print('Catalog formatting is deterministic and semantic-preserving')
-    else:
-        PATH.write_text(result)
-        print(f'{PATH.name}: {len(result.encode())} bytes')
+    from catalog_source import load_catalog, MAX_SOURCE_BYTES
+    descriptor=json.loads(PATH.read_text())
+    paths=[PATH]
+    if '$catalog_source' in descriptor:
+        paths += [PATH.parent/name for names in descriptor['sections'].values() for name in names]
+    before=load_catalog(PATH)
+    for path in paths:
+        old=path.read_text();data=json.loads(old)
+        result=json.dumps(data,indent=2)+'\n' if path==PATH and '$catalog_source' in data else format_fragment(data)
+        assert json.loads(result)==data
+        if len(result.encode())>=MAX_SOURCE_BYTES:raise ValueError('Public catalog artifact reaches90KB: '+str(path))
+        if '--check' in sys.argv:
+            if old!=result:raise SystemExit('Run assets/creatures/format_catalog.py to normalize authoring JSON')
+        else:path.write_text(result)
+    assert load_catalog(PATH)==before
+    print('Catalog source formatting is deterministic and semantic-preserving (%d bounded files)'%len(paths))

@@ -2,7 +2,7 @@
 #include "equipment.h"
 
 const EquipmentItemId equipment_authored_ids[EQUIPMENT_AUTHORED_COUNT] = {
-    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83, 4, 12, 36, 52, 66, 84, 20, 37, 53, 67, 85, 5
+    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83, 4, 12, 36, 52, 66, 84, 20, 37, 53, 67, 85, 5, 6, 13, 38, 54, 68, 86
 };
 
 const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {
@@ -37,6 +37,12 @@ const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] =
     [67] = {67, 3, 0, 0, 255, {0, 0}, {0, 1, 0, -2, 0, 0, 0, 1}},
     [85] = {85, 4, 0, 0, 255, {0, 0}, {0, 0, 0, 2, 0, 3, 0, 0}},
     [5] = {5, 0, 1, 0, 255, {0, 0}, {2, 0, 0, -2, 0, 0, 2, 0}},
+    [6] = {6, 0, 1, 0, 255, {0, 0}, {1, 0, 0, 0, 0, 0, 3, 0}},
+    [13] = {13, 0, 2, 0, 255, {0, 0}, {0, 1, 0, -2, 0, 0, 4, 0}},
+    [38] = {38, 1, 0, 0, 255, {0, 0}, {0, 2, 4, 0, 0, 0, 0, 0}},
+    [54] = {54, 2, 0, 0, 255, {0, 0}, {0, 0, 0, 6, 1, 0, 0, 0}},
+    [68] = {68, 3, 0, 0, 255, {0, 0}, {0, 0, 8, -2, 0, 2, 0, 0}},
+    [86] = {86, 4, 0, 0, 255, {0, 0}, {0, 1, 0, 0, 0, 2, 0, 0}},
 };
 
 const EquipmentWeapon equipment_weapons[4] = {
@@ -78,6 +84,12 @@ const char *equipment_name(unsigned id) {
     case 67: return "Bricklayer Belt";
     case 85: return "Quietnote Ring";
     case 5: return "Terrace Sword";
+    case 6: return "Shellscribe Sword";
+    case 13: return "Nacrepoint Lance";
+    case 38: return "Pearlweave Mail";
+    case 54: return "Driftstep Boots";
+    case 68: return "Mapfold Belt";
+    case 86: return "Quietwater Ring";
     default: return "Empty";
     }
 }
@@ -116,6 +128,12 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 67: return line ? "Guard +1; stagger +1." : "A firm belt for steady work.";
     case 85: return line ? "Speed +2; power wait -3." : "A softly vibrating ring.";
     case 5: return line ? "Attack +2; reach +2." : "A broad terrace-work sword.";
+    case 6: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
+    case 13: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
+    case 38: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
+    case 54: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
+    case 68: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
+    case 86: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
     default: return "";
     }
 }

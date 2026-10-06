@@ -1,0 +1,1387 @@
+{
+  "schema_version": 1,
+  "generator": "assets/generate_underwater_creatures.py",
+  "form_ids": [
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72
+  ],
+  "names": [
+    "Inkbud",
+    "Scriptcuttle",
+    "Fanfolio",
+    "Bobclam",
+    "Keelcasket",
+    "Crownfloat",
+    "Frondfoal",
+    "Trellisseer",
+    "Bowercoil",
+    "Rimlet",
+    "Gateshield",
+    "Stencilback",
+    "Ventplume",
+    "Haloworm",
+    "Trailwick",
+    "Palmstar",
+    "Crossbloom",
+    "Foldrunner",
+    "Linkeel",
+    "Hingejaw",
+    "Claspcoil",
+    "Combgleam",
+    "Veilglass",
+    "Triadome"
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "status": "ART ONLY: sprite sheets and scene composites are not emulator captures or proof of unlocks, live rendering, or acceptance.",
+  "rights": "Original code-native pixel geometry. No Nintendo/Pokemon extraction, tracing, or third-party raster inputs.",
+  "generator_sha256": "311194852661ba4b1ec60a6b32bd9b841970e07284a4e00460e22f6405647385",
+  "codegen_sha256": "91ec0196a184f2a58808d939461f493f9df8d3f9b50bae605e7305277067856c",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 196632,
+  "runtime_data_bytes": 0,
+  "runtime_bss_bytes": 0,
+  "persistent_obj_allocation_bytes": 0,
+  "rom_budget_bytes": 198656,
+  "include_bytes": [
+    29931,
+    29926,
+    29974,
+    29936,
+    29974,
+    29958,
+    29944,
+    29949,
+    29954,
+    29996,
+    29944,
+    29992,
+    29966,
+    29975,
+    29971,
+    29963,
+    7077
+  ],
+  "max_include_bytes": 29996,
+  "scene_review_sources": [
+    {
+      "name": "NACRE",
+      "path": "assets/underwater_region/nacreway.png",
+      "crop": [
+        218,
+        236,
+        242,
+        260
+      ],
+      "sha256": "d4195b2adbb46038130579e6ede73cf5fc4c8a1aa4924350f9068889fbbdd82b"
+    },
+    {
+      "name": "SILT",
+      "path": "assets/underwater_region/siltglass_commons.png",
+      "crop": [
+        226,
+        214,
+        250,
+        238
+      ],
+      "sha256": "b1e5120582826c4503999487f6118690649ce0c34b72401ca732a5649085dc7e"
+    },
+    {
+      "name": "KELP",
+      "path": "assets/underwater_region/kelp_promenade.png",
+      "crop": [
+        184,
+        176,
+        208,
+        200
+      ],
+      "sha256": "9669e7a75ba819d0b1cda4f1ca196da04b2fc72b12206ae294264dbe7bd690c7"
+    },
+    {
+      "name": "CHALK",
+      "path": "assets/underwater_region/hollow_oyster_garden.png",
+      "crop": [
+        224,
+        176,
+        248,
+        200
+      ],
+      "sha256": "dcf1f0f713e47a69a50b85ce607ee9a69170bda80925bb45ed543c9f9b7f7587"
+    },
+    {
+      "name": "SHADE",
+      "path": "assets/underwater_region/countercurrent_stacks.png",
+      "crop": [
+        102,
+        188,
+        126,
+        212
+      ],
+      "sha256": "c4d36a42809825ff6c29bac765016e81af5a9ca52ba5d781abe0d55d74c81ceb"
+    }
+  ],
+  "anchor": [
+    8,
+    8
+  ],
+  "shadow_anchor": [
+    8,
+    13
+  ],
+  "shadow_in_sprite": false,
+  "idle_frame": 0,
+  "walk_ticks_by_form": {
+    "49": [
+      9,
+      7,
+      9,
+      8
+    ],
+    "50": [
+      11,
+      9,
+      11,
+      8
+    ],
+    "51": [
+      8,
+      11,
+      8,
+      10
+    ],
+    "52": [
+      10,
+      8,
+      12,
+      8
+    ],
+    "53": [
+      12,
+      8,
+      10,
+      9
+    ],
+    "54": [
+      10,
+      7,
+      10,
+      13
+    ],
+    "55": [
+      7,
+      8,
+      7,
+      10
+    ],
+    "56": [
+      11,
+      8,
+      12,
+      9
+    ],
+    "57": [
+      8,
+      10,
+      7,
+      11
+    ],
+    "58": [
+      6,
+      7,
+      6,
+      8
+    ],
+    "59": [
+      10,
+      9,
+      10,
+      8
+    ],
+    "60": [
+      12,
+      8,
+      12,
+      9
+    ],
+    "61": [
+      10,
+      7,
+      10,
+      8
+    ],
+    "62": [
+      12,
+      9,
+      11,
+      8
+    ],
+    "63": [
+      6,
+      7,
+      7,
+      6
+    ],
+    "64": [
+      9,
+      10,
+      8,
+      10
+    ],
+    "65": [
+      11,
+      8,
+      11,
+      9
+    ],
+    "66": [
+      6,
+      8,
+      6,
+      9
+    ],
+    "67": [
+      7,
+      7,
+      6,
+      8
+    ],
+    "68": [
+      10,
+      8,
+      11,
+      7
+    ],
+    "69": [
+      8,
+      11,
+      7,
+      10
+    ],
+    "70": [
+      10,
+      8,
+      9,
+      8
+    ],
+    "71": [
+      11,
+      8,
+      12,
+      8
+    ],
+    "72": [
+      9,
+      9,
+      10,
+      8
+    ]
+  },
+  "ability_poses": [
+    "anticipation",
+    "release",
+    "settle"
+  ],
+  "briefs": [
+    {
+      "id": 49,
+      "name": "Inkbud",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 34,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 67,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 67
+        }
+      ],
+      "field_caps": [
+        "echo_outline"
+      ],
+      "silhouette": "A teardrop cuttlefish with a blunt living face, six short arm tips and two long bracket feelers; dark mantle separated from pale fins.",
+      "motion": "Mantle pulses forward, fins ripple left-to-right, feelers catch up.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_17"
+      }
+    },
+    {
+      "id": 50,
+      "name": "Scriptcuttle",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 46,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 36
+      },
+      "stat_total": 240,
+      "signature_ability": 68,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 67
+        },
+        {
+          "level": 28,
+          "ability_id": 68
+        }
+      ],
+      "field_caps": [
+        "echo_outline"
+      ],
+      "silhouette": "A long rectangular cuttlefish mantle between two scalloped fin rails; four long arms curl into open brackets beneath its large eyes.",
+      "motion": "Long steady fin-wave glide, then separate left and right bracket-arm folds.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 51,
+      "name": "Fanfolio",
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 40,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 54
+      },
+      "stat_total": 240,
+      "signature_ability": 69,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 67
+        },
+        {
+          "level": 28,
+          "ability_id": 69
+        }
+      ],
+      "field_caps": [
+        "echo_outline"
+      ],
+      "silhouette": "A broad cuttlefish with joined webbed arms spread into two offset fans; the face sits in a deep central V, with a short mantle behind.",
+      "motion": "Alternating broad fan strokes, a sideways bank, and a deliberate web fold.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 52,
+      "name": "Bobclam",
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 38,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_ability": 70,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 70
+        }
+      ],
+      "field_caps": [
+        "shift_ballast"
+      ],
+      "silhouette": "A living rounded clam with two unequal chalk valves, a visible smiling hinge face and one thick scalloped foot.",
+      "motion": "Foot reaches, shell tips forward, valves clap gently after the pull.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_18"
+      }
+    },
+    {
+      "id": 53,
+      "name": "Keelcasket",
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 32
+      },
+      "stat_total": 240,
+      "signature_ability": 71,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 70
+        },
+        {
+          "level": 28,
+          "ability_id": 71
+        }
+      ],
+      "field_caps": [
+        "shift_ballast"
+      ],
+      "silhouette": "A long low clam with an open split-keel lower valve, broad muscular foot and an eye-bearing upper lip projecting forward.",
+      "motion": "Low foot ripples while the keel rocks in opposite phase; eyelids track the path.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 54,
+      "name": "Crownfloat",
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 44,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 50
+      },
+      "stat_total": 240,
+      "signature_ability": 72,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 70
+        },
+        {
+          "level": 28,
+          "ability_id": 72
+        }
+      ],
+      "field_caps": [
+        "shift_ballast"
+      ],
+      "silhouette": "A tall clam with two thin high valves held in an open crown above its face; a short inflated foot forms a visible round ballast below.",
+      "motion": "Foot inflates for a short buoyant rise then settles; valves open asymmetrically.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 55,
+      "name": "Frondfoal",
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 73,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 73
+        }
+      ],
+      "field_caps": [
+        "grow_roots",
+        "inscribe_trace"
+      ],
+      "silhouette": "An upright seahorse with a leaf-frilled short snout, two small fins and a single hook tail with a bare visible tip.",
+      "motion": "Two fin flutters, forward nod and uncoiling tail step without a static hover.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_19"
+      }
+    },
+    {
+      "id": 56,
+      "name": "Trellisseer",
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 46,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 36
+      },
+      "stat_total": 240,
+      "signature_ability": 74,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 73
+        },
+        {
+          "level": 28,
+          "ability_id": 74
+        }
+      ],
+      "field_caps": [
+        "grow_roots",
+        "inscribe_trace"
+      ],
+      "silhouette": "A tall seahorse whose paired branching back fronds frame an open ladder behind its small living face; long nearly straight tail.",
+      "motion": "Long upright fin strokes; the tail straightens and the open frond ladder flexes.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 57,
+      "name": "Bowercoil",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 40,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 54
+      },
+      "stat_total": 240,
+      "signature_ability": 75,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 73
+        },
+        {
+          "level": 28,
+          "ability_id": 75
+        }
+      ],
+      "field_caps": [
+        "grow_roots",
+        "inscribe_trace"
+      ],
+      "silhouette": "A compact seahorse curled sideways around one broad living kelp loop, head outside the loop and fins above its low center.",
+      "motion": "Tail hooks, releases and rolls one quarter-turn while the face remains upright.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 58,
+      "name": "Rimlet",
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 38,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_ability": 76,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 76
+        }
+      ],
+      "field_caps": [
+        "draw_ore",
+        "align_rail",
+        "unfold_screen"
+      ],
+      "silhouette": "A low horseshoe-crab animal with a smooth U-shaped metal rim, two bright front eyes, six tiny feet and a slender jointed tail.",
+      "motion": "Six feet scuttle in offset pairs, tail steers late and the rim dips.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_20"
+      }
+    },
+    {
+      "id": 59,
+      "name": "Gateshield",
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 32
+      },
+      "stat_total": 240,
+      "signature_ability": 77,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 76
+        },
+        {
+          "level": 28,
+          "ability_id": 77
+        }
+      ],
+      "field_caps": [
+        "draw_ore",
+        "align_rail",
+        "unfold_screen"
+      ],
+      "silhouette": "A narrow horseshoe body whose two upright rim halves form an open portal around its face; splayed rear feet and a fork-ended tail.",
+      "motion": "Diagonal braced steps, opening rim halves and a two-beat gate-close gesture.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 60,
+      "name": "Stencilback",
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 44,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 50
+      },
+      "stat_total": 240,
+      "signature_ability": 78,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 76
+        },
+        {
+          "level": 28,
+          "ability_id": 78
+        }
+      ],
+      "field_caps": [
+        "draw_ore",
+        "align_rail",
+        "unfold_screen"
+      ],
+      "silhouette": "A broad rectangular horseshoe shell with two large asymmetric open windows; a living face and short feet remain visible at its front.",
+      "motion": "Wide planted stride; front shell lifts first, followed by a flat deliberate stamp.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 61,
+      "name": "Ventplume",
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 79,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 79
+        }
+      ],
+      "field_caps": [
+        "store_heat",
+        "ignite"
+      ],
+      "silhouette": "A short soft tube-worm with a rounded face below a forked warm feather crown; flexible pale tube ends in three root toes.",
+      "motion": "Toes grip, tube stretches, crown opens and contracts in a breathing beat.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_21"
+      }
+    },
+    {
+      "id": 62,
+      "name": "Haloworm",
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 46,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 36
+      },
+      "stat_total": 240,
+      "signature_ability": 80,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 79
+        },
+        {
+          "level": 28,
+          "ability_id": 80
+        }
+      ],
+      "field_caps": [
+        "store_heat",
+        "ignite"
+      ],
+      "silhouette": "A tall tube-worm whose two offset half-fan crowns leave an open crescent above its blinking face; a narrow coiled foot.",
+      "motion": "Foot uncoils, neck bows, two half-fans open in opposite order.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 63,
+      "name": "Trailwick",
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 40,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 54
+      },
+      "stat_total": 240,
+      "signature_ability": 81,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 79
+        },
+        {
+          "level": 28,
+          "ability_id": 81
+        }
+      ],
+      "field_caps": [
+        "store_heat",
+        "ignite"
+      ],
+      "silhouette": "A low long tube-worm with four separated glowing mantle folds, exposed forward eyes and a single trailing wick-like feeler.",
+      "motion": "Muscular waves travel along the soft tube; folds brighten from head to tail.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 64,
+      "name": "Palmstar",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 38,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_ability": 82,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 82
+        }
+      ],
+      "field_caps": [
+        "grow_bridge",
+        "inscribe_trace"
+      ],
+      "silhouette": "A soft five-armed sea star with a raised expressive center and broad kelp-edged arm tips; gaps are wide and individually readable.",
+      "motion": "Two arms plant while three reach; the raised face tilts before each turn.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_22"
+      }
+    },
+    {
+      "id": 65,
+      "name": "Crossbloom",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 32
+      },
+      "stat_total": 240,
+      "signature_ability": 83,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 82
+        },
+        {
+          "level": 28,
+          "ability_id": 83
+        }
+      ],
+      "field_caps": [
+        "grow_bridge",
+        "inscribe_trace"
+      ],
+      "silhouette": "A high-centered star with four long unequal cross arms and a fifth short rear arm; open diagonal gaps and a face held above the center.",
+      "motion": "Opposite arms extend together and the center rises, then alternating arms settle.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 66,
+      "name": "Foldrunner",
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 44,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 50
+      },
+      "stat_total": 240,
+      "signature_ability": 84,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 82
+        },
+        {
+          "level": 28,
+          "ability_id": 84
+        }
+      ],
+      "field_caps": [
+        "grow_bridge",
+        "inscribe_trace"
+      ],
+      "silhouette": "A long folded star animal walking on three joined zigzag arms while two short forearms frame its face; no radial silhouette at rest.",
+      "motion": "A traveling accordion fold changes the two major bends; forearms feel the next step.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 67,
+      "name": "Linkeel",
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 85,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 85
+        }
+      ],
+      "field_caps": [
+        "tune_latch",
+        "align_rail"
+      ],
+      "silhouette": "A slender eel with a soft blunt face, three separated metallic collar plates and a flexible bare tail; no legs or wing fins.",
+      "motion": "One lateral body wave travels through all three loose collars; eyes lead the turn.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_23"
+      }
+    },
+    {
+      "id": 68,
+      "name": "Hingejaw",
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 46,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 36
+      },
+      "stat_total": 240,
+      "signature_ability": 86,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 85
+        },
+        {
+          "level": 28,
+          "ability_id": 86
+        }
+      ],
+      "field_caps": [
+        "tune_latch",
+        "align_rail"
+      ],
+      "silhouette": "An angular eel with two long articulated body sections, an open elbow gap and a broad hinged jaw around a visible living face.",
+      "motion": "Front segment aims, rear segment swings around a clearly planted joint, jaw closes.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 69,
+      "name": "Claspcoil",
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 40,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 54
+      },
+      "stat_total": 240,
+      "signature_ability": 87,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 85
+        },
+        {
+          "level": 28,
+          "ability_id": 87
+        }
+      ],
+      "field_caps": [
+        "tune_latch",
+        "align_rail"
+      ],
+      "silhouette": "A short thick eel curled into an unequal figure eight with two open loops; face rests beside the crossing and tail remains free.",
+      "motion": "Large loop contracts as small loop expands, then the crossing moves one foot-length.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 70,
+      "name": "Combgleam",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 38,
+        "power": 36,
+        "guard": 30,
+        "focus": 44,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_ability": 88,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 88
+        }
+      ],
+      "field_caps": [
+        "refract_beam",
+        "echo_outline"
+      ],
+      "silhouette": "A translucent oval comb-jelly with a small face, four broad ciliary comb bands and two short joined feeding lobes, never an umbrella.",
+      "motion": "Four comb bands ripple in sequence while the oval body compresses lengthwise.",
+      "role": "Readable positioning and field teacher",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": true,
+        "gate": "underwater_source_24"
+      }
+    },
+    {
+      "id": 71,
+      "name": "Veilglass",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 42,
+        "guard": 54,
+        "focus": 62,
+        "haste": 32
+      },
+      "stat_total": 240,
+      "signature_ability": 89,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 88
+        },
+        {
+          "level": 28,
+          "ability_id": 89
+        }
+      ],
+      "field_caps": [
+        "refract_beam",
+        "echo_outline"
+      ],
+      "silhouette": "A tall diamond comb-jelly with one broad diagonal veil and two separated trailing lobes; its face shows through a pale central window.",
+      "motion": "Diagonal veil folds across the body and opens on the other side; lobes trail.",
+      "role": "Deliberate control and protected gaps",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 72,
+      "name": "Triadome",
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 44,
+        "power": 62,
+        "guard": 36,
+        "focus": 48,
+        "haste": 50
+      },
+      "stat_total": 240,
+      "signature_ability": 90,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 88
+        },
+        {
+          "level": 28,
+          "ability_id": 90
+        }
+      ],
+      "field_caps": [
+        "refract_beam",
+        "echo_outline"
+      ],
+      "silhouette": "A low triangular comb-jelly with three connected soft corner lobes around an open-looking central window; two eyes sit on the leading lobe.",
+      "motion": "Three corners pulse one at a time, giving a slow turning glide and clear landing shadow.",
+      "role": "Expressive movement and spatial offense",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    }
+  ],
+  "validation": {
+    "images": 696,
+    "field_dimensions": [
+      24,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      24,
+      4,
+      3,
+      256
+    ],
+    "portrait_dimensions": [
+      24,
+      1024
+    ],
+    "actor_palette_entries": 97,
+    "palette_indices": [
+      0,
+      1,
+      6,
+      7,
+      11,
+      12,
+      13,
+      14,
+      29,
+      30,
+      36,
+      37,
+      41,
+      46,
+      47,
+      50,
+      55,
+      56,
+      60,
+      62,
+      63,
+      65,
+      66,
+      67,
+      89,
+      96
+    ],
+    "transparent_zero": true,
+    "transparent_outer_field_boundary": true,
+    "articulated_walk_masks_per_direction": 4,
+    "articulated_cast_masks_per_direction": 3,
+    "independently_composed_native_portraits": true,
+    "catalog_identity_match": true
+  },
+  "legacy_prefix": {
+    "baseline": "0a8b05c3e24d02bd350a11c32289fb5686641535",
+    "files": 48,
+    "unchanged": true
+  },
+  "silhouette_comparison": {
+    "current_unique_front_masks": 24,
+    "released_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      25,
+      26,
+      28,
+      29,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "cross_release_front_mask_matches": 0,
+    "branch_distances": [
+      {
+        "family_id": "F017",
+        "branches": [
+          50,
+          51
+        ],
+        "different_mask_pixels_by_direction": [
+          68,
+          68,
+          65,
+          65
+        ]
+      },
+      {
+        "family_id": "F018",
+        "branches": [
+          53,
+          54
+        ],
+        "different_mask_pixels_by_direction": [
+          56,
+          56,
+          54,
+          54
+        ]
+      },
+      {
+        "family_id": "F019",
+        "branches": [
+          56,
+          57
+        ],
+        "different_mask_pixels_by_direction": [
+          57,
+          58,
+          54,
+          54
+        ]
+      },
+      {
+        "family_id": "F020",
+        "branches": [
+          59,
+          60
+        ],
+        "different_mask_pixels_by_direction": [
+          62,
+          62,
+          67,
+          67
+        ]
+      },
+      {
+        "family_id": "F021",
+        "branches": [
+          62,
+          63
+        ],
+        "different_mask_pixels_by_direction": [
+          84,
+          84,
+          82,
+          82
+        ]
+      },
+      {
+        "family_id": "F022",
+        "branches": [
+          65,
+          66
+        ],
+        "different_mask_pixels_by_direction": [
+          71,
+          71,
+          68,
+          68
+        ]
+      },
+      {
+        "family_id": "F023",
+        "branches": [
+          68,
+          69
+        ],
+        "different_mask_pixels_by_direction": [
+          78,
+          78,
+          79,
+          79
+        ]
+      },
+      {
+        "family_id": "F024",
+        "branches": [
+          71,
+          72
+        ],
+        "different_mask_pixels_by_direction": [
+          65,
+          65,
+          62,
+          62
+        ]
+      }
+    ]
+  },
+  "terrain_visibility_minimum_opaque": 0.563,
+  "terrain_visibility_minimum_boundary": 0.6098
+}

@@ -1,0 +1,5 @@
+[
+  {"from":95,"to":96,"min_level":26,"min_bond":45,"required_gate":"magma_ready","required_trial":"magma_find_the_cold_seam","location":"sanctuary","player_confirm":true,"consumed_item":null},
+  {"from":97,"to":98,"min_level":26,"min_bond":45,"required_gate":"magma_ready","required_trial":"magma_the_cloth_stays_clear","location":"sanctuary","player_confirm":true,"consumed_item":null},
+  {"from":99,"to":100,"min_level":26,"min_bond":45,"required_gate":"magma_ready","required_trial":"magma_the_quiet_chord","location":"sanctuary","player_confirm":true,"consumed_item":null}
+]

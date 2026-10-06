@@ -1,0 +1,13 @@
+test_all_released_binary_rows_stay_byte_exact (__main__.SouthernCoreTests.test_all_released_binary_rows_stay_byte_exact) ... ok
+test_bad_rom_indexes_reject_lookups_without_mutation (__main__.SouthernCoreTests.test_bad_rom_indexes_reject_lookups_without_mutation) ... ok
+test_capability_keys_and_party_requirements_are_bounded_atomic (__main__.SouthernCoreTests.test_capability_keys_and_party_requirements_are_bounded_atomic) ... ok
+test_historical_commands_do_not_follow_broadened_current_learnsets (__main__.SouthernCoreTests.test_historical_commands_do_not_follow_broadened_current_learnsets) ... ok
+test_legacy_qualified_keys_preserve_wire_masks (__main__.SouthernCoreTests.test_legacy_qualified_keys_preserve_wire_masks) ... ok
+test_new_evolutions_require_exact_target_and_preserve_identity (__main__.SouthernCoreTests.test_new_evolutions_require_exact_target_and_preserve_identity) ... ok
+test_qualified_trials_are_full_width_family_bound_and_atomic (__main__.SouthernCoreTests.test_qualified_trials_are_full_width_family_bound_and_atomic) ... ok
+test_revision_whitelists_cover_every_form_command_and_trial (__main__.SouthernCoreTests.test_revision_whitelists_cover_every_form_command_and_trial) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 6.243s
+
+OK

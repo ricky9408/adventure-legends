@@ -2,18 +2,26 @@
  * Core, catalog, quests, save reader, generated text and portraits are real.
  * Engine globals, sound/save requests and framebuffer writes are host stubs.
  * This is not a controller, emulator, native acquisition or timing test. */
+#ifdef EVOLUTION_ARM_PROFILE
+typedef unsigned uintptr_t;
+void *memset(void *,int,unsigned);
+int memcmp(const void *,const void *,unsigned);
+#else
 #include <string.h>
 #include <stdint.h>
+#endif
 #include "progression.h"
 #include "ui.h"
 #include "assets.h"
 #include "magma_creature_art.h"
+#include "underwater_creature_art.h"
 
 volatile int room,px,py,spirit,game_state,has_save,save_failed;
 volatile unsigned chapter_flags;
 int journal_tab,frame,ability_cd,heal_cd,gfx_companion_frame,checkpoint_spawn;
 unsigned host_saves,host_toast,host_sounds,host_fallbacks,host_bad_bounds;
 unsigned host_roster_checks,host_catalog_checks,host_admission_checks,host_commits;
+unsigned host_bounded_steps,host_bounded_commits,host_selection_notifications,host_preflight_steps,host_exact_checks;
 unsigned char host_pixels[240*160];
 typedef struct {int kind,id,x,y,w,h,color;} HostDraw;
 HostDraw host_draws[128];
@@ -21,7 +29,7 @@ unsigned host_draw_count;
 static Save5State snapshot;
 static const unsigned char fallback[256]={1};
 
-/* Only creatures.c is built with instrumentation. Counts include internal
+/* Creature and Save5 code are built with instrumentation. Counts include internal
  * calls, so an accidentally introduced full validation cannot hide in a helper. */
 void __attribute__((no_instrument_function)) __cyg_profile_func_enter(void *fn,void *caller){
  (void)caller;
@@ -29,6 +37,10 @@ void __attribute__((no_instrument_function)) __cyg_profile_func_enter(void *fn,v
  if(fn==(void*)(uintptr_t)creatures_catalog_validate)host_catalog_checks++;
  if(fn==(void*)(uintptr_t)creatures_can_evolve_roster_to)host_admission_checks++;
  if(fn==(void*)(uintptr_t)creatures_evolve_to)host_commits++;
+ if(fn==(void*)(uintptr_t)creatures_admission_job_step)host_bounded_steps++;
+ if(fn==(void*)(uintptr_t)save5_preflight_step)host_preflight_steps++;
+ if(fn==(void*)(uintptr_t)save5_preflight_matches)host_exact_checks++;
+ if(fn==(void*)(uintptr_t)creatures_admission_job_commit_evolution)host_bounded_commits++;
 }
 void __attribute__((no_instrument_function)) __cyg_profile_func_exit(void *fn,void *caller){(void)fn;(void)caller;}
 static void draw(int kind,int id,int x,int y,int w,int h,int col){
@@ -53,6 +65,7 @@ void centered(int id,int y,int col){if(id<0||id>=TX_COUNT){host_bad_bounds++;ret
 void sprite(const unsigned char*p,int x,int y,int w,int h,int flash){
  unsigned i;int xx,yy,form=0;(void)flash;
  for(i=0;i<MAGMA_CREATURE_ART_COUNT;i++)if(p==magma_creature_portraits[i])form=magma_creature_form_ids[i];
+ for(i=0;i<UNDERWATER_CREATURE_ART_COUNT;i++)if(p==underwater_creature_portraits[i])form=underwater_creature_form_ids[i];
  draw(2,form,x,y,w,h,0);
  if(!p){host_bad_bounds++;return;}
  for(yy=0;yy<h;yy++)for(xx=0;xx<w;xx++)if(p[yy*w+xx])pixel(x+xx,y+yy,p[yy*w+xx]);
@@ -61,26 +74,102 @@ const unsigned char*companion_form_pixels(unsigned form,unsigned direction,unsig
 void toast(int id){host_toast=(unsigned)id;}
 void save_game(void){host_saves++;}
 void sfx(int id){host_sounds|=1u<<(unsigned)id;}
+void underwater_powers_selection_changed(void){host_selection_notifications++;}
+void underwater_game_selection_changed(void){}
 
 void host_reset_draw(void){memset(host_pixels,0,sizeof host_pixels);host_draw_count=host_bad_bounds=host_fallbacks=0;}
-void host_reset_counts(void){host_roster_checks=host_catalog_checks=host_admission_checks=host_commits=0;}
+void host_reset_counts(void){host_roster_checks=host_catalog_checks=host_admission_checks=host_commits=host_bounded_steps=host_bounded_commits=host_preflight_steps=host_exact_checks=0;}
+/* These are explicitly synthetic typed histories, built with the production
+ * validators. Supporting source owners live at high slots so low-slot UI
+ * identity assertions retain their original meaning. No save policy stubs. */
+static unsigned host_setup;
+static void host_claim(unsigned q,unsigned mask,int yes){
+ save5_quest_set_state(&adventure_save.quests,q,yes?SAVE5_QUEST_CLAIMED:0);
+ adventure_save.quests.objectives[q]=(Save4U16)(yes?mask:0);
+ if(yes)adventure_save.quests.rewards[q>>3]|=(Save4U8)(1u<<(q&7));
+ else adventure_save.quests.rewards[q>>3]&=(Save4U8)~(1u<<(q&7));
+}
+static void host_sources(void){
+ static const unsigned sb[]={25,28,81,83,87,89,91,93};
+ unsigned i,j;adventure_save.quests.region_flags[8]=0;adventure_save.quests.region_flags[9]=0;adventure_save.quests.region_flags[10]=0;
+ for(i=0;i<160;i++){
+  unsigned form=adventure_save.roster.instances[i].form_id;
+  for(j=0;j<8;j++)if(form==sb[j]||form==sb[j]+1)adventure_save.quests.region_flags[8]|=(Save4U8)(1u<<j);
+  if(form>=37&&form<=48)adventure_save.quests.region_flags[9]|=(Save4U8)(1u<<((form-37)/3));
+  if(form>=95&&form<=100)adventure_save.quests.region_flags[9]|=(Save4U8)(1u<<(4+(form-95)/2));
+  if(form>=55&&form<=72)adventure_save.quests.region_flags[10]|=(Save4U8)(1u<<((form-55)/3));
+ }
+}
 void host_context(unsigned bits){
- save5_quest_set_state(&adventure_save.quests,30,bits&256?3:0);
- save5_quest_set_state(&adventure_save.quests,31,bits&256?3:0);
- save5_quest_set_state(&adventure_save.quests,32,bits&512?3:0);
+ chapter_flags=bits&7u;
+ host_claim(30,3,(bits&256)!=0);host_claim(31,3,(bits&256)!=0);host_claim(32,15,(bits&512)!=0);
+ if(bits&1024){host_claim(38,3,1);host_claim(39,3,1);}
+ if(bits&2048)host_claim(40,15,1);
 }
 unsigned host_add(unsigned form,unsigned trial){
  unsigned slot=creatures_grant(&adventure_save.roster,form,50,100,0,0);
  if(slot<160)adventure_save.roster.instances[slot].trial_flags=(CreatureU16)trial;
+ if(host_setup)host_sources();
  return slot;
 }
+static int host_support(unsigned form,unsigned reward){
+ unsigned i,slot,high=159;const CreatureForm*f=creatures_form(form);
+ for(i=0;i<160;i++){
+  const CreatureForm*other=creatures_form(adventure_save.roster.instances[i].form_id);
+  if(other&&other->family==f->family)break;
+ }
+ if(i==160){
+  slot=creatures_grant(&adventure_save.roster,form,50,100,0,0);if(slot>=160)return 0;
+  while(adventure_save.roster.instances[high].form_id)high--;
+  adventure_save.roster.instances[high]=adventure_save.roster.instances[slot];
+  memset(&adventure_save.roster.instances[slot],0,sizeof(CreatureInstance));
+  for(i=0;i<4;i++)if(adventure_save.roster.party[i]==slot)adventure_save.roster.party[i]=255;
+ }
+ if(reward)adventure_save.roster.rewards[(reward-1)>>3]|=(CreatureU8)(1u<<((reward-1)&7));
+ return 1;
+}
 int host_fresh(unsigned form,unsigned trial,unsigned context){
- memset(&adventure_save,0,sizeof adventure_save);creatures_roster_init(&adventure_save.roster);
+ unsigned i;static const unsigned qs[]={11,13,21,22,23,24};static const unsigned masks[]={3,3,15,3,3,15};
+ progression_evolution_cancel();save5_test_reset_writer();host_setup=0;
+ memset(&adventure_save,0,sizeof adventure_save);creatures_roster_init(&adventure_save.roster);equipment_init(&adventure_save.equipment);
  room=38;px=120;py=120;spirit=0;game_state=3;chapter_flags=0;journal_tab=3;
- host_saves=host_sounds=0;host_toast=0xffffffffu;
+ host_saves=host_sounds=host_selection_notifications=0;host_toast=0xffffffffu;
  if(host_add(form,trial)!=0)return 0;
+ adventure_save.campaign.chapter_flags=7;
+ for(i=0;i<sizeof qs/sizeof qs[0];i++)host_claim(qs[i],masks[i],1);
+ adventure_save.quests.region_flags[0]=1;adventure_save.quests.region_flags[1]=1;
+ adventure_save.quests.region_flags[2]=15;adventure_save.quests.region_flags[3]=15;
+ if(!host_support(19,7)||!host_support(77,11)||!host_support(79,0)||!host_support(85,0)||!host_support(31,0)||!host_support(34,0))return 0;
+ equipment_claim(&adventure_save.equipment,equipment_reward_item(19),19,0);
+ equipment_claim(&adventure_save.equipment,equipment_reward_item(25),25,0);
+ if(form>=49&&form<=72){
+  if(!host_support(49,0)||!host_support(52,0))return 0;
+  context|=256|512|1024|2048;room=46;
+  adventure_save.quests.region_flags[4]=255;adventure_save.quests.region_flags[20]=3;adventure_save.quests.region_flags[21]=7;
+ }
+ host_setup=1;host_sources();
+ if(adventure_save.quests.region_flags[9]&64)adventure_save.quests.region_flags[19]=7;
  host_context(context);progression_refresh();host_reset_draw();host_reset_counts();
  return creatures_roster_validate(&adventure_save.roster);
+}
+int host_save_valid(void){return save5_validate(&adventure_save);}
+unsigned host_quest(unsigned id){return save5_quest_state(&adventure_save.quests,id);}
+int host_old_region_fresh(unsigned form,unsigned trial){
+ if(!host_fresh(form,trial,256|7))return 0;
+ if(form==13){host_claim(2,7,1);adventure_save.roster.rewards[0]|=16;host_claim(4,3,1);equipment_claim(&adventure_save.equipment,equipment_reward_item(5),5,0);}
+ if(adventure_save.quests.region_flags[8]&16){save5_quest_set_state(&adventure_save.quests,29,SAVE5_QUEST_READY);adventure_save.quests.objectives[29]=3;adventure_save.quests.region_flags[18]|=1;}
+ if(adventure_save.quests.region_flags[8]&64){save5_quest_set_state(&adventure_save.quests,28,SAVE5_QUEST_READY);adventure_save.quests.objectives[28]=3;adventure_save.quests.region_flags[18]|=2;}
+ return save5_validate(&adventure_save);
+}
+
+int host_story_fresh(unsigned form,unsigned trial,unsigned context){
+ progression_evolution_cancel();save5_test_reset_writer();host_setup=0;
+ memset(&adventure_save,0,sizeof adventure_save);creatures_roster_init(&adventure_save.roster);equipment_init(&adventure_save.equipment);
+ room=0;px=120;py=120;game_state=3;journal_tab=3;chapter_flags=context;
+ host_saves=host_sounds=host_selection_notifications=0;host_toast=0xffffffffu;
+ adventure_save.campaign.chapter_flags=(Save4U8)context;
+ if(host_add(form,trial)!=0)return 0;
+ progression_refresh();host_reset_draw();host_reset_counts();return save5_validate(&adventure_save);
 }
 int host_load_fixture(void){
  save5_test_reset_writer();save5_test_fail_after(-1);
@@ -108,9 +197,21 @@ void host_mutate(unsigned kind,unsigned slot,unsigned value){
  if(kind==5&&c)c->bond=(CreatureU8)value;
  if(kind==6&&c)c->trial_flags=(CreatureU16)value;
  if(kind==7&&c)c->selected_command=(CreatureU8)value;
+ if(kind==8&&c)c->equipped[0]=(CreatureU8)value;
+ if(kind==9&&c)c->equipped[1]=(CreatureU8)value;
 }
 unsigned host_status(unsigned slot,unsigned target){return creatures_can_evolve_roster_to(&adventure_save.roster,slot,target,progression_evolution_context(),progression_is_sanctuary());}
 unsigned host_evolve(unsigned slot,unsigned target){return creatures_evolve_to(&adventure_save.roster,slot,target,progression_evolution_context(),progression_is_sanctuary(),1);}
 unsigned host_name(unsigned form){return (unsigned)progression_name_id(form);}
 unsigned host_reason_name(unsigned reason){static const unsigned ids[]={TX_E_READY,TX_E_NO_MEMBER,TX_E_GROWN,TX_E_LEVEL_MORE,TX_E_BOND_MORE,TX_E_MG_MORE,TX_E_TRIAL_MORE,TX_E_SANCTUARY,TX_E_NO_MEMBER,TX_E_CHOOSE_BRANCH,TX_E_SPACE_RESERVED};return reason<sizeof ids/sizeof ids[0]?ids[reason]:TX_E_NO_MEMBER;}
 unsigned host_source_changed_name(void){return TX_E_SOURCE_CHANGED;}
+unsigned host_preparing_name(void){return TX_UW_PREPARING;}
+unsigned host_state_bytes(void){return sizeof adventure_save;}
+void host_mutate_byte(unsigned offset,unsigned value){if(offset<sizeof adventure_save)((unsigned char*)&adventure_save)[offset]^=(unsigned char)value;}
+
+/* The isolated evolution UI has no world transition scheduler. Full Magma
+ * return cancellation uses real linked modules in the engine-review suite. */
+void magma_game_cancel_return(void){}
+
+/* The evolution-only harness also has no Southern rest scheduler. */
+void south_game_cancel_rest(void){}

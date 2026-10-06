@@ -1,0 +1,179 @@
+python3 assets/generate_assets.py
+Generated 5 opaque native backgrounds; 20 fallback sprites; 16 hero poses; 32 directional companion poses; 6 foreground boughs; 2 shadows; boss; RGB555 palette; manifest; C sources; PNG/GIF art previews.
+python3 assets/generate_ui.py
+Generated 1380 Japanese paired-span text masks
+python3 assets/generate_world.py
+Generated 480x320 original overworld: 76 solids, 63 trees, 37 chunks, 10 route proofs passed, palette unchanged (178 entries).
+python3 assets/generate_campaign.py
+{
+  "data_bytes": 400384,
+  "rom_bytes_total_gba": 400424,
+  "generated_c_chunks": 47,
+  "max_chunk_bytes": 32767,
+  "verification": {
+    "opaque_backgrounds": true,
+    "palette_unchanged": true,
+    "all_sprite_colors_in_base_palette": true,
+    "four_distinct_frames_per_direction": true,
+    "geometry_copied_from_master": true
+  }
+}
+python3 assets/generate_campaign_rules.py
+Generated campaign geometry and 38 dialogues
+python3 assets/creatures/format_catalog.py
+Catalog source formatting is deterministic and semantic-preserving (31 bounded files)
+python3 assets/creatures/generate_data.py
+/workspace/scratch/33ed39a77941/underwater-k-source-preflight/Adventure-Legends-Emberbond/src/creature_data.c
+python3 assets/generate_evolutions.py
+{
+  "generated_forms": [
+    2,
+    5,
+    8,
+    11
+  ],
+  "data_bytes": 20484,
+  "max_include_bytes": 32762
+}
+python3 assets/generate_trials.py
+Generated 82944 ROM pixel bytes, 10 chunks; palette/transparency/distinct-state assertions passed
+python3 assets/equipment/generate_data.py
+wrote src/equipment_data.c
+python3 assets/generate_region.py
+{
+  "rooms": 6,
+  "sprites": 40,
+  "proof_targets": 70,
+  "bitmap_bytes": 768000,
+  "sprite_bytes": 10240,
+  "collision_bytes": 896,
+  "arm32_room_table_bytes": 120,
+  "rom_payload_bytes": 779256,
+  "chunks": 98,
+  "largest_chunk_bytes": 31998,
+  "chunk_limit_bytes": 32000
+}
+python3 assets/generate_regional_creatures.py
+{
+  "generated_forms": [
+    13,
+    14,
+    16
+  ],
+  "data_bytes": 21507,
+  "max_include_bytes": 31958
+}
+python3 assets/generate_northern_creatures.py
+{
+  "generated_forms": [
+    19,
+    20,
+    22,
+    23,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78
+  ],
+  "data_bytes": 71690,
+  "max_include_bytes": 30000
+}
+python3 assets/generate_northern_region.py
+{"bitmap_bytes": 844800, "rom_payload_bytes": 857808, "collision_lookup_bytes": 4014, "alignment_bytes": 10, "arm32_room_table_bytes": 224, "largest_include_bytes": 31999, "sprite_bytes": 8192}
+python3 assets/generate_southern_region.py
+{"bitmap_bytes": 844800, "rom_payload_bytes": 859332, "collision_lookup_bytes": 3962, "alignment_bytes": 10, "arm32_room_table_bytes": 224, "largest_include_bytes": 30000, "sprite_bytes": 9728}
+python3 assets/generate_southern_creatures.py
+{
+  "generated_forms": [
+    25,
+    26,
+    28,
+    29,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94
+  ],
+  "data_bytes": 143380,
+  "max_include_bytes": 29999
+}
+python3 assets/generate_magma_region.py
+{"rom_payload_bytes": 860026, "collision_lookup_bytes": 3954, "sprite_bytes": 10496, "permanent_new_obj_bytes": 0, "largest_include_bytes": 29998}
+python3 assets/generate_magma_creatures.py
+{
+  "generated_forms": [
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "data_bytes": 172056,
+  "max_include_bytes": 29993
+}
+python3 assets/generate_underwater_region.py
+{"rom_payload_bytes": 1393216, "collision_lookup_bytes": 4792, "sprite_bytes": 5120, "permanent_new_obj_bytes": 0, "maximum_streamed_obj_slots": 20, "ambient_obj_limit": 8, "largest_include_bytes": 30000}
+python3 assets/generate_underwater_creatures.py
+{
+  "generated_forms": [
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72
+  ],
+  "data_bytes": 196632,
+  "max_include_bytes": 29996
+}

@@ -14,12 +14,12 @@ class MagmaCatalogPolicyTests(unittest.TestCase):
         cls.c=load_json(ROOT/'assets/creatures/catalog.json');cls.e=load_json(ROOT/'assets/creatures/enabled.json');cls.lock=load_json(ROOT/'assets/creatures/identity-lock.json')
     def test_exact_current_manifest_and_generation(self):
         self.assertEqual(validate(self.c,self.lock),[]);self.assertEqual(validate_enabled(self.c,self.e),[])
-        self.assertEqual(self.e['content_revision'],5)
-        tables=build_tables(self.c,self.e);self.assertEqual(tuple(len(t) for t in tables[:4]),(65,102,35,65))
+        self.assertEqual(self.e['content_revision'],6)
+        tables=build_tables(self.c,self.e);self.assertEqual(tuple(len(t) for t in tables[:4]),(89,142,51,89))
         self.assertEqual(generate(self.c,self.e),(ROOT/'src/creature_data.c').read_text())
         self.assertEqual(hashlib.sha256((ROOT/'assets/creatures/identity-lock.json').read_bytes()).hexdigest(),'fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969')
     def test_every_old_revision_manifest_stays_explicit(self):
-        for revision,counts in [(1,(8,12,4,8)),(2,(11,16,5,11)),(3,(21,31,10,21)),(4,(41,61,20,41))]:
+        for revision,counts in [(1,(8,12,4,8)),(2,(11,16,5,11)),(3,(21,31,10,21)),(4,(41,61,20,41)),(5,(65,102,35,65))]:
             policy=REVISION_POLICY[revision];e={'content_revision':revision,'enabled_form_ids':policy['forms'],'enabled_evolutions':policy['edges'],'enabled_ability_ids':policy['abilities']}
             self.assertEqual(validate_enabled(self.c,e),[])
             self.assertEqual(tuple(len(t) for t in build_tables(self.c,e)[:4]),counts)

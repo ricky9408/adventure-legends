@@ -8,24 +8,25 @@ from test_creatures import Instance, Roster
 sys.path.insert(0,str(ROOT/'assets/creatures'))
 from generate_data import build_trial_masks
 from released_policy import validate_compatibility
+from catalog_source import load_catalog
 
 def append(text,name,rows):return edit_array(text,name,lambda body:body+'\n'+rows)
 def linear_sources():
     h=(ROOT/'src/creatures.h').read_text();c=(ROOT/'src/creatures.c').read_text();d=(ROOT/'src/creature_data.c').read_text()
-    h=h.replace('CREATURE_ENABLED_COUNT = 65','CREATURE_ENABLED_COUNT = 66').replace('CREATURE_ABILITY_COUNT = 65','CREATURE_ABILITY_COUNT = 66')
-    h=h.replace('CREATURE_LEARNSET_COUNT = 102','CREATURE_LEARNSET_COUNT = 105').replace('CREATURE_EVOLUTION_COUNT = 35','CREATURE_EVOLUTION_COUNT = 36')
-    c=c.replace('{2, 1, 2, 5, 1, 2, 0, 0, 1, 1, 0x00001222u}', '{2, 1, 2, 5, 1, 2, 35, 1, 1, 1025, 0x00001222u}',1)
-    d=d.replace('5, 0x00001222u, 2, 1, 2, 0, 0, 0, 2, 1}', '5, 0x00001222u, 2, 1, 2, 1, 35, 0, 2, 1}',1)
+    h=h.replace('CREATURE_ENABLED_COUNT = 89','CREATURE_ENABLED_COUNT = 90').replace('CREATURE_ABILITY_COUNT = 89','CREATURE_ABILITY_COUNT = 90')
+    h=h.replace('CREATURE_LEARNSET_COUNT = 142','CREATURE_LEARNSET_COUNT = 145').replace('CREATURE_EVOLUTION_COUNT = 51','CREATURE_EVOLUTION_COUNT = 52')
+    c=c.replace('{2, 1, 2, 5, 1, 2, 0, 0, 1, 1, 0x00001222u}', '{2, 1, 2, 5, 1, 2, 51, 1, 1, 1025, 0x00001222u}',1)
+    d=d.replace('5, 0x00001222u, 2, 1, 2, 0, 0, 0, 2, 1}', '5, 0x00001222u, 2, 1, 2, 1, 51, 0, 2, 1}',1)
     c=c.replace('{1, CREATURE_FIRE, CREATURE_YANG, CREATURE_TRIAL_HEARTH, FIELD_HOMURA, 0}', '{1, CREATURE_FIRE, CREATURE_YANG, CREATURE_TRIAL_HEARTH | 1024, FIELD_HOMURA, 0}',1)
-    c=append(c,'form_policy','    {3, 1, 3, 67, 102, 3, 0, 0, 1, 1025, 0x00001222u},')
-    c=append(c,'ability_policy','    {67, 120},')
+    c=append(c,'form_policy','    {3, 1, 3, 91, 142, 3, 0, 0, 1, 1025, 0x00001222u},')
+    c=append(c,'ability_policy','    {91, 120},')
     c=append(c,'trial_policy','    {1, 2, 1024, 1, 4},')
     edge='    {2, 3, 30, 60, 1025, 4},'
     c=append(c,'expected_edges',edge)
     d=append(d,'creature_evolutions',edge)
-    d=append(d,'creature_forms','    {3, 1, 1, 1, 3, 0, {57, 57, 57, 57, 57}, 67, 0x00001222u, 3, 102, 3, 0, 0, 0, 3, 1},')
-    d=append(d,'creature_learnsets','    {1, 1},\n    {12, 5},\n    {30, 67},')
-    d=append(d,'creature_abilities','    {67, 1, 120, 0x00001222u},')
+    d=append(d,'creature_forms','    {3, 1, 1, 1, 3, 0, {57, 57, 57, 57, 57}, 91, 0x00001222u, 3, 142, 3, 0, 0, 0, 3, 1},')
+    d=append(d,'creature_learnsets','    {1, 1},\n    {12, 5},\n    {30, 91},')
+    d=append(d,'creature_abilities','    {91, 1, 120, 0x00001222u},')
     c,d=refresh_key_indexes(c,d)
     return h,c,d
 
@@ -92,6 +93,8 @@ def native(sources,linear=False,invalid=False,context=256):
     with tempfile.TemporaryDirectory(prefix='magma-policy-') as tmp:
         p=Path(tmp)
         for name,source in zip(('creatures.h','creatures.c','creature_data.c'),sources):(p/name).write_text(source)
+        (p/'creature_history_v5.inc').write_bytes((ROOT/'src/creature_history_v5.inc').read_bytes())
+        (p/'creature_admission_job.inc').write_bytes((ROOT/'src/creature_admission_job.inc').read_bytes())
         (p/'test.c').write_text(HARNESS)
         flags=['-std=c99','-O1','-Wall','-Wextra','-Werror','-pedantic','-fsanitize=address,undefined','-fno-omit-frame-pointer','-no-pie','-I'+str(p)]
         flags+=['-DCONTEXT='+str(context)]
@@ -105,17 +108,17 @@ class MagmaArchitectureTests(unittest.TestCase):
     def test_branch_each_key_and_both_keys_keep_explicit_target_and_decline(self):native(multi_branch_sources())
     def test_future_u16_context_is_not_truncated(self):
         h,c,d=multi_branch_sources()
-        h=h.replace('CREATURE_EVOLUTION_CONTEXT_MASK = 1023','CREATURE_EVOLUTION_CONTEXT_MASK = 2047')
-        for old,new in [('{37, 38, 26, 45, 1, 256}','{37, 38, 26, 45, 1, 1024}'),('{37, 39, 26, 45, 2, 256}','{37, 39, 26, 45, 2, 1024}')]:c=c.replace(old,new);d=d.replace(old,new)
-        native((h,c,d),context=1024)
+        h=h.replace('CREATURE_EVOLUTION_CONTEXT_MASK = 4095','CREATURE_EVOLUTION_CONTEXT_MASK = 8191')
+        for old,new in [('{37, 38, 26, 45, 1, 256}','{37, 38, 26, 45, 1, 4096}'),('{37, 39, 26, 45, 2, 256}','{37, 39, 26, 45, 2, 4096}')]:c=c.replace(old,new);d=d.replace(old,new)
+        native((h,c,d),context=4096)
     def test_trial_alias_unknown_dependencies_cycles_and_unclosed_edge_fail(self):
         h,c,d=linear_sources()
-        for old,new in [('{1, 2, 1024, 1, 4}','{1, 1, 1024, 1, 4}'),('{1, 2, 1024, 1, 4}','{1, 2, 1, 0, 4}'),('{1, 2, 1024, 1, 4}','{1, 2, 1024, 2, 4}'),('{1, 1, CREATURE_TRIAL_HEARTH, 0, 1}','{1, 1, CREATURE_TRIAL_HEARTH, 1024, 1}'),('{1, 2, 1024, 1, 4}','{1, 2, 1024, 1, 6}')]:
+        for old,new in [('{1, 2, 1024, 1, 4}','{1, 1, 1024, 1, 4}'),('{1, 2, 1024, 1, 4}','{1, 2, 1, 0, 4}'),('{1, 2, 1024, 1, 4}','{1, 2, 1024, 2, 4}'),('{1, 1, CREATURE_TRIAL_HEARTH, 0, 1}','{1, 1, CREATURE_TRIAL_HEARTH, 1024, 1}'),('{1, 2, 1024, 1, 4}','{1, 2, 1024, 1, 7}')]:
             with self.subTest(new=new):self.assertIn(old,c);native((h,c.replace(old,new,1),d),linear=True,invalid=True)
         native((h,c.replace('{2, 3, 30, 60, 1025, 4}','{2, 3, 30, 60, 1024, 4}'),d.replace('{2, 3, 30, 60, 1025, 4}','{2, 3, 30, 60, 1024, 4}')),linear=True,invalid=True)
     def test_frozen_policy_generation_is_exact(self):subprocess.run([sys.executable,str(ROOT/'tools/generate_creature_history.py'),'--check'],check=True)
     def test_semantic_prefix_lock_accepts_extension_rejects_rewrite(self):
-        cat=json.loads((ROOT/'assets/creatures/catalog.json').read_text());self.assertFalse(validate_compatibility(cat))
+        cat=load_catalog(ROOT/'assets/creatures/catalog.json');self.assertFalse(validate_compatibility(cat))
         added=copy.deepcopy(cat);f=next(f for f in added['forms'] if f['id']==2)
         f['learnset'].append({'level':30,'ability_id':43});added['evolutions'].append(dict(added['evolutions'][0],**{'from':2,'to':3,'min_level':30,'required_trial':'future_trial'}))
         self.assertFalse(validate_compatibility(added))

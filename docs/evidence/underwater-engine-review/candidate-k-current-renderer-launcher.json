@@ -1,0 +1,16 @@
+{
+  "scope": "synthetic full-engine host integration, not GBA timing or native acquisition",
+  "returncode": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "returncode": 0,
+      "classified_heap_collision": null,
+      "passed_game_checks": 27,
+      "report_sha256": "047e20a9fc7792bbbb6bbbe9cd252c4c540b855dd0a83d2200bca4b3f1dd92aa"
+    }
+  ],
+  "maximum_attempts": 3,
+  "game_assertion_failure_retries": 0,
+  "forced_mappings": false
+}

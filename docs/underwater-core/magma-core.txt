@@ -1,0 +1,15 @@
+test_corrupt_new_rom_rows_fail_closed (__main__.MagmaCreatureCoreTests.test_corrupt_new_rom_rows_fail_closed) ... ok
+test_current_and_old_malformed_instances_match_independent_reference (__main__.MagmaCreatureCoreTests.test_current_and_old_malformed_instances_match_independent_reference) ... ok
+test_disabled_forms_and_wide_ids_reject_without_mutation (__main__.MagmaCreatureCoreTests.test_disabled_forms_and_wide_ids_reject_without_mutation) ... ok
+test_entire_released_revision4_prefix_is_byte_exact (__main__.MagmaCreatureCoreTests.test_entire_released_revision4_prefix_is_byte_exact) ... ok
+test_exact_allocation_every_form_command_capability_and_polarity (__main__.MagmaCreatureCoreTests.test_exact_allocation_every_form_command_capability_and_polarity) ... ok
+test_exact_revision_whitelists_and_historical_command_trial_differential (__main__.MagmaCreatureCoreTests.test_exact_revision_whitelists_and_historical_command_trial_differential) ... ok
+test_native_address_and_undefined_sanitizers (__main__.MagmaCreatureCoreTests.test_native_address_and_undefined_sanitizers) ... Magma native:35 edges,384 complete branch orders,2078 coverage and 45796 admission comparisons passed
+ok
+test_native_strict (__main__.MagmaCreatureCoreTests.test_native_strict) ... Magma native:35 edges,384 complete branch orders,2078 coverage and 45796 admission comparisons passed
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 22.717s
+
+OK

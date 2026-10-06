@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+  "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "banks_verified": 4,
+  "actual_retained_individuals": 34,
+  "earned_form_histories": 65,
+  "claimed_quests": 38,
+  "exact_report_parts": 186,
+  "runtime_manifest_entries": 893,
+  "current_runtime_verified": false,
+  "checksum_files_verified": 237,
+  "machine_states_loaded": 0,
+  "fixture_bytes_changed": false
+}

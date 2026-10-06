@@ -7,6 +7,10 @@
 #include "regional_quests.h"
 #include "regional_creature_art.h"
 #include "ui.h"
+#include "south_game.h"
+#include "magma_game.h"
+#include "underwater_game.h"
+#include "underwater_powers.h"
 
 volatile int room,px,py,spirit,game_state,has_save,save_failed;
 volatile unsigned chapter_flags;
@@ -22,6 +26,19 @@ void sprite(const unsigned char*a,int b,int c,int d,int e,int f){CHECK(a!=NULL);
 void save_game(void){++saves;}
 void toast(int n){last_toast=(unsigned)n;}
 void sfx(int a){(void)a;}
+/* This legacy adapter harness exercises no regional world/power schedulers.
+ * Only their cancellation notifications are absent-world bridges. Current
+ * Underwater quest context, core admission, save policy and portrait art are
+ * linked as real production modules by the Python driver. */
+void south_game_cancel_rest(void){}
+void magma_game_cancel_return(void){}
+void underwater_powers_selection_changed(void){}
+void underwater_game_selection_changed(void){}
+static void settle_evolution(void){
+ unsigned step;
+ for(step=0;step<250&&progression_evolution_busy();step++)progression_confirm_input(0);
+ CHECK(!progression_evolution_busy());
+}
 const unsigned char* companion_pixels(int family,int d,int f){(void)d;(void)f;fprintf(stderr,"FAIL legacy companion_pixels(%d) called in adapter\n",family);exit(1);}
 const unsigned char* companion_form_pixels(unsigned form,unsigned d,unsigned f){CHECK(creatures_form_id_valid(form));CHECK(d<4);CHECK(f<4);++art_calls;++forms_seen[form];return fallback_art;}
 
@@ -58,7 +75,7 @@ static void evolution(void){
  CHECK(save5_quest_set_state(&adventure_save.quests,2,SAVE5_QUEST_CLAIMED));c->trial_flags=0;game_state=3;CHECK(progression_menu_input(4));CHECK(game_state==3&&c->form_id==13);claim(4);CHECK(c->trial_flags&CREATURE_TRIAL_PAIRED_POOLS);
  room=17;px=120;py=232;CHECK(progression_is_sanctuary());px=150;CHECK(!progression_is_sanctuary());px=120;py=263;CHECK(!progression_is_sanctuary());room=18;CHECK(!progression_is_sanctuary());room=16;
  game_state=3;CHECK(progression_menu_input(4));CHECK(game_state==7);snapshot=adventure_save;progression_confirm_input(2);CHECK(game_state==3);CHECK(!memcmp(&snapshot,&adventure_save,sizeof snapshot));
- CHECK(progression_menu_input(4));CHECK(game_state==7);progression_confirm_input(1);CHECK(game_state==8);CHECK(c->form_id==14);CHECK(c->instance_id==identity&&c->equipped[0]==9&&c->selected_command==0);CHECK(progression_current_spirit()==4&&spirit==4);
+ CHECK(progression_menu_input(4));CHECK(game_state==7);settle_evolution();CHECK(game_state==7);progression_confirm_input(1);settle_evolution();CHECK(game_state==8);CHECK(c->form_id==14);CHECK(c->instance_id==identity&&c->equipped[0]==9&&c->selected_command==0);CHECK(progression_current_spirit()==4&&spirit==4);
  progression_draw_evolution();for(i=0;i<40;i++)progression_evolution_tick();progression_draw_evolution();for(;i<80;i++)progression_evolution_tick();CHECK(game_state==3);
  progression_draw_tab();CHECK(progression_command()==9);CHECK(progression_menu_input(256));CHECK(progression_command()==10);CHECK(progression_menu_input(256));CHECK(progression_command()==9);CHECK(c->instance_id==identity&&c->form_id==14);CHECK(creatures_instance_validate(c));CHECK(save5_validate(&adventure_save));
  CHECK(creatures_equip(c,1,10));CHECK(progression_command()==9);CHECK(progression_menu_input(256));CHECK(c->selected_command==1&&progression_command()==10);CHECK(c->equipped[0]==9&&c->equipped[1]==10);CHECK(progression_menu_input(256));CHECK(c->selected_command==0&&progression_command()==9);CHECK(c->equipped[0]==9&&c->equipped[1]==10);

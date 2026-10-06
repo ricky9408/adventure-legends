@@ -1,0 +1,92 @@
+{
+  "suite": "underwater-independent-minimal-native-review",
+  "candidate_frozen": true,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "machine_state_loads": 0,
+  "source_main_report_sha256": "07f94cdb8c748bfeeceb2765b2212e6991211498aef975ff1d08f826fe189c88",
+  "source_main_report": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/main/underwater-journey.json",
+  "source_main_assertions": 762,
+  "source_main_terminal_sram_sha256": "3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda",
+  "helper_source_snapshot_sha256": "6c5ee26ee03840779c05fa114b1f660b52b6ed4dc428d501d0925aa4fc693faa",
+  "review_source_sha256": "98dc2bb74c380dee2e98f7afb9e3e4a86c5c163a7ed5e4c226b4fd5365610fd1",
+  "cold_boots": [],
+  "exit_checks": [],
+  "damage_trace": [],
+  "scope_limits": [
+    "Native emulator, not physical handheld",
+    "Main route, save/reboot, death/retry, and ordinary exits; optional quests/trials are out of scope"
+  ],
+  "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+  "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+  "rom_bytes": 9770108,
+  "bridge_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+  "source_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "provenance": {
+    "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/fixtures/v5-revision5-minimal/magma-minimal10-town.sav",
+    "sram_sha256": "f584de3b29cb77731148b31b99dc40e0c7e4ec05f1aac42e0d38dd5b44612eeb",
+    "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "cross_rom_machine_state_loaded": false,
+    "minimal_prior_route": true
+  },
+  "checks": [],
+  "failures": [
+    {
+      "case": "cold-native-save-reboot",
+      "error": "'NoneType' object has no attribute 'frame'",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 285, in main\n    fn()\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 188, in cold_save_case\n    self.baseline('main-independent-cold-import')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 175, in baseline\n    self.cold_boot(initial_sram, name, terminal['sram_sha256'])\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 156, in cold_boot\n    self.check(int.from_bytes(bank[12:14], 'little') == 6, label + ': source is genuine current-revision SRAM')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/region_journey.py\", line 107, in check\n    self.checks.append({'label':label,'passed':bool(yes),'frame':self.e.frame})\n                                                                 ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'frame'\n",
+      "status": null
+    },
+    {
+      "case": "magma-surface-reciprocal-return",
+      "error": "'NoneType' object has no attribute 'frame'",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 285, in main\n    fn()\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 226, in surface_return_case\n    self.baseline('surface-return-baseline')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 175, in baseline\n    self.cold_boot(initial_sram, name, terminal['sram_sha256'])\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 156, in cold_boot\n    self.check(int.from_bytes(bank[12:14], 'little') == 6, label + ': source is genuine current-revision SRAM')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/region_journey.py\", line 107, in check\n    self.checks.append({'label':label,'passed':bool(yes),'frame':self.e.frame})\n                                                                 ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'frame'\n",
+      "status": null
+    },
+    {
+      "case": "ordinary-optional-garden-exits",
+      "error": "'NoneType' object has no attribute 'frame'",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 285, in main\n    fn()\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 235, in gardens_case\n    self.baseline('optional-ordinary-exits-baseline')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 175, in baseline\n    self.cold_boot(initial_sram, name, terminal['sram_sha256'])\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 156, in cold_boot\n    self.check(int.from_bytes(bank[12:14], 'little') == 6, label + ': source is genuine current-revision SRAM')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/region_journey.py\", line 107, in check\n    self.checks.append({'label':label,'passed':bool(yes),'frame':self.e.frame})\n                                                                 ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'frame'\n",
+      "status": null
+    },
+    {
+      "case": "archive-and-shortcut-reciprocal-exits",
+      "error": "'NoneType' object has no attribute 'frame'",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 285, in main\n    fn()\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 241, in archive_case\n    self.baseline('archive-reciprocal-exits-baseline')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 175, in baseline\n    self.cold_boot(initial_sram, name, terminal['sram_sha256'])\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 156, in cold_boot\n    self.check(int.from_bytes(bank[12:14], 'little') == 6, label + ': source is genuine current-revision SRAM')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/region_journey.py\", line 107, in check\n    self.checks.append({'label':label,'passed':bool(yes),'frame':self.e.frame})\n                                                                 ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'frame'\n",
+      "status": null
+    },
+    {
+      "case": "ordinary-death-retry-reboot",
+      "error": "'NoneType' object has no attribute 'frame'",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 285, in main\n    fn()\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 248, in death_case\n    self.baseline('death-retry-baseline')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 175, in baseline\n    self.cold_boot(initial_sram, name, terminal['sram_sha256'])\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/underwater_minimal_review.py\", line 156, in cold_boot\n    self.check(int.from_bytes(bank[12:14], 'little') == 6, label + ': source is genuine current-revision SRAM')\n  File \"/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-minimal-review-a/test-source/tests/region_journey.py\", line 107, in check\n    self.checks.append({'label':label,'passed':bool(yes),'frame':self.e.frame})\n                                                                 ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'frame'\n",
+      "status": null
+    }
+  ],
+  "cases": [
+    {
+      "case": "cold-native-save-reboot",
+      "passed": false
+    },
+    {
+      "case": "magma-surface-reciprocal-return",
+      "passed": false
+    },
+    {
+      "case": "ordinary-optional-garden-exits",
+      "passed": false
+    },
+    {
+      "case": "archive-and-shortcut-reciprocal-exits",
+      "passed": false
+    },
+    {
+      "case": "ordinary-death-retry-reboot",
+      "passed": false
+    }
+  ],
+  "snapshots": {},
+  "frame_windows": [],
+  "inputs": [],
+  "transitions": []
+}

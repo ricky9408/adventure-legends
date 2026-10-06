@@ -1,0 +1,42 @@
+10-main-independent-cold-import {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+11-main-native-save {'game_state': 1, 'room': 46, 'px': 80, 'py': 269, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+12-main-native-reboot {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+13-magma-shell-lift-return {'game_state': 1, 'room': 38, 'px': 416, 'py': 240, 'hp': 6, 'chapter_flags': 3, 'camera_x': 240, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 4, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+14-underwater-shell-lift-reentry {'game_state': 1, 'room': 46, 'px': 240, 'py': 288, 'hp': 6, 'chapter_flags': 3, 'camera_x': 120, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 0, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+15-optional-gardens-return {'game_state': 1, 'room': 46, 'px': 240, 'py': 32, 'hp': 6, 'chapter_flags': 3, 'camera_x': 120, 'camera_y': 0, 'save_failed': 0, 'checkpoint_spawn': 1, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+16-archive-reciprocal-returns {'game_state': 1, 'room': 46, 'px': 240, 'py': 32, 'hp': 5, 'chapter_flags': 3, 'camera_x': 120, 'camera_y': 0, 'save_failed': 0, 'checkpoint_spawn': 1, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+17-commons-safe-rest {'game_state': 1, 'room': 47, 'px': 67, 'py': 270, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+18-ordinary-underwater-death {'game_state': 4, 'room': 47, 'px': 96, 'py': 176, 'hp': 0, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 96, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+19-ordinary-underwater-retry {'game_state': 1, 'room': 47, 'px': 64, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+20-post-death-cold-reboot {'game_state': 1, 'room': 47, 'px': 64, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+21-minimal-cold-dialogs-evolution-preview {'game_state': 1, 'room': 46, 'px': 340, 'py': 85, 'hp': 6, 'chapter_flags': 3, 'camera_x': 220, 'camera_y': 5, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+{
+  "checks": 1187,
+  "failures": [],
+  "cases": [
+    {
+      "case": "cold-native-save-reboot",
+      "passed": true
+    },
+    {
+      "case": "magma-surface-reciprocal-return",
+      "passed": true
+    },
+    {
+      "case": "ordinary-optional-garden-exits",
+      "passed": true
+    },
+    {
+      "case": "archive-and-shortcut-reciprocal-exits",
+      "passed": true
+    },
+    {
+      "case": "ordinary-death-retry-reboot",
+      "passed": true
+    },
+    {
+      "case": "cold-dialogs-and-ineligible-preview",
+      "passed": true
+    }
+  ]
+}

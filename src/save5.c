@@ -1,5 +1,6 @@
 #include "save5.h"
 #include "save5_history_policy.h"
+#include "save5_underwater_policy.h"
 
 typedef char save5_u32_width[(sizeof(Save4U32) == 4) ? 1 : -1];
 typedef char save5_instance_width[(sizeof(CreatureInstance) == 24) ? 1 : -1];
@@ -163,7 +164,7 @@ int save5_campaign_validate(const CampaignSave *s) {
     if (!s) return 0;
     f = s->room_flags;
     unsigned chapter = s->chapter_flags, seen = s->story_seen;
-    if ((s->room > 13 && (s->room < 16 || s->room > 45)) ||
+    if ((s->room > 13 && (s->room < 16 || s->room > 53)) ||
         s->spawn > SAVE4_SPAWN_WEST_TRAIL ||
         s->bridge > 1 || s->torches > 3 || s->relic > 1 || s->camp > 1 ||
         s->optional_flags > 1 || (seen & ~0x7Fu) || (f & ~0xFFFFu)) return 0;
@@ -193,9 +194,14 @@ int save5_campaign_validate(const CampaignSave *s) {
 
     if (s->room >= 4 && s->room <= 8 && !(chapter & SAVE4_GROVE_CLEAR)) return 0;
     if (s->room >= 9 && s->room <= 13 && !(chapter & SAVE4_SKY_CLEAR)) return 0;
+    if (s->room >= 46) {
+        return (chapter & SAVE4_SKY_CLEAR) &&
+            (save5_policy6_rooms[s->room-46].spawns & (1u<<s->spawn));
+    }
     if (s->room >= 38) {
         /* assets/magma_region/validation.json verifies radius-five paths. */
-        return (chapter & SAVE4_SKY_CLEAR) && (s->room<=39?s->spawn<=3:s->spawn==0);
+        return (chapter & SAVE4_SKY_CLEAR) &&
+            (s->room==38?s->spawn<=4:s->room==39?s->spawn<=3:s->spawn==0);
     }
     if (s->room >= 30) {
         if (!(chapter & SAVE4_SKY_CLEAR)) return 0;
@@ -274,8 +280,8 @@ static void decode_instance(CreatureInstance *s, const Save4U8 *b) {
  * room/event handlers cannot turn reserved bits into implicit content. */
 /* assets/region/contract.json schema1. Keep identities stable; rooms14/15
  * remain the separate personal trials and are not regional checkpoints. */
-static const Save4U8 quest_masks[38] = {7,3,7,7,3,1,1,1,3,7,1,3,7,3,7,7,3,7,7,3,7,15,3,3,15,7,3,3,3,3,3,3,15,7,3,3,3,7};
-static const signed char equipment_source_quest[31] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6,16,17,18,19,19,20,22,29,25,27,26,28,30,33,34,35,36,37};
+static const Save4U8 quest_masks[46] = {7,3,7,7,3,1,1,1,3,7,1,3,7,3,7,7,3,7,7,3,7,15,3,3,15,7,3,3,3,3,3,3,15,7,3,3,3,7,3,3,15,7,3,3,3,7};
+static const signed char equipment_source_quest[37] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6,16,17,18,19,19,20,22,29,25,27,26,28,30,33,34,35,36,37,41,42,43,44,45,45};
 static unsigned quest_objective_mask(unsigned id) {
     return id < sizeof quest_masks ? quest_masks[id] : 0;
 }
@@ -296,7 +302,7 @@ static int quest_objective_validate(const Save5Quests *q, unsigned id) {
     if (!mask) return !state && !objectives;
     if (objectives & ~mask) return 0;
     /* Beacon stages are monotonic prefixes: 0,1,3,7,15 only. */
-    if ((id == 21 || id == 24 || id == 32) && (objectives & (objectives + 1u))) return 0;
+    if ((id == 21 || id == 24 || id == 32 || id == 40) && (objectives & (objectives + 1u))) return 0;
     if (state == SAVE5_QUEST_INACTIVE) return !objectives;
     if (state == SAVE5_QUEST_ACTIVE) return objectives != mask;
     return objectives == mask;
@@ -321,14 +327,18 @@ static int quest_fields_validate(const Save5Quests *q) {
         (q->region_flags[1] && !(q->region_flags[1] & 1u)) ||
         (q->region_flags[2] && !(q->region_flags[2] & 1u)) ||
         (q->region_flags[3] && !(q->region_flags[3] & 1u)) ||
-        !zero_bytes(q->region_flags + 4, 4) || (q->region_flags[9] & ~127u) ||
-        !zero_bytes(q->region_flags + 10, 6) || (q->region_flags[16] & ~15u) ||
-        q->region_flags[17] || (q->region_flags[18] & ~3u) ||
+        (q->region_flags[4] && !(q->region_flags[4] & 1u)) ||
+        !zero_bytes(q->region_flags + 5, 3) || (q->region_flags[9] & ~127u) ||
+        (q->region_flags[10] & ~63u) || !zero_bytes(q->region_flags + 11, 5) ||
+        (q->region_flags[16] & ~15u) || (q->region_flags[18] & ~3u) ||
         (q->region_flags[19] & ~7u) || (q->region_flags[19] & (q->region_flags[19]+1u)) ||
-        !zero_bytes(q->region_flags + 20, 12) ||
+        (q->region_flags[20] & ~3u) || (q->region_flags[20] & (q->region_flags[20]+1u)) ||
+        (q->region_flags[21] & ~7u) || (q->region_flags[21] & (q->region_flags[21]+1u)) ||
+        !zero_bytes(q->region_flags + 22, 10) ||
         (q->anchors[0] & ~3u) || (q->anchors[1] & ~3u) ||
         (q->anchors[2] & ~3u) || (q->anchors[3] & ~3u) ||
-        !zero_bytes(q->anchors + 4, 12)) return 0;
+        (q->anchors[4] & ~3u) || !zero_bytes(q->anchors + 5, 11)) return 0;
+    if (q->anchors[4] & ~q->region_flags[4]) return 0;
     if (q->anchors[3] & ~q->region_flags[3]) return 0;
     if ((q->anchors[2] & 1u) && !(q->region_flags[2] & 1u)) return 0;
     if ((q->anchors[2] & 2u) && !(q->region_flags[2] & 2u)) return 0;
@@ -423,8 +433,13 @@ static int quest_campaign_validate(const CampaignSave *c, const Save5Quests *q) 
         if ((q->region_flags[8]&16u) && !(q->region_flags[18]&1u)) return 0;
         if ((q->region_flags[8]&64u) && !(q->region_flags[18]&2u)) return 0;
     }
-    if(!magma_quest_campaign_validate(q))return 0;
+    if(!magma_quest_campaign_validate(q)||!underwater_quest_campaign_validate(q))return 0;
+    if (room >= 46) {
+        if(c->spawn==2 && room<=47 && !(q->anchors[4]&(1u<<(room-46))))return 0;
+        return (q->region_flags[4]&(1u<<(room-46)))!=0;
+    }
     if (room >= 38) {
+        if(room==38 && c->spawn==4 && !(q->region_flags[4]&1u))return 0;
         if(c->spawn==3 && room<=39 && !(q->anchors[3]&(1u<<(room-38))))return 0;
         return (q->region_flags[3] & (1u << (room-38))) != 0;
     }
@@ -604,6 +619,7 @@ static int magma_roster_sources_validate(const Save5Quests *q,const CreatureRost
     for(i=0;i<CREATURE_ROSTER_CAPACITY;++i)magma_instance_evidence(&e,&r->instances[i]);
     return magma_sources_validate(q,r->obtained,&e);
 }
+#include "save5_underwater_policy.inc"
 static int quest_equipment_validate(const Save5Quests *q, const EquipmentState *e) {
     unsigned source;
     if ((e->reward_claims[0] & 20u) && !(q->region_flags[0] & 1u)) return 0;
@@ -622,22 +638,25 @@ static int quest_equipment_validate(const Save5Quests *q, const EquipmentState *
  * validation and streaming bank scans. They never resolve a historical row
  * through current quest, equipment, region or creature source catalogs. */
 static const Save5HistoryVersion *history_version(unsigned revision) {
+    if(revision==6)return &save5_policy6_version;
     if(revision==5)return &save5_policy5_version;
     return revision >= 1 && revision <= 4 ? &save5_history_versions[revision] : 0;
 }
 static const Save5HistoryItem *history_item(unsigned id, unsigned revision) {
     const Save5HistoryVersion *v = history_version(revision);
     unsigned row;
-    if(revision==5)for(row=0;row<6;++row)if(save5_policy5_items[row].id==id)return &save5_policy5_items[row];
+    if(revision>=6)for(row=0;row<6;++row)if(save5_policy6_items[row].id==id)return &save5_policy6_items[row];
+    if(revision>=5)for(row=0;row<6;++row)if(save5_policy5_items[row].id==id)return &save5_policy5_items[row];
     if (!v || id >= sizeof save5_history_item_source) return 0;
     row = save5_history_item_source[id];
-    return row && row <= v->item_count ? &save5_history_items[row - 1u] : 0;
+    return row && row <= v->item_count && row <= 25 ? &save5_history_items[row - 1u] : 0;
 }
 static const Save5HistoryQuest *history_quest(unsigned id) {
-    return id<30?&save5_history_quests[id]:&save5_policy5_quests[id-30];
+    return id<30?&save5_history_quests[id]:id<38?&save5_policy5_quests[id-30]:&save5_policy6_quests[id-38];
 }
-static const Save5HistoryRoom *history_room(unsigned id) {
-    return id<38?&save5_history_rooms[id]:&save5_policy5_rooms[id-38];
+static const Save5HistoryRoom *history_room(unsigned id,unsigned revision) {
+    if(revision==6 && id==38)return &save5_policy6_magma_return;
+    return id<38?&save5_history_rooms[id]:id<46?&save5_policy5_rooms[id-38]:&save5_policy6_rooms[id-46];
 }
 static int history_claimed(const Save5Quests *q, unsigned quest_plus_one) {
     return !quest_plus_one || save5_quest_state(q, quest_plus_one - 1u) == 3;
@@ -648,7 +667,7 @@ static int history_campaign_validate(const CampaignSave *c, unsigned revision) {
     unsigned i, chapter, seen, spirits;
     Save4U32 flags;
     if (!c || !v || c->room > v->last_room || c->spawn > 5) return 0;
-    room = history_room(c->room);
+    room = history_room(c->room,revision);
     chapter = c->chapter_flags; seen = c->story_seen; flags = c->room_flags;
     if (!room->since || room->since > revision || !(room->spawns & (1u << c->spawn)) ||
         c->bridge > 1 || c->torches > 3 || c->relic > 1 || c->camp > 1 ||
@@ -703,11 +722,13 @@ static int history_quest_fields_validate(const Save5Quests *q, unsigned revision
     for (i = 0; i < 32; ++i) if (q->region_flags[i] & ~v->regions[i]) return 0;
     for (i = 0; i < 16; ++i) {
         if (q->anchors[i] & ~v->anchors[i]) return 0;
-        if (i < (revision==5?4u:3u) && (q->anchors[i] & ~q->region_flags[i])) return 0;
+        if (i < (revision>=6?5u:revision==5?4u:3u) && (q->anchors[i] & ~q->region_flags[i])) return 0;
     }
-    for (i = 0; i < (revision==5?4u:3u); ++i)
+    for (i = 0; i < (revision>=6?5u:revision==5?4u:3u); ++i)
         if (q->region_flags[i] && !(q->region_flags[i] & 1u)) return 0;
-    if(revision==5 && (q->region_flags[19] & (q->region_flags[19]+1u)))return 0;
+    if(revision>=5 && (q->region_flags[19] & (q->region_flags[19]+1u)))return 0;
+    if(revision>=6 && ((q->region_flags[20] & (q->region_flags[20]+1u)) ||
+        (q->region_flags[21] & (q->region_flags[21]+1u))))return 0;
     return 1;
 }
 static int history_quest_campaign_validate(const CampaignSave *c, const Save5Quests *q,
@@ -716,7 +737,7 @@ static int history_quest_campaign_validate(const CampaignSave *c, const Save5Que
     const Save5HistoryRoom *room;
     unsigned i, j;
     if (!v || c->room > v->last_room) return 0;
-    room = history_room(c->room);
+    room = history_room(c->room,revision);
     for (i = 0; i < 3; ++i) if (q->region_flags[i]) {
         const Save4U8 *p = save5_history_regions[i];
         if (!has_all(c->chapter_flags, p[1])) return 0;
@@ -750,7 +771,9 @@ static int history_quest_campaign_validate(const CampaignSave *c, const Save5Que
         if (!(q->region_flags[2] & save5_history_field_visit[i]) ||
             !has_all(q->region_flags[18], save5_history_field_discovery[i])) return 0;
     }
-    if(revision==5 && !magma_quest_campaign_validate(q))return 0;
+    if(revision>=5 && !magma_quest_campaign_validate(q))return 0;
+    if(revision>=6 && !underwater_quest_campaign_validate(q))return 0;
+    if(revision==6 && c->room==38 && c->spawn==4 && !(q->region_flags[4]&1u))return 0;
     if (room->region != 255) {
         if (!(q->region_flags[room->region] & room->visit) || !history_claimed(q, room->quest)) return 0;
         if (c->spawn == (room->since==5?3u:2u) && room->anchor && !(q->anchors[room->region] & room->anchor)) return 0;
@@ -833,7 +856,7 @@ static int history_equipment_claims_validate(const Save5Quests *q, const Equipme
         unsigned claimed = (e->reward_claims[i >> 3] >> (i & 7u)) & 1u;
         const Save5HistoryItem *p;
         if (i >= v->item_count) { if (claimed) return 0; continue; }
-        p = i<25?&save5_history_items[i]:&save5_policy5_items[i-25];
+        p = i<25?&save5_history_items[i]:i<31?&save5_policy5_items[i-25]:&save5_policy6_items[i-31];
         if (claimed && !(e->seen[p->id >> 3] & (1u << (p->id & 7u)))) return 0;
         if (p->category == 1 && claimed && !(q->region_flags[0] & 1u)) return 0;
         if (p->category == 2 && claimed != (save5_quest_state(q, (unsigned)p->quest) == 3)) return 0;
@@ -893,7 +916,8 @@ int save5_validate_revision(const Save5State *s, unsigned revision) {
     }
     return history_quest_campaign_validate(&s->campaign, &s->quests, revision) &&
         history_creatures_validate(&s->quests, s->roster.obtained, s->roster.rewards, retained, southern) &&
-        (revision!=5 || magma_roster_sources_validate(&s->quests,&s->roster)) &&
+        (revision<5 || magma_roster_sources_validate(&s->quests,&s->roster)) &&
+        (revision<6 || underwater_roster_sources_validate(&s->quests,&s->roster)) &&
         (revision == 1 ? history_starter_validate(&s->equipment) :
          history_equipment_validate(&s->quests, &s->equipment, revision));
 }
@@ -930,6 +954,7 @@ int save5_validate(const Save5State *s) {
                                  retained_creatures(&s->roster)) &&
         southern_sources_validate(&s->quests, s->roster.obtained, southern_roster_evidence(&s->roster)) &&
         magma_roster_sources_validate(&s->quests,&s->roster) &&
+        underwater_roster_sources_validate(&s->quests,&s->roster) &&
         equipment_validate(&s->equipment) && quest_equipment_validate(&s->quests, &s->equipment);
 }
 /* Tight metadata packing uses all 1088 canonical-padding bytes temporarily:
@@ -976,6 +1001,7 @@ typedef struct BankScan {
     unsigned offset, position, valid, story_mask, stage, boundary, base, slot, memory, revision;
     unsigned retained_creatures, southern_evidence; /* checked per-individual evidence */
     MagmaEvidence magma;
+    UnderwaterEvidence underwater;
     unsigned pending_quest_check;
 } BankScan;
 static BankScan scan;
@@ -1044,7 +1070,8 @@ static int scan_instance(unsigned slot) {
     set_bit(scan.occupied, slot);
     scan.retained_creatures |= history_retained_evidence(&c);
     scan.southern_evidence |= history_southern_evidence(&c);
-    if(scan.revision==5)magma_instance_evidence(&scan.magma,&c);
+    if(scan.revision>=5)magma_instance_evidence(&scan.magma,&c);
+    if(scan.revision>=6)underwater_instance_evidence(&scan.underwater,&c);
     if (c.instance_id > scan.max_id) scan.max_id = c.instance_id;
     legacy = creatures_legacy_spirit_revision(c.form_id, scan.revision);
     if (c.flags & CREATURE_STORY_LOCKED) {
@@ -1097,18 +1124,29 @@ static void scan_next(unsigned stage, unsigned size) {
 static unsigned scan_run(unsigned budget) {
     unsigned used = 0;
     if(scan.pending_quest_check && budget) {
-        scan.pending_quest_check=0;
-        if (!history_quest_fields_validate(&scan.quests, scan.revision) ||
-                    !history_quest_campaign_validate(&scan.campaign, &scan.quests, scan.revision) ||
-                    !history_creatures_validate(&scan.quests, scan.collection + 16, scan.collection + 32,
-                                               scan.retained_creatures, scan.southern_evidence) ||
-                    (scan.revision==5 && !magma_sources_validate(&scan.quests,scan.collection+16,&scan.magma)) ||
-                    (scan.memory && (!quest_fields_validate(&scan.quests) ||
-                     !quest_campaign_validate(&scan.campaign, &scan.quests) ||
-                     !quest_creatures_validate(&scan.quests, scan.collection + 16, scan.collection + 32,
-                                               scan.retained_creatures) ||
-                     !southern_sources_validate(&scan.quests, scan.collection + 16, scan.southern_evidence)))) scan.valid = 0;
-        /* Exactly one bounded semantic pass; never a full-roster scan. */
+        unsigned stage=scan.pending_quest_check;
+        /* Preserve every historical/current causal check, but split their
+         * fixed cost into separate cold slices. More authored quests must
+         * not make one charged byte silently run a complete doubled pass. */
+        if(stage==1) {
+            if (!history_quest_fields_validate(&scan.quests, scan.revision) ||
+                !history_quest_campaign_validate(&scan.campaign, &scan.quests, scan.revision)) scan.valid=0;
+            scan.pending_quest_check=2;
+        } else if(stage==2) {
+            if (!history_creatures_validate(&scan.quests, scan.collection + 16, scan.collection + 32,
+                    scan.retained_creatures, scan.southern_evidence) ||
+                (scan.revision>=5 && !magma_sources_validate(&scan.quests,scan.collection+16,&scan.magma)) ||
+                (scan.revision>=6 && !underwater_sources_validate(&scan.quests,scan.collection+16,&scan.underwater))) scan.valid=0;
+            scan.pending_quest_check=scan.memory?3:0;
+        } else {
+            if (!quest_fields_validate(&scan.quests) ||
+                !quest_campaign_validate(&scan.campaign, &scan.quests) ||
+                !quest_creatures_validate(&scan.quests, scan.collection + 16, scan.collection + 32,
+                    scan.retained_creatures) ||
+                !southern_sources_validate(&scan.quests, scan.collection + 16, scan.southern_evidence)) scan.valid=0;
+            scan.pending_quest_check=0;
+        }
+        /* One bounded semantic slice; never a full-roster rescan. */
         return budget;
     }
     while (scan.valid && scan.position < SAVE5_BANK_SIZE && used < budget) {
@@ -1339,14 +1377,17 @@ static int load_internal(Save5State *out) {
     return 1;
 }
 int save5_load(Save5State *out) {
+    save5_preflight_cancel();
     if (!out || writer_status == SAVE5_BUSY) return 0;
     return load_internal(out);
 }
 int save5_has_valid(void) {
+    save5_preflight_cancel();
     if (writer_status == SAVE5_BUSY) return 0;
     return load_internal(0);
 }
 int save5_begin(const Save5State *s) {
+    if (save5_preflight_active()) return 0;
     if (writer_status == SAVE5_BUSY) return 0;
     if (!s || !save5_campaign_validate(&s->campaign)) {
         writer_status = SAVE5_FAILED; return 0;
@@ -1492,6 +1533,9 @@ int save5_store(const Save5State *s) {
 }
 #ifdef SAVE5_HOST_TEST
 void save5_test_reset_writer(void) {
+    save5_preflight_cancel();
     writer_status = SAVE5_IDLE; writer_progress = 0; test_step_work = 0;
 }
 #endif
+
+#include "save5_preflight.inc"

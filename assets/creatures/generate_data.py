@@ -191,7 +191,7 @@ if __name__ == '__main__':
     if '--check' in sys.argv:
         if OUT.read_text() != text:
             raise SystemExit('creature_data.c differs from authored catalog; regenerate it')
-        print('Validated 65 development core forms, 102 learnset pairs, 35 edges, 65 abilities and immutable128-terminal reservation data; native obtainability/art/handlers are tested separately')
+        print('Validated revision6 development core:89 forms,142 learn pairs,51 edges,89 abilities; native obtainability/art/handlers remain separate acceptance gates')
     else:
         OUT.write_text(text)
         print(OUT)

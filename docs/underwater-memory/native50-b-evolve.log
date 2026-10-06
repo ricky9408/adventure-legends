@@ -1,0 +1,25 @@
+{"label": "cold-continue", "hardware_frame": 202, "status": {"game_state": 1, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+{"label": "journal-tab-0", "hardware_frame": 298, "status": {"game_state": 3, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+{"label": "journal-tab-1", "hardware_frame": 406, "status": {"game_state": 3, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+{"label": "journal-tab-2", "hardware_frame": 520, "status": {"game_state": 3, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+{"label": "journal-tab-3", "hardware_frame": 640, "status": {"game_state": 3, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+{"label": "journal-tab-4", "hardware_frame": 766, "status": {"game_state": 3, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+{"label": "failure", "hardware_frame": 772, "status": {"game_state": 1, "room": 52, "px": 32, "py": 112, "hp": 7, "chapter_flags": 15, "camera_x": 0, "camera_y": 0, "save_failed": 0, "checkpoint_spawn": 2, "spirit": 37, "summoned": 0, "ability_cd": 0, "roll_cd": 0}, "retained_individuals": 50, "obtained_history": 88, "lowest_overwritten_word_address": "0x3007b4c", "observed_overwritten_extent_bytes": 948, "changed_word_bytes": 928, "unmodified_prefix_bytes": 2892, "bottom_64_bytes_intact": true, "true_minimum_sp": "not measured"}
+Traceback (most recent call last):
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/docs/underwater-memory/observe_stack.py", line 116, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/docs/underwater-memory/observe_stack.py", line 99, in main
+    r.target(80,256);r.observe('checkpoint-save-transaction')
+    ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/magma_journey.py", line 112, in target
+    self.act(x+dx,y+dy,face)
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/region_journey.py", line 217, in act
+    self.goto(x,y)
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/region_journey.py", line 201, in goto
+    path,blocked,w=self.path(tx,ty)
+                   ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/region_journey.py", line 178, in path
+    if b[g]:
+       ~^^^
+IndexError: bytearray index out of range

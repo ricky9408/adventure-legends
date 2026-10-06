@@ -1,0 +1,23 @@
+test_fragment_paths_duplicate_keys_and_oversize_reject (__main__.UnderwaterCatalogTests.test_fragment_paths_duplicate_keys_and_oversize_reject) ... ok
+test_fragments_generate_exact_tables_and_old_values (__main__.UnderwaterCatalogTests.test_fragments_generate_exact_tables_and_old_values) ... ok
+test_frozen_history_reproducible (__main__.UnderwaterCatalogTests.test_frozen_history_reproducible) ... Frozen revisions1–4 verified unchanged; revision5 verified (65 form policies,102 learns,2 trial dependencies)
+Catalog source formatting is deterministic and semantic-preserving (31 bounded files)
+ok
+test_pre_extension_catalog_canonical_values_are_exact (__main__.UnderwaterCatalogTests.test_pre_extension_catalog_canonical_values_are_exact) ... ok
+test_address_undefined_sanitizers (__main__.UnderwaterCoreTests.test_address_undefined_sanitizers) ... Underwater strict core:1,572,864 mask cases,16 branches,72-opportunity admission and atomic denials passed
+ok
+test_bounded_admission_sanitizers (__main__.UnderwaterCoreTests.test_bounded_admission_sanitizers) ... Bounded admission:4886 exact synchronous differentials,all4140 stale-byte denials,once-only tokens passed
+ok
+test_bounded_admission_strict (__main__.UnderwaterCoreTests.test_bounded_admission_strict) ... Bounded admission:4886 exact synchronous differentials,all4140 stale-byte denials,once-only tokens passed
+ok
+test_every_new_form_definition_and_command_inheritance (__main__.UnderwaterCoreTests.test_every_new_form_definition_and_command_inheritance) ... ok
+test_exact_released_runtime_prefixes (__main__.UnderwaterCoreTests.test_exact_released_runtime_prefixes) ... ok
+test_revision5_does_not_consult_live_polarity_trial_learn_or_evolution (__main__.UnderwaterCoreTests.test_revision5_does_not_consult_live_polarity_trial_learn_or_evolution) ... ok
+test_revision5_exact_old_acceptance_differential (__main__.UnderwaterCoreTests.test_revision5_exact_old_acceptance_differential) ... ok
+test_strict_native (__main__.UnderwaterCoreTests.test_strict_native) ... Underwater strict core:1,572,864 mask cases,16 branches,72-opportunity admission and atomic denials passed
+ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 6.724s
+
+OK

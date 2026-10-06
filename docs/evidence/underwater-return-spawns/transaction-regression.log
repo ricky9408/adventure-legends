@@ -1,0 +1,13 @@
+test_all_request_kinds_match_synchronous_transaction (__main__.UnderwaterTransactionTests.test_all_request_kinds_match_synchronous_transaction) ... ok
+test_bounded_full48_mixed_bundle_has_no_partial_first_item (__main__.UnderwaterTransactionTests.test_bounded_full48_mixed_bundle_has_no_partial_first_item) ... ok
+test_cancel_state_mutation_scene_change_and_load_invalidate_before_commit (__main__.UnderwaterTransactionTests.test_cancel_state_mutation_scene_change_and_load_invalidate_before_commit) ... ok
+test_copied_request_and_writer_ownership (__main__.UnderwaterTransactionTests.test_copied_request_and_writer_ownership) ... ok
+test_full_and_exhausted_denials_match_without_consuming_receipts (__main__.UnderwaterTransactionTests.test_full_and_exhausted_denials_match_without_consuming_receipts) ... ok
+test_preflight_matches_full_validator_on_real_and_random_malformed_states (__main__.UnderwaterTransactionTests.test_preflight_matches_full_validator_on_real_and_random_malformed_states) ... ok
+test_successful_teaching_field_repeat_trial_gear_and_implicit_objective (__main__.UnderwaterTransactionTests.test_successful_teaching_field_repeat_trial_gear_and_implicit_objective) ... ok
+test_unused_fields_and_wrapped_ids_fail_closed (__main__.UnderwaterTransactionTests.test_unused_fields_and_wrapped_ids_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.749s
+
+OK

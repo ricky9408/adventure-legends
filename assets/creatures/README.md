@@ -1,27 +1,45 @@
-# Magma authoring schema2, content revision5
+# Underwater authoring schema2, development content revision6
 
-The current catalog has66 authored designs and128 immutable reserved identities.
-The reviewed development ROM manifest enables65 forms,102 learned-command pairs,
-35 evolution edges and65 commands. The new batch is exactly31–48 and95–100, with
-signatures43–66. Ability12, legends121–128 and every unlisted form remain disabled.
-Table enablement is not evidence of acquisition, artwork, handlers or native play.
+The current catalog has90 authored designs and128 immutable reserved identities.
+The development core manifest selects89 forms,142 learned-command pairs,51 edges
+and89 commands. This append is forms49–72 and signatures67–90 in families17–24.
+Ability12, legends121–128 and every unlisted form remain disabled. Table enablement
+is not evidence of acquisition, artwork, handlers, controller routes or delivery.
+
+## Bounded source fragments
+
+catalog.json is a strict source descriptor, not the assembled schema2 document.
+Use catalog_source.load_catalog(path), or validate_catalog.load_json(path), for
+all consumers. The loader also accepts archived monolithic JSON. It preserves
+row order, rejects duplicate keys/paths, unsafe relative paths, nested descriptor
+fragments and files reaching90,000 bytes.31 source files each stay below90KB;
+metadata is separate and row arrays use stable24-record chunks. format_catalog.py
+checks deterministic formatting without changing parsed values. No assembled
+oversize JSON needs to be published or committed.
+
+The old65-form catalog can be reconstructed by removing only revision6 rows,
+capabilities and proposed slot statuses49–72. Its canonical SHA256 remains
+ ebe05e3fa2b35c7fcd3e32d5235b95fc0010e003acb8439b23eef58fa9b16ec0.
 
 ## Immutable history and current policy
 
-- The released41 form rows,61 learns,20 edges and41 command rows remain byte-exact
+- The released65 form rows,102 learns,35 edges and65 command rows remain byte-exact
   prefixes. IDs, names, phases, polarities, existing stat weights, trial meanings
   and learn relationships are preserved
 - identity-lock.json SHA256 is
   fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969
 - assets/history/creatures-v1-v4.json and released-creature-relations-v4.json
   independently freeze historical reader and authoring semantics. Never regenerate
-  those snapshots from expanded current data
-- Revision APIs dispatch1–4 to frozen policies and5 to current policy. Admission is
+  those snapshots from expanded current data. Separate creatures-v5.json and
+  released-creature-relations-v5.json freeze finally delivered Magma commit
+  0a8b05c3e24d02bd350a11c32289fb5686641535 before revision6 expansion
+- Revision APIs dispatch1–5 to frozen policies and6 to current policy. Admission is
   absent from all revision/current instance and roster legality predicates
 - Current per-form policy specifies each polarity and field-capability set. Only
-  target39 changes Yin to Yang and target48 changes Yang to Yin. No family-wide
-  exception permits any other change. Historical polarity remains per-form frozen
-- Original21, Southern20 and Magma24 remain in append-only ROM order. Authored
+  individually approved branch polarities may differ. The old39/48 exceptions
+  remain unchanged. Every new form49–72 has explicit polarity; no family-wide
+  exception is accepted. Historical polarity remains per-form frozen
+- Original21, Southern20, Magma24 and Underwater24 use append-only ROM order. Authored
   JSON is ID-sorted separately. Offsets/counts are checked before narrowing;
   source-grouped multi-edge rows must be contiguous
 - Schema2 retains the8-command authoring bound and byte command IDs. Generated
@@ -41,10 +59,16 @@ requiring only the selected edge's bit. Families36–38 have key1 only. World qu
 code must separately prove source, from-form, context and same-individual floors.
 
 MAGMA_READY=256 and CALDERA_OPEN=512 belong to the u16 evolution-context namespace,
-not CampaignSave chapter flags. The current context mask is1023. Context derives
+not CampaignSave chapter flags. The current context mask is4095. Magma context derives
 from claimed quests30/31 and32 respectively. Every evolution requires its exact
 level, bond, trial, context, sanctuary and explicit target confirmation. Third
 forms33/36 total285 stat points and retain all earlier field actions/commands.
+
+Underwater families17–24 have independent local keys1/2, masks1/2 and no mutual
+prerequisite. Both terminals inherit the base command at level1. New terminals
+require their own branch receipt and level28/bond45. UNDERWATER_READY=1024 derives
+from quests38/39; PALINODE_OPEN=2048 derives from quest40. Old evolved forms keep
+exact historical acceptance, including legal zero bond or missing trial receipts.
 
 Branch enumeration never silently selects its first edge. Legacy ambiguous calls
 return AMBIGUOUS. The roster-aware preconfirmation query checks both eligibility
@@ -66,7 +90,7 @@ without mutation. The scan uses120 scratch count/mask bytes, a single bounded160
 record coverage pass, no heap and no whole-roster stack copy.
 
 Legal over-budget historical collections remain loadable and saveable, including
-revision5 re-saves. New actions may only preserve/reduce excess and preserve/increase
+revision6 re-saves. New actions may only preserve/reduce excess and preserve/increase
 coverage while respecting physical capacity. Admission cannot guarantee recovery
 of all future opportunities from an already over-budget collection. No deletion,
 replacement, release or history cloning is introduced.
@@ -85,6 +109,7 @@ Run from the repository root:
     python3 assets/creatures/generate_data.py --check
     python3 assets/creatures/format_catalog.py --check
     python3 tools/generate_creature_history.py --check
+    python3 tests/test_underwater_creature_core.py
     python3 tests/test_magma_catalog_policy.py
     python3 tests/test_magma_creature_core.py
     python3 tests/test_magma_history_core.py
@@ -95,3 +120,17 @@ malformed metadata and randomized admission sequences. The isolated ARM benchmar
 is tests/benchmark_magma_creatures.py; docs/MAGMA_CREATURE_IMPLEMENTATION.md records
 its invocation, bounds and limitations. Whole-engine cadence, save interruption,
 source receipt integration and native controller routes are separate required gates.
+
+See docs/UNDERWATER_CORE_FOUNDATION.md for exact new host coverage and isolated
+ARM object resource deltas. Integration acceptance remains the parent milestone.
+
+## Frame-bounded transactions
+
+New gameplay can use creatures_admission_job_begin/step/result and once-only
+commit_grant/commit_evolution against a caller-owned immutable snapshot. Four
+records per step cap the full validation/admission workload; commits compare
+all4140 live roster bytes exactly. The private ARM cursor is164 bytes. The
+caller proves fullSave and typed source/attempt state and cancels on every
+load/death/scene/confirmation invalidation. Existing synchronous APIs remain
+available with unchanged behavior. See the foundation report for measured
+cycle limits and the remaining combined-frame cadence gate.

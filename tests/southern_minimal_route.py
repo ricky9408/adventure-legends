@@ -217,8 +217,8 @@ class SouthernMinimalRoute(SouthernJourney):
         self.old_records={c.instance_id:bytes(c) for c in self.live()}
         self.old_quests=[self.quest(q) for q in range(22)];self.old_objectives=list(s.quests.objectives[:22])
         saved=self.e.bytes(0x0e000000,32768);migrated=newest_bank(saved)
-        self.check(int.from_bytes(migrated[12:14],'little')==5 and migrated[32:]==b[32:],
-                   'migration commits current revision5 with byte-identical revision3 payload')
+        self.check(int.from_bytes(migrated[12:14],'little')==6 and migrated[32:]==b[32:],
+                   'migration commits current revision6 with byte-identical revision3 payload')
         old_offset=self.source_bytes.index(b)
         self.check(saved[old_offset:old_offset+6144]==b,'forward migration keeps prior committed revision3 bank intact')
         self.absent_optional();self.record_state('before-southern-entry');self.snapshot('00-minimal-n5-forward-migration')

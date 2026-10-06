@@ -1,0 +1,3 @@
+/workspace/scratch/33ed39a77941/emberbond/tools/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-memory-diagnostic-g/link-limit-probes/rom.elf section `.text' will not fit in region `ROM'
+/workspace/scratch/33ed39a77941/emberbond/tools/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: region `ROM' overflowed by 9777032 bytes
+collect2: error: ld returned 1 exit status

@@ -1,0 +1,15 @@
+test_asan_ubsan_snapshot_mutations_and_staged_jobs (__main__.UnderwaterSaveTests.test_asan_ubsan_snapshot_mutations_and_staged_jobs) ... ok
+test_bundle_second_item_full_rolls_back_and_seen_discard_settles (__main__.UnderwaterSaveTests.test_bundle_second_item_full_rolls_back_and_seen_discard_settles) ... ok
+test_exact89_history_50_real_identities_37_items_roundtrip (__main__.UnderwaterSaveTests.test_exact89_history_50_real_identities_37_items_roundtrip) ... ok
+test_exact_source_discovery_trial_namespaces_and_32bit_inputs (__main__.UnderwaterSaveTests.test_exact_source_discovery_trial_namespaces_and_32bit_inputs) ... ok
+test_extra_receipt_requires_two_retained_and_terminal_without_replay (__main__.UnderwaterSaveTests.test_extra_receipt_requires_two_retained_and_terminal_without_replay) ... ok
+test_id_exhaustion_and_full_roster_are_atomic (__main__.UnderwaterSaveTests.test_id_exhaustion_and_full_roster_are_atomic) ... ok
+test_invalid_typed_bytes_never_write (__main__.UnderwaterSaveTests.test_invalid_typed_bytes_never_write) ... ok
+test_main_route_and_return_spawns_require_permanent_prefixes (__main__.UnderwaterSaveTests.test_main_route_and_return_spawns_require_permanent_prefixes) ... ok
+test_native34_migrates_unchanged_without_new_receipts (__main__.UnderwaterSaveTests.test_native34_migrates_unchanged_without_new_receipts) ... ok
+test_synthetic_full160_full48_roundtrip_and_production_rejection (__main__.UnderwaterSaveTests.test_synthetic_full160_full48_roundtrip_and_production_rejection) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 11.756s
+
+OK

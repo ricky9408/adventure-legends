@@ -1,0 +1,13 @@
+test_authoring_resolves_linear_prerequisites_and_branch_subsets (__main__.MagmaArchitectureTests.test_authoring_resolves_linear_prerequisites_and_branch_subsets) ... ok
+test_branch_each_key_and_both_keys_keep_explicit_target_and_decline (__main__.MagmaArchitectureTests.test_branch_each_key_and_both_keys_keep_explicit_target_and_decline) ... ok
+test_frozen_policy_generation_is_exact (__main__.MagmaArchitectureTests.test_frozen_policy_generation_is_exact) ... Frozen revisions1–4 verified unchanged; revision5 verified (65 form policies,102 learns,2 trial dependencies)
+ok
+test_future_u16_context_is_not_truncated (__main__.MagmaArchitectureTests.test_future_u16_context_is_not_truncated) ... ok
+test_released_F001_third_tier_and_every_u16_trial_pattern (__main__.MagmaArchitectureTests.test_released_F001_third_tier_and_every_u16_trial_pattern) ... ok
+test_semantic_prefix_lock_accepts_extension_rejects_rewrite (__main__.MagmaArchitectureTests.test_semantic_prefix_lock_accepts_extension_rejects_rewrite) ... ok
+test_trial_alias_unknown_dependencies_cycles_and_unclosed_edge_fail (__main__.MagmaArchitectureTests.test_trial_alias_unknown_dependencies_cycles_and_unclosed_edge_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 10.410s
+
+OK

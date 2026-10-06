@@ -1,0 +1,238 @@
+{
+  "scope": "Synthetic host state and input-edge integration; real production functions with entry instrumentation",
+  "native_controller_gameplay": false,
+  "native_hardware_timing": false,
+  "emulator_ram_injection": false,
+  "dma_emulated": false,
+  "compiler": "cc",
+  "checks": [
+    {
+      "name": "underwater_anchor_writer_failure_retains_valid_live_receipt_and_retry_is_once",
+      "passed": true,
+      "fail_after": 0
+    },
+    {
+      "name": "underwater_anchor_writer_failure_retains_valid_live_receipt_and_retry_is_once",
+      "passed": true,
+      "fail_after": 3000
+    },
+    {
+      "name": "underwater_anchor_writer_failure_retains_valid_live_receipt_and_retry_is_once",
+      "passed": true,
+      "fail_after": 6144
+    },
+    {
+      "name": "return_arch_commits_intent_before_transition_and_entry_queued_objective_before_writer",
+      "passed": true
+    },
+    {
+      "name": "new_visit_freezes_old_scene_before_validation_and_transition",
+      "passed": true,
+      "honest_two_page_warmup": true
+    },
+    {
+      "name": "underwater_rest_delayed_exact_once_with_hostiles_frozen",
+      "passed": true,
+      "area": 46,
+      "already_lit": false
+    },
+    {
+      "name": "underwater_rest_delayed_exact_once_with_hostiles_frozen",
+      "passed": true,
+      "area": 46,
+      "already_lit": true
+    },
+    {
+      "name": "underwater_rest_delayed_exact_once_with_hostiles_frozen",
+      "passed": true,
+      "area": 47,
+      "already_lit": false
+    },
+    {
+      "name": "underwater_rest_delayed_exact_once_with_hostiles_frozen",
+      "passed": true,
+      "area": 47,
+      "already_lit": true
+    },
+    {
+      "name": "explicit_world_reset_revokes_pending_anchor",
+      "passed": true,
+      "pending_frame": 0
+    },
+    {
+      "name": "explicit_world_reset_revokes_pending_anchor",
+      "passed": true,
+      "pending_frame": 3
+    },
+    {
+      "name": "explicit_world_reset_revokes_pending_anchor",
+      "passed": true,
+      "pending_frame": 8
+    },
+    {
+      "name": "explicit_world_reset_revokes_pending_anchor",
+      "passed": true,
+      "pending_frame": 30
+    },
+    {
+      "name": "changed_invalid_live_state_fails_before_anchor_or_writer",
+      "passed": true
+    },
+    {
+      "name": "real_death_resets_pre_freeze_world_intent",
+      "passed": true
+    },
+    {
+      "name": "new_game_or_load_revokes_pending_anchor",
+      "passed": true,
+      "resume": 0
+    },
+    {
+      "name": "new_game_or_load_revokes_pending_anchor",
+      "passed": true,
+      "resume": 1
+    },
+    {
+      "name": "multi_intent_guaranteed_quests_claim_once_and_repeated_npc_is_idempotent",
+      "passed": true
+    },
+    {
+      "name": "engine_selection_and_lifecycle_revoke_exact_trial_and_old_cast",
+      "passed": true,
+      "invalidation": "selected_away_back"
+    },
+    {
+      "name": "engine_selection_and_lifecycle_revoke_exact_trial_and_old_cast",
+      "passed": true,
+      "invalidation": "unselected_party_away_back"
+    },
+    {
+      "name": "engine_selection_and_lifecycle_revoke_exact_trial_and_old_cast",
+      "passed": true,
+      "invalidation": "command_away_back"
+    },
+    {
+      "name": "engine_selection_and_lifecycle_revoke_exact_trial_and_old_cast",
+      "passed": true,
+      "invalidation": "room"
+    },
+    {
+      "name": "engine_selection_and_lifecycle_revoke_exact_trial_and_old_cast",
+      "passed": true,
+      "invalidation": "death"
+    },
+    {
+      "name": "real_update_drives_two_page_bounded_evolution_and_delayed_save",
+      "passed": true,
+      "confirmed_frames": 37,
+      "maximum_slices_per_update": 3
+    },
+    {
+      "name": "real_update_revokes_frozen_evolution_without_commit",
+      "passed": true,
+      "invalidation": "cancel_chord"
+    },
+    {
+      "name": "real_update_revokes_frozen_evolution_without_commit",
+      "passed": true,
+      "invalidation": "direction_chord"
+    },
+    {
+      "name": "real_update_revokes_frozen_evolution_without_commit",
+      "passed": true,
+      "invalidation": "selection"
+    },
+    {
+      "name": "real_update_revokes_frozen_evolution_without_commit",
+      "passed": true,
+      "invalidation": "room"
+    },
+    {
+      "name": "real_update_revokes_frozen_evolution_without_commit",
+      "passed": true,
+      "invalidation": "load"
+    },
+    {
+      "name": "real_update_revokes_frozen_evolution_without_commit",
+      "passed": true,
+      "invalidation": "foreign_owner"
+    }
+  ],
+  "source_sha256": {
+    "src/game.c": "13461969d9f7d3e4e8fe14dcecf6e0a330143b7a545188e5f843a0fa00c682fb",
+    "src/magma_game.c": "960a861bdf86854ed33ae336d5cd3a94da30b20738eebe278992118ac051da3f",
+    "src/magma_quests.c": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+    "src/save5.c": "a637429f7e016b3d108b2c526917ab58768fc996a99b35355270114ad27237b1",
+    "src/progression.c": "541ade7e1fafcf976eac13193aa00f782c64b1acf3d5bbb3cc1a32e6e6f81213"
+  },
+  "synthetic_mapping": {
+    "map_fixed_noreplace": true,
+    "ranges": 4,
+    "bytes_per_range": 131072,
+    "overwritten_mappings": false
+  },
+  "manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "modules": [
+    "game",
+    "assets",
+    "ui",
+    "world",
+    "campaign_art",
+    "campaign_rules",
+    "save4",
+    "creatures",
+    "creature_data",
+    "save5",
+    "progression",
+    "evolution_art",
+    "advanced_powers",
+    "trials",
+    "trial_art",
+    "quickparty",
+    "equipment",
+    "equipment_data",
+    "combat_rules",
+    "weapon_actions",
+    "gear_runtime",
+    "gear_menu",
+    "regional_quests",
+    "regional_creature_art",
+    "regional_powers",
+    "region_art",
+    "region_game",
+    "northern_creature_art",
+    "northern_powers",
+    "northern_power_art",
+    "southern_powers",
+    "southern_power_art",
+    "southern_creature_art",
+    "south_art",
+    "south_game",
+    "southern_quests",
+    "progression_events",
+    "north_art",
+    "north_game",
+    "northern_quests",
+    "magma_game",
+    "magma_art",
+    "magma_quests",
+    "magma_creature_art",
+    "magma_powers",
+    "magma_power_art",
+    "underwater_game",
+    "underwater_quests",
+    "underwater_art",
+    "underwater_powers",
+    "underwater_power_art",
+    "underwater_creature_art"
+  ],
+  "maxima": {
+    "event_slices": 1,
+    "evolution_slices": 3,
+    "event_frames": 141,
+    "writer_frames": 36
+  },
+  "failures": [],
+  "passed": true,
+  "sources_still_frozen": true
+}

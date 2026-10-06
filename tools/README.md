@@ -132,3 +132,13 @@ this test pass. Preserve the failure log. A fresh-process rerun can distinguish 
 setup problem; an actual game assertion failure must still be investigated. The normal
 Make target directs its generated report into build/ to preserve archived evidence.
 See docs/magma/source-export-review.json and docs/VERIFICATION.md for exact scope.
+
+
+The ongoing Underwater branch adds a narrowly bounded launcher for that host probe.
+It captures errno, the requested range and only overlapping generic mapping tags.
+Only EEXIST with an independently recorded overlapping Python heap, before any game
+assertion, permits up to two fresh-process retries. Every attempt and original failure
+is retained in a unique build directory. Permission failures, other setup failures,
+malformed diagnostics and game assertion failures stop immediately. No fixed mapping
+is overwritten and no ASLR/protection setting changes. Synthetic launcher tests cover
+all of these refusal paths; they are not extra game-coverage evidence.
