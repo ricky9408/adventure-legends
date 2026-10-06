@@ -10,7 +10,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-ENABLED = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78]
+ENABLED = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78,25,26,28,29] + list(range(79,95))
 U8, U16, U32 = C.c_ubyte, C.c_ushort, C.c_uint
 
 class Instance(C.Structure):
@@ -342,7 +342,7 @@ class CreatureTests(unittest.TestCase):
                              (family,phase,polarity,tier,signature,caps))
             self.assertEqual(self.lib.creatures_legacy_spirit(form),255)
         for command in range(256):
-            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=11 or 13<=command<=22)
+            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=11 or 13<=command<=42)
         self.assertTrue(self.lib.creatures_command_learned(14,15,9))
         self.assertTrue(self.lib.creatures_command_learned(14,15,10))
         self.assertFalse(self.lib.creatures_command_learned(14,14,10))
@@ -397,7 +397,7 @@ class CreatureTests(unittest.TestCase):
         result=json.loads(subprocess.check_output(['python3',str(ROOT/'assets/creatures/validate_catalog.py')]))
         self.assertEqual((result['reserved_identities'],result['authored_designs'],
                           result['enabled_native_core_forms'],result['enabled_evolution_edges'],
-                          result['enabled_abilities']),(128,22,21,10,21))
+                          result['enabled_abilities']),(128,42,41,20,41))
         self.assertEqual(result['disabled_authored_forms'],[121])
         self.assertIn('separate native acquisition',result['native_obtainability'])
         # Host grants test data APIs; they do not navigate any acquisition route.
@@ -525,7 +525,7 @@ class CreatureTests(unittest.TestCase):
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(False),1),5)
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(True),1),0)
         before=bytes(self.r)
-        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,5),(32,1,1,5),(64,1,1,1),(0x10000,1,1,1)]:
+        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,5),(32,1,1,5),(64,1,1,5),(256,1,1,1),(0x10000,1,1,1)]:
             self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,ctx,sanctuary,confirmed),result)
             self.assertEqual(bytes(self.r),before)
         identity=bytes(c);party=bytes(self.r.party)

@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:emberbond:creature-catalog:1",
+  "$id": "urn:emberbond:creature-catalog:2",
   "title": "Emberbond creature design catalog",
   "type": "object",
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "scope": {
       "const": "DESIGN_ONLY_NOT_IN_ROM"
@@ -212,7 +212,7 @@
         "$ref": "#/$defs/ability"
       },
       "minItems": 1,
-      "maxItems": 63
+      "maxItems": 255
     },
     "forms": {
       "type": "array",
@@ -444,6 +444,14 @@
         "save_blocks"
       ],
       "additionalProperties": false
+    },
+    "trial_bindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trial_binding"
+      },
+      "minItems": 0,
+      "maxItems": 960
     }
   },
   "required": [
@@ -466,7 +474,8 @@
     "gates",
     "trials",
     "legendary_gates",
-    "budget"
+    "budget",
+    "trial_bindings"
   ],
   "additionalProperties": false,
   "$defs": {
@@ -574,7 +583,7 @@
         "id": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 63
+          "maximum": 255
         },
         "name": {
           "type": "string",
@@ -664,7 +673,7 @@
         "ability_id": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 63
+          "maximum": 255
         }
       },
       "required": [
@@ -747,7 +756,7 @@
         "signature_ability": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 63
+          "maximum": 255
         },
         "learnset": {
           "type": "array",
@@ -964,6 +973,61 @@
         "required_phase_count",
         "opposite_polarity_switches",
         "repeatable"
+      ],
+      "additionalProperties": false
+    },
+    "trial_binding": {
+      "type": "object",
+      "properties": {
+        "trial_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "family_id": {
+          "type": "string",
+          "pattern": "^F[0-9]{3}$"
+        },
+        "local_trial_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "wire_mask": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32768
+        },
+        "introduced_content_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "prerequisite_trial_mask": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "from_form_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 128
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "trial_id",
+        "family_id",
+        "local_trial_id",
+        "wire_mask",
+        "introduced_content_revision",
+        "prerequisite_trial_mask",
+        "from_form_ids"
       ],
       "additionalProperties": false
     }

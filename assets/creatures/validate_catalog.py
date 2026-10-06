@@ -13,8 +13,8 @@ ROOT=Path(__file__).resolve().parent
 PHASES=['wood','fire','earth','metal','water']
 GENERATION=list(zip(PHASES,PHASES[1:]+PHASES[:1]))
 CONTROL=[('wood','earth'),('earth','water'),('water','fire'),('fire','metal'),('metal','wood')]
-# Wire-stable capability order: original bits 0..20, reviewed additions 21..24.
-FIELD_CAPABILITIES = ['break_crack', 'burn_thorns', 'draw_ore', 'drive_sail', 'earth_socket', 'expose_fire', 'expose_stone', 'expose_wind', 'fill_basin', 'fire_socket', 'grow_bridge', 'grow_roots', 'ignite', 'link_pools', 'press_weight', 'reveal_current', 'tune_latch', 'turn_vane', 'uncap_well', 'wind_socket', 'wood_socket', 'reel_load', 'store_heat', 'float_load', 'align_rail']
+from catalog_policy import (LEGACY_FIELD_CAPABILITIES, FIELD_CAPABILITIES,
+                            REVISION_POLICY, TRIAL_POLICY, GATE_MASKS)
 KEYWORDS={'$schema','$id','$defs','title','$ref','type','enum','const','properties','required','additionalProperties','items','minItems','maxItems','uniqueItems','minimum','maximum','minLength','maxLength','pattern'}
 
 class CatalogError(ValueError):pass
@@ -61,7 +61,10 @@ def structure(value,schema,root,path='$'):
     return errors
 
 def validate(data,identity=None,schema=None):
-    schema=schema or load_json(ROOT/'catalog.schema.json')
+    version=data.get('schema_version') if isinstance(data,dict) else None
+    if type(version) is not int or version not in (1,2):
+        return ['schema_version: unsupported authoring revision']
+    schema=schema or load_json(ROOT/('catalog.v1.schema.json' if version==1 else 'catalog.schema.json'))
     errors=structure(data,schema,schema)
     if errors:return sorted(errors)
     def check(test,msg):
@@ -112,7 +115,7 @@ def validate(data,identity=None,schema=None):
     for s in data['slots']:
         check((s['status']!='reserved')==(s['id'] in F),f'form {s["id"]}: content status mismatch')
         check(s['key']==f'FORM_{s["id"]:03d}',f'form {s["id"]}: stable key mismatch')
-    field=set(data['field_capabilities']); check(data['field_capabilities']==FIELD_CAPABILITIES,'field_capabilities: reviewed append-only bit order required')
+    field=set(data['field_capabilities']); check(data['field_capabilities']==(LEGACY_FIELD_CAPABILITIES if version==1 else FIELD_CAPABILITIES),'field_capabilities: reviewed append-only bit order required')
     check(len({a['handler'] for a in A.values()})==len(A),'abilities: handler identity must be unique')
     for a in A.values():check(set(a['field_caps'])<=field,f'ability {a["id"]}: unknown field capability')
     check(len({f['name'] for f in F.values()})==len(F),'forms: names must be distinct')
@@ -141,19 +144,65 @@ def validate(data,identity=None,schema=None):
     check(len(signatures)==len(set(signatures)),'forms: signature abilities must be distinct')
     check(sorted(legacy)==[(0,1),(1,4),(2,7),(3,10)],'legacy: exact companion mapping required')
     check(data['implemented_legacy_form_ids']==[1,4,7,10],'legacy: exact implemented list required')
-    edges=[];targets=[]
+    # Trial identity is family-local. Numeric bits may repeat across families only.
+    bindings={}; family_keys=set(); family_bits=set(); allowed_masks={}
+    if version==2:
+        authored_bindings=data['trial_bindings']
+        check(authored_bindings==sorted(authored_bindings,key=lambda x:(x['family_id'],x['local_trial_id'])), 'trial_bindings: family/key order required')
+        for t in authored_bindings:
+            name,family,key,mask=t['trial_id'],t['family_id'],t['local_trial_id'],t['wire_mask']
+            check(name in T,f'trial binding {name}: unknown trial')
+            check(family in families,f'trial binding {name}: unknown family')
+            check(name not in bindings,f'trial binding {name}: duplicate trial name')
+            check((family,key) not in family_keys,f'trial binding {name}: duplicate same-family local key')
+            check((family,mask) not in family_bits,f'trial binding {name}: duplicate same-family wire mask')
+            check(mask & (mask-1)==0,f'trial binding {name}: wire mask must be one-hot u16')
+            check(not (t['prerequisite_trial_mask'] & mask),f'trial binding {name}: self prerequisite')
+            check(t['from_form_ids']==sorted(t['from_form_ids']),f'trial binding {name}: source order required')
+            for source in t['from_form_ids']:
+                check(source in F and source in S and S[source]['family_id']==family,f'trial binding {name}: source family mismatch or undesigned source')
+            bindings[name]=t;family_keys.add((family,key));family_bits.add((family,mask))
+            allowed_masks[family]=allowed_masks.get(family,0)|mask
+        for t in authored_bindings:
+            check(t['prerequisite_trial_mask'] & ~allowed_masks.get(t['family_id'],0)==0,f'trial binding {t["trial_id"]}: unknown prerequisite mask')
+        trial_edges=[]
+        for t in authored_bindings:
+            for prerequisite in authored_bindings:
+                if prerequisite['family_id']==t['family_id'] and prerequisite['wire_mask'] & t['prerequisite_trial_mask']:
+                    trial_edges.append([prerequisite['trial_id'],t['trial_id']])
+                    check(prerequisite['introduced_content_revision']<=t['introduced_content_revision'],f'trial binding {t["trial_id"]}: prerequisite introduced later')
+        acyclic(bindings,trial_edges,'trial prerequisites')
+    edges=[];targets=[];sources={}
     for e in data['evolutions']:
-        a,b=e['from'],e['to'];edges.append([a,b]);targets.append(b)
+        a,b=e['from'],e['to'];edges.append([a,b]);targets.append(b);sources.setdefault(a,[]).append(b)
         check([a,b] in planned,f'evolution {a}->{b}: not in family graph')
         check(a in F and b in F,f'evolution {a}->{b}: both forms must be designed')
         check(e['required_gate'] in G and e['required_trial'] in T,f'evolution {a}->{b}: unknown gate or trial')
+        if a in S and b in S:
+            check(S[a]['family_id']==S[b]['family_id'],f'evolution {a}->{b}: cross-family edge')
+            check(S[b]['tier']==S[a]['tier']+1,f'evolution {a}->{b}: tier must increase by one')
+        if version==2:
+            t=bindings.get(e['required_trial'])
+            check(t is not None,f'evolution {a}->{b}: missing family-qualified trial binding')
+            if t is not None and a in S:
+                check(t['family_id']==S[a]['family_id'] and a in t['from_form_ids'],f'evolution {a}->{b}: trial source/family mismatch')
         if a in F and b in F:
+            check(F[a]['phase']==F[b]['phase'],f'evolution {a}->{b}: phase changed within family')
             check(set(F[a]['field_caps'])<=set(F[b]['field_caps']),f'evolution {a}->{b}: loses field capability')
             check(F[b]['acquisition']['kind']=='evolution',f'evolution {a}->{b}: target acquisition mismatch')
             old={x['ability_id'] for x in F[a]['learnset']};new={x['ability_id'] for x in F[b]['learnset']}
             check(old<=new,f'evolution {a}->{b}: loses inherited command')
+            new_levels={x['ability_id']:x['level'] for x in F[b]['learnset']}
+            for command in F[a]['learnset']:
+                check(new_levels.get(command['ability_id'],51)<=command['level'],f'evolution {a}->{b}: delays inherited command')
             sig=F[b]['signature_ability'];levels=[x['level'] for x in F[b]['learnset'] if x['ability_id']==sig]
             check(not levels or levels[0]<=e['min_level'],f'evolution {a}->{b}: signature unavailable at evolution')
+    for source, dests in sources.items():
+        family=families.get(S[source]['family_id']) if source in S else None
+        if len(dests)>1:
+            check(family is not None and family['shape']=='branch_three' and len(dests)==2
+                  and sorted([[source,d] for d in dests])==sorted(family['planned_edges']),
+                  f'evolution {source}: repeated source requires exact reviewed branch topology')
     check(len(edges)==len({tuple(e) for e in edges}),'evolutions: duplicate edge')
     check(len(targets)==len(set(targets)),'evolutions: merging branches is not supported')
     for id_,f in F.items():
@@ -171,7 +220,7 @@ def validate(data,identity=None,schema=None):
     for id_ in F:
         if id_ in S and S[id_]['rarity']=='legendary':check(id_ in legends,f'form {id_}: legendary gate required')
     B=data['budget'];L=data['limits'];offsets=B['save_bank_offsets'];size=B['save_bank_bytes']
-    check(L=={'max_level':50,'max_bond':100,'party_slots':4,'instance_slots':160,'equipped_abilities':2,'max_learnset':8,'max_ability_id':63,'max_active_legendaries':1},'limits: version-one layout changed')
+    check(L=={'max_level':50,'max_bond':100,'party_slots':4,'instance_slots':160,'equipped_abilities':2,'max_learnset':8,'max_ability_id':63 if version==1 else 255,'max_active_legendaries':1},'limits: authoring revision layout changed')
     check(B['instance_bytes']==24,'budget: instance record must remain 24 bytes')
     check(B['save_blocks']['instances']==L['instance_slots']*B['instance_bytes'],'budget: instance allocation mismatch')
     check(sum(B['save_blocks'].values())<=size,'budget: save payload exceeds bank')
@@ -185,33 +234,47 @@ def validate(data,identity=None,schema=None):
     return sorted(set(errors))
 
 def validate_enabled(data, enabled):
-    """Review boundary for ROM data, independent of gameplay obtainability."""
-    errors = []
-    if not isinstance(enabled, dict):
-        return ['enabled: expected manifest object']
-    expected_ids = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78]
-    expected_edges = [[1,2],[4,5],[7,8],[10,11],[13,14],[19,20],[22,23],[73,74],[75,76],[77,78]]
-    expected_abilities = list(range(1,12)) + list(range(13,23))
-    if type(enabled.get('content_revision')) is not int or enabled['content_revision'] != 3:
-        errors.append('enabled: expected content revision 3')
-    for key, expected in [('enabled_form_ids', expected_ids),
-                          ('enabled_evolutions', expected_edges),
-                          ('enabled_ability_ids', expected_abilities)]:
-        # JSON canonical equality also rejects bool aliases for integer IDs.
-        if json.dumps(enabled.get(key)) != json.dumps(expected):
-            errors.append(f'enabled: {key} differs from reviewed core')
-    forms = [f for f in data['forms'] if f['id'] in expected_ids]
-    if [f['id'] for f in forms] != expected_ids:
-        errors.append('enabled: every form requires an authored definition')
-    if sum(len(f['learnset']) for f in forms) != 31:
-        errors.append('enabled: expected exactly 31 learnset entries')
-    if sorted({l['ability_id'] for f in forms for l in f['learnset']}) != expected_abilities:
+    """Exact revision whitelist, separate from wider design/branch authoring support."""
+    errors=[]
+    if not isinstance(enabled,dict):return ['enabled: expected manifest object']
+    revision=enabled.get('content_revision')
+    if type(revision) is not int or revision not in REVISION_POLICY:
+        return ['enabled: unsupported content revision']
+    policy=REVISION_POLICY[revision]
+    if revision==4 and data['schema_version']!=2:
+        errors.append('enabled: content revision 4 requires authoring schema 2')
+    for key,expected in [('enabled_form_ids',policy['forms']),('enabled_evolutions',policy['edges']),('enabled_ability_ids',policy['abilities'])]:
+        if json.dumps(enabled.get(key))!=json.dumps(expected):
+            errors.append(f'enabled: {key} differs from reviewed core table order')
+    forms={f['id']:f for f in data['forms']}; abilities={a['id']:a for a in data['abilities']}
+    if not set(policy['forms'])<=set(forms):errors.append('enabled: every form requires an authored definition')
+    if not set(policy['abilities'])<=set(abilities):errors.append('enabled: every command requires an authored definition')
+    selected=[forms[id_] for id_ in policy['forms'] if id_ in forms]
+    if sum(len(f['learnset']) for f in selected)!=policy['learns']:
+        errors.append(f'enabled: expected exactly {policy["learns"]} learnset entries')
+    if sorted({l['ability_id'] for f in selected for l in f['learnset']})!=sorted(policy['abilities']):
         errors.append('enabled: learned commands differ from reviewed core')
-    edges = [[e['from'],e['to']] for e in data['evolutions']
-             if e['from'] in expected_ids or e['to'] in expected_ids]
-    if edges != expected_edges:
-        errors.append('enabled: evolution graph differs from reviewed core')
-    return errors
+    edges=[[e['from'],e['to']] for e in data['evolutions'] if e['from'] in policy['forms'] or e['to'] in policy['forms']]
+    if sorted(edges)!=sorted(policy['edges']):errors.append('enabled: evolution graph differs from reviewed core')
+    # Generating current ROMs uses reviewed wire maps, not arbitrary authored bits.
+    for e in data['evolutions']:
+        if [e['from'],e['to']] in policy['edges']:
+            if e['required_gate'] not in GATE_MASKS:errors.append('enabled: unreviewed evolution gate')
+            trial=TRIAL_POLICY.get(e['required_trial'])
+            if trial is None or e['from'] not in trial[4] or trial[3]>revision:
+                errors.append('enabled: unreviewed family-qualified evolution trial')
+    if data['schema_version']==2:
+        enabled_families={s['family_id'] for s in data['slots'] if s['id'] in policy['forms']}
+        expected={name:value for name,value in TRIAL_POLICY.items() if value[3]<=revision}
+        actual={t['trial_id']:t for t in data['trial_bindings'] if t['family_id'] in enabled_families}
+        if set(actual)!=set(expected):errors.append('enabled: trial bindings differ from reviewed revision')
+        for name,value in expected.items():
+            t=actual.get(name)
+            if t is None:continue
+            got=(t['family_id'],t['local_trial_id'],t['wire_mask'],t['introduced_content_revision'],tuple(t['from_form_ids']))
+            if got!=value or t['prerequisite_trial_mask']!=0:
+                errors.append(f'enabled: trial binding {name} differs from reviewed revision')
+    return sorted(set(errors))
 
 def summary(data, enabled=None):
     b=data['budget'];canonical=json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
@@ -229,12 +292,12 @@ def summary(data, enabled=None):
             'catalog_sha256':hashlib.sha256(canonical).hexdigest()}
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('catalog',nargs='?',type=Path,default=ROOT/'catalog.json');p.add_argument('--identity-lock',type=Path,default=ROOT/'identity-lock.json');p.add_argument('--report',type=Path);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('catalog',nargs='?',type=Path,default=ROOT/'catalog.json');p.add_argument('--identity-lock',type=Path,default=ROOT/'identity-lock.json');p.add_argument('--report',type=Path);p.add_argument('--enabled',type=Path,default=ROOT/'enabled.json');p.add_argument('--catalog-only',action='store_true',help='Validate archived authoring data without a runtime enablement manifest');args=p.parse_args()
     try:
         data=load_json(args.catalog);errors=validate(data,load_json(args.identity_lock))
-        enabled=load_json(ROOT/'enabled.json')
-        if not errors: errors += validate_enabled(data, enabled)
-        result={'valid':False,'errors':errors} if errors else summary(data, enabled)
+        enabled=load_json(args.enabled) if not args.catalog_only else None
+        if not errors and enabled is not None:errors += validate_enabled(data, enabled)
+        result={'valid':False,'errors':errors} if errors else ({'valid':True,'schema_version':data['schema_version'],'authored_designs':len(data['forms']),'scope':'Catalog-only validation; no runtime enablement or native acceptance claim'} if args.catalog_only else summary(data,enabled))
     except (CatalogError,ValueError,OSError) as e:result={'valid':False,'errors':[str(e)]}
     out=json.dumps(result,ensure_ascii=False,indent=2)+'\n';print(out,end='')
     if args.report:args.report.write_text(out,encoding='utf-8')

@@ -37,7 +37,7 @@ class QuickPartyRun(EvolutionRun):
         # cache row width. ROM behavior remains measured by native execution.
         source = (ROOT / 'src/game.c').read_text()
         width = re.search(r'#define\s+CACHE_FIELDS\s+(\d+)', source)
-        initializer = re.search(r'void\s+render\s*\(void\)\s*\{\s*u32\s+key\[CACHE_FIELDS\]\s*=\s*\{([^}]+)\}', source)
+        initializer = re.search(r'void\s+render\s*\(void\)\s*\{\s*(?:game_geometry_sync\(\);\s*)?u32\s+key\[CACHE_FIELDS\]\s*=\s*\{([^}]+)\}', source)
         assert width and initializer, 'Missing renderer cache instrumentation declaration'
         fields = [item.strip() for item in initializer.group(1).split(',')]
         self.cache_field_count = int(width.group(1))

@@ -263,6 +263,14 @@ class NorthernJourney(RegionJourney):
         self.snapshot('06-all-five-new-recruits')
 
     def trials(self):
+        # Optional exploration can leave the real hero at one heart. Rest by
+        # ordinary interaction before this long non-combat puzzle itinerary;
+        # do not depend on a particular global-frame phase to dodge every hit.
+        # Deliberate death/retry remains independently covered in lifecycle().
+        retained=bytes(self.roster());quests=bytes(self.state().quests)
+        self.act(104,208)
+        self.check(self.hp_q4()>0 and bytes(self.roster())==retained and bytes(self.state().quests)==quests,
+                   'ordinary town rest prepares trials without changing retained companions or quest rewards')
         self.entry(24);self.cast_owned(19,176,96);self.exit_north(22);self.entry(24)
         self.check(self.state().quests.objectives[16]==2,'partial roof objective survives leaving/reentry')
         self.cast_owned(19,64,96);self.act(208,128);self.reward(16)

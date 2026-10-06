@@ -6,12 +6,13 @@ typedef unsigned char CreatureU8;
 typedef unsigned short CreatureU16;
 typedef unsigned int CreatureU32;
 typedef CreatureU8 FormId;
+typedef CreatureU16 CreatureCapabilityId;
 
 enum {
     CREATURE_FORM_CAPACITY = 128, CREATURE_FAMILY_CAPACITY = 60,
-    CREATURE_ENABLED_COUNT = 21,
-    CREATURE_LEARNSET_COUNT = 31, CREATURE_EVOLUTION_COUNT = 10,
-    CREATURE_ABILITY_COUNT = 21, CREATURE_LEGACY_COUNT = 4,
+    CREATURE_ENABLED_COUNT = 41,
+    CREATURE_LEARNSET_COUNT = 61, CREATURE_EVOLUTION_COUNT = 20,
+    CREATURE_ABILITY_COUNT = 41, CREATURE_LEGACY_COUNT = 4,
     CREATURE_ROSTER_CAPACITY = 160, CREATURE_PARTY_CAPACITY = 4,
     CREATURE_EMPTY_SLOT = 255, CREATURE_MAX_LEVEL = 50,
     CREATURE_MAX_BOND = 100, CREATURE_EXPEDITION_BOND_CAP = 10,
@@ -28,7 +29,9 @@ enum {
      * Legacy migration/story APIs still accept original campaign flags. */
     CREATURE_EVOLUTION_CHAPTER_MASK = 7, CREATURE_REED_RESTORED = 8,
     CREATURE_NORTH_HARBOR_READY = 16, CREATURE_COUNTERWORKS_STABLE = 32,
-    CREATURE_EVOLUTION_CONTEXT_MASK = 63,
+    CREATURE_SOUTH_READY = 64, CREATURE_SUNWELL_OPEN = 128,
+    CREATURE_EVOLUTION_CONTEXT_MASK = 255,
+    CREATURE_CONTENT_REVISION = 4, CREATURE_ROUTE_REQUIREMENTS_MAX = 8,
     CREATURE_TRIAL_HEARTH = 1, CREATURE_TRIAL_CANOPY = 2,
     CREATURE_TRIAL_WIND_LOOM = 4, CREATURE_TRIAL_AMBER_ARCH = 8,
     CREATURE_TRIAL_PAIRED_POOLS = 16,
@@ -57,7 +60,8 @@ enum FieldCapability {
     FIELD_UNCAP_WELL = 1u << 18, FIELD_WIND_SOCKET = 1u << 19,
     FIELD_WOOD_SOCKET = 1u << 20,
     FIELD_REEL_LOAD = 1u << 21, FIELD_STORE_HEAT = 1u << 22,
-    FIELD_FLOAT_LOAD = 1u << 23, FIELD_ALIGN_RAIL = 1u << 24
+    FIELD_FLOAT_LOAD = 1u << 23, FIELD_ALIGN_RAIL = 1u << 24,
+    FIELD_REFRACT_BEAM = 1u << 25
 };
 #define FIELD_HOMURA (FIELD_IGNITE | FIELD_BURN_THORNS | FIELD_FIRE_SOCKET | FIELD_EXPOSE_FIRE)
 #define FIELD_MIDORI (FIELD_GROW_BRIDGE | FIELD_GROW_ROOTS | FIELD_WOOD_SOCKET)
@@ -114,24 +118,43 @@ extern const CreatureLearn creature_learnsets[CREATURE_LEARNSET_COUNT];
 extern const CreatureEvolution creature_evolutions[CREATURE_EVOLUTION_COUNT];
 extern const CreatureAbility creature_abilities[CREATURE_ABILITY_COUNT];
 extern const FormId creature_legacy_forms[CREATURE_LEGACY_COUNT];
+/* ROM sparse lookup indexes store row+1; zero is absent. Identities remain
+ * the explicit row keys. Mismatched/out-of-range maps fail closed. */
+extern const CreatureU8 creature_form_index[CREATURE_FORM_CAPACITY + 1];
+extern const CreatureU8 creature_ability_index[256];
+extern const CreatureU8 creature_incoming_evolution_index[CREATURE_FORM_CAPACITY + 1];
 
 /* Enabled core data is not proof of a native acquisition/art/ability route.
  * Only explicit table rows are enabled; every unlisted form, including legendary
- * 121 and reserved third-tier forms 21/24, is disabled. Northern rows are
+ * 121 and reserved third-tier forms 21/24/27/30, is disabled. Southern rows are
  * development data until separate art, handlers and native acquisition pass. */
 int creatures_form_id_valid(unsigned form_id);
 const CreatureForm *creatures_form(unsigned form_id);
-/* Counts bound ROM scans; form/family/ability IDs may be sparse and unordered.
+/* Checked ROM indexes allow sparse/unordered form/family/ability IDs.
  * Only explicit enabled rows resolve. Ability 12 is reserved and absent. */
 const CreatureAbility *creatures_ability(unsigned ability_id);
-/* An enabled form's reviewed family trial mask, or zero for no trial/unknown.
+/* Frozen legacy family trial mask, or zero for Southern/no trial/unknown.
  * Never derive a trial from family_id or an enabled table index. */
 unsigned creatures_family_trial(unsigned form_id);
+/* Exact historical snapshots; only revisions 1..4 are accepted. Zero mask
+ * means no permitted trial, not permission to award one. */
+int creatures_form_allowed_revision(unsigned form_id, unsigned content_revision);
+int creatures_command_learned_revision(unsigned form_id, unsigned level,
+                                       unsigned ability_id, unsigned content_revision);
+unsigned creatures_trial_allowed_mask(unsigned form_id, unsigned content_revision);
+int creatures_instance_validate_revision(const CreatureInstance *instance,
+                                          unsigned content_revision);
 const char *creatures_name(unsigned form_id);
 const char *creatures_ability_name(unsigned ability_id);
 unsigned creatures_legacy_spirit(unsigned form_id); /* 255 if unavailable */
 CreatureU32 creatures_capabilities(unsigned form_id);
 int creatures_has_capability(unsigned form_id, CreatureU32 needed);
+/* Stable keys 1..26 map explicitly to reviewed bits 0..25. All other keys
+ * are disabled until authored. No query shifts by an unchecked key. */
+int creatures_supports_capability(unsigned form_id, unsigned capability_id);
+int creatures_party_supports_capability(const CreatureRoster *roster, unsigned capability_id);
+int creatures_party_set_requirements(CreatureRoster *roster, const CreatureU8 party[4],
+                                      const CreatureCapabilityId *required, unsigned required_count);
 unsigned creatures_phase_multiplier_q8(unsigned attacker, unsigned defender); /* 0 invalid */
 unsigned creatures_generated_phase(unsigned phase); /* 255 invalid */
 int creatures_catalog_validate(void);
@@ -182,15 +205,31 @@ int creatures_credit_event(CreatureRoster *roster, unsigned event_id,
  * Zero, combined flags and trials for another family are rejected. The u16
  * save field is unchanged; new trials require explicit collision-free policy. */
 int creatures_mark_trial(CreatureInstance *instance, unsigned trial_flag);
+/* Qualifiers are full-width and checked before conversion; a shared wire bit
+ * never grants a different family's trial. These APIs do not prove objectives. */
+unsigned creatures_trial_mask_for_key(unsigned family_id, unsigned local_trial_id);
+int creatures_mark_trial_qualified(CreatureInstance *instance, unsigned family_id,
+                                   unsigned local_trial_id);
+int creatures_has_trial_qualified(const CreatureInstance *instance, unsigned family_id,
+                                  unsigned local_trial_id);
 
 enum CreatureEvolutionStatus {
     CREATURE_EVOLVE_READY = 0, CREATURE_EVOLVE_INVALID,
     CREATURE_EVOLVE_NO_EDGE, CREATURE_EVOLVE_LEVEL,
     CREATURE_EVOLVE_BOND, CREATURE_EVOLVE_STORY,
     CREATURE_EVOLVE_TRIAL, CREATURE_EVOLVE_SANCTUARY,
-    CREATURE_EVOLVE_DEFERRED
+    CREATURE_EVOLVE_DEFERRED, CREATURE_EVOLVE_AMBIGUOUS
 };
+/* Legacy lookup returns NULL for zero or multiple edges. Ordinal enumeration
+ * is bounded and never substitutes an implicit first target for player choice. */
 const CreatureEvolution *creatures_evolution(unsigned form_id);
+unsigned creatures_evolution_count(unsigned form_id);
+const CreatureEvolution *creatures_evolution_at(unsigned form_id, unsigned ordinal);
+const CreatureEvolution *creatures_evolution_to(unsigned form_id, unsigned target_form);
+unsigned creatures_can_evolve_to(const CreatureInstance *instance, unsigned target_form,
+                                 unsigned evolution_context, int at_sanctuary);
+unsigned creatures_evolve_to(CreatureRoster *roster, unsigned roster_slot, unsigned target_form,
+                             unsigned evolution_context, int at_sanctuary, int confirmed);
 /* READY ignores confirmation so UI can show eligibility; evolve requires it.
  * Deferring is explicit and leaves every roster byte unchanged. evolution_context
  * uses the separate masked namespace documented above, never raw campaign flags. */

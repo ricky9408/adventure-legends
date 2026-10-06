@@ -1,0 +1,226 @@
+{
+  "schema": 1,
+  "status": "Runtime geometry contract; native obtainability awaits controller acceptance",
+  "first_room": 30,
+  "room_count": 8,
+  "first_quest": 22,
+  "quest_count": 8,
+  "entry": "Northern quest21 CLAIMED plus explicit ferry A",
+  "rooms": [
+    {
+      "id": 30,
+      "key": "sunlace_anchorage",
+      "name": "Sunlace Anchorage",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          304,
+          32
+        ],
+        "2": [
+          112,
+          224
+        ],
+        "3": [
+          80,
+          148
+        ],
+        "4": [
+          400,
+          224
+        ]
+      },
+      "rest_spawn": 2,
+      "requires_quests_claimed": [],
+      "requires_sunwell_objectives": 0
+    },
+    {
+      "id": 31,
+      "key": "frondshore_commons",
+      "name": "Frondshore Commons",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          400,
+          72
+        ],
+        "2": [
+          80,
+          264
+        ],
+        "3": [
+          80,
+          104
+        ]
+      },
+      "rest_spawn": 2,
+      "requires_quests_claimed": [],
+      "requires_sunwell_objectives": 0
+    },
+    {
+      "id": 32,
+      "key": "awning_loft",
+      "name": "Awning Loft",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [],
+      "requires_sunwell_objectives": 0
+    },
+    {
+      "id": 33,
+      "key": "chalkspring_hollow",
+      "name": "Chalkspring Hollow",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [],
+      "requires_sunwell_objectives": 0
+    },
+    {
+      "id": 34,
+      "key": "light_intake",
+      "name": "Conservatory Light Intake",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        22,
+        23
+      ],
+      "requires_sunwell_objectives": 0
+    },
+    {
+      "id": 35,
+      "key": "split_shade_walk",
+      "name": "Split-Shade Walk",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        22,
+        23
+      ],
+      "requires_sunwell_objectives": 1
+    },
+    {
+      "id": 36,
+      "key": "turning_bough_gallery",
+      "name": "Turning-Bough Gallery",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        22,
+        23
+      ],
+      "requires_sunwell_objectives": 3
+    },
+    {
+      "id": 37,
+      "key": "sunwell_crown",
+      "name": "Sunwell Crown",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        22,
+        23
+      ],
+      "requires_sunwell_objectives": 7
+    }
+  ],
+  "regions": {
+    "visits_byte": 2,
+    "anchors_byte": 2,
+    "field_claim_byte": 8,
+    "discovery_byte": 18
+  },
+  "quest_masks": [
+    3,
+    3,
+    15,
+    7,
+    3,
+    3,
+    3,
+    3
+  ],
+  "optics": "Cardinal paths, maximum4 segments, maximum2 fixed mirrors; incomplete arrangements transient; reachable manual reset and south escape in every state",
+  "sources": [
+    79,
+    85,
+    25,
+    28,
+    81,
+    83,
+    87,
+    89,
+    91,
+    93
+  ],
+  "trial_identity": "Pinned actual instance_id; three distinct environmental objects; local family key1",
+  "art": "Original code-native pixels; shared palette; secular climate-responsive reference only"
+}

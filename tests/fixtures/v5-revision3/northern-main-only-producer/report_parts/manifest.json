@@ -1,0 +1,172 @@
+{
+  "format": "exact-byte-concatenation-v1",
+  "original_filename": "northern-journey.json",
+  "original_bytes": 780727,
+  "original_sha256": "b1e0eb43aa6a7ec36e0cae8aac41673fd831ae574db63234a2006ce6bb49ecba",
+  "encoding": "utf-8",
+  "max_part_bytes": 30000,
+  "parts": [
+    {
+      "file": "part_000.txt",
+      "offset": 0,
+      "bytes": 30000,
+      "sha256": "1b8ba53bd86df85bbeb81b223bf541b25c9b5c1b1235a00463777d09d0c27664"
+    },
+    {
+      "file": "part_001.txt",
+      "offset": 30000,
+      "bytes": 29983,
+      "sha256": "41414f7b19a69b18f07192d086c2e339ee3e50f67720c7d07bcba5e17e57e584"
+    },
+    {
+      "file": "part_002.txt",
+      "offset": 59983,
+      "bytes": 29998,
+      "sha256": "75fdb21f01169d20e077c605e4866d9ac67a4b9aa617236edf7257a50374d20a"
+    },
+    {
+      "file": "part_003.txt",
+      "offset": 89981,
+      "bytes": 29999,
+      "sha256": "0106158ea6dfa4382fd2d57253c168f02446662a718c6ba6170bb99b614783cc"
+    },
+    {
+      "file": "part_004.txt",
+      "offset": 119980,
+      "bytes": 29942,
+      "sha256": "911133fe02623260f6d3d7937232ec595e6af8763d276b704dab6ccd773988f7"
+    },
+    {
+      "file": "part_005.txt",
+      "offset": 149922,
+      "bytes": 29999,
+      "sha256": "84458edf01917b7326ade83b122c34364820835980c05d2f84ae178b54a23f1e"
+    },
+    {
+      "file": "part_006.txt",
+      "offset": 179921,
+      "bytes": 29958,
+      "sha256": "1a85033871c97f84a4d47f382c61a5bb3e82fd826d53cd61fde107557b9ae5dd"
+    },
+    {
+      "file": "part_007.txt",
+      "offset": 209879,
+      "bytes": 29943,
+      "sha256": "bb14daeb313dfe2978f1fcf2254212b2e72e1f9902f71749645db376ada53129"
+    },
+    {
+      "file": "part_008.txt",
+      "offset": 239822,
+      "bytes": 29982,
+      "sha256": "caf88d82a8d0af35f1faed1c0a837ab9a8779f30b3eb20966e848bff5f0a870f"
+    },
+    {
+      "file": "part_009.txt",
+      "offset": 269804,
+      "bytes": 29984,
+      "sha256": "1b918c9a58844e84c452caa2b83e2542621fd5182b890609b682f600ee77799f"
+    },
+    {
+      "file": "part_010.txt",
+      "offset": 299788,
+      "bytes": 29972,
+      "sha256": "f3ae0de99f6380bbb244d01d553448489aa70aa120467f7b59abb1b0c562d309"
+    },
+    {
+      "file": "part_011.txt",
+      "offset": 329760,
+      "bytes": 29983,
+      "sha256": "0cec31dd473e17de171bb975944e1f1a42ef85d3fb554e61e72fe0d66c870db8"
+    },
+    {
+      "file": "part_012.txt",
+      "offset": 359743,
+      "bytes": 29952,
+      "sha256": "c230d4836df9ba8440308799486588b1b8a75b2062dfdbe5cad9506ede7d65df"
+    },
+    {
+      "file": "part_013.txt",
+      "offset": 389695,
+      "bytes": 29982,
+      "sha256": "86b08d0a8ad868f5a932c3b2e9cf2548e52f7829e6d4670ddffc6bf982e7979d"
+    },
+    {
+      "file": "part_014.txt",
+      "offset": 419677,
+      "bytes": 29976,
+      "sha256": "277b0103801c3b2c4d20865737003ce97486767c710b198a910d66acf4dfcb0d"
+    },
+    {
+      "file": "part_015.txt",
+      "offset": 449653,
+      "bytes": 29988,
+      "sha256": "d900120a46b16d268f0e8749a603e66ddef8c1e347108323389afeab6f301c7c"
+    },
+    {
+      "file": "part_016.txt",
+      "offset": 479641,
+      "bytes": 29999,
+      "sha256": "b8260697d5ec619cd7c16a36427aad01e4ae596447618e162bd07acea51b2a65"
+    },
+    {
+      "file": "part_017.txt",
+      "offset": 509640,
+      "bytes": 29954,
+      "sha256": "2fa07a44efcd1c152b78759aaefd962e6bc3a21c79269155d41960820335c994"
+    },
+    {
+      "file": "part_018.txt",
+      "offset": 539594,
+      "bytes": 29997,
+      "sha256": "07be87012a0f257e4afbf3dbb6c98b1a04832c4942efd643ed375414586d36ff"
+    },
+    {
+      "file": "part_019.txt",
+      "offset": 569591,
+      "bytes": 29998,
+      "sha256": "35dadff8641eaaae69241923213a7b807fb93c0949c858e92d925d0cc829cd43"
+    },
+    {
+      "file": "part_020.txt",
+      "offset": 599589,
+      "bytes": 29984,
+      "sha256": "0c677a15a43c969f3dc6897e15ca45f73f1ad47592fd9f120592a9622e3e2ceb"
+    },
+    {
+      "file": "part_021.txt",
+      "offset": 629573,
+      "bytes": 29983,
+      "sha256": "823006d749d46288a869217c897607335f0838e478ffe20722aa61ec605bfa0c"
+    },
+    {
+      "file": "part_022.txt",
+      "offset": 659556,
+      "bytes": 29994,
+      "sha256": "7a3a9f96f04dbd9c1bffd1e9934838789c791eaa51bd2644073a7d2e37e3588c"
+    },
+    {
+      "file": "part_023.txt",
+      "offset": 689550,
+      "bytes": 29990,
+      "sha256": "0d90a5c1f012c808650fb8cd573b88f3f8a3134493c13f8b429bdf5e4c043bd0"
+    },
+    {
+      "file": "part_024.txt",
+      "offset": 719540,
+      "bytes": 29989,
+      "sha256": "d8b7b333038b5babfa8406151d33a5d2a9c434b7b432405ff5637de66baf3c2c"
+    },
+    {
+      "file": "part_025.txt",
+      "offset": 749529,
+      "bytes": 30000,
+      "sha256": "088135621d7e2cba26f58422ea7aea3d88632a7d62f79455a587c87c072160c8"
+    },
+    {
+      "file": "part_026.txt",
+      "offset": 779529,
+      "bytes": 1198,
+      "sha256": "0fb38d893a85ef4ae8b15bd821d2ad85253632a6698c1a0a63413494a7545bec"
+    }
+  ]
+}

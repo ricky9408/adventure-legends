@@ -1,0 +1,1295 @@
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9311
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9315
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9318
+    },
+    {
+      "label": "real equipment menu equips item1",
+      "passed": true,
+      "frame": 9318
+    },
+    {
+      "label": "equipping never increases current q4 health",
+      "passed": true,
+      "frame": 9318
+    },
+    {
+      "label": "form19 is available in active party",
+      "passed": true,
+      "frame": 9318
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9318
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9320
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9323
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9326
+    },
+    {
+      "label": "L direction selects party slot0",
+      "passed": true,
+      "frame": 9326
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9326
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9329
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9329
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9329
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9335
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9338
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9338
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9338
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9350
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9353
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9353
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9353
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9365
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9368
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9368
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9368
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9380
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9383
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9383
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9383
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9391
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9394
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9394
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9394
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9397
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9397
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9399
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9401
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9404
+    },
+    {
+      "label": "field command keeps selected instance identity",
+      "passed": true,
+      "frame": 9404
+    },
+    {
+      "label": "form77 is available in active party",
+      "passed": true,
+      "frame": 9404
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9404
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9406
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9409
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9412
+    },
+    {
+      "label": "L direction selects party slot1",
+      "passed": true,
+      "frame": 9412
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9412
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9415
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9415
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9415
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9427
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9430
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9430
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9430
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9442
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9445
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9445
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9445
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9457
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9460
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9460
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9460
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9472
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9475
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9475
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9475
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9487
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9490
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9490
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9490
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9502
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9505
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9505
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9505
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9517
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9520
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9520
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9520
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9524
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9527
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9527
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9527
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9530
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9530
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9532
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9534
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9537
+    },
+    {
+      "label": "field command keeps selected instance identity",
+      "passed": true,
+      "frame": 9537
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9537
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9540
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9540
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9540
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9552
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9555
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9555
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9555
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9567
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9570
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9570
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9570
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9582
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9585
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9585
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9585
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9593
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9596
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9596
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9596
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9598
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9600
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9603
+    },
+    {
+      "label": "handle starts visible machine telegraph",
+      "passed": true,
+      "frame": 9603
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9603
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9606
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9606
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9609
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9609
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9609
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9615
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9618
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9618
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9618
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9619
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9620
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9621
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9622
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9623
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9624
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9625
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9626
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9627
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9628
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9629
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9630
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9631
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9632
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9633
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9634
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9635
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9636
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9637
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9638
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9639
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9640
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9641
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9642
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9643
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9644
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9645
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9646
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9647
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9648
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9649
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9650
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9651
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9652
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9653
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9654
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9655
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9656
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9657
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9658
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9659
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9660
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9661
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9662
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9663
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9664
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9665
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9666
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9667
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9668
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9669
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9670
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9671
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9672
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9673
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9674
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9675
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9676
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9677
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9678
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9679
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9680
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9683
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9683
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9683
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9695
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9698
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9698
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9698
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9710
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9713
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9713
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9713
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9718
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9721
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9721
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9721
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9723
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9725
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9727
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9749
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9752
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9752
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9754
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9776
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9779
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9779
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9782
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9782
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9782
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9794
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9797
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9797
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9797
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9809
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9812
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9812
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9812
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9820
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 9823
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 9823
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9823
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9824
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9825
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9826
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9827
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9828
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9829
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9830
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9831
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9832
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9833
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9834
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9835
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9836
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9837
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9838
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9839
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9840
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9841
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9842
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9843
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9844
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9845
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9846
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9847
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9848
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9849
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9850
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9851
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9852
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9853
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9854
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9855
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9856
+    },
+    {
+      "label": "mandatory route never selects an Earth companion",
+      "passed": true,
+      "frame": 9857
+    },
+    {

@@ -33,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
              'advanced_powers','trials','trial_art','quickparty','equipment','equipment_data',
              'combat_rules','weapon_actions','gear_runtime','gear_menu','regional_quests',
              'regional_creature_art','regional_powers','region_art','region_game',
-             'northern_creature_art','northern_powers','northern_power_art','north_art','north_game','northern_quests']
+             'northern_creature_art','northern_powers','northern_power_art','southern_powers','southern_power_art','southern_creature_art','south_art','south_game','southern_quests','progression_events','north_art','north_game','northern_quests']
     subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
         '-shared','-fPIC','-O0','-std=c99','-fno-builtin','-Wno-attributes',
         '-Wno-pointer-to-int-cast','-Wno-int-to-pointer-cast',
@@ -60,7 +60,13 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     def wait_updates(count):
         for _ in range(count):update()
     def drain(resume=PLAY):
-        lib.save_frame();assert get('game_state')==SAVE_PENDING
+        before_entry=bytes(sram);pose=(get('px'),get('py'));lib.save_frame()
+        assert get('game_state')==SAVE_PENDING and get('save_begin_pending')==1
+        assert bytes(sram)==before_entry,'entry paints the notice before snapshot work or SRAM writes'
+        update(1023)
+        assert get('save_begin_pending')==0 and get('game_state')==SAVE_PENDING
+        assert (get('px'),get('py'))==pose,'queued save consumes no movement or menu input'
+        assert bytes(sram)==before_entry,'snapshot begin preserves the previously committed SRAM'
         for _ in range(200):
             update()
             if get('game_state')!=SAVE_PENDING:break
@@ -183,9 +189,13 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     assert get('save_failure_notice')==1 and get('toast_ticks')==0
     lib.finish_dialogue()
     assert get('game_state')==PLAY and get('save_failure_notice')==0 and get('save_failed')==1
-    # Validation rejection before SAVE_PENDING also exposes the same notice.
+    # The queued begin validates on its next frozen update. Rejection exposes
+    # the same notice and returns to the original requesting state.
     put('game_state',PAUSE);prior_chapter=get('chapter_flags');put('chapter_flags',2)
     before=bytes(sram);lib.save_game();lib.save_frame()
+    assert get('game_state')==SAVE_PENDING and get('save_begin_pending')==1
+    assert bytes(sram)==before
+    update(1023)
     assert get('game_state')==PAUSE and get('save_failed')==get('save_failure_notice')==1
     assert bytes(sram)==before
     put('chapter_flags',prior_chapter);lib.save5_test_fail_after(-1)

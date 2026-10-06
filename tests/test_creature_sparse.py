@@ -26,6 +26,30 @@ def edit_array(text, name, edit):
     return result
 
 
+def refresh_key_indexes(core, data):
+    """Regenerate matching fixture indexes after intentionally reordering rows.
+    A stale index is corruption, not permission for a fallback linear scan.
+    """
+    def rewrite(source, index_name, record_name, bound, key=0):
+        pattern=r'\b'+re.escape(record_name)+r'\[[^\]]*\]\s*=\s*\{\n(.*?)\n\s*\};'
+        body=re.search(pattern,source,re.S)[1]
+        records=re.findall(r'\{([^{}]*)\}',body) if record_name != 'creature_forms' else re.findall(r'\{(\d+),[^\n]*',body)
+        # Form rows contain nested stats; their immutable ID is still first.
+        ids=[int(record.split(',')[key].strip()) for record in records]
+        if record_name == 'creature_forms':ids=[int(x) for x in records]
+        values=[0]*(bound+1)
+        for row,id_ in enumerate(ids):
+            if not 0<id_<=bound or values[id_]:raise AssertionError((record_name,id_))
+            values[id_]=row+1
+        return edit_array(source,index_name,lambda _: '\n'.join('    '+', '.join(map(str,values[i:i+16]))+',' for i in range(0,len(values),16)))
+    for index,record,bound,key in [('creature_form_index','creature_forms',128,0),
+                                    ('creature_ability_index','creature_abilities',255,0),
+                                    ('creature_incoming_evolution_index','creature_evolutions',128,1)]:
+        data=rewrite(data,index,record,bound,key)
+    for record,bound in [('form_policy',128),('family_policy',60),('ability_policy',255)]:
+        core=rewrite(core,record+'_index',record,bound)
+    return core,data
+
 def fixture_sources(*, high_bit=False, reordered=False):
     header = (ROOT / 'src/creatures.h').read_text()
     core = (ROOT / 'src/creatures.c').read_text()
@@ -45,6 +69,8 @@ def fixture_sources(*, high_bit=False, reordered=False):
             data = edit_array(data, name, reverse)
         for name in ('form_policy', 'family_policy', 'ability_policy'):
             core = edit_array(core, name, reverse)
+    if reordered:
+        core, data = refresh_key_indexes(core, data)
     return header, core, data
 
 
@@ -98,6 +124,20 @@ class SparseCreatureTests(unittest.TestCase):
             with self.subTest(label=label):
                 self.assertEqual(core.count(old), 1)
                 native_check((header, core.replace(old, new), data), invalid=True, sanitize=True)
+
+    def test_sparse_synthetic_malformed_indexes_fail_closed(self):
+        header, core, data = fixture_sources()
+        for name,where in [('creature_form_index','data'),('creature_ability_index','data'),
+                           ('creature_incoming_evolution_index','data'),('form_policy_index','core'),
+                           ('family_policy_index','core'),('ability_policy_index','core')]:
+            for value in [1,255]:
+                with self.subTest(name=name,value=value):
+                    def corrupt(body):
+                        values=[int(v) for v in re.findall(r'\d+',body)]
+                        values[0]=value
+                        return '    '+', '.join(map(str,values))+','
+                    modified=edit_array(data if where=='data' else core,name,corrupt)
+                    native_check((header,core if where=='data' else modified,modified if where=='data' else data),invalid=True,sanitize=True)
 
     def test_sparse_synthetic_unknown_family_is_not_array_index(self):
         header, core, data = fixture_sources()

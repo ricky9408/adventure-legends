@@ -1,0 +1,290 @@
+{
+  "kind": "isolated-ARM7TDMI-module-timing-synthetic-world-and-OBJ-callbacks",
+  "waitcnt": "0x4317",
+  "clock_hz": 16777216,
+  "frame_cycles": 280896,
+  "columns": [
+    "cast_cycles",
+    "max_tick_cycles",
+    "max_draw_cycles",
+    "max_busy_check_cycles"
+  ],
+  "commands": {
+    "23": {
+      "cycles": [
+        20462,
+        7715,
+        8614,
+        1019
+      ],
+      "max_tick_solid_calls": 56,
+      "max_draw_objects": 6,
+      "max_steady_draw_cycles": 8614,
+      "max_steady_draw_solid_calls": 66
+    },
+    "24": {
+      "cycles": [
+        25810,
+        4921,
+        18056,
+        1019
+      ],
+      "max_tick_solid_calls": 15,
+      "max_draw_objects": 10,
+      "max_steady_draw_cycles": 18056,
+      "max_steady_draw_solid_calls": 157
+    },
+    "25": {
+      "cycles": [
+        10503,
+        16917,
+        16001,
+        1019
+      ],
+      "max_tick_solid_calls": 109,
+      "max_draw_objects": 12,
+      "max_steady_draw_cycles": 16001,
+      "max_steady_draw_solid_calls": 122
+    },
+    "26": {
+      "cycles": [
+        24948,
+        28443,
+        15936,
+        1019
+      ],
+      "max_tick_solid_calls": 158,
+      "max_draw_objects": 7,
+      "max_steady_draw_cycles": 15936,
+      "max_steady_draw_solid_calls": 143
+    },
+    "27": {
+      "cycles": [
+        10503,
+        15718,
+        850,
+        1019
+      ],
+      "max_tick_solid_calls": 61,
+      "max_draw_objects": 2,
+      "max_steady_draw_cycles": 850,
+      "max_steady_draw_solid_calls": 2
+    },
+    "28": {
+      "cycles": [
+        23558,
+        2024,
+        13001,
+        1019
+      ],
+      "max_tick_solid_calls": 6,
+      "max_draw_objects": 7,
+      "max_steady_draw_cycles": 13001,
+      "max_steady_draw_solid_calls": 103
+    },
+    "29": {
+      "cycles": [
+        14944,
+        1709,
+        871,
+        1019
+      ],
+      "max_tick_solid_calls": 2,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 871,
+      "max_steady_draw_solid_calls": 0
+    },
+    "30": {
+      "cycles": [
+        10620,
+        6697,
+        50506,
+        1019
+      ],
+      "max_tick_solid_calls": 41,
+      "max_draw_objects": 8,
+      "max_steady_draw_cycles": 50506,
+      "max_steady_draw_solid_calls": 492
+    },
+    "31": {
+      "cycles": [
+        14061,
+        925,
+        2269,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 2269,
+      "max_steady_draw_solid_calls": 15
+    },
+    "32": {
+      "cycles": [
+        14174,
+        9298,
+        4517,
+        1019
+      ],
+      "max_tick_solid_calls": 68,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 4517,
+      "max_steady_draw_solid_calls": 35
+    },
+    "33": {
+      "cycles": [
+        10503,
+        925,
+        2375,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 2375,
+      "max_steady_draw_solid_calls": 15
+    },
+    "34": {
+      "cycles": [
+        23558,
+        9995,
+        12990,
+        1019
+      ],
+      "max_tick_solid_calls": 76,
+      "max_draw_objects": 7,
+      "max_steady_draw_cycles": 12990,
+      "max_steady_draw_solid_calls": 103
+    },
+    "35": {
+      "cycles": [
+        24585,
+        925,
+        5796,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 5796,
+      "max_steady_draw_solid_calls": 55
+    },
+    "36": {
+      "cycles": [
+        24702,
+        925,
+        21975,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 9,
+      "max_steady_draw_cycles": 21975,
+      "max_steady_draw_solid_calls": 197
+    },
+    "37": {
+      "cycles": [
+        10465,
+        10825,
+        850,
+        1019
+      ],
+      "max_tick_solid_calls": 39,
+      "max_draw_objects": 2,
+      "max_steady_draw_cycles": 850,
+      "max_steady_draw_solid_calls": 2
+    },
+    "38": {
+      "cycles": [
+        10582,
+        21691,
+        27952,
+        1019
+      ],
+      "max_tick_solid_calls": 5,
+      "max_draw_objects": 9,
+      "max_steady_draw_cycles": 2230,
+      "max_steady_draw_solid_calls": 0
+    },
+    "39": {
+      "cycles": [
+        14649,
+        1397,
+        871,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 871,
+      "max_steady_draw_solid_calls": 0
+    },
+    "40": {
+      "cycles": [
+        14748,
+        1397,
+        4469,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 4469,
+      "max_steady_draw_solid_calls": 32
+    },
+    "41": {
+      "cycles": [
+        10465,
+        7992,
+        579,
+        1019
+      ],
+      "max_tick_solid_calls": 26,
+      "max_draw_objects": 1,
+      "max_steady_draw_cycles": 579,
+      "max_steady_draw_solid_calls": 1
+    },
+    "42": {
+      "cycles": [
+        10582,
+        38295,
+        1085,
+        1019
+      ],
+      "max_tick_solid_calls": 318,
+      "max_draw_objects": 3,
+      "max_steady_draw_cycles": 1085,
+      "max_steady_draw_solid_calls": 3
+    }
+  },
+  "rom_sha256": "704171d09d0ce401e925233f295c607fbc054c305403051a1f50bba8341f222c",
+  "conservative_max_tick_plus_draw_cycles": 57203,
+  "paired_native_position_probe": {
+    "positions": [
+      [
+        320,
+        96
+      ],
+      [
+        272,
+        48
+      ]
+    ],
+    "second_aim_cycles": 19162,
+    "second_aim_solid_calls": 180,
+    "same_frame_draw_cycles": 6748,
+    "same_frame_draw_solid_calls": 0
+  },
+  "source_sha256": {
+    "tests/southern_powers_native.c": "936358f3ca42367c01fae1c3b7051f69b9fa1fb4c0edaceabc990dfe06c0fbd2",
+    "src/southern_powers.c": "fb2446f2eaa5a36970ae91368d644cd83f8ba1b514199af14b8f6410deaa3115",
+    "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+    "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+    "src/northern_power_art.c": "fadac439537dcba908a7a4cd36e58f8fce1ee453a22ebb37737c95f29a4dedc3",
+    "src/advanced_powers.c": "3d28a15830aaa05a0fcc764cc30c91bdc3ef3e869ff6a0c758d119e2e57b7bad",
+    "src/regional_powers.c": "598ab1c413064a7489482e25bfbc204955cf4390170f937c0d96e24394f55766",
+    "src/gear_runtime.c": "8e72bc754c7091d4fd570e4203430c3a59e4de33ff167ee11d46f0789a96146a",
+    "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
+    "src/combat_rules.c": "443b81d059efbe3c892f2e824c73f4c8ee84716dd8d9494caa6ae03664eabe69",
+    "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "src/equipment_data.c": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+    "src/creatures.c": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+    "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "src/assets.c": "c08fa97049f25066e15733391694a1fb055ea8db30b620cf918337cb64f010f7"
+  },
+  "limitation": "No full game loop, world room collision, renderer OAM/cache pressure, controller acceptance or frame-budget guarantee is implied."
+}

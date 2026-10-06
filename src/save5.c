@@ -162,7 +162,7 @@ int save5_campaign_validate(const CampaignSave *s) {
     if (!s) return 0;
     f = s->room_flags;
     unsigned chapter = s->chapter_flags, seen = s->story_seen;
-    if ((s->room > 13 && (s->room < 16 || s->room > 29)) ||
+    if ((s->room > 13 && (s->room < 16 || s->room > 37)) ||
         s->spawn > SAVE4_SPAWN_WEST_TRAIL ||
         s->bridge > 1 || s->torches > 3 || s->relic > 1 || s->camp > 1 ||
         s->optional_flags > 1 || (seen & ~0x7Fu) || (f & ~0xFFFFu)) return 0;
@@ -192,6 +192,12 @@ int save5_campaign_validate(const CampaignSave *s) {
 
     if (s->room >= 4 && s->room <= 8 && !(chapter & SAVE4_GROVE_CLEAR)) return 0;
     if (s->room >= 9 && s->room <= 13 && !(chapter & SAVE4_SKY_CLEAR)) return 0;
+    if (s->room >= 30) {
+        if (!(chapter & SAVE4_SKY_CLEAR)) return 0;
+        if (s->room == 30) return s->spawn <= 4;
+        if (s->room == 31) return s->spawn <= 3;
+        return s->spawn == 0;
+    }
     if (s->room >= 22) {
         if (!(chapter & SAVE4_SKY_CLEAR)) return 0;
         if (s->room == 22) return s->spawn <= 4;
@@ -263,8 +269,8 @@ static void decode_instance(CreatureInstance *s, const Save4U8 *b) {
  * room/event handlers cannot turn reserved bits into implicit content. */
 /* assets/region/contract.json schema1. Keep identities stable; rooms14/15
  * remain the separate personal trials and are not regional checkpoints. */
-static const Save4U8 quest_masks[22] = {7,3,7,7,3,1,1,1,3,7,1,3,7,3,7,7,3,7,7,3,7,15};
-static const signed char equipment_source_quest[19] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6,16,17,18,19,19,20};
+static const Save4U8 quest_masks[30] = {7,3,7,7,3,1,1,1,3,7,1,3,7,3,7,7,3,7,7,3,7,15,3,3,15,7,3,3,3,3};
+static const signed char equipment_source_quest[25] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6,16,17,18,19,19,20,22,29,25,27,26,28};
 static unsigned quest_objective_mask(unsigned id) {
     return id < sizeof quest_masks ? quest_masks[id] : 0;
 }
@@ -285,7 +291,7 @@ static int quest_objective_validate(const Save5Quests *q, unsigned id) {
     if (!mask) return !state && !objectives;
     if (objectives & ~mask) return 0;
     /* Beacon stages are monotonic prefixes: 0,1,3,7,15 only. */
-    if (id == 21 && (objectives & (objectives + 1u))) return 0;
+    if ((id == 21 || id == 24) && (objectives & (objectives + 1u))) return 0;
     if (state == SAVE5_QUEST_INACTIVE) return !objectives;
     if (state == SAVE5_QUEST_ACTIVE) return objectives != mask;
     return objectives == mask;
@@ -308,8 +314,13 @@ static int quest_fields_validate(const Save5Quests *q) {
     if ((q->region_flags[0] & ~63u) ||
         (q->region_flags[0] && !(q->region_flags[0] & 1u)) ||
         (q->region_flags[1] && !(q->region_flags[1] & 1u)) ||
-        !zero_bytes(q->region_flags + 2, 30) || (q->anchors[0] & ~3u) ||
-        (q->anchors[1] & ~3u) || !zero_bytes(q->anchors + 2, 14)) return 0;
+        (q->region_flags[2] && !(q->region_flags[2] & 1u)) ||
+        !zero_bytes(q->region_flags + 3, 5) || !zero_bytes(q->region_flags + 9, 9) ||
+        (q->region_flags[18] & ~3u) || !zero_bytes(q->region_flags + 19, 13) ||
+        (q->anchors[0] & ~3u) || (q->anchors[1] & ~3u) ||
+        (q->anchors[2] & ~3u) || !zero_bytes(q->anchors + 3, 13)) return 0;
+    if ((q->anchors[2] & 1u) && !(q->region_flags[2] & 1u)) return 0;
+    if ((q->anchors[2] & 2u) && !(q->region_flags[2] & 2u)) return 0;
     if ((q->anchors[0] & 1u) && !(q->region_flags[0] & 1u)) return 0;
     if ((q->anchors[0] & 2u) && !(q->region_flags[0] & 2u)) return 0;
     if ((q->anchors[1] & 1u) && !(q->region_flags[1] & 1u)) return 0;
@@ -347,6 +358,42 @@ static int quest_campaign_validate(const CampaignSave *c, const Save5Quests *q) 
      * current checkpoint has returned to town. No objective or claim resets. */
     if ((q->region_flags[1] & 240u) && !harbor) return 0;
     if (((q->region_flags[1] >> 5) & 7u) & ~q->objectives[21]) return 0;
+    /* Southern claims/visits never borrow legacy generic creature rewards. */
+    if (q->region_flags[2] || q->region_flags[8] || q->region_flags[18]) {
+        if (!(c->chapter_flags & SAVE4_SKY_CLEAR) || !(q->region_flags[0] & 1u) ||
+            !(q->region_flags[1] & 1u) || save5_quest_state(q,21) != SAVE5_QUEST_CLAIMED ||
+            !(q->region_flags[2] & 1u)) return 0;
+    }
+    for (i = 22; i < 30; ++i)
+        if (save5_quest_state(q,i) && (!(q->region_flags[2] & 1u) ||
+            save5_quest_state(q,21) != SAVE5_QUEST_CLAIMED)) return 0;
+    {
+        unsigned ready = save5_quest_state(q,22) == SAVE5_QUEST_CLAIMED &&
+                         save5_quest_state(q,23) == SAVE5_QUEST_CLAIMED;
+        if ((save5_quest_state(q,24) || (q->region_flags[2] & 240u)) && !ready) return 0;
+        /* All required earlier objectives, not merely the last prefix bit. */
+        for (i=5; i<8; ++i)
+            if ((q->region_flags[2] & (1u<<i)) &&
+                (q->objectives[24] & ((1u<<(i-4))-1u)) != ((1u<<(i-4))-1u)) return 0;
+    }
+    if (q->region_flags[18]) {
+        if (!(q->region_flags[2] & 4u)) return 0;
+        if ((q->region_flags[18] & 1u) && save5_quest_state(q,29) < SAVE5_QUEST_READY) return 0;
+        if ((q->region_flags[18] & 2u) && save5_quest_state(q,28) < SAVE5_QUEST_READY) return 0;
+    }
+    {
+        static const Save4U8 visit[8]={2,2,8,2,2,2,4,8};
+        for (i=0;i<8;++i)
+            if ((q->region_flags[8] & (1u<<i)) && !(q->region_flags[2] & visit[i])) return 0;
+        if ((q->region_flags[8]&16u) && !(q->region_flags[18]&1u)) return 0;
+        if ((q->region_flags[8]&64u) && !(q->region_flags[18]&2u)) return 0;
+    }
+    if (room >= 30) {
+        if (!(q->region_flags[2] & (1u << (room - 30)))) return 0;
+        if (c->spawn == 2 && ((room == 30 && !(q->anchors[2] & 1u)) ||
+                             (room == 31 && !(q->anchors[2] & 2u)))) return 0;
+        return 1;
+    }
     if (room >= 22) {
         /* Separate regional byte: never shift a campaign mask by room ID. */
         if (!(q->region_flags[1] & (1u << (room - 22)))) return 0;
@@ -408,10 +455,62 @@ static int quest_creatures_validate(const Save5Quests *q, const Save4U8 *obtaine
     }
     return 1;
 }
+/* Southern source order: two guaranteed, then eight typed field encounters.
+ * A record with any trial or an evolved Southern form is checked locally for
+ * its complete floor. OR summaries never combine one copy's trial with another
+ * copy's training. High bits mean that a checked individual requires a source. */
+static unsigned southern_instance_evidence(const CreatureInstance *c) {
+    static const Save4U8 forms[10]={79,85,25,28,81,83,87,89,91,93};
+    static const Save4U8 levels[10]={20,20,20,22,22,22,24,22,24,22};
+    static const Save4U8 bonds[10]={40,40,40,45,45,45,45,45,45,45};
+    /* Explicit form-byte -> source-row+1. Zero means no Southern evidence;
+     * bounds are checked before indexing. This preserves all256 byte inputs. */
+    static const Save4U8 source_row[128]={
+        [79]=1,[80]=1,[85]=2,[86]=2,[25]=3,[26]=3,[28]=4,[29]=4,
+        [81]=5,[82]=5,[83]=6,[84]=6,[87]=7,[88]=7,[89]=8,[90]=8,
+        [91]=9,[92]=9,[93]=10,[94]=10
+    };
+    unsigned i, result;
+    /* Empty records still receive the complete zero-byte instance validation. */
+    if (!c->form_id || c->form_id>=sizeof source_row) return 0;
+    i=source_row[c->form_id];
+    if (!i) return 0;
+    --i;result=1u<<i;
+    if (c->trial_flags || c->form_id==forms[i]+1u) {
+        if (c->trial_flags!=1 || c->level<levels[i] || c->bond<bonds[i]) return 0x80000000u;
+        result|=1u<<(i+10);
+    }
+    return result;
+}
+static unsigned southern_roster_evidence(const CreatureRoster *r) {
+    unsigned i, evidence=0;
+    for(i=0;i<CREATURE_ROSTER_CAPACITY;++i) evidence|=southern_instance_evidence(&r->instances[i]);
+    return evidence;
+}
+static int southern_sources_validate(const Save5Quests *q, const Save4U8 *obtained,
+                                      unsigned evidence) {
+    static const Save4U8 forms[10]={79,85,25,28,81,83,87,89,91,93};
+    unsigned i, sources=(unsigned)q->region_flags[8]<<2;
+    if (evidence&0x80000000u) return 0;
+    if (save5_quest_state(q,22)==SAVE5_QUEST_CLAIMED) sources|=1u;
+    if (save5_quest_state(q,23)==SAVE5_QUEST_CLAIMED) sources|=2u;
+    if ((sources & evidence)!=sources || ((evidence>>10)&~sources)) return 0;
+    if ((evidence>>10) && (sources&3u)!=3u) return 0;
+    for(i=0;i<10;++i) if(sources&(1u<<i)) {
+        unsigned base=forms[i]-1u;
+        if (!(obtained[base>>3]&(1u<<(base&7))) &&
+            !(obtained[(base+1)>>3]&(1u<<((base+1)&7)))) return 0;
+    }
+    return 1;
+}
 /* Revision2 cannot acquire Northern state merely because today's catalog can
  * resolve it. Revision1 already uses its all-zero legacy reservation reader. */
 static int quest_revision_validate(const Save5Quests *q, unsigned revision) {
     unsigned i;
+    if (revision < 4) {
+        if (q->region_flags[2] || q->region_flags[8] || q->region_flags[18] || q->anchors[2]) return 0;
+        for(i=22;i<30;++i) if(save5_quest_state(q,i) || q->objectives[i]) return 0;
+    }
     if (revision >= 3) return 1;
     if (q->region_flags[1] || q->anchors[1]) return 0;
     for (i=11; i<22; ++i)
@@ -462,6 +561,7 @@ int save5_validate(const Save5State *s) {
         quest_campaign_validate(&s->campaign, &s->quests) &&
         quest_creatures_validate(&s->quests, s->roster.obtained, s->roster.rewards,
                                  retained_creatures(&s->roster)) &&
+        southern_sources_validate(&s->quests, s->roster.obtained, southern_roster_evidence(&s->roster)) &&
         equipment_validate(&s->equipment) && quest_equipment_validate(&s->quests, &s->equipment);
 }
 /* Tight metadata packing uses all 1088 canonical-padding bytes temporarily:
@@ -506,7 +606,7 @@ typedef struct BankScan {
     CampaignSave campaign;
     Save4U32 crc, expected_crc, sequence, max_id;
     unsigned offset, position, valid, story_mask, stage, boundary, base, slot, memory, revision;
-    unsigned retained_creatures; /* streamed, validated owned Water/Metal bits */
+    unsigned retained_creatures, southern_evidence; /* checked per-individual evidence */
 } BankScan;
 static BankScan scan;
 static unsigned writer_status, writer_phase, writer_position, writer_progress;
@@ -535,7 +635,7 @@ static int scan_header(void) {
     const Save4U8 *b = scan.block;
     if (b[0] != 0x45 || b[1] != 0x42 || b[2] != 5 || b[3] != 32 ||
         get16(b + 4) != SAVE5_BANK_SIZE || get16(b + 6) != SAVE5_USED_SIZE ||
-        (get16(b + 12) != 1 && get16(b + 12) != 2 && get16(b + 12) != SAVE5_CONTENT_REVISION) ||
+        (get16(b + 12) < 1 || get16(b + 12) > SAVE5_CONTENT_REVISION) ||
         b[20] != (scan.memory ? 0 : SAVE5_COMMIT) ||
         !zero_bytes(b + 14, 2) || !zero_bytes(b + 21, 11)) return 0;
     scan.expected_crc = get32(b + 16); scan.sequence = get32(b + 8);
@@ -543,19 +643,15 @@ static int scan_header(void) {
     return 1;
 }
 static int revision_form_allowed(unsigned id) {
-    /* Identity lists are fixed for each released content revision. */
-    if (id==1 || id==2 || id==4 || id==5 || id==7 || id==8 || id==10 || id==11)
-        return creatures_form(id)!=0;
-    if (scan.revision>=2 && (id==13 || id==14 || id==16)) return creatures_form(id)!=0;
-    if (scan.revision==3 && (id==19 || id==20 || id==22 || id==23 ||
-        id==73 || id==74 || id==75 || id==76 || id==77 || id==78)) return creatures_form(id)!=0;
-    return 0;
+    return creatures_form_allowed_revision(id, scan.revision);
 }
 static int revision_equipment_allowed(unsigned id) {
     if (id==1 || id==2 || id==9 || id==10 || id==17 || id==18 ||
         id==33 || id==34 || id==49 || id==50 || id==65 || id==81 || id==82)
         return equipment_definition(id)!=0;
-    return scan.revision==3 && (id==3 || id==11 || id==19 || id==35 || id==51 || id==83) &&
+    if (scan.revision>=3 && (id==3 || id==11 || id==19 || id==35 || id==51 || id==83))
+        return equipment_definition(id)!=0;
+    return scan.revision==4 && (id==4 || id==12 || id==36 || id==52 || id==66 || id==84) &&
            equipment_definition(id)!=0;
 }
 static int scan_collection(void) {
@@ -573,8 +669,7 @@ static int scan_instance(unsigned slot) {
     unsigned i, legacy;
     Save4U8 *ids = scratch.bytes + SAVE5_RESERVED_OFFSET;
     decode_instance(&c, scan.block);
-    if (!creatures_instance_validate(&c)) return 0;
-    if (c.form_id && !revision_form_allowed(c.form_id)) return 0;
+    if (!creatures_instance_validate_revision(&c, scan.revision)) return 0;
     if (!(c.flags & CREATURE_OCCUPIED)) return 1;
     if (!bit(scan.collection + 16, c.form_id - 1)) return 0;
     for (i = 0; i < slot; ++i)
@@ -582,6 +677,7 @@ static int scan_instance(unsigned slot) {
     put32(ids + slot * 4, c.instance_id);
     set_bit(scan.occupied, slot);
     scan.retained_creatures |= retained_creature_bits(&c);
+    scan.southern_evidence |= southern_instance_evidence(&c);
     if (c.instance_id > scan.max_id) scan.max_id = c.instance_id;
     legacy = creatures_legacy_spirit(c.form_id);
     if (c.flags & CREATURE_STORY_LOCKED) {
@@ -684,7 +780,7 @@ static unsigned scan_run(unsigned budget) {
                 decode_campaign(&c, scan.block);
                 scan.campaign = c;
                 if (!save5_campaign_validate(&c) || (scan.revision == 1 && c.room > 13) ||
-                    (scan.revision == 2 && c.room > 21) ||
+                    (scan.revision == 2 && c.room > 21) || (scan.revision == 3 && c.room > 29) ||
                     !zero_bytes(scan.block+15, 49)) scan.valid = 0;
                 scan_next(SCAN_COLLECTION, 48); charge = 32; break;
             }
@@ -694,7 +790,9 @@ static unsigned scan_run(unsigned budget) {
             case SCAN_COLLECTION_RESERVED:
                 scan.slot = 0; scan_next(SCAN_INSTANCE, 24); break;
             case SCAN_INSTANCE:
-                charge = scan.block[0] ? 128 : 16;
+                /* Revision-qualified policy and Southern per-copy evidence add
+                 * semantic work. Charge it explicitly without raising the cap. */
+                charge = scan.block[0] ? 160 : 16;
                 if (!scan_instance(scan.slot++)) scan.valid = 0;
                 scan_next(scan.slot == 160 ? SCAN_PARTY : SCAN_INSTANCE, scan.slot == 160 ? 32 : 24); break;
             case SCAN_PARTY:
@@ -726,7 +824,8 @@ static unsigned scan_run(unsigned budget) {
                 if (!quest_fields_validate(&scan.quests) || !quest_revision_validate(&scan.quests,scan.revision) ||
                     !quest_campaign_validate(&scan.campaign, &scan.quests) ||
                     !quest_creatures_validate(&scan.quests, scan.collection + 16, scan.collection + 32,
-                                              scan.retained_creatures)) scan.valid = 0;
+                                              scan.retained_creatures) ||
+                    !southern_sources_validate(&scan.quests, scan.collection + 16, scan.southern_evidence)) scan.valid = 0;
                 scan_next(SCAN_BOND, 160); charge = 128; break;
             case SCAN_BOND: scan_next(SCAN_EVENTS, 80); break;
             case SCAN_EVENTS: scan_next(SCAN_CREDIT_RESERVED, 8); break;
@@ -754,7 +853,9 @@ static unsigned scan_run(unsigned budget) {
                 copy_bytes(scan.equipment.reward_claims, scan.block, 8);
                 if (!quest_equipment_validate(&scan.quests, &scan.equipment) ||
                     (scan.revision == 2 && ((scan.equipment.reward_claims[1] & 0xe0u) ||
-                     !zero_bytes(scan.equipment.reward_claims+2,6)))) scan.valid = 0;
+                     !zero_bytes(scan.equipment.reward_claims+2,6))) ||
+                    (scan.revision == 3 && ((scan.equipment.reward_claims[2] & 0xf8u) ||
+                     !zero_bytes(scan.equipment.reward_claims+3,5)))) scan.valid = 0;
                 scan_next(SCAN_EQUIPMENT_RESERVED, 24); charge = 128; break;
             case SCAN_EQUIPMENT_RESERVED: scan_next(SCAN_PADDING, 1088); break;
             default: break;

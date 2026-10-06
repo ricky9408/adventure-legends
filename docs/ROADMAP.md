@@ -15,9 +15,9 @@ Every roster release will separately report:
 3. Obtainable: a normal player can acquire the form in the shipped world
 4. Verified: evolution/acquisition, field actions, combat, saves and performance are tested
 
-At the current **Northern N5 candidate**, **21 forms are implemented, obtainable and controller-verified**. There are eleven retained companion families, ten optional evolution paths, three player weapon classes, five equipment slots, 19 earnable items, 30 areas and 22 regional side quests. All 21 historical forms fit a single controller-earned/reloaded collection with eleven real individuals. They are not duplicated from collection history.
+At the current **Southern S3 candidate**, **41 forms are implemented, obtainable and controller-verified**. There are 21 retained companion families, 20 optional evolution edges, three player weapon classes, five equipment slots, 25 earnable items, 38 areas and 30 regional side quests. All 41 historical forms fit a single controller-earned/reloaded collection with 21 real individuals. They are not duplicated from collection history.
 
-The three-lantern story remains a completed foundation. The river region and a bright Northern-inspired harbor/headland chapter are playable. Southern-island, magma-mountain and underwater regions remain planned; the complete 128-form roster and legendary progression are unfinished. Twenty-two forms are designed, twenty-one enabled, zero legendaries obtainable. Native emulator acceptance is separate from physical-hardware testing, which remains outstanding.
+The three-lantern story remains a completed foundation. The river, Northern harbor/headland and Southern island chapters are playable. Magma-mountain and underwater regions, later return journeys and the complete 128-form/legendary progression are unfinished. Forty-two forms are designed, 41 enabled, zero legendaries obtainable. Native emulator acceptance is separate from physical-hardware testing, which remains outstanding.
 
 ## Completed exploration foundation
 
@@ -43,7 +43,7 @@ This milestone establishes a coherent playable baseline while the larger systems
 - Stable 1–128 catalog identifiers (0 means empty) with explicit unimplemented slots; data-driven family, phase, polarity, stats, learnsets and acquisition conditions
 - Wood, Fire, Earth, Metal and Water phases, with Yin/Yang as a separate dimension; research cited in the system design and numerical battle rules identified as original game interpretation
 - Party/storage, experience, learnable abilities and explicit evolution choices; preserve required traversal powers through evolution and party changes
-- Twenty-one substantive representative forms across all five phases, including genuine evolutions; rare/legendary encounter progression is still a later milestone
+- Forty-one substantive representative forms across all five phases, including genuine evolutions; rare/legendary encounter progression is still a later milestone
 - Journal/catalog, field selection and intelligible feedback at 240×160
 - Save expansion with non-overwriting migration, bounded storage and old-save fixtures; no newly mandatory grinding in the existing story
 
@@ -75,6 +75,17 @@ Delivered: three native weapon state machines, attack snapshots, safe projectile
 - Five-visible-enemy combined stress: 420/420 hardware updates and flips; cold seven-tab journals: 80/80; no physical-GBA claim
 
 See `docs/VERIFICATION.md` and the bounded `docs/northern/` reports for exact-candidate evidence and the status of the whole-game aggregate. This does not mean the expanded game is complete.
+
+## Completed candidate: Southern islands
+
+- Eight connected areas with a sunny harbor, distinct field/interior activities and a recoverable multi-room optical/companion puzzle chain
+- Ten distinct new base/evolution families, 20 field/combat commands, eight local quests and six gear sidegrades
+- Guaranteed base companions before mandatory gates; a separate minimal-prerequisite native route uses only the starter sword and preserves absent optional content
+- Content revision 4 retains every prior owned individual and exact historical source semantics; mixed one-time rewards and personal trials remain instance-bound
+- All 41 forms, 25 gear and 30 quests earned and independently reloaded, with storage/selector, dialogue, death, reset, return and real combat checks
+- Native frame-pacing fixes for collision geometry, full-collection saving and large storage gaps, with full-screen pixel/OAM evidence
+
+See `docs/VERIFICATION.md` and `docs/southern/` for source-pinned evidence and whole-game regression status. These are native emulator results, not physical-cartridge certification.
 
 ## Ongoing: regions, towns and side quests
 
@@ -143,3 +154,24 @@ capabilities and frozen runtime remain unchanged.
 - Known limitations stated, including untested physical hardware or emulator/platform combinations
 
 Each meaningful milestone is a separate reviewable PR. The owner has authorized self-review and merge for this repository only; exact-head tests and an independent review still precede merge. Work can continue while review is pending; later commits must be reconciled with the actual main branch or clearly stacked on the earlier PR.
+
+
+## Next implementation: Magma Mountain
+
+The agreed next batch is 24 forms across nine families: F011–F016 (IDs31–48)
+and F036–F038 (IDs95–100). It adds two third tiers and four alternate branches,
+so both policy-isolation gates in `SOUTHERN_CORE_REVIEW.md` must be closed and
+independently reviewed before activation. The separate development workspace
+is preparing those changes; no new Magma form or save revision is enabled in
+this Southern release.
+
+Each alternate branch needs its own ordinarily acquired base individual;
+collection history never manufactures a duplicate. The full planned collection
+at that chapter boundary is 65 historical forms and 34 real retained individuals.
+Global quest IDs 30–37 and eight area IDs 38–45 are reserved for the chapter.
+Current cold-menu/save headroom is limited, so broader collection and new-world
+costs require fresh whole-engine native tests before the next delivery.
+
+The finite full roster remains 65 after Magma, 89 after underwater, 104/120 after
+two return-content batches, then 128 including eight gated legends. These are
+planned counts, not current playable content or a measured playtime promise.

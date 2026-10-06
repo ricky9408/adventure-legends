@@ -1,4 +1,4 @@
-# Save format 5, content revision 3
+# Save format 5, content revision 4
 
 ## Compatibility
 
@@ -6,7 +6,7 @@ The two 6,144-byte banks remain at SRAM `0x0200` and `0x1A00`, ending at
 `0x3200`. No write touches `0x0000–0x01FF`, including legacy v2/v3 data and both
 v4 banks. No offsets, creature records or credit-ledger positions moved.
 
-New writes use **content revision 3**. Revision 1 is decoded explicitly, with
+New writes use **content revision 4**. Revision 1 is decoded explicitly, with
 its original eight-form whitelist (1, 2, 4, 5, 7, 8, 10, 11), zero quest and
 zero equipment allocations. Migration retains all creatures, identities, XP,
 bond, evolutions, learned/equipped commands, selected command, collection,
@@ -23,7 +23,7 @@ and areas 22+ are rejected inside a revision-2 bank. Revision 3 enables exactly
 21 forms: 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 19, 20, 22, 23, 73, 74, 75, 76,
 77, 78. Reserved IDs and legendary 121 remain invalid.
 
-Revision 2→3 loading preserves every existing campaign, roster, command,
+Revision 2/3→4 loading preserves every existing campaign, roster, command,
 collection, credit, typed quest and equipment byte. It grants no recruit,
 trial, quest, item, visit or reward. Only a later successful save changes the
 header revision/generation/CRC. These are content revisions inside unchanged
@@ -32,7 +32,7 @@ wire version 5; an unknown content revision rejects the bank.
 When neither v5 bank validates, the unchanged v4/v3/v2 reader is used. It
 preserves every decoded campaign field and synthesizes the unlocked legacy
 story families using the existing creature migration rules. Loading and
-migration are read-only. A later successful transaction writes revision 3 in
+migration are read-only. A later successful transaction writes revision 4 in
 the new address range, leaving the previous active bank and all legacy bytes
 intact. Older ROMs can see only their untouched old checkpoint, not newer
 progress; downgrade synchronization is unsupported.
@@ -50,7 +50,7 @@ pointers and derived statistics are never the serialization format.
 | 4 | 2 | Bank size 6,144 |
 | 6 | 2 | Used allocation 5,056 |
 | 8 | 4 | Unsigned generation |
-| 12 | 2 | Content revision 3; exact revision-1 and revision-2 readers retained |
+| 12 | 2 | Content revision 4; exact readers for revisions 1, 2, 3 retained |
 | 14 | 2 | Zero reserved |
 | 16 | 4 | IEEE CRC32 |
 | 20 | 1 | Commit marker `A5`, zero while constructing |
@@ -74,7 +74,7 @@ optional flags 7, room flags 32 at 8, story-seen 16 at 12, legacy companion 14;
 bytes 15–63 are zero. Every old progression flag is retained.
 
 Pending Core ending resumes at village/elder. Once `ENDING_SEEN` is set,
-revisions 2 and 3 retain an otherwise valid checkpoint rather than forcing every
+revisions 2, 3 and 4 retain an otherwise valid checkpoint rather than forcing every
 postgame resume back to the elder. Missing Wind/Stone story conversations still
 normalize safely. Revision-1 and older migrations retain conservative original
 resume behavior. Room/spawn validation is explicit; holes do not become valid
@@ -127,7 +127,7 @@ creature slots must have zero expedition bond counters.
 
 `assets/region/contract.json` is the schema-1 authoring contract. Quest IDs 0–10
 retain their released revision-2 definitions. Northern IDs 11–21 are described
-below;22–63 are zero. All regional quest activity requires Grove-clear
+below; Southern IDs 22–29 follow;30–63 are zero. All regional quest activity requires Grove-clear
 and town-visited. The authored objective masks and rewards are:
 
 | Quest | Mask | Reward link |
@@ -147,15 +147,14 @@ and town-visited. The authored objective masks and rewards are:
 Only variables 3 and9 are assigned, each0–3 while its matching quest is active,
 ready or claimed; both must be zero while unseen. Full objective masks determine
 READY/CLAIMED; variable 3 is not additionally required. Region byte 0 permits bits
-0–5 for visited rooms 16–21, with town bit 0 required for any visit; all other
-region bytes except Northern byte 1 are zero. Anchor byte 0 permits town-rest bit 0 and basin-rest bit 1,
-each implying that room's visit; Northern anchors use byte 1 and all others are zero.
+0–5 for visited rooms 16–21, with town bit 0 required for any visit; Northern byte 1 and Southern bytes 2, 8 and 18 are described below. Anchor byte 0 permits town-rest bit 0 and basin-rest bit 1,
+each implying that room's visit; Northern anchors use byte 1 and Southern anchors byte 2.
 
 Safe regional checkpoint rooms/spawns are16:0–5,17:0–2,18–21:0. All require
 Grove-clear and the current room's visit bit. Rooms18/19 additionally require
 quest 2 CLAIMED. Rest spawn 2 in 16/17 requires its matching discovered anchor.
 Rooms14/15 remain separate personal trials, not regional save checkpoints;
-30+ and all other holes remain rejected; Northern rooms 22–29 are below. Exact world coordinates live in the
+38+ and all other holes remain rejected; Northern rooms 22–29 and Southern 30–37 are below. Exact world coordinates live in the
 contract and are the region engine's responsibility.
 
 A claimed creature quest requires the matching creature reward bit and obtained
@@ -198,8 +197,8 @@ Generic creature reward bits 5–128 keep their existing independent semantics;
 retention rules are scoped to the matching typed quest claim.
 
 Region byte 1 bits 0–7 mark rooms 22–29. Bit 0 is required for every other visit;
-bytes 2–31 are zero. Anchor byte 1 bits 0/1 mark the rest points in rooms 22/23,
-respectively, and imply that room's visit; bytes 2–15 are zero. Current room
+revision-3 bytes 2–31 are zero. Anchor byte 1 bits 0/1 mark the rest points in rooms 22/23,
+respectively, and imply that room's visit; revision-3 bytes 2–15 are zero. Current room
 requires its visit bit. Safe spawns are 22:0–4, 23:0–2, 24–29:0; rest spawn 2 in 22/23
 also requires its anchor. Both current checkpoint and historical visits to
 26–29 require quests 11/13 CLAIMED; 27/28/29 additionally imply quest 21 objectives
@@ -212,6 +211,83 @@ must never be written into `CampaignSave.chapter_flags`; its bit 3 (value 0x08) 
 ENDING_SEEN. Use the explicit creature constants and masks, not family-index
 shifts. Region visits do not use `1u << room`; room IDs 32+ need separate regional
 storage, and the encounter-credit `room*6` scheme must be audited before 64 areas.
+
+### Southern revision-4 contract
+
+Only revisions 1, 2, 3 and 4 are accepted. Each bank's declared revision is
+validated before migration, including immutable form identity, command/minimum
+level pairs, family trial masks, incoming evolution minimum and polarity.
+Current expanded policy cannot legalize an old record. In particular ability12,
+Southern commands23–42 and Southern local trial bits on the wrong historical
+family remain invalid. Historical evolved records with otherwise legal zero
+trial/bond stay legal: Southern causal checks are never imposed retroactively.
+
+Revision4 adds exactly forms25,26,28,29,79–94 (41 enabled), items4,12,36,52,66,84
+(25 enabled), quests22–29, and these region allocations:
+
+| Field | Meaning |
+|---|---|
+| region byte2 bits0–7 | Visits30–37; every visit requires town30 and Northern Q21 CLAIMED |
+| anchors byte2 bits0/1 | Rest anchors30/31; each requires the matching visit |
+| region byte8 bits0–7 | Typed field recruits25,28,81,83,87,89,91,93 |
+| region byte18 bits0/1 | Loft/Q29 and awning/Q28 discoveries |
+
+Bytes3–7,9–17,19–31 and unassigned anchor bits/bytes remain zero. Quests22–29
+use masks3,3,15,7,3,3,3,3. Q24 accepts only prefixes0,1,3,7,15. Q22 CLAIMED
+requires retained F028/obtained79 or80 and source19/item4 history; Q23 CLAIMED
+requires retained F031/obtained85 or86. No Southern source consumes a generic
+creature reward bit. The whole historical reward namespace5–128, event credits
+and lifetime-aid bytes are preserved; old aid bits only suppress repeat event
+credit and do not block new sources or explicit trial training floors.
+
+All Southern content requires inherited Northern entry gates. Safe spawns are
+30:0–4,31:0–3,32–37:0. Rest spawn2 in30/31 additionally requires its anchor.
+Current checkpoint and permanent historical visits34–37 require Q22 and Q23
+CLAIMED;35/36/37 require Q24 prefix1/3/7 respectively. Both guaranteed base
+companions are required by the native Q24 interactions, independently of
+command equipment. Scene/reset/escape correctness is the world caller's job.
+
+Field source bit0/1/3/4/5 requires visit31, bit2/7 visit33, and bit6 visit32.
+Bit4 additionally requires discovery0; bit6 requires discovery1. Discovery0
+requires visit32 and Q29 READY or CLAIMED; discovery1 requires visit32 and Q28
+READY or CLAIMED. A full gear bag therefore cannot hide either encounter.
+Every claimed source retains its exact enabled family and obtained history,
+including stored companions. Seen history alone does not establish a claim.
+
+All ten new families map their own qualified trial key1 to wire mask1. Every
+persisted Southern trial and evolved form requires Q22/Q23 CLAIMED, its matching
+typed source, and that **same instance's** full trial/level/bond evidence. A
+streamed per-individual check rejects undertrained copies before OR-combining
+only already-validated source requirements. Old family masks remain unchanged.
+Context SOUTH_READY=0x0040 derives from Q22/Q23 CLAIMED; SUNWELL_OPEN=0x0080
+from Q24 CLAIMED. Neither is a campaign chapter flag.
+
+`src/southern_quests.h` exposes synchronous event-only helpers. Source0 is
+invalid;1=Q22,2=Q23,16–23=field bits0–7. Trial completion takes slot, expected
+instance ID, explicit family/key and actual typed source token. It stages a
+single24-byte instance, marks that family's trial and raises only missing
+training to its floor. Greater values, identity and commands remain untouched.
+Wrong identity/family/key/source fails without mutation. Generic credit history
+cannot impersonate a typed source. The caller must prove environmental targets,
+geometry, scene solution and the same participating identity; these helpers do
+not fabricate gameplay-object evidence.
+
+Q22 preflights free roster capacity and stages a512-byte equipment state before
+its grant-zero inner recruit. Once grant succeeds, only infallible copies and
+quest/source bits remain. Full160 roster, exhausted identity or full inventory
+leaves the complete state unchanged and quest READY. No member is overwritten,
+no party slot silently replaced, no release API invented. The outer save
+transaction must publish that staged state only after DONE; retry retains the
+same snapshot and identity.
+
+`tests/fixtures/v5-revision3/northern-all21-town.sav` is the genuine N5 controller
+fixture, SHA256 `f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479`,
+source ROM `302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e`.
+Its provenance records a locally frozen candidate with publication pending,
+not a published release. Revision3→4 re-save preserves the entire payload from
+32 onward, as does the existing revision2 fixture. No load writes SRAM or grants
+new Southern content. Revision1 alone retains its original starter/resume
+migration exception.
 
 ### Equipment block
 
@@ -229,7 +305,7 @@ Relative offsets:
 
 Each record encodes item ID16 at 0, rank at 2, flags at 3, quantity at 4, and zero
 bytes 5–7. Empty records are all zero. Authored item IDs are
-1,2,9,10,17,18,33,34,49,50,65,81,82,3,11,19,35,51,83 in stable acquisition
+1,2,9,10,17,18,33,34,49,50,65,81,82,3,11,19,35,51,83,4,12,36,52,66,84 in stable acquisition
 source order (not numeric sort). Revision 2 accepts only the first thirteen. Rank must be zero, quantity one, and flags
 must match the definition. No derived HP/attack/defense/speed or affix statistic
 is saved. Unique items cannot appear twice. Every owned item must be seen, but
@@ -239,8 +315,8 @@ Bag0 always holds protected starter sword1. References are0–47 or255 empty,
 match each slot's authored type, and cannot alias incompatible items. The
 weapon cannot be empty; unequip falls back to bag0. Seen bit 0 is forbidden.
 
-Equipment source IDs 0–18 map to the authored item list above;19–63 are reserved.
-Sources 0–12 are byte-compatible with revision 2;13–18 append the Northern gear.
+Equipment source IDs 0–24 map to the authored item list above;25–63 are reserved.
+Sources 0–12 are byte-compatible with revision 2;13–18 append the Northern gear;19–24 append Southern.
 A source claim requires the matching seen-item bit. Starter source 0 is marked
 by initialization/migration. Free lance/bow rack sources 2/4 require town-visited;
 every other source must exactly agree with its mapped claimed quest. Quests 6 and19
@@ -302,7 +378,104 @@ Caller version/generation metadata is not mutated; reload if needed.
 blocking host/startup/transition helpers, not active-play tick operations.
 Load/has-valid refuse while the writer owns the shared scratch space.
 
+## Revision-4 measured verification
+
+Source-pinned results: `SOUTHERN_SAVE4_VERIFICATION.json`,
+`evidence/southern-save-limits-arm-final.json`, and
+`evidence/southern-save-limits-sanitizers.json`.
+
+- Existing Save5 suite:41 tests; Southern ledger suite:13; unchanged Save4 suite:26
+- Every6,146 durable cut/success position for24 Southern transactions,147,504 positions:
+  mixed Q22, one field recruit, all ten trials, all ten evolutions, Crown claim and N5 migration
+- Every legal historical generic reward5–128 individually under each revision1/2/3,
+ 372 collision cases; all old event/aid bytes preserved; new typed sources remain usable
+- Actual full160 roster containing all41 forms, all30 quests and all25 authored items
+- Synthetic48 unique gear records: Q22 is byte-unchanged FULL and remains READY;
+  freeing one synthetic slot permits exactly one mixed claim. These extra IDs never ship
+- Production historical stream rejects that synthetic catalog before any SRAM write
+- ASan/UBSan:1,200 valid round-trips and1,200 invalid snapshots across79,491 randomized
+ budget calls, including2,334 zero-budget and49,013 over-cap calls
+
+ARM7TDMI/GBA timer measurement, WAITCNT0x4317, cap unchanged3072:
+
+| Operation | Maximum cycles | 280,896-cycle frame |
+|---|---:|---:|
+| begin |21,657|7.71%|
+| step1024 |60,321|21.47%|
+| step3072, real25 gear |153,114|54.51%|
+| step3072, synthetic48 gear |164,858|58.69%|
+| requested4096, clamped3072, worst synthetic48 |164,854|58.69%|
+
+The full160/all41/all30 states, both25 real and48 synthetic gear records, take
+89/108/127 updates at1024 for two N5 banks, mixed N5/current banks, and two
+full160 current banks respectively, or31/38/44 at3072.
+These are isolated subsystem measurements, not full-game cadence claims.
+The initial occupied-instance charge128 exceeded the1024 benchmark ceiling
+(71,504 cycles); charging160 for exact revision checks and source evidence
+restores the limit without weakening validation or raising the3072 cap. The
+initial report is retained explicitly as an unsuccessful timing comparison.
+
+Production `save5.o`:14,828 ROM bytes,7,248 BSS/EWRAM bytes, zero IWRAM code.
+Compared with frozen Northern's13,464/7,244, that is +1,364 ROM and +4 mutable
+bytes. Its single6,144-byte scratch allocation remains unchanged; with the
+4,944-byte caller state, combined persistence storage is12,192 bytes.
+`southern_quests.o`:2,662 ROM bytes and zero mutable globals. Its largest own
+compiler frame is568 bytes (mixed claim, including512-byte equipment staging),
+while trial completion uses64. `save5`'s largest own frame remains120
+(`scan_run`); begin16 and step48. No whole SaveState is placed on the stack.
+Reviewed ARM O2 direct-call frame sums are252 bytes for save5_step
+(48+120+24+48+12) and788 bytes for southern_quest_claim
+(568+72+40+48+48+12). These sums exclude interrupts, indirect calls and runtime
+helper frames; they are not whole-program stack high-water measurements.
+
+### Rest-entry validation optimization
+
+The scene2 controller trace exposed two rest-entry updates at411,452 and398,657
+cycles, with148 updates/flips over150 hardware frames. Steady save steps were
+within budget; the synchronous anchor validation contributed244,641 cycles on
+the11-individual N5-derived entry state.
+
+`profile_southern_validation.py` builds only isolated profiling ROMs. Before
+optimization, the11-instance cost comprised136,540 cycles for roster validation,
+58,215 for Southern evidence,15,361 for quest validation,16,647 for equipment,
+and the remaining campaign/ledger checks. Empty records were needlessly tested
+against all ten Southern families and checked one byte at a time in the core.
+
+The core now checks all24 bytes of an empty instance with six alias-safe aligned
+word loads, with a portable fieldwise fallback; no field/padding check is lost.
+Southern source rows use an explicit bounded lookup and an empty fast path.
+These changes introduce no mutable cache, caller-trust shortcut or wire change.
+
+| Isolated scenario | Anchor before | Anchor after | Full validation after |
+|---|---:|---:|---:|
+| N5-derived11 individuals |244,641|108,143|107,855|
+| Ordinary Southern21, host fixture |256,598|126,725|126,435|
+| Synthetic full160 |560,550|505,753|505,463|
+
+Both zero-check implementations reject every24×255 single-byte nonzero case
+under current and all four historical revisions.96,768 evidence cases cover
+all256 form bytes and trial/training boundaries. Four genuine historical
+fixtures and158,400 historical instance comparisons remain identical. Strict
+ARM compilation adds no libc dependency. Core42, Save5 41, Southern13,
+capacity/sanitizer4 and optimization3 suites pass. The full160 ASan/UBSan and
+interrupted-write suites remain green; static stack-chain sums remain252/788.
+
+See `evidence/southern-validation-optimization.json` for component measurements,
+source hashes and scope. No frozen scene2 or main ROM was overwritten. The
+numbers above do not prove whole-game rest cadence; the parent must rerun the
+native controller gate using the optimized sources.
+
 ## Verification and reproducible measurements
+
+Southern commands (host transactions do not establish native acquisition):
+
+    python3 tests/test_southern_save.py
+    python3 tests/test_southern_save_limits.py
+
+Revision4 timing/resource evidence is recorded separately in the Southern save
+limits report. The revision3 measurements below are historical comparisons, not
+revision4 results.
+
 
     python3 tests/test_save5.py
     python3 tests/test_save4.py
@@ -326,7 +499,7 @@ R5 save, SHA256 `74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa910
 Its provenance pins the exact R5 ROM and native combat report, which has 2,761
 passing checks, a saved/rebooted eleven-form collection, six live instances,
 eleven claimed quests and thirteen items. The migration test compares the
-entire bank payload from offset 32 onward byte-for-byte after revision 3 save.
+entire bank payload from offset 32 onward byte-for-byte after revision 4 save.
 No old-ROM machine state is imported. Northern API grants in host tests prove
 codec behavior only; native Northern acquisition requires its controller suite.
 
@@ -385,3 +558,23 @@ snapshots with no durable writes. `tests/save5_sanitizer.c` is compiled and run
 by `tests/test_save5.py`; leak detection is disabled for the ptrace sandbox,
 while address and undefined-behavior checks remain active. These are subsystem
 verification results, not a claim of 21 natively obtainable creatures.
+
+
+## Southern queued save presentation
+
+The engine now enters its frozen saving overlay for one update before calling
+`progression_save_begin`. On the next frozen update, the unchanged public
+`save5_begin` copies the snapshot, then later updates perform bounded writer
+steps. No input or world progression can change the queued state. This avoids
+combining a synchronous anchor validation, snapshot copy and cold bitmap redraw
+in a single presentation interval. Codec wire bytes, snapshot semantics, CRC,
+revision policy and transactional commit order are unchanged.
+
+A rejected begin returns to the requesting state with the same persistent
+failure notice. The queued entry itself writes no SRAM, and an interruption
+there leaves the previous committed save intact. Host fault/freeze tests and
+native full-collection cadence tests cover this additional engine phase.
+
+The later core optimization and exact isolated timing sources are recorded in
+`evidence/southern-validation-second.json`; older tables above remain historical
+measurements and should not be relabeled as new runs.

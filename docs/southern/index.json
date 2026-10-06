@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "scope": "Exact-candidate native-controller summaries; developer spoilers",
+  "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+  "reports": [
+    {
+      "path": "journey.json",
+      "sha256": "d12166ce603775ef6cd3434a34921ec1ff2ce0804d391626b9e2d21b579ea5e5",
+      "full_report_sha256": "780317f27cb2595ece2741a33edc085aa6646e0ab2687e98f2a62689056fd635",
+      "passed_checks": 15732
+    },
+    {
+      "path": "minimal.json",
+      "sha256": "a60826be30d89057d4a9a1b3756d9cafe68b449861cff61de5b15f7e66ca210f",
+      "full_report_sha256": "b028d1aa5020b53fa9b17eed863921d39d66c6bff0e93c93b464546452045b09",
+      "passed_checks": 1889
+    },
+    {
+      "path": "optics.json",
+      "sha256": "a51650c4f0c885beb8a644a3e669f975047e8b8d6614c269848b59cdd41363e3",
+      "full_report_sha256": "b04fbe1f7caa9949f8ef29a1fc1a65ec3d33e7256d7c123b9cb15be21c2c5c77",
+      "passed_checks": 4708
+    },
+    {
+      "path": "controls.json",
+      "sha256": "ba9915dd4cabf7dae21ae0e01bb99f3ab8b801afc2c2621bfdf1af14c2ffa626",
+      "full_report_sha256": "abf234c4cd40c7dab83a18c0d06b75a130d1e6d1ec364a8f5f36bdd912ee35d6",
+      "passed_checks": 448
+    },
+    {
+      "path": "targeting.json",
+      "sha256": "f4174eaed3196b152d6279d21db533f85f5ab35f944d5a2eb346fec649e75645",
+      "full_report_sha256": "5247e01756a9d58a6b1157ebf78a26c13c2a8e7b1ffdbe79f8cc61c55c6aa77b",
+      "passed_checks": 188
+    },
+    {
+      "path": "selector.json",
+      "sha256": "f88cad2b075c7fb83cb5ce252479418da75978b0cbce70b7b93516dd6e8fd517",
+      "full_report_sha256": "cfcba61614da21cc3868cba5c0d134ce8c783d79a54dfad1d354da8f6e5a785e",
+      "passed_checks": 42
+    },
+    {
+      "path": "combat.json",
+      "sha256": "5d2d23862abf43f21a64d9df53598523e1cbe3cc6b4fec6147d5baac6325e96b",
+      "full_report_sha256": "2e2abc1f5dfa7af1e6d7f140dbf868c4786eb30ce68253d0948b6ca4e06b63a5",
+      "passed_checks": 8176
+    },
+    {
+      "path": "performance.json",
+      "sha256": "ac751de85be458b535bb4dd2b869f5f8a974ddd8cbb06f0313b73a11dd8f9d2a",
+      "full_report_sha256": "1065181f18d12d6d3e2e21ab4bbd1083389e79051e17e3a001ece4f853111fef",
+      "passed_checks": 1484
+    },
+    {
+      "path": "render.json",
+      "sha256": "8ae0848d2fb909c638e084d56a21d9fa58139c961a886164dc88db198865d538",
+      "full_report_sha256": "1aecbab41d57c2b42154e170ed9cd9eb782047ddeb2a24a382f632057ef3d170",
+      "passed_checks": 343
+    }
+  ],
+  "overlapping_native_check_sum": 33010
+}

@@ -29,32 +29,32 @@ Swords link three cuts, lances commit to a narrow longer thrust, and bows can be
 
 The corner icon shows B when a companion can be called and R while it is summoned. Its small bar shows power recovery. Area names appear briefly on entry and are available in the journal.
 
-Keep the emulator's `.sav` file. Progress records automatically. A short saving state preserves your progress before reward dialogue continues; world actions pause during that state. Title-screen Select starts a new adventure and replaces prior progress. Published saves from formats 2–4 and format 5 revisions 1–2 continue into this version (format 5 content revision 3). Back up your `.sav` before upgrading or returning to an older ROM: older builds cannot understand the new equipment, quests and recruits.
+Keep the emulator's `.sav` file. Progress records automatically. A short saving state preserves your progress before reward dialogue continues; world actions pause during that state. Title-screen Select offers a new adventure; a separate A confirmation is required before replacing existing progress. B, Start or Select cancels. Published saves from formats 2–4 and format 5 revisions 1–3 continue into this version (format 5 content revision 4). Back up your `.sav` before upgrading or returning to an older ROM: older builds cannot understand the new equipment, quests and recruits.
 
 [日本語の遊び方、ネタバレなし](docs/PLAY_JA.md)
 
-## This update: the northern harbor
+## This update: a southern island journey
 
-- Eight new connected areas with a harbor community, workshops and a new adventure
-- Five new companion families, each with an optional, separately confirmed evolution
-- Eleven new regional quests and six equipment sidegrades
-- New field and combat powers across Wood, Fire, Earth, Metal and Water
-- Continued full-screen exploration, four-slot party switching and retained older companions
-- Forward save migration that preserves earlier progress without granting new rewards
+- Eight new connected places, a sunlit harbor community and a new multi-room adventure
+- Ten new companion families with optional, separately confirmed evolutions
+- Eight regional quests, six equipment sidegrades and twenty new field/combat commands
+- More reasons to look closely, revisit familiar paths and experiment with your companions
+- Smooth four-slot switching and storage browsing as your collection grows
+- Forward save migration from the delivered Northern chapter, preserving each real companion
 
-The default player teaser is a continuous 20-second walk around the opening northern harbor with the starting companion. Source data, test reports and developer guides contain progression spoilers; this README and the Japanese player guide do not reveal puzzle solutions or companion locations.
+The player teaser is a continuous 20-second stroll around the opening southern town with a familiar companion. Source data, test reports and developer guides contain progression spoilers; this README and the Japanese player guide do not reveal puzzle solutions or companion locations. Audio in this build is the original PSG ambient phrase and sound effects.
 
 ## Development status
 
-The Northern N5 ROM has **21 implemented, obtainable and controller-verified forms** in **11 companion families**, four assignable quick slots, **30 areas**, **19 equipment items** and **22 regional quests**. A single controller-earned and independently reloaded save records all 21 historical forms while retaining 11 real owned family instances. Evolution changes an existing companion; it does not create a duplicate.
+The Southern S3 cartridge has **41 implemented, obtainable and controller-verified forms** in **21 companion families**, four assignable quick slots, **38 areas**, **25 equipment items** and **30 regional quests**. A single controller-earned and independently reloaded save records all 41 historical forms while retaining 21 real owned family instances. Evolution changes an existing companion; it does not create a duplicate.
 
-The catalog reserves 128 stable identities and contains 22 authored designs. Twenty-one are enabled and obtainable; the authored legendary remains disabled. The full 128-form roster, legendary progression and the remaining southern-island, magma-mountain and underwater regions are unfinished. Reserved rows are not playable monsters, and evolved forms count within the provisional 128-form target. No final campaign length is claimed.
+The catalog reserves 128 stable identities and contains 42 authored designs. Forty-one are enabled and obtainable; the authored legendary remains disabled. The full 128-form roster, legendary progression and the magma-mountain and underwater regions are unfinished. Reserved rows are not playable monsters, and evolved forms count within the provisional 128-form target. No final campaign length is claimed.
 
-Wood, Fire, Earth, Metal and Water are separate from Yin/Yang polarity. The numerical battle rules are original game design; legacy untyped encounters retain their prior balance. All five controlling matchups are verified through native Northern combat.
+Wood, Fire, Earth, Metal and Water are separate from Yin/Yang polarity. The numerical battle rules are original game design; legacy untyped encounters retain their prior balance. All five controlling matchups and all twenty Southern combat commands are verified through native gameplay.
 
-The frozen release is 4,351,688 bytes, SHA-256 `302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e`. The six named Northern controller suites pass 24,180 checks. A fresh whole-game `make test test-tools` run also passes; its overlapping counts and synthetic tests are documented separately. Representative native emulator windows maintain one update and presentation per approximately 59.7275-Hz hardware frame. Physical GBA hardware remains untested.
+The frozen cartridge is 5,858,700 bytes, SHA-256 `87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de`. Nine named Southern controller suites pass 33,010 overlapping checks with zero failures. Whole-game regression acceptance is recorded separately in the verification guide. Representative native emulator windows maintain one update and presentation per approximately 59.7275-Hz hardware frame, including full-collection saves, storage browsing and crowded combat. The highest cold-menu samples leave limited headroom, so future content and music changes require another native pacing pass. Physical GBA hardware remains untested.
 
-Developer links, with spoilers: [Roadmap](docs/ROADMAP.md) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Northern evidence](docs/NORTHERN_VERIFICATION.md) · [Save format](docs/SAVE5.md)
+Developer links, with spoilers: [Roadmap](docs/ROADMAP.md) · [Architecture](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Southern evidence](docs/southern/index.json) · [Northern evidence](docs/NORTHERN_VERIFICATION.md) · [Save format](docs/SAVE5.md)
 
 ## Build
 
@@ -80,9 +80,9 @@ make test-tools
 make gameplay-video  # ffmpeg; spoiler-free player teaser
 ```
 
-`make test` includes native-controller journeys, full-screen pixel/OAM checks, older-save migration, fault-injected host persistence tests, personal trials, all enabled evolutions, regional quests/collection, Northern acquisition/combat/control coverage, weapon/gear/phase effects and actual emulated display cadence. Synthetic host fixtures are labeled separately from normal controller gameplay. Raw traces are generated under ignored `build/`.
+`make test` includes native-controller journeys, full-screen pixel/OAM checks, older-save migration, fault-injected host persistence tests, personal trials, all enabled evolutions, regional quests/collection, Northern and Southern acquisition/combat/control coverage, weapon/gear/phase effects and actual emulated display cadence. Synthetic host fixtures are labeled separately from normal controller gameplay. Raw traces are generated under ignored `build/`.
 
-`make test-northern` runs the Northern host and native suites; [the QA guide](tests/NORTHERN_QA.md) documents individual commands and provenance. `make developer-video` produces a spoiler-bearing campaign recording for development review. `python3 tools/package_source.py` makes a deterministic source ZIP and file-integrity manifest. `tools/package_northern_evidence.py` validates and summarizes the archived, hash-pinned N5 reports into bounded public JSON; it is not a test runner and intentionally requires that exact evidence set.
+`make test-southern` runs the current island host, journey, optics, selector, combat and rendering suites. `make test-northern` retains the Northern regression suites; [the QA guide](tests/NORTHERN_QA.md) documents individual commands and provenance. `make developer-video` produces a spoiler-bearing campaign recording for development review. `python3 tools/package_source.py` makes a deterministic source ZIP and file-integrity manifest. `tools/package_northern_evidence.py` validates and summarizes the archived, hash-pinned N5 reports into bounded public JSON; it is not a test runner and intentionally requires that exact evidence set. `tools/package_southern_evidence.py` accepts passing exact-ROM native reports and pins their full bytes while producing bounded summaries; the release checklist separately verifies complete suite coverage.
 
 ## Credits and limits
 

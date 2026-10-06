@@ -1,0 +1,85 @@
+{
+  "status": "strict-host-and-sanitizers-and-isolated-ARM-passed",
+  "not_claimed": [
+    "integrated native controller gameplay",
+    "full-engine frame/OAM/cache budget",
+    "separate-boss-actor power damage"
+  ],
+  "commands": [
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42
+  ],
+  "source_sha256": {
+    "src/southern_powers.c": "fb2446f2eaa5a36970ae91368d644cd83f8ba1b514199af14b8f6410deaa3115",
+    "src/southern_powers.h": "e22acbeb8f7e7fb9f3cc50b82c013cf0cc9a83f304818a5348a4724809aa2b4f",
+    "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+    "src/southern_power_art.h": "fd0d17f30242305a3a35b874f9cb349c63cff0e2f56913d4a382f76b03be4654",
+    "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+    "src/northern_powers.h": "2c4017abe6e08cecc6fa2da2ca4f5afc9178560783679da4799bd644c02f9ff5",
+    "tests/southern_powers_native.c": "936358f3ca42367c01fae1c3b7051f69b9fa1fb4c0edaceabc990dfe06c0fbd2",
+    "tests/test_southern_powers.py": "177f5ea8ec89df47fc809e78f27fbafbd34eacdddcdf6f2070c365e62944ff4e",
+    "tests/northern_powers_native.c": "bf2eaf28bf80b7c4e292651955afa57fd99d7de20dbae54696d318a3c9247a5e",
+    "tests/test_northern_powers.py": "257404f05cbd08809db510dbef593fefdbcab3017b7c48faef61c129835e6fa6",
+    "docs/SOUTHERN_POWERS.md": "4e58701087fa553bf2b97931f04de2b130b06a239baa8c2a760b18d1a0b08e50"
+  },
+  "measured_conservative_max_tick_plus_draw_cycles": 57203,
+  "tools": [
+    "python3 tests/test_southern_powers.py",
+    "python3 tests/test_northern_powers.py"
+  ],
+  "synthetic_callback_scope": [
+    "world/collision",
+    "OBJ upload/add",
+    "input/update scheduler",
+    "sound/impact",
+    "pool spawning"
+  ],
+  "real_linked_scope": [
+    "core41 creature/catalog/command validation",
+    "Q4 damage and phases",
+    "equipment busy/mutation",
+    "weapon action geometry",
+    "ordinary arrow tick and gear damage callback"
+  ],
+  "cache_optimization": {
+    "status": "host/ASan/UBSan and isolated ARM passed; integrated native repeat pending",
+    "crescent_differential_cases": 2380,
+    "crescent_steady_draw_cycles": 2230,
+    "crescent_steady_draw_solid_calls": 0,
+    "paired_probe": {
+      "positions": [
+        [
+          320,
+          96
+        ],
+        [
+          272,
+          48
+        ]
+      ],
+      "second_aim_cycles": 19162,
+      "second_aim_solid_calls": 180,
+      "same_frame_draw_cycles": 6748,
+      "same_frame_draw_solid_calls": 0
+    },
+    "requires": "game_geometry_sync must call southern_powers_geometry_changed before tick/draw when any exact solid() input changes"
+  }
+}

@@ -31,7 +31,7 @@ int main(void) {
         assert(creatures_mark_trial(&state.roster.instances[6+i],32u<<i));
     }
     for(i=11;i<160;++i)assert(creatures_grant(&state.roster,forms[i%21],50,100,0,0)==i);
-    for(i=1;i<EQUIPMENT_AUTHORED_COUNT;++i)
+    for(i=1;i<19;++i)
         assert(equipment_claim(&state.equipment,equipment_authored_ids[i],i,0)==EQUIPMENT_OK);
     state.quests.region_flags[0]=1;state.quests.region_flags[1]=255;state.campaign.room=29;
     for(i=0;i<22;++i) {

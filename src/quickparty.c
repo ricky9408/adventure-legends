@@ -50,7 +50,9 @@ int quickparty_assign(unsigned target,unsigned instance){CreatureRoster*r=&adven
  if(!creatures_party_set(r,party,0))return 0;
  menu_notice=0;synchronize();save_game();return 1;
 }
-static void menu_move(int delta){CreatureRoster*r=&adventure_save.roster;int i=(unsigned)quickparty_menu_candidate<CREATURE_ROSTER_CAPACITY?quickparty_menu_candidate:CREATURE_ROSTER_CAPACITY;unsigned n;for(n=0;n<161;n++){i=(i+delta+161)%161;if(i==160||((r->instances[i].flags&CREATURE_OCCUPIED)&&progression_form_spirit(r->instances[i].form_id)<PROGRESSION_SPIRIT_COUNT)){quickparty_menu_candidate=i==160?EMPTY:i;menu_notice=0;changed();return;}}}
+/* Only +/-1 steps enter here. Explicit wrap avoids a software integer divide
+ * for every empty storage slot on ARM7TDMI (up to160 checks per key press). */
+static void menu_move(int delta){CreatureRoster*r=&adventure_save.roster;int i=(unsigned)quickparty_menu_candidate<CREATURE_ROSTER_CAPACITY?quickparty_menu_candidate:CREATURE_ROSTER_CAPACITY;unsigned n;for(n=0;n<161;n++){i+=delta;if(i<0)i=160;else if(i>160)i=0;if(i==160||((r->instances[i].flags&CREATURE_OCCUPIED)&&progression_form_spirit(r->instances[i].form_id)<PROGRESSION_SPIRIT_COUNT)){quickparty_menu_candidate=i==160?EMPTY:i;menu_notice=0;changed();return;}}}
 int quickparty_menu_input(int pressed){CreatureRoster*r=&adventure_save.roster;int dir=pressed&DIRECTIONS;if(journal_tab!=2)return 0;
  if((unsigned)quickparty_menu_slot>=CREATURE_PARTY_CAPACITY)quickparty_menu_slot=r->selected_party<CREATURE_PARTY_CAPACITY?r->selected_party:0;
  if(dir==16||dir==32){quickparty_menu_slot=(quickparty_menu_slot+(dir==16?1:3))&3;quickparty_menu_candidate=r->party[quickparty_menu_slot];menu_notice=0;changed();return 1;}

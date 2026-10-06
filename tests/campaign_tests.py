@@ -935,9 +935,13 @@ class CampaignRun:
         self.restore(final)
         complete=self.save('before-new-game-test')
         self.e.close();self.e=Emulator(self.rom);self.e.load_save(complete);self.e.reset();self.step(90)
-        self.tap('SELECT',4,4);self.dialogs()
+        before_new_game=self.e.bytes(0x0e000000,32768)
+        self.tap('SELECT',4,4)
+        self.check(self.get('game_state')==9 and self.e.bytes(0x0e000000,32768)==before_new_game,
+                   'Select asks before replacing a completed game')
+        self.tap('A',4,4);self.dialogs()
         self.check(self.get('chapter_flags')==0 and self.get('room_flags')==0 and self.get('max_hp')==6,
-                   'Select intentionally resets completed game progression')
+                   'explicit new-adventure confirmation resets completed game progression')
         new=self.save('new-game-after-complete')
         self.reopen(new);self.dialogs()
         self.check(self.get('chapter_flags')==0 and self.get('room_flags')==0,

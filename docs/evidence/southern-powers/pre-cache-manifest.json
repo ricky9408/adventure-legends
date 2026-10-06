@@ -1,0 +1,62 @@
+{
+  "status": "strict-host-and-sanitizers-and-isolated-ARM-passed",
+  "not_claimed": [
+    "integrated native controller gameplay",
+    "full-engine frame/OAM/cache budget",
+    "separate-boss-actor power damage"
+  ],
+  "commands": [
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42
+  ],
+  "source_sha256": {
+    "src/southern_powers.c": "da3940358d39bc89b00f373759d533681da672a2dff8cdfa77e3537417a38d03",
+    "src/southern_powers.h": "6004580719c2d2b4b35ecc719f70a2fb1b2a68abb741d6f896ccd055f707e301",
+    "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+    "src/southern_power_art.h": "fd0d17f30242305a3a35b874f9cb349c63cff0e2f56913d4a382f76b03be4654",
+    "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+    "src/northern_powers.h": "2c4017abe6e08cecc6fa2da2ca4f5afc9178560783679da4799bd644c02f9ff5",
+    "tests/southern_powers_native.c": "fc2e9349b1a68a752df26a28a63f2b66436e8279aa7e0d110bedae0f5811ab78",
+    "tests/test_southern_powers.py": "8c07abd6b01dd4d98f6fc219f283b41997a7240d3b02e803b8223371ba8f8340",
+    "tests/northern_powers_native.c": "bf2eaf28bf80b7c4e292651955afa57fd99d7de20dbae54696d318a3c9247a5e",
+    "tests/test_northern_powers.py": "257404f05cbd08809db510dbef593fefdbcab3017b7c48faef61c129835e6fa6",
+    "docs/SOUTHERN_POWERS.md": "64075d22a3d1bc7bd83e57f6df378288a4f3d1be9816c1b0d3351658c2139633"
+  },
+  "measured_conservative_max_tick_plus_draw_cycles": 59533,
+  "tools": [
+    "python3 tests/test_southern_powers.py",
+    "python3 tests/test_northern_powers.py"
+  ],
+  "synthetic_callback_scope": [
+    "world/collision",
+    "OBJ upload/add",
+    "input/update scheduler",
+    "sound/impact",
+    "pool spawning"
+  ],
+  "real_linked_scope": [
+    "core41 creature/catalog/command validation",
+    "Q4 damage and phases",
+    "equipment busy/mutation",
+    "weapon action geometry",
+    "ordinary arrow tick and gear damage callback"
+  ]
+}

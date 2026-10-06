@@ -10,7 +10,7 @@ static unsigned roll(void) { rng = rng * 1664525u + 1013904223u; return rng; }
 
 int main(void) {
     unsigned i, j, b;
-    static const unsigned enabled[] = {1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78};
+    static const unsigned enabled[] = {1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78,25,26,28,29,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94};
     static const CreatureU8 parties[][4] = {{0,1,2,3},{4,5,0,1},{2,3,4,5},{255,255,255,255}};
     assert(creatures_catalog_validate());
     assert(creatures_migrate_legacy(&roster, 7, 3));
@@ -41,7 +41,7 @@ int main(void) {
             break;
         case 10: creatures_equip(c, (n >> 16) & 3, (n >> 24) & 31); break;
         case 11: creatures_mark_trial(c, (n >> 19) & 63); break;
-        case 12: creatures_grant(&roster, enabled[(n >> 12) % 21], 50, 100, 0, 0); break;
+        case 12: creatures_grant(&roster, enabled[(n >> 12) % (sizeof(enabled) / sizeof(enabled[0]))], 50, 100, 0, 0); break;
         case 13: creatures_evolve(&roster, (n >> 24), n & 31, 1, 1); break;
         case 14: creatures_party_capabilities(&roster); break;
         default: creatures_apply_story_floors(&roster, n & 7); break;
@@ -80,6 +80,8 @@ int main(void) {
             creatures_instance_validate(&probe);
             creatures_can_evolve(&probe, 63, 1);
             creatures_mark_trial(&probe, creatures_family_trial(enabled[i]));
+            creatures_mark_trial_qualified(&probe, creatures_form(enabled[i])->family, 1);
+            creatures_has_trial_qualified(&probe, b * 257u, 1);
             creatures_add_xp(&probe, 0xffffffffu);
             creatures_equip(&probe, 1, 10);
             creatures_select_command(&probe, 1);

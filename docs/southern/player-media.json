@@ -1,0 +1,136 @@
+{
+  "suite": "southern-spoiler-free-native-teaser",
+  "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+  "captured_frames": 1200,
+  "frame_rate": 59.72750056960583,
+  "duration_seconds": 20.09124755859375,
+  "native_resolution": [
+    240,
+    160
+  ],
+  "video_resolution": [
+    960,
+    640
+  ],
+  "scaling": "4x nearest-neighbor, one encoded video frame per emulated hardware frame",
+  "native_frame_stats": {
+    "hardware_frames": 1200,
+    "game_updates": 1200,
+    "display_page_flips": 1200,
+    "update_histogram": {
+      "1": 1200
+    },
+    "state_histogram": {
+      "1": 1200
+    },
+    "max_update_render_cycles": 179386,
+    "native_frame_budget_cycles": 280896,
+    "max_obj_count": 26,
+    "camera_x_range": [
+      0,
+      225
+    ],
+    "camera_y_range": [
+      74,
+      160
+    ],
+    "measurement": "Emulated hardware frames, live game update counter, displayed VRAM page bit and native update/render cycle timer; not host FPS. Timer excludes VBlank wait/OAM commit."
+  },
+  "native_audio_minus_video_seconds": 0.0,
+  "retained_companion_form": 2,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "machine_state_loads": 0,
+  "capture_cuts": 0,
+  "capture_reset_count": 0,
+  "capture_sram_reloads": 0,
+  "emulator_core": {
+    "name": "mGBA",
+    "version": "0.10.5",
+    "path": "/workspace/scratch/33ed39a77941/emberbond/tools/sysroot/usr/lib/x86_64-linux-gnu/libmgba.so.0.10.5",
+    "sha256": "a1d7713cc89e3a4e4eeaf2bc7a523115356ebe14e057805c06f5e9d4a328be63",
+    "path_status": "located_loaded_library_via_dladdr",
+    "host_platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "test_sources": {
+    "tests/southern_journey.py": "d5119d607ba55cbd0932c011b3af984bbd115ad3856ea7e6bf7b45a5fd07ee32",
+    "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+    "tests/test_save5.py": "6dcdfaca99dabb500faecd6ba52d01c1cdac2ae7eb8ecf8e00d37c4f6b1d8b9c",
+    "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+    "tests/capture_southern_teaser.py": "32b6a3d0a26d9a0ad9386e9e768dbf75edda79f1c117617e2a0403619ebb5a5a",
+    "tests/test_creatures.py": "607c0205706a33eaf11acf50f201c4eaba844be17fc6f6b1468e0205def300ac",
+    "tests/capture_northern_teaser.py": "54440847d27b16b6a587ccb7de29c25a559f490e49e74d13ddea98bc3a700767",
+    "tests/northern_sky_route.py": "411a3923a467bf88b9e83fe43b4de0619a665a1f64c29e9bf520efe768aeacb8",
+    "tools/mgba_bridge.c": "935986438f538c5bae5ae3ae733bf4db45bca991d1dd0e5b6e391992e93aeda8",
+    "tools/mgba_bridge.so": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3"
+  },
+  "files": {
+    "sunlace-native-teaser.mp4": {
+      "sha256": "635db3ee138a32b89e62b3957c10b4ab6db5891332f12f630135b45892b54813",
+      "bytes": 1115701
+    },
+    "native-frames.mkv": {
+      "sha256": "344a451fc2126e9eb8efd1545b01d576ded2d42df6c3560c0ad014cb8f04352c",
+      "bytes": 26433386
+    },
+    "native-psg.wav": {
+      "sha256": "369fc9ed11a6258b4db36ebce8903cbd6e229967121a5276ebdf4c60cd2370c5",
+      "bytes": 2633444
+    },
+    "frame-trace.json": {
+      "sha256": "eea36f6b237754182f2be7c3c776c6ee79d4e996c4b1adb6da717a9798bebc5c",
+      "bytes": 485330
+    },
+    "capture-start.sav": {
+      "sha256": "3f27b1540f70b40163a93efc30df1e13e97b1d7248dd35fdf3ad13a1c0fac7fd",
+      "bytes": 32768
+    },
+    "capture-end.sav": {
+      "sha256": "3f27b1540f70b40163a93efc30df1e13e97b1d7248dd35fdf3ad13a1c0fac7fd",
+      "bytes": 32768
+    },
+    "source-northern-n5.sav": {
+      "sha256": "f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479",
+      "bytes": 32768
+    },
+    "source-save-provenance.json": {
+      "sha256": "5a3e139b03ea51ce6d49229a0a6654a70612d636e66b308945277b7168df17dc",
+      "bytes": 1250
+    },
+    "candidate-source-hashes.json": {
+      "sha256": "609104f75fa341bb67d0d1e2a362db7b03ed655ecb6eed41c101b0c799b2f089",
+      "bytes": 72252
+    },
+    "sunlace-preview-4x.png": {
+      "sha256": "bc04cfd465c0814ca7a00ce8b900c46a7f2b405ddf033d1ba682d84113d8b366",
+      "bytes": 12003
+    },
+    "native-harbor.png": {
+      "sha256": "5b89a98aa15a64302cc917812f8e81ee014a505b09c67b2beca831ce7f6ac913",
+      "bytes": 6404
+    },
+    "native-town-west.png": {
+      "sha256": "db3298a364a6d5ac96c6db250532d28eb42cee3a1f47f481a646c0e1ab693623",
+      "bytes": 6823
+    },
+    "native-town-east.png": {
+      "sha256": "481fece8545623635a949bcff7cee372fd768729b59ccffd4e0d3c36a86e4af3",
+      "bytes": 6233
+    },
+    "native-waterfront.png": {
+      "sha256": "3da6f9ae39ce60e5eee60f95237f50b8ec8b17fcbab54539b0359578cfb2ac80",
+      "bytes": 6333
+    },
+    "native-sunlace-preview.png": {
+      "sha256": "1deb0c045a5f03b99eba2434a8a82109230c8552ac5a866f848fa89b431bf71c",
+      "bytes": 6343
+    }
+  },
+  "full_capture_report_sha256": "fa4d276f803521baafee831cdeba0a12a86b55ff9a1827014b544d4259152bb5",
+  "scope": "Continuous spoiler-free actual-PSG town capture; acceptance is established by the separate full-game reports",
+  "failures": []
+}

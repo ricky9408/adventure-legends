@@ -5,6 +5,8 @@ Synthetic immutable catalogs exercise the otherwise unreachable 48-slot limit
 and future aggregate stat caps. Those fixtures do not enable content in the ROM.
 """
 import ctypes as C
+import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,7 +17,9 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 U8, U16, U32, S16 = C.c_ubyte, C.c_ushort, C.c_uint, C.c_short
-IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
+LEGACY_IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
+SOUTHERN_IDS = [4, 12, 36, 52, 66, 84]
+IDS = LEGACY_IDS + SOUTHERN_IDS
 OK, INVALID, BUSY, INCOMPATIBLE, FULL, DUPLICATE, ALREADY, PROTECTED, CONFIRM = range(9)
 
 
@@ -192,6 +196,181 @@ class EquipmentTests(unittest.TestCase):
             self.assertEqual(self.lib.equipment_reward_item(source), IDS[source] if source < len(IDS) else 0)
         self.assertEqual(self.lib.equipment_description(1, 2), b'')
         self.assertEqual(self.lib.equipment_name(65535), b'Empty')
+
+    def test_original_nineteen_catalog_rows_and_starter_wire_are_frozen(self):
+        catalog = json.loads((ROOT / 'assets/equipment/catalog.json').read_text())
+        catalog['items'] = catalog['items'][:19]
+        catalog['reward_sources'] = catalog['reward_sources'][:19]
+        # Canonical snapshot taken before the Southern append. Covers every old
+        # name, description, stat, weapon parameter, bound, and source pairing.
+        digest = hashlib.sha256(json.dumps(catalog, sort_keys=True,
+                                           separators=(',', ':')).encode()).hexdigest()
+        self.assertEqual(digest, '710d174fe8126c9a581641a0f590895ba9b5826b783f2193ca2a88910ed3aa66')
+        expected = bytearray(512)
+        expected[:8] = bytes([1, 0, 0, 1, 1, 0, 0, 0])
+        expected[384:389] = bytes([0, 255, 255, 255, 255])
+        expected[400], expected[480] = 2, 1
+        self.assertEqual(bytes(self.s), bytes(expected))
+        self.assertEqual([self.lib.equipment_reward_item(i) for i in range(19)], LEGACY_IDS)
+
+    def test_southern_definitions_match_exact_sidegrade_contract(self):
+        # All eight bonuses are explicit; an omitted design bonus must be zero.
+        expected = [
+            (4, 'Shadecutter Sword', 0, 1, (0, 0, 0, 0, 0, 0, 1, 1)),
+            (12, 'Sunlace Lance', 0, 2, (0, 0, 0, 0, 0, 0, 4, 0)),
+            (36, 'Breezewall Mail', 1, 0, (0, 3, 0, -2, 0, 0, 0, 0)),
+            (52, 'Softsand Boots', 2, 0, (0, 0, 0, -4, 4, 0, 0, 0)),
+            (66, 'Raincatch Belt', 3, 0, (0, 0, 4, 0, 0, 1, 0, 0)),
+            (84, 'Springpin Ring', 4, 0, (0, 0, 0, -4, 0, 0, 0, 2)),
+        ]
+        authored = (U16 * 25).in_dll(self.lib, 'equipment_authored_ids')
+        self.assertEqual(list(authored), IDS)
+        for source, (item, name, slot, weapon, stats) in enumerate(expected, 19):
+            with self.subTest(item=item, source=source):
+                d = self.lib.equipment_definition(item).contents
+                self.assertEqual((d.id, d.slot, d.weapon_class, d.flags, d.phase),
+                                 (item, slot, weapon, 0, 255))
+                self.assertEqual(tuple(getattr(d.stats, k) for k, _ in Bonuses._fields_), stats)
+                self.assertEqual(bytes(d.reserved), bytes(2))
+                self.assertEqual(self.lib.equipment_name(item).decode(), name)
+                self.assertEqual(self.lib.equipment_reward_item(source), item)
+                self.assertEqual(self.lib.equipment_reward_source(item), source)
+        self.assertEqual(self.lib.equipment_reward_item(25), 0)
+
+    def test_southern_choices_have_explicit_benefits_and_costs(self):
+        for new, old, benefit, cost in [
+                (4, 2, 'stagger', 'attack_q4'), (4, 3, 'stagger', 'reach_px'),
+                (12, 10, 'reach_px', 'attack_q4'), (12, 11, 'reach_px', 'defense_q4'),
+                (36, 34, 'speed_q8_delta', 'hp_q4'),
+                (36, 35, 'defense_q4', 'speed_q8_delta'),
+                (52, 50, 'roll_reduction', 'speed_q8_delta'),
+                (66, 65, 'power_reduction', 'hp_q4'),
+                (84, 82, 'stagger', 'defense_q4'),
+                (84, 81, 'stagger', 'power_reduction')]:
+            with self.subTest(new=new, old=old):
+                a = self.lib.equipment_definition(new).contents.stats
+                b = self.lib.equipment_definition(old).contents.stats
+                self.assertGreater(getattr(a, benefit), getattr(b, benefit))
+                self.assertLess(getattr(a, cost), getattr(b, cost))
+
+    def test_southern_derived_previews_clamps_and_no_free_healing(self):
+        refs = {item: self.claim(item) for item in SOUTHERN_IDS}
+        self.hp.value = 70
+        for item in [4, 36, 52, 66, 84]:
+            slot = self.lib.equipment_definition(item).contents.slot
+            before, comparison = bytes(self.s), Comparison()
+            self.assertEqual(self.lib.equipment_preview(C.byref(self.s), slot, refs[item],
+                             96, self.hp.value, 0, C.byref(comparison)), OK)
+            self.assertEqual(bytes(self.s), before)
+            self.equip(slot, refs[item])
+            self.assertEqual(bytes(self.derive()), bytes(comparison.after))
+            self.assertEqual((self.hp.value, comparison.hp_after_q4), (70, 70))
+        s = self.derive()
+        self.assertEqual((s.max_hp_q4, s.speed_q8, s.diagonal_q8), (100, 310, 219))
+        self.assertEqual((s.attack_q4, s.defense_q4, s.roll_cooldown, s.power_cooldown),
+                         (0, 3, 38, 74))
+        self.assertEqual((s.reach_px, s.stagger, s.weapon_class, s.phase), (1, 3, 1, 255))
+        self.equip(0, refs[12])
+        s = self.derive()
+        self.assertEqual((s.reach_px, s.stagger, s.weapon_class), (4, 2, 2))
+        self.assertEqual(self.derive(192).max_hp_q4, 192)
+        self.hp.value = 100
+        self.assertEqual(self.lib.equipment_unequip(C.byref(self.s), 3, 96,
+                         C.byref(self.hp), 0, None), OK)
+        self.assertEqual((self.derive().max_hp_q4, self.hp.value), (96, 96))
+        self.equip(3, refs[66])
+        self.assertEqual((self.derive().max_hp_q4, self.hp.value), (100, 96))
+        self.valid()
+
+    def test_southern_claims_append_preserve_old_records_and_discard_history(self):
+        for item in LEGACY_IDS[1:]:
+            self.claim(item)
+        before = bytes(self.s)
+        self.assertEqual(list(self.s.reward_claims), [255, 255, 7, 0, 0, 0, 0, 0])
+        for sources in [(19, 20, 21, 22), (23, 24)]:
+            bundle = (U8 * len(sources))(*sources)
+            self.assertEqual(self.lib.equipment_claim_many(C.byref(self.s), bundle, len(sources)), OK)
+        self.assertEqual(bytes(self.s)[:19 * 8], before[:19 * 8])
+        self.assertEqual(bytes(self.s)[384:400], before[384:400])
+        self.assertEqual(self.lib.equipment_count(C.byref(self.s)), 25)
+        self.assertEqual(list(self.s.reward_claims), [255, 255, 255, 1, 0, 0, 0, 0])
+        for source, item in enumerate(SOUTHERN_IDS, 19):
+            ref = self.lib.equipment_find(C.byref(self.s), item)
+            slot = self.lib.equipment_definition(item).contents.slot
+            self.equip(slot, ref)
+            snapshot = bytes(self.s)
+            for busy in [1, 2, 4, 8, 16]:
+                self.assertEqual(self.lib.equipment_discard(C.byref(self.s), ref, 96,
+                                 C.byref(self.hp), busy, 1), BUSY)
+                self.assertEqual(bytes(self.s), snapshot)
+            self.assertEqual(self.lib.equipment_discard(C.byref(self.s), ref, 96,
+                             C.byref(self.hp), 0, 0), CONFIRM)
+            self.assertEqual(bytes(self.s), snapshot)
+            self.assertEqual(self.lib.equipment_discard(C.byref(self.s), ref, 96,
+                             C.byref(self.hp), 0, 1), OK)
+            self.assertEqual(self.s.equipped[slot], 0 if slot == 0 else 255)
+            self.assertEqual(self.lib.equipment_seen(C.byref(self.s), item), 1)
+            self.assertEqual(self.lib.equipment_reward_claimed(C.byref(self.s), source), 1)
+            snapshot = bytes(self.s)
+            self.assertEqual(self.lib.equipment_claim(C.byref(self.s), item, source, None), ALREADY)
+            self.assertEqual(bytes(self.s), snapshot)
+        self.assertEqual(self.lib.equipment_count(C.byref(self.s)), 19)
+        self.valid()
+        for source in range(25, 64):
+            bad = State.from_buffer_copy(bytes(self.s))
+            bad.reward_claims[source >> 3] |= 1 << (source & 7)
+            self.assertEqual(self.lib.equipment_reserved_validate(C.byref(bad)), 0)
+
+    def test_southern_full_bag_claims_and_cross_byte_bundle_are_atomic(self):
+        lib = self.variants['capacity']
+        for ref, item in enumerate(range(100, 147), 1):
+            self.s.bag[ref].item_id, self.s.bag[ref].quantity = item, 1
+            self.s.seen[item >> 3] |= 1 << (item & 7)
+        before, out = bytes(self.s), C.c_uint(999)
+        for source, item in enumerate(SOUTHERN_IDS, 19):
+            self.assertEqual(lib.equipment_claim(C.byref(self.s), item, source, C.byref(out)), FULL)
+            self.assertEqual(bytes(self.s), before)
+            self.assertEqual(out.value, 999)
+        self.assertEqual(lib.equipment_discard(C.byref(self.s), 47, 96,
+                         C.byref(self.hp), 0, 1), OK)
+        before = bytes(self.s)
+        sources = (U8 * 2)(23, 24)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s), sources, 2), FULL)
+        self.assertEqual(bytes(self.s), before)
+        self.assertEqual(lib.equipment_discard(C.byref(self.s), 46, 96,
+                         C.byref(self.hp), 0, 1), OK)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s), sources, 2), OK)
+        self.assertEqual((lib.equipment_find(C.byref(self.s), 66),
+                          lib.equipment_find(C.byref(self.s), 84)), (46, 47))
+        self.assertEqual(list(self.s.reward_claims), [1, 0, 128, 1, 0, 0, 0, 0])
+        self.assertEqual(lib.equipment_validate(C.byref(self.s)), 1)
+
+    def test_generator_rejects_remapping_and_unauthorized_append(self):
+        spec = importlib.util.spec_from_file_location('equipment_generator',
+                                     ROOT / 'assets/equipment/generate_data.py')
+        generator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(generator)
+        source = json.loads((ROOT / 'assets/equipment/catalog.json').read_text())
+        generator.SOURCE = Path(self.tmp.name) / 'test-catalog.json'
+        generator.SOURCE.write_text(json.dumps(source))
+        self.assertEqual(generator.generate(), (ROOT / 'src/equipment_data.c').read_text())
+        for case in ['old_order', 'southern_order', 'source_remap', 'missing', 'extra', 'stat_overflow']:
+            data = json.loads(json.dumps(source))
+            if case == 'old_order':
+                data['items'][1], data['items'][13] = data['items'][13], data['items'][1]
+            elif case == 'southern_order':
+                data['items'][19], data['items'][20] = data['items'][20], data['items'][19]
+            elif case == 'source_remap':
+                data['reward_sources'][19]['item_id'] = 12
+            elif case == 'missing':
+                data['items'].pop()
+            elif case == 'extra':
+                data['items'].append(dict(data['items'][-1], id=85))
+            else:
+                data['items'][19]['stats']['hp_q4'] = 33
+            generator.SOURCE.write_text(json.dumps(data))
+            with self.subTest(case=case), self.assertRaises(AssertionError):
+                generator.generate()
 
     def test_northern_sidegrades_preserve_source_ids_and_no_heal(self):
         original=[1,2,9,10,17,18,33,34,49,50,65,81,82]

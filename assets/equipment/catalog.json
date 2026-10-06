@@ -446,6 +446,146 @@
         "A measured balance of guard and focus.",
         "Defense +1; power recovery -2."
       ]
+    },
+    {
+      "id": 4,
+      "key": "ITEM_004",
+      "name": "Shadecutter Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 1,
+        "stagger": 1
+      },
+      "description": [
+        "A light cut that interrupts.",
+        "Reach +1; stagger +1."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 12,
+      "key": "ITEM_012",
+      "name": "Sunlace Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 4,
+        "stagger": 0
+      },
+      "description": [
+        "A long point for careful spacing.",
+        "Reach +4; no attack bonus."
+      ],
+      "weapon_class": "lance"
+    },
+    {
+      "id": 36,
+      "key": "ITEM_036",
+      "name": "Breezewall Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 3,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A breezy guard without padding.",
+        "Defense +3; speed -2."
+      ]
+    },
+    {
+      "id": 52,
+      "key": "ITEM_052",
+      "name": "Softsand Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -4,
+        "roll_reduction": 4,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Soft soles steady the next roll.",
+        "Roll cooldown -4; speed -4."
+      ]
+    },
+    {
+      "id": 66,
+      "key": "ITEM_066",
+      "name": "Raincatch Belt",
+      "slot": "belt",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 1,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A quarter-heart reserve.",
+        "Power cooldown -1."
+      ]
+    },
+    {
+      "id": 84,
+      "key": "ITEM_084",
+      "name": "Springpin Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 2
+      },
+      "description": [
+        "A firm strike with a slower step.",
+        "Stagger +2; speed -4."
+      ]
     }
   ],
   "weapon_classes": [
@@ -655,6 +795,30 @@
     {
       "source_id": 18,
       "item_id": 83
+    },
+    {
+      "source_id": 19,
+      "item_id": 4
+    },
+    {
+      "source_id": 20,
+      "item_id": 12
+    },
+    {
+      "source_id": 21,
+      "item_id": 36
+    },
+    {
+      "source_id": 22,
+      "item_id": 52
+    },
+    {
+      "source_id": 23,
+      "item_id": 66
+    },
+    {
+      "source_id": 24,
+      "item_id": 84
     }
   ]
 }
