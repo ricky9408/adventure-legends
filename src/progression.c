@@ -1,5 +1,6 @@
 /* Creature progression stays ROM-resident; game.c only orchestrates hooks. */
 #include "progression.h"
+#include "progression_events.h"
 #include "ui.h"
 #include "assets.h"
 #include "world.h"
@@ -8,7 +9,9 @@
 #include "regional_creature_art.h"
 #include "regional_quests.h"
 #include "northern_quests.h"
+#include "southern_quests.h"
 #include "northern_creature_art.h"
+#include "southern_creature_art.h"
 typedef unsigned char u8;
 extern volatile int room,px,py,spirit,game_state,has_save,save_failed;
 extern volatile unsigned chapter_flags;
@@ -40,7 +43,10 @@ unsigned progression_form_spirit(unsigned form){
     case 5:return PROGRESSION_WATER;case 6:return PROGRESSION_METAL;
     case 7:return PROGRESSION_NORTH_WOOD;case 8:return PROGRESSION_NORTH_FIRE;
     case 25:return PROGRESSION_NORTH_WATER;case 26:return PROGRESSION_NORTH_EARTH;
-    case 27:return PROGRESSION_NORTH_METAL;default:return CREATURE_EMPTY_SLOT;
+    case 27:return PROGRESSION_NORTH_METAL;
+    case 9:return 11;case 10:return 12;case 28:return 13;case 29:return 14;
+    case 30:return 15;case 31:return 16;case 32:return 17;case 33:return 18;
+    case 34:return 19;case 35:return 20;default:return CREATURE_EMPTY_SLOT;
     }
 }
 CreatureInstance *progression_selected(void){
@@ -102,7 +108,8 @@ void progression_story(void){
     progression_refresh();
 }
 void progression_encounter(unsigned area,unsigned enemy){
-    if(area<=NORTH_LAST_ROOM&&enemy<6){creatures_credit_event(&adventure_save.roster,area*6+enemy,60,CREATURE_CREDIT_ENCOUNTER);progression_revision++;}
+    unsigned event=progression_encounter_event(area,enemy);
+    if(event<CREATURE_FIELD_EVENT_BASE){creatures_credit_event(&adventure_save.roster,event,60,CREATURE_CREDIT_ENCOUNTER);progression_revision++;}
 }
 int progression_field(unsigned event){int result=creatures_credit_event(&adventure_save.roster,CREATURE_FIELD_EVENT_BASE+event,100,CREATURE_CREDIT_FIELD_AID);if(result>0)progression_revision++;return result;}
 unsigned progression_command(void){CreatureInstance*c=progression_selected();return c&&c->selected_command<2?c->equipped[c->selected_command]:0;}
@@ -117,11 +124,17 @@ unsigned progression_evolution_context(void){
         context|=CREATURE_NORTH_HARBOR_READY;
     if(save5_quest_state(&adventure_save.quests,NORTH_Q_BEACON)==SAVE5_QUEST_CLAIMED)
         context|=CREATURE_COUNTERWORKS_STABLE;
+    if(save5_quest_state(&adventure_save.quests,SOUTH_Q_WINDOW)==SAVE5_QUEST_CLAIMED&&
+       save5_quest_state(&adventure_save.quests,SOUTH_Q_HINGE)==SAVE5_QUEST_CLAIMED)
+        context|=CREATURE_SOUTH_READY;
+    if(save5_quest_state(&adventure_save.quests,SOUTH_Q_SUNWELL)==SAVE5_QUEST_CLAIMED)
+        context|=CREATURE_SUNWELL_OPEN;
     return context;
 }
 int progression_is_sanctuary(void){
     unsigned i;
-    if(room==0||room==16||room==22)return 1;
+    if(room==0||room==16||room==22||room==30)return 1;
+    if(room==31&&close_to(80,264,30))return 1;
     if(room==23&&close_to(80,264,30))return 1;
     if(room==17&&close_to(120,232,30))return 1;
     if(room==1&&close_to(WORLD_CAMP_X,WORLD_CAMP_Y,30))return 1;
@@ -144,7 +157,8 @@ int progression_name_id(unsigned form){
     case 22:return TX_E_CINDERTRAY;case 23:return TX_E_KILNBARROW;
     case 73:return TX_E_KEELKIP;case 74:return TX_E_WAKECRADLE;
     case 75:return TX_E_CAIRNCRICKET;case 76:return TX_E_ARCHSPRING;
-    case 77:return TX_E_RIVETFOIL;case 78:return TX_E_GIMBALCLOAK;default:return TX_C_UNKNOWN;
+    case 77:return TX_E_RIVETFOIL;case 78:return TX_E_GIMBALCLOAK;
+    case 25:return TX_E_TANGLEAPER;case 26:return TX_E_BOUGHVAULT;case 28:return TX_E_DUNEROLL;case 29:return TX_E_DUNESCOOP;case 79:return TX_E_SKIMKIP;case 80:return TX_E_SAILSKIP;case 81:return TX_E_WARMCROAK;case 82:return TX_E_BELLOWSWELL;case 83:return TX_E_SHELLWADDLE;case 84:return TX_E_VAULTBACK;case 85:return TX_E_CLIPMANTIS;case 86:return TX_E_FOILSCYTHE;case 87:return TX_E_SWAYLEMUR;case 88:return TX_E_CANOPETAIL;case 89:return TX_E_RILLNEWT;case 90:return TX_E_VEILCREST;case 91:return TX_E_GLIMMERBAT;case 92:return TX_E_FLAREFAN;case 93:return TX_E_NEEDLETROT;case 94:return TX_E_QUILLSTRIDE;default:return TX_C_UNKNOWN;
     }
 }
 static int reason_id(unsigned reason,unsigned form){
@@ -152,7 +166,7 @@ static int reason_id(unsigned reason,unsigned form){
     case CREATURE_EVOLVE_READY:return TX_E_READY;
     case CREATURE_EVOLVE_LEVEL:return TX_E_LEVEL_MORE;
     case CREATURE_EVOLVE_BOND:return TX_E_BOND_MORE;
-    case CREATURE_EVOLVE_STORY:return form==13?TX_E_REED_MORE:progression_form_spirit(form)>=PROGRESSION_NORTH_WOOD?TX_E_NORTH_MORE:TX_E_STORY_MORE;
+    case CREATURE_EVOLVE_STORY:return form==13?TX_E_REED_MORE:progression_form_spirit(form)>=PROGRESSION_SOUTH_FIRST?TX_E_SOUTH_MORE:progression_form_spirit(form)>=PROGRESSION_NORTH_WOOD?TX_E_NORTH_MORE:TX_E_STORY_MORE;
     case CREATURE_EVOLVE_TRIAL:return TX_E_TRIAL_MORE;
     case CREATURE_EVOLVE_SANCTUARY:return TX_E_SANCTUARY;
     case CREATURE_EVOLVE_NO_EDGE:return form==16?TX_E_FIXED_FORM:TX_E_GROWN;
@@ -160,15 +174,15 @@ static int reason_id(unsigned reason,unsigned form){
     }
 }
 static int wish_id(unsigned form){
-    static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM,TX_E_WISH_NORTH_WOOD,TX_E_WISH_NORTH_FIRE,TX_E_WISH_NORTH_WATER,TX_E_WISH_NORTH_EARTH,TX_E_WISH_NORTH_METAL};
+    static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM,TX_E_WISH_NORTH_WOOD,TX_E_WISH_NORTH_FIRE,TX_E_WISH_NORTH_WATER,TX_E_WISH_NORTH_EARTH,TX_E_WISH_NORTH_METAL,TX_E_WISH_SOUTH_0,TX_E_WISH_SOUTH_1,TX_E_WISH_SOUTH_2,TX_E_WISH_SOUTH_3,TX_E_WISH_SOUTH_4,TX_E_WISH_SOUTH_5,TX_E_WISH_SOUTH_6,TX_E_WISH_SOUTH_7,TX_E_WISH_SOUTH_8,TX_E_WISH_SOUTH_9};
     unsigned family=progression_form_spirit(form);
     return family<PROGRESSION_SPIRIT_COUNT?wishes[family]:TX_E_NO_MEMBER;
 }
 static int command_id(unsigned command){
-    static const int names[]={TX_E_COMMAND_OLD,TX_E_MOVE_FIRE,TX_E_MOVE_HEAL,TX_E_MOVE_WIND,TX_E_MOVE_STONE,TX_E_MOVE_HEARTH,TX_E_MOVE_CANOPY,TX_E_MOVE_REFLECT,TX_E_MOVE_ARCH,TX_E_MOVE_DEW,TX_E_MOVE_TIDE,TX_E_MOVE_CHIME,TX_E_COMMAND_OLD,TX_E_MOVE_THREADHOLD,TX_E_MOVE_SHUTTLE_SPAN,TX_E_MOVE_HEAT_POCKET,TX_E_MOVE_FIRING_DRAWER,TX_E_MOVE_WASHBACK,TX_E_MOVE_WAKE_TURN,TX_E_MOVE_COUNTERDROP,TX_E_MOVE_COUNTERPOISE,TX_E_MOVE_QUARTERTURN,TX_E_MOVE_GIMBAL_SCREEN};
+    static const int names[]={TX_E_COMMAND_OLD,TX_E_MOVE_FIRE,TX_E_MOVE_HEAL,TX_E_MOVE_WIND,TX_E_MOVE_STONE,TX_E_MOVE_HEARTH,TX_E_MOVE_CANOPY,TX_E_MOVE_REFLECT,TX_E_MOVE_ARCH,TX_E_MOVE_DEW,TX_E_MOVE_TIDE,TX_E_MOVE_CHIME,TX_E_COMMAND_OLD,TX_E_MOVE_THREADHOLD,TX_E_MOVE_SHUTTLE_SPAN,TX_E_MOVE_HEAT_POCKET,TX_E_MOVE_FIRING_DRAWER,TX_E_MOVE_WASHBACK,TX_E_MOVE_WAKE_TURN,TX_E_MOVE_COUNTERDROP,TX_E_MOVE_COUNTERPOISE,TX_E_MOVE_QUARTERTURN,TX_E_MOVE_GIMBAL_SCREEN,TX_E_MOVE_LEAFBOUND,TX_E_MOVE_CANOPY_ARC,TX_E_MOVE_RIDGEKICK,TX_E_MOVE_RAMPART_TURN,TX_E_MOVE_LENS_DART,TX_E_MOVE_PRISM_WAKE,TX_E_MOVE_EMBER_HUSH,TX_E_MOVE_BELLOWS_RING,TX_E_MOVE_SIDEGUARD,TX_E_MOVE_VAULT_STEP,TX_E_MOVE_PINCH_WINDOW,TX_E_MOVE_SHEAR_GATE,TX_E_MOVE_SAPLING_FEINT,TX_E_MOVE_CANOPY_EXCHANGE,TX_E_MOVE_RILL_FORK,TX_E_MOVE_VEIL_CURL,TX_E_MOVE_WARM_ECHO,TX_E_MOVE_PAIRED_ECHO,TX_E_MOVE_NEEDLE_BANK,TX_E_MOVE_QUILL_RETURN};
     return command<sizeof names/sizeof names[0]&&creatures_ability(command)?names[command]:TX_E_COMMAND_OLD;
 }
-static const u8 *portrait(unsigned form){const u8*p=northern_creature_art_portrait(form);if(p)return p;p=evolution_art_portrait(form);return p?p:regional_creature_art_portrait(form);}
+static const u8 *portrait(unsigned form){const u8*p=southern_creature_art_portrait(form);if(p)return p;p=northern_creature_art_portrait(form);if(p)return p;p=evolution_art_portrait(form);return p?p:regional_creature_art_portrait(form);}
 static void draw_form(unsigned form,int x,int y){
     const u8*p=portrait(form);
     if(p)sprite(p,x,y,32,32,0);

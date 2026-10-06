@@ -7,7 +7,7 @@ branches are created locally and verified with matching SRAM and target hashes.
 Read-only game symbols are observations, never fabricated ownership or setup.
 """
 from __future__ import annotations
-import argparse, hashlib, json, struct, traceback
+import argparse, hashlib, json, re, struct, traceback
 from collections import Counter
 from pathlib import Path
 from northern_journey import NorthernJourney, ALL_FORMS, PLAY, PAUSE, digest, ROOT, R5_SHA, R5_ROM, newest_bank
@@ -60,6 +60,13 @@ def validate_source_report(path,target_rom_sha,target_symbols_sha):
     assert digest(fixture)==R5_SHA,'Ancestor fixture bytes differ'
     ancestor=newest_bank(fixture.read_bytes());assert int.from_bytes(ancestor[12:14],'little')==2
     old_ids={int.from_bytes(ancestor[160+i*24+8:160+i*24+12],'little') for i in range(160) if ancestor[160+i*24+1]&1}
+    # Archived evidence remains tied to the original revision3 cartridge. Only
+    # a fresh, source-authenticated same-target journey follows today's header.
+    content_revision=3
+    if not archived:
+        revision_match=re.search(r'\bSAVE5_CONTENT_REVISION\s*=\s*(\d+)\b',(ROOT/'src/save5.h').read_text())
+        assert revision_match,'Missing current SAVE5 content revision'
+        content_revision=int(revision_match.group(1))
     snapshots={}
     for name in (SOURCE_SNAPSHOT,'04-machine-ready'):
         record=report.get('snapshots',{}).get(name);assert record,'Missing authenticated source snapshot: '+name
@@ -68,7 +75,7 @@ def validate_source_report(path,target_rom_sha,target_symbols_sha):
         if not source.is_file():source=path.parent/Path(record['sram_path']).name
         assert digest(source)==record['sram_sha256'],'Snapshot SRAM bytes differ: '+name
         if archived:assert record['sram_sha256']==ARCHIVED_SRAM[name],'Archived snapshot is not pinned'
-        bank=newest_bank(source.read_bytes());assert int.from_bytes(bank[12:14],'little')==3,'Expected CRC-valid Northern content revision3'
+        bank=newest_bank(source.read_bytes());assert int.from_bytes(bank[12:14],'little')==content_revision,f'Expected CRC-valid Northern content revision{content_revision}'
         live=[(bank[160+i*24],int.from_bytes(bank[160+i*24+8:160+i*24+12],'little')) for i in range(160) if bank[160+i*24+1]&1]
         ids={identity for _,identity in live};assert 0 not in ids and len(ids)==len(live) and old_ids<=ids,'Source lost or duplicated real instance identities'
         obtained=[i+1 for i in range(128) if bank[112+(i>>3)]&(1<<(i&7))]
@@ -83,12 +90,62 @@ def validate_source_report(path,target_rom_sha,target_symbols_sha):
         snapshots[name]={'path':source,'record':record,'bank_sha256':hashlib.sha256(bank).hexdigest()}
     return {'path':path,'report':report,'sha256':report_hash,'snapshots':snapshots,'trust':'pinned-archived-controller-report' if archived else 'same-target-current-controller-journey','ancestor_fixture':str(fixture),'ancestor_sha256':R5_SHA}
 
+def northern_local_symbols(symbols,rom,elf=None):
+    """Disambiguate file-static geometry using an independently ROM-paired ELF.
+
+    Old Northern-only symbol files remain sufficient when names are unique.
+    Later chapters may reuse private names; picking the last nm row silently
+    observes another power system. Require STT_FILE scope in that case.
+    """
+    sizes={name:4 for name in ('ax','ay','bx','by','effect_x','effect_y','travel','pulse_age','tile_owner')}
+    sizes.update(enemy_hits=1,redirect_count=1,turned_slots=2,friendly_slots=2,shot_serial=24)
+    rows=[p for line in Path(symbols).read_text().splitlines() if len(p:=line.split())==3]
+    counts=Counter(p[2] for p in rows)
+    assert all(counts[name] for name in sizes),'Missing Northern observation symbol'
+    if elf is None and not any(counts[name]>1 for name in sizes):return {},None
+    elf=Path(elf) if elf is not None else Path(symbols).with_suffix('.elf')
+    raw=elf.read_bytes();target=Path(rom).read_bytes()
+    assert raw[:6]==b'\x7fELF\x01\x01','Expected little-endian ELF32 for scoped Northern symbols'
+    header=struct.unpack_from('<16sHHIIIIIHHHHHH',raw)
+    assert header[2]==40,'Scoped Northern symbols require ARM ELF'
+    image=bytearray();covered=bytearray()
+    for i in range(header[10]):
+        kind,offset,virtual,physical,size,memsize,flags,align=struct.unpack_from('<IIIIIIII',raw,header[5]+i*header[9])
+        if kind!=1 or not size:continue
+        start=physical-0x08000000;end=start+size
+        assert 0<=start<end<=len(target),'ELF load segment lies outside frozen ROM'
+        if end>len(image):image.extend(bytes(end-len(image)));covered.extend(bytes(end-len(covered)))
+        assert len(raw[offset:offset+size])==size,'Truncated ELF load segment'
+        image[start:end]=raw[offset:offset+size];covered[start:end]=b'\1'*size
+    assert len(image)==len(target) and all(covered) and image[0xc0:]==target[0xc0:],'Scoped-symbol ELF load image differs from frozen ROM beyond repaired192-byte header'
+    sections=[struct.unpack_from('<IIIIIIIIII',raw,header[6]+i*header[11]) for i in range(header[12])]
+    scoped={}
+    for section in sections:
+        if section[1]!=2:continue
+        strings=sections[section[6]];strings=raw[strings[4]:strings[4]+strings[5]];current=None
+        for pos in range(section[4],section[4]+section[5],section[9]):
+            name,value,size,info,other,index=struct.unpack_from('<IIIBBH',raw,pos)
+            name=strings[name:].split(b'\0',1)[0].decode()
+            if info&15==4:current=name
+            if current=='northern_powers.c' and info>>4==0 and info&15==1 and name in sizes:
+                assert size==sizes[name] and name not in scoped,'Ambiguous Northern power local'
+                assert any(p[2]==name and int(p[0],16)==value for p in rows),'Scoped Northern local missing from pinned symbols'
+                scoped[name]=value
+    assert set(scoped)==set(sizes),'Exact ELF lacks Northern power locals'
+    pairing={'elf_path':str(elf.resolve()),'elf_sha256':digest(elf),'rom_sha256':digest(rom),
+        'matched_bytes':len(target)-0xc0,'header_note':'Only first192bytes repaired by fix_header.py are excluded',
+        'file_scope':'northern_powers.c','addresses':scoped,'sizes':sizes,
+        'resolver_source':'tests/northern_combat_tests.py','resolver_source_sha256':digest(__file__)}
+    return scoped,pairing
+
 class NorthernCombat(NorthernJourney):
-    def __init__(self,rom,symbols,output,rom_sha,symbols_sha,source_report):
+    def __init__(self,rom,symbols,output,rom_sha,symbols_sha,source_report,elf=None):
         self.ready_report=False
         self.harness_bytes=Path(__file__).read_bytes();self.harness_sha=hashlib.sha256(self.harness_bytes).hexdigest()
         self.source_evidence=validate_source_report(source_report,rom_sha,symbols_sha)
         super().__init__(rom,symbols,output,rom_sha,symbols_sha)
+        self.northern_symbols,self.northern_symbol_pairing=northern_local_symbols(self.source_symbols,self.rom,elf)
+        self.sym.update(self.northern_symbols)
         evidence=self.source_evidence;report=evidence['report'];source=evidence['snapshots'][SOURCE_SNAPSHOT]['path']
         self.provenance={'source_report':str(evidence['path']),'source_report_sha256':evidence['sha256'],
             'source_rom_sha256':report['rom_sha256'],'source_snapshot':SOURCE_SNAPSHOT,'sram_path':str(source),
@@ -102,6 +159,7 @@ class NorthernCombat(NorthernJourney):
         data={'suite':'northern-native-combat-controls','controller_only':True,'game_ram_writes':0,'player_facing':False,
             'provenance':self.provenance,**self.candidate,'test_source_sha256':self.harness_sha,'test_source_copy':str(self.out/'tested-harness.py'),
             'branch_policy':'This run creates and hash-checks only same-candidate state+SRAM pairs','phase_order':['Wood','Fire','Earth','Metal','Water'],'development_status':'Northern forms remain development content pending final acceptance','timing_caveat':'render_cycles excludes the final VBlank wait and OAM commit; acceptance also requires every hardware frame to update and flip',
+            'northern_symbol_pairing':self.northern_symbol_pairing,
             'checks':self.checks,'failures':self.failures,'cases':self.cases,'coverage':self.coverage,
             'frame_windows':self.frame_windows,'snapshots':self.snapshots,'notes':self.notes,'inputs':self.inputs}
         (self.out/'northern-combat.json').write_text(json.dumps(data,indent=2)+'\n')
@@ -598,8 +656,8 @@ class NorthernCombat(NorthernJourney):
             if name in selected:self.run_case(name,fn)
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--rom',type=Path,required=True);p.add_argument('--symbols',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--expected-rom-sha',required=True);p.add_argument('--expected-symbols-sha',required=True);p.add_argument('--source-report',type=Path,default=ROOT/'build/northern-journey/northern-journey.json');p.add_argument('--case');a=p.parse_args()
-    run=NorthernCombat(a.rom,a.symbols,a.output,a.expected_rom_sha,a.expected_symbols_sha,a.source_report)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--rom',type=Path,required=True);p.add_argument('--symbols',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--expected-rom-sha',required=True);p.add_argument('--expected-symbols-sha',required=True);p.add_argument('--source-report',type=Path,default=ROOT/'build/northern-journey/northern-journey.json');p.add_argument('--case');p.add_argument('--elf',type=Path,help='Exact ROM-paired ELF for file-scoped locals; defaults to symbols sibling when names collide');a=p.parse_args()
+    run=NorthernCombat(a.rom,a.symbols,a.output,a.expected_rom_sha,a.expected_symbols_sha,a.source_report,a.elf)
     try:run.run(a.case)
     finally:run.report();run.e.close()
     return bool(run.failures)

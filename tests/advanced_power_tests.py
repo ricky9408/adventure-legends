@@ -53,12 +53,16 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
             end+=1
         return source[start:end]
     shim = r'''
+#include <assert.h>
 #include <string.h>
 #include "advanced_powers.h"
 #include "gear_runtime.h"
 #include "combat_rules.h"
 #include "regional_powers.h"
 #include "northern_powers.h"
+#include "southern_powers.h"
+#include "south_game.h"
+#include "progression.h"
 #include "ui.h"
 #define MAX_ENEMIES 6
 #define PLAY 1
@@ -68,6 +72,9 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
 typedef struct{int x,y,hp,flash,kind;} Enemy;
 typedef struct{int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6]; Shot shots[12];
+unsigned char ordinary_hostile_shots[12];
+static unsigned char vram[16384];
+int cx,cy,south_reset_calls;
 volatile int px,py,spirit,stone_guard,guard_invuln;
 int face,frame,ability_cd,ability_max,power_effect,enemy_windups[6];
 int invuln,roll_ticks,game_state,hp,max_hp,deaths,summoned,room;
@@ -75,7 +82,7 @@ int boss_armor,boss_flash,boss_x,boss_y,torches,save_calls,dialogue_calls;
 int swing,combo_step,swing_damage,hitstop,enemy_clocks[6],enemy_aimx[6],enemy_aimy[6];
 int kills,wall_x,wall_y,wall_w,wall_h,sword_connect;
 EquipmentStats gear_stats;WeaponAttack weapon_action;
-unsigned char enemy_phases[6],enemy_stagger_ticks[6],slowed_enemies[6];
+unsigned char enemy_phases[6],enemy_stagger_ticks[6];
 int hero_hp_q4;
 /* This fixture isolates advanced commands and exact game dispatch. Fractional
  * health, weapon geometry and gear mutation have dedicated actual-C suites. */
@@ -84,13 +91,10 @@ void game_enemy_stagger(unsigned i,unsigned bonus){(void)i;(void)bonus;}
 void game_health_heal(unsigned amount){hp+=(int)(amount/16);hero_hp_q4=hp*16;}
 void game_health_hurt(unsigned amount,unsigned phase){(void)phase;hp-=(int)(amount/16);hero_hp_q4=hp*16;}
 void game_attacks_reset(void){}
-/* This supplemental fixture exercises legacy commands5–8. The live regional
- * and Northern power handlers, shot generations and tile lease have their own
- * unchanged-module host tests plus controller-only cartridge coverage. */
-void regional_powers_reset(void){}
-void northern_powers_reset(void){}
-void northern_powers_shot_spawn(unsigned index){(void)index;}
-int northern_powers_shot_is_reflected(unsigned index){(void)index;return 0;}
+/* Power handlers, shot generations and the shared OBJ lease are real modules.
+ * This bounded world has no selected regional caster or Southern machine. */
+CreatureInstance *progression_selected(void){return 0;}
+void south_game_reset(void){south_reset_calls++;}
 unsigned game_companion_phase(void){return CREATURE_FIRE;}
 unsigned game_power_cooldown(unsigned base){return base;}
 int game_melee_hit(unsigned id,int x,int y,int boss){(void)id;(void)x;(void)y;(void)boss;return sword_connect&&swing==11;}
@@ -100,7 +104,7 @@ int world_height(void){return room==1?320:160;}
 int ab(int x){return x<0?-x:x;}
 int sign(int x){return x<0?-1:x>0;}
 int near(int a,int b,int c,int d,int r){return ab(a-c)+ab(b-d)<r;}
-int solid(int x,int y){return wall_w&&x>=wall_x&&x<wall_x+wall_w&&y>=wall_y&&y<wall_y+wall_h;}
+int solid(int x,int y){return x<0||y<0||x>=world_width()||y>=world_height()||(wall_w&&x>=wall_x&&x<wall_x+wall_w&&y>=wall_y&&y<wall_y+wall_h);}
 int boss_active(void){return 1;}
 void zero(void*p,unsigned n){memset(p,0,n);}
 void impact(int x,int y){(void)x;(void)y;}
@@ -110,19 +114,31 @@ void save_game(void){save_calls++;}
 void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;dialogue_calls++;}
 int sword_hits(int x,int y,int r){(void)x;(void)y;(void)r;return sword_connect;}
 void progression_encounter(unsigned a,unsigned b){(void)a;(void)b;}
-void obj_add(int a,int b,int c,int d,int e,int f,int g,int h){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;(void)h;}
+void obj_upload(const unsigned char *pixels,int w,int h,int off){
+ assert(pixels&&w>0&&h>0&&w<=32&&h<=32&&off>=0&&off+w*h<=16384);
+ memcpy(vram+off,pixels,(size_t)w*h);
+}
+void obj_add(int off,int x,int y,int w,int h,int priority,int depth,int flip){
+ (void)x;(void)y;(void)priority;(void)depth;(void)flip;
+ assert(w>0&&h>0&&w<=32&&h<=32&&off>=0&&off+w*h<=16384);
+}
 '''
     shim += '\n'.join(body(n) for n in ('kill_enemy','damage_amount','damage_phase','damage','fire_shot','shot_segment_clear','update_shots','update_enemies'))
     shim += r'''
 void source_reset(void){
  memset(enemies,0,sizeof enemies);memset(shots,0,sizeof shots);
- memset(shot_effects,0,12);memset(enemy_windups,0,sizeof enemy_windups);
+ memset(shot_effects,0,sizeof shot_effects);memset(shot_phases,255,sizeof shot_phases);
+ memset(ordinary_hostile_shots,0,sizeof ordinary_hostile_shots);
+ memset(enemy_phases,255,sizeof enemy_phases);memset(enemy_stagger_ticks,0,sizeof enemy_stagger_ticks);
+ memset(enemy_windups,0,sizeof enemy_windups);
  memset(enemy_clocks,0,sizeof enemy_clocks);
  px=py=100;face=3;frame=0;spirit=0;stone_guard=guard_invuln=0;
  invuln=roll_ticks=deaths=summoned=room=0;game_state=1;hp=max_hp=8;hero_hp_q4=128;gear_stats.max_hp_q4=128;weapon_action.damage_q4=32;weapon_action.attack_q4=0;weapon_action.stagger=0;weapon_action.element=255;
  boss_armor=boss_flash=torches=save_calls=dialogue_calls=0;
  boss_x=boss_y=0;swing=combo_step=swing_damage=hitstop=0;
- kills=wall_x=wall_y=wall_w=wall_h=sword_connect=0;advanced_reset();
+ kills=wall_x=wall_y=wall_w=wall_h=sword_connect=south_reset_calls=0;
+ cx=px;cy=py;ability_cd=ability_max=power_effect=0;
+ advanced_reset();regional_powers_reset();northern_powers_reset();southern_powers_reset();
 }
 '''
     class Enemy(C.Structure):
@@ -135,10 +151,14 @@ void source_reset(void){
         libfile=Path(tmp)/'contract.so'
         subprocess.run([os.environ.get('HOST_CC','cc'),'-std=c99','-O2','-Wall','-Wextra',
                         '-Werror','-fPIC','-shared','-I'+str(ROOT/'src'),str(fixture),
-                        str(ROOT/'src/advanced_powers.c'),str(ROOT/'src/creatures.c'),
+                        str(ROOT/'src/advanced_powers.c'),str(ROOT/'src/regional_powers.c'),
+                        str(ROOT/'src/northern_powers.c'),str(ROOT/'src/northern_power_art.c'),
+                        str(ROOT/'src/southern_powers.c'),str(ROOT/'src/southern_power_art.c'),
+                        str(ROOT/'src/creatures.c'),
                         str(ROOT/'src/creature_data.c'),'-o',str(libfile)],check=True)
         lib=C.CDLL(str(libfile));enemies=(Enemy*6).in_dll(lib,'enemies')
         shots=(Shot*12).in_dll(lib,'shots');effects=(C.c_ubyte*12).in_dll(lib,'shot_effects')
+        ordinary=(C.c_ubyte*12).in_dll(lib,'ordinary_hostile_shots')
         roots=(C.c_int*6).in_dll(lib,'rooted_enemies')
         def get(n): return C.c_int.in_dll(lib,n).value
         def setv(n,v): C.c_int.in_dll(lib,n).value=v
@@ -199,8 +219,9 @@ void source_reset(void){
         lib.source_reset();shots[0]=Shot(116,100,2,0,50,0);effects[0]=2
         enemies[0]=Enemy(120,100,6,0,2);enemies[1]=Enemy(120,100,6,0,2);lib.update_enemies()
         check('one reflected shot cannot damage overlapping enemies twice',enemies[0].hp==4 and enemies[1].hp==6 and not shots[0].life)
-        lib.fire_shot(120,100,-2,0,1)
+        ordinary[0]=1;lib.fire_shot(120,100,-2,0,1)
         check('hostile shot slot reuse clears prior wind identity',shots[0].owner==1 and effects[0]==0)
+        check('generic hostile shot reuse clears ordinary-enemy eligibility',ordinary[0]==0)
         shots[0].life=0;lib.fire_shot(120,100,2,0,0)
         check('fire shot slot reuse restores explicit fire identity',shots[0].owner==0 and effects[0]==1)
         lib.source_reset();setv('room',2);setv('px',42);setv('py',64)
@@ -213,6 +234,18 @@ void source_reset(void){
         effects[0]=1;lib.update_shots();check('fire positive control exposes Grove armor',get('boss_armor')==210)
         lib.source_reset();setv('room',2);shots[0]=Shot(60,64,2,0,50,0);effects[0]=1;lib.update_shots()
         check('fire positive control ignites temple torch',get('torches')==1 and get('save_calls')==1)
+        lib.source_reset();enemies[0]=Enemy(120,100,6,0,2);lib.update_enemies()
+        check('inactive Southern hooks preserve ordinary ranged windup',get('enemy_windups')==30)
+        for _ in range(30):lib.update_enemies()
+        check('ordinary ranged emission marks only the spawned hostile shot',
+              shots[0].owner==1 and shots[0].life==90 and ordinary[0]==1 and sum(ordinary)==1)
+        lib.source_reset();lib.regional_power(11)
+        check('source fixture links a live regional lease',get('regional_power_time')==36 and lib.northern_powers_tiles_owner()!=0)
+        setv('hp',1);setv('hero_hp_q4',16);lib.damage()
+        check('exact death dispatch resets live power lease and Southern chapter bridge',
+              get('game_state')==4 and get('deaths')==1 and get('south_reset_calls')==1 and
+              get('regional_power_time')==get('northern_power_time')==get('southern_power_time')==0 and
+              lib.northern_powers_tiles_owner()==0)
         lib.source_reset();lib.advanced_power(8);setv('invuln',10);lib.damage()
         check('ordinary invulnerability does not consume guard charges',get('advanced_guard_charges')==2 and get('hp')==8)
         setv('invuln',0);lib.damage()
@@ -226,7 +259,7 @@ void source_reset(void){
         check('Shot ABI stays exactly24bytes with separate12byte metadata',C.sizeof(Shot)==24 and len(effects)==12)
     report={'kind':'supplemental host source-contract tests; synthetic host states',
             'normal_progression_proof':False,'actual_rom_execution':False,
-            'source_sha256':{n:sha(ROOT/'src'/n) for n in ('advanced_powers.c','game.c','creature_data.c')},
+            'source_sha256':{n:sha(ROOT/'src'/n) for n in ('advanced_powers.c','regional_powers.c','northern_powers.c','northern_power_art.c','southern_powers.c','southern_power_art.c','game.c','creature_data.c')},
             'checks':results,'passed':all(r['passed'] for r in results)}
     (output/'source-contract-report.json').write_text(json.dumps(report,indent=2)+'\n')
     return report

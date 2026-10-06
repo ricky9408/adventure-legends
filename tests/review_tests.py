@@ -53,7 +53,8 @@ if completed.exists():
   p.tap('L')
  ok(p,p.get('spirit')==2,'first-lantern resume preserves earned wind companion')
  p.e.reset();p.step(90)
- p.tap('SELECT');ok(p,p.get('chapter_flags')==0 and p.get('completed')==0 and p.get('bridge_open')==0 and p.get('torches')==0 and p.get('room')==0 and p.get('game_state')==2,'title Select starts fresh and clears prior chapter progress')
+ before=p.e.bytes(0x0E000000,32768);p.tap('SELECT');ok(p,p.get('game_state')==9 and p.e.bytes(0x0E000000,32768)==before,'title Select asks before replacing existing progress')
+ p.tap('A');ok(p,p.get('chapter_flags')==0 and p.get('completed')==0 and p.get('bridge_open')==0 and p.get('torches')==0 and p.get('room')==0 and p.get('game_state')==2,'fresh confirmation starts new adventure and clears prior chapter progress')
  p.e.reset();p.step(90);p.tap('START')
  ok(p,p.get('completed')==0 and p.get('room')==0,'fresh Select persists replacement checkpoint');p.e.close()
 # Walk from our real forest checkpoint into the guardian encounter.

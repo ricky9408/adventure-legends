@@ -29,6 +29,9 @@ def source_files():
         for p in (ROOT/name).rglob('*'):
             rel=p.relative_to(ROOT)
             if p.is_symlink() or not p.is_file() or EXCLUDED.intersection(rel.parts):continue
+            # The bridge smoke test creates a disposable color screenshot in
+            # its own directory. Ship its self-generating script, not outputs.
+            if rel.parts[:2]==('tools','smoke_tests') and p.name!='test_bridge.py':continue
             if rel.as_posix() in GENERATED_OVERVIEWS:continue
             if p.name=='.gitignore':files.append(p);continue
             if p.suffix not in EXTENSIONS:continue
@@ -39,7 +42,7 @@ def source_files():
 def main():
     OUT.mkdir(exist_ok=True)
     files=source_files()
-    manifest={'schema':1,'purpose':'Source-only reproducible campaign foundation','files':[]}
+    manifest={'schema':1,'purpose':'Source-only reproducible Southern S3 release; 41 native-obtainable forms, Save5 revision4','files':[]}
     target=OUT/'Adventure-Legends-Emberbond-source.zip'
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
         for p in files:

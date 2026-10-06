@@ -1,26 +1,107 @@
-# Twenty-one-form creature core, content revision 3
+# Southern authoring schema 2, content revision 4
 
-Developer reference; contains companion, quest and progression spoilers.
+Current authoring contains **42 designs**, including disabled legendary 121,
+with **128 immutable reserved identities**. The separate reviewed ROM manifest
+contains **41 enabled forms, 61 learned-command pairs, 20 evolution edges and
+41 abilities**. Only forms **25, 26, 28, 29, 79–94** and commands **23–42** are
+added here. Ability 12, legendary 121, third forms 27/30, all branching families
+and all other unlisted rows remain disabled. These counts establish authored
+core data only, not native gameplay, acquisition, sprite or combat acceptance.
 
-This directory preserves the original authoring schema and 128 stable reserved
-identities. The catalog now contains **22 authored designs**, including the
-disabled legendary. Its historical `DESIGN_ONLY_NOT_IN_ROM` scope is proposal
-metadata, not the current runtime manifest. `enabled.json` explicitly enables
-**21 forms**: `1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 19, 20, 22, 23, 73, 74,
-75, 76, 77, 78`. There are 31 learnset rows, 21 enabled commands (IDs 1–11 and
-13–22), and ten enabled evolution edges. Ability 12, legendary 121, reserved
-third-tier forms 21/24 and all other unlisted identities remain disabled.
-A reserved identity is never an encounter fallback or proof of an authored form.
+## Stable identity, order and bounded generation
 
-The five Northern families are Spoolbud/Loomcrown, Cindertray/Kilnbarrow,
-Keelkip/Wakecradle, Cairncricket/Archspring and Rivetfoil/Gimbalcloak. The N5
-controller journey obtains and independently reloads all 21 historical forms,
-retaining eleven real family instances and the six previous instance identities.
-That native proof, artwork, handlers, combat and UI acceptance are separate from
-data/core validation. See [Northern verification](../../docs/NORTHERN_VERIFICATION.md)
-and [the exact-ROM summary](../../docs/northern/summary.json). Header-enabled
-rows or a host API grant alone do not establish obtainability. The full 128-form
-roster and legendary progression remain unfinished.
+- `identity-lock.json` is unchanged (SHA-256
+  `fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969`)
+- Authored forms and abilities stay ID-sorted. `enabled.json` specifies stable
+  ROM table order independently: the original 21 forms precede the 20 Southern
+  forms, even though IDs 25–29 sort before Northern IDs 73–78
+- Three generated const u8 ROM maps provide bounded form, command and incoming
+  evolution lookup without scans. A stored value is the table row plus one;
+  zero always means disabled/absent. IDs are checked before indexing and every
+  index-backed table is capped at 255 rows. The maps retain explicit manifest
+  order and do not enable any reserved identity
+- Existing generated form, learnset, edge and ability prefixes are byte-exact.
+  New pair `i` has base/evolved learn offsets `31+3*i` / `32+3*i`, and its edge
+  starts at `10+i`. Zero-edge forms retain offset zero
+- Schema 2 allows command IDs through **255**, matching the unchanged saved
+  command byte. It does not enable any command implicitly. Every enabled ID
+  remains in an exact content-revision whitelist in `catalog_policy.py`
+- The original schema is preserved byte-for-byte as `catalog.v1.schema.json`.
+  The validator automatically selects it for archived schema-1 catalogs,
+  retaining their 63-command authoring ceiling and original capability order
+- Multi-edge generation uses an explicit count and contiguous manifest offset,
+  rejecting split source groups and overflow of u8 counts/u16 offsets. Actual
+  branching rows remain disabled. The authoring validator accepts only the
+  immutable reserved branch topology, with no cycles, merges, cross-family
+  edges, lost field actions or delayed/lost inherited commands
+
+## Qualified trial and capability authoring
+
+`trial_bindings` names the family, local trial key, one-hot u16 wire mask,
+introduction revision, source forms and prerequisite mask. Keys and wire bits
+must be unique within their family; prerequisites are known, acyclic and no
+newer than their dependent trial. Every executable edge references a trial
+bound to that same source family. Current ROM mappings are separately checked
+against explicit reviewed policy rather than inferred from family numbers.
+
+Legacy trial bits remain 1, 2, 4, 8, 16, 32, 64, 128, 256 and 512 with their
+original owners. F006 remains unassigned. Southern families F009, F010 and
+F028–F035 each explicitly map **local key 1 to wire mask 1**. All ten new edges
+require their own trial and **SOUTH_READY = 64**, plus their authored level/bond,
+sanctuary and explicit player confirmation. New requirements do not reinterpret
+legacy unqualified APIs or campaign chapter flags.
+
+All old capability bits 0–24 retain their meaning. The sole appended capability
+is **REFRACT_BEAM at bit 25 (`0x02000000`)** for forms 79/80. Existing abilities
+and field actions remain independent; no generic phase grants an action.
+
+Japanese name and command text is appended in `ui_additions.json`; this change
+does not run or modify global UI generation. New command cooldown targets are
+90 updates for base signatures and 120 for evolved signatures. Stat weights
+are authored 180/240 totals, not evidence that every weight is a combat consumer.
+
+## Reproducible authoring checks
+
+```
+python3 assets/creatures/validate_catalog.py
+python3 assets/creatures/generate_data.py --check
+python3 tests/test_southern_catalog.py
+# Archived source, with its exact historical manifest:
+python3 assets/creatures/validate_catalog.py OLD_CATALOG --enabled OLD_MANIFEST
+# Standalone archived design validation, with no runtime enablement claim:
+python3 assets/creatures/validate_catalog.py OLD_CATALOG --catalog-only
+```
+
+The focused tests pin old authored rows, original schema, identity lock and
+legacy generated table bytes; exercise local-trial collisions/overflow, exact
+enabled boundaries, command-byte limits, inheritance, branch topology,
+prerequisite cycles, multi-edge layout and deterministic generation. Native C,
+save migration, battle handlers, sprites, route safety and controller-based
+obtainability are separate integration gates owned by their corresponding tests.
+
+The notes below are preserved historical documentation. Their eleven-form,
+revision-2 counts and masks describe that earlier release, not current totals.
+
+---
+
+# Historical river/core notes, content revision 2
+
+This directory preserves the original authoring catalog and schema, with **12
+fully described designs and 128 reserved identities**. Its historical
+`DESIGN_ONLY_NOT_IN_ROM` scope describes that original proposal, not the current
+runtime manifest. `enabled.json` separately enables eleven core definitions:
+1, 2, 4, 5, 7, 8, 10, 11, **13 Dewspindle, 14 Tidewheel and 16 Chimeclasp**.
+Abilities 1–11 and five evolution edges are enabled. Legendary 121, every other
+placeholder, and ability 12 remain disabled. No reserved identity is an encounter
+fallback and no count here claims 128 authored creatures.
+
+This directory reports **data/core** acceptance separately from gameplay. The
+river release also passes acquisition, original sprite, combat, quest and UI
+integration tests; all eleven forms were obtained and reloaded in one normal
+controller-driven collection. See `docs/reedhaven/summary.json` for that exact-ROM
+evidence rather than treating enabled data rows alone as proof of obtainability. The
+original proposal's repeatable acquisitions and gate descriptions remain design
+history; the actual one-time regional reward contract is documented below.
 
 Run `python3 assets/creatures/generate_data.py` to validate the source and rebuild
 `src/creature_data.c`. `--check` checks the checked-in generated file without
@@ -72,12 +153,8 @@ outside `game.o`, hence outside its IWRAM placement.
   clear objectives or grant rewards. Caller must prove its distinct-object
   trial and award its event exactly once. Flags 1/2/4/8 keep their original
   families; flag 16 (`CREATURE_TRIAL_PAIRED_POOLS`) belongs exclusively to
-  Dewspindle/Tidewheel. Chimeclasp (family 6) retains no personal trial bit.
-  Northern masks 32/64/128/256/512 belong to families 7/8/25/26/27, respectively.
-  Family IDs are sparse keys, never compact-array offsets or shift counts.
-  `creatures_family_trial(form_id)` resolves the reviewed one-hot 16-bit mask;
-  do not derive it with `1 << family`. Zero, combined and wrong-family trial
-  flags are rejected
+  Dewspindle/Tidewheel. Metal has no personal trial bit in this revision. Zero,
+  combined and wrong-family trial flags are rejected
 - `creatures_can_evolve` returns visible requirement reasons. All requirements
   are ANDed: level, bond, evolution context, matching personal trial and sanctuary.
   `creatures_evolve` also needs explicit confirmation. Defer makes no changes.
@@ -106,14 +183,11 @@ outside `game.o`, hence outside its IWRAM placement.
 
 ```c
 unsigned context = (campaign.chapter_flags & CREATURE_EVOLUTION_CHAPTER_MASK) |
-    (quest2_claimed ? CREATURE_REED_RESTORED : 0) |
-    ((quest11_claimed && quest13_claimed) ? CREATURE_NORTH_HARBOR_READY : 0) |
-    (quest21_claimed ? CREATURE_COUNTERWORKS_STABLE : 0);
+    (quest2_claimed ? CREATURE_REED_RESTORED : 0);
 ```
 
 `CREATURE_EVOLUTION_CHAPTER_MASK` is 7; `CREATURE_REED_RESTORED` is 8;
-`CREATURE_NORTH_HARBOR_READY` is 16; `CREATURE_COUNTERWORKS_STABLE` is 32;
-`CREATURE_EVOLUTION_CONTEXT_MASK` is **63**. Campaign bit 3 is **ENDING_SEEN** and
+`CREATURE_EVOLUTION_CONTEXT_MASK` is 15. Campaign bit 3 is **ENDING_SEEN** and
 must be stripped before deriving this separate context. The core cannot tell
 raw campaign value 15 from a correctly composed context value 15. Story grant,
 legacy migration and story catch-up APIs continue to accept the original
@@ -121,51 +195,12 @@ campaign flag namespace. Unknown evolution-context bits reject without mutation.
 
 The core grant API still supports general reward IDs 5–128 and does not enforce
 quest completion or synthesize it. Save5 and the quest transaction own exact
-quest/reward/collection consistency. Revision-2 and revision-3 Save5 require claimed quest 2
+quest/reward/collection consistency. Revision-2 Save5 now requires claimed quest 2
 to retain at least one valid owned form 13/14 and claimed quest 3 to retain
 form 16, whether active or stored. Both blocking and incremental validation
 reject history/reward-only claims; revision-1 migration is unchanged. Current-party
 capability checks inspect active members only; story ownership is not a substitute
 for the actual route capabilities supplied to `creatures_party_set`.
-
-### Northern integration and legacy compatibility
-
-Northern forms keep the original instance wire layout, stable IDs and old
-field capabilities. IDs are sparse in every lookup: form 73 is not table index
-73, family 25 is not array index 25, and absent command 12 is not a fallback.
-The catalog rejects duplicate IDs, cross-family trial collisions, missing policy
-rows, invalid learnsets and unknown enabled endpoints.
-
-| Recruit quest | Base/evolved forms | Family | One-time creature reward | Personal trial |
-| ---: | --- | ---: | ---: | --- |
-| 11 | 19/20 | 7 | 7 | Quest 16, mask 32, level 16/bond 40 |
-| 12 | 22/23 | 8 | 8 | Quest 17, mask 64, level 17/bond 40 |
-| 13 | 77/78 | 27 | 11 | Quest 20, mask 512, level 20/bond 50 |
-| 14 | 73/74 | 25 | 9 | Quest 18, mask 128, level 18/bond 45 |
-| 15 | 75/76 | 26 | 10 | Quest 19, mask 256, level 18/bond 45 |
-
-Quest 13 requires quest 11 CLAIMED. All five new evolutions require the
-Harbor-ready context from **both** recruit quests 11 and 13 CLAIMED, the
-matching trial and level/bond floor, sanctuary and explicit confirmation.
-The separate Counterworks context exists without making the machine clear a
-hidden prerequisite for these five evolutions. New commands are learned through
-the authored learnsets; evolving never silently equips a signature or deletes
-the old command. Trials must belong to the same retained instance that meets
-the training floor, not two different copies.
-
-All Northern recruits are ordinary occupied instances with flags 0 at grant,
-not new story-locked companions. A full active party leaves the recruit in
-storage, and a full roster rejects atomically without consuming its reward.
-Quest claims own their typed recruit, gear and trial consistency. General
-creature reward IDs 5–128 keep the prior independent semantics: an old generic
-reward bit does not fabricate a Northern quest or force a new recruit. Existing
-story IDs 1–4, legacy migration, original trial bits, field commands, XP/bond
-ledgers and reward history retain their historical meanings.
-
-Save5 uses content revision 3 and explicit revision-1/revision-2 whitelists,
-not the current enabled table as a permissive older-save reader. The authentic
-R5 all-eleven save is preserved and migrates without new rewards. See
-[SAVE5.md](../../docs/SAVE5.md) and [save verification](../../docs/NORTHERN_SAVE3_VERIFICATION.json).
 
 ### Explicit story catch-up compensation
 
@@ -197,17 +232,13 @@ and future item encoding belong to the save subsystem.
 Run `python3 tests/test_creatures.py`. Tests compile and call the actual native C
 code, test all 50 XP boundaries and 25 phase pairings, fill all 160 slots,
 exercise rewards, corruption, collection, party safety, XP/bond event deduplication,
-all ten evolutions, deferred evolution, learned-command retention and every
+all five evolutions, deferred evolution, learned-command retention and every
 migration chapter. Twenty-six deliberately damaged C data tables must fail
 validation. Six SHA256-pinned full-roster snapshots from the preceding core
 assert byte-exact legacy migration/evolution compatibility. Host API grants
 are explicitly distinguished from controller-based native obtainability tests.
-`core-verification.json` is preserved **historical revision-2** object-size and
-sanitizer evidence, not current Northern acceptance. New sparse-key tests in
-`tests/test_creature_sparse.py` also run through the normal creature test suite;
-they cover shuffled form/family/ability tables, full-width synthetic trial masks,
-colliding policies, unknown IDs and sanitizer safety. Synthetic tables are
-host-only probes, not extra enabled or obtainable creatures.
+`core-verification.json` records object-level ARM sizes and a sanitizer smoke run;
+these are not full-cartridge timing or playable-campaign acceptance claims.
 
 The deterministic mixed-operation sanitizer harness is reproducible with:
 
@@ -223,10 +254,12 @@ Leak checking is disabled only because this execution environment uses ptrace;
 address and undefined-behavior checking remain enabled. No creature core function
 allocates dynamic memory.
 
-The current sanitizer exercises 24,000 mixed operations across old and Northern
-families, 33,120 single-bit roster mutations, and 129,024 byte-value probes
-(21 forms × 24 instance bytes × 256 values). The ARM core objects contain no libc
+The current sanitizer covers 24,000 mixed operations including stored Water and
+Metal recruits, 33,120 single-bit roster mutations, and 67,584 byte-value probes
+across all eleven enabled instance types. The ARM core objects contain no libc
 imports and no mutable `.data`/`.bss`; object sizes and compiler stack frames are
-historically recorded in `core-verification.json`; do not carry those old size
-figures forward as N5 measurements. Native N5 memory and frame measurements are
-in the Northern report, and whole-program stack high-water remains unmeasured.
+recorded in `core-verification.json`. These are not complete-engine timing or
+whole-program stack-high-water measurements.
+
+
+The complete Southern S3 cartridge is independently accepted in `docs/VERIFICATION.md` and the bounded `docs/southern/` reports. Catalog enablement alone remains insufficient evidence of native acquisition or combat. `format_catalog.py` stores one semantic record per line without changing values or order; `--check` verifies this bounded, deterministic publication format.

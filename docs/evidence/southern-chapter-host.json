@@ -1,0 +1,172 @@
+{
+  "scope": "Southern chapter module tests; not controller-native obtainability, full-ROM timing or release acceptance",
+  "art_tests_passed": 10,
+  "runtime_ubsan_tests_passed": 14,
+  "geometry_required_points": 144,
+  "optical_states": 24,
+  "camera_alignment": "every integer x0..240,y0..160; actor culling bounds exactly -8<x<248,-8<y<168",
+  "observed_actor_maxima_room30_to37": [
+    15,
+    13,
+    12,
+    7,
+    4,
+    10,
+    7,
+    4
+  ],
+  "conservative_actor_upper_bound": {
+    "town": 20,
+    "field": 16
+  },
+  "art_bytes": {
+    "bitmap_bytes": 844800,
+    "rom_payload_bytes": 859332,
+    "collision_lookup_bytes": 3962,
+    "alignment_bytes": 10,
+    "arm32_room_table_bytes": 224,
+    "largest_include_bytes": 30000,
+    "sprite_bytes": 9728
+  },
+  "isolated_runtime_arm": {
+    "code_bytes": 12500,
+    "rodata_bytes": 772,
+    "ewram_data_bytes": 4,
+    "ewram_bss_bytes": 44,
+    "explicit_iwram_section_bytes": 0,
+    "linked_placement": "Current linker source uses explicit game.o/region_game.o/north_game.o hot modules, routing south_game.o text to ROM. Parent owns final linked-map and native timing verification.",
+    "code_delta_targeting_fix_bytes": 276
+  },
+  "commands": [
+    "python tests/test_south_art.py",
+    "SOUTH_SANITIZE=1 python tests/test_south_game.py",
+    "arm-none-eabi-gcc -mcpu=arm7tdmi -mthumb-interwork -mthumb -O2 -ffreestanding -Wall -Wextra -Werror -DSOUTH_GAME_HOST_TEST -Isrc -I<temporary-generated-UI> -c src/south_game.c"
+  ],
+  "artifact_hash_manifest": {
+    "path": "build/southern_art_frozen_sha256.txt",
+    "sha256": "888f87aff75d757260b1f589fff616ef5f1f94e700b2bf20848e78a68a98f2aa"
+  },
+  "native_preview": {
+    "path": "build/southern_preview_native.png",
+    "sha256": "460e9b0310f41320e8667e10b77320bc9858b81b1d8966fdea50526c6e8c57a5"
+  },
+  "files": {
+    "src/south_game.c": {
+      "bytes": 26268,
+      "sha256": "7bc031db1ea07d072951d98793badecf17897b75d1d3c0c36e364db3c596c7b9"
+    },
+    "src/south_game.h": {
+      "bytes": 2824,
+      "sha256": "0d1d95319ba3ddfa5f92e2705898f04bfc86429ba73aaf77779b89c099fbdb9c"
+    },
+    "src/south_game_draw.inc": {
+      "bytes": 6855,
+      "sha256": "bc52ac3b6aecd96836d3acaa419a66becfd04e98921833275f4c3ead439c77a1"
+    },
+    "src/south_art.c": {
+      "bytes": 4313,
+      "sha256": "128227ed6483e9268269fdd57d3da29a047d95638ba6f40d2757f94fb087e26e"
+    },
+    "src/south_art.h": {
+      "bytes": 2401,
+      "sha256": "b6166d4895c32ac054417c25905f08a5930866e3a32b5a0595b068aae8e6ae1e"
+    },
+    "assets/generate_southern_region.py": {
+      "bytes": 28668,
+      "sha256": "216e066b61f691eb6cc50aa6ee24189d1fc43bcdc8f65072e17dde3058adf3cc"
+    },
+    "assets/southern_region/sprite_art.py": {
+      "bytes": 5561,
+      "sha256": "eaa728eda7127a534659d931abc9141219ca5d52107841f84e82a63d1e653bae"
+    },
+    "assets/southern_region/contract.json": {
+      "bytes": 4068,
+      "sha256": "3eb4f3d94c3800444baa6a563838dab3c26a47df24b10bd094e1ec98537041db"
+    },
+    "assets/southern_region/scene.json": {
+      "bytes": 13334,
+      "sha256": "ec4d1d0863d51d407ce209405a28fa8fcfd6a518fa5b09ef51f32bca9458dd49"
+    },
+    "assets/southern_region/ui_additions.json": {
+      "bytes": 7310,
+      "sha256": "2a39736b9ad5bca40415ea3c3e6bdf772fe7937f3c8f32c94d36aa2ce6c4ca9f"
+    },
+    "assets/southern_region/layout.json": {
+      "bytes": 27986,
+      "sha256": "b6be317622976708971dcc5b0d26ee3eb0ddc4d99e5fe489eb4548ed32bc0dc7"
+    },
+    "assets/southern_region/validation.json": {
+      "bytes": 20668,
+      "sha256": "e2f6d05a65cdcf94021b2fb60bb17a844518a37135617ff8ca4e3a280b54b062"
+    },
+    "tests/test_south_art.py": {
+      "bytes": 10530,
+      "sha256": "f1eca2fd21b7ecd02351b8c85f4501b4bf8b4038b7c6041c688f097206af4820"
+    },
+    "tests/test_south_game.py": {
+      "bytes": 21219,
+      "sha256": "5ef1a91f68cee8a268f51c846e4103a98e2e925efa1b4eb5d002dffa3df0db83"
+    },
+    "docs/SOUTHERN_ART.md": {
+      "bytes": 9756,
+      "sha256": "be137d6b114104a781ff8efc3cc55a05a0a66b30dc85cc94d7e93d571471b20e"
+    },
+    "docs/SOUTHERN_RUNTIME.md": {
+      "bytes": 12623,
+      "sha256": "4f9c555e49df732c447ad859045e35d6e6e89f2194e059b661c6aec387d8c4ed"
+    }
+  },
+  "test_logs": {
+    "art": "..........\n----------------------------------------------------------------------\nRan 10 tests in 2.898s\n\nOK\n",
+    "runtime_ubsan": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.412s\n\nOK\nMaximum regional actor slots by room30\u201337, including ranged enemies: [15, 13, 12, 7, 4, 10, 7, 4]\n",
+    "arm_object": "/tmp/south-host/south_game-targeting.arm.o  :\nsection            size   addr\n.text              2076      0\n.data                 4      0\n.bss                 44      0\n.text.rom         10424      0\n.rodata             772      0\n.comment             39      0\n.ARM.attributes      42      0\nTotal             13401\n\n\n"
+  },
+  "targeting_regression": {
+    "reproduced_before_fix": true,
+    "authored_stall_approach": [
+      344,
+      224,
+      "up"
+    ],
+    "native_closer_approach": [
+      343,
+      216,
+      "up"
+    ],
+    "sideways_npc": [
+      352,
+      224
+    ],
+    "fix": "Conversation-only facing cone; lateral<=forward+4. Existing manual-control targeting and geometry unchanged.",
+    "npc_verified_approaches": [
+      [
+        344,
+        224,
+        "right"
+      ],
+      [
+        352,
+        240,
+        "up"
+      ],
+      [
+        336,
+        224,
+        "right"
+      ],
+      [
+        368,
+        224,
+        "left"
+      ],
+      [
+        352,
+        208,
+        "down"
+      ]
+    ],
+    "frozen_native_fixture_modified": false,
+    "art_modified": false,
+    "native_retest": "Parent/independent controller worker will rebuild and verify; host proof is not native acceptance."
+  }
+}

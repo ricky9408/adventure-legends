@@ -1,0 +1,1861 @@
+{
+  "purpose": "Semantics-preserving validation optimization following a native rest-entry cadence miss; native acceptance rerun remains required",
+  "native_trigger": {
+    "report": "build/southern-scene2-controls2/southern-journey.json",
+    "sha256": "f8115a981d5e231afce1aaf1fd954150f26d897f8048ffcc1e76a92521a90cdd",
+    "entry_cycles": [
+      411452,
+      398657
+    ],
+    "hardware_frames": 150,
+    "updates_and_flips": 148,
+    "diagnosis": "Full synchronous validation dominates rest entry; steady incremental saves were not the originating miss"
+  },
+  "production_changes": [
+    "Empty CreatureInstance validates all24 bytes through six naturally aligned may_alias u32 loads on GCC/Clang, with a portable fieldwise fallback",
+    "Southern source evidence uses a guarded explicit128-entry row-plus-one index; all256 form-byte outcomes remain exact",
+    "No validation bypass, whole-state cache, wire change, mutable-state addition or UI/game edit"
+  ],
+  "profiles": {
+    "before": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "a43263f694a57c895b6deb20871975d1ae5393375f0121c7499897daaa078306",
+        "creatures": "40cf1dc6b2aac7f19abda7895b42fc20445bfa002a2a622a592344ccce7b1986",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "2037b00d2234e8ea36b31d38cd4060b104f73387cc7f428988d7073cb06c0bf6",
+      "rom_sha256": "4dac9de07f7b4f61e444da85b50419257fd441dcd3ff32666436f7c5449ce011",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "cycles": [
+                608,
+                608,
+                608,
+                608
+              ],
+              "max_cycles": 608,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                136540,
+                136540,
+                136540,
+                136540
+              ],
+              "max_cycles": 136540,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15361,
+                15361,
+                15361,
+                15361
+              ],
+              "max_cycles": 15361,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2508,
+                2508,
+                2508,
+                2508
+              ],
+              "max_cycles": 2508,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                5324,
+                5324,
+                5324,
+                5324
+              ],
+              "max_cycles": 5324,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                58215,
+                58215,
+                58215,
+                58215
+              ],
+              "max_cycles": 58215,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                6286,
+                6286,
+                6286,
+                6286
+              ],
+              "max_cycles": 6286,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                58609,
+                58609,
+                58609,
+                58609
+              ],
+              "max_cycles": 58609,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                16647,
+                16647,
+                16647,
+                16647
+              ],
+              "max_cycles": 16647,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                8625,
+                8625,
+                8625,
+                8625
+              ],
+              "max_cycles": 8625,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                244371,
+                244371,
+                244371,
+                244371
+              ],
+              "max_cycles": 244371,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                244639,
+                244641,
+                244641,
+                244641
+              ],
+              "max_cycles": 244641,
+              "results": [
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "label": "ordinary-South-complete-host-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "cycles": [
+                590,
+                590,
+                590,
+                590
+              ],
+              "max_cycles": 590,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                146906,
+                146906,
+                146906,
+                146906
+              ],
+              "max_cycles": 146906,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15357,
+                15357,
+                15357,
+                15357
+              ],
+              "max_cycles": 15357,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2740,
+                2740,
+                2740,
+                2740
+              ],
+              "max_cycles": 2740,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                5354,
+                5354,
+                5354,
+                5354
+              ],
+              "max_cycles": 5354,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                57560,
+                57560,
+                57560,
+                57560
+              ],
+              "max_cycles": 57560,
+              "results": [
+                1048575,
+                1048575,
+                1048575,
+                1048575
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                6316,
+                6316,
+                6316,
+                6316
+              ],
+              "max_cycles": 6316,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                58266,
+                58266,
+                58266,
+                58266
+              ],
+              "max_cycles": 58266,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                17853,
+                17853,
+                17853,
+                17853
+              ],
+              "max_cycles": 17853,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                9111,
+                9111,
+                9111,
+                9111
+              ],
+              "max_cycles": 9111,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                256326,
+                256326,
+                256326,
+                256326
+              ],
+              "max_cycles": 256326,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                256598,
+                256598,
+                256598,
+                256598
+              ],
+              "max_cycles": 256598,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "cycles": [
+                590,
+                590,
+                590,
+                590
+              ],
+              "max_cycles": 590,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                448606,
+                448606,
+                448606,
+                448606
+              ],
+              "max_cycles": 448606,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15357,
+                15357,
+                15357,
+                15357
+              ],
+              "max_cycles": 15357,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2740,
+                2740,
+                2740,
+                2740
+              ],
+              "max_cycles": 2740,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                8791,
+                8791,
+                8791,
+                8791
+              ],
+              "max_cycles": 8791,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                56375,
+                56375,
+                56375,
+                56375
+              ],
+              "max_cycles": 56375,
+              "results": [
+                1048575,
+                1048575,
+                1048575,
+                1048575
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                9753,
+                9753,
+                9753,
+                9753
+              ],
+              "max_cycles": 9753,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                57081,
+                57081,
+                57081,
+                57081
+              ],
+              "max_cycles": 57081,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                17853,
+                17853,
+                17853,
+                17853
+              ],
+              "max_cycles": 17853,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                9111,
+                9111,
+                9111,
+                9111
+              ],
+              "max_cycles": 9111,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                560278,
+                560278,
+                560278,
+                560278
+              ],
+              "max_cycles": 560278,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                560550,
+                560550,
+                560550,
+                560550
+              ],
+              "max_cycles": 560550,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": true
+    },
+    "empty_evidence_only": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "089b20562cd5fc2e692a2c71858fdb33b5df66553ef800b9c7e5717a5941b181",
+        "creatures": "40cf1dc6b2aac7f19abda7895b42fc20445bfa002a2a622a592344ccce7b1986",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "6d66f2ddd25dff722b3b93731d862e1ae422b28455ac94f359d1504d1af72a82",
+      "rom_sha256": "05c40c9e13ae923d8615d3f62e4c05b09b0e663229b4b9bc8c4bc4e3a57da972",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "cycles": [
+                608,
+                608,
+                608,
+                608
+              ],
+              "max_cycles": 608,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                136540,
+                136540,
+                136540,
+                136540
+              ],
+              "max_cycles": 136540,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15361,
+                15361,
+                15361,
+                15361
+              ],
+              "max_cycles": 15361,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2508,
+                2508,
+                2508,
+                2508
+              ],
+              "max_cycles": 2508,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                5324,
+                5324,
+                5324,
+                5324
+              ],
+              "max_cycles": 5324,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                12516,
+                12516,
+                12516,
+                12516
+              ],
+              "max_cycles": 12516,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                6286,
+                6286,
+                6286,
+                6286
+              ],
+              "max_cycles": 6286,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                12910,
+                12910,
+                12910,
+                12910
+              ],
+              "max_cycles": 12910,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                16647,
+                16647,
+                16647,
+                16647
+              ],
+              "max_cycles": 16647,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                8625,
+                8625,
+                8625,
+                8625
+              ],
+              "max_cycles": 8625,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                198672,
+                198672,
+                198672,
+                198672
+              ],
+              "max_cycles": 198672,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                198940,
+                198942,
+                198942,
+                198942
+              ],
+              "max_cycles": 198942,
+              "results": [
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "label": "ordinary-South-complete-host-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "cycles": [
+                590,
+                590,
+                590,
+                590
+              ],
+              "max_cycles": 590,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                146906,
+                146906,
+                146906,
+                146906
+              ],
+              "max_cycles": 146906,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15357,
+                15357,
+                15357,
+                15357
+              ],
+              "max_cycles": 15357,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2740,
+                2740,
+                2740,
+                2740
+              ],
+              "max_cycles": 2740,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                5354,
+                5354,
+                5354,
+                5354
+              ],
+              "max_cycles": 5354,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                14831,
+                14831,
+                14831,
+                14831
+              ],
+              "max_cycles": 14831,
+              "results": [
+                1048575,
+                1048575,
+                1048575,
+                1048575
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                6316,
+                6316,
+                6316,
+                6316
+              ],
+              "max_cycles": 6316,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                15537,
+                15537,
+                15537,
+                15537
+              ],
+              "max_cycles": 15537,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                17853,
+                17853,
+                17853,
+                17853
+              ],
+              "max_cycles": 17853,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                9111,
+                9111,
+                9111,
+                9111
+              ],
+              "max_cycles": 9111,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                213597,
+                213597,
+                213597,
+                213597
+              ],
+              "max_cycles": 213597,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                213869,
+                213869,
+                213869,
+                213869
+              ],
+              "max_cycles": 213869,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "cycles": [
+                590,
+                590,
+                590,
+                590
+              ],
+              "max_cycles": 590,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                448606,
+                448606,
+                448606,
+                448606
+              ],
+              "max_cycles": 448606,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15357,
+                15357,
+                15357,
+                15357
+              ],
+              "max_cycles": 15357,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2740,
+                2740,
+                2740,
+                2740
+              ],
+              "max_cycles": 2740,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                8791,
+                8791,
+                8791,
+                8791
+              ],
+              "max_cycles": 8791,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                56815,
+                56815,
+                56815,
+                56815
+              ],
+              "max_cycles": 56815,
+              "results": [
+                1048575,
+                1048575,
+                1048575,
+                1048575
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                9753,
+                9753,
+                9753,
+                9753
+              ],
+              "max_cycles": 9753,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                57521,
+                57521,
+                57521,
+                57521
+              ],
+              "max_cycles": 57521,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                17853,
+                17853,
+                17853,
+                17853
+              ],
+              "max_cycles": 17853,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                9111,
+                9111,
+                9111,
+                9111
+              ],
+              "max_cycles": 9111,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                560718,
+                560718,
+                560718,
+                560718
+              ],
+              "max_cycles": 560718,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                560990,
+                560990,
+                560990,
+                560990
+              ],
+              "max_cycles": 560990,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": true
+    },
+    "optimized": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "158fcec4bddcab1a2294d96352e6bb8153feaeee6e6ed1c9cc50be04c8453a18",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "3b570afe8613f639f7394c77eb9d785e15d454137adc6d3609f4fc53722787ce",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "cycles": [
+                590,
+                590,
+                590,
+                590
+              ],
+              "max_cycles": 590,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                54688,
+                54688,
+                54688,
+                54688
+              ],
+              "max_cycles": 54688,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15343,
+                15343,
+                15343,
+                15343
+              ],
+              "max_cycles": 15343,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2490,
+                2490,
+                2490,
+                2490
+              ],
+              "max_cycles": 2490,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                5306,
+                5306,
+                5306,
+                5306
+              ],
+              "max_cycles": 5306,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                3549,
+                3549,
+                3549,
+                3549
+              ],
+              "max_cycles": 3549,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                6268,
+                6268,
+                6268,
+                6268
+              ],
+              "max_cycles": 6268,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                3939,
+                3939,
+                3939,
+                3939
+              ],
+              "max_cycles": 3939,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                16629,
+                16629,
+                16629,
+                16629
+              ],
+              "max_cycles": 16629,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                8607,
+                8607,
+                8607,
+                8607
+              ],
+              "max_cycles": 8607,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                107855,
+                107855,
+                107855,
+                107855
+              ],
+              "max_cycles": 107855,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                108141,
+                108143,
+                108143,
+                108143
+              ],
+              "max_cycles": 108143,
+              "results": [
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "label": "ordinary-South-complete-host-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "cycles": [
+                572,
+                572,
+                572,
+                572
+              ],
+              "max_cycles": 572,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                70214,
+                70214,
+                70214,
+                70214
+              ],
+              "max_cycles": 70214,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15339,
+                15339,
+                15339,
+                15339
+              ],
+              "max_cycles": 15339,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2722,
+                2722,
+                2722,
+                2722
+              ],
+              "max_cycles": 2722,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                5336,
+                5336,
+                5336,
+                5336
+              ],
+              "max_cycles": 5336,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                4359,
+                4359,
+                4359,
+                4359
+              ],
+              "max_cycles": 4359,
+              "results": [
+                1048575,
+                1048575,
+                1048575,
+                1048575
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                6298,
+                6298,
+                6298,
+                6298
+              ],
+              "max_cycles": 6298,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                5061,
+                5061,
+                5061,
+                5061
+              ],
+              "max_cycles": 5061,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                17835,
+                17835,
+                17835,
+                17835
+              ],
+              "max_cycles": 17835,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                9093,
+                9093,
+                9093,
+                9093
+              ],
+              "max_cycles": 9093,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                126435,
+                126435,
+                126435,
+                126435
+              ],
+              "max_cycles": 126435,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                126725,
+                126725,
+                126725,
+                126725
+              ],
+              "max_cycles": 126725,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "cycles": [
+                572,
+                572,
+                572,
+                572
+              ],
+              "max_cycles": 572,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "roster": {
+              "cycles": [
+                443638,
+                443638,
+                443638,
+                443638
+              ],
+              "max_cycles": 443638,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quests": {
+              "cycles": [
+                15339,
+                15339,
+                15339,
+                15339
+              ],
+              "max_cycles": 15339,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_campaign": {
+              "cycles": [
+                2722,
+                2722,
+                2722,
+                2722
+              ],
+              "max_cycles": 2722,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "retained_legacy": {
+              "cycles": [
+                8773,
+                8773,
+                8773,
+                8773
+              ],
+              "max_cycles": 8773,
+              "results": [
+                8063,
+                8063,
+                8063,
+                8063
+              ]
+            },
+            "southern_evidence": {
+              "cycles": [
+                6526,
+                6526,
+                6526,
+                6526
+              ],
+              "max_cycles": 6526,
+              "results": [
+                1048575,
+                1048575,
+                1048575,
+                1048575
+              ]
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "cycles": [
+                9735,
+                9735,
+                9735,
+                9735
+              ],
+              "max_cycles": 9735,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_sources_including_evidence": {
+              "cycles": [
+                7228,
+                7228,
+                7228,
+                7228
+              ],
+              "max_cycles": 7228,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "equipment": {
+              "cycles": [
+                17835,
+                17835,
+                17835,
+                17835
+              ],
+              "max_cycles": 17835,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "quest_equipment": {
+              "cycles": [
+                9093,
+                9093,
+                9093,
+                9093
+              ],
+              "max_cycles": 9093,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "full_save_validate": {
+              "cycles": [
+                505463,
+                505463,
+                505463,
+                505463
+              ],
+              "max_cycles": 505463,
+              "results": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "southern_anchor_30": {
+              "cycles": [
+                505753,
+                505753,
+                505753,
+                505753
+              ],
+              "max_cycles": 505753,
+              "results": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": true
+    }
+  },
+  "validation": {
+    "empty_byte_mutations_per_implementation": 6120,
+    "implementations": [
+      "strict-aliasing may_alias",
+      "portable fieldwise fallback"
+    ],
+    "checks_per_mutation": [
+      "current",
+      "revision1",
+      "revision2",
+      "revision3",
+      "revision4"
+    ],
+    "source_evidence_form_floor_cases": 96768,
+    "all_form_byte_values": 256,
+    "strict_arm_no_libc_symbols": true,
+    "historical_differential": {
+      "north_commit": "f1676fd7c5703281913f32052d964ec0ee06ecc5",
+      "fixtures": [
+        {
+          "file": "tests/fixtures/v5-revision1/all-evolved-village.sav",
+          "north": 1,
+          "south": 1,
+          "state_equal": true,
+          "south_store": 1,
+          "south_reload": 1
+        },
+        {
+          "file": "tests/fixtures/v5-revision1/pr5-evolved-reversed-party.sav",
+          "north": 1,
+          "south": 1,
+          "state_equal": true,
+          "south_store": 1,
+          "south_reload": 1
+        },
+        {
+          "file": "tests/fixtures/v5-revision2/all-eleven-town.sav",
+          "north": 1,
+          "south": 1,
+          "state_equal": true,
+          "south_store": 1,
+          "south_reload": 1
+        },
+        {
+          "file": "tests/fixtures/v5-revision3/northern-all21-town.sav",
+          "north": 1,
+          "south": 1,
+          "state_equal": true,
+          "south_store": 1,
+          "south_reload": 1
+        }
+      ],
+      "instance_comparisons": 158400,
+      "present_regressions_found": 0
+    },
+    "suites": [
+      {
+        "command": "python3 tests/test_creatures.py",
+        "tests": 42,
+        "seconds": 35.859,
+        "result": "PASS"
+      },
+      {
+        "command": "python3 tests/test_save5.py",
+        "tests": 41,
+        "seconds": 67.637,
+        "result": "PASS"
+      },
+      {
+        "command": "python3 tests/test_southern_save.py",
+        "tests": 13,
+        "seconds": 110.675,
+        "result": "PASS"
+      },
+      {
+        "command": "python3 tests/test_southern_save_limits.py",
+        "tests": 4,
+        "seconds": 10.464,
+        "result": "PASS"
+      },
+      {
+        "command": "python3 tests/test_southern_validation_optimization.py",
+        "tests": 3,
+        "seconds": 3.468,
+        "result": "PASS"
+      }
+    ]
+  },
+  "pipeline_reports": [
+    "southern-save-limits-arm-final.json",
+    "southern-save-limits-sanitizers.json"
+  ],
+  "source_sha256": {
+    "src/creatures.c": "158fcec4bddcab1a2294d96352e6bb8153feaeee6e6ed1c9cc50be04c8453a18",
+    "src/save5.c": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+    "src/southern_quests.c": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b",
+    "tests/profile_southern_validation.py": "55381fa08c087072e4904c9e77519f40ef4effcc9d6fe7799da876a7d1f43886",
+    "tests/test_southern_validation_optimization.py": "b93a29b71194c7b99fbe2f1f3608d8f0793c8b141e96c12676cac76a24e0868a"
+  },
+  "scope_limits": [
+    "Profiling includes no game update/render work",
+    "21-instance and160-instance scenarios use host setup from authenticated N5; no native Southern acquisition claim",
+    "Static .su sums are not runtime stack high-water",
+    "Parent owns final native cadence acceptance"
+  ],
+  "protected_roms_observed_unchanged_at_164343_UTC": {
+    "build/emberbond.gba": "44c352a0d83e0c476e3917caae917501e5a817dbbfbf3533a4117e48735c6530",
+    "build/southern-scene2-controls2/tested.gba": "35d1def3959d88f071a79d7da2ed3219114415dbd4db09c151f1f2e72c3f47c1"
+  }
+}

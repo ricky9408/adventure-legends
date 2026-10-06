@@ -1,0 +1,996 @@
+{
+  "purpose": "Second semantics-preserving validation optimization for fully-earned21-instance rest entry; native cadence rerun remains parent-owned",
+  "source_sha256": {
+    "src/creatures.c": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+    "src/save5.c": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+    "tests/southern_validation_differential.c": "141d0f1de58bb92f9e70c8219edefb8f032cf99a691972846b97c78e358c4898",
+    "tests/test_southern_validation_optimization.py": "cd1a746fe2cfa63e9323a30a609210f88eaacd9296ab6ec852a7ded497f76fec",
+    "tests/profile_southern_validation.py": "78ab0465cd9b4c9442902168ede48d30521b2c2f04a71ce5b21c472f20632135"
+  },
+  "changes": [
+    "Validate known level using exact adjacent XP thresholds; leave public level_for_xp unchanged",
+    "Full roster performs structural/reference/rarity party checks then fully validates every record once; standalone party validation still fully checks members",
+    "Evaluate legacy story-family lookup only for story-locked instances",
+    "Check seen/obtained subset bytewise and resolve every set discovery identity; no bit or disabled-ID bypass"
+  ],
+  "native_fixture": {
+    "path": "build/southern-s0-earned41-controls/earned41-controls-complete.sav",
+    "sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+    "retained_instances": 21
+  },
+  "profiles": {
+    "before": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "158fcec4bddcab1a2294d96352e6bb8153feaeee6e6ed1c9cc50be04c8453a18",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "c3d93e019184e626def20f8ca42ac85cef45b7ce37db049d4b542cc8e0864cc8",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "earned_fixture_sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "max_cycles": 590
+            },
+            "roster": {
+              "max_cycles": 54688
+            },
+            "quests": {
+              "max_cycles": 15343
+            },
+            "quest_campaign": {
+              "max_cycles": 2490
+            },
+            "retained_legacy": {
+              "max_cycles": 5306
+            },
+            "southern_evidence": {
+              "max_cycles": 3549
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6268
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 3939
+            },
+            "equipment": {
+              "max_cycles": 16629
+            },
+            "quest_equipment": {
+              "max_cycles": 8607
+            },
+            "full_save_validate": {
+              "max_cycles": 107855
+            },
+            "southern_anchor_30": {
+              "max_cycles": 108143
+            }
+          }
+        },
+        {
+          "label": "native-earned-South21-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "max_cycles": 578
+            },
+            "roster": {
+              "max_cycles": 70241
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2744
+            },
+            "retained_legacy": {
+              "max_cycles": 5336
+            },
+            "southern_evidence": {
+              "max_cycles": 4359
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6298
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 5061
+            },
+            "equipment": {
+              "max_cycles": 18311
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 126966
+            },
+            "southern_anchor_30": {
+              "max_cycles": 127256
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "max_cycles": 572
+            },
+            "roster": {
+              "max_cycles": 443638
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2722
+            },
+            "retained_legacy": {
+              "max_cycles": 8773
+            },
+            "southern_evidence": {
+              "max_cycles": 6526
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 9735
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 7228
+            },
+            "equipment": {
+              "max_cycles": 17835
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 505463
+            },
+            "southern_anchor_30": {
+              "max_cycles": 505753
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": true
+    },
+    "xp": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "808f61d0f4ca72f8e51451f000b17fff25d2f82ab10bd2bbec1c2ab8511487b5",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "faf663d7c7291d387de542f5f3ca6208da3487d1de31896875e9641f399f0de7",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "earned_fixture_sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "max_cycles": 590
+            },
+            "roster": {
+              "max_cycles": 49370
+            },
+            "quests": {
+              "max_cycles": 15343
+            },
+            "quest_campaign": {
+              "max_cycles": 2490
+            },
+            "retained_legacy": {
+              "max_cycles": 5306
+            },
+            "southern_evidence": {
+              "max_cycles": 3549
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6268
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 3939
+            },
+            "equipment": {
+              "max_cycles": 16629
+            },
+            "quest_equipment": {
+              "max_cycles": 8607
+            },
+            "full_save_validate": {
+              "max_cycles": 102537
+            },
+            "southern_anchor_30": {
+              "max_cycles": 102825
+            }
+          }
+        },
+        {
+          "label": "native-earned-South21-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "max_cycles": 578
+            },
+            "roster": {
+              "max_cycles": 62027
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2744
+            },
+            "retained_legacy": {
+              "max_cycles": 5336
+            },
+            "southern_evidence": {
+              "max_cycles": 4359
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6298
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 5061
+            },
+            "equipment": {
+              "max_cycles": 18311
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 118752
+            },
+            "southern_anchor_30": {
+              "max_cycles": 119042
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "max_cycles": 572
+            },
+            "roster": {
+              "max_cycles": 400118
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2722
+            },
+            "retained_legacy": {
+              "max_cycles": 8773
+            },
+            "southern_evidence": {
+              "max_cycles": 6526
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 9735
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 7228
+            },
+            "equipment": {
+              "max_cycles": 17835
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 461943
+            },
+            "southern_anchor_30": {
+              "max_cycles": 462233
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": false
+    },
+    "xp-party": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "58723ffb184161a8525b03de0fb519b9126e630dfbfd10008a33a70ee4534845",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "77503729a5872aaa7ba67118799d3365b0dd5aa92fe2effc57a93ab17827cf53",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "earned_fixture_sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "max_cycles": 590
+            },
+            "roster": {
+              "max_cycles": 45685
+            },
+            "quests": {
+              "max_cycles": 15343
+            },
+            "quest_campaign": {
+              "max_cycles": 2490
+            },
+            "retained_legacy": {
+              "max_cycles": 5306
+            },
+            "southern_evidence": {
+              "max_cycles": 3549
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6268
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 3939
+            },
+            "equipment": {
+              "max_cycles": 16629
+            },
+            "quest_equipment": {
+              "max_cycles": 8607
+            },
+            "full_save_validate": {
+              "max_cycles": 98852
+            },
+            "southern_anchor_30": {
+              "max_cycles": 99140
+            }
+          }
+        },
+        {
+          "label": "native-earned-South21-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "max_cycles": 578
+            },
+            "roster": {
+              "max_cycles": 58369
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2744
+            },
+            "retained_legacy": {
+              "max_cycles": 5336
+            },
+            "southern_evidence": {
+              "max_cycles": 4359
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6298
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 5061
+            },
+            "equipment": {
+              "max_cycles": 18311
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 115094
+            },
+            "southern_anchor_30": {
+              "max_cycles": 115384
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "max_cycles": 572
+            },
+            "roster": {
+              "max_cycles": 396433
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2722
+            },
+            "retained_legacy": {
+              "max_cycles": 8773
+            },
+            "southern_evidence": {
+              "max_cycles": 6526
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 9735
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 7228
+            },
+            "equipment": {
+              "max_cycles": 17835
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 458258
+            },
+            "southern_anchor_30": {
+              "max_cycles": 458548
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": false
+    },
+    "xp-party-lazy": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "eb953cbc9d82f81e9f76fa4aa2793da29a5bda6656f1504ddc65ac0448d83d6d",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "01379311982c4fc0ee2d0aa339d5ed759974052b60241db58934756ba2309c41",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "earned_fixture_sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "max_cycles": 590
+            },
+            "roster": {
+              "max_cycles": 44508
+            },
+            "quests": {
+              "max_cycles": 15343
+            },
+            "quest_campaign": {
+              "max_cycles": 2490
+            },
+            "retained_legacy": {
+              "max_cycles": 5306
+            },
+            "southern_evidence": {
+              "max_cycles": 3549
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6268
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 3939
+            },
+            "equipment": {
+              "max_cycles": 16629
+            },
+            "quest_equipment": {
+              "max_cycles": 8607
+            },
+            "full_save_validate": {
+              "max_cycles": 97675
+            },
+            "southern_anchor_30": {
+              "max_cycles": 97963
+            }
+          }
+        },
+        {
+          "label": "native-earned-South21-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "max_cycles": 578
+            },
+            "roster": {
+              "max_cycles": 55342
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2744
+            },
+            "retained_legacy": {
+              "max_cycles": 5336
+            },
+            "southern_evidence": {
+              "max_cycles": 4359
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6298
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 5061
+            },
+            "equipment": {
+              "max_cycles": 18311
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 112067
+            },
+            "southern_anchor_30": {
+              "max_cycles": 112357
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "max_cycles": 572
+            },
+            "roster": {
+              "max_cycles": 372185
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2722
+            },
+            "retained_legacy": {
+              "max_cycles": 8773
+            },
+            "southern_evidence": {
+              "max_cycles": 6526
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 9735
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 7228
+            },
+            "equipment": {
+              "max_cycles": 17835
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 434010
+            },
+            "southern_anchor_30": {
+              "max_cycles": 434300
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": false
+    },
+    "final": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "27525890e1d66c1bf6b65dd5e36eb737f7fa9b15a9136918a9fabe19d15f17c5",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "d8ec9d9c8a757ad033a28cacae597daf1a504c464f5dee1a5fc83ee5b12a47c4",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "earned_fixture_sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "max_cycles": 590
+            },
+            "roster": {
+              "max_cycles": 37950
+            },
+            "quests": {
+              "max_cycles": 15343
+            },
+            "quest_campaign": {
+              "max_cycles": 2490
+            },
+            "retained_legacy": {
+              "max_cycles": 5306
+            },
+            "southern_evidence": {
+              "max_cycles": 3549
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6268
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 3939
+            },
+            "equipment": {
+              "max_cycles": 16629
+            },
+            "quest_equipment": {
+              "max_cycles": 8607
+            },
+            "full_save_validate": {
+              "max_cycles": 91117
+            },
+            "southern_anchor_30": {
+              "max_cycles": 91405
+            }
+          }
+        },
+        {
+          "label": "native-earned-South21-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "max_cycles": 578
+            },
+            "roster": {
+              "max_cycles": 48876
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2744
+            },
+            "retained_legacy": {
+              "max_cycles": 5336
+            },
+            "southern_evidence": {
+              "max_cycles": 4359
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6298
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 5061
+            },
+            "equipment": {
+              "max_cycles": 18311
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 105601
+            },
+            "southern_anchor_30": {
+              "max_cycles": 105891
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "max_cycles": 572
+            },
+            "roster": {
+              "max_cycles": 364885
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2722
+            },
+            "retained_legacy": {
+              "max_cycles": 8773
+            },
+            "southern_evidence": {
+              "max_cycles": 6526
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 9735
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 7228
+            },
+            "equipment": {
+              "max_cycles": 17835
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 426710
+            },
+            "southern_anchor_30": {
+              "max_cycles": 427000
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": false
+    },
+    "production": {
+      "purpose": "Isolated ARM7TDMI validation diagnosis; fixtures after N5 use host setup, not native acquisition evidence",
+      "source_sha256": {
+        "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "save5": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+        "creatures": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+        "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+      },
+      "compiled_save5_sha256": "b3558e87cb3a050095b7b45cec417cf244e6dd76060b9d4379862a2893710a9f",
+      "rom_sha256": "d8ec9d9c8a757ad033a28cacae597daf1a504c464f5dee1a5fc83ee5b12a47c4",
+      "waitcnt": "0x4317",
+      "timer_hz": 16777216,
+      "earned_fixture_sha256": "dbef8414a1a8ada889c499ee63cd6efd656dffd89a1e3cbd22118bba1ee3e0f3",
+      "scenarios": [
+        {
+          "label": "authenticated-N5-plus-South-entry",
+          "retained": 11,
+          "components": {
+            "campaign": {
+              "max_cycles": 590
+            },
+            "roster": {
+              "max_cycles": 37950
+            },
+            "quests": {
+              "max_cycles": 15343
+            },
+            "quest_campaign": {
+              "max_cycles": 2490
+            },
+            "retained_legacy": {
+              "max_cycles": 5306
+            },
+            "southern_evidence": {
+              "max_cycles": 3549
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6268
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 3939
+            },
+            "equipment": {
+              "max_cycles": 16629
+            },
+            "quest_equipment": {
+              "max_cycles": 8607
+            },
+            "full_save_validate": {
+              "max_cycles": 91117
+            },
+            "southern_anchor_30": {
+              "max_cycles": 91405
+            }
+          }
+        },
+        {
+          "label": "native-earned-South21-fixture",
+          "retained": 21,
+          "components": {
+            "campaign": {
+              "max_cycles": 578
+            },
+            "roster": {
+              "max_cycles": 48876
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2744
+            },
+            "retained_legacy": {
+              "max_cycles": 5336
+            },
+            "southern_evidence": {
+              "max_cycles": 4359
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 6298
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 5061
+            },
+            "equipment": {
+              "max_cycles": 18311
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 105601
+            },
+            "southern_anchor_30": {
+              "max_cycles": 105891
+            }
+          }
+        },
+        {
+          "label": "synthetic-full160",
+          "retained": 160,
+          "components": {
+            "campaign": {
+              "max_cycles": 572
+            },
+            "roster": {
+              "max_cycles": 364885
+            },
+            "quests": {
+              "max_cycles": 15339
+            },
+            "quest_campaign": {
+              "max_cycles": 2722
+            },
+            "retained_legacy": {
+              "max_cycles": 8773
+            },
+            "southern_evidence": {
+              "max_cycles": 6526
+            },
+            "quest_creatures_including_legacy_evidence": {
+              "max_cycles": 9735
+            },
+            "southern_sources_including_evidence": {
+              "max_cycles": 7228
+            },
+            "equipment": {
+              "max_cycles": 17835
+            },
+            "quest_equipment": {
+              "max_cycles": 9093
+            },
+            "full_save_validate": {
+              "max_cycles": 426710
+            },
+            "southern_anchor_30": {
+              "max_cycles": 427000
+            }
+          }
+        }
+      ],
+      "source_unchanged_during_measurement": true
+    }
+  },
+  "differential": {
+    "xp_level_pairs": 23531642,
+    "party_reference_pairs": 301510,
+    "collection_byte_pairs": 1048576,
+    "instance_corruptions": 36720
+  },
+  "historical_differential": {
+    "north_commit": "f1676fd7c5703281913f32052d964ec0ee06ecc5",
+    "fixtures": [
+      {
+        "file": "tests/fixtures/v5-revision1/all-evolved-village.sav",
+        "north": 1,
+        "south": 1,
+        "state_equal": true,
+        "south_store": 1,
+        "south_reload": 1
+      },
+      {
+        "file": "tests/fixtures/v5-revision1/pr5-evolved-reversed-party.sav",
+        "north": 1,
+        "south": 1,
+        "state_equal": true,
+        "south_store": 1,
+        "south_reload": 1
+      },
+      {
+        "file": "tests/fixtures/v5-revision2/all-eleven-town.sav",
+        "north": 1,
+        "south": 1,
+        "state_equal": true,
+        "south_store": 1,
+        "south_reload": 1
+      },
+      {
+        "file": "tests/fixtures/v5-revision3/northern-all21-town.sav",
+        "north": 1,
+        "south": 1,
+        "state_equal": true,
+        "south_store": 1,
+        "south_reload": 1
+      }
+    ],
+    "instance_comparisons": 158400,
+    "present_regressions_found": 0
+  },
+  "suites": [
+    {
+      "name": "core",
+      "tests": 42,
+      "seconds": 36.27,
+      "result": "PASS"
+    },
+    {
+      "name": "save5",
+      "tests": 41,
+      "seconds": 68.502,
+      "result": "PASS"
+    },
+    {
+      "name": "southern-save",
+      "tests": 13,
+      "seconds": 114.672,
+      "result": "PASS"
+    },
+    {
+      "name": "capacity-ASan-UBSan",
+      "tests": 4,
+      "seconds": 10.148,
+      "result": "PASS"
+    },
+    {
+      "name": "validation-fast-path-proofs",
+      "tests": 4,
+      "seconds": 5.091,
+      "result": "PASS"
+    }
+  ],
+  "save_step_report": {
+    "path": "southern-second-save-step-arm.json",
+    "sha256": "1a9b00013b09743b518f0e96bb6092dae7e892988b261dcc9fbaeee28491d3cb"
+  },
+  "sanitizer_report": {
+    "path": "southern-second-southern-save-limits-sanitizers.json",
+    "sha256": "4a7cb811f9ab3149cb26323fa2c47e9a058491e144291f7fbc093b22bc205b17"
+  },
+  "actual21_anchor_cycles_before": 127256,
+  "actual21_anchor_cycles_after": 105891,
+  "actual21_anchor_cycles_saved": 21365,
+  "scope": [
+    "No cache or weakened validation",
+    "No first-time-anchor bypass",
+    "No public API signature or result change",
+    "No save wire or immutable-policy change",
+    "No game/render/main-ROM/S0 edits",
+    "Isolated measurements do not prove final native cadence"
+  ],
+  "full_evidence_sha256": "3afb22ca1101d5ac12a5365d6a25ff3d86315937fd65f54962b491d8884d83d2"
+}

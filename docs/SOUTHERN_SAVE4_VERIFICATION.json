@@ -1,0 +1,127 @@
+{
+  "purpose": "Southern revision4 persistence/reward foundation; host and isolated ARM evidence only, not native acquisition or publication",
+  "wire_version": 5,
+  "content_revision": 4,
+  "accepted_content_revisions": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "instance_bytes": 24,
+  "roster_capacity": 160,
+  "bank_bytes": 6144,
+  "bank_offsets": [
+    512,
+    6656
+  ],
+  "used_bytes": 5056,
+  "runtime_state_bytes": 4944,
+  "maximum_step_budget": 3072,
+  "occupied_instance_semantic_charge": 160,
+  "source_sha256": {
+    "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "src/save5.c": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+    "src/save5.h": "2985f18f9da5113f0e543a9de08adcdd399622a7861ce1b975346e32d830fae0",
+    "src/southern_quests.c": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b",
+    "src/southern_quests.h": "735d7de5b06dd06bf8d3fdad43396460cbd9da78b79bb47d11a9bc6bfa343236",
+    "src/creatures.c": "158fcec4bddcab1a2294d96352e6bb8153feaeee6e6ed1c9cc50be04c8453a18",
+    "src/creatures.h": "dd9fdd2e57865d6209b4d6e5d85dbc7fa264ea25c7f217aa71a34797d1e966fe",
+    "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "src/equipment.h": "2a81f86cdd5554430834d2c0b69a25f9f2b97558f1c01848c707e463bde618d9",
+    "src/equipment_data.c": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+    "tests/test_save5.py": "6dcdfaca99dabb500faecd6ba52d01c1cdac2ae7eb8ecf8e00d37c4f6b1d8b9c",
+    "tests/test_southern_save.py": "85be4abcf7f411d244ea60a36acd1747b01feb5524f9e61156def4602a8a523d",
+    "tests/save5_sanitizer.c": "3203edf5d5a63b8fe980b640d9d752bdfac0e506222bd2e52c3d6dbc4c6e291a"
+  },
+  "suites": [
+    {
+      "command": "python3 tests/test_creatures.py",
+      "tests": 42,
+      "seconds": 35.859,
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tests/test_save5.py",
+      "tests": 41,
+      "seconds": 67.637,
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tests/test_southern_save.py",
+      "tests": 13,
+      "seconds": 110.675,
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tests/test_southern_save_limits.py",
+      "tests": 4,
+      "seconds": 10.464,
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tests/test_southern_validation_optimization.py",
+      "tests": 3,
+      "seconds": 3.468,
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tests/test_save4.py",
+      "tests": 26,
+      "result": "PASS (unchanged source)"
+    }
+  ],
+  "southern_durable_write_cases": {
+    "cut_or_success_positions_per_transition": 6146,
+    "transitions": 24,
+    "total_positions": 147504,
+    "operations": [
+      "Q22 mixed creature/gear claim",
+      "field source16 recruit",
+      "each of ten family-qualified trials",
+      "each of ten Southern evolutions",
+      "Q24 Crown claim",
+      "authentic N5 revision3 to4 migration"
+    ],
+    "retry": "same complete staged target, no second instance"
+  },
+  "historical_generic_reward_collision_cases": {
+    "revisions": [
+      1,
+      2,
+      3
+    ],
+    "reward_ids_inclusive": [
+      5,
+      128
+    ],
+    "individual_bit_cases": 372,
+    "all_event_and_lifetime_aid_bits": true,
+    "migration_preserves_all_old_ledgers": true
+  },
+  "additional_evidence": [
+    "evidence/southern-save-limits-arm-final.json",
+    "evidence/southern-save-limits-sanitizers.json",
+    "evidence/southern-validation-optimization.json"
+  ],
+  "N5_fixture": {
+    "path": "tests/fixtures/v5-revision3/northern-all21-town.sav",
+    "sha256": "f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479",
+    "source_rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+    "release_status": "Locally frozen N5 candidate; publication pending"
+  },
+  "non_claims": [
+    "No Southern native controller obtainability established here",
+    "No full-engine frame cadence or runtime stack high-water measured",
+    "Synthetic48-item capacity catalog/policy is temporary and never shipping",
+    "No implicit migration SRAM write",
+    "No GitHub or Library publication"
+  ],
+  "validation_optimization": {
+    "source_evidence_cases": 96768,
+    "historical_instance_comparisons": 158400,
+    "all24_empty_bytes_checked": true,
+    "native_cadence_acceptance": "pending parent rerun"
+  }
+}

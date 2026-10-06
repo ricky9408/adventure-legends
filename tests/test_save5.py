@@ -124,7 +124,7 @@ class Save5Tests(unittest.TestCase):
         subprocess.run(compiler + [
             '-std=c99', '-O2', '-Wall', '-Wextra', '-Werror', '-ffreestanding',
             '-fno-builtin', '-DSAVE4_HOST_TEST', '-DSAVE5_HOST_TEST', '-shared', '-fPIC',
-            *[str(ROOT / 'src' / name) for name in ('save4.c', 'save5.c', 'creatures.c', 'creature_data.c', 'equipment.c', 'equipment_data.c')],
+            *[str(ROOT / 'src' / name) for name in ('save4.c', 'save5.c', 'creatures.c', 'creature_data.c', 'equipment.c', 'equipment_data.c', 'southern_quests.c')],
             '-o', str(so),
         ], check=True)
         cls.lib = C.CDLL(str(so))
@@ -324,7 +324,7 @@ class Save5Tests(unittest.TestCase):
         s = self.fresh()
         self.store(s)
         good = bytes(self.sram[A:A+SIZE])
-        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 4),
+        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 5),
                      (14, 1), (21, 1), (32, 14), (34, 2), (46, 3), (47, 1),
                      (96, 255), (112, 0), (128, 0), (144, 1),
                      (160+1, 0x81), (160+2, 2), (160+3, 101), (160+8, 0),
@@ -601,7 +601,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(bytes(migrated.roster.lifetime_field_aid), original[4520:4536])
         self.store(migrated)
         newest = bytes(self.sram[B if offset == A else A:(B if offset == A else A)+SIZE])
-        self.assertEqual(newest[12:14], bytes((3,0)))
+        self.assertEqual(newest[12:14], bytes((4,0)))
         self.assertEqual(newest[96:4032], original[96:4032])
         self.assertEqual(newest[4296:4544], original[4296:4544])
         self.assertEqual(bytes(self.sram[:A]), old[:A])
@@ -620,7 +620,7 @@ class Save5Tests(unittest.TestCase):
         for offset in (4032,4176,4280,4544,4928,4944,5024):
             bad = bytearray(rev1); bad[offset] = 1
             self.reset(); self.put(repair_crc(bad), A); self.invalid()
-        for revision in (0,4,255,256,65535):
+        for revision in (0,5,255,256,65535):
             bad = bytearray(rev2); bad[12:14] = revision.to_bytes(2,'little')
             self.reset(); self.put(repair_crc(bad), A); self.invalid()
             self.put(repair_crc(rev1), B)
@@ -1005,7 +1005,7 @@ class Save5Tests(unittest.TestCase):
         self.store(migrated)
         destination=B if offset==A else A
         written=bytes(self.sram[destination:destination+SIZE])
-        self.assertEqual(written[12:14],b'\x03\x00')
+        self.assertEqual(written[12:14],b'\x04\x00')
         self.assertEqual(written[32:],bank[32:],'migration changed earned campaign, roster, commands, credits, quests or equipment')
         self.assertEqual(bytes(self.sram[offset:offset+SIZE]),bank)
         self.assertEqual(bytes(self.sram[:A]),data[:A])
@@ -1313,7 +1313,7 @@ int main(void) {
             state.quests.objectives[i]=masks[i-11];state.quests.rewards[i>>3]|=(1u<<(i&7));
         }
     }
-    for(i=13;i<EQUIPMENT_AUTHORED_COUNT;++i)equipment_claim(&state.equipment,equipment_authored_ids[i],i,0);
+    for(i=13;i<19;++i)equipment_claim(&state.equipment,equipment_authored_ids[i],i,0);
     state.quests.region_flags[1]=255;state.campaign.room=29;
     bench(18);bench(19);bench(20);
     completed=1;

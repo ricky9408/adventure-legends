@@ -1,0 +1,1380 @@
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/sky-clear-source.sav",
+      "sram_sha256": "d52f2679dcab3e9b34f3c9f0458d311959085c972244bb9124df58e151349da6",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/sky-clear-source.png",
+      "status": {
+        "game_state": 1,
+        "room": 0,
+        "px": 120,
+        "py": 118,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 3,
+        "spirit": 2,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10
+      ]
+    },
+    "01-quay-entry-no-ending-or-river-quests": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/01-quay-entry-no-ending-or-river-quests.state",
+      "state_sha256": "ca5799e35b36e2519ae3e6aa3451fbfb5b0da4dd638c7a4bb3439f4906b3ac14",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/01-quay-entry-no-ending-or-river-quests.sav",
+      "sram_sha256": "96c72d81abde784753c281e960c552aa1b4d78277a54e2070df85ed262934c73",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/01-quay-entry-no-ending-or-river-quests.png",
+      "status": {
+        "game_state": 1,
+        "room": 22,
+        "px": 240,
+        "py": 284,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 120,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 2,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10
+      ]
+    },
+    "02-lines-active": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/02-lines-active.state",
+      "state_sha256": "6d1225fc14c40ff3ae498979e18ea7bae9a1fbba8948a6b9c0555df46b0a6860",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/02-lines-active.sav",
+      "sram_sha256": "e781e1f563725fbb68f3b14b33ab8291d72020962f0bbfa71a3e3ac648b80b5f",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/02-lines-active.png",
+      "status": {
+        "game_state": 1,
+        "room": 22,
+        "px": 170,
+        "py": 209,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 50,
+        "camera_y": 129,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 2,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10
+      ]
+    },
+    "lines-reversed-order": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/lines-reversed-order.state",
+      "state_sha256": "e5895beae09f851d1c125665416ca2163b23414707d26e56ba37416685beb87e",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/lines-reversed-order.sav",
+      "sram_sha256": "f4124026a176997bb665ca9a820ac6e52c8adaf7b12677e2d0b4b51a8e2ecd31",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/lines-reversed-order.png",
+      "status": {
+        "game_state": 1,
+        "room": 22,
+        "px": 166,
+        "py": 209,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 46,
+        "camera_y": 129,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 2,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19
+      ]
+    },
+    "03-guaranteed-base-recruits": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/03-guaranteed-base-recruits.state",
+      "state_sha256": "f4170efa8be6d7225a4ed42d769e2c871d0f16a5ffbe6f2868004e931e0ef7ee",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/03-guaranteed-base-recruits.sav",
+      "sram_sha256": "449a3ad25c2d9256580b8aa6316684e7a172acf2f63413257d3a07b17df051a6",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/03-guaranteed-base-recruits.png",
+      "status": {
+        "game_state": 1,
+        "room": 23,
+        "px": 352,
+        "py": 176,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 232,
+        "camera_y": 96,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "26-unsolved-entry": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/26-unsolved-entry.state",
+      "state_sha256": "e5b15da2411d1f5c6f083cb046b7cf6ac4b850d7c1b94a04b5a22f2d054582a2",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/26-unsolved-entry.sav",
+      "sram_sha256": "7b818e2b5f3820c687cb6ae76aed097517cd6561d0204d222b04ffe4154c357f",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/26-unsolved-entry.png",
+      "status": {
+        "game_state": 1,
+        "room": 26,
+        "px": 120,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "26-solved-manual-weight": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/26-solved-manual-weight.state",
+      "state_sha256": "7a5f7bdc938df298247122a00b3905784888f17906895ab79b1acf562d3f4acd",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/26-solved-manual-weight.sav",
+      "sram_sha256": "69f68c3c7a4f43821b851fe87136839212e6a4e9c77cd068acc86afee91c7f52",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/26-solved-manual-weight.png",
+      "status": {
+        "game_state": 1,
+        "room": 26,
+        "px": 32,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "27-unsolved-entry": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/27-unsolved-entry.state",
+      "state_sha256": "39baf4e2fc79140b1466232305c11450dbb6ab4dc0f8ffdd025a05988d98e43b",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/27-unsolved-entry.sav",
+      "sram_sha256": "9496f094ec211186a7fc0e9e939aad8d1582fc3f499fa42a5a8ed0082b29f714",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/27-unsolved-entry.png",
+      "status": {
+        "game_state": 1,
+        "room": 27,
+        "px": 120,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "27-solved-manual-weight": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/27-solved-manual-weight.state",
+      "state_sha256": "f160fb758845f7597a211abd3baf9a194a2b41a02a2c3fde402add52685c7aee",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/27-solved-manual-weight.sav",
+      "sram_sha256": "3a4718045a1d574c9333a0917661bb2677d569dd2a62a7d3984141718e388b4a",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/27-solved-manual-weight.png",
+      "status": {
+        "game_state": 1,
+        "room": 27,
+        "px": 35,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "28-unsolved-entry": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/28-unsolved-entry.state",
+      "state_sha256": "61ab019972bc70ede6d306d28a0ae0016d4e4cedc27fff15f36c0c18a1145dd2",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/28-unsolved-entry.sav",
+      "sram_sha256": "81bcec2e62774afed4f7a039265f4a635047de715c006ea31a672a2b354bf2b4",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/28-unsolved-entry.png",
+      "status": {
+        "game_state": 1,
+        "room": 28,
+        "px": 120,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "28-solved-manual-weight": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/28-solved-manual-weight.state",
+      "state_sha256": "cc13983c89525bb70671548f2f58bd8edc14d1386ae12d87bb1c64d6f1c06547",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/28-solved-manual-weight.sav",
+      "sram_sha256": "2a8ff1dc0badf06542d4c8921066fe992ccfe907f3431cd095a4490a6c294e49",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/28-solved-manual-weight.png",
+      "status": {
+        "game_state": 1,
+        "room": 28,
+        "px": 35,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "04-machine-ready": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/04-machine-ready.state",
+      "state_sha256": "dc16451a573b2225f170fb87427bbeb95075a3139d0bd7bd231555aa470c8ec9",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/04-machine-ready.sav",
+      "sram_sha256": "ddeb5ca9aa78384abdd595b9b8e7d6f488cce59504047c9f124a6da1e8a93339",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/04-machine-ready.png",
+      "status": {
+        "game_state": 1,
+        "room": 29,
+        "px": 120,
+        "py": 132,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 6,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "machine-1-telegraph": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/machine-1-telegraph.state",
+      "state_sha256": "f188c53e046ed442d1d59f635b8bf46fff98eef011178990558dcc76193ec679",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/machine-1-telegraph.sav",
+      "sram_sha256": "88611daec45f3e357db2e52d4b2125fc85b22167e8a44f84e745fc77ddd35f5d",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/machine-1-telegraph.png",
+      "status": {
+        "game_state": 1,
+        "room": 29,
+        "px": 120,
+        "py": 124,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 10,
+        "summoned": 1,
+        "ability_cd": 15,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "machine-1-cleared": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/machine-1-cleared.state",
+      "state_sha256": "3545a309e52c6ec583c64a82808637ee832ea35ac430dbd5c0b023ac11a5423d",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/machine-1-cleared.sav",
+      "sram_sha256": "f52554093ab2215b803167bb0b4b70daf31ddd763ed9af2b87362b92dd81da40",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/machine-1-cleared.png",
+      "status": {
+        "game_state": 1,
+        "room": 29,
+        "px": 120,
+        "py": 124,
+        "hp": 3,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 10,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    },
+    "sky-main-complete-without-earth-ending-river": {
+      "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+      "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/sky-main-complete-without-earth-ending-river.state",
+      "state_sha256": "b5ef91d399515da62a2bcc33efe9ac89cae7111920007dc9e419aa7abfb18331",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/sky-main-complete-without-earth-ending-river.sav",
+      "sram_sha256": "d34152445836da03a7cd9abbcd11f68e35d70887717bc24624bb2141cb25da5d",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-northern/build/northern-sky-native-n5/sky-main-complete-without-earth-ending-river.png",
+      "status": {
+        "game_state": 1,
+        "room": 22,
+        "px": 107,
+        "py": 207,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 127,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 10,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "obtained_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ],
+      "owned_form_ids": [
+        1,
+        4,
+        7,
+        10,
+        19,
+        77
+      ]
+    }
+  },
+  "transitions": [
+    {
+      "frame": 290,
+      "from": 0,
+      "to": 1,
+      "keys": "UP"
+    },
+    {
+      "frame": 421,
+      "from": 1,
+      "to": 16,
+      "keys": "A"
+    },
+    {
+      "frame": 640,
+      "from": 16,
+      "to": 22,
+      "keys": "A"
+    },
+    {
+      "frame": 1859,
+      "from": 22,
+      "to": 23,
+      "keys": "UP"
+    },
+    {
+      "frame": 2901,
+      "from": 23,
+      "to": 26,
+      "keys": "A"
+    },
+    {
+      "frame": 3633,
+      "from": 26,
+      "to": 23,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 3668,
+      "from": 23,
+      "to": 26,
+      "keys": "A"
+    },
+    {
+      "frame": 4605,
+      "from": 26,
+      "to": 27,
+      "keys": "A"
+    },
+    {
+      "frame": 5309,
+      "from": 27,
+      "to": 26,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 5488,
+      "from": 26,
+      "to": 27,
+      "keys": "A"
+    },
+    {
+      "frame": 6905,
+      "from": 27,
+      "to": 28,
+      "keys": "A"
+    },
+    {
+      "frame": 7609,
+      "from": 28,
+      "to": 27,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 7863,
+      "from": 27,
+      "to": 28,
+      "keys": "A"
+    },
+    {
+      "frame": 9216,
+      "from": 28,
+      "to": 29,
+      "keys": "A"
+    },
+    {
+      "frame": 10137,
+      "from": 29,
+      "to": 28,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 10178,
+      "from": 28,
+      "to": 27,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 10219,
+      "from": 27,
+      "to": 26,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 10280,
+      "from": 26,
+      "to": 23,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 10862,
+      "from": 23,
+      "to": 22,
+      "keys": "DOWN"
+    }
+  ],
+  "main_route_selected_form_ids": [
+    19,
+    77
+  ],
+  "frame_windows": [],
+  "pixel_cases": [],
+  "inputs": [
+    {
+      "frame": 0,
+      "frames": 150,
+      "keys": 0
+    },
+    {
+      "frame": 150,
+      "frames": 2,
+      "keys": "START"
+    },
+    {
+      "frame": 152,
+      "frames": 35,
+      "keys": 0
+    },
+    {
+      "frame": 187,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 190,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 193,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 196,
+      "frames": 12,
+      "keys": "UP"
+    },
+    {
+      "frame": 208,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 211,
+      "frames": 12,
+      "keys": "UP"
+    },
+    {
+      "frame": 223,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 226,
+      "frames": 12,
+      "keys": "UP"
+    },
+    {
+      "frame": 238,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 241,
+      "frames": 12,
+      "keys": "UP"
+    },
+    {
+      "frame": 253,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 256,
+      "frames": 12,
+      "keys": "UP"
+    },
+    {
+      "frame": 268,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 271,
+      "frames": 8,
+      "keys": "UP"
+    },
+    {
+      "frame": 279,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 282,
+      "frames": 8,
+      "keys": "UP"
+    },
+    {
+      "frame": 290,
+      "frames": 20,
+      "keys": 0
+    },
+    {
+      "frame": 310,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 313,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 316,
+      "frames": 12,
+      "keys": "UP"
+    },
+    {
+      "frame": 328,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 331,
+      "frames": 9,
+      "keys": "UP"
+    },
+    {
+      "frame": 340,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 343,
+      "frames": 12,
+      "keys": "LEFT"
+    },
+    {
+      "frame": 355,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 358,
+      "frames": 12,
+      "keys": "LEFT"
+    },
+    {
+      "frame": 370,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 373,
+      "frames": 12,
+      "keys": "LEFT"
+    },
+    {
+      "frame": 385,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 388,
+      "frames": 12,
+      "keys": "LEFT"
+    },
+    {
+      "frame": 400,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 403,
+      "frames": 9,
+      "keys": "LEFT"
+    },
+    {
+      "frame": 412,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 415,
+      "frames": 2,
+      "keys": "UP"
+    },
+    {
+      "frame": 417,
+      "frames": 2,
+      "keys": 0
+    },
+    {
+      "frame": 419,
+      "frames": 2,
+      "keys": "A"
+    },
+    {
+      "frame": 421,
+      "frames": 22,
+      "keys": 0
+    },
+    {
+      "frame": 443,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 446,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 449,
+      "frames": 11,
+      "keys": "UP"
+    },
+    {
+      "frame": 460,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 463,
+      "frames": 12,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 475,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 478,
+      "frames": 12,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 490,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 493,
+      "frames": 12,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 505,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 508,
+      "frames": 12,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 520,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 523,
+      "frames": 4,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 527,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 530,
+      "frames": 8,
+      "keys": "DOWN"
+    },
+    {
+      "frame": 538,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 541,
+      "frames": 12,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 553,
+      "frames": 3,
+      "keys": 0
+    },
+    {
+      "frame": 556,
+      "frames": 12,
+      "keys": "RIGHT"
+    },
+    {
+      "frame": 568,
+      "frames": 3,
+      "keys": 0
+    },

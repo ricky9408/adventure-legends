@@ -2,7 +2,7 @@
 #include "equipment.h"
 
 const EquipmentItemId equipment_authored_ids[EQUIPMENT_AUTHORED_COUNT] = {
-    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83
+    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83, 4, 12, 36, 52, 66, 84
 };
 
 const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {
@@ -25,6 +25,12 @@ const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] =
     [35] = {35, 1, 0, 0, 255, {0, 0}, {0, 1, 4, 0, 0, 0, 0, 0}},
     [51] = {51, 2, 0, 0, 255, {0, 0}, {0, 0, 0, 4, 1, 0, 0, 0}},
     [83] = {83, 4, 0, 0, 255, {0, 0}, {0, 1, 0, 0, 0, 2, 0, 0}},
+    [4] = {4, 0, 1, 0, 255, {0, 0}, {0, 0, 0, 0, 0, 0, 1, 1}},
+    [12] = {12, 0, 2, 0, 255, {0, 0}, {0, 0, 0, 0, 0, 0, 4, 0}},
+    [36] = {36, 1, 0, 0, 255, {0, 0}, {0, 3, 0, -2, 0, 0, 0, 0}},
+    [52] = {52, 2, 0, 0, 255, {0, 0}, {0, 0, 0, -4, 4, 0, 0, 0}},
+    [66] = {66, 3, 0, 0, 255, {0, 0}, {0, 0, 4, 0, 0, 1, 0, 0}},
+    [84] = {84, 4, 0, 0, 255, {0, 0}, {0, 0, 0, -4, 0, 0, 0, 2}},
 };
 
 const EquipmentWeapon equipment_weapons[4] = {
@@ -54,6 +60,12 @@ const char *equipment_name(unsigned id) {
     case 35: return "Sailcloth Mail";
     case 51: return "Deck Boots";
     case 83: return "Bearing Ring";
+    case 4: return "Shadecutter Sword";
+    case 12: return "Sunlace Lance";
+    case 36: return "Breezewall Mail";
+    case 52: return "Softsand Boots";
+    case 66: return "Raincatch Belt";
+    case 84: return "Springpin Ring";
     default: return "Empty";
     }
 }
@@ -80,6 +92,12 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 35: return line ? "Defense +1; health +1/4 heart." : "Light padding leaves your stride free.";
     case 51: return line ? "Speed +4; roll recovery -1." : "Sure steps and a quicker second roll.";
     case 83: return line ? "Defense +1; power recovery -2." : "A measured balance of guard and focus.";
+    case 4: return line ? "Reach +1; stagger +1." : "A light cut that interrupts.";
+    case 12: return line ? "Reach +4; no attack bonus." : "A long point for careful spacing.";
+    case 36: return line ? "Defense +3; speed -2." : "A breezy guard without padding.";
+    case 52: return line ? "Roll cooldown -4; speed -4." : "Soft soles steady the next roll.";
+    case 66: return line ? "Power cooldown -1." : "A quarter-heart reserve.";
+    case 84: return line ? "Stagger +2; speed -4." : "A firm strike with a slower step.";
     default: return "";
     }
 }

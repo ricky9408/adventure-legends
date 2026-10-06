@@ -20,6 +20,7 @@ typedef struct {int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6];Shot shots[12];Save5State adventure_save;
 volatile int hp,max_hp,px,py,boss_hp,boss_x,boss_y,room;
 volatile int spirit,stone_guard,guard_invuln;
+int cx,cy;
 int keys,gfx_slash_frame,face,roll_ticks,swing,sword_cd,combo_step,combo_timer;
 int attack_buffer,swing_damage,slash_id,hitstop,boss_flash,boss_armor;
 int ability_cd,ability_max,enemy_windups[6],enemy_clocks[6],frame,power_effect;
@@ -48,6 +49,8 @@ void kill_enemy(Enemy *e){unsigned i=(unsigned)(e-enemies);assert(i<6);assert(++
 int north_game_target(int *x,int *y,int *radius){(void)x;(void)y;(void)radius;return 0;}
 int north_game_weapon_hit(unsigned weapon_class,int x,int y,unsigned damage_q4){
     (void)weapon_class;(void)x;(void)y;(void)damage_q4;return 0;}
+int south_game_target(int*x,int*y,int*r){(void)x;(void)y;(void)r;return 0;}
+int south_game_weapon_hit(unsigned c,int x,int y,unsigned d){(void)c;(void)x;(void)y;(void)d;return 0;}
 int region_game_practice_hit(unsigned c,int x,int y){(void)c;(void)x;(void)y;return 0;}
 void obj_upload(const unsigned char *p,int w,int h,int off){
     assert(off>=0&&off+w*h<=16384);memcpy(vram+off,p,(size_t)(w*h));uploads++;
@@ -262,6 +265,10 @@ static void test_cancelled_effects(void){
 }
 static void test_feedback_and_tiles_concurrency(void){
     int old_uploads,old_draws,i;unsigned generation;unsigned char saved[16384];
+    setup(15);assert(northern_powers_tiles_claim(NORTHERN_TILES_SOUTHERN));
+    assert(!northern_powers_tiles_claim(NORTHERN_TILES_SOUTHERN));
+    assert(!northern_power(15)&&!regional_power(11));
+    assert(northern_powers_tiles_release(NORTHERN_TILES_SOUTHERN));
     setup(15);old_uploads=uploads;ability_cd=71;
     assert(northern_powers_feedback(15));assert(northern_power_cast_time==20);
     assert(!northern_powers_busy()&&!northern_power_time&&ability_cd==71&&uploads==old_uploads);

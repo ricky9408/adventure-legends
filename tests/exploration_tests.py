@@ -489,12 +489,16 @@ class ExplorationRun:
                    'damaged migrated banks recover the preserved legacy bridge checkpoint')
 
         self.reopen(checkpoint)
+        before_new_game = self.e.bytes(0x0e000000, 32768)
         self.tap('SELECT', 4, 4)
+        self.check(self.get('game_state') == 9 and self.e.bytes(0x0e000000, 32768) == before_new_game,
+                   'title Select asks for confirmation without changing upgraded progress')
+        self.tap('A', 4, 4)
         self.dialogs()
         self.check(self.get('room') == 0 and self.get('max_hp') == 6
                    and self.get('relic_found') == self.get('camp_unlocked') == self.get('bridge_open') == 0
                    and self.get('chapter_flags') == self.get('room_flags') == self.get('story_seen') == 0,
-                   'title Select starts fresh and clears upgraded exploration and campaign progression')
+                   'confirmed new adventure clears upgraded exploration and campaign progression')
         self.e.reset()
         self.step(90)
         self.tap('START', 4, 4)

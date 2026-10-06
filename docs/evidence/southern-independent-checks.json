@@ -1,0 +1,162 @@
+{
+  "kind": "independent-targeted-host-source-review",
+  "manifest_entries": 707,
+  "manifest_mismatches": [],
+  "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "elf_sha256": "b51c73b85837f228a0b334482bdc74b9cbc8173ac9d15f0ae122cd336ba632e9",
+  "sym_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+  "checks": [
+    {
+      "name": "test_southern_creature_core",
+      "tests": 8,
+      "passed": true,
+      "seconds": 4.755955339001957,
+      "test_sha256": "f307314a35a555abf678c7bca493ad1b0c5351ca2b5ea668c7bce7143302b290"
+    },
+    {
+      "name": "test_creature_branches",
+      "tests": 4,
+      "passed": true,
+      "seconds": 11.981943860999309,
+      "test_sha256": "5126f25168cad71403454a03057c9b077e0e3e2e7dc719408fa9c06c8e8f1dd4"
+    },
+    {
+      "name": "test_southern_save",
+      "tests": 13,
+      "passed": true,
+      "seconds": 118.9439317169963,
+      "test_sha256": "85be4abcf7f411d244ea60a36acd1747b01feb5524f9e61156def4602a8a523d"
+    },
+    {
+      "name": "test_southern_save_limits",
+      "tests": 4,
+      "passed": true,
+      "seconds": 10.898979900994163,
+      "test_sha256": "16b42a6802ab2237be7f29863915be808a468e50fdf076d4f297312ddbf48321"
+    },
+    {
+      "name": "test_southern_validation_optimization",
+      "tests": 4,
+      "passed": true,
+      "seconds": 5.239211579995754,
+      "test_sha256": "cd1a746fe2cfa63e9323a30a609210f88eaacd9296ab6ec852a7ded497f76fec"
+    },
+    {
+      "name": "test_geometry_fingerprint",
+      "tests": 1,
+      "passed": true,
+      "seconds": 0.04216302600252675,
+      "test_sha256": "2c23d186fc30f50351ac4c665e7331f0df389bbd21901166f42f9c40f09d212a"
+    },
+    {
+      "name": "test_quickparty_scan",
+      "passed": true,
+      "test_sha256": "e967de7f3df4579fee62ca41cacfff808a795c29a24134c123b7820105aa3cc4"
+    },
+    {
+      "name": "southern_powers_native-strict",
+      "passed": true,
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-misleading-indentation",
+        "-pedantic",
+        "-Isrc",
+        "tests/southern_powers_native.c",
+        "src/southern_powers.c",
+        "src/southern_power_art.c",
+        "src/northern_powers.c",
+        "src/northern_power_art.c",
+        "src/advanced_powers.c",
+        "src/regional_powers.c",
+        "src/gear_runtime.c",
+        "src/weapon_actions.c",
+        "src/combat_rules.c",
+        "src/equipment.c",
+        "src/equipment_data.c",
+        "src/creatures.c",
+        "src/creature_data.c",
+        "src/assets.c",
+        "-o",
+        "/workspace/scratch/33ed39a77941/adventure-legends-southern-s3/build/release-independent-review/powers-strict"
+      ],
+      "sources": {
+        "tests/southern_powers_native.c": "936358f3ca42367c01fae1c3b7051f69b9fa1fb4c0edaceabc990dfe06c0fbd2",
+        "src/southern_powers.c": "fb2446f2eaa5a36970ae91368d644cd83f8ba1b514199af14b8f6410deaa3115",
+        "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+        "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+        "src/northern_power_art.c": "fadac439537dcba908a7a4cd36e58f8fce1ee453a22ebb37737c95f29a4dedc3",
+        "src/advanced_powers.c": "3d28a15830aaa05a0fcc764cc30c91bdc3ef3e869ff6a0c758d119e2e57b7bad",
+        "src/regional_powers.c": "598ab1c413064a7489482e25bfbc204955cf4390170f937c0d96e24394f55766",
+        "src/gear_runtime.c": "8e72bc754c7091d4fd570e4203430c3a59e4de33ff167ee11d46f0789a96146a",
+        "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
+        "src/combat_rules.c": "443b81d059efbe3c892f2e824c73f4c8ee84716dd8d9494caa6ae03664eabe69",
+        "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "src/equipment_data.c": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "src/creatures.c": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+        "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "src/assets.c": "c08fa97049f25066e15733391694a1fb055ea8db30b620cf918337cb64f010f7"
+      }
+    },
+    {
+      "name": "southern_powers_native-ASan-UBSan",
+      "passed": true,
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-misleading-indentation",
+        "-pedantic",
+        "-Isrc",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-no-pie",
+        "tests/southern_powers_native.c",
+        "src/southern_powers.c",
+        "src/southern_power_art.c",
+        "src/northern_powers.c",
+        "src/northern_power_art.c",
+        "src/advanced_powers.c",
+        "src/regional_powers.c",
+        "src/gear_runtime.c",
+        "src/weapon_actions.c",
+        "src/combat_rules.c",
+        "src/equipment.c",
+        "src/equipment_data.c",
+        "src/creatures.c",
+        "src/creature_data.c",
+        "src/assets.c",
+        "-o",
+        "/workspace/scratch/33ed39a77941/adventure-legends-southern-s3/build/release-independent-review/powers-ASan-UBSan"
+      ],
+      "sources": {
+        "tests/southern_powers_native.c": "936358f3ca42367c01fae1c3b7051f69b9fa1fb4c0edaceabc990dfe06c0fbd2",
+        "src/southern_powers.c": "fb2446f2eaa5a36970ae91368d644cd83f8ba1b514199af14b8f6410deaa3115",
+        "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+        "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+        "src/northern_power_art.c": "fadac439537dcba908a7a4cd36e58f8fce1ee453a22ebb37737c95f29a4dedc3",
+        "src/advanced_powers.c": "3d28a15830aaa05a0fcc764cc30c91bdc3ef3e869ff6a0c758d119e2e57b7bad",
+        "src/regional_powers.c": "598ab1c413064a7489482e25bfbc204955cf4390170f937c0d96e24394f55766",
+        "src/gear_runtime.c": "8e72bc754c7091d4fd570e4203430c3a59e4de33ff167ee11d46f0789a96146a",
+        "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
+        "src/combat_rules.c": "443b81d059efbe3c892f2e824c73f4c8ee84716dd8d9494caa6ae03664eabe69",
+        "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "src/equipment_data.c": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+        "src/creatures.c": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+        "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+        "src/assets.c": "c08fa97049f25066e15733391694a1fb055ea8db30b620cf918337cb64f010f7"
+      }
+    }
+  ],
+  "post_run_manifest_mismatches": [],
+  "all_passed": true
+}

@@ -1,0 +1,63 @@
+{
+  "verdict": "PASS targeted independent scope; no current blocker found",
+  "native_acceptance": "separate parent-owned controller/combat/performance suites, not claimed here",
+  "runtime_manifest_entries": 707,
+  "runtime_manifest_mismatches": [],
+  "runtime_manifest_sha256": "609104f75fa341bb67d0d1e2a362db7b03ed655ecb6eed41c101b0c799b2f089",
+  "independent_rebuild": {
+    "gba": {
+      "candidate_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "rebuilt_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "byte_equal": true
+    },
+    "elf": {
+      "candidate_sha256": "b51c73b85837f228a0b334482bdc74b9cbc8173ac9d15f0ae122cd336ba632e9",
+      "rebuilt_sha256": "b51c73b85837f228a0b334482bdc74b9cbc8173ac9d15f0ae122cd336ba632e9",
+      "byte_equal": true
+    },
+    "sym": {
+      "candidate_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "rebuilt_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "byte_equal": true
+    }
+  },
+  "reviewed_source_hashes": {
+    "src/game.c": "16a82a04ee9ba81f63b1f3e5dc92ea68e88d74f64336bd5b368cecab158d543d",
+    "src/creatures.c": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+    "src/save5.c": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+    "src/quickparty.c": "2c7fc4507f8ef6839f08f16351f9c59cbcfb1ec0f4393cbcdfa59e485e1d9834",
+    "src/southern_powers.c": "fb2446f2eaa5a36970ae91368d644cd83f8ba1b514199af14b8f6410deaa3115",
+    "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+    "src/progression.c": "0f52723e4b15300d89581a7e85f6a3baee09e12595d2560a99a9601a96334596",
+    "src/gear_runtime.c": "8e72bc754c7091d4fd570e4203430c3a59e4de33ff167ee11d46f0789a96146a",
+    "src/southern_quests.c": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b",
+    "src/region_game.c": "4941c0cc90bf71c6ceb45fa3f03ad4890232efb8f9b50468d897cd8a484c97b9",
+    "src/north_game.c": "14ea23086d5b46f4fc006a8fb0681be2b261091fad5a132769799cdafefef986",
+    "src/south_game.c": "7bc031db1ea07d072951d98793badecf17897b75d1d3c0c36e364db3c596c7b9",
+    "src/trials.c": "9a4803b1517916e6105fddc340b8983d810fc4521006fc3c1bf7141a0067552f",
+    "linker.ld": "05ca307d840ff5dfe437e5fe4e8fba64d6db2148b35284d035686571089ff4b5",
+    "tests/test_save_feedback.py": "0403578985b1745531d074fcf576d7f022ab7318088fae9e2902e2019e57e9db",
+    "tests/southern_powers_native.c": "936358f3ca42367c01fae1c3b7051f69b9fa1fb4c0edaceabc990dfe06c0fbd2",
+    "tests/southern_validation_differential.c": "141d0f1de58bb92f9e70c8219edefb8f032cf99a691972846b97c78e358c4898"
+  },
+  "added_randomized_geometry": {
+    "seed": "0x79129ab5",
+    "scenes": 16000,
+    "target_comparisons": 192000,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "world": "synthetic",
+    "result": "PASS"
+  },
+  "extra_validator_sanitizer_result": {
+    "xp_level_pairs": 23531642,
+    "party_reference_pairs": 301510,
+    "collection_byte_pairs": 1048576,
+    "instance_corruptions": 36720
+  },
+  "compiler": "arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119",
+  "host_compiler": "cc (Debian 14.2.0-19) 14.2.0",
+  "report_sha256": "fa134b4f057fcdd3ea29e38f50584a713ca87608b56e9f607824c83fa64ce0ae"
+}

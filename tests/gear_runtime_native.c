@@ -7,20 +7,26 @@
 #include "progression.h"
 #include "regional_powers.h"
 #include "northern_powers.h"
+#include "southern_powers.h"
+#include "advanced_powers.h"
+#include "south_game.h"
 #include "obj_layout.h"
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6];Shot shots[12];Save5State adventure_save;
-unsigned char shot_effects[12],shot_phases[12];
-/* Northern machine is outside this bounded gear harness; native chapter QA covers it. */
+/* Chapter machines are absent from this bounded world; native chapter QA covers them. */
 int north_game_target(int*x,int*y,int*r){(void)x;(void)y;(void)r;return 0;}
 int north_game_weapon_hit(unsigned c,int x,int y,unsigned d){(void)c;(void)x;(void)y;(void)d;return 0;}
+int south_game_target(int*x,int*y,int*r){(void)x;(void)y;(void)r;return 0;}
+int south_game_weapon_hit(unsigned c,int x,int y,unsigned d){(void)c;(void)x;(void)y;(void)d;return 0;}
 volatile int hp,max_hp,px,py,boss_hp,boss_x,boss_y,room;
+volatile int spirit,stone_guard,guard_invuln;
+int cx,cy,frame,power_effect;
 int keys,gfx_slash_frame,face,roll_ticks,swing,sword_cd,combo_step,combo_timer,attack_buffer,swing_damage,slash_id,hitstop,boss_flash,boss_armor;
 int ability_cd,ability_max,enemy_windups[6],enemy_clocks[6];
 static unsigned char vram[16384];
 static int wall_x=-100,wall_y=-100,boss_live;
-int solid(int x,int y){return x==wall_x||y==wall_y;}
+int solid(int x,int y){return x<0||y<0||x>=480||y>=320||x==wall_x||y==wall_y;}
 int near(int x,int y,int tx,int ty,int radius){return abs(x-tx)+abs(y-ty)<radius;}
 int boss_active(void){return boss_live;}
 int try_interaction(void){return 0;}
@@ -30,8 +36,8 @@ void impact(int x,int y){(void)x;(void)y;}
 void sfx(int n){(void)n;}
 void kill_enemy(Enemy*e){e->hp=0;}
 int region_game_practice_hit(unsigned c,int x,int y){(void)c;(void)x;(void)y;return 0;}
-void obj_upload(const unsigned char *p,int w,int h,int off){assert(off>=0&&w*h<=1024&&off+w*h<=16384);memcpy(vram+off,p,(size_t)w*h);}
-void obj_add(int o,int x,int y,int w,int h,int p,int d,int f){(void)x;(void)y;(void)p;(void)d;(void)f;assert(o>=0&&o+w*h<=16384);}
+void obj_upload(const unsigned char *p,int w,int h,int off){assert(p&&w>0&&h>0&&w<=32&&h<=32&&off>=0&&off+w*h<=16384);memcpy(vram+off,p,(size_t)w*h);}
+void obj_add(int o,int x,int y,int w,int h,int p,int d,int f){(void)x;(void)y;(void)p;(void)d;(void)f;assert(w>0&&h>0&&w<=32&&h<=32&&o>=0&&o+w*h<=16384);}
 static void equip(unsigned slot,unsigned ref){EquipmentU16 h=(EquipmentU16)hero_hp_q4;assert(equipment_equip(&adventure_save.equipment,slot,ref,96,&h,0,0)==0);game_gear_apply(h);}
 int main(void){
  unsigned body,ring,i;unsigned char arrows[128],pin[256],icons[320];

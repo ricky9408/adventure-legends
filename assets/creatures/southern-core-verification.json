@@ -1,0 +1,420 @@
+{
+  "scope": "Southern creature core/data only. No native obtainability, art/handler, whole-frame, whole-engine-stack, save timing or physical-hardware acceptance claimed.",
+  "content_revision": 4,
+  "enabled_forms": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    11,
+    13,
+    14,
+    16,
+    19,
+    20,
+    22,
+    23,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    25,
+    26,
+    28,
+    29,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94
+  ],
+  "enabled_abilities": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42
+  ],
+  "enabled_evolutions": [
+    [
+      1,
+      2
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      19,
+      20
+    ],
+    [
+      22,
+      23
+    ],
+    [
+      73,
+      74
+    ],
+    [
+      75,
+      76
+    ],
+    [
+      77,
+      78
+    ],
+    [
+      25,
+      26
+    ],
+    [
+      28,
+      29
+    ],
+    [
+      79,
+      80
+    ],
+    [
+      81,
+      82
+    ],
+    [
+      83,
+      84
+    ],
+    [
+      85,
+      86
+    ],
+    [
+      87,
+      88
+    ],
+    [
+      89,
+      90
+    ],
+    [
+      91,
+      92
+    ],
+    [
+      93,
+      94
+    ]
+  ],
+  "authored_design_count": 42,
+  "reserved_identity_count": 128,
+  "disabled_authored_forms": [
+    121
+  ],
+  "wire": {
+    "instance_bytes": 24,
+    "roster_capacity": 160,
+    "roster_native_bytes": 4140,
+    "trial_offset": 14,
+    "equipped_offset": 16
+  },
+  "tests": {
+    "legacy_and_sparse_native_suites": 42,
+    "southern_api_suites": 8,
+    "branch_extended_capability_suites_asan_ubsan": 4,
+    "authoring_suites": 20,
+    "total_suites": 74,
+    "full_mutation_sanitizer": "Passed ASan/UBSan,24000 deterministic operations,33120 roster-bit probes and251904 instance-byte probes across all41 enabled forms",
+    "strict_host_c99_warnings": "Passed -Wall -Wextra -Werror -pedantic",
+    "strict_arm_c99_warnings": "Passed -Wall -Wextra -Werror -pedantic",
+    "deterministic_generation": "Passed generate_data.py --check",
+    "git_diff_check": "Passed on owned files"
+  },
+  "released_binary_prefixes_sha256": {
+    "forms_21_records": "bc65ecc6849c015686b0263ad59928fa4e73d16097afdbc48af5f24c1e091da0",
+    "learns_31_records": "c5a36f66da524b8aa96daa1257aa5dbba48f2a9b98561d21b35ce051402c9d05",
+    "evolutions_10_records": "fb21890584b87cd1c3793917564a3518f2b87be9f86faf4360b911eeb4bf56be",
+    "abilities_21_records": "2fbab2735f8dcac6956d9676053f44600d47c2f425de0cad5edc87b82befd15f"
+  },
+  "arm_object_budget": {
+    "compiler": "arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119",
+    "flags": "-mcpu=arm7tdmi -mthumb-interwork -mthumb -O2 -std=c99 -ffreestanding -fno-builtin -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Werror -pedantic -fstack-usage",
+    "baseline_rom_sections_bytes": 8892,
+    "current_rom_sections_bytes": 16946,
+    "incremental_rom_sections_bytes": 8054,
+    "incremental_data_bytes": 0,
+    "incremental_bss_bytes": 0,
+    "incremental_iwram_code_bytes": 0,
+    "maximum_individual_stack_frame_bytes": 96,
+    "maximum_frame_function": "creatures_catalog_validate",
+    "stack_scope": "Compiler per-function frames only; this is not a whole-engine high-water proof",
+    "linker_note": "Existing linker places non-game.o text and all const rodata in ROM; no .iwram sections were added"
+  },
+  "isolated_arm_timing_before_indexes": {
+    "purpose": "Isolated ARM7TDMI core microbenchmark; never builds the main game ROM.\nThe optional128-row stress fixture pads/reorders the lookup table only. It is\nnot a valid/playable128-form catalog and does not enable reserved content.\n",
+    "waitcnt": "0x4317",
+    "frame_cycles": 280896,
+    "timer_clock_hz": 16777216,
+    "scenarios": [
+      {
+        "mode": "baseline21",
+        "cycles": {
+          "catalog_validate": 120732,
+          "full160_roster_validate": 808243,
+          "party4_validate": 16250,
+          "instances160_validate": 533800,
+          "lookup_hit_1000": 624038,
+          "lookup_miss_1000": 650034,
+          "instances160_revision_validate": 0
+        },
+        "answers": [
+          1,
+          1,
+          1,
+          160,
+          1000,
+          0,
+          0
+        ],
+        "source_sha256": {
+          "creatures.h": "406333b65d6a7fc4a78ce62ae04e24d20a5b2220de31d13295072ab8514eb4ff",
+          "creatures.c": "c87806fec74b550ae6b6f3846c830c1415cd031862b49786d9028f802b16a6f9",
+          "creature_data.c": "77e3b4413f26eb9b44bc730a33d25d16cdcc97c12af483d5ee06831d2e6c7ec4"
+        },
+        "rom_sha256": "9c6b97aacd85791aa08069a34837a341c07849a24cb23bf8bdc83151aec443e3"
+      },
+      {
+        "mode": "current41",
+        "cycles": {
+          "catalog_validate": 472990,
+          "full160_roster_validate": 1194733,
+          "party4_validate": 27798,
+          "instances160_validate": 909322,
+          "lookup_hit_1000": 1164042,
+          "lookup_miss_1000": 1190040,
+          "instances160_revision_validate": 1500350
+        },
+        "answers": [
+          1,
+          1,
+          1,
+          160,
+          1000,
+          0,
+          160
+        ],
+        "source_sha256": {
+          "creatures.h": "cad96461adbf3ce2e0e21a160db25388c843539dfffc8e986aaabef39e0e78f6",
+          "creatures.c": "f6ca599cd8fb584fe09fd5bb11f4911bc29e029b910cbee535797d651f7fbd55",
+          "creature_data.c": "0c62458b17af4a413425fd041d033217bd4f90c3826d1f33fbe0667953e6208c"
+        },
+        "rom_sha256": "aabf5d196e51e37ea73ff6d2caa9ce777311e2279f49888429e8c1c5f0267473"
+      },
+      {
+        "mode": "lookup_stress128",
+        "cycles": {
+          "catalog_validate": 126808,
+          "full160_roster_validate": 2064678,
+          "party4_validate": 58130,
+          "instances160_validate": 1746762,
+          "lookup_hit_1000": 3513042,
+          "lookup_miss_1000": 3539040,
+          "instances160_revision_validate": 2685790
+        },
+        "answers": [
+          0,
+          1,
+          1,
+          160,
+          1000,
+          0,
+          160
+        ],
+        "source_sha256": {
+          "creatures.h": "740035de2fa114a442374ba7b0bfa9316514710913b4deaa671f11b90d332159",
+          "creatures.c": "f6ca599cd8fb584fe09fd5bb11f4911bc29e029b910cbee535797d651f7fbd55",
+          "creature_data.c": "4ba1a716b24fc0c5206826b25ac8a7b706be4617d92a40a87a28598c4e6799aa"
+        },
+        "rom_sha256": "044944c618f68b2f62e37e5ee645e738ccb71649953793ce6fe058254102ca97"
+      }
+    ]
+  },
+  "isolated_arm_timing_after_indexes": {
+    "purpose": "Isolated ARM7TDMI core microbenchmark; never builds the main game ROM.\nThe optional128-row stress fixture pads/reorders the lookup table only. It is\nnot a valid/playable128-form catalog and does not enable reserved content.\n",
+    "waitcnt": "0x4317",
+    "frame_cycles": 280896,
+    "timer_clock_hz": 16777216,
+    "scenarios": [
+      {
+        "mode": "baseline21",
+        "cycles": {
+          "catalog_validate": 120732,
+          "full160_roster_validate": 808243,
+          "party4_validate": 16250,
+          "instances160_validate": 533800,
+          "lookup_hit_1000": 624038,
+          "lookup_miss_1000": 650034,
+          "instances160_revision_validate": 0
+        },
+        "answers": [
+          1,
+          1,
+          1,
+          160,
+          1000,
+          0,
+          0
+        ],
+        "source_sha256": {
+          "creatures.h": "406333b65d6a7fc4a78ce62ae04e24d20a5b2220de31d13295072ab8514eb4ff",
+          "creatures.c": "c87806fec74b550ae6b6f3846c830c1415cd031862b49786d9028f802b16a6f9",
+          "creature_data.c": "77e3b4413f26eb9b44bc730a33d25d16cdcc97c12af483d5ee06831d2e6c7ec4"
+        },
+        "rom_sha256": "9c6b97aacd85791aa08069a34837a341c07849a24cb23bf8bdc83151aec443e3"
+      },
+      {
+        "mode": "current41",
+        "cycles": {
+          "catalog_validate": 306352,
+          "full160_roster_validate": 454699,
+          "party4_validate": 5634,
+          "instances160_validate": 192362,
+          "lookup_hit_1000": 106042,
+          "lookup_miss_1000": 52040,
+          "instances160_revision_validate": 284510
+        },
+        "answers": [
+          1,
+          1,
+          1,
+          160,
+          1000,
+          0,
+          160
+        ],
+        "source_sha256": {
+          "creatures.h": "dd9fdd2e57865d6209b4d6e5d85dbc7fa264ea25c7f217aa71a34797d1e966fe",
+          "creatures.c": "40cf1dc6b2aac7f19abda7895b42fc20445bfa002a2a622a592344ccce7b1986",
+          "creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2"
+        },
+        "rom_sha256": "404a72e6871a4d0e8c2fb2430f9d84ee4fe7bae70790eddaf8830624e4312189"
+      },
+      {
+        "mode": "lookup_stress128",
+        "cycles": {
+          "catalog_validate": 35015,
+          "full160_roster_validate": 454699,
+          "party4_validate": 5634,
+          "instances160_validate": 192362,
+          "lookup_hit_1000": 106042,
+          "lookup_miss_1000": 52040,
+          "instances160_revision_validate": 284510
+        },
+        "answers": [
+          0,
+          1,
+          1,
+          160,
+          1000,
+          0,
+          160
+        ],
+        "source_sha256": {
+          "creatures.h": "8ddfb2b184f13a12df60c567cf4a7ef71f50709253e34a580619935c5a1a37ea",
+          "creatures.c": "40cf1dc6b2aac7f19abda7895b42fc20445bfa002a2a622a592344ccce7b1986",
+          "creature_data.c": "87e4b7da3cbcb46b0304f0f22402c415917e33c5f6fd7ae10f1477d207d250dd"
+        },
+        "rom_sha256": "2c6d29a34f225ba742a830f48d58934e0dcb6a582d6128af8271528acae367c8"
+      }
+    ]
+  },
+  "remaining_integration_gates": [
+    "Native art, combat command handlers, tagged capability targets, acquisition/controller evidence",
+    "Revision4 save/source integration and bounded save timing owned separately",
+    "Aggregate scene/UI/update/presentation cadence and stack/OBJ/RAM measurements on integrated ROM"
+  ],
+  "source_sha256": {
+    "src/creatures.c": "40cf1dc6b2aac7f19abda7895b42fc20445bfa002a2a622a592344ccce7b1986",
+    "src/creatures.h": "dd9fdd2e57865d6209b4d6e5d85dbc7fa264ea25c7f217aa71a34797d1e966fe",
+    "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "assets/creatures/catalog.json": "ca6dc18fc331529daf852b57a54d6eea5ec1af96f652c9c72713a120a5b773e5",
+    "assets/creatures/catalog.schema.json": "e3a24a701752b8a79dbab4d95d09d5f32ffd8bff2d3a5961ec51c404aba5acaf",
+    "assets/creatures/catalog.v1.schema.json": "904846498906733d7ef8d3f7c1a60f0f419d3c52ba96d79d21be0ebb35a25781",
+    "assets/creatures/catalog_policy.py": "e55e7635b3d454d2b77c99aadc1dcb4362c8a8b480178c8965bf056963f4ec5e",
+    "assets/creatures/enabled.json": "a46d917fc1c9cd7752a7aa243d8a91b6d1fcfe00e230c40b88126b3ee58763e7",
+    "assets/creatures/identity-lock.json": "fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969",
+    "assets/creatures/generate_data.py": "0f45f622ecd185843bad36b96c82a45b27f82aeba4baae645c1131fedc9e749c",
+    "assets/creatures/validate_catalog.py": "7dbb391e7ca08eece304429450a64e8817c36954445f350b1adcdd87f578647f",
+    "tests/test_creatures.py": "607c0205706a33eaf11acf50f201c4eaba844be17fc6f6b1468e0205def300ac",
+    "tests/test_creature_sparse.py": "3a505d590fb9a56b6dd4aee1e50d83d06c7695dfe1e3816894ba2b7b456052a6",
+    "tests/test_southern_creature_core.py": "f307314a35a555abf678c7bca493ad1b0c5351ca2b5ea668c7bce7143302b290",
+    "tests/test_creature_branches.py": "5126f25168cad71403454a03057c9b077e0e3e2e7dc719408fa9c06c8e8f1dd4",
+    "tests/creatures_branch_native.c": "df48e9992a4d0d7ced2f21fdea820e53df23060050b8d756fa9e27201f6e2ba8",
+    "tests/creatures_sanitizer.c": "4f8d940f2505155522396e88e76b24dbcc6ebf9409935389a543323fdd8f5311",
+    "tests/test_southern_catalog.py": "19578dc3590f79a8bad2bb50b12b854bb8c32f49fbe9eaa7b272b9f0e3cf67dd",
+    "tests/benchmark_creature_core.py": "5d4ec613093bbabf0756813d41e261410c2c58921dcbbe93f382e9d502456587"
+  }
+}

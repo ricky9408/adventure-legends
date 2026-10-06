@@ -1,0 +1,13 @@
+{
+  "checked_existing": 1245,
+  "changed": [],
+  "added_excluded_overviews": [
+    "assets/region/region_preview_2x.png",
+    "assets/region/native_camera_sheet_2x.png",
+    "assets/region/native_camera_sheet.png",
+    "assets/region/region_preview_native.png"
+  ],
+  "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+  "scope": "Exported source unpacked, rebuilt and bridge-smoke tested; all existing asset files unchanged after make assets."
+}

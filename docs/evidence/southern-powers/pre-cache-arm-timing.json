@@ -1,0 +1,234 @@
+{
+  "kind": "isolated-ARM7TDMI-module-timing-synthetic-world-and-OBJ-callbacks",
+  "waitcnt": "0x4317",
+  "clock_hz": 16777216,
+  "frame_cycles": 280896,
+  "columns": [
+    "cast_cycles",
+    "max_tick_cycles",
+    "max_draw_cycles",
+    "max_busy_check_cycles"
+  ],
+  "commands": {
+    "23": {
+      "cycles": [
+        20850,
+        7722,
+        8598,
+        1019
+      ],
+      "max_tick_solid_calls": 56,
+      "max_draw_objects": 6
+    },
+    "24": {
+      "cycles": [
+        26220,
+        4924,
+        18046,
+        1019
+      ],
+      "max_tick_solid_calls": 15,
+      "max_draw_objects": 10
+    },
+    "25": {
+      "cycles": [
+        10891,
+        16910,
+        15991,
+        1019
+      ],
+      "max_tick_solid_calls": 109,
+      "max_draw_objects": 12
+    },
+    "26": {
+      "cycles": [
+        25358,
+        28455,
+        15931,
+        1019
+      ],
+      "max_tick_solid_calls": 158,
+      "max_draw_objects": 7
+    },
+    "27": {
+      "cycles": [
+        10891,
+        15777,
+        840,
+        1019
+      ],
+      "max_tick_solid_calls": 61,
+      "max_draw_objects": 2
+    },
+    "28": {
+      "cycles": [
+        23968,
+        2009,
+        12996,
+        1019
+      ],
+      "max_tick_solid_calls": 6,
+      "max_draw_objects": 7
+    },
+    "29": {
+      "cycles": [
+        15262,
+        1654,
+        3826,
+        1019
+      ],
+      "max_tick_solid_calls": 2,
+      "max_draw_objects": 1
+    },
+    "30": {
+      "cycles": [
+        11030,
+        6706,
+        50490,
+        1019
+      ],
+      "max_tick_solid_calls": 41,
+      "max_draw_objects": 8
+    },
+    "31": {
+      "cycles": [
+        14449,
+        918,
+        2263,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1
+    },
+    "32": {
+      "cycles": [
+        14584,
+        9307,
+        4519,
+        1019
+      ],
+      "max_tick_solid_calls": 68,
+      "max_draw_objects": 1
+    },
+    "33": {
+      "cycles": [
+        10891,
+        918,
+        2369,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1
+    },
+    "34": {
+      "cycles": [
+        23968,
+        10058,
+        12985,
+        1019
+      ],
+      "max_tick_solid_calls": 76,
+      "max_draw_objects": 7
+    },
+    "35": {
+      "cycles": [
+        24973,
+        918,
+        5787,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 1
+    },
+    "36": {
+      "cycles": [
+        25112,
+        918,
+        21987,
+        1019
+      ],
+      "max_tick_solid_calls": 0,
+      "max_draw_objects": 9
+    },
+    "37": {
+      "cycles": [
+        10853,
+        10842,
+        840,
+        1019
+      ],
+      "max_tick_solid_calls": 39,
+      "max_draw_objects": 2
+    },
+    "38": {
+      "cycles": [
+        10992,
+        36483,
+        23050,
+        1019
+      ],
+      "max_tick_solid_calls": 216,
+      "max_draw_objects": 9
+    },
+    "39": {
+      "cycles": [
+        14967,
+        1648,
+        3826,
+        1019
+      ],
+      "max_tick_solid_calls": 2,
+      "max_draw_objects": 1
+    },
+    "40": {
+      "cycles": [
+        15088,
+        8810,
+        4336,
+        1019
+      ],
+      "max_tick_solid_calls": 80,
+      "max_draw_objects": 1
+    },
+    "41": {
+      "cycles": [
+        10853,
+        8045,
+        573,
+        1019
+      ],
+      "max_tick_solid_calls": 26,
+      "max_draw_objects": 1
+    },
+    "42": {
+      "cycles": [
+        10992,
+        38312,
+        1079,
+        1019
+      ],
+      "max_tick_solid_calls": 318,
+      "max_draw_objects": 3
+    }
+  },
+  "rom_sha256": "c8cc5b7abd594a47fd58e02d48256db04f54e7f94c8a6ed79523e62556f926ca",
+  "conservative_max_tick_plus_draw_cycles": 59533,
+  "source_sha256": {
+    "tests/southern_powers_native.c": "fc2e9349b1a68a752df26a28a63f2b66436e8279aa7e0d110bedae0f5811ab78",
+    "src/southern_powers.c": "da3940358d39bc89b00f373759d533681da672a2dff8cdfa77e3537417a38d03",
+    "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+    "src/northern_powers.c": "c611f3d32c3c5704d7d64a02fbfa3b4fd83120d1bde6cf94f2b32959faf5a21a",
+    "src/northern_power_art.c": "fadac439537dcba908a7a4cd36e58f8fce1ee453a22ebb37737c95f29a4dedc3",
+    "src/advanced_powers.c": "3d28a15830aaa05a0fcc764cc30c91bdc3ef3e869ff6a0c758d119e2e57b7bad",
+    "src/regional_powers.c": "598ab1c413064a7489482e25bfbc204955cf4390170f937c0d96e24394f55766",
+    "src/gear_runtime.c": "8e72bc754c7091d4fd570e4203430c3a59e4de33ff167ee11d46f0789a96146a",
+    "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
+    "src/combat_rules.c": "443b81d059efbe3c892f2e824c73f4c8ee84716dd8d9494caa6ae03664eabe69",
+    "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "src/equipment_data.c": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+    "src/creatures.c": "158fcec4bddcab1a2294d96352e6bb8153feaeee6e6ed1c9cc50be04c8453a18",
+    "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "src/assets.c": "c08fa97049f25066e15733391694a1fb055ea8db30b620cf918337cb64f010f7"
+  },
+  "limitation": "No full game loop, world room collision, renderer OAM/cache pressure, controller acceptance or frame-budget guarantee is implied."
+}
