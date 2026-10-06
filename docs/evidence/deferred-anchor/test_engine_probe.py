@@ -43,7 +43,27 @@ subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
  '-DGAME_HOST_TEST','-Dmain=gba_main','-Isrc','-Wl,-Bsymbolic',
  str(OUT/'engine_probe.c'),*[str(ROOT/'src'/f'{n}.c') for n in MODULES],
  '-o',str(SO)],cwd=ROOT,check=True)
-L=C.CDLL(str(SO));assert L.probe_map()==1,'cannot map synthetic host backing memory'
+L=C.CDLL(str(SO))
+if L.probe_map()!=1:
+ address=C.c_size_t.in_dll(L,'probe_map_error_address').value
+ error=C.c_int.in_dll(L,'probe_map_error_number').value
+ overlaps=[]
+ # Only overlapping address ranges and their generic tag are reported; no
+ # unrelated process map paths or environment data enter the test evidence.
+ try:
+  for line in Path('/proc/self/maps').read_text().splitlines():
+   columns=line.split();left,right=(int(v,16) for v in columns[0].split('-'))
+   if left<address+0x20000 and right>address:
+    overlaps.append({'start':left,'end':right,'tag':'[heap]' if columns[-1]=='[heap]' else 'other'})
+ except OSError:pass
+ detail={'kind':'synthetic-address-reservation','errno':error,'address':address,
+         'length':0x20000,'mapped_before_failure':C.c_uint.in_dll(L,'probe_map_success_count').value,
+         'overlaps':overlaps,'game_assertions_started':False,'overwritten_mappings':False}
+ print('DEFERRED_PROBE_SETUP_FAILURE_JSON='+json.dumps(detail,sort_keys=True),file=sys.stderr)
+ raise SystemExit(78)
+RESULT['synthetic_mapping']={'map_fixed_noreplace':True,'ranges':4,'bytes_per_range':0x20000,
+                             'overwritten_mappings':False}
+
 for name in ('save5_load','save5_store','save5_validate'):
  getattr(L,name).argtypes=[C.POINTER(Save)];getattr(L,name).restype=C.c_int
 L.save5_test_fail_after.argtypes=[C.c_int]
@@ -249,5 +269,8 @@ record('large_roster_synthetic_regression',fixture=full,
  fixture_sha256=full_sha,actual_input_individuals=34,actual_input_histories=65,
  generated_test_fixture=True,player_save=False,native_claim=False)
 RESULT['passed']=True
-(OUT/os.environ.get('PROBE_RESULT_NAME','engine-probe-results.json')).write_text(json.dumps(RESULT,indent=2)+'\n')
+result_path=Path(os.environ.get('PROBE_RESULT_NAME',str(ROOT/'build/deferred-anchor-engine-results.json')))
+if not result_path.is_absolute():result_path=OUT/result_path
+result_path.parent.mkdir(parents=True,exist_ok=True)
+result_path.write_text(json.dumps(RESULT,indent=2)+'\n')
 print(json.dumps(RESULT,indent=2))

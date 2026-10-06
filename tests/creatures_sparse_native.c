@@ -66,8 +66,8 @@ int main(void) {
     }
 #ifdef SPARSE_FIXTURE
     for (i = 13; i <= 22; ++i) assert(creatures_ability(i)->id == i);
-    for (i = 23; i <= 66; ++i) assert(creatures_ability(i)->id == i);
-    assert(!creatures_ability(67) && !creatures_ability(255));
+    for (i = 23; i <= 90; ++i) assert(creatures_ability(i)->id == i);
+    assert(!creatures_ability(91) && !creatures_ability(255));
     for (i = 0; i < sizeof(new_forms) / sizeof(new_forms[0]); ++i) {
         unsigned trial = i < 8 ? 32u << (i / 2) : LAST_TRIAL;
         CreatureInstance before;
@@ -101,7 +101,7 @@ int main(void) {
     }
 #endif
     for (i = 1; i <= 128; ++i) {
-        unsigned enabled = 0;
+        unsigned enabled = i >= 49 && i <= 72;
         for (j = 0; j < sizeof(old_forms) / sizeof(old_forms[0]); ++j) enabled |= old_forms[j] == i;
 #ifdef SPARSE_FIXTURE
         for (j = 0; j < sizeof(new_forms) / sizeof(new_forms[0]); ++j) enabled |= new_forms[j] == i;

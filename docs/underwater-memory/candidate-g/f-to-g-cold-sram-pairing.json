@@ -1,0 +1,54 @@
+{
+  "classification": "Authenticated F controller SRAM cold-imported into a separate G-source canary diagnostic, explicitly distinct from a same-G-ROM acquisition route.",
+  "sram_producer_rom_sha256": "78ba51a7dd8160af681fb68e52e573f6de4140a70ea320d344d10d8fdd4d13c8",
+  "sram_producer_report_sha256": "a0e9796a9023944582db44c89844b39b2fa91275c7adc0ac09b7db99a212568f",
+  "sram_producer_functional_assertions": 10939,
+  "sram_producer_failures": [],
+  "candidate_g_rom_sha256": "8c216b7e36a241a713f2aae87d1c1e33cd7ff221c9279c305c150d9386f8ad9b",
+  "candidate_g_source_manifest_sha256": "77d212ef0747a95e455521284eb7d176ffd3d3ae2733ab191f93025f499fc288",
+  "diagnostic_rom_sha256": "345973f06dd00a480667339fe1ffea2a62de193df8fdd6bc207b3481d29ef083",
+  "changed_runtime_files_f_to_g": [
+    "src/game.c",
+    "src/underwater_game.c",
+    "src/underwater_powers.c"
+  ],
+  "identical_persisted_sources": [
+    "src/creature_admission_job.inc",
+    "src/creature_data.c",
+    "src/creature_history_v5.inc",
+    "src/creatures.c",
+    "src/creatures.h",
+    "src/equipment.c",
+    "src/equipment.h",
+    "src/equipment_data.c",
+    "src/save4.c",
+    "src/save4.h",
+    "src/save5.c",
+    "src/save5.h",
+    "src/save5_history_policy.h",
+    "src/save5_preflight.inc",
+    "src/save5_underwater_policy.h",
+    "src/save5_underwater_policy.inc",
+    "src/underwater_quests.c",
+    "src/underwater_quests.h",
+    "src/underwater_transactions.inc"
+  ],
+  "no_cross_rom_machine_state_imports": true,
+  "game_ram_writes": 0,
+  "save_wire_version": 5,
+  "content_revision": 6,
+  "inputs": [
+    {
+      "snapshot": "11-all89-earned-town",
+      "sram_sha256": "41cf371618208e0097fe6ee10393e3185b4bffb2af9dad9e5f81e2663d6673a0",
+      "retained_individuals": 50,
+      "obtained_history": 89
+    },
+    {
+      "snapshot": "trial-15-complete",
+      "sram_sha256": "fc4488e9d94c61291bbcf74da8277cb3fd8acddcdd42473c54044ba69735b253",
+      "retained_individuals": 50,
+      "obtained_history": 88
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+/tmp/underwater_game_arm.o  :
+section             size   addr
+.text               4856      0
+.data                  4      0
+.bss                 188      0
+.text.rom          22592      0
+.rodata             1048      0
+.debug_info        53478      0
+.debug_abbrev       1567      0
+.debug_loclists    26502      0
+.debug_aranges       352      0
+.debug_rnglists     3913      0
+.debug_line        48071      0
+.debug_str         11417      0
+.comment              39      0
+.debug_frame        2348      0
+.ARM.attributes       42      0
+Total             176417
+
+

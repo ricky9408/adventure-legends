@@ -18,17 +18,7 @@ from catalog_policy import (LEGACY_FIELD_CAPABILITIES, FIELD_CAPABILITIES,
                             CURRENT_POLARITY_OVERRIDES)
 KEYWORDS={'$schema','$id','$defs','title','$ref','type','enum','const','properties','required','additionalProperties','items','minItems','maxItems','uniqueItems','minimum','maximum','minLength','maxLength','pattern'}
 
-class CatalogError(ValueError):pass
-
-def load_json(path):
-    def pairs(items):
-        d={}
-        for k,v in items:
-            if k in d:raise CatalogError(f'duplicate JSON key: {k}')
-            d[k]=v
-        return d
-    def constant(value):raise CatalogError(f'non-finite JSON value: {value}')
-    return json.loads(Path(path).read_text(encoding='utf-8'),object_pairs_hook=pairs,parse_constant=constant)
+from catalog_source import CatalogError, load_json
 
 def structure(value,schema,root,path='$'):
     errors=[]

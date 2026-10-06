@@ -1,0 +1,84 @@
+{
+  "purpose": "Source-export packaging only; no evidence, assertions, runtime, observers, or original indexes changed",
+  "format": "gzip",
+  "settings": {
+    "mtime": 0,
+    "embedded_filename": "",
+    "compression_level": 9,
+    "os_header": 255
+  },
+  "reader_instructions": "See COMPRESSED_EVIDENCE.md. Original index report paths and hashes identify the restored uncompressed bytes, not the gzip transport.",
+  "raw_docs_and_build_originals_preserved": true,
+  "source_export_may_omit_only_redundant_raw_docs_paths": [
+    "docs/evidence/underwater-engine-review/candidate-d-magma-return.json",
+    "docs/evidence/underwater-engine-review/candidate-d-southern-rest.json",
+    "docs/evidence/underwater-engine-review/candidate-k-magma-return.json",
+    "docs/evidence/underwater-engine-review/candidate-k-southern-rest.json"
+  ],
+  "source_export_must_include": [
+    "docs/evidence/underwater-engine-review/candidate-d-magma-return.json.gz",
+    "docs/evidence/underwater-engine-review/candidate-d-southern-rest.json.gz",
+    "docs/evidence/underwater-engine-review/candidate-k-magma-return.json.gz",
+    "docs/evidence/underwater-engine-review/candidate-k-southern-rest.json.gz",
+    "docs/evidence/underwater-engine-review/compressed-evidence-packaging.json",
+    "docs/evidence/underwater-engine-review/COMPRESSED_EVIDENCE.md"
+  ],
+  "reports": [
+    {
+      "candidate": "D",
+      "suite": "magma-return",
+      "compressed_path": "docs/evidence/underwater-engine-review/candidate-d-magma-return.json.gz",
+      "compressed_bytes": 52062,
+      "compressed_sha256": "e2fe53cff58430bab7680e4d49b4edda1e68730e80c821eefb7e675046fe393e",
+      "uncompressed_path": "docs/evidence/underwater-engine-review/candidate-d-magma-return.json",
+      "uncompressed_bytes": 130097,
+      "uncompressed_sha256": "022395171385c9b5dc4b0ab2060de3629be2a8e5ae36114a16d018c2296634ab",
+      "original_index_path": "docs/evidence/underwater-engine-review/candidate-d-index.json",
+      "original_index_sha256": "553b67d2c3537b6659fba4959ad8a9d517581567e9dbbfed876c9cec3ad1ca37",
+      "original_build_evidence_path": "build/underwater-engine-review/test_bounded_magma_return-cmva2me6/attempt-01.json",
+      "decompression_byte_identical": true
+    },
+    {
+      "candidate": "D",
+      "suite": "southern-rest",
+      "compressed_path": "docs/evidence/underwater-engine-review/candidate-d-southern-rest.json.gz",
+      "compressed_bytes": 52204,
+      "compressed_sha256": "2dd6498894bdf9773f0e58dd5146ee5cc3d793d1b5121d0f09982b75e0b87440",
+      "uncompressed_path": "docs/evidence/underwater-engine-review/candidate-d-southern-rest.json",
+      "uncompressed_bytes": 132183,
+      "uncompressed_sha256": "0d8a424a02f6ef0331a7bb227325e730bd7ec997860aa5e94913c7f8b9475c73",
+      "original_index_path": "docs/evidence/underwater-engine-review/candidate-d-index.json",
+      "original_index_sha256": "553b67d2c3537b6659fba4959ad8a9d517581567e9dbbfed876c9cec3ad1ca37",
+      "original_build_evidence_path": "build/underwater-engine-review/test_bounded_southern_rest-ue3u1k03/attempt-01.json",
+      "decompression_byte_identical": true
+    },
+    {
+      "candidate": "K",
+      "suite": "magma-return",
+      "compressed_path": "docs/evidence/underwater-engine-review/candidate-k-magma-return.json.gz",
+      "compressed_bytes": 52049,
+      "compressed_sha256": "ac42f302973bba03bea8eb7a9eed8de4c37b8551c140bcd80eb19229baa1eae8",
+      "uncompressed_path": "docs/evidence/underwater-engine-review/candidate-k-magma-return.json",
+      "uncompressed_bytes": 130097,
+      "uncompressed_sha256": "864c5c0db4d6405f0dd7a608445ebb2459727f99d2e26760d8d2fed74d2c1838",
+      "original_index_path": "docs/evidence/underwater-engine-review/candidate-k-index.json",
+      "original_index_sha256": "5c010b9af3179c5beb3c4b8f7af3902a48e32a9d3a926dd803d247fd2b1495f1",
+      "original_build_evidence_path": "build/underwater-engine-review/test_bounded_magma_return-bby3k3pu/attempt-01.json",
+      "decompression_byte_identical": true
+    },
+    {
+      "candidate": "K",
+      "suite": "southern-rest",
+      "compressed_path": "docs/evidence/underwater-engine-review/candidate-k-southern-rest.json.gz",
+      "compressed_bytes": 52193,
+      "compressed_sha256": "cb6b92f04a24f784f49e7a435b1a49f35d1c91bf8cc40e34c0ec9671696bb94f",
+      "uncompressed_path": "docs/evidence/underwater-engine-review/candidate-k-southern-rest.json",
+      "uncompressed_bytes": 132183,
+      "uncompressed_sha256": "2afdc125deb800c6703da97b740cd5a31ee4383358c7ccd381640b028c0cd932",
+      "original_index_path": "docs/evidence/underwater-engine-review/candidate-k-index.json",
+      "original_index_sha256": "5c010b9af3179c5beb3c4b8f7af3902a48e32a9d3a926dd803d247fd2b1495f1",
+      "original_build_evidence_path": "build/underwater-engine-review/test_bounded_southern_rest-orcgoxwo/attempt-01.json",
+      "decompression_byte_identical": true
+    }
+  ]
+}

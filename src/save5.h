@@ -10,14 +10,15 @@
  * revision1 (8 forms, reserved quests/gear), revision2 (11 forms/13 items),
  * revision3 (21 forms/19 items, Northern quests11..21/areas22..29),
  * revision4 (41 forms/25 items, Southern quests22..29/areas30..37), and
- * revision5 (65 forms/31 items, Magma quests30..37/areas38..45). Revision1
- * installs only starter equipment; revision2/3/4->5 preserves existing typed bytes
+ * revision5 (65 forms/31 items, Magma quests30..37/areas38..45), and
+ * revision6 (89 forms/37 items, Underwater quests38..45/areas46..53). Revision1
+ * installs only starter equipment; revision2/3/4/5->6 preserves existing typed bytes
  * and adds no recruit, trial, quest, gear, visit or reward on load. All writes
- * use revision5. Unknown revisions and cross-revision content are rejected. */
+ * use revision6. Unknown revisions and cross-revision content are rejected. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
     SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5056,
-    SAVE5_CONTENT_REVISION = 5, SAVE5_COMMIT = 0xA5,
+    SAVE5_CONTENT_REVISION = 6, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,
@@ -80,6 +81,26 @@ unsigned save5_progress_total(void);
 /* Blocking adapter ONLY for host tests or explicitly paused transitions. */
 int save5_store(const Save5State *state);
 Save4U32 save5_crc32(const Save4U8 *bytes, unsigned length);
+
+/* Read-only budgeted transaction preflight. Owns the existing writer scratch;
+ * begin/write refuses while owned, load cancels it. No SRAM read or write.
+ * The raw immutable snapshot is available only after complete validation.
+ * Token identity and exact full-state word comparison are required at commit;
+ * a hash, caller trust flag or merely unchanged generation is insufficient.
+ * step executes at most one bounded phase (up to8 roster records), never a
+ * full roster scan. A zero budget does nothing. Caller cancels on scene,
+ * load/death, participant or input-attempt changes. */
+Save4U32 save5_preflight_begin(const Save5State *state);
+unsigned save5_preflight_step(Save4U32 token, unsigned byte_budget);
+unsigned save5_preflight_status(Save4U32 token);
+unsigned save5_preflight_phase(Save4U32 token);
+const Save5State *save5_preflight_snapshot(Save4U32 token);
+/* Reuses the codec scan's existing512-byte equipment stage after validation;
+ * this is separate from the immutable raw snapshot and exists only while owned. */
+EquipmentState *save5_preflight_equipment_stage(Save4U32 token);
+int save5_preflight_matches(Save4U32 token, const Save5State *state);
+int save5_preflight_active(void);
+void save5_preflight_cancel(void);
 
 #ifdef SAVE5_HOST_TEST
 extern Save4U8 save5_test_sram[32768];

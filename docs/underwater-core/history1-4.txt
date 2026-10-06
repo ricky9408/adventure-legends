@@ -1,0 +1,10 @@
+test_current_command1_replacement23_cannot_revoke_old_command (__main__.HistoricalCoreTests.test_current_command1_replacement23_cannot_revoke_old_command) ... ok
+test_decoded_roster_uses_history_for_members_collection_and_story (__main__.HistoricalCoreTests.test_decoded_roster_uses_history_for_members_collection_and_story) ... ok
+test_deterministic_corruptions_match_independent_wire_reference (__main__.HistoricalCoreTests.test_deterministic_corruptions_match_independent_wire_reference) ... ok
+test_every_snapshot_form_levels_commands_trials_and_zero_bond (__main__.HistoricalCoreTests.test_every_snapshot_form_levels_commands_trials_and_zero_bond) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.216s
+
+OK
+historical instance policy comparisons: 100608

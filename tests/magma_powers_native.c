@@ -42,6 +42,11 @@ int solid(int x,int y){
        y>=walls[i].y&&y<walls[i].y+walls[i].h)return 1;
     return 0;
 }
+int game_clear_box(int x0,int y0,int x1,int y1){int i;
+ if(x0<0||y0<0||x1>=480||y1>=320||x0>x1||y0>y1)return 0;
+ for(i=0;i<wall_count;i++)if(x0<walls[i].x+walls[i].w&&x1>=walls[i].x&&y0<walls[i].y+walls[i].h&&y1>=walls[i].y)return 0;
+ return 1;
+}
 static void wall(int x,int y,int w,int h){assert(wall_count<8);walls[wall_count].x=x;
     walls[wall_count].y=y;walls[wall_count].w=w;walls[wall_count++].h=h;southern_powers_geometry_changed();magma_powers_geometry_changed();}
 int near(int x,int y,int tx,int ty,int radius){return abs(x-tx)+abs(y-ty)<radius;}
@@ -219,12 +224,12 @@ static void test_guard_and_screen(void){unsigned i;
  assert(!magma_powers_intercept_shot(UINT_MAX,0,0,0,0,1));
 }
 static void test_shared_lease(void){unsigned owner;
- for(owner=1;owner<=4;owner++){
+ for(owner=1;owner<=NORTHERN_TILES_UNDERWATER;owner++){
   setup(43);assert(northern_powers_tiles_claim(owner));assert(!magma_power(43));assert(!ability_cd);
   assert(!northern_powers_tiles_claim(owner));assert(northern_powers_tiles_release(owner));
  }
- setup(43);assert(!northern_powers_tiles_claim(5));assert(magma_power(43));
- for(owner=1;owner<=4;owner++){assert(!northern_powers_tiles_claim(owner));assert(!northern_powers_tiles_release(owner));}
+ setup(43);assert(!northern_powers_tiles_claim(NORTHERN_TILES_UNDERWATER+1));assert(magma_power(43));
+ for(owner=1;owner<=NORTHERN_TILES_UNDERWATER;owner++){assert(!northern_powers_tiles_claim(owner));assert(!northern_powers_tiles_release(owner));}
  magma_powers_reset();assert(northern_powers_tiles_owner()==0);
  setup(43);regional_power_time=3;assert(!magma_power(43));regional_power_time=0;
  northern_power_time=3;assert(!magma_power(43));northern_power_time=0;

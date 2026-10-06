@@ -1,0 +1,86 @@
+{
+  "scope": "Synthetic real-production-module full-engine host integration; not native controller acquisition, hardware pixels, DMA execution, or native timing",
+  "candidate": "K",
+  "runtime_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "runtime_input_files": 1163,
+  "reference_rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "reference_symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+  "reference_elf_sha256": "1fc2082a8cdc7cb56ca8e8ded59a7a322a4beacbb0adebad47d5169e9ea5dbe3",
+  "all_frozen_sources_checked_before_and_after": true,
+  "total_passed_checks": 147,
+  "full_state_byte_mutation_rejection_cases": 14832,
+  "runtime_and_shared_observers_unchanged": true,
+  "observer_input_receipt": "candidate-k-replay-inputs.json",
+  "observer_input_receipt_sha256": "adf45df05338da8b67fdf06666dff98909e398475042a439cf7d48ae0b9e7409",
+  "safe_fixed_address_mapping": "MAP_FIXED_NOREPLACE; no overwritten mappings, no permission/ASLR changes, no game assertion retries",
+  "all_four_suites_passed_first_attempt": true,
+  "earlier_evidence_preserved": true,
+  "suites": [
+    {
+      "suite": "current-renderer",
+      "passed_checks": 27,
+      "report": "candidate-k-current-renderer.json",
+      "report_sha256": "047e20a9fc7792bbbb6bbbe9cd252c4c540b855dd0a83d2200bca4b3f1dd92aa",
+      "launcher": "candidate-k-current-renderer-launcher.json",
+      "launcher_sha256": "b8566006fb51cf85c39f7df3aad77df1fe6f6c467446345db0aa7dd5fafaa8a7",
+      "report_source_hashes_matched_to_frozen_k": 52,
+      "attempts": 1,
+      "classified_heap_collision_retries": 0,
+      "original_attempt_evidence": "build/underwater-engine-review/test_legacy_deferred_anchor_current-bon2fx1d"
+    },
+    {
+      "suite": "lifecycle",
+      "passed_checks": 30,
+      "report": "candidate-k-lifecycle.json",
+      "report_sha256": "b464f198270504f7d5acc71417f7de0e42ffd1fc9c59880aa5033d083ec547a3",
+      "launcher": "candidate-k-lifecycle-launcher.json",
+      "launcher_sha256": "4fca5f5c5670cbf45649e6231059a52747fd280bcac8969504cee092121639a8",
+      "report_source_hashes_matched_to_frozen_k": 5,
+      "attempts": 1,
+      "classified_heap_collision_retries": 0,
+      "original_attempt_evidence": "build/underwater-engine-review/test_engine_lifecycle-sadxyjjh",
+      "observed_host_maxima": {
+        "event_slices": 1,
+        "evolution_slices": 3,
+        "event_frames": 141,
+        "writer_frames": 37
+      }
+    },
+    {
+      "suite": "magma-return",
+      "passed_checks": 39,
+      "report": "candidate-k-magma-return.json",
+      "report_sha256": "864c5c0db4d6405f0dd7a608445ebb2459727f99d2e26760d8d2fed74d2c1838",
+      "launcher": "candidate-k-magma-return-launcher.json",
+      "launcher_sha256": "1800dfdfb7aece50f423ca7071870f6816a149fe9700f95e35f15112bf2975dd",
+      "report_source_hashes_matched_to_frozen_k": 1162,
+      "attempts": 1,
+      "classified_heap_collision_retries": 0,
+      "original_attempt_evidence": "build/underwater-engine-review/test_bounded_magma_return-bby3k3pu",
+      "observed_host_maxima": {
+        "event_slices": 1,
+        "evolution_slices": 0,
+        "event_frames": 51,
+        "writer_frames": 37
+      }
+    },
+    {
+      "suite": "southern-rest",
+      "passed_checks": 51,
+      "report": "candidate-k-southern-rest.json",
+      "report_sha256": "2afdc125deb800c6703da97b740cd5a31ee4383358c7ccd381640b028c0cd932",
+      "launcher": "candidate-k-southern-rest-launcher.json",
+      "launcher_sha256": "af64ea9e96c9cbaacbadad46e425ce06352963e2fcc19f874aad9b2501d44c80",
+      "report_source_hashes_matched_to_frozen_k": 1162,
+      "attempts": 1,
+      "classified_heap_collision_retries": 0,
+      "original_attempt_evidence": "build/underwater-engine-review/test_bounded_southern_rest-orcgoxwo",
+      "observed_host_maxima": {
+        "event_slices": 0,
+        "evolution_slices": 0,
+        "event_frames": 48,
+        "writer_frames": 37
+      }
+    }
+  ]
+}

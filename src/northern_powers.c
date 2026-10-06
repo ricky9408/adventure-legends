@@ -18,6 +18,8 @@ extern int face,ability_cd,ability_max,enemy_windups[6];
 extern int southern_power_time;
 /* Optional when older focused harnesses link only historical modules. */
 extern int magma_power_time __attribute__((weak));
+extern int underwater_power_time __attribute__((weak));
+static int underwater_tiles_live(void){return &underwater_power_time&&underwater_power_time>0;}
 static int magma_tiles_live(void){return &magma_power_time&&magma_power_time>0;}
 extern int solid(int,int);
 extern void kill_enemy(Enemy *),impact(int,int),sfx(int);
@@ -80,10 +82,11 @@ unsigned northern_powers_tiles_owner(void){return tile_owner;}
 unsigned northern_powers_tiles_generation(void){return tile_generation;}
 int northern_powers_tiles_claim(unsigned owner){
     if(owner!=NORTHERN_TILES_REGIONAL&&owner!=NORTHERN_TILES_NORTHERN&&
-       owner!=NORTHERN_TILES_SOUTHERN&&owner!=NORTHERN_TILES_MAGMA)return 0;
+       owner!=NORTHERN_TILES_SOUTHERN&&owner!=NORTHERN_TILES_MAGMA&&
+       owner!=NORTHERN_TILES_UNDERWATER)return 0;
     /* Also protect a regional effect created before the lease adapter was wired. */
     if(tile_owner!=NORTHERN_TILES_NONE||northern_power_time>0||regional_power_time>0||
-       southern_power_time>0||magma_tiles_live())return 0;
+       southern_power_time>0||magma_tiles_live()||underwater_tiles_live())return 0;
     tile_owner=owner;tile_generation++;
     return 1;
 }
@@ -92,7 +95,8 @@ int northern_powers_tiles_release(unsigned owner){
     if((owner==NORTHERN_TILES_NORTHERN&&northern_power_time>0)||
        (owner==NORTHERN_TILES_REGIONAL&&regional_power_time>0)||
        (owner==NORTHERN_TILES_SOUTHERN&&southern_power_time>0)||
-       (owner==NORTHERN_TILES_MAGMA&&magma_tiles_live()))return 0;
+       (owner==NORTHERN_TILES_MAGMA&&magma_tiles_live())||
+       (owner==NORTHERN_TILES_UNDERWATER&&underwater_tiles_live()))return 0;
     tile_owner=NORTHERN_TILES_NONE;tile_generation++;
     return 1;
 }

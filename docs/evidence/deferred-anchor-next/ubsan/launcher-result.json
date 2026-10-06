@@ -1,0 +1,18 @@
+{
+  "scope": "Synthetic host integration, not native GBA timing or acquisition",
+  "returncode": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "returncode": 0,
+      "classified_heap_collision": null,
+      "stdout_sha256": "b6b4cdd5cacc34e12d59268f6b468a845aa8ac401def147410a3d4017cc86df8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "report_sha256": "b6b4cdd5cacc34e12d59268f6b468a845aa8ac401def147410a3d4017cc86df8",
+      "passed_game_checks": 27
+    }
+  ],
+  "maximum_attempts": 3,
+  "game_assertion_failure_retries": 0,
+  "forced_mappings": false
+}

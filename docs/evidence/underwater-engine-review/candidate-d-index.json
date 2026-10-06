@@ -1,0 +1,50 @@
+{
+  "scope": "Synthetic full-engine host integration; not native controller acquisition, hardware pixels, DMA execution, or native timing",
+  "candidate": "D",
+  "runtime_manifest_sha256": "e9b5eb4cfe1a26f8337c54956621d34403e73bd27bb85e9cd6b14ac75a8c786f",
+  "runtime_input_files": 1163,
+  "reference_rom_sha256": "0ce33fac654559563853c4a342b855357cc61c4dd52cdeb247c22293079afd82",
+  "reference_elf_sha256": "beae8b51cbcb0b6f4c7aa83bc2bdacc41a10688afe6526949eb8ac0134b902e1",
+  "all_frozen_sources_checked": true,
+  "total_passed_checks": 147,
+  "full_state_byte_mutation_cases": 14832,
+  "production_sources_unchanged_by_test_replay": true,
+  "suites": [
+    {
+      "suite": "current-renderer",
+      "passed_checks": 27,
+      "report": "candidate-d-current-renderer.json",
+      "report_sha256": "ca60788351afe20101d4cb192da570ed66c6de791f17ec733b71519f3fa26f1e",
+      "launcher": "candidate-d-current-renderer-launcher.json",
+      "launcher_sha256": "531831028c71b298b2f651592f4c9c60a4edf390c43a95303c583b69b2a013cd",
+      "report_source_hashes_matched_to_frozen_d": 52
+    },
+    {
+      "suite": "lifecycle",
+      "passed_checks": 30,
+      "report": "candidate-d-lifecycle.json",
+      "report_sha256": "543432b3b27d80ca0260ce77d5601106962c5d3393aa28bc5aed894ddb97814d",
+      "launcher": "candidate-d-lifecycle-launcher.json",
+      "launcher_sha256": "884eb30ee818f93b1a9ea5055f5a8690017e26e778fa2aff02e0aead0c31d46e",
+      "report_source_hashes_matched_to_frozen_d": 5
+    },
+    {
+      "suite": "magma-return",
+      "passed_checks": 39,
+      "report": "candidate-d-magma-return.json",
+      "report_sha256": "022395171385c9b5dc4b0ab2060de3629be2a8e5ae36114a16d018c2296634ab",
+      "launcher": "candidate-d-magma-return-launcher.json",
+      "launcher_sha256": "a5b482e83a709b0749761395945b5c66af412c6e5be9c5606bf521790689cfc2",
+      "report_source_hashes_matched_to_frozen_d": 1162
+    },
+    {
+      "suite": "southern-rest",
+      "passed_checks": 51,
+      "report": "candidate-d-southern-rest.json",
+      "report_sha256": "0d8a424a02f6ef0331a7bb227325e730bd7ec997860aa5e94913c7f8b9475c73",
+      "launcher": "candidate-d-southern-rest-launcher.json",
+      "launcher_sha256": "aa4a1570d31e1fa88a1631c15c37844bd83ba7f1408e45cb267d420db52710e0",
+      "report_source_hashes_matched_to_frozen_d": 1162
+    }
+  ]
+}

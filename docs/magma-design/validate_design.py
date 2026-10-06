@@ -11,6 +11,10 @@ EXPECTED_IDS=set(range(31,49))|set(range(95,101))
 EXPECTED_FAMILIES={'F011','F012','F013','F014','F015','F016','F036','F037','F038'}
 LOCK_SHA='fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969'
 class DesignError(ValueError):pass
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'assets/creatures'))
+from catalog_source import load_catalog
+
 def need(x,m):
  if not x:raise DesignError(m)
 def validate(p,lock,source=None):
@@ -114,7 +118,7 @@ def validate(p,lock,source=None):
  need(len(all_events)==40 and set(all_events)==set(range(220,260)),'encounter/quest namespace')
  if source:
   need(hashlib.sha256((source/'assets/creatures/identity-lock.json').read_bytes()).hexdigest()==LOCK_SHA,'source identity lock changed')
-  current=json.loads((source/'assets/creatures/catalog.json').read_text())
+  current=load_catalog(source/'assets/creatures/catalog.json')
   runtime=json.loads((source/'assets/creatures/enabled.json').read_text())
   need(runtime['content_revision']==4 and runtime['enabled_form_ids']==p['baseline']['enabled_form_ids'],'baseline changed; re-review before implementation')
   need(not EXPECTED_IDS.intersection(runtime['enabled_form_ids']),'design content unexpectedly enabled in inspected source')

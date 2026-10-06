@@ -1,0 +1,999 @@
+10-main-independent-cold-import {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+11-main-native-save {'game_state': 1, 'room': 46, 'px': 80, 'py': 269, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+12-main-native-reboot {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+13-magma-shell-lift-return {'game_state': 1, 'room': 38, 'px': 416, 'py': 240, 'hp': 6, 'chapter_flags': 3, 'camera_x': 240, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 4, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+14-underwater-shell-lift-reentry {'game_state': 1, 'room': 46, 'px': 240, 'py': 288, 'hp': 6, 'chapter_flags': 3, 'camera_x': 120, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 0, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+15-optional-gardens-return {'game_state': 1, 'room': 46, 'px': 240, 'py': 32, 'hp': 6, 'chapter_flags': 3, 'camera_x': 120, 'camera_y': 0, 'save_failed': 0, 'checkpoint_spawn': 1, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+16-archive-reciprocal-returns {'game_state': 1, 'room': 46, 'px': 240, 'py': 32, 'hp': 5, 'chapter_flags': 3, 'camera_x': 120, 'camera_y': 0, 'save_failed': 0, 'checkpoint_spawn': 1, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+17-commons-safe-rest {'game_state': 1, 'room': 47, 'px': 67, 'py': 270, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+18-ordinary-underwater-death {'game_state': 4, 'room': 47, 'px': 96, 'py': 176, 'hp': 0, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 96, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+19-ordinary-underwater-retry {'game_state': 1, 'room': 47, 'px': 64, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+20-post-death-cold-reboot {'game_state': 1, 'room': 47, 'px': 64, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+21-minimal-cold-dialogs-evolution-preview {'game_state': 1, 'room': 46, 'px': 340, 'py': 85, 'hp': 6, 'chapter_flags': 3, 'camera_x': 219, 'camera_y': 5, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0}
+{
+  "checks": 1187,
+  "failures": [
+    {
+      "case": "main-independent-cold-import-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('main-independent-cold-import-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220688,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "native-save-independent-reboot-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('native-save-independent-reboot-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220694,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "surface-return-baseline-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('surface-return-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220688,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "whole-exit-46-to-38",
+      "kind": "whole-action-native-timing",
+      "error": "('whole-exit-46-to-38 updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 38, 'px': 416, 'py': 240, 'hp': 6, 'chapter_flags': 3, 'camera_x': 240, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 4, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 38,
+        "px": 416,
+        "py": 240,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 240,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 4,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 366,
+          "frame_before": 207,
+          "frame_after": 207,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 295856,
+          "state": 6,
+          "room": 38
+        }
+      ]
+    },
+    {
+      "case": "optional-ordinary-exits-baseline-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('optional-ordinary-exits-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220688,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "archive-reciprocal-exits-baseline-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('archive-reciprocal-exits-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220688,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "death-retry-baseline-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('death-retry-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220688,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "death-retry-independent-reboot-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('death-retry-independent-reboot-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 47, 'px': 64, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 47,
+        "px": 64,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2226970,
+          "state": 6,
+          "room": 47
+        }
+      ]
+    },
+    {
+      "case": "cold-dialogs-baseline-whole-continue",
+      "kind": "whole-action-native-timing",
+      "error": "('cold-dialogs-baseline-whole-continue updates and page-flips every native hardware frame within budget', {'game_state': 1, 'room': 46, 'px': 80, 'py': 272, 'hp': 6, 'chapter_flags': 3, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 31, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 1,
+        "room": 46,
+        "px": 80,
+        "py": 272,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 0,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 31,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 151,
+          "frame_before": 128,
+          "frame_after": 0,
+          "counter_reset": true,
+          "delta": 4294967168,
+          "flip": true,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 152,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 153,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 154,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 155,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 156,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 157,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 3158,
+          "state": 1,
+          "room": 0
+        },
+        {
+          "hardware_frame": 158,
+          "frame_before": 0,
+          "frame_after": 0,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 2220688,
+          "state": 6,
+          "room": 46
+        }
+      ]
+    },
+    {
+      "case": "cold-ineligible-base-evolution-preview",
+      "kind": "whole-action-native-timing",
+      "error": "('cold-ineligible-base-evolution-preview updates and page-flips every native hardware frame within budget', {'game_state': 7, 'room': 46, 'px': 340, 'py': 85, 'hp': 6, 'chapter_flags': 3, 'camera_x': 219, 'camera_y': 5, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 0, 'ability_cd': 0, 'roll_cd': 0})",
+      "status": {
+        "game_state": 7,
+        "room": 46,
+        "px": 340,
+        "py": 85,
+        "hp": 6,
+        "chapter_flags": 3,
+        "camera_x": 219,
+        "camera_y": 5,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 30,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "bad_frames": [
+        {
+          "hardware_frame": 750,
+          "frame_before": 590,
+          "frame_after": 590,
+          "counter_reset": false,
+          "delta": 0,
+          "flip": false,
+          "cycles": 286896,
+          "state": 7,
+          "room": 46
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "case": "cold-native-save-reboot",
+      "passed": false
+    },
+    {
+      "case": "magma-surface-reciprocal-return",
+      "passed": false
+    },
+    {
+      "case": "ordinary-optional-garden-exits",
+      "passed": false
+    },
+    {
+      "case": "archive-and-shortcut-reciprocal-exits",
+      "passed": false
+    },
+    {
+      "case": "ordinary-death-retry-reboot",
+      "passed": false
+    },
+    {
+      "case": "cold-dialogs-and-ineligible-preview",
+      "passed": false
+    }
+  ]
+}

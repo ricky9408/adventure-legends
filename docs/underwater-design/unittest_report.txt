@@ -1,0 +1,21 @@
+test_88_extras_leave_all_new_opportunities (test_design.DesignTests.test_88_extras_leave_all_new_opportunities) ... ok
+test_all_256_first_branch_choices_complete_89_50 (test_design.DesignTests.test_all_256_first_branch_choices_complete_89_50) ... ok
+test_both_keys_choose_either_but_cannot_cross_branches (test_design.DesignTests.test_both_keys_choose_either_but_cannot_cross_branches) ... ok
+test_branch_coverage_loss_boundary_only (test_design.DesignTests.test_branch_coverage_loss_boundary_only) ... ok
+test_completed_trial_does_not_refill_lowered_stats (test_design.DesignTests.test_completed_trial_does_not_refill_lowered_stats) ... ok
+test_each_family_repeat_same_attempt_no_duplicate (test_design.DesignTests.test_each_family_repeat_same_attempt_no_duplicate) ... ok
+test_first_receipt_retry_before_capacity_and_id (test_design.DesignTests.test_first_receipt_retry_before_capacity_and_id) ... ok
+test_grandfathered_nonworsening_not_load_rejection (test_design.DesignTests.test_grandfathered_nonworsening_not_load_rejection) ... ok
+test_id_exhaustion_and_repeat_locked_are_atomic (test_design.DesignTests.test_id_exhaustion_and_repeat_locked_are_atomic) ... ok
+test_main_story_graph_has_no_optional_requirements (test_design.DesignTests.test_main_story_graph_has_no_optional_requirements) ... ok
+test_new_repeat_attempt_has_no_event_xp_or_old_trial (test_design.DesignTests.test_new_repeat_attempt_has_no_event_xp_or_old_trial) ... ok
+test_per_instance_floor_with_existing_lifetime_aid (test_design.DesignTests.test_per_instance_floor_with_existing_lifetime_aid) ... ok
+test_schema_and_allocations (test_design.DesignTests.test_schema_and_allocations) ... ok
+test_terminal_72_plus_88_extras_exactly_160 (test_design.DesignTests.test_terminal_72_plus_88_extras_exactly_160) ... ok
+test_unproven_or_interrupted_trial_has_no_floors (test_design.DesignTests.test_unproven_or_interrupted_trial_has_no_floors) ... ok
+test_wrong_family_keys_and_identity_unchanged (test_design.DesignTests.test_wrong_family_keys_and_identity_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.636s
+
+OK

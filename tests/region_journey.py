@@ -9,7 +9,7 @@ Machine-state branches always travel with matching SRAM and recorded hashes.
 from __future__ import annotations
 from collections import deque
 from pathlib import Path
-import argparse, ctypes as C, hashlib, json, shutil, sys
+import argparse, ctypes as C, hashlib, json, shutil, struct, sys
 sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
@@ -17,7 +17,7 @@ from mgba_runner import Emulator
 from test_save5 import Save
 from test_creatures import Roster
 from test_save4 import CampaignSave
-PLAY,DIALOG,PAUSE,DEAD,SAVING,CONFIRM,EVOLVING=1,2,3,4,6,7,8
+PLAY,DIALOG,PAUSE,DEAD,SAVING,CONFIRM,EVOLVING,EVENT_PENDING=1,2,3,4,6,7,8,10
 FIXTURE_SHA='8f603dff9d9893675b2864a900f77a4608d7de43b85fa1464ad3b5f820607809'
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -35,6 +35,67 @@ class RegionJourney:
         self.campaign=json.loads((ROOT/'assets/campaign_layouts.json').read_text());self.campaign_rooms={r['id']:r for r in self.campaign['rooms']}
         self.inputs=[];self.checks=[];self.snapshots={};self.failures=[];self.timings={}
         self.e=Emulator(self.rom);self.e.load_save(self.fixture);self.e.reset()
+    def evolution_observer(self):
+        """Authenticate the current async job through the exact ROM-paired ELF.
+
+        No ambiguous nm lookup, gameplay-memory mutation, or elapsed-delay
+        inference. The source ABI uses two u32 tokens followed by phase;
+        its complete ARM object size is checked against STT_FILE ownership.
+        """
+        if hasattr(self,'evolution_pairing'):return self.evolution_pairing
+        elf=self.out/'tested.elf'
+        if not elf.is_file():shutil.copyfile(self.source_rom.with_suffix('.elf'),elf)
+        raw=elf.read_bytes();rom=self.rom.read_bytes()
+        assert raw[:6]==b'\x7fELF\x01\x01','Evolution observation requires little-endian ELF32'
+        h=struct.unpack_from('<16sHHIIIIIHHHHHH',raw);assert h[2]==40 and h[9]>=32 and h[11]>=40
+        image=bytearray(len(rom));covered=bytearray(len(rom))
+        for i in range(h[10]):
+            kind,off,virt,physical,size,memsize,flags,align=struct.unpack_from('<IIIIIIII',raw,h[5]+i*h[9])
+            if kind!=1 or not size:continue
+            start=physical-0x08000000
+            assert 0<=start<start+size<=len(rom) and off+size<=len(raw)
+            assert not any(covered[start:start+size]),'Overlapping ELF load images'
+            image[start:start+size]=raw[off:off+size];covered[start:start+size]=b'\1'*size
+        assert all(covered) and image[192:]==rom[192:],'Evolution ELF does not pair with candidate ROM'
+        sections=[struct.unpack_from('<IIIIIIIIII',raw,h[6]+i*h[11]) for i in range(h[12])];matches=[]
+        for section in sections:
+            if section[1]!=2:continue
+            assert section[9]>=16 and section[5]%section[9]==0
+            strings=sections[section[6]];strings=raw[strings[4]:strings[4]+strings[5]];owner=None
+            for pos in range(section[4],section[4]+section[5],section[9]):
+                ni,address,size,info,other,index=struct.unpack_from('<IIIBBH',raw,pos)
+                name=strings[ni:].split(b'\0',1)[0].decode()
+                if info&15==4:owner=name
+                if owner=='progression.c' and info>>4==0 and info&15==1 and name=='evolution_job':
+                    assert index and size==72,('Evolution job ABI changed; update observer explicitly',size)
+                    matches.append(address)
+        assert len(matches)==1,'Expected one progression.c:evolution_job object'
+        assert any(len(v:=line.split())==3 and v[2]=='evolution_job' and int(v[0],16)==matches[0] for line in self.symbol_path.read_text().splitlines()),'Evolution ELF differs from candidate symbols'
+        self.evolution_pairing={'elf_sha256':digest(elf),'rom_sha256':digest(self.rom),'symbols_sha256':digest(self.symbol_path),'matched_rom_bytes':len(rom)-192,'source_file':'progression.c','object':'evolution_job','address':matches[0],'size':72,'phase_offset':8,'phase_bytes':4}
+        return self.evolution_pairing
+    def wait_evolution(self,target_state=CONFIRM,require_ready=True,max_frames=180):
+        """Release inputs; observe bounded preparation/commit before fresh A.
+
+        A prepared confirmation is state7 AND idle phase0, not merely time
+        passing. A confirmed commit must reach actual animation state8. Each
+        observed wait frame retains the strict hardware update/display gate.
+        """
+        pairing=self.evolution_observer();trace=[];step=getattr(self,'raw_step',self.step)
+        previous=(self.get('frame'),self.e.read(0x04000000,2)&16)
+        for _ in range(max_frames+1):
+            state=self.get('game_state');phase=self.e.read(pairing['address']+8)
+            if state==target_state and phase==0:break
+            self.check(state==CONFIRM and 1<=phase<=5,'evolution wait observes a live bounded confirmation job')
+            if len(trace)==max_frames:raise AssertionError(('Evolution preparation exceeded bounded hardware frames',target_state,phase,self.status()))
+            step(1,0);frame=self.get('frame');page=self.e.read(0x04000000,2)&16
+            trace.append({'hardware_frame':self.e.frame,'update_delta':(frame-previous[0])&0xffffffff,'page_flip':page!=previous[1],'cycles':self.get('render_cycles'),'phase':self.e.read(pairing['address']+8),'state':self.get('game_state')});previous=(frame,page)
+        observation={'target_state':target_state,'hardware_frames':len(trace),'maximum_cycles':max((r['cycles'] for r in trace),default=0),'trace':trace}
+        if not hasattr(self,'evolution_waits'):self.evolution_waits=[]
+        self.evolution_waits.append(observation)
+        (self.out/'evolution-waits.json').write_text(json.dumps({'pairing':pairing,'controller_only':True,'game_ram_writes':0,'waits':self.evolution_waits},indent=2)+'\n')
+        self.check(all(r['update_delta']==1 and r['page_flip'] and r['cycles']<280896 for r in trace),'bounded evolution preparation presents every hardware frame')
+        self.check(self.get('game_state')==target_state and self.e.read(pairing['address']+8)==0,'evolution reaches requested prepared state within bounded frames')
+        if require_ready and target_state==CONFIRM:self.check(self.get('progression_evolution_reason')==0,'prepared evolution is genuinely ready')
     def get(self,n,width=4):return self.e.read(self.sym[n],width)
     def state(self):return Save.from_buffer_copy(self.e.bytes(self.sym['adventure_save'],C.sizeof(Save)))
     def roster(self):return self.state().roster
@@ -51,7 +112,7 @@ class RegionJourney:
         for _ in range(80):
             s=self.get('game_state')
             if s==DIALOG and dialogs:self.tap('A',2,16)
-            elif s in (SAVING,EVOLVING):self.step(20)
+            elif s in (SAVING,EVOLVING,EVENT_PENDING):self.step(20)
             else:break
         else:raise AssertionError(('modal did not finish',self.status()))
         self.step(3)
@@ -254,7 +315,7 @@ class RegionJourney:
         self.check(self.quest(4)==3,'base Water9 completes paired pools without evolved power');self.check(self.selected().trial_flags&16,'Water personal trial recorded');self.snapshot('08-paired-pools')
         self.leave_interior(17);self.goto(120,232);self.act(120,232);self.select_form(13)
         self.open_tab(3);before=bytes(self.selected());self.tap('SELECT',2,4);self.check(self.get('game_state')==CONFIRM,'Water evolution requires confirmation');self.e.screenshot(self.out/'water-confirmation.png');self.tap('B',2,4);self.check(bytes(self.selected())==before,'decline preserves exact Water instance')
-        self.tap('SELECT',2,4);self.tap('A',2,3);self.settle();self.check(self.selected().form_id==14,'confirmed Water evolution completes');self.check(self.selected().equipped[self.selected().selected_command]==9,'Water evolution keeps old command');self.close_menu()
+        self.tap('SELECT',2,4);self.wait_evolution();self.tap('A',2,3);self.wait_evolution(EVOLVING);self.settle();self.check(self.selected().form_id==14,'confirmed Water evolution completes');self.check(self.selected().equipped[self.selected().selected_command]==9,'Water evolution keeps old command');self.close_menu()
         self.goto(296,140);self.ready();self.tap('R');self.settle();self.check(abs(self.get('px')-296)<=3,'retained Water9 fills rather than teleports')
         self.open_tab(3);self.tap('R',2,25);self.settle();self.check(self.selected().equipped[self.selected().selected_command]==10,'growth journal selects newly learned Water10');self.close_menu();self.ready();self.tap('R');self.settle()
         self.check(abs(self.get('px')-424)<=1 and abs(self.get('py')-124)<=1,'Water10 links to the other authored basin');self.snapshot('09-water-evolved-shortcut')

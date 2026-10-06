@@ -18,6 +18,8 @@ import unittest
 from PIL import Image
 sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'assets/creatures'))
+from catalog_source import load_catalog
 SPEC=importlib.util.spec_from_file_location('test_northern_art_generator',ROOT/'assets/generate_northern_creatures.py')
 ART=importlib.util.module_from_spec(SPEC);SPEC.loader.exec_module(ART)
 
@@ -43,7 +45,7 @@ class NorthernCreatureArtTests(unittest.TestCase):
         expected=('Spoolbud','Loomcrown','Cindertray','Kilnbarrow','Keelkip','Wakecradle','Cairncricket','Archspring','Rivetfoil','Gimbalcloak')
         self.assertEqual(ART.NAMES,expected)
         ids=(C.c_ubyte*10).in_dll(self.lib,'northern_creature_form_ids');self.assertEqual(bytes(ids),bytes(ART.FORM_IDS))
-        catalog=json.loads((ROOT/'assets/creatures/catalog.json').read_text())
+        catalog=load_catalog(ROOT/'assets/creatures/catalog.json')
         lock=json.loads((ROOT/'assets/creatures/identity-lock.json').read_text())
         self.assertTrue(lock)
         self.assertTrue(set(ART.FORM_IDS).issubset({f['id'] for f in catalog['forms']}))

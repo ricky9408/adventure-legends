@@ -1,0 +1,15 @@
+/workspace/scratch/33ed39a77941/adventure-legends-underwater/build/underwater-memory-tool-selftest/control/control.gba: 9770108 bytes; valid header, complement 0xea
+{
+  "candidate_rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "candidate_source_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "control_rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "control_byte_identical_to_candidate": true,
+  "diagnostic_rom_sha256": "28ba164f9a7a3962955e024e291c5720ecd1b4fe82bc07e5f937228ca823afc8",
+  "diagnostic_source_manifest_sha256": "3ddd478a21a596b582c1c8b9affbffefc933e6101be894a950d465dc6d8b7145",
+  "runtime_source_changes": [
+    "src/startup.s"
+  ],
+  "compiler_flags": "-mcpu=arm7tdmi -mthumb-interwork -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -MMD -MP -fstack-usage",
+  "source_inputs": 1161,
+  "script_sha256": "9bd2906e52be49c4eb260b71a15e17224c3be7e77a06097dcf311218def6e5aa"
+}

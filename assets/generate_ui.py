@@ -64,12 +64,18 @@ texts.update({'NEW_CONFIRM':'新しい冒険を始めますか？','NEW_WARNING'
 texts.update({'E_SOUTH_MORE': '南のふたりと契約しよう', 'E_WISH_SOUTH_0': '願い：三つの根をつなぐ', 'E_WISH_SOUTH_1': '願い：砂の水路をたどる', 'E_WISH_SOUTH_2': '願い：三つの光を届ける', 'E_WISH_SOUTH_3': '願い：干し布を整える', 'E_WISH_SOUTH_4': '願い：日陰の輪を守る', 'E_WISH_SOUTH_5': '願い：三つの留め金を開く', 'E_WISH_SOUTH_6': '願い：葉陰の道を結ぶ', 'E_WISH_SOUTH_7': '願い：小川の曇りをほどく', 'E_WISH_SOUTH_8': '願い：布越しの灯をつなぐ', 'E_WISH_SOUTH_9': '願い：三つの針を合わせる'})
 texts.update({'ST_FERRY_WAIT_A':'南の島へは、この船で。','ST_FERRY_WAIT_B':'港の灯を直したら、声をかけて。'})
 texts.update({'SP_AIM_CLEAR':'狙いを変えてみよう','SP_OTHER_SIDE':'R もう一度で反対側へ','SP_SECOND_TARGET':'別の相手を向いて、もう一度R'})
-for extra in ('assets/magma_ui.json','assets/magma_region/dialogue.json'):
+for extra in ('assets/magma_ui.json','assets/magma_region/dialogue.json','assets/underwater_ui.json','assets/underwater_region/dialogue_ja.json'):
     additions=ROOT/extra
     if additions.exists():
         for key,value in json.loads(additions.read_text()).items():
             assert key not in texts or texts[key]==value,key
             texts[key]=value
+# Both authoring languages retain identical Underwater message identifiers.
+uw_english=ROOT/'assets/underwater_region/dialogue.json'
+uw_japanese=ROOT/'assets/underwater_region/dialogue_ja.json'
+if uw_english.exists() or uw_japanese.exists():
+    assert uw_english.exists() and uw_japanese.exists(), 'Underwater localization is incomplete'
+    assert set(json.loads(uw_english.read_text()))==set(json.loads(uw_japanese.read_text())), 'Underwater message keys drifted'
 items=[]
 for name,text in texts.items():
     f=small if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL') else font

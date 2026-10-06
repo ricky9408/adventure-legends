@@ -1,0 +1,92 @@
+{
+  "scope": "Host core/history/admission and source-reader verification only; not native chapter delivery",
+  "baseline_commit": "0a8b05c3e24d02bd350a11c32289fb5686641535",
+  "suites": {
+    "new-core": {
+      "tests": 12,
+      "output": "docs/underwater-core/new-core.txt",
+      "sha256": "2b3595b1381dbcc0b6622a73312d41cab62e6b04d3ab669032e2afa8bbc34a17"
+    },
+    "legacy-core-sparse-branches": {
+      "tests": 46,
+      "output": "docs/underwater-core/legacy-core-sparse-branches.txt",
+      "sha256": "75d6fb4e73c17e53c887fd92557e07da7a7d13f7ad156e17d484b2fea39a605a"
+    },
+    "magma-architecture": {
+      "tests": 7,
+      "output": "docs/underwater-core/magma-architecture.txt",
+      "sha256": "a57698e512a9082d85411c1981bb5540a803142f278da4e90237250c0d882b7f"
+    },
+    "magma-core": {
+      "tests": 8,
+      "output": "docs/underwater-core/magma-core.txt",
+      "sha256": "c607ab568b7d1fce16c553a96bf596fbf89f3daa01a26d1cf77b3deeacccb17b"
+    },
+    "history1-4": {
+      "tests": 4,
+      "output": "docs/underwater-core/history1-4.txt",
+      "sha256": "dfc3fc0b88c05da28fa1758333daa9bbab0f7475129d2b3f8b1a174506564dc8"
+    },
+    "southern-catalog": {
+      "tests": 20,
+      "output": "docs/underwater-core/southern-catalog.txt",
+      "sha256": "e0e9fa511687c12e621c2112da50d0d31b4e5237a0e07cbffb4d9917959c356b"
+    },
+    "southern-core": {
+      "tests": 8,
+      "output": "docs/underwater-core/southern-core.txt",
+      "sha256": "90cb33fe685f26cb80b57b9e85d9991ddd2017a81a8bfba7d5b89249a9b201b0"
+    },
+    "magma-catalog": {
+      "tests": 8,
+      "output": "docs/underwater-core/magma-catalog.txt",
+      "sha256": "249c2a1152c60dfdae1b47b60f2966169bce49e43376dea8071fc689a97ba7a1"
+    },
+    "prior-creature-art": {
+      "tests": 60,
+      "output": "docs/underwater-core/prior-creature-art.txt",
+      "sha256": "f5f4ba23583c470deccc891e21e64b70f7091f50362494c8a3c76205607ea6e6"
+    }
+  },
+  "source_sha256": {
+    "src/creatures.h": "b6e21b866c55863ecfdf1ff8d2a97098aac60e63047edc29968599d2d29667a9",
+    "src/creatures.c": "b6d892f4b0f5969101b35b541aa07a8e923ad41be593a6f398c89363a6d56175",
+    "src/creature_data.c": "743333870d4436af76a662b0761de36df0c28ee831761b7d5ff1983babedef49",
+    "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+    "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+    "tests/underwater_admission_job_native.c": "64bca622ebb7977f8d663f2ffa7c99337b5c021332ef361077c4670e4dbbc726",
+    "tests/underwater_creature_native.c": "9d02cf63b9f96dac877ca6b628f1a74f7a63abbf9f6e099e9e05e23c67a455c8",
+    "tests/test_underwater_creature_core.py": "a6fe402e6b5cade331ce323c61802cb67e136f768694b0c5457e5e7f9b5da921",
+    "assets/creatures/catalog.json": "38334ee64f45f0850be3452bfb043670df1462d09612c0be24211f66fb725e93",
+    "assets/creatures/source/abilities-01.json": "9463f628e3e063ae82fedabff2dd80caf7a1cfcab068d09ebc897566aa63df9e",
+    "assets/creatures/source/abilities-02.json": "9e416a1dc7a0ff03595849fb9c370e3f4874e2057f634e70692091c634c8a98b",
+    "assets/creatures/source/abilities-03.json": "552bd495c723e7214142fc0bf669783264c089c8ec97e0a293389796740c6d0a",
+    "assets/creatures/source/abilities-04.json": "7fad524f09e58aaa2fb5021596ed69055d9eaf00e75530c2716d416746d76826",
+    "assets/creatures/source/evolutions-01.json": "5b699686259750558d762ff0a509c0cc33a233b75683868306ea11461125fcf0",
+    "assets/creatures/source/evolutions-02.json": "5c5192b75517f4cc8d5038d91ade68255ede12124d46f10b0abd387a75cb4f98",
+    "assets/creatures/source/evolutions-03.json": "2df14462f7f66a4bbe5f7c1aa84768b8a36a85392ae4694661020d281c51fd10",
+    "assets/creatures/source/families-01.json": "b6cf323b971ed341221735a50216842264bc08ce86f4f4af5e1e8f4d9d24d400",
+    "assets/creatures/source/families-02.json": "8fbdcb392e7e982496af784351ac7d1fa9be2be90e41eefd038aa712334454e5",
+    "assets/creatures/source/families-03.json": "0c807a60ba6fb5da1b2f7254571de8685daabb9bc5626d2c42e485f99ffb683f",
+    "assets/creatures/source/forms-01.json": "a8dbb1c0ef93f2115d431c33d0cd60010f7fe0cd68a71509398a233426611d32",
+    "assets/creatures/source/forms-02.json": "80a85f3e8678631e49be0cd5bd54ab6feef4b3302794bf8c9a2ec30bbb1515cc",
+    "assets/creatures/source/forms-03.json": "ae72a4413110efcb340510ed497b49aeda85f6345683da51781330a72da02be6",
+    "assets/creatures/source/forms-04.json": "9ee7aa13bf4ab9c7446fc1c5aac1a9c932669fdc3abf07f639d13eaa160ad160",
+    "assets/creatures/source/gates-01.json": "7bac336632256e8599882c3ca632dfc3b701b8c083247de44d1d5b708b52a09b",
+    "assets/creatures/source/gates-02.json": "d181f5d13efcb7badce4d1ff3b71339117ef888b9de1177082b7d5148e55a001",
+    "assets/creatures/source/legendary_gates-01.json": "e20148fbd767b47516a1264919e37d4ed460c3303d98d0c1a66d0b21afd0f083",
+    "assets/creatures/source/metadata.json": "8ac6e650b2f3679bf8d6a92538cedf01e74c90e2ecfc9d95f2c1f22d6279b625",
+    "assets/creatures/source/slots-01.json": "3c5b5a0006b4ce2aea4745d918dd0d00c074330159b8ce86a4e7f086f359f612",
+    "assets/creatures/source/slots-02.json": "2903ea5017fb2de000fe6da7a1ca5dd91551505f70fe364dc9dc4d8d59d8baf7",
+    "assets/creatures/source/slots-03.json": "4d9e946eadcc339e388de257313e1c47c0fc4473ea7bb32443d852886b5fe472",
+    "assets/creatures/source/slots-04.json": "3e7853a05b6bf1962b767402390b7617dd028535c4649e58c1f92a7cf2a5a32c",
+    "assets/creatures/source/slots-05.json": "bc3219c18ac76b955fac5b52148360f1981e3aa8462f0d415b105384362ec50b",
+    "assets/creatures/source/slots-06.json": "62ae4d3c467e279af34763b799bf5897948adff6eede14de5325b68dcdceb462",
+    "assets/creatures/source/trial_bindings-01.json": "ef68147e2764d5746bc189b1a75685b5fdd049850d0293d917eefa38debd7748",
+    "assets/creatures/source/trial_bindings-02.json": "acb09dc36729ff984253b46bb7f0bf9225768d85a7f9a535b892381218dbe684",
+    "assets/creatures/source/trial_bindings-03.json": "df3bd5493bb87dd5e1f242bf82a588cfe207e2a5fd9199634756fa2f74ebce14",
+    "assets/creatures/source/trials-01.json": "964dc318291e3ba56bc5d21dd0ee46c8a07e744b29bad585ee0c9fb3ad95e2a3",
+    "assets/creatures/source/trials-02.json": "ba984dd8edd6872effc0248ce7a8a6889fa8667174f4b7ab46b584709fb65a19",
+    "assets/creatures/source/trials-03.json": "1ca74b526e4508d543774209c41ffe76791e4cf037b8a94f86694d0ad69ce4c9"
+  }
+}

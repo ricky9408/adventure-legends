@@ -1,0 +1,9 @@
+combat-town-source {'game_state': 1, 'room': 46, 'px': 80, 'py': 269, 'hp': 7, 'chapter_flags': 15, 'camera_x': 0, 'camera_y': 160, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 37, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}
+BEGIN room-46-ballast-0-x240
+END room-46-ballast-0-x240 PASS
+BEGIN room-46-ballast-0-x304
+END room-46-ballast-0-x304 PASS
+BEGIN room-51-ballast-0-x278
+END room-51-ballast-0-x278 PASS
+BEGIN room-51-ballast-1-x302
+END room-51-ballast-1-x302 PASS

@@ -3,10 +3,14 @@
 from pathlib import Path
 import json, hashlib
 ROOT=Path(__file__).resolve().parent
-SOURCE=ROOT.parent/'adventure-legends-southern'
+SOURCE=ROOT.parents[2]/'adventure-legends-southern'
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'assets/creatures'))
+from catalog_source import load_catalog
+
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 lock=json.loads((SOURCE/'assets/creatures/identity-lock.json').read_text())
-cat=json.loads((SOURCE/'assets/creatures/catalog.json').read_text())
+cat=load_catalog(SOURCE/'assets/creatures/catalog.json')
 enabled=json.loads((SOURCE/'assets/creatures/enabled.json').read_text())
 items=json.loads((SOURCE/'assets/equipment/catalog.json').read_text())
 identity={x['id']:x for x in lock['slots']}

@@ -1,0 +1,24 @@
+{
+  "shared_manifest_sha256": "2ef870c623562e2b76bb5031e3744a365bcaabd107a29aa6c867e100d94fe749",
+  "all18_snapshot_and_live_helpers_match": true,
+  "helper_hashes": {
+    "tests/magma_journey.py": "511f7ba84ef7d840c5f3edded805fffb9d53edb042ce0315a09469b5ed58dc07",
+    "tests/northern_combat_tests.py": "e74469b7c103910d167af1f9746f35a9e8706db2ca314fa0a81a8d7d4f4d8fc7",
+    "tests/northern_journey.py": "34e4c2dbeca41d41fd9f02193e88bd2c942d470d486178d9fa7fb9e99f7494aa",
+    "tests/region_combat_tests.py": "d7011bb49c402645bce28a82640489bfe73470fcdbd9b7c08fd73f4c3ad58c80",
+    "tests/region_journey.py": "6663ad0740f041ebfb9fca17f33e1283a2134899ae54c8fcab4882900dba9c2b",
+    "tests/southern_journey.py": "03c36f169e66eba05593e3b73364c019702cfbbb85fdb925fabbed83ee0ebae3",
+    "tests/southern_symbols.py": "7f21fb8098ad216457190fa9071374b49df263794f43f4caac70dafce0e81aad",
+    "tests/test_creatures.py": "8a129c92f626e5d64691641e4ac535dbb61d018f62587e0a36562ab63735f85e",
+    "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+    "tests/test_save5.py": "73fbb732803b6b5ae94d0914860823d2645fac1583da4e14b029349e46e1159a",
+    "tests/underwater_collection_route.py": "fcdba2f202c96214aad45ed711d6f211d5cfb383fddda8ba8a94bc2c132a2f89",
+    "tests/underwater_combat_native.py": "b9bc952ccc43c17daac512b98961bef79bcb7e30e3dc079a5a41ac3dd5c62d50",
+    "tests/underwater_dynamic_stress_native.py": "5161782d9438de516f979a9c720d616df7e6267bcf2e495ec7cc14341b4ccb98",
+    "tests/underwater_geometry_stress_native.py": "16e2433261806111aaecf566f4ee470c9a7f88a58d04d62ee5647c830bbfb1f4",
+    "tests/underwater_journey.py": "e6ff183a9f2e178e954584eebdf54f51a5943100d0499fbad092cc2c7c6f6b6e",
+    "tests/underwater_precision_native.py": "3e29eb3ca5201f2121c0519a254d043e3ee93ef6010048fa4d655d4ac6ca5b12",
+    "tools/mgba_bridge.so": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+  }
+}

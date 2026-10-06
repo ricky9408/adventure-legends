@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce frozen v1-v4 save policy without reading the current catalog.
+"""Reproduce frozen v1-v5 save policy without reading the current catalog.
 
 The reviewed snapshot digest is deliberate: extending history requires adding a
 new versioned snapshot, never regenerating old policy from live authored rows.
@@ -37,6 +37,30 @@ def render(data):
         out.append('    },')
     return '\n'.join(out+['};',END])
 
+V5_SNAPSHOT=ROOT/'assets/history/creatures-v5.json'
+V5_PIN='477d264b8b05328c1c5016101758cdbd41ac323ab1c2c143ba774d274d412b30'
+def render_v5(data):
+    if data['schema'] != 1: raise ValueError('Unknown frozen revision5 schema')
+    learns=[]; rows=[]; indexes=[0]*129
+    for n,f in enumerate(data['forms'],1):
+        if not 1<=f['id']<=128 or indexes[f['id']] or f['revision_bits']!=16: raise ValueError('Invalid revision5 identity')
+        indexes[f['id']]=n
+        rows.append((f['id'],f['family'],f['polarity'],len(f['learn']),f['min_level'],16,f['trial_mask'],len(learns)))
+        learns.extend(f['learn'])
+    out=['/* Generated only from immutable assets/history/creatures-v5.json. */',
+         'static const CreatureRevisionPolicy revision5_policy[] = {']
+    out += ['    {'+', '.join(map(str,r))+'},' for r in rows]
+    out += ['};','static const CreatureLearn revision5_learnsets[] = {']
+    out += ['    {%d, %d},'%tuple(r) for r in learns]
+    out += ['};','static const CreatureU8 revision5_policy_index[129] = {']
+    out += ['    '+', '.join(map(str,indexes[i:i+16]))+',' for i in range(0,129,16)]
+    out += ['};','typedef struct CreatureRevisionTrialDependency {',
+            '    CreatureU16 family, mask, prerequisite;',
+            '} CreatureRevisionTrialDependency;',
+            'static const CreatureRevisionTrialDependency revision5_trial_dependencies[] = {']
+    out += ['    {%d, %d, %d},'%(d['family'],d['mask'],d['prerequisite']) for d in data['trial_dependencies']]
+    return '\n'.join(out+['};',''])
+
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--check',action='store_true');args=ap.parse_args()
     blob=SNAPSHOT.read_bytes()
@@ -47,5 +71,11 @@ def main():
     if args.check:
         if new!=old:raise ValueError('Generated creature history drifted; run tools/generate_creature_history.py')
     else:source.write_text(new)
-    print('Frozen creature revisions 1-4 verified (41 immutable form policies, 61 learn relationships)')
+    blob=V5_SNAPSHOT.read_bytes()
+    if hashlib.sha256(blob).hexdigest()!=V5_PIN: raise ValueError('Immutable revision5 snapshot changed; add a new version instead')
+    rendered=render_v5(json.loads(blob)); source=ROOT/'src/creature_history_v5.inc'
+    if args.check:
+        if not source.exists() or source.read_text()!=rendered: raise ValueError('Generated revision5 history drifted')
+    else: source.write_text(rendered)
+    print('Frozen revisions1–4 verified unchanged; revision5 verified (65 form policies,102 learns,2 trial dependencies)')
 if __name__=='__main__':main()

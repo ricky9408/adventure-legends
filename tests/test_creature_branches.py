@@ -27,6 +27,8 @@ def check(sources,*,invalid=False,extended=False,sanitize=True):
     with tempfile.TemporaryDirectory(prefix='creature-branch-') as temp:
         path=Path(temp)
         for name,src in zip(('creatures.h','creatures.c','creature_data.c'),sources):(path/name).write_text(src)
+        (path/'creature_history_v5.inc').write_bytes((ROOT/'src/creature_history_v5.inc').read_bytes())
+        (path/'creature_admission_job.inc').write_bytes((ROOT/'src/creature_admission_job.inc').read_bytes())
         flags=['-std=c99','-O1','-Wall','-Wextra','-Werror','-pedantic','-I'+str(path)]
         if invalid:flags+=['-DEXPECT_INVALID_CATALOG']
         if extended:flags+=['-DEXTENDED_CAPABILITY']

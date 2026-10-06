@@ -1,0 +1,153 @@
+{
+  "status": "diagnostic-only; excluded from final acceptance",
+  "candidate": "A",
+  "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "source_producer_failed_overall": true,
+  "native_damage_commands_verified": [
+    67,
+    70,
+    73,
+    76,
+    79,
+    82,
+    85,
+    88
+  ],
+  "blockers": [
+    {
+      "source": "underwater-a-combat-diagnostic01",
+      "window": "direct-82-facing1",
+      "hardware_frames": 43,
+      "updates": 42,
+      "page_flips": 42,
+      "max_cycles": 277883,
+      "missed_frames": 1
+    },
+    {
+      "source": "underwater-a-combat-diagnostic01",
+      "window": "walking-camera-cast-79",
+      "hardware_frames": 44,
+      "updates": 42,
+      "page_flips": 42,
+      "max_cycles": 279285,
+      "missed_frames": 2
+    },
+    {
+      "source": "underwater-a-combat-diagnostic01",
+      "window": "walking-camera-cast-82",
+      "hardware_frames": 46,
+      "updates": 34,
+      "page_flips": 34,
+      "max_cycles": 286815,
+      "missed_frames": 12
+    },
+    {
+      "source": "underwater-a-combat-diagnostic01",
+      "window": "walking-camera-cast-88",
+      "hardware_frames": 44,
+      "updates": 38,
+      "page_flips": 38,
+      "max_cycles": 281137,
+      "missed_frames": 6
+    },
+    {
+      "source": "underwater-a-command77-diagnostic02",
+      "window": "native-evolution-command77",
+      "hardware_frames": 180,
+      "updates": 178,
+      "page_flips": 178,
+      "max_cycles": 310726,
+      "missed_frames": 3
+    },
+    {
+      "source": "underwater-a-command77-diagnostic03",
+      "window": "native-evolution-command77",
+      "hardware_frames": 180,
+      "updates": 175,
+      "page_flips": 175,
+      "max_cycles": 350655,
+      "missed_frames": 7
+    },
+    {
+      "source": "underwater-a-command77-diagnostic03",
+      "window": "command77-natural-entry-crossing",
+      "hardware_frames": 65,
+      "updates": 64,
+      "page_flips": 64,
+      "max_cycles": 301976,
+      "missed_frames": 1
+    }
+  ],
+  "reports": [
+    {
+      "path": "build/underwater-a-combat-diagnostic01/underwater-combat-native.json",
+      "sha256": "983725d68cceb8a1220ca5c5705272ebf810b1f66c2be9cf80876d5a2089d1d1",
+      "failures": 4,
+      "case_outcomes": {
+        "direct-67": true,
+        "direct-70": true,
+        "direct-73": true,
+        "direct-76": true,
+        "direct-79": true,
+        "direct-82": false,
+        "direct-85": true,
+        "direct-88": true,
+        "workload-67": true,
+        "workload-70": true,
+        "workload-73": true,
+        "workload-76": true,
+        "workload-79": false,
+        "workload-82": false,
+        "workload-85": true,
+        "workload-88": false
+      }
+    },
+    {
+      "path": "build/underwater-a-controls-diagnostic01/underwater-combat-native.json",
+      "sha256": "031888e3383488cf89c4614f8c04e3044c12ccf9e27a58e377f8eaf95812048d",
+      "failures": 0,
+      "case_outcomes": {
+        "alternate-67": true,
+        "cooldown": true,
+        "wall": true
+      }
+    },
+    {
+      "path": "build/underwater-a-command77-diagnostic02/underwater-combat-native.json",
+      "sha256": "f9432809aa2c44da1d53fd78b1159cae3199f4ac57a4ac6bdc437cd5a4762e89",
+      "failures": 2,
+      "case_outcomes": {}
+    },
+    {
+      "path": "build/underwater-a-command77-diagnostic03/underwater-combat-native.json",
+      "sha256": "54820e697f11f3fa6d76f37b7889011063bc319ab88a96b0323aad82643f4dff",
+      "failures": 3,
+      "case_outcomes": {
+        "command77": false
+      }
+    }
+  ],
+  "limitations": [
+    "Intermediate42-instance73-history snapshot only; not final89/50 acceptance",
+    "All24 commands, all50 storage, final selector and all24 form visual review remain pending matching final fixture",
+    "Emulated GBA cycle/update/page cadence, no physical hardware or orchestral claim"
+  ],
+  "command77": {
+    "case": "command77-natural-entry-crossing",
+    "forward_range": [
+      27,
+      38
+    ],
+    "caught_frames": 37,
+    "damage_q4": 0,
+    "required_damage_q4": 24,
+    "ordinary_ai_speed": "One axis moves at most1px every3 active updates; axis alternates, straight-axis motion at most1px per6updates",
+    "required_crossing": "entry f<=33 to exit f<15, minimum19px",
+    "active_updates": 36,
+    "max_total_ai_steps": 12,
+    "max_straight_axis_steps": 6,
+    "recommendation": "Keep its directional traversal lane and whiff counterplay; increase active time to132updates (straight pursuit needs114 for19px), lifetime154, cooldown180, then rerun native and synthetic contracts on a separately frozen candidate."
+  }
+}

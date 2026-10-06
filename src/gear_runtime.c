@@ -11,6 +11,8 @@
 #include "south_game.h"
 #include "magma_game.h"
 #include "magma_powers.h"
+#include "underwater_game.h"
+#include "underwater_powers.h"
 typedef unsigned char u8;
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
@@ -41,7 +43,7 @@ unsigned game_weapon_class(void){return gear_stats.weapon_class;}
 unsigned game_power_cooldown(unsigned base){unsigned reduction=EQUIPMENT_BASE_POWER_COOLDOWN-gear_stats.power_cooldown;return base>reduction?base-reduction:1;}
 unsigned game_gear_base_hp(void){return (unsigned)max_hp*16u;}
 unsigned game_gear_hp(void){return (unsigned)hero_hp_q4;}
-unsigned game_gear_busy(void){unsigned i,busy=weapon_action_busy(&weapon_action,live_arrows())|(roll_ticks?EQUIPMENT_BUSY_ROLLING:0);for(i=0;i<12;i++)if(shots[i].life&&!shots[i].owner)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;if((regional_power_kind==11&&regional_power_time)||northern_powers_busy()||southern_powers_busy()||magma_powers_busy())busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;return busy;}
+unsigned game_gear_busy(void){unsigned i,busy=weapon_action_busy(&weapon_action,live_arrows())|(roll_ticks?EQUIPMENT_BUSY_ROLLING:0);for(i=0;i<12;i++)if(shots[i].life&&!shots[i].owner)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;if((regional_power_kind==11&&regional_power_time)||northern_powers_busy()||southern_powers_busy()||magma_powers_busy()||underwater_powers_busy())busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;return busy;}
 void game_health_refresh(int fill){
     if(!equipment_derive(&adventure_save.equipment,game_gear_base_hp(),&gear_stats))return;
     if(fill||hero_hp_q4>gear_stats.max_hp_q4)hero_hp_q4=gear_stats.max_hp_q4;
@@ -76,16 +78,17 @@ unsigned game_companion_phase(void){CreatureInstance*c=progression_selected();co
 void game_attacks_reset(void){unsigned i;weapon_action_init(&weapon_action);for(i=0;i<2;i++){player_arrows[i].active=0;magma_arrow_tokens[i]=0;}magma_melee_token=0;weapon_code=-1;if(!phase_icons_ready){init_phase_icons();phase_icons_ready=1;}swing=sword_cd=attack_buffer=combo_step=combo_timer=0;}
 void game_attacks_suspend(void){weapon_action_suspend(&weapon_action);if(!(keys&1))weapon_action.suppress_until_release=0;attack_buffer=0;}
 static int clear_path(int x,int y,int tx,int ty){int dx=tx-x,dy=ty-y,sx=dx<0?-1:1,sy=dy<0?-1:1,err,e2;if(dx<0)dx=-dx;if(dy<0)dy=-dy;err=dx-dy;while(x!=tx||y!=ty){e2=err*2;if(e2>-dy){err-=dy;x+=sx;}if(e2<dx){err+=dx;y+=sy;}if(solid(x,y))return 0;}return 1;}
-static int chapter_target(int*x,int*y,int*r){return north_game_target(x,y,r)||south_game_target(x,y,r)||magma_game_target(x,y,r);}
-static int chapter_hit(unsigned c,int x,int y,unsigned d,unsigned channel,unsigned token){return north_game_weapon_hit(c,x,y,d)||south_game_weapon_hit(c,x,y,d)||magma_game_weapon_hit(c,x,y,d,channel,token);}
+static unsigned chapter_action_begin(unsigned channel){return (unsigned)(room-46)<8u?underwater_game_action_begin(channel):magma_game_action_begin(channel);}
+static int chapter_target(int*x,int*y,int*r){return north_game_target(x,y,r)||south_game_target(x,y,r)||magma_game_target(x,y,r)||underwater_game_target(x,y,r);}
+static int chapter_hit(unsigned c,int x,int y,unsigned d,unsigned channel,unsigned token){return north_game_weapon_hit(c,x,y,d)||south_game_weapon_hit(c,x,y,d)||magma_game_weapon_hit(c,x,y,d,channel,token)||underwater_game_weapon_hit(c,x,y,d,channel,token);}
 void game_attack_update(int held,int pressed){
     unsigned event,i;const EquipmentWeapon*w;
     if(roll_ticks)return;
     if((pressed&1)&&!weapon_action.suppress_until_release&&weapon_action.phase==WEAPON_IDLE&&try_interaction()){game_attacks_suspend();return;}
     event=weapon_action_tick(&weapon_action,&gear_stats,(unsigned)face,!!(held&1),!!(pressed&1),live_arrows());
     w=&equipment_weapons[weapon_action.weapon_class];
-    if(event&WEAPON_EVENT_START){slash_id++;if(weapon_action.weapon_class!=EQUIPMENT_BOW)magma_melee_token=magma_game_action_begin(0);if(weapon_action.weapon_class!=EQUIPMENT_BOW){int d=weapon_action.direction;move_player(d==2?-(int)w->lunge_q8:d==3?(int)w->lunge_q8:0,d==1?-(int)w->lunge_q8:d==0?(int)w->lunge_q8:0);sfx(1);}}
-    if(event&WEAPON_EVENT_ARROW)for(i=0;i<2;i++)if(!player_arrows[i].active&&weapon_arrow_spawn(&player_arrows[i],&weapon_action,px,py)){magma_arrow_tokens[i]=magma_game_action_begin(i+1);sfx(1);break;}
+    if(event&WEAPON_EVENT_START){slash_id++;if(weapon_action.weapon_class!=EQUIPMENT_BOW)magma_melee_token=chapter_action_begin(0);if(weapon_action.weapon_class!=EQUIPMENT_BOW){int d=weapon_action.direction;move_player(d==2?-(int)w->lunge_q8:d==3?(int)w->lunge_q8:0,d==1?-(int)w->lunge_q8:d==0?(int)w->lunge_q8:0);sfx(1);}}
+    if(event&WEAPON_EVENT_ARROW)for(i=0;i<2;i++)if(!player_arrows[i].active&&weapon_arrow_spawn(&player_arrows[i],&weapon_action,px,py)){magma_arrow_tokens[i]=chapter_action_begin(i+1);sfx(1);break;}
     if(event&WEAPON_EVENT_ACTIVE){int tx=440,ty=280;if(room==16&&weapon_action_contains(&weapon_action,px,py,tx,ty)&&clear_path(px,py,tx,ty)&&weapon_action_mark_hit(&weapon_action,7))region_game_practice_hit(weapon_action.weapon_class,tx,ty);}
     if(event&WEAPON_EVENT_ACTIVE){int tx,ty,radius;if(chapter_target(&tx,&ty,&radius)&&game_melee_hit(8,tx,ty,1)){
         unsigned damage=combat_damage_q4(weapon_action.damage_q4,weapon_action.attack_q4,0,weapon_action.element,COMBAT_NEUTRAL_PHASE,0);

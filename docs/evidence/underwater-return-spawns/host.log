@@ -1,0 +1,12 @@
+test_every_spawn_byte_and_unsupported_holes (__main__.ReturnSpawnTests.test_every_spawn_byte_and_unsupported_holes) ... ok
+test_focused_return_checkpoints_every_cut_both_destinations (__main__.ReturnSpawnTests.test_focused_return_checkpoints_every_cut_both_destinations) ... ok
+test_magma_return_requires_real_underwater_visit_in_revision6_only (__main__.ReturnSpawnTests.test_magma_return_requires_real_underwater_visit_in_revision6_only) ... ok
+test_new_return_writer_roundtrips_and_invalid_begin_never_writes (__main__.ReturnSpawnTests.test_new_return_writer_roundtrips_and_invalid_begin_never_writes) ... ok
+test_ordinary_return_spawns_do_not_borrow_anchor_permission (__main__.ReturnSpawnTests.test_ordinary_return_spawns_do_not_borrow_anchor_permission) ... ok
+test_return_routes_keep_teaching_prefix_source_and_visit_gates (__main__.ReturnSpawnTests.test_return_routes_keep_teaching_prefix_source_and_visit_gates) ... ok
+test_unchanged_historical_magma_spawn_matrix (__main__.ReturnSpawnTests.test_unchanged_historical_magma_spawn_matrix) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 22.726s
+
+OK

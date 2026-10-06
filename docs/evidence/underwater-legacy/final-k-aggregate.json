@@ -1,0 +1,187 @@
+{
+  "scope": "Completed isolated final-K legacy/native and Underwater/Magma host aggregate; all native producers freshly executed on K; earlier H/I diagnostic evidence is not relabeled",
+  "result": "PASS",
+  "completed": true,
+  "workspace": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final",
+  "candidate": {
+    "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+    "symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+    "qa_rebuild_elf_sha256": "83c83f4d9fa8510c26d0b472edb01acfa95e4fd1eb8bd3f93f0a3f099e3d8f64",
+    "runtime_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+    "clean_rebuild_rom_symbols_runtime_manifest_match_archived_K": true,
+    "elf_note": "Debug-directory paths differ in the isolated clean rebuild; each native suite authenticates its exact ELF load image against the unchanged K ROM"
+  },
+  "commands": [
+    {
+      "command": "make test-tools test",
+      "exit_code": 0,
+      "status_receipt": "build/underwater-k-final-main-status.json",
+      "status_sha256": "93ba7ffff0025054f27952ca1d402830a7d05d1a487ee8ca0a7605b22ff21793",
+      "log": "build/underwater-k-final-main-aggregate.log",
+      "log_sha256": "b578df56d95a6914a0c2582fb6ff11eb68240a8f362ca2658311d7c9f83a12ec",
+      "log_bytes": 1074811
+    },
+    {
+      "command": "make test-magma-native",
+      "exit_code": 0,
+      "status_receipt": "build/underwater-k-final-magma-native-status.json",
+      "status_sha256": "da273a993f9d6af14515fda1e263a2445fe7e421de4e3c54690be56de70e6f0d",
+      "log": "build/underwater-k-final-magma-native.log",
+      "log_sha256": "308a8209463b1b009d9b94e29402570653eb61fd2f2d7aaf616a6c0b87d88a84",
+      "log_bytes": 25963
+    },
+    {
+      "command": "make test-underwater-host test-magma-host",
+      "exit_code": 0,
+      "status_receipt": "build/underwater-k-final-host-status.json",
+      "status_sha256": "b43537aacf3b9c5f9fee921c126473aeeb3567dea36778764d5cd00c72156c0b",
+      "log": "build/underwater-k-final-host-aggregate.log",
+      "log_sha256": "626c062cbe459886aca4cd5aa5e7644b7d23b38843c2baaa7a223455fec70e3d",
+      "log_bytes": 58539
+    }
+  ],
+  "post_run_immutability": {
+    "runtime_input_count": 1163,
+    "observer_source_count": 295,
+    "shared_native_input_count": 18,
+    "all_recorded_hashes_unchanged": true,
+    "runtime_manifest": "docs/evidence/underwater-legacy/final-k-runtime-source-hashes.json",
+    "snapshot_receipt": "docs/evidence/underwater-legacy/final-k-snapshot.json",
+    "snapshot_sha256": "7045b7cca27515c2ce1ce9ddfe155821bd6bd39dc17892bbea7c71cdaaeb4478",
+    "shared_observer_manifest": "docs/evidence/underwater-legacy/final-k-shared-observer-hashes.json",
+    "shared_observer_manifest_sha256": "2ef870c623562e2b76bb5031e3744a365bcaabd107a29aa6c867e100d94fe749"
+  },
+  "representative_native_reports": [
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/region-journey/region-journey.json",
+      "sha256": "82431c31e4dfb9568b81c94cd70e7b144f43eb328b9d74d373ac6365ebff4094",
+      "suite": "reedhaven-native-controller-journey",
+      "checks": 5754,
+      "failures": 0,
+      "frame_windows": 0,
+      "peak_reported_cycles": null
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/region-combat/region-combat.json",
+      "sha256": "aa3acbcc36f260646aab42578c341d1875008d80b50caaf3d7c6e0e23f5117e5",
+      "suite": "region-native-combat",
+      "checks": 3116,
+      "failures": 0,
+      "frame_windows": 1,
+      "peak_reported_cycles": 123744
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/northern-journey/northern-journey.json",
+      "sha256": "9956d1421bede0069c21c34d7ff13a58a82d3f943f0b837ffc949bed9c66daf8",
+      "suite": "northern-native-controller-journey",
+      "checks": 10388,
+      "failures": 0,
+      "frame_windows": 0,
+      "peak_reported_cycles": null
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/northern-combat/northern-combat.json",
+      "sha256": "66b950ed447693598dfb028a13657bfe7acb3098819cb4ace338d5fbc355c190",
+      "suite": "northern-native-combat-controls",
+      "checks": 8842,
+      "failures": 0,
+      "frame_windows": 5,
+      "peak_reported_cycles": null
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/southern-journey/southern-journey.json",
+      "sha256": "5f1c9c949e09e0d525daa0d9d3e376d529a6f7963dae849cefcd4bdc188df34b",
+      "suite": "southern-native-controller-journey",
+      "checks": 16432,
+      "failures": 0,
+      "frame_windows": 1,
+      "peak_reported_cycles": 33234
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/southern-combat/southern-combat.json",
+      "sha256": "fa1d9e45454fdb4d8d28b1276c61097ce0ca72b755679cacc76c95d95a72850e",
+      "suite": "southern-native-combat-controls",
+      "checks": 8422,
+      "failures": 0,
+      "frame_windows": 1,
+      "peak_reported_cycles": null
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/southern-performance/southern-combat.json",
+      "sha256": "1d7c5fe73b2d694c83a631b0c64a44f37d5bfd9c26f4f080fc242d904da62ec9",
+      "suite": "southern-native-combat-controls",
+      "checks": 1484,
+      "failures": 0,
+      "frame_windows": 8,
+      "peak_reported_cycles": null
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/southern-render/southern-combat.json",
+      "sha256": "3ee2b41e8080ecf026e64701722e2f4285db7ea0355580637ddbf07ed866875a",
+      "suite": "southern-native-combat-controls",
+      "checks": 343,
+      "failures": 0,
+      "frame_windows": 0,
+      "peak_reported_cycles": null
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/magma-journey/magma-journey.json",
+      "sha256": "a51b3be42c77f6fb52f1a1c9335a67875a286b99ac9602632e31be78f8daf840",
+      "suite": "magma-native-controller-journey",
+      "checks": 28836,
+      "failures": 0,
+      "frame_windows": 1,
+      "peak_reported_cycles": 129829
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/magma-combat/magma-combat.json",
+      "sha256": "778c5d7495764d10d404090501cb41afb4f3398ffb1371e2b53d1f7ab86c0935",
+      "suite": "magma-native-combat-controls",
+      "checks": 13976,
+      "failures": 0,
+      "frame_windows": 77,
+      "peak_reported_cycles": 231081
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/magma-performance/magma-performance.json",
+      "sha256": "0bfc2d15bb548e9a5de5a3f47be3a88187dcdaf10708f618727b05300195f761",
+      "suite": "magma-native-full-engine-performance",
+      "checks": 5206,
+      "failures": 0,
+      "frame_windows": 31,
+      "peak_reported_cycles": 265300
+    },
+    {
+      "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/build/magma-teaching-boss/magma-combat.json",
+      "sha256": "fe9f3701854ce463db2f41130951e4856ee1e2f0766bce0093365e0dfa5e5723",
+      "suite": "magma-native-combat-controls",
+      "checks": 633,
+      "failures": 0,
+      "frame_windows": 4,
+      "peak_reported_cycles": 199483
+    }
+  ],
+  "counting_note": "Suite checks overlap; counts are not additive unique behaviors. Full command logs establish all recipe stages ran, including base playthrough/review/exploration, systems/evolution, quickparty, both campaign routes/performance, regional/Northern/Southern suites, Magma suites, and host targets.",
+  "host_powerloss": {
+    "report": "/workspace/scratch/33ed39a77941/underwater-legacy-k-final/docs/evidence/underwater-save-powerloss.json",
+    "sha256": "c45c49d48634ace26b328c4cfb9fc6b73a85b56444f1cff05da122b055319044",
+    "transactions": 70,
+    "cut_positions": 430220,
+    "complete_compile_include_closure_unchanged": true
+  },
+  "separate_post_freeze_tooling_evidence": {
+    "scope": "Output-only routing change to two host reporters in the main worktree, absent from frozen native observer sets; active QA checkout was left untouched",
+    "provenance": "docs/evidence/underwater-host-k/provenance.json",
+    "sha256": "fb6ff6cdb5ae21ee3236b5ecc3906e213c616a6be690f76b8a017fccbcf54f22",
+    "rerun_tests": 9,
+    "rerun_result": "PASS",
+    "measurements_match_pre_routing_K": true,
+    "historical_tracked_receipts_restored_from_HEAD": true
+  },
+  "prior_diagnostic_evidence": [
+    "docs/evidence/underwater-legacy/h-magma66-cadence-failure.json",
+    "docs/evidence/underwater-legacy/i-magma66-verified-profile.json",
+    "build/underwater-k-magma66-cold-sram-diagnostic/replay/diagnostic-report.json"
+  ],
+  "production_changes_by_this_worker": false
+}

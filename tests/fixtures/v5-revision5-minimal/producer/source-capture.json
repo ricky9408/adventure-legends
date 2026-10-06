@@ -1,0 +1,61 @@
+{
+  "recorded_hashes_verified": {
+    "tests/magma_journey.py": "bc0dd73960c23816c1d5bd53b7dff6ebbde015e5da8181f397249c3ec87e51e5",
+    "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+    "tests/magma_minimal_route.py": "2b2e591743aa92ae714e320e15416ed5bddac0b14480d001ebaaea80959c2354",
+    "tests/test_southern_frozen_fixtures.py": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce"
+  },
+  "archived_from": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source",
+  "runtime_manifest_entries_verified": 893,
+  "runtime_source_root": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d",
+  "runtime_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "runtime_wire_sources": {
+    "src/save5.c": "93c42b198a22914d1de853c4fd54093acf05a14c9705eca15b0ac14e2757d2b9",
+    "src/save5.h": "6c13dfc930f0e1cb31be0c832239368ca1431045446f51b3ab09102f5d3bcf75",
+    "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+    "src/creatures.h": "dbf45cc6dbe037eddd10e683d7118a055c880aa6ca1b70a7a5d067b70ab3882c",
+    "src/equipment.h": "b4c314753c3370baecf74aa8e9b824d78f09c8a2a2bacef5a7889bf44e0c7f7e"
+  },
+  "supplemental_sources": {
+    "tests/test_save5.py": {
+      "sha256": "f933d85234da54d6da09f62a99e822eab0c21c0e3ffce8fc1eb7883fb1377aba",
+      "bytes": 77804,
+      "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/test_save5.py",
+      "authentication": "capture-only; not individually hashed in original minimal report"
+    },
+    "tests/test_creatures.py": {
+      "sha256": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+      "bytes": 36980,
+      "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/test_creatures.py",
+      "authentication": "capture-only; not individually hashed in original minimal report"
+    },
+    "tests/test_save4.py": {
+      "sha256": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+      "bytes": 30686,
+      "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/test_save4.py",
+      "authentication": "capture-only; not individually hashed in original minimal report"
+    },
+    "tests/region_combat_tests.py": {
+      "sha256": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+      "bytes": 30004,
+      "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/region_combat_tests.py",
+      "authentication": "capture-only; not individually hashed in original minimal report"
+    },
+    "tests/southern_symbols.py": {
+      "sha256": "7f21fb8098ad216457190fa9071374b49df263794f43f4caac70dafce0e81aad",
+      "bytes": 3343,
+      "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/southern_symbols.py",
+      "authentication": "capture-only; not individually hashed in original minimal report"
+    },
+    "tools/mgba_bridge.c": {
+      "sha256": "935986438f538c5bae5ae3ae733bf4db45bca991d1dd0e5b6e391992e93aeda8",
+      "bytes": 4954,
+      "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tools/mgba_bridge.c",
+      "authentication": "capture-only; not individually hashed in original minimal report"
+    }
+  },
+  "scope": "Seven original report-pinned producer helpers were copied from their exact archived sources. All runtime manifest entries were verified against candidate-D; the wire-schema subset is retained here. Supplemental imports are preserved with capture hashes only; the original report did not pin them, so historical identity is not independently claimed."
+}

@@ -1,0 +1,123 @@
+{
+  "classification": "Diagnostic controller-acquisition chain; earlier failing navigation/usability branches are retained. Not final release acquisition evidence.",
+  "final_sram": "build/underwater-b-debug03/11-all89-earned-town.sav",
+  "final_sram_sha256": "3481201401c7a5541f332aedc4689b444cbba2b32f38a434399facc466ed3992",
+  "ancestry_newest_to_oldest": [
+    {
+      "source_report": "build/underwater-b-debug03/underwater-journey.json",
+      "sha256": "765b3da7fafdcb373a705a55e646de9de38d8a17ae5799d1af98b6e2ec29604f",
+      "failures": [],
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+      "provenance": {
+        "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/fixtures/v5-revision5/magma-all65-town.sav",
+        "sram_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+        "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+        "cross_rom_machine_state_loaded": false,
+        "minimal_prior_route": false,
+        "debug_matching_state_branch": {
+          "source_report": "build/underwater-b-debug02/underwater-journey.json",
+          "report_sha256": "762e1f3cfbaea39989886dd7e6b520759f5f3dd64c2618d66dba2dc6a2cbbb51",
+          "state_sha256": "25fbdb2f491398cec2fbe823078aa341068fc9e5ae280ea82933954312645038",
+          "sram_sha256": "a1bbc93890ba9441e62b32d535541b3eb1b9daaf3d6be566156edf22272338e6",
+          "source_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923"
+        }
+      }
+    },
+    {
+      "source_report": "build/underwater-b-debug02/underwater-journey.json",
+      "sha256": "762e1f3cfbaea39989886dd7e6b520759f5f3dd64c2618d66dba2dc6a2cbbb51",
+      "failures": [
+        {
+          "error": "('actual trial proof earned', {'game_state': 1, 'room': 48, 'px': 243, 'py': 149, 'hp': 7, 'chapter_flags': 15, 'camera_x': 123, 'camera_y': 69, 'save_failed': 0, 'checkpoint_spawn': 0, 'spirit': 32, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0})",
+          "status": {
+            "game_state": 1,
+            "room": 48,
+            "px": 243,
+            "py": 149,
+            "hp": 7,
+            "chapter_flags": 15,
+            "camera_x": 123,
+            "camera_y": 69,
+            "save_failed": 0,
+            "checkpoint_spawn": 0,
+            "spirit": 32,
+            "summoned": 1,
+            "ability_cd": 0,
+            "roll_cd": 0
+          }
+        }
+      ],
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+      "provenance": {
+        "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/fixtures/v5-revision5/magma-all65-town.sav",
+        "sram_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+        "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+        "cross_rom_machine_state_loaded": false,
+        "minimal_prior_route": false,
+        "debug_matching_state_branch": {
+          "source_report": "build/underwater-b-full01/underwater-journey.json",
+          "report_sha256": "f1cd5fb0af8b2de125c00384b23c87c44a3f069cb7fb6985983be2256b99548a",
+          "state_sha256": "0d9d290d2c5405238aeba3e0e8c0f36d33b331f3a6b952c306a8c2f3e3527df5",
+          "sram_sha256": "6fca02a63991464db64f6b9369bcfff6ea440687968fec519d224b142555e470",
+          "source_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923"
+        }
+      }
+    },
+    {
+      "source_report": "build/underwater-b-full01/underwater-journey.json",
+      "sha256": "f1cd5fb0af8b2de125c00384b23c87c44a3f069cb7fb6985983be2256b99548a",
+      "failures": [
+        {
+          "error": "('navigation stalled', {'game_state': 1, 'room': 52, 'px': 169, 'py': 82, 'hp': 7, 'chapter_flags': 15, 'camera_x': 0, 'camera_y': 0, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 1, 'ability_cd': 0, 'roll_cd': 0}, 168, 84)",
+          "status": {
+            "game_state": 1,
+            "room": 52,
+            "px": 169,
+            "py": 82,
+            "hp": 7,
+            "chapter_flags": 15,
+            "camera_x": 0,
+            "camera_y": 0,
+            "save_failed": 0,
+            "checkpoint_spawn": 2,
+            "spirit": 30,
+            "summoned": 1,
+            "ability_cd": 0,
+            "roll_cd": 0
+          }
+        }
+      ],
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+      "provenance": {
+        "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/fixtures/v5-revision5/magma-all65-town.sav",
+        "sram_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+        "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+        "cross_rom_machine_state_loaded": false,
+        "minimal_prior_route": false
+      }
+    }
+  ],
+  "diagnostic_import": "Cold SRAM only. Same-ROM machine states were used inside the acquisition chain, never imported into the canary ROM.",
+  "authenticated_inputs": [
+    {
+      "snapshot": "trial-15-complete",
+      "sram_sha256": "a27defd44af7d00aca4b200034af5279a5b58c11fe2df493075b330f0954262a",
+      "retained_individuals": 50,
+      "obtained_histories": 88,
+      "source_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923"
+    },
+    {
+      "snapshot": "11-all89-earned-town",
+      "sram_sha256": "3481201401c7a5541f332aedc4689b444cbba2b32f38a434399facc466ed3992",
+      "retained_individuals": 50,
+      "obtained_histories": 89,
+      "source_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "existing_all65_fixture_files_unchanged": 238,
+  "original_minimal_source_run_files_unchanged": 53,
+  "primary_sram_exact_copy": true,
+  "source_report_sha256": "c650e0982ff84ecda77faf4cc75270d2eff6ac73f05596ed8ffedd3f39715632",
+  "tests": {
+    "standard_library_verifier": "passed; complete source runtime and original run reauthenticated",
+    "self_contained_export": "passed without sibling fixtures, source run, emulators or site packages",
+    "optimized_python": "passed under -O; corruption still rejected",
+    "regression_tests_passed": 7,
+    "negative_tests": "corrupted SRAM, report part and helper; missing ledger; unlisted file; CRC failure; CRC-repaired optional quest, base form, instance identity, and personal trial"
+  },
+  "machine_states_loaded": 0,
+  "game_ram_writes": 0,
+  "fixture_bytes_edited": false,
+  "existing_fixture_or_pin_edited": false,
+  "new_acquisition_run": false
+}

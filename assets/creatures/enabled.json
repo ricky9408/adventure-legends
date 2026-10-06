@@ -1,5 +1,5 @@
 {
-  "content_revision": 5,
+  "content_revision": 6,
   "enabled_form_ids": [
     1,
     2,
@@ -65,7 +65,31 @@
     97,
     98,
     99,
-    100
+    100,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72
   ],
   "enabled_evolutions": [
     [
@@ -207,6 +231,70 @@
     [
       99,
       100
+    ],
+    [
+      49,
+      50
+    ],
+    [
+      49,
+      51
+    ],
+    [
+      52,
+      53
+    ],
+    [
+      52,
+      54
+    ],
+    [
+      55,
+      56
+    ],
+    [
+      55,
+      57
+    ],
+    [
+      58,
+      59
+    ],
+    [
+      58,
+      60
+    ],
+    [
+      61,
+      62
+    ],
+    [
+      61,
+      63
+    ],
+    [
+      64,
+      65
+    ],
+    [
+      64,
+      66
+    ],
+    [
+      67,
+      68
+    ],
+    [
+      67,
+      69
+    ],
+    [
+      70,
+      71
+    ],
+    [
+      70,
+      72
     ]
   ],
   "enabled_ability_ids": [
@@ -274,7 +362,31 @@
     63,
     64,
     65,
-    66
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90
   ],
-  "note": "Magma development manifest:65 current core forms,102 learns,35 edges,65 commands. Existing41 rows and historical revisions1–4 remain immutable. Only explicit39/48 polarity overrides are approved. Tables do not establish obtainability, art/handler integration or native playability. Ability12, all121–128 and every unlisted row remain disabled."
+  "note": "Underwater development core manifest:89 forms,142 learn pairs,51 edges,89 commands. These are authored/runtime core rows, NOT a native acquisition, visual, controller or delivered-playability claim. Revision1\u20135 semantics and released relations are immutable; legendary121\u2013128 and command12 stay disabled."
 }

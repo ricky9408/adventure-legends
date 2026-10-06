@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "fixture_sha256": "f584de3b29cb77731148b31b99dc40e0c7e4ec05f1aac42e0d38dd5b44612eeb",
+  "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "owned_individuals": 10,
+  "earned_histories": 10,
+  "claimed_quests": 9,
+  "gear_item_ids": [
+    1,
+    4,
+    20
+  ],
+  "room": 38,
+  "spawn": 3,
+  "chapter_flags": 3,
+  "banks_verified": 2,
+  "ancestry_banks_verified": 2,
+  "passing_original_controller_checks": 1837,
+  "exact_report_parts": 15,
+  "ancestry_report_parts": 19,
+  "runtime_manifest_entries": 893,
+  "checksum_files_verified": 68,
+  "original_run_reverified": false,
+  "runtime_root_reverified": false,
+  "historical_unpinned_supplemental_sources": 6,
+  "machine_states_loaded_by_verifier": 0,
+  "game_ram_writes_by_verifier": 0,
+  "fixture_bytes_changed": false,
+  "new_acquisition_run": false
+}

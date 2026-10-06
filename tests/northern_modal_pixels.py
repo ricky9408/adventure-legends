@@ -70,9 +70,9 @@ class ModalRun(NorthernJourney):
             if tab<6:self.tap('A',1,5)
         self.resume('pause-resume')
         self.goto(104,208);self.act(104,208);self.open_tab(3);self.tap('SELECT',1,5)
-        self.check(self.get('game_state')==CONFIRM,'actual earned evolution opens confirmation');self.align();self.capture('evolution-confirm')
+        self.check(self.get('game_state')==CONFIRM,'actual earned evolution opens confirmation');self.wait_evolution();self.align();self.capture('evolution-confirm')
         self.tap('B',1,4);self.check(self.get('game_state')==PAUSE,'decline returns to journal');self.resume('declined-evolution-resume')
-        self.open_tab(3);self.tap('SELECT',1,4);self.tap('A',1,0)
+        self.open_tab(3);self.tap('SELECT',1,4);self.wait_evolution();self.tap('A',1,0);self.wait_evolution(8)
         self.check(self.get('game_state')==8,'actual confirmation starts evolution animation')
         for target in (16,40,72):
             for _ in range(100):

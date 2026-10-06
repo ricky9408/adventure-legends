@@ -1,0 +1,83 @@
+{
+  "source_filename": "underwater-journey.json",
+  "source_sha256": "07f94cdb8c748bfeeceb2765b2212e6991211498aef975ff1d08f826fe189c88",
+  "source_bytes": 446980,
+  "encoding": "UTF-8 JSON bytes, concatenate in listed order without separators",
+  "parts": [
+    {
+      "path": "part_000.txt",
+      "bytes": 30000,
+      "sha256": "36cdfce6ec13bc23f8355b8d757741f9f71a122926aea8bd96724bd44e8916fd"
+    },
+    {
+      "path": "part_001.txt",
+      "bytes": 30000,
+      "sha256": "3b5e7b7400af44fffcb61f7fcce0bf619da030402b4e757c343df2c000394532"
+    },
+    {
+      "path": "part_002.txt",
+      "bytes": 30000,
+      "sha256": "066f5755a763d0786d9078ec1809ba2cfe73f0704cb40b88750ddc1bb81eef3f"
+    },
+    {
+      "path": "part_003.txt",
+      "bytes": 30000,
+      "sha256": "2c409fe44ce5479f01d214d2489725a5745b7883c832273dfe19cc65cc7e57b6"
+    },
+    {
+      "path": "part_004.txt",
+      "bytes": 30000,
+      "sha256": "2c7096aac260a68fbbc560bf8c517415421784dcad1ba720e8190acdff85e4e8"
+    },
+    {
+      "path": "part_005.txt",
+      "bytes": 30000,
+      "sha256": "4f2ff0246721de6df12ea4158528e208756ea6d92524da8a220d91e7bfd360c3"
+    },
+    {
+      "path": "part_006.txt",
+      "bytes": 30000,
+      "sha256": "89c43f0074582af23c907a36ba0905b9654ae73b9b855b04751acf4642ef0a7a"
+    },
+    {
+      "path": "part_007.txt",
+      "bytes": 30000,
+      "sha256": "5cbbf6088169a17f2d5228286bb8a292a30e28794814e8475d8722662901a32e"
+    },
+    {
+      "path": "part_008.txt",
+      "bytes": 30000,
+      "sha256": "f3b70b7a594bd48144242af8003630a0966274396cc8526855cf4ed013c12f7f"
+    },
+    {
+      "path": "part_009.txt",
+      "bytes": 30000,
+      "sha256": "9b514c01f6de470a324e410adc8d096914d2782652fd388c5f737753da260df5"
+    },
+    {
+      "path": "part_010.txt",
+      "bytes": 30000,
+      "sha256": "9d71f50de92493c09ea5e011e25d4300c840803476f92cee7f94aa0524b0eb36"
+    },
+    {
+      "path": "part_011.txt",
+      "bytes": 30000,
+      "sha256": "bc93bde873feb469fb1292d4be606f5d1089d0a2470f99059765a93172f2cee3"
+    },
+    {
+      "path": "part_012.txt",
+      "bytes": 30000,
+      "sha256": "5b641a9a4742eeee5ff6cb633207aa67ac98045d1439f0533efe5828cc4dcaa1"
+    },
+    {
+      "path": "part_013.txt",
+      "bytes": 30000,
+      "sha256": "600bf8f66c60b6e9c37938bcbcbf0129cf4c2dec8bff699587976d32f9732d1d"
+    },
+    {
+      "path": "part_014.txt",
+      "bytes": 26980,
+      "sha256": "d21ddc0ea53818288b3709bb5628244444877b154ca311ae0ff09fc40ec5faa6"
+    }
+  ]
+}

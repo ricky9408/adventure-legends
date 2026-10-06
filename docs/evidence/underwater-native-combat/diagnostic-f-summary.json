@@ -1,0 +1,19 @@
+{
+  "status": "diagnostic-only; excluded from final acceptance",
+  "candidate": "F",
+  "reports": [
+    {
+      "path": "build/underwater-f-critical-diagnostic01/underwater-combat-native.json",
+      "sha256": "19912e7ff23a0c5d2a11be0c5f05fab30e78f19b975a83d03a3347868c2ab757",
+      "native_damage_commands_accepted": [],
+      "completed_cases": 3,
+      "passed_cases": 3,
+      "failed_case_names": [],
+      "failing_windows": [],
+      "maximum_cycles": 266969
+    }
+  ],
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "rom_sha256": "78ba51a7dd8160af681fb68e52e573f6de4140a70ea320d344d10d8fdd4d13c8"
+}

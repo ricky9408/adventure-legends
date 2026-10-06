@@ -13,12 +13,27 @@ unsigned magma_game_spawn_count(unsigned area);
 int magma_game_spawn(unsigned area,unsigned index,int *x,int *y);
 int magma_game_can_enter(unsigned area);
 int magma_game_enter(unsigned area,unsigned spawn);
+/* Engine-only bounded room46 -> room38:4 shell-lift orchestration. Request
+ * BEFORE any transition mutation: 0 denied, 1 scoped commit, 2 queued.
+ * Freeze in EVENT_PENDING(10), warm both pages, then prepare one slice/update.
+ * DONE still owns scratch: restore original mode and call commit immediately.
+ * Commit performs the exact comparison and invokes enter_room itself; do not
+ * issue a second transition. Cancel on a different entry, selection, reset,
+ * death or load. No API grants an arbitrary trusted/validated flag. */
+int magma_game_request_return(void);
+int magma_game_return_pending(void);
+unsigned magma_game_prepare_return(void);
+int magma_game_commit_return(void);
+void magma_game_cancel_return(void);
 unsigned magma_game_enemy_spawns(unsigned area,const MagmaEnemySpawn **out);
 /* Exact baked static collision; same radius-five intervals as production.
  * Dynamic fingerprint exposes every prop position changing the predicate,
  * independent of decorative animation, power cooldown or quest text. */
 int magma_game_geometry_solid(unsigned area,int x,int y);
 int magma_game_solid(int x,int y);
+/* Inclusive exact empty-box proof in large rooms38/39. False elsewhere keeps
+ * callers on their original pixel collision path, including small puzzles. */
+int magma_game_clear_box(int x0,int y0,int x1,int y1);
 void magma_game_collision_inputs(unsigned out[3]);
 void magma_puzzle_reset(MagmaPuzzle *,unsigned area);
 unsigned magma_puzzle_count(unsigned area);

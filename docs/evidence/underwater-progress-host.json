@@ -1,0 +1,128 @@
+{
+  "scope": "Underwater typed transactions/save6 host + isolated ARM acceptance only. Native controller route/collection and full update+draw/OAM/frame cadence are separate unfinished parent gates.",
+  "result": "PASS",
+  "production_source_sha256": {
+    "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+    "src/creature_data.c": "743333870d4436af76a662b0761de36df0c28ee831761b7d5ff1983babedef49",
+    "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+    "src/creatures.c": "b6d892f4b0f5969101b35b541aa07a8e923ad41be593a6f398c89363a6d56175",
+    "src/creatures.h": "b6e21b866c55863ecfdf1ff8d2a97098aac60e63047edc29968599d2d29667a9",
+    "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "src/equipment.h": "57cd1272bc13e67031412c189c8ef0bdf3b5f43a4173adcdc93024173b18699f",
+    "src/equipment_data.c": "d28c475fb0142878182c13d75d4b117a968f5e237dce0821b98d7ae264e001d6",
+    "src/magma_quests.c": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+    "src/magma_quests.h": "844ae97ad9600b90b66debecc58865351b3960bdf6cdbd0a8aeafb877b4b75c1",
+    "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+    "src/save5.c": "dbeef77a1e478c33e3c1405f5ea6b6e6ac7f7f7eb48acb4855d6b04671267682",
+    "src/save5.h": "70fde544df6e0fab7c61a6aeb213da15d33b502cee3ba70bb141d2a19f1ab509",
+    "src/save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+    "src/save5_preflight.inc": "14d05e2ff8943f8effa093ba9350e11b2d615bd46951d713bbf1c016f2356eb4",
+    "src/save5_underwater_policy.h": "7933c903797e090aad304b2e57874c34f056b66a9664a8c8797f87a6901c7ca1",
+    "src/save5_underwater_policy.inc": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083",
+    "src/southern_quests.c": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+    "src/southern_quests.h": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881",
+    "src/underwater_quests.c": "2fcfa62e084d7116e3f14eaa0734d90d0f62283b0994dd68cafb5f29427f048e",
+    "src/underwater_quests.h": "2732f3888c23b06d5874431ba5f85a076000cd0c5eba1ff962e558272a8d6062",
+    "src/underwater_transactions.inc": "3122483bbd99be0a43dd15bf5e26fd83e51c4e74e5e29d649a9acbf70305d0d9"
+  },
+  "new_host_suites": {
+    "test_underwater_save.py": {
+      "result": "PASS",
+      "methods": 10
+    },
+    "test_underwater_transactions.py": {
+      "result": "PASS",
+      "methods": 8
+    },
+    "test_underwater_history_differential.py": {
+      "result": "PASS",
+      "methods": 6
+    },
+    "test_underwater_powerloss.py": {
+      "result": "PASS",
+      "methods": 1
+    }
+  },
+  "existing_host_suites": {
+    "test_save5.py": {
+      "result": "PASS",
+      "methods": 41
+    },
+    "test_save5_history.py": {
+      "result": "PASS",
+      "methods": 7
+    },
+    "test_save5_history_differential.py": {
+      "result": "PASS",
+      "methods": 9
+    },
+    "test_equipment.py": {
+      "result": "PASS",
+      "methods": 37
+    },
+    "test_southern_save.py": {
+      "result": "PASS",
+      "methods": 13
+    },
+    "test_southern_save_limits.py": {
+      "result": "PASS",
+      "methods": 4
+    },
+    "test_magma_save.py": {
+      "result": "PASS",
+      "methods": 13
+    },
+    "test_magma_save_limits.py": {
+      "result": "PASS",
+      "methods": 5
+    }
+  },
+  "existing_method_total": 129,
+  "authentic_magma34_fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+  "unchanged_save5_history_policy_sha256": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+  "immutable_magma_oracle_manifest_sha256": "9ba6c261b8a45525ecbe5d75a2a9ee858f11709074875105a9560dc855689d54",
+  "historical_differential": {
+    "banks": 61216,
+    "accepted": 441,
+    "rejected": 60775,
+    "original_images": 7,
+    "weakened_trials_bond_cases": 696
+  },
+  "powerloss": {
+    "transactions": 70,
+    "write_cut_positions_each": 6146,
+    "checks": 430220,
+    "result": "PASS"
+  },
+  "asan_ubsan": {
+    "checks": 6000,
+    "result": "PASS"
+  },
+  "bounded_full_validator_parity_mutants": 3000,
+  "typed_job_mutable_bytes_arm": 104,
+  "save5_mutable_delta_bytes_arm": 32,
+  "core_admission_mutable_bytes_arm": 164,
+  "new_total_mutable_bytes_arm": 300,
+  "new_full_save_copies": 0,
+  "new_iwram_bytes": 0,
+  "isolated_transaction_max_stage_cycles": 56038,
+  "isolated_transaction_max_begin_cycles": 24836,
+  "lower_writer_budgets": {
+    "768": 51043,
+    "896": 55570
+  },
+  "equipment_sources": {
+    "31": 6,
+    "32": 13,
+    "33": 38,
+    "34": 54,
+    "35": 68,
+    "36": 86
+  },
+  "quest45_bundle_sources": [
+    35,
+    36
+  ],
+  "historical_pins_relaxed": false
+}

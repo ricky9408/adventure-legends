@@ -1,0 +1,123 @@
+{
+  "format": "exact-byte-concatenation-v1",
+  "original_filename": "southern-minimal-route.json",
+  "original_sha256": "b028d1aa5020b53fa9b17eed863921d39d66c6bff0e93c93b464546452045b09",
+  "original_bytes": 569857,
+  "max_part_bytes": 30000,
+  "parts": [
+    {
+      "file": "part_000.txt",
+      "offset": 0,
+      "bytes": 30000,
+      "sha256": "5cd1c4f67c9bf56e3842b3e1b46b65b75b31364bb24f0f37029f60bd5d4f2ba0"
+    },
+    {
+      "file": "part_001.txt",
+      "offset": 30000,
+      "bytes": 30000,
+      "sha256": "87abeaa53df394fd3050257f62fee622379234eccfb57793a1406783aa678abf"
+    },
+    {
+      "file": "part_002.txt",
+      "offset": 60000,
+      "bytes": 30000,
+      "sha256": "411919ea42f279415a38022b0909d84eb011d478f5c80e8cdb7cb3f150d79546"
+    },
+    {
+      "file": "part_003.txt",
+      "offset": 90000,
+      "bytes": 30000,
+      "sha256": "09a7454215aeddd4c863ef9f771461c37c90093ba13db0fdb210b7c3ce1e6aed"
+    },
+    {
+      "file": "part_004.txt",
+      "offset": 120000,
+      "bytes": 30000,
+      "sha256": "4b45b3fd063bbda4400039b6da687d4268f7d24b8bcbde72dd13bbf5ad31b683"
+    },
+    {
+      "file": "part_005.txt",
+      "offset": 150000,
+      "bytes": 30000,
+      "sha256": "c687b53a65ccaabe59fd5b6edd12172be8795e9290b21fbeb5850c40ed3cec83"
+    },
+    {
+      "file": "part_006.txt",
+      "offset": 180000,
+      "bytes": 30000,
+      "sha256": "9b8c73f275ed1b10f8e5d5c98fd916624dfc369f48777921f8f16b6977eaa1ef"
+    },
+    {
+      "file": "part_007.txt",
+      "offset": 210000,
+      "bytes": 30000,
+      "sha256": "9f7ce5d92b7957fd3a5227acca463d67558224c49b22fc2cff2cc8c66b3d5f48"
+    },
+    {
+      "file": "part_008.txt",
+      "offset": 240000,
+      "bytes": 30000,
+      "sha256": "084ac72a9e5506758ef9fded460c3d2ba5f8b10bc11880164f5c95750c174764"
+    },
+    {
+      "file": "part_009.txt",
+      "offset": 270000,
+      "bytes": 30000,
+      "sha256": "b25713cffe12f9e36a5b8ada633f7d022d9258959dc00374cb486551f0cdb653"
+    },
+    {
+      "file": "part_010.txt",
+      "offset": 300000,
+      "bytes": 30000,
+      "sha256": "371c704b5a78b12f70b47f508a0ebaba0f3bcf5048f5fd021b59d49a5547bfdf"
+    },
+    {
+      "file": "part_011.txt",
+      "offset": 330000,
+      "bytes": 30000,
+      "sha256": "d58bc08b2f4c4e44f8193382f72888fc9aed33be427a3aa629874a006e096f52"
+    },
+    {
+      "file": "part_012.txt",
+      "offset": 360000,
+      "bytes": 30000,
+      "sha256": "87370060420fc4322b6e22f121979e799b236aa0434a3ba44a35ec89c8f69560"
+    },
+    {
+      "file": "part_013.txt",
+      "offset": 390000,
+      "bytes": 30000,
+      "sha256": "ef77d01d9e63b709db3ae63a00e32666a3a22b8f9d32bc905afbc65402c08cb0"
+    },
+    {
+      "file": "part_014.txt",
+      "offset": 420000,
+      "bytes": 30000,
+      "sha256": "5cbc0b5037258294da65520d26fe5a7bd070406f62ceab3ab16f2fed896e6e3f"
+    },
+    {
+      "file": "part_015.txt",
+      "offset": 450000,
+      "bytes": 30000,
+      "sha256": "a814c083b1ee713f55b2f7b75aec8664bd4d3fea2528615a105039460ab2743a"
+    },
+    {
+      "file": "part_016.txt",
+      "offset": 480000,
+      "bytes": 30000,
+      "sha256": "746ab6483936bc897294e0fa46c407787a8279d2a3aa57d2596df60059313817"
+    },
+    {
+      "file": "part_017.txt",
+      "offset": 510000,
+      "bytes": 30000,
+      "sha256": "f0dcb66bc6233fd5694e8608828fd7ddec9b7f86e0db0d48503d40a42cf5c014"
+    },
+    {
+      "file": "part_018.txt",
+      "offset": 540000,
+      "bytes": 29857,
+      "sha256": "53573ef4e76ade6067aea97ce87f63d9fbe88c2c30952abc736b1d243145a752"
+    }
+  ]
+}

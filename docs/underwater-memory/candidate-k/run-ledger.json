@@ -1,0 +1,199 @@
+[
+  {
+    "source_report": "build/underwater-memory-observe34-k/underwater-journey.json",
+    "source_report_sha256": "9ceed48fb4a1dc4a1cb2a1e16f15e1351230e02a2edd201ce8e683a2db508c97",
+    "functional_assertions": 4,
+    "failures": [],
+    "hardware_frames": 202,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "minimum_unchanged_prefix_bytes": 2892,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      34
+    ],
+    "timing_windows": []
+  },
+  {
+    "source_report": "build/underwater-memory-observe50-k-evolve/underwater-journey.json",
+    "source_report_sha256": "57aadf3c91ba4e8fcc79ed8056a345ed7760dbfd9f7f0cb1e55255412fc6638e",
+    "functional_assertions": 202,
+    "failures": [],
+    "hardware_frames": 2768,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "minimum_unchanged_prefix_bytes": 2892,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      50
+    ],
+    "timing_windows": [
+      {
+        "name": "diagnostic-real-cast-50",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 196786,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      }
+    ]
+  },
+  {
+    "source_report": "build/underwater-memory-observe50-k-all16/underwater-journey.json",
+    "source_report_sha256": "2be4a28ee8378cfeafa0a019f5276be0a01dc71d5aa323e89d06e8658b512045",
+    "functional_assertions": 182,
+    "failures": [],
+    "hardware_frames": 7549,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "minimum_unchanged_prefix_bytes": 2892,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      50
+    ],
+    "timing_windows": [
+      {
+        "name": "diagnostic-real-cast-50",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 196786,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-51",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 202895,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-53",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 84229,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-54",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 193087,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-56",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 200730,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-57",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 197402,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-59",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 68861,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-60",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 205287,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-62",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 203753,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-63",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 57410,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-65",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 213965,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-66",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 206678,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-68",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 205577,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-69",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 207489,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-71",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 199974,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      },
+      {
+        "name": "diagnostic-real-cast-72",
+        "hardware_frames": 120,
+        "updates": 120,
+        "flips": 120,
+        "max_cycles": 201595,
+        "original_cadence_predicate_pass": true,
+        "timing_is_candidate_acceptance_evidence": false
+      }
+    ]
+  }
+]

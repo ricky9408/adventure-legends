@@ -1,0 +1,1317 @@
+4,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1249,
+      "state": 1,
+      "hp_q4": 32,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1259,
+      "state": 1,
+      "hp_q4": 32,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1269,
+      "state": 1,
+      "hp_q4": 32,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1279,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1289,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1299,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1309,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1319,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1329,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1339,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1349,
+      "state": 1,
+      "hp_q4": 16,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    },
+    {
+      "frame": 1359,
+      "state": 4,
+      "hp_q4": 0,
+      "position": [
+        96,
+        176
+      ],
+      "live_enemies": [
+        {
+          "x": 96,
+          "y": 176,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 0
+        },
+        {
+          "x": 304,
+          "y": 264,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 1
+        },
+        {
+          "x": 432,
+          "y": 112,
+          "hp": 5,
+          "flash": 0,
+          "kind": 2,
+          "hp_q4": 80,
+          "phase": 3
+        },
+        {
+          "x": 304,
+          "y": 80,
+          "hp": 5,
+          "flash": 0,
+          "kind": 0,
+          "hp_q4": 80,
+          "phase": 4
+        }
+      ]
+    }
+  ],
+  "scope_limits": [
+    "Native emulator, not physical handheld",
+    "Main route, save/reboot, death/retry, and ordinary exits; optional quests/trials are out of scope"
+  ],
+  "rom_sha256": "0d7fd78733405a6fc8ec6eeca68ad207dfb11b91dcfe44a8d67f312552b46675",
+  "symbols_sha256": "da6615df0f932eb5f096442092962d2fa28fad684758640c65175bc535d8b176",
+  "elf_sha256": "bc0d714e08569d75c46c86c546e3342467b588cfac631f2fd5cb0e7b8d6d1d0d",
+  "rom_bytes": 9770108,
+  "bridge_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+  "source_manifest_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "provenance": {
+    "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-underwater/tests/fixtures/v5-revision5-minimal/magma-minimal10-town.sav",
+    "sram_sha256": "f584de3b29cb77731148b31b99dc40e0c7e4ec05f1aac42e0d38dd5b44612eeb",
+    "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "cross_rom_machine_state_loaded": false,
+    "minimal_prior_route": true
+  },
+  "checks": [
+    {
+      "label": "main-independent-cold-import: source is genuine current-revision SRAM",
+      "passed": true,
+      "frame": 0
+    },
+    {
+      "label": "main-independent-cold-import-whole-continue updates and page-flips every native hardware frame within budget",
+      "passed": false,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: fresh emulator Continue completes normally",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: Continue retains exact durable SRAM payload",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: exactly twelve retained base individuals and histories",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: all original identities plus only the two teaching identities",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: all three new main quests and all four archive objectives retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: no optional quest/trial or evolution requirement introduced",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual1 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual2 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual3 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual4 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual5 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual6 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual7 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual8 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual9 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "main-independent-cold-import: original individual10 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "11-main-native-save: at intended anchor room",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "11-main-native-save updates and page-flips every native hardware frame within budget",
+      "passed": true,
+      "frame": 291
+    },
+    {
+      "label": "11-main-native-save: native rest records real safe checkpoint",
+      "passed": true,
+      "frame": 291
+    },
+    {
+      "label": "11-main-native-save: timing includes actual staged anchor event and SRAM save",
+      "passed": true,
+      "frame": 291
+    },
+    {
+      "label": "native-save-independent-reboot: source is genuine current-revision SRAM",
+      "passed": true,
+      "frame": 0
+    },
+    {
+      "label": "native-save-independent-reboot-whole-continue updates and page-flips every native hardware frame within budget",
+      "passed": false,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: fresh emulator Continue completes normally",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: Continue retains exact durable SRAM payload",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: exactly twelve retained base individuals and histories",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: all original identities plus only the two teaching identities",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: all three new main quests and all four archive objectives retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: no optional quest/trial or evolution requirement introduced",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual1 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual2 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual3 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual4 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual5 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual6 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual7 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual8 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual9 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native-save-independent-reboot: original individual10 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "native rest and independent reboot preserve exact roster, quest, and equipment bytes",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: source is genuine current-revision SRAM",
+      "passed": true,
+      "frame": 0
+    },
+    {
+      "label": "surface-return-baseline-whole-continue updates and page-flips every native hardware frame within budget",
+      "passed": false,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: fresh emulator Continue completes normally",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: Continue retains exact durable SRAM payload",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: exactly twelve retained base individuals and histories",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: all original identities plus only the two teaching identities",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: all three new main quests and all four archive objectives retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: no optional quest/trial or evolution requirement introduced",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual1 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual2 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual3 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual4 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual5 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual6 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual7 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual8 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual9 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "surface-return-baseline: original individual10 identity/form/commands/seed/trials retained",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 202
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 214
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 226
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 228
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 230
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 232
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 234
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 236
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 238
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 240
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 242
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 244
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 246
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 248
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 250
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 252
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 254
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 256
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 258
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 260
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 262
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 264
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 266
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 268
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 270
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 272
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 274
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 276
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 278
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 280
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 282
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 284
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 286
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 288
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 290
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 292
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 294
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 296
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 298
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 300
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 302
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 304
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 306
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 308
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 310
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 312
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 314
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 316
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 318
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 320
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 322
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 324
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 326
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 328
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 330
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 332
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 334
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 336
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 338
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 340
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 342
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 344
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 346
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 348
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 350
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 352
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 354
+    },
+    {
+      "label": "actual exit reaches area38",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "whole-exit-46-to-38 updates and page-flips every native hardware frame within budget",
+      "passed": false,
+      "frame": 390
+    },
+    {
+      "label": "exit46->38: valid live destination",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "exit46->38: reciprocal spawn4",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "exit46->38: exact owned identities and history retained",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "exit46->38: new main progress retained",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "exit46->38: physical landing is collision-clear",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "Underwater south return lands at Magma shell-lift spawn4 (416,240)",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 390
+    },
+    {
+      "label": "real shell-lift interaction re-enters Underwater with retained new progress",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "whole-exit-38-to-46 updates and page-flips every native hardware frame within budget",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "exit38->46: valid live destination",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "exit38->46: reciprocal spawn0",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "exit38->46: exact owned identities and history retained",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "exit38->46: new main progress retained",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "exit38->46: physical landing is collision-clear",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "surface reciprocal return: exactly twelve retained base individuals and histories",
+      "passed": true,
+      "frame": 428
+    },
+    {
+      "label": "surface reciprocal return: all original identities plus only the two teaching identities",
+      "passed": true,
+      "fram

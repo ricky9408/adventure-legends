@@ -18,6 +18,7 @@ import sys
 from campaign_tests import CampaignRun, PLAY, DIALOG, PAUSE, ROOT
 from test_creatures import Roster
 from test_save4 import CampaignSave
+from region_journey import RegionJourney
 
 SAVE_PENDING, EVOLVE_CONFIRM, EVOLVE_ANIM = 6, 7, 8
 ENABLED = {1, 2, 4, 5, 7, 8, 10, 11}
@@ -32,6 +33,8 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 class EvolutionRun(CampaignRun):
+    evolution_observer=RegionJourney.evolution_observer
+    wait_evolution=RegionJourney.wait_evolution
     def __init__(self, rom, symbols, output, optional=True, exhaustive=False):
         super().__init__(rom, symbols, output, optional, exhaustive)
         self.save_checks = []
@@ -175,7 +178,7 @@ class EvolutionRun(CampaignRun):
         self.tap('SELECT');self.check(self.get('game_state')==EVOLVE_CONFIRM,f'family {family}: eligible Select opens confirmation')
         self.shot(f'evolution-{family}-confirmation');self.tap('B')
         self.check(self.get('game_state')==PAUSE and bytes(self.instance(family))==before,f'family {family}: decline leaves every instance byte unchanged')
-        self.tap('SELECT');self.tap('A')
+        self.tap('SELECT');self.wait_evolution();self.tap('A');self.wait_evolution(EVOLVE_ANIM)
         self.check(self.get('game_state')==EVOLVE_ANIM,f'family {family}: explicit confirmation starts animation')
         self.shot(f'evolution-{family}-before')
         tick=self.get('frame');page=self.e.read(0x04000000,2)&16;deltas=[];flips=[];cycles=[]

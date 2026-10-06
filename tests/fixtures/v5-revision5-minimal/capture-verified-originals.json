@@ -1,0 +1,513 @@
+[
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/magma-minimal-route.json",
+    "kind": "original-controller-report",
+    "sha256": "c650e0982ff84ecda77faf4cc75270d2eff6ac73f05596ed8ffedd3f39715632",
+    "bytes": 428557,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/tested.gba",
+    "kind": "rom_sha256",
+    "sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "bytes": 7495920,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/tested.elf",
+    "kind": "elf_sha256",
+    "sha256": "0b56a0a525ef59d36b14a89a2786e5811f29fd9a54c386093fa06528f3afcc99",
+    "bytes": 9076692,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/tested.sym",
+    "kind": "symbols_sha256",
+    "sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+    "bytes": 115797,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tools/mgba_bridge.so",
+    "kind": "reported-emulator-bridge-binary",
+    "sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+    "bytes": 16928,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/candidate-source-hashes.json",
+    "kind": "runtime-source-manifest",
+    "sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+    "bytes": 91412,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tests/magma_journey.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "bc0dd73960c23816c1d5bd53b7dff6ebbde015e5da8181f397249c3ec87e51e5",
+    "bytes": 30883,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tests/region_journey.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "bytes": 25322,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tests/northern_journey.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "bytes": 29751,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tests/southern_journey.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+    "bytes": 37735,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tools/mgba_runner.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+    "bytes": 4975,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tests/magma_minimal_route.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "2b2e591743aa92ae714e320e15416ed5bddac0b14480d001ebaaea80959c2354",
+    "bytes": 10825,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/test-source/tests/test_southern_frozen_fixtures.py",
+    "kind": "original-report-pinned-helper",
+    "sha256": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce",
+    "bytes": 12678,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/00-s3-forward-migration.sav",
+    "kind": "magma-snapshot:00-s3-forward-migration:sram",
+    "sha256": "4d337a3a02742a4a1a01286511d3001d4a74c248df6cd2c3d37d863c6b43dbe4",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/00-s3-forward-migration.state",
+    "kind": "magma-snapshot:00-s3-forward-migration:state",
+    "sha256": "673e05e22b5f622ce2850e4a1f6606412353fc23fa8ee0b876ee83f6f23ff9bd",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/01-lift-entry.sav",
+    "kind": "magma-snapshot:01-lift-entry:sram",
+    "sha256": "98c9f2454342746053c594d901c91ab24603e820d483a73efc6ffa1dae89276b",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/01-lift-entry.state",
+    "kind": "magma-snapshot:01-lift-entry:state",
+    "sha256": "e40e13d755fda68a1da511c194641e19738965a5a546ab67ad6dbc2143eca142",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/02-teaching-companions.sav",
+    "kind": "magma-snapshot:02-teaching-companions:sram",
+    "sha256": "7473cad73b1ea080f73cb2ffe1b1d2177a7e21d6549f15c8408d7a7d6176e6ef",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/02-teaching-companions.state",
+    "kind": "magma-snapshot:02-teaching-companions:state",
+    "sha256": "cfc5d9735a3a76c5389022e00749a060696e6c29dddc751d0715ed4e642a121b",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/03-intake-unsolved.sav",
+    "kind": "magma-snapshot:03-intake-unsolved:sram",
+    "sha256": "a9b31625034f1d8aa0c75f364be30ee255eb2e0b0dac0b83519515fac1730afa",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/03-intake-unsolved.state",
+    "kind": "magma-snapshot:03-intake-unsolved:state",
+    "sha256": "3c82a914847390296d58718c06467e0bd29ebc715f312ce66c4f631f2cadcf5d",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/04-intake-solved.sav",
+    "kind": "magma-snapshot:04-intake-solved:sram",
+    "sha256": "94313b9ec30c3b815fedd41446d8c28c5b51a3fe6d2cf28495d93d55a7a7a9bf",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/04-intake-solved.state",
+    "kind": "magma-snapshot:04-intake-solved:state",
+    "sha256": "bad9e883ef96a7f0d494302801f084c3cf25a0b001b3cc9a42431193d606ae59",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/05-vault-solved.sav",
+    "kind": "magma-snapshot:05-vault-solved:sram",
+    "sha256": "1132102d74878df800d9bef09265df36ba9e2fe45a2a041f3198552cc31f94e3",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/05-vault-solved.state",
+    "kind": "magma-snapshot:05-vault-solved:state",
+    "sha256": "c82ac6d913d3addb2ca160b94583c22a449c513a7798cfd24e696eb0ed9aed92",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/06-gallery-solved.sav",
+    "kind": "magma-snapshot:06-gallery-solved:sram",
+    "sha256": "ce2aac94d67e28c94a6d879a9a625229693c72f0ab633a988bd47319ae20a540",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/06-gallery-solved.state",
+    "kind": "magma-snapshot:06-gallery-solved:state",
+    "sha256": "d82b5049e6fe32b956e8d511cb73a8f1e9c1a5af32a42bc217feaec8e5089cf8",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/regulator-telegraph.sav",
+    "kind": "magma-snapshot:regulator-telegraph:sram",
+    "sha256": "1bd9adbb27f8a22419132b1d84399c42e7f31b8f49fb824eb9738b55f6d8d7d3",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/regulator-telegraph.state",
+    "kind": "magma-snapshot:regulator-telegraph:state",
+    "sha256": "f9be6e154a90821ec15b893024efe62ca51888f70aa6e3ab3a8d18476ab1ef95",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/regulator-cleared.sav",
+    "kind": "magma-snapshot:regulator-cleared:sram",
+    "sha256": "4690fd4753c4afd995d6feeaee55a9e89b21c421eb8012fdfeafc5e6c3b336b8",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/regulator-cleared.state",
+    "kind": "magma-snapshot:regulator-cleared:state",
+    "sha256": "74f15d3c23db761dde81bf4b26395c8308cc46eb860f6fcac3d41dbe033bb818",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/07-magma-main-cleared.sav",
+    "kind": "magma-snapshot:07-magma-main-cleared:sram",
+    "sha256": "17c143a3f0386156bb810d248f0525b4d2a809dda61b5951e707acdb3e9bfa3d",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/07-magma-main-cleared.state",
+    "kind": "magma-snapshot:07-magma-main-cleared:state",
+    "sha256": "d1f06120a8fb86daef84f5efd4c555adad5456209ca07bcd380364ebf8f2bdd1",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/08-minimal-main-cleared.sav",
+    "kind": "magma-snapshot:08-minimal-main-cleared:sram",
+    "sha256": "17c143a3f0386156bb810d248f0525b4d2a809dda61b5951e707acdb3e9bfa3d",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/08-minimal-main-cleared.state",
+    "kind": "magma-snapshot:08-minimal-main-cleared:state",
+    "sha256": "1e1fd8d5581e9895c13e4556ea04721a23513fcf2af6678ab20760d69c0077ed",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/09-minimal-independent-reboot.sav",
+    "kind": "magma-snapshot:09-minimal-independent-reboot:sram",
+    "sha256": "f584de3b29cb77731148b31b99dc40e0c7e4ec05f1aac42e0d38dd5b44612eeb",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/09-minimal-independent-reboot.state",
+    "kind": "magma-snapshot:09-minimal-independent-reboot:state",
+    "sha256": "4129159ae837d4edbf685b147a37d10e0ba7ca7dc0f480b7366aba799b3a51c4",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/10-minimal-old-region-return.sav",
+    "kind": "magma-snapshot:10-minimal-old-region-return:sram",
+    "sha256": "68d4e3b21d1006c90ec4396ba358c063b597dc37eb4b35870eb6d112a18568e7",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-minimal-d1/10-minimal-old-region-return.state",
+    "kind": "magma-snapshot:10-minimal-old-region-return:state",
+    "sha256": "cc94cfd4a21917ea7a2333d5e19aec73a54d82fdfb6402be270976bde3fc2e94",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/fixtures/v5-revision4/southern-minimal8-town.sav",
+    "kind": "authenticated-prior-Southern-SRAM",
+    "sha256": "968066ed983bd48fc2af0d7ffeb79f635624037ef2099809fd00c97aaa04cc0c",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/southern-minimal-route.json",
+    "kind": "original-Southern-controller-report",
+    "sha256": "b028d1aa5020b53fa9b17eed863921d39d66c6bff0e93c93b464546452045b09",
+    "bytes": 569857,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/emberbond.gba",
+    "kind": "original-Southern-rom",
+    "sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+    "bytes": 5858700,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/emberbond.sym",
+    "kind": "original-Southern-symbols",
+    "sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+    "bytes": 90860,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/00-minimal-n5-forward-migration.sav",
+    "kind": "Southern-snapshot:00-minimal-n5-forward-migration:sram",
+    "sha256": "ad2877ae2feb6c5e5bdb63ce47ab5d580fc58c5d8bad8ee8c57f4374c8d5fba0",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/00-minimal-n5-forward-migration.state",
+    "kind": "Southern-snapshot:00-minimal-n5-forward-migration:state",
+    "sha256": "01032ddcaeb484057421e912be1fe69e5368f5f8b55829d9012dabfbc9f7a8f8",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/01-minimal-ferry-entry.sav",
+    "kind": "Southern-snapshot:01-minimal-ferry-entry:sram",
+    "sha256": "22ff1b99f5e563487cff1a4a0040366fa284b112f4eb321b11c40c1f107ce208",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/01-minimal-ferry-entry.state",
+    "kind": "Southern-snapshot:01-minimal-ferry-entry:state",
+    "sha256": "556dc94c0a74d1e4a10c34d724c519d65edd1448db05db5d778cc74605c3c575",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/02-guaranteed-bases.sav",
+    "kind": "Southern-snapshot:02-guaranteed-bases:sram",
+    "sha256": "41a753f9fbb6668d371930a7f0694cf83372f5ee29d8d28d2af6fba0efd959ca",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/02-guaranteed-bases.state",
+    "kind": "Southern-snapshot:02-guaranteed-bases:state",
+    "sha256": "5153f9868d9ffdc5f7b4753a9c2fc990c6317efda5b6efd2748c74a460705e23",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/34-unsolved-entry.sav",
+    "kind": "Southern-snapshot:34-unsolved-entry:sram",
+    "sha256": "ecb2bb7d32a6bba4224ea80cf5369cddb86bdb60d785974886ca8b5f43f11059",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/34-unsolved-entry.state",
+    "kind": "Southern-snapshot:34-unsolved-entry:state",
+    "sha256": "28dec3a757490176249b0f7214f6e53966dd37646eda55ac505f37cbe3ea594c",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/34-solved.sav",
+    "kind": "Southern-snapshot:34-solved:sram",
+    "sha256": "ed9d1df7f48d148f5145e3319f153e39517c2055b26a4fad82dc5d45976c8149",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/34-solved.state",
+    "kind": "Southern-snapshot:34-solved:state",
+    "sha256": "05da51d55de65bf62e679c9170be7b40c86e654427a22bfc6b9c9c0fea788563",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/35-unsolved-entry.sav",
+    "kind": "Southern-snapshot:35-unsolved-entry:sram",
+    "sha256": "d661e1acd6c73532e8d1e4b124a70f09d84ebcd34c13fd982736b28c6b942e28",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/35-unsolved-entry.state",
+    "kind": "Southern-snapshot:35-unsolved-entry:state",
+    "sha256": "14d0df1bd816aedbb52a30a8f4ee95683237a4f7fc2a41c65e1d9c386509fe65",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/35-solved.sav",
+    "kind": "Southern-snapshot:35-solved:sram",
+    "sha256": "c704d84f930ace6214d547c7bb110ee565f5e0c4b866d9d833f5e111b9091826",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/35-solved.state",
+    "kind": "Southern-snapshot:35-solved:state",
+    "sha256": "b476928b09e5cdeee8a6ea5c333e61ea7b592b215dc00ad3de25d51c79e4499a",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/36-unsolved-entry.sav",
+    "kind": "Southern-snapshot:36-unsolved-entry:sram",
+    "sha256": "ce55d27ba9eb6ed0a45a6b417e31af769e4ab4cd70b0e4fce5588e8abdea63a1",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/36-unsolved-entry.state",
+    "kind": "Southern-snapshot:36-unsolved-entry:state",
+    "sha256": "05f2ee8f30ad7ec1343e8e2afbcee2c7ac805d015b6bba863af1b005579cff7e",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/36-solved.sav",
+    "kind": "Southern-snapshot:36-solved:sram",
+    "sha256": "ed774001c352eb7b4a347e1bc0026e0a0d1d709f154a2b014d0358795db94e60",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/36-solved.state",
+    "kind": "Southern-snapshot:36-solved:state",
+    "sha256": "e70b66824f2ed847026397c89ee4a8196d6fc5d36f37d8bf17eabb38f0259852",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/03-minimal-machine-ready.sav",
+    "kind": "Southern-snapshot:03-minimal-machine-ready:sram",
+    "sha256": "07bd095be3483388b587c6eff32c602c09b82c4503154569a81f9d03c6081996",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/03-minimal-machine-ready.state",
+    "kind": "Southern-snapshot:03-minimal-machine-ready:state",
+    "sha256": "2349b30332e9bb6ecd079939c556093ebec82338d07fa36e3394b7d8965d7bbd",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/machine-1-telegraph.sav",
+    "kind": "Southern-snapshot:machine-1-telegraph:sram",
+    "sha256": "5d4f7c552bb2be1e322b64737ba549f6e242f0f9b33f3397085cac66dcd9bb6f",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/machine-1-telegraph.state",
+    "kind": "Southern-snapshot:machine-1-telegraph:state",
+    "sha256": "7ce47fcd0b4363801dcc352ced075988fcce82ccf47c5118beb673da1ace1476",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/boss-1-cleared.sav",
+    "kind": "Southern-snapshot:boss-1-cleared:sram",
+    "sha256": "bc369ce2a3782a66bc32907b0ed565b218b5d6bdb5132600c69f64e61bcb5f37",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/boss-1-cleared.state",
+    "kind": "Southern-snapshot:boss-1-cleared:state",
+    "sha256": "c38e3f0e0dc3b06d05f6e91284efbe15110b9a78c2a740f7c49ae3abe159ce10",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/04-minimal-main-complete.sav",
+    "kind": "Southern-snapshot:04-minimal-main-complete:sram",
+    "sha256": "fab3d8f714c761a7f91044ea7d54844ad3c025ffae489b7c6bb1eed00cd12f3c",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/04-minimal-main-complete.state",
+    "kind": "Southern-snapshot:04-minimal-main-complete:state",
+    "sha256": "bb0cf9e0569f40fcd3d8c897df3f9ff6b06d6c008db3817f68042f71cd124181",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/05-minimal-independent-reboot.sav",
+    "kind": "Southern-snapshot:05-minimal-independent-reboot:sram",
+    "sha256": "968066ed983bd48fc2af0d7ffeb79f635624037ef2099809fd00c97aaa04cc0c",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/05-minimal-independent-reboot.state",
+    "kind": "Southern-snapshot:05-minimal-independent-reboot:state",
+    "sha256": "c0e910d679c375d54bab71107470d4a5a000ed814dc4eabd846efe156c262c51",
+    "bytes": 397312,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/06-minimal-old-region-return.sav",
+    "kind": "Southern-snapshot:06-minimal-old-region-return:sram",
+    "sha256": "4c39c2400ffdb4a6ebece3cb0443d385352aa15543a9bed8b5797b0e0f75391c",
+    "bytes": 32768,
+    "verified": true
+  },
+  {
+    "source_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-minimal-route/06-minimal-old-region-return.state",
+    "kind": "Southern-snapshot:06-minimal-old-region-return:state",
+    "sha256": "cd127725dc3c625a5a15d810584d5727151caaf34eb7d09eab606a63e4f0d0cf",
+    "bytes": 397312,
+    "verified": true
+  }
+]

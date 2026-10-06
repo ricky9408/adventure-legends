@@ -1,0 +1,70 @@
+[
+  {
+    "path": "build/underwater-memory-observe50-b/underwater-journey.json",
+    "report_sha256": "9db7ae9902c1acd6ff81ea09ba5a400738e06de2c9abeaa4f0d0a191d6193fbe",
+    "classification": "Stopped by inherited cast cadence gate; result retained as a diagnostic failure.",
+    "checks": 54,
+    "failures": [
+      {
+        "error": "('diagnostic-real-cast updates and presents once every native frame', {'game_state': 1, 'room': 46, 'px': 175, 'py': 182, 'hp': 7, 'chapter_flags': 15, 'camera_x': 55, 'camera_y': 102, 'save_failed': 0, 'checkpoint_spawn': 2, 'spirit': 30, 'summoned': 1, 'ability_cd': 2, 'roll_cd': 0})",
+        "status": {
+          "game_state": 1,
+          "room": 46,
+          "px": 175,
+          "py": 182,
+          "hp": 7,
+          "chapter_flags": 15,
+          "camera_x": 55,
+          "camera_y": 102,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 30,
+          "summoned": 1,
+          "ability_cd": 2,
+          "roll_cd": 0
+        }
+      }
+    ]
+  },
+  {
+    "path": "build/underwater-memory-observe50-b-evolve/underwater-journey.json",
+    "report_sha256": "82d389057a5543da7e95fe0572e0778f5c5aeb702f7fc435926befe75bc16089",
+    "classification": "Observer navigation mistake: town coordinates requested before returning from small room52. No game-state injection.",
+    "checks": 8,
+    "failures": [
+      {
+        "error": "bytearray index out of range",
+        "status": {
+          "game_state": 1,
+          "room": 52,
+          "px": 32,
+          "py": 112,
+          "hp": 7,
+          "chapter_flags": 15,
+          "camera_x": 0,
+          "camera_y": 0,
+          "save_failed": 0,
+          "checkpoint_spawn": 2,
+          "spirit": 37,
+          "summoned": 0,
+          "ability_cd": 0,
+          "roll_cd": 0
+        }
+      }
+    ]
+  },
+  {
+    "path": "build/underwater-memory-observe50-b-evolve2/underwater-journey.json",
+    "report_sha256": "78c5ea3f74317a754c8ee5b78d4c87ea25cbbf26c154bf269df04f6042dc7392",
+    "classification": "Successful stack-only functional run after adding ordinary controller travel to town. Cadence traces are non-gating and remain visible.",
+    "checks": 202,
+    "failures": []
+  },
+  {
+    "path": "build/underwater-memory-b-all16-powers/underwater-journey.json",
+    "report_sha256": "7be7038eac386b12ade9bf3484e86de640f7140391ee91763b4398f1ec8d4ef9",
+    "classification": "Additional stack-only actual-controller selection and casts of all16 retained Underwater evolved forms at50/89. Cadence predicates are recorded, non-gating.",
+    "checks": 175,
+    "failures": []
+  }
+]

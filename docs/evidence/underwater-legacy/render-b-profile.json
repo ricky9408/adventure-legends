@@ -1,0 +1,210 @@
+{
+  "scope": "Timestamp-only isolated render-B diagnostic; not final production cadence evidence. Counters include profiling overhead. Source from exact archivedB plus timestamp hooks only.",
+  "build_receipt": {
+    "base_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+    "instrumented_rom_sha256": "255592c03fdc3f70eeb40c3f6bf4aec0695a351eb99af8565e25228535a1e807",
+    "base_source_manifest_sha256": "eab1962002f85dc65f6b754c0ff625dc9cc4eb0d937d29ebc9f1f5f7f0e62f80",
+    "source_delta": {
+      "src/game.c": "f6b89f1a6726ade9df0a4b7f75936fe46a7908fe01b7d46afaef87058f58107e"
+    },
+    "production_function_memory_regions_changed": [],
+    "matched_production_functions": 1058,
+    "diagnostic_functions": {
+      "('_dvmd_tls.o', 'profile_finish')": {
+        "address": 134218721,
+        "size": 100,
+        "memory": "ROM"
+      },
+      "('_dvmd_tls.o', 'profile_begin')": {
+        "address": 134218621,
+        "size": 28,
+        "memory": "ROM"
+      },
+      "('_dvmd_tls.o', 'profile_mark')": {
+        "address": 134218649,
+        "size": 72,
+        "memory": "ROM"
+      }
+    },
+    "scope": "Timestamp-only diagnostic, not native final cadence acceptance; timer/call overhead included. Original28KiB IWRAM linker guard unchanged."
+  },
+  "instrumented_iwram_end": "0x03006ef0",
+  "production_b_iwram_end": "0x03006f00",
+  "production_memory_region_moves": 0,
+  "counter_memory": "EWRAM",
+  "helper_code_memory": "ROM",
+  "source_reports": {
+    "build/underwater-render-diagnostics/p-failure/cold-rest-save-profile.json": {
+      "sha256": "16376f11c04e30c6ff727ba19f35f044c5b78568551c1fd068907eef98c3c786",
+      "completed_profile_rows": 156
+    },
+    "build/underwater-render-diagnostics/p-storage/earned41-actual-save-dialog-profile.json": {
+      "sha256": "44f38bcb4643e793454fa432f697f5f8ed88c045e77d61a2b164dff639d54fb8",
+      "completed_profile_rows": 176
+    }
+  },
+  "representative_frames": [
+    {
+      "companion": "summoned",
+      "operation": "enter saving",
+      "sequence": 581,
+      "hardware_observation": 617,
+      "game_frame": 452,
+      "begin_state": 1,
+      "after_update_state": 2,
+      "end_state": 6,
+      "render_cycles": 272728,
+      "obj_count": 19,
+      "render_finished_vcount": 162,
+      "obj_finished_vcount": 166,
+      "displayed_page": 0,
+      "cycles": {
+        "update": 133839,
+        "save_frame": 485,
+        "render": 138239,
+        "vblank_wait": 277986,
+        "obj_commit": 6922,
+        "render_static": 113559,
+        "draw_world": 83199,
+        "static_ui_after_world": 30192,
+        "draw_actors": 19611
+      }
+    },
+    {
+      "companion": "summoned",
+      "operation": "completed save resumes dialogue",
+      "sequence": 616,
+      "hardware_observation": 653,
+      "game_frame": 487,
+      "begin_state": 6,
+      "after_update_state": 2,
+      "end_state": 2,
+      "render_cycles": 277595,
+      "obj_count": 24,
+      "render_finished_vcount": 163,
+      "obj_finished_vcount": 168,
+      "displayed_page": 1,
+      "cycles": {
+        "update": 100212,
+        "save_frame": 276,
+        "render": 176942,
+        "vblank_wait": 276642,
+        "obj_commit": 9455,
+        "render_static": 152092,
+        "draw_world": 83199,
+        "static_ui_after_world": 68725,
+        "draw_actors": 19751
+      }
+    },
+    {
+      "companion": "summoned",
+      "operation": "steady saving",
+      "sequence": 672,
+      "hardware_observation": 710,
+      "game_frame": 543,
+      "begin_state": 6,
+      "after_update_state": 6,
+      "end_state": 6,
+      "render_cycles": 182176,
+      "obj_count": 19,
+      "render_finished_vcount": 86,
+      "obj_finished_vcount": 166,
+      "displayed_page": 1,
+      "cycles": {
+        "update": 159759,
+        "save_frame": 243,
+        "render": 22009,
+        "vblank_wait": 91158,
+        "obj_commit": 6922,
+        "render_static": null,
+        "draw_world": null,
+        "static_ui_after_world": null,
+        "draw_actors": 19611
+      }
+    },
+    {
+      "companion": "unsummoned",
+      "operation": "enter saving",
+      "sequence": 832,
+      "hardware_observation": 866,
+      "game_frame": 703,
+      "begin_state": 1,
+      "after_update_state": 2,
+      "end_state": 6,
+      "render_cycles": 271183,
+      "obj_count": 18,
+      "render_finished_vcount": 160,
+      "obj_finished_vcount": 165,
+      "displayed_page": 1,
+      "cycles": {
+        "update": 133829,
+        "save_frame": 485,
+        "render": 136704,
+        "vblank_wait": 280638,
+        "obj_commit": 6485,
+        "render_static": 113551,
+        "draw_world": 83191,
+        "static_ui_after_world": 30192,
+        "draw_actors": 18087
+      }
+    },
+    {
+      "companion": "unsummoned",
+      "operation": "completed save resumes dialogue",
+      "sequence": 789,
+      "hardware_observation": 822,
+      "game_frame": 660,
+      "begin_state": 6,
+      "after_update_state": 2,
+      "end_state": 2,
+      "render_cycles": 276010,
+      "obj_count": 22,
+      "render_finished_vcount": 161,
+      "obj_finished_vcount": 167,
+      "displayed_page": 0,
+      "cycles": {
+        "update": 100202,
+        "save_frame": 276,
+        "render": 175367,
+        "vblank_wait": 278658,
+        "obj_commit": 8349,
+        "render_static": 152084,
+        "draw_world": 83191,
+        "static_ui_after_world": 68725,
+        "draw_actors": 18184
+      }
+    },
+    {
+      "companion": "unsummoned",
+      "operation": "steady saving",
+      "sequence": 767,
+      "hardware_observation": 799,
+      "game_frame": 638,
+      "begin_state": 6,
+      "after_update_state": 6,
+      "end_state": 6,
+      "render_cycles": 180586,
+      "obj_count": 18,
+      "render_finished_vcount": 84,
+      "obj_finished_vcount": 165,
+      "displayed_page": 0,
+      "cycles": {
+        "update": 159693,
+        "save_frame": 243,
+        "render": 20485,
+        "vblank_wait": 93198,
+        "obj_commit": 6485,
+        "render_static": null,
+        "draw_world": null,
+        "static_ui_after_world": null,
+        "draw_actors": 18087
+      }
+    }
+  ],
+  "attribution": [
+    "PLAY-to-SAVE update includes southern_anchor full save5_validate before detecting already-set anchor.",
+    "SAVE-to-DIALOG update includes final budgeted SRAM verification via progression_save_step before changing visible mode in the same update.",
+    "Cold world copy plus UI text overlaps those expensive update steps; render completion lands after scanline160, causing a complete additional hardware frame of waiting.",
+    "save_frame scheduling itself is only276-485 measured cycles; final OBJ commit is6485-9455 depending on actor count."
+  ]
+}

@@ -144,7 +144,7 @@ class MagmaCreatureCoreTests(unittest.TestCase):
         lookup={p['id']:p for p in HISTORY}
         for revision in [0,1,2,3,4,5,6,255,256,0xffffffff]:
             for form in list(range(130))+[256,65537,0xffffffff]:
-                expected=form in ENABLED if revision==5 else form in lookup and revision in range(1,5) and bool(lookup[form]['revision_bits']&(1<<(revision-1)))
+                expected=form in ENABLED+list(range(49,73)) if revision==6 else form in ENABLED if revision==5 else form in lookup and revision in range(1,5) and bool(lookup[form]['revision_bits']&(1<<(revision-1)))
                 self.assertEqual(bool(self.lib.creatures_form_allowed_revision(form,revision)),expected,(form,revision))
                 if revision in (1,2,3,4):
                     p=lookup.get(form)
@@ -195,7 +195,7 @@ class MagmaCreatureCoreTests(unittest.TestCase):
     def test_disabled_forms_and_wide_ids_reject_without_mutation(self):
         roster=Roster();self.lib.creatures_roster_init(C.byref(roster));before=bytes(roster)
         for form in list(range(130))+[256,65537,0xffffffff]:
-            if form in ENABLED:continue
+            if form in ENABLED+list(range(49,73)):continue
             self.assertFalse(self.lib.creatures_form(form))
             self.assertEqual(self.lib.creatures_grant(C.byref(roster),form,50,100,0,0),255)
             self.assertEqual(bytes(roster),before)

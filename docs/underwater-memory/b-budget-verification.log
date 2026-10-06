@@ -1,0 +1,33 @@
+{
+  "candidate_rom_sha256": "e02c410824086957a9ee472185a384360e3f6c144b1693b875c05873d6603923",
+  "candidate_elf_sha256": "1fdcd84f4d494ee67261214a426051a9559dc1171b558e64f0ac54819acc320d",
+  "candidate_map_sha256": "a7bab1b7b24c640dd6132ff93bb909bb6342a9a881819ab4f4940efa89d302c4",
+  "rom_bytes": 9770620,
+  "rom_hard_limit_bytes": 33554432,
+  "rom_hard_limit_remaining_bytes": 23783812,
+  "ewram_data_plus_bss_bytes": 49696,
+  "ewram_remaining_bytes": 212448,
+  "iwram_code_bytes": 28416,
+  "gap_to_reserved_system_stack_bytes": 256,
+  "system_stack_reserved_bytes": 3840,
+  "hard_limit_assertions": {
+    "rom_within_32MiB_hardware_window": true,
+    "iwram_code_ends_at_or_before_reserved_stack_floor": true,
+    "ewram_data_and_bss_within_256KiB": true,
+    "system_stack_reserve_is_3840_bytes": true
+  },
+  "prior_magma_rom_bytes": 7495920,
+  "prior_magma_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "chapter_delta_bytes": 2274700,
+  "original_chapter_target_bytes": 2097152,
+  "original_chapter_target_met": false,
+  "original_target_exceeded_bytes": 177548,
+  "proposed_adjusted_chapter_budget_bytes": 2621440,
+  "proposed_adjusted_budget_would_fit": true,
+  "proposed_adjusted_budget_headroom_bytes": 346740,
+  "budget_status": "Original 2MiB chapter target exceeded. 2.5MiB is an explicit proposed adjustment, not a retroactive original-budget pass.",
+  "adjustment_rationale": "Four 480x320 maps plus four 240x160 maps, collision masks and localized room art, 196632 bytes of creature art, Japanese UI glyph masks, and chapter gameplay code. No map reduction or quality loss was silently substituted.",
+  "stack_usage_function_records": 896,
+  "non_static_stack_records": [],
+  "static_stack_limitation": "Individual GCC frames do not sum callees, capture unseen assembly/library paths, or prove the maximum call-chain depth."
+}

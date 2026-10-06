@@ -17,6 +17,9 @@ extern Enemy enemies[6];extern Shot shots[12];
 extern volatile int px,py;
 extern int face,ability_cd,ability_max,hitstop,enemy_windups[6],enemy_clocks[6];
 extern int solid(int,int);
+/* Optional engine proof: absent in older focused linkers, which retain the
+ * original exact pixel path. No dependency on a future chapter is introduced. */
+extern int game_clear_box(int,int,int,int) __attribute__((weak));
 extern void kill_enemy(Enemy *),impact(int,int),sfx(int);
 extern void obj_upload(const unsigned char *,int,int,int);
 extern void obj_add(int,int,int,int,int,int,int,int);
@@ -113,7 +116,13 @@ static void refresh_one(unsigned n){Path*p=&paths[n];int x,y,dx,dy,sx,sy,err;
  if(p->parent){Path*q=&paths[p->parent-1];if(p->parent>n||!q->valid||!q->whole||q->tx!=p->x||q->ty!=p->y)return;}
  else if(!clear(magma_power_origin_x,magma_power_origin_y,p->x,p->y))return;
  x=p->x;y=p->y;if(!coordinate(p->tx,p->ty)||dist(x,y,p->tx,p->ty)>96||solid(x,y))return;
- p->open=1;p->ex=(short)x;p->ey=(short)y;dx=absolute(p->tx-x);dy=-absolute(p->ty-y);
+ p->open=1;p->ex=(short)x;p->ey=(short)y;
+ /* An empty inclusive rectangle contains the entire raster and both diagonal
+  * side cells. Failed proof changes nothing: clip with the original loop. */
+ if(game_clear_box&&game_clear_box(x<p->tx?x:p->tx,y<p->ty?y:p->ty,x>p->tx?x:p->tx,y>p->ty?y:p->ty)){
+  p->ex=p->tx;p->ey=p->ty;p->whole=1;return;
+ }
+ dx=absolute(p->tx-x);dy=-absolute(p->ty-y);
  sx=x<p->tx?1:-1;sy=y<p->ty?1:-1;err=dx+dy;
  while(x!=p->tx||y!=p->ty){int e=err*2,nx=x,ny=y;
   if(e>=dy){err+=dy;nx+=sx;}if(e<=dx){err+=dx;ny+=sy;}

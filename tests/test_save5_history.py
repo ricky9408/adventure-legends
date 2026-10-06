@@ -82,18 +82,18 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         cls.directory = Path(cls.tmp.name)
         cls.base = build(cls.directory, 'base')
         cls.broad = build(cls.directory, 'current-quest-broadened', {
-            'save5': [('quest_masks[38] = {7,3,7,7', 'quest_masks[38] = {15,3,7,7')]
+            'save5': [('quest_masks[46] = {7,3,7,7', 'quest_masks[46] = {15,3,7,7')]
         })
         cls.narrow = build(cls.directory, 'current-quest-narrowed', {
-            'save5': [('quest_masks[38] = {7,3,7,7', 'quest_masks[38] = {3,3,7,7')]
+            'save5': [('quest_masks[46] = {7,3,7,7', 'quest_masks[46] = {3,3,7,7')]
         })
         cls.command = build(cls.directory, 'current-command-removed', {
             'creature_data': [('    {1, 1},', '    {1, 23},')]
         })
         cls.gates = build(cls.directory, 'current-gates-and-source-quest-changed', {
             'save5': [
-                ('equipment_source_quest[31] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6',
-                 'equipment_source_quest[31] = {-1,0,-1,6,-1,4,7,8,1,9,5,10,6'),
+                ('equipment_source_quest[37] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6',
+                 'equipment_source_quest[37] = {-1,0,-1,6,-1,4,7,8,1,9,5,10,6'),
                 ('trial_recruit[5] = {11,12,14,15,13}', 'trial_recruit[5] = {12,11,14,15,13}'),
                 ('if ((q->region_flags[1] & 240u) && !harbor) return 0;',
                  'if ((q->region_flags[1] & 240u) && !harbor) { /* future current gate */ }'),
@@ -178,7 +178,7 @@ class HistoricalSavePolicyTests(unittest.TestCase):
                 self.assertEqual(bytes(lib.sram[A:A+SIZE]), good)
                 migrated = bytes(lib.sram[B:B+SIZE])
                 self.assertEqual(int.from_bytes(migrated[8:12], 'little'), 18)
-                self.assertEqual(migrated[12:14], b'\x05\0')
+                self.assertEqual(migrated[12:14], b'\x06\0')
                 self.assertEqual(migrated[32:], good[32:])
                 self.assertEqual(lib.save5_test_write_count(), 6145)
                 self.assertEqual(lib.save5_load(C.byref(loaded)), 1)
@@ -293,7 +293,7 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         self.assertEqual(self.base.save5_validate_revision(C.byref(loaded), 1), 1)
         loaded.equipment.reward_claims[0] = 0
         self.assertEqual(self.base.save5_validate_revision(C.byref(loaded), 1), 0)
-        for revision in (0, 6, 0xffffffff):
+        for revision in (0, 7, 0xffffffff):
             self.assertEqual(self.base.save5_validate_revision(C.byref(loaded), revision), 0)
         self.assertEqual(C.sizeof(loaded.roster.instances[0]), 24)
         self.assertEqual(len(loaded.roster.instances), 160)

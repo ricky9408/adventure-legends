@@ -1,0 +1,39 @@
+{
+  "scope": "Pre-final source ZIP export portability and deterministic regeneration, not final archive or release acceptance",
+  "source_zip_sha256": "2a3e935b946176ab3c041d51244d675e37615dd6a5191242903229266e922be0",
+  "source_zip_bytes": 14434553,
+  "shipped_files": 3977,
+  "toolchain_setup": "Existing authorized official ARM/libmGBA sysroot linked to clean extraction; ZIP executable modes restored",
+  "commands": [
+    "make -j4",
+    "./tools/build_mgba_bridge.sh",
+    "make test-tools",
+    "make assets",
+    "make -j4"
+  ],
+  "all_exit_codes": 0,
+  "generated_shipped_files_changed": [],
+  "all_shipped_file_hashes_unchanged": true,
+  "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+  "runtime_source_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "logs": {
+    "bridge-setup.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "bridge-smoke.log": {
+      "sha256": "160b72e9b777dda64511aa99a01c3f98f3ea57bd28c5edca5e8ac2d2e351faeb",
+      "bytes": 113
+    },
+    "regenerate.log": {
+      "sha256": "e3b3f0cf4454aeb9e354242b5d180130b10cff3655ab7bfabaab5c3621bd69f4",
+      "bytes": 4086
+    },
+    "regenerated-build.log": {
+      "sha256": "b40665f125738555ea3c4ba6e9df995271365362b51a513c246707ac4f47eb2a",
+      "bytes": 12768
+    }
+  },
+  "limitation": "Final documentation/evidence and native runner are still being completed; final ZIP needs its own receipt."
+}

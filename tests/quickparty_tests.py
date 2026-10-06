@@ -635,7 +635,9 @@ class QuickPartyRun(EvolutionRun):
         self.check(bytes(self.roster()) == bytes(roster),
                    'declining reordered evolution preserves selection, party and all creature data')
         self.tap('SELECT')
+        self.wait_evolution()
         self.tap('A')
+        self.wait_evolution(8)
         self.check(self.get('game_state') == 8, 'explicit confirmation evolves the reordered selected instance')
         self.step(100)
         self.check(self.get('game_state') == PAUSE, 'reordered evolution animation and save return to journal')

@@ -1,0 +1,272 @@
+{
+  "scope": "Synthetic host state and input-edge integration; real production functions with entry instrumentation",
+  "native_controller_gameplay": false,
+  "native_hardware_timing": false,
+  "emulator_ram_injection": false,
+  "dma_emulated": false,
+  "compiler": "cc",
+  "checks": [
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 38,
+      "already_lit": false,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 38,
+      "already_lit": true,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 39,
+      "already_lit": false,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 39,
+      "already_lit": true,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "simultaneous_input_precedence",
+      "passed": true,
+      "buttons": 9,
+      "game_state": 3
+    },
+    {
+      "name": "simultaneous_input_precedence",
+      "passed": true,
+      "buttons": 513,
+      "game_state": 1
+    },
+    {
+      "name": "simultaneous_input_precedence",
+      "passed": true,
+      "buttons": 5,
+      "game_state": 1
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "reset",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_room",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_campaign_room",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_campaign_spawn",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_checkpoint",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "invalid_roster",
+      "anchor_calls": 1
+    },
+    {
+      "name": "wrong_mode_prepare_cancels_without_validation",
+      "passed": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 0,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 50,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 3000,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 6144,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "start_game_cancels_pending",
+      "passed": true,
+      "resume": 0,
+      "room": 0
+    },
+    {
+      "name": "start_game_cancels_pending",
+      "passed": true,
+      "resume": 1,
+      "room": 39
+    },
+    {
+      "name": "synthetic_pre_freeze_death_cancels_pending",
+      "passed": true
+    },
+    {
+      "name": "duplicate_queue_calls_do_not_reheal_or_revalidate",
+      "passed": true
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 0
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 1
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 2
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 3
+    },
+    {
+      "name": "large_roster_synthetic_regression",
+      "passed": true,
+      "fixture": "tests/fixtures/v5-revision5/magma-all65-town.sav",
+      "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+      "actual_input_individuals": 34,
+      "actual_input_histories": 65,
+      "generated_test_fixture": true,
+      "player_save": false,
+      "native_claim": false
+    }
+  ],
+  "source_sha256": {
+    "src/game.c": "13461969d9f7d3e4e8fe14dcecf6e0a330143b7a545188e5f843a0fa00c682fb",
+    "src/assets.c": "c08fa97049f25066e15733391694a1fb055ea8db30b620cf918337cb64f010f7",
+    "src/ui.c": "3668447362364dba8fdeed7b33e42155b4bbe77a0c6cb6f7d92a1fecc5f80845",
+    "src/world.c": "6cb14e0dfa9e6550348235e2cdf66fc1c4c0b2901d3ff7323f27c5ae57a6005f",
+    "src/campaign_art.c": "95110c551b0bab604eedbabbf212ab3597b8727d0cb92d83883e3a291ca18e8b",
+    "src/campaign_rules.c": "a25b70e9971e346ec56f1596f76ef3e101d144441087f8ec3b4948b8e4fb326f",
+    "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "src/creatures.c": "b6d892f4b0f5969101b35b541aa07a8e923ad41be593a6f398c89363a6d56175",
+    "src/creature_data.c": "743333870d4436af76a662b0761de36df0c28ee831761b7d5ff1983babedef49",
+    "src/save5.c": "a637429f7e016b3d108b2c526917ab58768fc996a99b35355270114ad27237b1",
+    "src/progression.c": "541ade7e1fafcf976eac13193aa00f782c64b1acf3d5bbb3cc1a32e6e6f81213",
+    "src/evolution_art.c": "e67c9fc76607d478f5e77c4a19004df35008a80cc0660f30685c3b350ab3620e",
+    "src/advanced_powers.c": "3d28a15830aaa05a0fcc764cc30c91bdc3ef3e869ff6a0c758d119e2e57b7bad",
+    "src/trials.c": "9a4803b1517916e6105fddc340b8983d810fc4521006fc3c1bf7141a0067552f",
+    "src/trial_art.c": "676fee2272fbd0aacd68934fdbaa2dbafc062ea77fd5a2207a91c7575cbcad52",
+    "src/quickparty.c": "f0cbd102ae4ce9c3046a31a5837da655c5a4cc996630066639b504612d1238bb",
+    "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "src/equipment_data.c": "d28c475fb0142878182c13d75d4b117a968f5e237dce0821b98d7ae264e001d6",
+    "src/combat_rules.c": "443b81d059efbe3c892f2e824c73f4c8ee84716dd8d9494caa6ae03664eabe69",
+    "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
+    "src/gear_runtime.c": "b3f5d10f760fa2ca9594afd9c6bd1e4f8c694ce8ed7272b54ee219416b8c025a",
+    "src/gear_menu.c": "29eafb0032a8f45808582123470dba82ea943073c358b393ce655374a97bfeff",
+    "src/regional_quests.c": "35afcdef81f50a7db2ff35a4272333d3569709a9c220dc249b1acbfc0f6ab055",
+    "src/regional_creature_art.c": "10f8c830e15457452546013cb099c497369e74303ab5ecd512c79db041f89b38",
+    "src/regional_powers.c": "598ab1c413064a7489482e25bfbc204955cf4390170f937c0d96e24394f55766",
+    "src/region_art.c": "04e6db67b25143c4147ff93bb9f2c83b8da9605e824425854bf6b23c7fcd8d67",
+    "src/region_game.c": "47419a64acbfd6e165fd983228a160266b4fe35d1a0dba248d52fe9fe7c72e6f",
+    "src/northern_creature_art.c": "aafc9c0641a9cdbce88653274cf79148343b9423d721507db265a57bcefea5ff",
+    "src/northern_powers.c": "9b7ce7e202d3c33a923dec456fe65e505f4801b5d4f44f5d7bdcba95539244b3",
+    "src/northern_power_art.c": "fadac439537dcba908a7a4cd36e58f8fce1ee453a22ebb37737c95f29a4dedc3",
+    "src/southern_powers.c": "fb2446f2eaa5a36970ae91368d644cd83f8ba1b514199af14b8f6410deaa3115",
+    "src/southern_power_art.c": "9c081f09be00eb8c1bcd07ecd8e824c32f99a0ccb1d3e72a555c87a8399148b4",
+    "src/southern_creature_art.c": "0cb98b42909bd23df8442aec196ff6a03d1ba183876b2ae0d1060174d0f08f5f",
+    "src/south_art.c": "128227ed6483e9268269fdd57d3da29a047d95638ba6f40d2757f94fb087e26e",
+    "src/south_game.c": "e5bfe471e0eebf0497f567808d179d2c4fd90c47d0bf3d9c8a63b68a286fdb70",
+    "src/southern_quests.c": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+    "src/progression_events.c": "0ad9879aa0de986c5119efb910561ff1f412a7f89fb3d7555fab27e6a0d5af98",
+    "src/north_art.c": "5229e26b21c13655d22591f20696a38202cad15a8be8e229dca8969651b70d30",
+    "src/north_game.c": "4d8d7842c8008210bb988e1a573a31001c9a7c5068e1094e70bfaa8ed1a20c07",
+    "src/northern_quests.c": "16aabbaf8ca9fa1ba269a1923ac724d267c2d5f2be62d7b6ba1b9c1ea5c3d6f5",
+    "src/magma_game.c": "960a861bdf86854ed33ae336d5cd3a94da30b20738eebe278992118ac051da3f",
+    "src/magma_art.c": "75131e88853fe84ca0b7f6b08d5e8d5510761717c8879b4277c34ea15d2573b7",
+    "src/magma_quests.c": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+    "src/magma_creature_art.c": "9cb34e239c6d0d4d23ae0bdbd1c379722c9d5ec049b9743ab40208a9cb38b78f",
+    "src/magma_powers.c": "65764bcc3c056e6b55a8b69559637109dd47927e76a38e78e677603d0e3ca3a5",
+    "src/magma_power_art.c": "95b2e3e9fde117101e207b5e137b07525961b239242ad3327f565178079454d6",
+    "src/underwater_game.c": "b12c8c3b9e625758bf84b8f8ee04a00dedf7079e0f7e02109c6c0f62bf9cf599",
+    "src/underwater_quests.c": "2fcfa62e084d7116e3f14eaa0734d90d0f62283b0994dd68cafb5f29427f048e",
+    "src/underwater_art.c": "287f66d253a3d4d76cc119295bd9c63fe080ae1d5cbf0d78652b20f7f85bfd74",
+    "src/underwater_powers.c": "e2ec1a0adcb188fe1e69c730d7bd02f17d22eed54484344dcf65e73792bfacd0",
+    "src/underwater_power_art.c": "f59c74c5057eca8e8ec27bf7dc3f1d76f6473ed673ed5f58a42c67b2897b57dd",
+    "src/underwater_creature_art.c": "3cbb57f64057d1fbeb03f8ea6f6f7a4b74c7169c51a6edf69bf63b2f7141a613"
+  },
+  "synthetic_mapping": {
+    "map_fixed_noreplace": true,
+    "ranges": 4,
+    "bytes_per_range": 131072,
+    "overwritten_mappings": false
+  },
+  "passed": true
+}

@@ -1,0 +1,19 @@
+{
+  "candidate": "K",
+  "runtime_files": 1163,
+  "runtime_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+  "observer_sha256": {
+    "tests/underwater_engine_review/run_probe.py": "f299cd6efe59ec9b45a08179862545ba09d38a7e2ef4b355eb8d475f815bda1e",
+    "tests/underwater_engine_review/test_bounded_magma_return.py": "44321bd65b85b35d31b04c9a7b3895d040db7d0b6d90d424a61b78dbe5fe142c",
+    "tests/underwater_engine_review/test_bounded_southern_rest.py": "1e159720c1043c9e4e943dfa39ea8d818145b5172713ca5112f22827c0befa0b",
+    "tests/underwater_engine_review/test_engine_lifecycle.py": "3d2552a5053b17875db9b3f418b82d97c3b493e3b1269ed1d328312b64025573",
+    "tests/underwater_engine_review/test_legacy_deferred_anchor_current.py": "aeb455b079970a762872651df108d8b4f59c51fdf0a8f8012a2034643d48e155",
+    "tests/underwater_engine_review/test_legacy_deferred_anchor_linked.py": "860006fe19bee8488db1440f4bac183e103a7726d13e13338e53a89cf893eb02",
+    "tests/underwater_engine_review/engine_probe.c": "eac3a3d9a8a0a9face7e9896d289c9abbd1c2b5201ccc0f282a10bebdb18fa5a",
+    "tests/underwater_engine_review/engine_probe_current.c": "3544eb813975cc962f5008867e9f4ccd8edf6c4e93598bc60e976f983a40d1af",
+    "tools/run_deferred_anchor_probe.py": "82599541be05b7bddb78e8a457c2b26f638413955c2c9c98941bda2e5adf9875"
+  },
+  "all_frozen_sources_checked": true
+}

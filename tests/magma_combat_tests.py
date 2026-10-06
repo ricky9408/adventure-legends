@@ -75,7 +75,7 @@ class MagmaCombat(MagmaJourney):
             p=Path(rec[kind+'_path']);assert digest(p)==rec[kind+'_sha256']
             if cross_rom and kind=='state':rec[kind+'_path']=None;continue
             dest=self.out/(self.source_snapshot+suffix);shutil.copyfile(p,dest);rec[kind+'_path']=str(dest)
-        bank=newest_bank(Path(rec['sram_path']).read_bytes());assert int.from_bytes(bank[12:14],'little')==5
+        bank=newest_bank(Path(rec['sram_path']).read_bytes());assert int.from_bytes(bank[12:14],'little')==(5 if cross_rom else 6)
         retained=[(bank[160+i*24],int.from_bytes(bank[168+i*24:172+i*24],'little')) for i in range(160) if bank[161+i*24]&1]
         histories=[i+1 for i in range(128) if bank[112+(i>>3)]&(1<<(i&7))]
         assert [f for f,i in retained]==rec['owned_form_ids'] and histories==rec['obtained_form_ids']

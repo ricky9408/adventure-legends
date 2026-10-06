@@ -92,6 +92,7 @@ dirty=0;
 static COLD void say(int a,int b){persist();
 dialogue(a,b,PLAY);
 }
+#include "south_rest_job.inc"
 static COLD int offer(unsigned q){int r=southern_quest_offer(&adventure_save,q);
 if(r==SOUTH_CHANGED)dirty=1;
 return r!=SOUTH_LOCKED&&r!=SOUTH_INVALID;
@@ -229,11 +230,11 @@ south_game_machine_hp=(unsigned char)(south_game_machine_stage==5?0:144);
 machine_x=88;
 changed();
 }
-COLD void south_game_reset(void){clear_trial();
+COLD void south_game_reset(void){south_game_cancel_rest();clear_trial();
 reset_scene();
 }
 COLD int south_game_enter(unsigned area,unsigned spawn){int r;
-sync();
+south_game_cancel_rest();sync();
 if(!south_game_is_room(area)||spawn>=counts[area-30]||!southern_can_enter(&adventure_save,area))return 0;
 r=southern_visit(&adventure_save,area);
 if(r==SOUTH_INVALID||r==SOUTH_LOCKED)return 0;
@@ -387,9 +388,15 @@ return 1;
 }return 0;
 }
 COLD int south_game_interact(void){unsigned i;
+if(game_state!=PLAY||!south_game_is_room((unsigned)room))return 0;
+/* Rest must enqueue before the ordinary interaction path synchronizes or
+ * mutates any live campaign/checkpoint fields. */
+if((room==30&&close(112,208))||(room==31&&close(80,248))){
+ if(!south_game_request_rest())toast(TX_ST_LOCKED_A);
+ return 1;
+}
 dirty=0;
 sync();
-if(game_state!=PLAY||!south_game_is_room((unsigned)room))return 0;
 if(trial_index==7)for(i=0;i<3;i++)if(trial_near(i)){if(!participant()){toast(TX_ST_TRIAL_SAME);
 return 1;
 }if(trial_revealed&(1u<<i))return trial_mark(i);
@@ -408,13 +415,6 @@ if(face==1&&near(px,py,80,136,18))return door(32,0);
 if(close(240,264)){persist();
 enter_room(22,0);
 game_region_warp(208,224);
-return 1;
-}
-if(close(112,208)){southern_anchor(&adventure_save,30);
-game_health_fill();
-checkpoint_spawn=2;
-dirty=1;
-say(TX_ST_REST_A,TX_ST_REST_B);
 return 1;
 }
 if(npc_close(144,160)){talk(22);
@@ -479,13 +479,6 @@ return 1;
 }else if(room==31){
 if(face==1&&near(px,py,400,65,18))return door(34,0);
 if(face==1&&near(px,py,80,96,18))return door(33,0);
-if(close(80,248)){southern_anchor(&adventure_save,31);
-game_health_fill();
-checkpoint_spawn=2;
-dirty=1;
-say(TX_ST_REST_A,TX_ST_REST_B);
-return 1;
-}
 if(npc_close(352,160)){talk(23);
 return 1;
 }
@@ -640,9 +633,15 @@ return 0;
 }
 COLD int south_game_power(unsigned command){int r;
 (void)command;
+if(game_state!=PLAY||!south_game_is_room((unsigned)room))return 0;
+/* Rest must enqueue before the ordinary interaction path synchronizes or
+ * mutates any live campaign/checkpoint fields. */
+if((room==30&&close(112,208))||(room==31&&close(80,248))){
+ if(!south_game_request_rest())toast(TX_ST_LOCKED_A);
+ return 1;
+}
 dirty=0;
 sync();
-if(game_state!=PLAY||!south_game_is_room((unsigned)room))return 0;
 /* Mandatory tagged targets get priority over optional trial fixtures. */
 if(room==34&&close(112,104)){if(!field(26,112,104))return wrong(TX_ST_WRONG);
 if(!south_puzzle_solved(&south_game_puzzle,34))return wrong(TX_ST_ARRANGE);

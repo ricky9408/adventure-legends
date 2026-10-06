@@ -1,0 +1,35 @@
+{
+  "local_commit": "0a8b05c3e24d02bd350a11c32289fb5686641535",
+  "local_tree": "0d6d8ceab36723479d9b57f908f6f1ae62b78467",
+  "source_files": 2742,
+  "runtime_inputs": 893,
+  "runtime_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "artifacts": {
+    "Adventure-Legends-Emberbond.gba": {
+      "bytes": 7495920,
+      "sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2"
+    },
+    "Adventure-Legends-Emberbond-source.zip": {
+      "bytes": 9339621,
+      "sha256": "a9f201bcefe607842f124c98859b77d454a97596a4058d4da28cdd200650e86c"
+    },
+    "Adventure-Legends-Emberbond-gameplay.mp4": {
+      "bytes": 956230,
+      "sha256": "5858efd00973af636aa6c7775a1d80e4472092c116bcd11876754981aa40593b"
+    },
+    "Adventure-Legends-Emberbond-preview.png": {
+      "bytes": 13016,
+      "sha256": "bb5f12bbf93dfe68617d86f7b7ce212351f924ff1c4cf508c67717652cb5de4d"
+    }
+  },
+  "verification": {
+    "new_native_overlapping_checks": 50149,
+    "legacy_aggregate_exit_code": 0,
+    "live_magma_host_exit_code": 0,
+    "final_archive_build_exact": true,
+    "final_archive_bridge_smoke_pass": true,
+    "extracted_host_aggregate_setup_failure_recorded": true,
+    "unchanged_standalone_probe_passes": 27
+  },
+  "scope": "Delivered Magma revision5 source and exact ROM; immutable historical authority for revision6 implementation"
+}

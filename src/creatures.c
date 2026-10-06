@@ -125,6 +125,30 @@ static const CreatureFormPolicy form_policy[CREATURE_ENABLED_COUNT] = {
     {98, 37, 2, 64, 97, 2, 0, 0, 1, 1, 0x00200000u},
     {99, 38, 1, 65, 99, 1, 34, 1, 0, 1, 0x00010000u},
     {100, 38, 2, 66, 100, 2, 0, 0, 0, 1, 0x00010000u},
+    {49, 17, 1, 67, 102, 1, 35, 2, 0, 3, 0x04000000u},
+    {50, 17, 2, 68, 103, 2, 0, 0, 0, 3, 0x04000000u},
+    {51, 17, 2, 69, 105, 2, 0, 0, 1, 3, 0x04000000u},
+    {52, 18, 1, 70, 107, 1, 37, 2, 1, 3, 0x08000000u},
+    {53, 18, 2, 71, 108, 2, 0, 0, 0, 3, 0x08000000u},
+    {54, 18, 2, 72, 110, 2, 0, 0, 1, 3, 0x08000000u},
+    {55, 19, 1, 73, 112, 1, 39, 2, 1, 3, 0x10000800u},
+    {56, 19, 2, 74, 113, 2, 0, 0, 1, 3, 0x10000800u},
+    {57, 19, 2, 75, 115, 2, 0, 0, 0, 3, 0x10000800u},
+    {58, 20, 1, 76, 117, 1, 41, 2, 0, 3, 0x21000004u},
+    {59, 20, 2, 77, 118, 2, 0, 0, 0, 3, 0x21000004u},
+    {60, 20, 2, 78, 120, 2, 0, 0, 1, 3, 0x21000004u},
+    {61, 21, 1, 79, 122, 1, 43, 2, 1, 3, 0x00401000u},
+    {62, 21, 2, 80, 123, 2, 0, 0, 0, 3, 0x00401000u},
+    {63, 21, 2, 81, 125, 2, 0, 0, 1, 3, 0x00401000u},
+    {64, 22, 1, 82, 127, 1, 45, 2, 0, 3, 0x10000400u},
+    {65, 22, 2, 83, 128, 2, 0, 0, 0, 3, 0x10000400u},
+    {66, 22, 2, 84, 130, 2, 0, 0, 1, 3, 0x10000400u},
+    {67, 23, 1, 85, 132, 1, 47, 2, 1, 3, 0x01010000u},
+    {68, 23, 2, 86, 133, 2, 0, 0, 1, 3, 0x01010000u},
+    {69, 23, 2, 87, 135, 2, 0, 0, 0, 3, 0x01010000u},
+    {70, 24, 1, 88, 137, 1, 49, 2, 0, 3, 0x06000000u},
+    {71, 24, 2, 89, 138, 2, 0, 0, 0, 3, 0x06000000u},
+    {72, 24, 2, 90, 140, 2, 0, 0, 1, 3, 0x06000000u},
 };
 /* Sparse locked family IDs are keys, never compact-array indexes. Trial is
  * the current family-qualified u16 UNION, never a legacy scalar or family shift.
@@ -163,6 +187,14 @@ static const CreatureFamilyPolicy family_policy[] = {
     {36, 2, 0, 1, 0x00040000u, 0},
     {37, 0, 1, 1, 0x00200000u, 0},
     {38, 4, 0, 1, 0x00010000u, 0},
+    {17, 4, 0, 3, 0x04000000u, 0},
+    {18, 2, 1, 3, 0x08000000u, 0},
+    {19, 0, 1, 3, 0x10000800u, 0},
+    {20, 3, 0, 3, 0x21000004u, 0},
+    {21, 1, 1, 3, 0x00401000u, 0},
+    {22, 0, 0, 3, 0x10000400u, 0},
+    {23, 3, 1, 3, 0x01010000u, 0},
+    {24, 4, 0, 3, 0x06000000u, 0},
 };
 static const CreatureAbilityPolicy ability_policy[CREATURE_ABILITY_COUNT] = {
     {1, 75},
@@ -230,6 +262,30 @@ static const CreatureAbilityPolicy ability_policy[CREATURE_ABILITY_COUNT] = {
     {64, 120},
     {65, 90},
     {66, 120},
+    {67, 90},
+    {68, 120},
+    {69, 120},
+    {70, 90},
+    {71, 120},
+    {72, 120},
+    {73, 90},
+    {74, 120},
+    {75, 120},
+    {76, 90},
+    {77, 180},
+    {78, 120},
+    {79, 90},
+    {80, 120},
+    {81, 120},
+    {82, 90},
+    {83, 120},
+    {84, 120},
+    {85, 90},
+    {86, 120},
+    {87, 120},
+    {88, 90},
+    {89, 120},
+    {90, 120},
 };
 /* Reviewed sparse key maps store row+1, never an identity. Lookups check
  * full-width bounds and mapped row identity; catalog validation checks both
@@ -238,8 +294,8 @@ static const CreatureU8 form_policy_index[129] = {
     0, 1, 2, 0, 3, 4, 0, 5, 6, 0, 7, 8, 0, 9, 10, 0,
     11, 0, 0, 12, 13, 0, 14, 15, 0, 22, 23, 0, 24, 25, 0, 42,
     43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
-    59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 18, 19, 20, 21, 26,
+    59, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+    81, 82, 83, 84, 85, 86, 87, 88, 89, 16, 17, 18, 19, 20, 21, 26,
     27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 60,
     61, 62, 63, 64, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -247,7 +303,7 @@ static const CreatureU8 form_policy_index[129] = {
 };
 static const CreatureU8 family_policy_index[61] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 22, 23, 24, 25, 26,
-    27, 0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 14, 15, 16, 17,
+    27, 31, 32, 33, 34, 35, 36, 37, 38, 9, 10, 11, 14, 15, 16, 17,
     18, 19, 20, 21, 28, 29, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
@@ -256,8 +312,8 @@ static const CreatureU8 ability_policy_index[256] = {
     15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
     31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
     47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-    63, 64, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78,
+    79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -269,6 +325,7 @@ static const CreatureU8 ability_policy_index[256] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
+
 static const CreatureFormPolicy *form_policy_for_id(unsigned id) {
     unsigned row;
     if (!id || id > 128) return 0;
@@ -467,9 +524,16 @@ static const CreatureU8 revision_policy_index[4][129] = {
     },
 };
 /* END GENERATED IMMUTABLE CREATURE HISTORY */
+#include "creature_history_v5.inc"
 static const CreatureRevisionPolicy *revision_policy_for_id(unsigned id, unsigned revision) {
     unsigned row;
-    if (!id || id > 128 || revision < 1 || revision > 4) return 0;
+    if (!id || id > 128 || revision < 1 || revision > 5) return 0;
+    if (revision == 5) {
+        row = revision5_policy_index[id];
+        if (!row || row > sizeof(revision5_policy) / sizeof(revision5_policy[0]) ||
+            revision5_policy[row - 1].id != id) return 0;
+        return &revision5_policy[row - 1];
+    }
     row = revision_policy_index[revision - 1][id];
     if (!row || row > sizeof(revision_policy) / sizeof(revision_policy[0]) ||
         revision_policy[row - 1].id != id ||
@@ -494,9 +558,11 @@ int creatures_command_learned_revision(unsigned id, unsigned level, unsigned abi
     if (revision == CREATURE_CONTENT_REVISION) return creatures_command_learned(id, level, ability);
     if (!p || level < 1 || level > 50 ||
         !ability || ability > 255 ||
-        p->learn_offset + p->learn_count > sizeof(revision_learnsets) / sizeof(revision_learnsets[0])) return 0;
+        p->learn_offset + p->learn_count > (revision == 5 ?
+            sizeof(revision5_learnsets) / sizeof(revision5_learnsets[0]) :
+            sizeof(revision_learnsets) / sizeof(revision_learnsets[0]))) return 0;
     for (i = 0; i < p->learn_count; ++i) {
-        const CreatureLearn *l = &revision_learnsets[p->learn_offset + i];
+        const CreatureLearn *l = &(revision == 5 ? revision5_learnsets : revision_learnsets)[p->learn_offset + i];
         if (l->ability_id == ability && l->level <= level) return 1;
     }
     return 0;
@@ -556,6 +622,22 @@ static const CreatureTrialPolicy trial_policy[] = {
     {36, 1, 1, 0, 5},
     {37, 1, 1, 0, 5},
     {38, 1, 1, 0, 5},
+    {17, 1, 1, 0, 6},
+    {17, 2, 2, 0, 6},
+    {18, 1, 1, 0, 6},
+    {18, 2, 2, 0, 6},
+    {19, 1, 1, 0, 6},
+    {19, 2, 2, 0, 6},
+    {20, 1, 1, 0, 6},
+    {20, 2, 2, 0, 6},
+    {21, 1, 1, 0, 6},
+    {21, 2, 2, 0, 6},
+    {22, 1, 1, 0, 6},
+    {22, 2, 2, 0, 6},
+    {23, 1, 1, 0, 6},
+    {23, 2, 2, 0, 6},
+    {24, 1, 1, 0, 6},
+    {24, 2, 2, 0, 6},
 };
 static const CreatureTrialPolicy *trial_policy_for_key(unsigned family, unsigned key) {
     unsigned i;
@@ -661,6 +743,10 @@ static const CreatureCapabilityPolicy capability_policy[] = {
     {24, FIELD_FLOAT_LOAD},
     {25, FIELD_ALIGN_RAIL},
     {26, FIELD_REFRACT_BEAM},
+    {27, FIELD_ECHO_OUTLINE},
+    {28, FIELD_SHIFT_BALLAST},
+    {29, FIELD_INSCRIBE_TRACE},
+    {30, FIELD_UNFOLD_SCREEN},
 };
 /* Sentinel only: no extended/unreviewed action is enabled in revision 4. */
 static const CreatureCapabilityMembership capability_memberships[] = {
@@ -801,6 +887,22 @@ int creatures_catalog_validate(void) {
         {95, 96, 26, 45, 1, 256},
         {97, 98, 26, 45, 1, 256},
         {99, 100, 26, 45, 1, 256},
+        {49, 50, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {49, 51, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {52, 53, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {52, 54, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {55, 56, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {55, 57, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {58, 59, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {58, 60, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {61, 62, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {61, 63, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {64, 65, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {64, 66, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {67, 68, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {67, 69, 28, 45, 2, CREATURE_UNDERWATER_READY},
+        {70, 71, 28, 45, 1, CREATURE_UNDERWATER_READY},
+        {70, 72, 28, 45, 2, CREATURE_UNDERWATER_READY},
     };
     static const FormId legacy_ids[CREATURE_LEGACY_COUNT] = {1,4,7,10};
     unsigned i, j, k, trials = 0;
@@ -813,6 +915,7 @@ int creatures_catalog_validate(void) {
     CHECK_KEY_INDEX(form_policy_index, CREATURE_FORM_CAPACITY, form_policy, id);
     CHECK_KEY_INDEX(family_policy_index, CREATURE_FAMILY_CAPACITY, family_policy, id);
     CHECK_KEY_INDEX(ability_policy_index, 255, ability_policy, id);
+    CHECK_KEY_INDEX(revision5_policy_index, CREATURE_FORM_CAPACITY, revision5_policy, id);
     for (k = 0; k < 4; ++k) {
         for (i = 0; i <= CREATURE_FORM_CAPACITY; ++i) {
             j = revision_policy_index[k][i];
@@ -962,7 +1065,7 @@ int creatures_catalog_validate(void) {
     }
     return 1;
 }
-/* Persistent scalar rules are frozen across revisions1-4. No current form,
+/* Persistent scalar rules are frozen across revisions1-5. No current form,
  * ability, incoming edge, nickname table or legacy-story map is consulted. */
 CREATURE_INLINE int instance_shape_valid(const CreatureInstance *c, unsigned legacy) {
     CreatureU32 n;
@@ -1004,6 +1107,9 @@ int creatures_instance_validate(const CreatureInstance *c) {
     if (f->tier > 1) {
         const CreatureEvolution *e = incoming_evolution(c->form_id);
         if (!e || c->level < e->min_level) return 0;
+        /* New branch receipts never tighten a released family's acceptance. */
+        if (f->family >= 17 && f->family <= 24 &&
+            (c->bond < e->min_bond || (c->trial_flags & e->trial_flag) != e->trial_flag)) return 0;
     }
     return 1;
 }
@@ -1011,12 +1117,19 @@ int creatures_instance_validate_revision(const CreatureInstance *c, unsigned rev
     const CreatureRevisionPolicy *p;
     unsigned i;
     if (revision == CREATURE_CONTENT_REVISION) return creatures_instance_validate(c);
-    if (!c || revision < 1 || revision > 4) return 0;
+    if (!c || revision < 1 || revision > 5) return 0;
     if (!c->form_id) return instance_is_zero(c);
     p = revision_policy_for_id(c->form_id, revision);
     if (!p || !instance_shape_valid(c, p->family >= 1 && p->family <= 4 ? p->family - 1u : 255u) ||
         c->polarity != p->polarity || c->level < p->min_level ||
         (c->trial_flags & ~p->trial_mask)) return 0;
+    if (revision == 5) {
+        for (i = 0; i < sizeof(revision5_trial_dependencies) / sizeof(revision5_trial_dependencies[0]); ++i) {
+            const CreatureRevisionTrialDependency *d = &revision5_trial_dependencies[i];
+            if (p->family == d->family && (c->trial_flags & d->mask) &&
+                (c->trial_flags & d->prerequisite) != d->prerequisite) return 0;
+        }
+    }
     for (i = 0; i < 2; ++i)
         if (c->equipped[i] && !creatures_command_learned_revision(c->form_id, c->level, c->equipped[i], revision)) return 0;
     return 1;
@@ -1039,7 +1152,7 @@ static int party_validate(const CreatureRoster *r, int validate_instances, unsig
         if (revision ? !creatures_form_allowed_revision(c->form_id, revision) : !f) return 0;
         for (j = 0; j < i; ++j) if (slot == r->party[j]) return 0;
         ++members;
-        legendary += f && f->rarity != 0; /* revisions1-4 have no legendary */
+        legendary += f && f->rarity != 0; /* revisions1-5 have no legendary */
     }
     if (legendary > 1) return 0;
     if (!members) return r->selected_party == CREATURE_EMPTY_SLOT;
@@ -1086,7 +1199,7 @@ CREATURE_INLINE int roster_validate(const CreatureRoster *r, unsigned revision) 
 int creatures_roster_validate(const CreatureRoster *r) { return roster_validate(r, 0); }
 int creatures_roster_validate_revision(const CreatureRoster *r, unsigned revision) {
     if (revision == CREATURE_CONTENT_REVISION) return creatures_roster_validate(r);
-    return revision >= 1 && revision <= 4 && roster_validate(r, revision);
+    return revision >= 1 && revision <= 5 && roster_validate(r, revision);
 }
 void creatures_roster_init(CreatureRoster *r) {
     unsigned i;
@@ -1716,3 +1829,5 @@ unsigned creatures_defer_evolution(const CreatureInstance *c) {
     if (!c || !c->form_id || !creatures_instance_validate(c)) return CREATURE_EVOLVE_INVALID;
     return CREATURE_EVOLVE_DEFERRED;
 }
+
+#include "creature_admission_job.inc"

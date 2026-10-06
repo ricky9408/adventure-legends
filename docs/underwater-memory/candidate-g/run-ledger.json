@@ -1,0 +1,50 @@
+[
+  {
+    "source_report": "build/underwater-memory-observe34-g/underwater-journey.json",
+    "source_report_sha256": "3474f876247044b1d0dee8047c110b017b841abd226590588514e7de2889b147",
+    "functional_assertions": 4,
+    "failures": [],
+    "hardware_frames": 202,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      34
+    ]
+  },
+  {
+    "source_report": "build/underwater-memory-observe50-g-town/underwater-journey.json",
+    "source_report_sha256": "a9b2709b44b52e0e4b6a411c4aea65e364dce47ba1c9331adc2e9fe882582ce9",
+    "functional_assertions": 54,
+    "failures": [],
+    "hardware_frames": 1486,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      50
+    ]
+  },
+  {
+    "source_report": "build/underwater-memory-observe50-g-evolve/underwater-journey.json",
+    "source_report_sha256": "9b60af0be39cd639539ff7b0a51d365ca9f42f30a76b9bff08595113998f8c12",
+    "functional_assertions": 202,
+    "failures": [],
+    "hardware_frames": 2768,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      50
+    ]
+  },
+  {
+    "source_report": "build/underwater-memory-observe50-g-all16/underwater-journey.json",
+    "source_report_sha256": "4b4c3d30796eb545fd88b59794c56e26730db8a95152ffb8d834f6c3baa40bf7",
+    "functional_assertions": 182,
+    "failures": [],
+    "hardware_frames": 7549,
+    "observed_maximum_overwritten_extent_bytes": 948,
+    "all_bottom_64_guards_intact": true,
+    "native_roster_counts": [
+      50
+    ]
+  }
+]

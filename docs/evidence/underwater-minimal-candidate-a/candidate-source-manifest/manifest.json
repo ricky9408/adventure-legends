@@ -1,0 +1,33 @@
+{
+  "source_filename": "source-hashes.json",
+  "source_sha256": "f75b5b9924bda3e9118e64f80f12f5905d1d72cef166980c3d8a94d407484580",
+  "source_bytes": 120164,
+  "encoding": "UTF-8 JSON bytes, concatenate in listed order without separators",
+  "parts": [
+    {
+      "path": "part_000.txt",
+      "bytes": 30000,
+      "sha256": "c42898b42579ac08b0669f050e51e451cb64dd2c10ecce5c37c31f50c1dd1f7a"
+    },
+    {
+      "path": "part_001.txt",
+      "bytes": 30000,
+      "sha256": "1aeea826ca8ccc225533510fa96659a45c5b207ae1af8290aba707f756a62884"
+    },
+    {
+      "path": "part_002.txt",
+      "bytes": 30000,
+      "sha256": "c0dcb563db8bc5f72ab23e72c8109ae2a498bec749ce7317557703ed118bf8fa"
+    },
+    {
+      "path": "part_003.txt",
+      "bytes": 30000,
+      "sha256": "de06dad142bbe1625cfbc3afae79c0153a897cba406b88809c10ccf9a4d29a06"
+    },
+    {
+      "path": "part_004.txt",
+      "bytes": 164,
+      "sha256": "e271e85d42715d7e965224da1b20484324fd1b3786a1a91f21d43233475778d7"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+--- before/src/save5.c
++++ after/src/save5.c
+@@ -195,11 +195,13 @@
+     if (s->room >= 4 && s->room <= 8 && !(chapter & SAVE4_GROVE_CLEAR)) return 0;
+     if (s->room >= 9 && s->room <= 13 && !(chapter & SAVE4_SKY_CLEAR)) return 0;
+     if (s->room >= 46) {
+-        return (chapter & SAVE4_SKY_CLEAR) && (s->room<=47?s->spawn<=2:s->spawn<=1);
++        return (chapter & SAVE4_SKY_CLEAR) &&
++            (save5_policy6_rooms[s->room-46].spawns & (1u<<s->spawn));
+     }
+     if (s->room >= 38) {
+         /* assets/magma_region/validation.json verifies radius-five paths. */
+-        return (chapter & SAVE4_SKY_CLEAR) && (s->room<=39?s->spawn<=3:s->spawn==0);
++        return (chapter & SAVE4_SKY_CLEAR) &&
++            (s->room==38?s->spawn<=4:s->room==39?s->spawn<=3:s->spawn==0);
+     }
+     if (s->room >= 30) {
+         if (!(chapter & SAVE4_SKY_CLEAR)) return 0;
+@@ -437,6 +439,7 @@
+         return (q->region_flags[4]&(1u<<(room-46)))!=0;
+     }
+     if (room >= 38) {
++        if(room==38 && c->spawn==4 && !(q->region_flags[4]&1u))return 0;
+         if(c->spawn==3 && room<=39 && !(q->anchors[3]&(1u<<(room-38))))return 0;
+         return (q->region_flags[3] & (1u << (room-38))) != 0;
+     }
+@@ -651,7 +654,8 @@
+ static const Save5HistoryQuest *history_quest(unsigned id) {
+     return id<30?&save5_history_quests[id]:id<38?&save5_policy5_quests[id-30]:&save5_policy6_quests[id-38];
+ }
+-static const Save5HistoryRoom *history_room(unsigned id) {
++static const Save5HistoryRoom *history_room(unsigned id,unsigned revision) {
++    if(revision==6 && id==38)return &save5_policy6_magma_return;
+     return id<38?&save5_history_rooms[id]:id<46?&save5_policy5_rooms[id-38]:&save5_policy6_rooms[id-46];
+ }
+ static int history_claimed(const Save5Quests *q, unsigned quest_plus_one) {
+@@ -663,7 +667,7 @@
+     unsigned i, chapter, seen, spirits;
+     Save4U32 flags;
+     if (!c || !v || c->room > v->last_room || c->spawn > 5) return 0;
+-    room = history_room(c->room);
++    room = history_room(c->room,revision);
+     chapter = c->chapter_flags; seen = c->story_seen; flags = c->room_flags;
+     if (!room->since || room->since > revision || !(room->spawns & (1u << c->spawn)) ||
+         c->bridge > 1 || c->torches > 3 || c->relic > 1 || c->camp > 1 ||
+@@ -733,7 +737,7 @@
+     const Save5HistoryRoom *room;
+     unsigned i, j;
+     if (!v || c->room > v->last_room) return 0;
+-    room = history_room(c->room);
++    room = history_room(c->room,revision);
+     for (i = 0; i < 3; ++i) if (q->region_flags[i]) {
+         const Save4U8 *p = save5_history_regions[i];
+         if (!has_all(c->chapter_flags, p[1])) return 0;
+@@ -769,6 +773,7 @@
+     }
+     if(revision>=5 && !magma_quest_campaign_validate(q))return 0;
+     if(revision>=6 && !underwater_quest_campaign_validate(q))return 0;
++    if(revision==6 && c->room==38 && c->spawn==4 && !(q->region_flags[4]&1u))return 0;
+     if (room->region != 255) {
+         if (!(q->region_flags[room->region] & room->visit) || !history_claimed(q, room->quest)) return 0;
+         if (c->spawn == (room->since==5?3u:2u) && room->anchor && !(q->anchors[room->region] & room->anchor)) return 0;
+--- before/src/save5_underwater_policy.h
++++ after/src/save5_underwater_policy.h
+@@ -18,11 +18,15 @@
+  {54,2,0,2,44},{68,3,0,2,45},{86,4,0,2,45}
+ };
+ static const Save5HistoryRoom save5_policy6_rooms[8] = {
+- {6,7,2,4,1,1,33,0,0},{6,7,2,4,2,2,33,0,0},
+- {6,3,2,4,4,0,33,0,0},{6,3,2,4,8,0,33,0,0},
+- {6,3,2,4,16,0,33,0,0},{6,3,2,4,32,0,33,0,0},
+- {6,3,2,4,64,0,33,0,0},{6,3,2,4,128,0,33,0,0}
++ {6,15,2,4,1,1,33,0,0},{6,7,2,4,2,2,33,0,0},
++ {6,7,2,4,4,0,33,0,0},{6,3,2,4,8,0,33,0,0},
++ {6,3,2,4,16,0,33,0,0},{6,7,2,4,32,0,33,0,0},
++ {6,7,2,4,64,0,33,0,0},{6,3,2,4,128,0,33,0,0}
+ };
++/* Current-r6 reciprocal shell-lift landing only. The inherited since5 keeps
++ * old spawn3 anchor semantics; spawn4 additionally needs the Underwater visit.
++ * Immutable r1..5 still resolve their exact original room38 row. */
++static const Save5HistoryRoom save5_policy6_magma_return = {5,31,2,3,1,1,25,0,0};
+ /* Per-record evidence, not a roster clone. Counts saturate at2. A branch
+  * receipt needs a retained terminal and two globally distinct identities. */
+ typedef struct UnderwaterEvidence {

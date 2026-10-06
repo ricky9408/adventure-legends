@@ -138,7 +138,7 @@ class CombatReview(RegionJourney):
     def wood_reflection(self):
         self.restore('candidate-town-source');self.owned_select(7);self.open_tab(3)
         self.tap('SELECT',2,3);self.check(self.get('game_state')==CONFIRM,'earned Fuuri trial permits explicit evolution confirmation')
-        self.tap('A',2,3);self.settle();self.check(self.selected().form_id==8,'Fuuri evolves through real menu confirmation')
+        self.wait_evolution();self.tap('A',2,3);self.wait_evolution(8);self.settle();self.check(self.selected().form_id==8,'Fuuri evolves through real menu confirmation')
         self.close_menu();self.set_command(7);self.equip_item(1,33);self.enter_basin();self.ready();self.goto(269,128);self.face(1)
         self.snapshot('phase-Wood-controls-Earth-before');before=self.enemies()[4]['hp_q4'];incoming=[]
         for _ in range(250):
@@ -338,7 +338,7 @@ class CombatReview(RegionJourney):
             self.owned_select(base);self.open_tab(3);before=bytes(self.selected())
             self.tap('SELECT',2,3)
             self.check(self.get('game_state')==CONFIRM,f'form{base} opens explicit sanctuary evolution confirmation')
-            self.tap('A',2,3);self.settle()
+            self.wait_evolution();self.tap('A',2,3);self.wait_evolution(8);self.settle()
             self.check(self.selected().form_id==base+1,f'controller confirmation evolves form{base} to{base+1}')
             expected=bytearray(before);expected[0]=base+1
             self.check(bytes(self.selected())==bytes(expected),'evolution retains identity XP bond flags and equipped command bytes')

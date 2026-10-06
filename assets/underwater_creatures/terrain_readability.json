@@ -1,0 +1,728 @@
+{
+  "metric": "Native RGB555 distance >=48; all28 poses per terrain. Visibility heuristic, not emulator/gameplay/performance evidence.",
+  "samples": 3360,
+  "rows": [
+    {
+      "form_id": 49,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.7857,
+      "minimum_distinct_boundary_fraction": 0.8571
+    },
+    {
+      "form_id": 49,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8496,
+      "minimum_distinct_boundary_fraction": 0.8571
+    },
+    {
+      "form_id": 49,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9192,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 49,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 49,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8447,
+      "minimum_distinct_boundary_fraction": 0.8333
+    },
+    {
+      "form_id": 50,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.86,
+      "minimum_distinct_boundary_fraction": 0.8421
+    },
+    {
+      "form_id": 50,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.934,
+      "minimum_distinct_boundary_fraction": 0.9184
+    },
+    {
+      "form_id": 50,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.92,
+      "minimum_distinct_boundary_fraction": 0.9756
+    },
+    {
+      "form_id": 50,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 50,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8077,
+      "minimum_distinct_boundary_fraction": 0.8293
+    },
+    {
+      "form_id": 51,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8333,
+      "minimum_distinct_boundary_fraction": 0.8947
+    },
+    {
+      "form_id": 51,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.875,
+      "minimum_distinct_boundary_fraction": 0.8947
+    },
+    {
+      "form_id": 51,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9273,
+      "minimum_distinct_boundary_fraction": 0.9737
+    },
+    {
+      "form_id": 51,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 51,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8142,
+      "minimum_distinct_boundary_fraction": 0.7209
+    },
+    {
+      "form_id": 52,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.6068,
+      "minimum_distinct_boundary_fraction": 0.6216
+    },
+    {
+      "form_id": 52,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.725,
+      "minimum_distinct_boundary_fraction": 0.6757
+    },
+    {
+      "form_id": 52,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.713,
+      "minimum_distinct_boundary_fraction": 0.9143
+    },
+    {
+      "form_id": 52,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 52,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.6667,
+      "minimum_distinct_boundary_fraction": 0.7436
+    },
+    {
+      "form_id": 53,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.563,
+      "minimum_distinct_boundary_fraction": 0.6098
+    },
+    {
+      "form_id": 53,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.6618,
+      "minimum_distinct_boundary_fraction": 0.6585
+    },
+    {
+      "form_id": 53,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.6842,
+      "minimum_distinct_boundary_fraction": 0.8529
+    },
+    {
+      "form_id": 53,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 53,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.6532,
+      "minimum_distinct_boundary_fraction": 0.6842
+    },
+    {
+      "form_id": 54,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.7287,
+      "minimum_distinct_boundary_fraction": 0.8077
+    },
+    {
+      "form_id": 54,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.7519,
+      "minimum_distinct_boundary_fraction": 0.8654
+    },
+    {
+      "form_id": 54,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8475,
+      "minimum_distinct_boundary_fraction": 0.9423
+    },
+    {
+      "form_id": 54,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 54,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7619,
+      "minimum_distinct_boundary_fraction": 0.7255
+    },
+    {
+      "form_id": 55,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9024,
+      "minimum_distinct_boundary_fraction": 0.9412
+    },
+    {
+      "form_id": 55,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8667,
+      "minimum_distinct_boundary_fraction": 0.8235
+    },
+    {
+      "form_id": 55,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9024,
+      "minimum_distinct_boundary_fraction": 0.9412
+    },
+    {
+      "form_id": 55,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 55,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8171,
+      "minimum_distinct_boundary_fraction": 0.7647
+    },
+    {
+      "form_id": 56,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9158,
+      "minimum_distinct_boundary_fraction": 0.9667
+    },
+    {
+      "form_id": 56,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8878,
+      "minimum_distinct_boundary_fraction": 0.9206
+    },
+    {
+      "form_id": 56,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9053,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 56,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 56,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7526,
+      "minimum_distinct_boundary_fraction": 0.7231
+    },
+    {
+      "form_id": 57,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9175,
+      "minimum_distinct_boundary_fraction": 0.94
+    },
+    {
+      "form_id": 57,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8879,
+      "minimum_distinct_boundary_fraction": 0.8519
+    },
+    {
+      "form_id": 57,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9175,
+      "minimum_distinct_boundary_fraction": 0.94
+    },
+    {
+      "form_id": 57,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 57,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8365,
+      "minimum_distinct_boundary_fraction": 0.8333
+    },
+    {
+      "form_id": 58,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.875,
+      "minimum_distinct_boundary_fraction": 0.8857
+    },
+    {
+      "form_id": 58,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9278,
+      "minimum_distinct_boundary_fraction": 0.8958
+    },
+    {
+      "form_id": 58,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9032,
+      "minimum_distinct_boundary_fraction": 0.9429
+    },
+    {
+      "form_id": 58,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 58,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8,
+      "minimum_distinct_boundary_fraction": 0.7949
+    },
+    {
+      "form_id": 59,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8269,
+      "minimum_distinct_boundary_fraction": 0.8824
+    },
+    {
+      "form_id": 59,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.86,
+      "minimum_distinct_boundary_fraction": 0.9265
+    },
+    {
+      "form_id": 59,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8367,
+      "minimum_distinct_boundary_fraction": 0.9118
+    },
+    {
+      "form_id": 59,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 59,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.6667,
+      "minimum_distinct_boundary_fraction": 0.6912
+    },
+    {
+      "form_id": 60,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8295,
+      "minimum_distinct_boundary_fraction": 0.9322
+    },
+    {
+      "form_id": 60,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8852,
+      "minimum_distinct_boundary_fraction": 0.9365
+    },
+    {
+      "form_id": 60,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8361,
+      "minimum_distinct_boundary_fraction": 0.9661
+    },
+    {
+      "form_id": 60,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 60,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7213,
+      "minimum_distinct_boundary_fraction": 0.6765
+    },
+    {
+      "form_id": 61,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.7108,
+      "minimum_distinct_boundary_fraction": 0.8298
+    },
+    {
+      "form_id": 61,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.7738,
+      "minimum_distinct_boundary_fraction": 0.8913
+    },
+    {
+      "form_id": 61,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8961,
+      "minimum_distinct_boundary_fraction": 0.973
+    },
+    {
+      "form_id": 61,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 61,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7215,
+      "minimum_distinct_boundary_fraction": 0.7391
+    },
+    {
+      "form_id": 62,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8043,
+      "minimum_distinct_boundary_fraction": 0.8475
+    },
+    {
+      "form_id": 62,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8265,
+      "minimum_distinct_boundary_fraction": 0.8833
+    },
+    {
+      "form_id": 62,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9091,
+      "minimum_distinct_boundary_fraction": 0.9492
+    },
+    {
+      "form_id": 62,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 62,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.6742,
+      "minimum_distinct_boundary_fraction": 0.6885
+    },
+    {
+      "form_id": 63,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8333,
+      "minimum_distinct_boundary_fraction": 0.9167
+    },
+    {
+      "form_id": 63,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8514,
+      "minimum_distinct_boundary_fraction": 0.9375
+    },
+    {
+      "form_id": 63,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8824,
+      "minimum_distinct_boundary_fraction": 0.9697
+    },
+    {
+      "form_id": 63,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 63,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8824,
+      "minimum_distinct_boundary_fraction": 0.9231
+    },
+    {
+      "form_id": 64,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8933,
+      "minimum_distinct_boundary_fraction": 0.9394
+    },
+    {
+      "form_id": 64,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9494,
+      "minimum_distinct_boundary_fraction": 0.9394
+    },
+    {
+      "form_id": 64,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8933,
+      "minimum_distinct_boundary_fraction": 0.9394
+    },
+    {
+      "form_id": 64,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 64,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8205,
+      "minimum_distinct_boundary_fraction": 0.7895
+    },
+    {
+      "form_id": 65,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8919,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 65,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.95,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 65,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8919,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 65,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 65,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7922,
+      "minimum_distinct_boundary_fraction": 0.7317
+    },
+    {
+      "form_id": 66,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9012,
+      "minimum_distinct_boundary_fraction": 0.9167
+    },
+    {
+      "form_id": 66,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9012,
+      "minimum_distinct_boundary_fraction": 0.9333
+    },
+    {
+      "form_id": 66,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9012,
+      "minimum_distinct_boundary_fraction": 0.9167
+    },
+    {
+      "form_id": 66,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 66,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7912,
+      "minimum_distinct_boundary_fraction": 0.7059
+    },
+    {
+      "form_id": 67,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8302,
+      "minimum_distinct_boundary_fraction": 0.8214
+    },
+    {
+      "form_id": 67,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9057,
+      "minimum_distinct_boundary_fraction": 0.9062
+    },
+    {
+      "form_id": 67,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8302,
+      "minimum_distinct_boundary_fraction": 0.8214
+    },
+    {
+      "form_id": 67,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 67,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8302,
+      "minimum_distinct_boundary_fraction": 0.7812
+    },
+    {
+      "form_id": 68,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8625,
+      "minimum_distinct_boundary_fraction": 0.907
+    },
+    {
+      "form_id": 68,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9136,
+      "minimum_distinct_boundary_fraction": 0.9302
+    },
+    {
+      "form_id": 68,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8625,
+      "minimum_distinct_boundary_fraction": 0.907
+    },
+    {
+      "form_id": 68,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 68,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.7647,
+      "minimum_distinct_boundary_fraction": 0.6744
+    },
+    {
+      "form_id": 69,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9,
+      "minimum_distinct_boundary_fraction": 0.9074
+    },
+    {
+      "form_id": 69,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9388,
+      "minimum_distinct_boundary_fraction": 0.9444
+    },
+    {
+      "form_id": 69,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9,
+      "minimum_distinct_boundary_fraction": 0.9074
+    },
+    {
+      "form_id": 69,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 69,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8061,
+      "minimum_distinct_boundary_fraction": 0.7627
+    },
+    {
+      "form_id": 70,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9048,
+      "minimum_distinct_boundary_fraction": 0.9667
+    },
+    {
+      "form_id": 70,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8588,
+      "minimum_distinct_boundary_fraction": 0.9333
+    },
+    {
+      "form_id": 70,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8929,
+      "minimum_distinct_boundary_fraction": 0.9333
+    },
+    {
+      "form_id": 70,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 70,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8252,
+      "minimum_distinct_boundary_fraction": 0.7667
+    },
+    {
+      "form_id": 71,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.9121,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 71,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.8571,
+      "minimum_distinct_boundary_fraction": 0.9667
+    },
+    {
+      "form_id": 71,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.9011,
+      "minimum_distinct_boundary_fraction": 0.9667
+    },
+    {
+      "form_id": 71,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 71,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8511,
+      "minimum_distinct_boundary_fraction": 0.8182
+    },
+    {
+      "form_id": 72,
+      "terrain": "NACRE",
+      "minimum_distinct_opaque_fraction": 0.8947,
+      "minimum_distinct_boundary_fraction": 0.913
+    },
+    {
+      "form_id": 72,
+      "terrain": "SILT",
+      "minimum_distinct_opaque_fraction": 0.9306,
+      "minimum_distinct_boundary_fraction": 0.9362
+    },
+    {
+      "form_id": 72,
+      "terrain": "KELP",
+      "minimum_distinct_opaque_fraction": 0.8846,
+      "minimum_distinct_boundary_fraction": 0.8913
+    },
+    {
+      "form_id": 72,
+      "terrain": "CHALK",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 72,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8837,
+      "minimum_distinct_boundary_fraction": 0.8333
+    }
+  ],
+  "minimum_opaque_fraction": 0.563,
+  "minimum_boundary_fraction": 0.6098
+}

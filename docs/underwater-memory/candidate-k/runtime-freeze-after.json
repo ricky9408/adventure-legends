@@ -1,0 +1,8 @@
+{
+  "candidate_rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "candidate_symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+  "candidate_source_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "runtime_inputs": 1163,
+  "all_live_and_archived_runtime_inputs_match": true,
+  "production_sources_modified_by_diagnostic": false
+}

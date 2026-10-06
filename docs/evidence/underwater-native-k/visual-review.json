@@ -1,0 +1,99 @@
+{
+  "scope": "Visual inspection of actual mGBA screenshots, not merely generator artwork or scaled marketing images",
+  "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "producer_report_sha256": "8e8c9f749f7f78aa043fd985a05c7d06c2ff6dec95effa1639f8f6520954cc6d",
+  "rooms": [
+    {
+      "area": 46,
+      "source": "continuous spoiler-free teaser02",
+      "image_sha256": "9b3730c575dc1eba02c0e331998b8123794a1477819d5198fe891e32f621ed82",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 50,
+      "source_snapshot": "04-vestibule-solved",
+      "image_sha256": "ae8f4923a7d680643976c6e290386d90df778f8aeb62726ac47b3fbcd24fb3a1",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 51,
+      "source_snapshot": "05-stacks-solved",
+      "image_sha256": "7cf4dc259e0676e575cc984408131183f501f3a071d0337df57496b827be274d",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 52,
+      "source_snapshot": "06-listening-solved",
+      "image_sha256": "945120ee0c1d84f451035bae52e84fb64fb770618a17913e5bfcd086665b62be",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 53,
+      "source_snapshot": "07-guardian-warning",
+      "image_sha256": "150bb4754db97e9c8a6a65f7fa93d2ea7eb8bd6cb9d6c6fff5069504e3d16be3",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 49,
+      "source_snapshot": "trial-03-start",
+      "image_sha256": "7eb8462d7586dce5d4d7c8e65537d031e934afb6fa450c03a83c37544798fac2",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 48,
+      "source_snapshot": "trial-04-start",
+      "image_sha256": "e134b19f4181ceeaa7b3198b96a731614b42d33f99e4de066161799f140e8a46",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    },
+    {
+      "area": 47,
+      "source_snapshot": "repeated-base-58",
+      "image_sha256": "a63ff01717e42e61b47ead65b1dfa0c15e642adb075130cf0e20e4eadeeb6275",
+      "native_resolution": [
+        240,
+        160
+      ],
+      "reviewed": true
+    }
+  ],
+  "findings": [
+    "All eight scenes preserve full-world viewport with floating corner HUD and clearly outlined player/companion bodies",
+    "Cream paths, teal boundaries and coral/kelp silhouettes remain distinguishable at native size",
+    "Town shell buildings, tall archive shelving, garden roof and concentric listening chamber provide different landmarks",
+    "Movable baffles and puzzle markers remain separated from walking paths; temporary short Japanese hints occupy the bottom only while active",
+    "Archive chambers intentionally use open floor around interactive targets; environmental density is modest rather than commercial-game parity"
+  ],
+  "limits": [
+    "Finite captured views, not an exhaustive screenshot proof of every camera coordinate",
+    "Bright cream backgrounds reduce contrast of some pale command details; outlines and active-state effects need continued review as later chapters grow",
+    "No physical handheld panel or color-response testing"
+  ]
+}

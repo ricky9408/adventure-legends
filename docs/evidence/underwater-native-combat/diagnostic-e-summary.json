@@ -1,0 +1,71 @@
+{
+  "status": "diagnostic-only; excluded from final acceptance",
+  "candidate": "E",
+  "reports": [
+    {
+      "path": "build/underwater-e-critical-diagnostic03/underwater-combat-native.json",
+      "sha256": "7d717ab695c9a8998cb2098618a8a1a7c42e2c583ea8630ddb14f3414db580af",
+      "native_damage_commands_accepted": [],
+      "completed_cases": 2,
+      "passed_cases": 2,
+      "failed_case_names": [],
+      "failing_windows": [],
+      "maximum_cycles": 264154
+    },
+    {
+      "path": "build/underwater-e-scenery-diagnostic01/underwater-combat-native.json",
+      "sha256": "0504efd0674aee24d75acd2910d1a56da088f7a6b1f357cb340e5c6657ab6d3b",
+      "native_damage_commands_accepted": [],
+      "completed_cases": 24,
+      "passed_cases": 19,
+      "failed_case_names": [
+        "scenery-87-1",
+        "scenery-87-3",
+        "scenery-87-5",
+        "scenery-87-7",
+        "scenery-87-8"
+      ],
+      "failing_windows": [
+        {
+          "name": "scenery-87-1",
+          "hardware_frames": 60,
+          "updates": 59,
+          "flips": 59,
+          "maximum_cycles": 308569
+        },
+        {
+          "name": "scenery-87-3",
+          "hardware_frames": 60,
+          "updates": 59,
+          "flips": 59,
+          "maximum_cycles": 296785
+        },
+        {
+          "name": "scenery-87-5",
+          "hardware_frames": 60,
+          "updates": 58,
+          "flips": 58,
+          "maximum_cycles": 427558
+        },
+        {
+          "name": "scenery-87-7",
+          "hardware_frames": 60,
+          "updates": 59,
+          "flips": 59,
+          "maximum_cycles": 305878
+        },
+        {
+          "name": "scenery-87-8",
+          "hardware_frames": 60,
+          "updates": 59,
+          "flips": 59,
+          "maximum_cycles": 313983
+        }
+      ],
+      "maximum_cycles": 427558
+    }
+  ],
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "rom_sha256": "c8184e668af1ec57c35d1cc94bd4b6a1faaaeef963705747f37811e042847bc0"
+}

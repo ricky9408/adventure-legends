@@ -1,0 +1,62 @@
+{
+  "kind": "independent host synthetic bounded core review",
+  "source_hashes": {
+    "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+    "src/creature_data.c": "743333870d4436af76a662b0761de36df0c28ee831761b7d5ff1983babedef49",
+    "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+    "src/creatures.c": "b6d892f4b0f5969101b35b541aa07a8e923ad41be593a6f398c89363a6d56175",
+    "src/creatures.h": "b6e21b866c55863ecfdf1ff8d2a97098aac60e63047edc29968599d2d29667a9",
+    "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "src/equipment.h": "57cd1272bc13e67031412c189c8ef0bdf3b5f43a4173adcdc93024173b18699f",
+    "src/equipment_data.c": "d28c475fb0142878182c13d75d4b117a968f5e237dce0821b98d7ae264e001d6",
+    "src/magma_quests.c": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+    "src/magma_quests.h": "844ae97ad9600b90b66debecc58865351b3960bdf6cdbd0a8aeafb877b4b75c1",
+    "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+    "src/save5.c": "dbeef77a1e478c33e3c1405f5ea6b6e6ac7f7f7eb48acb4855d6b04671267682",
+    "src/save5.h": "70fde544df6e0fab7c61a6aeb213da15d33b502cee3ba70bb141d2a19f1ab509",
+    "src/save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+    "src/save5_preflight.inc": "14d05e2ff8943f8effa093ba9350e11b2d615bd46951d713bbf1c016f2356eb4",
+    "src/save5_underwater_policy.h": "7933c903797e090aad304b2e57874c34f056b66a9664a8c8797f87a6901c7ca1",
+    "src/save5_underwater_policy.inc": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083",
+    "src/southern_quests.c": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+    "src/southern_quests.h": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881",
+    "src/underwater_quests.c": "2fcfa62e084d7116e3f14eaa0734d90d0f62283b0994dd68cafb5f29427f048e",
+    "src/underwater_quests.h": "2732f3888c23b06d5874431ba5f85a076000cd0c5eba1ff962e558272a8d6062",
+    "src/underwater_transactions.inc": "3122483bbd99be0a43dd15bf5e26fd83e51c4e74e5e29d649a9acbf70305d0d9"
+  },
+  "test_source_hashes": {
+    "docs/evidence/underwater-transaction-review/review.c": "8c82f0ea7c1c9eb8f9c7184b10044951b35d0e133ebfa995d28b3048adab0b30",
+    "docs/evidence/underwater-transaction-review/admission_review.c": "462230bd405f565abb3f1f7a49bbeb5b79d72ca429f9d2fb1b56161ccb2bbea5",
+    "docs/evidence/underwater-transaction-review/run_review.py": "9d8d65c96b1d0930b7951ee3a912a5dec885bbc1dee8ed1267d2961d1bdc65d7",
+    "docs/evidence/underwater-transaction-review/run_admission_review.py": "b8d3ed0fafb61c4fe2da1cb65f86d859cb89f205a90a373a3d0ec923fbcf39c6",
+    "tests/underwater_save_setup.c": "764b41ef543cc024b42a3f05740813a2a19c863f6708870c9e674bc4d9ff2f22",
+    "tests/test_underwater_save.py": "6c1bb9d41f6266c6ba064f1b40e6cd6b8af064ada5b2d0bff2256926c0200144"
+  },
+  "review_sha256": "462230bd405f565abb3f1f7a49bbeb5b79d72ca429f9d2fb1b56161ccb2bbea5",
+  "flags": [
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wstrict-aliasing=2",
+    "-fstrict-aliasing",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-I/workspace/scratch/33ed39a77941/adventure-legends-underwater/src",
+    "-g",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer"
+  ],
+  "exit_code": 0,
+  "sanitizer_environment": {
+    "ASAN_OPTIONS": "detect_leaks=0"
+  },
+  "duration_seconds": 0.504333728007623,
+  "result": {
+    "core_queries": 14652,
+    "core_commit_differentials": 14652,
+    "status": "pass"
+  }
+}

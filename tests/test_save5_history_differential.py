@@ -461,7 +461,7 @@ class HistoricalSaveDifferentialTests(unittest.TestCase):
 
     def test_08_revision_boundaries_and_crc_valid_header_padding(self):
         for revision, original in self.completed.items():
-            for advertised in (0, 1, 2, 3, 4, 6, 255, 256, 65535):
+            for advertised in (0, 1, 2, 3, 4, 7, 255, 256, 65535):
                 bank = bytearray(original)
                 bank[12:14] = advertised.to_bytes(2, 'little')
                 self.compare(bank, (revision, 'advertised', advertised), group='revision_crossovers')

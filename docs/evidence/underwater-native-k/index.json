@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "scope": "Exact-candidate native-controller summaries; developer spoilers",
+  "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "symbols_sha256": "3839900cde0cbbfae5f3883bfda7e726f2f85ee92d736f60381e95cc3899a797",
+  "reports": [
+    {
+      "path": "full.json",
+      "sha256": "89d25c135cbaec50cfd7f965819f9e94da8396bc850bb44319432dd451c28c12",
+      "full_report_sha256": "8e8c9f749f7f78aa043fd985a05c7d06c2ff6dec95effa1639f8f6520954cc6d",
+      "passed_checks": 10940
+    },
+    {
+      "path": "minimal-main.json",
+      "sha256": "888da2bcc43d63a598db6e5315af4de575dc76705941aac3004a186311921630",
+      "full_report_sha256": "cc9428a0e905ad8e3f10f3a259cd5a3662e91ab0b00d6285a3bd4e303c6d46c9",
+      "passed_checks": 761
+    },
+    {
+      "path": "minimal-lifecycle.json",
+      "sha256": "ed705c0dd4e3ed72f36c127015c7d7a289cf072d6d03405b50ba4f41937069e2",
+      "full_report_sha256": "f9c6816cb9d149fbedab37d35f155a42937836380cf2ba89ae935d6fa25bde32",
+      "passed_checks": 1187
+    },
+    {
+      "path": "combat.json",
+      "sha256": "0925eeca96e8ba949383d608aae943eb5f58d526b8506d454b60754d59f37cf3",
+      "full_report_sha256": "77fc27d048848e265d1400809f853bf4d61550d6a0df5eaa4c9832ea4c1f5aab",
+      "passed_checks": 8383
+    },
+    {
+      "path": "scenery.json",
+      "sha256": "81af049004e688612e38692e9600bcd75989d149c59c58678ac680bd1ad8fdf0",
+      "full_report_sha256": "ff4decd4187d4c7102662005532caaa38f033a90ed213a00e8125780344b0f20",
+      "passed_checks": 1773
+    },
+    {
+      "path": "dynamic.json",
+      "sha256": "de186c7011f59e58f5adf935c1a507dd76cadaea9f8fe71b57369c6ac94c6178",
+      "full_report_sha256": "f43bbedb010129c7d105c318970cac096af79abc1365eef19d9f413b0ad1ce6b",
+      "passed_checks": 703
+    },
+    {
+      "path": "critical-aim.json",
+      "sha256": "5be30c6262c5e5f148751d5591b68a2e8b3073ed0d996ea54f6e1ca40c2bc721",
+      "full_report_sha256": "4e4bd21e1e956226ea83ad3bb2d08a9db4b41b7cc0c2a87de410c280593a4c31",
+      "passed_checks": 76
+    },
+    {
+      "path": "phase.json",
+      "sha256": "ee400b620ea7948b88c876125e9a70fde0c52374fb11ee05837697ad4391de36",
+      "full_report_sha256": "e9870994797304ebd823ea2bbd072a365072076d89104922950201725f1c181a",
+      "passed_checks": 385
+    }
+  ],
+  "overlapping_native_check_sum": 24208
+}

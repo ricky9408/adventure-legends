@@ -1,0 +1,12 @@
+{
+  "scope": "Lossless bounded source-evidence packaging only",
+  "raw_file": "runtime-source-hashes.json",
+  "raw_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "raw_bytes": 120358,
+  "shipped_file": "runtime-source-hashes.json.gz",
+  "gzip_sha256": "26a2fa8deb320791d815d1be223585dfa854108c56ebb6e73d57645115872d47",
+  "gzip_bytes": 50450,
+  "gzip_mtime": 0,
+  "decompression_exact": true,
+  "instruction": "The source ZIP carries the .json.gz representation. gzip -dc runtime-source-hashes.json.gz restores the exact original manifest referenced by provenance.json; the raw development copy remains retained."
+}

@@ -1,0 +1,5 @@
+[
+  {"trial_id":"magma_find_the_cold_seam","family_id":"F036","local_trial_id":1,"wire_mask":1,"introduced_content_revision":5,"prerequisite_trial_mask":0,"from_form_ids":[95]},
+  {"trial_id":"magma_the_cloth_stays_clear","family_id":"F037","local_trial_id":1,"wire_mask":1,"introduced_content_revision":5,"prerequisite_trial_mask":0,"from_form_ids":[97]},
+  {"trial_id":"magma_the_quiet_chord","family_id":"F038","local_trial_id":1,"wire_mask":1,"introduced_content_revision":5,"prerequisite_trial_mask":0,"from_form_ids":[99]}
+]

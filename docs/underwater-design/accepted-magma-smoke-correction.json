@@ -1,0 +1,45 @@
+{
+  "scope": "New exact-accepted-source extraction; bridge build and native tool smoke only. No gameplay acceptance, full ROM rebuild, host aggregate, publication or network action.",
+  "accepted_archive": {
+    "filename": "Adventure-Legends-Emberbond-source.zip",
+    "sha256": "a9f201bcefe607842f124c98859b77d454a97596a4058d4da28cdd200650e86c",
+    "bytes": 9339621,
+    "files": 2742
+  },
+  "prerequisite_setup": {
+    "fresh_extraction": true,
+    "manifest_hashes_and_sizes_verified": 2742,
+    "zip_modes_restored_without_source_byte_edits": true,
+    "bridge_script_mode": "0o755",
+    "used_preexisting_authorized_local_sysroot": true,
+    "system_package_or_network_changes": false,
+    "mgba_library_sha256": "a1d7713cc89e3a4e4eeaf2bc7a523115356ebe14e057805c06f5e9d4a328be63"
+  },
+  "checks": [
+    {
+      "command": "./tools/build_mgba_bridge.sh",
+      "exit_code": 0,
+      "log": "bridge-build.log",
+      "log_bytes": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "make test-tools",
+      "exit_code": 0,
+      "log": "test-tools.log",
+      "log_bytes": 113,
+      "log_sha256": "160b72e9b777dda64511aa99a01c3f98f3ea57bd28c5edca5e8ac2d2e351faeb"
+    }
+  ],
+  "historical_evidence_preserved": {
+    "accepted_release_unchanged": true,
+    "old_final_export_bridge_log_unchanged": true,
+    "old_final_export_smoke_log_sha256": "1a9b25c9b98073315e2d197f851d6901bd5a3e4338858b6bdbb7908d621e51bb",
+    "old_final_export_smoke_status": "FAILED: script permission denied, then shared library absent; the old pass flag is contradicted by its pinned log",
+    "old_source_export_host_aggregate_status": "EXIT 2 before game assertions at synthetic fixed-address setup; standalone unchanged probe passed 27 scenarios; not rerun here"
+  },
+  "source_manifest_mismatches_after_tests": [],
+  "source_archive_sha256_after_tests": "a9f201bcefe607842f124c98859b77d454a97596a4058d4da28cdd200650e86c",
+  "built_bridge_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+  "status": "PASS_TOOL_SMOKE_ONLY"
+}

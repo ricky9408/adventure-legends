@@ -1,0 +1,29 @@
+{
+  "classification": "Same-candidate K controller-earned SRAM cold-imported into the separately hashed startup-only K diagnostic.",
+  "sram_producer_rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "sram_producer_report_sha256": "8e8c9f749f7f78aa043fd985a05c7d06c2ff6dec95effa1639f8f6520954cc6d",
+  "sram_producer_functional_assertions": 10940,
+  "sram_producer_failures": [],
+  "candidate_k_source_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "diagnostic_rom_sha256": "a9e538a2446db905d72624e9303f57b5fc57b3f44a6333796d392a467f3bf718",
+  "no_cross_rom_machine_state_imports": true,
+  "game_ram_writes": 0,
+  "startup_reserved_stack_fill_only": true,
+  "save_wire_version": 5,
+  "content_revision": 6,
+  "observer_script_sha256": "28086cbd93343acf916bd0ea2161c5ac48f9c0b6fd7f2a58c9aa62e0708ef0d3",
+  "inputs": [
+    {
+      "snapshot": "11-all89-earned-town",
+      "sram_sha256": "41cf371618208e0097fe6ee10393e3185b4bffb2af9dad9e5f81e2663d6673a0",
+      "retained_individuals": 50,
+      "obtained_history": 89
+    },
+    {
+      "snapshot": "trial-15-complete",
+      "sram_sha256": "fc4488e9d94c61291bbcf74da8277cb3fd8acddcdd42473c54044ba69735b253",
+      "retained_individuals": 50,
+      "obtained_history": 88
+    }
+  ]
+}

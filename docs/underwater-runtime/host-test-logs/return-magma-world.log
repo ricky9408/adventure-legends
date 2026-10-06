@@ -1,0 +1,21 @@
+test_all_fifteen_same_instance_trials_and_tiers (__main__.MagmaRuntime.test_all_fifteen_same_instance_trials_and_tiers) ... ok
+test_all_seven_invitations_and_six_optional_stories (__main__.MagmaRuntime.test_all_seven_invitations_and_six_optional_stories) ... ok
+test_boss_all_weapons_and_once_per_action (__main__.MagmaRuntime.test_boss_all_weapons_and_once_per_action) ... ok
+test_capacity_refusal_keeps_source_and_missing_branch_still_fits (__main__.MagmaRuntime.test_capacity_refusal_keeps_source_and_missing_branch_still_fits) ... ok
+test_diversion_waits_for_successful_window_without_speed_gate (__main__.MagmaRuntime.test_diversion_waits_for_successful_window_without_speed_gate) ... ok
+test_every_damaging_sweep_position_invalidates_bitmap_cache (__main__.MagmaRuntime.test_every_damaging_sweep_position_invalidates_bitmap_cache) ... ok
+test_failed_queued_anchor_prevents_host_codec_write (__main__.MagmaRuntime.test_failed_queued_anchor_prevents_host_codec_write) ... ok
+test_four_repeat_sources_real_individuals_no_event_farming (__main__.MagmaRuntime.test_four_repeat_sources_real_individuals_no_event_farming) ... ok
+test_grab_blocks_live_actor_modal_and_resets (__main__.MagmaRuntime.test_grab_blocks_live_actor_modal_and_resets) ... ok
+test_host_save_bridge_prepares_town_and_field_before_codec_write (__main__.MagmaRuntime.test_host_save_bridge_prepares_town_and_field_before_codec_write) ... ok
+test_q35_screen_repair_persists_travel_reset_and_codec_reload (__main__.MagmaRuntime.test_q35_screen_repair_persists_travel_reset_and_codec_reload) ... ok
+test_real_module_minimal_guaranteed_route (__main__.MagmaRuntime.test_real_module_minimal_guaranteed_route) ... ok
+test_rest_prepare_cancellation_mismatch_and_invalid_state_fail_closed (__main__.MagmaRuntime.test_rest_prepare_cancellation_mismatch_and_invalid_state_fail_closed) ... ok
+test_rest_validation_deferred_once_without_revision_or_reward (__main__.MagmaRuntime.test_rest_validation_deferred_once_without_revision_or_reward) ... ok
+test_static_engine_collision_and_spawns (__main__.MagmaRuntime.test_static_engine_collision_and_spawns) ... ok
+test_trial_partial_cannot_transfer_and_restart_death_clear (__main__.MagmaRuntime.test_trial_partial_cannot_transfer_and_restart_death_clear) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.353s
+
+OK

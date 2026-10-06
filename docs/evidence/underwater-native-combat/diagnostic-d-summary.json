@@ -1,0 +1,82 @@
+{
+  "status": "diagnostic-only; excluded from final acceptance",
+  "candidate": "D",
+  "reports": [
+    {
+      "path": "build/underwater-d-all24-diagnostic01/underwater-combat-native.json",
+      "sha256": "3f3818b4340b7e08064882a702cec8b6ab3b84a7141f4d4700db42244740ca67",
+      "native_damage_commands_accepted": [
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90
+      ],
+      "completed_cases": 48,
+      "passed_cases": 45,
+      "failed_case_names": [
+        "workload-68",
+        "workload-87",
+        "workload-90"
+      ],
+      "failing_windows": [
+        {
+          "name": "walking-camera-cast-68",
+          "hardware_frames": 46,
+          "updates": 45,
+          "flips": 45,
+          "maximum_cycles": 279909
+        },
+        {
+          "name": "walking-camera-cast-87",
+          "hardware_frames": 60,
+          "updates": 59,
+          "flips": 59,
+          "maximum_cycles": 305325
+        },
+        {
+          "name": "walking-camera-cast-90",
+          "hardware_frames": 46,
+          "updates": 45,
+          "flips": 45,
+          "maximum_cycles": 294240
+        }
+      ],
+      "maximum_cycles": 305325
+    },
+    {
+      "path": "build/underwater-d-controls-diagnostic01/underwater-combat-native.json",
+      "sha256": "20b3838deee7c753a087eda2cd8d3500bd54b86f3b13149cd50b8cd499f5d467",
+      "native_damage_commands_accepted": [
+        70
+      ],
+      "completed_cases": 28,
+      "passed_cases": 28,
+      "failed_case_names": [],
+      "failing_windows": [],
+      "maximum_cycles": 221328
+    }
+  ],
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "rom_sha256": "0ce33fac654559563853c4a342b855357cc61c4dd52cdeb247c22293079afd82"
+}

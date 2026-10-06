@@ -1,0 +1,69 @@
+{
+  "scope": "Current K host-only receipts are separate from preserved historical Magma source evidence; no native acquisition claim",
+  "rom_sha256": "df3733446cda3d41c2e78da134b25cd446846d6283e4ac5dc47b3fcaa3f98607",
+  "runtime_manifest_sha256": "458a276750c5f677123a5905d4214af585db5ad6787a07d5a5135f565eb03929",
+  "receipt_generation": "Pre-routing reporter versions in the isolated final K aggregate",
+  "reports": {
+    "save-limits-host.json": {
+      "prior_live_path": "docs/evidence/magma-revision5-southern-save-limits-host.json",
+      "sha256": "cbd497757ee01911bb868c7abe186a0ac36a5b3c58a915a95212ae005f5ecd6c",
+      "origin": "Fresh isolated K aggregate"
+    },
+    "save-limits-sanitizers.json": {
+      "prior_live_path": "docs/evidence/magma-revision5-southern-save-limits-sanitizers.json",
+      "sha256": "040c63a08063673ed7aaf1260566d0c8f2dca4bff219238945fc468627346a1d",
+      "origin": "Fresh isolated K aggregate"
+    },
+    "save-branch-sanitizers.json": {
+      "prior_live_path": "docs/evidence/magma-save-sanitizers.json",
+      "sha256": "9dcd281b55e3f73c3da4aa178d91f4dad2996a4f6a99271ae2368611f49f31d3",
+      "origin": "Fresh isolated K aggregate"
+    }
+  },
+  "historical_HEAD_bytes_restored": {
+    "docs/evidence/magma-revision5-southern-save-limits-host.json": "60a0d64b473c7ebcb1287ea71cedfcb2760d355740b4c3f68898c9723d77499a",
+    "docs/evidence/magma-revision5-southern-save-limits-sanitizers.json": "66d9facf9740832c98b834402744bedd89d286959ab60e7b570846eadcda1346",
+    "docs/evidence/magma-save-sanitizers.json": "ba3ceba316fe60c4765f592cf6d6eb69cceda0381debc544c49e827ca0957282"
+  },
+  "output_only_change": {
+    "description": "Only report destinations and parent directory creation changed; all assertions, fixtures and execution remain unchanged",
+    "reporters": {
+      "tests/test_southern_save_limits.py": {
+        "before": "6021731e40e1f57229b62169d693d4c67e02d2809095712d30976520d3613a82",
+        "after": "95831d4be864332d423f59808db85faa7ba7fe31f64f260d306b5642601df0b4"
+      },
+      "tests/test_magma_save_limits.py": {
+        "before": "7773d6bbc2003d22fe70a61904dd01bbbc4fb963736ad6c5ae6fbccc3e681ec8",
+        "after": "9444935061557bd4ec737df743cf0a3278f496d25a62dca5298f888e4b5287db"
+      }
+    },
+    "new_directory": "build/current-host-evidence",
+    "git_ignored": true
+  },
+  "new_output_rerun": {
+    "result": "PASS",
+    "commands": [
+      "python3 tests/test_southern_save_limits.py",
+      "python3 tests/test_magma_save_limits.py"
+    ],
+    "tests": 9,
+    "log": "build/underwater-k-host-evidence-routing-rerun.log",
+    "log_sha256": "98912b532b76a73ef301b1b85c7cbc8cceea5e21bd970ab85d3b91984c57e606",
+    "receipts": {
+      "save-limits-host.json": {
+        "sha256": "231a98b596b6a95bd6d5f7f807582a72a7bc41b9b9e0caa78b42dbf145aaae7e",
+        "same_measurements_as_isolated_K": true
+      },
+      "save-limits-sanitizers.json": {
+        "sha256": "040c63a08063673ed7aaf1260566d0c8f2dca4bff219238945fc468627346a1d",
+        "same_measurements_as_isolated_K": true
+      },
+      "save-branch-sanitizers.json": {
+        "sha256": "9dcd281b55e3f73c3da4aa178d91f4dad2996a4f6a99271ae2368611f49f31d3",
+        "same_measurements_as_isolated_K": true
+      }
+    },
+    "difference_note": "Only the host aggregate receipt tests_sha256 changes to identify its new output-routing script; every measurement and other report field matches the isolated K run"
+  },
+  "historical_head_commit": "0a8b05c3e24d02bd350a11c32289fb5686641535"
+}
