@@ -7,6 +7,8 @@
 #include "evolution_art.h"
 #include "regional_creature_art.h"
 #include "regional_quests.h"
+#include "northern_quests.h"
+#include "northern_creature_art.h"
 typedef unsigned char u8;
 extern volatile int room,px,py,spirit,game_state,has_save,save_failed;
 extern volatile unsigned chapter_flags;
@@ -29,13 +31,17 @@ static unsigned evolution_tick,evolution_before;
 static int abs_i(int n){return n<0?-n:n;}
 static int close_to(int x,int y,int d){return abs_i(px-x)+abs_i(py-y)<d;}
 unsigned progression_form_spirit(unsigned form){
-    unsigned legacy;
-    if(!creatures_form(form))return CREATURE_EMPTY_SLOT;
-    legacy=creatures_legacy_spirit(form);
-    if(legacy<CREATURE_LEGACY_COUNT)return legacy;
-    if(form==13||form==14)return PROGRESSION_WATER;
-    if(form==16)return PROGRESSION_METAL;
-    return CREATURE_EMPTY_SLOT;
+    const CreatureForm*f=creatures_form(form);
+    if(!f)return CREATURE_EMPTY_SLOT;
+    /* Only this compatibility cache is compact. Persistent family IDs and
+     * selected roster references retain their actual authored identities. */
+    switch(f->family){
+    case 1:return 0;case 2:return 1;case 3:return 2;case 4:return 3;
+    case 5:return PROGRESSION_WATER;case 6:return PROGRESSION_METAL;
+    case 7:return PROGRESSION_NORTH_WOOD;case 8:return PROGRESSION_NORTH_FIRE;
+    case 25:return PROGRESSION_NORTH_WATER;case 26:return PROGRESSION_NORTH_EARTH;
+    case 27:return PROGRESSION_NORTH_METAL;default:return CREATURE_EMPTY_SLOT;
+    }
 }
 CreatureInstance *progression_selected(void){
     CreatureRoster*r=&adventure_save.roster;
@@ -47,7 +53,7 @@ CreatureInstance *progression_selected(void){
 unsigned progression_current_form(void){CreatureInstance*c=progression_selected();return c?c->form_id:0;}
 unsigned progression_current_spirit(void){CreatureInstance*c=progression_selected();return c?progression_form_spirit(c->form_id):0;}
 /* CampaignSave keeps its four-family wire contract. The roster reference is
- * authoritative for Water/Metal and for two owned instances in one family. */
+ * authoritative for every regional family and multiple instances in a family. */
 static void synchronize_selection(void){
     spirit=(int)progression_current_spirit();
     adventure_save.campaign.spirit=(unsigned)spirit<CREATURE_LEGACY_COUNT?(unsigned)spirit:0;
@@ -96,7 +102,7 @@ void progression_story(void){
     progression_refresh();
 }
 void progression_encounter(unsigned area,unsigned enemy){
-    if(area<=REGION_LAST_ROOM&&enemy<6){creatures_credit_event(&adventure_save.roster,area*6+enemy,60,CREATURE_CREDIT_ENCOUNTER);progression_revision++;}
+    if(area<=NORTH_LAST_ROOM&&enemy<6){creatures_credit_event(&adventure_save.roster,area*6+enemy,60,CREATURE_CREDIT_ENCOUNTER);progression_revision++;}
 }
 int progression_field(unsigned event){int result=creatures_credit_event(&adventure_save.roster,CREATURE_FIELD_EVENT_BASE+event,100,CREATURE_CREDIT_FIELD_AID);if(result>0)progression_revision++;return result;}
 unsigned progression_command(void){CreatureInstance*c=progression_selected();return c&&c->selected_command<2?c->equipped[c->selected_command]:0;}
@@ -106,11 +112,17 @@ unsigned progression_evolution_context(void){
     unsigned context=chapter_flags&CREATURE_EVOLUTION_CHAPTER_MASK;
     if(save5_quest_state(&adventure_save.quests,REGION_QUEST_WATER_BOND)==SAVE5_QUEST_CLAIMED)
         context|=CREATURE_REED_RESTORED;
+    if(save5_quest_state(&adventure_save.quests,NORTH_Q_LINES)==SAVE5_QUEST_CLAIMED&&
+       save5_quest_state(&adventure_save.quests,NORTH_Q_BEARING)==SAVE5_QUEST_CLAIMED)
+        context|=CREATURE_NORTH_HARBOR_READY;
+    if(save5_quest_state(&adventure_save.quests,NORTH_Q_BEACON)==SAVE5_QUEST_CLAIMED)
+        context|=CREATURE_COUNTERWORKS_STABLE;
     return context;
 }
 int progression_is_sanctuary(void){
     unsigned i;
-    if(room==0||room==16)return 1;
+    if(room==0||room==16||room==22)return 1;
+    if(room==23&&close_to(80,264,30))return 1;
     if(room==17&&close_to(120,232,30))return 1;
     if(room==1&&close_to(WORLD_CAMP_X,WORLD_CAMP_Y,30))return 1;
     if(room>=4&&room<14){const CampaignRoom*r=&campaign_rooms[room-4];for(i=0;i<r->object_count;i++)if(r->objects[i].kind==9&&close_to(r->objects[i].x,r->objects[i].y,30))return 1;}
@@ -127,7 +139,12 @@ int progression_name_id(unsigned form){
     case 7:return TX_C_WIND;case 8:return TX_E_FUURI;
     case 10:return TX_C_STONE;case 11:return TX_E_KOHAKU;
     case 13:return TX_E_DEWSPINDLE;case 14:return TX_E_TIDEWHEEL;
-    case 16:return TX_E_CHIMECLASP;default:return TX_C_UNKNOWN;
+    case 16:return TX_E_CHIMECLASP;
+    case 19:return TX_E_SPOOLBUD;case 20:return TX_E_LOOMCROWN;
+    case 22:return TX_E_CINDERTRAY;case 23:return TX_E_KILNBARROW;
+    case 73:return TX_E_KEELKIP;case 74:return TX_E_WAKECRADLE;
+    case 75:return TX_E_CAIRNCRICKET;case 76:return TX_E_ARCHSPRING;
+    case 77:return TX_E_RIVETFOIL;case 78:return TX_E_GIMBALCLOAK;default:return TX_C_UNKNOWN;
     }
 }
 static int reason_id(unsigned reason,unsigned form){
@@ -135,7 +152,7 @@ static int reason_id(unsigned reason,unsigned form){
     case CREATURE_EVOLVE_READY:return TX_E_READY;
     case CREATURE_EVOLVE_LEVEL:return TX_E_LEVEL_MORE;
     case CREATURE_EVOLVE_BOND:return TX_E_BOND_MORE;
-    case CREATURE_EVOLVE_STORY:return form==13?TX_E_REED_MORE:TX_E_STORY_MORE;
+    case CREATURE_EVOLVE_STORY:return form==13?TX_E_REED_MORE:progression_form_spirit(form)>=PROGRESSION_NORTH_WOOD?TX_E_NORTH_MORE:TX_E_STORY_MORE;
     case CREATURE_EVOLVE_TRIAL:return TX_E_TRIAL_MORE;
     case CREATURE_EVOLVE_SANCTUARY:return TX_E_SANCTUARY;
     case CREATURE_EVOLVE_NO_EDGE:return form==16?TX_E_FIXED_FORM:TX_E_GROWN;
@@ -143,15 +160,15 @@ static int reason_id(unsigned reason,unsigned form){
     }
 }
 static int wish_id(unsigned form){
-    static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM};
+    static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM,TX_E_WISH_NORTH_WOOD,TX_E_WISH_NORTH_FIRE,TX_E_WISH_NORTH_WATER,TX_E_WISH_NORTH_EARTH,TX_E_WISH_NORTH_METAL};
     unsigned family=progression_form_spirit(form);
     return family<PROGRESSION_SPIRIT_COUNT?wishes[family]:TX_E_NO_MEMBER;
 }
 static int command_id(unsigned command){
-    static const int names[]={TX_E_COMMAND_OLD,TX_E_MOVE_FIRE,TX_E_MOVE_HEAL,TX_E_MOVE_WIND,TX_E_MOVE_STONE,TX_E_MOVE_HEARTH,TX_E_MOVE_CANOPY,TX_E_MOVE_REFLECT,TX_E_MOVE_ARCH,TX_E_MOVE_DEW,TX_E_MOVE_TIDE,TX_E_MOVE_CHIME};
+    static const int names[]={TX_E_COMMAND_OLD,TX_E_MOVE_FIRE,TX_E_MOVE_HEAL,TX_E_MOVE_WIND,TX_E_MOVE_STONE,TX_E_MOVE_HEARTH,TX_E_MOVE_CANOPY,TX_E_MOVE_REFLECT,TX_E_MOVE_ARCH,TX_E_MOVE_DEW,TX_E_MOVE_TIDE,TX_E_MOVE_CHIME,TX_E_COMMAND_OLD,TX_E_MOVE_THREADHOLD,TX_E_MOVE_SHUTTLE_SPAN,TX_E_MOVE_HEAT_POCKET,TX_E_MOVE_FIRING_DRAWER,TX_E_MOVE_WASHBACK,TX_E_MOVE_WAKE_TURN,TX_E_MOVE_COUNTERDROP,TX_E_MOVE_COUNTERPOISE,TX_E_MOVE_QUARTERTURN,TX_E_MOVE_GIMBAL_SCREEN};
     return command<sizeof names/sizeof names[0]&&creatures_ability(command)?names[command]:TX_E_COMMAND_OLD;
 }
-static const u8 *portrait(unsigned form){const u8*p=evolution_art_portrait(form);return p?p:regional_creature_art_portrait(form);}
+static const u8 *portrait(unsigned form){const u8*p=northern_creature_art_portrait(form);if(p)return p;p=evolution_art_portrait(form);return p?p:regional_creature_art_portrait(form);}
 static void draw_form(unsigned form,int x,int y){
     const u8*p=portrait(form);
     if(p)sprite(p,x,y,32,32,0);

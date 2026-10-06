@@ -1,6 +1,6 @@
 # Native equipment/stat core
 
-These assets author the thirteen fixed equipment definitions and three weapon
+These assets author the nineteen fixed equipment definitions and three weapon
 parameter sets. They do not imply that an acquisition route, weapon action,
 region, or UI has been integrated into the ROM.
 
@@ -8,8 +8,7 @@ region, or UI has been integrated into the ROM.
 
 `catalog.json` preserves the proposed fixed IDs and all eight explicit bonuses.
 Run `python3 assets/equipment/generate_data.py`, or pass `--check` to verify the
-committed generated `src/equipment_data.c`. The complete generated C source is
-3,373 bytes; there are no generated include fragments. The 512-entry definition
+committed generated `src/equipment_data.c`. The generated C source remains below32KB; there are no generated include fragments. The 512-entry definition
 table is 12,288 ROM bytes, including disabled zero-filled identities.
 
 Only one unique instance of each authored item can exist. Bag records do not
@@ -35,8 +34,12 @@ it must encode fields explicitly in little-endian order, not persist a C struct.
 
 Starter seen bit is `seen[0] = 2`; starter source claim is `reward_claims[0] = 1`.
 Equipment sources 0..12 map respectively to item IDs
-1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82. Sources 13..63 are reserved and
-must not have claims. Claimed sources require matching item-seen history. Quest
+1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82. Northern sources13..18 append
+3, 11, 19, 35, 51, 83. Sources19..63 remain reserved and must not have claims.
+This array is stable acquisition order, not sorted item order: inserting item3
+must never shift any published claim. Catalog checks prove exact definition
+coverage and uniqueness. The shared save codec applies revision-specific
+whitelists, so enabling new data does not legalize new gear in old revisions. Claimed sources require matching item-seen history. Quest
 completion is a separate ledger, with cross-ledger consistency owned by save5.
 These checks establish consistent claims; CRC is not authentication against
 intentional save editing.
@@ -118,3 +121,12 @@ caller's existing 512-byte equipment allocation. The largest individual ARM
 stack frame is 544 bytes for atomic multi-item claims; ordinary gear operations
 have at most 80-byte individual frames. Whole-ROM size, timing, UI, and gameplay
 verification belong to the engine integration pass.
+
+## Northern sidegrade integration
+
+Six new definitions trade different useful parameters rather than replacing all
+older items. Their acquisition quests are tested separately; an enabled row is
+not proof of obtainability. Reach bonus is bounded at12 pixels, with charged bow
+range156 pixels fitting the existing16-bit fixed-point arrow travel field.
+Attack snapshots retain the captured range and attack when a preview changes.
+The original thirteen definitions, source IDs and starter wire bytes are unchanged.

@@ -30,11 +30,19 @@ class CombatReview(RegionJourney):
         # sibling with the same exact filename is accepted only after SHA check.
         if not source_sram.is_file():source_sram=source_report.parent/Path(source['sram_path']).name
         assert report['controller_only'] and not report['failures'] and all(c['passed'] for c in report['checks'])
-        assert source['sram_sha256']==SOURCE_SRAM_SHA and digest(source_sram)==SOURCE_SRAM_SHA
+        assert digest(source_sram)==source['sram_sha256']
+        if report['rom_sha256']!=self.target_sha:
+            # The archived R5 fixture remains the only accepted cross-ROM source.
+            assert source['sram_sha256']==SOURCE_SRAM_SHA
+        else:
+            # A fresh current-ROM journey may use a newer save content revision.
+            # It must still originate at the pinned controller-earned v4 story.
+            assert report['fixture']['sha256']=='8f603dff9d9893675b2864a900f77a4608d7de43b85fa1464ad3b5f820607809'
+
         assert source['quests']==[3]*11
         self.provenance={'source_report':str(source_report),'source_report_sha256':digest(source_report),
             'source_rom_sha256':report['rom_sha256'],'source_snapshot':SOURCE_SNAPSHOT,
-            'sram_path':str(source_sram),'sram_sha256':SOURCE_SRAM_SHA,
+            'sram_path':str(source_sram),'sram_sha256':source['sram_sha256'],
             'source_machine_state_loaded':False,'scope':'Controller-earned collection/quests/gear imported forward as SRAM only'}
         self.e.load_save(source_sram);self.e.reset()
     def report(self):

@@ -1,0 +1,2226 @@
+{
+  "schema": 1,
+  "palette": {
+    "entries": 178,
+    "sha256": "acad21683ec7b2f85d996a8590b407470aa20cb6c9b6a6038a96af08ed17fae8"
+  },
+  "coordinate_contract": "world centers; half-open rectangles; five-pixel foot; row-major actors x-8,y-8",
+  "sprites": {
+    "names": [
+      "EDDA",
+      "TOVE",
+      "NERI",
+      "PELL",
+      "IVEN",
+      "RESET",
+      "HANDLE",
+      "HANDLE_DONE",
+      "CART_LIGHT",
+      "CART_HEAVY",
+      "JUNCTION_NS",
+      "JUNCTION_EW",
+      "WEIGHT_UP",
+      "WEIGHT_DOWN",
+      "REEL",
+      "REEL_HELD",
+      "BEARING",
+      "TENDER",
+      "MARKER",
+      "HEAT_COLD",
+      "HEAT_WARM",
+      "CHART_DAMP",
+      "CHART_DRY",
+      "REST",
+      "REST_LIT",
+      "FERRY_SIGN",
+      "MACHINE_IDLE",
+      "MACHINE_WARN",
+      "MACHINE_OPEN",
+      "BEACON_LIT",
+      "FORECAST",
+      "SOCKET"
+    ],
+    "indices": {
+      "EDDA": 0,
+      "TOVE": 1,
+      "NERI": 2,
+      "PELL": 3,
+      "IVEN": 4,
+      "RESET": 5,
+      "HANDLE": 6,
+      "HANDLE_DONE": 7,
+      "CART_LIGHT": 8,
+      "CART_HEAVY": 9,
+      "JUNCTION_NS": 10,
+      "JUNCTION_EW": 11,
+      "WEIGHT_UP": 12,
+      "WEIGHT_DOWN": 13,
+      "REEL": 14,
+      "REEL_HELD": 15,
+      "BEARING": 16,
+      "TENDER": 17,
+      "MARKER": 18,
+      "HEAT_COLD": 19,
+      "HEAT_WARM": 20,
+      "CHART_DAMP": 21,
+      "CHART_DRY": 22,
+      "REST": 23,
+      "REST_LIT": 24,
+      "FERRY_SIGN": 25,
+      "MACHINE_IDLE": 26,
+      "MACHINE_WARN": 27,
+      "MACHINE_OPEN": 28,
+      "BEACON_LIT": 29,
+      "FORECAST": 30,
+      "SOCKET": 31
+    },
+    "size": [
+      16,
+      16
+    ]
+  },
+  "rooms": [
+    {
+      "id": 22,
+      "key": "hearthwake_quay",
+      "name": "Hearthwake Quay",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          240,
+          36
+        ],
+        "2": [
+          104,
+          208
+        ],
+        "3": [
+          88,
+          144
+        ],
+        "4": [
+          384,
+          144
+        ]
+      },
+      "rest_spawn": 2,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0,
+      "width": 480,
+      "height": 320,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            472,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "north_edge_left",
+          "rect": [
+            8,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "north_edge_right",
+          "rect": [
+            256,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_left",
+          "rect": [
+            8,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_right",
+          "rect": [
+            256,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "harbor_water_west",
+          "rect": [
+            8,
+            240,
+            214,
+            72
+          ]
+        },
+        {
+          "kind": "harbor_water_east",
+          "rect": [
+            258,
+            240,
+            214,
+            72
+          ]
+        },
+        {
+          "kind": "painted_gabled_timber",
+          "rect": [
+            49,
+            40,
+            78,
+            89
+          ]
+        },
+        {
+          "kind": "painted_gabled_timber",
+          "rect": [
+            335,
+            40,
+            98,
+            89
+          ]
+        },
+        {
+          "kind": "painted_gabled_timber",
+          "rect": [
+            157,
+            28,
+            62,
+            73
+          ]
+        },
+        {
+          "kind": "tree_trunk",
+          "rect": [
+            14,
+            94,
+            20,
+            30
+          ]
+        },
+        {
+          "kind": "tree_trunk",
+          "rect": [
+            278,
+            28,
+            20,
+            30
+          ]
+        },
+        {
+          "kind": "tree_trunk",
+          "rect": [
+            442,
+            124,
+            20,
+            30
+          ]
+        },
+        {
+          "kind": "work_barrel",
+          "rect": [
+            20,
+            194,
+            11,
+            13
+          ]
+        },
+        {
+          "kind": "work_barrel",
+          "rect": [
+            447,
+            209,
+            11,
+            13
+          ]
+        },
+        {
+          "kind": "work_barrel",
+          "rect": [
+            132,
+            159,
+            11,
+            13
+          ]
+        },
+        {
+          "kind": "work_barrel",
+          "rect": [
+            275,
+            152,
+            11,
+            13
+          ]
+        },
+        {
+          "kind": "timber_stack",
+          "rect": [
+            185,
+            150,
+            33,
+            12
+          ]
+        },
+        {
+          "kind": "timber_stack",
+          "rect": [
+            348,
+            212,
+            33,
+            12
+          ]
+        },
+        {
+          "kind": "sheltered_garden",
+          "rect": [
+            281,
+            83,
+            36,
+            43
+          ]
+        },
+        {
+          "kind": "rope_drying_frame",
+          "rect": [
+            131,
+            68,
+            18,
+            50
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "edda",
+          "center": [
+            168,
+            192
+          ],
+          "sprite": "EDDA",
+          "sprite_index": 0,
+          "approach": [
+            168,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "neri",
+          "center": [
+            312,
+            192
+          ],
+          "sprite": "NERI",
+          "sprite_index": 2,
+          "approach": [
+            312,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "pell",
+          "center": [
+            64,
+            192
+          ],
+          "sprite": "PELL",
+          "sprite_index": 3,
+          "approach": [
+            64,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "tove",
+          "center": [
+            384,
+            160
+          ],
+          "sprite": "TOVE",
+          "sprite_index": 1,
+          "approach": [
+            384,
+            176
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "iven",
+          "center": [
+            416,
+            208
+          ],
+          "sprite": "IVEN",
+          "sprite_index": 4,
+          "approach": [
+            416,
+            224
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "rest",
+          "center": [
+            104,
+            192
+          ],
+          "sprite": "REST",
+          "sprite_index": 23,
+          "approach": [
+            104,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "line_triangle",
+          "center": [
+            160,
+            224
+          ],
+          "sprite": "HANDLE",
+          "sprite_index": 6,
+          "approach": [
+            160,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "line_square",
+          "center": [
+            304,
+            224
+          ],
+          "sprite": "HANDLE",
+          "sprite_index": 6,
+          "approach": [
+            304,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "forecast",
+          "center": [
+            240,
+            192
+          ],
+          "sprite": "FORECAST",
+          "sprite_index": 30,
+          "approach": [
+            240,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "ferry",
+          "center": [
+            240,
+            264
+          ],
+          "sprite": "FERRY_SIGN",
+          "sprite_index": 25,
+          "approach": [
+            240,
+            280
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "headland",
+          "rect": [
+            224,
+            0,
+            32,
+            16
+          ],
+          "approach": [
+            240,
+            16
+          ],
+          "target": 23
+        },
+        {
+          "key": "boathouse",
+          "rect": [
+            76,
+            130,
+            24,
+            15
+          ],
+          "approach": [
+            88,
+            144
+          ],
+          "target": 24
+        },
+        {
+          "key": "kiln",
+          "rect": [
+            372,
+            130,
+            24,
+            15
+          ],
+          "approach": [
+            384,
+            144
+          ],
+          "target": 25
+        },
+        {
+          "key": "ferry",
+          "rect": [
+            224,
+            260,
+            32,
+            32
+          ],
+          "approach": [
+            240,
+            284
+          ],
+          "target": 16
+        }
+      ],
+      "landmarks": [
+        {
+          "kind": "original_gabled_timber_gallery",
+          "bounds": [
+            47,
+            40,
+            82,
+            95
+          ]
+        },
+        {
+          "kind": "original_gabled_timber",
+          "bounds": [
+            333,
+            40,
+            102,
+            95
+          ]
+        },
+        {
+          "kind": "original_gabled_timber",
+          "bounds": [
+            155,
+            28,
+            66,
+            79
+          ]
+        }
+      ],
+      "camera_crops": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          80
+        ],
+        [
+          240,
+          160
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bitmap_sha256": "387e6efc49afa4895e37b1ef75066cfc837ab7d5ef19df388aa918220c6d59be",
+      "collision_lookup": {
+        "unique_bands": 26,
+        "maximum_intervals": 6,
+        "row_bytes": 640,
+        "band_bytes": 436
+      }
+    },
+    {
+      "id": 23,
+      "key": "headland_roads",
+      "name": "Headland Roads",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          400,
+          72
+        ],
+        "2": [
+          80,
+          264
+        ]
+      },
+      "rest_spawn": 2,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0,
+      "width": 480,
+      "height": 320,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            472,
+            0,
+            8,
+            320
+          ]
+        },
+        {
+          "kind": "north_edge_left",
+          "rect": [
+            8,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "north_edge_right",
+          "rect": [
+            256,
+            0,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_left",
+          "rect": [
+            8,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "south_edge_right",
+          "rect": [
+            256,
+            312,
+            216,
+            8
+          ]
+        },
+        {
+          "kind": "coastal_water",
+          "rect": [
+            8,
+            8,
+            84,
+            208
+          ]
+        },
+        {
+          "kind": "headland_tree",
+          "rect": [
+            168,
+            30,
+            20,
+            30
+          ]
+        },
+        {
+          "kind": "headland_tree",
+          "rect": [
+            322,
+            232,
+            20,
+            30
+          ]
+        },
+        {
+          "kind": "headland_tree",
+          "rect": [
+            410,
+            212,
+            20,
+            30
+          ]
+        },
+        {
+          "kind": "beacon_entrance",
+          "rect": [
+            370,
+            14,
+            60,
+            42
+          ]
+        },
+        {
+          "kind": "upper_cliff",
+          "rect": [
+            92,
+            8,
+            18,
+            50
+          ]
+        },
+        {
+          "kind": "headland_stored_planks",
+          "rect": [
+            360,
+            274,
+            33,
+            12
+          ]
+        },
+        {
+          "kind": "headland_stored_planks",
+          "rect": [
+            439,
+            105,
+            33,
+            12
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "junction",
+          "center": [
+            240,
+            192
+          ],
+          "sprite": "JUNCTION_NS",
+          "sprite_index": 10,
+          "approach": [
+            240,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "bearing",
+          "center": [
+            320,
+            192
+          ],
+          "sprite": "BEARING",
+          "sprite_index": 16,
+          "approach": [
+            320,
+            208
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "neri",
+          "center": [
+            352,
+            160
+          ],
+          "sprite": "NERI",
+          "sprite_index": 2,
+          "approach": [
+            352,
+            176
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "tender_clue",
+          "center": [
+            112,
+            96
+          ],
+          "sprite": "FERRY_SIGN",
+          "sprite_index": 25,
+          "approach": [
+            112,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "tender",
+          "center": [
+            144,
+            112
+          ],
+          "sprite": "TENDER",
+          "sprite_index": 17,
+          "approach": [
+            144,
+            128
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "shelter",
+          "center": [
+            176,
+            144
+          ],
+          "sprite": "FORECAST",
+          "sprite_index": 30,
+          "approach": [
+            176,
+            160
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "rest",
+          "center": [
+            80,
+            248
+          ],
+          "sprite": "REST",
+          "sprite_index": 23,
+          "approach": [
+            80,
+            264
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "marker_triangle",
+          "center": [
+            176,
+            224
+          ],
+          "sprite": "MARKER",
+          "sprite_index": 18,
+          "approach": [
+            176,
+            240
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "marker_square",
+          "center": [
+            288,
+            112
+          ],
+          "sprite": "MARKER",
+          "sprite_index": 18,
+          "approach": [
+            288,
+            128
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "marker_diamond",
+          "center": [
+            368,
+            240
+          ],
+          "sprite": "MARKER",
+          "sprite_index": 18,
+          "approach": [
+            368,
+            256
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "town",
+          "rect": [
+            224,
+            304,
+            32,
+            16
+          ],
+          "approach": [
+            240,
+            300
+          ],
+          "target": 22
+        },
+        {
+          "key": "counterworks",
+          "rect": [
+            388,
+            57,
+            24,
+            16
+          ],
+          "approach": [
+            400,
+            72
+          ],
+          "target": 26
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          80
+        ],
+        [
+          240,
+          160
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bitmap_sha256": "8b2a96d6f708a8581dc658b984d07707282791b9aaf0d113335ad7f9cf85ce03",
+      "collision_lookup": {
+        "unique_bands": 14,
+        "maximum_intervals": 4,
+        "row_bytes": 640,
+        "band_bytes": 180
+      }
+    },
+    {
+      "id": 24,
+      "key": "boathouse_gallery",
+      "name": "Boathouse Gallery",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0,
+      "width": 240,
+      "height": 160,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_left",
+          "rect": [
+            8,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "south_right",
+          "rect": [
+            136,
+            152,
+            96,
+            8
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "sprite": "RESET",
+          "sprite_index": 5,
+          "approach": [
+            48,
+            132
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "tether_left",
+          "center": [
+            64,
+            80
+          ],
+          "sprite": "REEL",
+          "sprite_index": 14,
+          "approach": [
+            64,
+            96
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "tether_right",
+          "center": [
+            176,
+            80
+          ],
+          "sprite": "REEL",
+          "sprite_index": 14,
+          "approach": [
+            176,
+            96
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "parcel",
+          "center": [
+            120,
+            80
+          ],
+          "sprite": "CART_LIGHT",
+          "sprite_index": 8,
+          "approach": [
+            120,
+            96
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "roof_parcel",
+          "center": [
+            120,
+            48
+          ],
+          "sprite": "CART_LIGHT",
+          "sprite_index": 8,
+          "approach": [
+            120,
+            64
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "edda",
+          "center": [
+            208,
+            112
+          ],
+          "sprite": "EDDA",
+          "sprite_index": 0,
+          "approach": [
+            208,
+            128
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "south",
+          "rect": [
+            108,
+            144,
+            24,
+            16
+          ],
+          "approach": [
+            120,
+            144
+          ],
+          "target": 22
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "103c0fd2ea9269de5ee5c9c2e75d2ce0957d6af35cbeb4f7f81aa8aa003d39d7",
+      "collision_lookup": {
+        "unique_bands": 3,
+        "maximum_intervals": 2,
+        "row_bytes": 320,
+        "band_bytes": 26
+      }
+    },
+    {
+      "id": 25,
+      "key": "kiln_chart_store",
+      "name": "Kiln and Chart Store",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0,
+      "width": 240,
+      "height": 160,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_left",
+          "rect": [
+            8,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "south_right",
+          "rect": [
+            136,
+            152,
+            96,
+            8
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "sprite": "RESET",
+          "sprite_index": 5,
+          "approach": [
+            48,
+            132
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "vent_64",
+          "center": [
+            64,
+            64
+          ],
+          "sprite": "HEAT_COLD",
+          "sprite_index": 19,
+          "approach": [
+            64,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "chart_64",
+          "center": [
+            64,
+            104
+          ],
+          "sprite": "CHART_DAMP",
+          "sprite_index": 21,
+          "approach": [
+            64,
+            120
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "vent_120",
+          "center": [
+            120,
+            64
+          ],
+          "sprite": "HEAT_COLD",
+          "sprite_index": 19,
+          "approach": [
+            120,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "chart_120",
+          "center": [
+            120,
+            104
+          ],
+          "sprite": "CHART_DAMP",
+          "sprite_index": 21,
+          "approach": [
+            120,
+            120
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "vent_176",
+          "center": [
+            176,
+            64
+          ],
+          "sprite": "HEAT_COLD",
+          "sprite_index": 19,
+          "approach": [
+            176,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "chart_176",
+          "center": [
+            176,
+            104
+          ],
+          "sprite": "CHART_DAMP",
+          "sprite_index": 21,
+          "approach": [
+            176,
+            120
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "tove",
+          "center": [
+            208,
+            112
+          ],
+          "sprite": "TOVE",
+          "sprite_index": 1,
+          "approach": [
+            208,
+            128
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "south",
+          "rect": [
+            108,
+            144,
+            24,
+            16
+          ],
+          "approach": [
+            120,
+            144
+          ],
+          "target": 22
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "d7a166693d303dd759c3791a873f4101c7108721b773cc212e8373a49352eac6",
+      "collision_lookup": {
+        "unique_bands": 3,
+        "maximum_intervals": 2,
+        "row_bytes": 320,
+        "band_bytes": 26
+      }
+    },
+    {
+      "id": 26,
+      "key": "loading_hall",
+      "name": "Loading Hall",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 0,
+      "width": 240,
+      "height": 160,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_left",
+          "rect": [
+            8,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "south_right",
+          "rect": [
+            136,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "loading_rack",
+          "rect": [
+            13,
+            32,
+            34,
+            79
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "sprite": "RESET",
+          "sprite_index": 5,
+          "approach": [
+            48,
+            132
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "junction",
+          "center": [
+            120,
+            96
+          ],
+          "sprite": "JUNCTION_NS",
+          "sprite_index": 10,
+          "approach": [
+            120,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "reel",
+          "center": [
+            64,
+            64
+          ],
+          "sprite": "REEL",
+          "sprite_index": 14,
+          "approach": [
+            64,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "manual_weight",
+          "center": [
+            176,
+            96
+          ],
+          "sprite": "WEIGHT_UP",
+          "sprite_index": 12,
+          "approach": [
+            176,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "cart_a",
+          "center": [
+            80,
+            64
+          ],
+          "sprite": "CART_LIGHT",
+          "sprite_index": 8,
+          "approach": [
+            80,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "cart_b",
+          "center": [
+            160,
+            64
+          ],
+          "sprite": "CART_HEAVY",
+          "sprite_index": 9,
+          "approach": [
+            160,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "next",
+          "center": [
+            208,
+            56
+          ],
+          "sprite": "HANDLE",
+          "sprite_index": 6,
+          "approach": [
+            208,
+            72
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "south",
+          "rect": [
+            108,
+            144,
+            24,
+            16
+          ],
+          "approach": [
+            120,
+            144
+          ],
+          "target": 23
+        },
+        {
+          "key": "next",
+          "rect": [
+            196,
+            44,
+            24,
+            25
+          ],
+          "approach": [
+            208,
+            72
+          ],
+          "target": 27
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "4c02712507a83c75bef992075f6dbd2fc26b42f25552ddf2c752464d6f9325be",
+      "collision_lookup": {
+        "unique_bands": 4,
+        "maximum_intervals": 2,
+        "row_bytes": 320,
+        "band_bytes": 36
+      }
+    },
+    {
+      "id": 27,
+      "key": "crossbeam_chamber",
+      "name": "Crossbeam Chamber",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 1,
+      "width": 240,
+      "height": 160,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_left",
+          "rect": [
+            8,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "south_right",
+          "rect": [
+            136,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "crossbeam_west_post",
+          "rect": [
+            23,
+            38,
+            6,
+            54
+          ]
+        },
+        {
+          "kind": "crossbeam_east_post",
+          "rect": [
+            184,
+            38,
+            6,
+            42
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "sprite": "RESET",
+          "sprite_index": 5,
+          "approach": [
+            48,
+            132
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "junction",
+          "center": [
+            120,
+            96
+          ],
+          "sprite": "JUNCTION_NS",
+          "sprite_index": 10,
+          "approach": [
+            120,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "reel",
+          "center": [
+            64,
+            64
+          ],
+          "sprite": "REEL",
+          "sprite_index": 14,
+          "approach": [
+            64,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "manual_weight",
+          "center": [
+            176,
+            96
+          ],
+          "sprite": "WEIGHT_UP",
+          "sprite_index": 12,
+          "approach": [
+            176,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "cart_a",
+          "center": [
+            80,
+            64
+          ],
+          "sprite": "CART_LIGHT",
+          "sprite_index": 8,
+          "approach": [
+            80,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "cart_b",
+          "center": [
+            160,
+            64
+          ],
+          "sprite": "CART_HEAVY",
+          "sprite_index": 9,
+          "approach": [
+            160,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "next",
+          "center": [
+            208,
+            56
+          ],
+          "sprite": "HANDLE",
+          "sprite_index": 6,
+          "approach": [
+            208,
+            72
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "trial_pan",
+          "center": [
+            208,
+            112
+          ],
+          "sprite": "WEIGHT_UP",
+          "sprite_index": 12,
+          "approach": [
+            208,
+            128
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "south",
+          "rect": [
+            108,
+            144,
+            24,
+            16
+          ],
+          "approach": [
+            120,
+            144
+          ],
+          "target": 26
+        },
+        {
+          "key": "next",
+          "rect": [
+            196,
+            44,
+            24,
+            25
+          ],
+          "approach": [
+            208,
+            72
+          ],
+          "target": 28
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "4420c3e552c480858148c8543a6ec7be0800e0cd3446212f3224bc0a6dcd87c3",
+      "collision_lookup": {
+        "unique_bands": 5,
+        "maximum_intervals": 4,
+        "row_bytes": 320,
+        "band_bytes": 58
+      }
+    },
+    {
+      "id": 28,
+      "key": "relay_gallery",
+      "name": "Relay Gallery",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 2,
+      "width": 240,
+      "height": 160,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_left",
+          "rect": [
+            8,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "south_right",
+          "rect": [
+            136,
+            152,
+            96,
+            8
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "sprite": "RESET",
+          "sprite_index": 5,
+          "approach": [
+            48,
+            132
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "junction",
+          "center": [
+            120,
+            96
+          ],
+          "sprite": "JUNCTION_NS",
+          "sprite_index": 10,
+          "approach": [
+            120,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "reel",
+          "center": [
+            64,
+            64
+          ],
+          "sprite": "REEL",
+          "sprite_index": 14,
+          "approach": [
+            64,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "manual_weight",
+          "center": [
+            176,
+            96
+          ],
+          "sprite": "WEIGHT_UP",
+          "sprite_index": 12,
+          "approach": [
+            176,
+            112
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "cart_a",
+          "center": [
+            80,
+            64
+          ],
+          "sprite": "CART_LIGHT",
+          "sprite_index": 8,
+          "approach": [
+            80,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "cart_b",
+          "center": [
+            160,
+            64
+          ],
+          "sprite": "CART_HEAVY",
+          "sprite_index": 9,
+          "approach": [
+            160,
+            80
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "next",
+          "center": [
+            208,
+            56
+          ],
+          "sprite": "HANDLE",
+          "sprite_index": 6,
+          "approach": [
+            208,
+            72
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "compass",
+          "center": [
+            208,
+            112
+          ],
+          "sprite": "FORECAST",
+          "sprite_index": 30,
+          "approach": [
+            208,
+            128
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "south",
+          "rect": [
+            108,
+            144,
+            24,
+            16
+          ],
+          "approach": [
+            120,
+            144
+          ],
+          "target": 27
+        },
+        {
+          "key": "next",
+          "rect": [
+            196,
+            44,
+            24,
+            25
+          ],
+          "approach": [
+            208,
+            72
+          ],
+          "target": 29
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "6c1a0e61451812110ae933d74fe23426d3200fc08b8a23bd3935601062e6705e",
+      "collision_lookup": {
+        "unique_bands": 3,
+        "maximum_intervals": 2,
+        "row_bytes": 320,
+        "band_bytes": 26
+      }
+    },
+    {
+      "id": 29,
+      "key": "beacon_crown",
+      "name": "Beacon Crown",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 4,
+      "width": 240,
+      "height": 160,
+      "solids": [
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            232,
+            0,
+            8,
+            160
+          ]
+        },
+        {
+          "kind": "upper_wall",
+          "rect": [
+            8,
+            0,
+            224,
+            30
+          ]
+        },
+        {
+          "kind": "south_left",
+          "rect": [
+            8,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "south_right",
+          "rect": [
+            136,
+            152,
+            96,
+            8
+          ]
+        },
+        {
+          "kind": "crown_cliff_west",
+          "rect": [
+            8,
+            30,
+            12,
+            114
+          ]
+        },
+        {
+          "kind": "crown_cliff_east",
+          "rect": [
+            220,
+            30,
+            12,
+            114
+          ]
+        }
+      ],
+      "dynamic_rectangles": [],
+      "objects": [
+        {
+          "key": "reset",
+          "center": [
+            32,
+            132
+          ],
+          "sprite": "RESET",
+          "sprite_index": 5,
+          "approach": [
+            48,
+            132
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "wood_coupling",
+          "center": [
+            64,
+            108
+          ],
+          "sprite": "REEL",
+          "sprite_index": 14,
+          "approach": [
+            64,
+            124
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "metal_coupling",
+          "center": [
+            176,
+            108
+          ],
+          "sprite": "JUNCTION_NS",
+          "sprite_index": 10,
+          "approach": [
+            176,
+            124
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "start",
+          "center": [
+            120,
+            108
+          ],
+          "sprite": "HANDLE",
+          "sprite_index": 6,
+          "approach": [
+            120,
+            124
+          ],
+          "interaction_radius": 24
+        },
+        {
+          "key": "machine",
+          "center": [
+            120,
+            68
+          ],
+          "sprite": "MACHINE_IDLE",
+          "sprite_index": 26,
+          "approach": [
+            120,
+            84
+          ],
+          "interaction_radius": 24
+        }
+      ],
+      "exits": [
+        {
+          "key": "south",
+          "rect": [
+            108,
+            144,
+            24,
+            16
+          ],
+          "approach": [
+            120,
+            144
+          ],
+          "target": 28
+        }
+      ],
+      "landmarks": [],
+      "camera_crops": [
+        [
+          0,
+          0
+        ]
+      ],
+      "bitmap_sha256": "5fc6615a98ed0fb7f6335777588fff0f14a04619a5267462e7c948d04f3576a9",
+      "collision_lookup": {
+        "unique_bands": 3,
+        "maximum_intervals": 2,
+        "row_bytes": 320,
+        "band_bytes": 26
+      }
+    }
+  ],
+  "generated": {
+    "bitmap_bytes": 844800,
+    "rom_payload_bytes": 857808,
+    "collision_lookup_bytes": 4014,
+    "alignment_bytes": 10,
+    "arm32_room_table_bytes": 224,
+    "largest_include_bytes": 31999,
+    "sprite_bytes": 8192
+  }
+}

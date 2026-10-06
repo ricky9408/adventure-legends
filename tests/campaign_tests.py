@@ -422,7 +422,7 @@ class CampaignRun:
         self.check(all(im==images[0] for im in images),name+': journal stable across both display pages')
         self.shot(name+'-journal')
         first_tab=self.get('journal_tab');tab_images={first_tab:self.e.screenshot().crop((8,31,232,153)).tobytes()}
-        for i in range(6):
+        for i in range(7):
             self.tap('A');self.step(6);tab=self.get('journal_tab')
             if tab==first_tab:break
             tab_images[tab]=self.e.screenshot().crop((8,31,232,153)).tobytes()
@@ -431,7 +431,7 @@ class CampaignRun:
         self.check(self.get('journal_tab')==first_tab and len(tab_images)>=2,name+': A cycles all journal tabs and returns')
         self.check(len(set(tab_images.values()))==len(tab_images),name+': every journal tab has distinct visible content')
         companion_tab=2 if 2 in tab_images else 1
-        for _ in range(6):
+        for _ in range(7):
             if self.get('journal_tab')==companion_tab:break
             self.tap('A');self.step(6)
         if len(tab_images)>=3:

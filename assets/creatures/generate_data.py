@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate authored source and generate the reviewed eleven enabled C ROM rows."""
+"""Validate authored source and generate the reviewed development C ROM rows."""
 import json
 from pathlib import Path
 from validate_catalog import load_json, validate, validate_enabled
@@ -39,12 +39,12 @@ def generate():
     out += ['};', '', 'const CreatureLearn creature_learnsets[CREATURE_LEARNSET_COUNT] = {']
     out += ['    {%d, %d},' % (x['level'],x['ability_id']) for x in learns]
     out += ['};', '', 'const CreatureEvolution creature_evolutions[CREATURE_EVOLUTION_COUNT] = {']
-    gates = {'grove_clear':1, 'sky_clear':2, 'core_clear':4, 'reed_basin_restored':8}
-    trials = {'restore_hearth':1, 'restore_canopy':2, 'mend_wind_loom':4, 'raise_amber_arch':8, 'join_two_pools':16}
+    gates = {'grove_clear':1, 'sky_clear':2, 'core_clear':4, 'reed_basin_restored':8, 'north_harbor_ready':16, 'north_counterworks_stable':32}
+    trials = {'restore_hearth':1, 'restore_canopy':2, 'mend_wind_loom':4, 'raise_amber_arch':8, 'join_two_pools':16, 'tension_roof':32, 'dry_ledger':64, 'fragile_cargo':128, 'balanced_reach':256, 'compass_round':512}
     out += ['    {%d, %d, %d, %d, %d, %d},' % (e['from'],e['to'],e['min_level'],e['min_bond'],trials[e['required_trial']],gates[e['required_gate']]) for e in evolutions]
     out += ['};', '', 'const CreatureAbility creature_abilities[CREATURE_ABILITY_COUNT] = {']
     abilities = [a for a in catalog['abilities'] if a['id'] in enabled['enabled_ability_ids']]
-    if len(forms) != 11 or len(learns) != 16 or len(evolutions) != 5 or len(abilities) != 11:
+    if len(forms) != 21 or len(learns) != 31 or len(evolutions) != 10 or len(abilities) != 21:
         raise ValueError('Runtime table counts differ from the reviewed core')
     if {x['ability_id'] for x in learns} != set(enabled['enabled_ability_ids']):
         raise ValueError('Enabled command list differs from authored learnsets')
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     if '--check' in sys.argv:
         if OUT.read_text() != text:
             raise SystemExit('creature_data.c differs from authored catalog; regenerate it')
-        print('Validated eleven enabled core forms, five edges, eleven abilities and deterministic ROM data; obtainability is tested separately')
+        print('Validated 21 development core forms, 10 edges, 21 abilities and deterministic ROM data; native obtainability/art/handlers are tested separately')
     else:
         OUT.write_text(text)
         print(OUT)

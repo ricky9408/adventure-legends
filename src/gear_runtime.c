@@ -5,6 +5,8 @@
 #include "assets.h"
 #include "obj_layout.h"
 #include "regional_powers.h"
+#include "northern_powers.h"
+#include "north_game.h"
 typedef unsigned char u8;
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
@@ -34,7 +36,7 @@ unsigned game_weapon_class(void){return gear_stats.weapon_class;}
 unsigned game_power_cooldown(unsigned base){unsigned reduction=EQUIPMENT_BASE_POWER_COOLDOWN-gear_stats.power_cooldown;return base>reduction?base-reduction:1;}
 unsigned game_gear_base_hp(void){return (unsigned)max_hp*16u;}
 unsigned game_gear_hp(void){return (unsigned)hero_hp_q4;}
-unsigned game_gear_busy(void){unsigned i,busy=weapon_action_busy(&weapon_action,live_arrows())|(roll_ticks?EQUIPMENT_BUSY_ROLLING:0);for(i=0;i<12;i++)if(shots[i].life&&!shots[i].owner)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;if(regional_power_kind==11&&regional_power_time)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;return busy;}
+unsigned game_gear_busy(void){unsigned i,busy=weapon_action_busy(&weapon_action,live_arrows())|(roll_ticks?EQUIPMENT_BUSY_ROLLING:0);for(i=0;i<12;i++)if(shots[i].life&&!shots[i].owner)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;if((regional_power_kind==11&&regional_power_time)||northern_powers_busy())busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;return busy;}
 void game_health_refresh(int fill){
     if(!equipment_derive(&adventure_save.equipment,game_gear_base_hp(),&gear_stats))return;
     if(fill||hero_hp_q4>gear_stats.max_hp_q4)hero_hp_q4=gear_stats.max_hp_q4;
@@ -78,6 +80,10 @@ void game_attack_update(int held,int pressed){
     if(event&WEAPON_EVENT_START){slash_id++;if(weapon_action.weapon_class!=EQUIPMENT_BOW){int d=weapon_action.direction;move_player(d==2?-(int)w->lunge_q8:d==3?(int)w->lunge_q8:0,d==1?-(int)w->lunge_q8:d==0?(int)w->lunge_q8:0);sfx(1);}}
     if(event&WEAPON_EVENT_ARROW)for(i=0;i<2;i++)if(!player_arrows[i].active&&weapon_arrow_spawn(&player_arrows[i],&weapon_action,px,py)){sfx(1);break;}
     if(event&WEAPON_EVENT_ACTIVE){int tx=440,ty=280;if(room==16&&weapon_action_contains(&weapon_action,px,py,tx,ty)&&clear_path(px,py,tx,ty)&&weapon_action_mark_hit(&weapon_action,7))region_game_practice_hit(weapon_action.weapon_class,tx,ty);}
+    if(event&WEAPON_EVENT_ACTIVE){int tx,ty,radius;if(north_game_target(&tx,&ty,&radius)&&game_melee_hit(8,tx,ty,1)){
+        unsigned damage=combat_damage_q4(weapon_action.damage_q4,weapon_action.attack_q4,0,weapon_action.element,COMBAT_NEUTRAL_PHASE,0);
+        if(north_game_weapon_hit(weapon_action.weapon_class,tx,ty,damage)){hitstop=3;impact(tx,ty);sfx(4);}
+    }}
     combo_step=weapon_action.combo;combo_timer=weapon_action.combo_clock;attack_buffer=weapon_action.buffer;swing_damage=weapon_action.damage_q4/16;
     swing=weapon_action.phase&&weapon_action.weapon_class==EQUIPMENT_SWORD&&weapon_action.age<13?13-weapon_action.age:0;
     sword_cd=weapon_action.phase?1:0;
@@ -98,6 +104,10 @@ static int arrow_target(void*context,int x,int y){
         if(!enemies[i].hp)kill_enemy(&enemies[i]);
         return 1;
     }
+    {int tx,ty,radius;if(north_game_target(&tx,&ty,&radius)&&near(x,y,tx,ty,radius)&&clear_path(x,y,tx,ty)){
+        unsigned damage=combat_damage_q4(a->damage_q4,a->attack_q4,0,a->element,COMBAT_NEUTRAL_PHASE,0);
+        if(north_game_weapon_hit(EQUIPMENT_BOW,tx,ty,damage)){impact(tx,ty);sfx(4);}return 1;
+    }}
     if(boss_active()&&near(x,y,boss_x,boss_y,20)&&clear_path(x,y,boss_x,boss_y)){
         if(boss_armor&&!boss_flash){game_boss_hurt(a->damage_q4==48?32:16,a->attack_q4,a->element);boss_flash=16;impact(x,y);sfx(4);}return 1;
     }

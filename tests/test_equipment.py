@@ -15,7 +15,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 U8, U16, U32, S16 = C.c_ubyte, C.c_ushort, C.c_uint, C.c_short
-IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82]
+IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
 OK, INVALID, BUSY, INCOMPATIBLE, FULL, DUPLICATE, ALREADY, PROTECTED, CONFIRM = range(9)
 
 
@@ -189,9 +189,28 @@ class EquipmentTests(unittest.TestCase):
         for item_id in list(range(1024)) + [65535, 0xffffffff]:
             self.assertEqual(bool(self.lib.equipment_definition(item_id)), item_id in IDS)
         for source in range(256):
-            self.assertEqual(self.lib.equipment_reward_item(source), IDS[source] if source < 13 else 0)
+            self.assertEqual(self.lib.equipment_reward_item(source), IDS[source] if source < len(IDS) else 0)
         self.assertEqual(self.lib.equipment_description(1, 2), b'')
         self.assertEqual(self.lib.equipment_name(65535), b'Empty')
+
+    def test_northern_sidegrades_preserve_source_ids_and_no_heal(self):
+        original=[1,2,9,10,17,18,33,34,49,50,65,81,82]
+        added=[3,11,19,35,51,83]
+        self.assertEqual([self.lib.equipment_reward_item(i) for i in range(13)],original)
+        self.assertEqual([self.lib.equipment_reward_item(i) for i in range(13,19)],added)
+        for source,item in enumerate(added,13):
+            ref=self.claim(item);slot=self.lib.equipment_definition(item).contents.slot
+            hp=self.hp.value;self.equip(slot,ref);self.assertLessEqual(self.hp.value,hp)
+            self.assertEqual(self.lib.equipment_reward_source(item),source)
+        self.assertEqual(self.lib.equipment_definition(19).contents.stats.reach_px,12)
+        # Compare each new item's role against an older alternative. There is
+        # a benefit and a cost, not a universal strictly-better replacement.
+        for new,old,benefit,cost in [(3,2,'reach_px','attack_q4'),(11,10,'defense_q4','attack_q4'),
+                                    (19,18,'reach_px','attack_q4'),(35,33,'speed_q8_delta','defense_q4'),
+                                    (51,49,'roll_reduction','speed_q8_delta'),(83,81,'defense_q4','power_reduction')]:
+            a=self.lib.equipment_definition(new).contents.stats;b=self.lib.equipment_definition(old).contents.stats
+            self.assertGreater(getattr(a,benefit),getattr(b,benefit));self.assertLess(getattr(a,cost),getattr(b,cost))
+        self.valid()
 
     def test_weapon_parameters_exact_and_no_action_runtime(self):
         for expected in json.loads((ROOT / 'assets/equipment/catalog.json').read_text())['weapon_classes']:
@@ -209,8 +228,8 @@ class EquipmentTests(unittest.TestCase):
     def test_all_items_all_slots_and_stable_instance_references(self):
         for item in IDS[1:]:
             self.claim(item)
-        self.assertEqual(self.lib.equipment_count(C.byref(self.s)), 13)
-        for ref in range(13):
+        self.assertEqual(self.lib.equipment_count(C.byref(self.s)), len(IDS))
+        for ref in range(len(IDS)):
             item = self.s.bag[ref].item_id
             target = self.lib.equipment_definition(item).contents.slot
             for slot in range(5):
@@ -352,7 +371,7 @@ class EquipmentTests(unittest.TestCase):
         before = bytes(self.s)
         self.assertEqual(self.lib.equipment_claim_many(C.byref(self.s), sources, 2), ALREADY)
         self.assertEqual(bytes(self.s), before)
-        for values, count in [([1, 1], 2), ([1, 13], 2), ([1, 255], 2), ([1], 0), ([1] * 5, 5)]:
+        for values, count in [([1, 1], 2), ([1, len(IDS)], 2), ([1, 255], 2), ([1], 0), ([1] * 5, 5)]:
             array = (U8 * len(values))(*values)
             self.assertEqual(self.lib.equipment_claim_many(C.byref(self.s), array, count), INVALID)
             self.assertEqual(bytes(self.s), before)
@@ -402,9 +421,9 @@ class EquipmentTests(unittest.TestCase):
 
     def test_invalid_and_mismatched_reward_sources_atomic(self):
         before = bytes(self.s)
-        for source in list(range(13, 256)) + [65535, 0xffffffff]:
+        for source in list(range(len(IDS), 256)) + [65535, 0xffffffff]:
             self.assertEqual(self.lib.equipment_claim(C.byref(self.s), 49, source, None), INVALID)
-        for source in range(13):
+        for source in range(len(IDS)):
             if source != 8:
                 self.assertEqual(self.lib.equipment_claim(C.byref(self.s), 49, source, None), INVALID)
         for item in [0, 3, 511, 512, 65535, 0xffffffff]:
@@ -422,7 +441,7 @@ class EquipmentTests(unittest.TestCase):
             if mode in ['caps', 'overflow']:
                 self.assertEqual((stats.max_hp_q4, stats.attack_q4, stats.defense_q4), (192, 24, 8))
                 self.assertEqual((stats.speed_q8, stats.diagonal_q8), (352, 249))
-                self.assertEqual((stats.roll_cooldown, stats.power_cooldown, stats.reach_px, stats.stagger), (36, 67, 4, 3))
+                self.assertEqual((stats.roll_cooldown, stats.power_cooldown, stats.reach_px, stats.stagger), (36, 67, 12 if mode == 'overflow' else 4, 3))
             else:
                 self.assertEqual((stats.max_hp_q4, stats.attack_q4, stats.defense_q4), (96, 0, 0))
                 self.assertEqual((stats.speed_q8, stats.diagonal_q8), (288, 204))

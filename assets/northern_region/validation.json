@@ -1,0 +1,1565 @@
+{
+  "routes": {
+    "hearthwake_quay": {
+      "all_dynamic_open": {
+        "reachable_pixels": 66711,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              240,
+              36
+            ],
+            "cardinal_steps": 248
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              104,
+              208
+            ],
+            "cardinal_steps": 212
+          },
+          {
+            "target": "spawn_3",
+            "point": [
+              88,
+              144
+            ],
+            "cardinal_steps": 292
+          },
+          {
+            "target": "spawn_4",
+            "point": [
+              384,
+              144
+            ],
+            "cardinal_steps": 284
+          },
+          {
+            "target": "exit_headland",
+            "point": [
+              240,
+              16
+            ],
+            "cardinal_steps": 268
+          },
+          {
+            "target": "exit_boathouse",
+            "point": [
+              88,
+              144
+            ],
+            "cardinal_steps": 292
+          },
+          {
+            "target": "exit_kiln",
+            "point": [
+              384,
+              144
+            ],
+            "cardinal_steps": 284
+          },
+          {
+            "target": "exit_ferry",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "object_edda",
+            "point": [
+              168,
+              208
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_neri",
+            "point": [
+              312,
+              208
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_pell",
+            "point": [
+              64,
+              208
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_tove",
+            "point": [
+              384,
+              176
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_iven",
+            "point": [
+              416,
+              224
+            ],
+            "cardinal_steps": 236
+          },
+          {
+            "target": "object_rest",
+            "point": [
+              104,
+              208
+            ],
+            "cardinal_steps": 212
+          },
+          {
+            "target": "object_line_triangle",
+            "point": [
+              160,
+              208
+            ],
+            "cardinal_steps": 156
+          },
+          {
+            "target": "object_line_square",
+            "point": [
+              304,
+              208
+            ],
+            "cardinal_steps": 140
+          },
+          {
+            "target": "object_forecast",
+            "point": [
+              240,
+              208
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_ferry",
+            "point": [
+              240,
+              280
+            ],
+            "cardinal_steps": 4
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 66711,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              240,
+              36
+            ],
+            "cardinal_steps": 248
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              104,
+              208
+            ],
+            "cardinal_steps": 212
+          },
+          {
+            "target": "spawn_3",
+            "point": [
+              88,
+              144
+            ],
+            "cardinal_steps": 292
+          },
+          {
+            "target": "spawn_4",
+            "point": [
+              384,
+              144
+            ],
+            "cardinal_steps": 284
+          },
+          {
+            "target": "exit_headland",
+            "point": [
+              240,
+              16
+            ],
+            "cardinal_steps": 268
+          },
+          {
+            "target": "exit_boathouse",
+            "point": [
+              88,
+              144
+            ],
+            "cardinal_steps": 292
+          },
+          {
+            "target": "exit_kiln",
+            "point": [
+              384,
+              144
+            ],
+            "cardinal_steps": 284
+          },
+          {
+            "target": "exit_ferry",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "object_edda",
+            "point": [
+              168,
+              208
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_neri",
+            "point": [
+              312,
+              208
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_pell",
+            "point": [
+              64,
+              208
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_tove",
+            "point": [
+              384,
+              176
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_iven",
+            "point": [
+              416,
+              224
+            ],
+            "cardinal_steps": 236
+          },
+          {
+            "target": "object_rest",
+            "point": [
+              104,
+              208
+            ],
+            "cardinal_steps": 212
+          },
+          {
+            "target": "object_line_triangle",
+            "point": [
+              160,
+              208
+            ],
+            "cardinal_steps": 156
+          },
+          {
+            "target": "object_line_square",
+            "point": [
+              304,
+              208
+            ],
+            "cardinal_steps": 140
+          },
+          {
+            "target": "object_forecast",
+            "point": [
+              240,
+              208
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_ferry",
+            "point": [
+              240,
+              280
+            ],
+            "cardinal_steps": 4
+          }
+        ]
+      }
+    },
+    "headland_roads": {
+      "all_dynamic_open": {
+        "reachable_pixels": 106824,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              400,
+              72
+            ],
+            "cardinal_steps": 372
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              80,
+              264
+            ],
+            "cardinal_steps": 180
+          },
+          {
+            "target": "exit_town",
+            "point": [
+              240,
+              300
+            ],
+            "cardinal_steps": 16
+          },
+          {
+            "target": "exit_counterworks",
+            "point": [
+              400,
+              72
+            ],
+            "cardinal_steps": 372
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              240,
+              208
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_bearing",
+            "point": [
+              320,
+              208
+            ],
+            "cardinal_steps": 156
+          },
+          {
+            "target": "object_neri",
+            "point": [
+              352,
+              176
+            ],
+            "cardinal_steps": 220
+          },
+          {
+            "target": "object_tender_clue",
+            "point": [
+              112,
+              112
+            ],
+            "cardinal_steps": 300
+          },
+          {
+            "target": "object_tender",
+            "point": [
+              144,
+              128
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_shelter",
+            "point": [
+              176,
+              160
+            ],
+            "cardinal_steps": 188
+          },
+          {
+            "target": "object_rest",
+            "point": [
+              80,
+              264
+            ],
+            "cardinal_steps": 180
+          },
+          {
+            "target": "object_marker_triangle",
+            "point": [
+              176,
+              240
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_marker_square",
+            "point": [
+              288,
+              128
+            ],
+            "cardinal_steps": 204
+          },
+          {
+            "target": "object_marker_diamond",
+            "point": [
+              368,
+              256
+            ],
+            "cardinal_steps": 156
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 106824,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              240,
+              284
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "spawn_1",
+            "point": [
+              400,
+              72
+            ],
+            "cardinal_steps": 372
+          },
+          {
+            "target": "spawn_2",
+            "point": [
+              80,
+              264
+            ],
+            "cardinal_steps": 180
+          },
+          {
+            "target": "exit_town",
+            "point": [
+              240,
+              300
+            ],
+            "cardinal_steps": 16
+          },
+          {
+            "target": "exit_counterworks",
+            "point": [
+              400,
+              72
+            ],
+            "cardinal_steps": 372
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              240,
+              208
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_bearing",
+            "point": [
+              320,
+              208
+            ],
+            "cardinal_steps": 156
+          },
+          {
+            "target": "object_neri",
+            "point": [
+              352,
+              176
+            ],
+            "cardinal_steps": 220
+          },
+          {
+            "target": "object_tender_clue",
+            "point": [
+              112,
+              112
+            ],
+            "cardinal_steps": 300
+          },
+          {
+            "target": "object_tender",
+            "point": [
+              144,
+              128
+            ],
+            "cardinal_steps": 252
+          },
+          {
+            "target": "object_shelter",
+            "point": [
+              176,
+              160
+            ],
+            "cardinal_steps": 188
+          },
+          {
+            "target": "object_rest",
+            "point": [
+              80,
+              264
+            ],
+            "cardinal_steps": 180
+          },
+          {
+            "target": "object_marker_triangle",
+            "point": [
+              176,
+              240
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_marker_square",
+            "point": [
+              288,
+              128
+            ],
+            "cardinal_steps": 204
+          },
+          {
+            "target": "object_marker_diamond",
+            "point": [
+              368,
+              256
+            ],
+            "cardinal_steps": 156
+          }
+        ]
+      }
+    },
+    "boathouse_gallery": {
+      "all_dynamic_open": {
+        "reachable_pixels": 24144,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_tether_left",
+            "point": [
+              64,
+              96
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_tether_right",
+            "point": [
+              176,
+              96
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_parcel",
+            "point": [
+              120,
+              96
+            ],
+            "cardinal_steps": 36
+          },
+          {
+            "target": "object_roof_parcel",
+            "point": [
+              120,
+              64
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_edda",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 24144,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_tether_left",
+            "point": [
+              64,
+              96
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_tether_right",
+            "point": [
+              176,
+              96
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_parcel",
+            "point": [
+              120,
+              96
+            ],
+            "cardinal_steps": 36
+          },
+          {
+            "target": "object_roof_parcel",
+            "point": [
+              120,
+              64
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_edda",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      }
+    },
+    "kiln_chart_store": {
+      "all_dynamic_open": {
+        "reachable_pixels": 24144,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_vent_64",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_chart_64",
+            "point": [
+              64,
+              120
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_vent_120",
+            "point": [
+              120,
+              80
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_chart_120",
+            "point": [
+              120,
+              120
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_vent_176",
+            "point": [
+              176,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_chart_176",
+            "point": [
+              176,
+              120
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_tove",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 24144,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_vent_64",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_chart_64",
+            "point": [
+              64,
+              120
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_vent_120",
+            "point": [
+              120,
+              80
+            ],
+            "cardinal_steps": 52
+          },
+          {
+            "target": "object_chart_120",
+            "point": [
+              120,
+              120
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_vent_176",
+            "point": [
+              176,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_chart_176",
+            "point": [
+              176,
+              120
+            ],
+            "cardinal_steps": 68
+          },
+          {
+            "target": "object_tove",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      }
+    },
+    "loading_hall": {
+      "all_dynamic_open": {
+        "reachable_pixels": 20985,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "exit_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              120,
+              112
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "object_reel",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_manual_weight",
+            "point": [
+              176,
+              112
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_cart_a",
+            "point": [
+              80,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_cart_b",
+            "point": [
+              160,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 20985,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "exit_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              120,
+              112
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "object_reel",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_manual_weight",
+            "point": [
+              176,
+              112
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_cart_a",
+            "point": [
+              80,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_cart_b",
+            "point": [
+              160,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          }
+        ]
+      }
+    },
+    "crossbeam_chamber": {
+      "all_dynamic_open": {
+        "reachable_pixels": 22352,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "exit_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              120,
+              112
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "object_reel",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_manual_weight",
+            "point": [
+              176,
+              112
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_cart_a",
+            "point": [
+              80,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_cart_b",
+            "point": [
+              160,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_trial_pan",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 22352,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "exit_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              120,
+              112
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "object_reel",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_manual_weight",
+            "point": [
+              176,
+              112
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_cart_a",
+            "point": [
+              80,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_cart_b",
+            "point": [
+              160,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_trial_pan",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      }
+    },
+    "relay_gallery": {
+      "all_dynamic_open": {
+        "reachable_pixels": 24144,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "exit_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              120,
+              112
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "object_reel",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_manual_weight",
+            "point": [
+              176,
+              112
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_cart_a",
+            "point": [
+              80,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_cart_b",
+            "point": [
+              160,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_compass",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 24144,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "exit_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_junction",
+            "point": [
+              120,
+              112
+            ],
+            "cardinal_steps": 20
+          },
+          {
+            "target": "object_reel",
+            "point": [
+              64,
+              80
+            ],
+            "cardinal_steps": 108
+          },
+          {
+            "target": "object_manual_weight",
+            "point": [
+              176,
+              112
+            ],
+            "cardinal_steps": 76
+          },
+          {
+            "target": "object_cart_a",
+            "point": [
+              80,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_cart_b",
+            "point": [
+              160,
+              80
+            ],
+            "cardinal_steps": 92
+          },
+          {
+            "target": "object_next",
+            "point": [
+              208,
+              72
+            ],
+            "cardinal_steps": 148
+          },
+          {
+            "target": "object_compass",
+            "point": [
+              208,
+              128
+            ],
+            "cardinal_steps": 92
+          }
+        ]
+      }
+    },
+    "beacon_crown": {
+      "all_dynamic_open": {
+        "reachable_pixels": 21456,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_wood_coupling",
+            "point": [
+              64,
+              124
+            ],
+            "cardinal_steps": 64
+          },
+          {
+            "target": "object_metal_coupling",
+            "point": [
+              176,
+              124
+            ],
+            "cardinal_steps": 64
+          },
+          {
+            "target": "object_start",
+            "point": [
+              120,
+              124
+            ],
+            "cardinal_steps": 8
+          },
+          {
+            "target": "object_machine",
+            "point": [
+              120,
+              84
+            ],
+            "cardinal_steps": 48
+          }
+        ]
+      },
+      "all_dynamic_closed": {
+        "reachable_pixels": 21456,
+        "targets": [
+          {
+            "target": "spawn_0",
+            "point": [
+              120,
+              132
+            ],
+            "cardinal_steps": 0
+          },
+          {
+            "target": "exit_south",
+            "point": [
+              120,
+              144
+            ],
+            "cardinal_steps": 12
+          },
+          {
+            "target": "object_reset",
+            "point": [
+              48,
+              132
+            ],
+            "cardinal_steps": 72
+          },
+          {
+            "target": "object_wood_coupling",
+            "point": [
+              64,
+              124
+            ],
+            "cardinal_steps": 64
+          },
+          {
+            "target": "object_metal_coupling",
+            "point": [
+              176,
+              124
+            ],
+            "cardinal_steps": 64
+          },
+          {
+            "target": "object_start",
+            "point": [
+              120,
+              124
+            ],
+            "cardinal_steps": 8
+          },
+          {
+            "target": "object_machine",
+            "point": [
+              120,
+              84
+            ],
+            "cardinal_steps": 48
+          }
+        ]
+      }
+    }
+  },
+  "budget": {
+    "bitmap_bytes": 844800,
+    "rom_payload_bytes": 857808,
+    "collision_lookup_bytes": 4014,
+    "alignment_bytes": 10,
+    "arm32_room_table_bytes": 224,
+    "largest_include_bytes": 31999,
+    "sprite_bytes": 8192
+  }
+}

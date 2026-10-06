@@ -8,9 +8,10 @@ typedef unsigned int CreatureU32;
 typedef CreatureU8 FormId;
 
 enum {
-    CREATURE_FORM_CAPACITY = 128, CREATURE_ENABLED_COUNT = 11,
-    CREATURE_LEARNSET_COUNT = 16, CREATURE_EVOLUTION_COUNT = 5,
-    CREATURE_ABILITY_COUNT = 11, CREATURE_LEGACY_COUNT = 4,
+    CREATURE_FORM_CAPACITY = 128, CREATURE_FAMILY_CAPACITY = 60,
+    CREATURE_ENABLED_COUNT = 21,
+    CREATURE_LEARNSET_COUNT = 31, CREATURE_EVOLUTION_COUNT = 10,
+    CREATURE_ABILITY_COUNT = 21, CREATURE_LEGACY_COUNT = 4,
     CREATURE_ROSTER_CAPACITY = 160, CREATURE_PARTY_CAPACITY = 4,
     CREATURE_EMPTY_SLOT = 255, CREATURE_MAX_LEVEL = 50,
     CREATURE_MAX_BOND = 100, CREATURE_EXPEDITION_BOND_CAP = 10,
@@ -22,12 +23,18 @@ enum {
      * CampaignSave means ENDING_SEEN and must never be passed through here.
      * Supply (chapter_flags & CREATURE_EVOLUTION_CHAPTER_MASK) |
      *         (quest2_claimed ? CREATURE_REED_RESTORED : 0).
+     * Northern context is separately derived: NORTH_HARBOR_READY requires both
+     * quests 11 and 13 claimed; COUNTERWORKS_STABLE requires quest 21 claimed.
      * Legacy migration/story APIs still accept original campaign flags. */
     CREATURE_EVOLUTION_CHAPTER_MASK = 7, CREATURE_REED_RESTORED = 8,
-    CREATURE_EVOLUTION_CONTEXT_MASK = 15,
+    CREATURE_NORTH_HARBOR_READY = 16, CREATURE_COUNTERWORKS_STABLE = 32,
+    CREATURE_EVOLUTION_CONTEXT_MASK = 63,
     CREATURE_TRIAL_HEARTH = 1, CREATURE_TRIAL_CANOPY = 2,
     CREATURE_TRIAL_WIND_LOOM = 4, CREATURE_TRIAL_AMBER_ARCH = 8,
-    CREATURE_TRIAL_PAIRED_POOLS = 16, CREATURE_TRIAL_MASK = 31,
+    CREATURE_TRIAL_PAIRED_POOLS = 16,
+    CREATURE_TRIAL_TENSION_ROOF = 32, CREATURE_TRIAL_DRY_LEDGER = 64,
+    CREATURE_TRIAL_FRAGILE_CARGO = 128, CREATURE_TRIAL_BALANCED_REACH = 256,
+    CREATURE_TRIAL_COMPASS_ROUND = 512, CREATURE_TRIAL_MASK = 1023,
     CREATURE_EVENT_CAPACITY = 512, CREATURE_FIELD_EVENT_BASE = 384,
     CREATURE_NICKNAME_MAX = 0 /* Named presets are not authored yet. */
 };
@@ -48,7 +55,9 @@ enum FieldCapability {
     FIELD_PRESS_WEIGHT = 1u << 14, FIELD_REVEAL_CURRENT = 1u << 15,
     FIELD_TUNE_LATCH = 1u << 16, FIELD_TURN_VANE = 1u << 17,
     FIELD_UNCAP_WELL = 1u << 18, FIELD_WIND_SOCKET = 1u << 19,
-    FIELD_WOOD_SOCKET = 1u << 20
+    FIELD_WOOD_SOCKET = 1u << 20,
+    FIELD_REEL_LOAD = 1u << 21, FIELD_STORE_HEAT = 1u << 22,
+    FIELD_FLOAT_LOAD = 1u << 23, FIELD_ALIGN_RAIL = 1u << 24
 };
 #define FIELD_HOMURA (FIELD_IGNITE | FIELD_BURN_THORNS | FIELD_FIRE_SOCKET | FIELD_EXPOSE_FIRE)
 #define FIELD_MIDORI (FIELD_GROW_BRIDGE | FIELD_GROW_ROOTS | FIELD_WOOD_SOCKET)
@@ -107,10 +116,17 @@ extern const CreatureAbility creature_abilities[CREATURE_ABILITY_COUNT];
 extern const FormId creature_legacy_forms[CREATURE_LEGACY_COUNT];
 
 /* Enabled core data is not proof of a native acquisition/art/ability route.
- * 13/14/16 are enabled; every other unlisted form (including 121) is disabled. */
+ * Only explicit table rows are enabled; every unlisted form, including legendary
+ * 121 and reserved third-tier forms 21/24, is disabled. Northern rows are
+ * development data until separate art, handlers and native acquisition pass. */
 int creatures_form_id_valid(unsigned form_id);
 const CreatureForm *creatures_form(unsigned form_id);
+/* Counts bound ROM scans; form/family/ability IDs may be sparse and unordered.
+ * Only explicit enabled rows resolve. Ability 12 is reserved and absent. */
 const CreatureAbility *creatures_ability(unsigned ability_id);
+/* An enabled form's reviewed family trial mask, or zero for no trial/unknown.
+ * Never derive a trial from family_id or an enabled table index. */
+unsigned creatures_family_trial(unsigned form_id);
 const char *creatures_name(unsigned form_id);
 const char *creatures_ability_name(unsigned ability_id);
 unsigned creatures_legacy_spirit(unsigned form_id); /* 255 if unavailable */
@@ -163,7 +179,8 @@ int creatures_credit_event(CreatureRoster *roster, unsigned event_id,
                            CreatureU32 xp, unsigned kind);
 /* Legacy family trials 1/2/4/8 are unchanged. PAIRED_POOLS (16) belongs only
  * to Dewspindle/Tidewheel and is awarded by regional personal quest 4.
- * Zero, combined flags and trials for another family are rejected. */
+ * Zero, combined flags and trials for another family are rejected. The u16
+ * save field is unchanged; new trials require explicit collision-free policy. */
 int creatures_mark_trial(CreatureInstance *instance, unsigned trial_flag);
 
 enum CreatureEvolutionStatus {

@@ -1,5 +1,5 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "enabled_form_ids": [
     1,
     2,
@@ -11,7 +11,17 @@
     11,
     13,
     14,
-    16
+    16,
+    19,
+    20,
+    22,
+    23,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78
   ],
   "enabled_evolutions": [
     [
@@ -33,6 +43,26 @@
     [
       13,
       14
+    ],
+    [
+      19,
+      20
+    ],
+    [
+      22,
+      23
+    ],
+    [
+      73,
+      74
+    ],
+    [
+      75,
+      76
+    ],
+    [
+      77,
+      78
     ]
   ],
   "enabled_ability_ids": [
@@ -46,7 +76,17 @@
     8,
     9,
     10,
-    11
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
   ],
-  "note": "Eleven enabled native core definitions, five evolution edges and eleven commands. This manifest does not prove native obtainability, artwork or combat handlers. The authoring catalog retains twelve designs and 128 reserved identities; legendary 121 and all other unlisted forms remain disabled."
+  "note": "Northern integration manifest:21 authored native core rows,10 evolution edges,21 enabled commands. Handler/art/acquisition integration and native acceptance are separate release gates. Ability12, legendary121 and every other unlisted form remain disabled; no128-form completion claim."
 }

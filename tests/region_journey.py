@@ -158,7 +158,7 @@ class RegionJourney:
         self.tap('A');self.settle()
     def open_tab(self,tab):
         self.settle();self.step(2);self.tap('START',2,4)
-        for _ in range(6):
+        for _ in range(7):
             if self.get('journal_tab')==tab:break
             self.tap('A',2,4)
         self.check(self.get('game_state')==PAUSE and self.get('journal_tab')==tab,f'journal tab{tab} opens')
@@ -180,7 +180,7 @@ class RegionJourney:
         # This is intentionally different from the normal wait-before-equip path.
         self.step(90);self.face(0);self.tap('A',1,1);self.tap('START',1,3)
         self.check(self.get('game_state')==PAUSE,'journal can open during real weapon recovery')
-        for _ in range(6):
+        for _ in range(7):
             if self.get('journal_tab')==4:break
             self.tap('A',2,3)
         before=bytes(self.state().equipment);self.tap('RIGHT',2,3);self.tap('R',2,3)

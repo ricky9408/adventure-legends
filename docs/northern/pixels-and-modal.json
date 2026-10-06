@@ -1,0 +1,417 @@
+{
+  "current_rom_scenes": {
+    "death-retry-resume-0": {
+      "rgb_sha256": "0f836baafee9e7a40f6b0b8f4073fdd0d5b434368356bd42deed699ec553368b",
+      "visible_oam_canonical_sha256": "64e5abe59368afa95d66f2adcd4ed20aa39eabf72bfb93485fe77ca5099227e0",
+      "visible_oam_entries": 21
+    },
+    "death-retry-resume-1": {
+      "rgb_sha256": "0f836baafee9e7a40f6b0b8f4073fdd0d5b434368356bd42deed699ec553368b",
+      "visible_oam_canonical_sha256": "64e5abe59368afa95d66f2adcd4ed20aa39eabf72bfb93485fe77ca5099227e0",
+      "visible_oam_entries": 21
+    },
+    "death-retry-resume-2": {
+      "rgb_sha256": "c397ec49416656f37d408e853ab592184ca2e38bcd75bf4b7ab25172c0c5a8ee",
+      "visible_oam_canonical_sha256": "b609f73963210f3add99c16fd62eab91d3f2f64d5b707e7b149d74ed8eb85753",
+      "visible_oam_entries": 21
+    },
+    "death-retry-resume-input": {
+      "rgb_sha256": "97177418136189336f9be0ec7bc509435cce95785e247ea90f6653c56675e208",
+      "visible_oam_canonical_sha256": "514cbf2d00d67c76ec47ec8bfcb206f6d70b55238382bef0fdbdf4ef330a49c5",
+      "visible_oam_entries": 9
+    },
+    "declined-evolution-resume-0": {
+      "rgb_sha256": "7827f7fa6426264ef8d70cd5465d072e52594c410f053c569a547e11f5cea875",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "declined-evolution-resume-1": {
+      "rgb_sha256": "78c4137ecea2b31b531beeded09e35338b473b32ed72a63d38643f924ec90734",
+      "visible_oam_canonical_sha256": "d34e9daf27c34397aabba4b8d352a4fc3ff1cd676b0f3277730011a1c58f5da5",
+      "visible_oam_entries": 20
+    },
+    "declined-evolution-resume-2": {
+      "rgb_sha256": "78c4137ecea2b31b531beeded09e35338b473b32ed72a63d38643f924ec90734",
+      "visible_oam_canonical_sha256": "d34e9daf27c34397aabba4b8d352a4fc3ff1cd676b0f3277730011a1c58f5da5",
+      "visible_oam_entries": 20
+    },
+    "evolution-animation-16": {
+      "rgb_sha256": "dd4e6d642c849d9a91d4ca624635729e93ef47e187998f5d392bca969bfb3257",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "evolution-animation-40": {
+      "rgb_sha256": "13e6b3ab9bd089f6624370b57bd1f44e2e5df34d2877b7be4caf84d6fe7c8b2f",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "evolution-animation-72": {
+      "rgb_sha256": "13e6b3ab9bd089f6624370b57bd1f44e2e5df34d2877b7be4caf84d6fe7c8b2f",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "evolution-confirm": {
+      "rgb_sha256": "98ecffe8976627403a856d7a571d6d3f351d87a98f4ab067fc83c4f9c3642206",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "evolved-form-resume-0": {
+      "rgb_sha256": "8b54c9c3e2b3149f3e6550fdadb90d2da807e8b8f096dbc7dfcb75db3d8319b7",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "evolved-form-resume-1": {
+      "rgb_sha256": "617396a190704f18aff532e5b1420e8e9386efcd0a4a663dbbd78f0f2912e33e",
+      "visible_oam_canonical_sha256": "d34e9daf27c34397aabba4b8d352a4fc3ff1cd676b0f3277730011a1c58f5da5",
+      "visible_oam_entries": 20
+    },
+    "evolved-form-resume-2": {
+      "rgb_sha256": "617396a190704f18aff532e5b1420e8e9386efcd0a4a663dbbd78f0f2912e33e",
+      "visible_oam_canonical_sha256": "d34e9daf27c34397aabba4b8d352a4fc3ff1cd676b0f3277730011a1c58f5da5",
+      "visible_oam_entries": 20
+    },
+    "ordinary-death": {
+      "rgb_sha256": "97177418136189336f9be0ec7bc509435cce95785e247ea90f6653c56675e208",
+      "visible_oam_canonical_sha256": "514cbf2d00d67c76ec47ec8bfcb206f6d70b55238382bef0fdbdf4ef330a49c5",
+      "visible_oam_entries": 9
+    },
+    "pause-resume-0": {
+      "rgb_sha256": "264a771065a6351e8d9d2b8d62c7a9321c0c6b84190af5d29210bb4b4900dca3",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-resume-1": {
+      "rgb_sha256": "95dac31fabda5575fdd0f5cefc67d3722f7a5a299272dcbaf6901eed06c950d7",
+      "visible_oam_canonical_sha256": "9b3b9bebb324653c6ea523305d6ddc542bc2fc9520923c0c865d55d39d1f2f6d",
+      "visible_oam_entries": 20
+    },
+    "pause-resume-2": {
+      "rgb_sha256": "95dac31fabda5575fdd0f5cefc67d3722f7a5a299272dcbaf6901eed06c950d7",
+      "visible_oam_canonical_sha256": "9b3b9bebb324653c6ea523305d6ddc542bc2fc9520923c0c865d55d39d1f2f6d",
+      "visible_oam_entries": 20
+    },
+    "pause-tab-0": {
+      "rgb_sha256": "3f0f37d2a332e5a617ee282003b61d4c64cbb0555acab7fe0a51feec230ca335",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-tab-1": {
+      "rgb_sha256": "b543528d0cf7f4fbc8247a9bbcf1b981c11d68006e91666c6c2422d3fb494a93",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-tab-2": {
+      "rgb_sha256": "43cb7a0f2d5123b76a3c7bf0fc51c3aff90f87c2ca443c1693dc535ca3ce4c4e",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-tab-3": {
+      "rgb_sha256": "7827f7fa6426264ef8d70cd5465d072e52594c410f053c569a547e11f5cea875",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-tab-4": {
+      "rgb_sha256": "fcc1652c2176a0acc572d5c33ab6e09134b129f5444e25162b5af9653d143a6f",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-tab-5": {
+      "rgb_sha256": "d6abfc68024713f0eb7c0fdd7ce82ed1b530d1a863548ae4d60da87bc2571dec",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    },
+    "pause-tab-6": {
+      "rgb_sha256": "264a771065a6351e8d9d2b8d62c7a9321c0c6b84190af5d29210bb4b4900dca3",
+      "visible_oam_canonical_sha256": "918bc566ccd7f3c69b07ca7ce9db1db328e6f980705c778e2ad0a75209b2164a",
+      "visible_oam_entries": 9
+    }
+  },
+  "independent_boot_comparison": {
+    "after_rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+    "before_rom_sha256": "52408cd9e91d851396bfad31de92edd1aed1f302bc60aa989eb7d1c2bc674364",
+    "comparisons": [
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-0",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-1",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-2",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-3",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-4",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-5",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-tab-6",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-resume-0",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-resume-1",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "pause-resume-2",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolution-confirm",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "declined-evolution-resume-0",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "declined-evolution-resume-1",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "declined-evolution-resume-2",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolution-animation-16",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolution-animation-40",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolution-animation-72",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolved-form-resume-0",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolved-form-resume-1",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "evolved-form-resume-2",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "ordinary-death",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "death-retry-resume-input",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "death-retry-resume-0",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "death-retry-resume-1",
+        "visible_oam_identical": true
+      },
+      {
+        "passed": true,
+        "pixels_identical": true,
+        "scene": "death-retry-resume-2",
+        "visible_oam_identical": true
+      }
+    ],
+    "cross_rom_machine_states_loaded": false
+  },
+  "modal_comparison_report_sha256": "90073a9cb629580423da3e8042c9b4d7d4edd9a76c2ed27621d9d35604bdce19",
+  "player_facing": false,
+  "resume_observations": {
+    "death-retry-resume": [
+      {
+        "current_form": 20,
+        "frame": 2288,
+        "world_oam_count": 12
+      },
+      {
+        "current_form": 20,
+        "frame": 2289,
+        "world_oam_count": 12
+      },
+      {
+        "current_form": 20,
+        "frame": 2290,
+        "world_oam_count": 12
+      }
+    ],
+    "declined-evolution-resume": [
+      {
+        "current_form": 19,
+        "frame": 1170,
+        "world_oam_count": 0
+      },
+      {
+        "current_form": 19,
+        "frame": 1171,
+        "world_oam_count": 11
+      },
+      {
+        "current_form": 19,
+        "frame": 1172,
+        "world_oam_count": 11
+      }
+    ],
+    "evolved-form-resume": [
+      {
+        "current_form": 20,
+        "frame": 1339,
+        "world_oam_count": 0
+      },
+      {
+        "current_form": 20,
+        "frame": 1340,
+        "world_oam_count": 11
+      },
+      {
+        "current_form": 20,
+        "frame": 1341,
+        "world_oam_count": 11
+      }
+    ],
+    "pause-resume": [
+      {
+        "current_form": 19,
+        "frame": 918,
+        "world_oam_count": 0
+      },
+      {
+        "current_form": 19,
+        "frame": 919,
+        "world_oam_count": 11
+      },
+      {
+        "current_form": 19,
+        "frame": 920,
+        "world_oam_count": 11
+      }
+    ]
+  },
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "scene_report_sha256": "4a683c7997418b0aa881261f982c60501a82b55910defb416a6a3968a5b2fada",
+  "schema": 1,
+  "source_pixel_alignments": [
+    {
+      "camera": [
+        119,
+        124
+      ],
+      "mismatches": 0,
+      "name": "quay-source-alignment-3",
+      "rgb_background_pixels": 36467,
+      "rgb_mismatches": 0,
+      "room": 22,
+      "rows_compared": 160,
+      "source_pixels": 38400
+    },
+    {
+      "camera": [
+        120,
+        124
+      ],
+      "mismatches": 0,
+      "name": "quay-source-alignment-0",
+      "rgb_background_pixels": 36468,
+      "rgb_mismatches": 0,
+      "room": 22,
+      "rows_compared": 160,
+      "source_pixels": 38400
+    },
+    {
+      "camera": [
+        121,
+        124
+      ],
+      "mismatches": 0,
+      "name": "quay-source-alignment-1",
+      "rgb_background_pixels": 36468,
+      "rgb_mismatches": 0,
+      "room": 22,
+      "rows_compared": 160,
+      "source_pixels": 38400
+    },
+    {
+      "camera": [
+        122,
+        124
+      ],
+      "mismatches": 0,
+      "name": "quay-source-alignment-2",
+      "rgb_background_pixels": 36465,
+      "rgb_mismatches": 0,
+      "room": 22,
+      "rows_compared": 160,
+      "source_pixels": 38400
+    }
+  ],
+  "spoilers": true,
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018"
+}

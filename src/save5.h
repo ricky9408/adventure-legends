@@ -5,11 +5,17 @@
 #include "equipment.h"
 
 /* v5 never writes SRAM 0..0x1ff, including every v2/v3 byte and both v4 banks.
- * Every multibyte wire field is explicitly little endian. */
+ * Every multibyte wire field is explicitly little endian.
+ * Content revisions are distinct from wire version5: readers accept exactly
+ * revision1 (8 forms, reserved quests/gear), revision2 (11 forms/13 items), and
+ * revision3 (21 forms/19 items, Northern quests11..21/areas22..29). Revision1
+ * installs only starter equipment; revision2->3 preserves existing typed bytes
+ * and adds no recruit, trial, quest, gear, visit or reward on load. All writes
+ * use revision3. Unknown revisions and cross-revision content are rejected. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
     SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5056,
-    SAVE5_CONTENT_REVISION = 2, SAVE5_COMMIT = 0xA5,
+    SAVE5_CONTENT_REVISION = 3, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,

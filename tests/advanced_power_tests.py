@@ -58,6 +58,7 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
 #include "gear_runtime.h"
 #include "combat_rules.h"
 #include "regional_powers.h"
+#include "northern_powers.h"
 #include "ui.h"
 #define MAX_ENEMIES 6
 #define PLAY 1
@@ -83,6 +84,13 @@ void game_enemy_stagger(unsigned i,unsigned bonus){(void)i;(void)bonus;}
 void game_health_heal(unsigned amount){hp+=(int)(amount/16);hero_hp_q4=hp*16;}
 void game_health_hurt(unsigned amount,unsigned phase){(void)phase;hp-=(int)(amount/16);hero_hp_q4=hp*16;}
 void game_attacks_reset(void){}
+/* This supplemental fixture exercises legacy commands5–8. The live regional
+ * and Northern power handlers, shot generations and tile lease have their own
+ * unchanged-module host tests plus controller-only cartridge coverage. */
+void regional_powers_reset(void){}
+void northern_powers_reset(void){}
+void northern_powers_shot_spawn(unsigned index){(void)index;}
+int northern_powers_shot_is_reflected(unsigned index){(void)index;return 0;}
 unsigned game_companion_phase(void){return CREATURE_FIRE;}
 unsigned game_power_cooldown(unsigned base){return base;}
 int game_melee_hit(unsigned id,int x,int y,int boss){(void)id;(void)x;(void)y;(void)boss;return sword_connect&&swing==11;}
@@ -104,7 +112,7 @@ int sword_hits(int x,int y,int r){(void)x;(void)y;(void)r;return sword_connect;}
 void progression_encounter(unsigned a,unsigned b){(void)a;(void)b;}
 void obj_add(int a,int b,int c,int d,int e,int f,int g,int h){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;(void)h;}
 '''
-    shim += '\n'.join(body(n) for n in ('kill_enemy','damage_phase','damage','fire_shot','update_shots','update_enemies'))
+    shim += '\n'.join(body(n) for n in ('kill_enemy','damage_amount','damage_phase','damage','fire_shot','shot_segment_clear','update_shots','update_enemies'))
     shim += r'''
 void source_reset(void){
  memset(enemies,0,sizeof enemies);memset(shots,0,sizeof shots);

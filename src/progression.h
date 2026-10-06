@@ -1,13 +1,16 @@
 #ifndef EMBER_PROGRESSION_H
 #define EMBER_PROGRESSION_H
 #include "save5.h"
-enum { PROGRESSION_SPIRIT_COUNT=6, PROGRESSION_WATER=4, PROGRESSION_METAL=5 };
+enum { PROGRESSION_SPIRIT_COUNT=11, PROGRESSION_WATER=4, PROGRESSION_METAL=5,
+       PROGRESSION_NORTH_WOOD=6, PROGRESSION_NORTH_FIRE=7,
+       PROGRESSION_NORTH_WATER=8, PROGRESSION_NORTH_EARTH=9, PROGRESSION_NORTH_METAL=10 };
 extern Save5State adventure_save;
 /* Best owned form per engine adapter; regional entries are zero until owned.
  * Selected HUD/body/menu art must use the actual instance, not this cache. */
 extern unsigned progression_forms[PROGRESSION_SPIRIT_COUNT], progression_revision;
 extern int save_requested, save_resume_state;
-/* Enabled identity -> legacy 0..3, Water4, Metal5; 255 if unsupported. */
+/* Enabled identity -> compact explicit family adapter0..10; 255 if unsupported.
+ * Persistent family IDs are sparse and must never be used as array indices. */
 unsigned progression_form_spirit(unsigned form_id);
 unsigned progression_current_spirit(void); /* selected instance, safe0 if absent */
 unsigned progression_current_form(void);   /* selected actual form, 0 if absent */
@@ -16,7 +19,7 @@ unsigned progression_evolution_context(void);
 int progression_load(void);
 void progression_new(void);
 void progression_refresh(void);
-/* Explicit family selection accepts adapters0..5. Keeps exact selected
+/* Explicit family selection accepts adapters0..10. Keeps exact selected
  * instance if it already matches. Save/load never call this to infer selection. */
 void progression_select(unsigned engine_spirit);
 void progression_story(void);

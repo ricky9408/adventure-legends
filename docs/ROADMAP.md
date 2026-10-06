@@ -15,9 +15,9 @@ Every roster release will separately report:
 3. Obtainable: a normal player can acquire the form in the shipped world
 4. Verified: evolution/acquisition, field actions, combat, saves and performance are tested
 
-At the current river-region milestone, **11 forms are implemented, obtainable and controller-verified**. There are six live companion families, five optional evolution paths, three player weapon classes, five equipment slots, 13 earnable items, 22 areas and 11 regional side quests. All 11 forms fit a single controller-earned/reloaded collection, without duplicated family instances or fabricated history.
+At the current **Northern N5 candidate**, **21 forms are implemented, obtainable and controller-verified**. There are eleven retained companion families, ten optional evolution paths, three player weapon classes, five equipment slots, 19 earnable items, 30 areas and 22 regional side quests. All 21 historical forms fit a single controller-earned/reloaded collection with eleven real individuals. They are not duplicated from collection history.
 
-The first three-lantern story remains a completed foundation. One Asian-inspired riverside town/field and four local activity rooms are now playable. Northern-European, southern-island, magma-mountain and underwater regions remain planned; the complete 128-form roster and legendary progression are not finished. Twelve forms are designed, eleven enabled, zero legendaries obtainable.
+The three-lantern story remains a completed foundation. The river region and a bright Northern-inspired harbor/headland chapter are playable. Southern-island, magma-mountain and underwater regions remain planned; the complete 128-form roster and legendary progression are unfinished. Twenty-two forms are designed, twenty-one enabled, zero legendaries obtainable. Native emulator acceptance is separate from physical-hardware testing, which remains outstanding.
 
 ## Completed exploration foundation
 
@@ -43,7 +43,7 @@ This milestone establishes a coherent playable baseline while the larger systems
 - Stable 1–128 catalog identifiers (0 means empty) with explicit unimplemented slots; data-driven family, phase, polarity, stats, learnsets and acquisition conditions
 - Wood, Fire, Earth, Metal and Water phases, with Yin/Yang as a separate dimension; research cited in the system design and numerical battle rules identified as original game interpretation
 - Party/storage, experience, learnable abilities and explicit evolution choices; preserve required traversal powers through evolution and party changes
-- Eleven substantive representative forms across all five phases, including genuine evolutions; rare/legendary encounter progression is still a later milestone
+- Twenty-one substantive representative forms across all five phases, including genuine evolutions; rare/legendary encounter progression is still a later milestone
 - Journal/catalog, field selection and intelligible feedback at 240×160
 - Save expansion with non-overwriting migration, bounded storage and old-save fixtures; no newly mandatory grinding in the existing story
 
@@ -64,6 +64,18 @@ Acceptance: each weapon has combat/traversal tests, each slot changes the docume
 
 Delivered: three native weapon state machines, attack snapshots, safe projectile ownership/tags, fractional-health armor, clear equipment comparisons, 13 meaningful rewards and controller-verified training/combat. Expansion should build on this tested set, not add inert catalog rows.
 
+## Completed candidate: Northern harbor chapter
+
+- Eight connected new areas with a harbor town, scrolling headland, working interiors and a multiroom movable-load/rail puzzle sequence
+- Five genuinely distinct new base/evolution pairs, ten field/combat commands, eleven local quests and six gear sidegrades
+- Guaranteed base companions precede mandatory gates; reset, re-entry, safe return and reassignment stay available
+- Content revision 3 preserves earlier revision 1/2 data and uses exact historical whitelists, coupled retained ownership and atomic one-time rewards
+- All 21 forms, 19 items and 22 regional quests obtained and independently reloaded through controller input; separate Sky-clear route proves no old ending or optional River quest prerequisite
+- All ten commands, all three boss weapon classes, cooldown/equip/picker control paths and actual native frame presentation verified
+- Five-visible-enemy combined stress: 420/420 hardware updates and flips; cold seven-tab journals: 80/80; no physical-GBA claim
+
+See `docs/VERIFICATION.md` and the bounded `docs/northern/` reports for exact-candidate evidence and the status of the whole-game aggregate. This does not mean the expanded game is complete.
+
 ## Ongoing: regions, towns and side quests
 
 - Connected original Asian-inspired, Northern-European-inspired, southern-island, magma-mountain and underwater regions, with researched visual reference and distinct original architecture/ecology
@@ -83,6 +95,44 @@ Acceptance: each region has a playable entrance-to-exit route, distinct local ac
 - Balance acquisition rates, XP, stats, phase interactions, equipment and bosses as an integrated action game
 
 Acceptance: a machine-checked acquisition/evolution graph reaches all 128 forms, representative manual visual/play review accompanies automation, every ability has a defined role, and progression has no forced palette-swap filler.
+
+### Finite trial and capability namespaces: required next-batch gate
+
+The Northern candidate uses **10 distinct personal-trial bits in a 16-bit
+instance field** (values 1 through 512) and **25 of 32 field-capability bits**.
+Six unique trial positions remain (1024, 2048, 4096, 8192, 16384, 32768), and seven
+capability positions remain (bits 25–31). The locked catalog allocates 60
+families, so one globally unique trial bit per family cannot scale to the full
+roster. Never allocate a trial value beyond 32768, truncate it to 16 bits, or
+shift beyond the capability word.
+
+Before approving the next family batch, review its namespace demand and choose
+an explicit long-term trial model. The decision is required **before** a batch
+would exceed either remaining capacity; using the last positions is not a
+substitute for the design review. Two possible directions need separate review:
+
+- A family-scoped trial namespace may reuse numeric bits for different families,
+  with explicit family/form lookup and a versioned policy. It must preserve the
+  exact meanings and saved bytes of all released families, distinguish multiple
+  trials within one family, preserve evolution ownership, and reject accidental
+  cross-family evidence. Today's validator requires globally distinct nonzero
+  family trials, so reuse is not implicitly enabled by the existing API
+- A wider persisted trial representation needs a new wire-layout/version plan,
+  explicit migration from every released format/content revision, new SRAM/ROM/
+  RAM/stack budgets, and complete interrupted-write and malformed-record tests.
+  Widening a C field alone must never change the established 24-byte wire record
+
+Prefer existing reusable capability tags plus explicit command/target rules
+when they express the same action. A genuinely new capability must justify its
+bit, bounded runtime handler, target semantics and regression coverage. Do not
+collapse unrelated old abilities just to reclaim a bit, or derive capabilities
+from phase, polarity, family number or an item's damage type.
+
+The reviewed decision must specify stable IDs, old/new revision whitelists,
+translation or identity-preserving migration, no fabricated trial rewards,
+collision/overflow rejection and exact-save fixtures before activation. This
+is a future architecture gate only; Northern N5's 16-bit trial field, 32-bit
+capabilities and frozen runtime remain unchanged.
 
 ## Release gate
 

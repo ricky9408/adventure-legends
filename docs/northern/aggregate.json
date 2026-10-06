@@ -1,0 +1,356 @@
+{
+  "asset_regeneration": {
+    "changed": [],
+    "existing_file_count": 859,
+    "new": [
+      "assets/region/region_preview_2x.png",
+      "assets/region/native_camera_sheet_2x.png",
+      "assets/region/native_camera_sheet.png",
+      "assets/region/region_preview_native.png"
+    ],
+    "new_files_are_excluded_generated_overviews": true,
+    "report_sha256": "dab7abffb382c8638bc6fb5109feeb52b919ea13eb917c710717c60604bb531a"
+  },
+  "bridge_smoke_tests_completed": true,
+  "campaign_cadence": {
+    "minimal": {
+      "full_strict_native_cadence_pass": true,
+      "player_facing": false,
+      "report": "build/campaign-performance-minimal/campaign-performance.json",
+      "report_bytes": 500424,
+      "report_sha256": "812357038aad1eb4c1616213e4174938a96ae253c7e944a40faa9767e118df89",
+      "scene_count": 60,
+      "suite": null,
+      "transition_count": 28
+    },
+    "optional": {
+      "full_strict_native_cadence_pass": true,
+      "player_facing": false,
+      "report": "build/campaign-performance-optional/campaign-performance.json",
+      "report_bytes": 501010,
+      "report_sha256": "081ccb494f4c2526393f7c17541952cf71459a98e38575ca42458b148f787ddb",
+      "scene_count": 60,
+      "suite": null,
+      "transition_count": 28
+    }
+  },
+  "clean_rebuild": {
+    "rom_and_symbols_byte_identical": true
+  },
+  "command": "make test test-tools",
+  "completion_evidence": {
+    "bytes": 890474,
+    "log": "build/n5-full-aggregate.log",
+    "raw_log_not_published": true,
+    "sha256": "821f5eb5e8cb955f329eb10902dd5e5a445b059bd796a8a810245c2ade1ab6bf"
+  },
+  "counting_notes": [
+    "One report per suite; intermediate campaign manifests copied into other reports are not counted again",
+    "Assertions repeat across frames and branches; totals are not counts of distinct behaviors",
+    "The independent historical N5 acceptance includes one additional modal equivalence check; this fresh no-comparison modal setup has 161 checks",
+    "The separately retained 25-scene before/after modal comparison and player teaser are outside this fresh aggregate",
+    "Do not add this rerun total to archived Northern acceptance totals as unique coverage"
+  ],
+  "exit_code": 0,
+  "host_scope": "All make test host targets and make test-tools completed in the pinned successful log; only separately structured host reports are counted here",
+  "limits": [
+    "Emulator verification only; physical GBA/flash cartridges untested",
+    "Full 128-form roster and later regions remain unfinished"
+  ],
+  "mixed_review_checks": 20,
+  "native_controller_checks": 44707,
+  "native_controller_suite_count": 21,
+  "native_suites": {
+    "advanced-powers": {
+      "checks_failed": 0,
+      "checks_passed": 504,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/advanced-power-qa/advanced-power-report.json",
+      "report_bytes": 37203,
+      "report_sha256": "4642d2e642bfc1b7df5867a279fc95849329943d93cb5435e58d39b4dd424a05",
+      "suite": null,
+      "symbols_hash_recorded": true
+    },
+    "campaign-minimal": {
+      "checks_failed": 0,
+      "checks_passed": 3425,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/campaign-qa/campaign-report.json",
+      "report_bytes": 463410,
+      "report_sha256": "ebd18fa0e95f00adda3f4f62e08eb30a5e11bf09721e171e9c0a7204a8b7a525",
+      "suite": null,
+      "symbols_hash_recorded": true
+    },
+    "campaign-optional": {
+      "checks_failed": 0,
+      "checks_passed": 3481,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/campaign-optional/campaign-report.json",
+      "report_bytes": 470030,
+      "report_sha256": "6a65dd0aa6bb115eece6653786debe263fa410fa48348947a8ce798ff32da079",
+      "suite": null,
+      "symbols_hash_recorded": true
+    },
+    "evolution-eight": {
+      "checks_failed": 0,
+      "checks_passed": 1237,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/evolution-qa/evolution-report.json",
+      "report_bytes": 438527,
+      "report_sha256": "f6a3f851e28500ac3fe60e37229c1e0b107e6520888c74a5643bb04931ad90e9",
+      "suite": "evolution-and-trial-controller-journey",
+      "symbols_hash_recorded": true
+    },
+    "evolution-migrated": {
+      "checks_failed": 0,
+      "checks_passed": 798,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/evolution-migrated/evolution-report.json",
+      "report_bytes": 247896,
+      "report_sha256": "743ecbc76a589aad7a5268b8a1f2261c4fe575bfab7edff6f58b098e9ec0fc7e",
+      "suite": "evolution-and-trial-controller-journey",
+      "symbols_hash_recorded": true
+    },
+    "evolution-six-hearts": {
+      "checks_failed": 0,
+      "checks_passed": 1206,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/evolution-six-hearts/evolution-report.json",
+      "report_bytes": 433561,
+      "report_sha256": "d0d4337d27e138976a800e906f274de45c1e93b259d8ddc8edd9d01996427211",
+      "suite": "evolution-and-trial-controller-journey",
+      "symbols_hash_recorded": true
+    },
+    "expeditions": {
+      "checks_failed": 0,
+      "checks_passed": 115,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/expedition-qa/expedition-report.json",
+      "report_bytes": 15047,
+      "report_sha256": "7b5a5dde42eaac410737cf4ef26cbec4d913efd4ec8731fa95b12d46b824323d",
+      "suite": "expedition-controller-regression",
+      "symbols_hash_recorded": true
+    },
+    "exploration": {
+      "checks_failed": 0,
+      "checks_passed": 144,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/exploration/exploration-tests.json",
+      "report_bytes": 798547,
+      "report_sha256": "a2cbea29eef00cd9ae757ad91a14c0914384dec91d63888c800f713a983ef192",
+      "suite": null,
+      "symbols_hash_recorded": true
+    },
+    "first-chapter": {
+      "checks_failed": 0,
+      "checks_passed": 24,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/qa/playthrough.json",
+      "report_bytes": 1387,
+      "report_sha256": "2b0cdcbdc2b81943837e0acc4b135fd64ec472be523bc7e42a3f4e64b989d566",
+      "suite": null,
+      "symbols_hash_recorded": true
+    },
+    "fullscreen": {
+      "checks_failed": 0,
+      "checks_passed": 97,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/fullscreen-qa/fullscreen-report.json",
+      "report_bytes": 68877,
+      "report_sha256": "0bbb03aee6f6a1bdb5b006a339b0d13536811a22ae527c826c82d72f3f4d48ff",
+      "suite": "fullscreen-native-pixel-and-cadence",
+      "symbols_hash_recorded": true
+    },
+    "northern-boss-controls": {
+      "checks_failed": 0,
+      "checks_passed": 221,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/northern-boss-controls/northern-stress.json",
+      "report_bytes": 119611,
+      "report_sha256": "812dde21dbc19ac6f55f40a26df0d3bd9e8d16906817ba9581f8d47c91ef8a82",
+      "suite": "northern-native-stress",
+      "symbols_hash_recorded": true
+    },
+    "northern-combat": {
+      "checks_failed": 0,
+      "checks_passed": 8837,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/northern-combat/northern-combat.json",
+      "report_bytes": 13589536,
+      "report_sha256": "5ae49f8d417f0672ee889df69e208feae9beefe90eb443c780905e61aadf740e",
+      "suite": "northern-native-combat-controls",
+      "symbols_hash_recorded": true
+    },
+    "northern-journey": {
+      "checks_failed": 0,
+      "checks_passed": 9978,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/northern-journey/northern-journey.json",
+      "report_bytes": 1820970,
+      "report_sha256": "4b63eed1199370c512ab69d62c2748e596734d4dbf68a0230392c42d780c5d29",
+      "suite": "northern-native-controller-journey",
+      "symbols_hash_recorded": true
+    },
+    "northern-modal-controller": {
+      "checks_failed": 0,
+      "checks_passed": 161,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/northern-modal-pixels/northern-journey.json",
+      "report_bytes": 142300,
+      "report_sha256": "c7cf1d4460fbf95b7b8ba0c2cfced7542ab11b2281c548c49c68574d027e2360",
+      "suite": "northern-native-controller-journey",
+      "symbols_hash_recorded": true
+    },
+    "northern-sky-route": {
+      "checks_failed": 0,
+      "checks_passed": 4668,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/northern-sky-route/northern-journey.json",
+      "report_bytes": 780811,
+      "report_sha256": "4b1f904f50225272b658947edc28c38359cb33b100b7a6667e559f4823b235d7",
+      "suite": "northern-native-controller-journey",
+      "symbols_hash_recorded": true
+    },
+    "northern-stress": {
+      "checks_failed": 0,
+      "checks_passed": 314,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/northern-stress/northern-stress.json",
+      "report_bytes": 758009,
+      "report_sha256": "7f0656733d5093b82f1da708e13e0ba398e8d6073827f01cb832fa918042ea9c",
+      "suite": "northern-native-stress",
+      "symbols_hash_recorded": true
+    },
+    "pr5-migration": {
+      "checks_failed": 0,
+      "checks_passed": 91,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/pr5-quickparty-migration-qa/quickparty-migration-report.json",
+      "report_bytes": 19043,
+      "report_sha256": "85cdff3b31a4ce5d7c16a166dba21bf4afe8defc8b308d41fa48b850b87c279b",
+      "suite": "pr5-quickparty-revision1-to-current content revision-controller-migration",
+      "symbols_hash_recorded": true
+    },
+    "quickparty": {
+      "checks_failed": 0,
+      "checks_passed": 573,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/quickparty-qa/quickparty-report.json",
+      "report_bytes": 114641,
+      "report_sha256": "48f7327191ce9436fb6623c34162ac0dd2e600c6c6ea784877545b1623552e39",
+      "suite": "quick-party-native-controller-integration",
+      "symbols_hash_recorded": true
+    },
+    "quickparty-evolved": {
+      "checks_failed": 0,
+      "checks_passed": 388,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/quickparty-evolved-qa/quickparty-report.json",
+      "report_bytes": 86695,
+      "report_sha256": "1dc430302025d19fd2a2dd4847f96e40b176c2141410c72941d5f1e81ca529e1",
+      "suite": "quick-party-native-controller-integration",
+      "symbols_hash_recorded": true
+    },
+    "review-with-corrupt-save": {
+      "checks_failed": 0,
+      "checks_passed": 20,
+      "evidence": "native controller inputs plus deliberate copied-SRAM corruption",
+      "player_facing": false,
+      "report": "build/review/review-tests.json",
+      "report_bytes": 1310,
+      "report_sha256": "402a18c080cefeaed24db9a64eee9e7eb4744d9ebdb7179fa4fa97c6512ca805",
+      "suite": null,
+      "symbols_hash_recorded": false
+    },
+    "river-combat": {
+      "checks_failed": 0,
+      "checks_passed": 2761,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/region-combat/region-combat.json",
+      "report_bytes": 605818,
+      "report_sha256": "6dc58ea294e3c52bdc480c90798c33679365b5a96ceeea33d84daa823f9ce094",
+      "suite": "region-native-combat",
+      "symbols_hash_recorded": true
+    },
+    "river-journey": {
+      "checks_failed": 0,
+      "checks_passed": 5684,
+      "evidence": "native controller gameplay",
+      "player_facing": false,
+      "report": "build/region-journey/region-journey.json",
+      "report_bytes": 1072775,
+      "report_sha256": "b05700d9502b2fa959db7e9ad794992ad9ff0eb80f969d369a870e70ed324c97",
+      "suite": "reedhaven-native-controller-journey",
+      "symbols_hash_recorded": true
+    }
+  },
+  "player_facing": false,
+  "prior_attempt": "An obsolete advanced-power host shim failed before the fresh complete rerun; the shim was corrected without changing runtime/art",
+  "rom_bytes": 4351688,
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "schema": 1,
+  "spoilers": true,
+  "status": "passed",
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+  "synthetic_host_reports": {
+    "advanced-source-contract": {
+      "checks_passed": 39,
+      "native_obtainability_proof": false,
+      "player_facing": false,
+      "report": "build/advanced-power-qa/source-contract-report.json",
+      "report_bytes": 4313,
+      "report_sha256": "bb7f2c28e2e167c0c9fcfe6fd9a43d648a89388138e6df313fda32de9bebab4d",
+      "suite": null
+    },
+    "northern-orders-capacity": {
+      "checks_passed": 78,
+      "native_obtainability_proof": false,
+      "player_facing": false,
+      "report": "build/northern-host-cases.json",
+      "report_bytes": 13857,
+      "report_sha256": "d2f7259811df985d698966d9a14b16658b4711d6023b160fff68d53062819da9",
+      "suite": "northern-synthetic-host-orders-capacity"
+    },
+    "northern-source-provenance": {
+      "checks_passed": 15,
+      "native_obtainability_proof": false,
+      "player_facing": false,
+      "report": "build/northern-source-provenance.json",
+      "report_bytes": 6093,
+      "report_sha256": "fd04846e58c7b72e7ab3115396fbc4a33e96ffebb7527dc98030da6f91622f4c",
+      "suite": "northern-combat-source-provenance"
+    }
+  },
+  "synthetic_quickparty": {
+    "excluded_from_controller_total": true,
+    "game_ram_writes": 3,
+    "player_facing": false,
+    "repeated_normal_checks": 573,
+    "report": "build/quickparty-synthetic-qa/quickparty-report.json",
+    "report_bytes": 116111,
+    "report_sha256": "821571eb781bf8f61db142e41eeed4dafbe210aca55f618bfa7ac343bf30ac7a",
+    "suite": "quick-party-native-controller-integration",
+    "synthetic_checks": 6,
+    "total_recorded_checks": 579
+  }
+}

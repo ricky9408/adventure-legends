@@ -24,3 +24,5 @@ __pycache__/
 /assets/region/region_preview_2x.png
 /assets/region/native_camera_sheet.png
 /assets/region/native_camera_sheet_2x.png
+
+!tests/fixtures/v5-revision2/*.sav

@@ -1,0 +1,991 @@
+{
+  "establishes_native_obtainability": false,
+  "objective_order_capacity": {
+    "cases": [
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 11,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 11,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 12,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 12,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 12,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 12,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 12,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 12,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 13,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 13,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 14,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 14,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 14,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 14,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 14,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 14,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 15,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 15,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 15,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 15,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 15,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 15,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 16,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 16,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 17,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 17,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 17,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 17,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 17,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 17,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 18,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 18,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 18,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 18,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 18,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 18,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 19,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 19,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 20,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 20,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 20,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 20,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 20,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 20,
+        "sequential": false
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          2,
+          8,
+          4
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          2,
+          8
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          4,
+          8,
+          2
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          8,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          1,
+          8,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          4,
+          8
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          1,
+          8,
+          4
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          1,
+          8
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          4,
+          8,
+          1
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          8,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          2,
+          8,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          2,
+          8
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          1,
+          8,
+          2
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          1,
+          8
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          2,
+          8,
+          1
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          8,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          4,
+          8,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          8,
+          1,
+          2,
+          4
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          8,
+          1,
+          4,
+          2
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          8,
+          2,
+          1,
+          4
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          8,
+          2,
+          4,
+          1
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          8,
+          4,
+          1,
+          2
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "case": "objective-order",
+        "order": [
+          8,
+          4,
+          2,
+          1
+        ],
+        "passed": true,
+        "quest": 21,
+        "sequential": true
+      },
+      {
+        "capacity": 160,
+        "case": "synthetic-roster-full-atomic-retry",
+        "passed": true,
+        "quest": 11
+      },
+      {
+        "capacity": 160,
+        "case": "synthetic-roster-full-atomic-retry",
+        "passed": true,
+        "quest": 12
+      },
+      {
+        "capacity": 160,
+        "case": "synthetic-roster-full-atomic-retry",
+        "passed": true,
+        "quest": 13
+      },
+      {
+        "capacity": 160,
+        "case": "synthetic-roster-full-atomic-retry",
+        "passed": true,
+        "quest": 14
+      },
+      {
+        "capacity": 160,
+        "case": "synthetic-roster-full-atomic-retry",
+        "passed": true,
+        "quest": 15
+      },
+      {
+        "case": "synthetic-equipment-full-training-atomic-retry",
+        "passed": true,
+        "quest": 16
+      },
+      {
+        "case": "synthetic-equipment-full-training-atomic-retry",
+        "passed": true,
+        "quest": 17
+      },
+      {
+        "case": "synthetic-equipment-full-training-atomic-retry",
+        "passed": true,
+        "quest": 18
+      },
+      {
+        "case": "synthetic-equipment-full-training-atomic-retry",
+        "passed": true,
+        "quest": 19
+      },
+      {
+        "case": "synthetic-equipment-full-training-atomic-retry",
+        "passed": true,
+        "quest": 20
+      }
+    ],
+    "count": 78,
+    "player_facing": false,
+    "report": "build/northern-native-n5/northern-host-orders-capacity.json",
+    "report_bytes": 13857,
+    "report_sha256": "d2f7259811df985d698966d9a14b16658b4711d6023b160fff68d53062819da9",
+    "scope": "Synthetic host model/fault tests only. Does not establish cartridge acquisition, combat, or rendering.",
+    "sources": {
+      "src/creatures.c": "c87806fec74b550ae6b6f3846c830c1415cd031862b49786d9028f802b16a6f9",
+      "src/north_game.c": "14ea23086d5b46f4fc006a8fb0681be2b261091fad5a132769799cdafefef986",
+      "src/northern_quests.c": "e8066db305066c817ab247747ca6cca6c137e4ec13e473d4c3a9bba7f0d73fe4",
+      "src/save5.c": "0e374df92371da179f608671bd534331fb26bb59110c65c41e66646affba158b",
+      "tests/northern_host_cases.py": "2830f4d23ddfea32e5b9121545d9fcd0fc89569e3dc192ff354ae47f6dab8540",
+      "tests/test_north_game.py": "aa527af70e19bf55c34e1926110213b7286d2500ee332eb08a0af6159705850d"
+    },
+    "suite": "northern-synthetic-host-orders-capacity"
+  },
+  "persistence_evidence": "../NORTHERN_SAVE3_VERIFICATION.json; host codec and isolated ARM subsystem evidence, not whole-frame measurements",
+  "player_facing": false,
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "schema": 1,
+  "source_provenance": {
+    "checks": [
+      {
+        "case": "accepted-same-target",
+        "passed": true,
+        "temporary_manifest_sha256": "41b317d122abec224f68832ec0842b7d971567cfb0763377e39495c9062a2dfc",
+        "trust": "same-target-current-controller-journey"
+      },
+      {
+        "case": "untrusted-foreign-rom",
+        "expected_rejection": "Unpinned cross-ROM report",
+        "passed": true,
+        "reason": "Unpinned cross-ROM report",
+        "rejected": true,
+        "temporary_manifest_sha256": "366f16f7c08fa854ab0b4d55157199684cc3c588411ae3ff969a7f16b8c2089e"
+      },
+      {
+        "case": "wrong-symbols",
+        "expected_rejection": "Unpinned cross-ROM report",
+        "passed": true,
+        "reason": "Unpinned cross-ROM report",
+        "rejected": true,
+        "temporary_manifest_sha256": "bf7d7fd5ee64e9e63db6f21eda04c807ec35b0eafed60216201380efef3bc778"
+      },
+      {
+        "case": "RAM-writing-producer",
+        "expected_rejection": "Source is not controller-only",
+        "passed": true,
+        "reason": "Source is not controller-only",
+        "rejected": true,
+        "temporary_manifest_sha256": "589635af0b4e0d8ca3882b9a8feb58bbefa8944f401fced805e4974b7f4fe4ee"
+      },
+      {
+        "case": "non-controller-producer",
+        "expected_rejection": "Source is not controller-only",
+        "passed": true,
+        "reason": "Source is not controller-only",
+        "rejected": true,
+        "temporary_manifest_sha256": "5c3fa32985cf7cb6209ca97c387c25d7b042f67ecc8422bf119b45993cc9e3b9"
+      },
+      {
+        "case": "failed-producer-check",
+        "expected_rejection": "Source journey did not pass",
+        "passed": true,
+        "reason": "Source journey did not pass",
+        "rejected": true,
+        "temporary_manifest_sha256": "053481116f142eb9c6134a87780f5d6ebaabea051b1e2e9f0a05b4575ef90e13"
+      },
+      {
+        "case": "failed-producer-suite",
+        "expected_rejection": "Source journey did not pass",
+        "passed": true,
+        "reason": "Source journey did not pass",
+        "rejected": true,
+        "temporary_manifest_sha256": "9a747344355d216a9722c3e196d03cecb6136ff6d0527769586f61f2467bb3a8"
+      },
+      {
+        "case": "unverified-R5-ancestor",
+        "expected_rejection": "Unverified R5 ancestor",
+        "passed": true,
+        "reason": "Unverified R5 ancestor",
+        "rejected": true,
+        "temporary_manifest_sha256": "651b11aefa702b4de3e3509c76b35fc92d3d2c7965fff6508137fa55b46017d4"
+      },
+      {
+        "case": "wrong-controller-source",
+        "expected_rejection": "Source journey script hash differs: tests/northern_journey.py",
+        "passed": true,
+        "reason": "Source journey script hash differs: tests/northern_journey.py",
+        "rejected": true,
+        "temporary_manifest_sha256": "87e95d8027a574161891e48b0d4eab7ff3a7f06e2c55b26de6722de2f6537020"
+      },
+      {
+        "case": "wrong-content-contract",
+        "expected_rejection": "Source contract differs",
+        "passed": true,
+        "reason": "Source contract differs",
+        "rejected": true,
+        "temporary_manifest_sha256": "cd672439033bb5ede957a2ec0c07a3d318a8cabe164f6d3c93425771ea553cdb"
+      },
+      {
+        "case": "incomplete-lifecycle",
+        "expected_rejection": "Source journey has not finished its lifecycle checks",
+        "passed": true,
+        "reason": "Source journey has not finished its lifecycle checks",
+        "rejected": true,
+        "temporary_manifest_sha256": "187da3b215e3ffc72cecdae04085178d8f615071f4303320afa73492aa8c8ead"
+      },
+      {
+        "case": "missing-recruitment",
+        "expected_rejection": "Missing native recruitment evidence",
+        "passed": true,
+        "reason": "Missing native recruitment evidence",
+        "rejected": true,
+        "temporary_manifest_sha256": "c49b4c5573e00ef8e39c88ce12389d1a42a225af71a2626e2cc573dde0643729"
+      },
+      {
+        "case": "wrong-SRAM-hash",
+        "expected_rejection": "Snapshot SRAM bytes differ: 09-complete21-independent-reboot",
+        "passed": true,
+        "reason": "Snapshot SRAM bytes differ: 09-complete21-independent-reboot",
+        "rejected": true,
+        "temporary_manifest_sha256": "985676eed00134d0224a2a0169eab836465829307d786b3fdb0971c0b8e0cc38"
+      },
+      {
+        "case": "false-owned-metadata",
+        "expected_rejection": "Snapshot metadata disagrees with CRC-valid SRAM",
+        "passed": true,
+        "reason": "Snapshot metadata disagrees with CRC-valid SRAM",
+        "rejected": true,
+        "temporary_manifest_sha256": "10b027cace0caed0dba503512421da9cad9445ff0d96a6fd3a824a6389d7f77b"
+      },
+      {
+        "case": "wrong-snapshot-target",
+        "expected_rejection": "Snapshot target differs from journey",
+        "passed": true,
+        "reason": "Snapshot target differs from journey",
+        "rejected": true,
+        "temporary_manifest_sha256": "013d3ec6eceac27493e7246201b207824407ccc22c2bf72dc271766d7e23c11d"
+      }
+    ],
+    "checks_passed": 15,
+    "combat_harness_sha256": "2c72d21e530958bec5716590830bc2750d73c531b6e2fe5bb722209ebf6c2079",
+    "emulator_runs": 0,
+    "harness_sha256": "ae88fb14acb5e70eed25e8bb7d09c1afa7e38384971bf6a7f4307bccbfb47a2a",
+    "invalid_sources_rejected": 14,
+    "player_facing": false,
+    "report": "build/northern-source-provenance-reproducible.json",
+    "report_bytes": 6101,
+    "report_sha256": "34cb595ddb9ec8eaceee500109ed8256adceb91ccb4fb6ad6abd0d060ab74c7f",
+    "source_report_sha256": "41b317d122abec224f68832ec0842b7d971567cfb0763377e39495c9062a2dfc",
+    "suite": "northern-combat-source-provenance",
+    "synthetic_inputs": "Fourteen rejected temporary JSON mutations only; no fabricated native evidence",
+    "unchanged_inputs": {
+      "04-machine-ready": true,
+      "09-complete21-independent-reboot": true,
+      "ROM": true,
+      "ancestor_fixture": true,
+      "combat_harness": true,
+      "source_report": true,
+      "symbols": true
+    },
+    "valid_current_target_accepted": true
+  },
+  "spoilers": true,
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018"
+}

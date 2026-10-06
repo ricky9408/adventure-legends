@@ -1,0 +1,106 @@
+{
+  "suite": "region-native-combat",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "provenance": {
+    "source_report": "/workspace/scratch/33ed39a77941/adventure-legends-equipment/build/region-r5-journey/region-journey.json",
+    "source_report_sha256": "bc23de7bd2567a42f1e44aaeab1b0adab90cc9287c7f4b3f7451b9ef1329a9d7",
+    "source_rom_sha256": "0ba77d82ce15619784c35a67be83950f924265b604a47495a8987afb21963e90",
+    "source_snapshot": "11-idempotent-revisit",
+    "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-equipment/build/region-r5-journey/11-idempotent-revisit.sav",
+    "sram_sha256": "af04d795c9a4781f35cdc187559fd4929320ddb34f9f4a5e04dc4ed4e748302b",
+    "source_machine_state_loaded": false,
+    "scope": "Controller-earned collection/quests/gear imported forward as SRAM only"
+  },
+  "test_source_sha256": "e74e779e3d56c9fbb2292c05b97dba1947901f0ea7b653e00140fd2347957229",
+  "rom_sha256": "0ba77d82ce15619784c35a67be83950f924265b604a47495a8987afb21963e90",
+  "symbols_sha256": "2e44714072837c06db32f7b019afbdd0555f82904166da6d980bf8394ccfb2ac",
+  "rom_bytes": 3085056,
+  "branch_policy": "Only same-candidate machine states paired with their own hash-checked SRAM are restored",
+  "fixture": "all-eleven-town.sav",
+  "sram_sha256": "74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106",
+  "source_report_sha256": "6c4607f0867aaf6a881da30d82dc1811256a02e1af785376dc7c5015ea17f81f",
+  "source_report": "region-combat-qa/r5-complete/region-combat.json",
+  "check_count": 2761,
+  "fixture_policy": "Unmodified controller-earned SRAM from the R5 all-eleven collection case; no machine state is imported into a new ROM",
+  "obtained_form_ids": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    11,
+    13,
+    14,
+    16
+  ],
+  "owned_form_ids": [
+    2,
+    5,
+    8,
+    11,
+    14,
+    16
+  ],
+  "collection_case": {
+    "case": "complete-eleven-form-collection",
+    "evolutions": [
+      {
+        "from": 1,
+        "to": 2,
+        "instance_id": 1
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "instance_id": 2
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "instance_id": 3
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "instance_id": 4
+      }
+    ],
+    "obtained_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16
+    ],
+    "live_form_ids": [
+      2,
+      5,
+      8,
+      11,
+      14,
+      16
+    ],
+    "live_instance_count": 6,
+    "source_instance_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "saved_sram_path": "/tmp/region-combat-qa/r5-complete/collection-all-eleven-saved.sav",
+    "saved_sram_sha256": "74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106",
+    "independent_reboot": true,
+    "passed": true
+  }
+}
