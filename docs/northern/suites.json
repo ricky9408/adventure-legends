@@ -1,0 +1,129 @@
+{
+  "check_count_scope": "Six named Northern suites only; repeated assertions are counted as recorded, not unique behaviors",
+  "native_checks_passed": 24180,
+  "player_facing": false,
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "schema": 1,
+  "spoilers": true,
+  "suites": {
+    "boss-controls": {
+      "checks_failed": 0,
+      "checks_passed": 221,
+      "functional_cases": 1,
+      "harness_sha256": null,
+      "harness_source_hashes": {
+        "tests/northern_boss_controls.py": "da98354fb047c10d43ce32cda9eb6ae6894f779593b673eae43dea75e09c5fc1",
+        "tests/northern_journey.py": "e78328c0ea327239bc7892bbefb227896b159f50a720440d6c8a4c2242099ec6",
+        "tests/northern_stress.py": "72e31f57469421b1db81a6c4dfada3527418c460a91a0dbd2da111886b9573a1",
+        "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+        "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+        "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+        "tests/test_save5.py": "2e32d4c6f4adbde4815f0de542dc2661753a7ee66a371b40c174240e13d60d44",
+        "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+      },
+      "player_facing": false,
+      "report": "build/northern-boss-controls-n5/northern-stress.json",
+      "report_bytes": 119235,
+      "report_sha256": "b60d91bc43329eef84c6cf232f10eec0c48e5ec7d301add6ebc8e099f2ae7b07",
+      "source_report_sha256": null,
+      "suite": "northern-native-stress"
+    },
+    "combat": {
+      "checks_failed": 0,
+      "checks_passed": 8837,
+      "functional_cases": 85,
+      "harness_sha256": "2c72d21e530958bec5716590830bc2750d73c531b6e2fe5bb722209ebf6c2079",
+      "harness_source_hashes": {},
+      "player_facing": false,
+      "report": "build/northern-combat-n5-portable/northern-combat.json",
+      "report_bytes": 13589850,
+      "report_sha256": "352228d6080399e9e82ac2cd45585ddd98aca158d0e1a72fab96e1843fbaede1",
+      "source_report_sha256": "41b317d122abec224f68832ec0842b7d971567cfb0763377e39495c9062a2dfc",
+      "suite": "northern-native-combat-controls"
+    },
+    "journey": {
+      "checks_failed": 0,
+      "checks_passed": 9978,
+      "functional_cases": 4,
+      "harness_sha256": null,
+      "harness_source_hashes": {
+        "tests/northern_journey.py": "e78328c0ea327239bc7892bbefb227896b159f50a720440d6c8a4c2242099ec6",
+        "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+        "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+        "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+        "tests/test_save5.py": "2e32d4c6f4adbde4815f0de542dc2661753a7ee66a371b40c174240e13d60d44",
+        "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+      },
+      "player_facing": false,
+      "report": "build/northern-native-n5/northern-journey.json",
+      "report_bytes": 1820616,
+      "report_sha256": "41b317d122abec224f68832ec0842b7d971567cfb0763377e39495c9062a2dfc",
+      "source_report_sha256": null,
+      "suite": "northern-native-controller-journey"
+    },
+    "modal-controller": {
+      "checks_failed": 0,
+      "checks_passed": 162,
+      "functional_cases": 0,
+      "harness_sha256": null,
+      "harness_source_hashes": {
+        "tests/northern_journey.py": "e78328c0ea327239bc7892bbefb227896b159f50a720440d6c8a4c2242099ec6",
+        "tests/northern_modal_pixels.py": "d5ecf9ac7a0cb497ab8fb358013825a4fd90b9b0009cc8a42f8ef9fc457c8693",
+        "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+        "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+        "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+        "tests/test_save5.py": "2e32d4c6f4adbde4815f0de542dc2661753a7ee66a371b40c174240e13d60d44",
+        "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+      },
+      "player_facing": false,
+      "report": "build/northern-modal-n5/northern-journey.json",
+      "report_bytes": 141679,
+      "report_sha256": "7c1fc488cb5f692bcd412999ed7e85f1743b612979eff96cc214e9ba44c20bad",
+      "source_report_sha256": "6a3f10034028ce06f190cab331896bad76388766a6f58424deb9bf8b62928bd3",
+      "suite": "northern-native-controller-journey"
+    },
+    "sky-route": {
+      "checks_failed": 0,
+      "checks_passed": 4668,
+      "functional_cases": 1,
+      "harness_sha256": null,
+      "harness_source_hashes": {
+        "tests/northern_journey.py": "e78328c0ea327239bc7892bbefb227896b159f50a720440d6c8a4c2242099ec6",
+        "tests/northern_sky_route.py": "411a3923a467bf88b9e83fe43b4de0619a665a1f64c29e9bf520efe768aeacb8",
+        "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+        "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+        "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+        "tests/test_save5.py": "2e32d4c6f4adbde4815f0de542dc2661753a7ee66a371b40c174240e13d60d44",
+        "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+      },
+      "player_facing": false,
+      "report": "build/northern-sky-native-n5/northern-journey.json",
+      "report_bytes": 780727,
+      "report_sha256": "b1e0eb43aa6a7ec36e0cae8aac41673fd831ae574db63234a2006ce6bb49ecba",
+      "source_report_sha256": null,
+      "suite": "northern-native-controller-journey"
+    },
+    "stress": {
+      "checks_failed": 0,
+      "checks_passed": 314,
+      "functional_cases": 1,
+      "harness_sha256": null,
+      "harness_source_hashes": {
+        "tests/northern_journey.py": "e78328c0ea327239bc7892bbefb227896b159f50a720440d6c8a4c2242099ec6",
+        "tests/northern_stress.py": "72e31f57469421b1db81a6c4dfada3527418c460a91a0dbd2da111886b9573a1",
+        "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+        "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+        "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+        "tests/test_save5.py": "2e32d4c6f4adbde4815f0de542dc2661753a7ee66a371b40c174240e13d60d44",
+        "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+      },
+      "player_facing": false,
+      "report": "build/northern-stress-n5-final/northern-stress.json",
+      "report_bytes": 757705,
+      "report_sha256": "6588538ce5576bdacbdbd0abecb962b9f0082f2447ad1496ca6d87c6a00bf238",
+      "source_report_sha256": null,
+      "suite": "northern-native-stress"
+    }
+  },
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018"
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path(__file__).with_name('catalog.json')
 TARGET = ROOT / 'src/equipment_data.c'
-IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82]
+IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
 SLOTS = ['weapon', 'body', 'boots', 'belt', 'ring']
 STATS = ['attack_q4', 'defense_q4', 'hp_q4', 'speed_q8_delta',
          'roll_reduction', 'power_reduction', 'reach_px', 'stagger']

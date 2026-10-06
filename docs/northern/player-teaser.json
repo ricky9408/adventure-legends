@@ -1,0 +1,119 @@
+{
+  "audio": "Real emulator PSG stereo PCM, retained as native WAV; MP4 uses 48kHz AAC resampling",
+  "capture_cuts": 0,
+  "capture_reset_count": 0,
+  "captured_frames": 1200,
+  "checks_failed": 0,
+  "checks_passed": 110,
+  "controller_only": true,
+  "duration_seconds": 20.09124755859375,
+  "files": {
+    "hearthwake-native-teaser.mp4": {
+      "bytes": 1006083,
+      "sha256": "12fbcad81b61d9dfc1f7d09fe59aaa023e22a280cc520f4361623bd05b081ad0"
+    },
+    "native-final.png": {
+      "bytes": 5329,
+      "sha256": "174cb8b8ba59ad80fede1e892895e9a0efd140f5205d3a89280ada90b77d0827"
+    },
+    "native-frames.mkv": {
+      "bytes": 24910185,
+      "sha256": "5b5d0571ff03f61e04b4f9b0a200baaa5e0d3b2ae96136fa8d994726150e2f34"
+    },
+    "native-harbor.png": {
+      "bytes": 5374,
+      "sha256": "f6f40d19ad88684534f3c502f219582af5c82676d060cd565088a0badefd1ff7"
+    },
+    "native-homura-fire.png": {
+      "bytes": 6341,
+      "sha256": "ac92f170619a07b54fab324fc21c671c28f5a8983d4327ff1440cf10f812f0d0"
+    },
+    "native-psg.wav": {
+      "bytes": 2633444,
+      "sha256": "16842fc4fded19d6125dfbb2183226cfa831df56d9c967b0b71cad98818eb21b"
+    },
+    "native-quay-east.png": {
+      "bytes": 5678,
+      "sha256": "baae3c355481b183f47b9ab0f5c3e30a77942750538914dcf92e8e3bdc5f7ee1"
+    },
+    "native-quay-preview.png": {
+      "bytes": 6192,
+      "sha256": "2f0cb09640bae82f85566bdde34c3b6b63b84ea92745159a4fb495cbb30305c3"
+    },
+    "native-quay-west.png": {
+      "bytes": 5895,
+      "sha256": "0a4d566bedc9290187adca8f30c7094b74bc7fb4116120649248f0e350965468"
+    }
+  },
+  "frame_rate": 59.72750056960583,
+  "game_ram_writes": 0,
+  "hardware_clock_ratio": "16777216/280896",
+  "harness_sha256": "54440847d27b16b6a587ccb7de29c25a559f490e49e74d13ddea98bc3a700767",
+  "lossless_rgb_stream_sha256": "9c33cd797f7616b3e15bc1d27379af0c85ba4de19e399e2ac8d8dfc6c7c0aba2",
+  "machine_state_loads": 0,
+  "native_audio": {
+    "channels": 2,
+    "duration_seconds": 20.09124755859375,
+    "peak_amplitude": 6912,
+    "rms_amplitude": 1106.906852171774,
+    "sample_rate": 32768,
+    "samples": 658350
+  },
+  "native_audio_minus_video_seconds": 0,
+  "native_frame_stats": {
+    "camera_x_range": [
+      0,
+      240
+    ],
+    "camera_y_range": [
+      15,
+      141
+    ],
+    "display_page_flips": 1200,
+    "game_updates": 1200,
+    "hardware_frames": 1200,
+    "max_obj_count": 21,
+    "max_update_render_cycles": 136058,
+    "measurement": "Emulated hardware frames, live game update counter, displayed VRAM page bit and native update/render cycle timer; not host FPS. Timer excludes VBlank wait/OAM commit.",
+    "native_frame_budget_cycles": 280896,
+    "state_histogram": {
+      "1": 1200
+    },
+    "update_histogram": {
+      "1": 1200
+    }
+  },
+  "native_resolution": [
+    240,
+    160
+  ],
+  "player_facing": true,
+  "preview_frame_offsets": {
+    "native-final.png": 1199,
+    "native-harbor.png": 89,
+    "native-homura-fire.png": 562,
+    "native-quay-east.png": 866,
+    "native-quay-preview.png": 550,
+    "native-quay-west.png": 299
+  },
+  "report": "build/northern-teaser/portable/capture.json",
+  "report_sha256": "3985c506f57117ba9f1b901f8e7cc87ea1a48fe371559f18b27b874bf7e2fdf5",
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "saved_progress_unchanged_during_capture": true,
+  "scaling": "4x nearest-neighbor, one encoded video frame per emulated hardware frame",
+  "schema": 1,
+  "scope": "Hearthwake Quay opening exterior, base Homura, ordinary walking and one harmless initial Fire cast. No recruits, evolutions, hidden routes, puzzle solutions, boss or ending.",
+  "scope_note": "Media checks are separate from the six gameplay suites and the whole-game aggregate",
+  "source_verification": {
+    "enforced_entry_count": 853,
+    "manifest_sha256": "0effd60dc5e3d255e54269e862033b3a3eac1829cc1245c205db4a4acc6df792",
+    "scope": "Compiled src, linker.ld, and art/generator inputs; Markdown and credits documentation are excluded from enforcement. ROM and symbols are independently hash-authenticated.",
+    "status": "verified_against_frozen_build_manifest"
+  },
+  "spoilers": false,
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+  "video_resolution": [
+    960,
+    640
+  ]
+}

@@ -77,7 +77,7 @@ static void controls(void){
  c=progression_selected();i=c->instance_id;progression_select(5);CHECK(progression_selected()->instance_id==i);progression_select(255);CHECK(progression_selected()->instance_id==i);progression_select(4);CHECK(progression_current_form()==13&&spirit==4);
  for(i=0;i<4;i++)party[i]=r->party[i];quickparty_menu_candidate=255;CHECK(quickparty_menu_input(128));CHECK(quickparty_menu_candidate<160);for(i=0;i<4;i++)CHECK(r->party[i]==party[i]);
  for(i=1;i<4;i++)CHECK(quickparty_assign(i,255));CHECK(r->party[0]==water&&r->selected_party==0);old_saves=saves;CHECK(!quickparty_assign(0,255));CHECK(saves==old_saves);CHECK(r->party[0]==water);CHECK(!quickparty_cycle());
- for(i=0;i<CREATURE_ENABLED_COUNT;i++){unsigned form=creature_forms[i].id;CHECK(progression_form_spirit(form)<6);CHECK(progression_name_id(form)!=TX_C_UNKNOWN);}
+ for(i=0;i<CREATURE_ENABLED_COUNT;i++){unsigned form=creature_forms[i].id;CHECK(progression_form_spirit(form)<PROGRESSION_SPIRIT_COUNT);CHECK(progression_name_id(form)!=TX_C_UNKNOWN);}
  for(i=0;i<256;i++)if(!creatures_form_id_valid(i)){CHECK(progression_form_spirit(i)==255);CHECK(progression_name_id(i)==TX_C_UNKNOWN);}
 }
 static void invalid(void){

@@ -140,6 +140,21 @@ static void arrows(void){
     a=make_arrow();weapon_arrow_tick(&a,0,target,&w);
     CHECK(a.x_q8==100*256&&a.active);
 }
+static void northern_reach_boundaries(void){
+    WeaponAttack a,old;WeaponArrow arrow={0};EquipmentStats s=stats(3);unsigned i;
+    s.attack_q4=1;s.reach_px=12;weapon_action_init(&a);
+    CHECK(tick(&a,&s,3,1,1,0)==WEAPON_EVENT_START);
+    s.reach_px=0;s.attack_q4=24; /* Active draw retains its item snapshot. */
+    for(i=1;i<24;i++)tick(&a,&s,3,1,0,0);
+    CHECK(tick(&a,&s,3,0,0,0)==WEAPON_EVENT_ARROW);
+    CHECK(a.reach_px==156&&a.attack_q4==1&&a.damage_q4==48);
+    CHECK(weapon_arrow_spawn(&arrow,&a,100,100));
+    CHECK(arrow.remaining_q8==156*256&&arrow.attack_q4==1);
+    {World w={999,999,0,0,0};for(i=0;i<39;i++)weapon_arrow_tick(&arrow,wall,target,&w);
+     CHECK(!arrow.active&&arrow.x_q8==256*256&&w.wcalls==156&&w.tcalls==156);}
+    weapon_action_init(&a);old=a;s.reach_px=13;
+    CHECK(!tick(&a,&s,3,1,1,0));CHECK(!memcmp(&a,&old,sizeof a));
+}
 static void invalid_and_fuzz(void){
     WeaponAttack a,old;EquipmentStats s=stats(1);unsigned i,r=123,e;weapon_action_init(&a);old=a;
     CHECK(!tick(&a,&s,4,1,1,0));
@@ -153,11 +168,11 @@ static void invalid_and_fuzz(void){
         r=r*1664525u+1013904223u;
         if((r&1023u)==0)weapon_action_init(&a);
         if((r&127u)==1)weapon_action_suspend(&a);
-        s=stats(1+((r>>16)%3));s.attack_q4=(r>>12)%25;s.reach_px=(r>>8)%5;
+        s=stats(1+((r>>16)%3));s.attack_q4=(r>>12)%25;s.reach_px=(r>>8)%(EQUIPMENT_MAX_REACH_PX+1);
         e=tick(&a,&s,(r>>4)&3,r&1,(r>>1)&1,(r>>24)%3);
         CHECK(e<32&&a.phase<=WEAPON_CHARGING&&a.direction<4&&a.charge<=45);
         if(e&WEAPON_EVENT_ARROW){WeaponArrow arrow={0};
     CHECK(weapon_arrow_spawn(&arrow,&a,480,320));}
     }
 }
-int main(void){melee();buffers();bow();arrows();invalid_and_fuzz();printf("weapon action checks: %u\n",checks);return 0;}
+int main(void){melee();buffers();bow();arrows();northern_reach_boundaries();invalid_and_fuzz();printf("weapon action checks: %u\n",checks);return 0;}

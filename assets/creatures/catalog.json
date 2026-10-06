@@ -84,7 +84,11 @@
     "turn_vane",
     "uncap_well",
     "wind_socket",
-    "wood_socket"
+    "wood_socket",
+    "reel_load",
+    "store_heat",
+    "float_load",
+    "align_rail"
   ],
   "stat_budgets": {
     "tier_1": 180,
@@ -1119,7 +1123,7 @@
       "family_id": "F007",
       "tier": 1,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 20,
@@ -1127,7 +1131,7 @@
       "family_id": "F007",
       "tier": 2,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 21,
@@ -1143,7 +1147,7 @@
       "family_id": "F008",
       "tier": 1,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 23,
@@ -1151,7 +1155,7 @@
       "family_id": "F008",
       "tier": 2,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 24,
@@ -1551,7 +1555,7 @@
       "family_id": "F025",
       "tier": 1,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 74,
@@ -1559,7 +1563,7 @@
       "family_id": "F025",
       "tier": 2,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 75,
@@ -1567,7 +1571,7 @@
       "family_id": "F026",
       "tier": 1,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 76,
@@ -1575,7 +1579,7 @@
       "family_id": "F026",
       "tier": 2,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 77,
@@ -1583,7 +1587,7 @@
       "family_id": "F027",
       "tier": 1,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 78,
@@ -1591,7 +1595,7 @@
       "family_id": "F027",
       "tier": 2,
       "rarity": "ordinary",
-      "status": "reserved"
+      "status": "proposed"
     },
     {
       "id": 79,
@@ -2156,6 +2160,116 @@
         "reveal_current",
         "link_pools"
       ]
+    },
+    {
+      "id": 13,
+      "name": "Threadhold",
+      "phase": "wood",
+      "handler": "threadhold",
+      "cooldown_updates": 90,
+      "effect": "A narrow Wood tether deals16 Q4 base damage and pulls one ordinary enemy at most8 swept pixels. Bosses cannot be pulled. Only tagged loads can be reeled in field puzzles.",
+      "field_caps": [
+        "reel_load"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Shuttle Span",
+      "phase": "wood",
+      "handler": "shuttle_span",
+      "cooldown_updates": 120,
+      "effect": "Set a short visible thread between two authored endpoints for at most60 updates;24 Q4 once per enemy per cast. Every segment and target must have line of sight.",
+      "field_caps": [
+        "reel_load"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Heat Pocket",
+      "phase": "fire",
+      "handler": "heat_pocket",
+      "cooldown_updates": 90,
+      "effect": "Place one visible stationary heat patch that bursts after18 updates for24 Q4 once per enemy; maximum lifetime48. Field heat charges affect only tagged receptacles.",
+      "field_caps": [
+        "store_heat"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Firing Drawer",
+      "phase": "fire",
+      "handler": "firing_drawer",
+      "cooldown_updates": 120,
+      "effect": "Move a stored heat patch between two short visible positions before its arrival burst,24 Q4 once per enemy. Maximum lifetime60; never crosses unmarked walls or ignites from phase alone.",
+      "field_caps": [
+        "store_heat"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Washback",
+      "phase": "water",
+      "handler": "washback",
+      "cooldown_updates": 90,
+      "effect": "A short frontal surge deals24 Q4 and pushes ordinary enemies at most10 swept pixels. No boss displacement. Buoy only explicitly tagged dock loads.",
+      "field_caps": [
+        "float_load"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Wake Turn",
+      "phase": "water",
+      "handler": "wake_turn",
+      "cooldown_updates": 120,
+      "effect": "A telegraphed L-shaped surge travels at most48 pixels across two orthogonal segments,24 Q4 once per enemy. Check walls on every segment and target; pivot only marked floating loads.",
+      "field_caps": [
+        "float_load"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Counterdrop",
+      "phase": "earth",
+      "handler": "counterdrop",
+      "cooldown_updates": 90,
+      "effect": "Place a visible small Earth impact that lands after18 updates for24 Q4 once per enemy. Press only authored counterweight pans; manual weights remain a mandatory-route alternative.",
+      "field_caps": [
+        "press_weight"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Counterpoise",
+      "phase": "earth",
+      "handler": "counterpoise",
+      "cooldown_updates": 120,
+      "effect": "One placed weight intercepts one hostile projectile then emits a32 Q4 Earth pulse. Maximum lifetime48; no player invulnerability or healing; normal boss vulnerability still applies.",
+      "field_caps": [
+        "press_weight"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Quarterturn",
+      "phase": "metal",
+      "handler": "quarterturn",
+      "cooldown_updates": 90,
+      "effect": "Redirect one approaching hostile projectile90 degrees into a visible side lane, making it friendly Metal without field or fire tags. Align only marked four-position rail junctions.",
+      "field_caps": [
+        "align_rail"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Gimbal Screen",
+      "phase": "metal",
+      "handler": "gimbal_screen",
+      "cooldown_updates": 120,
+      "effect": "Place one directional gate for at most48 updates, turning up to two later hostile shots90 degrees. A per-cast projectile ledger forbids repeated redirection; friendly shots are ignored.",
+      "field_caps": [
+        "align_rail"
+      ]
     }
   ],
   "forms": [
@@ -2559,6 +2673,341 @@
       }
     },
     {
+      "id": 19,
+      "name": "Spoolbud",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 36,
+        "power": 24,
+        "guard": 30,
+        "focus": 54,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 13,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 13
+        }
+      ],
+      "field_caps": [
+        "reel_load"
+      ],
+      "silhouette": "A low living thicket with a bobbin-shaped seed body, expressive knot face, leaf ears, four root paws and a vine-loop tail.",
+      "motion": "Sniffs the rope end, gathers its paws, then rocks forward with a breathing seed body.",
+      "role": "Precise tether positioning",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": false,
+        "gate": "north_lines_ready"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Loomcrown",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 48,
+        "power": 30,
+        "guard": 42,
+        "focus": 72,
+        "haste": 48
+      },
+      "stat_total": 240,
+      "signature_ability": 14,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 13
+        },
+        {
+          "level": 16,
+          "ability_id": 14
+        }
+      ],
+      "field_caps": [
+        "reel_load"
+      ],
+      "silhouette": "A tall long-legged thicket animal; arched shoulder branches frame an open trellis above its living face and chest.",
+      "motion": "Leans into a two-point tether, ears focused; the vine tail slips through the open shoulder crown.",
+      "role": "Two-endpoint tether control",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 22,
+      "name": "Cindertray",
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 36,
+        "power": 28,
+        "guard": 44,
+        "focus": 52,
+        "haste": 20
+      },
+      "stat_total": 180,
+      "signature_ability": 15,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 15
+        }
+      ],
+      "field_caps": [
+        "store_heat"
+      ],
+      "silhouette": "A squat warm ceramic quadruped with rounded muzzle, amber eyes, handle-like ears, cheek vents and a triangular back plate.",
+      "motion": "Pads toward warmth, crouches to breathe out heat, then raises its soft-looking ceramic ears.",
+      "role": "Delayed stationary heat patch",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": false,
+        "gate": "north_kiln_ready"
+      }
+    },
+    {
+      "id": 23,
+      "name": "Kilnbarrow",
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 52,
+        "power": 40,
+        "guard": 56,
+        "focus": 68,
+        "haste": 24
+      },
+      "stat_total": 240,
+      "signature_ability": 16,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 15
+        },
+        {
+          "level": 17,
+          "ability_id": 16
+        }
+      ],
+      "field_caps": [
+        "store_heat"
+      ],
+      "silhouette": "A low elongated ceramic animal with broad forelegs, an expressive head and two kiln-like shoulder plates that open sideways.",
+      "motion": "Lopes deliberately, carries a glowing heat drawer, and settles its side plates with a relieved exhale.",
+      "role": "Movable heat placement",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 73,
+      "name": "Keelkip",
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 38,
+        "guard": 26,
+        "focus": 34,
+        "haste": 48
+      },
+      "stat_total": 180,
+      "signature_ability": 17,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 17
+        }
+      ],
+      "field_caps": [
+        "float_load"
+      ],
+      "silhouette": "A seal-like companion with round muzzle, bright eyes, broad front flippers, forked hind flipper and three overlapping translucent body plates.",
+      "motion": "Lifts its chest into a flipper-waddle, then settles into a buoyant sliding turn.",
+      "role": "Frontal water displacement",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": false,
+        "gate": "north_tender_ready"
+      }
+    },
+    {
+      "id": 74,
+      "name": "Wakecradle",
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 48,
+        "power": 52,
+        "guard": 34,
+        "focus": 46,
+        "haste": 60
+      },
+      "stat_total": 240,
+      "signature_ability": 18,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 17
+        },
+        {
+          "level": 18,
+          "ability_id": 18
+        }
+      ],
+      "field_caps": [
+        "float_load"
+      ],
+      "silhouette": "A broad seal-like animal with long outward-curving flippers and a raised back crest framing a suspended water sling beneath its continuous body.",
+      "motion": "Banks on one flipper, swings the water sling around a visible corner and lands with a curious head tilt.",
+      "role": "Cornered surge and cargo pivot",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 75,
+      "name": "Cairncricket",
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 50,
+        "guard": 26,
+        "focus": 24,
+        "haste": 50
+      },
+      "stat_total": 180,
+      "signature_ability": 19,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 19
+        }
+      ],
+      "field_caps": [
+        "press_weight"
+      ],
+      "silhouette": "A cricket-like animal with three offset stone plates, bright eyes beneath a pebble brow, flexible antennae, short forefeet and long jointed hind legs.",
+      "motion": "Crouches, springs and lands with antenna recoil; the upper stone plate tilts like a living brow.",
+      "role": "Delayed marked counterweight impact",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": false,
+        "gate": "north_markers_ready"
+      }
+    },
+    {
+      "id": 76,
+      "name": "Archspring",
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 44,
+        "power": 62,
+        "guard": 40,
+        "focus": 32,
+        "haste": 62
+      },
+      "stat_total": 240,
+      "signature_ability": 20,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 19
+        },
+        {
+          "level": 18,
+          "ability_id": 20
+        }
+      ],
+      "field_caps": [
+        "press_weight"
+      ],
+      "silhouette": "A high-arched stone cricket with paired long hind legs, a hanging tail stone and large negative spaces between its expressive body and legs.",
+      "motion": "Leans its face into a deliberate springing gait, then settles a protective counterweight ahead.",
+      "role": "Placed reactive Earth counterweight",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
+      "id": 77,
+      "name": "Rivetfoil",
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 32,
+        "power": 28,
+        "guard": 38,
+        "focus": 50,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_ability": 21,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 21
+        }
+      ],
+      "field_caps": [
+        "align_rail"
+      ],
+      "silhouette": "A small folded bird with fan-shaped metal wings, a bright eye, pointed beak, forked feet, short balancing tail and one off-center rivet mark.",
+      "motion": "Tilts its head, side-steps, and flicks one wing to turn an approaching shot into a visible side lane.",
+      "role": "Single-shot quarter-turn redirection",
+      "acquisition": {
+        "kind": "bond_trial",
+        "repeatable": false,
+        "gate": "north_bearing_ready"
+      }
+    },
+    {
+      "id": 78,
+      "name": "Gimbalcloak",
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 44,
+        "power": 38,
+        "guard": 52,
+        "focus": 64,
+        "haste": 42
+      },
+      "stat_total": 240,
+      "signature_ability": 22,
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 21
+        },
+        {
+          "level": 20,
+          "ability_id": 22
+        }
+      ],
+      "field_caps": [
+        "align_rail"
+      ],
+      "silhouette": "A crested long-necked metal bird whose broad cloak wings surround a gimbal-shaped breast; its face stays visible above the mechanism.",
+      "motion": "Steps sideways, spreads a directional wing screen, then tucks its wings with a living recovery pose.",
+      "role": "Stationary two-shot directional screen",
+      "acquisition": {
+        "kind": "evolution",
+        "repeatable": false
+      }
+    },
+    {
       "id": 121,
       "name": "Stilltide Orrery",
       "phase": "water",
@@ -2652,6 +3101,61 @@
       "location": "sanctuary",
       "player_confirm": true,
       "consumed_item": null
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "min_level": 16,
+      "min_bond": 40,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "tension_roof",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 22,
+      "to": 23,
+      "min_level": 17,
+      "min_bond": 40,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "dry_ledger",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 73,
+      "to": 74,
+      "min_level": 18,
+      "min_bond": 45,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "fragile_cargo",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 75,
+      "to": 76,
+      "min_level": 18,
+      "min_bond": 45,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "balanced_reach",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 77,
+      "to": 78,
+      "min_level": 20,
+      "min_bond": 50,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "compass_round",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
     }
   ],
   "gates": [
@@ -2698,6 +3202,56 @@
       "requires": []
     },
     {
+      "id": "north_bearing_ready",
+      "kind": "side_quest",
+      "requires": [
+        "north_lines_ready"
+      ]
+    },
+    {
+      "id": "north_counterworks_stable",
+      "kind": "side_quest",
+      "requires": [
+        "north_harbor_ready"
+      ]
+    },
+    {
+      "id": "north_harbor_ready",
+      "kind": "side_quest",
+      "requires": [
+        "north_lines_ready",
+        "north_bearing_ready"
+      ]
+    },
+    {
+      "id": "north_kiln_ready",
+      "kind": "side_quest",
+      "requires": [
+        "sky_clear"
+      ]
+    },
+    {
+      "id": "north_lines_ready",
+      "kind": "side_quest",
+      "requires": [
+        "sky_clear"
+      ]
+    },
+    {
+      "id": "north_markers_ready",
+      "kind": "side_quest",
+      "requires": [
+        "sky_clear"
+      ]
+    },
+    {
+      "id": "north_tender_ready",
+      "kind": "side_quest",
+      "requires": [
+        "sky_clear"
+      ]
+    },
+    {
       "id": "reed_basin_restored",
       "kind": "side_quest",
       "requires": [
@@ -2721,6 +3275,22 @@
   ],
   "trials": [
     {
+      "id": "balanced_reach",
+      "description": "Balance unequal loads while preserving the reachable exit and reset handle."
+    },
+    {
+      "id": "compass_round",
+      "description": "Route the marked carriage through three bearings and prove its return path."
+    },
+    {
+      "id": "dry_ledger",
+      "description": "Carry bounded heat to all three visible chart-drying stations."
+    },
+    {
+      "id": "fragile_cargo",
+      "description": "Float, pivot and unload the marked tender cargo using freely resettable safe stops."
+    },
+    {
       "id": "join_two_pools",
       "description": "Reconnect the paired marked pools in the reed-basin side quest."
     },
@@ -2743,6 +3313,10 @@
     {
       "id": "stilltide_covenant",
       "description": "Complete the five-phase relay, then survive 90 active-play seconds using two opposite-polarity support switches; failure resets only the trial."
+    },
+    {
+      "id": "tension_roof",
+      "description": "Connect the two taught roof-line endpoints without blocking the manual stairs."
     }
   ],
   "legendary_gates": [

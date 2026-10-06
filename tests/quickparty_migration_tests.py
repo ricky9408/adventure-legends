@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Controller-only PR5 quick-party SRAM -> current save5 revision2 migration.
+"""Controller-only PR5 quick-party SRAM -> current save5 current content revision migration.
 
 The checked-in 32KiB fixture is an unmodified, hash-pinned PR5 cartridge save.
 Only SRAM crosses ROM versions. No machine state is loaded, no game RAM is
@@ -15,6 +15,7 @@ import json
 from pathlib import Path
 import struct
 import zlib
+import re
 
 from evolution_tests import EvolutionRun, ROOT, PLAY, DIALOG
 from test_save5 import Save, Roster, Equipment
@@ -27,6 +28,7 @@ FIXTURE=FIXTURES/'pr5-evolved-reversed-party.sav'
 PROVENANCE=FIXTURES/'pr5-evolved-reversed-party-provenance.json'
 BANKS=(0x200,0x1a00)
 BANK_SIZE=6144
+TARGET_REVISION=int(re.search(r'SAVE5_CONTENT_REVISION\s*=\s*(\d+)',(ROOT/'src/save5.h').read_text()).group(1))
 FORM_SET={1,2,4,5,7,8,10,11}
 
 
@@ -146,8 +148,8 @@ class QuickPartyMigration(EvolutionRun):
                    'current ROM title Continue loads the PR5 checkpoint into normal village play')
         self.assert_preserved(expected,'migrated Continue')
         latest=newest(banks(self.e.bytes(0x0e000000,32768)))
-        self.check(latest['revision']==2 and latest['sequence']>current['sequence'],
-                   'normal Continue checkpoint transaction upgrades to revision2')
+        self.check(latest['revision']==TARGET_REVISION and latest['sequence']>current['sequence'],
+                   'normal Continue checkpoint transaction upgrades to current content revision')
         # The restored village checkpoint is already at the elder. A makes an
         # ordinary checkpoint before dialogue; do not advance the ending pages.
         self.check(abs(self.get('px')-120)+abs(self.get('py')-94)<29,
@@ -156,18 +158,18 @@ class QuickPartyMigration(EvolutionRun):
         self.check(self.get('game_state')==DIALOG,'real A interaction opens elder dialogue after saving')
         self.assert_preserved(expected,'elder checkpoint')
         latest=newest(banks(self.e.bytes(0x0e000000,32768)))
-        self.check(latest['revision']==2 and 0<((latest['sequence']-prior_sequence)&0xffffffff)<0x80000000,
-                   'real elder checkpoint commits a newer revision2 transaction')
+        self.check(latest['revision']==TARGET_REVISION and 0<((latest['sequence']-prior_sequence)&0xffffffff)<0x80000000,
+                   'real elder checkpoint commits a newer current content revision transaction')
         saved=self.save('pr5-migrated-elder-checkpoint')
         self.observations['checkpoint_sram_sha256']=digest(saved)
         self.reopen(saved);self.settle_save();self.step(2)
-        self.check(self.get('game_state')==PLAY and self.get('room')==0,'independent new core boots the revision2 checkpoint normally')
-        self.assert_preserved(expected,'independent revision2 reboot')
+        self.check(self.get('game_state')==PLAY and self.get('room')==0,'independent new core boots the current content revision checkpoint normally')
+        self.assert_preserved(expected,'independent current content revision reboot')
         self.check(digest(FIXTURE)==PR5_FIXTURE_SHA256,'the checked-in PR5 fixture remains byte-identical after all reboots')
         self.shot('pr5-migrated-village');self.report()
 
     def report(self):
-        result={'suite':'pr5-quickparty-revision1-to-revision2-controller-migration',
+        result={'suite':'pr5-quickparty-revision1-to-current content revision-controller-migration',
             'candidate':getattr(self,'candidate',{}),'controller_only':True,'game_ram_writes':0,
             'machine_state_loads':0,'fixture':FIXTURE.name,'fixture_sha256':PR5_FIXTURE_SHA256,
             'source_provenance':getattr(self,'provenance',{}),'passes':self.passes,'failures':self.failures,

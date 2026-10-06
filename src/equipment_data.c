@@ -2,7 +2,7 @@
 #include "equipment.h"
 
 const EquipmentItemId equipment_authored_ids[EQUIPMENT_AUTHORED_COUNT] = {
-    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82
+    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83
 };
 
 const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {
@@ -19,6 +19,12 @@ const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] =
     [65] = {65, 3, 0, 0, 255, {0, 0}, {0, 0, 8, 0, 0, 0, 0, 0}},
     [81] = {81, 4, 0, 0, 255, {0, 0}, {0, 0, 0, 0, 0, 4, 0, 0}},
     [82] = {82, 4, 0, 0, 255, {0, 0}, {0, 1, 0, 0, 0, 0, 0, 1}},
+    [3] = {3, 0, 1, 0, 255, {0, 0}, {2, 0, 0, 0, 0, 0, 3, 0}},
+    [11] = {11, 0, 2, 0, 255, {0, 0}, {2, 1, 0, 0, 0, 0, 0, 0}},
+    [19] = {19, 0, 3, 0, 255, {0, 0}, {1, 0, 0, 0, 0, 0, 12, 0}},
+    [35] = {35, 1, 0, 0, 255, {0, 0}, {0, 1, 4, 0, 0, 0, 0, 0}},
+    [51] = {51, 2, 0, 0, 255, {0, 0}, {0, 0, 0, 4, 1, 0, 0, 0}},
+    [83] = {83, 4, 0, 0, 255, {0, 0}, {0, 1, 0, 0, 0, 2, 0, 0}},
 };
 
 const EquipmentWeapon equipment_weapons[4] = {
@@ -42,6 +48,12 @@ const char *equipment_name(unsigned id) {
     case 65: return "Woven Belt";
     case 81: return "Resonance Ring";
     case 82: return "Steady Ring";
+    case 3: return "Ropeguard Sword";
+    case 11: return "Quay Lance";
+    case 19: return "Headland Bow";
+    case 35: return "Sailcloth Mail";
+    case 51: return "Deck Boots";
+    case 83: return "Bearing Ring";
     default: return "Empty";
     }
 }
@@ -62,6 +74,12 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 65: return line ? "Maximum health +half-heart." : "A packmaker's sturdy belt.";
     case 81: return line ? "Power cooldown -4." : "A clear note for companions.";
     case 82: return line ? "Defense +1; stagger +1." : "A ring that steadies the hand.";
+    case 3: return line ? "Attack +2; reach +3." : "A lighter cut with a longer reach.";
+    case 11: return line ? "Attack +2; defense +1." : "A balanced harbor thrust.";
+    case 19: return line ? "Attack +1; range +12." : "A lighter arrow that travels farther.";
+    case 35: return line ? "Defense +1; health +1/4 heart." : "Light padding leaves your stride free.";
+    case 51: return line ? "Speed +4; roll recovery -1." : "Sure steps and a quicker second roll.";
+    case 83: return line ? "Defense +1; power recovery -2." : "A measured balance of guard and focus.";
     default: return "";
     }
 }

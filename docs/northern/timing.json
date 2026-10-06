@@ -1,0 +1,202 @@
+{
+  "frame_cycles": 280896,
+  "hardware_clock_hz": 16777216,
+  "limitation": "Representative authored windows, not exhaustive theoretical pool maxima or physical-hardware certification",
+  "method": "Actual emulated hardware frames, update counter and displayed Mode4 page flips; render timer excludes final VBlank wait/OAM commit",
+  "nominal_refresh_hz": 59.72750056960583,
+  "player_facing": false,
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "schema": 1,
+  "spoilers": true,
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+  "windows": {
+    "combat": [
+      {
+        "ability": 18,
+        "camera_parities": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "camera_positions_observed": 7,
+        "case": "native-combined-combat-cadence",
+        "five_visible_enemies_two_visible_hostile_shots_two_arrows_active_effect_frames": 0,
+        "frame_budget_cycles": 280896,
+        "hardware_frames": 420,
+        "maximum_cycles": 174705,
+        "maximum_live_enemies": 5,
+        "maximum_live_hostile_shots": 2,
+        "maximum_oam": 46,
+        "maximum_visible_enemy_bodies": 3,
+        "maximum_visible_hostile_shots": 2,
+        "page_flips": 420,
+        "timing_source": "actual emulated GBA hardware frames, global update counter and displayed Mode4 page flip; never hostFPS",
+        "two_arrow_new_effect_visible_hostile_multiple_enemy_frames": 22,
+        "updates": 420,
+        "verified_page_flips": 420,
+        "verified_trace_frames": 420,
+        "verified_updates": 420
+      },
+      {
+        "ability": 14,
+        "camera_parities": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "camera_positions_observed": 7,
+        "case": "native-gathered-combat-cadence",
+        "five_visible_enemies_two_visible_hostile_shots_two_arrows_active_effect_frames": 12,
+        "frame_budget_cycles": 280896,
+        "hardware_frames": 420,
+        "maximum_cycles": 208128,
+        "maximum_live_enemies": 5,
+        "maximum_live_hostile_shots": 2,
+        "maximum_oam": 45,
+        "maximum_visible_enemy_bodies": 5,
+        "maximum_visible_hostile_shots": 2,
+        "page_flips": 420,
+        "timing_source": "actual emulated GBA hardware frames, global update counter and displayed Mode4 page flip; never hostFPS",
+        "two_arrow_new_effect_visible_hostile_multiple_enemy_frames": 12,
+        "updates": 420,
+        "verified_page_flips": 420,
+        "verified_trace_frames": 420,
+        "verified_updates": 420
+      },
+      {
+        "camera_positions_observed": 1,
+        "case": "cold-journal-seven-tabs",
+        "five_visible_enemies_two_visible_hostile_shots_two_arrows_active_effect_frames": 0,
+        "frame_budget_cycles": 280896,
+        "hardware_frames": 80,
+        "maximum_cycles": 266153,
+        "page_flips": 80,
+        "updates": 80,
+        "verified_page_flips": 80,
+        "verified_trace_frames": 80,
+        "verified_updates": 80
+      },
+      {
+        "camera_positions_observed": 1,
+        "case": "cold-rest-save",
+        "five_visible_enemies_two_visible_hostile_shots_two_arrows_active_effect_frames": 0,
+        "frame_budget_cycles": 280896,
+        "hardware_frames": 150,
+        "maximum_cycles": 207575,
+        "page_flips": 150,
+        "updates": 150,
+        "verified_page_flips": 150,
+        "verified_trace_frames": 150,
+        "verified_updates": 150
+      },
+      {
+        "camera_positions_observed": 2,
+        "case": "cold-field-journal",
+        "five_visible_enemies_two_visible_hostile_shots_two_arrows_active_effect_frames": 0,
+        "frame_budget_cycles": 280896,
+        "hardware_frames": 80,
+        "maximum_cycles": 265930,
+        "page_flips": 80,
+        "updates": 80,
+        "verified_page_flips": 80,
+        "verified_trace_frames": 80,
+        "verified_updates": 80
+      }
+    ],
+    "stress": [
+      {
+        "camera_positions_observed": 43,
+        "frame_budget": 280896,
+        "game_updates": 240,
+        "hardware_frames": 240,
+        "max_cycles": 126413,
+        "name": "scrolling-camera-active-updates",
+        "page_flips": 240,
+        "source": "emulated hardware frames, active game updates and displayed page flips; never host FPS",
+        "verified_page_flips": 240,
+        "verified_trace_frames": 240,
+        "verified_updates": 240
+      },
+      {
+        "camera_positions_observed": 1,
+        "frame_budget": 280896,
+        "game_updates": 80,
+        "hardware_frames": 80,
+        "max_cycles": 266135,
+        "name": "cold-journal-seven-tabs",
+        "page_flips": 80,
+        "source": "emulated hardware frames, active game updates and displayed page flips; never host FPS",
+        "verified_page_flips": 80,
+        "verified_trace_frames": 80,
+        "verified_updates": 80
+      },
+      {
+        "camera_positions_observed": 1,
+        "frame_budget": 280896,
+        "game_updates": 140,
+        "hardware_frames": 140,
+        "max_cycles": 207552,
+        "name": "cold-rest-autosave-dialogue",
+        "page_flips": 140,
+        "source": "emulated hardware frames, active game updates and displayed page flips; never host FPS",
+        "verified_page_flips": 140,
+        "verified_trace_frames": 140,
+        "verified_updates": 140
+      },
+      {
+        "camera_positions_observed": 7,
+        "hardware_frames": 600,
+        "max_cycles": 194941,
+        "max_oam": 40,
+        "maximum_hostile_shots": 2,
+        "maximum_visible_enemies": 3,
+        "name": "combined-camera-enemies-hostile-shots-two-arrows-new-effect",
+        "new_effect_frames": 187,
+        "simultaneous_representative_frames": 23,
+        "two_arrow_frames": 61,
+        "verified_page_flips": 600,
+        "verified_trace_frames": 600,
+        "verified_updates": 600
+      },
+      {
+        "camera_positions_observed": 1,
+        "frame_budget": 280896,
+        "game_updates": 80,
+        "hardware_frames": 80,
+        "max_cycles": 266428,
+        "name": "cold-field-journal-with-enemies",
+        "page_flips": 80,
+        "source": "emulated hardware frames, active game updates and displayed page flips; never host FPS",
+        "verified_page_flips": 80,
+        "verified_trace_frames": 80,
+        "verified_updates": 80
+      }
+    ]
+  }
+}

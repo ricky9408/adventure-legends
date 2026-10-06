@@ -26,7 +26,11 @@ ROOT = Path(__file__).resolve().parents[1]
 A, B, SIZE, USED = 0x200, 0x1A00, 6144, 5056
 IDLE, BUSY, DONE, FAILED = range(4)
 LEGACY_ENABLED = (1, 2, 4, 5, 7, 8, 10, 11)
-ENABLED = LEGACY_ENABLED + (13, 14, 16)
+REVISION2_ENABLED = LEGACY_ENABLED + (13, 14, 16)
+NORTHERN_ENABLED = (19,20,22,23,73,74,75,76,77,78)
+ENABLED = REVISION2_ENABLED + NORTHERN_ENABLED
+NORTH_MASKS = (3,7,3,7,7,3,7,7,3,7,15)
+ALL_ITEMS = (1,2,9,10,17,18,33,34,49,50,65,81,82,3,11,19,35,51,83)
 QUEST_MASKS = (7,3,7,7,3,1,1,1,3,7,1)
 SOURCE_QUEST = (None,7,None,6,None,4,0,8,1,9,5,10,6)
 
@@ -149,6 +153,8 @@ class Save5Tests(unittest.TestCase):
         cls.lib.creatures_form.restype = C.c_void_p
         cls.lib.creatures_roster_init.argtypes = [C.POINTER(Roster)]
         cls.lib.creatures_mark_trial.argtypes = [C.POINTER(Instance),C.c_uint]
+        cls.lib.creatures_xp_threshold.argtypes=[C.c_uint]
+        cls.lib.creatures_xp_threshold.restype=C.c_uint
         cls.lib.creatures_evolve.argtypes = [C.POINTER(Roster),C.c_uint,C.c_uint,C.c_int,C.c_int]
         cls.lib.equipment_init.argtypes = [C.POINTER(Equipment)]
         cls.lib.equipment_claim.argtypes = [C.POINTER(Equipment), C.c_uint, C.c_uint, C.POINTER(C.c_uint)]
@@ -318,7 +324,7 @@ class Save5Tests(unittest.TestCase):
         s = self.fresh()
         self.store(s)
         good = bytes(self.sram[A:A+SIZE])
-        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 3),
+        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 4),
                      (14, 1), (21, 1), (32, 14), (34, 2), (46, 3), (47, 1),
                      (96, 255), (112, 0), (128, 0), (144, 1),
                      (160+1, 0x81), (160+2, 2), (160+3, 101), (160+8, 0),
@@ -595,7 +601,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(bytes(migrated.roster.lifetime_field_aid), original[4520:4536])
         self.store(migrated)
         newest = bytes(self.sram[B if offset == A else A:(B if offset == A else A)+SIZE])
-        self.assertEqual(newest[12:14], bytes((2,0)))
+        self.assertEqual(newest[12:14], bytes((3,0)))
         self.assertEqual(newest[96:4032], original[96:4032])
         self.assertEqual(newest[4296:4544], original[4296:4544])
         self.assertEqual(bytes(self.sram[:A]), old[:A])
@@ -605,7 +611,7 @@ class Save5Tests(unittest.TestCase):
     def test_revision1_reserved_blocks_and_future_revision_fail_safely(self):
         s = self.fresh()
         self.store(s)
-        rev2 = bytearray(self.sram[A:A+SIZE])
+        rev2 = bytearray(self.sram[A:A+SIZE]); rev2[12:14] = bytes((2,0))
         rev1 = bytearray(rev2)
         rev1[12:14] = bytes((1,0)); rev1[4544:5056] = bytes(512)
         self.reset(); self.put(repair_crc(rev1), A)
@@ -614,7 +620,7 @@ class Save5Tests(unittest.TestCase):
         for offset in (4032,4176,4280,4544,4928,4944,5024):
             bad = bytearray(rev1); bad[offset] = 1
             self.reset(); self.put(repair_crc(bad), A); self.invalid()
-        for revision in (0,3,255,256,65535):
+        for revision in (0,4,255,256,65535):
             bad = bytearray(rev2); bad[12:14] = revision.to_bytes(2,'little')
             self.reset(); self.put(repair_crc(bad), A); self.invalid()
             self.put(repair_crc(rev1), B)
@@ -625,6 +631,8 @@ class Save5Tests(unittest.TestCase):
             s = self.fresh(chapter, 3)
             s.campaign.room = 4
             self.reset(); self.store(s)
+            rev2=bytearray(self.sram[A:A+SIZE]);rev2[12:14]=bytes((2,0))
+            self.put(repair_crc(rev2),A)
             got = self.load()
             self.assertEqual(got.campaign.room, expected_room)
             self.assertEqual(got.campaign.spawn, 0 if expected_room else 3)
@@ -704,9 +712,8 @@ class Save5Tests(unittest.TestCase):
         return True
 
     def test_retained_recruit_sanitizer_random_budgets_and_invalid_snapshots(self):
-        source=Path(self.tmp.name)/'retained-sanitizer.c'
+        source=ROOT/'tests/save5_sanitizer.c'
         exe=Path(self.tmp.name)/'retained-sanitizer'
-        source.write_text(RETAINED_SANITIZER_MAIN)
         subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
             '-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-pedantic',
             '-fsanitize=address,undefined','-fno-omit-frame-pointer',
@@ -858,7 +865,7 @@ class Save5Tests(unittest.TestCase):
         for qid, value in ((64,1),(0,4),(0,0xFFFFFFFF)):
             self.assertEqual(self.lib.save5_quest_set_state(C.byref(s.quests),qid,value),0)
             self.assertEqual(bytes(s.quests),before)
-        for qid in range(11,64):
+        for qid in range(22,64):
             broken = Save.from_buffer_copy(bytes(s)); self.set_quest(broken,qid,1,0)
             self.assert_runtime_invalid(broken)
 
@@ -943,73 +950,289 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(compare_state(self.load()),compare_state(target))
         self.assertEqual(self.lib.equipment_claim(C.byref(target.equipment),49,8,None),6)
 
+    def northern(self):
+        s=self.regional(3)
+        s.quests.region_flags[1]=1
+        return s
+
+    def claim_north(self,s,qid):
+        """Host contract fixture builder, never native obtainability evidence."""
+        recruits={11:(19,7),12:(22,8),13:(77,11),14:(73,9),15:(75,10)}
+        if qid in recruits:
+            form,reward=recruits[qid]
+            self.assertLess(self.lib.creatures_grant(C.byref(s.roster),form,10,20,0,reward),160)
+        if 16<=qid<=20:
+            form,trial,level,bond=((19,32,16,40),(22,64,17,40),(73,128,18,45),
+                                   (75,256,18,45),(77,512,20,50))[qid-16]
+            c=next(c for c in s.roster.instances if c.form_id in (form,form+1))
+            c.level=max(c.level,level);c.xp=self.lib.creatures_xp_threshold(c.level);c.bond=max(c.bond,bond)
+            self.assertEqual(self.lib.creatures_mark_trial(C.byref(c),trial),1)
+            for source in ((13,),(14,),(15,),(16,17),(18,))[qid-16]:
+                self.assertEqual(self.lib.equipment_claim(C.byref(s.equipment),ALL_ITEMS[source],source,None),0)
+        self.set_quest(s,qid,3,NORTH_MASKS[qid-11],True)
+
+    def north_complete(self):
+        s=self.northern()
+        for q in range(11): self.assertTrue(self.claim_quest(s,q))
+        for q in range(11,22): self.claim_north(s,q)
+        for source in (2,4):
+            self.assertEqual(self.lib.equipment_claim(C.byref(s.equipment),ALL_ITEMS[source],source,None),0)
+        s.quests.region_flags[0]=63;s.quests.region_flags[1]=255
+        s.quests.anchors[0]=3;s.quests.anchors[1]=3
+        s.campaign.room=29
+        self.assertEqual(self.lib.save5_validate(C.byref(s)),1)
+        return s
+
+    def test_revision2_authentic_R5_fixture_migrates_without_rewards(self):
+        folder=ROOT/'tests/fixtures/v5-revision2'
+        data=(folder/'all-eleven-town.sav').read_bytes()
+        evidence=json.loads((folder/'provenance.json').read_text())
+        self.assertEqual(hashlib.sha256(data).hexdigest(),'74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106')
+        self.assertEqual(evidence['sram_sha256'],hashlib.sha256(data).hexdigest())
+        self.assertEqual(evidence['rom_sha256'],'0ba77d82ce15619784c35a67be83950f924265b604a47495a8987afb21963e90')
+        self.assertTrue(evidence['controller_only']);self.assertEqual(evidence['game_ram_writes'],0)
+        self.put(data);migrated=self.load()
+        self.assertEqual(bytes(self.sram),data)
+        self.assertEqual([c.form_id for c in migrated.roster.instances if c.flags&1],[2,5,8,11,14,16])
+        self.assertEqual([i+1 for i in range(128) if migrated.roster.obtained[i//8]&(1<<(i%8))],list(REVISION2_ENABLED))
+        self.assertEqual([c.instance_id for c in migrated.roster.instances[:6]],list(range(1,7)))
+        self.assertEqual(sorted(r.item_id for r in migrated.equipment.bag if r.item_id),sorted(ALL_ITEMS[:13]))
+        self.assertTrue(all(self.lib.save5_quest_state(C.byref(migrated.quests),q)==3 for q in range(11)))
+        self.assertTrue(all(self.lib.save5_quest_state(C.byref(migrated.quests),q)==0 for q in range(11,64)))
+        self.assertEqual(migrated.quests.region_flags[1],0);self.assertEqual(migrated.quests.anchors[1],0)
+        offset=max((A,B),key=lambda o:int.from_bytes(data[o+8:o+12],'little'))
+        bank=data[offset:offset+SIZE];self.assertEqual(bank[12:14],b'\x02\x00')
+        self.store(migrated)
+        destination=B if offset==A else A
+        written=bytes(self.sram[destination:destination+SIZE])
+        self.assertEqual(written[12:14],b'\x03\x00')
+        self.assertEqual(written[32:],bank[32:],'migration changed earned campaign, roster, commands, credits, quests or equipment')
+        self.assertEqual(bytes(self.sram[offset:offset+SIZE]),bank)
+        self.assertEqual(bytes(self.sram[:A]),data[:A])
+        self.assertEqual(compare_state(self.load()),compare_state(migrated))
+
+    def test_each_revision_exact_form_whitelist_seen_and_owned(self):
+        self.store(self.fresh());base=bytes(self.sram[A:A+SIZE])
+        for revision,allowed in ((1,LEGACY_ENABLED),(2,REVISION2_ENABLED),(3,ENABLED)):
+            for form in range(1,129):
+                with self.subTest(revision=revision,seen=form):
+                    b=bytearray(base);b[12:14]=revision.to_bytes(2,'little')
+                    if revision==1:b[4544:5056]=bytes(512)
+                    b[96+(form-1)//8]|=1<<((form-1)%8)
+                    self.reset();self.put(repair_crc(b),A)
+                    if form in allowed:self.load()
+                    else:self.invalid()
+            for form in ENABLED:
+                self.reset();s=self.fresh()
+                self.assertLess(self.lib.creatures_grant(C.byref(s.roster),form,50,100,0,0),160)
+                self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=revision.to_bytes(2,'little')
+                if revision==1:b[4544:5056]=bytes(512)
+                self.reset();self.put(repair_crc(b),A)
+                if form in allowed:self.load()
+                else:self.invalid()
+
+    def test_revision2_rejects_new_items_claims_quests_and_visits(self):
+        self.store(self.fresh(3));base=bytes(self.sram[A:A+SIZE])
+        for item in ALL_ITEMS[13:]:
+            for record in (False,True):
+                b=bytearray(base);b[12:14]=b'\x02\x00'
+                b[4944+item//8]|=1<<(item%8)
+                if record:b[4552:4560]=item.to_bytes(2,'little')+b'\x00\x00\x01\x00\x00\x00'
+                self.reset();self.put(repair_crc(b),A);self.invalid()
+        for source in range(13,64):
+            b=bytearray(base);b[12:14]=b'\x02\x00';b[5024+source//8]|=1<<(source%8)
+            self.reset();self.put(repair_crc(b),A);self.invalid()
+        # Each of these is otherwise valid current content, rejected only by
+        # its revision boundary (no permissive current-catalog migration).
+        for qid in (None,11,12,14,15):
+            s=self.northern()
+            if qid is not None:self.set_quest(s,qid,1,0)
+            self.reset();self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=b'\x02\x00'
+            self.reset();self.put(repair_crc(b),A);self.invalid()
+
+    def test_northern_exact_quest_contract_and_prerequisites(self):
+        contract=json.loads((ROOT/'assets/northern_region/contract.json').read_text())
+        self.assertEqual(tuple(q['objective_mask'] for q in contract['quests']),NORTH_MASKS)
+        for qid,mask in enumerate(NORTH_MASKS,11):
+            s=self.northern()
+            if qid>=13 and qid not in (14,15):self.claim_north(s,11)
+            if qid==17:self.claim_north(s,12)
+            if qid==18:self.claim_north(s,14)
+            if qid==19:self.claim_north(s,15)
+            if qid in (20,21):self.claim_north(s,13)
+            self.set_quest(s,qid,1,0);self.assertEqual(self.lib.save5_validate(C.byref(s)),1,qid)
+            self.set_quest(s,qid,1,mask);self.assert_runtime_invalid(s)
+            self.set_quest(s,qid,2,mask);self.store(s);self.assertEqual(compare_state(self.load()),compare_state(s))
+            self.set_quest(s,qid,2,mask|0x100);self.assert_runtime_invalid(s)
+            self.set_quest(s,qid,2,mask);s.quests.variables[qid]=1;self.assert_runtime_invalid(s)
+            self.reset()
+        for qid in range(11,22):
+            s=self.northern();self.set_quest(s,qid,1,0)
+            for member in ('region_flags',):
+                bad=Save.from_buffer_copy(bytes(s));getattr(bad.quests,member)[1]=0
+                self.assert_runtime_invalid(bad)
+            if qid in (13,16,17,18,19,20,21):self.assert_runtime_invalid(s)
+        for chapter in (0,1):
+            s=self.fresh(chapter);s.quests.region_flags[0]=1;s.quests.region_flags[1]=1
+            self.assert_runtime_invalid(s)
+        s=self.northern();s.quests.region_flags[0]=0;self.assert_runtime_invalid(s)
+        for byte,index,value in [('region_flags',1,2),('region_flags',2,1),('anchors',1,4),('anchors',2,1)]:
+            s=self.northern();getattr(s.quests,byte)[index]=value;self.assert_runtime_invalid(s)
+        s=self.northern();self.claim_north(s,11);self.claim_north(s,13)
+        for objective in range(16):
+            self.set_quest(s,21,2 if objective==15 else 1,objective)
+            self.assertEqual(bool(self.lib.save5_validate(C.byref(s))),objective in (0,1,3,7,15),objective)
+
+    def test_northern_historical_visit_gates_remain_consistent_in_town(self):
+        for stage in (None,0,1,3,7,15):
+            s=self.northern()
+            if stage is not None:
+                self.claim_north(s,11);self.claim_north(s,13)
+                self.set_quest(s,21,2 if stage==15 else 1,stage)
+            for flags in range(256):
+                s.quests.region_flags[1]=flags
+                expected=(flags==0 and stage is None) or (bool(flags&1) and (stage is not None or not flags&240))
+                if stage is not None:expected=expected and not ((flags>>5)&7)&~stage
+                self.assertEqual(bool(self.lib.save5_validate(C.byref(s))),bool(expected),(stage,flags))
+            s.quests.region_flags[1]=255
+            if stage not in (7,15):self.assert_runtime_invalid(s)
+
+    def test_northern_retained_recruits_and_same_instance_trial_floors(self):
+        s=self.north_complete();self.store(s)
+        self.assertEqual(list(s.roster.party),[0,1,2,3])
+        self.assertTrue(all(not(c.flags&2) for c in s.roster.instances[4:11]))
+        for form,reward in ((19,7),(22,8),(77,11),(73,9),(75,10)):
+            slot=next(i for i,c in enumerate(s.roster.instances) if c.form_id==form)
+            bad=Save.from_buffer_copy(bytes(s));C.memset(C.byref(bad.roster.instances[slot]),0,C.sizeof(Instance))
+            self.assertEqual(self.lib.creatures_roster_validate(C.byref(bad.roster)),1)
+            self.assert_runtime_invalid(bad)
+            bad=Save.from_buffer_copy(bytes(s));bad.roster.rewards[(reward-1)//8]&=~(1<<((reward-1)%8))
+            self.assert_runtime_invalid(bad)
+        for form,trial,level,bond in ((19,32,16,40),(22,64,17,40),(73,128,18,45),(75,256,18,45),(77,512,20,50)):
+            slot=next(i for i,c in enumerate(s.roster.instances) if c.form_id==form)
+            for member,value in (('trial_flags',0),('level',level-1),('bond',bond-1)):
+                bad=Save.from_buffer_copy(bytes(s));setattr(bad.roster.instances[slot],member,value)
+                if member=='level':bad.roster.instances[slot].xp=self.lib.creatures_xp_threshold(value)
+                self.assertEqual(self.lib.creatures_roster_validate(C.byref(bad.roster)),1)
+                self.assert_runtime_invalid(bad)
+            # One low-level trial owner plus a trained non-trial copy must not
+            # combine into proof that the trial's training transaction happened.
+            bad=Save.from_buffer_copy(bytes(s));bad.roster.instances[slot].level=1;bad.roster.instances[slot].xp=0
+            copy=self.lib.creatures_grant(C.byref(bad.roster),form,level,bond,0,0)
+            self.assertLess(copy,160);self.assert_runtime_invalid(bad)
+            self.assertEqual(self.lib.creatures_mark_trial(C.byref(bad.roster.instances[copy]),trial),1)
+            self.store(bad);self.assertEqual(compare_state(self.load()),compare_state(bad))
+            # Evolved form is retained at final storage slot with its original
+            # instance ID and base command; active story party stays untouched.
+            evolved=Save.from_buffer_copy(bytes(s))
+            self.assertEqual(self.lib.creatures_evolve(C.byref(evolved.roster),slot,16,1,1),0)
+            oldid=evolved.roster.instances[slot].instance_id
+            evolved.roster.instances[159]=evolved.roster.instances[slot]
+            C.memset(C.byref(evolved.roster.instances[slot]),0,C.sizeof(Instance))
+            self.store(evolved);got=self.load()
+            self.assertEqual((got.roster.instances[159].form_id,got.roster.instances[159].instance_id),(form+1,oldid))
+            self.assertEqual(compare_state(got),compare_state(evolved))
+        # Generic reward IDs remain independent ledgers when no typed claim is
+        # present: no global reward7..11 retention semantics were added.
+        free=self.fresh();free.roster.rewards[0]|=0xc0;free.roster.rewards[1]|=7
+        self.store(free);self.assertEqual(compare_state(self.load()),compare_state(free))
+
+    def test_northern_checkpoint_spawn_gate_anchor_and_story_resume(self):
+        contract=json.loads((ROOT/'assets/northern_region/contract.json').read_text())
+        for entry in contract['rooms']:
+            room=entry['id']
+            for spawn in range(7):
+                s=self.north_complete();s.campaign.room=room;s.campaign.spawn=spawn
+                valid=str(spawn) in entry['spawns']
+                self.assertEqual(bool(self.lib.save5_validate(C.byref(s))),valid,(room,spawn))
+                if valid:
+                    self.store(s);self.assertEqual(compare_state(self.load()),compare_state(s))
+                    bad=Save.from_buffer_copy(bytes(s));bad.quests.region_flags[1]&=~(1<<(room-22))
+                    self.assert_runtime_invalid(bad)
+                    if spawn==2 and room in (22,23):
+                        bad=Save.from_buffer_copy(bytes(s));bad.quests.anchors[1]=0;self.assert_runtime_invalid(bad)
+                else:self.assert_runtime_invalid(s)
+                self.reset()
+            if room>=26:
+                bad=self.northern();bad.quests.region_flags[1]|=1<<(room-22);bad.campaign.room=room
+                self.assert_runtime_invalid(bad)
+                self.claim_north(bad,11);self.assert_runtime_invalid(bad)
+                self.claim_north(bad,13)
+                self.assertEqual(bool(self.lib.save5_validate(C.byref(bad))),room==26)
+                if room>=27:
+                    self.set_quest(bad,21,1,(1<<(room-26))-1)
+                    self.assertEqual(self.lib.save5_validate(C.byref(bad)),1)
+        for room in (14,15,30,31,32,63,64,255):
+            s=self.north_complete();s.campaign.room=room;self.assert_runtime_invalid(s)
+        # Existing pending Stone conversation redirects any chapter checkpoint;
+        # it must not remove already-owned story members or alter commands.
+        s=self.northern();s.campaign.room=22;s.campaign.story_seen&=~8
+        self.store(s);got=self.load();self.assertEqual((got.campaign.room,got.campaign.spawn),(0,3))
+        self.assertEqual(bytes(got.roster),bytes(s.roster))
+
+    def test_northern_crc_valid_malformed_rows_fail_before_writes(self):
+        s=self.north_complete();self.store(s);base=bytes(self.sram[A:A+SIZE])
+        mutations=[]
+        for slot,c in enumerate(s.roster.instances):
+            if c.form_id not in NORTHERN_ENABLED:continue
+            mutations.extend(((160+slot*24,bytes(24)),(160+slot*24+14,bytes(2)),
+                              (160+slot*24+2,b'\x01'),(160+slot*24+3,b'\x01')))
+        mutations.extend(((4048+42,b'\x08\x00'),(4249,b'\x00'),(4281,b'\x04'),
+                          (12,b'\x02\x00'),(32,b'\x20'),(5026,b'\x00')))
+        for offset,value in mutations:
+            bad=bytearray(base);bad[offset:offset+len(value)]=value
+            self.reset();self.put(repair_crc(bad),A);self.invalid()
+        # Invalid snapshot checks use independent budgets and never invalidate
+        # either authoritative bank before semantic rejection.
+        for budget in (1,7,128,1024,3072,4096):
+            self.reset();self.store(s);before=bytes(self.sram);writes=self.lib.save5_test_write_count()
+            bad=Save.from_buffer_copy(bytes(s));bad.roster.instances[6].trial_flags=0
+            self.assertEqual(self.lib.save5_validate(C.byref(bad)),0)
+            self.assertEqual(self.lib.save5_begin(C.byref(bad)),1)
+            while self.lib.save5_step(budget)==BUSY:
+                self.assertLessEqual(self.lib.save5_test_step_work(),min(budget,3072))
+            self.assertEqual(self.lib.save5_status(),FAILED)
+            self.assertEqual(self.lib.save5_test_write_count(),writes);self.assertEqual(bytes(self.sram),before)
+
+    def test_northern_full_roster_twentyone_forms_all_quests_all_gear(self):
+        s=self.north_complete()
+        for slot in range(11,160):
+            self.assertEqual(self.lib.creatures_grant(C.byref(s.roster),ENABLED[slot%len(ENABLED)],50,100,0,0),slot)
+        s.equipment.equipped[:]=[next(i for i,r in enumerate(s.equipment.bag) if r.item_id==item) for item in (11,35,51,65,83)]
+        for slot in (6,7,8,9,10):
+            self.assertEqual(self.lib.creatures_evolve(C.byref(s.roster),slot,16,1,1),0)
+        self.store(s);self.assertEqual(compare_state(self.load()),compare_state(s))
+        self.assertEqual({c.form_id for c in s.roster.instances},set(ENABLED))
+        self.assertEqual(sum(bool(c.flags&1) for c in s.roster.instances),160)
+        self.assertEqual(sorted(r.item_id for r in s.equipment.bag if r.item_id),sorted(ALL_ITEMS))
+        self.assertEqual(s.roster.instances[8].trial_flags,512)
+
+    def test_northern_recruit_trial_dual_gear_and_migration_every_cut(self):
+        transitions=[]
+        for qid in (11,13,19):
+            old=self.northern()
+            if qid==13:self.claim_north(old,11)
+            if qid==19:self.claim_north(old,15)
+            self.set_quest(old,qid,2,NORTH_MASKS[qid-11])
+            target=Save.from_buffer_copy(bytes(old));self.claim_north(target,qid)
+            self.reset();self.store(old);transitions.append((str(qid),bytes(self.sram),old,target))
+        data=(ROOT/'tests/fixtures/v5-revision2/all-eleven-town.sav').read_bytes()
+        self.reset();self.put(data);old=self.load()
+        transitions.append(('R5-revision2-migration',data,old,Save.from_buffer_copy(bytes(old))))
+        for name,initial,old,target in transitions:
+            source=max((A,B),key=lambda o:int.from_bytes(initial[o+8:o+12],'little') if initial[o:o+2]==b'EB' else -1)
+            for cut in range(SIZE+2):
+                self.put(initial);self.lib.save5_test_reset_writer();self.lib.save5_test_fail_after(cut)
+                ok=self.lib.save5_store(C.byref(target))
+                self.assertEqual(ok,int(cut>=SIZE+1),(name,cut))
+                self.assertEqual(compare_state(self.load()),compare_state(target if ok else old),(name,cut))
+                self.assertEqual(bytes(self.sram[:A]),initial[:A])
+                self.assertEqual(bytes(self.sram[source:source+SIZE]),initial[source:source+SIZE])
+            self.lib.save5_test_fail_after(-1)
+            self.store(target);self.assertEqual(compare_state(self.load()),compare_state(target))
 
 
-RETAINED_SANITIZER_MAIN = r"""
-#include "save5.h"
-#include <assert.h>
-#include <string.h>
-static Save5State state, out, broken;
-static unsigned rng=0xC0DE5052u;
-static unsigned next(void) { rng^=rng<<13; rng^=rng>>17; rng^=rng<<5; return rng; }
-static void finish(unsigned expected) {
-    unsigned steps=0;
-    while(save5_status()==SAVE5_BUSY) {
-        unsigned budget=next()%4097u;
-        save5_step(budget);
-        assert(save5_test_step_work()<=(budget>3072?3072:budget));
-        assert(++steps<1000);
-    }
-    assert(save5_status()==expected);
-}
-int main(void) {
-    unsigned i,cycle;
-    static const unsigned forms[8]={1,2,4,5,7,8,10,11};
-    static const unsigned masks[11]={7,3,7,7,3,1,1,1,3,7,1};
-    memset(save5_test_sram,255,sizeof save5_test_sram);
-    state.campaign.chapter_flags=3;state.campaign.story_seen=10;
-    assert(creatures_migrate_legacy(&state.roster,3,0));
-    equipment_init(&state.equipment);
-    assert(creatures_grant(&state.roster,13,50,100,0,5)==4);
-    assert(creatures_grant(&state.roster,16,50,100,0,6)==5);
-    for(i=6;i<160;++i)assert(creatures_grant(&state.roster,forms[i&7],50,100,0,0)==i);
-    for(i=1;i<EQUIPMENT_AUTHORED_COUNT;++i)
-        assert(equipment_claim(&state.equipment,equipment_authored_ids[i],i,0)==EQUIPMENT_OK);
-    state.quests.region_flags[0]=1;
-    for(i=0;i<11;++i) {
-        assert(save5_quest_set_state(&state.quests,i,SAVE5_QUEST_CLAIMED));
-        state.quests.objectives[i]=masks[i];state.quests.rewards[i>>3]|=1u<<(i&7);
-    }
-    for(cycle=0;cycle<1000;++cycle) {
-        if(cycle==400) {
-            assert(creatures_mark_trial(&state.roster.instances[4],CREATURE_TRIAL_PAIRED_POOLS));
-            assert(creatures_evolve(&state.roster,4,CREATURE_REED_RESTORED,1,1)==CREATURE_EVOLVE_READY);
-        }
-        if(cycle%50==0) {
-            const CreatureU8 party[4]={4,5,2,3};
-            assert(creatures_party_set(&state.roster,party,0));
-        } else if(cycle%50==25) {
-            const CreatureU8 party[4]={0,1,2,3};
-            assert(creatures_party_set(&state.roster,party,0));
-        }
-        state.roster.instances[cycle%160].cosmetic_seed=next();
-        assert(save5_validate(&state));assert(save5_begin(&state));finish(SAVE5_DONE);
-        assert(save5_load(&out));
-        assert(!memcmp(&state.roster,&out.roster,sizeof state.roster));
-        assert(!memcmp(&state.quests,&out.quests,sizeof state.quests));
-        assert(!memcmp(&state.equipment,&out.equipment,sizeof state.equipment));
-    }
-    for(i=4;i<=5;++i) {
-        unsigned writes=save5_test_write_count();
-        broken=state;memset(&broken.roster.instances[i],0,sizeof(CreatureInstance));
-        assert(creatures_roster_validate(&broken.roster));
-        assert(!save5_validate(&broken));assert(save5_begin(&broken));finish(SAVE5_FAILED);
-        assert(save5_test_write_count()==writes);
-        assert(save5_load(&out));assert(!memcmp(&state.roster,&out.roster,sizeof state.roster));
-    }
-    return 0;
-}
-"""
+
 
 ARM_TIMING_MAIN = r"""
 #include "save5.h"
@@ -1018,7 +1241,7 @@ ARM_TIMING_MAIN = r"""
 #endif
 #define REG16(a) (*(volatile unsigned short *)(a))
 static Save5State state;
-volatile unsigned begin_cycles[18], step_cycles[18][256], step_counts[18], results[18], completed;
+volatile unsigned begin_cycles[21], step_cycles[21][256], step_counts[21], results[21], completed;
 const char sram_id[] = "SRAM_V113";
 static unsigned now(void) {
     unsigned hi, lo, hi2;
@@ -1049,7 +1272,7 @@ int main(void) {
     creatures_migrate_legacy(&state.roster,3,0);
     for(i=4;i<160;++i) creatures_grant(&state.roster,11,50,100,0,0);
     bench(9); bench(10); bench(11);
-    for(i=1;i<EQUIPMENT_AUTHORED_COUNT;++i)
+    for(i=1;i<13;++i)
         equipment_claim(&state.equipment,equipment_authored_ids[i],i,0);
     state.quests.region_flags[0]=1;
     {
@@ -1072,6 +1295,27 @@ int main(void) {
     creatures_mark_trial(&state.roster.instances[4],CREATURE_TRIAL_PAIRED_POOLS);
     creatures_evolve(&state.roster,4,CREATURE_REED_RESTORED,1,1);
     bench(15); bench(16); bench(17);
+    creatures_migrate_legacy(&state.roster,3,0);
+    creatures_grant(&state.roster,14,50,100,0,5);
+    creatures_grant(&state.roster,16,50,100,0,6);
+    {
+        const unsigned char forms21[21]={1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78};
+        const unsigned char forms5[5]={19,22,73,75,77};
+        const unsigned char masks[11]={3,7,3,7,7,3,7,7,3,7,15};
+        for(i=0;i<5;++i) {
+            creatures_grant(&state.roster,forms5[i],50,100,0,7+i);
+            creatures_mark_trial(&state.roster.instances[6+i],32u<<i);
+            creatures_evolve(&state.roster,6+i,CREATURE_NORTH_HARBOR_READY,1,1);
+        }
+        for(i=11;i<160;++i)creatures_grant(&state.roster,forms21[i%21],50,100,0,0);
+        for(i=11;i<22;++i) {
+            save5_quest_set_state(&state.quests,i,SAVE5_QUEST_CLAIMED);
+            state.quests.objectives[i]=masks[i-11];state.quests.rewards[i>>3]|=(1u<<(i&7));
+        }
+    }
+    for(i=13;i<EQUIPMENT_AUTHORED_COUNT;++i)equipment_claim(&state.equipment,equipment_authored_ids[i],i,0);
+    state.quests.region_flags[1]=255;state.campaign.room=29;
+    bench(18);bench(19);bench(20);
     completed=1;
     while(1) { }
     return 0;
@@ -1119,7 +1363,10 @@ def arm_timing():
               'full-roster-all13-items-two-banks',
               'full-retained-recruits-all11-quests-after-gear',
               'full-retained-recruits-all11-quests-mixed-banks',
-              'full-retained-recruits-all11-quests-two-banks']
+              'full-retained-recruits-all11-quests-two-banks',
+              'full21-forms-all22-quests-all19-gear-after-river',
+              'full21-forms-all22-quests-all19-gear-mixed-banks',
+              'full21-forms-all22-quests-all19-gear-two-banks']
     for budget in (1024, 3072, 4096):
         subprocess.run([cc, *flags, f'-DBENCH_BUDGET={budget}', '-c', str(main), '-o', str(out/'main.o')], check=True)
         elf, rom = out/f'timing-{budget}.elf', out/f'timing-{budget}.gba'

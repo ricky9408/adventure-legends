@@ -305,6 +305,147 @@
         "A ring that steadies the hand.",
         "Defense +1; stagger +1."
       ]
+    },
+    {
+      "id": 3,
+      "key": "ITEM_003",
+      "name": "Ropeguard Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 3,
+        "stagger": 0
+      },
+      "description": [
+        "A lighter cut with a longer reach.",
+        "Attack +2; reach +3."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 11,
+      "key": "ITEM_011",
+      "name": "Quay Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A balanced harbor thrust.",
+        "Attack +2; defense +1."
+      ],
+      "weapon_class": "lance"
+    },
+    {
+      "id": 19,
+      "key": "ITEM_019",
+      "name": "Headland Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 1,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 12,
+        "stagger": 0
+      },
+      "description": [
+        "A lighter arrow that travels farther.",
+        "Attack +1; range +12."
+      ],
+      "weapon_class": "bow"
+    },
+    {
+      "id": 35,
+      "key": "ITEM_035",
+      "name": "Sailcloth Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Light padding leaves your stride free.",
+        "Defense +1; health +1/4 heart."
+      ]
+    },
+    {
+      "id": 51,
+      "key": "ITEM_051",
+      "name": "Deck Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 4,
+        "roll_reduction": 1,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Sure steps and a quicker second roll.",
+        "Speed +4; roll recovery -1."
+      ]
+    },
+    {
+      "id": 83,
+      "key": "ITEM_083",
+      "name": "Bearing Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 2,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A measured balance of guard and focus.",
+        "Defense +1; power recovery -2."
+      ]
     }
   ],
   "weapon_classes": [
@@ -429,7 +570,7 @@
     ],
     "reach_px": [
       0,
-      4
+      12
     ],
     "stagger": [
       0,
@@ -490,6 +631,30 @@
     {
       "source_id": 12,
       "item_id": 82
+    },
+    {
+      "source_id": 13,
+      "item_id": 3
+    },
+    {
+      "source_id": 14,
+      "item_id": 11
+    },
+    {
+      "source_id": 15,
+      "item_id": 19
+    },
+    {
+      "source_id": 16,
+      "item_id": 35
+    },
+    {
+      "source_id": 17,
+      "item_id": 51
+    },
+    {
+      "source_id": 18,
+      "item_id": 83
     }
   ]
 }

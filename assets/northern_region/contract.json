@@ -1,0 +1,331 @@
+{
+  "schema": 1,
+  "status": "Implemented contract; release obtainability requires native acceptance",
+  "first_room": 22,
+  "room_count": 8,
+  "first_quest": 11,
+  "quest_count": 11,
+  "entry": "Sky-clear AND Reedhaven visited; explicit ferry A interaction; prior ending and all-river completion are not required",
+  "regions": {
+    "visits_byte": 1,
+    "visits_mask": 255,
+    "anchors_byte": 1,
+    "anchors_mask": 3
+  },
+  "variables": "all quest11..21 variables zero; incomplete mechanisms reset on entry, completed objective bits retained",
+  "rooms": [
+    {
+      "id": 22,
+      "key": "hearthwake_quay",
+      "name": "Hearthwake Quay",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          240,
+          36
+        ],
+        "2": [
+          104,
+          208
+        ],
+        "3": [
+          88,
+          144
+        ],
+        "4": [
+          384,
+          144
+        ]
+      },
+      "rest_spawn": 2,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0
+    },
+    {
+      "id": 23,
+      "key": "headland_roads",
+      "name": "Headland Roads",
+      "size": [
+        480,
+        320
+      ],
+      "spawns": {
+        "0": [
+          240,
+          284
+        ],
+        "1": [
+          400,
+          72
+        ],
+        "2": [
+          80,
+          264
+        ]
+      },
+      "rest_spawn": 2,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0
+    },
+    {
+      "id": 24,
+      "key": "boathouse_gallery",
+      "name": "Boathouse Gallery",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0
+    },
+    {
+      "id": 25,
+      "key": "kiln_chart_store",
+      "name": "Kiln and Chart Store",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [],
+      "requires_beacon_objective": 0
+    },
+    {
+      "id": 26,
+      "key": "loading_hall",
+      "name": "Loading Hall",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 0
+    },
+    {
+      "id": 27,
+      "key": "crossbeam_chamber",
+      "name": "Crossbeam Chamber",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 1
+    },
+    {
+      "id": 28,
+      "key": "relay_gallery",
+      "name": "Relay Gallery",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 2
+    },
+    {
+      "id": 29,
+      "key": "beacon_crown",
+      "name": "Beacon Crown",
+      "size": [
+        240,
+        160
+      ],
+      "spawns": {
+        "0": [
+          120,
+          132
+        ]
+      },
+      "rest_spawn": null,
+      "requires_quests_claimed": [
+        11,
+        13
+      ],
+      "requires_beacon_objective": 4
+    }
+  ],
+  "quests": [
+    {
+      "id": 11,
+      "key": "lines_for_tomorrow",
+      "objective_mask": 3,
+      "variable_max": 0,
+      "equipment_sources": [],
+      "creature_reward_id": 7,
+      "creature_form": 19,
+      "trial_mask": 0
+    },
+    {
+      "id": 12,
+      "key": "a_cold_kiln",
+      "objective_mask": 7,
+      "variable_max": 0,
+      "equipment_sources": [],
+      "creature_reward_id": 8,
+      "creature_form": 22,
+      "trial_mask": 0
+    },
+    {
+      "id": 13,
+      "key": "borrowed_bearing",
+      "objective_mask": 3,
+      "variable_max": 0,
+      "equipment_sources": [],
+      "creature_reward_id": 11,
+      "creature_form": 77,
+      "trial_mask": 0
+    },
+    {
+      "id": 14,
+      "key": "one_tender_missing",
+      "objective_mask": 7,
+      "variable_max": 0,
+      "equipment_sources": [],
+      "creature_reward_id": 9,
+      "creature_form": 73,
+      "trial_mask": 0
+    },
+    {
+      "id": 15,
+      "key": "markers_that_walk",
+      "objective_mask": 7,
+      "variable_max": 0,
+      "equipment_sources": [],
+      "creature_reward_id": 10,
+      "creature_form": 75,
+      "trial_mask": 0
+    },
+    {
+      "id": 16,
+      "key": "roof_without_nails",
+      "objective_mask": 3,
+      "variable_max": 0,
+      "equipment_sources": [
+        13
+      ],
+      "creature_reward_id": null,
+      "creature_form": null,
+      "trial_mask": 32
+    },
+    {
+      "id": 17,
+      "key": "dry_ledger",
+      "objective_mask": 7,
+      "variable_max": 0,
+      "equipment_sources": [
+        14
+      ],
+      "creature_reward_id": null,
+      "creature_form": null,
+      "trial_mask": 64
+    },
+    {
+      "id": 18,
+      "key": "fragile_cargo",
+      "objective_mask": 7,
+      "variable_max": 0,
+      "equipment_sources": [
+        15
+      ],
+      "creature_reward_id": null,
+      "creature_form": null,
+      "trial_mask": 128
+    },
+    {
+      "id": 19,
+      "key": "balance_without_breaking",
+      "objective_mask": 3,
+      "variable_max": 0,
+      "equipment_sources": [
+        16,
+        17
+      ],
+      "creature_reward_id": null,
+      "creature_form": null,
+      "trial_mask": 256
+    },
+    {
+      "id": 20,
+      "key": "honest_compass",
+      "objective_mask": 7,
+      "variable_max": 0,
+      "equipment_sources": [
+        18
+      ],
+      "creature_reward_id": null,
+      "creature_form": null,
+      "trial_mask": 512
+    },
+    {
+      "id": 21,
+      "key": "beacon_counterworks",
+      "objective_mask": 15,
+      "variable_max": 0,
+      "equipment_sources": [],
+      "creature_reward_id": null,
+      "creature_form": null,
+      "trial_mask": 0
+    }
+  ],
+  "equipment_source_items": {
+    "13": 3,
+    "14": 11,
+    "15": 19,
+    "16": 35,
+    "17": 51,
+    "18": 83
+  },
+  "critical_inventory": "Wood family7 and Metal family27 guaranteed before mandatory uses; Earth and evolved commands never mandatory",
+  "machine": "A handle opens its coupled mechanism using guaranteed base Wood+Metal. Telegraph60 updates, sweep24, exposed90; any existing weapon can damage the exposed coupling. Always reachable south exit and west reset."
+}

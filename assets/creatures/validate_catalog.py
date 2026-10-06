@@ -13,6 +13,8 @@ ROOT=Path(__file__).resolve().parent
 PHASES=['wood','fire','earth','metal','water']
 GENERATION=list(zip(PHASES,PHASES[1:]+PHASES[:1]))
 CONTROL=[('wood','earth'),('earth','water'),('water','fire'),('fire','metal'),('metal','wood')]
+# Wire-stable capability order: original bits 0..20, reviewed additions 21..24.
+FIELD_CAPABILITIES = ['break_crack', 'burn_thorns', 'draw_ore', 'drive_sail', 'earth_socket', 'expose_fire', 'expose_stone', 'expose_wind', 'fill_basin', 'fire_socket', 'grow_bridge', 'grow_roots', 'ignite', 'link_pools', 'press_weight', 'reveal_current', 'tune_latch', 'turn_vane', 'uncap_well', 'wind_socket', 'wood_socket', 'reel_load', 'store_heat', 'float_load', 'align_rail']
 KEYWORDS={'$schema','$id','$defs','title','$ref','type','enum','const','properties','required','additionalProperties','items','minItems','maxItems','uniqueItems','minimum','maximum','minLength','maxLength','pattern'}
 
 class CatalogError(ValueError):pass
@@ -110,7 +112,7 @@ def validate(data,identity=None,schema=None):
     for s in data['slots']:
         check((s['status']!='reserved')==(s['id'] in F),f'form {s["id"]}: content status mismatch')
         check(s['key']==f'FORM_{s["id"]:03d}',f'form {s["id"]}: stable key mismatch')
-    field=set(data['field_capabilities']); check(data['field_capabilities']==sorted(field),'field_capabilities: sort required')
+    field=set(data['field_capabilities']); check(data['field_capabilities']==FIELD_CAPABILITIES,'field_capabilities: reviewed append-only bit order required')
     check(len({a['handler'] for a in A.values()})==len(A),'abilities: handler identity must be unique')
     for a in A.values():check(set(a['field_caps'])<=field,f'ability {a["id"]}: unknown field capability')
     check(len({f['name'] for f in F.values()})==len(F),'forms: names must be distinct')
@@ -187,22 +189,23 @@ def validate_enabled(data, enabled):
     errors = []
     if not isinstance(enabled, dict):
         return ['enabled: expected manifest object']
-    expected_ids = [1,2,4,5,7,8,10,11,13,14,16]
-    expected_edges = [[1,2],[4,5],[7,8],[10,11],[13,14]]
-    if type(enabled.get('content_revision')) is not int or enabled['content_revision'] != 2:
-        errors.append('enabled: expected content revision 2')
+    expected_ids = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78]
+    expected_edges = [[1,2],[4,5],[7,8],[10,11],[13,14],[19,20],[22,23],[73,74],[75,76],[77,78]]
+    expected_abilities = list(range(1,12)) + list(range(13,23))
+    if type(enabled.get('content_revision')) is not int or enabled['content_revision'] != 3:
+        errors.append('enabled: expected content revision 3')
     for key, expected in [('enabled_form_ids', expected_ids),
                           ('enabled_evolutions', expected_edges),
-                          ('enabled_ability_ids', list(range(1,12)))]:
+                          ('enabled_ability_ids', expected_abilities)]:
         # JSON canonical equality also rejects bool aliases for integer IDs.
         if json.dumps(enabled.get(key)) != json.dumps(expected):
             errors.append(f'enabled: {key} differs from reviewed core')
     forms = [f for f in data['forms'] if f['id'] in expected_ids]
     if [f['id'] for f in forms] != expected_ids:
         errors.append('enabled: every form requires an authored definition')
-    if sum(len(f['learnset']) for f in forms) != 16:
-        errors.append('enabled: expected exactly 16 learnset entries')
-    if sorted({l['ability_id'] for f in forms for l in f['learnset']}) != list(range(1,12)):
+    if sum(len(f['learnset']) for f in forms) != 31:
+        errors.append('enabled: expected exactly 31 learnset entries')
+    if sorted({l['ability_id'] for f in forms for l in f['learnset']}) != expected_abilities:
         errors.append('enabled: learned commands differ from reviewed core')
     edges = [[e['from'],e['to']] for e in data['evolutions']
              if e['from'] in expected_ids or e['to'] in expected_ids]

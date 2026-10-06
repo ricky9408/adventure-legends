@@ -160,7 +160,7 @@ class EvolutionRun(CampaignRun):
     def growth(self,family):
         if self.get('game_state')==PLAY:self.tap('START')
         self.check(self.get('game_state')==PAUSE,'Start opens journal for companion growth')
-        for _ in range(6):
+        for _ in range(7):
             if self.get('journal_tab')==3:break
             self.tap('A')
         self.check(self.get('journal_tab')==3,'growth is the fourth journal tab')

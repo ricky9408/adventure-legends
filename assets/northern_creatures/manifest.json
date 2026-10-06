@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "generator": "assets/generate_northern_creatures.py",
+  "form_ids": [
+    19,
+    20,
+    22,
+    23,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78
+  ],
+  "names": [
+    "Spoolbud",
+    "Loomcrown",
+    "Cindertray",
+    "Kilnbarrow",
+    "Keelkip",
+    "Wakecradle",
+    "Cairncricket",
+    "Archspring",
+    "Rivetfoil",
+    "Gimbalcloak"
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "status": "ART ONLY. Native rendering, catalog enablement, acquisition and powers are separate integration work.",
+  "rights": "Original code-native pixel art, authored from pixel geometry. No extracted game art, tracing, downloaded or generated raster creature inputs.",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 71690,
+  "runtime_data_bytes": 0,
+  "runtime_bss_bytes": 0,
+  "include_bytes": [
+    29987,
+    29994,
+    30000,
+    29987,
+    29924,
+    29935,
+    15723
+  ],
+  "max_include_bytes": 30000,
+  "scene_review_sources": [
+    {
+      "terrain": "GRASS",
+      "path": "assets/northern_region/headland_roads.png",
+      "sha256": "24387d4034a6201b1a638ddbdcaeb42f5f39c03cb46d90fe67dae8ccd8e29b11",
+      "crop": [
+        118,
+        170,
+        150,
+        202
+      ]
+    },
+    {
+      "terrain": "WATER",
+      "path": "assets/northern_region/hearthwake_quay.png",
+      "sha256": "d8b0084da418097f00fb8a80e11149e3a858477cca8aafced898a4c772894cd6",
+      "crop": [
+        116,
+        271,
+        148,
+        303
+      ]
+    },
+    {
+      "terrain": "TIMBER",
+      "path": "assets/northern_region/hearthwake_quay.png",
+      "sha256": "d8b0084da418097f00fb8a80e11149e3a858477cca8aafced898a4c772894cd6",
+      "crop": [
+        104,
+        190,
+        136,
+        222
+      ]
+    }
+  ],
+  "anchor": [
+    8,
+    8
+  ],
+  "frame_ticks_suggestion": 8,
+  "ability_poses": [
+    "gather",
+    "release"
+  ],
+  "motions": [
+    "Three root paws alternate under a rolling living seed-bobbin; loose vine curls",
+    "Tall antler-trellis sways on two root feet around a suspended expressive seed",
+    "Ceramic tortoise pup rocks on four paws; tail curls as its shell stores warmth",
+    "Long ceramic salamander steps on broad bent legs; hinged shell opens sideways",
+    "Seal pup paddles with asymmetric skates and overlapping translucent belly ribs",
+    "Long-necked seal rocks inside two curved flippers and an open water sling",
+    "Stone cricket hops on a long folded haunch; antennae frame its curious face",
+    "Tall cricket opens and closes paired arching haunches around its hanging thorax",
+    "Folded metal wren skips on forked toes; pleated wings and pendulum swing",
+    "Wide metal bird canopy flexes above an open breast-gimbal and stepping talons"
+  ],
+  "png_sizes": {
+    "ability_sheet.png": 5339,
+    "archspring_ability.png": 1276,
+    "archspring_portrait.png": 1096,
+    "archspring_walk.png": 1416,
+    "cairncricket_ability.png": 1263,
+    "cairncricket_portrait.png": 1068,
+    "cairncricket_walk.png": 1362,
+    "cindertray_ability.png": 1214,
+    "cindertray_portrait.png": 1063,
+    "cindertray_walk.png": 1310,
+    "contact_sheet.png": 21831,
+    "gimbalcloak_ability.png": 1341,
+    "gimbalcloak_portrait.png": 1122,
+    "gimbalcloak_walk.png": 1469,
+    "keelkip_ability.png": 1201,
+    "keelkip_portrait.png": 1073,
+    "keelkip_walk.png": 1347,
+    "kilnbarrow_ability.png": 1263,
+    "kilnbarrow_portrait.png": 1081,
+    "kilnbarrow_walk.png": 1372,
+    "loomcrown_ability.png": 1307,
+    "loomcrown_portrait.png": 1126,
+    "loomcrown_walk.png": 1417,
+    "native_dark_light.png": 28391,
+    "native_dark_light_2x.png": 39819,
+    "rivetfoil_ability.png": 1241,
+    "rivetfoil_portrait.png": 1067,
+    "rivetfoil_walk.png": 1366,
+    "scene_readability_2x.png": 33898,
+    "scene_readability_native.png": 22487,
+    "silhouette_review.png": 9542,
+    "spoolbud_ability.png": 1261,
+    "spoolbud_portrait.png": 1112,
+    "spoolbud_walk.png": 1332,
+    "wakecradle_ability.png": 1246,
+    "wakecradle_portrait.png": 1078,
+    "wakecradle_walk.png": 1376,
+    "walk_sheet.png": 6561
+  },
+  "validation": {
+    "field_dimensions": [
+      10,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      10,
+      4,
+      2,
+      256
+    ],
+    "portrait_dimensions": [
+      10,
+      1024
+    ],
+    "palette_entries": 178,
+    "existing_actor_palette_only": true,
+    "transparent_zero": true,
+    "palette_indices": [
+      0,
+      1,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      25,
+      26,
+      28,
+      29,
+      30,
+      31,
+      35,
+      36,
+      40,
+      41,
+      42,
+      43,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      55,
+      56,
+      59,
+      60,
+      63,
+      74,
+      89,
+      96
+    ],
+    "distinct_direction_silhouettes_per_form": 4,
+    "distinct_walk_silhouettes_per_direction": 4,
+    "additional_cast_poses_per_direction": 2,
+    "distinct_form_silhouettes": 10,
+    "independent_portraits": true
+  }
+}

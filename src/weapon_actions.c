@@ -1,7 +1,7 @@
 #include "weapon_actions.h"
 static int valid_stats(const EquipmentStats *s){
     return s && s->weapon_class>=EQUIPMENT_SWORD && s->weapon_class<=EQUIPMENT_BOW &&
-        s->attack_q4<=EQUIPMENT_MAX_ATTACK_Q4 && s->reach_px<=4 && s->stagger<=3 &&
+        s->attack_q4<=EQUIPMENT_MAX_ATTACK_Q4 && s->reach_px<=EQUIPMENT_MAX_REACH_PX && s->stagger<=3 &&
         (s->phase<5 || s->phase==EQUIPMENT_NEUTRAL_PHASE);
 }
 void weapon_action_init(WeaponAttack *a){

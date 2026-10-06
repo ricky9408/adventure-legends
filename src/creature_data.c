@@ -14,6 +14,16 @@ const CreatureForm creature_forms[CREATURE_ENABLED_COUNT] = {
     {13, 5, 4, 0, 1, 0, {35, 20, 30, 55, 40}, 9, 0x00008100u, 13, 12, 1, 1, 4, 0, 13, 1},
     {14, 5, 4, 0, 2, 0, {45, 30, 40, 70, 55}, 10, 0x0000a100u, 14, 13, 2, 0, 0, 0, 14, 1},
     {16, 6, 3, 1, 1, 0, {30, 50, 40, 35, 25}, 11, 0x00010004u, 16, 15, 1, 0, 0, 0, 16, 1},
+    {19, 7, 0, 0, 1, 0, {36, 24, 30, 54, 36}, 13, 0x00200000u, 19, 16, 1, 1, 5, 0, 19, 1},
+    {20, 7, 0, 0, 2, 0, {48, 30, 42, 72, 48}, 14, 0x00200000u, 20, 17, 2, 0, 0, 0, 20, 1},
+    {22, 8, 1, 0, 1, 0, {36, 28, 44, 52, 20}, 15, 0x00400000u, 22, 19, 1, 1, 6, 0, 22, 1},
+    {23, 8, 1, 0, 2, 0, {52, 40, 56, 68, 24}, 16, 0x00400000u, 23, 20, 2, 0, 0, 0, 23, 1},
+    {73, 25, 4, 1, 1, 0, {34, 38, 26, 34, 48}, 17, 0x00800000u, 73, 22, 1, 1, 7, 0, 73, 1},
+    {74, 25, 4, 1, 2, 0, {48, 52, 34, 46, 60}, 18, 0x00800000u, 74, 23, 2, 0, 0, 0, 74, 1},
+    {75, 26, 2, 1, 1, 0, {30, 50, 26, 24, 50}, 19, 0x00004000u, 75, 25, 1, 1, 8, 0, 75, 1},
+    {76, 26, 2, 1, 2, 0, {44, 62, 40, 32, 62}, 20, 0x00004000u, 76, 26, 2, 0, 0, 0, 76, 1},
+    {77, 27, 3, 0, 1, 0, {32, 28, 38, 50, 32}, 21, 0x01000000u, 77, 28, 1, 1, 9, 0, 77, 1},
+    {78, 27, 3, 0, 2, 0, {44, 38, 52, 64, 42}, 22, 0x01000000u, 78, 29, 2, 0, 0, 0, 78, 1},
 };
 
 const CreatureLearn creature_learnsets[CREATURE_LEARNSET_COUNT] = {
@@ -33,6 +43,21 @@ const CreatureLearn creature_learnsets[CREATURE_LEARNSET_COUNT] = {
     {1, 9},
     {15, 10},
     {1, 11},
+    {1, 13},
+    {1, 13},
+    {16, 14},
+    {1, 15},
+    {1, 15},
+    {17, 16},
+    {1, 17},
+    {1, 17},
+    {18, 18},
+    {1, 19},
+    {1, 19},
+    {18, 20},
+    {1, 21},
+    {1, 21},
+    {20, 22},
 };
 
 const CreatureEvolution creature_evolutions[CREATURE_EVOLUTION_COUNT] = {
@@ -41,6 +66,11 @@ const CreatureEvolution creature_evolutions[CREATURE_EVOLUTION_COUNT] = {
     {7, 8, 16, 55, 4, 2},
     {10, 11, 20, 60, 8, 4},
     {13, 14, 15, 45, 16, 8},
+    {19, 20, 16, 40, 32, 16},
+    {22, 23, 17, 40, 64, 16},
+    {73, 74, 18, 45, 128, 16},
+    {75, 76, 18, 45, 256, 16},
+    {77, 78, 20, 50, 512, 16},
 };
 
 const CreatureAbility creature_abilities[CREATURE_ABILITY_COUNT] = {
@@ -55,6 +85,16 @@ const CreatureAbility creature_abilities[CREATURE_ABILITY_COUNT] = {
     {9, 4, 90, 0x00008100u},
     {10, 4, 120, 0x0000a100u},
     {11, 3, 90, 0x00010004u},
+    {13, 0, 90, 0x00200000u},
+    {14, 0, 120, 0x00200000u},
+    {15, 1, 90, 0x00400000u},
+    {16, 1, 120, 0x00400000u},
+    {17, 4, 90, 0x00800000u},
+    {18, 4, 120, 0x00800000u},
+    {19, 2, 90, 0x00004000u},
+    {20, 2, 120, 0x00004000u},
+    {21, 3, 90, 0x01000000u},
+    {22, 3, 120, 0x01000000u},
 };
 
 const char *creatures_name(unsigned form_id) {
@@ -70,6 +110,16 @@ const char *creatures_name(unsigned form_id) {
     case 13: return "Dewspindle";
     case 14: return "Tidewheel";
     case 16: return "Chimeclasp";
+    case 19: return "Spoolbud";
+    case 20: return "Loomcrown";
+    case 22: return "Cindertray";
+    case 23: return "Kilnbarrow";
+    case 73: return "Keelkip";
+    case 74: return "Wakecradle";
+    case 75: return "Cairncricket";
+    case 76: return "Archspring";
+    case 77: return "Rivetfoil";
+    case 78: return "Gimbalcloak";
     default: return "Unavailable form";
     }
 }
@@ -87,6 +137,16 @@ const char *creatures_ability_name(unsigned ability_id) {
     case 9: return "Dew Ring";
     case 10: return "Tide Stitch";
     case 11: return "Chime Pin";
+    case 13: return "Threadhold";
+    case 14: return "Shuttle Span";
+    case 15: return "Heat Pocket";
+    case 16: return "Firing Drawer";
+    case 17: return "Washback";
+    case 18: return "Wake Turn";
+    case 19: return "Counterdrop";
+    case 20: return "Counterpoise";
+    case 21: return "Quarterturn";
+    case 22: return "Gimbal Screen";
     default: return "No command";
     }
 }

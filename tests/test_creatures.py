@@ -10,7 +10,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-ENABLED = [1,2,4,5,7,8,10,11,13,14,16]
+ENABLED = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78]
 U8, U16, U32 = C.c_ubyte, C.c_ushort, C.c_uint
 
 class Instance(C.Structure):
@@ -55,6 +55,7 @@ def build(directory, data=None, tag='good'):
         'creatures_party_set': (C.c_int, [C.POINTER(Roster), C.POINTER(U8), U32]),
         'creatures_party_capabilities': (U32, [C.POINTER(Roster)]),
         'creatures_form': (C.POINTER(Form), [C.c_uint]),
+        'creatures_family_trial': (C.c_uint, [C.c_uint]),
         'creatures_ability': (C.c_void_p, [C.c_uint]),
         'creatures_command_learned': (C.c_int, [C.c_uint, C.c_uint, C.c_uint]),
         'creatures_xp_threshold': (U32, [C.c_uint]),
@@ -332,7 +333,7 @@ class CreatureTests(unittest.TestCase):
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),1,0),7)
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),1,1),0)
     def test_evolved_forms_cannot_be_granted_below_evolution_level(self):
-        for form in [2,5,8,11,14]:self.assertEqual(self.grant(form,1),255)
+        for form in [2,5,8,11,14,20,23,74,76,78]:self.assertEqual(self.grant(form,1),255)
     def test_new_enabled_data_has_exact_authored_identity_and_commands(self):
         expected={13:(5,4,0,1,9,0x8100),14:(5,4,0,2,10,0xa100),16:(6,3,1,1,11,0x10004)}
         for form,(family,phase,polarity,tier,signature,caps) in expected.items():
@@ -341,18 +342,62 @@ class CreatureTests(unittest.TestCase):
                              (family,phase,polarity,tier,signature,caps))
             self.assertEqual(self.lib.creatures_legacy_spirit(form),255)
         for command in range(256):
-            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=11)
+            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=11 or 13<=command<=22)
         self.assertTrue(self.lib.creatures_command_learned(14,15,9))
         self.assertTrue(self.lib.creatures_command_learned(14,15,10))
         self.assertFalse(self.lib.creatures_command_learned(14,14,10))
         self.assertFalse(self.lib.creatures_command_learned(13,50,10))
         self.assertFalse(self.lib.creatures_command_learned(16,50,9))
 
+    def test_northern_exact_policies_evolution_and_disabled_legendary_command(self):
+        # Direct host grants exercise core contracts only, never acquisition.
+        rows = [(19,7,0,0,13,0x200000,16,40,32),
+                (22,8,1,0,15,0x400000,17,40,64),
+                (73,25,4,1,17,0x800000,18,45,128),
+                (75,26,2,1,19,0x4000,18,45,256),
+                (77,27,3,0,21,0x1000000,20,50,512)]
+        for base,family,phase,polarity,ability,caps,level,bond,trial in rows:
+            with self.subTest(form=base):
+                self.lib.creatures_roster_init(C.byref(self.r))
+                for form in (base,base+1):
+                    f=self.lib.creatures_form(form).contents
+                    self.assertEqual((f.family,f.phase,f.polarity,f.tier,f.signature_ability,f.field_caps),
+                                     (family,phase,polarity,form-base+1,ability+form-base,caps))
+                    self.assertEqual(self.lib.creatures_family_trial(form),trial)
+                    self.assertEqual(self.lib.creatures_legacy_spirit(form),255)
+                self.assertEqual(self.grant(base+1,level-1,bond),255)
+                self.assertEqual(self.grant(base,level-1,bond-1),0)
+                c=self.r.instances[0]
+                self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),16,1),3)
+                self.lib.creatures_add_xp(C.byref(c),4*(level-1)**3-c.xp)
+                self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),16,1),4)
+                c.bond=bond
+                for context in (0,7,8,15,32):
+                    self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context,1),5)
+                self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),16,1),6)
+                self.assertEqual(self.lib.creatures_mark_trial(C.byref(c),trial),1)
+                self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),16,0),7)
+                before=bytes(self.r)
+                self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,16,1,0),8)
+                self.assertEqual(bytes(self.r),before)
+                identity=bytes(c)
+                self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,16,1,1),0)
+                expected=bytearray(identity);expected[0]=base+1
+                self.assertEqual(bytes(c),bytes(expected))
+                self.assertTrue(self.lib.creatures_command_learned(base+1,1,ability))
+                self.assertFalse(self.lib.creatures_command_learned(base+1,level-1,ability+1))
+                self.assertTrue(self.lib.creatures_command_learned(base+1,level,ability+1))
+                before=bytes(self.r)
+                self.assertEqual(self.lib.creatures_equip(C.byref(c),1,12),0)
+                self.assertEqual(bytes(self.r),before)
+                self.assertEqual(self.lib.creatures_equip(C.byref(c),1,ability+1),1)
+                self.valid()
+
     def test_data_manifest_is_not_native_obtainability_evidence(self):
         result=json.loads(subprocess.check_output(['python3',str(ROOT/'assets/creatures/validate_catalog.py')]))
         self.assertEqual((result['reserved_identities'],result['authored_designs'],
                           result['enabled_native_core_forms'],result['enabled_evolution_edges'],
-                          result['enabled_abilities']),(128,12,11,5,11))
+                          result['enabled_abilities']),(128,22,21,10,21))
         self.assertEqual(result['disabled_authored_forms'],[121])
         self.assertIn('separate native acquisition',result['native_obtainability'])
         # Host grants test data APIs; they do not navigate any acquisition route.
@@ -368,7 +413,7 @@ class CreatureTests(unittest.TestCase):
             manifest=validate_catalog.load_json(ROOT/'assets/creatures/enabled.json')
             self.assertEqual(generate_data.generate(),generate_data.generate())
             self.assertEqual(generate_data.generate(),(ROOT/'src/creature_data.c').read_text())
-            mutations=[('content_revision',1),('content_revision',True),
+            mutations=[('content_revision',1),('content_revision',2),('content_revision',True),
                        ('enabled_form_ids',ENABLED+[121]),('enabled_form_ids',ENABLED[:-1]),
                        ('enabled_form_ids',[True]+ENABLED[1:]),
                        ('enabled_ability_ids',list(range(1,13))),
@@ -376,6 +421,9 @@ class CreatureTests(unittest.TestCase):
             for key,value in mutations:
                 changed=copy.deepcopy(manifest);changed[key]=value
                 self.assertTrue(validate_catalog.validate_enabled(catalog,changed),(key,value))
+            changed=copy.deepcopy(catalog)
+            changed['field_capabilities']=sorted(changed['field_capabilities'])
+            self.assertTrue(validate_catalog.validate(changed))
             changed=copy.deepcopy(catalog)
             changed['forms']=[f for f in changed['forms'] if f['id']!=13]
             self.assertTrue(validate_catalog.validate_enabled(changed,manifest))
@@ -445,12 +493,12 @@ class CreatureTests(unittest.TestCase):
         self.valid()
 
     def test_trial_flags_are_exactly_family_specific_including_zero(self):
-        trials={1:1,2:1,4:2,5:2,7:4,8:4,10:8,11:8,13:16,14:16,16:0}
+        trials={1:1,2:1,4:2,5:2,7:4,8:4,10:8,11:8,13:16,14:16,16:0,19:32,20:32,22:64,23:64,73:128,74:128,75:256,76:256,77:512,78:512}
         for form,trial in trials.items():
             self.lib.creatures_roster_init(C.byref(self.r))
             self.assertEqual(self.grant(form,50,100),0)
             good=bytes(self.r.instances[0])
-            for flag in range(64):
+            for flag in range(1024):
                 c=Instance.from_buffer_copy(good)
                 result=self.lib.creatures_mark_trial(C.byref(c),flag)
                 self.assertEqual(bool(result),bool(trial and flag==trial),(form,flag))
@@ -477,7 +525,7 @@ class CreatureTests(unittest.TestCase):
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(False),1),5)
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(True),1),0)
         before=bytes(self.r)
-        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,1),(0x10000,1,1,1)]:
+        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,5),(32,1,1,5),(64,1,1,1),(0x10000,1,1,1)]:
             self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,ctx,sanctuary,confirmed),result)
             self.assertEqual(bytes(self.r),before)
         identity=bytes(c);party=bytes(self.r.party)
@@ -558,4 +606,6 @@ class CreatureTests(unittest.TestCase):
             lib=build(self.tmp.name,source.replace(old,new,1),tag)
             self.assertEqual(lib.creatures_catalog_validate(),0,tag)
 
-if __name__ == '__main__': unittest.main(verbosity=2)
+if __name__ == '__main__':
+    from test_creature_sparse import SparseCreatureTests
+    unittest.main(verbosity=2)

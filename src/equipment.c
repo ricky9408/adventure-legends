@@ -49,7 +49,7 @@ static int definition_validate(const EquipmentDefinition *d) {
         s->hp_q4 < 0 || s->hp_q4 > 32 || s->speed_q8_delta < -16 || s->speed_q8_delta > 16 ||
         s->roll_reduction < 0 || s->roll_reduction > 6 ||
         s->power_reduction < 0 || s->power_reduction > 8 ||
-        s->reach_px < 0 || s->reach_px > 4 || s->stagger < 0 || s->stagger > 3 ||
+        s->reach_px < 0 || s->reach_px > EQUIPMENT_MAX_REACH_PX || s->stagger < 0 || s->stagger > 3 ||
         (d->slot != EQUIPMENT_WEAPON && s->reach_px)) return 0;
     return 1;
 }
@@ -67,9 +67,14 @@ int equipment_catalog_validate(void) {
     if (count != EQUIPMENT_AUTHORED_COUNT ||
         equipment_definitions[1].slot != EQUIPMENT_WEAPON ||
         equipment_definitions[1].weapon_class != EQUIPMENT_SWORD) return 0;
-    for (i = 0; i < EQUIPMENT_AUTHORED_COUNT; ++i)
-        if (!equipment_definition(equipment_authored_ids[i]) ||
-            (i && equipment_authored_ids[i - 1] >= equipment_authored_ids[i])) return 0;
+    /* This is a persistent acquisition-source mapping, not a sorted index.
+     * Append new sources without renumbering any previously saved claim. */
+    for (i = 0; i < EQUIPMENT_AUTHORED_COUNT; ++i) {
+        unsigned j;
+        if (!equipment_definition(equipment_authored_ids[i])) return 0;
+        for (j = 0; j < i; ++j)
+            if (equipment_authored_ids[j] == equipment_authored_ids[i]) return 0;
+    }
     for (i = 1; i <= EQUIPMENT_BOW; ++i) {
         const EquipmentWeapon *w = equipment_weapon(i);
         unsigned n;
@@ -87,7 +92,7 @@ int equipment_catalog_validate(void) {
 int equipment_record_validate(const EquipmentRecord *r) {
     const EquipmentDefinition *d;
     if (!r) return 0;
-    if (!r->item_id) return zero_bytes((const EquipmentU8 *)r, sizeof(*r));
+    if (!r->item_id) return !(r->rank|r->flags|r->quantity|r->reserved[0]|r->reserved[1]|r->reserved[2]);
     d = equipment_definition(r->item_id);
     return d && r->rank == 0 && r->flags == d->flags && r->quantity == 1 &&
            zero_bytes(r->reserved, sizeof(r->reserved));
@@ -115,8 +120,12 @@ int equipment_reserved_validate(const EquipmentState *s) {
         !zero_bytes(s->wallet_key_reserved, sizeof(s->wallet_key_reserved)) ||
         !zero_bytes(s->reserved, sizeof(s->reserved)) || bit_get(s->seen, 0)) return 0;
     /* Definitions occupy bits by exact ID, including sentinel bit zero. */
-    for (i = 1; i < EQUIPMENT_DEFINITION_CAPACITY; ++i)
-        if (bit_get(s->seen, i) && !equipment_definition(i)) return 0;
+    for (i = 0; i < sizeof(s->seen); ++i) {
+        unsigned bits=s->seen[i], bit=0;
+        /* Empty history bytes dominate a real bag. Skip them as bytes, but
+         * still validate every set identity, including malformed high bits. */
+        while(bits){if((bits&1u)&&!equipment_definition(i*8u+bit))return 0;bits>>=1;bit++;}
+    }
     for (i = 0; i < EQUIPMENT_REWARD_CAPACITY; ++i) {
         if (bit_get(s->reward_claims, i) &&
             (i >= EQUIPMENT_AUTHORED_COUNT || !bit_get(s->seen, equipment_authored_ids[i]))) return 0;
@@ -124,14 +133,16 @@ int equipment_reserved_validate(const EquipmentState *s) {
     return 1;
 }
 int equipment_validate(const EquipmentState *s) {
-    unsigned i, j;
+    unsigned i;EquipmentU8 owned[64];
     if (!equipment_refs_validate(s) || !equipment_reserved_validate(s)) return 0;
+    clear_bytes(owned,sizeof(owned));
     for (i = 0; i < EQUIPMENT_BAG_CAPACITY; ++i) {
         const EquipmentRecord *r = &s->bag[i];
         if (!equipment_record_validate(r)) return 0;
         if (!r->item_id) continue;
         if (!bit_get(s->seen, r->item_id)) return 0;
-        for (j = 0; j < i; ++j) if (s->bag[j].item_id == r->item_id) return 0;
+        if(bit_get(owned,r->item_id))return 0;
+        bit_set(owned,r->item_id);
     }
     return 1;
 }
@@ -244,7 +255,7 @@ static void derive_refs(const EquipmentState *s, const EquipmentU8 *refs,
     out->defense_q4 = (EquipmentU8)clamp(defense, 0, EQUIPMENT_MAX_DEFENSE_Q4);
     out->roll_cooldown = (EquipmentU8)(EQUIPMENT_BASE_ROLL_COOLDOWN - clamp(roll, 0, 6));
     out->power_cooldown = (EquipmentU8)(EQUIPMENT_BASE_POWER_COOLDOWN - clamp(power, 0, 8));
-    out->reach_px = (EquipmentU8)clamp(reach, 0, 4);
+    out->reach_px = (EquipmentU8)clamp(reach, 0, EQUIPMENT_MAX_REACH_PX);
     out->stagger = (EquipmentU8)clamp(stagger, 0, 3);
 }
 int equipment_derive(const EquipmentState *s, unsigned base_hp, EquipmentStats *out) {

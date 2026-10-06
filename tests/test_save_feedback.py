@@ -32,7 +32,8 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
              'creatures','creature_data','save5','progression','evolution_art',
              'advanced_powers','trials','trial_art','quickparty','equipment','equipment_data',
              'combat_rules','weapon_actions','gear_runtime','gear_menu','regional_quests',
-             'regional_creature_art','regional_powers','region_art','region_game']
+             'regional_creature_art','regional_powers','region_art','region_game',
+             'northern_creature_art','northern_powers','northern_power_art','north_art','north_game','northern_quests']
     subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
         '-shared','-fPIC','-O0','-std=c99','-fno-builtin','-Wno-attributes',
         '-Wno-pointer-to-int-cast','-Wno-int-to-pointer-cast',
@@ -107,7 +108,7 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
     assert get('save_failure_notice')==1,'paused timeout must not dismiss failure'
     # Other modal feedback and page changes cannot overwrite the failure.
     lib.toast(ids.index('TX_E_GROWN'));wait_updates(140)
-    for _ in range(6):
+    for _ in range(7):
         update(1);assert get('save_failure_notice')==1
     assert get('journal_tab')==3 and bytes(sram)==before
 

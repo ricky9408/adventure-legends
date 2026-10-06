@@ -1,0 +1,500 @@
+{
+  "cases": [
+    {
+      "case": "command-13",
+      "command": 13,
+      "damage_q4": 16,
+      "displacement_px": 8,
+      "expected_q4": 16,
+      "first_damage_age": 0,
+      "name": "Wood narrow pull",
+      "owner": 20,
+      "passed": true
+    },
+    {
+      "case": "command-14",
+      "command": 14,
+      "damage_q4": 24,
+      "expected_q4": 24,
+      "first_damage_age": 1,
+      "name": "Wood persistent span",
+      "owner": 20,
+      "passed": true
+    },
+    {
+      "case": "command-15",
+      "command": 15,
+      "damage_q4": 21,
+      "expected_q4": 21,
+      "first_damage_age": 18,
+      "name": "Fire delayed pocket",
+      "owner": 23,
+      "passed": true
+    },
+    {
+      "case": "command-16",
+      "command": 16,
+      "damage_q4": 21,
+      "expected_q4": 21,
+      "first_damage_age": 30,
+      "name": "Fire moving drawer",
+      "owner": 23,
+      "passed": true
+    },
+    {
+      "case": "command-17",
+      "command": 17,
+      "damage_q4": 24,
+      "displacement_px": 10,
+      "expected_q4": 24,
+      "first_damage_age": 0,
+      "name": "Water straight push",
+      "owner": 74,
+      "passed": true
+    },
+    {
+      "case": "command-18",
+      "command": 18,
+      "damage_q4": 24,
+      "expected_q4": 24,
+      "first_damage_age": 33,
+      "name": "Water turning wake",
+      "owner": 74,
+      "passed": true
+    },
+    {
+      "case": "command-19",
+      "command": 19,
+      "damage_q4": 30,
+      "expected_q4": 30,
+      "first_damage_age": 18,
+      "name": "Earth delayed impact",
+      "owner": 76,
+      "passed": true
+    },
+    {
+      "case": "command-20",
+      "damage_q4": 40,
+      "passed": true
+    },
+    {
+      "case": "command-21",
+      "passed": true
+    },
+    {
+      "case": "command-22",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-13",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-14",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-15",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-16",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-17",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-18",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-19",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-20",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-21",
+      "passed": true
+    },
+    {
+      "case": "blocked-endpoint-22",
+      "passed": true
+    },
+    {
+      "case": "Water-L-path-around-real-corner",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-13",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-14",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-15",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-16",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-17",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-18",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-19",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-20",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-21",
+      "passed": true
+    },
+    {
+      "case": "active-effect-gear-lock-22",
+      "passed": true
+    },
+    {
+      "case": "pause-picker-switch-recall-ledger",
+      "final_target_hp_q4": 72,
+      "passed": true,
+      "selected_form": 78
+    },
+    {
+      "case": "room-reset",
+      "passed": true
+    },
+    {
+      "case": "shared-lease-20-to-14",
+      "obj_bytes": 320,
+      "passed": true
+    },
+    {
+      "case": "shared-lease-20-to-16",
+      "obj_bytes": 320,
+      "passed": true
+    },
+    {
+      "case": "shared-lease-14-to-20",
+      "obj_bytes": 320,
+      "passed": true
+    },
+    {
+      "case": "shared-lease-16-to-20",
+      "obj_bytes": 320,
+      "passed": true
+    },
+    {
+      "after_hp_q4": 96,
+      "before_hp_q4": 96,
+      "case": "sidegrade-3",
+      "passed": true,
+      "slot": 0
+    },
+    {
+      "after_hp_q4": 96,
+      "before_hp_q4": 96,
+      "case": "sidegrade-11",
+      "passed": true,
+      "slot": 0
+    },
+    {
+      "after_hp_q4": 96,
+      "before_hp_q4": 96,
+      "case": "sidegrade-19",
+      "passed": true,
+      "slot": 0
+    },
+    {
+      "after_hp_q4": 96,
+      "before_hp_q4": 96,
+      "case": "sidegrade-35",
+      "passed": true,
+      "slot": 1
+    },
+    {
+      "after_hp_q4": 96,
+      "before_hp_q4": 96,
+      "case": "sidegrade-51",
+      "passed": true,
+      "slot": 2
+    },
+    {
+      "after_hp_q4": 96,
+      "before_hp_q4": 96,
+      "case": "sidegrade-83",
+      "passed": true,
+      "slot": 4
+    },
+    {
+      "case": "quarter-heart-no-heal-cycles",
+      "cycles": 3,
+      "final_hp_q4": 96,
+      "passed": true
+    },
+    {
+      "case": "native-sidegrade-movement-roll-reach",
+      "passed": true
+    },
+    {
+      "case": "bow-18-quick",
+      "passed": true,
+      "range_px": 112
+    },
+    {
+      "case": "bow-18-charged",
+      "passed": true,
+      "range_px": 144
+    },
+    {
+      "case": "bow-19-quick",
+      "passed": true,
+      "range_px": 124
+    },
+    {
+      "case": "bow-19-charged",
+      "passed": true,
+      "range_px": 156
+    },
+    {
+      "case": "weapon-native-hit-3",
+      "damage_q4": 34,
+      "passed": true
+    },
+    {
+      "case": "weapon-native-hit-11",
+      "damage_q4": 50,
+      "passed": true
+    },
+    {
+      "case": "weapon-native-hit-19",
+      "damage_q4": 49,
+      "passed": true
+    },
+    {
+      "case": "boss-handle-A-priority-1",
+      "damage_q4": 32,
+      "passed": true,
+      "weapon_class": 1
+    },
+    {
+      "case": "machine-weapon-1",
+      "passed": true
+    },
+    {
+      "case": "boss-handle-A-priority-2",
+      "damage_q4": 48,
+      "passed": true,
+      "weapon_class": 2
+    },
+    {
+      "case": "machine-weapon-2",
+      "passed": true
+    },
+    {
+      "case": "boss-handle-A-priority-3",
+      "damage_q4": 32,
+      "passed": true,
+      "weapon_class": 3
+    },
+    {
+      "case": "machine-weapon-3",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-13",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-14",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-15",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-16",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-17",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-18",
+      "passed": true
+    },
+    {
+      "case": "wrong-position-19",
+      "passed": true
+    },
+    {
+      "case": "four-direct-controlling-phase-matchups",
+      "passed": true
+    },
+    {
+      "case": "Metal-reflected-controls-Wood",
+      "damage_q4": 40,
+      "passed": true
+    },
+    {
+      "case": "reflected-shot-lock-and-natural-slot-reuse",
+      "passed": true
+    },
+    {
+      "case": "one-hit-ledger-through-weapon-hitstop",
+      "damage_q4": 56,
+      "frozen_samples": 3,
+      "passed": true
+    },
+    {
+      "case": "captured-cooldown-ring-no-evasion",
+      "new_cast": 118,
+      "old_cast": 120,
+      "passed": true,
+      "remaining_at_equip": 54
+    },
+    {
+      "after_q4": 85,
+      "before_q4": 100,
+      "case": "fractional-real-enemy-hit-and-preview",
+      "delta_q4": 15,
+      "passed": true
+    },
+    {
+      "case": "moving-away-14",
+      "damage_q4": 24,
+      "passed": true
+    },
+    {
+      "case": "moving-away-16",
+      "damage_q4": 21,
+      "passed": true
+    },
+    {
+      "case": "moving-away-19",
+      "damage_q4": 30,
+      "passed": true
+    },
+    {
+      "case": "Wood-span-late-enemy-crossing",
+      "first_damage_age": 4,
+      "passed": true
+    },
+    {
+      "case": "short-bow-picker",
+      "passed": true
+    },
+    {
+      "case": "short-bow-pause",
+      "passed": true
+    },
+    {
+      "case": "short-bow-roll",
+      "passed": true
+    },
+    {
+      "case": "held-bow-picker",
+      "passed": true
+    },
+    {
+      "case": "held-bow-pause",
+      "passed": true
+    },
+    {
+      "case": "held-bow-roll",
+      "passed": true
+    },
+    {
+      "case": "Earth-one-shot-intercept-capacity",
+      "passed": true
+    },
+    {
+      "case": "wrong-facing-21",
+      "passed": true
+    },
+    {
+      "case": "wrong-facing-22",
+      "passed": true
+    },
+    {
+      "case": "modal-hidden-world-cache-resume",
+      "passed": true
+    }
+  ],
+  "checks_passed": 8837,
+  "coverage": [
+    "Bow19-156charged-124quick-versus-Bow18-144-112",
+    "Earth-one-projectile-capacity-Metal-wrong-facing",
+    "Wood-span-persistent-late-crossing",
+    "all-five-control-matchups-native-Northern-targets",
+    "all-three-weapon-classes-near-exposed-machine",
+    "all10-active-effect-gear-lock",
+    "blocked-endpoints-all10",
+    "captured-cooldown-no-gear-evasion",
+    "cast-origin-immutable-while-moving",
+    "cold-journal-save-native-cadence",
+    "command-13",
+    "command-14",
+    "command-15",
+    "command-16",
+    "command-17",
+    "command-18",
+    "command-19",
+    "command-20",
+    "command-21",
+    "command-22",
+    "fractional-q4-hit-preview",
+    "held-bow-pause",
+    "held-bow-picker",
+    "held-bow-roll",
+    "modal-ledger-freeze",
+    "native-DeckBoots-movement-roll-Ropeguard-reach",
+    "native-Water-two-leg-corner-LOS",
+    "native-hitstop-one-hit-ledger",
+    "native-shared-OBJ-lease-both-directions",
+    "post-journal-hero-companion-regional-cache-pixel-resume",
+    "quarter-heart-no-equip-heal",
+    "reflected-shot-only-gear-lock-natural-slot-reuse",
+    "representative-visible-native-combat-cadence",
+    "room-reset",
+    "seven-damage-commands-wrong-position",
+    "short-bow-pause",
+    "short-bow-picker",
+    "short-bow-roll",
+    "six-authored-sidegrade-stats",
+    "three-weapon-sidegrades-native-q4-hits"
+  ],
+  "functional_cases": 85,
+  "player_facing": false,
+  "provenance": {
+    "ancestor_sram_sha256": "74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106",
+    "source_machine_state_loaded": false,
+    "source_report_sha256": "41b317d122abec224f68832ec0842b7d971567cfb0763377e39495c9062a2dfc",
+    "source_rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+    "source_snapshot": "09-complete21-independent-reboot",
+    "source_trust": "same-target-current-controller-journey",
+    "sram_sha256": "f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479"
+  },
+  "report_sha256": "352228d6080399e9e82ac2cd45585ddd98aca158d0e1a72fab96e1843fbaede1",
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "schema": 1,
+  "spoilers": true,
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018"
+}

@@ -6,10 +6,15 @@
 #include "gear_menu.h"
 #include "progression.h"
 #include "regional_powers.h"
+#include "northern_powers.h"
 #include "obj_layout.h"
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6];Shot shots[12];Save5State adventure_save;
+unsigned char shot_effects[12],shot_phases[12];
+/* Northern machine is outside this bounded gear harness; native chapter QA covers it. */
+int north_game_target(int*x,int*y,int*r){(void)x;(void)y;(void)r;return 0;}
+int north_game_weapon_hit(unsigned c,int x,int y,unsigned d){(void)c;(void)x;(void)y;(void)d;return 0;}
 volatile int hp,max_hp,px,py,boss_hp,boss_x,boss_y,room;
 int keys,gfx_slash_frame,face,roll_ticks,swing,sword_cd,combo_step,combo_timer,attack_buffer,swing_damage,slash_id,hitstop,boss_flash,boss_armor;
 int ability_cd,ability_max,enemy_windups[6],enemy_clocks[6];

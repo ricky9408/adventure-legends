@@ -1,0 +1,125 @@
+{
+  "content": {
+    "authored_designs_including_disabled_legendary": 22,
+    "enabled_evolution_edges": 10,
+    "equipment_items": 19,
+    "implemented_obtainable_controller_verified_forms": 21,
+    "new_equipment_items": 6,
+    "northern_areas": 8,
+    "northern_quests": 11,
+    "obtainable_legendary_forms": 0,
+    "quick_slots": 4,
+    "regional_quests": 22,
+    "retained_family_instances": 11,
+    "target_forms": 128,
+    "total_areas": 30,
+    "weapon_classes": 3
+  },
+  "controller_acceptance_scope": "Original five-suite acceptance plus separately validated combat suite; not a whole-game aggregate",
+  "controller_acceptance_source": {
+    "player_facing": false,
+    "report": "build/northern-final-controller-acceptance.json",
+    "report_bytes": 25306,
+    "report_sha256": "bf2a5d21ec2c71eaa0237b8bee81eeb91aed197f8969ffaeb4f1cf1a22221013",
+    "suite": "northern-final-controller-acceptance"
+  },
+  "cross_rom_machine_states_loaded": false,
+  "date_utc": "2026-10-05",
+  "files": {
+    "acquisition.json": {
+      "bytes": 3287,
+      "sha256": "5f419dc33ef3fcc4a2c90a252d5ee4823818390e7309530b149a6face52878f5"
+    },
+    "aggregate.json": {
+      "bytes": 14174,
+      "sha256": "5b92409cc61a20186def1d7bbcba13f4237d77d3a62739c2cba74a0073df887e"
+    },
+    "combat.json": {
+      "bytes": 10792,
+      "sha256": "c05b9bd7beab82eada22a12451336bd961965dc8b75c7c7266575527a9b64e3e"
+    },
+    "controls.json": {
+      "bytes": 1981,
+      "sha256": "507fb7f908dd77b68f49fc4bd2e81ee7d1ec3374e32d735eaa32d357a2aac29a"
+    },
+    "pixels-and-modal.json": {
+      "bytes": 13507,
+      "sha256": "9841d93a839d9d01bcf2fd2746d69c3e17122fdd1c16d611812f3f5379664dcc"
+    },
+    "player-teaser.json": {
+      "bytes": 4289,
+      "sha256": "a4dc797f2156dda441a9cd129b148f99336a8276862f3bce366520ae32465884"
+    },
+    "suites.json": {
+      "bytes": 7112,
+      "sha256": "bb49103b1a5ccb5ec2dd61dc7bb7023aca972e8165e2194e0e0d792a5c359e95"
+    },
+    "synthetic-host.json": {
+      "bytes": 22196,
+      "sha256": "1f1b9e8f3a48b3db1eed63276654831f977ca4136c2133ab436a2542e5af111e"
+    },
+    "timing.json": {
+      "bytes": 6667,
+      "sha256": "24b1f79e2897a81721e7d577ffb7fbacefc97804525fcf5923e9bc2aca5879fc"
+    }
+  },
+  "game_ram_writes": 0,
+  "limits": [
+    "Physical GBA and flash cartridges untested; measurements use mGBA 0.10.5",
+    "Cold Continue checkpoint decoding is a blocking load transition, not active gameplay cadence",
+    "Host/synthetic results and isolated ARM save benchmarks are not native-controller acquisition or whole-engine timing",
+    "The full 128-form roster, legendary progression and additional southern-island/magma-mountain/underwater regions remain unfinished",
+    "No theoretical worst-case crowd, full-game campaign-length or whole-program stack-high-water claim"
+  ],
+  "memory_bytes": {
+    "bss": 47468,
+    "data": 80,
+    "ewram_data_plus_bss": 47548,
+    "iwram": 28120,
+    "iwram_code_limit": 28672
+  },
+  "native_checks_failed": 0,
+  "native_checks_passed": 24180,
+  "native_suite_counts": {
+    "boss-controls": 221,
+    "combat": 8837,
+    "journey": 9978,
+    "modal-controller": 162,
+    "sky-route": 4668,
+    "stress": 314
+  },
+  "player_facing": false,
+  "player_teaser": {
+    "checks_passed": 110,
+    "duration_seconds": 20.09124755859375,
+    "frames": 1200,
+    "mp4_sha256": "12fbcad81b61d9dfc1f7d09fe59aaa023e22a280cc520f4361623bd05b081ad0"
+  },
+  "release": "Northern N5",
+  "rom_bytes": 4351688,
+  "rom_sha256": "302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e",
+  "save_content_revision": 3,
+  "save_wire_version": 5,
+  "schema": 1,
+  "source_guards": {
+    "compiled_source_files_checked": 531,
+    "compiled_source_manifest_canonical_sha256": "775f347018a6febded21c5c47c994f5361a5f9a9a50889e22cdf0882815cb4c4",
+    "frozen_manifest_sha256": "0effd60dc5e3d255e54269e862033b3a3eac1829cc1245c205db4a4acc6df792",
+    "guard_scope": "src C/header/assembly/include files and linker.ld; excludes mutable documentation, Makefile and harnesses",
+    "report_harness_hashes_are_historical": true
+  },
+  "spoilers": true,
+  "symbols_sha256": "7110402451d7bea92ebd1d83dfddbf2f389468028e8842ef6afa22f043595018",
+  "synthetic_host_cases": 78,
+  "synthetic_invalid_source_rejections": 14,
+  "synthetic_source_provenance_checks": 15,
+  "verified_same_rom_state_sram_pairs_in_original_acceptance": 79,
+  "whole_game_aggregate": {
+    "counting_scope": "Fresh complete rerun, separate from archived Northern suite and teaser counts",
+    "mixed_review_checks": 20,
+    "native_controller_checks": 44707,
+    "report": "aggregate.json",
+    "report_sha256": "5b92409cc61a20186def1d7bbcba13f4237d77d3a62739c2cba74a0073df887e",
+    "status": "passed"
+  }
+}
