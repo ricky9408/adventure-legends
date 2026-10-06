@@ -1,0 +1,15 @@
+{
+  "scope": "Unchanged original candidate-D engine review using controller-earned predecessor-C input; synthetic host assertions, not final-D fixture rerun results",
+  "source_directory": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/docs/evidence/deferred-anchor",
+  "files": {
+    "test_engine_probe.py": "4f4ff8e6c7c0ea95bc666827c3bb73ef24e35377c87ddcd0569def77fec72e27",
+    "engine_probe.c": "b9bdba48aaedaee92c857973088d0cb9e62cb9a4a1e6eed638f2772cc7f17364",
+    "engine-probe-results.json": "dbe108641f4faec92aec7f0534c2509381ee22fcdd44b1cea3b7bb5783bc9178",
+    "engine-probe.log": "dbe108641f4faec92aec7f0534c2509381ee22fcdd44b1cea3b7bb5783bc9178",
+    "engine-probe-ubsan-results.json": "270334d3c729f376c113312aa2a3930faa4f7866a1ce3e5b4191c6ba29a6ae28",
+    "engine-probe-ubsan.log": "270334d3c729f376c113312aa2a3930faa4f7866a1ce3e5b4191c6ba29a6ae28",
+    "REVIEW.md": "2de4ee6a82015998b62c06655a8c0f8338055572b9454e6a5b985c9ca4e1152c",
+    "existing-runtime.log": "d6f19af877624b953b3c028f211e5d8cc3c52762731303f4171b679835e03741",
+    "existing-save-feedback.log": "cb9ccca43090973b7aa67c0682d10c7cb4d97d380a452f0f57c67f010b6cb6f0"
+  }
+}

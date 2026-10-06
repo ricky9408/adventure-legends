@@ -22,7 +22,7 @@ int northern_powers_busy(void);
  * including an earlier effect of its own. Draw only while its lease is held.
  * Generation changes on successful ownership changes; renderer caches may use
  * it to invalidate stale tile assumptions. No additional resident OBJ bytes. */
-enum { NORTHERN_TILES_NONE, NORTHERN_TILES_REGIONAL, NORTHERN_TILES_NORTHERN, NORTHERN_TILES_SOUTHERN };
+enum { NORTHERN_TILES_NONE, NORTHERN_TILES_REGIONAL, NORTHERN_TILES_NORTHERN, NORTHERN_TILES_SOUTHERN, NORTHERN_TILES_MAGMA };
 int northern_powers_tiles_claim(unsigned owner);
 int northern_powers_tiles_release(unsigned owner);
 unsigned northern_powers_tiles_owner(void);

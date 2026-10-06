@@ -1,0 +1,219 @@
+{
+  "scope": "Synthetic host state and input-edge integration; real production functions with entry instrumentation",
+  "native_controller_gameplay": false,
+  "native_hardware_timing": false,
+  "emulator_ram_injection": false,
+  "dma_emulated": false,
+  "compiler": "cc -fsanitize=undefined -fno-sanitize-recover=all",
+  "checks": [
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 38,
+      "already_lit": false,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 38,
+      "already_lit": true,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 39,
+      "already_lit": false,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "full_engine_warmup_and_exact_once",
+      "passed": true,
+      "area": 39,
+      "already_lit": true,
+      "render_static_cumulative": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "anchor_mode": 6,
+      "old_bank_unchanged_until_writer": true,
+      "no_hostile_or_R_update": true,
+      "no_rewards_duplicated": true
+    },
+    {
+      "name": "simultaneous_input_precedence",
+      "passed": true,
+      "buttons": 9,
+      "game_state": 3
+    },
+    {
+      "name": "simultaneous_input_precedence",
+      "passed": true,
+      "buttons": 513,
+      "game_state": 1
+    },
+    {
+      "name": "simultaneous_input_precedence",
+      "passed": true,
+      "buttons": 5,
+      "game_state": 1
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "reset",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_room",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_campaign_room",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_campaign_spawn",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "wrong_checkpoint",
+      "anchor_calls": 0
+    },
+    {
+      "name": "prepare_failure_no_snapshot_or_write",
+      "passed": true,
+      "failure": "invalid_roster",
+      "anchor_calls": 1
+    },
+    {
+      "name": "wrong_mode_prepare_cancels_without_validation",
+      "passed": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 0,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 50,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 3000,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "write_failure_and_safe_retry",
+      "passed": true,
+      "fail_after": 6144,
+      "retains_live_anchor": true,
+      "old_bank_loadable": true
+    },
+    {
+      "name": "start_game_cancels_pending",
+      "passed": true,
+      "resume": 0,
+      "room": 0
+    },
+    {
+      "name": "start_game_cancels_pending",
+      "passed": true,
+      "resume": 1,
+      "room": 39
+    },
+    {
+      "name": "synthetic_pre_freeze_death_cancels_pending",
+      "passed": true
+    },
+    {
+      "name": "duplicate_queue_calls_do_not_reheal_or_revalidate",
+      "passed": true
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 0
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 1
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 2
+    },
+    {
+      "name": "restores_exact_prior_checkpoint",
+      "passed": true,
+      "checkpoint": 3
+    },
+    {
+      "name": "large_roster_synthetic_regression",
+      "passed": true,
+      "fixture": "tests/fixtures/v5-revision5/magma-all65-town.sav",
+      "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+      "actual_input_individuals": 34,
+      "actual_input_histories": 65,
+      "generated_test_fixture": true,
+      "player_save": false,
+      "native_claim": false
+    }
+  ],
+  "source_sha256": {
+    "src/game.c": "6c7872c036672678127ba0b71c2b9e4a7c3ea3dd0cecc90f84143396276e6421",
+    "src/magma_game.c": "9074017c7c25fe39f4a66c5054018fb98efa2cd547ba4e653363a5751016625c",
+    "src/magma_quests.c": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+    "src/save5.c": "93c42b198a22914d1de853c4fd54093acf05a14c9705eca15b0ac14e2757d2b9",
+    "src/progression.c": "62a18d3ca5875fb89f39eaac3bfa43825a4f7534427d4c3dccdb76f60717e6e3"
+  },
+  "passed": true
+}

@@ -1,0 +1,87 @@
+{
+  "scope": "Host core/codec/authoring tests only, not native acquisition",
+  "tests": [
+    {
+      "command": "python3 tests/test_southern_catalog.py",
+      "exit_code": 0,
+      "seconds": 0.47,
+      "unit_tests": 20
+    },
+    {
+      "command": "python3 tests/test_creatures.py",
+      "exit_code": 0,
+      "seconds": 41.28,
+      "unit_tests": 42
+    },
+    {
+      "command": "python3 tests/test_southern_creature_core.py",
+      "exit_code": 0,
+      "seconds": 5.19,
+      "unit_tests": 8
+    },
+    {
+      "command": "python3 tests/test_creature_branches.py",
+      "exit_code": 0,
+      "seconds": 12.73,
+      "unit_tests": 4
+    },
+    {
+      "command": "python3 tests/test_magma_architecture.py",
+      "exit_code": 0,
+      "seconds": 9.36,
+      "unit_tests": 7
+    },
+    {
+      "command": "python3 tests/test_magma_history_core.py",
+      "exit_code": 0,
+      "seconds": 1.84,
+      "unit_tests": 4
+    },
+    {
+      "command": "python3 tests/test_southern_validation_optimization.py",
+      "exit_code": 0,
+      "seconds": 5.52,
+      "unit_tests": 4
+    },
+    {
+      "command": "python3 tests/test_trials.py",
+      "exit_code": 0,
+      "seconds": 2.13,
+      "unit_tests": 12
+    },
+    {
+      "command": "python3 tests/test_save4.py",
+      "exit_code": 0,
+      "seconds": 0.4,
+      "unit_tests": 26
+    },
+    {
+      "command": "python3 tests/test_progression_events.py",
+      "exit_code": 0,
+      "seconds": 0.1,
+      "unit_tests": 1
+    },
+    {
+      "command": "python3 tests/test_equipment.py",
+      "exit_code": 0,
+      "seconds": 6.97,
+      "unit_tests": 34
+    },
+    {
+      "command": "python3 tests/test_southern_save_limits.py",
+      "exit_code": 0,
+      "seconds": 10.78,
+      "unit_tests": 4
+    }
+  ],
+  "source_sha256": {
+    "src/creatures.c": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+    "src/creatures.h": "aee4476931a3557b454aa41c716c90996bbca9551462a39ced012bf053954a6b",
+    "src/save5.c": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+    "src/save5.h": "8b268d3ed9d92433e4082aa4fa63b5a70e414f72b1a8e86e918e4430375ba727",
+    "src/save5_history_policy.h": "be6aa94ca115c59b62a02820d6aeed86b8c39ee1c79f260fcd60881fc3211c4c"
+  },
+  "passed": true,
+  "source_unchanged": true,
+  "unit_tests_total": 166
+}

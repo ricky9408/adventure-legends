@@ -1,0 +1,187 @@
+{
+  "method": "Compiler O2 .su plus direct objdump BL/THM_CALL, excludes interrupts/indirect calls/runtime high-water",
+  "chains": [
+    {
+      "entry": "save5_step",
+      "static_c_frame_sum_bytes": 236,
+      "route": [
+        {
+          "function": "save5_step",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "scan_run",
+          "own_frame_bytes": 128
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    },
+    {
+      "entry": "save5_load",
+      "static_c_frame_sum_bytes": 396,
+      "route": [
+        {
+          "function": "save5_load",
+          "own_frame_bytes": 8
+        },
+        {
+          "function": "load_internal",
+          "own_frame_bytes": 104
+        },
+        {
+          "function": "save5_validate_revision",
+          "own_frame_bytes": 128
+        },
+        {
+          "function": "creatures_roster_validate_revision",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "party_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    },
+    {
+      "entry": "save5_validate",
+      "static_c_frame_sum_bytes": 172,
+      "route": [
+        {
+          "function": "save5_validate",
+          "own_frame_bytes": 24
+        },
+        {
+          "function": "creatures_roster_validate",
+          "own_frame_bytes": 40
+        },
+        {
+          "function": "party_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    },
+    {
+      "entry": "save5_validate_revision",
+      "static_c_frame_sum_bytes": 284,
+      "route": [
+        {
+          "function": "save5_validate_revision",
+          "own_frame_bytes": 128
+        },
+        {
+          "function": "creatures_roster_validate_revision",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "party_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    },
+    {
+      "entry": "creatures_roster_validate",
+      "static_c_frame_sum_bytes": 148,
+      "route": [
+        {
+          "function": "creatures_roster_validate",
+          "own_frame_bytes": 40
+        },
+        {
+          "function": "party_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    },
+    {
+      "entry": "creatures_roster_validate_revision",
+      "static_c_frame_sum_bytes": 156,
+      "route": [
+        {
+          "function": "creatures_roster_validate_revision",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "party_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    },
+    {
+      "entry": "southern_quest_claim",
+      "static_c_frame_sum_bytes": 788,
+      "route": [
+        {
+          "function": "southern_quest_claim",
+          "own_frame_bytes": 568
+        },
+        {
+          "function": "creatures_grant",
+          "own_frame_bytes": 72
+        },
+        {
+          "function": "creatures_roster_validate",
+          "own_frame_bytes": 40
+        },
+        {
+          "function": "party_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "creatures_instance_validate",
+          "own_frame_bytes": 48
+        },
+        {
+          "function": "trial_subset_valid",
+          "own_frame_bytes": 12
+        }
+      ]
+    }
+  ]
+}

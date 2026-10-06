@@ -1,0 +1,61 @@
+{
+  "archive_sha256": "88482c38744f95195f6c5684ac991e90b081ce206fa1fc2cb3108267882e47a0",
+  "archive_file_count": 1122,
+  "archive_bytes": 3110114,
+  "build_directory_present": false,
+  "machine_state_files_included": false,
+  "physical_hardware_or_native_gameplay_claim": false,
+  "portable_verifier": {
+    "passed": true,
+    "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+    "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "banks_verified": 4,
+    "actual_retained_individuals": 34,
+    "earned_form_histories": 65,
+    "claimed_quests": 38,
+    "exact_report_parts": 186,
+    "runtime_manifest_entries": 893,
+    "current_runtime_verified": false,
+    "checksum_files_verified": 0,
+    "machine_states_loaded": 0,
+    "fixture_bytes_changed": false
+  },
+  "runs": [
+    {
+      "variant": "strict",
+      "exit_code": 0,
+      "checks": 27,
+      "result_sha256": "06c48d9024f927359a3919f3e21748ef21f8ee982df71c27ac8622509cfdc28d",
+      "log_sha256": "06c48d9024f927359a3919f3e21748ef21f8ee982df71c27ac8622509cfdc28d",
+      "generated_fixture_case": {
+        "name": "large_roster_synthetic_regression",
+        "passed": true,
+        "fixture": "tests/fixtures/v5-revision5/magma-all65-town.sav",
+        "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+        "actual_input_individuals": 34,
+        "actual_input_histories": 65,
+        "generated_test_fixture": true,
+        "player_save": false,
+        "native_claim": false
+      }
+    },
+    {
+      "variant": "ubsan",
+      "exit_code": 0,
+      "checks": 27,
+      "result_sha256": "c41cfebd8f4ae3e7b67e900160d7163c31db5ee6e9f489c8ed4f3b6bcd0f144d",
+      "log_sha256": "c41cfebd8f4ae3e7b67e900160d7163c31db5ee6e9f489c8ed4f3b6bcd0f144d",
+      "generated_fixture_case": {
+        "name": "large_roster_synthetic_regression",
+        "passed": true,
+        "fixture": "tests/fixtures/v5-revision5/magma-all65-town.sav",
+        "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+        "actual_input_individuals": 34,
+        "actual_input_histories": 65,
+        "generated_test_fixture": true,
+        "player_save": false,
+        "native_claim": false
+      }
+    }
+  ]
+}

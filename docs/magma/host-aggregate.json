@@ -1,0 +1,33 @@
+{
+  "scope": "Final Magma host aggregate, synthetic subsystem and fault evidence; not native gameplay",
+  "command": "make test-magma-host",
+  "exit_code": 0,
+  "log_sha256": "6dd03c9608e8e80f7759002df1223d7c1e6c2d45ce8a48bd979f913d4eaf07ec",
+  "log_bytes": 30194,
+  "runtime_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "test_run_summaries": [
+    "Ran 7 tests in 9.424s",
+    "Ran 4 tests in 1.984s",
+    "Ran 7 tests in 8.034s",
+    "Ran 9 tests in 35.857s",
+    "Ran 8 tests in 0.158s",
+    "Ran 8 tests in 20.287s",
+    "Ran 3 tests in 6.753s",
+    "Ran 6 tests in 0.077s",
+    "Ran 22 tests in 6.927s",
+    "Ran 5 tests in 8.715s",
+    "Ran 16 tests in 0.384s",
+    "Ran 13 tests in 243.146s",
+    "Ran 5 tests in 9.815s",
+    "Ran 22 tests in 0.042s",
+    "Ran 9 tests in 0.002s"
+  ],
+  "exhaustive_write_positions": 344176,
+  "historical_differential_images": 166703,
+  "export_guard_tests": 9,
+  "deferred_engine_cases": 27,
+  "output_redirection_note": "Only post-run Makefile change directs deferred probe report into build/ to preserve historical evidence; exact redirected invocation rerun successfully",
+  "redirected_probe_log_sha256": "06c48d9024f927359a3919f3e21748ef21f8ee982df71c27ac8622509cfdc28d",
+  "redirected_probe_report_sha256": "06c48d9024f927359a3919f3e21748ef21f8ee982df71c27ac8622509cfdc28d"
+}

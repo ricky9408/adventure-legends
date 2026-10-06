@@ -58,7 +58,7 @@ def validate_source_report(path,rom_sha,sym_sha):
     rec=r['snapshots'][SNAPSHOT];save=artifact(path,rec['sram_path'],Path(rec['sram_path']).name)
     assert digest(save)==rec['sram_sha256'] and (not archived or rec['sram_sha256']==ARCHIVE['sram'])
     assert (rec['rom_sha256'],rec['symbols_sha256'])==(r['rom_sha256'],r['symbols_sha256'])
-    bank=newest_bank(save.read_bytes());assert int.from_bytes(bank[12:14],'little')==4
+    bank=newest_bank(save.read_bytes());assert int.from_bytes(bank[12:14],'little')==(4 if archived else 5)
     live=[(bank[160+i*24],int.from_bytes(bank[168+i*24:172+i*24],'little')) for i in range(160) if bank[161+i*24]&1]
     obtained=[i+1 for i in range(128) if bank[112+(i>>3)]&(1<<(i&7))]
     quests=[(bank[4032+(i>>2)]>>((i&3)*2))&3 for i in range(30)]
@@ -94,7 +94,7 @@ class SouthernCombat(SouthernJourney):
     stats=NorthernCombat.stats
     def __init__(self,rom,symbols,output,rom_sha,sym_sha,source_report,source_manifest,elf):
         self.ready_report=False;self.source_evidence=validate_source_report(source_report,rom_sha,sym_sha)
-        super().__init__(rom,symbols,output,rom_sha,sym_sha,source_manifest=source_manifest)
+        super().__init__(rom,symbols,output,rom_sha,sym_sha,source_manifest=source_manifest,elf=elf)
         self.locals=elf_locals(elf,'southern_powers.c');self.elf_sha=digest(elf)
         extracted=self.out/'verified-elf-binary.gba';subprocess.run([resolve_arm_tools('objcopy',root=ROOT)['objcopy'],'-O','binary',str(elf),str(extracted)],check=True)
         eraw=extracted.read_bytes();rraw=self.rom.read_bytes();assert len(eraw)==len(rraw) and eraw[0xc0:]==rraw[0xc0:],'ELF load image does not match frozen ROM beyond repaired cartridge header'
@@ -477,7 +477,7 @@ class SouthernCombat(SouthernJourney):
         report=Path(self.provenance['path']);self.check(digest(report)==self.provenance['report_sha256'],'pre-boss producer report remains authenticated')
         producer=json.loads(report.read_text());record=producer['snapshots']['03-machine-ready'];save=artifact(report,record['sram_path'],Path(record['sram_path']).name)
         self.check(digest(save)==record['sram_sha256'] and record['rom_sha256']==producer['rom_sha256'] and record['symbols_sha256']==producer['symbols_sha256'],'exact pre-boss SRAM is paired with authenticated producer ROM/symbols')
-        bank=newest_bank(save.read_bytes());self.check(int.from_bytes(bank[12:14],'little')==4,'pre-boss source has CRC-valid revision4 bank')
+        bank=newest_bank(save.read_bytes());self.check(int.from_bytes(bank[12:14],'little')==5,'pre-boss source has CRC-valid current revision5 bank')
         self.notes.append(dict(case='boss-no-retiming',source_snapshot='03-machine-ready',source_sram=str(save),source_sram_sha256=digest(save),producer_report_sha256=digest(report),source_machine_state_loaded=False,scope='Cold import controller-earned pre-boss progress; base81 is acquired normally on this target'))
         self.e.load_save(save);self.e.reset();self.step(150);self.tap('START',2,35);self.settle();self.to_town();self.entry(31);self.entry(33);self.use('sun_shutter');self.recruit_field('encounter2',81);self.leave_interior(31);self.owned_select(81);self.set_command(29);self.ready();self.entry(34)
         for target in (35,36,37):self.entry(target)

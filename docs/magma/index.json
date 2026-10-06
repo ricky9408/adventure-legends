@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "scope": "Exact-candidate native-controller summaries; developer spoilers",
+  "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+  "reports": [
+    {
+      "path": "acquisition.json",
+      "sha256": "ee3fe86f9c87ae0732f14fdf6858f40674a2e6d1531e6c0780610b028be21cb3",
+      "full_report_sha256": "055d1cf3c86f64cb9a5781731c252dc32b652e9b7d6f32b0cab104123ec9241b",
+      "passed_checks": 26884
+    },
+    {
+      "path": "minimal.json",
+      "sha256": "d153266634231547ff8a9c322ec8e67f2d485ae010d329da09b135e28b358b91",
+      "full_report_sha256": "c650e0982ff84ecda77faf4cc75270d2eff6ac73f05596ed8ffedd3f39715632",
+      "passed_checks": 1837
+    },
+    {
+      "path": "controls.json",
+      "sha256": "7971635ebe6f4ea44b82963de3f17dd7656f432c060120ef9ea396fddf7a7a60",
+      "full_report_sha256": "2654c13204463de105ab6d480c2fe5983ddbda117ea74af536e6f6b3c2a0b73c",
+      "passed_checks": 1162
+    },
+    {
+      "path": "retained.json",
+      "sha256": "1ae2f7ccc842a96bae2ff2aecd170e89a3c1f8072aa1a77162b6b985b18b01cd",
+      "full_report_sha256": "8093ef37f4ae90174b24a3a12203c80c6bfaad94d5e087e5b65c4ede38c23bc6",
+      "passed_checks": 647
+    },
+    {
+      "path": "combat.json",
+      "sha256": "83333f885fb91c16fe859c38fa6286196335e7caa439d3561a5b95f4a3a77d4d",
+      "full_report_sha256": "9c5c5a474ad4790db249f9793e794b209e3c9d6175f048d56b4ea877d55b63ff",
+      "passed_checks": 13986
+    },
+    {
+      "path": "performance.json",
+      "sha256": "3de9eb12cb50a8a4b09ce487b7068063004929e7a275d7fcdbe851e6652c1ec7",
+      "full_report_sha256": "389785d29ce15117b58503582cc3402d8899a76f005cf437f2a2f9eeba4b6872",
+      "passed_checks": 5206
+    },
+    {
+      "path": "teaching-boss.json",
+      "sha256": "2138bb4382e71d6c227681e4f6d72f82441f21384258b4fe3af496f06b51b673",
+      "full_report_sha256": "776269cdc3152711859c74b56420f01f34a9f97610a0f1e109e53022447fafee",
+      "passed_checks": 427
+    }
+  ],
+  "overlapping_native_check_sum": 50149
+}

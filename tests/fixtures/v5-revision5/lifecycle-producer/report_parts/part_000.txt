@@ -1,0 +1,1234 @@
+{
+  "suite": "magma-earned34-65-independent-lifecycle",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "player_facing": false,
+  "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+  "elf_sha256": "0b56a0a525ef59d36b14a89a2786e5811f29fd9a54c386093fa06528f3afcc99",
+  "rom_bytes": 7495920,
+  "bridge_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+  "provenance": {
+    "fixture": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/tests/fixtures/v5-revision4/southern-all41-town.sav",
+    "sram_sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3",
+    "source_rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+    "cross_rom_machine_state_loaded": false,
+    "minimal_prior_route": false,
+    "earned_source_report": "/workspace/scratch/33ed39a77941/adventure-legends-magma/build/magma-final-d-journey3/magma-journey.json",
+    "earned_source_report_sha256": "055d1cf3c86f64cb9a5781731c252dc32b652e9b7d6f32b0cab104123ec9241b",
+    "earned_source_snapshot": "09-all65-earned-town",
+    "earned_source_sram_sha256": "28a01170b27b9029546067e2866ee91cde1ee7f64ffd6564f37df836aa2c11eb",
+    "earned_source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "earned_source_symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+    "earned_source_relation": "same-ROM",
+    "source_machine_states_loaded": 0,
+    "producer_source_capture_sha256": "07ad6f278adf81f8e93b5f3cdf6582b9b0492bf3ce2535d3bae66842f57108a3",
+    "verified_producer_test_sources": {
+      "tests/magma_journey.py": "ea2fc79efc577cc0527eee2a276455fd7f911bdb31795460f2f6efed70f018f2",
+      "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+      "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+      "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+      "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+      "tests/test_save5.py": "f933d85234da54d6da09f62a99e822eab0c21c0e3ffce8fc1eb7883fb1377aba",
+      "tests/test_creatures.py": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+      "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+      "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+      "tests/southern_symbols.py": "7f21fb8098ad216457190fa9071374b49df263794f43f4caac70dafce0e81aad",
+      "tests/test_southern_frozen_fixtures.py": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce"
+    }
+  },
+  "source_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "test_sources": {
+    "tests/magma_journey.py": "bc0dd73960c23816c1d5bd53b7dff6ebbde015e5da8181f397249c3ec87e51e5",
+    "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+    "tests/magma_controls.py": "15c82a457d80293fe0a9ddba626d55d23147b87865979b91abf2e760cdb2071d",
+    "tests/magma_retained_controls.py": "f05a342285627da2d7955c32806b5e13fdc7b7fc004d222560d60ebe2f85d0c4"
+  },
+  "checks": [
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "independent SRAM boot resumes playable game",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "all65 genuinely earned historical form receipts survive",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "all34 actual individuals survive with unique immutable identities",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "all38 actual claimed quest states survive",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "cold boot preserves exact160-slot instance array from controller-earned SRAM",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "cold boot preserves all party references and selected actual identity",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "cold boot preserves exact earned collection and reward ledgers",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "cold boot preserves exact quests and equipment",
+      "passed": true,
+      "frame": 210
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 213
+    },
+    {
+      "label": "earned source reaches ordinary safe Magma town",
+      "passed": true,
+      "frame": 213
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 216
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 234
+    },
+    {
+      "label": "ordinary storage scrolling visits every one of34 actually retained individuals",
+      "passed": true,
+      "frame": 382
+    },
+    {
+      "label": "browsing all34 candidates changes no roster quests or equipment bytes",
+      "passed": true,
+      "frame": 382
+    },
+    {
+      "label": "full34 storage draws every hardware frame within actual cycle and OBJ budgets",
+      "passed": true,
+      "frame": 382
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 391
+    },
+    {
+      "label": "four same-family branch pairs genuinely coexist in retained ownership",
+      "passed": true,
+      "frame": 391
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 394
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 412
+    },
+    {
+      "label": "journal cursor reaches the exact requested owned individual",
+      "passed": true,
+      "frame": 527
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 577
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 586
+    },
+    {
+      "label": "ordinary journal assignment references exact instance, not just a family or form",
+      "passed": true,
+      "frame": 586
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 589
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 607
+    },
+    {
+      "label": "journal cursor reaches the exact requested owned individual",
+      "passed": true,
+      "frame": 652
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 702
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 711
+    },
+    {
+      "label": "ordinary journal assignment references exact instance, not just a family or form",
+      "passed": true,
+      "frame": 711
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 719
+    },
+    {
+      "label": "L direction selects party slot0",
+      "passed": true,
+      "frame": 719
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 722
+    },
+    {
+      "label": "journal tab3 opens",
+      "passed": true,
+      "frame": 746
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 796
+    },
+    {
+      "label": "real growth menu selects learned command50",
+      "passed": true,
+      "frame": 796
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 805
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 808
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 808
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 823
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 823
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 828
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 828
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 833
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 833
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 838
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 838
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 843
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 843
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 848
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 848
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 853
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 853
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 858
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 858
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 863
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 863
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 868
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 868
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 873
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 873
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 878
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 878
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 883
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 883
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 888
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 888
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 893
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 893
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 898
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 898
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 903
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 903
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 908
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 908
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 913
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 913
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 918
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 918
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 923
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 923
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 928
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 928
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 933
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 933
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 938
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 938
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 943
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 943
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 948
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 948
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 953
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 953
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 958
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 958
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 963
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 963
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 968
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 968
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 973
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 973
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 978
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 978
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 983
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 983
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 988
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 988
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 993
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 993
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 998
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 998
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1003
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1003
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1008
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1008
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1013
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1013
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1018
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1018
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1023
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1023
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1028
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1028
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1033
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1033
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1038
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1038
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1043
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1043
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1048
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1048
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1053
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1053
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1058
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1058
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1063
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1063
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1068
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1068
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1073
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1073
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1078
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1078
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1083
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1083
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1088
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1088
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1093
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1093
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1098
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1098
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1103
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1103
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1108
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1108
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1113
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1113
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1120
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1127
+    },
+    {
+      "label": "first member of actual same-family pair selected",
+      "passed": true,
+      "frame": 1247
+    },
+    {
+      "label": "genuine same-family member starts its owned signature cast",
+      "passed": true,
+      "frame": 1249
+    },
+    {
+      "label": "native cast ownership records exact first individual",
+      "passed": true,
+      "frame": 1249
+    },
+    {
+      "label": "same-family-13-L-freeze updates and flips every hardware frame inside native cycle and OBJ budgets",
+      "passed": true,
+      "frame": 1281
+    },
+    {
+      "label": "same-family selector freezes position health effect cooldown and regional clock",
+      "passed": true,
+      "frame": 1281
+    },
+    {
+      "label": "L release selects exact second same-family individual",
+      "passed": true,
+      "frame": 1282
+    },
+    {
+      "label": "same-family selection cannot steal active cast ownership",
+      "passed": true,
+      "frame": 1282
+    },
+    {
+      "label": "native tile test observes an actually owned new companion",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose companion OBJ tiles match exact selected form and authored pose",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "same-family-13-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "visible dynamic Magma actors were inspected",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "different same-family instance does not borrow the original casting pose",
+      "passed": true,
+      "frame": 1285
+    },
+    {
+      "label": "different same-family member cannot overwrite live cast or reset cooldown",
+      "passed": true,
+      "frame": 1287
+    },
+    {
+      "label": "same-family swaps preserve every exact retained individual record",
+      "passed": true,
+      "frame": 1287
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1410
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 1428
+    },
+    {
+      "label": "journal cursor reaches the exact requested owned individual",
+      "passed": true,
+      "frame": 1458
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1508
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1517
+    },
+    {
+      "label": "ordinary journal assignment references exact instance, not just a family or form",
+      "passed": true,
+      "frame": 1517
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1520
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 1538
+    },
+    {
+      "label": "journal cursor reaches the exact requested owned individual",
+      "passed": true,
+      "frame": 1548
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1598
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1607
+    },
+    {
+      "label": "ordinary journal assignment references exact instance, not just a family or form",
+      "passed": true,
+      "frame": 1607
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1615
+    },
+    {
+      "label": "L direction selects party slot0",
+      "passed": true,
+      "frame": 1615
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1618
+    },
+    {
+      "label": "journal tab3 opens",
+      "passed": true,
+      "frame": 1642
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1692
+    },
+    {
+      "label": "real growth menu selects learned command53",
+      "passed": true,
+      "frame": 1692
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1701
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1704
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1704
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1711
+    },
+    {
+      "label": "first member of actual same-family pair selected",
+      "passed": true,
+      "frame": 1831
+    },
+    {
+      "label": "genuine same-family member starts its owned signature cast",
+      "passed": true,
+      "frame": 1833
+    },
+    {
+      "label": "native cast ownership records exact first individual",
+      "passed": true,
+      "frame": 1833
+    },
+    {
+      "label": "same-family-14-L-freeze updates and flips every hardware frame inside native cycle and OBJ budgets",
+      "passed": true,
+      "frame": 1865
+    },
+    {
+      "label": "same-family selector freezes position health effect cooldown and regional clock",
+      "passed": true,
+      "frame": 1865
+    },
+    {
+      "label": "L release selects exact second same-family individual",
+      "passed": true,
+      "frame": 1866
+    },
+    {
+      "label": "same-family selection cannot steal active cast ownership",
+      "passed": true,
+      "frame": 1866
+    },
+    {
+      "label": "native tile test observes an actually owned new companion",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose companion OBJ tiles match exact selected form and authored pose",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "same-family-14-new-selected-pose dynamic actor cache matches actual keyed ROM pixels",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "visible dynamic Magma actors were inspected",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "different same-family instance does not borrow the original casting pose",
+      "passed": true,
+      "frame": 1869
+    },
+    {
+      "label": "different same-family member cannot overwrite live cast or reset cooldown",
+      "passed": true,
+      "frame": 1871
+    },
+    {
+      "label": "same-family swaps preserve every exact retained individual record",
+      "passed": true,
+      "frame": 1871
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1994
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 2012
+    },
+    {
+      "label": "journal cursor reaches the exact requested owned individual",
+      "passed": true,
+      "frame": 2177
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2227
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2236
+    },
+    {
+      "label": "ordinary journal assignment references exact instance, not just a family or form",
+      "passed": true,
+      "frame": 2236
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2239
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 2257
+    },
+    {
+      "label": "journal cursor reaches the exact requested owned individual",
+      "passed": true,
+      "frame": 2267
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2317
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2326
+    },
+    {
+      "label": "ordinary journal assignment references exact instance, not just a family or form",
+      "passed": true,
+      "frame": 2326
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2334
+    },
+    {
+      "label": "L direction selects party slot0",
+      "passed": true,
+      "frame": 2334
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2337
+    },
+    {
+      "label": "journal tab3 opens",
+      "passed": true,
+      "frame": 2361
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2411
+    },
+    {
+      "label": "real growth menu selects learned command56",
+      "passed": true,
+      

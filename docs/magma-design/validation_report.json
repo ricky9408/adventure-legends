@@ -1,0 +1,287 @@
+{
+  "status": "DESIGN_CHECKS_PASS",
+  "runtime_enabled": false,
+  "allocation": {
+    "new_forms": 24,
+    "new_families": 9,
+    "new_evolution_edges": 15,
+    "new_qualified_trials": 15,
+    "new_learnset_rows": 41,
+    "cumulative_forms": 65,
+    "cumulative_minimum_individuals": 34,
+    "global_quests": 8,
+    "optional_global_quests": 5,
+    "additional_optional_discovery_commissions": 1,
+    "equipment": 6,
+    "capability_bits_added": 0,
+    "iwram_bytes_added": 0
+  },
+  "abstract_puzzles": [
+    {
+      "room": 42,
+      "reachable_abstract_states": 924,
+      "states_with_no_reset_solution": 924,
+      "player_prop_arrangements_with_unconditional_exit": 462,
+      "witness_actions": [
+        "walk",
+        "walk",
+        "walk",
+        "STORE_HEAT",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop"
+      ],
+      "scope": "finite abstract micro-layout only; final pixels, input sweeps and native cadence untested"
+    },
+    {
+      "room": 43,
+      "reachable_abstract_states": 11648,
+      "states_with_no_reset_solution": 11648,
+      "player_prop_arrangements_with_unconditional_exit": 5824,
+      "witness_actions": [
+        "walk",
+        "walk",
+        "move_prop",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "PRESS_WEIGHT"
+      ],
+      "scope": "finite abstract micro-layout only; final pixels, input sweeps and native cadence untested"
+    },
+    {
+      "room": 44,
+      "reachable_abstract_states": 24180,
+      "states_with_no_reset_solution": 24180,
+      "player_prop_arrangements_with_unconditional_exit": 4836,
+      "witness_actions": [
+        "walk",
+        "walk",
+        "move_prop",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "PRESS_WEIGHT",
+        "walk",
+        "move_prop",
+        "walk",
+        "walk",
+        "walk",
+        "move_prop",
+        "walk",
+        "STORE_HEAT",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "move_prop",
+        "walk",
+        "walk",
+        "move_prop",
+        "walk",
+        "ANY_WEAPON_PIN"
+      ],
+      "scope": "finite abstract micro-layout only; final pixels, input sweeps and native cadence untested"
+    }
+  ],
+  "acquisition": {
+    "forms_reached_in_design": 65,
+    "new_real_individuals": 13,
+    "total_real_individuals_including_baseline": 34,
+    "max_required_party_size": 2,
+    "witness": [
+      {
+        "action": "acquire",
+        "source": "Q30",
+        "instance_id": 22,
+        "form": 31
+      },
+      {
+        "action": "acquire",
+        "source": "Q31",
+        "instance_id": 23,
+        "form": 34
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_0",
+        "instance_id": 24,
+        "form": 37
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_1",
+        "instance_id": 25,
+        "form": 40
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_2",
+        "instance_id": 26,
+        "form": 43
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_3",
+        "instance_id": 27,
+        "form": 46
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_4",
+        "instance_id": 28,
+        "form": 95
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_5",
+        "instance_id": 29,
+        "form": 97
+      },
+      {
+        "action": "acquire",
+        "source": "M_FIELD_6",
+        "instance_id": 30,
+        "form": 99
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 22,
+        "target": 32
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 22,
+        "target": 33
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 23,
+        "target": 35
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 23,
+        "target": 36
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 24,
+        "target": 38
+      },
+      {
+        "action": "deterministic_new_base_encounter",
+        "source": "M_BRANCH_0",
+        "instance_id": 31,
+        "form": 37
+      },
+      {
+        "action": "other_trial_floor_and_confirm_evolution",
+        "instance_id": 31,
+        "target": 39
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 25,
+        "target": 41
+      },
+      {
+        "action": "deterministic_new_base_encounter",
+        "source": "M_BRANCH_1",
+        "instance_id": 32,
+        "form": 40
+      },
+      {
+        "action": "other_trial_floor_and_confirm_evolution",
+        "instance_id": 32,
+        "target": 42
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 26,
+        "target": 44
+      },
+      {
+        "action": "deterministic_new_base_encounter",
+        "source": "M_BRANCH_2",
+        "instance_id": 33,
+        "form": 43
+      },
+      {
+        "action": "other_trial_floor_and_confirm_evolution",
+        "instance_id": 33,
+        "target": 45
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 27,
+        "target": 47
+      },
+      {
+        "action": "deterministic_new_base_encounter",
+        "source": "M_BRANCH_3",
+        "instance_id": 34,
+        "form": 46
+      },
+      {
+        "action": "other_trial_floor_and_confirm_evolution",
+        "instance_id": 34,
+        "target": 48
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 28,
+        "target": 96
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 29,
+        "target": 98
+      },
+      {
+        "action": "trial_floor_and_confirm_evolution",
+        "instance_id": 30,
+        "target": 100
+      }
+    ],
+    "scope": "constructive design graph witness, not controller or implementation proof"
+  },
+  "all_choice_order_capacity_proof": {
+    "scope": "all allowed capture/evolution choice orders from an admission-safe state, by invariant closure and exhaustive sufficient-state checks; future world source reachability remains separate",
+    "global_safe_capacity_states": 6497,
+    "global_admitted_transition_classes": 25665,
+    "global_refused_transition_classes": 145,
+    "branch_count_states": 129764,
+    "branch_transition_classes": 380924,
+    "coverage_losing_branch_evolutions_examined": 178,
+    "max_terminal_opportunities": 72,
+    "extra_copy_budget": 88,
+    "capacity": 160,
+    "legacy_overbudget_saves_claimed_recoverable": false,
+    "runtime_implemented": false
+  },
+  "native_gameplay_tested": false,
+  "save_codec_implemented": false
+}

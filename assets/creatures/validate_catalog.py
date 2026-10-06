@@ -14,7 +14,8 @@ PHASES=['wood','fire','earth','metal','water']
 GENERATION=list(zip(PHASES,PHASES[1:]+PHASES[:1]))
 CONTROL=[('wood','earth'),('earth','water'),('water','fire'),('fire','metal'),('metal','wood')]
 from catalog_policy import (LEGACY_FIELD_CAPABILITIES, FIELD_CAPABILITIES,
-                            REVISION_POLICY, TRIAL_POLICY, GATE_MASKS)
+                            REVISION_POLICY, TRIAL_POLICY, TRIAL_PREREQUISITES, GATE_MASKS,
+                            CURRENT_POLARITY_OVERRIDES)
 KEYWORDS={'$schema','$id','$defs','title','$ref','type','enum','const','properties','required','additionalProperties','items','minItems','maxItems','uniqueItems','minimum','maximum','minLength','maxLength','pattern'}
 
 class CatalogError(ValueError):pass
@@ -241,8 +242,8 @@ def validate_enabled(data, enabled):
     if type(revision) is not int or revision not in REVISION_POLICY:
         return ['enabled: unsupported content revision']
     policy=REVISION_POLICY[revision]
-    if revision==4 and data['schema_version']!=2:
-        errors.append('enabled: content revision 4 requires authoring schema 2')
+    if revision>=4 and data['schema_version']!=2:
+        errors.append('enabled: current content revision requires authoring schema 2')
     for key,expected in [('enabled_form_ids',policy['forms']),('enabled_evolutions',policy['edges']),('enabled_ability_ids',policy['abilities'])]:
         if json.dumps(enabled.get(key))!=json.dumps(expected):
             errors.append(f'enabled: {key} differs from reviewed core table order')
@@ -272,8 +273,18 @@ def validate_enabled(data, enabled):
             t=actual.get(name)
             if t is None:continue
             got=(t['family_id'],t['local_trial_id'],t['wire_mask'],t['introduced_content_revision'],tuple(t['from_form_ids']))
-            if got!=value or t['prerequisite_trial_mask']!=0:
+            if got!=value or t['prerequisite_trial_mask']!=TRIAL_PREREQUISITES.get(name,0):
                 errors.append(f'enabled: trial binding {name} differs from reviewed revision')
+    # Current family identity is stable except these two individually authored
+    # branch targets. A broad family exception would silently admit other flips.
+    slots={s['id']:s for s in data['slots']}
+    roots={f['id']:min(f['form_ids']) for f in data['families']}
+    for f in selected:
+        root=forms.get(roots[slots[f['id']]['family_id']])
+        expected=CURRENT_POLARITY_OVERRIDES.get(f['id'],root['polarity'] if root else None)
+        if f['polarity']!=expected:errors.append(f'enabled: unreviewed per-form polarity {f["id"]}')
+    from released_policy import validate_compatibility
+    errors += validate_compatibility(data, revision)
     return sorted(set(errors))
 
 def summary(data, enabled=None):

@@ -1,0 +1,8 @@
+{
+  "scope": "Exact final-D-fixture synthetic host runner and observation hooks used in strict and UBSan runs; native claims remain false",
+  "source_sha256": {
+    "docs/evidence/deferred-anchor/test_engine_probe.py": "aa0f2812ca906194ea4c89f247b52b8d2c7888dfdb15c8b763ad6b73f8432629",
+    "docs/evidence/deferred-anchor/engine_probe.c": "b9bdba48aaedaee92c857973088d0cb9e62cb9a4a1e6eed638f2772cc7f17364"
+  },
+  "runtime_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f"
+}

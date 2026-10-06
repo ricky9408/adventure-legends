@@ -65,8 +65,13 @@ int northern_quest_claim(Save5State*s,unsigned q){
   idx=q-11;i=rewards[idx]-1;
   if(s->roster.rewards[i>>3]&(1u<<(i&7)))return NORTH_INVALID;
   if(!creatures_form(forms[idx]))return NORTH_LOCKED;
-  result=creatures_grant(&s->roster,forms[idx],northern_recruit_level(&s->roster),20,0,rewards[idx]);
-  if(result==CREATURE_EMPTY_SLOT)return NORTH_FULL;
+  {
+   enum CreatureAdmissionStatus admission=creatures_grant_admitted(&s->roster,
+    forms[idx],northern_recruit_level(&s->roster),20,0,rewards[idx],0);
+   if(!creatures_admission_allowed(admission))
+    return admission==CREATURE_ADMISSION_FULL?NORTH_FULL:
+           admission==CREATURE_ADMISSION_RESERVED?NORTH_RESERVED:NORTH_INVALID;
+  }
  }else if(q<=20){
   const CreatureForm*base;CreatureU32 xp;
   idx=q-16;base=creatures_form(trial_forms[idx]);if(!base)return NORTH_LOCKED;

@@ -12,7 +12,14 @@ class Events(unittest.TestCase):
    old=[f(a,s) for a in range(30) for s in range(6)];self.assertEqual(old,list(range(180)))
    new=[f(a,s) for a in (31,33) for s in range(6)];self.assertEqual(new,list(range(180,192)))
    self.assertEqual(len(set(old+new)),192)
+   rows={39:(220,5),41:(225,2),42:(227,1),43:(228,1),44:(229,2),45:(231,1)}
+   magma=[f(a,slot) for a,(_,count) in rows.items() for slot in range(count)]
+   self.assertEqual(magma,list(range(220,232)))
+   self.assertEqual(len(set(old+new+magma)),204)
    for a in (*range(30,31),32,*range(34,256),65536,0xffffffff):
+    if a in rows:
+     for slot in range(rows[a][1],6):self.assertEqual(f(a,slot),512)
+     continue
     for s in (0,1,5,6,255,0xffffffff):self.assertEqual(f(a,s),512)
    for a in range(34):
     for s in (6,255,65536,0xffffffff):self.assertEqual(f(a,s),512)

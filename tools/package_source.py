@@ -15,7 +15,7 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
 ROOT_FILES=('.gitignore','LICENSE','Makefile','README.md','linker.ld')
 SOURCE_ROOTS=('src','assets','docs','tests','tools')
-EXTENSIONS={'.c','.h','.s','.inc','.py','.sh','.md','.json','.png','.gif','.txt','.sav'}
+EXTENSIONS={'.c','.h','.s','.inc','.py','.sh','.md','.json','.png','.gif','.txt','.sav','.log'}
 EXCLUDED={'build','dist','downloads','sysroot','__pycache__','.git'}
 # Redundant large contact sheets are reproducible with make assets. Individual
 # region/camera PNGs remain included; these are not ROM inputs or test fixtures.
@@ -34,7 +34,7 @@ def source_files():
             if rel.parts[:2]==('tools','smoke_tests') and p.name!='test_bridge.py':continue
             if rel.as_posix() in GENERATED_OVERVIEWS:continue
             if p.name=='.gitignore':files.append(p);continue
-            if p.suffix not in EXTENSIONS:continue
+            if p.suffix not in EXTENSIONS and rel.as_posix() not in {'docs/magma-design/magma_allocation.original.json.gz','docs/magma-design/README.original.md.gz'}:continue
             if p.suffix=='.sav' and not str(rel).startswith('tests/fixtures/'):continue
             files.append(p)
     return sorted(set(files),key=lambda p:p.relative_to(ROOT).as_posix())
@@ -42,7 +42,7 @@ def source_files():
 def main():
     OUT.mkdir(exist_ok=True)
     files=source_files()
-    manifest={'schema':1,'purpose':'Source-only reproducible Southern S3 release; 41 native-obtainable forms, Save5 revision4','files':[]}
+    manifest={'schema':1,'purpose':'Source-only reproducible Magma chapter;65 obtainable forms, Save5 revision5','files':[]}
     target=OUT/'Adventure-Legends-Emberbond-source.zip'
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
         for p in files:

@@ -1,0 +1,544 @@
+{
+  "fixture": "southern-all41-town.sav",
+  "sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3",
+  "bytes": 32768,
+  "purpose": "Immutable controller-generated delivered Southern S3 revision4 SRAM for forward-migration tests; no user save data",
+  "source_release_status": "Delivered Southern S3 release, pinned by ROM and exact producer-report hashes",
+  "source_directory": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey",
+  "source_snapshot": "08-complete41-independent-reboot",
+  "source_rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "source_rom_bytes": 5858700,
+  "source_symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+  "source_report_sha256": "780317f27cb2595ece2741a33edc085aa6646e0ab2687e98f2a62689056fd635",
+  "source_report_original_filename": "southern-journey.json",
+  "source_report_bytes": 3112391,
+  "source_report_manifest": "southern-journey-producer/report_parts/manifest.json",
+  "source_report_manifest_sha256": "86c4dd041ff44690a3ab6089479aee51a0ffe70b4a3af33fdab40c7de0c2d600",
+  "source_report_storage": "UTF-8 text chunks concatenated byte-for-byte in manifest order; no minification or rewriting",
+  "source_suite": "southern-native-controller-journey",
+  "source_report_checks": 15732,
+  "source_report_inputs": 18283,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "source_machine_states_verified_but_never_loaded": true,
+  "source_tests": {
+    "tests/southern_journey.py": "d5119d607ba55cbd0932c011b3af984bbd115ad3856ea7e6bf7b45a5fd07ee32",
+    "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+    "tests/test_save5.py": "6dcdfaca99dabb500faecd6ba52d01c1cdac2ae7eb8ecf8e00d37c4f6b1d8b9c",
+    "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+  },
+  "archived_producer_test_root": "producer-test-source",
+  "source_manifest": "source-hashes.json",
+  "source_manifest_sha256": "609104f75fa341bb67d0d1e2a362db7b03ed655ecb6eed41c101b0c799b2f089",
+  "verified_runtime_source_count": 707,
+  "original_rom_symbols_sources_tests_and_snapshot_pairs_verified_at_capture": true,
+  "verified_original_snapshots": {
+    "00-n5-forward-migration": {
+      "state_sha256": "d05c4d36c92603732e3acdaf12f955cd2b87cbd02d97ae014a0415470e58710a",
+      "sram_sha256": "1d55eed32baf0ebe7e4d261cf574922841431a427b20a2a36003ecd4d05d2ce4"
+    },
+    "01-ferry-entry": {
+      "state_sha256": "8dca6c751e5f590dd9c80fd32aa993292051767b07f833d1ffec14b857e18c2f",
+      "sram_sha256": "41302adf380d3a891516464542bb2cd87a0dc9b7dbc269880a31b12b204961cc"
+    },
+    "02-guaranteed-bases": {
+      "state_sha256": "c359925f9071014e3eab7b817c2aefbbe28cd60e6cdb931223bafbfc338ebc35",
+      "sram_sha256": "81cfa6aa29242182e21114f728b0548debf6b51123efe173d3580bfd6cdb32cb"
+    },
+    "34-unsolved-entry": {
+      "state_sha256": "121189ccb440bccdb36b7a515c015b4798a90d4baa26b7f6de907588f1259a68",
+      "sram_sha256": "14960112c8bff015ec7c7c39d32dbf6505287473347d2e7cc70f23f120141880"
+    },
+    "34-solved": {
+      "state_sha256": "271426b3ae3c5505d4ed18fbafe02fe4b8b3e8fe83c762d403da041c9795af69",
+      "sram_sha256": "8d8157ab97802161d012809a718be89d1779b29630b671b7a6cefdf7cde7223b"
+    },
+    "35-unsolved-entry": {
+      "state_sha256": "2df5579f4ad92fac454f1c31f757697c1a3540ed8422a57a6f058a749bd7a8fc",
+      "sram_sha256": "12c23dd2c7cf8313fb8fb247c43af86ef57af91829d41a2c7131b41887e28359"
+    },
+    "35-solved": {
+      "state_sha256": "84a414b5419671cf9bbf09f9199bca78444194e87433f51443645f20383cd066",
+      "sram_sha256": "b5dcaafb1f46972f9e18bba39f540b412b12beb5aadde51cc1baca295d1f9d60"
+    },
+    "36-unsolved-entry": {
+      "state_sha256": "6480905201be2f4272e3604869cbb1bd0fd2395dbe3ca75cd967e73beb5a4286",
+      "sram_sha256": "6b9e7c8fedde747dad470cbd176c2c6cff3d3c7f9eb3131dad4b4db436cb21e9"
+    },
+    "36-solved": {
+      "state_sha256": "3e3788be85411e287eb43c2223cbeeeb2722bf798a8172408177fabe2dea842f",
+      "sram_sha256": "72d960d9415e036611386d34ab2f8208e0aea0722cebd10d4e554a30420a5427"
+    },
+    "03-machine-ready": {
+      "state_sha256": "73e2114edd7d0a8f123f464dff61997228bf4c62f457bb44d617458e69545065",
+      "sram_sha256": "7a50acb58adfed8adc46a866f4bf10d0857ced86249c5bb5ac9ad6922f5be290"
+    },
+    "machine-2-telegraph": {
+      "state_sha256": "6d95b2598ff1f94f6a964b02748bd723a6a70e25dc52176d28c4703b749958c5",
+      "sram_sha256": "3f041e8822a321b6a55f497325eec18f83d80e4ad5e2c080e076efb0534f67ed"
+    },
+    "boss-2-cleared": {
+      "state_sha256": "a3166358d4ac056167d68d0aed69bbd1a59b7bb728e98ef891aaf1f655e4f751",
+      "sram_sha256": "4c68e08b3ae2c9628decaa270f808dbec6f5645125918424c627165e7fd2f560"
+    },
+    "machine-3-telegraph": {
+      "state_sha256": "9dd4ca1567c6e1d1b32a2a5ec1f6fae44dd4dff84691a0f0f4086ec1c42705a5",
+      "sram_sha256": "ba77ae7dc8a98263bca48af194ac6ef8cff51de6951baa4a6db20aa53e732b04"
+    },
+    "boss-3-cleared": {
+      "state_sha256": "fdd73fc1711ddcb33a1b926d1f327b3fd00db14d8aeb7eea3ea70dd851a0b656",
+      "sram_sha256": "0eb513897a4198e8c417d8ed541b0ebe96f88df7d2e4f0b4d83c457c5654276b"
+    },
+    "machine-1-telegraph": {
+      "state_sha256": "fca2453a02a292cde53da47bc94a2fe11cd1d731d8f2d988fac1c20e32c4eb6a",
+      "sram_sha256": "efde21342ef0a0cb4bc96062420fc2aeeb94ad9f4027f8a4b66eaf8676b9cf07"
+    },
+    "boss-1-cleared": {
+      "state_sha256": "ce5663e294a80f4128d273eaad94aecb88b8aeafd63eb8006e84e67ac3ab0199",
+      "sram_sha256": "894fe2d8949fd57321371f6a2fa7a973a52f1406c33bdd2b5d1f3295805153ac"
+    },
+    "04-main-complete": {
+      "state_sha256": "09be21146824385b9469a16dc79a87a4b828774db8286f2ea1eecb31b8ae5c1d",
+      "sram_sha256": "20cddfd0bbd13611c4de96cf8c3489b1caef9182eebd326191757037335235e6"
+    },
+    "05-all-ten-recruits-eight-quests": {
+      "state_sha256": "ad035c72a38782eefd6d86afe45e0c7ab4220990f4bcd0b5afb419fc0bf0c993",
+      "sram_sha256": "f27a14da9eca9c88cb7eee1138614fdecd86a22b8bcb7373ba21ad4754d90550"
+    },
+    "trial79-partial-before-death": {
+      "state_sha256": "ab9d7998065b3a24d60e8e0041de3c37c96b3ed03f84ea96b2d5606b23f78c76",
+      "sram_sha256": "f27a14da9eca9c88cb7eee1138614fdecd86a22b8bcb7373ba21ad4754d90550"
+    },
+    "trial79-death-retry": {
+      "state_sha256": "b5e35c3d3cead17243cf4cf87c9392332d42243aa5a5a7f4bda25eace829d164",
+      "sram_sha256": "400a09631c2f47d4dd95b69b990091e6080f3d575166dc510e726e98228332ea"
+    },
+    "trial-79-earned": {
+      "state_sha256": "9b9f91514f7fa9e9353eaca7d22f199239070c22202700837f7c689da181f69d",
+      "sram_sha256": "fb675ab0f33d0e7496fdf1f01b99d0a9cac0abc494ebf8a334c48b3610e41b6a"
+    },
+    "trial-25-earned": {
+      "state_sha256": "1c22620423826688e4365b92cb986d167d230f79626c4100661e3bfcea4b4577",
+      "sram_sha256": "9a06b0b4d284301e3f52c5fee8b604620068c7f1ecdb40e7ab01d55e47d5562d"
+    },
+    "trial-28-earned": {
+      "state_sha256": "e7440d93e817e656aff89d8df255052af15492563fa48c56af188ece86e5cbfb",
+      "sram_sha256": "b167e3ebf179f995108a8dd009f199645e91de6770c6175ecb4f177a9032cf5e"
+    },
+    "trial-81-earned": {
+      "state_sha256": "40747f91b26f8afcd4e6a86bb77ebe9248daebebe0682974b54ddb3da2a5099e",
+      "sram_sha256": "df4e4fb8a0444f23b1a61a180cd1fc4287d1d07d3e5f4deecbae3f9503c943c7"
+    },
+    "trial-93-earned": {
+      "state_sha256": "a1d0aa8089b45fc1316aae64b2b7065e09da807a764242cff016e4ce2f50d75e",
+      "sram_sha256": "530d113bb3b931752d1561138286e52b73c1613d435cbd8d8cc633daf3fbbf1c"
+    },
+    "trial-83-earned": {
+      "state_sha256": "e51334690e5bb66883886ff61d9ea96d6b3be8c7eb69d7fdfe61e9c588123293",
+      "sram_sha256": "38a28fc81b0e9777b8e26926304e9f71223950b026a61c37ef1303fe16b34974"
+    },
+    "trial-89-earned": {
+      "state_sha256": "451679ea094906ae2dbfeb1c1e60560ac8aa27e734f32ed0d99f6a6715d00956",
+      "sram_sha256": "e812f47e64b7abc54146594b687bdd14fe89eecb3dfd93c19bc0ea6c8920a514"
+    },
+    "trial-85-earned": {
+      "state_sha256": "536e014e0f9917b777cc7504cc8ed7b9fe91dd2ae2b1f12b6aee81cfed2c15fc",
+      "sram_sha256": "4d8b932f303e18c305dec33f40a6ad76e3def7a8b2ff27e362dbc8acf929150e"
+    },
+    "trial-87-earned": {
+      "state_sha256": "d9d370b4f8c751e91fe554e3c94f7947c34958955d23fe89d941b362da5eccfb",
+      "sram_sha256": "9475e0efd00dff1fcafc37fac61f5f2dfe5921bd547419affcb507623ee9e062"
+    },
+    "trial-91-earned": {
+      "state_sha256": "ccce513982b5da1414d911eecb69daa36bf577fc09d31bfdd754c14e1668405a",
+      "sram_sha256": "56d872bcdb025526b85ef14503fb17a838091466cae0e09b81e937c64bdfbf06"
+    },
+    "06-all-ten-personal-trials": {
+      "state_sha256": "05e5fb6b961a3072b803f9ecc8f1d1d602d5a714c9568d1d639e6dffc1116485",
+      "sram_sha256": "a122effcc054c8b5ac7d4938596c76ced61078a4721639bafa837ab3bd93816e"
+    },
+    "evolved-26": {
+      "state_sha256": "b199cc36a321fc2b338e086bde888d6161e94f7184d8ed94d3bb5a54ff8b6d42",
+      "sram_sha256": "e309b9dd1f026336d28a726ee139ddecf4fc87d7f8e5aee67e85203142921a57"
+    },
+    "evolved-29": {
+      "state_sha256": "d42dda35590ff065237462ae7e74c4f22efcf43dc97197ab9cdd7b29024e616e",
+      "sram_sha256": "88cf457dc69aae4350263826d9e08af0d5bc0704fc9f53ef04b102228818be33"
+    },
+    "evolved-80": {
+      "state_sha256": "3e92ef803225fdf067ec77ba6de757311ed7c3e36736038daa61a0a4b300825f",
+      "sram_sha256": "70db7d7e10097b0554da32b673868bac82804591560e305403ec31a0a099b2f0"
+    },
+    "evolved-82": {
+      "state_sha256": "c7a8321fc75a469f5fbbd379c28b96d44ebbbb28a382e5c1341e3ff40db0d775",
+      "sram_sha256": "70d603ae21eb5626fbf3f8f62447907b9a5e6af2384f7143d88c8b2590d4dbf6"
+    },
+    "evolved-84": {
+      "state_sha256": "06d9b46f6e18d2cc5e425d39fc8923996fab90ae945a32d4c7675ad10756436c",
+      "sram_sha256": "accdc1aa5062767bf3918a65500d80aa6ff8b9a635bd4afc7f922d1f9968dfa0"
+    },
+    "evolved-86": {
+      "state_sha256": "bacd742878c95d66c704873ab686e2a1cb6c41f033dd61880fdd64d4097b2ad1",
+      "sram_sha256": "9e3953d677c6baffa57f112195d1d6c73b42e77b959ebb1f96a77734184c4cf9"
+    },
+    "evolved-88": {
+      "state_sha256": "353d49898144e1847fb9aa81805676e66efd5c13d24135dbf76a49245f68e8d6",
+      "sram_sha256": "4fe86bb90b13697e4ff48378e9ea5bcdb19844282e84e457b846c93fa95169e0"
+    },
+    "evolved-90": {
+      "state_sha256": "8399f3c04dfb4cb109dacb3087b40641c180d193ca498f624ee71b8232e077fd",
+      "sram_sha256": "be269ec0829f53aab526add154517db3068e1ff7432f05a8ee45082c4b4792f2"
+    },
+    "evolved-92": {
+      "state_sha256": "fab1193386c4d186fd87b79e44505ed79e5275de76ac57db056c18eecf8f776a",
+      "sram_sha256": "7720b953be7384140f40711363e2121445f7de7a556d4f896266c629335e3152"
+    },
+    "evolved-94": {
+      "state_sha256": "d2905823037b0c240bb27df743989a994a39b241d893a2783fde44ddb56e1c56",
+      "sram_sha256": "9b16f8001beb0af5deaab1a84adfaedc5c0b5cd7a8abc1611cc1642f0e13c1ca"
+    },
+    "07-complete41-saved": {
+      "state_sha256": "54fde24e4b431d8cebc7b7f54b037c659c5297eb233de32bb956f446f9fafce1",
+      "sram_sha256": "2e4f5305ad074e431bfb4df49018661c13a364ca0d8c3041669a51f3645f603d"
+    },
+    "08-complete41-independent-reboot": {
+      "state_sha256": "309d0afa94ae99cd464ba8aa974591521f581a2af7b34f18fe5cab5d98b21a2f",
+      "sram_sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3"
+    },
+    "09-old-region-return": {
+      "state_sha256": "e11fcd9abf232e4fef80829dda78ced462095ca1c5c943e792cb04591f33f498",
+      "sram_sha256": "f4c78c4932fd8dbfea9d5087a3e6141892310b9c6930e70f7a9fccb6d31fd28a"
+    },
+    "10-southern-death-retry": {
+      "state_sha256": "e25546849fc88f765c999d3e663673b5cd0e46da41df081a200952afb0d19099",
+      "sram_sha256": "b796c2e932e9bdbf35351d8444b71f0c2a95e9853510b37dc938b9ad47b293ed"
+    }
+  },
+  "source_state": {
+    "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+    "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+    "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/08-complete41-independent-reboot.state",
+    "state_sha256": "309d0afa94ae99cd464ba8aa974591521f581a2af7b34f18fe5cab5d98b21a2f",
+    "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/08-complete41-independent-reboot.sav",
+    "sram_sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3",
+    "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/08-complete41-independent-reboot.png",
+    "status": {
+      "game_state": 1,
+      "room": 30,
+      "px": 112,
+      "py": 224,
+      "hp": 8,
+      "chapter_flags": 15,
+      "camera_x": 0,
+      "camera_y": 144,
+      "save_failed": 0,
+      "checkpoint_spawn": 2,
+      "spirit": 16,
+      "summoned": 0,
+      "ability_cd": 0,
+      "roll_cd": 0
+    },
+    "quests": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "obtained_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      25,
+      26,
+      28,
+      29,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "owned_form_ids": [
+      2,
+      5,
+      8,
+      11,
+      14,
+      16,
+      20,
+      78,
+      23,
+      74,
+      76,
+      80,
+      86,
+      92,
+      26,
+      29,
+      90,
+      88,
+      84,
+      82,
+      94
+    ],
+    "southern_objectives": [
+      3,
+      3,
+      15,
+      7,
+      3,
+      3,
+      3,
+      3
+    ],
+    "puzzle": [
+      0,
+      0,
+      1
+    ],
+    "trial": {
+      "index": 255,
+      "slot": 255,
+      "instance_id": 0,
+      "bits": 0
+    }
+  },
+  "wire_state": {
+    "bank_offset": 512,
+    "sequence": 359,
+    "content_revision": 4,
+    "obtained_form_count": 41,
+    "owned_instance_count": 21,
+    "gear_item_count": 25,
+    "claimed_quest_count": 30,
+    "obtained_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      25,
+      26,
+      28,
+      29,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "owned_form_ids": [
+      2,
+      5,
+      8,
+      11,
+      14,
+      16,
+      20,
+      78,
+      23,
+      74,
+      76,
+      80,
+      86,
+      92,
+      26,
+      29,
+      90,
+      88,
+      84,
+      82,
+      94
+    ],
+    "gear_item_ids": [
+      1,
+      9,
+      17,
+      33,
+      50,
+      65,
+      49,
+      2,
+      81,
+      34,
+      18,
+      10,
+      82,
+      3,
+      19,
+      11,
+      35,
+      51,
+      83,
+      4,
+      36,
+      66,
+      52,
+      84,
+      12
+    ],
+    "quests": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "room": 30,
+    "spawn": 2,
+    "chapter_flags": 15,
+    "party_slots": [
+      11,
+      12,
+      2,
+      20
+    ],
+    "selected_party": 1,
+    "next_instance_id": 22
+  },
+  "coverage_scope": "Authenticity and released save content only; these prior-ROM saves do not prove Magma gameplay or acquisition"
+}

@@ -1,0 +1,94 @@
+{
+  "scope": "Creature core, legacy17 acquisition paths, current-only regression fixtures and host UI enum aliases",
+  "source_sha256": {
+    "assets/creatures/README.md": "2e59ac082a83d2f4d6b56cb05b7a870d828a149219669a553fd0162ed3fa4fe1",
+    "assets/creatures/catalog.json": "9a5a0ce1c1e980e26b4db5bcb338426b317acd6c2a757a9580bf942c360033bd",
+    "assets/creatures/catalog_policy.py": "96653977ded2076c2ae33e6162f5ae99ed8e2bf7625cded6d761fc50c579e3c9",
+    "assets/creatures/enabled.json": "b48020f81dd1082c22f31fe331330e351706ba4035ea7a42931c8ff94c4e3d11",
+    "assets/creatures/generate_data.py": "186bc7bc41d8fc3be4a31c45305b69171262373c52320241f7f0d1be9c73996a",
+    "assets/creatures/validate_catalog.py": "d08e2534046a8103ee88b7c0e8f72c36e45c0256ea15dcecf7e9d2e6c72bf364",
+    "assets/creatures/terminal-topology.json": "e15a39f1b9c925d71cff2501350fdab39ce7df6764c56272171a4c38dc2646aa",
+    "src/creatures.c": "b5125cdc4007918f5d0ca7ff08a646c261e06a05663feec71a057875573746f8",
+    "src/creatures.h": "dbf45cc6dbe037eddd10e683d7118a055c880aa6ca1b70a7a5d067b70ab3882c",
+    "src/creature_data.c": "7d34c17ada62635d3759bf23b84c401ab084b09d4cebc94b74acb153bd52b867",
+    "tests/magma_creature_native.c": "13a3ec85634da536b11d9857903ade0b9e1bb44f6a68622a3d00dc9bfcb9d5a2",
+    "tests/test_magma_creature_core.py": "418e2842835fa847e2bd77fb57d099a71238fc311f6369a9ccde563f894ad0c0",
+    "tests/test_magma_catalog_policy.py": "62b50fcc1711bedf62e85d40ef651c6515d7e7b17a68729c5751f614bab7e5e1",
+    "tests/benchmark_magma_creatures.py": "b231ff8bfe8b865f6ff75cb3fecf7efe8b41f1abeb0759a37060e423a1b461f8",
+    "docs/MAGMA_CREATURE_IMPLEMENTATION.md": "54e972083954ff049a0567ec28ab1d184a3de2a19fb5ad5a665ede6e5ed730d3",
+    "docs/evidence/magma-creature-arm.json": "612eec2dfacf6b6805bafab8d68686a54c8181c5602a734cf147fe942464b690",
+    "docs/evidence/magma-creature-host.json": "cace0b0e1779e860f8ac5af17ab82a99e120fb3844f7353db96cd56217898166",
+    "src/regional_quests.c": "35afcdef81f50a7db2ff35a4272333d3569709a9c220dc249b1acbfc0f6ab055",
+    "src/regional_quests.h": "65ef0ac78a30b027d0db531170a30b1d95a9b6d1849305326cc05d625b917857",
+    "src/northern_quests.c": "16aabbaf8ca9fa1ba269a1923ac724d267c2d5f2be62d7b6ba1b9c1ea5c3d6f5",
+    "src/northern_quests.h": "3dd9fe39767b649186dacd6987697e0a4e401b3c55e30f2ff103f6487e56cc88",
+    "src/southern_quests.c": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+    "src/southern_quests.h": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881",
+    "tests/magma_legacy_admission_native.c": "724d69348c57ab20ae4fd24a37f49f41ecccf8c49eb3d13c6dd6d442d05cbe69",
+    "tests/test_magma_legacy_admission.py": "1c524bd181221042774542d8844a8c3cbe906124f1b2a0bdfc020b6cf3aa3303",
+    "tests/test_creatures.py": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+    "tests/test_creature_branches.py": "01eab92189b1ad06282e0fc876aadd2027783e3b0c5a1dfefa4952b52ddf56a4",
+    "tests/test_creature_sparse.py": "ecef09d09ecd8aa1faba95719cee7be4f154b126bfe7b7c809a79b752aa8d40a",
+    "tests/creatures_branch_native.c": "8db017f16e476c6cb205c0010958b975ac8553eb2069f777e20edcd0509bdfc6",
+    "tests/creatures_sparse_native.c": "80e0e35d2765aa0a9bcd0087fd17dd8796a806db56516965ce052f24c218ab11",
+    "tests/test_magma_architecture.py": "2093a761c5447517867dc2e0f63a5fe243d7bddfbd40bb92615add276435298a",
+    "tests/test_region_game.py": "f822586d06e395c17fef111af7a8b23cb5dcb5471ebb22a9acc7f75424a80b23",
+    "tests/test_north_game.py": "c6f4079434e3491e8c6b23374d66e8aba0264ce5d06d7e0a3304a6efcbbd7aa2",
+    "tests/test_south_game.py": "7344f1db8add060fb74cd87c9a1f3787f540c63261e4efc68ead9a1c6df3f03b",
+    "docs/MAGMA_LEGACY_ADMISSION.md": "f0fcad32be4e032337853fb4054ffb54d581b7ec454fdcd1681ace6cfc2d833d"
+  },
+  "suites": [
+    {
+      "tests": 42,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-current-creatures.log",
+      "log_sha256": "e5e05948089cd12def7ec52f0b52722a5670858a19b58b01a1ee7cd93f4156a1"
+    },
+    {
+      "tests": 4,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-current-branches.log",
+      "log_sha256": "428d944ae9d8e8c1efd274bbaf4c091ba377168f5bd39c827d539ccfacba50b8"
+    },
+    {
+      "tests": 7,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-architecture-regression.log",
+      "log_sha256": "4d01492d4906a7482f49aa5fee8bf21b844130085aa002ebd96f5836c6d355f7"
+    },
+    {
+      "tests": 3,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-legacy-admission-final.log",
+      "log_sha256": "eda787c7e8ac2b953ea2842b9ca8323aaa658f6bb8e57890c658253974410cff"
+    },
+    {
+      "tests": 12,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-region-ui.log",
+      "log_sha256": "9bd30cc3bfba9a9fff59c893ff101532ebb920ab13f3b9376a27a9bc93f89fc8"
+    },
+    {
+      "tests": 13,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-north-ui.log",
+      "log_sha256": "0d5f8346517fbbc9f8c76001a173ca4ace78dc0d43bc08446621d0299d7dcd04"
+    },
+    {
+      "tests": 14,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-south-ui.log",
+      "log_sha256": "2af2fc9ae1d68f07ce1270c86ed420d90e2fea31f8518f9e63a194dbda61eb4b"
+    },
+    {
+      "tests": 13,
+      "passed": true,
+      "log": "build/magma-creature-integration/magma-legacy-southern-regression.log",
+      "log_sha256": "aab7b6000a02069656c04d2d719f3a879c80d900ad1b643971eae5d888180679"
+    }
+  ],
+  "supplemental_current_catalog_history_core_tests": 20,
+  "total_unittest_count": 128,
+  "legacy_native_each_run_checks": 23133,
+  "raw_gameplay_grant_audit": "Only creatures_grant definition and fresh <=4 legacy migration remain; no region gameplay wrapper uses raw grants."
+}

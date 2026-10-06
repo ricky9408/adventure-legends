@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "scope": "Synthetic host C state/SRAM fault injection plus actual notice/glyph/OBJ helpers",
+  "failed_write_preserves_prior_bank": true,
+  "failure_feedback_retained": true,
+  "paused_updates_before_close": 140,
+  "unrelated_toast_and_page_changes_preserve_notice": true,
+  "explicit_close_acknowledges_without_claiming_save_success": true,
+  "dialogue_return_acknowledges": true,
+  "begin_rejection_notice": true,
+  "successful_retry_clears_stale_error": true,
+  "rendered_modal_states": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    8
+  ],
+  "verified_glyph_pixels": 438,
+  "hud_and_world_obj_cannot_obscure_notice": true,
+  "normal_play_has_no_notice_bar": true,
+  "party_assignment_failure_visible_after_wait": true,
+  "party_assignment_retry_preserves_ownership": true,
+  "native_rom_gameplay": false,
+  "emulator_game_ram_injection": false
+}

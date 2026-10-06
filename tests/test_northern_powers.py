@@ -14,7 +14,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 SOURCES = ['tests/northern_powers_native.c', 'src/northern_powers.c',
            'src/northern_power_art.c', 'src/southern_powers.c',
            'src/southern_power_art.c', 'src/advanced_powers.c',
-           'src/regional_powers.c', 'src/gear_runtime.c', 'src/weapon_actions.c',
+           'src/regional_powers.c', 'src/gear_runtime.c', 'tests/legacy_magma_hooks.c', 'src/weapon_actions.c',
            'src/combat_rules.c', 'src/equipment.c', 'src/equipment_data.c',
            'src/creatures.c', 'src/creature_data.c', 'src/assets.c']
 for name, flags in [('strict', []), ('sanitized', ['-fsanitize=address,undefined',

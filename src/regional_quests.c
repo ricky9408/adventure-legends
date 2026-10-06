@@ -80,8 +80,10 @@ int regional_quest_claim(Save5State*s,unsigned q){
         /* A reward already granted without its quest ledger is inconsistent;
          * never repair it by creating a second creature. */
         if(s->roster.rewards[(reward-1)>>3]&(1u<<((reward-1)&7)))return REGION_QUEST_INVALID;
-        result=creatures_grant(&s->roster,form,10,20,0,reward);
-        if(result==CREATURE_EMPTY_SLOT)return REGION_QUEST_FULL;
+        enum CreatureAdmissionStatus admission=creatures_grant_admitted(&s->roster,form,10,20,0,reward,0);
+        if(!creatures_admission_allowed(admission))
+            return admission==CREATURE_ADMISSION_FULL?REGION_QUEST_FULL:
+                   admission==CREATURE_ADMISSION_RESERVED?REGION_QUEST_RESERVED:REGION_QUEST_INVALID;
     }else{
         result=equipment_claim_many(&s->equipment,rewards[q],rewards[q][1]==255?1:2);
         if(result==EQUIPMENT_FULL)return REGION_QUEST_FULL;

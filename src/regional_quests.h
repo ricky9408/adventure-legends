@@ -11,7 +11,7 @@ enum {
 };
 enum RegionQuestResult { REGION_QUEST_INVALID=-1, REGION_QUEST_UNCHANGED=0,
     REGION_QUEST_CHANGED=1, REGION_QUEST_NOW_READY=2, REGION_QUEST_REWARDED=3,
-    REGION_QUEST_LOCKED=4, REGION_QUEST_FULL=5 };
+    REGION_QUEST_LOCKED=4, REGION_QUEST_FULL=5, REGION_QUEST_RESERVED=6 };
 /* These APIs operate on the engine's already validated live state. They never
  * access SRAM: caller autosaves after a nonzero successful change. Call only on
  * an interaction/event, not every frame. Eligibility does not award anything. */
@@ -31,4 +31,7 @@ int regional_quest_variable(Save5State *state,unsigned quest,unsigned value);
 int regional_quest_claim(Save5State *state,unsigned quest);
 /* Practice racks are the only free non-starter equipment sources. */
 int regional_claim_rack(Save5State *state,unsigned weapon_class);
+/* RESERVED means physically free slots are needed for missing terminal paths;
+ * FULL means160 occupied slots. Neither consumes rewards, source or quest state.
+ * Imported over-budget rosters remain legal; only nonworsening grants proceed. */
 #endif

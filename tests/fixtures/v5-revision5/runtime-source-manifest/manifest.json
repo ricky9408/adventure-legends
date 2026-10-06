@@ -1,0 +1,34 @@
+{
+  "format": "exact-byte-concatenation-v1",
+  "original_filename": "source-hashes.json",
+  "original_bytes": 91412,
+  "original_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "encoding": "utf-8",
+  "max_part_bytes": 30000,
+  "parts": [
+    {
+      "file": "part_000.txt",
+      "offset": 0,
+      "bytes": 30000,
+      "sha256": "8d79af32240f44a163ebbdc9f7ba668ebccf5a356c9d0c10376a34e5b50d68f1"
+    },
+    {
+      "file": "part_001.txt",
+      "offset": 30000,
+      "bytes": 30000,
+      "sha256": "2a8ea560c5ce5138a52adaea568ae089e010faee5ade7787825641a0467cab58"
+    },
+    {
+      "file": "part_002.txt",
+      "offset": 60000,
+      "bytes": 30000,
+      "sha256": "f9e962cb85edfe0f445a9e170eebd5b01222136188530ac59739bef5a0f984e2"
+    },
+    {
+      "file": "part_003.txt",
+      "offset": 90000,
+      "bytes": 1412,
+      "sha256": "2525824d1131a6a89dd6bbff71c6da770b62a4704585e6c29fde862c54185bd9"
+    }
+  ]
+}

@@ -3,8 +3,8 @@
 
 Host/setup mutations are synthetic fixtures, never native acquisition proof.
 The 48-slot case expands equipment definitions only in a temporary C source;
-the production authored catalog remains exactly 25 items. A separate temporary
-codec whitelist enables those synthetic IDs in revision4 only for timing and
+the production authored catalog has31 items; this retained Southern scenario owns25. A separate temporary
+codec whitelist enables those synthetic IDs in revision5 only for timing and
 round-trip stress. The unmodified codec must reject synthetic records.
 """
 import ctypes as C
@@ -56,9 +56,19 @@ def prepare(folder, synthetic=False, codec=False):
         marker='static int revision_equipment_allowed(unsigned id) {\n'
         assert original.count(marker)==1
         result['save5']=folder/'synthetic-save5.c'
-        result['save5'].write_text(original.replace(marker,marker+
+        original=original.replace(marker,marker+
             '    /* TEST ONLY: synthetic capacity records, never historical content. */\n'
-            '    if (scan.revision == 4 && id >= 100 && id <= 146) return equipment_definition(id) != 0;\n'))
+            '    if (scan.revision == 5 && id >= 100 && id <= 146) return equipment_definition(id) != 0;\n')
+        # Historical validation now has exact immutable record/category data.
+        # Extend ONLY this temporary test source as well; the production policy
+        # continues to reject every synthetic ID before any SRAM write.
+        marker='static const Save5HistoryItem *history_item(unsigned id, unsigned revision) {\n'
+        assert original.count(marker)==1
+        rows=','.join('{%d,0,0,0,-1}'%i for i in range(100,147))
+        original=original.replace(marker,marker+
+            '    static const Save5HistoryItem synthetic_items[47]={'+rows+'};\n'
+            '    if (revision == 5 && id >= 100 && id <= 146) return &synthetic_items[id-100];\n')
+        result['save5'].write_text(original)
     return result
 
 
@@ -115,7 +125,7 @@ class SouthernSaveLimitsTests(unittest.TestCase):
                 'tests_sha256':sha(Path(__file__)),
                 'production_catalog_modified':False,'checks':cls.evidence}
             EVIDENCE.mkdir(parents=True,exist_ok=True)
-            (EVIDENCE/'southern-save-limits-host.json').write_text(json.dumps(report,indent=2)+'\n')
+            (EVIDENCE/'magma-revision5-southern-save-limits-host.json').write_text(json.dumps(report,indent=2)+'\n')
 
     def test_mixed_Q22_full48_inventory_rolls_back_every_byte(self):
         lib=self.augmented;s=Save()
@@ -188,7 +198,7 @@ class SouthernSaveLimitsTests(unittest.TestCase):
         self.assertEqual(real.save5_test_write_count(),writes)
         self.assertEqual(bytes(real_sram),before)
         synthetic_sram=(C.c_ubyte*32768).in_dll(lib,'save5_test_sram')
-        # Remove both older fallback banks, leaving only the synthetic revision4 image.
+        # Remove both older fallback banks, leaving only the synthetic revision5 image.
         latest=max((A,B),key=lambda off:int.from_bytes(bytes(synthetic_sram[off+8:off+12]),'little'))
         real_sram[:]=bytes([255])*32768
         real_sram[A:A+SIZE]=bytes(synthetic_sram[latest:latest+SIZE])
@@ -207,7 +217,7 @@ class SouthernSaveLimitsTests(unittest.TestCase):
         synthetic_sram[:]=bytes([255])*32768;synthetic_sram[A:A+SIZE]=repair_crc(bank)
         self.assertEqual(lib.save5_load(C.byref(out)),0)
         self.evidence.append({'test':'temporary-synthetic-codec-isolation',
-            'revision4_full48_roundtrip':True,'production_stream_rejects_before_write':True,
+            'revision5_full48_roundtrip':True,'production_stream_rejects_before_write':True,
             'production_load_rejects_synthetic_bank':True,'temporary_codec_rejects_revision3_synthetic_ids':True})
 
     def test_asan_ubsan_full_completed_state_and_invalid_snapshots(self):
@@ -233,7 +243,7 @@ class SouthernSaveLimitsTests(unittest.TestCase):
             'roster':160,'physical_forms':41,'obtained_forms':41,'claimed_quests':30,'authored_gear':25,
             'budget_range':[0,8192],'production_effective_cap':3072,**result}
         EVIDENCE.mkdir(parents=True,exist_ok=True)
-        (EVIDENCE/'southern-save-limits-sanitizers.json').write_text(json.dumps(report,indent=2)+'\n')
+        (EVIDENCE/'magma-revision5-southern-save-limits-sanitizers.json').write_text(json.dumps(report,indent=2)+'\n')
         self.evidence.append({'test':'ASan/UBSan',**result,'result':'PASS'})
 
 
@@ -367,7 +377,7 @@ def arm_timing():
                 'synthetic':synthetic,'physical_forms':41,'obtained_forms':41,'roster':160,'quests':30,
                 'gear_records':48 if synthetic else 25,'authored_catalog_count':25,
                 'temporary_changes':(['equipment definitions 100..146, zero-stat body items',
-                    'revision4-only synthetic-ID stream whitelist'] if synthetic else []),
+                    'revision5-only synthetic-ID stream whitelist'] if synthetic else []),
                 'compiled_source_sha256':{name:sha(path) for name,path in sources.items()},
                 'object_sizes':{name:object_sizes(prefix,out/f'{name}.o') for name in SOURCES},
                 'stack_usage':{name:(out/f'{name}.su').read_text() for name in SOURCES},

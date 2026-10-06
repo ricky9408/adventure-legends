@@ -1,0 +1,25 @@
+{
+  "status": "module-frozen-for-parent-integration-and-native-acceptance",
+  "source_sha256": {
+    "src/magma_powers.c": "65764bcc3c056e6b55a8b69559637109dd47927e76a38e78e677603d0e3ca3a5",
+    "src/magma_powers.h": "49ef314ba1ac5594fb5aad7662d649c6f641cd27f3f73c730a47b78c79ffd126",
+    "src/magma_power_art.c": "95b2e3e9fde117101e207b5e137b07525961b239242ad3327f565178079454d6",
+    "src/magma_power_art.h": "ba2f76e99cd58bb688dd0b5a7ff23b94f3767b0947a4c7467f6b71248f2d63ce",
+    "src/northern_powers.c": "98ef38bb8f37690965744cabcfbe79ef1b419d1231d7923ffd24fbc77ff5642f",
+    "src/northern_powers.h": "28ebe6dd67efe385e7bbbc19c1518f0915bc1dadeb2ac943448846835bc703b9",
+    "tests/magma_powers_native.c": "e793d05e584593a53a780ef85dabe4342c34f4ec892414e5fdb70a81da471b91",
+    "tests/test_magma_powers.py": "ed34aca1ae61f03bb0e315bdef32701a0b5b0554429ece7a7ef475677b7e4ee9",
+    "docs/MAGMA_COMBAT_IMPLEMENTATION.md": "53605f51aa8abcf6942e73f6e1f7006639bb24062053473b4d49b89fb4449b48"
+  },
+  "evidence": [
+    "docs/evidence/magma-powers-host.json",
+    "docs/evidence/magma-powers-arm-timing.json"
+  ],
+  "ordinary_damage_assertions": 401,
+  "all24_commands_all4_facings": true,
+  "all24_commands_all5_phases_plus_neutral": true,
+  "chapter_token_contract_cases": 24,
+  "regulator_bridge": "explicit resolved damage only, independent channel3 token and local one-hit cast bit",
+  "legacy_regression_stage": "lease-only integration before parent gear bridge changes",
+  "full_game_native_acceptance": "parent pending"
+}

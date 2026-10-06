@@ -105,7 +105,7 @@ if(r==SOUTH_REWARDED){dirty=1;
 progression_refresh();
 say(q==24?TX_ST_RETURN_A:TX_ST_RECEIVED_A,q==24?TX_ST_RETURN_B:TX_ST_RECEIVED_B);
 }
-else if(r==SOUTH_FULL)say(TX_ST_FULL_A,TX_ST_FULL_B);
+else if(r==SOUTH_RESERVED)say(TX_MG_RESERVED,TX_MG_RESERVEDB);else if(r==SOUTH_FULL)say(TX_ST_FULL_A,TX_ST_FULL_B);
 else if(r==SOUTH_UNCHANGED)say(q==24?TX_ST_RETURN_A:TX_ST_DONE_A,q==24?TX_ST_RETURN_B:TX_ST_DONE_B);
 else say(TX_ST_LOCKED_A,TX_ST_LOCKED_B);
 }
@@ -313,7 +313,7 @@ if(r==SOUTH_REWARDED){dirty=1;
 progression_refresh();
 persist();
 toast(TX_ST_RECRUITED);
-}else if(r==SOUTH_FULL)say(TX_ST_FULL_A,TX_ST_FULL_B);
+}else if(r==SOUTH_RESERVED)say(TX_MG_RESERVED,TX_MG_RESERVEDB);else if(r==SOUTH_FULL)say(TX_ST_FULL_A,TX_ST_FULL_B);
 else toast(TX_ST_ARRANGE);
 return 1;
 }

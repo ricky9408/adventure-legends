@@ -19,7 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 U8, U16, U32, S16 = C.c_ubyte, C.c_ushort, C.c_uint, C.c_short
 LEGACY_IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
 SOUTHERN_IDS = [4, 12, 36, 52, 66, 84]
-IDS = LEGACY_IDS + SOUTHERN_IDS
+MAGMA_IDS = [20, 37, 53, 67, 85, 5]
+IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS
 OK, INVALID, BUSY, INCOMPATIBLE, FULL, DUPLICATE, ALREADY, PROTECTED, CONFIRM = range(9)
 
 
@@ -223,7 +224,7 @@ class EquipmentTests(unittest.TestCase):
             (66, 'Raincatch Belt', 3, 0, (0, 0, 4, 0, 0, 1, 0, 0)),
             (84, 'Springpin Ring', 4, 0, (0, 0, 0, -4, 0, 0, 0, 2)),
         ]
-        authored = (U16 * 25).in_dll(self.lib, 'equipment_authored_ids')
+        authored = (U16 * len(IDS)).in_dll(self.lib, 'equipment_authored_ids')
         self.assertEqual(list(authored), IDS)
         for source, (item, name, slot, weapon, stats) in enumerate(expected, 19):
             with self.subTest(item=item, source=source):
@@ -235,7 +236,30 @@ class EquipmentTests(unittest.TestCase):
                 self.assertEqual(self.lib.equipment_name(item).decode(), name)
                 self.assertEqual(self.lib.equipment_reward_item(source), item)
                 self.assertEqual(self.lib.equipment_reward_source(item), source)
-        self.assertEqual(self.lib.equipment_reward_item(25), 0)
+        self.assertEqual(self.lib.equipment_reward_item(31), 0)
+
+    def test_magma_six_exact_vectors_sources_and_derived_comparisons(self):
+        allocation=json.loads((ROOT/'docs/magma-design/magma_allocation.json').read_text())
+        slots=['weapon','body','boots','belt','ring']
+        for row in allocation['equipment']:
+            d=self.lib.equipment_definition(row['id']).contents
+            self.assertEqual(self.lib.equipment_name(row['id']).decode(),row['name'])
+            self.assertEqual(d.slot,slots.index(row['slot']))
+            self.assertEqual(d.weapon_class,{'sword':1,'bow':3,None:0}[row['weapon_class']])
+            self.assertEqual({key:getattr(d.stats,key) for key,_ in Bonuses._fields_},row['stats'])
+            self.assertEqual(self.lib.equipment_reward_item(row['source_id']),row['id'])
+            self.assertEqual(self.lib.equipment_reward_source(row['id']),row['source_id'])
+            self.claim(row['id'])
+            ref=self.lib.equipment_find(C.byref(self.s),row['id'])
+            before=bytes(self.s);preview=Comparison()
+            self.assertEqual(self.lib.equipment_preview(C.byref(self.s),d.slot,ref,192,192,0,C.byref(preview)),OK)
+            self.assertEqual(bytes(self.s),before)
+            hp=U16(192)
+            self.assertEqual(self.lib.equipment_equip(C.byref(self.s),d.slot,ref,192,C.byref(hp),0,None),OK)
+            actual=Stats();self.assertEqual(self.lib.equipment_derive(C.byref(self.s),192,C.byref(actual)),1)
+            self.assertEqual(bytes(actual),bytes(preview.after))
+            self.assertEqual(actual.max_hp_q4,192)
+            self.assertEqual(hp.value,preview.hp_after_q4)
 
     def test_southern_choices_have_explicit_benefits_and_costs(self):
         for new, old, benefit, cost in [

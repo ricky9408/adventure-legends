@@ -1,0 +1,91 @@
+{
+  "scope": "Final creature/catalog/admission after per-form31/34 trial restriction; native source/save/world/UI acceptance remains separate",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "assets/creatures/validate_catalog.py"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/00.log",
+      "log_sha256": "e2258dc933d2fd3ddeb4ca8a32520bca62b3101eeb8e6386c2030bab6facd187"
+    },
+    {
+      "command": [
+        "python3",
+        "assets/creatures/generate_data.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/01.log",
+      "log_sha256": "5995fcba505a1ec435cd3c6b59184d148d64d4f396927de71fd42112e20216bc"
+    },
+    {
+      "command": [
+        "python3",
+        "assets/creatures/format_catalog.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/02.log",
+      "log_sha256": "71aa362eb2dd8dd5169bb60ff9f3471dc22268248df4ab975d6527963c088f27"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_creature_history.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/03.log",
+      "log_sha256": "778c5c1331d57cc121924fab02c4980a43a25a4e56c603ed41fe592c72532459"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_magma_catalog_policy.py"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/04.log",
+      "log_sha256": "147befa52f8596176502eaf5b4435b5a743aea90ac9a3e8af1eeebb96406f3e4"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_magma_creature_core.py"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/05.log",
+      "log_sha256": "4337431d134f30dccf2fa84a3c4319f0ffbb7238b76352c493187950ef496674"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_magma_history_core.py"
+      ],
+      "exit_code": 0,
+      "log": "build/magma-creature-host/06.log",
+      "log_sha256": "ce1a641d984bf8901fa245e931f5d29e35ed690d97d3029c3a880629c52ebef0"
+    }
+  ],
+  "source_sha256": {
+    "assets/creatures/README.md": "2e59ac082a83d2f4d6b56cb05b7a870d828a149219669a553fd0162ed3fa4fe1",
+    "assets/creatures/catalog.json": "9a5a0ce1c1e980e26b4db5bcb338426b317acd6c2a757a9580bf942c360033bd",
+    "assets/creatures/catalog_policy.py": "96653977ded2076c2ae33e6162f5ae99ed8e2bf7625cded6d761fc50c579e3c9",
+    "assets/creatures/enabled.json": "b48020f81dd1082c22f31fe331330e351706ba4035ea7a42931c8ff94c4e3d11",
+    "assets/creatures/generate_data.py": "186bc7bc41d8fc3be4a31c45305b69171262373c52320241f7f0d1be9c73996a",
+    "assets/creatures/validate_catalog.py": "d08e2534046a8103ee88b7c0e8f72c36e45c0256ea15dcecf7e9d2e6c72bf364",
+    "assets/creatures/terminal-topology.json": "e15a39f1b9c925d71cff2501350fdab39ce7df6764c56272171a4c38dc2646aa",
+    "src/creatures.c": "b5125cdc4007918f5d0ca7ff08a646c261e06a05663feec71a057875573746f8",
+    "src/creatures.h": "dbf45cc6dbe037eddd10e683d7118a055c880aa6ca1b70a7a5d067b70ab3882c",
+    "src/creature_data.c": "7d34c17ada62635d3759bf23b84c401ab084b09d4cebc94b74acb153bd52b867",
+    "tests/magma_creature_native.c": "13a3ec85634da536b11d9857903ade0b9e1bb44f6a68622a3d00dc9bfcb9d5a2",
+    "tests/test_magma_creature_core.py": "418e2842835fa847e2bd77fb57d099a71238fc311f6369a9ccde563f894ad0c0",
+    "tests/test_magma_catalog_policy.py": "62b50fcc1711bedf62e85d40ef651c6515d7e7b17a68729c5751f614bab7e5e1",
+    "tests/benchmark_magma_creatures.py": "b231ff8bfe8b865f6ff75cb3fecf7efe8b41f1abeb0759a37060e423a1b461f8",
+    "docs/MAGMA_CREATURE_IMPLEMENTATION.md": "54e972083954ff049a0567ec28ab1d184a3de2a19fb5ad5a665ede6e5ed730d3",
+    "docs/evidence/magma-creature-arm.json": "612eec2dfacf6b6805bafab8d68686a54c8181c5602a734cf147fe942464b690"
+  },
+  "passed": true,
+  "core_unchanged_during_tests": true
+}

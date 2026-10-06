@@ -11,6 +11,7 @@ static CreatureRoster roster;
 static const unsigned old_forms[] = {1,2,4,5,7,8,10,11,13,14,16};
 static const unsigned old_trials[] = {1,1,2,2,4,4,8,8,16,16,0};
 static const unsigned southern_forms[] = {25,26,28,29,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94};
+static const unsigned magma_forms[] = {31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,95,96,97,98,99,100};
 static const unsigned new_forms[] = {19,20,22,23,73,74,75,76,77,78};
 static void check_trials(CreatureInstance *c, unsigned trial) {
     static const unsigned flags[] = {0,1,2,4,8,16,32,64,128,256,512,1024,
@@ -65,8 +66,8 @@ int main(void) {
     }
 #ifdef SPARSE_FIXTURE
     for (i = 13; i <= 22; ++i) assert(creatures_ability(i)->id == i);
-    for (i = 23; i <= 42; ++i) assert(creatures_ability(i)->id == i);
-    assert(!creatures_ability(43) && !creatures_ability(255));
+    for (i = 23; i <= 66; ++i) assert(creatures_ability(i)->id == i);
+    assert(!creatures_ability(67) && !creatures_ability(255));
     for (i = 0; i < sizeof(new_forms) / sizeof(new_forms[0]); ++i) {
         unsigned trial = i < 8 ? 32u << (i / 2) : LAST_TRIAL;
         CreatureInstance before;
@@ -105,6 +106,7 @@ int main(void) {
 #ifdef SPARSE_FIXTURE
         for (j = 0; j < sizeof(new_forms) / sizeof(new_forms[0]); ++j) enabled |= new_forms[j] == i;
         for (j = 0; j < sizeof(southern_forms) / sizeof(southern_forms[0]); ++j) enabled |= southern_forms[j] == i;
+        for (j = 0; j < sizeof(magma_forms) / sizeof(magma_forms[0]); ++j) enabled |= magma_forms[j] == i;
 #endif
         assert((creatures_form(i) != 0) == (int)enabled);
     }

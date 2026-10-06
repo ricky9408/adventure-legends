@@ -1,0 +1,872 @@
+{
+  "metric": "Native RGB555-preview RGB distance >=48; all24 poses checked per terrain. Heuristic only, not a gameplay/emulator performance claim.",
+  "samples": 3456,
+  "rows": [
+    {
+      "form_id": 31,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 31,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 31,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.6852,
+      "minimum_distinct_boundary_fraction": 0.875
+    },
+    {
+      "form_id": 31,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.6574,
+      "minimum_distinct_boundary_fraction": 0.8125
+    },
+    {
+      "form_id": 31,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9573,
+      "minimum_distinct_boundary_fraction": 0.9688
+    },
+    {
+      "form_id": 31,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6697,
+      "minimum_distinct_boundary_fraction": 0.6667
+    },
+    {
+      "form_id": 32,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 32,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 32,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.719,
+      "minimum_distinct_boundary_fraction": 0.8983
+    },
+    {
+      "form_id": 32,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.6774,
+      "minimum_distinct_boundary_fraction": 0.8305
+    },
+    {
+      "form_id": 32,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9833,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 32,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6066,
+      "minimum_distinct_boundary_fraction": 0.625
+    },
+    {
+      "form_id": 33,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 33,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 33,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.7519,
+      "minimum_distinct_boundary_fraction": 0.9077
+    },
+    {
+      "form_id": 33,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7293,
+      "minimum_distinct_boundary_fraction": 0.8667
+    },
+    {
+      "form_id": 33,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9853,
+      "minimum_distinct_boundary_fraction": 0.9846
+    },
+    {
+      "form_id": 33,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5725,
+      "minimum_distinct_boundary_fraction": 0.6143
+    },
+    {
+      "form_id": 34,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 34,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 34,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.7111,
+      "minimum_distinct_boundary_fraction": 0.8684
+    },
+    {
+      "form_id": 34,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7528,
+      "minimum_distinct_boundary_fraction": 0.9474
+    },
+    {
+      "form_id": 34,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.961,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 34,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.561,
+      "minimum_distinct_boundary_fraction": 0.6
+    },
+    {
+      "form_id": 35,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 35,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 35,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.6618,
+      "minimum_distinct_boundary_fraction": 0.8364
+    },
+    {
+      "form_id": 35,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.8667,
+      "minimum_distinct_boundary_fraction": 0.9623
+    },
+    {
+      "form_id": 35,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9771,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 35,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.563,
+      "minimum_distinct_boundary_fraction": 0.6071
+    },
+    {
+      "form_id": 36,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 36,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 36,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.6975,
+      "minimum_distinct_boundary_fraction": 0.697
+    },
+    {
+      "form_id": 36,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.875,
+      "minimum_distinct_boundary_fraction": 0.9545
+    },
+    {
+      "form_id": 36,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.991,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 36,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6017,
+      "minimum_distinct_boundary_fraction": 0.7432
+    },
+    {
+      "form_id": 37,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 0.9135,
+      "minimum_distinct_boundary_fraction": 0.9091
+    },
+    {
+      "form_id": 37,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 37,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8317,
+      "minimum_distinct_boundary_fraction": 0.9487
+    },
+    {
+      "form_id": 37,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.757,
+      "minimum_distinct_boundary_fraction": 0.8571
+    },
+    {
+      "form_id": 37,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9159,
+      "minimum_distinct_boundary_fraction": 0.8864
+    },
+    {
+      "form_id": 37,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5213,
+      "minimum_distinct_boundary_fraction": 0.5909
+    },
+    {
+      "form_id": 38,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 0.9561,
+      "minimum_distinct_boundary_fraction": 0.9474
+    },
+    {
+      "form_id": 38,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 38,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8667,
+      "minimum_distinct_boundary_fraction": 0.9512
+    },
+    {
+      "form_id": 38,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7561,
+      "minimum_distinct_boundary_fraction": 0.8222
+    },
+    {
+      "form_id": 38,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.8833,
+      "minimum_distinct_boundary_fraction": 0.9048
+    },
+    {
+      "form_id": 38,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5263,
+      "minimum_distinct_boundary_fraction": 0.6
+    },
+    {
+      "form_id": 39,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 39,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 39,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8362,
+      "minimum_distinct_boundary_fraction": 0.9677
+    },
+    {
+      "form_id": 39,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7479,
+      "minimum_distinct_boundary_fraction": 0.806
+    },
+    {
+      "form_id": 39,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9524,
+      "minimum_distinct_boundary_fraction": 0.9194
+    },
+    {
+      "form_id": 39,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.475,
+      "minimum_distinct_boundary_fraction": 0.5821
+    },
+    {
+      "form_id": 40,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 40,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 0.9518,
+      "minimum_distinct_boundary_fraction": 0.9706
+    },
+    {
+      "form_id": 40,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 40,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 40,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.988,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 40,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5745,
+      "minimum_distinct_boundary_fraction": 0.5588
+    },
+    {
+      "form_id": 41,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 41,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 0.9397,
+      "minimum_distinct_boundary_fraction": 0.9556
+    },
+    {
+      "form_id": 41,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 41,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.9917,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 41,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9908,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 41,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6549,
+      "minimum_distinct_boundary_fraction": 0.561
+    },
+    {
+      "form_id": 42,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 42,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 0.9322,
+      "minimum_distinct_boundary_fraction": 0.9231
+    },
+    {
+      "form_id": 42,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 42,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 42,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9912,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 42,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6106,
+      "minimum_distinct_boundary_fraction": 0.5106
+    },
+    {
+      "form_id": 43,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 43,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 43,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.883,
+      "minimum_distinct_boundary_fraction": 0.8919
+    },
+    {
+      "form_id": 43,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.8723,
+      "minimum_distinct_boundary_fraction": 0.8919
+    },
+    {
+      "form_id": 43,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 43,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.4839,
+      "minimum_distinct_boundary_fraction": 0.6047
+    },
+    {
+      "form_id": 44,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 44,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 44,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8659,
+      "minimum_distinct_boundary_fraction": 0.9062
+    },
+    {
+      "form_id": 44,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.8659,
+      "minimum_distinct_boundary_fraction": 0.9062
+    },
+    {
+      "form_id": 44,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 44,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5227,
+      "minimum_distinct_boundary_fraction": 0.5625
+    },
+    {
+      "form_id": 45,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 45,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 45,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.9127,
+      "minimum_distinct_boundary_fraction": 0.9365
+    },
+    {
+      "form_id": 45,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.9173,
+      "minimum_distinct_boundary_fraction": 0.9524
+    },
+    {
+      "form_id": 45,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9925,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 45,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5128,
+      "minimum_distinct_boundary_fraction": 0.5846
+    },
+    {
+      "form_id": 46,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 46,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 46,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.975,
+      "minimum_distinct_boundary_fraction": 0.9355
+    },
+    {
+      "form_id": 46,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.8659,
+      "minimum_distinct_boundary_fraction": 0.9677
+    },
+    {
+      "form_id": 46,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9789,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 46,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6341,
+      "minimum_distinct_boundary_fraction": 0.5833
+    },
+    {
+      "form_id": 47,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 47,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 47,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.9718,
+      "minimum_distinct_boundary_fraction": 0.9459
+    },
+    {
+      "form_id": 47,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.9859,
+      "minimum_distinct_boundary_fraction": 0.973
+    },
+    {
+      "form_id": 47,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9722,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 47,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5507,
+      "minimum_distinct_boundary_fraction": 0.5143
+    },
+    {
+      "form_id": 48,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 48,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 48,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8447,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 48,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7748,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 48,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.973,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 48,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6436,
+      "minimum_distinct_boundary_fraction": 0.6316
+    },
+    {
+      "form_id": 95,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 95,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 95,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8941,
+      "minimum_distinct_boundary_fraction": 0.875
+    },
+    {
+      "form_id": 95,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.9753,
+      "minimum_distinct_boundary_fraction": 0.9375
+    },
+    {
+      "form_id": 95,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9906,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 95,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5422,
+      "minimum_distinct_boundary_fraction": 0.5833
+    },
+    {
+      "form_id": 96,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 96,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 96,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.8879,
+      "minimum_distinct_boundary_fraction": 0.9074
+    },
+    {
+      "form_id": 96,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.9781,
+      "minimum_distinct_boundary_fraction": 0.9565
+    },
+    {
+      "form_id": 96,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9926,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 96,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.6293,
+      "minimum_distinct_boundary_fraction": 0.6
+    },
+    {
+      "form_id": 97,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 0.5595,
+      "minimum_distinct_boundary_fraction": 0.4722
+    },
+    {
+      "form_id": 97,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 97,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.7473,
+      "minimum_distinct_boundary_fraction": 0.8571
+    },
+    {
+      "form_id": 97,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7789,
+      "minimum_distinct_boundary_fraction": 0.8571
+    },
+    {
+      "form_id": 97,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.978,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 97,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5714,
+      "minimum_distinct_boundary_fraction": 0.55
+    },
+    {
+      "form_id": 98,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 0.7193,
+      "minimum_distinct_boundary_fraction": 0.4286
+    },
+    {
+      "form_id": 98,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 98,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 0.7328,
+      "minimum_distinct_boundary_fraction": 0.7857
+    },
+    {
+      "form_id": 98,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.7623,
+      "minimum_distinct_boundary_fraction": 0.7857
+    },
+    {
+      "form_id": 98,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9825,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 98,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.4874,
+      "minimum_distinct_boundary_fraction": 0.575
+    },
+    {
+      "form_id": 99,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 99,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 0.7383,
+      "minimum_distinct_boundary_fraction": 0.8679
+    },
+    {
+      "form_id": 99,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 99,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 99,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9898,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 99,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5625,
+      "minimum_distinct_boundary_fraction": 0.5862
+    },
+    {
+      "form_id": 100,
+      "terrain": "GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 100,
+      "terrain": "WATER",
+      "minimum_distinct_opaque_fraction": 0.9364,
+      "minimum_distinct_boundary_fraction": 0.9146
+    },
+    {
+      "form_id": 100,
+      "terrain": "PLASTER",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 100,
+      "terrain": "WOOD",
+      "minimum_distinct_opaque_fraction": 0.99,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 100,
+      "terrain": "SHADE",
+      "minimum_distinct_opaque_fraction": 0.9899,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 100,
+      "terrain": "DOOR",
+      "minimum_distinct_opaque_fraction": 0.5946,
+      "minimum_distinct_boundary_fraction": 0.6098
+    }
+  ],
+  "minimum_opaque_fraction": 0.475,
+  "minimum_boundary_fraction": 0.4286
+}

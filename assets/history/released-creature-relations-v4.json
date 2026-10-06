@@ -1,0 +1,1947 @@
+{
+  "schema": 1,
+  "scope": "Released semantic relations, not mutable table offsets/counts; new relations may append after review",
+  "forms": [
+    {
+      "id": 1,
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 50,
+        "guard": 25,
+        "focus": 40,
+        "haste": 35
+      },
+      "stat_total": 180,
+      "signature_ability": 1,
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 1
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 2,
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 42,
+        "power": 61,
+        "guard": 35,
+        "focus": 58,
+        "haste": 44
+      },
+      "stat_total": 240,
+      "signature_ability": 5,
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 1
+        },
+        {
+          "level": 12,
+          "ability_id": 5
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 4,
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 45,
+        "power": 20,
+        "guard": 35,
+        "focus": 50,
+        "haste": 30
+      },
+      "stat_total": 180,
+      "signature_ability": 2,
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 2
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 5,
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 62,
+        "power": 25,
+        "guard": 51,
+        "focus": 67,
+        "haste": 35
+      },
+      "stat_total": 240,
+      "signature_ability": 6,
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 2
+        },
+        {
+          "level": 12,
+          "ability_id": 6
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 7,
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 25,
+        "power": 25,
+        "guard": 25,
+        "focus": 45,
+        "haste": 60
+      },
+      "stat_total": 180,
+      "signature_ability": 3,
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 3
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 8,
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 34,
+        "guard": 32,
+        "focus": 64,
+        "haste": 76
+      },
+      "stat_total": 240,
+      "signature_ability": 7,
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 3
+        },
+        {
+          "level": 16,
+          "ability_id": 7
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 10,
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 35,
+        "guard": 55,
+        "focus": 20,
+        "haste": 20
+      },
+      "stat_total": 180,
+      "signature_ability": 4,
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 4
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 11,
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 67,
+        "power": 44,
+        "guard": 76,
+        "focus": 26,
+        "haste": 27
+      },
+      "stat_total": 240,
+      "signature_ability": 8,
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 4
+        },
+        {
+          "level": 20,
+          "ability_id": 8
+        }
+      ],
+      "introduced": 1
+    },
+    {
+      "id": 13,
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 35,
+        "power": 20,
+        "guard": 30,
+        "focus": 55,
+        "haste": 40
+      },
+      "stat_total": 180,
+      "signature_ability": 9,
+      "field_caps": [
+        "fill_basin",
+        "reveal_current"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 9
+        }
+      ],
+      "introduced": 2
+    },
+    {
+      "id": 14,
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 45,
+        "power": 30,
+        "guard": 40,
+        "focus": 70,
+        "haste": 55
+      },
+      "stat_total": 240,
+      "signature_ability": 10,
+      "field_caps": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 9
+        },
+        {
+          "level": 15,
+          "ability_id": 10
+        }
+      ],
+      "introduced": 2
+    },
+    {
+      "id": 16,
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 50,
+        "guard": 40,
+        "focus": 35,
+        "haste": 25
+      },
+      "stat_total": 180,
+      "signature_ability": 11,
+      "field_caps": [
+        "tune_latch",
+        "draw_ore"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 11
+        }
+      ],
+      "introduced": 2
+    },
+    {
+      "id": 19,
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 36,
+        "power": 24,
+        "guard": 30,
+        "focus": 54,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 13,
+      "field_caps": [
+        "reel_load"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 13
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 20,
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 48,
+        "power": 30,
+        "guard": 42,
+        "focus": 72,
+        "haste": 48
+      },
+      "stat_total": 240,
+      "signature_ability": 14,
+      "field_caps": [
+        "reel_load"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 13
+        },
+        {
+          "level": 16,
+          "ability_id": 14
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 22,
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 36,
+        "power": 28,
+        "guard": 44,
+        "focus": 52,
+        "haste": 20
+      },
+      "stat_total": 180,
+      "signature_ability": 15,
+      "field_caps": [
+        "store_heat"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 15
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 23,
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 52,
+        "power": 40,
+        "guard": 56,
+        "focus": 68,
+        "haste": 24
+      },
+      "stat_total": 240,
+      "signature_ability": 16,
+      "field_caps": [
+        "store_heat"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 15
+        },
+        {
+          "level": 17,
+          "ability_id": 16
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 25,
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 28,
+        "power": 36,
+        "guard": 24,
+        "focus": 40,
+        "haste": 52
+      },
+      "stat_total": 180,
+      "signature_ability": 23,
+      "field_caps": [
+        "grow_roots"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 23
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 26,
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 36,
+        "power": 48,
+        "guard": 32,
+        "focus": 54,
+        "haste": 70
+      },
+      "stat_total": 240,
+      "signature_ability": 24,
+      "field_caps": [
+        "grow_roots",
+        "grow_bridge"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 23
+        },
+        {
+          "level": 20,
+          "ability_id": 24
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 28,
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 38,
+        "power": 46,
+        "guard": 40,
+        "focus": 22,
+        "haste": 34
+      },
+      "stat_total": 180,
+      "signature_ability": 25,
+      "field_caps": [
+        "uncap_well"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 25
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 29,
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 50,
+        "power": 60,
+        "guard": 56,
+        "focus": 30,
+        "haste": 44
+      },
+      "stat_total": 240,
+      "signature_ability": 26,
+      "field_caps": [
+        "uncap_well"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 25
+        },
+        {
+          "level": 22,
+          "ability_id": 26
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 73,
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 38,
+        "guard": 26,
+        "focus": 34,
+        "haste": 48
+      },
+      "stat_total": 180,
+      "signature_ability": 17,
+      "field_caps": [
+        "float_load"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 17
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 74,
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 48,
+        "power": 52,
+        "guard": 34,
+        "focus": 46,
+        "haste": 60
+      },
+      "stat_total": 240,
+      "signature_ability": 18,
+      "field_caps": [
+        "float_load"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 17
+        },
+        {
+          "level": 18,
+          "ability_id": 18
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 75,
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 50,
+        "guard": 26,
+        "focus": 24,
+        "haste": 50
+      },
+      "stat_total": 180,
+      "signature_ability": 19,
+      "field_caps": [
+        "press_weight"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 19
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 76,
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 44,
+        "power": 62,
+        "guard": 40,
+        "focus": 32,
+        "haste": 62
+      },
+      "stat_total": 240,
+      "signature_ability": 20,
+      "field_caps": [
+        "press_weight"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 19
+        },
+        {
+          "level": 18,
+          "ability_id": 20
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 77,
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 32,
+        "power": 28,
+        "guard": 38,
+        "focus": 50,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_ability": 21,
+      "field_caps": [
+        "align_rail"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 21
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 78,
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 44,
+        "power": 38,
+        "guard": 52,
+        "focus": 64,
+        "haste": 42
+      },
+      "stat_total": 240,
+      "signature_ability": 22,
+      "field_caps": [
+        "align_rail"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 21
+        },
+        {
+          "level": 20,
+          "ability_id": 22
+        }
+      ],
+      "introduced": 3
+    },
+    {
+      "id": 79,
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 30,
+        "power": 32,
+        "guard": 24,
+        "focus": 48,
+        "haste": 46
+      },
+      "stat_total": 180,
+      "signature_ability": 27,
+      "field_caps": [
+        "refract_beam"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 27
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 80,
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 40,
+        "power": 44,
+        "guard": 32,
+        "focus": 64,
+        "haste": 60
+      },
+      "stat_total": 240,
+      "signature_ability": 28,
+      "field_caps": [
+        "refract_beam"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 27
+        },
+        {
+          "level": 20,
+          "ability_id": 28
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 81,
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 44,
+        "power": 24,
+        "guard": 42,
+        "focus": 50,
+        "haste": 20
+      },
+      "stat_total": 180,
+      "signature_ability": 29,
+      "field_caps": [
+        "store_heat"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 29
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 82,
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 60,
+        "power": 32,
+        "guard": 54,
+        "focus": 66,
+        "haste": 28
+      },
+      "stat_total": 240,
+      "signature_ability": 30,
+      "field_caps": [
+        "store_heat"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 29
+        },
+        {
+          "level": 22,
+          "ability_id": 30
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 83,
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 42,
+        "power": 32,
+        "guard": 60,
+        "focus": 22,
+        "haste": 24
+      },
+      "stat_total": 180,
+      "signature_ability": 31,
+      "field_caps": [
+        "press_weight"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 31
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 84,
+      "phase": "earth",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 56,
+        "power": 42,
+        "guard": 78,
+        "focus": 30,
+        "haste": 34
+      },
+      "stat_total": 240,
+      "signature_ability": 32,
+      "field_caps": [
+        "press_weight"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 31
+        },
+        {
+          "level": 22,
+          "ability_id": 32
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 85,
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 28,
+        "power": 50,
+        "guard": 28,
+        "focus": 38,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 33,
+      "field_caps": [
+        "tune_latch"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 33
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 86,
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 38,
+        "power": 66,
+        "guard": 38,
+        "focus": 50,
+        "haste": 48
+      },
+      "stat_total": 240,
+      "signature_ability": 34,
+      "field_caps": [
+        "tune_latch"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 33
+        },
+        {
+          "level": 20,
+          "ability_id": 34
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 87,
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 30,
+        "power": 22,
+        "guard": 26,
+        "focus": 50,
+        "haste": 52
+      },
+      "stat_total": 180,
+      "signature_ability": 35,
+      "field_caps": [
+        "reel_load"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 35
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 88,
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 40,
+        "power": 30,
+        "guard": 34,
+        "focus": 68,
+        "haste": 68
+      },
+      "stat_total": 240,
+      "signature_ability": 36,
+      "field_caps": [
+        "reel_load"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 35
+        },
+        {
+          "level": 24,
+          "ability_id": 36
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 89,
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 34,
+        "power": 24,
+        "guard": 28,
+        "focus": 58,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_ability": 37,
+      "field_caps": [
+        "reveal_current",
+        "fill_basin"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 37
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 90,
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 46,
+        "power": 32,
+        "guard": 38,
+        "focus": 76,
+        "haste": 48
+      },
+      "stat_total": 240,
+      "signature_ability": 38,
+      "field_caps": [
+        "reveal_current",
+        "fill_basin"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 37
+        },
+        {
+          "level": 22,
+          "ability_id": 38
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 91,
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 26,
+        "power": 30,
+        "guard": 22,
+        "focus": 52,
+        "haste": 50
+      },
+      "stat_total": 180,
+      "signature_ability": 39,
+      "field_caps": [
+        "ignite"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 39
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 92,
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 34,
+        "power": 42,
+        "guard": 30,
+        "focus": 68,
+        "haste": 66
+      },
+      "stat_total": 240,
+      "signature_ability": 40,
+      "field_caps": [
+        "ignite"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 39
+        },
+        {
+          "level": 24,
+          "ability_id": 40
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 93,
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 32,
+        "power": 46,
+        "guard": 30,
+        "focus": 32,
+        "haste": 40
+      },
+      "stat_total": 180,
+      "signature_ability": 41,
+      "field_caps": [
+        "draw_ore"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 41
+        }
+      ],
+      "introduced": 4
+    },
+    {
+      "id": 94,
+      "phase": "metal",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 42,
+        "power": 62,
+        "guard": 40,
+        "focus": 42,
+        "haste": 54
+      },
+      "stat_total": 240,
+      "signature_ability": 42,
+      "field_caps": [
+        "draw_ore"
+      ],
+      "learnset": [
+        {
+          "level": 1,
+          "ability_id": 41
+        },
+        {
+          "level": 22,
+          "ability_id": 42
+        }
+      ],
+      "introduced": 4
+    }
+  ],
+  "abilities": [
+    {
+      "id": 1,
+      "phase": "fire",
+      "handler": "ember_dart",
+      "cooldown_updates": 75,
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ]
+    },
+    {
+      "id": 2,
+      "phase": "wood",
+      "handler": "root_circle",
+      "cooldown_updates": 75,
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ]
+    },
+    {
+      "id": 3,
+      "phase": "wood",
+      "handler": "gust_fan",
+      "cooldown_updates": 75,
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ]
+    },
+    {
+      "id": 4,
+      "phase": "earth",
+      "handler": "stone_guard",
+      "cooldown_updates": 75,
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ]
+    },
+    {
+      "id": 5,
+      "phase": "fire",
+      "handler": "hearthline",
+      "cooldown_updates": 105,
+      "field_caps": [
+        "ignite",
+        "burn_thorns",
+        "fire_socket",
+        "expose_fire"
+      ]
+    },
+    {
+      "id": 6,
+      "phase": "wood",
+      "handler": "canopy_knot",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "grow_bridge",
+        "grow_roots",
+        "wood_socket"
+      ]
+    },
+    {
+      "id": 7,
+      "phase": "wood",
+      "handler": "slipstream_loom",
+      "cooldown_updates": 105,
+      "field_caps": [
+        "turn_vane",
+        "drive_sail",
+        "wind_socket",
+        "expose_wind"
+      ]
+    },
+    {
+      "id": 8,
+      "phase": "earth",
+      "handler": "vaultstep",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "break_crack",
+        "press_weight",
+        "uncap_well",
+        "earth_socket",
+        "expose_stone"
+      ]
+    },
+    {
+      "id": 9,
+      "phase": "water",
+      "handler": "dew_ring",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "fill_basin",
+        "reveal_current"
+      ]
+    },
+    {
+      "id": 10,
+      "phase": "water",
+      "handler": "tide_stitch",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ]
+    },
+    {
+      "id": 11,
+      "phase": "metal",
+      "handler": "chime_pin",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "tune_latch",
+        "draw_ore"
+      ]
+    },
+    {
+      "id": 13,
+      "phase": "wood",
+      "handler": "threadhold",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "reel_load"
+      ]
+    },
+    {
+      "id": 14,
+      "phase": "wood",
+      "handler": "shuttle_span",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "reel_load"
+      ]
+    },
+    {
+      "id": 15,
+      "phase": "fire",
+      "handler": "heat_pocket",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "store_heat"
+      ]
+    },
+    {
+      "id": 16,
+      "phase": "fire",
+      "handler": "firing_drawer",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "store_heat"
+      ]
+    },
+    {
+      "id": 17,
+      "phase": "water",
+      "handler": "washback",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "float_load"
+      ]
+    },
+    {
+      "id": 18,
+      "phase": "water",
+      "handler": "wake_turn",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "float_load"
+      ]
+    },
+    {
+      "id": 19,
+      "phase": "earth",
+      "handler": "counterdrop",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "press_weight"
+      ]
+    },
+    {
+      "id": 20,
+      "phase": "earth",
+      "handler": "counterpoise",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "press_weight"
+      ]
+    },
+    {
+      "id": 21,
+      "phase": "metal",
+      "handler": "quarterturn",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "align_rail"
+      ]
+    },
+    {
+      "id": 22,
+      "phase": "metal",
+      "handler": "gimbal_screen",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "align_rail"
+      ]
+    },
+    {
+      "id": 23,
+      "phase": "wood",
+      "handler": "leafbound",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "grow_roots"
+      ]
+    },
+    {
+      "id": 24,
+      "phase": "wood",
+      "handler": "canopy_arc",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "grow_roots",
+        "grow_bridge"
+      ]
+    },
+    {
+      "id": 25,
+      "phase": "earth",
+      "handler": "ridgekick",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "uncap_well"
+      ]
+    },
+    {
+      "id": 26,
+      "phase": "earth",
+      "handler": "rampart_turn",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "uncap_well"
+      ]
+    },
+    {
+      "id": 27,
+      "phase": "water",
+      "handler": "lens_dart",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "refract_beam"
+      ]
+    },
+    {
+      "id": 28,
+      "phase": "water",
+      "handler": "prism_wake",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "refract_beam"
+      ]
+    },
+    {
+      "id": 29,
+      "phase": "fire",
+      "handler": "ember_hush",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "store_heat"
+      ]
+    },
+    {
+      "id": 30,
+      "phase": "fire",
+      "handler": "bellows_ring",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "store_heat"
+      ]
+    },
+    {
+      "id": 31,
+      "phase": "earth",
+      "handler": "sideguard",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "press_weight"
+      ]
+    },
+    {
+      "id": 32,
+      "phase": "earth",
+      "handler": "vault_step",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "press_weight"
+      ]
+    },
+    {
+      "id": 33,
+      "phase": "metal",
+      "handler": "pinch_window",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "tune_latch"
+      ]
+    },
+    {
+      "id": 34,
+      "phase": "metal",
+      "handler": "shear_gate",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "tune_latch"
+      ]
+    },
+    {
+      "id": 35,
+      "phase": "wood",
+      "handler": "sapling_feint",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "reel_load"
+      ]
+    },
+    {
+      "id": 36,
+      "phase": "wood",
+      "handler": "canopy_exchange",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "reel_load"
+      ]
+    },
+    {
+      "id": 37,
+      "phase": "water",
+      "handler": "rill_fork",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "reveal_current",
+        "fill_basin"
+      ]
+    },
+    {
+      "id": 38,
+      "phase": "water",
+      "handler": "veil_curl",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "reveal_current",
+        "fill_basin"
+      ]
+    },
+    {
+      "id": 39,
+      "phase": "fire",
+      "handler": "warm_echo",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "ignite"
+      ]
+    },
+    {
+      "id": 40,
+      "phase": "fire",
+      "handler": "paired_echo",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "ignite"
+      ]
+    },
+    {
+      "id": 41,
+      "phase": "metal",
+      "handler": "needle_bank",
+      "cooldown_updates": 90,
+      "field_caps": [
+        "draw_ore"
+      ]
+    },
+    {
+      "id": 42,
+      "phase": "metal",
+      "handler": "quill_return",
+      "cooldown_updates": 120,
+      "field_caps": [
+        "draw_ore"
+      ]
+    }
+  ],
+  "evolutions": [
+    {
+      "from": 1,
+      "to": 2,
+      "min_level": 12,
+      "min_bond": 40,
+      "required_gate": "grove_clear",
+      "required_trial": "restore_hearth",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "min_level": 12,
+      "min_bond": 40,
+      "required_gate": "grove_clear",
+      "required_trial": "restore_canopy",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "min_level": 16,
+      "min_bond": 55,
+      "required_gate": "sky_clear",
+      "required_trial": "mend_wind_loom",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "min_level": 20,
+      "min_bond": 60,
+      "required_gate": "core_clear",
+      "required_trial": "raise_amber_arch",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "min_level": 15,
+      "min_bond": 45,
+      "required_gate": "reed_basin_restored",
+      "required_trial": "join_two_pools",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "min_level": 16,
+      "min_bond": 40,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "tension_roof",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 22,
+      "to": 23,
+      "min_level": 17,
+      "min_bond": 40,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "dry_ledger",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 73,
+      "to": 74,
+      "min_level": 18,
+      "min_bond": 45,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "fragile_cargo",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 75,
+      "to": 76,
+      "min_level": 18,
+      "min_bond": 45,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "balanced_reach",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 77,
+      "to": 78,
+      "min_level": 20,
+      "min_bond": 50,
+      "required_gate": "north_harbor_ready",
+      "required_trial": "compass_round",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 25,
+      "to": 26,
+      "min_level": 20,
+      "min_bond": 40,
+      "required_gate": "south_ready",
+      "required_trial": "south_root_supports",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 28,
+      "to": 29,
+      "min_level": 22,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_drainage_branches",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 79,
+      "to": 80,
+      "min_level": 20,
+      "min_bond": 40,
+      "required_gate": "south_ready",
+      "required_trial": "south_demo_receivers",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 81,
+      "to": 82,
+      "min_level": 22,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_safe_drying",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 83,
+      "to": 84,
+      "min_level": 22,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_shade_loop",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 85,
+      "to": 86,
+      "min_level": 20,
+      "min_bond": 40,
+      "required_gate": "south_ready",
+      "required_trial": "south_paired_catches",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 87,
+      "to": 88,
+      "min_level": 24,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_canopy_route",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 89,
+      "to": 90,
+      "min_level": 22,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_runnel_sources",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 91,
+      "to": 92,
+      "min_level": 24,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_screened_beacons",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    },
+    {
+      "from": 93,
+      "to": 94,
+      "min_level": 22,
+      "min_bond": 45,
+      "required_gate": "south_ready",
+      "required_trial": "south_socket_diagram",
+      "location": "sanctuary",
+      "player_confirm": true,
+      "consumed_item": null
+    }
+  ],
+  "trial_bindings": [
+    {
+      "trial_id": "restore_hearth",
+      "family_id": "F001",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 1,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        1
+      ]
+    },
+    {
+      "trial_id": "restore_canopy",
+      "family_id": "F002",
+      "local_trial_id": 1,
+      "wire_mask": 2,
+      "introduced_content_revision": 1,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        4
+      ]
+    },
+    {
+      "trial_id": "mend_wind_loom",
+      "family_id": "F003",
+      "local_trial_id": 1,
+      "wire_mask": 4,
+      "introduced_content_revision": 1,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        7
+      ]
+    },
+    {
+      "trial_id": "raise_amber_arch",
+      "family_id": "F004",
+      "local_trial_id": 1,
+      "wire_mask": 8,
+      "introduced_content_revision": 1,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        10
+      ]
+    },
+    {
+      "trial_id": "join_two_pools",
+      "family_id": "F005",
+      "local_trial_id": 1,
+      "wire_mask": 16,
+      "introduced_content_revision": 2,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        13
+      ]
+    },
+    {
+      "trial_id": "tension_roof",
+      "family_id": "F007",
+      "local_trial_id": 1,
+      "wire_mask": 32,
+      "introduced_content_revision": 3,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        19
+      ]
+    },
+    {
+      "trial_id": "dry_ledger",
+      "family_id": "F008",
+      "local_trial_id": 1,
+      "wire_mask": 64,
+      "introduced_content_revision": 3,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        22
+      ]
+    },
+    {
+      "trial_id": "south_root_supports",
+      "family_id": "F009",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        25
+      ]
+    },
+    {
+      "trial_id": "south_drainage_branches",
+      "family_id": "F010",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        28
+      ]
+    },
+    {
+      "trial_id": "fragile_cargo",
+      "family_id": "F025",
+      "local_trial_id": 1,
+      "wire_mask": 128,
+      "introduced_content_revision": 3,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        73
+      ]
+    },
+    {
+      "trial_id": "balanced_reach",
+      "family_id": "F026",
+      "local_trial_id": 1,
+      "wire_mask": 256,
+      "introduced_content_revision": 3,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        75
+      ]
+    },
+    {
+      "trial_id": "compass_round",
+      "family_id": "F027",
+      "local_trial_id": 1,
+      "wire_mask": 512,
+      "introduced_content_revision": 3,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        77
+      ]
+    },
+    {
+      "trial_id": "south_demo_receivers",
+      "family_id": "F028",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        79
+      ]
+    },
+    {
+      "trial_id": "south_safe_drying",
+      "family_id": "F029",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        81
+      ]
+    },
+    {
+      "trial_id": "south_shade_loop",
+      "family_id": "F030",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        83
+      ]
+    },
+    {
+      "trial_id": "south_paired_catches",
+      "family_id": "F031",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        85
+      ]
+    },
+    {
+      "trial_id": "south_canopy_route",
+      "family_id": "F032",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        87
+      ]
+    },
+    {
+      "trial_id": "south_runnel_sources",
+      "family_id": "F033",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        89
+      ]
+    },
+    {
+      "trial_id": "south_screened_beacons",
+      "family_id": "F034",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        91
+      ]
+    },
+    {
+      "trial_id": "south_socket_diagram",
+      "family_id": "F035",
+      "local_trial_id": 1,
+      "wire_mask": 1,
+      "introduced_content_revision": 4,
+      "prerequisite_trial_mask": 0,
+      "from_form_ids": [
+        93
+      ]
+    }
+  ]
+}

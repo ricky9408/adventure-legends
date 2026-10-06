@@ -5,7 +5,7 @@ enum { SOUTH_FIRST_ROOM=30, SOUTH_LAST_ROOM=37, SOUTH_FIRST_QUEST=22, SOUTH_QUES
  SOUTH_Q_WINDOW=22, SOUTH_Q_HINGE, SOUTH_Q_SUNWELL, SOUTH_Q_MARKET,
  SOUTH_Q_RAIN, SOUTH_Q_DELIVERY, SOUTH_Q_AWNING, SOUTH_Q_LOFT };
 enum SouthQuestResult { SOUTH_INVALID=-1, SOUTH_UNCHANGED=0, SOUTH_CHANGED=1,
- SOUTH_NOW_READY=2, SOUTH_REWARDED=3, SOUTH_LOCKED=4, SOUTH_FULL=5 };
+ SOUTH_NOW_READY=2, SOUTH_REWARDED=3, SOUTH_LOCKED=4, SOUTH_FULL=5, SOUTH_RESERVED=6 };
 /* Typed source identities, independent of historical generic reward IDs. */
 enum SouthSourceToken { SOUTH_SOURCE_NONE=0, SOUTH_SOURCE_WINDOW=1,
  SOUTH_SOURCE_HINGE=2, SOUTH_SOURCE_TANGLEAPER=16, SOUTH_SOURCE_DUNEROLL,
@@ -40,4 +40,7 @@ int southern_discover(Save5State *, unsigned discovery_id);
 int southern_trial_complete(Save5State *, unsigned roster_slot,
  CreatureU32 expected_instance_id, unsigned family, unsigned local_trial_key,
  unsigned source_token);
+/* RESERVED means physically free slots are needed for missing terminal paths;
+ * FULL means160 occupied slots. Neither consumes rewards, source or quest state.
+ * Imported over-budget rosters remain legal; only nonworsening grants proceed. */
 #endif

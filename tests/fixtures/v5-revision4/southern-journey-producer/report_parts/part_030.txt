@@ -1,0 +1,1450 @@
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31384
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31384
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31399
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31399
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31414
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31414
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31465
+    },
+    {
+      "label": "ordinary controller transition 31 to33",
+      "passed": true,
+      "frame": 31465
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31528
+    },
+    {
+      "label": "journal tab4 opens",
+      "passed": true,
+      "frame": 31560
+    },
+    {
+      "label": "owned gear item2 is selectable in slot0",
+      "passed": true,
+      "frame": 31570
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31600
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31609
+    },
+    {
+      "label": "real equipment menu equips item2",
+      "passed": true,
+      "frame": 31609
+    },
+    {
+      "label": "equipping never increases current q4 health",
+      "passed": true,
+      "frame": 31609
+    },
+    {
+      "label": "native enemy clearing stays alive",
+      "passed": true,
+      "frame": 31609
+    },
+    {
+      "label": "enemy has a reachable ordinary attack approach",
+      "passed": true,
+      "frame": 31609
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31612
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31612
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31619
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31619
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31650
+    },
+    {
+      "label": "native enemy clearing stays alive",
+      "passed": true,
+      "frame": 31650
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31681
+    },
+    {
+      "label": "native enemy clearing stays alive",
+      "passed": true,
+      "frame": 31681
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31712
+    },
+    {
+      "label": "native enemy clearing stays alive",
+      "passed": true,
+      "frame": 31712
+    },
+    {
+      "label": "enemy has a reachable ordinary attack approach",
+      "passed": true,
+      "frame": 31712
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31715
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31715
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31730
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31730
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31745
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31745
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31776
+    },
+    {
+      "label": "native enemy clearing stays alive",
+      "passed": true,
+      "frame": 31776
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31807
+    },
+    {
+      "label": "native enemy clearing stays alive",
+      "passed": true,
+      "frame": 31807
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31838
+    },
+    {
+      "label": "all spawned trial-area enemies defeated by actual native sword attacks",
+      "passed": true,
+      "frame": 31838
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31841
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 31861
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31896
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31905
+    },
+    {
+      "label": "owned form28 assigned to party slot3",
+      "passed": true,
+      "frame": 31905
+    },
+    {
+      "label": "form28 is available in active party",
+      "passed": true,
+      "frame": 31905
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31913
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 31913
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31916
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31919
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31919
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31934
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31934
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31942
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31942
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31947
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31947
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31952
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31952
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31957
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31957
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31962
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31962
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31967
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31967
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31972
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31972
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31977
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31977
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31982
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31982
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31987
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31987
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31992
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31992
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 31997
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 31997
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32002
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32002
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32007
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32007
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32012
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32012
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32017
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32017
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32022
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32022
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32027
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32027
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32032
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32032
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32037
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32037
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32042
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32042
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32047
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32047
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32052
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32052
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32057
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32057
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32062
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32062
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32067
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32067
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32072
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32072
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32077
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32077
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32082
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32082
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32087
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32087
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32092
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32092
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32097
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32097
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32102
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32102
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32107
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32107
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32112
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32112
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32117
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32117
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32122
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32122
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32127
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32127
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32132
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32132
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32137
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32137
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32142
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32142
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32147
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32147
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32152
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32152
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32157
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32157
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32162
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32162
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32167
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32167
+    },
+    {
+      "label": "trial_sign controller reaches exact marked interaction range",
+      "passed": true,
+      "frame": 32171
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32196
+    },
+    {
+      "label": "trial pins selected actual slot and instance_id",
+      "passed": true,
+      "frame": 32196
+    },
+    {
+      "label": "explicit trial sign starts clean proof",
+      "passed": true,
+      "frame": 32196
+    },
+    {
+      "label": "form28 is available in active party",
+      "passed": true,
+      "frame": 32196
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32204
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 32204
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32207
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32207
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32222
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32222
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32228
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32228
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32243
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32243
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32251
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32251
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32258
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32265
+    },
+    {
+      "label": "only distinct environmental target advances proof",
+      "passed": true,
+      "frame": 32265
+    },
+    {
+      "label": "form28 is available in active party",
+      "passed": true,
+      "frame": 32265
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32273
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 32273
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32276
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32276
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32283
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32344
+    },
+    {
+      "label": "duplicate target cannot advance this individual personal trial",
+      "passed": true,
+      "frame": 32344
+    },
+    {
+      "label": "form79 is available in active party",
+      "passed": true,
+      "frame": 32344
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32352
+    },
+    {
+      "label": "L direction selects party slot0",
+      "passed": true,
+      "frame": 32352
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32355
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32355
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32362
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32362
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32369
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32376
+    },
+    {
+      "label": "another selected individual cannot add or steal this trial proof",
+      "passed": true,
+      "frame": 32376
+    },
+    {
+      "label": "form28 is available in active party",
+      "passed": true,
+      "frame": 32376
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32384
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 32384
+    },
+    {
+      "label": "form28 is available in active party",
+      "passed": true,
+      "frame": 32384
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32392
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 32392
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32395
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32395
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32400
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32400
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32405
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32405
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32410
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32410
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32415
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32415
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32420
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32420
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32425
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32425
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32430
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32430
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32435
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32435
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32440
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32440
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32445
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32445
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32450
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32450
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32455
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32455
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32460
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32460
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32465
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32465
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32470
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32470
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32475
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32475
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32480
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32480
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32485
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32485
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32490
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32490
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32495
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32495
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32500
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32500
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32505
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32505
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32510
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32510
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32517
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32524
+    },
+    {
+      "label": "only distinct environmental target advances proof",
+      "passed": true,
+      "frame": 32524
+    },
+    {
+      "label": "form28 is available in active party",
+      "passed": true,
+      "frame": 32524
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32532
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 32532
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32535
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32535
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32542
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32542
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32557
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32557
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32572
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32572
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32587
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32587
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32600
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32600
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32607
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32654
+    },
+    {
+      "label": "form28 exact individual earns family-local personal trial",
+      "passed": true,
+      "frame": 32654
+    },
+    {
+      "label": "environmental training reaches non-grinding evolution floors",
+      "passed": true,
+      "frame": 32654
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32657
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32660
+    },
+    {
+      "label": "journal tab2 opens",
+      "passed": true,
+      "frame": 32680
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32730
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32739
+    },
+    {
+      "label": "owned form81 assigned to party slot3",
+      "passed": true,
+      "frame": 32739
+    },
+    {
+      "label": "form81 is available in active party",
+      "passed": true,
+      "frame": 32739
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32747
+    },
+    {
+      "label": "L direction selects party slot3",
+      "passed": true,
+      "frame": 32747
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32750
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32785
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32785
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32800
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32800
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32809
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32809
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32824
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32824
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32839
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32839
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32854
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32854
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32869
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32869
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32884
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32884
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32899
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32899
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32914
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 32914
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 32929
+    },
+    {

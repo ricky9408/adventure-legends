@@ -1,0 +1,111 @@
+{
+  "report_sha256": "45dec7a122a539f5cb888dde3fbdfed8f543e03dc693e4d01b2b7e18ef45ae7d",
+  "checks": 1484,
+  "failures": [],
+  "windows": [
+    {
+      "case": "five-body-new-effect-38",
+      "hardware_frames": 180,
+      "game_updates": 180,
+      "page_flips": 180,
+      "maximum_cycles": 154837,
+      "maximum_oam": 46,
+      "maximum_visible_enemy_bodies": 5,
+      "maximum_visible_hostile_shots": 2,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+      "camera_positions": 7,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "five-body-new-effect-42",
+      "hardware_frames": 180,
+      "game_updates": 180,
+      "page_flips": 180,
+      "maximum_cycles": 259451,
+      "maximum_oam": 39,
+      "maximum_visible_enemy_bodies": 5,
+      "maximum_visible_hostile_shots": 2,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+      "camera_positions": 7,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "five-body-new-effect-30",
+      "hardware_frames": 180,
+      "game_updates": 180,
+      "page_flips": 180,
+      "maximum_cycles": 251667,
+      "maximum_oam": 50,
+      "maximum_visible_enemy_bodies": 5,
+      "maximum_visible_hostile_shots": 2,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+      "camera_positions": 7,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "five-body-new-effect-24",
+      "hardware_frames": 180,
+      "game_updates": 180,
+      "page_flips": 180,
+      "maximum_cycles": 208817,
+      "maximum_oam": 46,
+      "maximum_visible_enemy_bodies": 5,
+      "maximum_visible_hostile_shots": 2,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+      "camera_positions": 7,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "five-body-new-effect-32",
+      "hardware_frames": 180,
+      "game_updates": 180,
+      "page_flips": 180,
+      "maximum_cycles": 189137,
+      "maximum_oam": 38,
+      "maximum_visible_enemy_bodies": 5,
+      "maximum_visible_hostile_shots": 2,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 9,
+      "camera_positions": 7,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "cold-town-journal",
+      "hardware_frames": 95,
+      "game_updates": 95,
+      "page_flips": 95,
+      "maximum_cycles": 272939,
+      "maximum_oam": 26,
+      "maximum_visible_enemy_bodies": 0,
+      "maximum_visible_hostile_shots": 0,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 0,
+      "camera_positions": 1,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "cold-rest-save",
+      "hardware_frames": 160,
+      "game_updates": 160,
+      "page_flips": 160,
+      "maximum_cycles": 273845,
+      "maximum_oam": 26,
+      "maximum_visible_enemy_bodies": 0,
+      "maximum_visible_hostile_shots": 0,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 0,
+      "camera_positions": 1,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    },
+    {
+      "case": "cold-field-journal",
+      "hardware_frames": 95,
+      "game_updates": 95,
+      "page_flips": 95,
+      "maximum_cycles": 266594,
+      "maximum_oam": 26,
+      "maximum_visible_enemy_bodies": 2,
+      "maximum_visible_hostile_shots": 0,
+      "simultaneous_five_bodies_two_arrows_new_effect_hostile_frames": 0,
+      "camera_positions": 1,
+      "timing_source": "GBA hardware frame counter, real main-loop update counter and displayed Mode4 page, never host wall-clock FPS"
+    }
+  ]
+}

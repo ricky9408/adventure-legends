@@ -1,0 +1,16 @@
+test_all_fifteen_same_instance_trials_and_tiers (__main__.MagmaRuntime.test_all_fifteen_same_instance_trials_and_tiers) ... ok
+test_all_seven_invitations_and_six_optional_stories (__main__.MagmaRuntime.test_all_seven_invitations_and_six_optional_stories) ... ok
+test_boss_all_weapons_and_once_per_action (__main__.MagmaRuntime.test_boss_all_weapons_and_once_per_action) ... ok
+test_capacity_refusal_keeps_source_and_missing_branch_still_fits (__main__.MagmaRuntime.test_capacity_refusal_keeps_source_and_missing_branch_still_fits) ... ok
+test_diversion_waits_for_successful_window_without_speed_gate (__main__.MagmaRuntime.test_diversion_waits_for_successful_window_without_speed_gate) ... ok
+test_every_damaging_sweep_position_invalidates_bitmap_cache (__main__.MagmaRuntime.test_every_damaging_sweep_position_invalidates_bitmap_cache) ... ok
+test_four_repeat_sources_real_individuals_no_event_farming (__main__.MagmaRuntime.test_four_repeat_sources_real_individuals_no_event_farming) ... ok
+test_grab_blocks_live_actor_modal_and_resets (__main__.MagmaRuntime.test_grab_blocks_live_actor_modal_and_resets) ... ok
+test_real_module_minimal_guaranteed_route (__main__.MagmaRuntime.test_real_module_minimal_guaranteed_route) ... ok
+test_static_engine_collision_and_spawns (__main__.MagmaRuntime.test_static_engine_collision_and_spawns) ... ok
+test_trial_partial_cannot_transfer_and_restart_death_clear (__main__.MagmaRuntime.test_trial_partial_cannot_transfer_and_restart_death_clear) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.319s
+
+OK

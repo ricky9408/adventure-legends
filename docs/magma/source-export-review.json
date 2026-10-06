@@ -1,0 +1,224 @@
+{
+  "schema": 1,
+  "status": "SOURCE_REPRODUCTION_PASS_WITH_RECORDED_HOST_SETUP_FAILURE_AND_PASSED_STANDALONE_RETRY",
+  "scope": "Independent source export, build, generated assets, archived-fixture authentication, host tests and native bridge/title smoke. Full gameplay suites are not re-executed in this packaging review.",
+  "input_archive": {
+    "filename": "Adventure-Legends-Emberbond-source.zip",
+    "sha256": "c521340be3b4d00382da1dc367a1250e984ac789c475c708c096190085a04353",
+    "bytes": 9333218,
+    "files": 2740
+  },
+  "package_integrity": {
+    "all_file_hashes_and_sizes_verified": true,
+    "unique_relative_paths": true,
+    "no_path_traversal_or_archive_symlinks": true,
+    "executable_shell_modes_preserved": true,
+    "repacked_untouched_export_identical": true,
+    "repacked_after_build_assets_tests_and_redirected_probe_identical": true,
+    "shipped_file_drift_after_review": [],
+    "reviewed_document_links_resolve": true,
+    "seven_native_summary_hashes_match_index": true,
+    "credential_pattern_scan_text_files": 1958,
+    "credential_pattern_matches": [],
+    "private_assistant_note_marker_matches": []
+  },
+  "build": {
+    "clean_build_exit_code": 0,
+    "regenerated_assets_build_exit_code": 0,
+    "warnings_in_each_build": 0,
+    "rom_bytes": 7495920,
+    "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+    "runtime_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+    "runtime_manifest_entries": 893,
+    "all_runtime_entries_still_match": true,
+    "rom_symbols_and_runtime_manifest_match_frozen_D": true,
+    "rebuilt_elf_load_image_matches_ROM": true,
+    "ELF_note": "Debug paths may differ; exact load-image pairing was verified."
+  },
+  "asset_regeneration": {
+    "command": "make assets",
+    "exit_code": 0,
+    "shipped_files_checked": 2740,
+    "unchanged": 2740,
+    "changed": [],
+    "generated_source_art_extras": [
+      "assets/region/native_camera_sheet.png",
+      "assets/region/native_camera_sheet_2x.png",
+      "assets/region/region_preview_2x.png",
+      "assets/region/region_preview_native.png"
+    ]
+  },
+  "native_smoke": {
+    "bridge_rebuilt_from_packaged_source": true,
+    "make_test_tools_exit_code": 0,
+    "bridge_cases": "Native video, key bitmask, frame stepping, memory and machine-state API smoke",
+    "title_after_120_frames": {
+      "game_state": 0,
+      "has_save": 0,
+      "native_size": [
+        240,
+        160
+      ],
+      "screenshot_visually_inspected": true
+    },
+    "after_Start": {
+      "game_state": 2,
+      "room": 0,
+      "meaning": "Original opening dialogue"
+    },
+    "scope": "Boot/tool smoke only; not gameplay acceptance or physical hardware"
+  },
+  "revision5_fixture_verifier": {
+    "passed": true,
+    "fixture_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+    "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "banks_verified": 4,
+    "actual_retained_individuals": 34,
+    "earned_form_histories": 65,
+    "claimed_quests": 38,
+    "exact_report_parts": 186,
+    "runtime_manifest_entries": 893,
+    "current_runtime_verified": true,
+    "checksum_files_verified": 237,
+    "machine_states_loaded": 0,
+    "fixture_bytes_changed": false
+  },
+  "southern_oracle_portability": {
+    "archive": "tests/fixtures/southern-policy-oracle",
+    "source_commit": "0d08f7dd1c232bfdff0a3b572ba8d1fdee07ba15",
+    "required_frozen_inputs": 17,
+    "input_bytes": 341302,
+    "provenance_sha256": "a68c79b40b1c8e67088a51daa972736e16253ac6ac94c3ba72e7cbc22c469ff8",
+    "all_files_byte_identical_to_release_commit": true,
+    "runtime_closure_matches_delivered_runtime_manifest": true,
+    "original_C_and_SRAM_pins_retained": true,
+    "full_differential_tests_passed": 9,
+    "comparisons": 166703,
+    "accepted": 4688,
+    "rejected": 162015,
+    "default_resolved_inside_export": true,
+    "isolated_no_sibling_run_passed": true,
+    "missing_or_changed_oracle_fails_instead_of_skipping": true
+  },
+  "exported_host_aggregate": {
+    "command": "make test-magma-host",
+    "exit_code": 2,
+    "not_an_exit_zero_aggregate": true,
+    "commands_in_order": [
+      "tools/generate_creature_history.py --check",
+      "assets/creatures/generate_data.py --check",
+      "tests/test_magma_architecture.py",
+      "tests/test_magma_history_core.py",
+      "tests/test_save5_history.py",
+      "tests/test_save5_history_differential.py",
+      "tests/test_magma_catalog_policy.py",
+      "tests/test_magma_creature_core.py",
+      "tests/test_magma_legacy_admission.py",
+      "tests/test_southern_frozen_fixtures.py",
+      "tests/test_magma_creature_art.py",
+      "tests/test_magma_art.py",
+      "tests/test_magma_game.py",
+      "tests/test_magma_save.py",
+      "tests/test_magma_save_limits.py",
+      "tests/test_magma_powers.py",
+      "tests/test_magma_evolution_ui.py",
+      "tests/test_magma_evidence.py",
+      "docs/evidence/deferred-anchor/test_engine_probe.py"
+    ],
+    "all_commands_before_final_probe_passed": true,
+    "interrupted_save_test": {
+      "suite_tests": 13,
+      "positions": 344176,
+      "elapsed_seconds": 241.423
+    },
+    "final_probe_failure": {
+      "location": "docs/evidence/deferred-anchor/test_engine_probe.py:46",
+      "assertion": "cannot map synthetic host backing memory",
+      "happened_before_game_assertions": true,
+      "original_failed_address_and_errno_not_recorded": true
+    },
+    "standalone_retry": {
+      "command": "PROBE_RESULT_NAME=\"$PWD/build/export-redirected-engine-probe.json\" python3 docs/evidence/deferred-anchor/test_engine_probe.py",
+      "runtime_and_probe_sources_unchanged": true,
+      "exit_code": 0,
+      "passed_scenarios": 27,
+      "synthetic_host_integration_only": true,
+      "historical_docs_result_unchanged": true
+    }
+  },
+  "host_setup_diagnosis": {
+    "separate_plain_mapping_diagnostic": "All four requested ranges initially mapped successfully in a separate fresh process",
+    "temporary_instrumentation": "Added failed-address and errno recording only to a disposable engine_probe.c copy; original MAP_FIXED_NOREPLACE behavior preserved; packaged and runtime sources untouched",
+    "fresh_process_attempt_with_reproduction": 40,
+    "reproduced_failure": {
+      "result": 0,
+      "address": "0x5000000",
+      "errno": 17,
+      "error": "File exists",
+      "preexisting_overlapping_mappings": [
+        "04d48000-051a2000 rw-p 00000000 00:00 0                                  [heap]"
+      ]
+    },
+    "interpretation": "A real host Python-heap address collision was reproduced. The original aggregate failure did not record errno/address, so its exact cause cannot be established retroactively. No MAP_FIXED overwrite, assertion weakening or fake pass was used."
+  },
+  "package_exclusions": {
+    "roots_and_components": [
+      "build",
+      "dist",
+      "downloads",
+      "sysroot",
+      "__pycache__",
+      ".git"
+    ],
+    "ordinary_runtime_saves": "Only deliberate tests/fixtures SRAM is permitted; no player saves are included",
+    "binaries_and_machine_states": "ROM/object/ELF/symbol/map/shared-library and machine-state outputs are excluded",
+    "smoke_outputs_excluded": [
+      "tools/smoke_tests/smoke.gba",
+      "tools/smoke_tests/smoke.state",
+      "tools/smoke_tests/smoke-colors.png"
+    ],
+    "additional_review_outputs_excluded": [
+      "tools/mgba_bridge.so",
+      "tools/sysroot"
+    ],
+    "generated_asset_exclusions": [
+      "assets/region/native_camera_sheet.png",
+      "assets/region/native_camera_sheet_2x.png",
+      "assets/region/region_preview_2x.png",
+      "assets/region/region_preview_native.png"
+    ],
+    "allowed_compressed_historical_design_inputs": [
+      "docs/magma-design/magma_allocation.original.json.gz",
+      "docs/magma-design/README.original.md.gz"
+    ]
+  },
+  "environment": {
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "arm_gcc": "arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119",
+    "host_cc": "cc (Debian 14.2.0-19) 14.2.0",
+    "bridge_source_sha256": "935986438f538c5bae5ae3ae733bf4db45bca991d1dd0e5b6e391992e93aeda8",
+    "bridge_binary_sha256": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3",
+    "mgba_library_sha256": "a1d7713cc89e3a4e4eeaf2bc7a523115356ebe14e057805c06f5e9d4a328be63",
+    "fonts": {
+      "NotoSansCJK-Bold.ttc": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb",
+      "DejaVuSans.ttf": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e"
+    }
+  },
+  "logs_sha256": {
+    "clean-build.log": "4cf5f4a304486ef56b53627cd8480e039696d2160003a8a1413d0ad992a632d9",
+    "regenerated-build.log": "285600913942ef48767c6f329ae65cd1fac6cbbbd5e535feb2a31c4105453169",
+    "assets-regeneration.log": "ba4e341532e2a59092c8d248779ec7bda93270feffa9cd23a0fff812dc020257",
+    "bridge-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bridge-smoke.log": "160b72e9b777dda64511aa99a01c3f98f3ea57bd28c5edca5e8ac2d2e351faeb",
+    "fixture-verification.log": "98dcb774dc8fcbeef240bc519989881ac6be3b4e9a68210f04a997092b2d7f09",
+    "magma-host.log": "a0855d32561f59fbac177a560b0c132496140e68dc5f27018be512ecc870bfe1",
+    "redirected-probe.log": "06c48d9024f927359a3919f3e21748ef21f8ee982df71c27ac8622509cfdc28d"
+  },
+  "limits": [
+    "Physical GBA/flash cartridges and other compiler/emulator versions were not tested.",
+    "Full legacy/new native gameplay acceptance belongs to the separately pinned final-D reports.",
+    "This receipt pins the reviewed candidate archive; later documentation/receipt/Makefile-output-routing changes require final package manifest reconciliation."
+  ]
+}

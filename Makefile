@@ -25,7 +25,7 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/progression_events.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o $(BUILD)/equipment.o $(BUILD)/equipment_data.o $(BUILD)/combat_rules.o $(BUILD)/weapon_actions.o $(BUILD)/gear_runtime.o $(BUILD)/gear_menu.o $(BUILD)/regional_quests.o $(BUILD)/regional_creature_art.o $(BUILD)/regional_powers.o $(BUILD)/region_art.o $(BUILD)/region_game.o $(BUILD)/northern_creature_art.o $(BUILD)/north_art.o $(BUILD)/north_game.o $(BUILD)/northern_quests.o $(BUILD)/northern_powers.o $(BUILD)/northern_power_art.o $(BUILD)/south_art.o $(BUILD)/south_game.o $(BUILD)/southern_quests.o $(BUILD)/southern_creature_art.o $(BUILD)/southern_powers.o $(BUILD)/southern_power_art.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/progression_events.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o $(BUILD)/equipment.o $(BUILD)/equipment_data.o $(BUILD)/combat_rules.o $(BUILD)/weapon_actions.o $(BUILD)/gear_runtime.o $(BUILD)/gear_menu.o $(BUILD)/regional_quests.o $(BUILD)/regional_creature_art.o $(BUILD)/regional_powers.o $(BUILD)/region_art.o $(BUILD)/region_game.o $(BUILD)/northern_creature_art.o $(BUILD)/north_art.o $(BUILD)/north_game.o $(BUILD)/northern_quests.o $(BUILD)/northern_powers.o $(BUILD)/northern_power_art.o $(BUILD)/south_art.o $(BUILD)/south_game.o $(BUILD)/southern_quests.o $(BUILD)/southern_creature_art.o $(BUILD)/southern_powers.o $(BUILD)/southern_power_art.o $(BUILD)/magma_art.o $(BUILD)/magma_game.o $(BUILD)/magma_quests.o $(BUILD)/magma_creature_art.o $(BUILD)/magma_powers.o $(BUILD)/magma_power_art.o
 
 .PHONY: all clean tools assets test-tools test test-campaign test-systems test-quickparty test-quickparty-evolved test-equipment test-regional test-northern test-northern-host quickparty-video gameplay-video developer-video
 all: $(TARGET).gba
@@ -68,6 +68,8 @@ assets:
 	$(PYTHON) assets/generate_northern_region.py
 	$(PYTHON) assets/generate_southern_region.py
 	$(PYTHON) assets/generate_southern_creatures.py
+	$(PYTHON) assets/generate_magma_region.py
+	$(PYTHON) assets/generate_magma_creatures.py
 
 tools:
 	./tools/install_tools.sh
@@ -114,8 +116,8 @@ test-systems: all
 	$(PYTHON) tests/advanced_power_tests.py --journey build/evolution-qa/evolution-report.json --output build/advanced-power-qa --source-contracts
 
 gameplay-video: all
-	$(PYTHON) tools/archive_test_output.py build/southern-teaser-release
-	$(PYTHON) tests/capture_southern_teaser.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --output build/southern-teaser-release
+	$(PYTHON) tools/archive_test_output.py build/magma-teaser-release
+	$(PYTHON) tests/capture_magma_teaser.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --output build/magma-teaser-release
 
 # Spoiler-bearing full route is development evidence, not the default trailer.
 developer-video: all
@@ -146,6 +148,7 @@ test-equipment:
 	$(PYTHON) tests/test_weapon_actions.py
 	$(PYTHON) tests/test_gear_runtime.py
 	$(PYTHON) tests/test_gear_numbers.py
+	$(PYTHON) tests/test_gear_hearts.py
 	$(PYTHON) tests/test_regional_quests.py
 	$(PYTHON) tests/test_regional_adapters.py
 	$(PYTHON) tests/test_region_art.py
@@ -207,3 +210,46 @@ test-southern: all test-southern-host
 	$(PYTHON) tests/southern_combat_tests.py $(NORTHERN_ARGS) --elf $(TARGET).elf --source-manifest build/source-hashes.json --source-report build/southern-journey/southern-journey.json --output build/southern-combat
 	$(PYTHON) tests/southern_native_performance.py $(NORTHERN_ARGS) --elf $(TARGET).elf --source-manifest build/source-hashes.json --source-report build/southern-journey/southern-journey.json --output build/southern-performance
 	$(PYTHON) tests/southern_render_controls.py $(NORTHERN_ARGS) --elf $(TARGET).elf --source-manifest build/source-hashes.json --source-report build/southern-journey/southern-journey.json --output build/southern-render
+
+
+# Reviewed historical policy/multi-trial foundation, before new region enablement.
+.PHONY: test-magma-architecture
+test-magma-architecture:
+	$(PYTHON) tools/generate_creature_history.py --check
+	$(PYTHON) assets/creatures/generate_data.py --check
+	$(PYTHON) tests/test_magma_architecture.py
+	$(PYTHON) tests/test_magma_history_core.py
+	$(PYTHON) tests/test_save5_history.py
+	$(PYTHON) tests/test_save5_history_differential.py
+
+# Current Magma host contracts are separate from earned native gameplay.
+.PHONY: test-magma-host test-magma test-magma-native
+test-magma-host: test-magma-architecture
+	$(PYTHON) tests/test_magma_catalog_policy.py
+	$(PYTHON) tests/test_magma_creature_core.py
+	$(PYTHON) tests/test_magma_legacy_admission.py
+	$(PYTHON) tests/test_southern_frozen_fixtures.py
+	$(PYTHON) tests/test_magma_creature_art.py
+	$(PYTHON) tests/test_magma_art.py
+	$(PYTHON) tests/test_magma_game.py
+	$(PYTHON) tests/test_magma_save.py
+	$(PYTHON) tests/test_magma_save_limits.py
+	$(PYTHON) tests/test_magma_powers.py
+	$(PYTHON) tests/test_magma_evolution_ui.py
+	$(PYTHON) tests/test_magma_evidence.py
+	mkdir -p $(BUILD)
+	PROBE_RESULT_NAME=$(CURDIR)/$(BUILD)/magma-deferred-engine-results.json $(PYTHON) docs/evidence/deferred-anchor/test_engine_probe.py
+
+# New native outputs are archived before replay; no old run is relabeled.
+test-magma: test-magma-host test-magma-native
+
+test-magma-native: all
+	$(PYTHON) tools/archive_test_output.py build/magma-journey build/magma-minimal build/magma-controls build/magma-retained build/magma-combat build/magma-performance build/magma-teaching-boss
+	$(PYTHON) tests/magma_journey.py $(NORTHERN_ARGS) --output build/magma-journey --scope full
+	$(PYTHON) tools/archive_magma_test_sources.py build/magma-journey/magma-journey.json
+	$(PYTHON) tests/magma_minimal_route.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --output build/magma-minimal
+	$(PYTHON) tests/magma_controls.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --source-report build/magma-journey/magma-journey.json --output build/magma-controls
+	$(PYTHON) tests/magma_retained_controls.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --source-report build/magma-journey/magma-journey.json --output build/magma-retained
+	$(PYTHON) tests/magma_combat_tests.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --source-report build/magma-journey/magma-journey.json --source-snapshot 09-all65-earned-town --output build/magma-combat
+	$(PYTHON) tests/magma_native_performance.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --source-report build/magma-journey/magma-journey.json --source-snapshot 09-all65-earned-town --output build/magma-performance
+	$(PYTHON) tests/magma_combat_tests.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --source-report build/magma-journey/magma-journey.json --source-snapshot 02-teaching-companions --case teaching-boss --output build/magma-teaching-boss

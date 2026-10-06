@@ -1,0 +1,10 @@
+test_all_spawns_exits_clues_rewards_and_enemies_reachable (__main__.MagmaArt.test_all_spawns_exits_clues_rewards_and_enemies_reachable) ... ok
+test_budgets_deterministic_regeneration (__main__.MagmaArt.test_budgets_deterministic_regeneration) ... ok
+test_collision_lookup_exactly_matches_expanded_half_open_solids (__main__.MagmaArt.test_collision_lookup_exactly_matches_expanded_half_open_solids) ... ok
+test_exhaustive_actual_pixel_movable_state_proof (__main__.MagmaArt.test_exhaustive_actual_pixel_movable_state_proof) ... ok
+test_native_palette_source_bytes_and_camera_alignment (__main__.MagmaArt.test_native_palette_source_bytes_and_camera_alignment) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 8.807s
+
+OK

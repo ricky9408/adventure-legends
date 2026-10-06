@@ -586,6 +586,146 @@
         "A firm strike with a slower step.",
         "Stagger +2; speed -4."
       ]
+    },
+    {
+      "id": 20,
+      "name": "Ventstring Bow",
+      "slot": "weapon",
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 6,
+        "stagger": 0
+      },
+      "key": "ITEM_020",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A steady short-lane bow.",
+        "Attack +2; reach +6."
+      ],
+      "weapon_class": "bow"
+    },
+    {
+      "id": 37,
+      "name": "Kilnweave Mail",
+      "slot": "body",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 2,
+        "hp_q4": 8,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "key": "ITEM_037",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "Flexible kilnwork padding.",
+        "Guard +2; HP +8; speed -2."
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Pumice Boots",
+      "slot": "boots",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": 4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "key": "ITEM_053",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "Light porous walking soles.",
+        "HP +4; speed +4."
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Bricklayer Belt",
+      "slot": "belt",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "key": "ITEM_067",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A firm belt for steady work.",
+        "Guard +1; stagger +1."
+      ]
+    },
+    {
+      "id": 85,
+      "name": "Quietnote Ring",
+      "slot": "ring",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 2,
+        "roll_reduction": 0,
+        "power_reduction": 3,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "key": "ITEM_085",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A softly vibrating ring.",
+        "Speed +2; power wait -3."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Terrace Sword",
+      "slot": "weapon",
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 2,
+        "stagger": 0
+      },
+      "key": "ITEM_005",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A broad terrace-work sword.",
+        "Attack +2; reach +2."
+      ],
+      "weapon_class": "sword"
     }
   ],
   "weapon_classes": [
@@ -819,6 +959,30 @@
     {
       "source_id": 24,
       "item_id": 84
+    },
+    {
+      "source_id": 25,
+      "item_id": 20
+    },
+    {
+      "source_id": 26,
+      "item_id": 37
+    },
+    {
+      "source_id": 27,
+      "item_id": 53
+    },
+    {
+      "source_id": 28,
+      "item_id": 67
+    },
+    {
+      "source_id": 29,
+      "item_id": 85
+    },
+    {
+      "source_id": 30,
+      "item_id": 5
     }
   ]
 }

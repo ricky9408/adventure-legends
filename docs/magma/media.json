@@ -1,0 +1,137 @@
+{
+  "suite": "magma-spoiler-free-native-teaser",
+  "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+  "elf_sha256": "db13153b2407c1c8c32748cbe038fa851cd7e9c61db47f0e17a606a41723ae71",
+  "rom_bytes": 7495920,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "machine_state_loads": 0,
+  "capture_sram_reloads": 0,
+  "capture_cuts": 0,
+  "capture_reset_count": 0,
+  "scope": "Kilnstep Commons opening exterior and an ordinary sunny stroll with retained Southern Homura form 2. No Magma creatures, recruits, evolutions, interactions, hidden routes, puzzles, boss or ending.",
+  "preparation": "Hash-authenticated delivered Southern S3 SRAM, one cold boot, revision4-to5 byte-preservation checks and ordinary controller lift travel to room38. No completed Magma save or prior-ROM machine state.",
+  "native_frame_stats": {
+    "hardware_frames": 1200,
+    "game_updates": 1200,
+    "display_page_flips": 1200,
+    "update_histogram": {
+      "1": 1200
+    },
+    "state_histogram": {
+      "1": 1200
+    },
+    "max_update_render_cycles": 137435,
+    "native_frame_budget_cycles": 280896,
+    "max_obj_count": 21,
+    "camera_x_range": [
+      112,
+      240
+    ],
+    "camera_y_range": [
+      100,
+      160
+    ],
+    "measurement": "Emulated hardware frames, live game update counter, displayed VRAM page bit and native update/render cycle timer; not host FPS. Timer excludes VBlank wait/OAM commit."
+  },
+  "audio": "Real emulator PSG stereo PCM, retained as native WAV; MP4 uses 48kHz AAC resampling",
+  "duration_seconds": 20.09124755859375,
+  "files": {
+    "kilnstep-native-teaser.mp4": {
+      "sha256": "5858efd00973af636aa6c7775a1d80e4472092c116bcd11876754981aa40593b",
+      "bytes": 956230
+    },
+    "native-frames.mkv": {
+      "sha256": "33778a86a71babb45aa85cc658ac049235f60915d218a8bb7ebc6726f9473987",
+      "bytes": 29994894
+    },
+    "native-psg.wav": {
+      "sha256": "0cf1b7a7fa6b4bb09ce1489bdaa0d5bb663b1a44c95968d07b78560777b00ec3",
+      "bytes": 2633444
+    },
+    "frame-trace.json": {
+      "sha256": "77bc67d56a2de97af8e89ea159509b2196fb398cf012af089512597366794284",
+      "bytes": 486567
+    },
+    "capture-start.sav": {
+      "sha256": "9da5bfcbf2a0d2bfbb4de50a194a191a759660aecee49af0d9d24187dc39869c",
+      "bytes": 32768
+    },
+    "capture-end.sav": {
+      "sha256": "9da5bfcbf2a0d2bfbb4de50a194a191a759660aecee49af0d9d24187dc39869c",
+      "bytes": 32768
+    },
+    "source-southern-s3.sav": {
+      "sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3",
+      "bytes": 32768
+    },
+    "source-save-provenance.json": {
+      "sha256": "d675a2af36d3c364b8d26ee5202cbcb879eeb4a4dfe6a5b4c4304e8923ef436b",
+      "bytes": 16503
+    },
+    "candidate-source-hashes.json": {
+      "sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+      "bytes": 91412
+    },
+    "kilnstep-preview-4x.png": {
+      "sha256": "bb5f12bbf93dfe68617d86f7b7ce212351f924ff1c4cf508c67717652cb5de4d",
+      "bytes": 13016
+    },
+    "native-arrival-court.png": {
+      "sha256": "df4a9c57dc9e9f365e8a619a05480eec7a888ec576669ca95985e4080efa0035",
+      "bytes": 6528
+    },
+    "native-east-terrace.png": {
+      "sha256": "fafd9dab1c5dc0af27101b33d21d27cc298bba5a3c0c57ec7e248aafb1ec869c",
+      "bytes": 6243
+    },
+    "native-workyard.png": {
+      "sha256": "669d5352494cb8b6f195caf51f1d8832076e59f0c467c7399f05f80d87324a0a",
+      "bytes": 5989
+    },
+    "native-cool-channel.png": {
+      "sha256": "04f1d01f3cafdd4c4579f1a848602208355b7920f25b4ecfb11602ce03571244",
+      "bytes": 5815
+    },
+    "native-town-detail.png": {
+      "sha256": "384165e7932475e72d369834d4154f89d2bd044104b2da0c1bcf533e3239ef66",
+      "bytes": 6543
+    },
+    "native-kilnstep-preview.png": {
+      "sha256": "74fae59f99285cbd674a746ebc18b9db2ebcefcaa934744366d78dbf9b21b8c2",
+      "bytes": 6509
+    }
+  },
+  "original_report_sha256": "2262bd808695a733417c37b831d58178e616b73c14a09f24bce43a2cf913bbb4",
+  "full_candidate_qa_is_separate": true,
+  "captured_frames": 1200,
+  "frame_rate": 59.72750056960583,
+  "native_resolution": [
+    240,
+    160
+  ],
+  "video_resolution": [
+    960,
+    640
+  ],
+  "scaling": "4x nearest-neighbor, one encoded video frame per emulated hardware frame",
+  "native_audio_minus_video_seconds": 0.0,
+  "capture_rgb_stream_sha256": "07725523ba94d29850e55d6cff459e328c0d3d3cacb765fe0b084f239e528db0",
+  "native_lossless_decoded_rgb_stream_sha256": "07725523ba94d29850e55d6cff459e328c0d3d3cacb765fe0b084f239e528db0",
+  "frozen_source_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+  "frozen_source_count": 893,
+  "test_sources": {
+    "tests/magma_journey.py": "bc0dd73960c23816c1d5bd53b7dff6ebbde015e5da8181f397249c3ec87e51e5",
+    "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+    "tests/test_creatures.py": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+    "tests/capture_northern_teaser.py": "54440847d27b16b6a587ccb7de29c25a559f490e49e74d13ddea98bc3a700767",
+    "tests/capture_magma_teaser.py": "31115d604e769afc87b1071f95fca681add1f14a93c1afd7db7c49f922a95758",
+    "tests/northern_sky_route.py": "411a3923a467bf88b9e83fe43b4de0619a665a1f64c29e9bf520efe768aeacb8",
+    "tools/mgba_bridge.c": "935986438f538c5bae5ae3ae733bf4db45bca991d1dd0e5b6e391992e93aeda8",
+    "tools/mgba_bridge.so": "c158ceef817ffaed570acb8ecc0c8a5f2c237767dad4a5fd388239d3f5ae47a3"
+  }
+}

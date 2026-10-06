@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "scope": "Minimal immutable Southern S3 codec oracle for synthetic historical Save5 differential tests; not Magma native acquisition evidence",
+  "source_commit": "0d08f7dd1c232bfdff0a3b572ba8d1fdee07ba15",
+  "source_rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "source_runtime_manifest": "../v5-revision4/source-hashes.json",
+  "source_runtime_manifest_sha256": "609104f75fa341bb67d0d1e2a362db7b03ed655ecb6eed41c101b0c799b2f089",
+  "all_files_byte_identical_to_local_release_commit": true,
+  "all_runtime_inputs_match_delivered_source_manifest": true,
+  "generated_input": "southern_n5_fixture.h is generated at test time from the pinned revision3 SRAM; it is not a missing archived include",
+  "files": [
+    {
+      "path": "src/creature_data.c",
+      "bytes": 11804,
+      "sha256": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/creatures.c",
+      "bytes": 56001,
+      "sha256": "b239046f8e04b18dbbd7d330c36cbfd96dadd01d444d34084ddc75eb4cd4e53c",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/creatures.h",
+      "bytes": 14602,
+      "sha256": "dd9fdd2e57865d6209b4d6e5d85dbc7fa264ea25c7f217aa71a34797d1e966fe",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/equipment.c",
+      "bytes": 15612,
+      "sha256": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/equipment.h",
+      "bytes": 8070,
+      "sha256": "2a81f86cdd5554430834d2c0b69a25f9f2b97558f1c01848c707e463bde618d9",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/equipment_data.c",
+      "bytes": 5749,
+      "sha256": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/save4.c",
+      "bytes": 11982,
+      "sha256": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/save4.h",
+      "bytes": 3477,
+      "sha256": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/save5.c",
+      "bytes": 58198,
+      "sha256": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/save5.h",
+      "bytes": 4268,
+      "sha256": "2985f18f9da5113f0e543a9de08adcdd399622a7861ce1b975346e32d830fae0",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/southern_quests.c",
+      "bytes": 8401,
+      "sha256": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "src/southern_quests.h",
+      "bytes": 2728,
+      "sha256": "735d7de5b06dd06bf8d3fdad43396460cbd9da78b79bb47d11a9bc6bfa343236",
+      "role": "frozen-runtime-source"
+    },
+    {
+      "path": "tests/fixtures/v5-revision1/all-evolved-village.sav",
+      "bytes": 32768,
+      "sha256": "26d271e3c37d456f5eefcda9900be10d702eb60aa43ebc108eec96f0740f50a8",
+      "role": "authenticated-prior-controller-SRAM"
+    },
+    {
+      "path": "tests/fixtures/v5-revision1/pr5-evolved-reversed-party.sav",
+      "bytes": 32768,
+      "sha256": "806283f8ee36f4eb139822d74e8c176cf4c2e08f30c9e27ed5da82ae5f21d4d1",
+      "role": "authenticated-prior-controller-SRAM"
+    },
+    {
+      "path": "tests/fixtures/v5-revision2/all-eleven-town.sav",
+      "bytes": 32768,
+      "sha256": "74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106",
+      "role": "authenticated-prior-controller-SRAM"
+    },
+    {
+      "path": "tests/fixtures/v5-revision3/northern-all21-town.sav",
+      "bytes": 32768,
+      "sha256": "f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479",
+      "role": "authenticated-prior-controller-SRAM"
+    },
+    {
+      "path": "tests/southern_save_sanitizer.c",
+      "bytes": 9338,
+      "sha256": "80e16914c670ae2817909bb01058b83be3f53ea3ddbe23f735531051bd80ed07",
+      "role": "synthetic-host-seed-helper"
+    }
+  ]
+}

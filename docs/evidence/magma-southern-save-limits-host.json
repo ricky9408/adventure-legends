@@ -1,0 +1,99 @@
+{
+  "purpose": "Southern full-capacity and atomicity host tests; not native acquisition proof",
+  "result": "PASS",
+  "fixture_sha256": "f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479",
+  "source_sha256": {
+    "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "save5": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+    "creatures": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+    "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+    "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+  },
+  "compiled_source_sha256_by_variant": {
+    "normal": {
+      "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+      "save5": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+      "creatures": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+      "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+      "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+      "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+      "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+    },
+    "augmented": {
+      "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+      "save5": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+      "creatures": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+      "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+      "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+      "equipment_data": "af2bc7614b4f1dbbe3b03a41b4baacca716ed0bcba5186710f910c7800e08352",
+      "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+    },
+    "synthetic": {
+      "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+      "save5": "6bceb9765f9642406172d28dbf05a7de2c66781c9b5845a4516f34601f961146",
+      "creatures": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+      "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+      "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+      "equipment_data": "af2bc7614b4f1dbbe3b03a41b4baacca716ed0bcba5186710f910c7800e08352",
+      "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+    }
+  },
+  "source_unchanged_during_measurement": true,
+  "tests_sha256": "6f9edd75d24ae2de266f5950c8a87194661068ec09b129e94cdbdbab3f6b036a",
+  "production_catalog_modified": false,
+  "checks": [
+    {
+      "test": "ASan/UBSan",
+      "valid_roundtrips": 1200,
+      "invalid_snapshots": 1200,
+      "random_budget_steps": 79491,
+      "zero_budget_calls": 2334,
+      "above_cap_budget_calls": 49013,
+      "seed": 1347376468,
+      "result": "PASS"
+    },
+    {
+      "test": "mixed-Q22-full48-atomicity",
+      "unique_inventory_records": 48,
+      "temporary_catalog_ids": [
+        100,
+        146
+      ],
+      "runtime_equipment_validate": true,
+      "production_catalog_validate": false,
+      "full_retries": 10,
+      "result": "SOUTH_FULL",
+      "entire_state_byte_identical": true,
+      "quest_remains": "READY",
+      "companion_count": 0,
+      "one_slot_freed_retry": "SOUTH_REWARDED, exactly one companion and item4"
+    },
+    {
+      "test": "actual-catalog-full160-roundtrip",
+      "roster": 160,
+      "physical_forms": 41,
+      "obtained_forms": 41,
+      "claimed_quests": 30,
+      "gear": 25,
+      "budgets": [
+        0,
+        1,
+        64,
+        1024,
+        3072,
+        4096
+      ],
+      "effective_cap": 3072,
+      "all_roundtrips_match": true
+    },
+    {
+      "test": "temporary-synthetic-codec-isolation",
+      "revision4_full48_roundtrip": true,
+      "production_stream_rejects_before_write": true,
+      "production_load_rejects_synthetic_bank": true,
+      "temporary_codec_rejects_revision3_synthetic_ids": true
+    }
+  ]
+}

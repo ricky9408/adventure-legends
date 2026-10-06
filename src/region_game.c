@@ -77,7 +77,7 @@ static COLD void claim_scene(unsigned q){int r;sync_chapter();r=regional_quest_c
   else if(q==Q_METAL)say(TX_RG_METAL_JOIN_A,TX_RG_JOIN_SELECT_B);
   else if(q==Q_POOLS)say(TX_RG_TIDE_REWARD_A,TX_RG_TIDE_REWARD_B);
   else say(TX_RG_RECEIVED_A,TX_RG_RECEIVED_B);
- }else if(r==REGION_QUEST_FULL)say(TX_RG_FULL_A,TX_RG_FULL_B);
+ }else if(r==REGION_QUEST_RESERVED)say(TX_MG_RESERVED,TX_MG_RESERVEDB);else if(r==REGION_QUEST_FULL)say(TX_RG_FULL_A,TX_RG_FULL_B);
  else if(r==REGION_QUEST_UNCHANGED)say(TX_RG_RETURN_A,TX_RG_RETURN_B);
  else say(TX_RG_SAVE_RETRY,TX_RG_JOIN_SELECT_B);
 }
@@ -161,7 +161,7 @@ COLD int region_game_interact(void){int r;event_dirty=0;sync_chapter();if(game_s
   if(close_to(264,236,23)){if(ready(Q_DRY)&&!done(Q_DRY))claim_scene(Q_DRY);else if(done(Q_DRY))say(TX_RG_RETURN_A,TX_RG_RETURN_B);else{offer(Q_DRY);say(TX_RG_DRY_A,TX_RG_DRY_B);}return 1;}
   if(close_to(182,234,23)){if(done(Q_FRIENDS))say(TX_RG_RETURN_A,TX_RG_RETURN_B);else if(offer(Q_FRIENDS)&&four_wishes()){complete(Q_FRIENDS);claim_scene(Q_FRIENDS);}else say(TX_RG_FRIENDS_A,TX_RG_FRIENDS_B);return 1;}
   if(close_to(432,240,23)||close_to(456,240,23)){unsigned cls=abs_i(px-432)<=abs_i(px-456)?2:3;r=regional_claim_rack(&adventure_save,cls);
-   if(r==REGION_QUEST_REWARDED){event_dirty=1;say(TX_RG_RACK_A,TX_RG_RACK_B);}else if(r==REGION_QUEST_FULL)say(TX_RG_FULL_A,TX_RG_FULL_B);else say(TX_RG_PRACTICE_A,TX_RG_PRACTICE_B);return 1;}
+   if(r==REGION_QUEST_REWARDED){event_dirty=1;say(TX_RG_RACK_A,TX_RG_RACK_B);}else if(r==REGION_QUEST_RESERVED)say(TX_MG_RESERVED,TX_MG_RESERVEDB);else if(r==REGION_QUEST_FULL)say(TX_RG_FULL_A,TX_RG_FULL_B);else say(TX_RG_PRACTICE_A,TX_RG_PRACTICE_B);return 1;}
   if(close_to(408,240,23)||close_to(416,264,23)){say(TX_RG_PRACTICE_A,TX_RG_PRACTICE_B);return 1;}
   if(close_to(400,152,18)){say(TX_RG_WELCOME_A,TX_RG_WELCOME_B);return 1;}
   if(close_to(64,128,18)){say(TX_RG_WEAVER_A,TX_RG_WEAVER_B);return 1;}

@@ -1,0 +1,24 @@
+{
+  "design_revision": 2,
+  "source_files_unchanged_since_design_inspection": true,
+  "changed_source_paths": [],
+  "design_only": true,
+  "runtime_enablement": false,
+  "file_sha256": {
+    "MAGMA_CHAPTER_BRIEF.md": "a1020ab08677de1fccc9db2c603a0285f599dc7510a86ca90a3fa09a31a8d1a6",
+    "MAGMA_COLLECTION_SAFETY.md": "7f544a7997cde0bb93cf76f9b3c313158b1563b8e8085fbd9a29b1beb85a7e20",
+    "MAGMA_CREATURE_CARDS.md": "41396f6cd589c66ce6b5e770aee3385bc02fc09e430a09f51a5e0009f3ac7a09",
+    "MAGMA_IMPLEMENTATION_CONTRACT.md": "b71e9ec81c4f127cb03165448b2c36ab619b664327d96b7fd1afc5987e003dfb",
+    "README.md": "da86ef9f89bae1c7d19a37bf18a328b318edd52ef47c5f2e4775f54fcbaeeedd",
+    "build_design.py": "7c5e90ca6af8f52be3957ba26800f2bf6fc8b347317ca80416d575b6bff06fcd",
+    "capacity_unittest_report.txt": "ee81ce8fd7667db2d9cf78726de2ca3a53f47377127c63d64da6bf5fd077b50b",
+    "identity-lock.snapshot.json": "fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969",
+    "magma_allocation.json": "394493bf05433e2fdc40dbc664112d53450909463315549b49b7206f9e6f211f",
+    "terminal_admission.py": "6c1ffcdb327028f9716c68a547c16d589b8ef396591d5483871226076353787d",
+    "test_design.py": "dacbc4cb01b11ca40c4d514c948b4d5e2edf1ac60405a4bd51a0278ec0cc126b",
+    "test_terminal_admission.py": "516fb783319f42e935c8ce9ab2bddf1d69983bf4391b566d6b3638806969761a",
+    "unittest_report.txt": "c54372b57c5319f35a735fa86ed80a5e5d1e0c4f637f2d803f6b34924ebb7eab",
+    "validate_design.py": "b7a7b22853e91743459906de8845e63a6354bbc355cc568286b6aa9ed454f240",
+    "validation_report.json": "1b5604e287c056a028335c1090cd46fbbb495fcbea9bf8cd169ba94366030cb6"
+  }
+}

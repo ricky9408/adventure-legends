@@ -12,6 +12,7 @@ Reports and screenshots contain developer-only progression details.
 from __future__ import annotations
 import argparse, hashlib, inspect, json, shutil, struct
 from pathlib import Path
+from southern_symbols import paired_southern_symbols
 from southern_journey import SouthernJourney, N5_ROM
 from northern_journey import newest_bank
 from region_journey import ROOT, Emulator, digest
@@ -89,7 +90,7 @@ class ControllerOnlyEmulator(Emulator):
 
 
 class SouthernMinimalRoute(SouthernJourney):
-    def __init__(self,rom,symbols,output,expected_rom_sha,expected_symbols_sha,fixture=None,source_manifest=None):
+    def __init__(self,rom,symbols,output,expected_rom_sha,expected_symbols_sha,fixture=None,source_manifest=None,elf=None):
         assert digest(rom)==expected_rom_sha,'Candidate ROM differs from explicit frozen SHA'
         assert digest(symbols)==expected_symbols_sha,'Candidate symbols differ from explicit frozen SHA'
         self.target_sha=expected_rom_sha;self.symbol_sha=expected_symbols_sha;self.scene_only=False
@@ -97,8 +98,9 @@ class SouthernMinimalRoute(SouthernJourney):
         self.rom=self.out/'tested.gba';self.symbol_path=self.out/'tested.sym'
         for src,dst in ((self.source_rom,self.rom),(self.source_symbols,self.symbol_path)):
             if src!=dst:shutil.copyfile(src,dst)
-        self.sym={p[2]:int(p[0],16) for line in self.symbol_path.read_text().splitlines() if len(p:=line.split())==3}
+        self.sym,self.south_elf_pairing=paired_southern_symbols(self.rom,self.symbol_path,elf or self.source_rom.with_suffix('.elf'),self.out/'tested.elf')
         self.candidate={'rom_path':str(self.source_rom),'symbols_path':str(self.source_symbols),'rom_sha256':digest(self.rom),'symbols_sha256':digest(self.symbol_path),'rom_bytes':self.rom.stat().st_size,'emulator_bridge_sha256':digest(ROOT/'tools/mgba_bridge.so'),'emulator_bridge_source_sha256':digest(ROOT/'tools/mgba_bridge.c')}
+        self.candidate['southern_elf_pairing']=self.south_elf_pairing
         self.inputs=[];self.checks=[];self.snapshots={};self.failures=[];self.timings={};self.coverage=[];self.cases=[];self.frame_windows=[];self.pixel_cases=[];self.acquisitions=[];self.transitions=[];self.main_selections=[];self.main_only=False
         self.fixture=Path(fixture or ROOT/'tests/fixtures/v5-revision3/northern-main-only-sky.sav').resolve()
         assert digest(self.fixture)==MINIMAL_SHA,'Only the exact genuine main-only N5 SRAM is accepted'
@@ -117,7 +119,7 @@ class SouthernMinimalRoute(SouthernJourney):
         self.source_checks={p:digest(self.source_root/p)==sha for p,sha in self.source_hashes.items()}
         assert all(self.source_checks.values()),'Frozen source provenance differs from manifest'
         shutil.copyfile(self.source_root/'src/game.c',self.out/'candidate-source-game.c')
-        self.test_sources={str(p.relative_to(ROOT)):digest(p) for p in (Path(__file__).resolve(),ROOT/'tests/southern_journey.py',ROOT/'tests/northern_journey.py',ROOT/'tests/region_journey.py',ROOT/'tests/region_combat_tests.py',ROOT/'tests/test_save5.py',ROOT/'tests/test_save4.py',ROOT/'tools/mgba_runner.py',Path(inspect.getfile(type(self))).resolve())}
+        self.test_sources={str(p.relative_to(ROOT)):digest(p) for p in (Path(__file__).resolve(),ROOT/'tests/southern_symbols.py',ROOT/'tests/southern_journey.py',ROOT/'tests/northern_journey.py',ROOT/'tests/region_journey.py',ROOT/'tests/region_combat_tests.py',ROOT/'tests/test_save5.py',ROOT/'tests/test_save4.py',ROOT/'tools/mgba_runner.py',Path(inspect.getfile(type(self))).resolve())}
         (self.out/'test-source').mkdir(exist_ok=True)
         for p in self.test_sources:shutil.copyfile(ROOT/p,self.out/'test-source'/Path(p).name)
         # Preserve fixture hierarchy to avoid colliding with current helper names.
@@ -215,8 +217,8 @@ class SouthernMinimalRoute(SouthernJourney):
         self.old_records={c.instance_id:bytes(c) for c in self.live()}
         self.old_quests=[self.quest(q) for q in range(22)];self.old_objectives=list(s.quests.objectives[:22])
         saved=self.e.bytes(0x0e000000,32768);migrated=newest_bank(saved)
-        self.check(int.from_bytes(migrated[12:14],'little')==4 and migrated[32:]==b[32:],
-                   'migration commits revision4 with byte-identical revision3 payload')
+        self.check(int.from_bytes(migrated[12:14],'little')==5 and migrated[32:]==b[32:],
+                   'migration commits current revision5 with byte-identical revision3 payload')
         old_offset=self.source_bytes.index(b)
         self.check(saved[old_offset:old_offset+6144]==b,'forward migration keeps prior committed revision3 bank intact')
         self.absent_optional();self.record_state('before-southern-entry');self.snapshot('00-minimal-n5-forward-migration')

@@ -1,0 +1,43 @@
+{
+  "scope": "Developer-only native240x160 visual review; progression spoilers, not player teaser",
+  "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "source_report_sha256": "2654c13204463de105ab6d480c2fe5983ddbda117ea74af536e6f6b3c2a0b73c",
+  "files": [
+    {
+      "path": "town-resume-clean-art.png",
+      "sha256": "8277fada82e806c4c0c388401fd01c4c7fe4c18f0987b95cbf2462ef7cf9e586"
+    },
+    {
+      "path": "native-room-39.png",
+      "sha256": "4d22f0599dee664a3931ba8eaa05a2a8c5c526802c21f9921cdf561159885e9b"
+    },
+    {
+      "path": "native-room-40.png",
+      "sha256": "14c3e90ded0fc4410ac435335520b2ed61223051682fa6832b2d0d5fd74121cb"
+    },
+    {
+      "path": "native-room-41.png",
+      "sha256": "8f8847d614cbdc572446567c25099e7833bd29098982fff233200fb7d86f1cac"
+    },
+    {
+      "path": "native-room-42.png",
+      "sha256": "43dca10df57e66d1c9c06d75659172be6b46f6a39e2c367bd9dd472aa35b23d7"
+    },
+    {
+      "path": "native-room-43.png",
+      "sha256": "84ed10b8ea95d5b421cceb568da7332b8d876d2e38ca64edb92f11b3141a0cda"
+    },
+    {
+      "path": "native-room-44.png",
+      "sha256": "11445cf0d52b45cb770e0db69f6380850dac8a964a4eb94849c34372cfa6275b"
+    },
+    {
+      "path": "regulator-moving-sweep.png",
+      "sha256": "604a692c3fe761deef303955598099a226dd781443f49c87bcdbdc86688b401e"
+    },
+    {
+      "path": "journal-8.png",
+      "sha256": "f13c2c151b67eb7c8d6da6c5b9a8f9ed0e57ce9c979c77e135a55c45cc8b0d39"
+    }
+  ]
+}

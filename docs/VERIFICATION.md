@@ -1,84 +1,204 @@
-# Southern S3 release verification
+# Magma release verification
 
-Developer evidence, with progression spoilers. Player instructions and the default teaser remain spoiler-free. Reports were produced on 5 October 2026 UTC.
+Developer evidence contains progression spoilers. The default player teaser and guide
+remain spoiler-free. Measurements were made on 5 October 2026 UTC.
 
-## Exact cartridge and save contract
+## Exact cartridge and compatibility
 
-- ROM: **5,858,700 bytes**, SHA-256 `87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de`
-- Symbols: `ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305`
-- Runtime-source manifest: `609104f75fa341bb67d0d1e2a362db7b03ed655ecb6eed41c101b0c799b2f089`, 707 inputs
-- Save wire version 5, content revision 4; 24-byte instance records,160 slots and dual6144-byte banks remain unchanged
-- IWRAM code: **27,944 /28,672 bytes**,728 bytes before the linker boundary
-- Initialized data84 bytes plus BSS48,008 bytes; aligned EWRAM end48,096 bytes
-- Runtime evidence: mGBA 0.10.5, GNU ARM GCC 14.2.1, native 240×160 Mode4/OBJ output
+- ROM: **7,495,920 bytes**, SHA-256 `90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2`
+- Symbols: `add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6`
+- Runtime-source manifest: `a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f`, **893 inputs**
+- Save wire 5, content revision 5; exact revision 1–4 policy, 24-byte records,
+  160 slots and two 6,144-byte banks remain compatible
+- Linked IWRAM code **28,120 / 28,672 bytes**, 552 bytes before the reserved-stack boundary
+- Data **92 bytes**, BSS **48,568 bytes**; no new permanent OBJ allocation
+- mGBA 0.10.5, GNU ARM GCC 14.2.1, native 240×160 Mode4/OBJ output
 
-A clean independent rebuild reproduced ROM, ELF and symbols. Another clean final-QA checkout reproduced the same ROM/symbol pair. Asset regeneration checked 1,245 existing source/art files from the exported archive with no changes; only the four documented source-package-excluded River overview images were recreated. A packaging-only catalog normalization preserves parsed JSON and generated ROM tables while keeping individual public text files below 100 KB. The exported source archive was separately unpacked, rebuilt and bridge-smoke tested; its ROM and symbols match the exact cartridge above. Physical hardware is not claimed.
+A clean independent rebuild reproduces the exact ROM and symbol bytes. ELF debug paths
+may differ between directories; both ELF load images are independently paired with the
+same cartridge. A separate source-export review verifies a clean extracted build and deterministic
+asset regeneration. All 2,740 files in its reviewed archive remained byte-identical;
+only the four documented excluded River overview PNGs were regenerated. Repackaging
+that untouched extraction reproduced its exact ZIP bytes. The final package adds
+verification notes/receipts and redirects a host-test output into build/, with runtime
+inputs unchanged. The sealed receipt is in `magma/source-export-review.json`.
 
-## Native Southern acceptance
+## Controller-earned content
 
-Nine named controller suites pass **33,010 overlapping checks**, zero failures and zero gameplay-memory writes. Their original full-report hashes and bounded summaries are in [southern/index.json](southern/index.json). These are separate from synthetic host tests and the whole-game aggregate below.
+The final exact-D acquisition route passes **26,884 checks**, with no failures or game
+RAM writes. It earns all **65 historical forms while retaining 34 actual individuals**,
+all **31 gear items** and **38 quest claims**. All nine new families, 15 new personal
+trial/evolution edges, two third tiers and four alternate branches are exercised.
+Four extra bases are real repeated encounters with distinct identities; collection
+history never clones or replaces an individual.
 
-| Suite | Checks |
-|---|---:|
-| Full acquisition, puzzles, trials, evolution, reboot and lifecycle |15,732|
-| Minimal-prerequisite main route with starter sword |1,889|
-| All18 reachable optical arrangements |4,708|
-| Native initial controls/full-viewport pixels |448|
-| Facing-sensitive conversation targeting |188|
-| Earned21-individual storage/selector/journal/save stress |42|
-| All20 new combat commands and controller edge cases |8,176|
-| Crowd, cold UI, saving and companion-animation performance |1,484|
-| Resumed actor tiles, cast identity and companion body/shadow anchors |343|
+The separate minimal route passes **1,837 checks** from the authenticated delivered
+Southern eight-base town save. It requires no optional earlier quest, trial, evolution,
+gear or Core ending. Only the two guaranteed teaching companions and starter sword are
+needed for the new main route. The eight prior individuals stay unchanged.
 
-The journey earns all 41 historical forms while retaining 21 real individuals, all 25 gear and all 30 regional quest claims, then independently cold-boots the saved SRAM. It includes two guaranteed pre-gate bases, eight optional recruits, all ten personal trials/evolutions, decline/retry, three real boss weapon classes, older-region return and death/re-entry. Manual/reset routes never fabricate companion-gated objectives. Controller evidence covers 18 reachable optical states; the separate host oracle covers 24, and those counts are not conflated.
+Independent native controls pass **1,162 checks**: movement, diagonal camera, movable
+objects, reset/reentry, modal ownership, journal/selector input, actual death/retry,
+all eight full-view scenes and the moving hazard's pixel/collision alignment. Twelve
+whole-viewport oracles and twenty damaging-sweep position oracles are included.
 
-A separate genuine six-base-individual Northern source proves the main island route needs no optional River/Northern/Southern quest, Core/ending, evolution or trial. It acquires only guaranteed bases79/85, clears with starter sword1, independently reboots and returns by ferry; the six original individuals stay byte-identical. Two runs produce identical final SRAM.
+The final **647-check retained lifecycle** authenticates the exact-D acquisition SRAM,
+then uses cold SRAM boots only, never producer machine states. It checks all 34 storage
+candidates, four genuinely earned same-family selector pairs, save/reload, ordinary
+hazard death/retry, a second reboot and old-region return. Every identity, history and
+claimed quest remains intact.
 
-The migration starts from the delivered Northern N5 cartridge SHA `302316c53d6fb9dafa0ecbf9f679c9c39af3a150af3aa78398c368312e50399e` and authenticated SRAM SHA `f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479`. Old identities, histories, quest/equipment data and payload bytes are preserved. The codec load is read-only; ordinary engine Continue/arrival subsequently autosaves revision 4. No prior-ROM machine state is imported. In-run branches pair same-ROM machine states with their exact SRAM.
+Seven named new native suites pass **50,149 overlapping assertions**, with zero
+failures. The teaching-encounter exception suite contributes 427 checks; it is not
+counted as obtaining an additional form. All native reports pin exact ROM/symbol/ELF, runtime manifest, emulator bridge and test
+sources. The original producer reports are preserved byte-for-byte in bounded text
+parts with the generated fixtures. See [magma/index.json](magma/index.json) and
+`tests/fixtures/v5-revision5/provenance.json`. Individual checks overlap; their sum is
+not a count of unique behaviors.
 
-Combat includes all five phase advantages; real sword/lance/arrow echoes including lethal source hits; actual-wall ricochet; one-generation-only guard grace; hostile-only interception; wrong facing; cooldown/lease/equipment restrictions; selector, dialogue and hit-stop freezes; and all 20 commands. A real boss warning/attack/open/recovery trace is unchanged across 260 updates with repeated ordinary-ranged-mark attempts. The separate native boss actor is not a target of the new ordinary-enemy-only hooks.
+## Combat and actual frame presentation
 
-## Actual hardware-frame presentation
+The final same-target combat continuation passes **13,986 checks** and the performance
+continuation passes **5,206 checks**, both with zero failures. They cover all 24 new
+commands, real damage/control behavior, personal
+identity, cooldown/recovery, inherited commands, one-hit rules, connected wall-clipped
+paths, shared tile ownership, modal/hit-stop freezes and same-family switching.
+Five-phase complete modifier tables, adversarial serial wrap and forged projectile
+provenance are separate host tests, not falsely claimed as native input cases.
+Normal R dispatch uses the authored default side; the alternate-side internal API is
+not another player button.
 
-Tests sample the main-loop update counter and displayed Mode4 page after each emulated hardware frame. Host execution speed is never the frame-rate metric. Cycle readings cover input/update/render, **excluding** final VBlank wait and OAM commit; therefore a cycle number below 280,896 alone is insufficient.
+Tests sample the main-loop update counter and displayed bitmap page after every
+emulated hardware frame. Host execution speed is never the frame-rate metric. Timer
+cycles exclude final VBlank wait/OAM commit, so a value below 280,896 alone does not
+prove frame pacing. The target hardware cadence is approximately 59.7275 Hz.
 
-| Window | Native updates / page flips | Peak measured cycles |
+Confirmed final-D windows include:
+
+| Window | Updates / page flips | Peak measured cycles |
 |---|---:|---:|
-| Five visible bodies + hostile shot + two arrows + crescent |180/180 each|154,826|
-| Same combined load, returning fan |180/180 each|261,957|
-| Same combined load, expanding ring |180/180 each|253,878|
-| Same combined load, arc projectile |180/180 each|208,870|
-| Same combined load, switching guard |180/180 each|186,809|
-| Cold town / field eight-page journal |95/95 each|272,365 /266,003|
-| Full21-instance repeated rest/save |160/160 each|269,836|
-| All21 owned storage candidates including EMPTY wrap |120/120 each|274,847|
-| First journal open → all eight tabs → close |128/128 each|272,347|
-| Four explicit L-direction releases |96/96 each|178,275|
+| All 34 real storage candidates and empty wrap |148/148 each|272,595|
+| Full 34-individual repeated rest/save |180/180 each|219,356|
+| Independent performance full-roster save |45/45 each|218,891|
+| Final same-target combat windows, combined |3,837/3,837 each|246,444|
+| Final same-target performance windows, combined |2,187/2,187 each|270,525|
+| Spoiler-free native town stroll |1,200/1,200 each|137,414|
 
-Each crowd case contains nine frames with the full combination actually visible, rather than merely allocated offscreen. Independent earned-roster save coverage also passes 180/180 at 263,612 cycles. Long paired-target aim followed immediately by a one-hardware-frame A input passes 80/80 and samples the attack. Cold menus have limited remaining headroom; new content/audio needs renewed native tests.
+Six crowded windows combine five visible enemy bodies, a hostile shot, two arrows and
+a Magma effect for nine actual frames each. Native cold journal coverage opens all nine
+pages. Save, storage and cold-menu windows have limited remaining margins and must be
+remeasured after future content/audio changes. A measured window is not proof of all
+possible 160-instance/48-item engine states.
 
-Earlier candidates exposed real missed frames. Fixes preserve behavior rather than relaxing tests: exact collision-raster/LOS caches with explicit topology invalidation; equivalent full validation with exhaustive differential checks; queued frozen saving entry before snapshot copying; and removal of software modulo division from each empty storage-slot scan. Earlier failed reports are development history, not release acceptance.
+## Correctness fixes established during testing
 
-## Independent core review and persistence stress
+- Damaging regulator sweep pixels now refresh with each collision position rather
+  than the slower ambient animation clock
+- The deliberate diversion remains latched through undamaged cycles, allowing ordinary
+  walking to the coupling; it clears after a successful window
+- A durable repaired-screen objective restores the repaired position after travel/load
+- An inline chapter check and removal of an unrelated redundant geometry scan recover
+  older crowded Southern command cadence without changing collision semantics
+- Authentic full-roster rest exposed a cold-render plus anchor-validation overrun.
+  Exact anchor validation is now queued inside frozen saving mode after both bitmap
+  pages warm, before the unchanged snapshot/writer. No validation was removed
 
-[SOUTHERN_RELEASE_REVIEW.md](SOUTHERN_RELEASE_REVIEW.md) approves the exact reviewed integration scope, conditional on the separate native tests above. It confirms source/ELF identity and contains 34 targeted tests plus strict/ASan/UBSan save, selection and power checks. An additional 16,000 randomized crescent scenes produce 192,000 reference-equivalent target comparisons.
+Earlier failed candidate reports remain preserved as development evidence. Test-only
+route corrections moved away from the public rest interaction before sword attacks
+and used a four-pixel path endpoint tolerance for Q8 motion, while independently
+asserting real interaction range. No health, creature, reward or gameplay-memory
+injection was used to turn those routes into passes.
 
-Validation proof covers 23,531,642 XP/level pairs,301,510 party/reference cases,1,048,576 collection-byte pairs,36,720 instance corruptions and158,400 historical comparisons. Full records and standalone party APIs remain fully validated. Synthetic save stress covers 147,504 interrupted/success positions, full 160-instance/full 48-gear capacity, malformed CRC-valid records and bounded writer budgets. Synthetic capacity is not native obtainability. See the source-pinned files under `evidence/` and `SOUTHERN_SAVE4_VERIFICATION.json`.
+## Core, saves and independent reviews
 
-The initial historical-policy review remains pinned separately in `SOUTHERN_CORE_REVIEW.md`. Later third-tier/current-policy changes require its explicit expansion gates; no incompatible change is enabled in this 41-form release.
+- Frozen-policy comparison covers **166,703** CRC-valid historical images/banks
+- New typed transactions cover **344,176** interrupted/success write positions across
+  **56** transitions; failed final commits preserve the previous bank
+- Revision-5 direct/API and sanitizer tests cover same-instance trial causality,
+  third-tier eligibility, alternate branches, source receipts, wrong identities,
+  grandfathered capacity, mixed quest/gear atomicity and all unassigned bytes
+- Collection admission preserves 72 planned terminal opportunities within 160 slots;
+  old legal over-budget rosters remain loadable/saveable, without promising recovery
+- The branch UI review covers 22 host scenarios, 896 cancellation masks and 60
+  direction/A combinations; any direction consumes confirmation before mutation
+- Deferred-anchor full-engine host review covers 27 scenarios in strict/UBSan builds,
+  including the packaged earned-34 fixture, wrong mode/room/state, A+R, cancellation,
+  failures at begin/mid-write/final commit, persistent feedback and successful retry
+- Exact quarter-heart gear text is pixel-tested over 97 Q4 values and 2,500 comparisons
 
-## Whole-game regression and reproducibility
+Host/synthetic evidence is distinct from controller acquisition and native pacing.
+Isolated ARM save measurements and compiler stack frames do not establish full-engine
+stack high-water. Reviews: [MAGMA_POLICY_REVIEW.md](MAGMA_POLICY_REVIEW.md),
+[MAGMA_LEGACY_ADMISSION.md](MAGMA_LEGACY_ADMISSION.md),
+[MAGMA_SAVE_IMPLEMENTATION.md](MAGMA_SAVE_IMPLEMENTATION.md),
+[evidence/deferred-anchor/REVIEW.md](evidence/deferred-anchor/REVIEW.md).
 
-A clean `make test test-tools` completed with **exit0**, including all earlier story/exploration/save/evolution/quick-party/equipment/River/Northern suites and all current Southern targets. The complete log SHA-256 is `d0495b8781d46777532df1db743b81db5fdbb80a485fdd60af949595323121d0`. The bounded execution receipt and source hashes are in `southern/aggregate.json`. Host/synthetic and overlapping native counts are not combined into a single gameplay-coverage total.
+## Whole-game regression and reproduction
 
-Legacy tests now explicitly confirm title-screen replacement and use ordinary rest before a long puzzle itinerary. Northern private power fields are resolved through a ROM-paired ELF/STT_FILE scope, rather than ambiguous global nm names after another power module introduced matching private names. The prior observation failure is not hidden as a gameplay change; all original interception, wrong-facing and geometry assertions pass unchanged.
+A clean final-D `make test test-tools` passed with **exit 0** in **1,733.82 seconds**.
+It includes all prior story/exploration/save/evolution/party/equipment, River, Northern
+and Southern acquisition/combat/control/cadence/render suites plus the bridge smoke.
+The full log SHA-256 is `46596948fcea3810393578c27133ebf6aeb0dd959c4b5c8ff97cfa0381c295a1`.
+The source-pinned receipt is in `magma/aggregate.json`; earlier C aggregate success is
+not substituted for this exact-D run. All nine retained Southern suites pass 33,010
+overlapping assertions; their strict windows reach a maximum 273,845 measured cycles
+with one update/page flip per hardware frame. Magma host contracts and the seven new native
+suites are separately recorded rather than added to a misleading aggregate count.
+The final live `make test-magma-host` also passes with exit 0; its complete log hash is
+`6dd03c9608e8e80f7759002df1223d7c1e6c2d45ce8a48bd979f913d4eaf07ec`,
+with bounded details in `magma/host-aggregate.json`.
 
-Run `make test test-tools` for the complete suite. `make test-southern` reproduces the current chapter's authoring, host and native controller tests on the exact built ROM, with a newly earned same-ROM source save. Tool lookup supports explicit ARM_PREFIX, DEVKITARM, the isolated extracted official toolchain or standard installed ARM tools. Invalid explicit selections fail clearly. No private credentials or extracted commercial assets are needed.
+Run `make test test-tools` for the retained whole-game suite and `make test-magma` for
+the new host plus complete native milestone. `make test-magma-native` earns a fresh
+exact-ROM collection, archives its exact producer scripts, then runs minimal, controls,
+retained lifecycle, combat, performance and teaching-encounter checks. Source reports
+are generated outputs, not hard-coded success fixtures. `make gameplay-video` captures
+the spoiler-free town stroll; `make developer-video` is spoiler-bearing older campaign
+media. Every capture/test requires the ROM/symbol pair it actually observes.
 
-The source ZIP contains generated arrays, editable original assets, fixture provenance and test scripts, but no toolchain, emulator shared library, local gameplay saves or developer machine states. Prior release evidence remains available in [VERIFICATION-NORTHERN.md](VERIFICATION-NORTHERN.md) and [NORTHERN_VERIFICATION.md](NORTHERN_VERIFICATION.md).
+Legacy observation fixes use ROM-paired ELF/STT_FILE private-symbol scopes instead of
+ambiguous global nm names. Northern facing-sensitive range tests measure after the
+ordinary facing input, retaining their original band geometry, hit timing and damage
+assertions. Historical fixture bytes and their source pins remain unchanged. The frozen Southern
+policy oracle is included in `tests/fixtures/southern-policy-oracle`; both normal and
+isolated no-sibling source runs pass all 166,703 differential comparisons. This test
+now fails if its packaged oracle is absent rather than silently skipping it.
 
-## Player media and limits
+The independently extracted host aggregate passed every preceding suite, including
+all 344,176 interrupted-write positions, then exited 2 at the deferred-anchor probe's
+synthetic fixed-address memory setup, before any game assertions in that probe.
+The exact script's one standalone rerun passed all 27 scenarios, and a separate mapping
+diagnostic succeeded. The failed call's errno was not captured. A later disposable diagnostic independently
+reproduced errno 17 (EEXIST): Python heap 0x04d48000–0x051a2000 overlapped the requested
+0x05000000–0x05020000 synthetic palette range. This establishes a possible host-address
+collision, not the unrecorded cause of the first failure or a game assertion failure.
+This extracted aggregate is **not** reported as exit 0. The separate complete live
+aggregate above did pass, as did earlier strict/UBSan extracted fixture checks.
+No assertion was weakened and no mapping was forcibly overwritten.
 
-The default teaser is a continuous 20.091-second opening-town stroll with a previously available companion. All 1,200 native frames update/flip once; maximum 179,386 measured cycles. It captures actual PSG samples with zero endpoint drift, no cuts, RAM writes, state loads or quest/ownership changes. The 240×160 preview is a real frame; the delivered 4× image/video use nearest-neighbor scaling. Media reports are capture evidence, not substitutes for full-game acceptance.
+The source package excludes toolchains, shared emulator libraries, live runtime saves,
+machine states and diagnostic smoke screenshots. It contains original editable assets,
+chunked generated arrays, generated QA SRAM fixtures and their exact provenance.
+Prior release reports remain at [VERIFICATION-SOUTHERN.md](VERIFICATION-SOUTHERN.md)
+and [VERIFICATION-NORTHERN.md](VERIFICATION-NORTHERN.md).
 
-Physical GBA and alternate emulator/compiler releases remain untested. Runtime stack high-water is not measured; reviewed static call-chain bounds and the linker reserve are not a physical stress test. Audio is the existing original PSG phrase/effects. The complete 128-form game, legendary acquisition, Magma Mountain and underwater chapters remain unfinished. No commercial-game parity or unmeasured total playtime is claimed.
+## Visual review, media and limits
+
+All eight native scenes were visually inspected. Pale paths contrast with foliage,
+ceramic water channels and foreground edges. Town terraces, workshop and spring grotto
+supply distinct landmarks. Three industrial mechanism rooms deliberately share stone
+materials and remain sparse; commercial-game environmental density is not claimed.
+Developer-only native stills are under [magma/native](magma/native/index.json).
+
+The default teaser is an unbroken **20.091-second** opening-town stroll with an already
+available companion. It has no new creature reveal, puzzle solution, secret route,
+boss or ending; no cuts, resets, RAM writes or ownership/quest changes during capture.
+Its audio is actual original PSG samples with zero endpoint drift. The preview is an
+actual 240×160 frame; delivered 4× media uses nearest-neighbor scaling. No orchestral
+or voice integration is included. See [magma/media.json](magma/media.json).
+
+Physical GBA/flash cartridges, other emulator/compiler releases and runtime stack
+high-water remain untested. Cold checkpoint decoding is a blocking transition,
+separate from steady gameplay and incremental saving. The 128-form game, underwater
+chapter, return journeys and legendary acquisition remain unfinished. No unmeasured
+playtime or commercial-game parity is claimed.

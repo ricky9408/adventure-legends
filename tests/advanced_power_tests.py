@@ -62,6 +62,8 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
 #include "northern_powers.h"
 #include "southern_powers.h"
 #include "south_game.h"
+#include "magma_powers.h"
+#include "magma_game.h"
 #include "progression.h"
 #include "ui.h"
 #define MAX_ENEMIES 6
@@ -74,7 +76,7 @@ typedef struct{int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6]; Shot shots[12];
 unsigned char ordinary_hostile_shots[12];
 static unsigned char vram[16384];
-int cx,cy,south_reset_calls;
+int cx,cy,south_reset_calls,magma_reset_calls;
 volatile int px,py,spirit,stone_guard,guard_invuln;
 int face,frame,ability_cd,ability_max,power_effect,enemy_windups[6];
 int invuln,roll_ticks,game_state,hp,max_hp,deaths,summoned,room;
@@ -92,9 +94,17 @@ void game_health_heal(unsigned amount){hp+=(int)(amount/16);hero_hp_q4=hp*16;}
 void game_health_hurt(unsigned amount,unsigned phase){(void)phase;hp-=(int)(amount/16);hero_hp_q4=hp*16;}
 void game_attacks_reset(void){}
 /* Power handlers, shot generations and the shared OBJ lease are real modules.
- * This bounded world has no selected regional caster or Southern machine. */
+ * This bounded world has no selected regional caster or Southern/Magma machine. */
 CreatureInstance *progression_selected(void){return 0;}
 void south_game_reset(void){south_reset_calls++;}
+void magma_game_reset(void){magma_reset_calls++;}
+/* Chapter geometry/tokens are outside this old-command dispatch fixture.
+ * Real Magma power handlers must see no target and cannot claim a chapter hit. */
+int magma_game_target(int*x,int*y,int*radius){(void)x;(void)y;(void)radius;return 0;}
+unsigned magma_game_action_begin(unsigned channel){assert(channel<4);return 0;}
+int magma_game_command_hit(int x,int y,unsigned damage,unsigned token){
+ (void)x;(void)y;(void)damage;(void)token;return 0;
+}
 unsigned game_companion_phase(void){return CREATURE_FIRE;}
 unsigned game_power_cooldown(unsigned base){return base;}
 int game_melee_hit(unsigned id,int x,int y,int boss){(void)id;(void)x;(void)y;(void)boss;return sword_connect&&swing==11;}
@@ -136,9 +146,9 @@ void source_reset(void){
  invuln=roll_ticks=deaths=summoned=room=0;game_state=1;hp=max_hp=8;hero_hp_q4=128;gear_stats.max_hp_q4=128;weapon_action.damage_q4=32;weapon_action.attack_q4=0;weapon_action.stagger=0;weapon_action.element=255;
  boss_armor=boss_flash=torches=save_calls=dialogue_calls=0;
  boss_x=boss_y=0;swing=combo_step=swing_damage=hitstop=0;
- kills=wall_x=wall_y=wall_w=wall_h=sword_connect=south_reset_calls=0;
+ kills=wall_x=wall_y=wall_w=wall_h=sword_connect=south_reset_calls=magma_reset_calls=0;
  cx=px;cy=py;ability_cd=ability_max=power_effect=0;
- advanced_reset();regional_powers_reset();northern_powers_reset();southern_powers_reset();
+ advanced_reset();regional_powers_reset();northern_powers_reset();southern_powers_reset();magma_powers_reset();
 }
 '''
     class Enemy(C.Structure):
@@ -154,6 +164,7 @@ void source_reset(void){
                         str(ROOT/'src/advanced_powers.c'),str(ROOT/'src/regional_powers.c'),
                         str(ROOT/'src/northern_powers.c'),str(ROOT/'src/northern_power_art.c'),
                         str(ROOT/'src/southern_powers.c'),str(ROOT/'src/southern_power_art.c'),
+                        str(ROOT/'src/magma_powers.c'),str(ROOT/'src/magma_power_art.c'),str(ROOT/'src/combat_rules.c'),
                         str(ROOT/'src/creatures.c'),
                         str(ROOT/'src/creature_data.c'),'-o',str(libfile)],check=True)
         lib=C.CDLL(str(libfile));enemies=(Enemy*6).in_dll(lib,'enemies')
@@ -241,11 +252,15 @@ void source_reset(void){
               shots[0].owner==1 and shots[0].life==90 and ordinary[0]==1 and sum(ordinary)==1)
         lib.source_reset();lib.regional_power(11)
         check('source fixture links a live regional lease',get('regional_power_time')==36 and lib.northern_powers_tiles_owner()!=0)
+        check('absent Magma caster cannot steal live regional lease',not lib.magma_power(43) and
+              get('magma_power_time')==0 and get('regional_power_time')==36 and lib.northern_powers_tiles_owner()!=0)
         setv('hp',1);setv('hero_hp_q4',16);lib.damage()
         check('exact death dispatch resets live power lease and Southern chapter bridge',
               get('game_state')==4 and get('deaths')==1 and get('south_reset_calls')==1 and
               get('regional_power_time')==get('northern_power_time')==get('southern_power_time')==0 and
               lib.northern_powers_tiles_owner()==0)
+        check('exact death dispatch also resets Magma chapter bridge and power',
+              get('magma_reset_calls')==1 and get('magma_power_time')==0)
         lib.source_reset();lib.advanced_power(8);setv('invuln',10);lib.damage()
         check('ordinary invulnerability does not consume guard charges',get('advanced_guard_charges')==2 and get('hp')==8)
         setv('invuln',0);lib.damage()
@@ -259,7 +274,7 @@ void source_reset(void){
         check('Shot ABI stays exactly24bytes with separate12byte metadata',C.sizeof(Shot)==24 and len(effects)==12)
     report={'kind':'supplemental host source-contract tests; synthetic host states',
             'normal_progression_proof':False,'actual_rom_execution':False,
-            'source_sha256':{n:sha(ROOT/'src'/n) for n in ('advanced_powers.c','regional_powers.c','northern_powers.c','northern_power_art.c','southern_powers.c','southern_power_art.c','game.c','creature_data.c')},
+            'source_sha256':{n:sha(ROOT/'src'/n) for n in ('advanced_powers.c','regional_powers.c','northern_powers.c','northern_power_art.c','southern_powers.c','southern_power_art.c','magma_powers.c','magma_power_art.c','magma_powers.h','magma_game.h','combat_rules.c','game.c','creature_data.c')},
             'checks':results,'passed':all(r['passed'] for r in results)}
     (output/'source-contract-report.json').write_text(json.dumps(report,indent=2)+'\n')
     return report
