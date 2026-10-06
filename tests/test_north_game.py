@@ -8,6 +8,7 @@ import ctypes,json,os,subprocess,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='north-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/northern_region/ui_additions.json').read_text())
+UI.update({'MG_RESERVED': '', 'MG_RESERVEDB': ''})  # Host-only imported current capacity-refusal labels
 (OUT/'north_game_test_ui.h').write_text('enum {\n'+''.join(f'TX_{k}={2000+i},\n' for i,k in enumerate(UI))+'};\n')
 HARNESS=r'''
 #include <string.h>

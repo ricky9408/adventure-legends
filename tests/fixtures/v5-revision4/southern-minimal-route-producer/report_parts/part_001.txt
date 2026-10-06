@@ -1,0 +1,1265 @@
+    "src/trial_art_data/part_007.inc": true,
+    "src/trial_art_data/part_008.inc": true,
+    "src/trial_art_data/part_009.inc": true,
+    "src/trials.c": true,
+    "src/trials.h": true,
+    "src/ui.c": true,
+    "src/ui.h": true,
+    "src/ui_data/part_000.inc": true,
+    "src/ui_data/part_001.inc": true,
+    "src/ui_data/part_002.inc": true,
+    "src/ui_data/part_003.inc": true,
+    "src/ui_data/part_004.inc": true,
+    "src/ui_data/part_005.inc": true,
+    "src/ui_data/part_006.inc": true,
+    "src/ui_data/part_007.inc": true,
+    "src/ui_data/part_008.inc": true,
+    "src/ui_data/part_009.inc": true,
+    "src/ui_data/part_010.inc": true,
+    "src/ui_data/part_011.inc": true,
+    "src/ui_data/part_012.inc": true,
+    "src/ui_data/part_013.inc": true,
+    "src/ui_data/part_014.inc": true,
+    "src/ui_data/part_015.inc": true,
+    "src/ui_data/part_016.inc": true,
+    "src/ui_data/part_017.inc": true,
+    "src/ui_data/part_018.inc": true,
+    "src/ui_data/part_019.inc": true,
+    "src/ui_data/part_020.inc": true,
+    "src/ui_data/part_021.inc": true,
+    "src/ui_data/part_022.inc": true,
+    "src/ui_data/part_023.inc": true,
+    "src/ui_data/part_024.inc": true,
+    "src/ui_data/part_025.inc": true,
+    "src/ui_data/part_026.inc": true,
+    "src/ui_data/part_027.inc": true,
+    "src/ui_data/part_028.inc": true,
+    "src/ui_data/part_029.inc": true,
+    "src/ui_data/part_030.inc": true,
+    "src/ui_data/part_031.inc": true,
+    "src/ui_data/part_032.inc": true,
+    "src/ui_data/part_033.inc": true,
+    "src/ui_data/part_034.inc": true,
+    "src/ui_data/part_035.inc": true,
+    "src/ui_data/part_036.inc": true,
+    "src/ui_data/part_037.inc": true,
+    "src/ui_data/part_038.inc": true,
+    "src/ui_data/part_039.inc": true,
+    "src/ui_data/part_040.inc": true,
+    "src/ui_data/part_041.inc": true,
+    "src/ui_data/part_042.inc": true,
+    "src/ui_data/part_043.inc": true,
+    "src/ui_data/part_044.inc": true,
+    "src/ui_data/part_045.inc": true,
+    "src/ui_data/part_046.inc": true,
+    "src/ui_data/part_047.inc": true,
+    "src/ui_data/part_048.inc": true,
+    "src/ui_data/part_049.inc": true,
+    "src/ui_data/part_050.inc": true,
+    "src/ui_data/part_051.inc": true,
+    "src/ui_data/part_052.inc": true,
+    "src/ui_data/part_053.inc": true,
+    "src/ui_data/part_054.inc": true,
+    "src/ui_data/part_055.inc": true,
+    "src/ui_data/part_056.inc": true,
+    "src/ui_data/part_057.inc": true,
+    "src/ui_data/part_058.inc": true,
+    "src/ui_data/part_059.inc": true,
+    "src/ui_data/part_060.inc": true,
+    "src/ui_data/part_061.inc": true,
+    "src/ui_data/part_062.inc": true,
+    "src/ui_data/part_063.inc": true,
+    "src/ui_data/part_064.inc": true,
+    "src/ui_data/part_065.inc": true,
+    "src/ui_data/part_066.inc": true,
+    "src/ui_data/part_067.inc": true,
+    "src/ui_data/part_068.inc": true,
+    "src/ui_data/part_069.inc": true,
+    "src/ui_data/part_070.inc": true,
+    "src/ui_data/part_071.inc": true,
+    "src/ui_data/part_072.inc": true,
+    "src/ui_data/part_073.inc": true,
+    "src/ui_data/part_074.inc": true,
+    "src/ui_data/part_075.inc": true,
+    "src/ui_data/part_076.inc": true,
+    "src/ui_data/part_077.inc": true,
+    "src/ui_data/part_078.inc": true,
+    "src/ui_data/part_079.inc": true,
+    "src/ui_data/part_080.inc": true,
+    "src/ui_data/part_081.inc": true,
+    "src/ui_data/part_082.inc": true,
+    "src/ui_data/part_083.inc": true,
+    "src/ui_data/part_084.inc": true,
+    "src/ui_data/part_085.inc": true,
+    "src/ui_data/part_086.inc": true,
+    "src/ui_data/part_087.inc": true,
+    "src/ui_data/part_088.inc": true,
+    "src/ui_data/part_089.inc": true,
+    "src/ui_data/part_090.inc": true,
+    "src/ui_data/part_091.inc": true,
+    "src/ui_data/part_092.inc": true,
+    "src/ui_data/part_093.inc": true,
+    "src/ui_data/part_094.inc": true,
+    "src/ui_data/part_095.inc": true,
+    "src/ui_data/part_096.inc": true,
+    "src/ui_data/part_097.inc": true,
+    "src/ui_data/part_098.inc": true,
+    "src/ui_data/part_099.inc": true,
+    "src/ui_data/part_100.inc": true,
+    "src/ui_data/part_101.inc": true,
+    "src/ui_data/part_102.inc": true,
+    "src/ui_data/part_103.inc": true,
+    "src/ui_data/part_104.inc": true,
+    "src/ui_data/part_105.inc": true,
+    "src/ui_data/part_106.inc": true,
+    "src/ui_data/part_107.inc": true,
+    "src/ui_data/part_108.inc": true,
+    "src/ui_data/part_109.inc": true,
+    "src/ui_data/part_110.inc": true,
+    "src/ui_data/part_111.inc": true,
+    "src/ui_data/part_112.inc": true,
+    "src/ui_data/part_113.inc": true,
+    "src/ui_data/part_114.inc": true,
+    "src/ui_data/part_115.inc": true,
+    "src/ui_data/part_116.inc": true,
+    "src/ui_data/part_117.inc": true,
+    "src/ui_data/part_118.inc": true,
+    "src/ui_data/part_119.inc": true,
+    "src/ui_data/part_120.inc": true,
+    "src/ui_data/part_121.inc": true,
+    "src/ui_data/part_122.inc": true,
+    "src/ui_data/part_123.inc": true,
+    "src/ui_data/part_124.inc": true,
+    "src/ui_data/part_125.inc": true,
+    "src/ui_data/part_126.inc": true,
+    "src/ui_data/part_127.inc": true,
+    "src/ui_data/part_128.inc": true,
+    "src/ui_data/part_129.inc": true,
+    "src/ui_data/part_130.inc": true,
+    "src/ui_data/part_131.inc": true,
+    "src/ui_data/part_132.inc": true,
+    "src/ui_data/part_133.inc": true,
+    "src/ui_data/part_134.inc": true,
+    "src/ui_data/part_135.inc": true,
+    "src/ui_data/part_136.inc": true,
+    "src/ui_data/part_137.inc": true,
+    "src/ui_data/part_138.inc": true,
+    "src/ui_data/part_139.inc": true,
+    "src/ui_data/part_140.inc": true,
+    "src/ui_data/part_141.inc": true,
+    "src/ui_data/part_142.inc": true,
+    "src/ui_data/part_143.inc": true,
+    "src/ui_data/part_144.inc": true,
+    "src/ui_data/part_145.inc": true,
+    "src/ui_data/part_146.inc": true,
+    "src/ui_data/part_147.inc": true,
+    "src/ui_data/part_148.inc": true,
+    "src/ui_data/part_149.inc": true,
+    "src/ui_data/part_150.inc": true,
+    "src/ui_data/part_151.inc": true,
+    "src/ui_data/part_152.inc": true,
+    "src/ui_data/part_153.inc": true,
+    "src/ui_data/part_154.inc": true,
+    "src/ui_data/part_155.inc": true,
+    "src/ui_data/part_156.inc": true,
+    "src/ui_data/part_157.inc": true,
+    "src/ui_data/part_158.inc": true,
+    "src/ui_data/part_159.inc": true,
+    "src/ui_data/part_160.inc": true,
+    "src/ui_data/part_161.inc": true,
+    "src/ui_data/part_162.inc": true,
+    "src/ui_data/part_163.inc": true,
+    "src/ui_data/part_164.inc": true,
+    "src/weapon_actions.c": true,
+    "src/weapon_actions.h": true,
+    "src/world.c": true,
+    "src/world.h": true,
+    "src/world_data/part_000.inc": true,
+    "src/world_data/part_001.inc": true,
+    "src/world_data/part_002.inc": true,
+    "src/world_data/part_003.inc": true,
+    "src/world_data/part_004.inc": true,
+    "src/world_data/part_005.inc": true,
+    "src/world_data/part_006.inc": true,
+    "src/world_data/part_007.inc": true,
+    "src/world_data/part_008.inc": true,
+    "src/world_data/part_009.inc": true,
+    "src/world_data/part_010.inc": true,
+    "src/world_data/part_011.inc": true,
+    "src/world_data/part_012.inc": true,
+    "src/world_data/part_013.inc": true,
+    "src/world_data/part_014.inc": true,
+    "src/world_data/part_015.inc": true,
+    "src/world_data/part_016.inc": true,
+    "src/world_data/part_017.inc": true,
+    "src/world_data/part_018.inc": true,
+    "src/world_data/part_019.inc": true,
+    "src/world_data/part_020.inc": true,
+    "src/world_data/part_021.inc": true,
+    "src/world_data/part_022.inc": true,
+    "src/world_data/part_023.inc": true,
+    "src/world_data/part_024.inc": true,
+    "src/world_data/part_025.inc": true,
+    "src/world_data/part_026.inc": true,
+    "src/world_data/part_027.inc": true,
+    "src/world_data/part_028.inc": true,
+    "src/world_data/part_029.inc": true,
+    "src/world_data/part_030.inc": true,
+    "src/world_data/part_031.inc": true,
+    "src/world_data/part_032.inc": true,
+    "src/world_data/part_033.inc": true,
+    "src/world_data/part_034.inc": true,
+    "src/world_data/part_035.inc": true,
+    "src/world_data/part_036.inc": true,
+    "linker.ld": true
+  },
+  "content_contract_sha256": "3eb4f3d94c3800444baa6a563838dab3c26a47df24b10bd094e1ec98537041db",
+  "scene_sha256": "ec4d1d0863d51d407ce209405a28fa8fcfd6a518fa5b09ef51f32bca9458dd49",
+  "compiled_room_descriptors": {
+    "30": {
+      "address": 139041428,
+      "width": 480,
+      "height": 320,
+      "bitmap": 139747160,
+      "stride": 28
+    },
+    "31": {
+      "address": 139041456,
+      "width": 480,
+      "height": 320,
+      "bitmap": 139438908,
+      "stride": 28
+    },
+    "32": {
+      "address": 139041484,
+      "width": 240,
+      "height": 160,
+      "bitmap": 139245924,
+      "stride": 28
+    },
+    "33": {
+      "address": 139041512,
+      "width": 240,
+      "height": 160,
+      "bitmap": 139207120,
+      "stride": 28
+    },
+    "34": {
+      "address": 139041540,
+      "width": 240,
+      "height": 160,
+      "bitmap": 139168332,
+      "stride": 28
+    },
+    "35": {
+      "address": 139041568,
+      "width": 240,
+      "height": 160,
+      "bitmap": 139129504,
+      "stride": 28
+    },
+    "36": {
+      "address": 139041596,
+      "width": 240,
+      "height": 160,
+      "bitmap": 139090700,
+      "stride": 28
+    },
+    "37": {
+      "address": 139041624,
+      "width": 240,
+      "height": 160,
+      "bitmap": 139051836,
+      "stride": 28
+    },
+    "22": {
+      "address": 138181384,
+      "width": 480,
+      "height": 320,
+      "bitmap": 138885592,
+      "stride": 28
+    },
+    "23": {
+      "address": 138181412,
+      "width": 480,
+      "height": 320,
+      "bitmap": 138577140,
+      "stride": 28
+    },
+    "24": {
+      "address": 138181440,
+      "width": 240,
+      "height": 160,
+      "bitmap": 138384208,
+      "stride": 28
+    },
+    "25": {
+      "address": 138181468,
+      "width": 240,
+      "height": 160,
+      "bitmap": 138345420,
+      "stride": 28
+    },
+    "26": {
+      "address": 138181496,
+      "width": 240,
+      "height": 160,
+      "bitmap": 138306632,
+      "stride": 28
+    },
+    "27": {
+      "address": 138181524,
+      "width": 240,
+      "height": 160,
+      "bitmap": 138267828,
+      "stride": 28
+    },
+    "28": {
+      "address": 138181552,
+      "width": 240,
+      "height": 160,
+      "bitmap": 138228992,
+      "stride": 28
+    },
+    "29": {
+      "address": 138181580,
+      "width": 240,
+      "height": 160,
+      "bitmap": 138190204,
+      "stride": 28
+    }
+  },
+  "branch_policy": "Only exact tested ROM/symbols hash-checked state/SRAM pairs; no imported machine states",
+  "enabled_rows_are_not_acquisition_evidence": true,
+  "checks": [
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "genuine main-only Northern SRAM cold-resumes in Northern town",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration preserves all160 exact prior instance records",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration preserves active party and selected individual",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration preserves exact six-history collection and reward ledgers",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration preserves exact previous quests and starter-only equipment",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration preserves expedition and lifetime field aid bytes",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "source genuinely owns only six base individuals and six historical forms",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "all exact original individual IDs survive forward migration",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration invents no Southern content",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "source owns only guaranteed starter sword and no optional gear reward",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "migration commits revision4 with byte-identical revision3 payload",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "forward migration keeps prior committed revision3 bank intact",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "River and optional Northern quests stay absent; prior main quests stay complete",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "earlier Core clear and ending remain unearned",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "all optional Southern quests remain absent",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "no optional Southern field companion claimed",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "no personal trial or evolution prerequisite acquired",
+      "passed": true,
+      "frame": 190
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 193
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 196
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 196
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 211
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 211
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 216
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 216
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 221
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 221
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 226
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 226
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 231
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 231
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 236
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 236
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 241
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 241
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 246
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 246
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 251
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 251
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 256
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 256
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 261
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 261
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 266
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 266
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 271
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 271
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 276
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 276
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 281
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 281
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 286
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 286
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 291
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 291
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 296
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 296
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 301
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 301
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 306
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 306
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 311
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 311
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 316
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 316
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 321
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 321
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 326
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 326
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 331
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 331
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 336
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 336
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 341
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 341
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 346
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 346
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 351
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 351
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 356
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 356
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 361
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 361
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 366
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 366
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 371
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 371
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 376
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 376
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 381
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 381
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 386
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 386
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 391
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 391
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 396
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 396
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 401
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 401
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 406
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 406
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 411
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 411
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 416
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 416
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 467
+    },
+    {
+      "label": "ordinary controller transition 22 to30",
+      "passed": true,
+      "frame": 467
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 470
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 473
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 473
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 488
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 488
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 503
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 503
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 518
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 518
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 533
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 533
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 548
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 548
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 563
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 563
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 578
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 578
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 591
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 591
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 606
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 606
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 621
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 621
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 636
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 636
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 651
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 651
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 666
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 666
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 681
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 681
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 688
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 688
+    },
+    {
+      "label": "guide controller reaches exact marked interaction range",
+      "passed": true,
+      "frame": 692
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 757
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 760
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 760
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 775
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 775
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 780
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 780
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 785
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 785
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 790
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 790
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 795
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 795
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 800
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 800
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 805
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 805
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 810
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 810
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 815
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 815
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 820
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 820
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 825
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 825
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 830
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 830
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 835
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 835
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 840
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 840
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 845
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 845
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 850
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 850
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 855
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 855
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 860
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 860
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 865
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 865
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 870
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 870
+    },
+    {
+      "label": "demo_handle controller reaches exact marked interaction range",
+      "passed": true,
+      "frame": 874
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 921
+    },
+    {

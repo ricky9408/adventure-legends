@@ -10,9 +10,9 @@ typedef CreatureU16 CreatureCapabilityId;
 
 enum {
     CREATURE_FORM_CAPACITY = 128, CREATURE_FAMILY_CAPACITY = 60,
-    CREATURE_ENABLED_COUNT = 41,
-    CREATURE_LEARNSET_COUNT = 61, CREATURE_EVOLUTION_COUNT = 20,
-    CREATURE_ABILITY_COUNT = 41, CREATURE_LEGACY_COUNT = 4,
+    CREATURE_ENABLED_COUNT = 65,
+    CREATURE_LEARNSET_COUNT = 102, CREATURE_EVOLUTION_COUNT = 35,
+    CREATURE_ABILITY_COUNT = 65, CREATURE_LEGACY_COUNT = 4,
     CREATURE_ROSTER_CAPACITY = 160, CREATURE_PARTY_CAPACITY = 4,
     CREATURE_EMPTY_SLOT = 255, CREATURE_MAX_LEVEL = 50,
     CREATURE_MAX_BOND = 100, CREATURE_EXPEDITION_BOND_CAP = 10,
@@ -30,8 +30,9 @@ enum {
     CREATURE_EVOLUTION_CHAPTER_MASK = 7, CREATURE_REED_RESTORED = 8,
     CREATURE_NORTH_HARBOR_READY = 16, CREATURE_COUNTERWORKS_STABLE = 32,
     CREATURE_SOUTH_READY = 64, CREATURE_SUNWELL_OPEN = 128,
-    CREATURE_EVOLUTION_CONTEXT_MASK = 255,
-    CREATURE_CONTENT_REVISION = 4, CREATURE_ROUTE_REQUIREMENTS_MAX = 8,
+    CREATURE_MAGMA_READY = 256, CREATURE_CALDERA_OPEN = 512,
+    CREATURE_EVOLUTION_CONTEXT_MASK = 1023,
+    CREATURE_CONTENT_REVISION = 5, CREATURE_ROUTE_REQUIREMENTS_MAX = 8,
     CREATURE_TRIAL_HEARTH = 1, CREATURE_TRIAL_CANOPY = 2,
     CREATURE_TRIAL_WIND_LOOM = 4, CREATURE_TRIAL_AMBER_ARCH = 8,
     CREATURE_TRIAL_PAIRED_POOLS = 16,
@@ -136,11 +137,16 @@ const CreatureAbility *creatures_ability(unsigned ability_id);
 /* Frozen legacy family trial mask, or zero for Southern/no trial/unknown.
  * Never derive a trial from family_id or an enabled table index. */
 unsigned creatures_family_trial(unsigned form_id);
-/* Exact historical snapshots; only revisions 1..4 are accepted. Zero mask
+/* Exact historical snapshots for revisions 1..4; revision5 uses current policy. Zero mask
  * means no permitted trial, not permission to award one. */
+/* Historical lookups never resolve live catalog rows. Unknown family returns0;
+ * unknown/non-story legacy mapping returns255. No migration mutates evidence. */
+unsigned creatures_family_revision(unsigned form_id, unsigned revision);
+unsigned creatures_legacy_spirit_revision(unsigned form_id, unsigned revision);
 int creatures_form_allowed_revision(unsigned form_id, unsigned content_revision);
 int creatures_command_learned_revision(unsigned form_id, unsigned level,
                                        unsigned ability_id, unsigned content_revision);
+/* Current masks are per-form:31/34 cannot retain key2 before32/35. */
 unsigned creatures_trial_allowed_mask(unsigned form_id, unsigned content_revision);
 int creatures_instance_validate_revision(const CreatureInstance *instance,
                                           unsigned content_revision);
@@ -164,12 +170,16 @@ unsigned creatures_level_for_xp(CreatureU32 xp); /* saturates at 50 */
 int creatures_command_learned(unsigned form_id, unsigned level, unsigned ability_id);
 int creatures_instance_validate(const CreatureInstance *instance);
 int creatures_roster_validate(const CreatureRoster *roster);
+int creatures_roster_validate_revision(const CreatureRoster *roster, unsigned revision);
 int creatures_party_validate(const CreatureRoster *roster);
 void creatures_roster_init(CreatureRoster *roster);
 unsigned creatures_roster_count(const CreatureRoster *roster);
 CreatureU32 creatures_party_capabilities(const CreatureRoster *roster);
 int creatures_party_set(CreatureRoster *roster, const CreatureU8 party[4], CreatureU32 required_caps);
-/* Adds an enabled form; callers author acquisition gates. Returns slot or 255.
+/* Legacy/staging primitive. NOT an unguarded gameplay acquisition permission.
+ * Forward gameplay callers must use creatures_grant_admitted or check the
+ * prospective query in the same atomic transaction before this inner operation.
+ * Adds an enabled form; callers author acquisition gates. Returns slot or 255.
  * reward_id 1..4 is reserved for matching story families; 5..128 is a
  * general one-time transaction; 0 means repeatable. At capacity
  * nothing changes, including the reward ledger. Story grants use the API below.
@@ -177,6 +187,52 @@ int creatures_party_set(CreatureRoster *roster, const CreatureU8 party[4], Creat
  * Full parties are never replaced; a new companion remains in storage.
  * Quest 2 authors grant(13, 10, 20, 0, 5); quest 3 authors reward 6/form 16.
  * This API does not mark quests complete or verify the external recruit gate. */
+enum {
+    CREATURE_TERMINAL_OPPORTUNITIES = 72,
+    CREATURE_EXTRA_COPY_BUDGET = 88
+};
+/* Immutable final topology metadata includes disabled forms only for capacity
+ * reservation; it never enables their acquisition, commands or evolution. */
+typedef struct CreatureTerminalPolicy { CreatureU8 family, terminal_mask; } CreatureTerminalPolicy;
+extern const CreatureTerminalPolicy creature_terminal_policy[129];
+unsigned creatures_terminal_family(unsigned form_id); /* 0 invalid */
+unsigned creatures_terminal_mask(unsigned form_id);   /* 1/2/3; 0 invalid */
+typedef struct CreatureCoverage {
+    CreatureU16 occupied, viable, excess, free_slots, missing_opportunities;
+    CreatureU16 admission_safe;
+} CreatureCoverage;
+typedef struct CreatureAdmission {
+    CreatureCoverage before, after;
+} CreatureAdmission;
+enum CreatureAdmissionStatus {
+    CREATURE_ADMISSION_READY = 0,
+    CREATURE_ADMISSION_GRANDFATHERED_READY,
+    CREATURE_ADMISSION_INVALID,
+    CREATURE_ADMISSION_FULL,
+    CREATURE_ADMISSION_RESERVED,
+    CREATURE_ADMISSION_COVERAGE_LOSS,
+    CREATURE_ADMISSION_ALREADY_CLAIMED,
+    CREATURE_ADMISSION_ID_EXHAUSTED
+};
+/* Read-only, bounded160-record scans. Invalid output is zeroed. Optional detail
+ * exposes candidate coverage without copying a roster; no history bits count as
+ * individuals. These are gameplay guards, NEVER save-validity requirements.
+ * A legal over-budget save remains loadable/saveable; new actions can only be
+ * nonworsening and cannot promise recovery of all future terminal outcomes. */
+int creatures_collection_coverage(const CreatureRoster *roster, CreatureCoverage *out);
+enum CreatureAdmissionStatus creatures_admission_query_grant(
+    const CreatureRoster *roster, unsigned form_id, CreatureAdmission *detail);
+enum CreatureAdmissionStatus creatures_admission_query_evolution(
+    const CreatureRoster *roster, unsigned roster_slot, unsigned target_form,
+    CreatureAdmission *detail);
+/* Additional source/quest authorization belongs to the caller. receipt retries
+ * return ALREADY_CLAIMED before admission. out_slot is255 except on a new grant.
+ * Both READY statuses are successful; every other result leaves all bytes intact. */
+enum CreatureAdmissionStatus creatures_grant_admitted(
+    CreatureRoster *roster, unsigned form_id, unsigned level, unsigned bond,
+    unsigned flags, unsigned reward_id, unsigned *out_slot);
+int creatures_admission_allowed(enum CreatureAdmissionStatus status);
+
 unsigned creatures_grant(CreatureRoster *roster, unsigned form_id, unsigned level,
                          unsigned bond, unsigned flags, unsigned reward_id);
 unsigned creatures_grant_story(CreatureRoster *roster, unsigned legacy_spirit,
@@ -218,7 +274,8 @@ enum CreatureEvolutionStatus {
     CREATURE_EVOLVE_NO_EDGE, CREATURE_EVOLVE_LEVEL,
     CREATURE_EVOLVE_BOND, CREATURE_EVOLVE_STORY,
     CREATURE_EVOLVE_TRIAL, CREATURE_EVOLVE_SANCTUARY,
-    CREATURE_EVOLVE_DEFERRED, CREATURE_EVOLVE_AMBIGUOUS
+    CREATURE_EVOLVE_DEFERRED, CREATURE_EVOLVE_AMBIGUOUS,
+    CREATURE_EVOLVE_COLLECTION_RESERVED
 };
 /* Legacy lookup returns NULL for zero or multiple edges. Ordinal enumeration
  * is bounded and never substitutes an implicit first target for player choice. */
@@ -228,6 +285,11 @@ const CreatureEvolution *creatures_evolution_at(unsigned form_id, unsigned ordin
 const CreatureEvolution *creatures_evolution_to(unsigned form_id, unsigned target_form);
 unsigned creatures_can_evolve_to(const CreatureInstance *instance, unsigned target_form,
                                  unsigned evolution_context, int at_sanctuary);
+/* Roster-aware preconfirmation query includes prospective terminal admission.
+ * Instance-only queries above answer trial/context eligibility only. */
+unsigned creatures_can_evolve_roster_to(const CreatureRoster *roster,
+    unsigned roster_slot, unsigned target_form, unsigned evolution_context,
+    int at_sanctuary);
 unsigned creatures_evolve_to(CreatureRoster *roster, unsigned roster_slot, unsigned target_form,
                              unsigned evolution_context, int at_sanctuary, int confirmed);
 /* READY ignores confirmation so UI can show eligibility; evolve requires it.

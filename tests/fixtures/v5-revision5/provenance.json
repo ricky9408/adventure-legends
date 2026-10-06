@@ -1,0 +1,1707 @@
+{
+  "fixture": "magma-all65-town.sav",
+  "sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+  "bytes": 32768,
+  "generated_test_fixture": true,
+  "player_save": false,
+  "purpose": "Historical content-revision5 regression input generated only by native controller tests, not a player save or fabricated host roster",
+  "source_release_status": "Final D acceptance candidate; capture does not assert publication",
+  "source_rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+  "source_rom_bytes": 7495920,
+  "source_symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+  "source_elf_sha256": "0b56a0a525ef59d36b14a89a2786e5811f29fd9a54c386093fa06528f3afcc99",
+  "source_snapshot": "03-full34-independent-reboot",
+  "source_state": {
+    "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+    "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-retained-d-final/03-full34-independent-reboot.state",
+    "state_sha256": "49e4b40527bdd3e96b6e74506041ad7dba4c0c9e14496473460f0f9f191dca55",
+    "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-retained-d-final/03-full34-independent-reboot.sav",
+    "sram_sha256": "a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858",
+    "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-magma-candidate-d/build/magma-independent-retained-d-final/03-full34-independent-reboot.png",
+    "status": {
+      "game_state": 1,
+      "room": 38,
+      "px": 112,
+      "py": 264,
+      "hp": 7,
+      "chapter_flags": 15,
+      "camera_x": 0,
+      "camera_y": 160,
+      "save_failed": 0,
+      "checkpoint_spawn": 3,
+      "spirit": 26,
+      "summoned": 0,
+      "ability_cd": 0,
+      "roll_cd": 0
+    },
+    "quests": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "obtained_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      25,
+      26,
+      28,
+      29,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "owned_form_ids": [
+      2,
+      5,
+      8,
+      11,
+      14,
+      16,
+      20,
+      78,
+      23,
+      74,
+      76,
+      80,
+      86,
+      92,
+      26,
+      29,
+      90,
+      88,
+      84,
+      82,
+      94,
+      33,
+      36,
+      44,
+      98,
+      38,
+      47,
+      96,
+      41,
+      100,
+      39,
+      42,
+      45,
+      48
+    ],
+    "objectives": [
+      3,
+      3,
+      15,
+      7,
+      3,
+      3,
+      3,
+      7
+    ],
+    "puzzle": [
+      14,
+      26,
+      0,
+      0
+    ]
+  },
+  "source_report": {
+    "manifest": "lifecycle-producer/report_parts/manifest.json",
+    "manifest_sha256": "7bd4d6d3de2740ec7195d7b2a7b96400f05ab187b488ca58b9cbc723fa909c97",
+    "original_sha256": "8093ef37f4ae90174b24a3a12203c80c6bfaad94d5e087e5b65c4ede38c23bc6",
+    "original_bytes": 410613,
+    "part_count": 14
+  },
+  "acquisition_report": {
+    "manifest": "acquisition-producer/report_parts/manifest.json",
+    "manifest_sha256": "ab711d3bb4a9b7f331f97d980b514cba250ff120c5a930ef242f6c7b0c464997",
+    "original_sha256": "055d1cf3c86f64cb9a5781731c252dc32b652e9b7d6f32b0cab104123ec9241b",
+    "original_bytes": 5140009,
+    "part_count": 172
+  },
+  "acquisition_snapshot": "09-all65-earned-town",
+  "acquisition_sram_fixture": "magma-all65-acquisition-town.sav",
+  "acquisition_sram_sha256": "28a01170b27b9029546067e2866ee91cde1ee7f64ffd6564f37df836aa2c11eb",
+  "source_manifest": {
+    "manifest": "runtime-source-manifest/manifest.json",
+    "manifest_sha256": "ba5277acbd6a4189ba2b250440a1758cf46eb1ea014887f9eb4930b5affb9868",
+    "original_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f",
+    "original_bytes": 91412,
+    "part_count": 4
+  },
+  "runtime_source_count": 893,
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "lifecycle_machine_state_loads": 0,
+  "acquisition_machine_states_cross_rom_loaded": false,
+  "reports_successful_at_capture": true,
+  "producer_test_sources": {
+    "acquisition": {
+      "tests/magma_journey.py": "ea2fc79efc577cc0527eee2a276455fd7f911bdb31795460f2f6efed70f018f2",
+      "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+      "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+      "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+      "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+      "tests/test_save5.py": "f933d85234da54d6da09f62a99e822eab0c21c0e3ffce8fc1eb7883fb1377aba",
+      "tests/test_creatures.py": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+      "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+      "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+      "tests/southern_symbols.py": "7f21fb8098ad216457190fa9071374b49df263794f43f4caac70dafce0e81aad",
+      "tests/test_southern_frozen_fixtures.py": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce"
+    },
+    "lifecycle": {
+      "tests/magma_journey.py": "bc0dd73960c23816c1d5bd53b7dff6ebbde015e5da8181f397249c3ec87e51e5",
+      "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+      "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+      "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+      "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95",
+      "tests/magma_controls.py": "15c82a457d80293fe0a9ddba626d55d23147b87865979b91abf2e760cdb2071d",
+      "tests/magma_retained_controls.py": "f05a342285627da2d7955c32806b5e13fdc7b7fc004d222560d60ebe2f85d0c4",
+      "tests/test_save5.py": "f933d85234da54d6da09f62a99e822eab0c21c0e3ffce8fc1eb7883fb1377aba",
+      "tests/test_creatures.py": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+      "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+      "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+      "tests/southern_symbols.py": "7f21fb8098ad216457190fa9071374b49df263794f43f4caac70dafce0e81aad",
+      "tests/test_southern_frozen_fixtures.py": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce"
+    }
+  },
+  "acquisition_observer_receipt_sha256": "07ad6f278adf81f8e93b5f3cdf6582b9b0492bf3ce2535d3bae66842f57108a3",
+  "verified_originals": {
+    "path": "capture-verified-originals.json",
+    "sha256": "ba087c3f8e6d97b954385f371fd6b4b9fe72d5b4dae455930e27c54449ffd588",
+    "count": 121
+  },
+  "wire_banks": {
+    "magma-all65-town.sav": [
+      {
+        "bank_offset": 512,
+        "sequence": 663,
+        "room": 38,
+        "spawn": 3,
+        "chapter_flags": 15,
+        "owned_instance_count": 34,
+        "obtained_form_count": 65,
+        "claimed_quest_count": 38,
+        "gear_item_count": 31,
+        "instances": [
+          {
+            "index": 0,
+            "form_id": 2,
+            "instance_id": 1,
+            "record_hex": "0203144d3c6f0000010000000000010001000100b179379e"
+          },
+          {
+            "index": 1,
+            "form_id": 5,
+            "instance_id": 2,
+            "record_hex": "0503144d3c6f000002000000000002000200000062f36e3c"
+          },
+          {
+            "index": 2,
+            "form_id": 8,
+            "instance_id": 3,
+            "record_hex": "08031664b0960000030000000000040003000100136da6da"
+          },
+          {
+            "index": 3,
+            "form_id": 11,
+            "instance_id": 4,
+            "record_hex": "0b03144d3c6f0000040000000000080004000000c4e6dd78"
+          },
+          {
+            "index": 4,
+            "form_id": 14,
+            "instance_id": 5,
+            "record_hex": "0e010f2de02a000005000000000010000a00000075601517"
+          },
+          {
+            "index": 5,
+            "form_id": 16,
+            "instance_id": 6,
+            "record_hex": "10010a14640b000006000000000000000b00010026da4cb5"
+          },
+          {
+            "index": 6,
+            "form_id": 20,
+            "instance_id": 7,
+            "record_hex": "140114282c6b000007000000000020000e000000d7538453"
+          },
+          {
+            "index": 7,
+            "form_id": 78,
+            "instance_id": 8,
+            "record_hex": "4e0114322c6b000008000000000000021600000088cdbbf1"
+          },
+          {
+            "index": 8,
+            "form_id": 23,
+            "instance_id": 9,
+            "record_hex": "170114282c6b00000900000000004000100000003947f38f"
+          },
+          {
+            "index": 9,
+            "form_id": 74,
+            "instance_id": 10,
+            "record_hex": "4a01142d2c6b00000a0000000000800012000100eac02a2e"
+          },
+          {
+            "index": 10,
+            "form_id": 76,
+            "instance_id": 11,
+            "record_hex": "4c01142d2c6b00000b00000000000001140001009b3a62cc"
+          },
+          {
+            "index": 11,
+            "form_id": 80,
+            "instance_id": 12,
+            "record_hex": "50011439706d00000c000000000001001c0001004cb4996a"
+          },
+          {
+            "index": 12,
+            "form_id": 86,
+            "instance_id": 13,
+            "record_hex": "5601143c106e00000d0000000000010022000100fd2dd108"
+          },
+          {
+            "index": 13,
+            "form_id": 92,
+            "instance_id": 14,
+            "record_hex": "5c01182d1cbe00000e0000000000010027000100aea708a7"
+          },
+          {
+            "index": 14,
+            "form_id": 26,
+            "instance_id": 15,
+            "record_hex": "1a01142aa46b00000f00000000000100170001005f214045"
+          },
+          {
+            "index": 15,
+            "form_id": 29,
+            "instance_id": 16,
+            "record_hex": "1d01162db4900000100000000000010019000000109b77e3"
+          },
+          {
+            "index": 16,
+            "form_id": 90,
+            "instance_id": 17,
+            "record_hex": "5a01162db4900000110000000000010025000000c114af81"
+          },
+          {
+            "index": 17,
+            "form_id": 88,
+            "instance_id": 18,
+            "record_hex": "5801182d1cbe0000120000000000010023000000728ee61f"
+          },
+          {
+            "index": 18,
+            "form_id": 84,
+            "instance_id": 19,
+            "record_hex": "5401162db490000013000000000001001f00010023081ebe"
+          },
+          {
+            "index": 19,
+            "form_id": 82,
+            "instance_id": 20,
+            "record_hex": "5201162db490000014000000000001001d000000d481555c"
+          },
+          {
+            "index": 20,
+            "form_id": 94,
+            "instance_id": 21,
+            "record_hex": "5e01166464a4000015000000000001002900000085fb8cfa"
+          },
+          {
+            "index": 21,
+            "form_id": 33,
+            "instance_id": 22,
+            "record_hex": "21012064e0ea010016000000000003002b0000003675c498"
+          },
+          {
+            "index": 22,
+            "form_id": 36,
+            "instance_id": 23,
+            "record_hex": "2401206494e6010017000000000003002e000100e7eefb36"
+          },
+          {
+            "index": 23,
+            "form_id": 44,
+            "instance_id": 24,
+            "record_hex": "2c011a30c4f40000180000000000010038000000986833d5"
+          },
+          {
+            "index": 24,
+            "form_id": 98,
+            "instance_id": 25,
+            "record_hex": "62011a323cf5000019000000000001003f00010049e26a73"
+          },
+          {
+            "index": 25,
+            "form_id": 38,
+            "instance_id": 26,
+            "record_hex": "26011a35f0f500001a0000000000010032000000fa5ba211"
+          },
+          {
+            "index": 26,
+            "form_id": 47,
+            "instance_id": 27,
+            "record_hex": "2f011a35f0f500001b000000000001003b000100abd5d9af"
+          },
+          {
+            "index": 27,
+            "form_id": 96,
+            "instance_id": 28,
+            "record_hex": "60011a30c4f400001c000000000001003d0000005c4f114e"
+          },
+          {
+            "index": 28,
+            "form_id": 41,
+            "instance_id": 29,
+            "record_hex": "29011a323cf500001d00000000000100350001000dc948ec"
+          },
+          {
+            "index": 29,
+            "form_id": 100,
+            "instance_id": 30,
+            "record_hex": "64011a30c4f400001e0000000000010041000000be42808a"
+          },
+          {
+            "index": 30,
+            "form_id": 39,
+            "instance_id": 31,
+            "record_hex": "27011d32445901001f00000000000200310001006fbcb728"
+          },
+          {
+            "index": 31,
+            "form_id": 42,
+            "instance_id": 32,
+            "record_hex": "2a011d30445901002000000000000200340001002036efc6"
+          },
+          {
+            "index": 32,
+            "form_id": 45,
+            "instance_id": 33,
+            "record_hex": "2d011d35cc580100210000000000020037000000d1af2665"
+          },
+          {
+            "index": 33,
+            "form_id": 48,
+            "instance_id": 34,
+            "record_hex": "30011d35f859010022000000000002003a00000082295e03"
+          }
+        ],
+        "obtained_form_ids": [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          13,
+          14,
+          16,
+          19,
+          20,
+          22,
+          23,
+          25,
+          26,
+          28,
+          29,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "quests": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "party_slots": [
+          26,
+          33,
+          2,
+          29
+        ],
+        "selected_party": 1,
+        "next_instance_id": 35
+      },
+      {
+        "bank_offset": 6656,
+        "sequence": 664,
+        "room": 38,
+        "spawn": 3,
+        "chapter_flags": 15,
+        "owned_instance_count": 34,
+        "obtained_form_count": 65,
+        "claimed_quest_count": 38,
+        "gear_item_count": 31,
+        "instances": [
+          {
+            "index": 0,
+            "form_id": 2,
+            "instance_id": 1,
+            "record_hex": "0203144d3c6f0000010000000000010001000100b179379e"
+          },
+          {
+            "index": 1,
+            "form_id": 5,
+            "instance_id": 2,
+            "record_hex": "0503144d3c6f000002000000000002000200000062f36e3c"
+          },
+          {
+            "index": 2,
+            "form_id": 8,
+            "instance_id": 3,
+            "record_hex": "08031664b0960000030000000000040003000100136da6da"
+          },
+          {
+            "index": 3,
+            "form_id": 11,
+            "instance_id": 4,
+            "record_hex": "0b03144d3c6f0000040000000000080004000000c4e6dd78"
+          },
+          {
+            "index": 4,
+            "form_id": 14,
+            "instance_id": 5,
+            "record_hex": "0e010f2de02a000005000000000010000a00000075601517"
+          },
+          {
+            "index": 5,
+            "form_id": 16,
+            "instance_id": 6,
+            "record_hex": "10010a14640b000006000000000000000b00010026da4cb5"
+          },
+          {
+            "index": 6,
+            "form_id": 20,
+            "instance_id": 7,
+            "record_hex": "140114282c6b000007000000000020000e000000d7538453"
+          },
+          {
+            "index": 7,
+            "form_id": 78,
+            "instance_id": 8,
+            "record_hex": "4e0114322c6b000008000000000000021600000088cdbbf1"
+          },
+          {
+            "index": 8,
+            "form_id": 23,
+            "instance_id": 9,
+            "record_hex": "170114282c6b00000900000000004000100000003947f38f"
+          },
+          {
+            "index": 9,
+            "form_id": 74,
+            "instance_id": 10,
+            "record_hex": "4a01142d2c6b00000a0000000000800012000100eac02a2e"
+          },
+          {
+            "index": 10,
+            "form_id": 76,
+            "instance_id": 11,
+            "record_hex": "4c01142d2c6b00000b00000000000001140001009b3a62cc"
+          },
+          {
+            "index": 11,
+            "form_id": 80,
+            "instance_id": 12,
+            "record_hex": "50011439706d00000c000000000001001c0001004cb4996a"
+          },
+          {
+            "index": 12,
+            "form_id": 86,
+            "instance_id": 13,
+            "record_hex": "5601143c106e00000d0000000000010022000100fd2dd108"
+          },
+          {
+            "index": 13,
+            "form_id": 92,
+            "instance_id": 14,
+            "record_hex": "5c01182d1cbe00000e0000000000010027000100aea708a7"
+          },
+          {
+            "index": 14,
+            "form_id": 26,
+            "instance_id": 15,
+            "record_hex": "1a01142aa46b00000f00000000000100170001005f214045"
+          },
+          {
+            "index": 15,
+            "form_id": 29,
+            "instance_id": 16,
+            "record_hex": "1d01162db4900000100000000000010019000000109b77e3"
+          },
+          {
+            "index": 16,
+            "form_id": 90,
+            "instance_id": 17,
+            "record_hex": "5a01162db4900000110000000000010025000000c114af81"
+          },
+          {
+            "index": 17,
+            "form_id": 88,
+            "instance_id": 18,
+            "record_hex": "5801182d1cbe0000120000000000010023000000728ee61f"
+          },
+          {
+            "index": 18,
+            "form_id": 84,
+            "instance_id": 19,
+            "record_hex": "5401162db490000013000000000001001f00010023081ebe"
+          },
+          {
+            "index": 19,
+            "form_id": 82,
+            "instance_id": 20,
+            "record_hex": "5201162db490000014000000000001001d000000d481555c"
+          },
+          {
+            "index": 20,
+            "form_id": 94,
+            "instance_id": 21,
+            "record_hex": "5e01166464a4000015000000000001002900000085fb8cfa"
+          },
+          {
+            "index": 21,
+            "form_id": 33,
+            "instance_id": 22,
+            "record_hex": "21012064e0ea010016000000000003002b0000003675c498"
+          },
+          {
+            "index": 22,
+            "form_id": 36,
+            "instance_id": 23,
+            "record_hex": "2401206494e6010017000000000003002e000100e7eefb36"
+          },
+          {
+            "index": 23,
+            "form_id": 44,
+            "instance_id": 24,
+            "record_hex": "2c011a30c4f40000180000000000010038000000986833d5"
+          },
+          {
+            "index": 24,
+            "form_id": 98,
+            "instance_id": 25,
+            "record_hex": "62011a323cf5000019000000000001003f00010049e26a73"
+          },
+          {
+            "index": 25,
+            "form_id": 38,
+            "instance_id": 26,
+            "record_hex": "26011a35f0f500001a0000000000010032000000fa5ba211"
+          },
+          {
+            "index": 26,
+            "form_id": 47,
+            "instance_id": 27,
+            "record_hex": "2f011a35f0f500001b000000000001003b000100abd5d9af"
+          },
+          {
+            "index": 27,
+            "form_id": 96,
+            "instance_id": 28,
+            "record_hex": "60011a30c4f400001c000000000001003d0000005c4f114e"
+          },
+          {
+            "index": 28,
+            "form_id": 41,
+            "instance_id": 29,
+            "record_hex": "29011a323cf500001d00000000000100350001000dc948ec"
+          },
+          {
+            "index": 29,
+            "form_id": 100,
+            "instance_id": 30,
+            "record_hex": "64011a30c4f400001e0000000000010041000000be42808a"
+          },
+          {
+            "index": 30,
+            "form_id": 39,
+            "instance_id": 31,
+            "record_hex": "27011d32445901001f00000000000200310001006fbcb728"
+          },
+          {
+            "index": 31,
+            "form_id": 42,
+            "instance_id": 32,
+            "record_hex": "2a011d30445901002000000000000200340001002036efc6"
+          },
+          {
+            "index": 32,
+            "form_id": 45,
+            "instance_id": 33,
+            "record_hex": "2d011d35cc580100210000000000020037000000d1af2665"
+          },
+          {
+            "index": 33,
+            "form_id": 48,
+            "instance_id": 34,
+            "record_hex": "30011d35f859010022000000000002003a00000082295e03"
+          }
+        ],
+        "obtained_form_ids": [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          13,
+          14,
+          16,
+          19,
+          20,
+          22,
+          23,
+          25,
+          26,
+          28,
+          29,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "quests": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "party_slots": [
+          26,
+          33,
+          2,
+          29
+        ],
+        "selected_party": 1,
+        "next_instance_id": 35
+      }
+    ],
+    "magma-all65-acquisition-town.sav": [
+      {
+        "bank_offset": 512,
+        "sequence": 649,
+        "room": 38,
+        "spawn": 3,
+        "chapter_flags": 15,
+        "owned_instance_count": 34,
+        "obtained_form_count": 65,
+        "claimed_quest_count": 38,
+        "gear_item_count": 31,
+        "instances": [
+          {
+            "index": 0,
+            "form_id": 2,
+            "instance_id": 1,
+            "record_hex": "0203144d3c6f0000010000000000010001000100b179379e"
+          },
+          {
+            "index": 1,
+            "form_id": 5,
+            "instance_id": 2,
+            "record_hex": "0503144d3c6f000002000000000002000200000062f36e3c"
+          },
+          {
+            "index": 2,
+            "form_id": 8,
+            "instance_id": 3,
+            "record_hex": "08031664b0960000030000000000040003000100136da6da"
+          },
+          {
+            "index": 3,
+            "form_id": 11,
+            "instance_id": 4,
+            "record_hex": "0b03144d3c6f0000040000000000080004000000c4e6dd78"
+          },
+          {
+            "index": 4,
+            "form_id": 14,
+            "instance_id": 5,
+            "record_hex": "0e010f2de02a000005000000000010000a00000075601517"
+          },
+          {
+            "index": 5,
+            "form_id": 16,
+            "instance_id": 6,
+            "record_hex": "10010a14640b000006000000000000000b00010026da4cb5"
+          },
+          {
+            "index": 6,
+            "form_id": 20,
+            "instance_id": 7,
+            "record_hex": "140114282c6b000007000000000020000e000000d7538453"
+          },
+          {
+            "index": 7,
+            "form_id": 78,
+            "instance_id": 8,
+            "record_hex": "4e0114322c6b000008000000000000021600000088cdbbf1"
+          },
+          {
+            "index": 8,
+            "form_id": 23,
+            "instance_id": 9,
+            "record_hex": "170114282c6b00000900000000004000100000003947f38f"
+          },
+          {
+            "index": 9,
+            "form_id": 74,
+            "instance_id": 10,
+            "record_hex": "4a01142d2c6b00000a0000000000800012000100eac02a2e"
+          },
+          {
+            "index": 10,
+            "form_id": 76,
+            "instance_id": 11,
+            "record_hex": "4c01142d2c6b00000b00000000000001140001009b3a62cc"
+          },
+          {
+            "index": 11,
+            "form_id": 80,
+            "instance_id": 12,
+            "record_hex": "50011439706d00000c000000000001001c0001004cb4996a"
+          },
+          {
+            "index": 12,
+            "form_id": 86,
+            "instance_id": 13,
+            "record_hex": "5601143c106e00000d0000000000010022000100fd2dd108"
+          },
+          {
+            "index": 13,
+            "form_id": 92,
+            "instance_id": 14,
+            "record_hex": "5c01182d1cbe00000e0000000000010027000100aea708a7"
+          },
+          {
+            "index": 14,
+            "form_id": 26,
+            "instance_id": 15,
+            "record_hex": "1a01142aa46b00000f00000000000100170001005f214045"
+          },
+          {
+            "index": 15,
+            "form_id": 29,
+            "instance_id": 16,
+            "record_hex": "1d01162db4900000100000000000010019000000109b77e3"
+          },
+          {
+            "index": 16,
+            "form_id": 90,
+            "instance_id": 17,
+            "record_hex": "5a01162db4900000110000000000010025000000c114af81"
+          },
+          {
+            "index": 17,
+            "form_id": 88,
+            "instance_id": 18,
+            "record_hex": "5801182d1cbe0000120000000000010023000000728ee61f"
+          },
+          {
+            "index": 18,
+            "form_id": 84,
+            "instance_id": 19,
+            "record_hex": "5401162db490000013000000000001001f00010023081ebe"
+          },
+          {
+            "index": 19,
+            "form_id": 82,
+            "instance_id": 20,
+            "record_hex": "5201162db490000014000000000001001d000000d481555c"
+          },
+          {
+            "index": 20,
+            "form_id": 94,
+            "instance_id": 21,
+            "record_hex": "5e01166464a4000015000000000001002900000085fb8cfa"
+          },
+          {
+            "index": 21,
+            "form_id": 33,
+            "instance_id": 22,
+            "record_hex": "21012064e0ea010016000000000003002b0000003675c498"
+          },
+          {
+            "index": 22,
+            "form_id": 36,
+            "instance_id": 23,
+            "record_hex": "2401206494e6010017000000000003002e000100e7eefb36"
+          },
+          {
+            "index": 23,
+            "form_id": 44,
+            "instance_id": 24,
+            "record_hex": "2c011a30c4f40000180000000000010037000000986833d5"
+          },
+          {
+            "index": 24,
+            "form_id": 98,
+            "instance_id": 25,
+            "record_hex": "62011a323cf5000019000000000001003f00010049e26a73"
+          },
+          {
+            "index": 25,
+            "form_id": 38,
+            "instance_id": 26,
+            "record_hex": "26011a35f0f500001a0000000000010031000000fa5ba211"
+          },
+          {
+            "index": 26,
+            "form_id": 47,
+            "instance_id": 27,
+            "record_hex": "2f011a35f0f500001b000000000001003a000100abd5d9af"
+          },
+          {
+            "index": 27,
+            "form_id": 96,
+            "instance_id": 28,
+            "record_hex": "60011a30c4f400001c000000000001003d0000005c4f114e"
+          },
+          {
+            "index": 28,
+            "form_id": 41,
+            "instance_id": 29,
+            "record_hex": "29011a323cf500001d00000000000100340001000dc948ec"
+          },
+          {
+            "index": 29,
+            "form_id": 100,
+            "instance_id": 30,
+            "record_hex": "64011a30c4f400001e0000000000010041000000be42808a"
+          },
+          {
+            "index": 30,
+            "form_id": 39,
+            "instance_id": 31,
+            "record_hex": "27011d32445901001f00000000000200310001006fbcb728"
+          },
+          {
+            "index": 31,
+            "form_id": 42,
+            "instance_id": 32,
+            "record_hex": "2a011d30445901002000000000000200340001002036efc6"
+          },
+          {
+            "index": 32,
+            "form_id": 45,
+            "instance_id": 33,
+            "record_hex": "2d011d35cc580100210000000000020037000000d1af2665"
+          },
+          {
+            "index": 33,
+            "form_id": 48,
+            "instance_id": 34,
+            "record_hex": "30011d35f859010022000000000002003a00000082295e03"
+          }
+        ],
+        "obtained_form_ids": [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          13,
+          14,
+          16,
+          19,
+          20,
+          22,
+          23,
+          25,
+          26,
+          28,
+          29,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "quests": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "party_slots": [
+          21,
+          22,
+          2,
+          29
+        ],
+        "selected_party": 3,
+        "next_instance_id": 35
+      },
+      {
+        "bank_offset": 6656,
+        "sequence": 648,
+        "room": 38,
+        "spawn": 3,
+        "chapter_flags": 15,
+        "owned_instance_count": 34,
+        "obtained_form_count": 65,
+        "claimed_quest_count": 38,
+        "gear_item_count": 31,
+        "instances": [
+          {
+            "index": 0,
+            "form_id": 2,
+            "instance_id": 1,
+            "record_hex": "0203144d3c6f0000010000000000010001000100b179379e"
+          },
+          {
+            "index": 1,
+            "form_id": 5,
+            "instance_id": 2,
+            "record_hex": "0503144d3c6f000002000000000002000200000062f36e3c"
+          },
+          {
+            "index": 2,
+            "form_id": 8,
+            "instance_id": 3,
+            "record_hex": "08031664b0960000030000000000040003000100136da6da"
+          },
+          {
+            "index": 3,
+            "form_id": 11,
+            "instance_id": 4,
+            "record_hex": "0b03144d3c6f0000040000000000080004000000c4e6dd78"
+          },
+          {
+            "index": 4,
+            "form_id": 14,
+            "instance_id": 5,
+            "record_hex": "0e010f2de02a000005000000000010000a00000075601517"
+          },
+          {
+            "index": 5,
+            "form_id": 16,
+            "instance_id": 6,
+            "record_hex": "10010a14640b000006000000000000000b00010026da4cb5"
+          },
+          {
+            "index": 6,
+            "form_id": 20,
+            "instance_id": 7,
+            "record_hex": "140114282c6b000007000000000020000e000000d7538453"
+          },
+          {
+            "index": 7,
+            "form_id": 78,
+            "instance_id": 8,
+            "record_hex": "4e0114322c6b000008000000000000021600000088cdbbf1"
+          },
+          {
+            "index": 8,
+            "form_id": 23,
+            "instance_id": 9,
+            "record_hex": "170114282c6b00000900000000004000100000003947f38f"
+          },
+          {
+            "index": 9,
+            "form_id": 74,
+            "instance_id": 10,
+            "record_hex": "4a01142d2c6b00000a0000000000800012000100eac02a2e"
+          },
+          {
+            "index": 10,
+            "form_id": 76,
+            "instance_id": 11,
+            "record_hex": "4c01142d2c6b00000b00000000000001140001009b3a62cc"
+          },
+          {
+            "index": 11,
+            "form_id": 80,
+            "instance_id": 12,
+            "record_hex": "50011439706d00000c000000000001001c0001004cb4996a"
+          },
+          {
+            "index": 12,
+            "form_id": 86,
+            "instance_id": 13,
+            "record_hex": "5601143c106e00000d0000000000010022000100fd2dd108"
+          },
+          {
+            "index": 13,
+            "form_id": 92,
+            "instance_id": 14,
+            "record_hex": "5c01182d1cbe00000e0000000000010027000100aea708a7"
+          },
+          {
+            "index": 14,
+            "form_id": 26,
+            "instance_id": 15,
+            "record_hex": "1a01142aa46b00000f00000000000100170001005f214045"
+          },
+          {
+            "index": 15,
+            "form_id": 29,
+            "instance_id": 16,
+            "record_hex": "1d01162db4900000100000000000010019000000109b77e3"
+          },
+          {
+            "index": 16,
+            "form_id": 90,
+            "instance_id": 17,
+            "record_hex": "5a01162db4900000110000000000010025000000c114af81"
+          },
+          {
+            "index": 17,
+            "form_id": 88,
+            "instance_id": 18,
+            "record_hex": "5801182d1cbe0000120000000000010023000000728ee61f"
+          },
+          {
+            "index": 18,
+            "form_id": 84,
+            "instance_id": 19,
+            "record_hex": "5401162db490000013000000000001001f00010023081ebe"
+          },
+          {
+            "index": 19,
+            "form_id": 82,
+            "instance_id": 20,
+            "record_hex": "5201162db490000014000000000001001d000000d481555c"
+          },
+          {
+            "index": 20,
+            "form_id": 94,
+            "instance_id": 21,
+            "record_hex": "5e01166464a4000015000000000001002900000085fb8cfa"
+          },
+          {
+            "index": 21,
+            "form_id": 33,
+            "instance_id": 22,
+            "record_hex": "21012064e0ea010016000000000003002b0000003675c498"
+          },
+          {
+            "index": 22,
+            "form_id": 36,
+            "instance_id": 23,
+            "record_hex": "2401206494e6010017000000000003002e000100e7eefb36"
+          },
+          {
+            "index": 23,
+            "form_id": 44,
+            "instance_id": 24,
+            "record_hex": "2c011a30c4f40000180000000000010037000000986833d5"
+          },
+          {
+            "index": 24,
+            "form_id": 98,
+            "instance_id": 25,
+            "record_hex": "62011a323cf5000019000000000001003f00010049e26a73"
+          },
+          {
+            "index": 25,
+            "form_id": 38,
+            "instance_id": 26,
+            "record_hex": "26011a35f0f500001a0000000000010031000000fa5ba211"
+          },
+          {
+            "index": 26,
+            "form_id": 47,
+            "instance_id": 27,
+            "record_hex": "2f011a35f0f500001b000000000001003a000100abd5d9af"
+          },
+          {
+            "index": 27,
+            "form_id": 96,
+            "instance_id": 28,
+            "record_hex": "60011a30c4f400001c000000000001003d0000005c4f114e"
+          },
+          {
+            "index": 28,
+            "form_id": 41,
+            "instance_id": 29,
+            "record_hex": "29011a323cf500001d00000000000100340001000dc948ec"
+          },
+          {
+            "index": 29,
+            "form_id": 100,
+            "instance_id": 30,
+            "record_hex": "64011a30c4f400001e0000000000010041000000be42808a"
+          },
+          {
+            "index": 30,
+            "form_id": 39,
+            "instance_id": 31,
+            "record_hex": "27011d32445901001f00000000000200310001006fbcb728"
+          },
+          {
+            "index": 31,
+            "form_id": 42,
+            "instance_id": 32,
+            "record_hex": "2a011d30445901002000000000000200340001002036efc6"
+          },
+          {
+            "index": 32,
+            "form_id": 45,
+            "instance_id": 33,
+            "record_hex": "2d011d35cc580100210000000000020037000000d1af2665"
+          },
+          {
+            "index": 33,
+            "form_id": 48,
+            "instance_id": 34,
+            "record_hex": "30011d35f859010022000000000002003a00000082295e03"
+          }
+        ],
+        "obtained_form_ids": [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          13,
+          14,
+          16,
+          19,
+          20,
+          22,
+          23,
+          25,
+          26,
+          28,
+          29,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "quests": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "party_slots": [
+          21,
+          22,
+          2,
+          29
+        ],
+        "selected_party": 3,
+        "next_instance_id": 35
+      }
+    ]
+  },
+  "ancestry": {
+    "source_southern_fixture": "../v5-revision4/southern-all41-town.sav",
+    "sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3"
+  },
+  "evidence_scope": "Reports preserve exact original bytes and hashes. Archived catalog metadata is not acquisition evidence. State files were verified at capture but are not included or loaded by the portable verifier."
+}

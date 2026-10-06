@@ -1,0 +1,36 @@
+test_88_extras_exact (test_terminal_admission.CapacityTests.test_88_extras_exact) ... ok
+test_89th_extra_refused_before_full (test_terminal_admission.CapacityTests.test_89th_extra_refused_before_full) ... ok
+test_all_future_roots_reserved_even_before_enablement (test_terminal_admission.CapacityTests.test_all_future_roots_reserved_even_before_enablement) ... ok
+test_base_plus_either_terminal (test_terminal_admission.CapacityTests.test_base_plus_either_terminal) ... ok
+test_defer_byte_unchanged (test_terminal_admission.CapacityTests.test_defer_byte_unchanged) ... ok
+test_exhaustive_sufficient_states (test_terminal_admission.CapacityTests.test_exhaustive_sufficient_states) ... ok
+test_first_branch_choice_always_possible_at_limit (test_terminal_admission.CapacityTests.test_first_branch_choice_always_possible_at_limit) ... ok
+test_full_160_safe_roster_has_complete_coverage (test_terminal_admission.CapacityTests.test_full_160_safe_roster_has_complete_coverage) ... ok
+test_full_legacy_retained_unchanged (test_terminal_admission.CapacityTests.test_full_legacy_retained_unchanged) ... ok
+test_history_does_not_count_as_viable_owned_coverage (test_terminal_admission.CapacityTests.test_history_does_not_count_as_viable_owned_coverage) ... ok
+test_idempotent_claim_not_refused_at_limit (test_terminal_admission.CapacityTests.test_idempotent_claim_not_refused_at_limit) ... ok
+test_legacy_excess_may_not_worsen (test_terminal_admission.CapacityTests.test_legacy_excess_may_not_worsen) ... ok
+test_legacy_overbudget_load_not_rejected_or_normalized (test_terminal_admission.CapacityTests.test_legacy_overbudget_load_not_rejected_or_normalized) ... ok
+test_legacy_overbudget_not_falsely_recoverable (test_terminal_admission.CapacityTests.test_legacy_overbudget_not_falsely_recoverable) ... ok
+test_linear_duplicates_one_opportunity (test_terminal_admission.CapacityTests.test_linear_duplicates_one_opportunity) ... ok
+test_locked72 (test_terminal_admission.CapacityTests.test_locked72) ... ok
+test_matching_formula_against_exhaustive_assignments (test_terminal_admission.CapacityTests.test_matching_formula_against_exhaustive_assignments) ... ok
+test_missing_branch_base_admitted_at_limit (test_terminal_admission.CapacityTests.test_missing_branch_base_admitted_at_limit) ... ok
+test_missing_family_admitted_at_limit (test_terminal_admission.CapacityTests.test_missing_family_admitted_at_limit) ... ok
+test_mixed_reward_full_gear_atomic (test_terminal_admission.CapacityTests.test_mixed_reward_full_gear_atomic) ... ok
+test_one_flexible_base_is_one_not_two (test_terminal_admission.CapacityTests.test_one_flexible_base_is_one_not_two) ... ok
+test_opposite_terminal_pair (test_terminal_admission.CapacityTests.test_opposite_terminal_pair) ... ok
+test_refusal_preserves_evolution_trial_history_identity (test_terminal_admission.CapacityTests.test_refusal_preserves_evolution_trial_history_identity) ... ok
+test_repeat_source_refusal_has_no_new_identity_or_receipt (test_terminal_admission.CapacityTests.test_repeat_source_refusal_has_no_new_identity_or_receipt) ... ok
+test_reverse_wrong_terminal_refused (test_terminal_admission.CapacityTests.test_reverse_wrong_terminal_refused) ... ok
+test_same_terminal_twice_covers_one (test_terminal_admission.CapacityTests.test_same_terminal_twice_covers_one) ... ok
+test_two_flexible_bases_cover_two (test_terminal_admission.CapacityTests.test_two_flexible_bases_cover_two) ... ok
+test_varied_mutation_orders_always_retain_completion (test_terminal_admission.CapacityTests.test_varied_mutation_orders_always_retain_completion) ... ok
+test_wrong_family_not_an_escape (test_terminal_admission.CapacityTests.test_wrong_family_not_an_escape) ... ok
+test_wrong_terminal_allowed_with_one_slack_then_recovery (test_terminal_admission.CapacityTests.test_wrong_terminal_allowed_with_one_slack_then_recovery) ... ok
+test_wrong_terminal_last_flexible_refused (test_terminal_admission.CapacityTests.test_wrong_terminal_last_flexible_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 5.127s
+
+OK

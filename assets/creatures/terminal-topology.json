@@ -1,0 +1,1068 @@
+{
+  "schema_version": 1,
+  "scope": "capacity reservation only; does not enable content",
+  "terminal_opportunities": 72,
+  "extra_copy_budget": 88,
+  "forms": [
+    {
+      "form_id": 1,
+      "family_id": "F001",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        3
+      ]
+    },
+    {
+      "form_id": 2,
+      "family_id": "F001",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        3
+      ]
+    },
+    {
+      "form_id": 3,
+      "family_id": "F001",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        3
+      ]
+    },
+    {
+      "form_id": 4,
+      "family_id": "F002",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        6
+      ]
+    },
+    {
+      "form_id": 5,
+      "family_id": "F002",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        6
+      ]
+    },
+    {
+      "form_id": 6,
+      "family_id": "F002",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        6
+      ]
+    },
+    {
+      "form_id": 7,
+      "family_id": "F003",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        9
+      ]
+    },
+    {
+      "form_id": 8,
+      "family_id": "F003",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        9
+      ]
+    },
+    {
+      "form_id": 9,
+      "family_id": "F003",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        9
+      ]
+    },
+    {
+      "form_id": 10,
+      "family_id": "F004",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        12
+      ]
+    },
+    {
+      "form_id": 11,
+      "family_id": "F004",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        12
+      ]
+    },
+    {
+      "form_id": 12,
+      "family_id": "F004",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        12
+      ]
+    },
+    {
+      "form_id": 13,
+      "family_id": "F005",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        15
+      ]
+    },
+    {
+      "form_id": 14,
+      "family_id": "F005",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        15
+      ]
+    },
+    {
+      "form_id": 15,
+      "family_id": "F005",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        15
+      ]
+    },
+    {
+      "form_id": 16,
+      "family_id": "F006",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        18
+      ]
+    },
+    {
+      "form_id": 17,
+      "family_id": "F006",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        18
+      ]
+    },
+    {
+      "form_id": 18,
+      "family_id": "F006",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        18
+      ]
+    },
+    {
+      "form_id": 19,
+      "family_id": "F007",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        21
+      ]
+    },
+    {
+      "form_id": 20,
+      "family_id": "F007",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        21
+      ]
+    },
+    {
+      "form_id": 21,
+      "family_id": "F007",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        21
+      ]
+    },
+    {
+      "form_id": 22,
+      "family_id": "F008",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        24
+      ]
+    },
+    {
+      "form_id": 23,
+      "family_id": "F008",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        24
+      ]
+    },
+    {
+      "form_id": 24,
+      "family_id": "F008",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        24
+      ]
+    },
+    {
+      "form_id": 25,
+      "family_id": "F009",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        27
+      ]
+    },
+    {
+      "form_id": 26,
+      "family_id": "F009",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        27
+      ]
+    },
+    {
+      "form_id": 27,
+      "family_id": "F009",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        27
+      ]
+    },
+    {
+      "form_id": 28,
+      "family_id": "F010",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        30
+      ]
+    },
+    {
+      "form_id": 29,
+      "family_id": "F010",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        30
+      ]
+    },
+    {
+      "form_id": 30,
+      "family_id": "F010",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        30
+      ]
+    },
+    {
+      "form_id": 31,
+      "family_id": "F011",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        33
+      ]
+    },
+    {
+      "form_id": 32,
+      "family_id": "F011",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        33
+      ]
+    },
+    {
+      "form_id": 33,
+      "family_id": "F011",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        33
+      ]
+    },
+    {
+      "form_id": 34,
+      "family_id": "F012",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        36
+      ]
+    },
+    {
+      "form_id": 35,
+      "family_id": "F012",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        36
+      ]
+    },
+    {
+      "form_id": 36,
+      "family_id": "F012",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        36
+      ]
+    },
+    {
+      "form_id": 37,
+      "family_id": "F013",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        38,
+        39
+      ]
+    },
+    {
+      "form_id": 38,
+      "family_id": "F013",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        38,
+        39
+      ]
+    },
+    {
+      "form_id": 39,
+      "family_id": "F013",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        38,
+        39
+      ]
+    },
+    {
+      "form_id": 40,
+      "family_id": "F014",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        41,
+        42
+      ]
+    },
+    {
+      "form_id": 41,
+      "family_id": "F014",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        41,
+        42
+      ]
+    },
+    {
+      "form_id": 42,
+      "family_id": "F014",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        41,
+        42
+      ]
+    },
+    {
+      "form_id": 43,
+      "family_id": "F015",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        44,
+        45
+      ]
+    },
+    {
+      "form_id": 44,
+      "family_id": "F015",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        44,
+        45
+      ]
+    },
+    {
+      "form_id": 45,
+      "family_id": "F015",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        44,
+        45
+      ]
+    },
+    {
+      "form_id": 46,
+      "family_id": "F016",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        47,
+        48
+      ]
+    },
+    {
+      "form_id": 47,
+      "family_id": "F016",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        47,
+        48
+      ]
+    },
+    {
+      "form_id": 48,
+      "family_id": "F016",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        47,
+        48
+      ]
+    },
+    {
+      "form_id": 49,
+      "family_id": "F017",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        50,
+        51
+      ]
+    },
+    {
+      "form_id": 50,
+      "family_id": "F017",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        50,
+        51
+      ]
+    },
+    {
+      "form_id": 51,
+      "family_id": "F017",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        50,
+        51
+      ]
+    },
+    {
+      "form_id": 52,
+      "family_id": "F018",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        53,
+        54
+      ]
+    },
+    {
+      "form_id": 53,
+      "family_id": "F018",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        53,
+        54
+      ]
+    },
+    {
+      "form_id": 54,
+      "family_id": "F018",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        53,
+        54
+      ]
+    },
+    {
+      "form_id": 55,
+      "family_id": "F019",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        56,
+        57
+      ]
+    },
+    {
+      "form_id": 56,
+      "family_id": "F019",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        56,
+        57
+      ]
+    },
+    {
+      "form_id": 57,
+      "family_id": "F019",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        56,
+        57
+      ]
+    },
+    {
+      "form_id": 58,
+      "family_id": "F020",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        59,
+        60
+      ]
+    },
+    {
+      "form_id": 59,
+      "family_id": "F020",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        59,
+        60
+      ]
+    },
+    {
+      "form_id": 60,
+      "family_id": "F020",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        59,
+        60
+      ]
+    },
+    {
+      "form_id": 61,
+      "family_id": "F021",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        62,
+        63
+      ]
+    },
+    {
+      "form_id": 62,
+      "family_id": "F021",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        62,
+        63
+      ]
+    },
+    {
+      "form_id": 63,
+      "family_id": "F021",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        62,
+        63
+      ]
+    },
+    {
+      "form_id": 64,
+      "family_id": "F022",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        65,
+        66
+      ]
+    },
+    {
+      "form_id": 65,
+      "family_id": "F022",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        65,
+        66
+      ]
+    },
+    {
+      "form_id": 66,
+      "family_id": "F022",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        65,
+        66
+      ]
+    },
+    {
+      "form_id": 67,
+      "family_id": "F023",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        68,
+        69
+      ]
+    },
+    {
+      "form_id": 68,
+      "family_id": "F023",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        68,
+        69
+      ]
+    },
+    {
+      "form_id": 69,
+      "family_id": "F023",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        68,
+        69
+      ]
+    },
+    {
+      "form_id": 70,
+      "family_id": "F024",
+      "reachable_terminal_mask": 3,
+      "terminal_form_ids": [
+        71,
+        72
+      ]
+    },
+    {
+      "form_id": 71,
+      "family_id": "F024",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        71,
+        72
+      ]
+    },
+    {
+      "form_id": 72,
+      "family_id": "F024",
+      "reachable_terminal_mask": 2,
+      "terminal_form_ids": [
+        71,
+        72
+      ]
+    },
+    {
+      "form_id": 73,
+      "family_id": "F025",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        74
+      ]
+    },
+    {
+      "form_id": 74,
+      "family_id": "F025",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        74
+      ]
+    },
+    {
+      "form_id": 75,
+      "family_id": "F026",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        76
+      ]
+    },
+    {
+      "form_id": 76,
+      "family_id": "F026",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        76
+      ]
+    },
+    {
+      "form_id": 77,
+      "family_id": "F027",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        78
+      ]
+    },
+    {
+      "form_id": 78,
+      "family_id": "F027",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        78
+      ]
+    },
+    {
+      "form_id": 79,
+      "family_id": "F028",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        80
+      ]
+    },
+    {
+      "form_id": 80,
+      "family_id": "F028",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        80
+      ]
+    },
+    {
+      "form_id": 81,
+      "family_id": "F029",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        82
+      ]
+    },
+    {
+      "form_id": 82,
+      "family_id": "F029",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        82
+      ]
+    },
+    {
+      "form_id": 83,
+      "family_id": "F030",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        84
+      ]
+    },
+    {
+      "form_id": 84,
+      "family_id": "F030",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        84
+      ]
+    },
+    {
+      "form_id": 85,
+      "family_id": "F031",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        86
+      ]
+    },
+    {
+      "form_id": 86,
+      "family_id": "F031",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        86
+      ]
+    },
+    {
+      "form_id": 87,
+      "family_id": "F032",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        88
+      ]
+    },
+    {
+      "form_id": 88,
+      "family_id": "F032",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        88
+      ]
+    },
+    {
+      "form_id": 89,
+      "family_id": "F033",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        90
+      ]
+    },
+    {
+      "form_id": 90,
+      "family_id": "F033",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        90
+      ]
+    },
+    {
+      "form_id": 91,
+      "family_id": "F034",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        92
+      ]
+    },
+    {
+      "form_id": 92,
+      "family_id": "F034",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        92
+      ]
+    },
+    {
+      "form_id": 93,
+      "family_id": "F035",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        94
+      ]
+    },
+    {
+      "form_id": 94,
+      "family_id": "F035",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        94
+      ]
+    },
+    {
+      "form_id": 95,
+      "family_id": "F036",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        96
+      ]
+    },
+    {
+      "form_id": 96,
+      "family_id": "F036",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        96
+      ]
+    },
+    {
+      "form_id": 97,
+      "family_id": "F037",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        98
+      ]
+    },
+    {
+      "form_id": 98,
+      "family_id": "F037",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        98
+      ]
+    },
+    {
+      "form_id": 99,
+      "family_id": "F038",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        100
+      ]
+    },
+    {
+      "form_id": 100,
+      "family_id": "F038",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        100
+      ]
+    },
+    {
+      "form_id": 101,
+      "family_id": "F039",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        102
+      ]
+    },
+    {
+      "form_id": 102,
+      "family_id": "F039",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        102
+      ]
+    },
+    {
+      "form_id": 103,
+      "family_id": "F040",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        104
+      ]
+    },
+    {
+      "form_id": 104,
+      "family_id": "F040",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        104
+      ]
+    },
+    {
+      "form_id": 105,
+      "family_id": "F041",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        106
+      ]
+    },
+    {
+      "form_id": 106,
+      "family_id": "F041",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        106
+      ]
+    },
+    {
+      "form_id": 107,
+      "family_id": "F042",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        108
+      ]
+    },
+    {
+      "form_id": 108,
+      "family_id": "F042",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        108
+      ]
+    },
+    {
+      "form_id": 109,
+      "family_id": "F043",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        110
+      ]
+    },
+    {
+      "form_id": 110,
+      "family_id": "F043",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        110
+      ]
+    },
+    {
+      "form_id": 111,
+      "family_id": "F044",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        112
+      ]
+    },
+    {
+      "form_id": 112,
+      "family_id": "F044",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        112
+      ]
+    },
+    {
+      "form_id": 113,
+      "family_id": "F045",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        113
+      ]
+    },
+    {
+      "form_id": 114,
+      "family_id": "F046",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        114
+      ]
+    },
+    {
+      "form_id": 115,
+      "family_id": "F047",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        115
+      ]
+    },
+    {
+      "form_id": 116,
+      "family_id": "F048",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        116
+      ]
+    },
+    {
+      "form_id": 117,
+      "family_id": "F049",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        117
+      ]
+    },
+    {
+      "form_id": 118,
+      "family_id": "F050",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        118
+      ]
+    },
+    {
+      "form_id": 119,
+      "family_id": "F051",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        119
+      ]
+    },
+    {
+      "form_id": 120,
+      "family_id": "F052",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        120
+      ]
+    },
+    {
+      "form_id": 121,
+      "family_id": "F053",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        121
+      ]
+    },
+    {
+      "form_id": 122,
+      "family_id": "F054",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        122
+      ]
+    },
+    {
+      "form_id": 123,
+      "family_id": "F055",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        123
+      ]
+    },
+    {
+      "form_id": 124,
+      "family_id": "F056",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        124
+      ]
+    },
+    {
+      "form_id": 125,
+      "family_id": "F057",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        125
+      ]
+    },
+    {
+      "form_id": 126,
+      "family_id": "F058",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        126
+      ]
+    },
+    {
+      "form_id": 127,
+      "family_id": "F059",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        127
+      ]
+    },
+    {
+      "form_id": 128,
+      "family_id": "F060",
+      "reachable_terminal_mask": 1,
+      "terminal_form_ids": [
+        128
+      ]
+    }
+  ]
+}

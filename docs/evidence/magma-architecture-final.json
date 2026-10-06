@@ -1,0 +1,73 @@
+{
+  "status": "PASS; native gameplay/full-engine cadence not assessed",
+  "scope": "Isolated future policy gates; revision4/current41 unchanged, zero Magma forms enabled",
+  "baseline_rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+  "development_rom_sha256": "f083dcb13e5cb40f4e0d7bf47cf2060775a7291a1bee7f7b68f0766ba25b5c4e",
+  "rom_bytes": 5865092,
+  "rom_delta_bytes": 6392,
+  "mutable_data_bytes": 84,
+  "bss_bytes": 48008,
+  "mutable_ram_delta_bytes": 0,
+  "source_sha256": {
+    "src/creatures.c": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+    "src/creatures.h": "aee4476931a3557b454aa41c716c90996bbca9551462a39ced012bf053954a6b",
+    "src/save5.c": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+    "src/save5.h": "8b268d3ed9d92433e4082aa4fa63b5a70e414f72b1a8e86e918e4430375ba727",
+    "src/save5_history_policy.h": "be6aa94ca115c59b62a02820d6aeed86b8c39ee1c79f260fcd60881fc3211c4c",
+    "src/creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "assets/creatures/generate_data.py": "453c2cfb4b6edfc017d9bf45ffa12f45d20b5f5572290546e04ba3ff0b607c10",
+    "assets/creatures/released_policy.py": "dd6d93d7917538749ec965ee90851099604a32dcfd3680d02526b57345fc6331",
+    "assets/history/creatures-v1-v4.json": "ee516adadbad9e26cd18a5ccaa26fed9ead82e5ad0311eb736a1d3b47d17ac51",
+    "assets/history/released-creature-relations-v4.json": "69c6c06ad2914dbc4a3f98c07fd61d5857fc48b0d72f0f37dcef6899383999e4",
+    "tools/generate_creature_history.py": "d2719332f3857d6ed5dccd33a214a8d97cd02bc8e19c22e90f82810cc1cc7f6e",
+    "tests/test_magma_architecture.py": "518ffacb9c662f152787a5db25dfa5ff1dad3fe670413199b2d6cb66783d894c",
+    "tests/test_magma_history_core.py": "a063521efd9e97cd58c81048e9aad9c3d5cd27905e0b8a1828dfc841f34f78c0",
+    "tests/profile_magma_validation.py": "a2d5d88d0969ca07eacc3c0c1b8d0ecb212e135bcb55e59aa35cb02830edf3db",
+    "tests/test_southern_save_limits.py": "6f9edd75d24ae2de266f5950c8a87194661068ec09b129e94cdbdbab3f6b036a",
+    "tests/test_save5_history.py": "9e2fae522a15daf05110c5accdfdef3fbf1a92d6878a86b80c587018081b74c1",
+    "tests/test_save5_history_differential.py": "c50a81631ed58cb98ac945e4ed0115f389cfcdbab1517455275f6985ad10fcac"
+  },
+  "evidence": {
+    "docs/evidence/magma-southern-save-limits-host.json": "57e92a56b988c15755a9ad1a7671c49fdf63f5b09c7dc728c24cde08e4019726",
+    "docs/evidence/magma-architecture-final-save-timing.json": "92ac9ddac4c6623a309e3aa28039d5339801762fa2d63121da933b0edebbe643",
+    "docs/evidence/magma-southern-save-limits-sanitizers.json": "76fa8baac066aa226cc6284eb2bb240de85d20de1987b22989685dfebd7da164",
+    "docs/evidence/magma-architecture-baseline-validation.json": "5f42e90952d2a53799a724cde3f74d380923aaf2f4b1f2bc6b740368504d8741",
+    "docs/evidence/magma-architecture-final-host.json": "de0e4fdbe10b2de49db4c5591f4d51a01a3cc05b8ca8509683b14140dcfd5dd0",
+    "docs/evidence/magma-architecture-final-validation.json": "464ddb8557a92f34314dce08352f12a385e0b7d6c552d50c2157bc302d767ebb",
+    "docs/evidence/magma-save-history-policy-final.json": "daf90c768f1bd73aac517c21ffc924cfe284c6e6d1e8e119899897cbce2b72b7",
+    "docs/evidence/magma-architecture-final-stack.json": "0babbaffdc5d4a1587ca4fa8686fdc728e796ba74ff48954c14cce365f3e185a",
+    "docs/evidence/magma-save-history-policy.json": "8b9ad459865d7eaa5a19579cc7dab03bb38be6b1369a59b53d19def098e57f81"
+  },
+  "host_core_tests": 166,
+  "host_save_tests": 70,
+  "whole_bank_comparisons": 166699,
+  "southern_interruption_positions": 147504,
+  "historical_core_matrix_comparisons": 100608,
+  "historical_core_corruption_comparisons": 144000,
+  "synthetic_u16_patterns": 65536,
+  "native_anchor_cycles": {
+    "baseline21": 105891,
+    "final21": 99121,
+    "synthetic30": 110002,
+    "baseline160": 427000,
+    "final160": 445250
+  },
+  "regression_disclosure": "Synthetic full160 anchor increases18250 cycles (4.27%); ordinary earned21 improves6770 cycles (6.39%). Synthetic30 is not Magma gameplay cadence.",
+  "limits": [
+    "No Magma enabled content or native acquisition/UI/cadence acceptance",
+    "No runtime stack high-water or physical hardware measurement",
+    "Frozen Southern source oracle needed to replay whole-bank differential",
+    "Current semantic incompatibility loads history unchanged but rejects current saves; no automatic remapping",
+    "Proposed branch39/48 polarity flips require explicit per-form current polarity policy before enablement; existing family-wide catalog guard rejects them"
+  ],
+  "independent_review": {
+    "verdict": "PASS for the scoped two architecture gates; no blocker",
+    "report": "build/policy-independent-review/REVIEW.md",
+    "report_sha256": "751cde49c04976db5150d8e849a14a5c141cce4d12eb33ced4887375d7afbbb7",
+    "focused_tests_passed": 81,
+    "additional_whole_bank_comparisons": 12753,
+    "additional_u16_trial_patterns": 393216,
+    "arm_profile_exact_reproduction": true,
+    "polarity_flip_integration_gate_independently_reproduced": true
+  }
+}

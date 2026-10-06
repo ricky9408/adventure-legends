@@ -1,0 +1,1519 @@
+      "frame": 1435
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1435
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1440
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1440
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1445
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1445
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1450
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1450
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1455
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1455
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1460
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1460
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1465
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1465
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1470
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1470
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1475
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1475
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1480
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1480
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1485
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1485
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1490
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1490
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1495
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1495
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1500
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1500
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1505
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1505
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1510
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1510
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1515
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1515
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1520
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1520
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1525
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1525
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 1530
+    },
+    {
+      "label": "walking occurs in active gameplay",
+      "passed": true,
+      "frame": 1530
+    },
+    {
+      "label": "real Southern enemy damage reaches death without injected health",
+      "passed": true,
+      "frame": 2290
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2325
+    },
+    {
+      "label": "ordinary death retry restores safe field checkpoint",
+      "passed": true,
+      "frame": 2325
+    },
+    {
+      "label": "death/retry loses and duplicates no earned content",
+      "passed": true,
+      "frame": 2325
+    },
+    {
+      "label": "autosave remains valid",
+      "passed": true,
+      "frame": 2328
+    }
+  ],
+  "failures": [],
+  "coverage": [
+    "guaranteed-base79-base85-controller-main-route",
+    "all41-native-controller-acquisition-retention-and-reboot"
+  ],
+  "cases": [
+    {
+      "case": "boss-weapon-2",
+      "trace": [
+        {
+          "frame": 8480,
+          "stage": 3,
+          "damage_q4": 48,
+          "hp_q4": 96,
+          "weapon_class": 2
+        },
+        {
+          "frame": 8507,
+          "stage": 3,
+          "damage_q4": 48,
+          "hp_q4": 48,
+          "weapon_class": 2
+        },
+        {
+          "frame": 8534,
+          "stage": 4,
+          "damage_q4": 0,
+          "hp_q4": 48,
+          "weapon_class": 2
+        },
+        {
+          "frame": 8735,
+          "stage": 5,
+          "damage_q4": 48,
+          "hp_q4": 0,
+          "weapon_class": 2
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "boss-weapon-3",
+      "trace": [
+        {
+          "frame": 8462,
+          "stage": 3,
+          "damage_q4": 32,
+          "hp_q4": 112,
+          "weapon_class": 3
+        },
+        {
+          "frame": 8489,
+          "stage": 3,
+          "damage_q4": 32,
+          "hp_q4": 80,
+          "weapon_class": 3
+        },
+        {
+          "frame": 8516,
+          "stage": 3,
+          "damage_q4": 32,
+          "hp_q4": 48,
+          "weapon_class": 3
+        },
+        {
+          "frame": 8690,
+          "stage": 3,
+          "damage_q4": 32,
+          "hp_q4": 16,
+          "weapon_class": 3
+        },
+        {
+          "frame": 8737,
+          "stage": 5,
+          "damage_q4": 16,
+          "hp_q4": 0,
+          "weapon_class": 3
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "boss-weapon-1",
+      "trace": [
+        {
+          "frame": 8475,
+          "stage": 3,
+          "damage_q4": 32,
+          "hp_q4": 112,
+          "weapon_class": 1
+        },
+        {
+          "frame": 8502,
+          "stage": 3,
+          "damage_q4": 32,
+          "hp_q4": 80,
+          "weapon_class": 1
+        },
+        {
+          "frame": 8529,
+          "stage": 4,
+          "damage_q4": 48,
+          "hp_q4": 32,
+          "weapon_class": 1
+        },
+        {
+          "frame": 8732,
+          "stage": 5,
+          "damage_q4": 32,
+          "hp_q4": 0,
+          "weapon_class": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "personal-trial-79",
+      "instance_id": 12,
+      "level": 20,
+      "bond": 40,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-25",
+      "instance_id": 15,
+      "level": 20,
+      "bond": 40,
+      "passed": true
+    },
+    {
+      "case": "native-trial-workspace-combat",
+      "room": 33,
+      "trace": [
+        {
+          "frame": 31650,
+          "enemy": 0,
+          "before_hp_q4": 80,
+          "after_hp_q4": 44
+        },
+        {
+          "frame": 31681,
+          "enemy": 0,
+          "before_hp_q4": 44,
+          "after_hp_q4": 8
+        },
+        {
+          "frame": 31712,
+          "enemy": 0,
+          "before_hp_q4": 8,
+          "after_hp_q4": 0
+        },
+        {
+          "frame": 31776,
+          "enemy": 1,
+          "before_hp_q4": 80,
+          "after_hp_q4": 44
+        },
+        {
+          "frame": 31807,
+          "enemy": 1,
+          "before_hp_q4": 44,
+          "after_hp_q4": 8
+        },
+        {
+          "frame": 31838,
+          "enemy": 1,
+          "before_hp_q4": 8,
+          "after_hp_q4": 0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "personal-trial-28",
+      "instance_id": 16,
+      "level": 22,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-81",
+      "instance_id": 20,
+      "level": 22,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-93",
+      "instance_id": 21,
+      "level": 22,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "native-trial-workspace-combat",
+      "room": 31,
+      "trace": [
+        {
+          "frame": 36387,
+          "enemy": 0,
+          "before_hp_q4": 80,
+          "after_hp_q4": 44
+        },
+        {
+          "frame": 36418,
+          "enemy": 0,
+          "before_hp_q4": 44,
+          "after_hp_q4": 8
+        },
+        {
+          "frame": 36449,
+          "enemy": 0,
+          "before_hp_q4": 8,
+          "after_hp_q4": 0
+        },
+        {
+          "frame": 36607,
+          "enemy": 1,
+          "before_hp_q4": 80,
+          "after_hp_q4": 44
+        },
+        {
+          "frame": 36638,
+          "enemy": 1,
+          "before_hp_q4": 44,
+          "after_hp_q4": 8
+        },
+        {
+          "frame": 36669,
+          "enemy": 1,
+          "before_hp_q4": 8,
+          "after_hp_q4": 0
+        },
+        {
+          "frame": 36923,
+          "enemy": 4,
+          "before_hp_q4": 96,
+          "after_hp_q4": 60
+        },
+        {
+          "frame": 36954,
+          "enemy": 4,
+          "before_hp_q4": 60,
+          "after_hp_q4": 24
+        },
+        {
+          "frame": 36985,
+          "enemy": 4,
+          "before_hp_q4": 24,
+          "after_hp_q4": 0
+        },
+        {
+          "frame": 37214,
+          "enemy": 3,
+          "before_hp_q4": 80,
+          "after_hp_q4": 44
+        },
+        {
+          "frame": 37245,
+          "enemy": 3,
+          "before_hp_q4": 44,
+          "after_hp_q4": 8
+        },
+        {
+          "frame": 37276,
+          "enemy": 3,
+          "before_hp_q4": 8,
+          "after_hp_q4": 0
+        },
+        {
+          "frame": 37574,
+          "enemy": 2,
+          "before_hp_q4": 96,
+          "after_hp_q4": 60
+        },
+        {
+          "frame": 37605,
+          "enemy": 2,
+          "before_hp_q4": 60,
+          "after_hp_q4": 24
+        },
+        {
+          "frame": 37636,
+          "enemy": 2,
+          "before_hp_q4": 24,
+          "after_hp_q4": 0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "personal-trial-83",
+      "instance_id": 19,
+      "level": 22,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-89",
+      "instance_id": 17,
+      "level": 22,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-85",
+      "instance_id": 13,
+      "level": 20,
+      "bond": 40,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-87",
+      "instance_id": 18,
+      "level": 24,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "personal-trial-91",
+      "instance_id": 14,
+      "level": 24,
+      "bond": 45,
+      "passed": true
+    },
+    {
+      "case": "ten-confirmed-and-declined-evolutions",
+      "changes": [
+        {
+          "base": 25,
+          "evolved": 26,
+          "instance_id": 15
+        },
+        {
+          "base": 28,
+          "evolved": 29,
+          "instance_id": 16
+        },
+        {
+          "base": 79,
+          "evolved": 80,
+          "instance_id": 12
+        },
+        {
+          "base": 81,
+          "evolved": 82,
+          "instance_id": 20
+        },
+        {
+          "base": 83,
+          "evolved": 84,
+          "instance_id": 19
+        },
+        {
+          "base": 85,
+          "evolved": 86,
+          "instance_id": 13
+        },
+        {
+          "base": 87,
+          "evolved": 88,
+          "instance_id": 18
+        },
+        {
+          "base": 89,
+          "evolved": 90,
+          "instance_id": 17
+        },
+        {
+          "base": 91,
+          "evolved": 92,
+          "instance_id": 14
+        },
+        {
+          "base": 93,
+          "evolved": 94,
+          "instance_id": 21
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "field-independent-of-combat-command",
+      "room": 34,
+      "form": 80,
+      "equipped_command": 27,
+      "passed": true
+    },
+    {
+      "case": "field-independent-of-combat-command",
+      "room": 34,
+      "form": 80,
+      "equipped_command": 28,
+      "passed": true
+    },
+    {
+      "case": "field-independent-of-combat-command",
+      "room": 35,
+      "form": 86,
+      "equipped_command": 33,
+      "passed": true
+    },
+    {
+      "case": "field-independent-of-combat-command",
+      "room": 35,
+      "form": 86,
+      "equipped_command": 34,
+      "passed": true
+    }
+  ],
+  "acquisitions": [
+    {
+      "quest": 22,
+      "form_id": 79,
+      "instance_id": 12,
+      "level": 20,
+      "bond": 20,
+      "frame": 1360
+    },
+    {
+      "quest": 23,
+      "form_id": 85,
+      "instance_id": 13,
+      "level": 20,
+      "bond": 20,
+      "frame": 2443
+    },
+    {
+      "form_id": 91,
+      "instance_id": 14,
+      "frame": 18754,
+      "source": "field"
+    },
+    {
+      "form_id": 25,
+      "instance_id": 15,
+      "frame": 20540,
+      "source": "field"
+    },
+    {
+      "form_id": 28,
+      "instance_id": 16,
+      "frame": 20840,
+      "source": "field"
+    },
+    {
+      "form_id": 89,
+      "instance_id": 17,
+      "frame": 21355,
+      "source": "field"
+    },
+    {
+      "form_id": 87,
+      "instance_id": 18,
+      "frame": 21500,
+      "source": "field"
+    },
+    {
+      "form_id": 83,
+      "instance_id": 19,
+      "frame": 22029,
+      "source": "field"
+    },
+    {
+      "form_id": 81,
+      "instance_id": 20,
+      "frame": 23704,
+      "source": "field"
+    },
+    {
+      "form_id": 93,
+      "instance_id": 21,
+      "frame": 24116,
+      "source": "field"
+    }
+  ],
+  "snapshots": {
+    "00-n5-forward-migration": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/00-n5-forward-migration.state",
+      "state_sha256": "d05c4d36c92603732e3acdaf12f955cd2b87cbd02d97ae014a0415470e58710a",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/00-n5-forward-migration.sav",
+      "sram_sha256": "1d55eed32baf0ebe7e4d261cf574922841431a427b20a2a36003ecd4d05d2ce4",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/00-n5-forward-migration.png",
+      "status": {
+        "game_state": 1,
+        "room": 22,
+        "px": 104,
+        "py": 208,
+        "hp": 6,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 128,
+        "save_failed": 0,
+        "checkpoint_spawn": 2,
+        "spirit": 10,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76
+      ],
+      "southern_objectives": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        0,
+        0,
+        1
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "01-ferry-entry": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/01-ferry-entry.state",
+      "state_sha256": "8dca6c751e5f590dd9c80fd32aa993292051767b07f833d1ffec14b857e18c2f",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/01-ferry-entry.sav",
+      "sram_sha256": "41302adf380d3a891516464542bb2cd87a0dc9b7dbc269880a31b12b204961cc",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/01-ferry-entry.png",
+      "status": {
+        "game_state": 1,
+        "room": 30,
+        "px": 240,
+        "py": 284,
+        "hp": 6,
+        "chapter_flags": 15,
+        "camera_x": 120,
+        "camera_y": 160,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 10,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76
+      ],
+      "southern_objectives": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        0,
+        0,
+        1
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "02-guaranteed-bases": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/02-guaranteed-bases.state",
+      "state_sha256": "c359925f9071014e3eab7b817c2aefbbe28cd60e6cdb931223bafbfc338ebc35",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/02-guaranteed-bases.sav",
+      "sram_sha256": "81cfa6aa29242182e21114f728b0548debf6b51123efe173d3580bfd6cdb32cb",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/02-guaranteed-bases.png",
+      "status": {
+        "game_state": 1,
+        "room": 31,
+        "px": 350,
+        "py": 164,
+        "hp": 4,
+        "chapter_flags": 15,
+        "camera_x": 230,
+        "camera_y": 84,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 13,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        85
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76,
+        79,
+        85
+      ],
+      "southern_objectives": [
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        0,
+        0,
+        1
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "34-unsolved-entry": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/34-unsolved-entry.state",
+      "state_sha256": "121189ccb440bccdb36b7a515c015b4798a90d4baa26b7f6de907588f1259a68",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/34-unsolved-entry.sav",
+      "sram_sha256": "14960112c8bff015ec7c7c39d32dbf6505287473347d2e7cc70f23f120141880",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/34-unsolved-entry.png",
+      "status": {
+        "game_state": 1,
+        "room": 34,
+        "px": 120,
+        "py": 132,
+        "hp": 4,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 13,
+        "summoned": 0,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        85
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76,
+        79,
+        85
+      ],
+      "southern_objectives": [
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        0,
+        0,
+        1
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "34-solved": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/34-solved.state",
+      "state_sha256": "271426b3ae3c5505d4ed18fbafe02fe4b8b3e8fe83c762d403da041c9795af69",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/34-solved.sav",
+      "sram_sha256": "8d8157ab97802161d012809a718be89d1779b29630b671b7a6cefdf7cde7223b",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/34-solved.png",
+      "status": {
+        "game_state": 1,
+        "room": 34,
+        "px": 36,
+        "py": 132,
+        "hp": 4,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 13,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        85
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76,
+        79,
+        85
+      ],
+      "southern_objectives": [
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        1,
+        1,
+        0
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "35-unsolved-entry": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/35-unsolved-entry.state",
+      "state_sha256": "2df5579f4ad92fac454f1c31f757697c1a3540ed8422a57a6f058a749bd7a8fc",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/35-unsolved-entry.sav",
+      "sram_sha256": "12c23dd2c7cf8313fb8fb247c43af86ef57af91829d41a2c7131b41887e28359",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/35-unsolved-entry.png",
+      "status": {
+        "game_state": 1,
+        "room": 35,
+        "px": 120,
+        "py": 132,
+        "hp": 4,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 13,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        85
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76,
+        79,
+        85
+      ],
+      "southern_objectives": [
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        0,
+        0,
+        1
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "35-solved": {
+      "rom_sha256": "87d16a0fc513d7e8a491e0b5ac5929f7951e1e44e18b7f534f1e5e0cc794d4de",
+      "symbols_sha256": "ceedba1a6052fe450f17c91375eef6ddd5200d1a7bb01394c1eb95d2bc4f1305",
+      "state_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/35-solved.state",
+      "state_sha256": "84a414b5419671cf9bbf09f9199bca78444194e87433f51443645f20383cd066",
+      "sram_path": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/35-solved.sav",
+      "sram_sha256": "b5dcaafb1f46972f9e18bba39f540b412b12beb5aadde51cc1baca295d1f9d60",
+      "screenshot": "/workspace/scratch/33ed39a77941/adventure-legends-southern-final-qa/build/southern-journey/35-solved.png",
+      "status": {
+        "game_state": 1,
+        "room": 35,
+        "px": 36,
+        "py": 132,
+        "hp": 4,
+        "chapter_flags": 15,
+        "camera_x": 0,
+        "camera_y": 0,
+        "save_failed": 0,
+        "checkpoint_spawn": 0,
+        "spirit": 16,
+        "summoned": 1,
+        "ability_cd": 0,
+        "roll_cd": 0
+      },
+      "quests": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "obtained_form_ids": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        13,
+        14,
+        16,
+        19,
+        20,
+        22,
+        23,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        85
+      ],
+      "owned_form_ids": [
+        2,
+        5,
+        8,
+        11,
+        14,
+        16,
+        20,
+        78,
+        23,
+        74,
+        76,
+        79,
+        85
+      ],
+      "southern_objectives": [
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "puzzle": [
+        1,
+        1,
+        0
+      ],
+      "trial": {
+        "index": 255,
+        "slot": 255,
+        "instance_id": 0,
+        "bits": 0
+      }
+    },
+    "36-unsolved-entry": {

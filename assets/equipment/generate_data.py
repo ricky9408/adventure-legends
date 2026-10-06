@@ -10,7 +10,8 @@ TARGET = ROOT / 'src/equipment_data.c'
 # Persistent source order: never insert into the published sources 0..18.
 LEGACY_IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
 SOUTHERN_IDS = [4, 12, 36, 52, 66, 84]
-IDS = LEGACY_IDS + SOUTHERN_IDS
+MAGMA_IDS = [20, 37, 53, 67, 85, 5]
+IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS
 SLOTS = ['weapon', 'body', 'boots', 'belt', 'ring']
 STATS = ['attack_q4', 'defense_q4', 'hp_q4', 'speed_q8_delta',
          'roll_reduction', 'power_reduction', 'reach_px', 'stagger']

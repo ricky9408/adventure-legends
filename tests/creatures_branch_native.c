@@ -1,4 +1,4 @@
-/* Hypothetical locked F013 branch; never linked into the cartridge. */
+/* Current reviewed F013 branch; synthetic capability variants remain host-only. */
 #include "creatures.h"
 #include <assert.h>
 #include <string.h>
@@ -23,25 +23,25 @@ int main(void) {
     for (target = 38; target <= 39; ++target) {
         CreatureInstance expected;
         creatures_roster_init(&roster);
-        assert(creatures_grant(&roster, 37, 20, 40, 0, 0) == 0);
+        assert(creatures_grant(&roster, 37, 26, 45, 0, 0) == 0);
         assert(!creatures_mark_trial(&roster.instances[0], 1));
         assert(!creatures_mark_trial_qualified(&roster.instances[0], 9, 1));
-        assert(creatures_mark_trial_qualified(&roster.instances[0], 13, 1));
+        assert(creatures_mark_trial_qualified(&roster.instances[0], 13, target-37));
         before = roster;
-        assert(creatures_can_evolve(&roster.instances[0], 64, 1) == CREATURE_EVOLVE_AMBIGUOUS);
-        assert(creatures_evolve(&roster, 0, 64, 1, 1) == CREATURE_EVOLVE_AMBIGUOUS);
+        assert(creatures_can_evolve(&roster.instances[0], 256, 1) == CREATURE_EVOLVE_AMBIGUOUS);
+        assert(creatures_evolve(&roster, 0, 256, 1, 1) == CREATURE_EVOLVE_AMBIGUOUS);
         assert(!memcmp(&roster, &before, sizeof(roster)));
-        assert(creatures_evolve_to(&roster, 0, target, 64, 1, 0) == CREATURE_EVOLVE_DEFERRED);
+        assert(creatures_evolve_to(&roster, 0, target, 256, 1, 0) == CREATURE_EVOLVE_DEFERRED);
         assert(!memcmp(&roster, &before, sizeof(roster)));
-        assert(creatures_evolve_to(&roster, 0, 38 + 256u, 64, 1, 1) == CREATURE_EVOLVE_INVALID);
-        assert(creatures_evolve_to(&roster, 0, 25, 64, 1, 1) == CREATURE_EVOLVE_NO_EDGE);
+        assert(creatures_evolve_to(&roster, 0, 38 + 256u, 256, 1, 1) == CREATURE_EVOLVE_INVALID);
+        assert(creatures_evolve_to(&roster, 0, 25, 256, 1, 1) == CREATURE_EVOLVE_NO_EDGE);
         assert(!memcmp(&roster, &before, sizeof(roster)));
-        expected = roster.instances[0]; expected.form_id = (CreatureU8)target;
-        assert(creatures_evolve_to(&roster, 0, target, 64, 1, 1) == CREATURE_EVOLVE_READY);
+        expected = roster.instances[0]; expected.form_id = (CreatureU8)target; expected.polarity = creatures_form(target)->polarity;
+        assert(creatures_evolve_to(&roster, 0, target, 256, 1, 1) == CREATURE_EVOLVE_READY);
         assert(!memcmp(&roster.instances[0], &expected, sizeof(expected)));
         assert(creatures_roster_count(&roster) == 1);
         assert(creatures_roster_validate(&roster));
-        assert(creatures_command_learned(target, 1, 43));
+        assert(creatures_command_learned(target, 1, 49));
         assert(creatures_supports_capability(target, 12));
         assert(!creatures_evolution(target));
     }

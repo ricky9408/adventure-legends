@@ -2,7 +2,7 @@
 #include "equipment.h"
 
 const EquipmentItemId equipment_authored_ids[EQUIPMENT_AUTHORED_COUNT] = {
-    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83, 4, 12, 36, 52, 66, 84
+    1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83, 4, 12, 36, 52, 66, 84, 20, 37, 53, 67, 85, 5
 };
 
 const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {
@@ -31,6 +31,12 @@ const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] =
     [52] = {52, 2, 0, 0, 255, {0, 0}, {0, 0, 0, -4, 4, 0, 0, 0}},
     [66] = {66, 3, 0, 0, 255, {0, 0}, {0, 0, 4, 0, 0, 1, 0, 0}},
     [84] = {84, 4, 0, 0, 255, {0, 0}, {0, 0, 0, -4, 0, 0, 0, 2}},
+    [20] = {20, 0, 3, 0, 255, {0, 0}, {2, 0, 0, 0, 0, 0, 6, 0}},
+    [37] = {37, 1, 0, 0, 255, {0, 0}, {0, 2, 8, -2, 0, 0, 0, 0}},
+    [53] = {53, 2, 0, 0, 255, {0, 0}, {0, 0, 4, 4, 0, 0, 0, 0}},
+    [67] = {67, 3, 0, 0, 255, {0, 0}, {0, 1, 0, -2, 0, 0, 0, 1}},
+    [85] = {85, 4, 0, 0, 255, {0, 0}, {0, 0, 0, 2, 0, 3, 0, 0}},
+    [5] = {5, 0, 1, 0, 255, {0, 0}, {2, 0, 0, -2, 0, 0, 2, 0}},
 };
 
 const EquipmentWeapon equipment_weapons[4] = {
@@ -66,6 +72,12 @@ const char *equipment_name(unsigned id) {
     case 52: return "Softsand Boots";
     case 66: return "Raincatch Belt";
     case 84: return "Springpin Ring";
+    case 20: return "Ventstring Bow";
+    case 37: return "Kilnweave Mail";
+    case 53: return "Pumice Boots";
+    case 67: return "Bricklayer Belt";
+    case 85: return "Quietnote Ring";
+    case 5: return "Terrace Sword";
     default: return "Empty";
     }
 }
@@ -98,6 +110,12 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 52: return line ? "Roll cooldown -4; speed -4." : "Soft soles steady the next roll.";
     case 66: return line ? "Power cooldown -1." : "A quarter-heart reserve.";
     case 84: return line ? "Stagger +2; speed -4." : "A firm strike with a slower step.";
+    case 20: return line ? "Attack +2; reach +6." : "A steady short-lane bow.";
+    case 37: return line ? "Guard +2; HP +8; speed -2." : "Flexible kilnwork padding.";
+    case 53: return line ? "HP +4; speed +4." : "Light porous walking soles.";
+    case 67: return line ? "Guard +1; stagger +1." : "A firm belt for steady work.";
+    case 85: return line ? "Speed +2; power wait -3." : "A softly vibrating ring.";
+    case 5: return line ? "Attack +2; reach +2." : "A broad terrace-work sword.";
     default: return "";
     }
 }

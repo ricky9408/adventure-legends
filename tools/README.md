@@ -116,3 +116,19 @@ python tools/mgba_runner.py build/emberbond.gba --frames 600 --audio music.wav
 Or call `game.audio_start('music.wav')`, run frames/inputs, and `game.audio_stop()`. Closing the session also finalizes the WAV header. Script commands are `audio PATH` and `stopaudio`. The current game's native output is 32,768 Hz; the captured audio includes raw GBA DC bias characteristics. The runner explicitly enables a normal 256 master volume, since a blank mGBA frontend configuration otherwise leaves volume at zero. A 300-frame capture was verified to contain 164,120 stereo frames with nonconstant samples.
 
 Cartridge save loading was independently checked with a valid 32KiB SRAM file: after reset, the actual ROM set `has_save=1`; SRAM remained writable within the emulator and the input file's bytes were unchanged.
+
+
+## Deferred-anchor synthetic host probe
+
+The Linux-only host integration probe reserves inert memory at GBA hardware address
+ranges with MAP_FIXED_NOREPLACE. A randomized Python heap can overlap those ranges.
+The Magma source-export audit recorded one setup failure before game assertions;
+a disposable diagnostic independently reproduced EEXIST from a heap overlap.
+An unchanged fresh-process probe passed all 27 cases, and the full live host aggregate
+passed. This is separate from mGBA native tests and does not affect the cartridge.
+
+Do not use MAP_FIXED, overwrite a live mapping or disable memory protections to make
+this test pass. Preserve the failure log. A fresh-process rerun can distinguish this
+setup problem; an actual game assertion failure must still be investigated. The normal
+Make target directs its generated report into build/ to preserve archived evidence.
+See docs/magma/source-export-review.json and docs/VERIFICATION.md for exact scope.

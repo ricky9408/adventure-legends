@@ -62,6 +62,10 @@ def fixture_sources(*, high_bit=False, reordered=False):
         old = '{77, 78, 20, 50, 512,'
         assert data.count(old) == 1
         data = data.replace(old, '{77, 78, 20, 50, 32768,')
+        # Current per-form masks are independent of the frozen1–4 snapshot.
+        def remap_current_masks(body):
+            return re.sub(r'(\{(?:77|78),[^\n]+, )512(, 0x)',r'\g<1>32768\2',body)
+        core = edit_array(core, 'form_policy', remap_current_masks)
     if reordered:
         def reverse(body):
             return '\n'.join(line.rstrip().rstrip(',') + ',' for line in reversed(body.splitlines()))

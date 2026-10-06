@@ -1,0 +1,14 @@
+{
+  "tests/magma_minimal_route.py": {
+    "before_sha256": "2b2e591743aa92ae714e320e15416ed5bddac0b14480d001ebaaea80959c2354",
+    "after_sha256": "2b2e591743aa92ae714e320e15416ed5bddac0b14480d001ebaaea80959c2354"
+  },
+  "tests/magma_controls.py": {
+    "before_sha256": "15c82a457d80293fe0a9ddba626d55d23147b87865979b91abf2e760cdb2071d",
+    "after_sha256": "15c82a457d80293fe0a9ddba626d55d23147b87865979b91abf2e760cdb2071d"
+  },
+  "tests/magma_retained_controls.py": {
+    "before_sha256": "77f14a69a8ddf1a042ffbba6ac6ca3ceb0ab7e9536f391aef4f7053cab308a20",
+    "after_sha256": "f05a342285627da2d7955c32806b5e13fdc7b7fc004d222560d60ebe2f85d0c4"
+  }
+}

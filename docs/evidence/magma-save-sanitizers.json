@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "randomized_snapshots": 1200,
+  "accepted": 236,
+  "rejected": 964,
+  "roster": 160,
+  "forms_obtained": 65,
+  "source_sha256": {
+    "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "save5": "93c42b198a22914d1de853c4fd54093acf05a14c9705eca15b0ac14e2757d2b9",
+    "creatures": "b5125cdc4007918f5d0ca7ff08a646c261e06a05663feec71a057875573746f8",
+    "creature_data": "7d34c17ada62635d3759bf23b84c401ab084b09d4cebc94b74acb153bd52b867",
+    "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "equipment_data": "b7d27e403cfa1a5535b0ea9b7467eb8a34ebad33bff36251c6a02a47fe809202",
+    "southern_quests": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+    "magma_quests": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617"
+  },
+  "fixture_sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3",
+  "scope": "Host ledger/codec only; not controller acquisition"
+}

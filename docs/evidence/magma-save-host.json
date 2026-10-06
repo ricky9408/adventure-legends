@@ -1,0 +1,130 @@
+{
+  "scope": "Typed Magma source/quest/trial/equipment transactions and Save5 codec. Host/native-isolated evidence only. No controller acquisition or whole-engine cadence claim.",
+  "result": "PASS",
+  "test_cases": 133,
+  "runs": [
+    {
+      "command": "python3 tests/test_save5.py",
+      "test_cases": 41,
+      "result": "PASS",
+      "test_sha256": "f933d85234da54d6da09f62a99e822eab0c21c0e3ffce8fc1eb7883fb1377aba",
+      "log": "build/magma-save-validation/test_save5.py.log",
+      "log_sha256": "76f7d49d7be367f8b304a9fa64c3fef3ce316ee567c7758c4c0c6ae968cc58ad"
+    },
+    {
+      "command": "python3 tests/test_southern_save.py",
+      "test_cases": 13,
+      "result": "PASS",
+      "test_sha256": "20d5fde9e2b59ab7250136a482cf80eeb7939ff447ecec75e706c8082d78308e",
+      "log": "build/magma-save-validation/test_southern_save.py.log",
+      "log_sha256": "1f6e06d808c440a786b3f3cd887e0f0f088b267264240a6f07b1d20a70c57ec4"
+    },
+    {
+      "command": "python3 tests/test_save5_history.py",
+      "test_cases": 7,
+      "result": "PASS",
+      "test_sha256": "f1561646057bc78749c6daa362675ace0f8e6d5f74ac1b2105a0c1790627872a",
+      "log": "build/magma-save-validation/test_save5_history.py.log",
+      "log_sha256": "35da1fbd3279d8f1e760703059b79e2dc9d4362e9a02b7f132bf7352c34384b5"
+    },
+    {
+      "command": "python3 tests/test_save5_history_differential.py",
+      "test_cases": 9,
+      "result": "PASS",
+      "test_sha256": "92d0de3c7a60103217b316652c54a3fcff9b85f0288641c49728016d597fdee9",
+      "log": "build/magma-save-validation/test_save5_history_differential.py.log",
+      "log_sha256": "4064ec009261d960bfff53e4225fe51c519f6218d85d3598c685a193bffb61ab"
+    },
+    {
+      "command": "python3 tests/test_equipment.py",
+      "test_cases": 35,
+      "result": "PASS",
+      "test_sha256": "ea872d8e707bb5dee2a261b365236187f4872774651fa32c9ebeff46aa9c16c4",
+      "log": "build/magma-save-validation/test_equipment.py.log",
+      "log_sha256": "63e5f9c012f2fb389755fcb0eb5c98a0f25ca2349890cecbbd579cd9c451201a"
+    },
+    {
+      "command": "python3 tests/test_magma_save.py",
+      "test_cases": 13,
+      "result": "PASS",
+      "test_sha256": "ef7e3d8c4abb263f9c85112f122b0b920d46a50df853ff5bf1246e1b1192cabb",
+      "log": "build/magma-save-validation/test_magma_save.py.log",
+      "log_sha256": "07c86769045b45e9d30c60f7984cda51d5d423bb504b36595084728e386e4f83"
+    },
+    {
+      "command": "python3 tests/test_magma_save_limits.py",
+      "test_cases": 5,
+      "result": "PASS",
+      "test_sha256": "7773d6bbc2003d22fe70a61904dd01bbbc4fb963736ad6c5ae6fbccc3e681ec8",
+      "log": "build/magma-save-validation/test_magma_save_limits.py.log",
+      "log_sha256": "dbec010619bf5cc5b47958c80c7335e762c624647f80345ee1a10e49bc3dc2d9"
+    },
+    {
+      "command": "python3 tests/test_southern_save_limits.py",
+      "test_cases": 4,
+      "result": "PASS",
+      "test_sha256": "99978755d98cd2f955d88ca6ee5594e0e269ed32899f3526ead4c9db2e0a5acf",
+      "log": "build/magma-save-validation/test_southern_save_limits.py.log",
+      "log_sha256": "6595b8f0af304d4a7124be62e7d4644f22e5ebbc14cacc28133b9c447888edbb"
+    },
+    {
+      "command": "python3 tests/test_southern_frozen_fixtures.py",
+      "test_cases": 6,
+      "result": "PASS",
+      "test_sha256": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce",
+      "log": "build/magma-save-validation/test_southern_frozen_fixtures.py.log",
+      "log_sha256": "ef007a87449f75fb93da01bdbc5323ffa6ead467bda57d7b568ee8678b18175b"
+    }
+  ],
+  "historical_differential": {
+    "comparisons": 166703,
+    "accepted": 4688,
+    "rejected": 162015,
+    "controller_sram_images": 6
+  },
+  "magma_dual_bank_cuts": {
+    "transitions": 56,
+    "positions_per_transition": 6146,
+    "total": 344176
+  },
+  "southern_dual_bank_cuts": 147504,
+  "native_report": "docs/evidence/magma-save-arm.json",
+  "native_report_sha256": "2b1af73dc9c41d51a42c5b383667ae9e989ef9f286dbb0cac2630491a83b1d42",
+  "source_sha256": {
+    "save5.c": "93c42b198a22914d1de853c4fd54093acf05a14c9705eca15b0ac14e2757d2b9",
+    "save5.h": "6c13dfc930f0e1cb31be0c832239368ca1431045446f51b3ab09102f5d3bcf75",
+    "save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+    "magma_quests.c": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+    "magma_quests.h": "844ae97ad9600b90b66debecc58865351b3960bdf6cdbd0a8aeafb877b4b75c1",
+    "equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "equipment.h": "b4c314753c3370baecf74aa8e9b824d78f09c8a2a2bacef5a7889bf44e0c7f7e",
+    "equipment_data.c": "b7d27e403cfa1a5535b0ea9b7467eb8a34ebad33bff36251c6a02a47fe809202",
+    "creatures.c": "b5125cdc4007918f5d0ca7ff08a646c261e06a05663feec71a057875573746f8",
+    "creatures.h": "dbf45cc6dbe037eddd10e683d7118a055c880aa6ca1b70a7a5d067b70ab3882c",
+    "creature_data.c": "7d34c17ada62635d3759bf23b84c401ab084b09d4cebc94b74acb153bd52b867"
+  },
+  "remaining_gates": [
+    "Native world acquisition and same-instance environment/controller tests",
+    "Merged whole-engine cadence and runtime stack high-water",
+    "Independent final merged-engine review"
+  ],
+  "spawn_geometry_sources": {
+    "assets/magma_region/contract.json": "82a26850a3788dfce7506bc6f9907fd7547b093a4d9661c906f19a8fab69c831",
+    "assets/magma_region/validation.json": "301e93cebbcde70e3d0c429305f844a499771a115a62f1a119faef3d2ac9238c"
+  },
+  "independent_review": {
+    "result": "PASS",
+    "path": "build/magma-save-independent-review/REPORT.md",
+    "sha256": "e008f475d3b2efc6d3f5bbc41f1e68f5737339b7671672a5d6a1b28002b3622b",
+    "independent_state_wire_checks": 1720,
+    "matching_oracle_candidates": 8144,
+    "historical_bank_comparisons": 166703,
+    "fixes": [
+      "Authoritative per-form trial mask rejects key2 on linear bases31/34",
+      "Typed status mirrors identity exhaustion;Q30 status includes gear preflight"
+    ]
+  },
+  "authentic34_native_report": "docs/evidence/magma-save-arm-authentic34.json",
+  "authentic34_native_report_sha256": "923bc47c660a65c91c732506499dff055b924de5fdb0c3574c6970e9537d2c39",
+  "authentic34_provenance": "docs/evidence/magma-save-arm-authentic34-provenance.json"
+}

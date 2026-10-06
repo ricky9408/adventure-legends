@@ -45,7 +45,7 @@ static COLD int offer(unsigned q){int r=northern_quest_offer(&adventure_save,q);
 static COLD void objective(unsigned q,unsigned bit){int r=northern_quest_objective(&adventure_save,q,bit);if(r==NORTH_CHANGED||r==NORTH_NOW_READY){dirty=1;changed();}}
 static COLD void claim(unsigned q){int r=northern_quest_claim(&adventure_save,q);
  if(r==NORTH_REWARDED){dirty=1;progression_refresh();say(q==21?TX_NT_RETURN_A:TX_NT_RECEIVED_A,q==21?TX_NT_RETURN_B:TX_NT_RECEIVED_B);}
- else if(r==NORTH_FULL)say(TX_NT_FULL_A,TX_NT_FULL_B);else if(r==NORTH_UNCHANGED)say(TX_NT_RETURN_A,TX_NT_RETURN_B);else say(TX_NT_LOCKED_A,TX_NT_LOCKED_B);
+ else if(r==NORTH_RESERVED)say(TX_MG_RESERVED,TX_MG_RESERVEDB);else if(r==NORTH_FULL)say(TX_NT_FULL_A,TX_NT_FULL_B);else if(r==NORTH_UNCHANGED)say(TX_NT_RETURN_A,TX_NT_RETURN_B);else say(TX_NT_LOCKED_A,TX_NT_LOCKED_B);
 }
 static const int quest_names[11]={TX_NT_Q11,TX_NT_Q12,TX_NT_Q13,TX_NT_Q14,TX_NT_Q15,TX_NT_Q16,TX_NT_Q17,TX_NT_Q18,TX_NT_Q19,TX_NT_Q20,TX_NT_Q21};
 static const int clues[11][2]={{TX_NT_CLUE11A,TX_NT_CLUE11B},{TX_NT_CLUE12A,TX_NT_CLUE12B},{TX_NT_CLUE13A,TX_NT_CLUE13B},{TX_NT_CLUE14A,TX_NT_CLUE14B},{TX_NT_CLUE15A,TX_NT_CLUE15B},{TX_NT_CLUE16A,TX_NT_CLUE16B},{TX_NT_CLUE17A,TX_NT_CLUE17B},{TX_NT_CLUE18A,TX_NT_CLUE18B},{TX_NT_CLUE19A,TX_NT_CLUE19B},{TX_NT_CLUE20A,TX_NT_CLUE20B},{TX_NT_CLUE21A,TX_NT_CLUE21B}};

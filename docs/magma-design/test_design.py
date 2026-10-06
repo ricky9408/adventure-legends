@@ -1,0 +1,47 @@
+import copy,json,unittest
+from pathlib import Path
+from validate_design import validate,DesignError,abstract_puzzle_proof,acquisition_proof
+ROOT=Path(__file__).resolve().parent
+class DesignTests(unittest.TestCase):
+ def setUp(self):
+  self.p=json.loads((ROOT/'magma_allocation.json').read_text());self.lock=json.loads((ROOT/'identity-lock.snapshot.json').read_text())
+ def reject(self,mutate):
+  mutate(self.p)
+  with self.assertRaises((DesignError,KeyError)):validate(self.p,self.lock)
+ def test_good(self):self.assertEqual(validate(self.p,self.lock)['cumulative_forms'],65)
+ def test_runtime_enable(self):self.reject(lambda p:p.update(runtime_enablement=True))
+ def test_identity_tier(self):self.reject(lambda p:p['forms'][0].update(tier=3))
+ def test_wrong_phase(self):self.reject(lambda p:p['forms'][0].update(phase='lava'))
+ def test_duplicate_signature(self):self.reject(lambda p:p['forms'][0].update(signature_ability=44))
+ def test_legendary_insertion(self):self.reject(lambda p:p['forms'][0].update(id=121))
+ def test_missing_gate(self):self.reject(lambda p:p['evolutions'][0].update(activation_gates=[]))
+ def test_third_tier_mask(self):self.reject(lambda p:p['evolutions'][1].update(required_mask=2))
+ def test_same_family_trial_alias(self):self.reject(lambda p:p['trial_bindings'][1].update(wire_mask=1))
+ def test_trial_overflow(self):self.reject(lambda p:p['trial_bindings'][0].update(wire_mask=65536))
+ def test_branch_prerequisite(self):self.reject(lambda p:p['trial_bindings'][5].update(prerequisite_mask=1))
+ def test_cross_family_edge(self):self.reject(lambda p:p['evolutions'][0].update(family_id='F012'))
+ def test_missing_inheritance(self):self.reject(lambda p:p['forms'][1].update(field_caps=[]))
+ def test_wire_widening(self):self.reject(lambda p:p['limits'].update(instance_bytes=26))
+ def test_iwram_growth(self):self.reject(lambda p:p['limits'].update(new_iwram_bytes=4))
+ def test_quest_theft(self):self.reject(lambda p:p['quests'][0].update(id=38))
+ def test_missing_retreat(self):self.reject(lambda p:p.update(links=[l for l in p['links'] if l['from']!=45]))
+ def test_branch_clone(self):self.reject(lambda p:p['branch_sources'][0].update(no_history_cloning=False))
+ def test_branch_no_second(self):self.reject(lambda p:p['branch_sources'][0].update(first_receipt_retained_minimum=1))
+ def test_event_collision(self):self.reject(lambda p:p['namespace']['enemy_credit_ids'].__setitem__(0,240))
+ def test_aid_collision(self):self.reject(lambda p:p['field_sources'][0].update(aid_index=40))
+ def test_future_plan_overlap(self):self.reject(lambda p:p['authoritative_allocation']['milestones'][2]['ids'].__setitem__(0,31))
+ def test_capability_creation(self):self.reject(lambda p:p['namespace'].update(new_capabilities=['lava_walk']))
+ def test_quest_mask_broadening(self):self.reject(lambda p:p['quests'][0].update(mask=7))
+ def test_gear_source_repoint(self):self.reject(lambda p:p['equipment'][0].update(id=21))
+ def test_discovery_byte_theft(self):self.reject(lambda p:p['optional_discovery_commission'].update(discovery_byte=18))
+ def test_admission_budget_expansion(self):self.reject(lambda p:p['terminal_admission'].update(extra_copy_budget=89))
+ def test_history_coverage_cheat(self):self.reject(lambda p:p['terminal_admission'].update(uses_obtained_or_seen_history=True))
+ def test_legacy_budget_retrovalidation(self):self.reject(lambda p:p['terminal_admission'].update(bank_validation_uses_budget=True))
+ def test_legacy_false_recovery(self):self.reject(lambda p:p['terminal_admission'].update(legacy_overbudget_completion_guaranteed=True))
+ def test_terminal_mask_rewrite(self):self.reject(lambda p:p['terminal_admission']['form_terminal_masks'][36].update(reachable_terminal_mask=1))
+ def test_acquisition_witness(self):
+  r=acquisition_proof(self.p);self.assertEqual((r['forms_reached_in_design'],r['new_real_individuals']),(65,13))
+ def test_puzzle_42(self):self.assertEqual(abstract_puzzle_proof(42)['reachable_abstract_states'],924)
+ def test_puzzle_43(self):self.assertEqual(abstract_puzzle_proof(43)['reachable_abstract_states'],11648)
+ def test_puzzle_44(self):self.assertEqual(abstract_puzzle_proof(44)['reachable_abstract_states'],24180)
+if __name__=='__main__':unittest.main()

@@ -12,6 +12,7 @@ import ctypes, json, os, re, subprocess, tempfile, unittest
 from PIL import ImageFont
 ROOT=Path(__file__).resolve().parents[1]
 UI=json.loads((ROOT/'assets/region/ui_additions.json').read_text())
+UI.update({'MG_RESERVED': '', 'MG_RESERVEDB': ''})  # Host-only imported current capacity-refusal labels
 LAYOUT=json.loads((ROOT/'assets/region/layout.json').read_text())
 TMP=tempfile.TemporaryDirectory(prefix='region-game-tests-')
 OUT=Path(TMP.name)

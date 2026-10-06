@@ -1,5 +1,5 @@
 {
-  "content_revision": 4,
+  "content_revision": 5,
   "enabled_form_ids": [
     1,
     2,
@@ -41,7 +41,31 @@
     91,
     92,
     93,
-    94
+    94,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
   ],
   "enabled_evolutions": [
     [
@@ -123,6 +147,66 @@
     [
       93,
       94
+    ],
+    [
+      31,
+      32
+    ],
+    [
+      32,
+      33
+    ],
+    [
+      34,
+      35
+    ],
+    [
+      35,
+      36
+    ],
+    [
+      37,
+      38
+    ],
+    [
+      37,
+      39
+    ],
+    [
+      40,
+      41
+    ],
+    [
+      40,
+      42
+    ],
+    [
+      43,
+      44
+    ],
+    [
+      43,
+      45
+    ],
+    [
+      46,
+      47
+    ],
+    [
+      46,
+      48
+    ],
+    [
+      95,
+      96
+    ],
+    [
+      97,
+      98
+    ],
+    [
+      99,
+      100
     ]
   ],
   "enabled_ability_ids": [
@@ -166,7 +250,31 @@
     39,
     40,
     41,
-    42
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66
   ],
-  "note": "Southern integration manifest:41 authored native core rows,20 evolution edges,41 enabled commands. Manifest order preserves released ROM rows; authored forms remain ID-sorted. Handler/art/acquisition integration and native controller acceptance remain separate release gates. Ability12, legendary121 and every unlisted form/command remain disabled; no128-form completion claim."
+  "note": "Magma development manifest:65 current core forms,102 learns,35 edges,65 commands. Existing41 rows and historical revisions1–4 remain immutable. Only explicit39/48 polarity overrides are approved. Tables do not establish obtainability, art/handler integration or native playability. Ability12, all121–128 and every unlisted row remain disabled."
 }

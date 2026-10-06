@@ -28,3 +28,9 @@ __pycache__/
 !tests/fixtures/v5-revision2/*.sav
 
 !tests/fixtures/v5-revision3/*.sav
+
+!tests/fixtures/v5-revision4/*.sav
+
+!tests/fixtures/v5-revision5/*.sav
+# Immutable generated Southern-policy oracle regression saves.
+!tests/fixtures/southern-policy-oracle/tests/fixtures/*/*.sav

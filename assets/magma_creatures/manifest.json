@@ -1,0 +1,935 @@
+{
+  "schema_version": 1,
+  "generator": "assets/generate_magma_creatures.py",
+  "form_ids": [
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "names": [
+    "Coalcoil",
+    "Emberhelix",
+    "Hearthcrown",
+    "Shardibex",
+    "Bracehorn",
+    "Spanram",
+    "Tuftpika",
+    "Rootmuffle",
+    "Sporevault",
+    "Chalklung",
+    "Bellcup",
+    "Runnelribbon",
+    "Orelet",
+    "Augermole",
+    "Pendulumole",
+    "Ashkite",
+    "Plumehopper",
+    "Huskdrifter",
+    "Screepeek",
+    "Stairtrunk",
+    "Mossmarch",
+    "Trellislong",
+    "Dripurchin",
+    "Dewmedusa"
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "status": "ART ONLY. Native rendering, acquisition, catalog enablement and gameplay powers require independent integration acceptance.",
+  "rights": "Original code-native pixel geometry. No Nintendo or other game art, tracing, downloaded raster reference, or raster-generated creature input.",
+  "generator_sha256": "e96d75090a5f792881f5e74e0d0d484c759d6bd0592f90c4f010de3a5321a9db",
+  "codegen_sha256": "21336f4ff7f0481c6b3f74b7d60cf0568552d5a64c591c7303151115fef7bdbf",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 172056,
+  "runtime_data_bytes": 0,
+  "runtime_bss_bytes": 0,
+  "persistent_obj_allocation_bytes": 0,
+  "rom_budget_bytes": 174080,
+  "include_bytes": [
+    29961,
+    29949,
+    29921,
+    29966,
+    29929,
+    29941,
+    29917,
+    29926,
+    29993,
+    29926,
+    29937,
+    29936,
+    29981,
+    29965,
+    21976
+  ],
+  "max_include_bytes": 29993,
+  "scene_review_sources": [
+    {
+      "terrain": "GRASS",
+      "path": "assets/review_terrain/frondshore_commons.png",
+      "crop": [
+        276,
+        262,
+        300,
+        286
+      ],
+      "sha256": "1299ff7353c396c132498ea19ad74944b233e71480cc8b5cb354e0940c41a53f"
+    },
+    {
+      "terrain": "WATER",
+      "path": "assets/review_terrain/sunlace_anchorage.png",
+      "crop": [
+        32,
+        287,
+        56,
+        311
+      ],
+      "sha256": "da3cf89a74d37b17d3cf320acf5b3c929a8602ab6aa256bdc152aacf130c5e68"
+    },
+    {
+      "terrain": "PLASTER",
+      "path": "assets/review_terrain/sunlace_anchorage.png",
+      "crop": [
+        40,
+        96,
+        64,
+        120
+      ],
+      "sha256": "da3cf89a74d37b17d3cf320acf5b3c929a8602ab6aa256bdc152aacf130c5e68"
+    },
+    {
+      "terrain": "WOOD",
+      "path": "assets/review_terrain/awning_loft.png",
+      "crop": [
+        136,
+        120,
+        160,
+        144
+      ],
+      "sha256": "83be2273569ba9788551066f732c28fa3b5214c863ed1cbefdb34067ff078487"
+    },
+    {
+      "terrain": "SHADE",
+      "path": "assets/review_terrain/forest.png",
+      "crop": [
+        172,
+        16,
+        196,
+        40
+      ],
+      "sha256": "3d92c9a61ffdd0551add98018786903253509b3735a17bab8ce51b74b2430a10"
+    },
+    {
+      "terrain": "DOOR",
+      "path": "assets/review_terrain/sunlace_anchorage.png",
+      "crop": [
+        68,
+        104,
+        92,
+        128
+      ],
+      "sha256": "da3cf89a74d37b17d3cf320acf5b3c929a8602ab6aa256bdc152aacf130c5e68"
+    }
+  ],
+  "anchor": [
+    8,
+    8
+  ],
+  "frame_ticks_suggestion": 8,
+  "walk_ticks_by_form": {
+    "31": [
+      12,
+      8,
+      10,
+      12
+    ],
+    "32": [
+      10,
+      12,
+      8,
+      12
+    ],
+    "33": [
+      14,
+      12,
+      10,
+      14
+    ],
+    "34": [
+      6,
+      6,
+      7,
+      6
+    ],
+    "35": [
+      10,
+      12,
+      8,
+      10
+    ],
+    "36": [
+      11,
+      9,
+      11,
+      9
+    ],
+    "37": [
+      5,
+      6,
+      5,
+      8
+    ],
+    "38": [
+      6,
+      5,
+      6,
+      7
+    ],
+    "39": [
+      8,
+      5,
+      6,
+      9
+    ],
+    "40": [
+      10,
+      9,
+      12,
+      9
+    ],
+    "41": [
+      12,
+      10,
+      10,
+      12
+    ],
+    "42": [
+      9,
+      12,
+      9,
+      10
+    ],
+    "43": [
+      7,
+      8,
+      7,
+      8
+    ],
+    "44": [
+      10,
+      8,
+      10,
+      12
+    ],
+    "45": [
+      9,
+      9,
+      12,
+      10
+    ],
+    "46": [
+      6,
+      5,
+      6,
+      8
+    ],
+    "47": [
+      8,
+      5,
+      7,
+      9
+    ],
+    "48": [
+      12,
+      10,
+      12,
+      8
+    ],
+    "95": [
+      12,
+      11,
+      10,
+      13
+    ],
+    "96": [
+      11,
+      12,
+      10,
+      13
+    ],
+    "97": [
+      8,
+      7,
+      8,
+      7
+    ],
+    "98": [
+      9,
+      8,
+      9,
+      8
+    ],
+    "99": [
+      10,
+      8,
+      10,
+      12
+    ],
+    "100": [
+      12,
+      10,
+      10,
+      14
+    ]
+  },
+  "ability_poses": [
+    "anticipation",
+    "recovery"
+  ],
+  "briefs": [
+    {
+      "id": 31,
+      "name": "Coalcoil",
+      "family_id": "F011",
+      "tier": 1,
+      "silhouette": "A low snail with a broad smiling muzzle, two blunt eyestalks and a sideways crescent shell; pale foot clearly separate from charcoal shell.",
+      "locomotion": "Foot ripples in four readable waves; shell rocks after the head stops."
+    },
+    {
+      "id": 32,
+      "name": "Emberhelix",
+      "family_id": "F011",
+      "tier": 2,
+      "silhouette": "A raised snail on a narrow long foot; its open spiral shell sits upright with a large triangular window and expressive face below.",
+      "locomotion": "Stretch, brace, pull the shell forward; spiral tips lag by one pose."
+    },
+    {
+      "id": 33,
+      "name": "Hearthcrown",
+      "family_id": "F011",
+      "tier": 3,
+      "silhouette": "A long muscular snail with a flat fan-shaped shell held above its face on three connected shell ribs; large open spaces replace the earlier spiral.",
+      "locomotion": "Wide foot fans to anchor, then contracts into an unhurried glide."
+    },
+    {
+      "id": 34,
+      "name": "Shardibex",
+      "family_id": "F012",
+      "tier": 1,
+      "silhouette": "A small round-nosed mountain goat with short straight stone horns, wide cloven feet and a tilted rectangular shoulder patch.",
+      "locomotion": "Quick paired hoof plants, head dip, rear-foot catch-up."
+    },
+    {
+      "id": 35,
+      "name": "Bracehorn",
+      "family_id": "F012",
+      "tier": 2,
+      "silhouette": "A low broad-shouldered goat with huge outward U-curved horns enclosing its face, short hindquarters and distinctly spread forehooves.",
+      "locomotion": "Three-beat brace and short forward shuffle; head stays level."
+    },
+    {
+      "id": 36,
+      "name": "Spanram",
+      "family_id": "F012",
+      "tier": 3,
+      "silhouette": "A tall long-legged ram with two high buttress horns joining above its brow, a narrow waist and two strong negative-space arches.",
+      "locomotion": "High deliberate diagonal hoof steps; horns sway opposite hips."
+    },
+    {
+      "id": 37,
+      "name": "Tuftpika",
+      "family_id": "F013",
+      "tier": 1,
+      "silhouette": "A tiny pika with long swept-back grass whiskers, round ears, a square leafy tail tuft and two high-set dark eyes.",
+      "locomotion": "Compact four-paw gallop, pause, whisker flick."
+    },
+    {
+      "id": 38,
+      "name": "Rootmuffle",
+      "family_id": "F013",
+      "tier": 2,
+      "silhouette": "A low long-bodied pika with a broad root beard and two separated leafy shoulder mounds; its ears and living muzzle remain exposed.",
+      "locomotion": "Low belly-clear scamper; beard trails, then gathers beneath chin."
+    },
+    {
+      "id": 39,
+      "name": "Sporevault",
+      "family_id": "F013",
+      "tier": 2,
+      "silhouette": "An upright long-hindleg pika with a closed pinecone tail carried above its head and a tiny chest between large open arm spaces.",
+      "locomotion": "Crouch, tall hop, two-foot settle; tail opens only during casting."
+    },
+    {
+      "id": 40,
+      "name": "Chalklung",
+      "family_id": "F014",
+      "tier": 1,
+      "silhouette": "A living porous sponge with three soft lobed feet, one angled chimney and a friendly face on its lower flexible skirt.",
+      "locomotion": "Three-foot rocking walk; chimney compresses and rebounds as it breathes."
+    },
+    {
+      "id": 41,
+      "name": "Bellcup",
+      "family_id": "F014",
+      "tier": 2,
+      "silhouette": "A tall sponge with an inverted bell mouth, a long curved neck, broad two-lobed base and a face looking out beneath the rim.",
+      "locomotion": "Leans forward on the base, straightens neck, then draws the base underneath."
+    },
+    {
+      "id": 42,
+      "name": "Runnelribbon",
+      "family_id": "F014",
+      "tier": 2,
+      "silhouette": "A flat ribbon sponge with two raised breathing sails, four stub feet and a living face at one blunt leading corner.",
+      "locomotion": "Sideways inchworm fold, unfold and soft skirt sweep."
+    },
+    {
+      "id": 43,
+      "name": "Orelet",
+      "family_id": "F015",
+      "tier": 1,
+      "silhouette": "A round mole with a pale snout, narrow metallic digging nails and one smooth ore nodule at the tip of its very short tail.",
+      "locomotion": "Alternating outward forepaw scoops with its feet visibly above the ground."
+    },
+    {
+      "id": 44,
+      "name": "Augermole",
+      "family_id": "F015",
+      "tier": 2,
+      "silhouette": "A long wedge-bodied mole whose broad serrated forepaws frame a low face; its body tapers into a small straight tail.",
+      "locomotion": "Wide shoulder crawl with nails swept behind during recovery."
+    },
+    {
+      "id": 45,
+      "name": "Pendulumole",
+      "family_id": "F015",
+      "tier": 2,
+      "silhouette": "An upright mole with long forearms, broad planted hindfeet and an elongated heavy tail curved into a counterweight loop.",
+      "locomotion": "Two hindfoot steps then tail counter-swing; face aims independently of arms."
+    },
+    {
+      "id": 46,
+      "name": "Ashkite",
+      "family_id": "F016",
+      "tier": 1,
+      "silhouette": "A planthopper with a broad kite-shaped shell, very short antennae, tucked legs and a visible round face below a shallow hood.",
+      "locomotion": "Tiny spring hop, side slip and four-foot landing."
+    },
+    {
+      "id": 47,
+      "name": "Plumehopper",
+      "family_id": "F016",
+      "tier": 2,
+      "silhouette": "A tall long-legged hopper with a narrow upright plume, a pear-shaped abdomen and an open diamond between its rear legs.",
+      "locomotion": "High tucked-leg spring, upright hover beat and heel-first landing."
+    },
+    {
+      "id": 48,
+      "name": "Huskdrifter",
+      "family_id": "F016",
+      "tier": 2,
+      "silhouette": "A broad leaf-shaped hopper held horizontally beneath translucent folded shell sails, with a small face extending beyond their front edge.",
+      "locomotion": "Low skirt-like glide with visible occasional leg taps; not a permanent flight permission."
+    },
+    {
+      "id": 95,
+      "name": "Screepeek",
+      "family_id": "F036",
+      "tier": 1,
+      "silhouette": "A stocky tapir with a short mobile trunk, small round ears, heavy hindquarters and three pale pebble pads along its shoulder.",
+      "locomotion": "Slow alternating four-foot stroll; trunk probes ahead on the idle beat."
+    },
+    {
+      "id": 96,
+      "name": "Stairtrunk",
+      "family_id": "F036",
+      "tier": 2,
+      "silhouette": "A long-trunked tapir with stepped flaring ears, high shoulders and low hindquarters, leaving a clear diagonal back silhouette.",
+      "locomotion": "Forefoot reach, trunk curl, broad rear step; ears fold on recovery."
+    },
+    {
+      "id": 97,
+      "name": "Mossmarch",
+      "family_id": "F037",
+      "tier": 1,
+      "silhouette": "A short six-legged caterpillar-like animal with a square muzzle, four separated moss cushions and a bare expressive brow.",
+      "locomotion": "Six legs ripple in three pairs while cushions squash in sequence."
+    },
+    {
+      "id": 98,
+      "name": "Trellislong",
+      "family_id": "F037",
+      "tier": 2,
+      "silhouette": "A long high-arched six-legged crawler with an open lattice of connected moss ribs above its smooth living underside and wide face.",
+      "locomotion": "Three alternating leg pairs carry a traveling body arch, never a static stretched base sprite."
+    },
+    {
+      "id": 99,
+      "name": "Dripurchin",
+      "family_id": "F038",
+      "tier": 1,
+      "silhouette": "A low sea-urchin-like animal with a soft visible face, five blunt movable spines and three rounded tube feet.",
+      "locomotion": "Rotates its feet without rotating its face, then bobs with gathered droplets."
+    },
+    {
+      "id": 100,
+      "name": "Dewmedusa",
+      "family_id": "F038",
+      "tier": 2,
+      "silhouette": "A tall soft-bodied urchin with its five spines opened into curved umbrella ribs and long joined tube-foot tassels; face hangs below the cap.",
+      "locomotion": "Gentle pulse-lift then trailing-foot settle; a grounded shadow makes its location legible."
+    }
+  ],
+  "validation": {
+    "images": 600,
+    "field_dimensions": [
+      24,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      24,
+      4,
+      2,
+      256
+    ],
+    "portrait_dimensions": [
+      24,
+      1024
+    ],
+    "palette_entries": 178,
+    "existing_actor_palette_only": true,
+    "palette_indices": [
+      0,
+      1,
+      6,
+      7,
+      12,
+      13,
+      14,
+      28,
+      29,
+      30,
+      34,
+      35,
+      36,
+      37,
+      40,
+      41,
+      42,
+      45,
+      46,
+      47,
+      49,
+      50,
+      51,
+      53,
+      54,
+      55,
+      56,
+      60,
+      62,
+      63,
+      66,
+      67,
+      96
+    ],
+    "transparent_zero": true,
+    "native_field_footprint": [
+      16,
+      16
+    ],
+    "distinct_articulated_walk_silhouettes_per_direction": 4,
+    "cast_poses_per_direction": 2,
+    "exact_bilateral_side_symmetry": true,
+    "independently_composed_native_portraits": true
+  },
+  "silhouette_comparison": {
+    "current_unique_front_masks": 24,
+    "released_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      25,
+      26,
+      28,
+      29,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "cross_release_front_mask_matches": 0,
+    "evolution_and_branch_distances": [
+      {
+        "from": 31,
+        "to": 32,
+        "different_mask_pixels_by_direction": [
+          41,
+          38,
+          45,
+          45
+        ]
+      },
+      {
+        "from": 32,
+        "to": 33,
+        "different_mask_pixels_by_direction": [
+          34,
+          29,
+          38,
+          38
+        ]
+      },
+      {
+        "from": 34,
+        "to": 35,
+        "different_mask_pixels_by_direction": [
+          82,
+          84,
+          66,
+          66
+        ]
+      },
+      {
+        "from": 35,
+        "to": 36,
+        "different_mask_pixels_by_direction": [
+          75,
+          68,
+          73,
+          73
+        ]
+      },
+      {
+        "from": 37,
+        "to": 38,
+        "different_mask_pixels_by_direction": [
+          26,
+          23,
+          18,
+          18
+        ]
+      },
+      {
+        "from": 37,
+        "to": 39,
+        "different_mask_pixels_by_direction": [
+          70,
+          58,
+          77,
+          77
+        ]
+      },
+      {
+        "from": 40,
+        "to": 41,
+        "different_mask_pixels_by_direction": [
+          50,
+          50,
+          53,
+          53
+        ]
+      },
+      {
+        "from": 40,
+        "to": 42,
+        "different_mask_pixels_by_direction": [
+          74,
+          74,
+          72,
+          72
+        ]
+      },
+      {
+        "from": 43,
+        "to": 44,
+        "different_mask_pixels_by_direction": [
+          34,
+          34,
+          35,
+          35
+        ]
+      },
+      {
+        "from": 43,
+        "to": 45,
+        "different_mask_pixels_by_direction": [
+          55,
+          59,
+          62,
+          62
+        ]
+      },
+      {
+        "from": 46,
+        "to": 47,
+        "different_mask_pixels_by_direction": [
+          48,
+          36,
+          56,
+          56
+        ]
+      },
+      {
+        "from": 46,
+        "to": 48,
+        "different_mask_pixels_by_direction": [
+          35,
+          35,
+          29,
+          29
+        ]
+      },
+      {
+        "from": 95,
+        "to": 96,
+        "different_mask_pixels_by_direction": [
+          39,
+          37,
+          36,
+          36
+        ]
+      },
+      {
+        "from": 97,
+        "to": 98,
+        "different_mask_pixels_by_direction": [
+          35,
+          28,
+          34,
+          34
+        ]
+      },
+      {
+        "from": 99,
+        "to": 100,
+        "different_mask_pixels_by_direction": [
+          66,
+          63,
+          70,
+          70
+        ]
+      },
+      {
+        "from": 38,
+        "to": 39,
+        "different_mask_pixels_by_direction": [
+          76,
+          71,
+          79,
+          79
+        ]
+      },
+      {
+        "from": 41,
+        "to": 42,
+        "different_mask_pixels_by_direction": [
+          78,
+          78,
+          75,
+          75
+        ]
+      },
+      {
+        "from": 44,
+        "to": 45,
+        "different_mask_pixels_by_direction": [
+          63,
+          67,
+          75,
+          75
+        ]
+      },
+      {
+        "from": 47,
+        "to": 48,
+        "different_mask_pixels_by_direction": [
+          71,
+          63,
+          73,
+          73
+        ]
+      }
+    ],
+    "nearest_front_mask_distances": [
+      {
+        "form_id": 31,
+        "nearest_form_id": 32,
+        "different_mask_pixels": 41
+      },
+      {
+        "form_id": 32,
+        "nearest_form_id": 33,
+        "different_mask_pixels": 34
+      },
+      {
+        "form_id": 33,
+        "nearest_form_id": 32,
+        "different_mask_pixels": 34
+      },
+      {
+        "form_id": 34,
+        "nearest_form_id": 95,
+        "different_mask_pixels": 26
+      },
+      {
+        "form_id": 35,
+        "nearest_form_id": 42,
+        "different_mask_pixels": 52
+      },
+      {
+        "form_id": 36,
+        "nearest_form_id": 100,
+        "different_mask_pixels": 37
+      },
+      {
+        "form_id": 37,
+        "nearest_form_id": 95,
+        "different_mask_pixels": 15
+      },
+      {
+        "form_id": 38,
+        "nearest_form_id": 37,
+        "different_mask_pixels": 26
+      },
+      {
+        "form_id": 39,
+        "nearest_form_id": 45,
+        "different_mask_pixels": 46
+      },
+      {
+        "form_id": 40,
+        "nearest_form_id": 34,
+        "different_mask_pixels": 36
+      },
+      {
+        "form_id": 41,
+        "nearest_form_id": 32,
+        "different_mask_pixels": 47
+      },
+      {
+        "form_id": 42,
+        "nearest_form_id": 38,
+        "different_mask_pixels": 41
+      },
+      {
+        "form_id": 43,
+        "nearest_form_id": 37,
+        "different_mask_pixels": 27
+      },
+      {
+        "form_id": 44,
+        "nearest_form_id": 43,
+        "different_mask_pixels": 34
+      },
+      {
+        "form_id": 45,
+        "nearest_form_id": 39,
+        "different_mask_pixels": 46
+      },
+      {
+        "form_id": 46,
+        "nearest_form_id": 37,
+        "different_mask_pixels": 32
+      },
+      {
+        "form_id": 47,
+        "nearest_form_id": 40,
+        "different_mask_pixels": 39
+      },
+      {
+        "form_id": 48,
+        "nearest_form_id": 37,
+        "different_mask_pixels": 31
+      },
+      {
+        "form_id": 95,
+        "nearest_form_id": 37,
+        "different_mask_pixels": 15
+      },
+      {
+        "form_id": 96,
+        "nearest_form_id": 95,
+        "different_mask_pixels": 39
+      },
+      {
+        "form_id": 97,
+        "nearest_form_id": 44,
+        "different_mask_pixels": 34
+      },
+      {
+        "form_id": 98,
+        "nearest_form_id": 38,
+        "different_mask_pixels": 28
+      },
+      {
+        "form_id": 99,
+        "nearest_form_id": 48,
+        "different_mask_pixels": 38
+      },
+      {
+        "form_id": 100,
+        "nearest_form_id": 36,
+        "different_mask_pixels": 37
+      }
+    ]
+  },
+  "terrain_visibility_minimum_opaque": 0.475,
+  "terrain_visibility_minimum_boundary": 0.4286
+}

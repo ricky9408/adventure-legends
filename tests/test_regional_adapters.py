@@ -13,7 +13,7 @@ known=set(re.findall(r'\bTX_\w+\b',header))
 needed=set(re.findall(r'\bTX_\w+\b',(TMP/'progression.c').read_text()+(TMP/'quickparty.c').read_text()))
 missing=sorted(needed-known)
 (TMP/'ui.h').write_text(header+'\n'+('\nenum { '+', '.join(f'{n}={1000+i}' for i,n in enumerate(missing))+' };\n' if missing else ''))
-modules=['creatures','creature_data','equipment','equipment_data','save4','save5','regional_quests','campaign_rules','evolution_art','regional_creature_art','northern_creature_art','southern_creature_art','progression_events','southern_quests']
+modules=['creatures','creature_data','equipment','equipment_data','save4','save5','regional_quests','campaign_rules','evolution_art','regional_creature_art','northern_creature_art','southern_creature_art','progression_events','southern_quests','magma_quests','magma_creature_art','ui']
 args=['cc','-std=c99','-g','-O1','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fsanitize=address,undefined','-fno-omit-frame-pointer','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-I'+str(TMP),'-I'+str(ROOT/'src'),str(TMP/'harness.c'),str(TMP/'progression.c'),str(TMP/'quickparty.c'),*[str(ROOT/'src'/(n+'.c')) for n in modules],'-o',str(TMP/'harness')]
 print('UI shim IDs:',missing,flush=True)
 subprocess.run(args,check=True)

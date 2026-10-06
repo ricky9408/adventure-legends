@@ -46,11 +46,11 @@ static MENU_HOT void number(unsigned n,int x,int y,int color){
 static int name_id(unsigned item){switch(item){
  case 1:return TX_G_ITEM1;case 2:return TX_G_ITEM2;case 9:return TX_G_ITEM9;case 10:return TX_G_ITEM10;
  case 17:return TX_G_ITEM17;case 18:return TX_G_ITEM18;case 33:return TX_G_ITEM33;case 34:return TX_G_ITEM34;
- case 49:return TX_G_ITEM49;case 50:return TX_G_ITEM50;case 65:return TX_G_ITEM65;case 81:return TX_G_ITEM81;case 82:return TX_G_ITEM82;case 3:return TX_G_ITEM3;case 11:return TX_G_ITEM11;case 19:return TX_G_ITEM19;case 35:return TX_G_ITEM35;case 51:return TX_G_ITEM51;case 83:return TX_G_ITEM83;case 4:return TX_G_ITEM4;case 12:return TX_G_ITEM12;case 36:return TX_G_ITEM36;case 52:return TX_G_ITEM52;case 66:return TX_G_ITEM66;case 84:return TX_G_ITEM84;default:return TX_G_EMPTY;}}
+ case 49:return TX_G_ITEM49;case 50:return TX_G_ITEM50;case 65:return TX_G_ITEM65;case 81:return TX_G_ITEM81;case 82:return TX_G_ITEM82;case 3:return TX_G_ITEM3;case 11:return TX_G_ITEM11;case 19:return TX_G_ITEM19;case 35:return TX_G_ITEM35;case 51:return TX_G_ITEM51;case 83:return TX_G_ITEM83;case 4:return TX_G_ITEM4;case 12:return TX_G_ITEM12;case 36:return TX_G_ITEM36;case 52:return TX_G_ITEM52;case 66:return TX_G_ITEM66;case 84:return TX_G_ITEM84;case 20:return TX_G_ITEM20;case 37:return TX_G_ITEM37;case 53:return TX_G_ITEM53;case 67:return TX_G_ITEM67;case 85:return TX_G_ITEM85;case 5:return TX_G_ITEM5;default:return TX_G_EMPTY;}}
 static int description_id(unsigned item){switch(item){
  case 1:return TX_G_DESC1;case 2:return TX_G_DESC2;case 9:return TX_G_DESC9;case 10:return TX_G_DESC10;
  case 17:return TX_G_DESC17;case 18:return TX_G_DESC18;case 33:return TX_G_DESC33;case 34:return TX_G_DESC34;
- case 49:return TX_G_DESC49;case 50:return TX_G_DESC50;case 65:return TX_G_DESC65;case 81:return TX_G_DESC81;case 82:return TX_G_DESC82;case 3:return TX_G_DESC3;case 11:return TX_G_DESC11;case 19:return TX_G_DESC19;case 35:return TX_G_DESC35;case 51:return TX_G_DESC51;case 83:return TX_G_DESC83;case 4:return TX_G_DESC4;case 12:return TX_G_DESC12;case 36:return TX_G_DESC36;case 52:return TX_G_DESC52;case 66:return TX_G_DESC66;case 84:return TX_G_DESC84;default:return TX_G_EMPTY;}}
+ case 49:return TX_G_DESC49;case 50:return TX_G_DESC50;case 65:return TX_G_DESC65;case 81:return TX_G_DESC81;case 82:return TX_G_DESC82;case 3:return TX_G_DESC3;case 11:return TX_G_DESC11;case 19:return TX_G_DESC19;case 35:return TX_G_DESC35;case 51:return TX_G_DESC51;case 83:return TX_G_DESC83;case 4:return TX_G_DESC4;case 12:return TX_G_DESC12;case 36:return TX_G_DESC36;case 52:return TX_G_DESC52;case 66:return TX_G_DESC66;case 84:return TX_G_DESC84;case 20:return TX_G_DESC20;case 37:return TX_G_DESC37;case 53:return TX_G_DESC53;case 67:return TX_G_DESC67;case 85:return TX_G_DESC85;case 5:return TX_G_DESC5;default:return TX_G_EMPTY;}}
 void gear_menu_reset(void){gear_menu_slot=0;gear_menu_candidate=adventure_save.equipment.equipped[0];notice=0;gear_menu_revision++;}
 static void change_candidate(int delta){EquipmentState*e=&adventure_save.equipment;int i=gear_menu_candidate==255?48:gear_menu_candidate;unsigned n;
  for(n=0;n<49;n++){const EquipmentDefinition*d;i=(i+delta+49)%49;if(i==48){gear_menu_candidate=255;break;}d=equipment_definition(e->bag[i].item_id);if(d&&d->slot==gear_menu_slot){gear_menu_candidate=i;break;}}
@@ -66,8 +66,15 @@ int gear_menu_input(int pressed){EquipmentU16 hp;EquipmentComparison cmp;unsigne
  else notice=1;
  gear_menu_revision++;return 1;
 }
-static MENU_HOT void heart_number(unsigned n,int x,int y,int color){number(n/16,x,y,color);if(n%16){rect(x+5,y+4,1,1,(u8)color);number((n%16)*10/16,x+7,y,color);}}
-static MENU_HOT void stat(unsigned before,unsigned after,int label,int x,int hearts){int col=after>before?GOLD:after<before?PAL_HEART:CREAM;text(label,x,98,CREAM);if(hearts)heart_number(before,x+15,104,CREAM);else number(before,x+15,104,CREAM);rect(x+28,105,5,1,TEAL);rect(x+31,104,1,3,TEAL);if(hearts)heart_number(after,x+35,104,col);else number(after,x+35,104,col);}
+static unsigned number_width(unsigned n){return n>=100?11u:n>=10?7u:3u;}
+/* Exact terminating Q4 decimal, with a variable-width integer and no rounding.
+ * Every shipped HP bonus is a quarter heart, so the widest gameplay value is
+ * 11.75 (17 pixels). The helper also renders all sixteenth fractions exactly. */
+static unsigned heart_width(unsigned n){unsigned width=number_width(n/16),r=n%16;if(r){width+=2;do{width+=4;r=(r*10)%16;}while(r);}return width;}
+static void heart_number(unsigned n,int x,int y,int color){unsigned r=n%16,w=number_width(n/16);number(n/16,x,y,color);if(r){rect(x+(int)w+1,y+4,1,1,(u8)color);x+=(int)w+3;do{r*=10;digit_blit(r/16,x,y,(u8)color);x+=4;r%=16;}while(r);}}
+/* Each54px column reserves label0..12, before13..29 (right-aligned), arrow
+ * 31..35, and after37..53. Two17px quarter-heart values cannot overlap. */
+static MENU_HOT void stat(unsigned before,unsigned after,int label,int x,int hearts){int col=after>before?GOLD:after<before?PAL_HEART:CREAM;unsigned width=hearts?heart_width(before):number_width(before);text(label,x,98,CREAM);if(hearts)heart_number(before,x+30-(int)width,104,CREAM);else number(before,x+30-(int)width,104,CREAM);rect(x+31,105,5,1,TEAL);rect(x+34,104,1,3,TEAL);if(hearts)heart_number(after,x+37,104,col);else number(after,x+37,104,col);}
 MENU_HOT void gear_menu_draw(void){EquipmentState*e=&adventure_save.equipment;EquipmentComparison cmp;unsigned item=gear_menu_candidate<48?e->bag[gear_menu_candidate].item_id:0,i,result;const int labels[]={TX_G_TAB_WEAPON,TX_G_TAB_BODY,TX_G_TAB_BOOTS,TX_G_TAB_BELT,TX_G_TAB_RING};
  if(!item&&gear_menu_slot==EQUIPMENT_WEAPON)item=EQUIPMENT_STARTER_ID;
  box(8,31,224,123);centered(notice?TX_G_BUSY:TX_G_TITLE,33,GOLD);

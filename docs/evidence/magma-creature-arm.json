@@ -1,0 +1,854 @@
+{
+  "purpose": "Bounded isolated ARM7TDMI creature/admission timings and stack watermark.\n\nThe earned21 SRAM is read-only input, hash-pinned to delivered S3. The staged34\nand full160 profiles are host-constructed core states, never native route proof.\nNo full game ROM, saves or external state are modified by this benchmark.\n",
+  "earned_sram_sha256": "0bd83c19eb0dee81b3cd9e2b48462f6362b559786e38fa119312fe05787b0bd3",
+  "source_sha256": {
+    "src/creatures.h": "dbf45cc6dbe037eddd10e683d7118a055c880aa6ca1b70a7a5d067b70ab3882c",
+    "src/creatures.c": "b5125cdc4007918f5d0ca7ff08a646c261e06a05663feec71a057875573746f8",
+    "src/creature_data.c": "7d34c17ada62635d3759bf23b84c401ab084b09d4cebc94b74acb153bd52b867"
+  },
+  "source_unchanged": true,
+  "rom_sha256": "1b5459dad6da6d093667ca1542f7c4ddcb4f0e3f08ef35623f2c651e0ded7961",
+  "compiler": "arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119",
+  "waitcnt": "0x4317",
+  "timer_hz": 16777216,
+  "frame_cycles": 280896,
+  "scenarios": [
+    {
+      "label": "native-earned-S3-21",
+      "retained": 21,
+      "operations": {
+        "catalog_validate": {
+          "cycles": [
+            636795,
+            636795,
+            636795,
+            636795
+          ],
+          "max_cycles": 636795,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 100
+        },
+        "roster_validate": {
+          "cycles": [
+            44140,
+            44140,
+            44140,
+            44140
+          ],
+          "max_cycles": 44140,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 108
+        },
+        "historical_r4_roster_validate": {
+          "cycles": [
+            44951,
+            44951,
+            44951,
+            44951
+          ],
+          "max_cycles": 44951,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 112
+        },
+        "coverage_including_validation": {
+          "cycles": [
+            57412,
+            57412,
+            57412,
+            57412
+          ],
+          "max_cycles": 57412,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 260
+        },
+        "grant_query_including_validation": {
+          "cycles": [
+            58438,
+            58438,
+            58438,
+            58438
+          ],
+          "max_cycles": 58438,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 316
+        },
+        "evolution_query_including_validation": {
+          "cycles": [
+            44928,
+            44928,
+            44928,
+            44928
+          ],
+          "max_cycles": 44928,
+          "results": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "observed_stack_below_main_sp": 272
+        },
+        "admitted_grant_full_transaction": {
+          "cycles": [
+            60440,
+            60440,
+            60440,
+            60440
+          ],
+          "max_cycles": 60440,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 340
+        }
+      }
+    },
+    {
+      "label": "host-staged-34-all65-history",
+      "retained": 34,
+      "operations": {
+        "catalog_validate": {
+          "cycles": [
+            636795,
+            636795,
+            636795,
+            636795
+          ],
+          "max_cycles": 636795,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 100
+        },
+        "roster_validate": {
+          "cycles": [
+            74882,
+            74882,
+            74882,
+            74882
+          ],
+          "max_cycles": 74882,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 108
+        },
+        "historical_r4_roster_validate": {
+          "cycles": [
+            4800,
+            4800,
+            4800,
+            4800
+          ],
+          "max_cycles": 4800,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 104
+        },
+        "coverage_including_validation": {
+          "cycles": [
+            92626,
+            92626,
+            92626,
+            92626
+          ],
+          "max_cycles": 92626,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 260
+        },
+        "grant_query_including_validation": {
+          "cycles": [
+            93652,
+            93652,
+            93652,
+            93652
+          ],
+          "max_cycles": 93652,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 316
+        },
+        "evolution_query_including_validation": {
+          "cycles": [
+            75670,
+            75670,
+            75670,
+            75670
+          ],
+          "max_cycles": 75670,
+          "results": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "observed_stack_below_main_sp": 272
+        },
+        "admitted_grant_full_transaction": {
+          "cycles": [
+            95992,
+            95992,
+            95992,
+            95992
+          ],
+          "max_cycles": 95992,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 340
+        }
+      }
+    },
+    {
+      "label": "grandfathered-full160",
+      "retained": 160,
+      "operations": {
+        "catalog_validate": {
+          "cycles": [
+            636795,
+            636795,
+            636795,
+            636795
+          ],
+          "max_cycles": 636795,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 100
+        },
+        "roster_validate": {
+          "cycles": [
+            408018,
+            408018,
+            408018,
+            408018
+          ],
+          "max_cycles": 408018,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 108
+        },
+        "historical_r4_roster_validate": {
+          "cycles": [
+            4800,
+            4800,
+            4800,
+            4800
+          ],
+          "max_cycles": 4800,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 104
+        },
+        "coverage_including_validation": {
+          "cycles": [
+            466106,
+            466106,
+            466106,
+            466106
+          ],
+          "max_cycles": 466106,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 260
+        },
+        "grant_query_including_validation": {
+          "cycles": [
+            466704,
+            466704,
+            466704,
+            466704
+          ],
+          "max_cycles": 466704,
+          "results": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "observed_stack_below_main_sp": 316
+        },
+        "evolution_query_including_validation": {
+          "cycles": [
+            467724,
+            467724,
+            467724,
+            467724
+          ],
+          "max_cycles": 467724,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 324
+        },
+        "admitted_grant_full_transaction": {
+          "cycles": [
+            466541,
+            466541,
+            466541,
+            466541
+          ],
+          "max_cycles": 466541,
+          "results": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "observed_stack_below_main_sp": 340
+        }
+      }
+    },
+    {
+      "label": "safe-extra-limit89",
+      "retained": 89,
+      "operations": {
+        "catalog_validate": {
+          "cycles": [
+            636795,
+            636795,
+            636795,
+            636795
+          ],
+          "max_cycles": 636795,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 100
+        },
+        "roster_validate": {
+          "cycles": [
+            166788,
+            166788,
+            166788,
+            166788
+          ],
+          "max_cycles": 166788,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 108
+        },
+        "historical_r4_roster_validate": {
+          "cycles": [
+            156317,
+            156317,
+            156317,
+            156317
+          ],
+          "max_cycles": 156317,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 112
+        },
+        "coverage_including_validation": {
+          "cycles": [
+            201364,
+            201364,
+            201364,
+            201364
+          ],
+          "max_cycles": 201364,
+          "results": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "observed_stack_below_main_sp": 260
+        },
+        "grant_query_including_validation": {
+          "cycles": [
+            202390,
+            202390,
+            202390,
+            202390
+          ],
+          "max_cycles": 202390,
+          "results": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_stack_below_main_sp": 316
+        },
+        "evolution_query_including_validation": {
+          "cycles": [
+            167576,
+            167576,
+            167576,
+            167576
+          ],
+          "max_cycles": 167576,
+          "results": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "observed_stack_below_main_sp": 272
+        },
+        "admitted_grant_full_transaction": {
+          "cycles": [
+            202187,
+            202187,
+            202187,
+            202187
+          ],
+          "max_cycles": 202187,
+          "results": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "observed_stack_below_main_sp": 340
+        }
+      }
+    }
+  ],
+  "object_sections": {
+    "creatures": "/workspace/scratch/33ed39a77941/adventure-legends-magma/build/magma-creature-arm/creatures.o  :\nsection            size   addr\n.text             13336      0\n.data                 0      0\n.bss                  0      0\n.rodata            4520      0\n.comment             39      0\n.ARM.attributes      42      0\nTotal             17937\n\n\n",
+    "creature_data": "/workspace/scratch/33ed39a77941/adventure-legends-magma/build/magma-creature-arm/creature_data.o  :\nsection           size   addr\n.text               56      0\n.data                0      0\n.bss                 0      0\n.rodata.str1.4    1654      0\n.rodata           4532      0\n.comment            39      0\n.ARM.attributes     42      0\nTotal             6323\n\n\n"
+  },
+  "compiler_stack_frames": {
+    "family_policy_for_id": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "revision_policy_for_id": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "trial_subset_valid": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_terminal_family.part.0": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "coverage_add": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "coverage_scan": {
+      "bytes": 32,
+      "kind": "static"
+    },
+    "creatures_family_trial": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_form_allowed_revision": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_trial_allowed_mask": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_family_revision": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_legacy_spirit_revision": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_trial_mask_for_key": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_form_id_valid": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_form": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_ability": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_legacy_spirit": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_capabilities": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_has_capability": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_supports_capability": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_phase_multiplier_q8": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_generated_phase": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_xp_threshold": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_level_for_xp": {
+      "bytes": 16,
+      "kind": "static"
+    },
+    "creatures_command_learned": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_command_learned_revision": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "can_evolve_edge": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_evolution_count": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_evolution_at": {
+      "bytes": 16,
+      "kind": "static"
+    },
+    "creatures_evolution_to": {
+      "bytes": 16,
+      "kind": "static"
+    },
+    "admission_query_validated": {
+      "bytes": 232,
+      "kind": "static"
+    },
+    "creatures_evolution": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_catalog_validate": {
+      "bytes": 88,
+      "kind": "static"
+    },
+    "creatures_instance_validate": {
+      "bytes": 56,
+      "kind": "static"
+    },
+    "grant_validated": {
+      "bytes": 72,
+      "kind": "static"
+    },
+    "qualified_trial": {
+      "bytes": 32,
+      "kind": "static"
+    },
+    "evolve_ready": {
+      "bytes": 56,
+      "kind": "static"
+    },
+    "creatures_instance_validate_revision": {
+      "bytes": 32,
+      "kind": "static"
+    },
+    "party_validate": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_party_validate": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_roster_validate": {
+      "bytes": 40,
+      "kind": "static"
+    },
+    "creatures_roster_validate_revision": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_roster_init": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_roster_count": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_terminal_family": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_terminal_mask": {
+      "bytes": 12,
+      "kind": "static"
+    },
+    "creatures_collection_coverage": {
+      "bytes": 152,
+      "kind": "static"
+    },
+    "creatures_admission_allowed": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_admission_query_grant": {
+      "bytes": 16,
+      "kind": "static"
+    },
+    "creatures_admission_query_evolution": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_grant_admitted": {
+      "bytes": 40,
+      "kind": "static"
+    },
+    "creatures_party_capabilities": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_party_set": {
+      "bytes": 32,
+      "kind": "static"
+    },
+    "creatures_party_supports_capability": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_party_set_requirements": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_grant": {
+      "bytes": 32,
+      "kind": "static"
+    },
+    "creatures_grant_story": {
+      "bytes": 64,
+      "kind": "static"
+    },
+    "creatures_apply_story_floors": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_migrate_legacy": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_add_xp": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_equip": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_select_command": {
+      "bytes": 16,
+      "kind": "static"
+    },
+    "creatures_begin_expedition": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_credit_event": {
+      "bytes": 48,
+      "kind": "static"
+    },
+    "creatures_mark_trial": {
+      "bytes": 16,
+      "kind": "static"
+    },
+    "creatures_mark_trial_qualified": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_has_trial_qualified": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_can_evolve_to": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_can_evolve": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_can_evolve_roster_to": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_evolve_to": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_evolve": {
+      "bytes": 24,
+      "kind": "static"
+    },
+    "creatures_defer_evolution": {
+      "bytes": 8,
+      "kind": "static"
+    },
+    "creatures_name": {
+      "bytes": 0,
+      "kind": "static"
+    },
+    "creatures_ability_name": {
+      "bytes": 0,
+      "kind": "static"
+    }
+  },
+  "stack_note": "Measured isolated subcall watermark below main SP, not whole-engine stack high-water. No core mutable data/bss; benchmark fixture state itself is harness-only.",
+  "object_budget": {
+    "current65": {
+      "creatures": {
+        "rom_sections": 17856,
+        "mutable_data_bss": 0,
+        "sections": {
+          ".text": 13336,
+          ".data": 0,
+          ".bss": 0,
+          ".rodata": 4520,
+          ".comment": 39,
+          ".ARM.attributes": 42
+        }
+      },
+      "creature_data": {
+        "rom_sections": 6242,
+        "mutable_data_bss": 0,
+        "sections": {
+          ".text": 56,
+          ".data": 0,
+          ".bss": 0,
+          ".rodata.str1.4": 1654,
+          ".rodata": 4532,
+          ".comment": 39,
+          ".ARM.attributes": 42
+        }
+      }
+    },
+    "baseline_foundation41": {
+      "creatures": {
+        "rom_sections": 14078,
+        "mutable_data_bss": 0,
+        "sections": {
+          ".text": 10960,
+          ".data": 0,
+          ".bss": 0,
+          ".rodata": 3118,
+          ".comment": 39,
+          ".ARM.attributes": 42
+        }
+      },
+      "creature_data": {
+        "rom_sections": 4120,
+        "mutable_data_bss": 0,
+        "sections": {
+          ".text": 56,
+          ".data": 0,
+          ".bss": 0,
+          ".rodata.str1.4": 1072,
+          ".rodata": 2992,
+          ".comment": 39,
+          ".ARM.attributes": 42
+        }
+      }
+    },
+    "incremental_rom_sections": 5900,
+    "baseline_sha256": {
+      "creatures.c": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+      "creatures.h": "aee4476931a3557b454aa41c716c90996bbca9551462a39ced012bf053954a6b",
+      "creature_data.c": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2"
+    }
+  }
+}

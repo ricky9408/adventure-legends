@@ -1,0 +1,18 @@
+{
+  "recorded_hashes_verified": {
+    "tests/magma_journey.py": "ea2fc79efc577cc0527eee2a276455fd7f911bdb31795460f2f6efed70f018f2",
+    "tests/region_journey.py": "af5e0539da596b70fed2c1150e6488dfbde11f8f4f041a61ce853a990e25f2c1",
+    "tests/northern_journey.py": "d76245a148754aabd636aedf21cfe89cd8c7aeea31997ad54548ee2da50d807d",
+    "tests/southern_journey.py": "c712cf4e6c5b790152cb5bb7edd49dee8a9ffe4cc9671ea84f87867b9218daf0",
+    "tools/mgba_runner.py": "2a8eedab147252da3e6ace71bf368be2621cefde61fe37b16df7322e467d3c95"
+  },
+  "additional_imported_observer_sources": {
+    "tests/test_save5.py": "f933d85234da54d6da09f62a99e822eab0c21c0e3ffce8fc1eb7883fb1377aba",
+    "tests/test_creatures.py": "65dc00f7adfadba58dbf81ff446274d0de440d3cca9f75d94e65e3da73454bcf",
+    "tests/test_save4.py": "21be9858ba1dba773d5f2099e78c6331610fc41cf06d0e0e9fcd7932c800004c",
+    "tests/region_combat_tests.py": "5608af8dbd87a1963b48e4bd6242a906f4874f8fcf0eb29cc010f59b2a412b06",
+    "tests/southern_symbols.py": "7f21fb8098ad216457190fa9071374b49df263794f43f4caac70dafce0e81aad",
+    "tests/test_southern_frozen_fixtures.py": "4258706d5738f071ddb2e99281d589a644d253c8730058300f2ac395287bd4ce"
+  },
+  "capture_scope": "Exact files verified against successful producer receipt; no source rewrite"
+}

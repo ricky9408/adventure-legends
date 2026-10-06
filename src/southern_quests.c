@@ -95,11 +95,15 @@ unsigned southern_recruit_level(const CreatureRoster *r) {
  t=n?(n&1?values[n/2]:(values[n/2-1]+values[n/2])/2):18;
  return t<18?18:t>24?24:t;
 }
-static int grant_preflight(const CreatureRoster *r) {
- unsigned i;
+static int admission_result(enum CreatureAdmissionStatus status) {
+ if(creatures_admission_allowed(status))return SOUTH_CHANGED;
+ if(status==CREATURE_ADMISSION_FULL)return SOUTH_FULL;
+ if(status==CREATURE_ADMISSION_RESERVED)return SOUTH_RESERVED;
+ return SOUTH_INVALID;
+}
+static int grant_preflight(const CreatureRoster *r,unsigned form) {
  if(r->next_instance_id==0xffffffffu)return SOUTH_INVALID;
- for(i=0;i<CREATURE_ROSTER_CAPACITY;++i)if(!r->instances[i].form_id)return SOUTH_CHANGED;
- return SOUTH_FULL;
+ return admission_result(creatures_admission_query_grant(r,form,0));
 }
 int southern_quest_claim(Save5State *s,unsigned q) {
  static const Save4U8 gear[8]={19,255,255,21,23,22,24,20};
@@ -109,7 +113,7 @@ int southern_quest_claim(Save5State *s,unsigned q) {
  if(!southern_quest_available(s,q))return SOUTH_LOCKED;
  st=save5_quest_state(&s->quests,q);if(st==SAVE5_QUEST_CLAIMED)return SOUTH_UNCHANGED;
  if(st!=SAVE5_QUEST_READY||s->quests.objectives[q]!=southern_quest_mask(q))return SOUTH_LOCKED;
- if(q<24){result=grant_preflight(&s->roster);if(result!=SOUTH_CHANGED)return (int)result;}
+ if(q<24){result=grant_preflight(&s->roster,forms[q-22]);if(result!=SOUTH_CHANGED)return (int)result;}
  source=gear[q-22];
  if(source!=255){
   staged=s->equipment;
@@ -119,8 +123,11 @@ int southern_quest_claim(Save5State *s,unsigned q) {
  }
  /* grant has no failing mutations. Once it succeeds, only bounded infallible
   * copies/bit updates remain, so mixed Q22 cannot leave half a reward. */
- if(q<24 && creatures_grant(&s->roster,forms[q-22],southern_recruit_level(&s->roster),20,0,0)==CREATURE_EMPTY_SLOT)
-  return SOUTH_INVALID;
+ if(q<24){
+  result=(unsigned)admission_result(creatures_grant_admitted(&s->roster,
+   forms[q-22],southern_recruit_level(&s->roster),20,0,0,0));
+  if(result!=SOUTH_CHANGED)return (int)result;
+ }
  if(source!=255)s->equipment=staged;
  save5_quest_set_state(&s->quests,q,SAVE5_QUEST_CLAIMED);
  s->quests.rewards[q>>3]=(Save4U8)(s->quests.rewards[q>>3]|(1u<<(q&7)));
@@ -143,8 +150,9 @@ int southern_field_recruit(Save5State *s,unsigned token) {
     (field==4&&!(s->quests.region_flags[18]&1u))||
     (field==6&&!(s->quests.region_flags[18]&2u)))return SOUTH_LOCKED;
  if(southern_source_claimed(s,token))return SOUTH_UNCHANGED;
- result=grant_preflight(&s->roster);if(result!=SOUTH_CHANGED)return (int)result;
- if(creatures_grant(&s->roster,forms[i],southern_recruit_level(&s->roster),20,0,0)==CREATURE_EMPTY_SLOT)return SOUTH_INVALID;
+ result=(unsigned)admission_result(creatures_grant_admitted(&s->roster,
+  forms[i],southern_recruit_level(&s->roster),20,0,0,0));
+ if(result!=SOUTH_CHANGED)return (int)result;
  s->quests.region_flags[8]=(Save4U8)(s->quests.region_flags[8]|(1u<<field));
  return SOUTH_REWARDED;
 }

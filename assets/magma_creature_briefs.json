@@ -1,0 +1,194 @@
+[
+  {
+    "id": 31,
+    "name": "Coalcoil",
+    "family_id": "F011",
+    "tier": 1,
+    "silhouette": "A low snail with a broad smiling muzzle, two blunt eyestalks and a sideways crescent shell; pale foot clearly separate from charcoal shell.",
+    "locomotion": "Foot ripples in four readable waves; shell rocks after the head stops."
+  },
+  {
+    "id": 32,
+    "name": "Emberhelix",
+    "family_id": "F011",
+    "tier": 2,
+    "silhouette": "A raised snail on a narrow long foot; its open spiral shell sits upright with a large triangular window and expressive face below.",
+    "locomotion": "Stretch, brace, pull the shell forward; spiral tips lag by one pose."
+  },
+  {
+    "id": 33,
+    "name": "Hearthcrown",
+    "family_id": "F011",
+    "tier": 3,
+    "silhouette": "A long muscular snail with a flat fan-shaped shell held above its face on three connected shell ribs; large open spaces replace the earlier spiral.",
+    "locomotion": "Wide foot fans to anchor, then contracts into an unhurried glide."
+  },
+  {
+    "id": 34,
+    "name": "Shardibex",
+    "family_id": "F012",
+    "tier": 1,
+    "silhouette": "A small round-nosed mountain goat with short straight stone horns, wide cloven feet and a tilted rectangular shoulder patch.",
+    "locomotion": "Quick paired hoof plants, head dip, rear-foot catch-up."
+  },
+  {
+    "id": 35,
+    "name": "Bracehorn",
+    "family_id": "F012",
+    "tier": 2,
+    "silhouette": "A low broad-shouldered goat with huge outward U-curved horns enclosing its face, short hindquarters and distinctly spread forehooves.",
+    "locomotion": "Three-beat brace and short forward shuffle; head stays level."
+  },
+  {
+    "id": 36,
+    "name": "Spanram",
+    "family_id": "F012",
+    "tier": 3,
+    "silhouette": "A tall long-legged ram with two high buttress horns joining above its brow, a narrow waist and two strong negative-space arches.",
+    "locomotion": "High deliberate diagonal hoof steps; horns sway opposite hips."
+  },
+  {
+    "id": 37,
+    "name": "Tuftpika",
+    "family_id": "F013",
+    "tier": 1,
+    "silhouette": "A tiny pika with long swept-back grass whiskers, round ears, a square leafy tail tuft and two high-set dark eyes.",
+    "locomotion": "Compact four-paw gallop, pause, whisker flick."
+  },
+  {
+    "id": 38,
+    "name": "Rootmuffle",
+    "family_id": "F013",
+    "tier": 2,
+    "silhouette": "A low long-bodied pika with a broad root beard and two separated leafy shoulder mounds; its ears and living muzzle remain exposed.",
+    "locomotion": "Low belly-clear scamper; beard trails, then gathers beneath chin."
+  },
+  {
+    "id": 39,
+    "name": "Sporevault",
+    "family_id": "F013",
+    "tier": 2,
+    "silhouette": "An upright long-hindleg pika with a closed pinecone tail carried above its head and a tiny chest between large open arm spaces.",
+    "locomotion": "Crouch, tall hop, two-foot settle; tail opens only during casting."
+  },
+  {
+    "id": 40,
+    "name": "Chalklung",
+    "family_id": "F014",
+    "tier": 1,
+    "silhouette": "A living porous sponge with three soft lobed feet, one angled chimney and a friendly face on its lower flexible skirt.",
+    "locomotion": "Three-foot rocking walk; chimney compresses and rebounds as it breathes."
+  },
+  {
+    "id": 41,
+    "name": "Bellcup",
+    "family_id": "F014",
+    "tier": 2,
+    "silhouette": "A tall sponge with an inverted bell mouth, a long curved neck, broad two-lobed base and a face looking out beneath the rim.",
+    "locomotion": "Leans forward on the base, straightens neck, then draws the base underneath."
+  },
+  {
+    "id": 42,
+    "name": "Runnelribbon",
+    "family_id": "F014",
+    "tier": 2,
+    "silhouette": "A flat ribbon sponge with two raised breathing sails, four stub feet and a living face at one blunt leading corner.",
+    "locomotion": "Sideways inchworm fold, unfold and soft skirt sweep."
+  },
+  {
+    "id": 43,
+    "name": "Orelet",
+    "family_id": "F015",
+    "tier": 1,
+    "silhouette": "A round mole with a pale snout, narrow metallic digging nails and one smooth ore nodule at the tip of its very short tail.",
+    "locomotion": "Alternating outward forepaw scoops with its feet visibly above the ground."
+  },
+  {
+    "id": 44,
+    "name": "Augermole",
+    "family_id": "F015",
+    "tier": 2,
+    "silhouette": "A long wedge-bodied mole whose broad serrated forepaws frame a low face; its body tapers into a small straight tail.",
+    "locomotion": "Wide shoulder crawl with nails swept behind during recovery."
+  },
+  {
+    "id": 45,
+    "name": "Pendulumole",
+    "family_id": "F015",
+    "tier": 2,
+    "silhouette": "An upright mole with long forearms, broad planted hindfeet and an elongated heavy tail curved into a counterweight loop.",
+    "locomotion": "Two hindfoot steps then tail counter-swing; face aims independently of arms."
+  },
+  {
+    "id": 46,
+    "name": "Ashkite",
+    "family_id": "F016",
+    "tier": 1,
+    "silhouette": "A planthopper with a broad kite-shaped shell, very short antennae, tucked legs and a visible round face below a shallow hood.",
+    "locomotion": "Tiny spring hop, side slip and four-foot landing."
+  },
+  {
+    "id": 47,
+    "name": "Plumehopper",
+    "family_id": "F016",
+    "tier": 2,
+    "silhouette": "A tall long-legged hopper with a narrow upright plume, a pear-shaped abdomen and an open diamond between its rear legs.",
+    "locomotion": "High tucked-leg spring, upright hover beat and heel-first landing."
+  },
+  {
+    "id": 48,
+    "name": "Huskdrifter",
+    "family_id": "F016",
+    "tier": 2,
+    "silhouette": "A broad leaf-shaped hopper held horizontally beneath translucent folded shell sails, with a small face extending beyond their front edge.",
+    "locomotion": "Low skirt-like glide with visible occasional leg taps; not a permanent flight permission."
+  },
+  {
+    "id": 95,
+    "name": "Screepeek",
+    "family_id": "F036",
+    "tier": 1,
+    "silhouette": "A stocky tapir with a short mobile trunk, small round ears, heavy hindquarters and three pale pebble pads along its shoulder.",
+    "locomotion": "Slow alternating four-foot stroll; trunk probes ahead on the idle beat."
+  },
+  {
+    "id": 96,
+    "name": "Stairtrunk",
+    "family_id": "F036",
+    "tier": 2,
+    "silhouette": "A long-trunked tapir with stepped flaring ears, high shoulders and low hindquarters, leaving a clear diagonal back silhouette.",
+    "locomotion": "Forefoot reach, trunk curl, broad rear step; ears fold on recovery."
+  },
+  {
+    "id": 97,
+    "name": "Mossmarch",
+    "family_id": "F037",
+    "tier": 1,
+    "silhouette": "A short six-legged caterpillar-like animal with a square muzzle, four separated moss cushions and a bare expressive brow.",
+    "locomotion": "Six legs ripple in three pairs while cushions squash in sequence."
+  },
+  {
+    "id": 98,
+    "name": "Trellislong",
+    "family_id": "F037",
+    "tier": 2,
+    "silhouette": "A long high-arched six-legged crawler with an open lattice of connected moss ribs above its smooth living underside and wide face.",
+    "locomotion": "Three alternating leg pairs carry a traveling body arch, never a static stretched base sprite."
+  },
+  {
+    "id": 99,
+    "name": "Dripurchin",
+    "family_id": "F038",
+    "tier": 1,
+    "silhouette": "A low sea-urchin-like animal with a soft visible face, five blunt movable spines and three rounded tube feet.",
+    "locomotion": "Rotates its feet without rotating its face, then bobs with gathered droplets."
+  },
+  {
+    "id": 100,
+    "name": "Dewmedusa",
+    "family_id": "F038",
+    "tier": 2,
+    "silhouette": "A tall soft-bodied urchin with its five spines opened into curved umbrella ribs and long joined tube-foot tassels; face hangs below the cap.",
+    "locomotion": "Gentle pulse-lift then trailing-foot settle; a grounded shadow makes its location legible."
+  }
+]

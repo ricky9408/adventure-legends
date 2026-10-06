@@ -20,7 +20,7 @@ Player movement uses Q8 positions: cardinal 320/256 pixels/update and diagonal 2
 
 `campaign_rules.*` is generated from editable JSON: 10 new fixed rooms with blocks, gated exits, monotonic puzzle objects, enemies and dialogue; original rooms 0..3 remain separately implemented. Combined requirement masks use room bits 0..15 and chapter bits 16..19. Room transitions clear transient attacks/projectiles and use an entrance lock to prevent bouncing.
 
-Four current powers have distinct roles: fire projectiles/lighting/armor, nature roots/push/cooldown healing, wind vanes/projectile removal/stagger, and stone weights/one-hit guard/pulse. Power cooldown is shared across selection changes. Bosses expose only during explicitly timed recovery, cannot have vulnerability extended indefinitely, and reset living encounters on retreat. The final core clamps damage at each of its three phase boundaries. Cleared bosses do not respawn.
+The four original story power families have distinct roles: fire projectiles/lighting/armor, nature roots/push/cooldown healing, wind vanes/projectile removal/stagger, and stone weights/one-hit guard/pulse. Power cooldown is shared across selection changes. Bosses expose only during explicitly timed recovery, cannot have vulnerability extended indefinitely, and reset living encounters on retreat. The final core clamps damage at each of its three phase boundaries. Cleared bosses do not respawn.
 
 All content, sprites, dialogue and PSG music are original. Audio uses an ambient square-wave phrase and event effects, not streamed samples.
 
@@ -34,13 +34,13 @@ Host serialization tests cover interrupted writes, every stored-bit corruption, 
 
 ## Expansion boundaries
 
-The prior 14-area/four-companion campaign is the foundation. Creature evolution/catalog/party, equipment, regional quests and 128 forms are not silently implied by this architecture. The current creature milestone introduces stable data-driven IDs and a larger non-overwriting save schema; equipment and regional expansion remain subsequent work. Required traversal powers must survive evolution and party management. ROM/RAM/OBJ limits and cold as well as steady frame cadence remain release gates.
+The prior 14-area/four-companion campaign is the foundation. Creature evolution/catalog/party, equipment, regional quests and 128 forms are not silently implied by this architecture. The current implementation has 65 forms, equipment and four regional extensions; the remaining 128-form expansion is unfinished. Stable IDs and the non-overwriting save schema are shared across chapters. Required traversal powers must survive evolution and party management. ROM/RAM/OBJ limits and cold as well as steady frame cadence remain release gates.
 
 ## Full-screen creature milestone
 
 The newer renderer uses the complete 240×160 world viewport. Grove camera Y clamps to 0..160 and targets player Y−80; sprite transforms subtract camera Y with no 24-pixel offset. DMA copies all 160 source rows without stretching. Existing world art and collision definitions remain byte-identical. Hearts, selected companion, B/R hint and cooldown are small transparent OBJ in the corners. Area names are brief text on entry; the permanent HUD and boss text strips are removed. The old 38,400-byte HUD bitmap cache is no longer needed.
 
-`creatures.*` owns stable form lookup, a bounded 160-record storage model, four active references, levels, bond, event credit, confirmed/deferred evolution and inherited field capabilities. Only eight forms are enabled. `progression.*` adapts the old four power families to actual owned forms, adds the growth journal and coordinates save state. The journal exposes party assignment from actual occupied roster records. It never derives new instances from historical obtained-form bits, and exposes no release operation. Unassigned story powers remain recoverable from the owned collection anywhere the journal opens.
+`creatures.*` owns stable form lookup, a bounded 160-record storage model, four active references, levels, bond, event credit, confirmed/deferred evolution and inherited field capabilities. The initial milestone enabled eight forms; the current catalog enables 65. Historical revision validation never consults the expanded live catalog. `progression.*` adapts the old four power families to actual owned forms, adds the growth journal and coordinates save state. The journal exposes party assignment from actual occupied roster records. It never derives new instances from historical obtained-form bits, and exposes no release operation. Unassigned story powers remain recoverable from the owned collection anywhere the journal opens.
 
 `trials.*` provides optional first-aid discoveries, a rotating path puzzle and a resettable movable-object puzzle. Permanent discovery bits and completed personal trials persist separately from transient puzzle arrangements. Personal-trial completion has an explicit one-time +10 bond exception to ordinary expedition caps. Story compensation floors preserve that earned bonus and avoid forced replay after migration. Loading a checkpoint is distinct from actually departing a sanctuary; it does not reset expedition credit.
 
@@ -70,3 +70,36 @@ Failed writes keep the prior committed bank intact. A separate modal failure not
 - Yin/Yang and phases are independent catalog axes. Combat multipliers are original game rules, not a claim about canonical traditional numerical values.
 
 Whole-ROM frame cadence, save interruption and source reproducibility remain release gates. Core host/fault fixtures, native controller gameplay and cold blocking load measurements are reported separately.
+
+
+## Magma integration and performance-sensitive boundaries
+
+`magma_game` owns rooms 38–45, local movable objects, the regulator clock and exact
+bitmap revision changes. Every damaging sweep position advances that revision, so
+visible geometry and collision stay synchronized. Completed repair objectives restore
+the repaired screen after travel/load; unsolved local arrangements remain resettable.
+The regulator latch remains usable through undamaged cycles and clears after a
+successful open-window hit, avoiding a walk-speed-dependent puzzle lock.
+
+`magma_quests` owns typed source/repeat/trial/discovery transactions. The power and
+combat hooks in `magma_powers.c/.h` own bounded paths, distinct commands, effect provenance, identity,
+leases and ordinary-enemy interaction. Hostile projectiles and player arrows retain
+separate provenance. Normal R dispatch uses the authored default side; synthetic
+alternate-side API tests do not imply another player control exists.
+
+Expensive admission and full-state validation are event-only. Collision hot paths use
+an inline regional range check; topology caches are refreshed at all necessary points,
+without a redundant third full scan in unrelated rooms. The queued anchor preparation
+in [SAVE5.md](SAVE5.md) preserves validation while isolating its cost from cold rendering.
+
+Branch evolution UI operates on the actual individual and roster. Any direction
+consumes its input frame before A confirmation; only exact left/right changes a branch.
+The default branch prefers a roster-admitted target. Cancel, simultaneous directions,
+identity changes and full capacity leave ownership intact. Four same-family pairs were
+actually earned and exercised through journal assignment and the held-L selector.
+
+The final linked image uses 28,120 bytes of IWRAM code, leaving 552 bytes before the
+0x03007000 boundary. Data is 92 bytes and BSS 48,568 bytes. No new permanent OBJ region
+was allocated; regional actor budget remains bounded. These are link/static budgets,
+not a measured whole-engine stack high-water guarantee. Future audio or chapter code
+must respect these limits and repeat native cold-menu and combined-load tests.

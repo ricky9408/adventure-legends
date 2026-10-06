@@ -33,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix='emberbond-save-feedback-') as temp:
              'advanced_powers','trials','trial_art','quickparty','equipment','equipment_data',
              'combat_rules','weapon_actions','gear_runtime','gear_menu','regional_quests',
              'regional_creature_art','regional_powers','region_art','region_game',
-             'northern_creature_art','northern_powers','northern_power_art','southern_powers','southern_power_art','southern_creature_art','south_art','south_game','southern_quests','progression_events','north_art','north_game','northern_quests']
+             'northern_creature_art','northern_powers','northern_power_art','southern_powers','southern_power_art','southern_creature_art','south_art','south_game','southern_quests','progression_events','north_art','north_game','northern_quests','magma_game','magma_art','magma_quests','magma_creature_art','magma_powers','magma_power_art']
     subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+[
         '-shared','-fPIC','-O0','-std=c99','-fno-builtin','-Wno-attributes',
         '-Wno-pointer-to-int-cast','-Wno-int-to-pointer-cast',

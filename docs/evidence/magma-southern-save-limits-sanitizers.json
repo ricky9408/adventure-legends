@@ -1,0 +1,36 @@
+{
+  "purpose": "Southern host memory/undefined-behavior and randomized codec stress; not native acquisition proof",
+  "fixture_sha256": "f4e853c85445b8567263a1a875eba967e552e0dcae30958ca42f39bfec4e4479",
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "result": "PASS",
+  "source_sha256": {
+    "save4": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+    "save5": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+    "creatures": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+    "creature_data": "eaa427f100f808790b122c49db34820be2b5fa54213e00f67dcc69780c4fe1c2",
+    "equipment": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+    "equipment_data": "a9f6c1ac1ec0c889700f6aa54fe18025a28d66eba60fc36d93ffd9fe664b8c05",
+    "southern_quests": "3296c70118e2c88f8d70dc3a68a4017b0525fbaa47e5826a9dc98443bdef491b"
+  },
+  "source_unchanged_during_measurement": true,
+  "harness_sha256": "80e16914c670ae2817909bb01058b83be3f53ea3ddbe23f735531051bd80ed07",
+  "roster": 160,
+  "physical_forms": 41,
+  "obtained_forms": 41,
+  "claimed_quests": 30,
+  "authored_gear": 25,
+  "budget_range": [
+    0,
+    8192
+  ],
+  "production_effective_cap": 3072,
+  "valid_roundtrips": 1200,
+  "invalid_snapshots": 1200,
+  "random_budget_steps": 79491,
+  "zero_budget_calls": 2334,
+  "above_cap_budget_calls": 49013,
+  "seed": 1347376468
+}

@@ -1,6 +1,6 @@
 # Native equipment/stat core
 
-These assets author the twenty-five fixed equipment definitions and three weapon
+These assets author the thirty-one fixed equipment definitions and three weapon
 parameter sets. They do not imply that an acquisition route, weapon action,
 region, or UI has been integrated into the ROM.
 
@@ -8,8 +8,7 @@ region, or UI has been integrated into the ROM.
 
 `catalog.json` preserves the proposed fixed IDs and all eight explicit bonuses.
 Run `python3 assets/equipment/generate_data.py`, or pass `--check` to verify the
-committed generated `src/equipment_data.c`. The generated C source is 5,749 bytes,
-below 32 KB; there are no generated include fragments. The 512-entry definition
+committed generated `src/equipment_data.c`. The generated C source remains below 32 KB; there are no generated include fragments. The 512-entry definition
 table is 12,288 ROM bytes, including disabled zero-filled identities.
 
 Only one unique instance of each authored item can exist. Bag records do not
@@ -37,7 +36,8 @@ Starter seen bit is `seen[0] = 2`; starter source claim is `reward_claims[0] = 1
 Equipment sources 0..12 map respectively to item IDs
 1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82. Northern sources13..18 append
 3, 11, 19, 35, 51, 83. Southern sources 19..24 append 4, 12, 36, 52, 66, 84.
-Sources 25..63 remain reserved and must not have claims.
+Magma sources25..30 append20,37,53,67,85,5, with exact stats from
+`docs/magma-design/magma_allocation.json`. Sources31..63 remain reserved.
 This array is stable acquisition order, not sorted item order: inserting item3
 must never shift any published claim. Catalog checks prove exact definition
 coverage and uniqueness. The shared save codec applies revision-specific

@@ -57,3 +57,30 @@ REVISION_POLICY = {
         'edges':[[1,2],[4,5],[7,8],[10,11],[13,14],[19,20],[22,23],[73,74],[75,76],[77,78],
                  [25,26],[28,29],[79,80],[81,82],[83,84],[85,86],[87,88],[89,90],[91,92],[93,94]], 'learns':61},
 }
+
+# Approved Magma current-only extension; revisions1–4 above remain frozen.
+MAGMA_FORMS = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 95, 96, 97, 98, 99, 100]
+MAGMA_EDGES = [[31, 32], [32, 33], [34, 35], [35, 36], [37, 38], [37, 39], [40, 41], [40, 42], [43, 44], [43, 45], [46, 47], [46, 48], [95, 96], [97, 98], [99, 100]]
+CURRENT_POLARITY_OVERRIDES = {39: 'yang', 48: 'yin'}
+GATE_MASKS.update({'magma_ready':256, 'caldera_open':512})
+TRIAL_POLICY.update({
+    'magma_three_cool_shelves':('F011',1,1,5,(31,)),
+    'magma_one_hearth_three_uses':('F011',2,2,5,(32,)),
+    'magma_a_walkable_load':('F012',1,1,5,(34,)),
+    'magma_the_unbroken_crossing':('F012',2,2,5,(35,)),
+    'magma_shelter_the_roots':('F013',1,1,5,(37,)),
+    'magma_scatter_the_canopy':('F013',2,2,5,(37,)),
+    'magma_keep_the_last_drop':('F014',1,1,5,(40,)),
+    'magma_share_the_runnel':('F014',2,2,5,(40,)),
+    'magma_true_the_buried_seam':('F015',1,1,5,(43,)),
+    'magma_balance_the_hanging_note':('F015',2,2,5,(43,)),
+    'magma_lift_the_warm_air':('F016',1,1,5,(46,)),
+    'magma_settle_the_ash':('F016',2,2,5,(46,)),
+    'magma_find_the_cold_seam':('F036',1,1,5,(95,)),
+    'magma_the_cloth_stays_clear':('F037',1,1,5,(97,)),
+    'magma_the_quiet_chord':('F038',1,1,5,(99,)),
+})
+TRIAL_PREREQUISITES = {'magma_one_hearth_three_uses': 1, 'magma_the_unbroken_crossing': 1}
+REVISION_POLICY[5] = {'forms':REVISION_POLICY[4]['forms'] + MAGMA_FORMS,
+    'abilities':REVISION_POLICY[4]['abilities'] + list(range(43,67)),
+    'edges':REVISION_POLICY[4]['edges'] + MAGMA_EDGES, 'learns':102}

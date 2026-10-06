@@ -1,0 +1,94 @@
+{
+  "format": "exact-byte-concatenation-v1",
+  "original_filename": "magma-retained-controls.json",
+  "original_bytes": 410613,
+  "original_sha256": "8093ef37f4ae90174b24a3a12203c80c6bfaad94d5e087e5b65c4ede38c23bc6",
+  "encoding": "utf-8",
+  "max_part_bytes": 30000,
+  "parts": [
+    {
+      "file": "part_000.txt",
+      "offset": 0,
+      "bytes": 30000,
+      "sha256": "001ab0463d8fa9d6ead49b944cb4b29860c9ab454f1e45617a79da1436553e7c"
+    },
+    {
+      "file": "part_001.txt",
+      "offset": 30000,
+      "bytes": 30000,
+      "sha256": "5218cacbce75f900644a9b2cbc03fb3a92b5af873eba7765b128e06a8ed73409"
+    },
+    {
+      "file": "part_002.txt",
+      "offset": 60000,
+      "bytes": 30000,
+      "sha256": "9ba3558f2de1787ac99bfe3f3cdf2f1fe9bca45e2f049f87183c19f83b76718d"
+    },
+    {
+      "file": "part_003.txt",
+      "offset": 90000,
+      "bytes": 30000,
+      "sha256": "7a4c55f1126aca52a80b51e9967f18bd8dd2cd4bd65b4b157024603b444dc57a"
+    },
+    {
+      "file": "part_004.txt",
+      "offset": 120000,
+      "bytes": 30000,
+      "sha256": "5d7c2c15effa45fa7e0ad3ad3dcec90ea76b29d9d50cb5b22993dd549e28b835"
+    },
+    {
+      "file": "part_005.txt",
+      "offset": 150000,
+      "bytes": 30000,
+      "sha256": "6d08e01e83a37996b9d40c8eb37e42a39c76a9d94cc8d08365537fecf78fad01"
+    },
+    {
+      "file": "part_006.txt",
+      "offset": 180000,
+      "bytes": 30000,
+      "sha256": "acce393593f31db083b6e174b82f3a87289cfa9a3f388ab4b8204e5bbc8bf0d0"
+    },
+    {
+      "file": "part_007.txt",
+      "offset": 210000,
+      "bytes": 30000,
+      "sha256": "9197c35f37a2d45e73c338612a52ff2bdf079e316ca635eb654fca1de2bd15c7"
+    },
+    {
+      "file": "part_008.txt",
+      "offset": 240000,
+      "bytes": 30000,
+      "sha256": "af973f082e8401e5ee68f752d8d6b8a6df90a12510dbd3eb6277cb2058dc06b7"
+    },
+    {
+      "file": "part_009.txt",
+      "offset": 270000,
+      "bytes": 30000,
+      "sha256": "2591db346b92f36c83b859eca7c6678674563c37e29536b73dff3c747ff816d5"
+    },
+    {
+      "file": "part_010.txt",
+      "offset": 300000,
+      "bytes": 30000,
+      "sha256": "4dc2ac57a7aebf2995b8e147e0c8740a420a04b6c4f2bfc975c1f69a89430e5d"
+    },
+    {
+      "file": "part_011.txt",
+      "offset": 330000,
+      "bytes": 30000,
+      "sha256": "bb1f0e76dabfaafaba44ad6a07726e84565b0009d2fc4b061622be03179db5dd"
+    },
+    {
+      "file": "part_012.txt",
+      "offset": 360000,
+      "bytes": 30000,
+      "sha256": "53b987fb3d0735ebcf1388a56ef8c40c98710b9025261cc5255faa1a857f64cf"
+    },
+    {
+      "file": "part_013.txt",
+      "offset": 390000,
+      "bytes": 20613,
+      "sha256": "71ea17e922c7107309646ab15c58324484b6760bea6a901ac105ec7a6149be83"
+    }
+  ]
+}

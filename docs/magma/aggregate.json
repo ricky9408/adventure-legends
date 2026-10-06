@@ -1,0 +1,511 @@
+{
+  "schema": 1,
+  "suite": "candidate-d-full-legacy-aggregate",
+  "status": "PASS",
+  "runtime": {
+    "rom_sha256": "90ba47f30a0c94c28f073d26cc31ac5f5c736eb4d6e704d090892d2776f1ffb2",
+    "rom_bytes": 7495920,
+    "symbols_sha256": "add52be1a5d23d2e8df8fd616f4ef1c7fde8d3e1906e1d789925d68476cf50f6",
+    "elf_sha256": "0b56a0a525ef59d36b14a89a2786e5811f29fd9a54c386093fa06528f3afcc99",
+    "source_manifest_sha256": "a72fd93eddb0a39322b22e45caf0f4ac49496d962776ee616dfd83642342ef3f"
+  },
+  "build": {
+    "clean_rebuild": true,
+    "warnings": 0,
+    "reproduced_rom_symbols_and_runtime_manifest": true,
+    "original_and_rebuilt_stripped_debug_elf_identical": true,
+    "receipt_sha256": "a585a6633aed79bf2642d92f1aa667ccb1785c6d9cf068fbe6414f92523bb16f",
+    "environment_receipt_sha256": "4dbce3e7a6bcc3d7b9e9eff3e93f3c9111aba33fb687bf83420e731ff6372f8b"
+  },
+  "aggregate": {
+    "command": "make test test-tools",
+    "exit_code": 0,
+    "elapsed_seconds": 1733.82,
+    "python_invocations": 82,
+    "full_log_sha256": "46596948fcea3810393578c27133ebf6aeb0dd959c4b5c8ff97cfa0381c295a1",
+    "executed_commands_receipt_sha256": "aed1e2b181818eb8e7e38d796d3a6f7f031ad1614f14cf381b9d491b34bfd4dc"
+  },
+  "additional": {
+    "command": "python3 tests/test_gear_hearts.py",
+    "status": "PASS",
+    "strict_and_asan_ubsan": true,
+    "q4_values": 97,
+    "canvas_conditions": 4,
+    "quarter_comparisons": 2500,
+    "scope": "Isolated host pixels from actual shipped renderer, not native gameplay",
+    "report_sha256": "53e198ba54c86306a9ec00695ab65729dd33ae121a8500c69f41d4a20c825319",
+    "log_sha256": "ea45ae3c801327e4d08a75d4976ec29cb45fc92fa53ce2f3d63a7d72c57f5a83"
+  },
+  "integrity": {
+    "runtime_inputs_verified": 893,
+    "initial_production_asset_tool_inputs_unchanged": 1710,
+    "initial_historical_fixture_files_unchanged": 203,
+    "legacy_test_inputs_unchanged_during_aggregate": true,
+    "before_test_manifest_sha256": "3eca20c4dca9d3332c9e45b5c5763c02fb00bea7d9eb6e7f3ff3e941a3edab85",
+    "after_test_manifest_sha256": "36533364098a7afada4a0c1f9676288e343e9994ed8edbfbf3e2bfa884db63b5",
+    "final_receipt_sha256": "660511b4808dbba9dc3a5f9e044a09f20365f59c5f2e9a5439c9dcef8fb02709",
+    "unrelated_magma_combat_harness_change": [
+      {
+        "path": "tests/magma_combat_tests.py",
+        "before_sha256": "54d20d1cda589f103b0f0e88bb8937d6b247da677048bc55e02c60c806856d79",
+        "after_sha256": "c8a6488f3d6ee1647a1375012205bf955c4a0ff1b871805393a4dfaf420bedee"
+      }
+    ]
+  },
+  "reports": [
+    {
+      "path": "build/qa/playthrough.json",
+      "sha256": "fdbc378bdbefe3958cb4b513c0a4e8c2bc353600c5d1560369e7f780a5d960be",
+      "suite": null,
+      "checks": 0,
+      "passes": 24,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/review/review-tests.json",
+      "sha256": "fc25868444549115b252b98176ebc07f8f5cb0b1b8ee88dc5ead72ef5273f41a",
+      "suite": null,
+      "checks": 0,
+      "passes": 21,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/exploration/exploration-tests.json",
+      "sha256": "b41cb084ef26c833bd0579ffaa034f075e2c12280ecd9ada9d0752d492b8327e",
+      "suite": null,
+      "checks": 0,
+      "passes": 145,
+      "failures": 0,
+      "controller_only": null,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/new-game-confirmation/new-game-confirmation.json",
+      "sha256": "eaa0aab38a92601d67837c18dbde2e078d6bc03b33a30c4dd0804c8eb2c22d41",
+      "suite": "new-game-confirmation-native",
+      "checks": 53,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/pr5-quickparty-migration-qa/quickparty-migration-report.json",
+      "sha256": "a4a857aaed5c8dd5dfb0f5ae486944741e38d2bfee7df1ec0ffe924bbacdded3",
+      "suite": "pr5-quickparty-revision1-to-current content revision-controller-migration",
+      "checks": 0,
+      "passes": 91,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/expedition-qa/expedition-report.json",
+      "sha256": "fbf7b22fc65ad7ab627b6399c0a63a635844eb394961d4f748bf0cddff6deb4f",
+      "suite": "expedition-controller-regression",
+      "checks": 0,
+      "passes": 115,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/fullscreen-qa/fullscreen-report.json",
+      "sha256": "546c20fbbd5a0052783955c2654983bfb23706505de10717346658e1a1632548",
+      "suite": "fullscreen-native-pixel-and-cadence",
+      "checks": 0,
+      "passes": 97,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/evolution-qa/evolution-report.json",
+      "sha256": "b7a28e66a210c75feb0cddb5fe08669370521fe21a5e4bb9d15f2742ae6c6913",
+      "suite": "evolution-and-trial-controller-journey",
+      "checks": 0,
+      "passes": 1337,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/evolution-six-hearts/evolution-report.json",
+      "sha256": "d4bface8e6ad8cb892ae6897f13beb4a84d027a15d24df9aa93b643292c1b7b0",
+      "suite": "evolution-and-trial-controller-journey",
+      "checks": 0,
+      "passes": 1306,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/evolution-migrated/evolution-report.json",
+      "sha256": "ec45a84ecf1c5679c9ba2fb7e88ccfdab1a71409ea1fad53eaf2dd3b4ee22479",
+      "suite": "evolution-and-trial-controller-journey",
+      "checks": 0,
+      "passes": 898,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/advanced-power-qa/advanced-power-report.json",
+      "sha256": "14bb99a6e0e6a13fc89f67eee6a6fde359ba40c5e42ad2f70b4260d9e7f9009b",
+      "suite": null,
+      "checks": 0,
+      "passes": 524,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/advanced-power-qa/source-contract-report.json",
+      "sha256": "900f41f3ab869a95bec8bf89888fa56d593892c49931db90b252f744e6a39258",
+      "suite": "supplemental host source-contract tests; synthetic host states",
+      "checks": 46,
+      "passes": null,
+      "failures": 0,
+      "controller_only": null,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/quickparty-qa/quickparty-report.json",
+      "sha256": "4b7ee349445edc372e649c1f5fea91487a46a33ffa2db390acdf7e2aa0167e12",
+      "suite": "quick-party-native-controller-integration",
+      "checks": 0,
+      "passes": 613,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": 0
+    },
+    {
+      "path": "build/quickparty-synthetic-qa/quickparty-report.json",
+      "sha256": "aebfa1f8210ace85a62dfbf07161dba393392d04534d444f6fcb77d9cdc439bc",
+      "suite": "quick-party-native-controller-integration",
+      "checks": 0,
+      "passes": 619,
+      "failures": 0,
+      "controller_only": false,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": 3
+    },
+    {
+      "path": "build/quickparty-evolved-qa/quickparty-report.json",
+      "sha256": "c9c0623f76ee502f1562aa95174b766a6d238fe0f18fc71fbae8a7e7e541e6ec",
+      "suite": "quick-party-native-controller-integration",
+      "checks": 0,
+      "passes": 388,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": 0
+    },
+    {
+      "path": "build/campaign-qa/campaign-report.json",
+      "sha256": "9933274ce09681400566bcc7af6be0877337a254c79a765a4da4d3322bdba0b2",
+      "suite": null,
+      "checks": 0,
+      "passes": 3426,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/campaign-optional/campaign-report.json",
+      "sha256": "189a295e6ac973cdc9438c5617a301f009deb309d3b509a3b22e82610e48cbf6",
+      "suite": null,
+      "checks": 0,
+      "passes": 3482,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/campaign-performance-minimal/campaign-performance.json",
+      "sha256": "8a9d782e9abe6dc90bdc31d70f51c82efa1adbc44cf98d0084fde1183233db27",
+      "suite": null,
+      "checks": 0,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/campaign-performance-optional/campaign-performance.json",
+      "sha256": "7e74c2a10d8a4985b872064474077cc2879b64f8fe3cb914ac663766b6febed3",
+      "suite": null,
+      "checks": 0,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/region-journey/region-journey.json",
+      "sha256": "d5a22c60c5793f53a265dc56d06327db842f4973195708fcaa19a6ddc0217a3d",
+      "suite": "reedhaven-native-controller-journey",
+      "checks": 5684,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/region-combat/region-combat.json",
+      "sha256": "30516241914a798ddf465ab9fcf51e556ed2208e825b86e8107581aac8fb5139",
+      "suite": "region-native-combat",
+      "checks": 2761,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-host-cases.json",
+      "sha256": "3d4866e60b17d35cb2d939712331a87bb0ff21b5ded06a7a6df6fad89711e870",
+      "suite": "northern-synthetic-host-orders-capacity",
+      "checks": 0,
+      "passes": null,
+      "failures": 0,
+      "controller_only": false,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-journey/northern-journey.json",
+      "sha256": "cadce4f22c3b18aa9ed39791f301b039c5a05fb774d4e180eedc8a6b53b5425f",
+      "suite": "northern-native-controller-journey",
+      "checks": 10038,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-source-provenance.json",
+      "sha256": "1d790ef557f7637b4adee7f67d17ffa247c3b0a1929ccd4ac4b5de1811567950",
+      "suite": "northern-combat-source-provenance",
+      "checks": 15,
+      "passes": null,
+      "failures": 0,
+      "controller_only": null,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-sky-route/northern-journey.json",
+      "sha256": "6525cd534297c04095aea86550ddcdd077e0d4c62c411663c08bc56177993c9d",
+      "suite": "northern-native-controller-journey",
+      "checks": 4668,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-stress/northern-stress.json",
+      "sha256": "fa149ce8b5ca318ce56de2c737d440e66b0ab0c32ffbe4f5d076473889d53e8b",
+      "suite": "northern-native-stress",
+      "checks": 314,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-boss-controls/northern-stress.json",
+      "sha256": "4ba0b4df0d5d70af44a2c451e25a0317256fb7abcdaebf0a92f7aece7f581254",
+      "suite": "northern-native-stress",
+      "checks": 221,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-modal-pixels/modal-scenes.json",
+      "sha256": "7ad8b3d137dcc44d734b778d62ffe370ad45c4ea9e4fe3e7fb9b4d00529c3666",
+      "suite": "northern-modal-native-pixels",
+      "checks": 0,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/northern-combat/northern-combat.json",
+      "sha256": "12e372954834331004a3b25ea80a2e14d2773a673b24f38f9225de96cad30e8a",
+      "suite": "northern-native-combat-controls",
+      "checks": 8842,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-minimal-route/southern-minimal-route.json",
+      "sha256": "6b315e1c31a8daed1bec0cfc4b7b27a2d5675156711e2d4cd72b07971f9da5b7",
+      "suite": "southern-minimal-native-controller-route",
+      "checks": 1889,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-journey/southern-journey.json",
+      "sha256": "534ef54212eabc6c67f1d6ee3a741d682bff5c4a231aa56a40bf7bb03aeb0a14",
+      "suite": "southern-native-controller-journey",
+      "checks": 15732,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-targeting/southern-journey.json",
+      "sha256": "2ffd71efaa837f7a691477e92c2ddb1954405ae31b264e4a6e452de15a7a8aa8",
+      "suite": "southern-native-controller-journey",
+      "checks": 188,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-optics/southern-journey.json",
+      "sha256": "f506850c2e7161e179243be3eab59799ebda1cf1b6b5b6f013c96b35e58e2085",
+      "suite": "southern-native-controller-journey",
+      "checks": 4708,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-controls/southern-journey.json",
+      "sha256": "a2254806b977c6bc271c79335ddc555d3f144ac61979f3bf0fd0c67580fb25dc",
+      "suite": "southern-native-controller-journey",
+      "checks": 448,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-selector/southern-journey.json",
+      "sha256": "250d377634dd30e161f6fd0d7db6ba6027d38e25a66e0007857cd29981accfcf",
+      "suite": "southern-native-controller-journey",
+      "checks": 42,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-combat/southern-combat.json",
+      "sha256": "e8c3391473c98d1fa72dad522f8d67454550bb79f25db8094ac6617128b3cc2f",
+      "suite": "southern-native-combat-controls",
+      "checks": 8176,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-performance/southern-combat.json",
+      "sha256": "45dec7a122a539f5cb888dde3fbdfed8f543e03dc693e4d01b2b7e18ef45ae7d",
+      "suite": "southern-native-combat-controls",
+      "checks": 1484,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/southern-render/southern-combat.json",
+      "sha256": "ea0c018f74109e2882e76dcb9b87a10c5fe50433dbf3f562b1deee08368782ba",
+      "suite": "southern-native-combat-controls",
+      "checks": 343,
+      "passes": null,
+      "failures": 0,
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "synthetic_game_ram_writes": null
+    },
+    {
+      "path": "build/gear-heart-host/report.json",
+      "sha256": "53e198ba54c86306a9ec00695ab65729dd33ae121a8500c69f41d4a20c825319",
+      "suite": null,
+      "checks": 0,
+      "passes": null,
+      "failures": 0,
+      "controller_only": null,
+      "game_ram_writes": null,
+      "synthetic_game_ram_writes": null
+    }
+  ],
+  "southern_acceptance": {
+    "named_suites": 9,
+    "overlapping_assertions": 33010,
+    "failures": 0,
+    "all_20_combat_commands_accepted": true,
+    "all_measured_hardware_windows_have_one_update_and_display_flip_per_frame": true,
+    "worst_measured_render_cycles": 273845,
+    "render_counter_excludes_final_vblank_oam_work": true,
+    "raw_cadence_summary_sha256": "8cd7e5d6bf5649d811adde68b9944b7a6d5900575aeb025023d0983b2a15e926"
+  },
+  "evidence": {
+    "report_sha256": "10045954c4200e255797235891e3a15f3a983049a97bae5092022ecee4b304f5",
+    "report_index_sha256": "b1853246b7eb9caf64d1cc25f9480ae717e0cae9d32e348937137a144dee79c9",
+    "legacy_artifact_count": 5011,
+    "legacy_artifact_manifest_sha256": "6c3f4bc222af12e9309482545dc6107d2bf2a6ff3056f45194be34568774e5d7",
+    "initial_source_build_archive_sha256": "206e8522744774d9fa45539fe8dc697bf04a127ebec841abdfbd222dd55df576"
+  },
+  "limits": [
+    "Legacy acceptance only; Magma-specific acquisition, combat and full34 save-performance evidence is separately owned",
+    "No physical GBA, flash cart, other emulator/compiler/platform acceptance",
+    "Synthetic quickparty interruption run contains three explicit game_state writes and is not controller-only; bridge smoke writes only its trivial test ROM",
+    "Native journeys/combat/puzzles use controller input and earned SRAM, with no game-RAM injection or cross-ROM machine-state import",
+    "Sampled gameplay/UI/save cadence is not a claim of nonblocking cold checkpoint decoding",
+    "Final distributed source ZIP self-containment/generator/smoke checks are a separate packaging acceptance step"
+  ]
+}

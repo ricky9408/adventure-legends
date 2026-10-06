@@ -8,15 +8,16 @@
  * Every multibyte wire field is explicitly little endian.
  * Content revisions are distinct from wire version5: readers accept exactly
  * revision1 (8 forms, reserved quests/gear), revision2 (11 forms/13 items),
- * revision3 (21 forms/19 items, Northern quests11..21/areas22..29), and
- * revision4 (41 forms/25 items, Southern quests22..29/areas30..37). Revision1
- * installs only starter equipment; revision2/3->4 preserves existing typed bytes
+ * revision3 (21 forms/19 items, Northern quests11..21/areas22..29),
+ * revision4 (41 forms/25 items, Southern quests22..29/areas30..37), and
+ * revision5 (65 forms/31 items, Magma quests30..37/areas38..45). Revision1
+ * installs only starter equipment; revision2/3/4->5 preserves existing typed bytes
  * and adds no recruit, trial, quest, gear, visit or reward on load. All writes
- * use revision4. Unknown revisions and cross-revision content are rejected. */
+ * use revision5. Unknown revisions and cross-revision content are rejected. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
     SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5056,
-    SAVE5_CONTENT_REVISION = 4, SAVE5_COMMIT = 0xA5,
+    SAVE5_CONTENT_REVISION = 5, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,
@@ -56,6 +57,10 @@ int save5_load(Save5State *out);
 int save5_has_valid(void);
 /* Full blocking validator for host tools/transitions, not active-game ticks. */
 int save5_validate(const Save5State *state);
+/* Complete immutable released-policy check, independent of current catalogs.
+ * Revision1 here is DECODED state: zero quests plus its canonical migrated
+ * starter equipment. Revision1 bank bytes still require all gear bytes zero. */
+int save5_validate_revision(const Save5State *state, unsigned revision);
 int save5_campaign_validate(const CampaignSave *campaign);
 
 /* begin snapshots the complete state; caller may change it immediately after

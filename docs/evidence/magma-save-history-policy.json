@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "scope": "Immutable Save5 revision1-4 host semantic validation; not gameplay/cadence evidence",
+  "date": "2026-10-05",
+  "wire": {
+    "version": 5,
+    "content_revision": 4,
+    "individual_bytes": 24,
+    "roster_capacity": 160,
+    "used_bytes": 5056,
+    "bank_bytes": 6144,
+    "bank_offsets": [
+      512,
+      6656
+    ]
+  },
+  "source_sha256": {
+    "src/save5.c": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+    "src/save5.h": "8b268d3ed9d92433e4082aa4fa63b5a70e414f72b1a8e86e918e4430375ba727",
+    "src/save5_history_policy.h": "be6aa94ca115c59b62a02820d6aeed86b8c39ee1c79f260fcd60881fc3211c4c",
+    "src/creatures.c": "3495ca3d141b6162452b64e0f5f38a6aa88f46e2fe3cd7352db1825d15a1c350",
+    "src/creatures.h": "aee4476931a3557b454aa41c716c90996bbca9551462a39ced012bf053954a6b",
+    "tests/test_save5_history.py": "9e2fae522a15daf05110c5accdfdef3fbf1a92d6878a86b80c587018081b74c1",
+    "tests/test_save5_history_differential.py": "c50a81631ed58cb98ac945e4ed0115f389cfcdbab1517455275f6985ad10fcac"
+  },
+  "new_mutation_suite": {
+    "tests": 7,
+    "result": "PASS",
+    "reported_run": "Ran 7 tests in 8.736s",
+    "coverage": [
+      "Q0 current mask7->15 cannot admit historical ACTIVE/objectives8",
+      "revisions2-4 CRC-valid bad-bank blocking load and has-valid rejection",
+      "incremental snapshot failure with zero writes",
+      "streaming old-bank selection, exact generation and revision2->4 payload identity",
+      "current quest narrowing and variable/room/sourcequest policy drift",
+      "current command1->23 with exact revision1-4 loads and zero-write incompatible re-save",
+      "revision1 canonical starter decode exception only",
+      "immutable release row and schema SHA256 locks"
+    ]
+  },
+  "whole_bank_differential": {
+    "baseline_save5_sha256": "f0b1c2ce7e5b502694cd1244c785e4b6dc356b968efd5f273500b45d946ad059",
+    "candidate_save5_sha256": "379080d8b16364f9dbae552835caf34daec4d210a2e250d0e74f7055cdab0216",
+    "counts": {
+      "accepted": 4680,
+      "all_byte_gate_values": 17408,
+      "anchor_visit_pairs": 1152,
+      "catalog_drift_mutants": 14364,
+      "catalog_drift_valid_banks": 84,
+      "catalog_drift_witnesses": 3,
+      "complete_original_sram_images": 4,
+      "equipment_id_category_pairs": 10340,
+      "equipment_refs": 5120,
+      "equipment_source_seen_pairs": 1024,
+      "fresh_quest_combinations": 364,
+      "original_banks": 16,
+      "quest_combinations": 36864,
+      "rejected": 162019,
+      "removed_equipment_records": 188,
+      "reserved_padding": 1332,
+      "revision0": 4,
+      "revision1": 37973,
+      "revision2": 42827,
+      "revision255": 4,
+      "revision256": 4,
+      "revision3": 42912,
+      "revision4": 42963,
+      "revision5": 4,
+      "revision6": 4,
+      "revision65535": 4,
+      "revision_crossovers": 40,
+      "room_spawn_pairs": 8192,
+      "single_byte_mutants": 69688,
+      "valid_combination_seeds": 512,
+      "valid_seeds": 8
+    },
+    "deterministic_random_seed": 1396790837,
+    "suite": "historical-save5-whole-bank-differential"
+  },
+  "existing_suites": {
+    "save5": {
+      "tests": 41,
+      "result": "PASS",
+      "run_seconds": 72.863,
+      "note": "Initial refactor test run; integration runs final combined-source regression suite"
+    },
+    "southern_save": {
+      "tests": 13,
+      "result": "PASS",
+      "run_seconds": 116.183,
+      "durable_interruption_success_positions": 147504,
+      "note": "Initial refactor test run; integration runs final combined-source regression suite"
+    }
+  },
+  "invariants": [
+    "No SRAM write in load or has_valid",
+    "No current-catalog fallback for historical banks or decoded-state check",
+    "No full-save stack copy, mutable validation cache or validation bypass",
+    "Revision1 wire reservations still all zero",
+    "Current incompatible writes fail before first durable write",
+    "Seven equipment drift variants include negative weapon-class control preserving old acceptance"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "Packaging-only exact-value JSON compaction; original design bytes preserved in deterministic gzip",
+  "original_sha256": "394493bf05433e2fdc40dbc664112d53450909463315549b49b7206f9e6f211f",
+  "original_bytes": 124822,
+  "current_sha256": "b679b539cab64d5d323cb876f3cf1f18060b2e7592fb199444833a3b9fe8af6d",
+  "current_bytes": 84051,
+  "semantic_objects_equal": true,
+  "original_archive": "magma_allocation.original.json.gz",
+  "original_manifest": "artifact_manifest.json",
+  "runtime_source_changed": false,
+  "readme_transport_note": {
+    "original_archive": "README.original.md.gz",
+    "original_sha256": "da86ef9f89bae1c7d19a37bf18a328b318edd52ef47c5f2e4775f54fcbaeeedd",
+    "current_sha256": "691dfc2c875d5ea9677cc2e3756aa33e12205dcf4b9a26e8aa210d3df4bc2ccb"
+  }
+}

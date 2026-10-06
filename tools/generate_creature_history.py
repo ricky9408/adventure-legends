@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+"""Reproduce frozen v1-v4 save policy without reading the current catalog.
+
+The reviewed snapshot digest is deliberate: extending history requires adding a
+new versioned snapshot, never regenerating old policy from live authored rows.
+"""
+import argparse, hashlib, json, re
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+SNAPSHOT=ROOT/'assets/history/creatures-v1-v4.json'
+PIN='ee516adadbad9e26cd18a5ccaa26fed9ead82e5ad0311eb736a1d3b47d17ac51'
+START='/* BEGIN GENERATED IMMUTABLE CREATURE HISTORY */'
+END='/* END GENERATED IMMUTABLE CREATURE HISTORY */'
+
+def render(data):
+    if data['schema'] != 1:raise ValueError('Unknown frozen creature schema')
+    forms=data['forms'];ids=set();learns=[];rows=[]
+    for f in forms:
+        id_=f['id'];learn=f['learn']
+        if not 1<=id_<=128 or id_ in ids or not 1<=f['family']<=60:raise ValueError('Invalid frozen identity')
+        ids.add(id_)
+        if not 1<=f['revision_bits']<=15 or f['polarity'] not in (0,1) or not 1<=f['min_level']<=50 or not 0<=f['trial_mask']<=65535:raise ValueError('Invalid frozen policy')
+        if not 1<=len(learn)<=8 or len({x[1] for x in learn})!=len(learn) or any(not 1<=l<=50 or not 1<=a<=255 for l,a in learn):raise ValueError('Invalid frozen learn relationship')
+        rows.append((id_,f['family'],f['polarity'],len(learn),f['min_level'],f['revision_bits'],f['trial_mask'],len(learns)))
+        learns.extend(learn)
+    out=[START,'/* Generated only from assets/history/creatures-v1-v4.json. */','static const CreatureRevisionPolicy revision_policy[] = {']
+    out += ['    {'+', '.join(map(str,r))+'},' for r in rows]
+    out += ['};','static const CreatureLearn revision_learnsets[] = {']
+    out += ['    {%d, %d},'%tuple(r) for r in learns]
+    out += ['};','static const CreatureU8 revision_policy_index[4][129] = {']
+    for revision in range(4):
+        indexes=[0]*129
+        for n,f in enumerate(forms,1):
+            if f['revision_bits'] & (1<<revision):indexes[f['id']]=n
+        out.append('    {')
+        out += ['        '+', '.join(map(str,indexes[i:i+16]))+',' for i in range(0,129,16)]
+        out.append('    },')
+    return '\n'.join(out+['};',END])
+
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--check',action='store_true');args=ap.parse_args()
+    blob=SNAPSHOT.read_bytes()
+    if hashlib.sha256(blob).hexdigest()!=PIN:raise ValueError('Immutable v1-v4 snapshot changed; add a new version instead')
+    rendered=render(json.loads(blob));source=ROOT/'src/creatures.c';old=source.read_text()
+    begin=old.index(START);end=old.index(END,begin)+len(END)
+    new=old[:begin]+rendered+old[end:]
+    if args.check:
+        if new!=old:raise ValueError('Generated creature history drifted; run tools/generate_creature_history.py')
+    else:source.write_text(new)
+    print('Frozen creature revisions 1-4 verified (41 immutable form policies, 61 learn relationships)')
+if __name__=='__main__':main()

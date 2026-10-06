@@ -527,19 +527,43 @@ class NorthernCombat(NorthernJourney):
         CombatReview.bow_cancel_case(self)
     def span_late_entry(self):
         self.prepare(14,goal=(230,256),direction=3)
-        # Move away from the naturally approaching Wood slime until it starts
-        # just outside the span's collision band. No enemy location is edited.
-        for _ in range(45):
+        # Facing consumes live updates, so measure only after the final turn.
+        # Walk away from the naturally pursuing foe, then turn back with enough
+        # room to keep it beyond the span's inclusive19..29px collision band.
+        setup=[]
+        for _ in range(90):
             e=self.enemies()[0];distance=e['x']-self.get('px')
-            if 33<=distance<=39:break
-            self.step(1,'LEFT' if distance<33 else 'RIGHT')
-        self.face(3);before=self.row();self.step(1,'R');trace=[self.row()]
+            if 38<=distance<=44:
+                self.face(3);e=self.enemies()[0];distance=e['x']-self.get('px')
+                setup.append(self.row())
+                if 33<=distance<=39 and abs(e['y']-self.get('py'))<=14:break
+            self.step(1,'LEFT' if distance<38 else 'RIGHT')
+        before=self.row();e=before['enemies'][0]
+        forward=e['x']-before['hero'][0];side=e['y']-before['hero'][1]
+        self.check(self.get('face')==3 and e['hp_q4']>0 and 33<=forward<=39 and abs(side)<=14,
+            'late-span controller setup faces an aligned live enemy outside the initial collision band')
+        self.step(1,'R');trace=[self.row()]
         for _ in range(66):self.step(1);trace.append(self.row())
         hits=[r for r in trace if r['enemies'][0]['hp_q4']<before['enemies'][0]['hp_q4']]
-        self.cases.append({'case':'Wood-span-late-enemy-crossing','before':before,'trace':trace})
+        self.cases.append({'case':'Wood-span-late-enemy-crossing','setup':setup,'precast_forward':forward,'precast_side':side,'before':before,'trace':trace})
+        placed=trace[0];p=placed['power'];e=placed['enemies'][0]
+        self.check(p['northern_power_kind']==14 and p['northern_power_time']>0 and p['northern_power_direction']==3 and
+            [p['northern_power_origin_x'],p['northern_power_origin_y']]==before['hero'] and
+            [p['ax'],p['ay'],p['bx'],p['by']]==[before['hero'][0]+24,before['hero'][1]-14,before['hero'][0]+24,before['hero'][1]+14],
+            'late-span placement retains authored24px offset and28px transverse segment')
+        self.check(e['hp_q4']==before['enemies'][0]['hp_q4'] and e['x']-p['northern_power_origin_x']>29,
+            'real enemy remains outside the collision band without damage on placement update')
+        first_active=[r for r in trace if r['power']['northern_power_age']==1]
+        self.check(bool(first_active) and all(r['enemies'][0]['hp_q4']==before['enemies'][0]['hp_q4'] and
+            r['enemies'][0]['x']-r['power']['northern_power_origin_x']>29 for r in first_active),
+            'real enemy is still outside and undamaged on the first active span update')
         self.check(bool(hits) and hits[0]['power']['northern_power_age']>1,'persistent Wood span damages a real enemy entering after placement')
-        self.check(before['enemies'][0]['hp_q4']-self.enemies()[0]['hp_q4']==24,'late crossing receives only one24Q4span hit')
-        self.cases[-1].update(passed=True,first_damage_age=hits[0]['power']['northern_power_age']);self.coverage.append('Wood-span-persistent-late-crossing')
+        first=hits[0];e=first['enemies'][0];p=first['power']
+        self.check(abs(e['x']-p['northern_power_origin_x']-24)<=5 and abs(e['y']-p['northern_power_origin_y'])<=14,
+            'first delayed damage occurs only after real enemy enters the authored span collision band')
+        self.check(before['enemies'][0]['hp_q4']-self.enemies()[0]['hp_q4']==24 and
+            len({r['enemies'][0]['hp_q4'] for r in hits})==1,'late crossing receives only one24Q4span hit')
+        self.cases[-1].update(passed=True,first_damage_age=first['power']['northern_power_age']);self.coverage.append('Wood-span-persistent-late-crossing')
     def sidegrade_behavior(self):
         motion=[]
         for boots in (0,51):

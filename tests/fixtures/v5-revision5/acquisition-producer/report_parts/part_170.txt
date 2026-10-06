@@ -1,0 +1,1573 @@
+me": "ordinary-combat",
+      "room": 44,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 50848,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 50879,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 51254,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 51285,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 54910,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 54961,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 54992,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 55151,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 55182,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 55213,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 55436,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 55467,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 55524,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 55811,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 55842,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 55873,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 56138,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 56179,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 56225,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 59790,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 59840,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 59871,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 60030,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 60061,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 60092,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 60316,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 60347,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 60409,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 60676,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 60707,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 60738,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 61007,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 61048,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 61089,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 64054,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 64099,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 64130,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 64289,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 64320,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 64351,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 64575,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 64606,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 64658,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 64945,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 64976,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 65007,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 65272,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 65313,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 65359,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 69286,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 69317,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 69521,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 69552,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 73270,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 73301,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 73510,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 73541,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 76670,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 76713,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 76744,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 77018,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 77049,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 77080,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 77304,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 77335,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 77386,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 77720,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 77751,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 77782,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 78046,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 78092,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 78133,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 79142,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 79173,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 79382,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 79413,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 80421,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 80452,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 80564,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 80807,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 80838,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 80869,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 81138,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 81169,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 81200,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 81430,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 81461,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 81492,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 81678,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 81709,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 81740,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 82656,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 82687,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 82896,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 82927,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 87036,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 87067,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 87271,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 87302,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 92625,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 92670,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 92701,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 92860,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 92891,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 92922,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 93146,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 93177,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 93228,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 93562,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 93593,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 93624,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 93888,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 93934,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 93975,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 44,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 96104,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 96135,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 96510,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 96541,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 99599,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 99649,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 99680,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 99954,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 99985,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 100016,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 100282,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 100313,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 100344,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 100635,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 100666,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 100697,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 100882,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 100913,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 100944,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 103475,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 103506,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 103537,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 103816,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 103847,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 103878,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 104129,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 104160,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 104191,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 104482,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 104513,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 104544,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 104809,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 104855,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 104896,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 39,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 108402,
+          "enemy": 4,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 108447,
+          "enemy": 4,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 108478,
+          "enemy": 4,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 108757,
+          "enemy": 1,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 108788,
+          "enemy": 1,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 108819,
+          "enemy": 1,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 109070,
+          "enemy": 0,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 109101,
+          "enemy": 0,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 109132,
+          "enemy": 0,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 109423,
+          "enemy": 3,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 109454,
+          "enemy": 3,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 109485,
+          "enemy": 3,
+          "before": 8,
+          "after": 0
+        },
+        {
+          "frame": 109750,
+          "enemy": 2,
+          "before": 80,
+          "after": 44
+        },
+        {
+          "frame": 109796,
+          "enemy": 2,
+          "before": 44,
+          "after": 8
+        },
+        {
+          "frame": 109837,
+          "enemy": 2,
+          "before": 8,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 111400,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 111431,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 111635,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 111666,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 44,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 116624,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 116655,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 117030,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 117061,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 120383,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 120414,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 120618,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 120649,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    },
+    {
+      "name": "ordinary-combat",
+      "room": 41,
+      "weapon_item": 2,
+      "trace": [
+        {
+          "frame": 123045,
+          "enemy": 1,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 123076,
+          "enemy": 1,
+          "before": 28,
+          "after": 0
+        },
+        {
+          "frame": 123280,
+          "enemy": 0,
+          "before": 64,
+          "after": 28
+        },
+        {
+          "frame": 123311,
+          "enemy": 0,
+          "before": 28,
+          "after": 0
+        }
+      ]
+    }
+  ],
+  "frame_windows": [
+    {
+      "name": "magma-town-idle",
+      "hardware_frames": 120,
+      "updates": 120,
+      "flips": 120,
+      "max_cycles": 119340,
+      "trace": [
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 118891,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 112403,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 27342,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 27342,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26879,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20964,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26879,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 118891,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 118847,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 26805,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20898,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 27408,
+          "state": 1,
+          "obj_count": 18
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+        {
+          "delta": 1,
+          "flip": true,
+          "cycles": 20435,
+          "state": 1,
+          "obj_count": 17
+        },
+      
