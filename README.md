@@ -115,8 +115,8 @@ Project licensing is recorded in LICENSE. The original project world, characters
 
 Physical GBA hardware, flash cartridges, other emulator/compiler releases and
 the macOS native bridge-build path are unverified. Source/signal checks and
-emulator capture do not establish subjective listening quality. There is no
-hosted CI configured; local verification is required before merging.
+emulator capture do not establish subjective listening quality. The hosted gameplay regression workflow and local reproduction steps are
+described below; review the exact candidate checks before merging.
 
 ## GBJ font successor
 
@@ -125,3 +125,13 @@ GBJ / GBJ-Slim by **GeeBee**: https://geebeegb.itch.io/gbj. Both official atlas/
 Regenerate font text only with `make font-assets` (Pillow, fonts-noto-cjk, fonts-dejavu-core required); `make assets` also includes it through the existing individual generators. Native GBJ glyphs are never rescaled. Existing text IDs and vertical layout boxes are retained. All contributor, asset and tool credits, including GeeBee and the official URL, appear only in the ending roll. Source legal notices remain bundled. The title has no author-credit footer.
 
 After the ending card, the credits scroll automatically once controls are released; A starts them sooner. B or Start returns to the village. The final thanks screen waits for A to replay the roll or B/Start to return. With a completed save, open the journal, choose Quests, select the first/current-journey entry, then press A on its ending-replay prompt. Replay never resets progress or requests another save.
+
+## Automated gameplay debugging
+
+The [Gameplay regression workflow](.github/workflows/gameplay.yml) runs clean
+reproducible builds, current host/sanitizer checks and bounded native mGBA
+controller/save/menu/early-combat tests on pull requests and main pushes. It
+retains logs, replay inputs, test saves, screenshots and native audio/video for
+debugging. See [coverage, limitations and local replay](docs/GAMEPLAY_CI.md).
+Synthetic diagnostics and inherited cold-Continue stalls are labeled separately;
+this is not a complete campaign or physical-hardware certification.
