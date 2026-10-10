@@ -4,7 +4,7 @@
 Existing saves are historical fixtures for compatibility only. No memory writes
 or emulator machine states. All new first-checkpoint saves are controller-earned.
 """
-import argparse,ctypes as C,gzip,hashlib,json,sys,shutil
+import argparse,atexit,ctypes as C,gzip,hashlib,json,sys,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'tools'),str(ROOT/'tests')]
@@ -23,9 +23,24 @@ def main():
  sym={v[2]:int(v[0],16)for line in symbols.read_text().splitlines() if len(v:=line.split())==3}
  fixture=ROOT/'tests/fixtures/v5-revision2/all-eleven-town.sav';assert sha(fixture)=='74f39c496a1e93eb47c5b50828513033899be0567a1391cf99869750defa9106'
  report={'scope':__doc__,'rom_sha256':sha(rom),'symbols_sha256':sha(symbols),'elf_sha256':sha(rom.with_suffix('.elf')),'source_hashes_sha256':sha(ROOT/'build/source-hashes.json'),'bridge_sha256':sha(a.bridge),'harness_sha256':sha(__file__),'fixture_sha256':sha(fixture),'controller_only':True,'game_ram_writes':0,'machine_state_loads':0,'checks':[],'sessions':[],'screenshots':[]}
- trace=gzip.open(a.output/'frames.jsonl.gz','wt');e=None;row=None
+ trace=gzip.open(a.output/'frames.jsonl.gz','wt');inputs_trace=gzip.open(a.output/'inputs.jsonl.gz','wt');e=None;row=None
  def check(label,value):
   report['checks'].append({'session':row['name'],'check':label,'passed':bool(value)});assert value,(row['name'],label,{n:g(n)for n in ('game_state','frame','room','save_failed')})
+ def preserve_failure():
+  # atexit covers assertions anywhere in this existing controller harness.
+  # Timeout/SIGKILL still leaves the incrementally flushed frame/input trace.
+  if (a.output/'report.json').is_file():return
+  report['result']='FAIL_INCOMPLETE';report['failure_session']=row['name'] if row else None
+  (a.output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+  try:
+   if e and e.ptr:
+    e.screenshot(a.output/'failure.png')
+    (a.output/'failure-test-cartridge.sav').write_bytes(e.bytes(0x0e000000,32768))
+  except Exception as capture_error:print('Failure capture unavailable:',capture_error,file=sys.stderr)
+  finally:
+   trace.close();inputs_trace.close()
+   if e and e.ptr:e.close()
+ atexit.register(preserve_failure)
  def g(name,width=4):return e.read(sym[name],width)
  def raw():return e.bytes(0x0e000000,32768)
  def snapshot(name):
@@ -33,6 +48,7 @@ def main():
  def state_bytes():return e.bytes(sym['adventure_save'],C.sizeof(Save))
  def step(n,k=0,measured=True):
   row['inputs'].append({'frame':e.frame,'frames':n,'keys':keymask(k)})
+  inputs_trace.write(json.dumps({'input':row['inputs'][-1],'session':row['name']})+'\n');inputs_trace.flush();trace.flush()
   for _ in range(n):
    before=g('frame');oldstate=g('game_state');oldpage=e.read(0x04000000,2)&16;e.frames(1,k)
    f={'session':row['name'],'hw':e.frame,'state':g('game_state'),'delta':(g('frame')-before)&0xffffffff,'flip':(e.read(0x04000000,2)&16)!=oldpage,'cycles':g('render_cycles'),'faults':e.lib.eb_faults(e.ptr),'measured':measured}
@@ -117,7 +133,7 @@ def main():
     check('power cut recovers whole previous or whole new adventure',state_bytes() in ((new_state,historical_state)if old else(new_state,)) and g('game_state')==1)
     if count==2:check('new first checkpoint resumes in village without opening',g('room')==0)
    else:check('unfinished empty first checkpoint remains a new cartridge',not old)
- e.close();trace.close()
+ e.close();trace.close();inputs_trace.close()
  report['metrics']={k:sum(r[k]for r in report['sessions'])for k in('frames','flip_misses','update_misses','overruns')};report['metrics']['peak_cycles']=max(r['peak_cycles']for r in report['sessions'])
  report['cadence_by_scope']={}
  for scope in('opening_and_field','cold_continue_observed'):

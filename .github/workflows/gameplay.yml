@@ -1,0 +1,82 @@
+name: Gameplay regression
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      extended_audio:
+        description: Also verify two exact loops of every regional cue (synthetic diagnostics)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gameplay-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regression:
+    name: Gameplay / ${{ matrix.suite }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [host, native]
+    # Official Debian 13 image and signed package snapshot are immutable.
+    container:
+      image: debian:trixie-20250908-slim@sha256:c2880112cc5c61e1200c26f106e4123627b49726375eb5846313da9cca117337
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONHASHSEED: '0'
+      TZ: UTC
+      LC_ALL: C.UTF-8
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - name: Install signed snapshot dependencies
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          rm -f /etc/apt/sources.list.d/debian.sources
+          printf '%s\n' 'deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/20250910T000000Z trixie main' > /etc/apt/sources.list
+          apt-get -o Acquire::Retries=3 update
+          apt-get install --yes --no-install-recommends ca-certificates curl git build-essential pkg-config libmgba-dev python3 python3-venv python3-pil python3-numpy python3-scipy ffmpeg fonts-noto-cjk fonts-dejavu-core
+      - name: Check out candidate without persistent credentials
+        timeout-minutes: 3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install checksum-pinned ARM and mGBA tools
+        timeout-minutes: 8
+        run: |
+          sh tools/install_tools.sh
+          python3 -m venv --system-site-packages build/ci-venv
+          build/ci-venv/bin/python -m pip install --no-deps --require-hashes --only-binary=:all: --index-url https://pypi.org/simple -r tools/ci-requirements.txt
+      - name: Run clean build and gameplay gates
+        timeout-minutes: 37
+        env:
+          CI_SUITE: ${{ matrix.suite }}
+          CI_EXTENDED_AUDIO: ${{ inputs.extended_audio == true && '1' || '0' }}
+        run: |
+          export PATH="$PWD/build/ci-venv/bin:$PATH"
+          args=(--suite "$CI_SUITE" --output "build/ci-$CI_SUITE")
+          if [[ "$CI_EXTENDED_AUDIO" == 1 && "$CI_SUITE" == native ]]; then args+=(--extended-audio); fi
+          python3 tools/run_gameplay_ci.py "${args[@]}"
+      - name: Save logs, reports, replays and native captures
+        timeout-minutes: 2
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gameplay-${{ matrix.suite }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: build/ci-${{ matrix.suite }}/
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 6
+          include-hidden-files: false
