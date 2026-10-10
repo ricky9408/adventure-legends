@@ -5,6 +5,8 @@ from pathlib import Path
 from test_creature_branches import branch_sources
 from test_creature_sparse import ROOT, edit_array, refresh_key_indexes
 from test_creatures import Instance, Roster
+from retained_source_adapter import expand_local_includes
+from test_southern_catalog import before_return
 sys.path.insert(0,str(ROOT/'assets/creatures'))
 from generate_data import build_trial_masks
 from released_policy import validate_compatibility
@@ -12,22 +14,12 @@ from catalog_source import load_catalog
 
 def append(text,name,rows):return edit_array(text,name,lambda body:body+'\n'+rows)
 def linear_sources():
-    h=(ROOT/'src/creatures.h').read_text();c=(ROOT/'src/creatures.c').read_text();d=(ROOT/'src/creature_data.c').read_text()
-    h=h.replace('CREATURE_ENABLED_COUNT = 89','CREATURE_ENABLED_COUNT = 90').replace('CREATURE_ABILITY_COUNT = 89','CREATURE_ABILITY_COUNT = 90')
-    h=h.replace('CREATURE_LEARNSET_COUNT = 142','CREATURE_LEARNSET_COUNT = 145').replace('CREATURE_EVOLUTION_COUNT = 51','CREATURE_EVOLUTION_COUNT = 52')
-    c=c.replace('{2, 1, 2, 5, 1, 2, 0, 0, 1, 1, 0x00001222u}', '{2, 1, 2, 5, 1, 2, 51, 1, 1, 1025, 0x00001222u}',1)
-    d=d.replace('5, 0x00001222u, 2, 1, 2, 0, 0, 0, 2, 1}', '5, 0x00001222u, 2, 1, 2, 1, 51, 0, 2, 1}',1)
-    c=c.replace('{1, CREATURE_FIRE, CREATURE_YANG, CREATURE_TRIAL_HEARTH, FIELD_HOMURA, 0}', '{1, CREATURE_FIRE, CREATURE_YANG, CREATURE_TRIAL_HEARTH | 1024, FIELD_HOMURA, 0}',1)
-    c=append(c,'form_policy','    {3, 1, 3, 91, 142, 3, 0, 0, 1, 1025, 0x00001222u},')
-    c=append(c,'ability_policy','    {91, 120},')
-    c=append(c,'trial_policy','    {1, 2, 1024, 1, 4},')
-    edge='    {2, 3, 30, 60, 1025, 4},'
-    c=append(c,'expected_edges',edge)
-    d=append(d,'creature_evolutions',edge)
-    d=append(d,'creature_forms','    {3, 1, 1, 1, 3, 0, {57, 57, 57, 57, 57}, 91, 0x00001222u, 3, 142, 3, 0, 0, 0, 3, 1},')
-    d=append(d,'creature_learnsets','    {1, 1},\n    {12, 5},\n    {30, 91},')
-    d=append(d,'creature_abilities','    {91, 1, 120, 0x00001222u},')
-    c,d=refresh_key_indexes(c,d)
+    # The formerly synthetic F001 third tier is now reviewed Return7 content.
+    # Exercise that actual graph and its complete dependency mask; do not append
+    # duplicate form3/ability91 identities to make a broken synthetic catalog.
+    h=(ROOT/'src/creatures.h').read_text()
+    c=expand_local_includes(ROOT/'src/creatures.c')
+    d=(ROOT/'src/creature_data.c').read_text()
     return h,c,d
 
 def multi_branch_sources():
@@ -57,18 +49,20 @@ int main(void){CreatureInstance *c;unsigned target,mask,rev;
  assert(creatures_evolution_to(1,2)->trial_flag==1);
  assert(creatures_evolve_to(&r,0,2,1,1,1)==CREATURE_EVOLVE_READY);
  assert(creatures_evolution_count(2)==1 && creatures_evolution_to(2,3)->trial_flag==1025);
- for(rev=1;rev<=4;++rev)assert(creatures_instance_validate_revision(c,rev));
- assert(creatures_can_evolve_to(c,3,4,1)==CREATURE_EVOLVE_TRIAL);
+ for(rev=1;rev<=6;++rev)assert(creatures_instance_validate_revision(c,rev));
+ assert(creatures_can_evolve_to(c,3,4096,1)==CREATURE_EVOLVE_TRIAL);
  assert(creatures_mark_trial_qualified(c,1,2));assert(c->trial_flags==1025);
  assert(creatures_mark_trial(c,1));assert(c->trial_flags==1025);
  before=r;assert(!creatures_mark_trial_qualified(c,2,2));assert(!memcmp(&r,&before,sizeof r));
- for(rev=1;rev<=4;++rev)assert(!creatures_instance_validate_revision(c,rev));
- before=r;assert(creatures_evolve_to(&r,0,3,4,1,0)==CREATURE_EVOLVE_DEFERRED);assert(!memcmp(&r,&before,sizeof r));
- assert(creatures_evolve_to(&r,0,3,4,1,1)==CREATURE_EVOLVE_READY);
+ for(rev=1;rev<=6;++rev)assert(!creatures_instance_validate_revision(c,rev));
+ before=r;assert(creatures_evolve_to(&r,0,3,4096,1,0)==CREATURE_EVOLVE_DEFERRED);assert(!memcmp(&r,&before,sizeof r));
+ assert(creatures_evolve_to(&r,0,3,4096,1,1)==CREATURE_EVOLVE_READY);
  assert(c->form_id==3 && c->instance_id==before.instances[0].instance_id && c->trial_flags==1025);
  assert(c->flags==before.instances[0].flags && creatures_legacy_spirit(3)==0);
  assert(creatures_roster_validate(&r));
- for(mask=0;mask<65536;++mask){c->trial_flags=(CreatureU16)mask;assert(creatures_instance_validate(c)==(mask==0||mask==1||mask==1025));}
+ /* Return terminal3 now requires its complete earned chain. The old
+  * synthetic mask0/mask1 cases remain explicit adverse checks. */
+ for(mask=0;mask<65536;++mask){c->trial_flags=(CreatureU16)mask;assert(creatures_instance_validate(c)==(mask==1025));}
  (void)target;
 #else
  for(target=38;target<=39;++target)for(mask=0;mask<4;++mask){
@@ -108,18 +102,22 @@ class MagmaArchitectureTests(unittest.TestCase):
     def test_branch_each_key_and_both_keys_keep_explicit_target_and_decline(self):native(multi_branch_sources())
     def test_future_u16_context_is_not_truncated(self):
         h,c,d=multi_branch_sources()
-        h=h.replace('CREATURE_EVOLUTION_CONTEXT_MASK = 4095','CREATURE_EVOLUTION_CONTEXT_MASK = 8191')
-        for old,new in [('{37, 38, 26, 45, 1, 256}','{37, 38, 26, 45, 1, 4096}'),('{37, 39, 26, 45, 2, 256}','{37, 39, 26, 45, 2, 4096}')]:c=c.replace(old,new);d=d.replace(old,new)
-        native((h,c,d),context=4096)
+        self.assertIn('CREATURE_EVOLUTION_CONTEXT_MASK = 16383',h)
+        h=h.replace('CREATURE_EVOLUTION_CONTEXT_MASK = 16383','CREATURE_EVOLUTION_CONTEXT_MASK = 32767')
+        for old,new in [('{37, 38, 26, 45, 1, 256}','{37, 38, 26, 45, 1, 16384}'),('{37, 39, 26, 45, 2, 256}','{37, 39, 26, 45, 2, 16384}')]:
+            self.assertIn(old,c);self.assertIn(old,d)
+            c=c.replace(old,new);d=d.replace(old,new)
+        native((h,c,d),context=16384)
     def test_trial_alias_unknown_dependencies_cycles_and_unclosed_edge_fail(self):
         h,c,d=linear_sources()
-        for old,new in [('{1, 2, 1024, 1, 4}','{1, 1, 1024, 1, 4}'),('{1, 2, 1024, 1, 4}','{1, 2, 1, 0, 4}'),('{1, 2, 1024, 1, 4}','{1, 2, 1024, 2, 4}'),('{1, 1, CREATURE_TRIAL_HEARTH, 0, 1}','{1, 1, CREATURE_TRIAL_HEARTH, 1024, 1}'),('{1, 2, 1024, 1, 4}','{1, 2, 1024, 1, 7}')]:
+        for old,new in [('{1, 2, 1024, 1, 7}','{1, 1, 1024, 1, 7}'),('{1, 2, 1024, 1, 7}','{1, 2, 1, 0, 7}'),('{1, 2, 1024, 1, 7}','{1, 2, 1024, 2, 7}'),('{1, 1, CREATURE_TRIAL_HEARTH, 0, 1}','{1, 1, CREATURE_TRIAL_HEARTH, 1024, 1}'),('{1, 2, 1024, 1, 7}','{1, 2, 1024, 1, 8}')]:
             with self.subTest(new=new):self.assertIn(old,c);native((h,c.replace(old,new,1),d),linear=True,invalid=True)
-        native((h,c.replace('{2, 3, 30, 60, 1025, 4}','{2, 3, 30, 60, 1024, 4}'),d.replace('{2, 3, 30, 60, 1025, 4}','{2, 3, 30, 60, 1024, 4}')),linear=True,invalid=True)
+        self.assertIn('{2, 3, 32, 60, 1025, 4096}',c);self.assertIn('{2, 3, 32, 60, 1025, 4096}',d)
+        native((h,c.replace('{2, 3, 32, 60, 1025, 4096}','{2, 3, 32, 60, 1024, 4096}'),d.replace('{2, 3, 32, 60, 1025, 4096}','{2, 3, 32, 60, 1024, 4096}')),linear=True,invalid=True)
     def test_frozen_policy_generation_is_exact(self):subprocess.run([sys.executable,str(ROOT/'tools/generate_creature_history.py'),'--check'],check=True)
     def test_semantic_prefix_lock_accepts_extension_rejects_rewrite(self):
         cat=load_catalog(ROOT/'assets/creatures/catalog.json');self.assertFalse(validate_compatibility(cat))
-        added=copy.deepcopy(cat);f=next(f for f in added['forms'] if f['id']==2)
+        added=before_return(cat);f=next(f for f in added['forms'] if f['id']==2)
         f['learnset'].append({'level':30,'ability_id':43});added['evolutions'].append(dict(added['evolutions'][0],**{'from':2,'to':3,'min_level':30,'required_trial':'future_trial'}))
         self.assertFalse(validate_compatibility(added))
         for field,value in [('level',2),('ability_id',23)]:

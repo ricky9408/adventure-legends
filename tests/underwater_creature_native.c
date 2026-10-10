@@ -13,9 +13,9 @@ static unsigned grant(unsigned id) {
 static void tables_and_masks(void) {
     unsigned i,j,mask;
     assert(creatures_catalog_validate());
-    assert(CREATURE_CONTENT_REVISION==6 && CREATURE_ENABLED_COUNT==89);
-    assert(CREATURE_LEARNSET_COUNT==142 && CREATURE_EVOLUTION_COUNT==51 && CREATURE_ABILITY_COUNT==89);
-    assert(sizeof(CreatureInstance)==24 && CREATURE_EVOLUTION_CONTEXT_MASK==4095);
+    assert(CREATURE_CONTENT_REVISION==8 && CREATURE_ENABLED_COUNT==120);
+    assert(CREATURE_LEARNSET_COUNT==200 && CREATURE_EVOLUTION_COUNT==68 && CREATURE_ABILITY_COUNT==120);
+    assert(sizeof(CreatureInstance)==24 && CREATURE_EVOLUTION_CONTEXT_MASK==32767);
     for(i=0;i<8;++i) {
         unsigned base=49+3*i, family=17+i;
         const CreatureForm *f=creatures_form(base);
@@ -35,6 +35,7 @@ static void tables_and_masks(void) {
                 c.trial_flags=(CreatureU16)mask;
                 assert(creatures_instance_validate(&c)==!!expected);
                 assert(creatures_instance_validate_revision(&c,6)==!!expected);
+                assert(creatures_instance_validate_revision(&c,7)==!!expected);
                 assert(!creatures_instance_validate_revision(&c,5));
             }
             c.trial_flags=3;
@@ -48,7 +49,9 @@ static void tables_and_masks(void) {
             assert(creatures_mark_trial_qualified(&roster.instances[slot],family,j));before=roster;
             assert(creatures_can_evolve(&roster.instances[slot],1024,1)==CREATURE_EVOLVE_AMBIGUOUS);
             assert(creatures_evolve_to(&roster,slot,base+j,1024,1,0)==CREATURE_EVOLVE_DEFERRED);unchanged();
-            assert(creatures_evolve_to(&roster,slot,base+j,4096,1,1)==CREATURE_EVOLVE_INVALID);unchanged();
+            assert(creatures_evolve_to(&roster,slot,base+j,4096,1,1)==CREATURE_EVOLVE_STORY);unchanged();
+            assert(creatures_evolve_to(&roster,slot,base+j,8192,1,1)==CREATURE_EVOLVE_STORY);unchanged();
+            assert(creatures_evolve_to(&roster,slot,base+j,16384,1,1)==CREATURE_EVOLVE_STORY);unchanged();
             assert(creatures_evolve_to(&roster,slot,base+j+256,1024,1,1)==CREATURE_EVOLVE_INVALID);unchanged();
             assert(creatures_evolve_to(&roster,slot,base+j,1024,1,1)==CREATURE_EVOLVE_READY);
             assert(roster.instances[slot].instance_id==1 && roster.instances[slot].equipped[0]==67+3*i);

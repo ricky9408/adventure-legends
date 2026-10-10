@@ -20,6 +20,20 @@
 #include "southern_creature_art.h"
 #include "magma_creature_art.h"
 #include "underwater_creature_art.h"
+#include "return_creature_art.h"
+#include "return_quests.h"
+#include "return_game.h"
+#include "return_powers.h"
+#include "return_legacy_powers.h"
+#include "horizons_creature_art.h"
+#include "horizons_game.h"
+#include "horizons_quests.h"
+#include "horizons_powers.h"
+#include "covenants_powers.h"
+#include "covenants_game.h"
+#include "covenants_creature_art.h"
+#include "companion_guide.h"
+#include "companion_guide_text.h"
 typedef unsigned char u8;
 extern volatile int room,px,py,spirit,game_state,has_save,save_failed;
 extern volatile unsigned chapter_flags;
@@ -40,6 +54,7 @@ static CreatureU32 progression_evolution_instance;
 #define CREAM PAL_GOLD4
 #define GOLD PAL_GOLD3
 #define TEAL PAL_TEAL2
+#define PLAY 1
 #define PAUSE 3
 #define EVOLVE_CONFIRM 7
 #define EVOLVE_ANIM 8
@@ -64,6 +79,9 @@ unsigned progression_form_spirit(unsigned form){
     case 15:return 25;case 16:return 26;case 36:return 27;case 37:return 28;case 38:return 29;
     case 17:return 30;case 18:return 31;case 19:return 32;case 20:return 33;
     case 21:return 34;case 22:return 35;case 23:return 36;case 24:return 37;
+    case 39:return 38;case 40:return 39;
+    case 41:return 40;case 42:return 41;case 43:return 42;case 44:return 43;case 45:return 44;case 46:return 45;case 47:return 46;case 48:return 47;case 49:return 48;case 50:return 49;case 51:return 50;case 52:return 51;
+    case 53:return 52;case 54:return 53;case 55:return 54;case 56:return 55;case 57:return 56;case 58:return 57;case 59:return 58;case 60:return 59;
     default:return CREATURE_EMPTY_SLOT;
     }
 }
@@ -96,7 +114,7 @@ void progression_selection_changed(void){
  selected_signature_slot=r->selected_party;selected_signature_form=c?c->form_id:0;
  selected_signature_commands[0]=c?c->equipped[0]:0;selected_signature_commands[1]=c?c->equipped[1]:0;
  selected_signature_commands[2]=c?c->selected_command:0;
- if(changed&&selected_signature_valid){south_game_cancel_rest();magma_game_cancel_return();progression_evolution_cancel();underwater_powers_selection_changed();underwater_game_selection_changed();}
+ if(changed&&selected_signature_valid){south_game_cancel_rest();magma_game_cancel_return();progression_evolution_cancel();underwater_powers_selection_changed();underwater_game_selection_changed();return_powers_selection_changed();return_legacy_cancel();return_game_selection_changed();horizons_powers_selection_changed();horizons_game_selection_changed();covenants_powers_selection_changed();covenants_game_selection_changed();}
  selected_signature_valid=1;
 }
 static void synchronize_selection(void){
@@ -171,10 +189,11 @@ unsigned progression_evolution_context(void){
         context|=CREATURE_SOUTH_READY;
     if(save5_quest_state(&adventure_save.quests,SOUTH_Q_SUNWELL)==SAVE5_QUEST_CLAIMED)
         context|=CREATURE_SUNWELL_OPEN;
-    return context|magma_context(&adventure_save)|underwater_context(&adventure_save);
+    return context|magma_context(&adventure_save)|underwater_context(&adventure_save)|return_context(&adventure_save)|horizons_context(&adventure_save);
 }
 int progression_is_sanctuary(void){
     unsigned i;
+    if(return_game_is_sanctuary()||horizons_game_is_sanctuary()||covenants_game_is_sanctuary())return 1;
     if(room==0||room==16||room==22||room==30||room==38||room==46)return 1;
     if(room==47&&close_to(80,280,30))return 1;
     if(room==39&&close_to(80,280,30))return 1;
@@ -187,7 +206,24 @@ int progression_is_sanctuary(void){
 }
 /* Compact decimal font for dynamic values; story text remains rasterized. */
 static const u8 digits[10][5]={{7,5,5,5,7},{2,6,2,2,7},{7,1,7,4,7},{7,1,7,1,7},{5,5,7,1,1},{7,4,7,1,7},{7,4,7,5,7},{7,1,1,1,1},{7,5,7,5,7},{7,5,7,1,7}};
-static void number(unsigned n,int x,int y){unsigned divisor=100;int started=0;for(;divisor;divisor/=10){unsigned d=n/divisor%10;if(d||started||divisor==1){int xx,yy;for(yy=0;yy<5;yy++)for(xx=0;xx<3;xx++)if(digits[d][yy]&(4>>xx))rect(x+xx*2,y+yy*2,2,2,CREAM);x+=8;started=1;}}}
+/* Exact transparent6x10 doubled glyphs; ordinary level/bond values avoid division. */
+extern unsigned short *screen;
+static void growth_digit_blit(unsigned digit,int x,int y){
+ unsigned row;unsigned short ink=(unsigned short)(CREAM|((unsigned)CREAM<<8));
+ if((unsigned)x>234||(unsigned)y>150){int xx,yy;for(yy=0;yy<5;yy++)for(xx=0;xx<3;xx++)if(digits[digit][yy]&(4>>xx))rect(x+xx*2,y+yy*2,2,2,CREAM);return;}
+ for(row=0;row<5;row++){unsigned bits=digits[digit][row],copy;unsigned short*p=screen+(y+(int)row*2)*120+(x>>1);
+  if(!(x&1)){for(copy=0;copy<2;copy++,p+=120){if(bits&4)p[0]=ink;if(bits&2)p[1]=ink;if(bits&1)p[2]=ink;}}
+  else{unsigned short mask[4];unsigned col;mask[0]=(bits&4)?65280:0;mask[1]=(unsigned short)(((bits&4)?255:0)|((bits&2)?65280:0));mask[2]=(unsigned short)(((bits&2)?255:0)|((bits&1)?65280:0));mask[3]=(bits&1)?255:0;
+   for(copy=0;copy<2;copy++,p+=120)for(col=0;col<4;col++)if(mask[col])p[col]=(unsigned short)((p[col]&~mask[col])|(ink&mask[col]));}
+ }
+}
+static void number(unsigned n,int x,int y){unsigned value[3]={0,0,0},i;int started=0;
+ /* Real level/bond callers are <=100. Rare host probes retain the original
+  * low-three-digit behavior; valid menu values take no division path. */
+ if(n>=1000)n%=1000;while(n>=100){n-=100;value[0]++;}while(n>=10){n-=10;value[1]++;}value[2]=n;
+ for(i=0;i<3;i++)if(value[i]||started||i==2){growth_digit_blit(value[i],x,y);x+=8;started=1;}
+}
+
 int progression_name_id(unsigned form){
     if(!creatures_form(form))return TX_C_UNKNOWN;
     switch(form){
@@ -205,76 +241,114 @@ int progression_name_id(unsigned form){
     case 25:return TX_E_TANGLEAPER;case 26:return TX_E_BOUGHVAULT;case 28:return TX_E_DUNEROLL;case 29:return TX_E_DUNESCOOP;case 79:return TX_E_SKIMKIP;case 80:return TX_E_SAILSKIP;case 81:return TX_E_WARMCROAK;case 82:return TX_E_BELLOWSWELL;case 83:return TX_E_SHELLWADDLE;case 84:return TX_E_VAULTBACK;case 85:return TX_E_CLIPMANTIS;case 86:return TX_E_FOILSCYTHE;case 87:return TX_E_SWAYLEMUR;case 88:return TX_E_CANOPETAIL;case 89:return TX_E_RILLNEWT;case 90:return TX_E_VEILCREST;case 91:return TX_E_GLIMMERBAT;case 92:return TX_E_FLAREFAN;case 93:return TX_E_NEEDLETROT;case 94:return TX_E_QUILLSTRIDE;
     case 31:return TX_E_MG_NAME_31;case 32:return TX_E_MG_NAME_32;case 33:return TX_E_MG_NAME_33;case 34:return TX_E_MG_NAME_34;case 35:return TX_E_MG_NAME_35;case 36:return TX_E_MG_NAME_36;case 37:return TX_E_MG_NAME_37;case 38:return TX_E_MG_NAME_38;case 39:return TX_E_MG_NAME_39;case 40:return TX_E_MG_NAME_40;case 41:return TX_E_MG_NAME_41;case 42:return TX_E_MG_NAME_42;case 43:return TX_E_MG_NAME_43;case 44:return TX_E_MG_NAME_44;case 45:return TX_E_MG_NAME_45;case 46:return TX_E_MG_NAME_46;case 47:return TX_E_MG_NAME_47;case 48:return TX_E_MG_NAME_48;case 95:return TX_E_MG_NAME_95;case 96:return TX_E_MG_NAME_96;case 97:return TX_E_MG_NAME_97;case 98:return TX_E_MG_NAME_98;case 99:return TX_E_MG_NAME_99;case 100:return TX_E_MG_NAME_100;
     case 49:return TX_E_UW_NAME_49;case 50:return TX_E_UW_NAME_50;case 51:return TX_E_UW_NAME_51;case 52:return TX_E_UW_NAME_52;case 53:return TX_E_UW_NAME_53;case 54:return TX_E_UW_NAME_54;case 55:return TX_E_UW_NAME_55;case 56:return TX_E_UW_NAME_56;case 57:return TX_E_UW_NAME_57;case 58:return TX_E_UW_NAME_58;case 59:return TX_E_UW_NAME_59;case 60:return TX_E_UW_NAME_60;case 61:return TX_E_UW_NAME_61;case 62:return TX_E_UW_NAME_62;case 63:return TX_E_UW_NAME_63;case 64:return TX_E_UW_NAME_64;case 65:return TX_E_UW_NAME_65;case 66:return TX_E_UW_NAME_66;case 67:return TX_E_UW_NAME_67;case 68:return TX_E_UW_NAME_68;case 69:return TX_E_UW_NAME_69;case 70:return TX_E_UW_NAME_70;case 71:return TX_E_UW_NAME_71;case 72:return TX_E_UW_NAME_72;
+    case 3:return TX_E_RT_NAME_3;
+    case 6:return TX_E_RT_NAME_6;
+    case 9:return TX_E_RT_NAME_9;
+    case 12:return TX_E_RT_NAME_12;
+    case 15:return TX_E_RT_NAME_15;
+    case 17:return TX_E_RT_NAME_17;
+    case 18:return TX_E_RT_NAME_18;
+    case 21:return TX_E_RT_NAME_21;
+    case 24:return TX_E_RT_NAME_24;
+    case 27:return TX_E_RT_NAME_27;
+    case 30:return TX_E_RT_NAME_30;
+    case 101:return TX_E_RT_NAME_101;
+    case 102:return TX_E_RT_NAME_102;
+    case 103:return TX_E_RT_NAME_103;
+    case 104:return TX_E_RT_NAME_104;
+    case 105:return TX_E_HZ_NAME_105;case 106:return TX_E_HZ_NAME_106;case 107:return TX_E_HZ_NAME_107;case 108:return TX_E_HZ_NAME_108;case 109:return TX_E_HZ_NAME_109;case 110:return TX_E_HZ_NAME_110;case 111:return TX_E_HZ_NAME_111;case 112:return TX_E_HZ_NAME_112;case 113:return TX_E_HZ_NAME_113;case 114:return TX_E_HZ_NAME_114;case 115:return TX_E_HZ_NAME_115;case 116:return TX_E_HZ_NAME_116;case 117:return TX_E_HZ_NAME_117;case 118:return TX_E_HZ_NAME_118;case 119:return TX_E_HZ_NAME_119;case 120:return TX_E_HZ_NAME_120;
+    case 121:return TX_E_CV_STILLTIDE;case 122:return TX_E_CV_VOWBOUGH;case 123:return TX_E_CV_KILNWHORL;case 124:return TX_E_CV_CAIRNWARD;case 125:return TX_E_CV_BELLMANTLE;case 126:return TX_E_CV_SHADEWEAVER;case 127:return TX_E_CV_TIDEPLUME;case 128:return TX_E_CV_HEARTHMOTH;
     default:return TX_C_UNKNOWN;
     }
+}
+static int return_wish_index(unsigned form){
+    static const u8 predecessor[13]={2,5,8,11,14,16,17,20,23,26,29,101,103};
+    unsigned i;for(i=0;i<13;++i)if(predecessor[i]==form)return (int)i;return -1;
 }
 static int reason_id(unsigned reason,unsigned form){
     switch(reason){
     case CREATURE_EVOLVE_READY:return TX_E_READY;
     case CREATURE_EVOLVE_LEVEL:return TX_E_LEVEL_MORE;
     case CREATURE_EVOLVE_BOND:return TX_E_BOND_MORE;
-    case CREATURE_EVOLVE_STORY:return progression_form_spirit(form)>=PROGRESSION_UNDERWATER_FIRST?((progression_evolution_context()&CREATURE_UNDERWATER_READY)?TX_E_UW_LATER:TX_E_UW_MORE):progression_form_spirit(form)>=PROGRESSION_MAGMA_FIRST?(creatures_form(form)->tier>=2?TX_E_MG_LATER:TX_E_MG_MORE):form==13?TX_E_REED_MORE:progression_form_spirit(form)>=PROGRESSION_SOUTH_FIRST?TX_E_SOUTH_MORE:progression_form_spirit(form)>=PROGRESSION_NORTH_WOOD?TX_E_NORTH_MORE:TX_E_STORY_MORE;
+    case CREATURE_EVOLVE_STORY:if(form>=105&&form<=112)return TX_E_HZ_NEED_STORY;if(return_wish_index(form)>=0)return TX_E_RT_MORE;
+        return progression_form_spirit(form)>=PROGRESSION_UNDERWATER_FIRST?((progression_evolution_context()&CREATURE_UNDERWATER_READY)?TX_E_UW_LATER:TX_E_UW_MORE):progression_form_spirit(form)>=PROGRESSION_MAGMA_FIRST?(creatures_form(form)->tier>=2?TX_E_MG_LATER:TX_E_MG_MORE):form==13?TX_E_REED_MORE:progression_form_spirit(form)>=PROGRESSION_SOUTH_FIRST?TX_E_SOUTH_MORE:progression_form_spirit(form)>=PROGRESSION_NORTH_WOOD?TX_E_NORTH_MORE:TX_E_STORY_MORE;
     case CREATURE_EVOLVE_TRIAL:return TX_E_TRIAL_MORE;
     case CREATURE_EVOLVE_SANCTUARY:return TX_E_SANCTUARY;
     case CREATURE_EVOLVE_AMBIGUOUS:return TX_E_CHOOSE_BRANCH;
     case CREATURE_EVOLVE_COLLECTION_RESERVED:return TX_E_SPACE_RESERVED;
-    case CREATURE_EVOLVE_NO_EDGE:return form==16?TX_E_FIXED_FORM:TX_E_GROWN;
+    case CREATURE_EVOLVE_NO_EDGE:return form==16||(form>=121&&form<=128)?TX_E_FIXED_FORM:TX_E_GROWN;
     default:return TX_E_NO_MEMBER;
     }
 }
 static int wish_id(unsigned form){
-    static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM,TX_E_WISH_NORTH_WOOD,TX_E_WISH_NORTH_FIRE,TX_E_WISH_NORTH_WATER,TX_E_WISH_NORTH_EARTH,TX_E_WISH_NORTH_METAL,TX_E_WISH_SOUTH_0,TX_E_WISH_SOUTH_1,TX_E_WISH_SOUTH_2,TX_E_WISH_SOUTH_3,TX_E_WISH_SOUTH_4,TX_E_WISH_SOUTH_5,TX_E_WISH_SOUTH_6,TX_E_WISH_SOUTH_7,TX_E_WISH_SOUTH_8,TX_E_WISH_SOUTH_9,TX_E_MG_WISH_0,TX_E_MG_WISH_1,TX_E_MG_WISH_2,TX_E_MG_WISH_3,TX_E_MG_WISH_4,TX_E_MG_WISH_5,TX_E_MG_WISH_6,TX_E_MG_WISH_7,TX_E_MG_WISH_8,TX_E_UW_WISH_0,TX_E_UW_WISH_1,TX_E_UW_WISH_2,TX_E_UW_WISH_3,TX_E_UW_WISH_4,TX_E_UW_WISH_5,TX_E_UW_WISH_6,TX_E_UW_WISH_7};
-    unsigned family=progression_form_spirit(form);
+    static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM,TX_E_WISH_NORTH_WOOD,TX_E_WISH_NORTH_FIRE,TX_E_WISH_NORTH_WATER,TX_E_WISH_NORTH_EARTH,TX_E_WISH_NORTH_METAL,TX_E_WISH_SOUTH_0,TX_E_WISH_SOUTH_1,TX_E_WISH_SOUTH_2,TX_E_WISH_SOUTH_3,TX_E_WISH_SOUTH_4,TX_E_WISH_SOUTH_5,TX_E_WISH_SOUTH_6,TX_E_WISH_SOUTH_7,TX_E_WISH_SOUTH_8,TX_E_WISH_SOUTH_9,TX_E_MG_WISH_0,TX_E_MG_WISH_1,TX_E_MG_WISH_2,TX_E_MG_WISH_3,TX_E_MG_WISH_4,TX_E_MG_WISH_5,TX_E_MG_WISH_6,TX_E_MG_WISH_7,TX_E_MG_WISH_8,TX_E_UW_WISH_0,TX_E_UW_WISH_1,TX_E_UW_WISH_2,TX_E_UW_WISH_3,TX_E_UW_WISH_4,TX_E_UW_WISH_5,TX_E_UW_WISH_6,TX_E_UW_WISH_7,TX_E_RT_WISH_11,TX_E_RT_WISH_12};
+    static const int returning[13]={TX_E_RT_WISH_0,TX_E_RT_WISH_1,TX_E_RT_WISH_2,TX_E_RT_WISH_3,TX_E_RT_WISH_4,TX_E_RT_WISH_5,TX_E_RT_WISH_6,TX_E_RT_WISH_7,TX_E_RT_WISH_8,TX_E_RT_WISH_9,TX_E_RT_WISH_10,TX_E_RT_WISH_11,TX_E_RT_WISH_12};
+    unsigned family=progression_form_spirit(form);int index=return_wish_index(form);
+    if(form>=121&&form<=128)return TX_E_FIXED_FORM;
+    if(index>=0)return returning[index];
+    if(form>=105&&form<=112&&((form-105)&1u)==0){static const int wishes_hz[4]={TX_E_HZ_WISH_0,TX_E_HZ_WISH_1,TX_E_HZ_WISH_2,TX_E_HZ_WISH_3};return wishes_hz[(form-105)/2];}
+    if(creatures_form(form)&&!creatures_evolution_count(form))return TX_E_GROWN;
     if(form==32)return TX_E_MG_WISH_32;
     if(form==35)return TX_E_MG_WISH_35;
     return family<PROGRESSION_SPIRIT_COUNT?wishes[family]:TX_E_NO_MEMBER;
 }
-static int command_id(unsigned command){
-    static const int names[]={TX_E_COMMAND_OLD,TX_E_MOVE_FIRE,TX_E_MOVE_HEAL,TX_E_MOVE_WIND,TX_E_MOVE_STONE,TX_E_MOVE_HEARTH,TX_E_MOVE_CANOPY,TX_E_MOVE_REFLECT,TX_E_MOVE_ARCH,TX_E_MOVE_DEW,TX_E_MOVE_TIDE,TX_E_MOVE_CHIME,TX_E_COMMAND_OLD,TX_E_MOVE_THREADHOLD,TX_E_MOVE_SHUTTLE_SPAN,TX_E_MOVE_HEAT_POCKET,TX_E_MOVE_FIRING_DRAWER,TX_E_MOVE_WASHBACK,TX_E_MOVE_WAKE_TURN,TX_E_MOVE_COUNTERDROP,TX_E_MOVE_COUNTERPOISE,TX_E_MOVE_QUARTERTURN,TX_E_MOVE_GIMBAL_SCREEN,TX_E_MOVE_LEAFBOUND,TX_E_MOVE_CANOPY_ARC,TX_E_MOVE_RIDGEKICK,TX_E_MOVE_RAMPART_TURN,TX_E_MOVE_LENS_DART,TX_E_MOVE_PRISM_WAKE,TX_E_MOVE_EMBER_HUSH,TX_E_MOVE_BELLOWS_RING,TX_E_MOVE_SIDEGUARD,TX_E_MOVE_VAULT_STEP,TX_E_MOVE_PINCH_WINDOW,TX_E_MOVE_SHEAR_GATE,TX_E_MOVE_SAPLING_FEINT,TX_E_MOVE_CANOPY_EXCHANGE,TX_E_MOVE_RILL_FORK,TX_E_MOVE_VEIL_CURL,TX_E_MOVE_WARM_ECHO,TX_E_MOVE_PAIRED_ECHO,TX_E_MOVE_NEEDLE_BANK,TX_E_MOVE_QUILL_RETURN,TX_E_MG_CMD_43,TX_E_MG_CMD_44,TX_E_MG_CMD_45,TX_E_MG_CMD_46,TX_E_MG_CMD_47,TX_E_MG_CMD_48,TX_E_MG_CMD_49,TX_E_MG_CMD_50,TX_E_MG_CMD_51,TX_E_MG_CMD_52,TX_E_MG_CMD_53,TX_E_MG_CMD_54,TX_E_MG_CMD_55,TX_E_MG_CMD_56,TX_E_MG_CMD_57,TX_E_MG_CMD_58,TX_E_MG_CMD_59,TX_E_MG_CMD_60,TX_E_MG_CMD_61,TX_E_MG_CMD_62,TX_E_MG_CMD_63,TX_E_MG_CMD_64,TX_E_MG_CMD_65,TX_E_MG_CMD_66,TX_E_UW_CMD_67,TX_E_UW_CMD_68,TX_E_UW_CMD_69,TX_E_UW_CMD_70,TX_E_UW_CMD_71,TX_E_UW_CMD_72,TX_E_UW_CMD_73,TX_E_UW_CMD_74,TX_E_UW_CMD_75,TX_E_UW_CMD_76,TX_E_UW_CMD_77,TX_E_UW_CMD_78,TX_E_UW_CMD_79,TX_E_UW_CMD_80,TX_E_UW_CMD_81,TX_E_UW_CMD_82,TX_E_UW_CMD_83,TX_E_UW_CMD_84,TX_E_UW_CMD_85,TX_E_UW_CMD_86,TX_E_UW_CMD_87,TX_E_UW_CMD_88,TX_E_UW_CMD_89,TX_E_UW_CMD_90};
+int progression_command_name_id(unsigned command){
+    static const int names[]={TX_E_COMMAND_OLD,TX_E_MOVE_FIRE,TX_E_MOVE_HEAL,TX_E_MOVE_WIND,TX_E_MOVE_STONE,TX_E_MOVE_HEARTH,TX_E_MOVE_CANOPY,TX_E_MOVE_REFLECT,TX_E_MOVE_ARCH,TX_E_MOVE_DEW,TX_E_MOVE_TIDE,TX_E_MOVE_CHIME,TX_E_CV_CMD_12,TX_E_MOVE_THREADHOLD,TX_E_MOVE_SHUTTLE_SPAN,TX_E_MOVE_HEAT_POCKET,TX_E_MOVE_FIRING_DRAWER,TX_E_MOVE_WASHBACK,TX_E_MOVE_WAKE_TURN,TX_E_MOVE_COUNTERDROP,TX_E_MOVE_COUNTERPOISE,TX_E_MOVE_QUARTERTURN,TX_E_MOVE_GIMBAL_SCREEN,TX_E_MOVE_LEAFBOUND,TX_E_MOVE_CANOPY_ARC,TX_E_MOVE_RIDGEKICK,TX_E_MOVE_RAMPART_TURN,TX_E_MOVE_LENS_DART,TX_E_MOVE_PRISM_WAKE,TX_E_MOVE_EMBER_HUSH,TX_E_MOVE_BELLOWS_RING,TX_E_MOVE_SIDEGUARD,TX_E_MOVE_VAULT_STEP,TX_E_MOVE_PINCH_WINDOW,TX_E_MOVE_SHEAR_GATE,TX_E_MOVE_SAPLING_FEINT,TX_E_MOVE_CANOPY_EXCHANGE,TX_E_MOVE_RILL_FORK,TX_E_MOVE_VEIL_CURL,TX_E_MOVE_WARM_ECHO,TX_E_MOVE_PAIRED_ECHO,TX_E_MOVE_NEEDLE_BANK,TX_E_MOVE_QUILL_RETURN,TX_E_MG_CMD_43,TX_E_MG_CMD_44,TX_E_MG_CMD_45,TX_E_MG_CMD_46,TX_E_MG_CMD_47,TX_E_MG_CMD_48,TX_E_MG_CMD_49,TX_E_MG_CMD_50,TX_E_MG_CMD_51,TX_E_MG_CMD_52,TX_E_MG_CMD_53,TX_E_MG_CMD_54,TX_E_MG_CMD_55,TX_E_MG_CMD_56,TX_E_MG_CMD_57,TX_E_MG_CMD_58,TX_E_MG_CMD_59,TX_E_MG_CMD_60,TX_E_MG_CMD_61,TX_E_MG_CMD_62,TX_E_MG_CMD_63,TX_E_MG_CMD_64,TX_E_MG_CMD_65,TX_E_MG_CMD_66,TX_E_UW_CMD_67,TX_E_UW_CMD_68,TX_E_UW_CMD_69,TX_E_UW_CMD_70,TX_E_UW_CMD_71,TX_E_UW_CMD_72,TX_E_UW_CMD_73,TX_E_UW_CMD_74,TX_E_UW_CMD_75,TX_E_UW_CMD_76,TX_E_UW_CMD_77,TX_E_UW_CMD_78,TX_E_UW_CMD_79,TX_E_UW_CMD_80,TX_E_UW_CMD_81,TX_E_UW_CMD_82,TX_E_UW_CMD_83,TX_E_UW_CMD_84,TX_E_UW_CMD_85,TX_E_UW_CMD_86,TX_E_UW_CMD_87,TX_E_UW_CMD_88,TX_E_UW_CMD_89,TX_E_UW_CMD_90,TX_E_RT_CMD_91,TX_E_RT_CMD_92,TX_E_RT_CMD_93,TX_E_RT_CMD_94,TX_E_RT_CMD_95,TX_E_RT_CMD_96,TX_E_RT_CMD_97,TX_E_RT_CMD_98,TX_E_RT_CMD_99,TX_E_RT_CMD_100,TX_E_RT_CMD_101,TX_E_RT_CMD_102,TX_E_RT_CMD_103,TX_E_RT_CMD_104,TX_E_RT_CMD_105,TX_E_HZ_CMD_106,TX_E_HZ_CMD_107,TX_E_HZ_CMD_108,TX_E_HZ_CMD_109,TX_E_HZ_CMD_110,TX_E_HZ_CMD_111,TX_E_HZ_CMD_112,TX_E_HZ_CMD_113,TX_E_HZ_CMD_114,TX_E_HZ_CMD_115,TX_E_HZ_CMD_116,TX_E_HZ_CMD_117,TX_E_HZ_CMD_118,TX_E_HZ_CMD_119,TX_E_HZ_CMD_120,TX_E_HZ_CMD_121,TX_E_CV_CMD_122,TX_E_CV_CMD_123,TX_E_CV_CMD_124,TX_E_CV_CMD_125,TX_E_CV_CMD_126,TX_E_CV_CMD_127,TX_E_CV_CMD_128};
     return command<sizeof names/sizeof names[0]&&creatures_ability(command)?names[command]:TX_E_COMMAND_OLD;
 }
-static const u8 *portrait(unsigned form){const u8*p=underwater_creature_art_portrait(form);if(p)return p;p=magma_creature_art_portrait(form);if(p)return p;p=southern_creature_art_portrait(form);if(p)return p;p=northern_creature_art_portrait(form);if(p)return p;p=evolution_art_portrait(form);return p?p:regional_creature_art_portrait(form);}
+static const u8 *portrait(unsigned form){const u8*p;if(form>=121&&form<=128)return covenants_creature_art_portrait(form);if(form>=105&&form<=120)return horizons_creature_art_portrait(form);p=return_creature_art_portrait(form);if(p)return p;p=underwater_creature_art_portrait(form);if(p)return p;p=magma_creature_art_portrait(form);if(p)return p;p=southern_creature_art_portrait(form);if(p)return p;p=northern_creature_art_portrait(form);if(p)return p;p=evolution_art_portrait(form);return p?p:regional_creature_art_portrait(form);}
 static void draw_form(unsigned form,int x,int y){
     const u8*p=portrait(form);
-    if(p)sprite(p,x,y,32,32,0);
+    /* Original indexed anatomy stays intact, including ink-colored pixels.
+     * Only the eight new portraits need a light matte against this dark card. */
+    if(p){if(form>=121&&form<=128)rect(x,y,32,32,PAL_GOLD4);sprite(p,x,y,32,32,0);}
     else{p=companion_form_pixels(form,0,0);if(p)sprite(p,x+8,y+8,16,16,0);}
 }
-void progression_draw_tab(void){
-    CreatureInstance*c=progression_selected();const CreatureForm*f;
-    static const int phases[]={TX_E_WOOD,TX_E_FIRE,TX_E_EARTH,TX_E_METAL,TX_E_WATER};
-    unsigned reason;
-    box(8,31,224,122);centered(TX_E_GROWTH,34,GOLD);
-    if(!c){centered(TX_E_NO_MEMBER,87,CREAM);return;}
-    f=creatures_form(c->form_id);draw_form(c->form_id,18,56);
-    text(progression_name_id(c->form_id),59,53,CREAM);
-    if(f->phase<CREATURE_PHASE_COUNT)text(phases[f->phase],59,70,TEAL);
-    text(f->polarity==CREATURE_YIN?TX_E_YIN:TX_E_YANG,95,70,GOLD);
-    text(TX_E_LEVEL,131,70,CREAM);number(c->level,190,72);
-    text(TX_E_BOND,18,92,CREAM);number(c->bond,60,94);
-    rect(90,97,112,4,INK);rect(90,97,c->bond,4,TEAL);
-    reason=creatures_can_evolve(c,progression_evolution_context(),progression_is_sanctuary());
-    centered(reason==CREATURE_EVOLVE_TRIAL?wish_id(c->form_id):reason_id(reason,c->form_id),107,GOLD);
-    centered(command_id(progression_command()),123,CREAM);centered(TX_E_KEYS,138,TEAL);
+/* Browse is a preview. Only A commits the visible command or evolution. */
+int progression_menu_row,progression_menu_detail;
+unsigned progression_menu_command;
+void progression_menu_reset(void){progression_menu_row=progression_menu_detail=0;companion_guide_page=0;progression_menu_command=progression_command();progression_revision++;}
+int progression_menu_back(void){if(!progression_menu_detail)return 0;progression_menu_detail=0;progression_revision++;return 1;}
+static void command_candidate(CreatureInstance*c,int delta){
+ const CreatureForm*f=creatures_form(c->form_id);unsigned index=0,i;
+ if(!f||!f->learnset_count||f->learnset_offset+f->learnset_count>CREATURE_LEARNSET_COUNT)return;
+ for(i=0;i<f->learnset_count;i++)if(creature_learnsets[f->learnset_offset+i].ability_id==progression_menu_command){index=i;break;}
+ for(i=0;i<f->learnset_count;i++){unsigned next;index=delta>0?(index+1==f->learnset_count?0:index+1):(index?index-1:(unsigned)f->learnset_count-1);next=creature_learnsets[f->learnset_offset+index].ability_id;if(creatures_command_learned(c->form_id,c->level,next)){progression_menu_command=next;progression_revision++;return;}}
 }
-/* Cycle actual learned commands. If the next command is already equipped in
- * the other slot, select it rather than creating an invalid duplicate. */
-static int cycle_command(CreatureInstance*c){
-    const CreatureForm*f=creatures_form(c->form_id);unsigned current=progression_command(),index=0,i;
-    if(!f||f->learnset_offset+f->learnset_count>CREATURE_LEARNSET_COUNT||c->selected_command>1)return 0;
-    for(i=0;i<f->learnset_count;i++)if(creature_learnsets[f->learnset_offset+i].ability_id==current){index=i;break;}
-    for(i=1;i<=f->learnset_count;i++){
-        unsigned next=creature_learnsets[f->learnset_offset+(index+i)%f->learnset_count].ability_id;
-        if(next==current||!creatures_command_learned(c->form_id,c->level,next))continue;
-        if(c->equipped[c->selected_command^1]==next)return creatures_select_command(c,c->selected_command^1);
-        return creatures_equip(c,c->selected_command,next);
-    }
-    return 0;
+static int choose_command(CreatureInstance*c){unsigned next=progression_menu_command;
+ if(next==progression_command()||!creatures_command_learned(c->form_id,c->level,next)||c->selected_command>1)return 0;
+ if(c->equipped[c->selected_command^1]==next)return creatures_select_command(c,c->selected_command^1);
+ return creatures_equip(c,c->selected_command,next);
+}
+void progression_draw_tab(void){CreatureInstance*c=progression_selected();unsigned reason;
+ if(progression_menu_detail){companion_guide_draw(c,progression_menu_command,COMPANION_GUIDE_GROWTH);return;}
+ box(8,31,224,123);centered(TX_E_GROWTH,33,GOLD);
+ if(!c){centered(TX_E_NO_MEMBER,87,CREAM);centered(TX_PF_BACK_CLOSE,138,TEAL);return;}
+ centered(progression_name_id(c->form_id),51,CREAM);
+ text(TX_E_LEVEL,59,69,CREAM);number(c->level,101,71);text(TX_E_BOND,135,69,CREAM);number(c->bond,177,71);
+ reason=creatures_can_evolve(c,progression_evolution_context(),progression_is_sanctuary());
+ rect(14,progression_menu_row?105:87,212,17,PAL_STONE2);centered(progression_command_name_id(progression_menu_command),88,progression_menu_row?CREAM:GOLD);
+ if(progression_menu_command==progression_command())rect(216,94,3,3,TEAL);
+ text(TX_PF_EVOLVE,21,105,reason==CREATURE_EVOLVE_READY?GOLD:PAL_SLATE);
+ centered(reason==CREATURE_EVOLVE_TRIAL?wish_id(c->form_id):reason_id(reason,c->form_id),121,CREAM);companion_guide_center(CG_GROWTH_KEYS,138,TEAL);
 }
 #include "progression_evolution_job.inc"
 int progression_menu_input(int pressed){
-    CreatureInstance*c;if(journal_tab!=3)return 0;c=progression_selected();if(!c)return 0;
-    if(pressed&256){if(cycle_command(c)){progression_selection_changed();progression_revision++;save_game();}return 1;}
-    if(pressed&4){
+    CreatureInstance*c;int direction=pressed&240;
+    if(journal_tab!=3)return 0;if(pressed&(2|8))return 0;c=progression_selected();if(!c)return 1;
+    if(pressed&4)return 0;
+    if(progression_menu_detail){
+        if(direction==16||direction==32){command_candidate(c,direction==16?1:-1);return 1;}
+        if(direction==64||direction==128){companion_guide_page^=1;progression_revision++;return 1;}
+        if(direction)return 1;
+        if(pressed&1){if(choose_command(c)){progression_selection_changed();save_game();}progression_menu_detail=0;progression_revision++;return 1;}
+        return 0;
+    }
+    if(direction==64||direction==128){progression_menu_row^=1;progression_revision++;return 1;}
+    if(direction){if(!progression_menu_row&&(direction==16||direction==32))command_candidate(c,direction==16?1:-1);return 1;}
+    if(!(pressed&1))return 0;
+    if(!progression_menu_row){progression_menu_detail=1;companion_guide_page=0;progression_revision++;return 1;}
+    {
         unsigned count=creatures_evolution_count(c->form_id),i;
         if(!count||count>2){toast(reason_id(count?CREATURE_EVOLVE_INVALID:CREATURE_EVOLVE_NO_EDGE,c->form_id));return 1;}
         progression_evolution_cancel();
@@ -292,6 +366,7 @@ int progression_menu_input(int pressed){
         evolution_choice_refresh();
         if(count<2&&progression_evolution_reason!=CREATURE_EVOLVE_READY){toast(reason_id(progression_evolution_reason,c->form_id));return 1;}
         game_state=EVOLVE_CONFIRM;
+        evolution_job.a_latched=1;
         if(evolution_job.reasons[0]==CREATURE_EVOLVE_READY||(count==2&&evolution_job.reasons[1]==CREATURE_EVOLVE_READY))evolution_prepare(0);
         else progression_revision++;
         return 1;
@@ -299,28 +374,29 @@ int progression_menu_input(int pressed){
     return 0;
 }
 void progression_draw_confirm(void){
-    unsigned i;
-    if(progression_evolution_count<2){
-        box(12,42,216,105);centered(TX_E_CONFIRM,51,GOLD);
-        if(progression_evolution_busy())centered(TX_UW_PREPARING,87,CREAM);
-        else{centered(TX_E_KEEP_POWER,73,CREAM);centered(TX_E_CHOICE,95,CREAM);}
-        centered(TX_E_CONFIRM_KEYS,124,TEAL);return;
-    }
-    box(10,37,220,116);centered(TX_E_BRANCH,42,GOLD);
-    for(i=0;i<2;i++){
-        const CreatureEvolution*e=creatures_evolution_at(progression_evolution_source_form,i);
-        int x=18+(int)i*108,col=i==progression_evolution_choice?GOLD:TEAL;
-        /* Outer panel already filled these card interiors with UI_BG. */
-        rect(x,61,1,54,PAL_GOLD2);rect(x+95,61,1,54,PAL_GOLD2);rect(x,61,96,2,col);rect(x,113,96,2,col);
-        if(e){int name=progression_name_id(e->to);draw_form(e->to,x+32,80);text(name,x+(96-ui_texts[name].width)/2,63,CREAM);}
-    }
-    centered(progression_evolution_busy()?TX_UW_PREPARING:reason_id(progression_evolution_reason,progression_evolution_source_form),115,GOLD);
-    centered(TX_E_BRANCH_KEYS,136,TEAL);
+    const CreatureForm*f=creatures_form(progression_evolution_target);
+    box(8,31,224,123);
+    if(!f){centered(TX_E_NO_MEMBER,87,CREAM);centered(TX_E_CONFIRM_KEYS,138,TEAL);return;}
+    /* One full-width candidate avoids truncating either irreversible branch.
+     * Only drawing changes: the existing frozen transaction owns every input. */
+    centered(progression_name_id(f->id),33,GOLD);
+    companion_guide_axes(f->id,f->polarity,49);
+    centered(progression_command_name_id(f->signature_ability),65,GOLD);
+    companion_guide_combat(f->signature_ability,81);
+    companion_guide_center(CG_EVOLVE,109,TEAL);
+    centered(progression_evolution_busy()?TX_UW_PREPARING:reason_id(progression_evolution_reason,progression_evolution_source_form),123,CREAM);
+    companion_guide_center(progression_evolution_count>1?CG_EVOLVE_KEYS:CG_EVOLVE_SINGLE_KEYS,138,TEAL);
 }
 void progression_confirm_input(int pressed){
     unsigned fresh_a;
     if(game_state!=EVOLVE_CONFIRM){progression_evolution_cancel();return;}
-    if(pressed&(2|4|8)){progression_evolution_cancel();game_state=PAUSE;progression_revision++;return;}
+    /* The previous update committed the exact individual. Cancellation is
+     * no longer an option; publish once on this cheaper update. */
+    if(progression_evolution_handoff()){
+        evolution_release();progression_refresh();evolution_tick=0;game_state=EVOLVE_ANIM;sfx(2);return;
+    }
+    if(pressed&(2|8)){progression_evolution_cancel();game_state=(pressed&8)?PLAY:PAUSE;progression_revision++;return;}
+    if(pressed&4)return;
     if(!evolution_participant_matches()||!evolution_request_matches()){evolution_source_changed();return;}
     fresh_a=(pressed&1)&&!evolution_job.a_latched;
     evolution_job.a_latched=(unsigned char)((pressed&1)!=0);
@@ -363,4 +439,4 @@ void progression_draw_evolution(void){
     centered(TX_E_BOND_LIGHT,44,GOLD);draw_form(form,104,72);
     centered(evolution_tick<36?TX_E_BOND_LIGHT:progression_name_id(form),113,CREAM);
 }
-void progression_evolution_tick(void){evolution_tick++;if(evolution_tick==36)sfx(4);progression_revision++;if(evolution_tick>=80){game_state=PAUSE;save_game();}}
+void progression_evolution_tick(void){evolution_tick++;if(evolution_tick==36)sfx(4);progression_revision++;if(evolution_tick>=80){game_state=PAUSE;progression_menu_reset();save_game();}}

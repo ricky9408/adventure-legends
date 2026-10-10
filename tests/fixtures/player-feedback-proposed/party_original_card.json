@@ -1,0 +1,7 @@
+{
+  "source_rom_sha256": "f00b6d80787ca8d8f988f697b451de0a79b8708430a00de2310064e47745be77",
+  "source_quickparty_sha256": "d00fb54029af2ddf220423d34e93ee75726179d0e968d9a4b7a4875b810c3936",
+  "fixture_sha256": "48e4f2a906aefd50faa0f62be900ea8e792f211ea88d7e6566ec47ab5e6d7666",
+  "transformation": "Exact R4 static arrow/card function bodies; identifiers renamed original_arrow/original_card only",
+  "scope": "Raster oracle only; input/ownership logic is tested separately"
+}

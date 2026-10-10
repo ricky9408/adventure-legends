@@ -1,0 +1,530 @@
+{
+  "commands": [
+    {
+      "id": 1,
+      "combat": [
+        "火の弾をまっすぐ飛ばす",
+        "遠くの敵をねらう"
+      ],
+      "field": "印の火種をともす",
+      "source": [
+        "src/game.c:681",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 75 active-play updates. src/game.c:681 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 2,
+      "combat": [
+        "周囲の敵を押し返す",
+        "体力１回復・回復は別待ち"
+      ],
+      "field": "印の根や橋を育てる",
+      "source": [
+        "src/game.c:681",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 75 active-play updates. src/game.c:681 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. HP healing separately requires missing HP and heal_cd==0, heals16 Q4, then sets heal_cd=360 (game.c:ability_apply). No CreatureForm.stats value is used."
+    },
+    {
+      "id": 3,
+      "combat": [
+        "正面の敵弾を消す",
+        "敵のため攻撃を止める"
+      ],
+      "field": "印の風車や帆を動かす",
+      "source": [
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/game.c:681",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 75 active-play updates. src/game.c:681 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 4,
+      "combat": [
+        "１回防ぎ近くの敵を攻撃",
+        "近くの敵のためを止める"
+      ],
+      "field": "印の重しや岩に働く",
+      "source": [
+        "src/game.c:678",
+        "src/game.c:663",
+        "src/region_game.c:226",
+        "src/game.c:681",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 75 active-play updates. src/game.c:681 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 5,
+      "combat": [
+        "正面に３つの炎を順に出す",
+        "同じ敵には１回だけ当たる"
+      ],
+      "field": "印の火種をともす",
+      "source": [
+        "src/advanced_powers.c:23",
+        "src/advanced_powers.c:28",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 105 active-play updates. src/advanced_powers.c:23 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 6,
+      "combat": [
+        "近くの敵の足を止める",
+        "置いた場所で敵弾を１発防ぐ"
+      ],
+      "field": "印の根や橋を育てる",
+      "source": [
+        "src/advanced_powers.c:23",
+        "src/advanced_powers.c:28",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/advanced_powers.c:23 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 7,
+      "combat": [
+        "正面の敵弾を３発まで返す",
+        "返した弾は敵に当たる"
+      ],
+      "field": "印の風車や帆を動かす",
+      "source": [
+        "src/advanced_powers.c:23",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 105 active-play updates. src/advanced_powers.c:23 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 8,
+      "combat": [
+        "２回分の守りをまとう",
+        "守り中は歩みが遅くなる"
+      ],
+      "field": "印の重しや岩に働く",
+      "source": [
+        "src/advanced_powers.c:23",
+        "src/game.c:663",
+        "src/game.c:823",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/advanced_powers.c:23 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 9,
+      "combat": [
+        "近くの敵を水で攻撃",
+        "当たると動きも遅くする"
+      ],
+      "field": "印の水場に水を送る",
+      "source": [
+        "src/regional_powers.c:16",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/regional_powers.c:16 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 10,
+      "combat": [
+        "広めの周囲を水で攻撃",
+        "当たると動きも遅くする"
+      ],
+      "field": "印の水場をつなぐ",
+      "source": [
+        "src/regional_powers.c:16",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/regional_powers.c:16 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 11,
+      "combat": [
+        "正面へ針を飛ばして戻す",
+        "最初の敵を攻撃し構えを止める"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/regional_powers.c:16",
+        "src/regional_powers.c:32",
+        "src/game.c:678",
+        "src/region_game.c:226",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/regional_powers.c:16 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 12,
+      "combat": [
+        "敵弾を３発まで防ぐ",
+        "残るしずくが時間後に飛ぶ"
+      ],
+      "field": "試しの印にしずくを重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_powers.c:518",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 240 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 13,
+      "combat": [
+        "細いつるで正面の敵を攻撃",
+        "１体を少し引き寄せる"
+      ],
+      "field": "印の荷を引き寄せる",
+      "source": [
+        "src/northern_powers.c:181",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 14,
+      "combat": [
+        "前方に横向きの糸を張る",
+        "触れた敵を１回ずつ攻撃"
+      ],
+      "field": "印の荷を引き寄せる",
+      "source": [
+        "src/northern_powers.c:264",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 15,
+      "combat": [
+        "正面に熱を置いて待つ",
+        "少し後にその場で破裂する"
+      ],
+      "field": "印の器に熱をためる",
+      "source": [
+        "src/northern_powers.c:355",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 16,
+      "combat": [
+        "熱を前方へ運んで攻撃",
+        "移動先で少し後に破裂する"
+      ],
+      "field": "印の器へ熱を移す",
+      "source": [
+        "src/northern_powers.c:273",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 17,
+      "combat": [
+        "短い波で正面を攻撃",
+        "当たった敵を押し返す"
+      ],
+      "field": "印の荷を水に浮かす",
+      "source": [
+        "src/northern_powers.c:194",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 18,
+      "combat": [
+        "前に進んで横へ曲がる波",
+        "曲がり道の敵を攻撃"
+      ],
+      "field": "印の浮き荷を動かす",
+      "source": [
+        "src/northern_powers.c:289",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 19,
+      "combat": [
+        "前方へ時間差の一撃",
+        "印の場所へ敵を誘おう"
+      ],
+      "field": "印の重しを押さえる",
+      "source": [
+        "src/northern_powers.c:355",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 20,
+      "combat": [
+        "置いた重しで敵弾を１発消す",
+        "受けると周囲に衝撃を出す"
+      ],
+      "field": "印の重しを押さえる",
+      "source": [
+        "src/northern_powers.c:333",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 21,
+      "combat": [
+        "向かってくる敵弾を１発返す",
+        "弾は横へ直角に曲がる"
+      ],
+      "field": "印の線路の向きを変える",
+      "source": [
+        "src/northern_powers.c:318",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 22,
+      "combat": [
+        "正面に弾を曲げる門を置く",
+        "敵弾を２発まで横へ返す"
+      ],
+      "field": "印の線路の向きを変える",
+      "source": [
+        "src/northern_powers.c:318",
+        "src/north_game.c:156",
+        "src/northern_powers.c:234",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/northern_powers.c:234 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 23,
+      "combat": [
+        "仲間が横へ動いて斬る",
+        "近い横一列の敵をねらう"
+      ],
+      "field": "印の根を育てる",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 24,
+      "combat": [
+        "曲がる種の弾を飛ばす",
+        "２本の道筋を順に進む"
+      ],
+      "field": "印の根や橋を育てる",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:393",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 25,
+      "combat": [
+        "広がる土の一撃を前へ出す",
+        "当たった敵を押し返す"
+      ],
+      "field": "印の井戸のふたに働く",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 26,
+      "combat": [
+        "歩いてくる敵を横へ誘導",
+        "少し後に斜めの線で攻撃"
+      ],
+      "field": "印の井戸のふたに働く",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:310",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 27,
+      "combat": [
+        "水の弾が敵に当たると分かれる",
+        "分かれた弾は弱い一撃"
+      ],
+      "field": "印の光の向きを変える",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:393",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 28,
+      "combat": [
+        "正面の敵弾を１発消す",
+        "受けると端で水がはじける"
+      ],
+      "field": "印の光の向きを変える",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:380",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 29,
+      "combat": [
+        "印を付けた敵のためを延ばす",
+        "ためが始まると遅れて攻撃"
+      ],
+      "field": "印の器に熱をためる",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:305",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 30,
+      "combat": [
+        "広がる炎の輪で攻撃",
+        "輪の中心には当たらない"
+      ],
+      "field": "印の器に熱をためる",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 31,
+      "combat": [
+        "片側の近接攻撃を１回防ぐ",
+        "防いだ相手へすぐ反撃"
+      ],
+      "field": "印の重しを押さえる",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:289",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 32,
+      "combat": [
+        "選んだ横側で１回防ぐ",
+        "防ぐと横へ波を出す"
+      ],
+      "field": "印の重しを押さえる",
+      "source": [
+        "src/southern_powers.c:438",
+        "src/southern_powers.c:466",
+        "src/southern_powers.c:289",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/southern_powers.c:238",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/southern_powers.c:238 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    }
+  ]
+}

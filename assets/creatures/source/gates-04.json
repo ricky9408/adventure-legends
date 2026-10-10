@@ -1,0 +1,11 @@
+[
+  {"id":"underwater_ready","kind":"story","requires":["underwater_q38","underwater_q39"]},
+  {"id":"underwater_source_17","kind":"side_quest","requires":["underwater_q38"]},
+  {"id":"underwater_source_18","kind":"side_quest","requires":["underwater_q39"]},
+  {"id":"underwater_source_19","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_20","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_21","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_22","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_23","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_24","kind":"side_quest","requires":["underwater_arrival"]}
+]

@@ -1,0 +1,441 @@
+{
+  "authorship": "Original code-native motifs and exact collision particle diamonds; no external or extracted assets",
+  "commands": [
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "tile_lease": "existing PIN256B + WATER_DROP64B",
+  "source_sha256": "f3bb0847e08482f4faec2e3f1a1cd78d4b9882689d5d4ed4fee704c78db3c377",
+  "rows": [
+    {
+      "command": 91,
+      "motif_sha256": "ae735204d29f471d6963c1acacedd802e456093a6dee0f444ea34fe5d766ebd1",
+      "particle_sha256": [
+        "983e333d8d727b6e74d9cf5937ed30ed0a82e1f7ed33732697eac5cd1c2a2b7d",
+        "e1243f52cc5455837d650481300abfe6b4621e352d696d75c27e6b40569b592e"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          11,
+          12,
+          11
+        ],
+        [
+          3,
+          11,
+          3,
+          6
+        ],
+        [
+          12,
+          11,
+          12,
+          6
+        ],
+        [
+          6,
+          5,
+          9,
+          5
+        ]
+      ]
+    },
+    {
+      "command": 92,
+      "motif_sha256": "beb481ddf65aea878383fc2fd3c8aa21a453c85c21350f415c586f0199cd7464",
+      "particle_sha256": [
+        "8de3b6319d578910dfe8bc6629b206683402e932c5a68143c8ba80c6683b114b",
+        "43ab81ab9ec8f66821fddf285b89b2a974cab846c1531d26ad2719197f951310"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          4,
+          12,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          12,
+          4
+        ],
+        [
+          12,
+          4,
+          12,
+          12
+        ]
+      ]
+    },
+    {
+      "command": 93,
+      "motif_sha256": "26183eda74af959f59c221e0a7544bfa1ba8ae0fefff6c7d886c0e5818f9f7ab",
+      "particle_sha256": [
+        "8de3b6319d578910dfe8bc6629b206683402e932c5a68143c8ba80c6683b114b",
+        "43ab81ab9ec8f66821fddf285b89b2a974cab846c1531d26ad2719197f951310"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          12,
+          11,
+          12
+        ],
+        [
+          11,
+          12,
+          11,
+          4
+        ],
+        [
+          11,
+          4,
+          7,
+          4
+        ]
+      ]
+    },
+    {
+      "command": 94,
+      "motif_sha256": "1c941e1e1827c88542a1a6d1759a06b77b8c2a5a666e1d5a4885be6366ce5de7",
+      "particle_sha256": [
+        "1e3d1a0bb27daaefff5682ba72e45e7615cc4aa28fdc5f3a4ba613eb6aa37f89",
+        "6ccc1d2a7e40d1eb5df94efc61af77be362d732aa9304be90faab9e68553b3de"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          10,
+          12,
+          10
+        ],
+        [
+          7,
+          10,
+          7,
+          5
+        ],
+        [
+          5,
+          7,
+          9,
+          7
+        ]
+      ]
+    },
+    {
+      "command": 95,
+      "motif_sha256": "69f3e935c91babf813737607b82bc3d203fe36a67f3fb90b509b3f4f08d824a6",
+      "particle_sha256": [
+        "7f08c6484ff4ff81a914a947de46b48bc87a2505df4291fd3b0d58fde60b2f24",
+        "0e7ec260f7d9293963b3421f94aba86d353577aa351d44316db55880c130563a"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          4,
+          11,
+          4
+        ],
+        [
+          11,
+          4,
+          11,
+          11
+        ],
+        [
+          11,
+          11,
+          7,
+          11
+        ]
+      ]
+    },
+    {
+      "command": 96,
+      "motif_sha256": "82420336d9775852b2b34494c9555ef065ae006dc69a000c0a93b52f5dcac1be",
+      "particle_sha256": [
+        "5a37e6706dc572d999b6d01ffd5d26d2fc84e8186051e5b4e431657e61dd05b7",
+        "7df029b7154831eb1625ebe3034daa37af5118cba018a959c6185ad7e4ff980e"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          4,
+          3,
+          4,
+          12
+        ],
+        [
+          4,
+          7,
+          9,
+          7
+        ],
+        [
+          9,
+          7,
+          9,
+          5
+        ]
+      ]
+    },
+    {
+      "command": 97,
+      "motif_sha256": "d0617b40fbb5139fefd227c5858f5fa29ee39bfbd58bf9d33278ba714cdf9315",
+      "particle_sha256": [
+        "5a37e6706dc572d999b6d01ffd5d26d2fc84e8186051e5b4e431657e61dd05b7",
+        "7df029b7154831eb1625ebe3034daa37af5118cba018a959c6185ad7e4ff980e"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          3,
+          3,
+          12
+        ],
+        [
+          12,
+          3,
+          12,
+          12
+        ]
+      ]
+    },
+    {
+      "command": 98,
+      "motif_sha256": "6e7eca20f448ce2cffdc1c715c6e35e28dc73dcb4188afc3b13b3ceb6e6bf87b",
+      "particle_sha256": [
+        "8de3b6319d578910dfe8bc6629b206683402e932c5a68143c8ba80c6683b114b",
+        "43ab81ab9ec8f66821fddf285b89b2a974cab846c1531d26ad2719197f951310"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          2,
+          5,
+          5,
+          8
+        ],
+        [
+          5,
+          8,
+          10,
+          8
+        ],
+        [
+          10,
+          8,
+          13,
+          4
+        ]
+      ]
+    },
+    {
+      "command": 99,
+      "motif_sha256": "1ef4782c5cff0ed1c1728ab4a1b784e1966a71099db4f3101906404cb6615f13",
+      "particle_sha256": [
+        "983e333d8d727b6e74d9cf5937ed30ed0a82e1f7ed33732697eac5cd1c2a2b7d",
+        "e1243f52cc5455837d650481300abfe6b4621e352d696d75c27e6b40569b592e"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          4,
+          3,
+          10,
+          3
+        ],
+        [
+          10,
+          3,
+          13,
+          7
+        ],
+        [
+          13,
+          7,
+          10,
+          11
+        ],
+        [
+          10,
+          11,
+          4,
+          11
+        ]
+      ]
+    },
+    {
+      "command": 100,
+      "motif_sha256": "d237240306ea6074233b29ebbec24966832685c7805e3a8062d6de8b5604786c",
+      "particle_sha256": [
+        "8de3b6319d578910dfe8bc6629b206683402e932c5a68143c8ba80c6683b114b",
+        "43ab81ab9ec8f66821fddf285b89b2a974cab846c1531d26ad2719197f951310"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          2,
+          11,
+          8,
+          11
+        ],
+        [
+          8,
+          11,
+          8,
+          4
+        ],
+        [
+          8,
+          4,
+          12,
+          4
+        ]
+      ]
+    },
+    {
+      "command": 101,
+      "motif_sha256": "e8fd08ef783b7f95dd333cfb5b989c5e38053f9ed0af3c55af58b734a5d5e0d8",
+      "particle_sha256": [
+        "1e3d1a0bb27daaefff5682ba72e45e7615cc4aa28fdc5f3a4ba613eb6aa37f89",
+        "6ccc1d2a7e40d1eb5df94efc61af77be362d732aa9304be90faab9e68553b3de"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          3,
+          3,
+          12
+        ],
+        [
+          11,
+          5,
+          11,
+          12
+        ]
+      ]
+    },
+    {
+      "command": 102,
+      "motif_sha256": "b3258ba229806506b9c468eee6a68c9db2c7e7a666e7fd9589a8e46ef4923e64",
+      "particle_sha256": [
+        "5a37e6706dc572d999b6d01ffd5d26d2fc84e8186051e5b4e431657e61dd05b7",
+        "7df029b7154831eb1625ebe3034daa37af5118cba018a959c6185ad7e4ff980e"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          4,
+          3,
+          4,
+          12
+        ],
+        [
+          4,
+          8,
+          11,
+          8
+        ]
+      ]
+    },
+    {
+      "command": 103,
+      "motif_sha256": "2089c00e54e1a419b23b74ea852f0fbba34d2df067d10b048b93b3c66eb71128",
+      "particle_sha256": [
+        "5a37e6706dc572d999b6d01ffd5d26d2fc84e8186051e5b4e431657e61dd05b7",
+        "7df029b7154831eb1625ebe3034daa37af5118cba018a959c6185ad7e4ff980e"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          12,
+          12,
+          7
+        ],
+        [
+          12,
+          7,
+          3,
+          2
+        ]
+      ]
+    },
+    {
+      "command": 104,
+      "motif_sha256": "cb785b98d8c1d3f11e77df59f51025b04d50e19bbaec223a2acf673eeae879c7",
+      "particle_sha256": [
+        "7f08c6484ff4ff81a914a947de46b48bc87a2505df4291fd3b0d58fde60b2f24",
+        "0e7ec260f7d9293963b3421f94aba86d353577aa351d44316db55880c130563a"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          3,
+          3,
+          3,
+          9
+        ],
+        [
+          3,
+          9,
+          12,
+          9
+        ]
+      ]
+    },
+    {
+      "command": 105,
+      "motif_sha256": "f536096939152079245d5ea44dd231853a998382ef8572c29871d8d7ba9786da",
+      "particle_sha256": [
+        "7f08c6484ff4ff81a914a947de46b48bc87a2505df4291fd3b0d58fde60b2f24",
+        "0e7ec260f7d9293963b3421f94aba86d353577aa351d44316db55880c130563a"
+      ],
+      "particle_mask": "abs(x-3)+abs(y-3)<=2",
+      "motif_segments": [
+        [
+          2,
+          3,
+          12,
+          7
+        ],
+        [
+          2,
+          12,
+          7,
+          12
+        ],
+        [
+          7,
+          12,
+          12,
+          7
+        ]
+      ]
+    }
+  ]
+}

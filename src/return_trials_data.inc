@@ -1,0 +1,19 @@
+/* Authored local workspaces, no central projection and no collision override. */
+typedef struct {unsigned char area,form,family,key,command[2],count;short lectern[2],manual[2],target[3][2],walk[2];} TrialDef;
+static const TrialDef trials[13]={
+ {54,2,1,2,{1,5},2,{48,144},{96,144},{{64,80},{128,112},{0,0}},{96,112}},
+ {54,5,2,2,{2,6},3,{432,144},{368,144},{{336,72},{416,104},{376,112}},{416,160}},
+ {57,8,3,2,{3,7},2,{48,120},{128,48},{{80,80},{176,80},{0,0}},{128,112}},
+ {61,11,4,2,{4,8},2,{208,112},{120,80},{{64,80},{176,80},{0,0}},{120,104}},
+ {56,14,5,2,{9,10},2,{48,240},{80,176},{{80,80},{80,208},{0,0}},{120,240}},
+ {55,16,6,1,{11,0},3,{208,112},{120,108},{{64,72},{120,72},{176,72}},{208,96}},
+ {60,17,6,2,{11,96},3,{40,108},{120,80},{{64,56},{176,56},{120,56}},{176,108}},
+ {57,20,7,2,{13,14},2,{448,144},{368,112},{{320,64},{416,80},{0,0}},{416,112}},
+ {57,23,8,2,{15,16},3,{48,264},{128,264},{{80,208},{176,240},{208,192}},{112,240}},
+ {58,26,9,2,{23,24},2,{448,176},{368,144},{{320,80},{416,112},{0,0}},{416,160}},
+ {58,29,10,2,{25,26},2,{48,264},{128,192},{{80,224},{176,224},{0,0}},{192,256}},
+ {56,101,39,1,{102,0},3,{448,96},{368,112},{{336,80},{416,144},{368,240}},{416,208}},
+ {59,103,40,1,{104,0},2,{208,112},{120,104},{{64,56},{192,56},{0,0}},{192,96}},
+};
+static const int trial_names[13]={TX_RT_TRIAL0,TX_RT_TRIAL1,TX_RT_TRIAL2,TX_RT_TRIAL3,TX_RT_TRIAL4,TX_RT_TRIAL5,TX_RT_TRIAL6,TX_RT_TRIAL7,TX_RT_TRIAL8,TX_RT_TRIAL9,TX_RT_TRIAL10,TX_RT_TRIAL11,TX_RT_TRIAL12};
+static const int trial_clues[13][2]={{TX_RT_TRIAL0A,TX_RT_TRIAL0B},{TX_RT_TRIAL1A,TX_RT_TRIAL1B},{TX_RT_TRIAL2A,TX_RT_TRIAL2B},{TX_RT_TRIAL3A,TX_RT_TRIAL3B},{TX_RT_TRIAL4A,TX_RT_TRIAL4B},{TX_RT_TRIAL5A,TX_RT_TRIAL5B},{TX_RT_TRIAL6A,TX_RT_TRIAL6B},{TX_RT_TRIAL7A,TX_RT_TRIAL7B},{TX_RT_TRIAL8A,TX_RT_TRIAL8B},{TX_RT_TRIAL9A,TX_RT_TRIAL9B},{TX_RT_TRIAL10A,TX_RT_TRIAL10B},{TX_RT_TRIAL11A,TX_RT_TRIAL11B},{TX_RT_TRIAL12A,TX_RT_TRIAL12B}};

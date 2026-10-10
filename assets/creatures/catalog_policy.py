@@ -113,3 +113,86 @@ TRIAL_POLICY.update({
 REVISION_POLICY[6] = {"forms":REVISION_POLICY[5]["forms"] + UNDERWATER_FORMS,
     "abilities":REVISION_POLICY[5]["abilities"] + list(range(67,91)),
     "edges":REVISION_POLICY[5]["edges"] + UNDERWATER_EDGES, "learns":142}
+
+# Reviewed Return I current-only append; revisions1-6 above remain frozen.
+RETURN_FORMS = [3, 6, 9, 12, 15, 17, 18, 21, 24, 27, 30, 101, 102, 103, 104]
+RETURN_EDGES = [[2, 3], [5, 6], [8, 9], [11, 12], [14, 15], [16, 17], [17, 18], [20, 21], [23, 24], [26, 27], [29, 30], [101, 102], [103, 104]]
+GATE_MASKS.update({'return_ready':4096, 'home_map_joined':8192})
+TRIAL_POLICY.update({
+    'return_two_waiting_hearths':('F001', 2, 1024, 7, (2,)),
+    'return_shelter_with_an_opening':('F002', 2, 1024, 7, (5,)),
+    'return_sail_stop':('F003', 2, 1024, 7, (8,)),
+    'return_walking_friend':('F004', 2, 1024, 7, (11,)),
+    'return_water_around_reeds':('F005', 2, 1024, 7, (14,)),
+    'return_quiet_beat':('F006', 1, 1024, 7, (16,)),
+    'return_bell_empty_middle':('F006', 2, 2048, 7, (17,)),
+    'return_load_nobody_drops':('F007', 2, 1024, 7, (20,)),
+    'return_last_shelter':('F008', 2, 1024, 7, (23,)),
+    'return_branch_air':('F009', 2, 1024, 7, (26,)),
+    'return_patient_spillway':('F010', 2, 1024, 7, (29,)),
+    'return_listen_without_pulling':('F039', 1, 1024, 7, (101,)),
+    'return_passenger_safe_landing':('F040', 1, 1024, 7, (103,)),
+})
+TRIAL_PREREQUISITES.update({
+    'return_two_waiting_hearths':1,
+    'return_shelter_with_an_opening':2,
+    'return_sail_stop':4,
+    'return_walking_friend':8,
+    'return_water_around_reeds':16,
+    'return_bell_empty_middle':1024,
+    'return_load_nobody_drops':32,
+    'return_last_shelter':64,
+    'return_branch_air':1,
+    'return_patient_spillway':1,
+})
+REVISION_POLICY[7] = {'forms':REVISION_POLICY[6]['forms'] + RETURN_FORMS,
+    'abilities':REVISION_POLICY[6]['abilities'] + list(range(91,106)),
+    'edges':REVISION_POLICY[6]['edges'] + RETURN_EDGES, 'learns':180}
+
+# Reviewed Shared Horizons append; revisions1-7 above remain frozen.
+HORIZONS_FORMS = list(range(105,121))
+HORIZONS_EDGES = [[105,106],[107,108],[109,110],[111,112]]
+# Command IDs and form IDs are separate namespaces. In particular command121
+# belongs to ordinary form120 while legendary form121 remains disabled.
+HORIZONS_SIGNATURES = {105:106,106:107,107:108,108:109,109:110,110:111,
+    111:112,112:113,113:114,114:115,115:116,116:117,117:118,118:119,
+    119:120,120:121}
+HORIZONS_INHERITED_COMMANDS = {106:106,108:108,110:110,112:112}
+GATE_MASKS.update({'horizons_ready':16384})
+TRIAL_POLICY.update({
+    'horizons_a_hem_with_an_opening':('F041', 1, 1024, 8, (105,)),
+    'horizons_a_warmth_that_can_breathe':('F042', 1, 1024, 8, (107,)),
+    'horizons_a_weight_with_a_way_back':('F043', 1, 1024, 8, (109,)),
+    'horizons_light_through_two_hands':('F044', 1, 1024, 8, (111,)),
+})
+REVISION_POLICY[8] = {'forms':REVISION_POLICY[7]['forms'] + HORIZONS_FORMS,
+    'abilities':REVISION_POLICY[7]['abilities'] + list(range(106,122)),
+    'edges':REVISION_POLICY[7]['edges'] + HORIZONS_EDGES, 'learns':200}
+
+# Current-only final chapter. No new capability, evolution or personal trial bit.
+COVENANT_FORMS = list(range(121,129))
+COVENANT_SIGNATURES = {121:12,122:122,123:123,124:124,125:125,126:126,127:127,128:128}
+COVENANT_SUPPORT_COMMANDS = [[106,108,110,102,104],[106,104],[108,102],
+    [110,106],[102,106],[106,112],[104,110],[108,102,110]]
+COVENANT_GATE_NAMES = ['stilltide_covenant','covenant_vowbough','covenant_kilnwhorl',
+    'covenant_cairnward','covenant_bellmantle','covenant_shadeweaver',
+    'covenant_tideplume','covenant_hearthmoth']
+REVISION_POLICY[9] = {'forms':REVISION_POLICY[8]['forms'] + COVENANT_FORMS,
+    'abilities':REVISION_POLICY[8]['abilities'] + [12] + list(range(122,129)),
+    'edges':REVISION_POLICY[8]['edges'][:], 'learns':209}
+
+# Canonical current-preservation pins captured before this append from the
+# accepted Shared Horizons C baseline. These are not a historical save reader.
+# Command12 and form121 preserve the entire disabled draft rows; only their
+# unimplemented gate/trial placeholder is superseded by schema3 covenant data.
+COVENANT_PRESERVATION_SHA256 = {
+    'forms': 'fd77eb542395d355cdae9d98dcaea107677c781472fdc095321972233f5597b0',
+    'abilities': '02049bdd048a00c09c0f73cfddfb5673d5a87f36dde333d8f0905ff398149cda',
+    'stilltide': '69567e7f808054bc5f035592d492dee805905bbe62bf99bd8f8a0752350a3a20',
+    'evolutions': '10e7dcf6792f6734a69fc7e75d0f20fa1d0eb35cb26484e52740528b48957eb0',
+    'trial_bindings': 'd80abdab83d0803e0a644d02ee108a581aafd74721ba80fb275cd59914d7d669',
+    'families': 'ef33a28486a49a02964f188dacaeb7454371b12b573e98568967887b39fcb48d',
+    'field_capabilities': '31645300160f1892d8d187c234d2bd165703194c796054b21433eb66d513c63c',
+    'gates': 'fabecdc2542dd097c3020e0ec09c316e6a4b4e93ee27221c7fcca36c5409618e',
+    'trials': '67f3925b725ada50b7724f2b58b3ab066545cd8f8bd11238a009f0e24d4550ab',
+}

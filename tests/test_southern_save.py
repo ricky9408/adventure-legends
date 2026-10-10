@@ -102,7 +102,7 @@ class SouthernSaveTests(base.Save5Tests):
         self.assertTrue(provenance['controller_only']);self.assertEqual(provenance['game_ram_writes'],0)
         self.put(data);s=self.load();self.assertEqual(bytes(self.sram),data)
         src=max((A,B),key=lambda o:int.from_bytes(data[o+8:o+12],'little'));dst=B if src==A else A
-        self.store(s);written=bytes(self.sram[dst:dst+SIZE]);self.assertEqual(written[12:14],b'\x06\0')
+        self.store(s);written=bytes(self.sram[dst:dst+SIZE]);self.assertEqual(written[12:14],b'\x08\0')
         self.assertEqual(written[32:],data[src+32:src+SIZE]);self.assertEqual(bytes(self.sram[src:src+SIZE]),data[src:src+SIZE])
         self.assertEqual(bytes(s.quests.region_flags[2:]),bytes(30))
 

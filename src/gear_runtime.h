@@ -2,6 +2,8 @@
 #define EMBERBOND_GEAR_RUNTIME_H
 #include "equipment.h"
 #include "weapon_actions.h"
+/* Gear8 plus earned Sky Feather8 and Caldera Bell4. */
+#define GAME_MAX_POWER_RECOVERY 20u
 extern EquipmentStats gear_stats;
 extern WeaponAttack weapon_action;
 extern WeaponArrow player_arrows[2];
@@ -11,6 +13,10 @@ extern int hero_hp_q4,enemy_hp_q4[6],boss_hp_q4;
 extern unsigned char enemy_phases[6],enemy_stagger_ticks[6];
 void game_combat_tick(void);
 void game_enemy_stagger(unsigned index,unsigned bonus);
+void game_gear_bonus_stats(EquipmentStats *stats);
+/* Only for the raw after-stats returned by a successful live equipment_equip.
+ * The caller owns validation; current passive bonuses are applied once here. */
+void game_gear_apply_stats(unsigned clamped_hp_q4,const EquipmentStats *fresh);
 void game_health_refresh(int fill);
 void game_health_fill(void);
 void game_health_heal(unsigned amount_q4);

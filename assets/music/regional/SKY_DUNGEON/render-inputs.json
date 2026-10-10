@@ -1,0 +1,87 @@
+{
+  "palette": [
+    {
+      "name": "airy high wind-flute",
+      "gain": 0.67,
+      "attack": 0.015,
+      "release": 0.105,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.025
+        ],
+        [
+          3,
+          0.09
+        ],
+        [
+          5,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 5.1,
+      "vibrato_cents": 3.5
+    },
+    {
+      "name": "light hollow sky bass",
+      "gain": 0.36,
+      "attack": 0.006,
+      "release": 0.085,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.06
+        ],
+        [
+          5,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "clear muted wind chimes",
+      "gain": 0.255,
+      "attack": 0.003,
+      "release": 0.07,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.16
+        ],
+        [
+          3,
+          0.045
+        ],
+        [
+          4,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "threads_above_the_clouds-gba-16384-s8.raw": "5b323743b5dc5113b2dface4eb673ebaefffbe7601f7e5c7f6ada90702e69ed2"
+  }
+}

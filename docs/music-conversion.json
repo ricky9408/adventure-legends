@@ -1,0 +1,163 @@
+[
+  {
+    "track": "HOME",
+    "samples": 907421,
+    "sample_rate": 16384,
+    "seconds": 55.38458251953125,
+    "pcm_sha256": "a9ada6ff0b3ef068dc8ab9bfabd02f69521c6ef252420157b9646636e98e4838"
+  },
+  {
+    "track": "RIVER",
+    "samples": 842605,
+    "sample_rate": 16384,
+    "seconds": 51.42852783203125,
+    "pcm_sha256": "ee6b2f03e6e985ad4348de3b03e2707ed862fafc7cce819908b9d9af6dcc4a81"
+  },
+  {
+    "track": "GROVE",
+    "samples": 907422,
+    "sample_rate": 16384,
+    "seconds": 55.3846435546875,
+    "pcm_sha256": "dda862c061f2fbaa90e46f8406a83f61928dca1dc95b78a599aa2e9f58407c12"
+  },
+  {
+    "track": "SKY_ROAD",
+    "samples": 677958,
+    "sample_rate": 16384,
+    "seconds": 41.3792724609375,
+    "pcm_sha256": "0fc1343e9d72b3b962fd076ed1cf634b35b388f132a17fe770524230956adb7a"
+  },
+  {
+    "track": "SKY_DUNGEON",
+    "samples": 709974,
+    "sample_rate": 16384,
+    "seconds": 43.3333740234375,
+    "pcm_sha256": "5b323743b5dc5113b2dface4eb673ebaefffbe7601f7e5c7f6ada90702e69ed2"
+  },
+  {
+    "track": "DUSK_ROAD",
+    "samples": 655360,
+    "sample_rate": 16384,
+    "seconds": 40.0,
+    "pcm_sha256": "233c3f31dadb6ac838c7ef56519f901797092d30ffb16cbccf1990d7cb3dba7b"
+  },
+  {
+    "track": "CORE",
+    "samples": 786432,
+    "sample_rate": 16384,
+    "seconds": 48.0,
+    "pcm_sha256": "43976acb7e26afbd9d56f73148206a9fa2bc689d2d7bdfac2a08efbbe98a84a1"
+  },
+  {
+    "track": "REEDHAVEN",
+    "samples": 804305,
+    "sample_rate": 16384,
+    "seconds": 49.09088134765625,
+    "pcm_sha256": "7c76653e1898e020ba22e52b06b9997de9372b58d0869892c1285850a2af40c3"
+  },
+  {
+    "track": "REED_WORKS",
+    "samples": 655360,
+    "sample_rate": 16384,
+    "seconds": 40.0,
+    "pcm_sha256": "d5e1c50c1e3c79466bcf1ec19c5fb293baa4011d6448847179112aaffe9e9925"
+  },
+  {
+    "track": "HEARTHWAKE",
+    "samples": 756185,
+    "sample_rate": 16384,
+    "seconds": 46.15386962890625,
+    "pcm_sha256": "17b9fe328f48b45a8affa667fff026b556d022db7fc62dad70cf8c657f67c2ba"
+  },
+  {
+    "track": "HEADLAND",
+    "samples": 714939,
+    "sample_rate": 16384,
+    "seconds": 43.63641357421875,
+    "pcm_sha256": "d6e3e608a52f92b139deea9b15505c8371aacb9d3c55ddad33675132a7fa7eb6"
+  },
+  {
+    "track": "COUNTERWORKS",
+    "samples": 702171,
+    "sample_rate": 16384,
+    "seconds": 42.85711669921875,
+    "pcm_sha256": "267decca5b382d2e594f853c64b64bc67e2893d828b65ab1e0fbf1bfb9a1677c"
+  },
+  {
+    "track": "SUNLACE",
+    "samples": 779013,
+    "sample_rate": 16384,
+    "seconds": 47.54718017578125,
+    "pcm_sha256": "7cbb21af49edef759a2a7a08fac35df8f0d12f32cae3bdde2ec3dfebbd01a467"
+  },
+  {
+    "track": "FRONDSHORE",
+    "samples": 655361,
+    "sample_rate": 16384,
+    "seconds": 40.00006103515625,
+    "pcm_sha256": "755eaa7e34767a881a2e4408b1ca5f8b580c72dc6abb162cfb0497d6b1417518"
+  },
+  {
+    "track": "CONSERVATORY",
+    "samples": 752327,
+    "sample_rate": 16384,
+    "seconds": 45.91839599609375,
+    "pcm_sha256": "5e5244276988057aed1e907f0426a51a7c5c32f361cef80d8e2466a6614a4083"
+  },
+  {
+    "track": "KILNSTEP",
+    "samples": 786432,
+    "sample_rate": 16384,
+    "seconds": 48.0,
+    "pcm_sha256": "9ca3afda0041a5fd2842003728053a1cd52b94ffe0195e528d8e7f77918c4f1e"
+  },
+  {
+    "track": "PUMICE",
+    "samples": 714939,
+    "sample_rate": 16384,
+    "seconds": 43.63641357421875,
+    "pcm_sha256": "51de00c6e7543ab6481a6adb55bd62dedc62dff7afbb60b0e52055899a4e61ac"
+  },
+  {
+    "track": "CALDERA",
+    "samples": 741917,
+    "sample_rate": 16384,
+    "seconds": 45.28302001953125,
+    "pcm_sha256": "9a8e4a4e135fdce295730638bf44be7edaddf372d92cdbff8e4f9e09629acc01"
+  },
+  {
+    "track": "NACREWAY",
+    "samples": 737280,
+    "sample_rate": 16384,
+    "seconds": 45.0,
+    "pcm_sha256": "ec12bc46e256191c0967f9aff58031a9fdc207576f91367ba4197aac375b1cda"
+  },
+  {
+    "track": "KELP",
+    "samples": 680566,
+    "sample_rate": 16384,
+    "seconds": 41.5384521484375,
+    "pcm_sha256": "58ed9a00290dc199daa7ef5b7ee56c6babea8a2eef89c4bcc7750ad9b8470b6d"
+  },
+  {
+    "track": "PALINODE",
+    "samples": 804305,
+    "sample_rate": 16384,
+    "seconds": 49.09088134765625,
+    "pcm_sha256": "1e371dc3d0a96c85a605e673e031a5c3ff97bcdf0c68ead2182f0606a9540284"
+  },
+  {
+    "track": "HORIZONS",
+    "samples": 772388,
+    "sample_rate": 16384,
+    "seconds": 47.142822265625,
+    "pcm_sha256": "72dbe8d77a9bdc50e16d55d138faa6d6b88698b8b1fbf77706db95278f11abe4"
+  },
+  {
+    "track": "COVENANTS",
+    "samples": 786432,
+    "sample_rate": 16384,
+    "seconds": 48.0,
+    "pcm_sha256": "a5b1e4f219d4650caa4b595d59ff184dd67bfbc821cca0abb3d90ddd6ab23b81"
+  }
+]

@@ -1,0 +1,536 @@
+{
+ "scope": "Real C support renderers plus authored full-foot collision; not native gameplay acceptance",
+ "cases": [
+  {
+   "area": 70,
+   "key": "reed_strainer",
+   "command": 106,
+   "origin": [
+    120,
+    240
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     117,
+     213,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "10:1:0,11:1:0,12:1:0,23:2:0,24:2:0,25:2:0",
+   "beat_target_mask": 5,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 70,
+   "key": "warm_seam",
+   "command": 108,
+   "origin": [
+    160,
+    112
+   ],
+   "face": 3,
+   "target_rects": [
+    [
+     167,
+     109,
+     7,
+     7
+    ],
+    [
+     157,
+     121,
+     7,
+     7
+    ]
+   ],
+   "release_age": 10,
+   "actual_live_hit_ages": "8:1:0,9:1:0,10:1:0,11:2:0,12:2:0,12:2:1,13:2:0,13:2:1,14:2:0,14:2:1,15:2:0,15:2:1,16:2:0,16:2:1,17:2:0,17:2:1,18:2:0,18:2:1,19:2:0,19:2:1",
+   "beat_target_mask": 13,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 70,
+   "key": "stone_stop",
+   "command": 110,
+   "origin": [
+    320,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     317,
+     89,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "6:1:0,7:1:0,8:1:0,9:1:0,10:1:0,11:1:0,12:1:0,13:1:0,14:1:0,15:1:0,16:1:0,17:1:0",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 70,
+   "key": "west_pin",
+   "command": 102,
+   "origin": [
+    320,
+    240
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     309,
+     217,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "8,9,10,11,12,13,14,15,16,17",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 70,
+   "key": "east_runnel",
+   "command": 104,
+   "origin": [
+    120,
+    160
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     117,
+     133,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "14,15,16,17,18",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 71,
+   "key": "arbor_pull",
+   "command": 106,
+   "origin": [
+    48,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     45,
+     85,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "10:1:0,11:1:0,12:1:0,23:2:0,24:2:0,25:2:0",
+   "beat_target_mask": 5,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 71,
+   "key": "outer_trench",
+   "command": 104,
+   "origin": [
+    192,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     189,
+     85,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "14,15,16,17,18",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 72,
+   "key": "hot_plate_and_seam",
+   "command": 108,
+   "origin": [
+    96,
+    104
+   ],
+   "face": 3,
+   "target_rects": [
+    [
+     103,
+     101,
+     7,
+     7
+    ],
+    [
+     93,
+     113,
+     7,
+     7
+    ]
+   ],
+   "release_age": 10,
+   "actual_live_hit_ages": "8:1:0,9:1:0,10:1:0,11:2:0,12:2:0,12:2:1,13:2:0,13:2:1,14:2:0,14:2:1,15:2:0,15:2:1,16:2:0,16:2:1,17:2:0,17:2:1,18:2:0,18:2:1,19:2:0,19:2:1",
+   "beat_target_mask": 13,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 72,
+   "key": "cooling_pin",
+   "command": 102,
+   "origin": [
+    224,
+    104
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     213,
+     81,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "8,9,10,11,12,13,14,15,16,17",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 73,
+   "key": "near_weight",
+   "command": 110,
+   "origin": [
+    48,
+    64
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     45,
+     41,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "6:1:0,7:1:0,8:1:0,9:1:0,10:1:0,11:1:0,12:1:0,13:1:0,14:1:0,15:1:0,16:1:0,17:1:0",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 73,
+   "key": "far_tie",
+   "command": 106,
+   "origin": [
+    192,
+    64
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     189,
+     37,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "10:1:0,11:1:0,12:1:0,23:2:0,24:2:0,25:2:0",
+   "beat_target_mask": 5,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 74,
+   "key": "outer_screen",
+   "command": 106,
+   "origin": [
+    192,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     189,
+     93,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "8:1:0,9:1:0,26:2:0,27:2:0",
+   "beat_target_mask": 5,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 74,
+   "key": "quiet_pin",
+   "command": 102,
+   "origin": [
+    288,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     277,
+     93,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "8,9,10,11,12,13,14,15,16,17",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 75,
+   "key": "lower_hem",
+   "command": 106,
+   "origin": [
+    120,
+    64
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     117,
+     37,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "10:1:0,11:1:0,12:1:0,23:2:0,24:2:0,25:2:0",
+   "beat_target_mask": 5,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 75,
+   "key": "water_lens",
+   "command": 112,
+   "origin": [
+    112,
+    184
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     103,
+     157,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "12:1:0,13:1:0,14:1:0,15:1:0,16:1:0",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 76,
+   "key": "dock_ballast",
+   "command": 110,
+   "origin": [
+    96,
+    96
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     93,
+     73,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "6:1:0,7:1:0,8:1:0,9:1:0,10:1:0,11:1:0,12:1:0,13:1:0,14:1:0,15:1:0,16:1:0,17:1:0",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 76,
+   "key": "side_wake",
+   "command": 104,
+   "origin": [
+    240,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     237,
+     85,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "14,15,16,17,18",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 76,
+   "key": "far_signal",
+   "command": 104,
+   "origin": [
+    384,
+    120
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     381,
+     93,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "14,15,16,17,18",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 77,
+   "key": "refuge_warm_seam",
+   "command": 108,
+   "origin": [
+    72,
+    112
+   ],
+   "face": 3,
+   "target_rects": [
+    [
+     79,
+     109,
+     7,
+     7
+    ],
+    [
+     69,
+     121,
+     7,
+     7
+    ]
+   ],
+   "release_age": 10,
+   "actual_live_hit_ages": "8:1:0,9:1:0,10:1:0,11:2:0,12:2:0,12:2:1,13:2:0,13:2:1,14:2:0,14:2:1,15:2:0,15:2:1,16:2:0,16:2:1,17:2:0,17:2:1,18:2:0,18:2:1,19:2:0,19:2:1",
+   "beat_target_mask": 13,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 77,
+   "key": "outside_brace",
+   "command": 110,
+   "origin": [
+    120,
+    96
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     117,
+     73,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "6:1:0,7:1:0,8:1:0,9:1:0,10:1:0,11:1:0,12:1:0,13:1:0,14:1:0,15:1:0,16:1:0,17:1:0",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  },
+  {
+   "area": 77,
+   "key": "quiet_door",
+   "command": 102,
+   "origin": [
+    168,
+    112
+   ],
+   "face": 1,
+   "target_rects": [
+    [
+     157,
+     89,
+     7,
+     7
+    ]
+   ],
+   "release_age": 0,
+   "actual_live_hit_ages": "8,9,10,11,12,13,14,15,16,17",
+   "beat_target_mask": 1,
+   "all_hits_have_nonzero_renderer_pixels": true,
+   "same_original_cast": true,
+   "pass": true
+  }
+ ],
+ "source_sha256": {
+  "src/horizons_powers.c": "fffcfecfe6108213ee97a7b4338f47684245bd9a608bb1793c2010b1d10f4d4d",
+  "src/return_powers.c": "ebeeeb8f18625490b901214a5bec3ab5d2b612519d73a3bfaa4e30ea9c3f1c8d",
+  "src/field_world.h": "a7adaf647ccbb581347539f85b112367444a3cabc152aaff3882f6754aa9fcf3",
+  "src/covenants_art.c": "f39df41847b0de2897608a74ff5d6f6cc7c56407b74f8ed8dfd032dcb813a4a5",
+  "src/covenants_art.h": "32672924675304b743e0ddb23e1f294a1261b000d11e2c70110ef0d2590f4671",
+  "assets/covenants_world/geometry.json": "b7f40b1cb64c88cf1783a06a8171f7d5246a1427758b742540fa11d461cb5867",
+  "tests/covenants_field_feasibility.c": "71bf1b5eed2ca1b6e78f9eb193c7d701e9b631afe09b52d22373a2630379cc32"
+ }
+}

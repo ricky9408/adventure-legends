@@ -20,6 +20,8 @@ import unittest
 
 from test_creatures import build, Instance, Roster, Form, U8, U16, ROOT
 from test_creature_sparse import edit_array
+from test_southern_creature_core import historical_prefix_bytes
+from test_southern_catalog import RETURN_FORMS
 
 ALLOCATION = json.loads((ROOT / 'docs/magma-design/magma_allocation.json').read_text())
 NEW = list(range(31, 49)) + list(range(95, 101))
@@ -101,7 +103,7 @@ class MagmaCreatureCoreTests(unittest.TestCase):
                   ('creature_evolutions',160,'b34d98b7c74beaf2c03ded7f7b90ca3c7765da622709102972d77572d4094182'),
                   ('creature_abilities',328,'332f28e80476149567bf9d63f5bf23c722aaa803d8a895a4d6b3ac1ccf003268')]
         for name,count,digest in expected:
-            self.assertEqual(hashlib.sha256(bytes((U8*count).in_dll(self.lib,name))).hexdigest(),digest,name)
+            self.assertEqual(hashlib.sha256(historical_prefix_bytes(self.lib,name,count)).hexdigest(),digest,name)
 
     def test_exact_allocation_every_form_command_capability_and_polarity(self):
         self.assertTrue(self.lib.creatures_catalog_validate())
@@ -142,9 +144,9 @@ class MagmaCreatureCoreTests(unittest.TestCase):
 
     def test_exact_revision_whitelists_and_historical_command_trial_differential(self):
         lookup={p['id']:p for p in HISTORY}
-        for revision in [0,1,2,3,4,5,6,255,256,0xffffffff]:
+        for revision in [0,1,2,3,4,5,6,7,255,256,0xffffffff]:
             for form in list(range(130))+[256,65537,0xffffffff]:
-                expected=form in ENABLED+list(range(49,73)) if revision==6 else form in ENABLED if revision==5 else form in lookup and revision in range(1,5) and bool(lookup[form]['revision_bits']&(1<<(revision-1)))
+                expected=form in ENABLED+list(range(49,73))+RETURN_FORMS if revision==7 else form in ENABLED+list(range(49,73)) if revision==6 else form in ENABLED if revision==5 else form in lookup and revision in range(1,5) and bool(lookup[form]['revision_bits']&(1<<(revision-1)))
                 self.assertEqual(bool(self.lib.creatures_form_allowed_revision(form,revision)),expected,(form,revision))
                 if revision in (1,2,3,4):
                     p=lookup.get(form)
@@ -195,7 +197,7 @@ class MagmaCreatureCoreTests(unittest.TestCase):
     def test_disabled_forms_and_wide_ids_reject_without_mutation(self):
         roster=Roster();self.lib.creatures_roster_init(C.byref(roster));before=bytes(roster)
         for form in list(range(130))+[256,65537,0xffffffff]:
-            if form in ENABLED+list(range(49,73)):continue
+            if form in ENABLED+list(range(49,73))+RETURN_FORMS+list(range(105,121)):continue
             self.assertFalse(self.lib.creatures_form(form))
             self.assertEqual(self.lib.creatures_grant(C.byref(roster),form,50,100,0,0),255)
             self.assertEqual(bytes(roster),before)

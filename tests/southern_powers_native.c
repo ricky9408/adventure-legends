@@ -126,14 +126,15 @@ static void test_snapshot_pause_and_invalid(void){
     select_command(23);caster.form_id=121;assert(!southern_power(23));
     select_command(23);face=4;assert(!southern_power(23));face=3;absent=1;assert(!southern_power(23));absent=0;
     assert(up==uploads&&!ability_cd);
-    setup(24);gear_stats.power_cooldown=1;assert(southern_power(24));assert(ability_cd==112);
+    /* Hostile forged stat is bounded by gear8 + Feather8 + Bell4. */
+    setup(24);gear_stats.power_cooldown=1;assert(GAME_MAX_POWER_RECOVERY==20);assert(southern_power(24));assert(ability_cd==100);
     t=southern_power_time;cd=ability_cd;select_command(42);px=220;py=200;face=0;
     assert(southern_power_form==26&&southern_power_direction==3&&southern_power_phase==CREATURE_WOOD);
     assert(southern_power_origin_x==100&&southern_power_origin_y==100&&!southern_powers_feedback(42));
     for(c=0;c<20;c++){draw0=draws;southern_powers_draw();assert(draws-draw0<=24);}
     assert(southern_power_time==t&&ability_cd==cd);
     hitstop=3;updates(20);assert(southern_power_time==t&&southern_power_age==0&&ability_cd==cd);
-    hitstop=0;updates(1);assert(southern_power_time==t-1&&southern_power_cooldown==112);
+    hitstop=0;updates(1);assert(southern_power_time==t-1&&southern_power_cooldown==100);
     for(c=23;c<=42;c++){setup(c);enemy(0,124,100,10);if(c==29)enemies[0].kind=2;assert(southern_power(c));t=enemy_hp_q4[0];
         southern_powers_reset();updates(90);expect_damage(0,(unsigned)(160-t));assert(!southern_powers_busy());}
 }

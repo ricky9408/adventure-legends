@@ -1,0 +1,554 @@
+{
+  "commands": [
+    {
+      "id": 97,
+      "combat": [
+        "平行な２本の線で攻撃",
+        "真ん中の道には当たらない"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 150 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 98,
+      "combat": [
+        "遠い端を越える敵１体を攻撃",
+        "引っかかると少し引き戻す"
+      ],
+      "field": "印の荷を引き寄せる",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 135 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 99,
+      "combat": [
+        "熱を少し運んでＲで置く",
+        "置いた場所に炎の弧を残す"
+      ],
+      "field": "印の器に熱を渡す",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 150 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 100,
+      "combat": [
+        "前へ進み横へ曲がる種",
+        "戻らず曲がり先で終わる"
+      ],
+      "field": "印の根や橋を育てる",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 135 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 101,
+      "combat": [
+        "ずれた２本の土の線で攻撃",
+        "当たった敵を横へ押す"
+      ],
+      "field": "印の水の通り道に働く",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 150 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 102,
+      "combat": [
+        "弾を構える敵を横から止める",
+        "選んだ側が合う時だけ攻撃"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 103,
+      "combat": [
+        "正面にくさび形の守りを置く",
+        "前から来る敵弾を１発消す"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:279",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 104,
+      "combat": [
+        "前へ進む波で歩く敵１体を攻撃",
+        "横の空いた場所へ押し出す"
+      ],
+      "field": "印の浮き荷や水場に働く",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 105,
+      "combat": [
+        "２つの波が１つの先端で合流",
+        "違う道筋から敵をねらう"
+      ],
+      "field": "印の浮き荷や水場に働く",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 106,
+      "combat": [
+        "同じ道を往復する細い布",
+        "帰りを当てると強い一撃"
+      ],
+      "field": "印の荷を１区間引く",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 72 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 107,
+      "combat": [
+        "１回直角に曲がる布",
+        "出始めに曲がる側を選ぶ"
+      ],
+      "field": "試しの印に布を重ねる",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 88 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 108,
+      "combat": [
+        "ためてＲでその場に衝撃",
+        "時間内に放たないと消える"
+      ],
+      "field": "印の器から熱を渡す",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 84 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 109,
+      "combat": [
+        "正面の弧で敵弾を１発受ける",
+        "Ｒで放つ炎は受けた後が強い"
+      ],
+      "field": "印の器へ熱を渡す",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_powers.c:345",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 100 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 110,
+      "combat": [
+        "短い土の一撃を前へ出す",
+        "当たった敵を少し押し返す"
+      ],
+      "field": "印の重りを１段押す",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 66 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 111,
+      "combat": [
+        "近くと遠くを順番に攻撃",
+        "遠い一撃のほうが強い"
+      ],
+      "field": "試しの印に２拍を重ねる",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 86 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 112,
+      "combat": [
+        "左右にずらせる水の刃",
+        "前へ進み最初の壁で止まる"
+      ],
+      "field": "試しの印に刃を重ねる",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 64 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 113,
+      "combat": [
+        "近くの刃から遠くの光へ攻撃",
+        "遠い一撃のほうが強い"
+      ],
+      "field": "試しの印に２拍を重ねる",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 84 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 114,
+      "combat": [
+        "正面を長く細く突く",
+        "横側には攻撃が届かない"
+      ],
+      "field": "印の線路の向きを変える",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 80 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 115,
+      "combat": [
+        "切れ目のある弧で敵を攻撃",
+        "前から来る敵弾を１発防ぐ"
+      ],
+      "field": "印の幕を開く",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_powers.c:345",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 92 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 116,
+      "combat": [
+        "横から後ろへ短い弧で攻撃",
+        "出始めに向きを変えられる"
+      ],
+      "field": "印の横側の火種をともす",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 74 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 117,
+      "combat": [
+        "短い正面の範囲を攻撃",
+        "当たった敵を長くひるませる"
+      ],
+      "field": "印の重りを押さえる",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 88 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 118,
+      "combat": [
+        "左右の線を時間差で出す",
+        "２本目のほうが強い一撃"
+      ],
+      "field": "印の留め具に２拍を送る",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 72 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 119,
+      "combat": [
+        "ずれた２か所へ順番に水を落とす",
+        "遠い２つ目の水が強い"
+      ],
+      "field": "印の器へ順番に水を送る",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 76 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 120,
+      "combat": [
+        "短い根を横向きに置く",
+        "横切る敵を攻撃し遅くする"
+      ],
+      "field": "印の割れ目に根を伸ばす",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 121,
+      "combat": [
+        "前へ広がる扇で攻撃",
+        "先に進むほど横へ広がる"
+      ],
+      "field": "印の羽根を１段動かす",
+      "source": [
+        "src/horizons_powers.c:257",
+        "src/horizons_powers.c:336",
+        "src/horizons_fields.inc:28",
+        "src/horizons_attempts.inc:37",
+        "src/horizons_powers.c:358",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 70 active-play updates. src/horizons_powers.c:358 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 122,
+      "combat": [
+        "曲がった地面の線で攻撃",
+        "触れている敵の動きを遅くする"
+      ],
+      "field": "試しの印につるを重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 180 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 123,
+      "combat": [
+        "後ろに熱をためてから飛ばす",
+        "強い火の弾が最初の敵で止まる"
+      ],
+      "field": "試しの印へ熱を渡す",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 210 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 124,
+      "combat": [
+        "輪の境目を横切る敵を攻撃",
+        "中心には攻撃が当たらない"
+      ],
+      "field": "試しの印へ輪を重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 200 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 125,
+      "combat": [
+        "ずれた弧で攻撃してから守る",
+        "後の１拍で敵弾を１発消す"
+      ],
+      "field": "試しの印に音を重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_powers.c:518",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 165 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 126,
+      "combat": [
+        "三方の薄い縁で敵弾を防ぐ",
+        "２発まで・開いた側に注意"
+      ],
+      "field": "試しの印に幕を重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_powers.c:518",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 195 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 127,
+      "combat": [
+        "かぎ形に進む波で攻撃",
+        "当たった敵を少し押し返す"
+      ],
+      "field": "試しの印に波を重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 180 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 128,
+      "combat": [
+        "正面で敵弾を２発まで防ぐ",
+        "長く待つと縁に攻撃が出る"
+      ],
+      "field": "試しの印に熱を重ねる",
+      "source": [
+        "src/covenants_powers.c:365",
+        "src/covenants_powers.c:492",
+        "src/covenants_powers.c:518",
+        "src/covenants_fields.inc:66",
+        "src/covenants_fields.inc:103",
+        "src/covenants_powers.c:562",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 240 active-play updates. src/covenants_powers.c:562 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    }
+  ]
+}

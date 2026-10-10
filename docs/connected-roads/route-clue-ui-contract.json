@@ -1,0 +1,49 @@
+{
+  "scope": "Only three approved navigation clues change from accepted P2; every other metadata value, enum identifier and rendered row is retained.",
+  "allowed_keys": [
+    "RT_HUD_COMMON",
+    "RT_VILLAGE_B",
+    "UW_CLUE45A"
+  ],
+  "metadata_changes": [
+    {
+      "file": "assets/ui_texts.json",
+      "key": "UW_CLUE45A",
+      "old": "記録庫の帰りのアーチを開こう。",
+      "new": "面影の中庭を、西の道から出よう。"
+    },
+    {
+      "file": "assets/ui_texts_return.json",
+      "key": "RT_VILLAGE_B",
+      "old": "まず若葉の入口へ。その先は町の机。",
+      "new": "里の南は若葉の広場。次は町の机。"
+    },
+    {
+      "file": "assets/ui_texts_return.json",
+      "key": "RT_HUD_COMMON",
+      "old": "目的：里の若葉の入口へ",
+      "new": "目的：里の南から若葉の広場へ"
+    }
+  ],
+  "unchanged_metadata_sha256": {
+    "assets/ui_texts.json": "8d7b77b5536898fdbaf11fc586ebcbc5731d12e7708d5c3b95b742544d8017b6",
+    "assets/ui_texts_return.json": "fd607137a817868c52220e27063e7629edcb03ceb44812264e0c2ef3f6ab550d",
+    "assets/ui_texts_horizons.json": "191b7587a589dd2686cae698f741f9147945116dc420ffcb76a09cbae7743e34",
+    "assets/ui_texts_covenants.json": "c5f9cba6618266e4197c64736491315a76cc449defd126c247da9b2b3d807a03",
+    "assets/ui_texts_player_feedback.json": "397ffdf5d90b3a1cb1f55006f8f9f566882228e4e96006da648cc3588367c47b"
+  },
+  "unchanged_raster_sha256": "79f42debbf9dd9b437bb183527af5a84af75ca56ff09e1a7fac2e23615e61b84",
+  "unchanged_legacy_raster_sha256": "defb5fa8c8913cde75e741772a6b3949b951c9f28f5591fc2c05f09e271e300d",
+  "new_raster_sha256": {
+    "txt_UW_CLUE45A_0": "d0ca3b8e7ab2f86bf04ce2e595d90bac73b8b0dd0be4c9b5446c145649522cfe",
+    "txt_UW_CLUE45A_1": "784ef99a8b3f6c6d7bfa17eb3e862f0995f6d6fabdf8b499f9c957aee1dd501b",
+    "txt_RT_VILLAGE_B_0": "5e9886b63436b802be52b3d9d103463be2365615ab08967286db30d9cf10c4a7",
+    "txt_RT_VILLAGE_B_1": "cf69cc20259fdc199e0652a7dad3ce5d870f115be2e28e24b5a8e54dca4c3879",
+    "txt_RT_HUD_COMMON_0": "1ff6cc937e214e3cfbdd4289b5180a34d69b3087c5b4d4cdcaf945ce7821f645",
+    "txt_RT_HUD_COMMON_1": "56c054c1ff2765c56611f0f2befd0385f8b1da4bdfbe367a5c8f7009d39e8359"
+  },
+  "enum_sha256": "a958ea90fcbe752e54cbfa5bac4b8f76a37026d9cc234650bb96279ec6c3839e",
+  "unchanged_raster_statements": 4160,
+  "changed_raster_statements": 6,
+  "historical_p2_contract": "accepted-p2-ui-contract.json"
+}

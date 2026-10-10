@@ -7,6 +7,7 @@ from pathlib import Path
 from collections import deque
 import hashlib,json,random,sys
 from PIL import Image,ImageDraw
+import connected_road_art as roads
 sys.dont_write_bytecode=True
 from generate_assets import Art,P,PAL,COLORS,color_background,tree,flowers
 from generate_region import paths,terrace,water,bridge,soft_ground,verify_room,odd_bitmap,cbytes,paste_sprite
@@ -80,7 +81,7 @@ def shrubs(a,x,y):
   a.e((x+dx-4,y+dy-6,x+dx+5,y+dy+3),'pine2');a.e((x+dx-3,y+dy-6,x+dx+4,y+dy),'pine4');a.dot(x+dx-1,y+dy-4,'leaflight')
 def detail_town(a,r):
  # Deliberately clustered work props, leaving every tested approach clear.
- for x,y in[(25,199),(452,214),(137,164),(280,157)]:barrel(a,x,y);solid(r,'work_barrel',(x-5,y-5,11,13))
+ for x,y in[(25,183),(452,214),(137,164),(280,157)]:barrel(a,x,y);solid(r,'work_barrel',(x-5,y-5,11,13))
  for x,y in[(185,158),(348,220)]:timber_stack(a,x,y);solid(r,'timber_stack',(x,y-8,33,12))
  for x,y in[(30,216),(272,214),(436,194)]:rope_coil(a,x,y)
  for x,y in[(215,163),(266,162),(26,236),(453,238)]:banner(a,x,y,'water2' if x%2 else 'rose3')
@@ -121,10 +122,11 @@ def detail_field(a,r):
 
 def town():
  r,a=new(0);paths(a,[([(240,0),(240,228),(240,320)],30), ([(64,152),(88,144),(160,176),(384,144),(416,176)],22)])
+ roads.draw(a,22,P)
  water(a,(8,240,464,72),721);solid(r,'harbor_water_west',(8,240,214,72));solid(r,'harbor_water_east',(258,240,214,72));bridge(a,(224,234,32,86));terrace(a,(8,176,464,62),'wood')
  gable(a,r,52,40,72,88,'rose3',True);gable(a,r,338,40,92,88,'water1');gable(a,r,160,28,56,72,'gold1')
  hull(a,28,265,70);hull(a,346,274,98)
- for x,y in[(24,122),(288,56),(452,152)]:tree(a,x,y,.8);solid(r,'tree_trunk',(x-10,y-28,20,30))
+ for x,y in[(24,122),(288,56),(452,56)]:tree(a,x,y,.8);solid(r,'tree_trunk',(x-10,y-28,20,30))
  for k,xy,s in [('edda',(168,192),'EDDA'),('neri',(312,192),'NERI'),('pell',(64,192),'PELL'),('tove',(384,160),'TOVE'),('iven',(416,208),'IVEN'),('rest',(104,192),'REST'),('line_triangle',(160,224),'HANDLE'),('line_square',(304,224),'HANDLE'),('forecast',(240,192),'FORECAST'),('ferry',(240,264),'FERRY_SIGN')]:obj(r,k,xy,s,(xy[0],xy[1]+16) if k=='ferry' else (xy[0],xy[1]-16) if k.startswith('line_') else None)
  rail(a,[(144,224),(192,224)]);rail(a,[(280,224),(328,224)])
  for x,n in [(144,0),(328,1)]:glyph(a,x,214,n)
@@ -347,7 +349,7 @@ enum {
 def main():
  ROOMS.clear();SPRITES.clear()
  for fn in [town,field]+[lambda i=i:interior(i) for i in range(2,8)]:
-  r,a=fn();r['art']=color_background(a,'forest')
+  r,a=fn();roads.open_borders(r);r['art']=color_background(a,'forest')
  SPRITES.extend((n,sprite(n)) for n in NAMES)
  proofs={}
  for r in ROOMS:proofs[r['key']],_=verify_room(r)

@@ -2,7 +2,7 @@
 #ifndef EMBERBOND_ASSET_COLLISIONS_H
 #define EMBERBOND_ASSET_COLLISIONS_H
 typedef struct { short x,y,w,h; } AssetRect;
-static const AssetRect asset_solids_village[18] = {
+static const AssetRect asset_solids_village[16] = {
     {22,44,67,53},
     {151,47,67,50},
     {40,115,27,36},
@@ -19,10 +19,8 @@ static const AssetRect asset_solids_village[18] = {
     {167,0,28,34},
     {201,0,25,37},
     {227,1,13,44},
-    {0,72,21,40},
-    {224,74,16,40},
 };
-#define ASSET_SOLIDS_VILLAGE_COUNT 18
+#define ASSET_SOLIDS_VILLAGE_COUNT 16
 static const AssetRect asset_solids_forest[23] = {
     {92,19,11,24},
     {138,19,11,24},
@@ -84,5 +82,5 @@ static const AssetRect asset_solids_boss[20] = {
 };
 #define ASSET_SOLIDS_BOSS_COUNT 20
 static const AssetRect * const asset_solids[4] = {asset_solids_village,asset_solids_forest,asset_solids_temple,asset_solids_boss};
-static const unsigned char asset_solids_count[4] = {18,23,8,20};
+static const unsigned char asset_solids_count[4] = {16,23,8,20};
 #endif

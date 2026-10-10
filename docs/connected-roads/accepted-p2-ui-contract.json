@@ -1,0 +1,12 @@
+{
+  "scope": "Accepted P2 baseline snapshot, recorded before the three required navigation-clue revisions. Historical Return I ui_retention.json remains unchanged; route-clue-ui-contract.json strictly accounts for the approved exceptions.",
+  "accepted_baseline": "Experience Polish P2",
+  "accepted_source_archive_sha256_from_task": "66ede05f19ad63d0a3caa9903a9f1fc9ce7cbe6938c3dc5b88facb6993129495",
+  "verification": "Every global UI metadata/header/raster file was byte-compared with the accepted P2 sibling checkout on 2026-10-07 before the required road-clue updates. Baseline hashes here are retained unchanged.",
+  "exact_files_compared": 405,
+  "legacy_identifier_count": 1380,
+  "legacy_identifier_sha256": "bba2ea0167336e9efcbf073a0d89bf8c9f1ba3f0926c18718cc524707f1a372d",
+  "old_raster_statements": 2760,
+  "legacy_raster_sha256": "11bacce1a59cabe33a6908003520cdcaa4520a0c1e4409288bb0b6f0ec0e7ef6",
+  "legacy_metadata_sha256": "bb40ab0094f5488d78ee64927bdbbc5f970adb39408a73b80978d11ea021ed85"
+}

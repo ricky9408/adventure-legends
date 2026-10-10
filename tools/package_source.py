@@ -11,14 +11,21 @@ from pathlib import Path
 import hashlib
 import gzip
 import json
+import tarfile
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
-ROOT_FILES=('.gitignore','LICENSE','Makefile','README.md','linker.ld')
+ROOT_FILES=('.gitignore','LICENSE','Makefile','README.md','README_MUSIC.md','linker.ld')
 SOURCE_ROOTS=('src','assets','docs','tests','tools')
 EXTENSIONS={'.c','.h','.s','.inc','.py','.sh','.md','.json','.png','.gif','.txt','.sav','.log','.gz','.tsv','.diff'}
 EXCLUDED={'build','dist','downloads','sysroot','__pycache__','.git'}
+# Only the reviewed original score inputs may ship as WAV assets.
+MUSIC_INPUTS={'assets/music/original-v2/village_gba_synthetic_v2.wav':'1c2d3f4371be46d64785ddf2938ed8edb3c1e87b402c36375c68b47ad010c1c5','assets/music/original-v2/dungeon_gba_synthetic_v2.wav':'c3bf48b359d5ce96beeec7981dfcae7a02684ce71254f5909aa4a28983a9b2d4'}
+# Exact approved Lanterns inputs; never permit arbitrary binary assets.
+MUSIC_INPUTS.update({'assets/music/lanterns/lanterns-gba-16384-s8.raw': 'a9ada6ff0b3ef068dc8ab9bfabd02f69521c6ef252420157b9646636e98e4838', 'assets/music/lanterns/source/lanterns_by_the_footbridge.mid': 'cacfafc0fc305e60b696de01e3bb9b3401dffcbcc0952d6f77f3485294ef60a3', 'assets/music/lanterns/source/lanterns_by_the_footbridge.musicxml': '5dd3c8463f147760785998518d9be1a32a790e7921461b9cf6fd38fef53046a2'})
+# Reviewed regional source/render binary inputs. Hash checked on every export.
+MUSIC_INPUTS.update(json.loads((ROOT/'assets/music/regional/binary-input-pins.json').read_text()))
 # Redundant large contact sheets are reproducible with make assets. Individual
 # region/camera PNGs remain included; these are not ROM inputs or test fixtures.
 # Exact oversized historical reports ship as deterministic gzip, with raw hashes
@@ -34,7 +41,44 @@ GENERATED_OVERVIEWS={
  'assets/region/region_preview_native.png','assets/region/region_preview_2x.png',
  'assets/region/native_camera_sheet.png','assets/region/native_camera_sheet_2x.png'}
 
+def binary_dependency_archives():
+    """Keep exact historical evidence locally; don't publish bundled ELF tools."""
+    omitted=[]
+    for path in sorted((ROOT/'docs').rglob('*.tar.gz')):
+        members=[]
+        with tarfile.open(path,'r:gz') as archive:
+            for member in archive.getmembers():
+                if not member.isfile():continue
+                stream=archive.extractfile(member)
+                if stream.read(4)==b'\x7fELF':
+                    members.append({'path':member.name,'bytes':member.size})
+        if members:
+            omitted.append({'path':path.relative_to(ROOT).as_posix(),
+                'bytes':path.stat().st_size,
+                'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+                'compiled_dependency_members':members})
+    # An exported source tree deliberately lacks these archives. Repacking it
+    # must preserve their existing provenance instead of erasing the receipt.
+    receipt_path=ROOT/'docs/evidence/source-export-binary-exclusions.json'
+    if receipt_path.exists():
+        old=json.loads(receipt_path.read_text())
+        for row in old.get('omitted_archives',[]):
+            rel=Path(row['path'])
+            assert not rel.is_absolute() and '..' not in rel.parts
+            assert rel.parts[0]=='docs' and row['path'].endswith('.tar.gz')
+            assert len(row['sha256'])==64 and all(c in '0123456789abcdef' for c in row['sha256'])
+            if not (ROOT/rel).exists():
+                omitted.append(row)
+    omitted.sort(key=lambda row:row['path'])
+    receipt={'scope':'Source-export exclusions only; original historical archives remain unchanged locally.',
+        'reason':'These historical helper snapshots bundle compiled host mGBA/bridge dependencies. Install the documented official dependencies and build the bridge from source for current tests.',
+        'historical_checksum_scope':'Historical CHECKSUMS files describe their original complete evidence sets. This source export does not claim those omitted sets are complete; current source/build/native recipes remain provided.',
+        'omitted_archives':omitted}
+    receipt_path.write_text(json.dumps(receipt,indent=2)+'\n')
+    return {row['path']for row in omitted}
+
 def source_files():
+    archived_dependencies=binary_dependency_archives()
     files=[ROOT/p for p in ROOT_FILES]
     for name in SOURCE_ROOTS:
         for p in (ROOT/name).rglob('*'):
@@ -43,13 +87,19 @@ def source_files():
             # The bridge smoke test creates a disposable color screenshot in
             # its own directory. Ship its self-generating script, not outputs.
             if rel.parts[:2]==('tools','smoke_tests') and p.name!='test_bridge.py':continue
+            # This is regenerated from the consumer's compiler/mGBA headers.
+            # Native evidence records the tested receipt hash separately.
+            if rel.as_posix()=='tools/horizons_mgba_bridge.build.json':continue
             if rel.as_posix() in GENERATED_OVERVIEWS:continue
+            if rel.as_posix() in archived_dependencies:continue
             if rel.as_posix() in COMPRESSED_EVIDENCE:
                 packed=p.with_name(p.name+'.gz')
                 assert packed.is_file() and gzip.decompress(packed.read_bytes())==p.read_bytes(), 'Missing/lossy compressed evidence: '+str(rel)
                 continue
             if p.name=='.gitignore':files.append(p);continue
-            if p.suffix not in EXTENSIONS and rel.as_posix()!='tests/fixtures/v5-revision5-minimal/ancestry/southern-minimal8-input.bin':continue
+            if p.suffix not in EXTENSIONS and rel.as_posix() not in MUSIC_INPUTS and rel.as_posix()!='tests/fixtures/v5-revision5-minimal/ancestry/southern-minimal8-input.bin':continue
+            if rel.as_posix() in MUSIC_INPUTS:
+                assert hashlib.sha256(p.read_bytes()).hexdigest()==MUSIC_INPUTS[rel.as_posix()], 'Unreviewed music input'
             if p.suffix=='.bin':
                 assert p.stat().st_size==32768 and hashlib.sha256(p.read_bytes()).hexdigest()=='968066ed983bd48fc2af0d7ffeb79f635624037ef2099809fd00c97aaa04cc0c', 'Unreviewed binary fixture'
             if p.suffix=='.sav' and not str(rel).startswith('tests/fixtures/'):continue
@@ -59,13 +109,13 @@ def source_files():
 def main():
     OUT.mkdir(exist_ok=True)
     files=source_files()
-    manifest={'schema':1,'purpose':'Source-only reproducible Underwater chapter;89 obtainable forms, Save5 revision6','files':[]}
+    manifest={'schema':1,'purpose':'Original 23-cue regional soundtrack, explicit78room mapping, exact unpadded PCM, preserved HOME and gameplay/save/font, updated music credits; current evidence and historical limits','files':[]}
     target=OUT/'Adventure-Legends-Emberbond-source.zip'
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
         for p in files:
             data=p.read_bytes();name=p.relative_to(ROOT).as_posix()
             manifest['files'].append({'path':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
-            info=zipfile.ZipInfo('Adventure-Legends-Emberbond/'+name,(2026,10,6,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED
+            info=zipfile.ZipInfo('Adventure-Legends-Emberbond/'+name,(2026,10,7,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED
             info.external_attr=(0o755 if p.suffix=='.sh' else 0o644)<<16
             archive.writestr(info,data,compresslevel=9)
     manifest['source_zip_sha256']=hashlib.sha256(target.read_bytes()).hexdigest()

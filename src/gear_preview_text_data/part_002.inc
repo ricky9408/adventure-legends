@@ -1,0 +1,10 @@
+{127,14,0,{gp_STAGGER_CAP_0,gp_STAGGER_CAP_1},{255,239}},
+{167,14,0,{gp_SAME_0,gp_SAME_1},{332,310}},
+{165,14,0,{gp_NO_COMMAND_0,gp_NO_COMMAND_1},{340,330}},
+{173,15,0,{gp_UNITS_0,gp_UNITS_1},{367,344}},
+{132,15,0,{gp_FOOTER_0,gp_FOOTER_1},{215,215}},
+{11,15,0,{gp_LEFT_0,gp_LEFT_1},{6,8}},
+{11,15,0,{gp_RIGHT_0,gp_RIGHT_1},{5,8}},
+{11,15,0,{gp_UP_0,gp_UP_1},{11,16}},
+{11,15,0,{gp_DOWN_0,gp_DOWN_1},{11,16}},
+};

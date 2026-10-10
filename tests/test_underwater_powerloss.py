@@ -9,6 +9,7 @@ import ctypes as C,json,tempfile,time,unittest
 from pathlib import Path
 from test_underwater_save import ROOT,build,sha,FIXTURE_SHA,SOURCES,runtime_hashes
 from test_save5 import Save,A,B,SIZE,compare_state
+(ROOT/'build/current-host-evidence/underwater-return-spawns').mkdir(parents=True,exist_ok=True)
 class UnderwaterPowerLoss(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
@@ -52,5 +53,5 @@ class UnderwaterPowerLoss(unittest.TestCase):
    lib.save5_test_fail_after(-1);rows.append({'transaction':name,'cut_positions':SIZE+2,'destination':'A' if index&1 else 'B'})
    print(name,'all cuts pass',flush=True)
   report={'scope':'Synthetic typed transaction every-cut interruption test, not native acquisition','result':'PASS','transactions':rows,'checks':checks,'seconds':time.monotonic()-start,'fixture_sha256':FIXTURE_SHA,'source_sha256':lib._source_hashes,'source_unchanged_during_measurement':lib._source_hashes==runtime_hashes()}
-  (ROOT/'docs/evidence/underwater-save-powerloss.json').write_text(json.dumps(report,indent=2)+'\n')
+  (ROOT/'build/current-host-evidence/underwater-save-powerloss.json').write_text(json.dumps(report,indent=2)+'\n')
 if __name__=='__main__':unittest.main(verbosity=2)

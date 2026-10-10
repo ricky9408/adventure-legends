@@ -1,0 +1,1347 @@
+{
+  "title": "Warm Clay, Open Windows",
+  "slug": "kilnstep",
+  "cue_id": "KILNSTEP",
+  "key": "A-flat major",
+  "fifths": -4,
+  "tempo": 100,
+  "meter": "4/4",
+  "beats": 4,
+  "sections": {
+    "1": "A | Open windows",
+    "9": "B | Lesson benches",
+    "17": "A return | Shared table"
+  },
+  "bars": [
+    {
+      "number": 1,
+      "chord": "Ab",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 1.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Ab2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "chord": "Eb7/G",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "G2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "chord": "Fm7",
+      "melody": [
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "F5",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "F2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "chord": "Bbm",
+      "melody": [
+        {
+          "pitch": "Db5",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "R",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Bb2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "chord": "Ab",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 1.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "F5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Ab5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Ab2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "chord": "Eb / Ab",
+      "melody": [
+        {
+          "pitch": "G5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F5",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 2.0,
+          "onset": 2.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Eb3",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Ab2",
+          "duration": 2.0,
+          "onset": 2.0
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "chord": "Db",
+      "melody": [
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "F3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Db3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "chord": "Eb7",
+      "melody": [
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "R",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "G4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Eb3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "chord": "Fm7",
+      "melody": [
+        {
+          "pitch": "F5",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "F3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "chord": "Db",
+      "melody": [
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Ab5",
+          "duration": 2.0,
+          "onset": 2.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "F4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "F4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Db3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "chord": "Eb7",
+      "melody": [
+        {
+          "pitch": "G5",
+          "duration": 1.5,
+          "onset": 0
+        },
+        {
+          "pitch": "F5",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Eb4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Eb3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "chord": "Ab",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "R",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Eb4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "C4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Ab2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "chord": "Bbm",
+      "melody": [
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "F5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Db4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Bb2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "chord": "Bb7",
+      "melody": [
+        {
+          "pitch": "D5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Ab5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "G5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "F4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "D4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "F4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Bb2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "chord": "Eb",
+      "melody": [
+        {
+          "pitch": "G5",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Eb4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "G4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Eb3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "chord": "Eb7",
+      "melody": [
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Eb4",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Eb3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "chord": "Ab",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 1.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Ab2",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "chord": "Ab/C / Fm",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "F5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "C3",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F2",
+          "duration": 2.0,
+          "onset": 2.0
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "chord": "Db / Bbm",
+      "melody": [
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "F5",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb5",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Db5",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Bb4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Ab3",
+          "duration": 0.5,
+          "onset": 0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 0.5
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 1.5
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 2.0
+        },
+        {
+          "pitch": "F4",
+          "duration": 0.5,
+          "onset": 2.5
+        },
+        {
+          "pitch": "Db4",
+          "duration": 0.5,
+          "onset": 3.0
+        },
+        {
+          "pitch": "Bb3",
+          "duration": 0.5,
+          "onset": 3.5
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Db3",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Bb2",
+          "duration": 2.0,
+          "onset": 2.0
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "chord": "Eb7",
+      "melody": [
+        {
+          "pitch": "Bb4",
+          "duration": 2.0,
+          "onset": 0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "R",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "inner": [
+        {
+          "pitch": "Bb3",
+          "duration": 1.0,
+          "onset": 0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 1.0,
+          "onset": 1.0
+        },
+        {
+          "pitch": "Eb4",
+          "duration": 1.0,
+          "onset": 2.0
+        },
+        {
+          "pitch": "Db4",
+          "duration": 1.0,
+          "onset": 3.0
+        }
+      ],
+      "bass": [
+        {
+          "pitch": "Eb3",
+          "duration": 4.0,
+          "onset": 0
+        }
+      ]
+    }
+  ]
+}

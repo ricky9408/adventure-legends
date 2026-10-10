@@ -1,0 +1,117 @@
+{
+  "TITLE": {
+    "text": "装備 / 選択技",
+    "size": 12,
+    "height": 15
+  },
+  "EQUIPPED": {
+    "text": "装備中",
+    "size": 12,
+    "height": 15
+  },
+  "PREVIEW": {
+    "text": "比較中",
+    "size": 12,
+    "height": 15
+  },
+  "ATTACK": {
+    "text": "初撃",
+    "size": 12,
+    "height": 15
+  },
+  "DEFENSE": {
+    "text": "守り",
+    "size": 12,
+    "height": 15
+  },
+  "HEART": {
+    "text": "ハート",
+    "size": 12,
+    "height": 15
+  },
+  "WALK": {
+    "text": "歩速%",
+    "size": 12,
+    "height": 15
+  },
+  "RECOVERY": {
+    "text": "技待(約秒)",
+    "size": 11,
+    "height": 14
+  },
+  "DISTANCE": {
+    "text": "距離px",
+    "size": 11,
+    "height": 14
+  },
+  "STAGGER": {
+    "text": "怯み＋",
+    "size": 11,
+    "height": 14
+  },
+  "SWORD": {
+    "text": "剣:初撃 / 三段目+6px",
+    "size": 11,
+    "height": 14
+  },
+  "LANCE": {
+    "text": "槍:細い突き / 怯み＋は通常敵",
+    "size": 11,
+    "height": 14
+  },
+  "BOW": {
+    "text": "弓:通常 / 溜め+32px",
+    "size": 11,
+    "height": 14
+  },
+  "RECOVERY_CAP": {
+    "text": "技待は装備上限 / 秒は動ける間",
+    "size": 11,
+    "height": 14
+  },
+  "STAGGER_CAP": {
+    "text": "追加ひるみは通常敵のみ・上限3",
+    "size": 11,
+    "height": 14
+  },
+  "SAME": {
+    "text": "効果同じ / 秒:動ける間 / 怯+:通常敵",
+    "size": 11,
+    "height": 14
+  },
+  "NO_COMMAND": {
+    "text": "技待は仲間を選ぶと表示 / 怯+:通常敵",
+    "size": 11,
+    "height": 14
+  },
+  "UNITS": {
+    "text": "待:動ける間の約秒 距離:px 怯+:通常敵",
+    "size": 12,
+    "height": 15
+  },
+  "FOOTER": {
+    "text": "A 装備  B 戻る  START 閉じる",
+    "size": 12,
+    "height": 15
+  },
+  "LEFT": {
+    "text": "←",
+    "size": 12,
+    "height": 15
+  },
+  "RIGHT": {
+    "text": "→",
+    "size": 12,
+    "height": 15
+  },
+  "UP": {
+    "text": "↑",
+    "size": 12,
+    "height": 15
+  },
+  "DOWN": {
+    "text": "↓",
+    "size": 12,
+    "height": 15
+  }
+}

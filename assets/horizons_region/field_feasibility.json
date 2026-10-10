@@ -1,0 +1,410 @@
+[
+ {
+  "name": "lintail repeat",
+  "command": 106,
+  "area": 62,
+  "origin": [
+   384,
+   176
+  ],
+  "direction": 2,
+  "targets": [
+   [
+    352,
+    176
+   ],
+   [
+    352,
+    176
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 15,
+  "passed": true
+ },
+ {
+  "name": "talus repeat",
+  "command": 110,
+  "area": 66,
+  "origin": [
+   24,
+   240
+  ],
+  "direction": 3,
+  "targets": [
+   [
+    48,
+    240
+   ],
+   [
+    48,
+    240
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "gleam repeat",
+  "command": 112,
+  "area": 68,
+  "origin": [
+   176,
+   136
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    176,
+    112
+   ],
+   [
+    176,
+    112
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "rivet repeat",
+  "command": 114,
+  "area": 63,
+  "origin": [
+   48,
+   88
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    48,
+    64
+   ],
+   [
+    48,
+    64
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "shelter repeat",
+  "command": 115,
+  "area": 64,
+  "origin": [
+   200,
+   128
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    200,
+    104
+   ],
+   [
+    200,
+    104
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "root repeat",
+  "command": 120,
+  "area": 62,
+  "origin": [
+   320,
+   264
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    320,
+    240
+   ],
+   [
+    320,
+    240
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "warm main",
+  "command": 108,
+  "area": 67,
+  "origin": [
+   300,
+   208
+  ],
+  "direction": 2,
+  "targets": [
+   [
+    288,
+    208
+   ],
+   [
+    312,
+    208
+   ]
+  ],
+  "release_age": 12,
+  "wanted_bits": 9,
+  "actual_bits": 13,
+  "passed": true
+ },
+ {
+  "name": "warm repeat",
+  "command": 108,
+  "area": 63,
+  "origin": [
+   404,
+   96
+  ],
+  "direction": 2,
+  "targets": [
+   [
+    392,
+    96
+   ],
+   [
+    416,
+    96
+   ]
+  ],
+  "release_age": 12,
+  "wanted_bits": 9,
+  "actual_bits": 13,
+  "passed": true
+ },
+ {
+  "name": "rear wick",
+  "command": 116,
+  "area": 65,
+  "origin": [
+   384,
+   232
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    384,
+    256
+   ],
+   [
+    384,
+    256
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "weight hold",
+  "command": 117,
+  "area": 67,
+  "origin": [
+   64,
+   166
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    64,
+    144
+   ],
+   [
+    64,
+    144
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "short long",
+  "command": 118,
+  "area": 69,
+  "origin": [
+   196,
+   88
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    192,
+    64
+   ],
+   [
+    216,
+    64
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 9,
+  "actual_bits": 13,
+  "passed": true
+ },
+ {
+  "name": "split bowls",
+  "command": 119,
+  "area": 66,
+  "origin": [
+   52,
+   180
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    48,
+    160
+   ],
+   [
+    72,
+    160
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 9,
+  "actual_bits": 13,
+  "passed": true
+ },
+ {
+  "name": "vane fan",
+  "command": 121,
+  "area": 68,
+  "origin": [
+   80,
+   120
+  ],
+  "direction": 1,
+  "targets": [
+   [
+    80,
+    88
+   ],
+   [
+    80,
+    88
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 1,
+  "actual_bits": 3,
+  "passed": true
+ },
+ {
+  "name": "corner exhibit",
+  "command": 107,
+  "area": 63,
+  "origin": [
+   336,
+   54
+  ],
+  "direction": 0,
+  "targets": [
+   [
+    336,
+    64
+   ],
+   [
+    368,
+    96
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 9,
+  "actual_bits": 9,
+  "passed": true
+ },
+ {
+  "name": "warm exhibit",
+  "command": 109,
+  "area": 67,
+  "origin": [
+   268,
+   208
+  ],
+  "direction": 3,
+  "targets": [
+   [
+    288,
+    208
+   ],
+   [
+    312,
+    208
+   ]
+  ],
+  "release_age": 12,
+  "wanted_bits": 9,
+  "actual_bits": 13,
+  "passed": true
+ },
+ {
+  "name": "weight exhibit",
+  "command": 111,
+  "area": 66,
+  "origin": [
+   132,
+   256
+  ],
+  "direction": 3,
+  "targets": [
+   [
+    144,
+    248
+   ],
+   [
+    176,
+    248
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 9,
+  "actual_bits": 9,
+  "passed": true
+ },
+ {
+  "name": "glint exhibit",
+  "command": 113,
+  "area": 68,
+  "origin": [
+   64,
+   94
+  ],
+  "direction": 3,
+  "targets": [
+   [
+    80,
+    88
+   ],
+   [
+    116,
+    102
+   ]
+  ],
+  "release_age": 0,
+  "wanted_bits": 9,
+  "actual_bits": 9,
+  "passed": true
+ }
+]

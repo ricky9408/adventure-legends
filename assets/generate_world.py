@@ -13,6 +13,7 @@ import json
 import random
 
 from PIL import Image, ImageDraw
+import connected_road_art as roads
 from generate_assets import Art, COLORS, P, PAL, color_background, tree, bush, flowers, stone
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,7 @@ PATH_LINES = [
     ([(92, 72), (92, 92), (153, 92), (216, 92), (286, 92), (345, 92), (399, 92)], 20),
     ([(368, 92), (368, 67), (368, 40), (368, 22)], 25),
 ]
+PATH_LINES += [(line['points'],line['width']) for line in roads.paint_lines(1)]
 SOLIDS = []
 TREES = []
 PROPS = []

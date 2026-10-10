@@ -1,0 +1,313 @@
+{
+  "schema": 1,
+  "content_revision": 8,
+  "scope": "Exact frozen blocking boundary algorithms versus current bounded boundary algorithms, both linked against the same pinned content8 core. This does not assert the content8 core is equivalent to the historical core.",
+  "limitations": [
+    "Synthetic host state, fixtures, and inert UI stubs; no native controller acquisition, hardware timing, audio, or pixel correctness claim.",
+    "The core changes listed here are accepted test inputs, not validated by comparing two boundaries that share that core. Dedicated content8 catalog/save/history/migration gates establish core behavior separately.",
+    "Original oracle source files and manifests stay byte-identical; only the explicit current core linkage contract is new."
+  ],
+  "candidate_rom_sha256": "4166bdafdba0bf689a8230d6d8d407ae7faf0271925df480b4e3b0aa917f1a91",
+  "candidate_source_manifest_sha256": "72114c7c6cad910c8104a36acc8bf23b9066923e281c79229fbd2e7b647f0c5a",
+  "contracts": {
+    "magma": {
+      "modules": [
+        "magma_quests",
+        "save5",
+        "save4",
+        "equipment",
+        "equipment_data",
+        "creatures",
+        "creature_data"
+      ],
+      "frozen_core_manifest": "tests/oracles/magma-f/core-hashes.json",
+      "frozen_core_manifest_sha256": "1a08a3d802e3d0cb22399a9c80949d643f08cb343bd79f0dd0a0101aa003a157",
+      "frozen_core_hashes": {
+        "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+        "src/creature_data.c": "b3aa53837433a10f3c859659f7f37cba36522bf1b0a96d20e970f4a95650f324",
+        "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+        "src/creature_history_v6.inc": "1eef15fb18f7dd40661fc9bd1d0407866bb0775911c73d28a46374ddfab18c29",
+        "src/creature_validation.inc": "60accb203a2ee98ebb8d523e522547fe75410316acc88f970b0758611f546655",
+        "src/creatures.c": "1384b15ff275f5149952c039232749d2fd5718ba63edebc7c342179537a4fcb9",
+        "src/creatures.h": "c28da328184da70acfcbd2a75d8e79665ae61fa934c2425d735c84695dd7d2aa",
+        "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "src/equipment.h": "3a28e7bea6fe745d4ae2768bccfa0de09860e1202a8ddcf1abc5191875578e92",
+        "src/equipment_data.c": "a19073ebc39b73e3c8f5c6078dafebf0b5bca9f4b55b3e6f037d71cdf41f8085",
+        "src/magma_quests.c": "41fc6fe501f85f1951ae9aa1369b4d16188ea66b195f1f291f0ae3b845e23aa3",
+        "src/magma_quests.h": "5c5c06e14ec0d162f9da55f238732a6b1b67f941ebbe141f46d77c46ad4418b2",
+        "src/magma_recruit_job.inc": "ab5cb0ebd970a9c179ef49d45236c3271460f9bf165bc61f7f78099d9100faae",
+        "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+        "src/save5.c": "b395eb4af75b8c09770f5524889a8fd53fd6e1304069eb10c13e05da2072fd6b",
+        "src/save5.h": "6f1d78f468018a03a6105f0e52abb72be6cdd33be61dcb78c71aa3de768dee8a",
+        "src/save5_history_eval.inc": "97596d21f91d327d4240187f084f581fc2ed8c1e7d8664a7dc7ac85c11f7aaf4",
+        "src/save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+        "src/save5_preflight.inc": "bb92475420ee9e57ac259cb47ec8e791cacc6613c0cbae34e48a0a77f6086457",
+        "src/save5_return_policy.h": "fef7f4496f2b48a6891133a902017927d82f6831f1b8bd147f2a099c62d85923",
+        "src/save5_return_policy.inc": "1ca3dd4cb3af8dfd3e2f6a22321f7a4ff8570f9a9aa61b1110a412b48f7a2bf8",
+        "src/save5_underwater_policy.h": "3f78289d79484df9223cc8593166df0c9bfd53a147f9d2347c7a9b9181bb4200",
+        "src/save5_underwater_policy.inc": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083"
+      },
+      "current_core_hashes": {
+        "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+        "src/creature_data.c": "ea67aabf4297b5b7958e77c32e9346fb41b4c775132a4cad7985c12b66fdb9d1",
+        "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+        "src/creature_history_v6.inc": "1eef15fb18f7dd40661fc9bd1d0407866bb0775911c73d28a46374ddfab18c29",
+        "src/creature_history_v7.inc": "dfe490d85a02a0f1267905f9ac59a11b4d4606d0e83fb6bb26ded9c19208a52e",
+        "src/creature_validation.inc": "cf6e27366a1e36db99caa32416280806cbcc21c0c8055b7562acea0f28609b6f",
+        "src/creatures.c": "9db3356df97138d99b90e09909237b51c932a32316ddf3a343eb6027512c7478",
+        "src/creatures.h": "0ea048bb55b7afde0988336c636ca5de92b063dc2ff2e8208c46cd2139ccd854",
+        "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "src/equipment.h": "54d2bf0634325cda198104cde2b9f0d9809f3972d13b5913fddb183004c9b88f",
+        "src/equipment_data.c": "0b785bcac9d59e2e87e91e0a7a01108ded8a8c77c6210f1bcc26d940ead51f64",
+        "src/magma_quests.c": "41fc6fe501f85f1951ae9aa1369b4d16188ea66b195f1f291f0ae3b845e23aa3",
+        "src/magma_quests.h": "5c5c06e14ec0d162f9da55f238732a6b1b67f941ebbe141f46d77c46ad4418b2",
+        "src/magma_recruit_job.inc": "ab5cb0ebd970a9c179ef49d45236c3271460f9bf165bc61f7f78099d9100faae",
+        "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+        "src/save5.c": "b77a10a027d2b81927df06000a428eb2c7aec1a6ee86e0e25557ba25c2c6116a",
+        "src/save5.h": "f0f6d1484fb2a1d749673db61564575a8ab4d68e07921e1b258df22a264de297",
+        "src/save5_history_eval.inc": "c30805299da5d511bbecefdb58a154808d018c6ee997c1981100beedda975889",
+        "src/save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+        "src/save5_horizons_policy.h": "1e90a38e740b0f191e8d6ad9545ebc9422775e49f56429c33031a053d59d1c3e",
+        "src/save5_horizons_policy.inc": "861772b355c189095745c312a40946b24b560a6104a86a4a3e5ef7fff416e661",
+        "src/save5_preflight.inc": "0f18433d9d13e328a69a727968e193436ee40fdf074d114c8f1832d2a41f4e43",
+        "src/save5_return_policy.h": "fef7f4496f2b48a6891133a902017927d82f6831f1b8bd147f2a099c62d85923",
+        "src/save5_return_policy.inc": "1ca3dd4cb3af8dfd3e2f6a22321f7a4ff8570f9a9aa61b1110a412b48f7a2bf8",
+        "src/save5_revision7_policy.inc": "be7288f780ed9fe18582dfae9add5e44c8d75d2ce41eb9214de6a00de4ead5ae",
+        "src/save5_underwater_policy.h": "3f78289d79484df9223cc8593166df0c9bfd53a147f9d2347c7a9b9181bb4200",
+        "src/save5_underwater_policy.inc": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083"
+      },
+      "changed_or_added_core_files": {
+        "src/creature_data.c": {
+          "frozen_sha256": "b3aa53837433a10f3c859659f7f37cba36522bf1b0a96d20e970f4a95650f324",
+          "current_sha256": "ea67aabf4297b5b7958e77c32e9346fb41b4c775132a4cad7985c12b66fdb9d1",
+          "reason": "Content8 creature catalog rows and branches"
+        },
+        "src/creature_history_v7.inc": {
+          "frozen_sha256": null,
+          "current_sha256": "dfe490d85a02a0f1267905f9ac59a11b4d4606d0e83fb6bb26ded9c19208a52e",
+          "reason": "Frozen revision7 creature history acceptance for content8 migration"
+        },
+        "src/creature_validation.inc": {
+          "frozen_sha256": "60accb203a2ee98ebb8d523e522547fe75410316acc88f970b0758611f546655",
+          "current_sha256": "cf6e27366a1e36db99caa32416280806cbcc21c0c8055b7562acea0f28609b6f",
+          "reason": "Content8 current catalog and revision7 validation dispatch"
+        },
+        "src/creatures.c": {
+          "frozen_sha256": "1384b15ff275f5149952c039232749d2fd5718ba63edebc7c342179537a4fcb9",
+          "current_sha256": "9db3356df97138d99b90e09909237b51c932a32316ddf3a343eb6027512c7478",
+          "reason": "Content8 catalog/history integration"
+        },
+        "src/creatures.h": {
+          "frozen_sha256": "c28da328184da70acfcbd2a75d8e79665ae61fa934c2425d735c84695dd7d2aa",
+          "current_sha256": "0ea048bb55b7afde0988336c636ca5de92b063dc2ff2e8208c46cd2139ccd854",
+          "reason": "Content8 creature catalog constants"
+        },
+        "src/equipment.h": {
+          "frozen_sha256": "3a28e7bea6fe745d4ae2768bccfa0de09860e1202a8ddcf1abc5191875578e92",
+          "current_sha256": "54d2bf0634325cda198104cde2b9f0d9809f3972d13b5913fddb183004c9b88f",
+          "reason": "Content8 equipment catalog constants"
+        },
+        "src/equipment_data.c": {
+          "frozen_sha256": "a19073ebc39b73e3c8f5c6078dafebf0b5bca9f4b55b3e6f037d71cdf41f8085",
+          "current_sha256": "0b785bcac9d59e2e87e91e0a7a01108ded8a8c77c6210f1bcc26d940ead51f64",
+          "reason": "Content8 equipment catalog rows"
+        },
+        "src/save5.c": {
+          "frozen_sha256": "b395eb4af75b8c09770f5524889a8fd53fd6e1304069eb10c13e05da2072fd6b",
+          "current_sha256": "b77a10a027d2b81927df06000a428eb2c7aec1a6ee86e0e25557ba25c2c6116a",
+          "reason": "Content8 save validation and migration dispatch"
+        },
+        "src/save5.h": {
+          "frozen_sha256": "6f1d78f468018a03a6105f0e52abb72be6cdd33be61dcb78c71aa3de768dee8a",
+          "current_sha256": "f0f6d1484fb2a1d749673db61564575a8ab4d68e07921e1b258df22a264de297",
+          "reason": "Content revision8 and Horizons save constants"
+        },
+        "src/save5_history_eval.inc": {
+          "frozen_sha256": "97596d21f91d327d4240187f084f581fc2ed8c1e7d8664a7dc7ac85c11f7aaf4",
+          "current_sha256": "c30805299da5d511bbecefdb58a154808d018c6ee997c1981100beedda975889",
+          "reason": "Revision7 historical save validation dispatch"
+        },
+        "src/save5_horizons_policy.h": {
+          "frozen_sha256": null,
+          "current_sha256": "1e90a38e740b0f191e8d6ad9545ebc9422775e49f56429c33031a053d59d1c3e",
+          "reason": "Content8 Horizons policy declarations"
+        },
+        "src/save5_horizons_policy.inc": {
+          "frozen_sha256": null,
+          "current_sha256": "861772b355c189095745c312a40946b24b560a6104a86a4a3e5ef7fff416e661",
+          "reason": "Content8 Horizons save policy implementation"
+        },
+        "src/save5_preflight.inc": {
+          "frozen_sha256": "bb92475420ee9e57ac259cb47ec8e791cacc6613c0cbae34e48a0a77f6086457",
+          "current_sha256": "0f18433d9d13e328a69a727968e193436ee40fdf074d114c8f1832d2a41f4e43",
+          "reason": "Content8 save preflight policy integration"
+        },
+        "src/save5_revision7_policy.inc": {
+          "frozen_sha256": null,
+          "current_sha256": "be7288f780ed9fe18582dfae9add5e44c8d75d2ce41eb9214de6a00de4ead5ae",
+          "reason": "Frozen revision7 save policy for content8 migration"
+        }
+      }
+    },
+    "southern": {
+      "modules": [
+        "southern_quests",
+        "northern_quests",
+        "save5",
+        "save4",
+        "equipment",
+        "equipment_data",
+        "creatures",
+        "creature_data"
+      ],
+      "frozen_core_manifest": "tests/fixtures/southern-entry-e/source-hashes.json",
+      "frozen_core_manifest_sha256": "d6a2a1898cdf782dcae2a3001646ee612168b9841662254ae5a3b4033a9db615",
+      "frozen_core_hashes": {
+        "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+        "src/creature_data.c": "b3aa53837433a10f3c859659f7f37cba36522bf1b0a96d20e970f4a95650f324",
+        "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+        "src/creature_history_v6.inc": "1eef15fb18f7dd40661fc9bd1d0407866bb0775911c73d28a46374ddfab18c29",
+        "src/creature_validation.inc": "60accb203a2ee98ebb8d523e522547fe75410316acc88f970b0758611f546655",
+        "src/creatures.c": "1384b15ff275f5149952c039232749d2fd5718ba63edebc7c342179537a4fcb9",
+        "src/creatures.h": "c28da328184da70acfcbd2a75d8e79665ae61fa934c2425d735c84695dd7d2aa",
+        "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "src/equipment.h": "3a28e7bea6fe745d4ae2768bccfa0de09860e1202a8ddcf1abc5191875578e92",
+        "src/equipment_data.c": "a19073ebc39b73e3c8f5c6078dafebf0b5bca9f4b55b3e6f037d71cdf41f8085",
+        "src/northern_quests.c": "16aabbaf8ca9fa1ba269a1923ac724d267c2d5f2be62d7b6ba1b9c1ea5c3d6f5",
+        "src/northern_quests.h": "3dd9fe39767b649186dacd6987697e0a4e401b3c55e30f2ff103f6487e56cc88",
+        "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+        "src/save5.c": "b395eb4af75b8c09770f5524889a8fd53fd6e1304069eb10c13e05da2072fd6b",
+        "src/save5.h": "6f1d78f468018a03a6105f0e52abb72be6cdd33be61dcb78c71aa3de768dee8a",
+        "src/save5_history_eval.inc": "97596d21f91d327d4240187f084f581fc2ed8c1e7d8664a7dc7ac85c11f7aaf4",
+        "src/save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+        "src/save5_preflight.inc": "bb92475420ee9e57ac259cb47ec8e791cacc6613c0cbae34e48a0a77f6086457",
+        "src/save5_return_policy.h": "fef7f4496f2b48a6891133a902017927d82f6831f1b8bd147f2a099c62d85923",
+        "src/save5_return_policy.inc": "1ca3dd4cb3af8dfd3e2f6a22321f7a4ff8570f9a9aa61b1110a412b48f7a2bf8",
+        "src/save5_underwater_policy.h": "3f78289d79484df9223cc8593166df0c9bfd53a147f9d2347c7a9b9181bb4200",
+        "src/save5_underwater_policy.inc": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083",
+        "src/southern_quests.c": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+        "src/southern_quests.h": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881"
+      },
+      "current_core_hashes": {
+        "src/creature_admission_job.inc": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+        "src/creature_data.c": "ea67aabf4297b5b7958e77c32e9346fb41b4c775132a4cad7985c12b66fdb9d1",
+        "src/creature_history_v5.inc": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+        "src/creature_history_v6.inc": "1eef15fb18f7dd40661fc9bd1d0407866bb0775911c73d28a46374ddfab18c29",
+        "src/creature_history_v7.inc": "dfe490d85a02a0f1267905f9ac59a11b4d4606d0e83fb6bb26ded9c19208a52e",
+        "src/creature_validation.inc": "cf6e27366a1e36db99caa32416280806cbcc21c0c8055b7562acea0f28609b6f",
+        "src/creatures.c": "9db3356df97138d99b90e09909237b51c932a32316ddf3a343eb6027512c7478",
+        "src/creatures.h": "0ea048bb55b7afde0988336c636ca5de92b063dc2ff2e8208c46cd2139ccd854",
+        "src/equipment.c": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+        "src/equipment.h": "54d2bf0634325cda198104cde2b9f0d9809f3972d13b5913fddb183004c9b88f",
+        "src/equipment_data.c": "0b785bcac9d59e2e87e91e0a7a01108ded8a8c77c6210f1bcc26d940ead51f64",
+        "src/northern_quests.c": "16aabbaf8ca9fa1ba269a1923ac724d267c2d5f2be62d7b6ba1b9c1ea5c3d6f5",
+        "src/northern_quests.h": "3dd9fe39767b649186dacd6987697e0a4e401b3c55e30f2ff103f6487e56cc88",
+        "src/save4.c": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+        "src/save4.h": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+        "src/save5.c": "b77a10a027d2b81927df06000a428eb2c7aec1a6ee86e0e25557ba25c2c6116a",
+        "src/save5.h": "f0f6d1484fb2a1d749673db61564575a8ab4d68e07921e1b258df22a264de297",
+        "src/save5_history_eval.inc": "c30805299da5d511bbecefdb58a154808d018c6ee997c1981100beedda975889",
+        "src/save5_history_policy.h": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+        "src/save5_horizons_policy.h": "1e90a38e740b0f191e8d6ad9545ebc9422775e49f56429c33031a053d59d1c3e",
+        "src/save5_horizons_policy.inc": "861772b355c189095745c312a40946b24b560a6104a86a4a3e5ef7fff416e661",
+        "src/save5_preflight.inc": "0f18433d9d13e328a69a727968e193436ee40fdf074d114c8f1832d2a41f4e43",
+        "src/save5_return_policy.h": "fef7f4496f2b48a6891133a902017927d82f6831f1b8bd147f2a099c62d85923",
+        "src/save5_return_policy.inc": "1ca3dd4cb3af8dfd3e2f6a22321f7a4ff8570f9a9aa61b1110a412b48f7a2bf8",
+        "src/save5_revision7_policy.inc": "be7288f780ed9fe18582dfae9add5e44c8d75d2ce41eb9214de6a00de4ead5ae",
+        "src/save5_underwater_policy.h": "3f78289d79484df9223cc8593166df0c9bfd53a147f9d2347c7a9b9181bb4200",
+        "src/save5_underwater_policy.inc": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083",
+        "src/southern_quests.c": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+        "src/southern_quests.h": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881"
+      },
+      "changed_or_added_core_files": {
+        "src/creature_data.c": {
+          "frozen_sha256": "b3aa53837433a10f3c859659f7f37cba36522bf1b0a96d20e970f4a95650f324",
+          "current_sha256": "ea67aabf4297b5b7958e77c32e9346fb41b4c775132a4cad7985c12b66fdb9d1",
+          "reason": "Content8 creature catalog rows and branches"
+        },
+        "src/creature_history_v7.inc": {
+          "frozen_sha256": null,
+          "current_sha256": "dfe490d85a02a0f1267905f9ac59a11b4d4606d0e83fb6bb26ded9c19208a52e",
+          "reason": "Frozen revision7 creature history acceptance for content8 migration"
+        },
+        "src/creature_validation.inc": {
+          "frozen_sha256": "60accb203a2ee98ebb8d523e522547fe75410316acc88f970b0758611f546655",
+          "current_sha256": "cf6e27366a1e36db99caa32416280806cbcc21c0c8055b7562acea0f28609b6f",
+          "reason": "Content8 current catalog and revision7 validation dispatch"
+        },
+        "src/creatures.c": {
+          "frozen_sha256": "1384b15ff275f5149952c039232749d2fd5718ba63edebc7c342179537a4fcb9",
+          "current_sha256": "9db3356df97138d99b90e09909237b51c932a32316ddf3a343eb6027512c7478",
+          "reason": "Content8 catalog/history integration"
+        },
+        "src/creatures.h": {
+          "frozen_sha256": "c28da328184da70acfcbd2a75d8e79665ae61fa934c2425d735c84695dd7d2aa",
+          "current_sha256": "0ea048bb55b7afde0988336c636ca5de92b063dc2ff2e8208c46cd2139ccd854",
+          "reason": "Content8 creature catalog constants"
+        },
+        "src/equipment.h": {
+          "frozen_sha256": "3a28e7bea6fe745d4ae2768bccfa0de09860e1202a8ddcf1abc5191875578e92",
+          "current_sha256": "54d2bf0634325cda198104cde2b9f0d9809f3972d13b5913fddb183004c9b88f",
+          "reason": "Content8 equipment catalog constants"
+        },
+        "src/equipment_data.c": {
+          "frozen_sha256": "a19073ebc39b73e3c8f5c6078dafebf0b5bca9f4b55b3e6f037d71cdf41f8085",
+          "current_sha256": "0b785bcac9d59e2e87e91e0a7a01108ded8a8c77c6210f1bcc26d940ead51f64",
+          "reason": "Content8 equipment catalog rows"
+        },
+        "src/save5.c": {
+          "frozen_sha256": "b395eb4af75b8c09770f5524889a8fd53fd6e1304069eb10c13e05da2072fd6b",
+          "current_sha256": "b77a10a027d2b81927df06000a428eb2c7aec1a6ee86e0e25557ba25c2c6116a",
+          "reason": "Content8 save validation and migration dispatch"
+        },
+        "src/save5.h": {
+          "frozen_sha256": "6f1d78f468018a03a6105f0e52abb72be6cdd33be61dcb78c71aa3de768dee8a",
+          "current_sha256": "f0f6d1484fb2a1d749673db61564575a8ab4d68e07921e1b258df22a264de297",
+          "reason": "Content revision8 and Horizons save constants"
+        },
+        "src/save5_history_eval.inc": {
+          "frozen_sha256": "97596d21f91d327d4240187f084f581fc2ed8c1e7d8664a7dc7ac85c11f7aaf4",
+          "current_sha256": "c30805299da5d511bbecefdb58a154808d018c6ee997c1981100beedda975889",
+          "reason": "Revision7 historical save validation dispatch"
+        },
+        "src/save5_horizons_policy.h": {
+          "frozen_sha256": null,
+          "current_sha256": "1e90a38e740b0f191e8d6ad9545ebc9422775e49f56429c33031a053d59d1c3e",
+          "reason": "Content8 Horizons policy declarations"
+        },
+        "src/save5_horizons_policy.inc": {
+          "frozen_sha256": null,
+          "current_sha256": "861772b355c189095745c312a40946b24b560a6104a86a4a3e5ef7fff416e661",
+          "reason": "Content8 Horizons save policy implementation"
+        },
+        "src/save5_preflight.inc": {
+          "frozen_sha256": "bb92475420ee9e57ac259cb47ec8e791cacc6613c0cbae34e48a0a77f6086457",
+          "current_sha256": "0f18433d9d13e328a69a727968e193436ee40fdf074d114c8f1832d2a41f4e43",
+          "reason": "Content8 save preflight policy integration"
+        },
+        "src/save5_revision7_policy.inc": {
+          "frozen_sha256": null,
+          "current_sha256": "be7288f780ed9fe18582dfae9add5e44c8d75d2ce41eb9214de6a00de4ead5ae",
+          "reason": "Frozen revision7 save policy for content8 migration"
+        }
+      }
+    }
+  },
+  "native_source_manifest_provenance": {
+    "scope": "Canonical export omits exactly one uncompiled patch backup, whose original manifest entry and bytes remain preserved. No retained runtime or shared-core hash changes.",
+    "original_manifest_archive": "docs/evidence/horizons-source-export/native-c-original-source-hashes.json.gz",
+    "original_manifest_archive_sha256": "cd712c0225435918ff15233c5fa89fa0772bc69387f4550c51421390c1e5f1e6",
+    "original_manifest_sha256": "e4f99d30802a5e6a97f1d5c639ff3f3d8d59ddb2ad4a91d6c61b212b0ed91a54",
+    "original_input_files": 1734,
+    "canonical_input_files": 1733,
+    "correspondence": "docs/evidence/horizons-source-export/manifest-correspondence.json",
+    "correspondence_sha256": "cbbcdf35cd48dea36e817b1a2e4eeb462a5551492404dbca6e04e22faf9b96fe",
+    "source_path_removed": "src/horizons_game_draw.inc.orig",
+    "archived_path": "docs/evidence/horizons-source-export/pre-optimization-stage-renderer.inc.txt",
+    "archived_sha256": "c4c30b2a0808954458825821c92156b582aeef5fab0c9573569dc793abead2e2",
+    "archive_bytes": 12057
+  }
+}

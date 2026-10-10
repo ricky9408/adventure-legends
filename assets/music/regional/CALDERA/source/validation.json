@@ -1,0 +1,31 @@
+{
+  "title": "The Breath of the Caldera",
+  "bars": 20,
+  "meter": "4/4",
+  "tempo": 106,
+  "duration_seconds": 45.283018867924525,
+  "xml": "All pitches, onsets, durations match event data",
+  "midi": "All four binary tracks parsed; notes match events; 14-tick release gap",
+  "end_tick": 38400,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "voice_crossings": 0,
+  "ranges": {
+    "melody": [
+      71,
+      87
+    ],
+    "inner": [
+      55,
+      67
+    ],
+    "bass": [
+      43,
+      53
+    ]
+  },
+  "audible_review_performed": false,
+  "visual_review": "Passed: every final PDF page rasterized and visually inspected; all accidentals, note spacing, section labels and page boundaries readable.",
+  "independent_review": "See INDEPENDENT-MUSIC-REVIEW.md",
+  "individual_voice_midi": "All three files have valid two-track headers and byte-identical conductor and voice tracks to checked master"
+}

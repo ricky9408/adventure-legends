@@ -1,0 +1,99 @@
+{
+  "palette": [
+    {
+      "name": "warm harbor concertina",
+      "gain": 0.66,
+      "attack": 0.012,
+      "release": 0.083,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.14
+        ],
+        [
+          3,
+          0.125
+        ],
+        [
+          4,
+          0.038
+        ],
+        [
+          5,
+          0.03
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.5,
+      "vibrato_cents": 3.5
+    },
+    {
+      "name": "soft quay bass",
+      "gain": 0.35,
+      "attack": 0.008,
+      "release": 0.07,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.018
+        ],
+        [
+          3,
+          -0.1111111111111111
+        ],
+        [
+          5,
+          0.04
+        ],
+        [
+          7,
+          -0.02040816326530612
+        ],
+        [
+          9,
+          0.012345679012345678
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "muted dockside strings",
+      "gain": 0.21,
+      "attack": 0.004,
+      "release": 0.06,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.12
+        ],
+        [
+          3,
+          0.04
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "hearthwake-gba-16384-s8.raw": "17b9fe328f48b45a8affa667fff026b556d022db7fc62dad70cf8c657f67c2ba"
+  }
+}

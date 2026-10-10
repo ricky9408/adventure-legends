@@ -9,8 +9,11 @@ _start:
 reset:
     mov r0, #0xD3
     msr cpsr_c, r0
+    ldr sp, =0x03007FE0
+    mov r0, #0xD2
+    msr cpsr_c, r0
     ldr sp, =0x03007FA0
-    mov r0, #0xDF
+    mov r0, #0x5F
     msr cpsr_c, r0
     ldr sp, =0x03007F00
     ldr r0, =__iwram_lma

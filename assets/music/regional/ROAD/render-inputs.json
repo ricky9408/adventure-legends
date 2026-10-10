@@ -1,0 +1,111 @@
+{
+  "palette": [
+    {
+      "name": "sunlit narrow-pulse woodwind",
+      "gain": 0.68,
+      "attack": 0.0055,
+      "release": 0.068,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.17
+        ],
+        [
+          3,
+          0.26
+        ],
+        [
+          4,
+          0.05
+        ],
+        [
+          5,
+          0.11
+        ],
+        [
+          7,
+          0.042
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 5.2,
+      "vibrato_cents": 4.0
+    },
+    {
+      "name": "light traveling triangle bass",
+      "gain": 0.39,
+      "attack": 0.004,
+      "release": 0.055,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.018
+        ],
+        [
+          3,
+          -0.1111111111111111
+        ],
+        [
+          5,
+          0.04
+        ],
+        [
+          7,
+          -0.02040816326530612
+        ],
+        [
+          9,
+          0.012345679012345678
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "small wooden pluck",
+      "gain": 0.32,
+      "attack": 0.0022,
+      "release": 0.038,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.28
+        ],
+        [
+          3,
+          0.13
+        ],
+        [
+          4,
+          0.05
+        ],
+        [
+          5,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "where_the_mileposts_turn-gba-16384-s8.raw": "ee6b2f03e6e985ad4348de3b03e2707ed862fafc7cce819908b9d9af6dcc4a81"
+  }
+}

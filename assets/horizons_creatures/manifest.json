@@ -1,0 +1,1317 @@
+{
+  "schema_version": 1,
+  "design_version": "SHARED_HORIZONS",
+  "design_manifest_sha256": "913aded4088452c5d34dcd316274edc7cef5689f69a127b9a7188165b6409b1d",
+  "generator": "assets/generate_horizons_creatures.py",
+  "form_ids": [
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120
+  ],
+  "names": [
+    "Lintail",
+    "Loomarten",
+    "Cindercup",
+    "Mantlewick",
+    "Talusnip",
+    "Stratodillo",
+    "Gleamray",
+    "Foldcurrent",
+    "Rivetusk",
+    "Furlace",
+    "Kilnspoke",
+    "Chalkox",
+    "Tinshear",
+    "Rippleback",
+    "Tetherasp",
+    "Cymbalop"
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "status": "ART ONLY: these are authored sprite sheets and art-review composites, not emulator captures, obtainability proof, live-rendering proof or gameplay acceptance.",
+  "rights": "Original code-native pixel geometry, authored from silhouettes and anatomy in the Shared Horizons brief. No traced, downloaded, image-generated or third-party creature pixels.",
+  "generator_sha256": "e0b534f24b95fb656bbe9d0e0a229f59c826a11f72d074a0f1d23aa186f0e784",
+  "codegen_sha256": "8377ade9cf1d2b6b56008d83940bd29d9e739c9ad8d9bc28bed5e2572189131d",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 131088,
+  "runtime_data_bytes": 0,
+  "runtime_bss_bytes": 0,
+  "persistent_obj_allocation_bytes": 0,
+  "rom_budget_bytes": 134144,
+  "include_bytes": [
+    29967,
+    29955,
+    29981,
+    29915,
+    29931,
+    29977,
+    29937,
+    29937,
+    29980,
+    29945,
+    26498
+  ],
+  "max_include_bytes": 29981,
+  "scene_review_sources": [
+    {
+      "name": "OLD GRASS",
+      "path": "assets/southern_region/frondshore_commons.png",
+      "crop": [
+        276,
+        262,
+        300,
+        286
+      ],
+      "sha256": "1299ff7353c396c132498ea19ad74944b233e71480cc8b5cb354e0940c41a53f"
+    },
+    {
+      "name": "OLD CREAM",
+      "path": "assets/southern_region/sunlace_anchorage.png",
+      "crop": [
+        40,
+        96,
+        64,
+        120
+      ],
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
+    },
+    {
+      "name": "OLD TEAL",
+      "path": "assets/southern_region/sunlace_anchorage.png",
+      "crop": [
+        32,
+        287,
+        56,
+        311
+      ],
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
+    },
+    {
+      "name": "RETURN GRASS",
+      "path": "assets/return_region/greenwake_common.png",
+      "crop": [
+        208,
+        192,
+        232,
+        216
+      ],
+      "sha256": "deb91cab3e378c94267348ed53051a1c3caa065d458c7ae038d261554becebd0"
+    },
+    {
+      "name": "RETURN CREAM",
+      "path": "assets/return_region/sunlace_shade_terraces.png",
+      "crop": [
+        264,
+        112,
+        288,
+        136
+      ],
+      "sha256": "c7b12adbdbc1a52758dd43731db3fff795b21fd9414c6879500d84919963f75b"
+    },
+    {
+      "name": "RETURN TEAL",
+      "path": "assets/return_region/overflow_gardens.png",
+      "crop": [
+        152,
+        104,
+        176,
+        128
+      ],
+      "sha256": "bd17c8572d562feac4ef09824643fbd141a3c1b410c1d80769d1bac1cf7238dd"
+    }
+  ],
+  "anchor": [
+    8,
+    8
+  ],
+  "shadow_anchor": [
+    8,
+    13
+  ],
+  "shadow_in_sprite": false,
+  "idle_frame": 0,
+  "walk_ticks_by_form": {
+    "105": [
+      7,
+      5,
+      7,
+      6
+    ],
+    "106": [
+      9,
+      7,
+      9,
+      8
+    ],
+    "107": [
+      10,
+      8,
+      10,
+      8
+    ],
+    "108": [
+      12,
+      9,
+      12,
+      10
+    ],
+    "109": [
+      6,
+      5,
+      10,
+      8
+    ],
+    "110": [
+      11,
+      9,
+      12,
+      10
+    ],
+    "111": [
+      8,
+      7,
+      8,
+      7
+    ],
+    "112": [
+      10,
+      7,
+      10,
+      8
+    ],
+    "113": [
+      8,
+      6,
+      8,
+      7
+    ],
+    "114": [
+      7,
+      6,
+      7,
+      6
+    ],
+    "115": [
+      5,
+      6,
+      5,
+      7
+    ],
+    "116": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "117": [
+      5,
+      4,
+      5,
+      4
+    ],
+    "118": [
+      10,
+      8,
+      10,
+      9
+    ],
+    "119": [
+      8,
+      7,
+      8,
+      7
+    ],
+    "120": [
+      6,
+      5,
+      9,
+      5
+    ]
+  },
+  "ability_poses": [
+    "anticipation",
+    "release",
+    "settle"
+  ],
+  "recovery": "Return to walking after settle; no fourth cast pose. Effect pixels are owned by the separate effect renderer.",
+  "briefs": [
+    {
+      "id": 105,
+      "family_id": "F041",
+      "adapter": 40,
+      "name": "Lintail",
+      "phase": "wood",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 31,
+        "power": 35,
+        "guard": 29,
+        "focus": 43,
+        "haste": 42
+      },
+      "stat_total": 180,
+      "signature_command": 106,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 106
+        }
+      ],
+      "field_capabilities": [
+        "reel_load"
+      ],
+      "silhouette": "A slim leaf-furred marten with a cream triangular face, tiny round ears and one forked leaf tail; separated front paws and long rear body distinguish it from Hingelet.",
+      "motion": "Bounds low, tail forks close on landing; casts plant paws, stretch one tail ribbon, then recoil.",
+      "ability": {
+        "name": "Hem Draw",
+        "field": "Pull one cloth-tagged light carriage one socket toward the cast origin along its authored straight rail; side approaches refuse. Never moves the player.",
+        "combat": "A narrow strip travels outward, then returns along the identical clear segment. Outward damage1 or returning damage2, never both on one enemy; spacing favors the return.",
+        "anticipation_active_settle_updates": [
+          6,
+          24,
+          8
+        ],
+        "cooldown_active_updates": 72,
+        "max_extent_px": 48,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 106,
+      "family_id": "F041",
+      "adapter": 40,
+      "name": "Loomarten",
+      "phase": "wood",
+      "polarity": "yang",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 43,
+        "power": 45,
+        "guard": 40,
+        "focus": 59,
+        "haste": 53
+      },
+      "stat_total": 240,
+      "signature_command": 107,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 106
+        },
+        {
+          "level": 34,
+          "command": 107
+        }
+      ],
+      "field_capabilities": [
+        "reel_load",
+        "grow_roots"
+      ],
+      "silhouette": "Long upright marten with two connected leafy shoulder pennants, a slim visible waist, short round ears and the same single split tail; open space between raised arms and chest.",
+      "motion": "Forepaw step then trailing-tail sweep; casts gather shoulder pennants, weave an angled hem, then fold them.",
+      "ability": {
+        "name": "Corner Hem",
+        "field": "Guide that cloth carriage through one marked right-angle rail corner selected by one fresh cardinal edge in the first8 active updates. Each leg requires fresh visible contact.",
+        "combat": "One two-leg ribbon turns once at a visible elbow, total travel64px. Each leg clips independently against solids and no enemy takes more than2 total damage.",
+        "anticipation_active_settle_updates": [
+          8,
+          30,
+          10
+        ],
+        "cooldown_active_updates": 88,
+        "max_extent_px": 64,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 107,
+      "family_id": "F042",
+      "adapter": 41,
+      "name": "Cindercup",
+      "phase": "fire",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 39,
+        "power": 26,
+        "guard": 40,
+        "focus": 47,
+        "haste": 28
+      },
+      "stat_total": 180,
+      "signature_command": 108,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 108
+        }
+      ],
+      "field_capabilities": [
+        "store_heat"
+      ],
+      "silhouette": "A round orange puffin-like chick with a pale bowl-shaped down collar, short dark bill, tiny separate wings and broad charcoal feet; breast remains a living face-bearing body.",
+      "motion": "Short alternating waddles; collar contracts, receives a warm ember, then opens with a soft pulse.",
+      "ability": {
+        "name": "Warm Vessel",
+        "field": "Gather warmth from a marked warm plate, then release the current cast into its adjacent seam after a fresh R. One fixed local transfer, no carried heat across rooms.",
+        "combat": "After a visible charge, fresh R releases one radius12 pulse at the fixed cast origin; damage2. No release by update30 dissipates harmlessly; no automatic healing.",
+        "anticipation_active_settle_updates": [
+          8,
+          24,
+          10
+        ],
+        "cooldown_active_updates": 84,
+        "max_extent_px": 16,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 108,
+      "family_id": "F042",
+      "adapter": 41,
+      "name": "Mantlewick",
+      "phase": "fire",
+      "polarity": "yin",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 52,
+        "power": 36,
+        "guard": 52,
+        "focus": 64,
+        "haste": 36
+      },
+      "stat_total": 240,
+      "signature_command": 109,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 108
+        },
+        {
+          "level": 34,
+          "command": 109
+        }
+      ],
+      "field_capabilities": [
+        "store_heat",
+        "ignite"
+      ],
+      "silhouette": "Tall rounded wading bird with a continuous hood of warm down, long exposed neck, two short wing elbows and broad grounded feet; retains Cindercup's dark bill and pale collar.",
+      "motion": "Slow neck-leading steps; hood closes, one wing cups a coal, then the hood settles.",
+      "ability": {
+        "name": "Hearth Veil",
+        "field": "Transfer heat between one source and one shielded target on a short straight bench; a manually placed hood must leave the marked vent open.",
+        "combat": "A stationary crescent catches at most one eligible ordinary hostile shot, then releases a short forward ember on fresh R; damage3 only after a catch,1 without. No boss-shot reflection.",
+        "anticipation_active_settle_updates": [
+          8,
+          32,
+          10
+        ],
+        "cooldown_active_updates": 100,
+        "max_extent_px": 36,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 109,
+      "family_id": "F043",
+      "adapter": 42,
+      "name": "Talusnip",
+      "phase": "earth",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 38,
+        "power": 37,
+        "guard": 43,
+        "focus": 30,
+        "haste": 32
+      },
+      "stat_total": 180,
+      "signature_command": 110,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 110
+        }
+      ],
+      "field_capabilities": [
+        "press_weight",
+        "shift_ballast"
+      ],
+      "silhouette": "A pointed-nosed armadillo with three pale overlapping shoulder bands, low upright ears, a bare face and a broad flattened fan tail; no shell dome or goat horns.",
+      "motion": "Front claws tap twice before hindfeet catch up; casts fan the tail, lean forward, then resettle.",
+      "ability": {
+        "name": "Measured Nudge",
+        "field": "Move one tagged counterweight exactly one notch away from the caster on a three-notch rail; end stops and an occupied destination refuse without movement.",
+        "combat": "A short ground wedge hits once for2 and nudges only ordinary movable enemies up to8px if the destination is clear; bosses take normal damage without displacement.",
+        "anticipation_active_settle_updates": [
+          6,
+          12,
+          12
+        ],
+        "cooldown_active_updates": 66,
+        "max_extent_px": 28,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 110,
+      "family_id": "F043",
+      "adapter": 42,
+      "name": "Stratodillo",
+      "phase": "earth",
+      "polarity": "yang",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 52,
+        "power": 48,
+        "guard": 59,
+        "focus": 41,
+        "haste": 40
+      },
+      "stat_total": 240,
+      "signature_command": 111,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 110
+        },
+        {
+          "level": 34,
+          "command": 111
+        }
+      ],
+      "field_capabilities": [
+        "press_weight",
+        "shift_ballast"
+      ],
+      "silhouette": "Long low armadillo with four raised offset shoulder bands, two wide digging forepaws and a tall open fan tail; a diagonal gap separates bands from its snout.",
+      "motion": "Heavy front-left/front-right tread with delayed fan-tail sway; casts brace, press two distinct beats, then relax.",
+      "ability": {
+        "name": "Terrace Measure",
+        "field": "Choose left or right notch during the first8 updates and settle a tagged weight there only after its two foot pads receive the two visible beats; no arbitrary terrain creation.",
+        "combat": "Two spatially separated ground pulses, one near then one far. Enemies take at most3 total, and the near empty gap rewards deliberate range choice.",
+        "anticipation_active_settle_updates": [
+          8,
+          22,
+          12
+        ],
+        "cooldown_active_updates": 86,
+        "max_extent_px": 44,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 111,
+      "family_id": "F044",
+      "adapter": 43,
+      "name": "Gleamray",
+      "phase": "water",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 30,
+        "power": 29,
+        "guard": 35,
+        "focus": 50,
+        "haste": 36
+      },
+      "stat_total": 180,
+      "signature_command": 112,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 112
+        }
+      ],
+      "field_capabilities": [
+        "refract_beam"
+      ],
+      "silhouette": "A small diamond freshwater ray with curled pectoral tips used as feet, two high bright eyes, a pale smiling underside and one slender tail; grounded, not free-swimming.",
+      "motion": "Alternating fin-tip steps and a soft back ripple; casts cup the fins, tilt a clear water lens, then flatten.",
+      "ability": {
+        "name": "Shallow Prism",
+        "field": "Tilt one marked water-lens tray to one of two pictured bearings; a beam must visibly reach both lens and recipient along clear authored segments.",
+        "combat": "A short forward water blade stops at its first wall. A fresh early cardinal edge sets one of two small lateral offsets; damage2, no ricochet.",
+        "anticipation_active_settle_updates": [
+          6,
+          18,
+          8
+        ],
+        "cooldown_active_updates": 64,
+        "max_extent_px": 44,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 112,
+      "family_id": "F044",
+      "adapter": 43,
+      "name": "Foldcurrent",
+      "phase": "water",
+      "polarity": "yin",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 42,
+        "power": 40,
+        "guard": 47,
+        "focus": 65,
+        "haste": 46
+      },
+      "stat_total": 240,
+      "signature_command": 113,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 112
+        },
+        {
+          "level": 34,
+          "command": 113
+        }
+      ],
+      "field_capabilities": [
+        "refract_beam",
+        "link_pools"
+      ],
+      "silhouette": "Wide connected ray fins fold into an asymmetric W around an exposed central face; long tail ends in a single broad fan, with open fin arches above the ground.",
+      "motion": "Fin arches alternate like a walking cloth; casts fold one wing, release two unequal glints, then lower.",
+      "ability": {
+        "name": "Paired Prism",
+        "field": "Light two adjacent marked receivers from one tray in a fixed near-then-far sequence after selecting its manual shutter; both clear segments must be demonstrated.",
+        "combat": "A near water blade and delayed far glint share one cast and once-per-enemy ledger; maximum3 damage, each clipped to visible geometry.",
+        "anticipation_active_settle_updates": [
+          8,
+          26,
+          10
+        ],
+        "cooldown_active_updates": 84,
+        "max_extent_px": 60,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 113,
+      "family_id": "F045",
+      "adapter": 44,
+      "name": "Rivetusk",
+      "phase": "metal",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 38,
+        "power": 40,
+        "guard": 42,
+        "focus": 26,
+        "haste": 34
+      },
+      "stat_total": 180,
+      "signature_command": 114,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 114
+        }
+      ],
+      "field_capabilities": [
+        "align_rail"
+      ],
+      "silhouette": "A squat russet boar with a blunt living snout, two unequal flat silver tusks, a square mane and a short corkscrew tail; tusks sit beside the face, never replace it.",
+      "motion": "Shoulder-led trot with snout bob; casts align tusks, flick one forward, then stamp.",
+      "ability": {
+        "name": "Rail Flick",
+        "field": "Turn a tagged empty rail junction a quarter-turn; a carriage occupying it prevents movement and receives a clear refusal.",
+        "combat": "A committed narrow metal tongue reaches36px for3 damage with long settle; side flanks stay exposed and the player never dashes.",
+        "anticipation_active_settle_updates": [
+          10,
+          10,
+          16
+        ],
+        "cooldown_active_updates": 80,
+        "max_extent_px": 36,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 114,
+      "family_id": "F046",
+      "adapter": 45,
+      "name": "Furlace",
+      "phase": "wood",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 29,
+        "power": 25,
+        "guard": 34,
+        "focus": 49,
+        "haste": 43
+      },
+      "stat_total": 180,
+      "signature_command": 115,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 115
+        }
+      ],
+      "field_capabilities": [
+        "unfold_screen"
+      ],
+      "silhouette": "A pale green lacewing with two broad scalloped net wings held sideways, an expressive small head and two forked antennae; six little feet hang below its continuous body.",
+      "motion": "Wing tips alternately dip above a grounded shadow; casts fold to a narrow pleat, unfold a shelter arc, then shake it closed.",
+      "ability": {
+        "name": "Leaf Shelter",
+        "field": "Unfold one tagged woven screen without covering the nearby nesting aperture; only the marked hinged frame changes state.",
+        "combat": "A small stationary arc cancels at most one ordinary hostile shot and gives one contact hit for1; no invulnerability, boss cancellation or permanent shield.",
+        "anticipation_active_settle_updates": [
+          6,
+          30,
+          8
+        ],
+        "cooldown_active_updates": 92,
+        "max_extent_px": 24,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 115,
+      "family_id": "F047",
+      "adapter": 46,
+      "name": "Kilnspoke",
+      "phase": "fire",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 30,
+        "power": 44,
+        "guard": 27,
+        "focus": 41,
+        "haste": 38
+      },
+      "stat_total": 180,
+      "signature_command": 116,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 116
+        }
+      ],
+      "field_capabilities": [
+        "ignite",
+        "store_heat"
+      ],
+      "silhouette": "A rust-red scorpion with two narrow blunt claws, four readable leg pairs and a rounded warm lantern at the end of its single curved tail; large attentive eyes above its mouth.",
+      "motion": "Leg pairs ripple while the tail counterbalances; casts lower claws, sweep the tail sideways, then curl it back.",
+      "ability": {
+        "name": "Backspark",
+        "field": "Ignite a marked side wick from its sheltered flank; the open front face is deliberately unreceptive and visibly patterned differently.",
+        "combat": "A quarter-arc starts beside the caster and sweeps behind for2 damage, leaving the forward lane empty; orientation changes only during the first8 updates.",
+        "anticipation_active_settle_updates": [
+          6,
+          20,
+          10
+        ],
+        "cooldown_active_updates": 74,
+        "max_extent_px": 28,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 116,
+      "family_id": "F048",
+      "adapter": 47,
+      "name": "Chalkox",
+      "phase": "earth",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 46,
+        "power": 27,
+        "guard": 48,
+        "focus": 34,
+        "haste": 25
+      },
+      "stat_total": 180,
+      "signature_command": 117,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 117
+        }
+      ],
+      "field_capabilities": [
+        "shift_ballast",
+        "press_weight"
+      ],
+      "silhouette": "A compact chalk-white ox with a broad square muzzle, a hanging scalloped dewlap, two low crescent horns and four dark hooves; heavy rectangular outline distinct from the stone goats.",
+      "motion": "Deliberate square steps; casts lower the dewlap, plant both forehooves, then raise the head.",
+      "ability": {
+        "name": "Still Hoof",
+        "field": "Hold a tagged balance plate at its current notch while the player operates an adjacent manual latch; hold ends with the cast and never seals an exit.",
+        "combat": "A short grounded frontal shove deals1 with extra ordinary-enemy stagger; no full-body armor or immunity. A rear attack remains effective.",
+        "anticipation_active_settle_updates": [
+          8,
+          24,
+          12
+        ],
+        "cooldown_active_updates": 88,
+        "max_extent_px": 24,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 117,
+      "family_id": "F049",
+      "adapter": 48,
+      "name": "Tinshear",
+      "phase": "metal",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 27,
+        "power": 34,
+        "guard": 30,
+        "focus": 47,
+        "haste": 42
+      },
+      "stat_total": 180,
+      "signature_command": 118,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 118
+        }
+      ],
+      "field_capabilities": [
+        "tune_latch",
+        "echo_outline"
+      ],
+      "silhouette": "A dragonfly with four separate spatula-shaped metal wings, a long jointed tail and two huge soft eyes; no folded bird chest or mantis claws.",
+      "motion": "Wings alternate in paired shallow strokes; casts draw them inward, sound two unequal clicks, then spread.",
+      "ability": {
+        "name": "Twin Click",
+        "field": "Open a marked resonant latch with a short-long visual pulse pattern; repeated brute-force casts reset only that latch, and the pattern is also painted.",
+        "combat": "Two narrow parallel strokes release at different times; choose facing early to place the gap. Maximum2 total per enemy; no damage in the visible gap.",
+        "anticipation_active_settle_updates": [
+          6,
+          24,
+          8
+        ],
+        "cooldown_active_updates": 72,
+        "max_extent_px": 40,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 118,
+      "family_id": "F050",
+      "adapter": 49,
+      "name": "Rippleback",
+      "phase": "water",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 41,
+        "power": 32,
+        "guard": 40,
+        "focus": 37,
+        "haste": 30
+      },
+      "stat_total": 180,
+      "signature_command": 119,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 119
+        }
+      ],
+      "field_capabilities": [
+        "fill_basin"
+      ],
+      "silhouette": "A flat round softshell turtle with a long flexible snout, four clearly separated paddle feet and one low translucent rim; no amber plates, clam valves or arch shell.",
+      "motion": "Alternating paddles slide under the rim; casts lift the snout, splash outward twice, then tuck.",
+      "ability": {
+        "name": "Split Pour",
+        "field": "Fill two adjacent small marked bowls to their pictured unequal marks in a fixed sequence; an overflow lip visibly drains excess, without timers.",
+        "combat": "Two unequal splash discs land beside a short forward path; at most2 power objects and2 total damage per enemy. The empty center line stays safe.",
+        "anticipation_active_settle_updates": [
+          6,
+          22,
+          10
+        ],
+        "cooldown_active_updates": 76,
+        "max_extent_px": 38,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 119,
+      "family_id": "F051",
+      "adapter": 50,
+      "name": "Tetherasp",
+      "phase": "wood",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 33,
+        "power": 28,
+        "guard": 33,
+        "focus": 48,
+        "haste": 38
+      },
+      "stat_total": 180,
+      "signature_command": 120,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 120
+        }
+      ],
+      "field_capabilities": [
+        "grow_roots"
+      ],
+      "silhouette": "A short leaf-green snake with a broad friendly wedge head and three joined leaf cuffs; its single bare tail rests outside an asymmetric S curve, with no metal collars or eel fins.",
+      "motion": "A traveling S wave with head held steady; casts draw a cuff inward, lay one root seam, then smooth it flat.",
+      "ability": {
+        "name": "Root Stitch",
+        "field": "Grow one soft root strip along a marked cracked garden seam; it changes a tagged clue/work object only, never makes unbounded bridges or new solids.",
+        "combat": "A stationary short root strip damages a crossing ordinary enemy once for2 and briefly slows it; boss speed unchanged and no stacking slow.",
+        "anticipation_active_settle_updates": [
+          8,
+          28,
+          8
+        ],
+        "cooldown_active_updates": 90,
+        "max_extent_px": 40,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    },
+    {
+      "id": 120,
+      "family_id": "F052",
+      "adapter": 51,
+      "name": "Cymbalop",
+      "phase": "metal",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": {
+        "vitality": 32,
+        "power": 38,
+        "guard": 31,
+        "focus": 35,
+        "haste": 44
+      },
+      "stat_total": 180,
+      "signature_command": 121,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 121
+        }
+      ],
+      "field_capabilities": [
+        "turn_vane",
+        "draw_ore"
+      ],
+      "silhouette": "A small pearl-gray rabbit with two broad round metal ears held at unequal angles, stubby soft paws and a tiny round tail; a short wide body distinguishes it from the long-eared dune mammal.",
+      "motion": "Paired hindfoot hops with ears swinging in opposite directions; casts cup ears, clap one bright impulse, then bounce back.",
+      "ability": {
+        "name": "Bright Clap",
+        "field": "Turn a tagged light vane one stop after a matching manual counterweight is set; clapping against the marked stop does nothing and explains why.",
+        "combat": "A short expanding forward fan deals2, wide at its far edge and narrow near the caster; one contact per enemy and no wall penetration.",
+        "anticipation_active_settle_updates": [
+          6,
+          16,
+          12
+        ],
+        "cooldown_active_updates": 70,
+        "max_extent_px": 40,
+        "maximum_moving_objects": 2,
+        "early_aim_updates": 8
+      },
+      "art": "shared_contracts.form_art"
+    }
+  ],
+  "validation": {
+    "images": 464,
+    "field_dimensions": [
+      16,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      16,
+      4,
+      3,
+      256
+    ],
+    "portrait_dimensions": [
+      16,
+      1024
+    ],
+    "actor_palette_entries": 97,
+    "palette_indices": [
+      0,
+      1,
+      4,
+      6,
+      7,
+      10,
+      11,
+      12,
+      13,
+      26,
+      27,
+      28,
+      29,
+      30,
+      33,
+      34,
+      35,
+      36,
+      37,
+      41,
+      42,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      54,
+      55,
+      56,
+      60,
+      62,
+      63,
+      79,
+      80,
+      88,
+      89,
+      96
+    ],
+    "transparent_zero": true,
+    "transparent_outer_field_boundary": true,
+    "unique_direction_masks_per_form": 4,
+    "articulated_walk_masks_per_direction": 4,
+    "articulated_cast_masks_per_direction": 3,
+    "unique_front_silhouettes": 16,
+    "independently_composed_native_portraits": true,
+    "evolution_morphology": [
+      {
+        "forms": [
+          105,
+          106
+        ],
+        "silhouette_changed_pixels_by_direction": [
+          44,
+          39,
+          44,
+          44
+        ]
+      },
+      {
+        "forms": [
+          107,
+          108
+        ],
+        "silhouette_changed_pixels_by_direction": [
+          27,
+          23,
+          32,
+          32
+        ]
+      },
+      {
+        "forms": [
+          109,
+          110
+        ],
+        "silhouette_changed_pixels_by_direction": [
+          30,
+          29,
+          30,
+          30
+        ]
+      },
+      {
+        "forms": [
+          111,
+          112
+        ],
+        "silhouette_changed_pixels_by_direction": [
+          45,
+          45,
+          46,
+          46
+        ]
+      }
+    ]
+  },
+  "silhouette_comparison": {
+    "current_unique_front_masks": 16,
+    "released_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      25,
+      26,
+      28,
+      29,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      3,
+      6,
+      9,
+      12,
+      15,
+      17,
+      18,
+      21,
+      24,
+      27,
+      30,
+      101,
+      102,
+      103,
+      104
+    ],
+    "cross_release_front_mask_matches": 0,
+    "nearest_front_masks": [
+      {
+        "form_id": 105,
+        "nearest_form_id": 109,
+        "different_front_mask_pixels": 23
+      },
+      {
+        "form_id": 106,
+        "nearest_form_id": 120,
+        "different_front_mask_pixels": 32
+      },
+      {
+        "form_id": 107,
+        "nearest_form_id": 34,
+        "different_front_mask_pixels": 23
+      },
+      {
+        "form_id": 108,
+        "nearest_form_id": 107,
+        "different_front_mask_pixels": 27
+      },
+      {
+        "form_id": 109,
+        "nearest_form_id": 105,
+        "different_front_mask_pixels": 23
+      },
+      {
+        "form_id": 110,
+        "nearest_form_id": 105,
+        "different_front_mask_pixels": 25
+      },
+      {
+        "form_id": 111,
+        "nearest_form_id": 44,
+        "different_front_mask_pixels": 30
+      },
+      {
+        "form_id": 112,
+        "nearest_form_id": 110,
+        "different_front_mask_pixels": 42
+      },
+      {
+        "form_id": 113,
+        "nearest_form_id": 116,
+        "different_front_mask_pixels": 23
+      },
+      {
+        "form_id": 114,
+        "nearest_form_id": 117,
+        "different_front_mask_pixels": 39
+      },
+      {
+        "form_id": 115,
+        "nearest_form_id": 19,
+        "different_front_mask_pixels": 47
+      },
+      {
+        "form_id": 116,
+        "nearest_form_id": 113,
+        "different_front_mask_pixels": 23
+      },
+      {
+        "form_id": 117,
+        "nearest_form_id": 58,
+        "different_front_mask_pixels": 34
+      },
+      {
+        "form_id": 118,
+        "nearest_form_id": 63,
+        "different_front_mask_pixels": 23
+      },
+      {
+        "form_id": 119,
+        "nearest_form_id": 24,
+        "different_front_mask_pixels": 36
+      },
+      {
+        "form_id": 120,
+        "nearest_form_id": 106,
+        "different_front_mask_pixels": 32
+      }
+    ],
+    "source": "assets/return_creatures/released104_silhouettes_native.png",
+    "source_sha256": "622d6f6dc29d9a11c6e38a339032cd23dc8699d4597ad8ac86697ff75743145a"
+  },
+  "terrain_visibility_minimum_opaque": 0.820755,
+  "terrain_visibility_minimum_boundary": 0.791667
+}

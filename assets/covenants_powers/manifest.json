@@ -1,0 +1,38 @@
+{
+  "commands": [
+    12,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128
+  ],
+  "bytes": 3072,
+  "stamp_native_pixels": 13,
+  "new_palette_colors": 0,
+  "base_palette_indices": [
+    55,
+    13,
+    50,
+    6,
+    6,
+    12,
+    54,
+    49
+  ],
+  "highlight_palette_indices": [
+    96,
+    14,
+    51,
+    7,
+    7,
+    14,
+    96,
+    51
+  ],
+  "logical_effect_parts_max": 3,
+  "world_stamp_draw_cap": 24,
+  "scope": "native indexed assets; full ROM performance and controller review pending"
+}

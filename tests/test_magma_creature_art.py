@@ -23,6 +23,8 @@ from PIL import Image
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
+# This host target can run before any ROM/build target in a clean export.
+(ROOT / 'build').mkdir(parents=True, exist_ok=True)
 SOUTHERN = Path(os.environ.get("SOUTHERN_REFERENCE_ROOT", ROOT))
 EXPECTED_IDS = tuple(range(31, 49)) + tuple(range(95, 101))
 EXPECTED_DATA_BYTES = 172056

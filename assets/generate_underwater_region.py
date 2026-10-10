@@ -10,6 +10,7 @@ from pathlib import Path
 from collections import deque
 import hashlib, json, math, random, sys
 from PIL import Image, ImageDraw
+import connected_road_art as roads
 sys.dont_write_bytecode = True
 from generate_assets import Art, P, PAL, COLORS
 from generate_region import odd_bitmap, cbytes, verify_room, paste_sprite
@@ -144,7 +145,15 @@ DOORS=[ [('south',240,304,38,4),('east',464,160,47,0),('north',240,16,48,0)],
  [('south',120,146,51,1),('east',224,112,53,0),('west',16,112,49,1)],
  [('south',120,146,52,1),('east',224,112,46,1)]]
 def boundary(a,r):
- w,h=r['width'],r['height'];doors=DOORS[r['id']-46]
+ w,h=r['width'],r['height'];doors=[]
+ # Exterior mouths share the runtime adjacency source; only the shell lift stays transport.
+ for road in roads.DATA['roads']:
+  for e,other in [road['ends'],list(reversed(road['ends']))]:
+   if e['room']!=r['id']:continue
+   side={'N':'north','S':'south','W':'west','E':'east'}[e['edge']]
+   x,y={'N':(e['center'],16),'S':(e['center'],h-16),'W':(16,e['center']),'E':(w-16,e['center'])}[e['edge']]
+   doors.append((side,x,y,other['room'],other['saved_spawn']))
+ if r['id']==46:doors.append(('south',240,304,38,4))
  gaps={'north':[],'south':[],'east':[],'west':[]}
  for side,x,y,target,spawn in doors:gaps[side].append((x if side in('north','south')else y)-24)
  for side in gaps:
@@ -230,7 +239,7 @@ def commons():
  ell(a,(264,68,294,80),'jade_lit');line(a,[(270,74),(279,69),(286,74)],'pearl')
  for x,y in[(55,65),(448,74),(432,278),(130,276),(282,286),(32,205)]:kelp(a,x,y,25)
  for x,y in[(53,120),(433,130),(44,283),(444,47)]:coral(a,x,y,.75)
- bench(a,r,32,164,23);bench(a,r,413,252,31)
+ bench(a,r,32,120,23);bench(a,r,413,252,31)
  for x,y in[(64,244),(280,96),(426,173)]:lamp(a,x,y)
  motif(a,184,204,1,'brass');motif(a,300,244,0,'brass')
  for key,k,x,y in [('return_loop','NOTICE',240,164),('echo_practice','LEAF',288,96),('fallen_chart','NOTICE',136,232),('rest','REST',64,256),('ballast','SHELF',272,176)]:obj(r,key,k,x,y)
@@ -532,7 +541,7 @@ RUNTIME_TARGETS={46: [(64, 72), (64, 104), (80, 256), (96, 104), (120, 72), (144
 def main():
  ROOMS.clear();OUT.mkdir(exist_ok=True);sprites={n:sprite(n)for n in NAMES};proof={}
  for fn in [town,commons,promenade,garden,vestibule,stacks,listening,court]:
-  r,a=fn();finishing_detail(r,a);audit_runtime_targets(r);r['art']=a
+  r,a=fn();finishing_detail(r,a);roads.draw(a,r['id'],P);roads.open_borders(r);audit_runtime_targets(r);r['art']=a
   proof[r['key']],_=verify_room({**r,'spawns':{**r['spawns'],**{'enemy'+str(i):p for i,p in enumerate(r['enemy_spawns'])}}})
  budget=emit(sprites);(OUT/'sprites').mkdir(exist_ok=True);(OUT/'camera').mkdir(exist_ok=True)
  sheet=Image.new('RGB',(160,32),(32,40,66))

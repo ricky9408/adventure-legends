@@ -41,11 +41,11 @@ int trials_try_push(int x,int y,unsigned face){static const signed char dx[4]={0
  if(nx<72||nx>168||ny<56||ny>104||(nx==trial_parcels[1-i][0]&&ny==trial_parcels[1-i][1]))return -1;
  trial_parcels[i][0]=(short)nx;trial_parcels[i][1]=(short)ny;changed();return 1;}}return 0;}
 int trials_exit(unsigned room,int x,int y){if(x<108||x>132||y<140||y>=148)return -1;return room==TRIAL_ROOM_WIND?4:room==TRIAL_ROOM_STONE?9:-1;}
-int trials_interact(unsigned room,int x,int y,unsigned face){int i,result;if(room==4&&close(x,y,204,64,19))return TRIAL_ENTER_WIND;if(room==9&&close(x,y,208,120,19))return TRIAL_ENTER_STONE;
+int trials_interact(unsigned room,int x,int y,unsigned face){int i,result;/* Entry belongs to the authored walking doorway. */
  if(room==1){for(i=0;i<6;i++)if(close(x,y,trial_grove_aids[i].x,trial_grove_aids[i].y,23))return (adventure_save.roster.lifetime_field_aid[0]&(1u<<i))?TRIAL_ALREADY_DONE:TRIAL_INSPECT;return TRIAL_NONE;}
  if(!trials_is_room(room))return TRIAL_NONE;
  if(close(x,y,RESET_X,RESET_Y,21)){if(trials_done(room==TRIAL_ROOM_WIND?2:3))return TRIAL_ALREADY_DONE;trials_enter(room);return TRIAL_RESET;}
- if(trials_exit(room,x,y)>=0)return TRIAL_EXIT;
+
  if(room==TRIAL_ROOM_STONE){if(trials_done(3)){for(i=0;i<2;i++)if(close(x,y,trial_parcels[i][0],trial_parcels[i][1],27))return TRIAL_ALREADY_DONE;}else{result=trials_try_push(x,y,face);if(result)return result>0?TRIAL_PUSHED:TRIAL_BLOCKED;}if(close(x,y,200,64,25))return trials_done(3)?TRIAL_ALREADY_DONE:TRIAL_INSPECT;}
  if(room==TRIAL_ROOM_WIND)for(i=0;i<3;i++)if(close(x,y,trial_vane_centers[i][0],trial_vane_centers[i][1],25))return trials_done(2)?TRIAL_ALREADY_DONE:TRIAL_INSPECT;
  return TRIAL_NONE;
@@ -77,7 +77,7 @@ void trials_draw_actors(unsigned room,int cam_x,int cam_y){unsigned i;int reload
  else{load_slot(0,trial_misc_sprites[TRIAL_SPR_PARCEL]);load_slot(1,trial_misc_sprites[TRIAL_SPR_PARCEL]);load_slot(2,trial_misc_sprites[TRIAL_SPR_RESET]);load_slot(3,trial_misc_sprites[trials_done(3)?TRIAL_SPR_ARCH_LIT:TRIAL_SPR_ARCH]);}
  loaded_room=(int)room;loaded_revision=trials_revision;}
  if(room==1){for(i=0;i<6;i++){actor(i,trial_grove_aids[i].x,trial_grove_aids[i].y);hint(trial_grove_aids[i].x,trial_grove_aids[i].y,23);}}
- else if(room==4||room==9){int x=room==4?204:208,y=room==4?64:120;actor(5,x,y);hint(x,y,22);}
+ else if(room==4||room==9){/* feedback_world draws the walking entries. */}
  else if(room==TRIAL_ROOM_WIND){for(i=0;i<3;i++)actor(i,trial_vane_centers[i][0],trial_vane_centers[i][1]);actor(3,RESET_X,RESET_Y);actor(4,168,48);hint(RESET_X,RESET_Y,24);}
  else{for(i=0;i<2;i++)actor(i,trial_parcels[i][0],trial_parcels[i][1]);actor(2,RESET_X,RESET_Y);actor(3,200,64);hint(RESET_X,RESET_Y,24);}
 }

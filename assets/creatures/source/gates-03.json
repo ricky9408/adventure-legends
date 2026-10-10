@@ -1,0 +1,6 @@
+[
+  {"id":"stilltide_covenant","kind":"legendary","requires":["covenants_lower_ready"]},
+  {"id":"underwater_arrival","kind":"story","requires":["caldera_open"]},
+  {"id":"underwater_q38","kind":"story","requires":["underwater_arrival"]},
+  {"id":"underwater_q39","kind":"story","requires":["underwater_arrival"]}
+]

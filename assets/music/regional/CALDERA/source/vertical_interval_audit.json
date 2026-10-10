@@ -1,0 +1,948 @@
+[
+  {
+    "bar": 1,
+    "beat": 0,
+    "pitches": {
+      "melody": "C5",
+      "inner": "Eb4",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 0,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 1,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "Eb4",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 5,
+      "melody/bass": 8,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 1,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "C4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 1,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 1,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Eb4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 4,
+      "melody/bass": 0,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 2,
+    "beat": 0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "Ab3",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 5,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 2,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "G3",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 3,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 2,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "C4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 8,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 2,
+    "beat": 3.0,
+    "pitches": {
+      "inner": "G3",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 3,
+    "beat": 0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "C4",
+      "bass": "Ab2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 7,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 3,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "C6",
+      "inner": "C4",
+      "bass": "Ab2"
+    },
+    "interval_classes": {
+      "melody/inner": 0,
+      "melody/bass": 4,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 3,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "C6",
+      "inner": "Eb4",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 9,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 3,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "G4",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 7,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 4,
+    "beat": 0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "C4",
+      "bass": "Ab2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 0,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 4,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Bb3",
+      "bass": "Ab2"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 11,
+      "inner/bass": 2
+    }
+  },
+  {
+    "bar": 4,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "C4",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 0,
+      "inner/bass": 9
+    }
+  },
+  {
+    "bar": 5,
+    "beat": 0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "F4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 4,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 5,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "F4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 5,
+      "melody/bass": 0,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 5,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "D4",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 5,
+      "inner/bass": 9
+    }
+  },
+  {
+    "bar": 5,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "F4",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 3,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 6,
+    "beat": 0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Eb4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 4,
+      "melody/bass": 9,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 6,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "D4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 7,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 6,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "Bb3",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 7,
+      "melody/bass": 0,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 6,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "F4",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 9,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 7,
+    "beat": 0,
+    "pitches": {
+      "melody": "C5",
+      "inner": "Eb4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 5,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 7,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "G4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 8,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 7,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "F4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 0,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 8,
+    "beat": 0,
+    "pitches": {
+      "melody": "B4",
+      "inner": "F4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 6,
+      "melody/bass": 4,
+      "inner/bass": 10
+    }
+  },
+  {
+    "bar": 8,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "D4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 0,
+      "melody/bass": 0,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 8,
+    "beat": 3.0,
+    "pitches": {
+      "inner": "F4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 9,
+    "beat": 0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Bb3",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 4,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 9,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "Eb4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 7,
+      "melody/bass": 0,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 9,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "Eb6",
+      "inner": "G4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 5,
+      "inner/bass": 9
+    }
+  },
+  {
+    "bar": 10,
+    "beat": 0,
+    "pitches": {
+      "melody": "D6",
+      "inner": "Bb3",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 4,
+      "melody/bass": 11,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 10,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "C6",
+      "inner": "Eb4",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 9,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 10,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "F4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 5,
+      "melody/bass": 0,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 11,
+    "beat": 0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "D4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 7,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 11,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Bb3",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 5,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 11,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "D4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 8,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 12,
+    "beat": 0,
+    "pitches": {
+      "melody": "A5",
+      "inner": "Eb4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 6,
+      "melody/bass": 11,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 12,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "D4",
+      "bass": "Bb2"
+    },
+    "interval_classes": {
+      "melody/inner": 5,
+      "melody/bass": 9,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 12,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "Bb3",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 7,
+      "melody/bass": 3,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 13,
+    "beat": 0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "C4",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 3,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 13,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "C6",
+      "inner": "Ab3",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 4,
+      "melody/bass": 0,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 13,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "C4",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 8,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 14,
+    "beat": 0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Bb3",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 2,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 14,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "Ab3",
+      "bass": "F3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 0,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 14,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "C4",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 3,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 15,
+    "beat": 0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "F4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 7,
+      "inner/bass": 10
+    }
+  },
+  {
+    "bar": 15,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "Ab3",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 3,
+      "inner/bass": 6
+    }
+  },
+  {
+    "bar": 15,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "F4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 6,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 16,
+    "beat": 0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "B3",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 0,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 16,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "D4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 10,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 16,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "F4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 0,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 16,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "B4",
+      "inner": "D4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 9,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 17,
+    "beat": 0,
+    "pitches": {
+      "melody": "C5",
+      "inner": "Eb4",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 0,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 17,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "Eb4",
+      "bass": "C3"
+    },
+    "interval_classes": {
+      "melody/inner": 5,
+      "melody/bass": 8,
+      "inner/bass": 3
+    }
+  },
+  {
+    "bar": 17,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "C4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 1,
+      "inner/bass": 5
+    }
+  },
+  {
+    "bar": 17,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Eb4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 4,
+      "melody/bass": 0,
+      "inner/bass": 8
+    }
+  },
+  {
+    "bar": 18,
+    "beat": 0,
+    "pitches": {
+      "melody": "Eb5",
+      "inner": "C4",
+      "bass": "Ab2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 7,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 18,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "Eb4",
+      "bass": "Ab2"
+    },
+    "interval_classes": {
+      "melody/inner": 4,
+      "melody/bass": 11,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 18,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "C6",
+      "inner": "G4",
+      "bass": "Eb3"
+    },
+    "interval_classes": {
+      "melody/inner": 5,
+      "melody/bass": 9,
+      "inner/bass": 4
+    }
+  },
+  {
+    "bar": 19,
+    "beat": 0,
+    "pitches": {
+      "melody": "Bb5",
+      "inner": "D4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 3,
+      "inner/bass": 7
+    }
+  },
+  {
+    "bar": 19,
+    "beat": 1.0,
+    "pitches": {
+      "melody": "Ab5",
+      "inner": "F4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 1,
+      "inner/bass": 10
+    }
+  },
+  {
+    "bar": 19,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "G5",
+      "inner": "B3",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 8,
+      "melody/bass": 5,
+      "inner/bass": 9
+    }
+  },
+  {
+    "bar": 19,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "F5",
+      "inner": "D4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 3,
+      "melody/bass": 3,
+      "inner/bass": 0
+    }
+  },
+  {
+    "bar": 20,
+    "beat": 0,
+    "pitches": {
+      "melody": "D5",
+      "inner": "F4",
+      "bass": "G2"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 7,
+      "inner/bass": 10
+    }
+  },
+  {
+    "bar": 20,
+    "beat": 2.0,
+    "pitches": {
+      "melody": "C5",
+      "inner": "Eb4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 10,
+      "inner/bass": 1
+    }
+  },
+  {
+    "bar": 20,
+    "beat": 3.0,
+    "pitches": {
+      "melody": "B4",
+      "inner": "D4",
+      "bass": "D3"
+    },
+    "interval_classes": {
+      "melody/inner": 9,
+      "melody/bass": 9,
+      "inner/bass": 0
+    }
+  }
+]

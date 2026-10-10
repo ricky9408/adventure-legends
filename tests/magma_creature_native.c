@@ -55,11 +55,11 @@ static void prepare_edge(unsigned form,unsigned mask) {
 
 static void edge_tests(void) {
     unsigned i,j;
-    assert(CREATURE_ENABLED_COUNT==89 && CREATURE_LEARNSET_COUNT==142);
-    assert(CREATURE_EVOLUTION_COUNT==51 && CREATURE_ABILITY_COUNT==89);
-    assert(CREATURE_CONTENT_REVISION==6 && sizeof(CreatureInstance)==24);
+    assert(CREATURE_ENABLED_COUNT==120 && CREATURE_LEARNSET_COUNT==200);
+    assert(CREATURE_EVOLUTION_COUNT==68 && CREATURE_ABILITY_COUNT==120);
+    assert(CREATURE_CONTENT_REVISION==8 && sizeof(CreatureInstance)==24);
     assert(CREATURE_MAGMA_READY==256 && CREATURE_CALDERA_OPEN==512);
-    assert(CREATURE_EVOLUTION_CONTEXT_MASK==4095);
+    assert(CREATURE_EVOLUTION_CONTEXT_MASK==32767);
     for (i=0;i<35;++i) {
         const CreatureEvolution *e=&expected_edges[i];
         const CreatureForm *f=creatures_form(e->from),*t=creatures_form(e->to);
@@ -79,7 +79,10 @@ static void edge_tests(void) {
         assert(creatures_evolve_to(&roster,0,e->to,e->chapter_flags,1,0)==CREATURE_EVOLVE_DEFERRED);unchanged();
         assert(creatures_evolve_to(&roster,0,e->to,0,1,1)==CREATURE_EVOLVE_STORY);unchanged();
         assert(creatures_evolve_to(&roster,0,e->to,e->chapter_flags,0,1)==CREATURE_EVOLVE_SANCTUARY);unchanged();
-        assert(creatures_evolve_to(&roster,0,e->to,4096,1,1)==CREATURE_EVOLVE_INVALID);unchanged();
+        /* Return context bits are valid width but do not satisfy old gates. */
+        assert(creatures_evolve_to(&roster,0,e->to,4096,1,1)==CREATURE_EVOLVE_STORY);unchanged();
+        assert(creatures_evolve_to(&roster,0,e->to,8192,1,1)==CREATURE_EVOLVE_STORY);unchanged();
+        assert(creatures_evolve_to(&roster,0,e->to,16384,1,1)==CREATURE_EVOLVE_STORY);unchanged();
         assert(creatures_evolve_to(&roster,0,e->to,65536u+e->chapter_flags,1,1)==CREATURE_EVOLVE_INVALID);unchanged();
         assert(creatures_evolve_to(&roster,0,e->to+256u,e->chapter_flags,1,1)==CREATURE_EVOLVE_INVALID);unchanged();
         expected=roster.instances[0];expected.form_id=e->to;expected.polarity=t->polarity;
@@ -319,6 +322,24 @@ static void init_fixtures(void) {
             unsigned base=49+3*((id-49)/3),key=id-base;
             grant(base);trial(0,key);
             assert(creatures_evolve_to(&roster,0,id,1024,1,1)==CREATURE_EVOLVE_READY);
+        } else if (id==17 || id==18) {
+            /* Return's newly earned terminal records cannot be raw grants. */
+            grant(16);trial(0,1);
+            assert(creatures_evolve_to(&roster,0,17,4096,1,1)==CREATURE_EVOLVE_READY);
+            if(id==18) {
+                trial(0,2);
+                assert(creatures_evolve_to(&roster,0,18,4096,1,1)==CREATURE_EVOLVE_READY);
+            }
+        } else if (id==3 || id==6 || id==9 || id==12 || id==15 ||
+                   id==21 || id==24 || id==27 || id==30) {
+            grant(id-1);trial(0,1);trial(0,2);
+            assert(creatures_evolve_to(&roster,0,id,4096,1,1)==CREATURE_EVOLVE_READY);
+        } else if (id==102 || id==104) {
+            grant(id-1);trial(0,1);
+            assert(creatures_evolve_to(&roster,0,id,4096,1,1)==CREATURE_EVOLVE_READY);
+        } else if(id==106||id==108||id==110||id==112){
+            grant(id-1);trial(0,1);
+            assert(creatures_evolve_to(&roster,0,id,16384,1,1)==CREATURE_EVOLVE_READY);
         } else grant(id);
         fixture_instances[id]=roster.instances[0];
     }
@@ -594,11 +615,11 @@ static void future_reserve_tests(void) {
     coverage_check(122,34);
     assert(creatures_collection_coverage(&roster,&coverage));
     assert(coverage.excess==88 && coverage.free_slots==38 && coverage.missing_opportunities==38);
-    /* Old34 covered opportunities still reserve38; new Underwater families
-     * may now spend exactly their missing opportunity without using surplus. */
+    /* Old34 covered opportunities still reserve38; Underwater and Return
+     * new families may spend their missing opportunity without using surplus. */
     for(i=1;i<=128;++i)if(creatures_form(i)) {
         before=roster;
-        assert(query_grant(i)==(i>=49 && i<=72 ? CREATURE_ADMISSION_READY : CREATURE_ADMISSION_RESERVED));unchanged();
+        assert(query_grant(i)==((i>=49 && i<=72) || (i>=101 && i<=120) ? CREATURE_ADMISSION_READY : CREATURE_ADMISSION_RESERVED));unchanged();
     }
 }
 

@@ -242,6 +242,11 @@ static void derive_refs(const EquipmentState *s, const EquipmentU8 *refs,
         hp += b->hp_q4; speed += b->speed_q8_delta;
         attack += b->attack_q4; defense += b->defense_q4;
         roll += b->roll_reduction; power += b->power_reduction; stagger += b->stagger;
+        /* Current-balance overlay: after dodge removal, Porchlight Ring (89)
+         * trades more speed than Listening Ring for one more recovery point.
+         * Keep the frozen catalog and saved item identity intact;
+         * runtime still caps combined equipment recovery at eight. */
+        if (d->id == 89) ++power;
         if (i == EQUIPMENT_WEAPON) {
             reach = b->reach_px;
             out->weapon_class = d->weapon_class;

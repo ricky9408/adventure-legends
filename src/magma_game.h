@@ -13,6 +13,15 @@ unsigned magma_game_spawn_count(unsigned area);
 int magma_game_spawn(unsigned area,unsigned index,int *x,int *y);
 int magma_game_can_enter(unsigned area);
 int magma_game_enter(unsigned area,unsigned spawn);
+/* Active general entry only; cold restoration and the shell-lift retain
+ * their existing exact paths. Request after deterministic source sync and
+ * expedition reset but before scene/pose mutation. 0 denied,2 queued,1 only
+ * inside the adapter-owned synchronous commit callback. */
+int magma_game_request_enter(unsigned area,unsigned spawn);
+int magma_game_enter_pending(void);
+unsigned magma_game_prepare_enter(void);
+int magma_game_commit_enter(void);
+void magma_game_cancel_enter(void);
 /* Engine-only bounded room46 -> room38:4 shell-lift orchestration. Request
  * BEFORE any transition mutation: 0 denied, 1 scoped commit, 2 queued.
  * Freeze in EVENT_PENDING(10), warm both pages, then prepare one slice/update.
@@ -25,6 +34,13 @@ int magma_game_return_pending(void);
 unsigned magma_game_prepare_return(void);
 int magma_game_commit_return(void);
 void magma_game_cancel_return(void);
+/* Branch-invitation queue, advanced once per frozen EVENT_PENDING update.
+ * DONE: restore PLAY and call commit_event immediately for presentation/save.
+ * B, a redirected transition, scene reset, death or load cancels the request. */
+int magma_game_event_pending(void);
+unsigned magma_game_prepare_event(void);
+int magma_game_commit_event(void);
+void magma_game_cancel_event(void);
 unsigned magma_game_enemy_spawns(unsigned area,const MagmaEnemySpawn **out);
 /* Exact baked static collision; same radius-five intervals as production.
  * Dynamic fingerprint exposes every prop position changing the predicate,
@@ -60,13 +76,21 @@ void magma_game_tick(void);
 void magma_game_reset(void);
 /* Rest queues an exact typed anchor validation for a cached SAVE_PENDING(6)
  * update. The requested checkpoint is3; campaign.spawn retains its prior legal
- * value until preparation succeeds. Engine: render both saving-notice pages,
- * call prepare once on a frozen cached-notice update, then snapshot/write.
+ * value until preparation succeeds. The synchronous prepare helper preserves
+ * the original direct contract; active engines warm both saving-notice pages
+ * and use the bounded step API below before the ordinary snapshot/write.
  * Return1 only after real magma_anchor CHANGED/UNCHANGED; failure0 consumes the
  * queue and must surface save failure. Never bump a bitmap/UI revision here.
  * No queue: pending returns0 and prepare returns0. Death/load/new reset cancels. */
 int magma_game_save_prepare_pending(void);
+/* Pre-writer entry redirection only: revoke the owned proof/queue and restore
+ * the old runtime checkpoint. Engine restores its old caller mode separately. */
+void magma_game_cancel_save_prepare(void);
 int magma_game_prepare_save(void);
+/* Engine SAVE_PENDING stage2 holds on BUSY; DONE advances to the ordinary
+ * save writer; FAILED consumes/revokes the queue and shows save failure.
+ * The synchronous API above remains the exact direct/oracle path. */
+unsigned magma_game_prepare_save_step(void);
 void magma_game_draw_actors(void);
 void magma_game_draw_overlay(void);
 int magma_game_name(void);
@@ -89,4 +113,11 @@ void game_health_fill(void);
 unsigned game_weapon_class(void);
 void game_north_hurt(unsigned damage_q4);
 int game_magma_actor_overlap(int x,int y,int radius);
+/* Engine-private typed quest action queue. Seal once after the action, freeze
+ * input, prepare bounded frames, restore PLAY and commit once. */
+int magma_game_quest_pending(void);
+int magma_game_quest_seal(void);
+unsigned magma_game_quest_prepare(void);
+int magma_game_quest_commit(void);
+void magma_game_quest_cancel(void);
 #endif

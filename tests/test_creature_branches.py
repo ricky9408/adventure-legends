@@ -8,11 +8,12 @@ import shlex
 import subprocess
 import tempfile
 import unittest
+from retained_source_adapter import expand_local_includes
 from test_creature_sparse import ROOT, edit_array, refresh_key_indexes
 
 def branch_sources(extended=False):
     h=(ROOT/'src/creatures.h').read_text()
-    c=(ROOT/'src/creatures.c').read_text()
+    c=expand_local_includes(ROOT/'src/creatures.c')
     d=(ROOT/'src/creature_data.c').read_text()
     # F013 is now an actual reviewed current branch. Preserve the independent
     # synthetic capability extension and all malformed-graph cases below.

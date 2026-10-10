@@ -1,0 +1,87 @@
+{
+  "palette": [
+    {
+      "name": "underwater glass reed",
+      "gain": 0.68,
+      "attack": 0.021,
+      "release": 0.135,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.035
+        ],
+        [
+          3,
+          0.07
+        ],
+        [
+          4,
+          0.01
+        ]
+      ],
+      "vibrato_delay": 0.34,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.0,
+      "vibrato_cents": 3.0
+    },
+    {
+      "name": "soft deep-water triangle",
+      "gain": 0.34,
+      "attack": 0.014,
+      "release": 0.125,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.035
+        ],
+        [
+          5,
+          0.009
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "rounded glass pluck",
+      "gain": 0.24,
+      "attack": 0.005,
+      "release": 0.08,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.1
+        ],
+        [
+          3,
+          0.032
+        ],
+        [
+          4,
+          0.012
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "nacreway-gba-16384-s8.raw": "ec12bc46e256191c0967f9aff58031a9fdc207576f91367ba4197aac375b1cda"
+  }
+}

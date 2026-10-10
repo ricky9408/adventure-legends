@@ -1,12 +1,13 @@
 #ifndef EMBERBOND_REGION_GAME_H
 #define EMBERBOND_REGION_GAME_H
+#include "connected_roads.h"
 /* Native six-room runtime. Persistence belongs only to regional_quests/save5.
  * Engine bridge contract:
  * - Call enter after validating the target, before final Q8/camera initialization.
  *   This function also assigns room, px, py, checkpoint_spawn and visits the room.
  * - solid already tests a +/-5px square foot: never expand it a second time.
  * - interact is A only; power is an actual selected/summoned command use.
- * - tick is active PLAY only; it handles directional exits and real roll sensors.
+ * - tick is active PLAY only; it handles directional exits and ordered walking-pad sensors.
  * - Call draw_overlay after base bitmap, draw_actors from the native OBJ pass.
  * - region_game_revision must participate in the bitmap cache key.
  * - Grove return enter_room(1,3) is transient: engine places (168,264), then

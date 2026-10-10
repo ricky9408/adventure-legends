@@ -4,7 +4,7 @@
   "routes": {
     "reedhaven": {
       "all_dynamic_open": {
-        "reachable_pixels": 69395,
+        "reachable_pixels": 74657,
         "targets": [
           {
             "target": "spawn_0",
@@ -201,7 +201,7 @@
         ]
       },
       "all_dynamic_closed": {
-        "reachable_pixels": 69395,
+        "reachable_pixels": 74657,
         "targets": [
           {
             "target": "spawn_0",
@@ -400,7 +400,7 @@
     },
     "reedbasin": {
       "all_dynamic_open": {
-        "reachable_pixels": 76632,
+        "reachable_pixels": 82868,
         "targets": [
           {
             "target": "spawn_0",
@@ -517,7 +517,7 @@
         ]
       },
       "all_dynamic_closed": {
-        "reachable_pixels": 75628,
+        "reachable_pixels": 81864,
         "targets": [
           {
             "target": "spawn_0",
@@ -1205,7 +1205,7 @@
     "arm32_room_table_bytes": 120,
     "rom_payload_bytes": 779256,
     "chunks": 98,
-    "largest_chunk_bytes": 31998,
+    "largest_chunk_bytes": 32000,
     "chunk_limit_bytes": 32000
   }
 }

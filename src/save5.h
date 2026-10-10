@@ -3,6 +3,7 @@
 #include "save4.h"
 #include "creatures.h"
 #include "equipment.h"
+#include "economy_types.h"
 
 /* v5 never writes SRAM 0..0x1ff, including every v2/v3 byte and both v4 banks.
  * Every multibyte wire field is explicitly little endian.
@@ -13,16 +14,22 @@
  * revision5 (65 forms/31 items, Magma quests30..37/areas38..45), and
  * revision6 (89 forms/37 items, Underwater quests38..45/areas46..53). Revision1
  * installs only starter equipment; revision2/3/4/5->6 preserves existing typed bytes
- * and adds no recruit, trial, quest, gear, visit or reward on load. All writes
- * use revision6. Unknown revisions and cross-revision content are rejected. */
+ * and adds no recruit, trial, quest, gear, visit or reward on load. Revision7 adds Return quests46..53/areas54..61,104 forms/42 items. All writes
+ * use revision11, adding four later boss receipts at5079 to the32-byte
+ * revision10 wallet/pouch at5056. Revision10 is immutable
+ * (128 forms/48 items,quests60..63/areas70..77). Revision8
+ * is immutable Shared Horizons C (120 forms/46 items,quests54..59/areas62..69).
+ * Exact immutable revisions1..10 authenticate prior banks before migration. No new source,
+ * history, visit, trial or equipment is awarded on load. Unknown revisions and
+ * cross-revision content are rejected. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
-    SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5056,
-    SAVE5_CONTENT_REVISION = 6, SAVE5_COMMIT = 0xA5,
+    SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5088,
+    SAVE5_CONTENT_REVISION = 11, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,
-    SAVE5_EQUIPMENT_OFFSET = 4544, SAVE5_RESERVED_OFFSET = 5056,
+    SAVE5_EQUIPMENT_OFFSET = 4544, SAVE5_ECONOMY_OFFSET = 5056, SAVE5_RESERVED_OFFSET = 5088,
     SAVE5_CRC_OFFSET = 16, SAVE5_COMMIT_OFFSET = 20,
     SAVE5_RECOMMENDED_BUDGET = 1024, SAVE5_MAX_BUDGET = 3072,
     SAVE5_IDLE = 0, SAVE5_BUSY = 1, SAVE5_DONE = 2, SAVE5_FAILED = 3
@@ -48,6 +55,7 @@ typedef struct Save5State {
     CreatureRoster roster;
     Save5Quests quests;
     EquipmentState equipment;
+    EconomyState economy;
 } Save5State;
 
 /* Read-only, blocking startup/transition operation. Failure leaves out intact.
@@ -58,6 +66,7 @@ int save5_load(Save5State *out);
 int save5_has_valid(void);
 /* Full blocking validator for host tools/transitions, not active-game ticks. */
 int save5_validate(const Save5State *state);
+int save5_later_claims_validate(const Save5Quests *quests,const EconomyState *economy);
 /* Complete immutable released-policy check, independent of current catalogs.
  * Revision1 here is DECODED state: zero quests plus its canonical migrated
  * starter equipment. Revision1 bank bytes still require all gear bytes zero. */
@@ -74,6 +83,10 @@ int save5_campaign_validate(const CampaignSave *campaign);
 int save5_begin(const Save5State *state);
 unsigned save5_step(unsigned byte_budget);
 unsigned save5_status(void);
+/* Only explicitly marked ordinary saves may yield their scratch owner. */
+void save5_set_preemptible(int enabled);
+int save5_cancel_background(void);
+int save5_take_preempted(void);
 /* Monotonic byte work count, conservative total 6*6144+3. Invalid old banks
  * short-circuit scans, so DONE is authoritative rather than total equality. */
 unsigned save5_progress(void);
@@ -101,6 +114,10 @@ EquipmentState *save5_preflight_equipment_stage(Save4U32 token);
 int save5_preflight_matches(Save4U32 token, const Save5State *state);
 int save5_preflight_active(void);
 void save5_preflight_cancel(void);
+/* Exact full-state/token match -> immutable economy candidate writer.
+ * Freeze live state until DONE and apply the delta only after verification. */
+int save5_preflight_store_economy(Save4U32 token,const Save5State *live,
+                                  const EconomyState *next);
 
 #ifdef SAVE5_HOST_TEST
 extern Save4U8 save5_test_sram[32768];

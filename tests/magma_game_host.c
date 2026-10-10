@@ -101,3 +101,20 @@ unsigned host_anchor_bits(void){return adventure_save.quests.anchors[3];}
 unsigned host_campaign_spawn(void){return adventure_save.campaign.spawn;}
 void host_corrupt_roster_level(void){adventure_save.roster.instances[0].level=0;}
 void host_stamp_campaign(unsigned area,unsigned spawn){adventure_save.campaign.room=(Save4U8)area;adventure_save.campaign.spawn=(Save4U8)spawn;}
+
+/* Explicit synthetic EVENT_PENDING scheduler for retained world tests.
+ * Two warmup updates do no transaction work; then one actual bounded prepare
+ * call runs per host update. This proves module sequencing, not native frames. */
+int host_settle_event(void){unsigned step,status;
+ if(!magma_game_event_pending())return 1;
+ game_state=10;
+ for(step=0;step<502;step++){
+  if(step<2)continue;
+  status=magma_game_prepare_event();
+  if(status==SAVE5_BUSY)continue;
+  game_state=1;
+  if(status!=SAVE5_DONE)return 0;
+  return magma_game_commit_event()&&!magma_game_event_pending();
+ }
+ magma_game_cancel_event();game_state=1;return 0;
+}

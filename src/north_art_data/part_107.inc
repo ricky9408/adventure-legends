@@ -1,5 +1,3 @@
-  120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,
-  120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,118,118,118,118,118,118,118,118,118,137,137,137,137,
   137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,
   137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,
   137,137,137,137,137,137,137,118,118,118,118,118,118,118,118,118,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,
@@ -407,7 +405,9 @@ const unsigned char north_sprites[NORTH_SPR_COUNT][256] __attribute__((aligned(4
  },
 };
 const NorthArtRoom north_art_rooms[NORTH_ART_ROOM_COUNT] = {
- {480,320,north_background_hearthwake_quay,north_background_hearthwake_quay_odd,north_hearthwake_quay_solids,22,north_hearthwake_quay_collision_rows,north_hearthwake_quay_collision_bands },
+ {480,320,north_background_hearthwake_quay,north_background_hearthwake_quay_odd,north_hearthwake_quay_solids,24,north_hearthwake_quay_collision_rows,north_hearthwake_quay_collision_bands },
  {480,320,north_background_headland_roads,north_background_headland_roads_odd,north_headland_roads_solids,14,north_headland_roads_collision_rows,north_headland_roads_collision_bands },
  {240,160,north_background_boathouse_gallery,0,north_boathouse_gallery_solids,5,north_boathouse_gallery_collision_rows,north_boathouse_gallery_collision_bands },
  {240,160,north_background_kiln_chart_store,0,north_kiln_chart_store_solids,5,north_kiln_chart_store_collision_rows,north_kiln_chart_store_collision_bands },
+ {240,160,north_background_loading_hall,0,north_loading_hall_solids,6,north_loading_hall_collision_rows,north_loading_hall_collision_bands },
+ {240,160,north_background_crossbeam_chamber,0,north_crossbeam_chamber_solids,7,north_crossbeam_chamber_collision_rows,north_crossbeam_chamber_collision_bands },

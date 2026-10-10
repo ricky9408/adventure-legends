@@ -4,12 +4,28 @@
 All raw cases have independent CRC repair and an otherwise valid state. These
 are host/preflight checks, not native walking or collision evidence.
 """
-import ctypes as C,json,struct,tempfile,unittest
+import ctypes as C,hashlib,json,struct,tempfile,unittest
 from pathlib import Path
 from test_underwater_save import ROOT,build,runtime_hashes,FIXTURE_SHA
 from test_underwater_transactions import configure
 from test_save5 import Save,A,B,SIZE,repair_crc,compare_state,BUSY,DONE,FAILED
+(ROOT/'build/current-host-evidence/underwater-return-spawns').mkdir(parents=True,exist_ok=True)
 from test_underwater_history_differential import build as history_build,ORACLE
+TEMPLATE_FIXTURE=ROOT/'tests/fixtures/v5-revision6/underwater-minimal12-town.sav'
+TEMPLATE_SHA='3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda'
+
+def historical_template():
+ """Current revision11 used-size5088 is not the historical revision6 size5056."""
+ raw=TEMPLATE_FIXTURE.read_bytes();assert hashlib.sha256(raw).hexdigest()==TEMPLATE_SHA
+ provenance=json.loads((TEMPLATE_FIXTURE.parent/'provenance.json').read_text())
+ row=next(x for x in provenance['fixtures'] if x['fixture']==TEMPLATE_FIXTURE.name)
+ assert row['sha256']==TEMPLATE_SHA and row['controller_only'] and row['game_ram_writes']==0
+ banks=[raw[offset:offset+SIZE] for offset in (A,B)]
+ banks=[b for b in banks if b[:4]==b'EB\x05\x20' and b[20]==0xa5 and bytes(repair_crc(b))==b and int.from_bytes(b[12:14],'little')==6]
+ assert banks,'No authenticated committed revision6 bank'
+ bank=max(banks,key=lambda b:int.from_bytes(b[8:12],'little'))
+ assert not any(bank[5056:]),'Historical economy/padding must remain zero'
+ return bank
 
 def encode_state(template,s,revision=6):
  b=bytearray(template);b[12:14]=revision.to_bytes(2,'little')
@@ -28,17 +44,31 @@ class ReturnSpawnTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   cls.tmp=tempfile.TemporaryDirectory(prefix='underwater-return-spawns-');cls.addClassCleanup(cls.tmp.cleanup);folder=Path(cls.tmp.name)
-  cls.lib=configure(build(folder/'current'));cls.oracle=history_build(ORACLE,folder/'oracle');cls.checks=0
+  cls.lib=configure(build(folder/'current'));cls.oracle=history_build(ORACLE,folder/'oracle');cls.checks=0;cls.failed=False
   s=Save();assert cls.lib.underwater_test_earned34(C.byref(s))==0;cls.old=bytes(s)
-  assert cls.lib.save5_store(C.byref(s))==1;latest=max((A,B),key=lambda p:int.from_bytes(bytes(cls.lib.sram[p+8:p+12]),'little'));cls.template=bytes(cls.lib.sram[latest:latest+SIZE])
+  # Keep testing the current writer, but independently seed raw legacy cases
+  # from a real old bank. Relabeling revision11 retains an invalid used-size.
+  assert cls.lib.save5_store(C.byref(s))==1;latest=max((A,B),key=lambda p:int.from_bytes(bytes(cls.lib.sram[p+8:p+12]),'little'));cls.current_template=bytes(cls.lib.sram[latest:latest+SIZE])
+  cls.template=historical_template()
   assert cls.lib.underwater_test_completed(C.byref(s),0)==0
   for room in (46,47):assert cls.lib.underwater_anchor(C.byref(s),room)==1
   s.quests.anchors[3]=3;cls.complete=bytes(s)
+ def tearDown(self):
+  result=self._outcome.result
+  if any(test is self for test,_ in result.failures+result.errors):self.__class__.failed=True
  @classmethod
  def tearDownClass(cls):
-  report={'result':'PASS','scope':'Current-r6 reciprocal return spawn codec/current/preflight checks only; world collision and native journeys are separate','checks':cls.checks,'source_sha256':cls.lib._source_hashes,'source_unchanged_during_measurement':cls.lib._source_hashes==runtime_hashes(),'fixture_sha256':FIXTURE_SHA,'new_landings':{'38:4':'requires Underwater town visit','46:3':'ordinary return','48:2':'ordinary return','51:2':'ordinary return with main prefix1','52:2':'ordinary return with main prefix3'},'anchor_spawns':['46:2','47:2'],'old_revisions':'unchanged; all1..5 reject38:4'}
-  (ROOT/'docs/evidence/underwater-return-spawns/host.json').write_text(json.dumps(report,indent=2)+'\n')
+  report={'result':'FAIL' if cls.failed else 'PASS','scope':'Retained r6 landings under current-r7 reciprocal return spawn codec/current/preflight checks only; world collision and native journeys are separate','checks':cls.checks,'source_sha256':cls.lib._source_hashes,'source_unchanged_during_measurement':cls.lib._source_hashes==runtime_hashes(),'fixture_sha256':FIXTURE_SHA,'new_landings':{'38:4':'requires Underwater town visit','46:3':'ordinary return','48:2':'ordinary return','51:2':'ordinary return with main prefix1','52:2':'ordinary return with main prefix3'},'anchor_spawns':['46:2','47:2'],'old_revisions':'unchanged; all1..5 reject38:4'}
+  report['raw_template']={'fixture':str(TEMPLATE_FIXTURE.relative_to(ROOT)),'fixture_sha256':TEMPLATE_SHA,'bank_sha256':hashlib.sha256(cls.template).hexdigest(),'content_revision':6,'source':'Authenticated controller-only retained SRAM; current writer is not used as a historical template'}
+  (ROOT/'build/current-host-evidence/underwater-return-spawns/host.json').write_text(json.dumps(report,indent=2)+'\n')
  def clone(self,complete=True):return Save.from_buffer_copy(self.complete if complete else self.old)
+ def test_current_writer_cannot_be_relabelled_as_historical_template(self):
+  self.assertEqual(int.from_bytes(self.current_template[12:14],'little'),11)
+  self.assertEqual(int.from_bytes(self.current_template[6:8],'little'),5088)
+  self.assertEqual(int.from_bytes(self.template[6:8],'little'),5056)
+  bank=encode_state(self.current_template,self.clone(),6)
+  self.lib.save5_test_reset_writer();self.lib.sram[:]=bytes([255])*32768;self.lib.sram[A:A+SIZE]=bank
+  out=Save();self.assertEqual(self.lib.save5_load(C.byref(out)),0)
  def assert_state(self,s,expected,raw=True):
   lib=self.lib;before=bytes(s);lib.save5_test_reset_writer();lib.save5_test_fail_after(-1)
   self.assertEqual(lib.save5_validate(C.byref(s)),expected,(s.campaign.room,s.campaign.spawn))

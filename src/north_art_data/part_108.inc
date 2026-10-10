@@ -1,5 +1,3 @@
- {240,160,north_background_loading_hall,0,north_loading_hall_solids,6,north_loading_hall_collision_rows,north_loading_hall_collision_bands },
- {240,160,north_background_crossbeam_chamber,0,north_crossbeam_chamber_solids,7,north_crossbeam_chamber_collision_rows,north_crossbeam_chamber_collision_bands },
  {240,160,north_background_relay_gallery,0,north_relay_gallery_solids,5,north_relay_gallery_collision_rows,north_relay_gallery_collision_bands },
  {240,160,north_background_beacon_crown,0,north_beacon_crown_solids,7,north_beacon_crown_collision_rows,north_beacon_crown_collision_bands },
 };

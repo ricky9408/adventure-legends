@@ -1,0 +1,99 @@
+{
+  "palette": [
+    {
+      "name": "open-coast pulse reed",
+      "gain": 0.66,
+      "attack": 0.008,
+      "release": 0.072,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.115
+        ],
+        [
+          3,
+          0.235
+        ],
+        [
+          4,
+          0.025
+        ],
+        [
+          5,
+          0.065
+        ],
+        [
+          7,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 5.0,
+      "vibrato_cents": 4.5
+    },
+    {
+      "name": "light coastal walking bass",
+      "gain": 0.37,
+      "attack": 0.005,
+      "release": 0.055,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.02
+        ],
+        [
+          3,
+          -0.095
+        ],
+        [
+          5,
+          0.03
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "soft coastal harp",
+      "gain": 0.255,
+      "attack": 0.0035,
+      "release": 0.065,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.115
+        ],
+        [
+          3,
+          0.055
+        ],
+        [
+          4,
+          0.024
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "headland-gba-16384-s8.raw": "d6e3e608a52f92b139deea9b15505c8371aacb9d3c55ddad33675132a7fa7eb6"
+  }
+}

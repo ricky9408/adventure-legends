@@ -8,6 +8,8 @@ import hashlib,json,os,random,shlex,subprocess,sys,tempfile,unittest
 from pathlib import Path
 from test_creatures import ROOT,Instance,Roster,Form,build,U8
 from test_magma_creature_core import configure,Learn,Ability
+from test_southern_creature_core import historical_prefix_bytes
+from test_southern_catalog import before_return
 sys.path.insert(0,str(ROOT/'assets/creatures'))
 from catalog_source import load_catalog,load_json,CatalogError
 from catalog_policy import REVISION_POLICY,CAPABILITY_MASKS
@@ -43,7 +45,7 @@ class UnderwaterCoreTests(unittest.TestCase):
 
     def test_exact_released_runtime_prefixes(self):
         for name,size in [('creature_forms',65*32),('creature_learnsets',102*2),('creature_evolutions',35*8),('creature_abilities',65*8)]:
-            self.assertEqual(bytes((U8*size).in_dll(self.lib,name)),bytes((U8*size).in_dll(self.old,name)),name)
+            self.assertEqual(historical_prefix_bytes(self.lib,name,size),bytes((U8*size).in_dll(self.old,name)),name)
 
     def test_every_new_form_definition_and_command_inheritance(self):
         for row in NEW:
@@ -112,18 +114,18 @@ class UnderwaterCatalogTests(unittest.TestCase):
         catalog=load_catalog(ROOT/'assets/creatures/catalog.json');enabled=load_json(ROOT/'assets/creatures/enabled.json')
         self.assertFalse(validate(catalog,load_json(ROOT/'assets/creatures/identity-lock.json')))
         self.assertFalse(validate_enabled(catalog,enabled));self.assertFalse(validate_compatibility(catalog,6))
-        self.assertEqual(tuple(len(x) for x in build_tables(catalog,enabled)[:4]),(89,142,51,89))
+        self.assertEqual(tuple(len(x) for x in build_tables(catalog,enabled)[:4]),(120,200,68,120))
         self.assertEqual(generate(catalog,enabled),(ROOT/'src/creature_data.c').read_text())
         descriptor=json.loads((ROOT/'assets/creatures/catalog.json').read_text())
         for paths in descriptor['sections'].values():
             for p in paths:self.assertLess((ROOT/'assets/creatures'/p).stat().st_size,90000)
         for p in ['src/creatures.c','src/creature_data.c','src/creature_history_v5.inc','assets/history/creatures-v5.json','assets/history/released-creature-relations-v5.json']:
             self.assertLess((ROOT/p).stat().st_size,90000)
-        for revision,counts in [(1,(8,12,4,8)),(2,(11,16,5,11)),(3,(21,31,10,21)),(4,(41,61,20,41)),(5,(65,102,35,65))]:
+        for revision,counts in [(1,(8,12,4,8)),(2,(11,16,5,11)),(3,(21,31,10,21)),(4,(41,61,20,41)),(5,(65,102,35,65)),(6,(89,142,51,89))]:
             p=REVISION_POLICY[revision];manifest={'content_revision':revision,'enabled_form_ids':p['forms'],'enabled_ability_ids':p['abilities'],'enabled_evolutions':p['edges']}
             self.assertFalse(validate_enabled(catalog,manifest));self.assertEqual(tuple(len(x) for x in build_tables(catalog,manifest)[:4]),counts)
     def test_pre_extension_catalog_canonical_values_are_exact(self):
-        c=load_catalog(ROOT/'assets/creatures/catalog.json')
+        c=before_return(load_catalog(ROOT/'assets/creatures/catalog.json'))
         c['forms']=[f for f in c['forms'] if not 49<=f['id']<=72]
         c['abilities']=[a for a in c['abilities'] if a['id']<67]
         c['evolutions']=[e for e in c['evolutions'] if not 49<=e['from']<=72]

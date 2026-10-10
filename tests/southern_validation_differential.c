@@ -1,12 +1,14 @@
 /* Exact pre-second-optimization validator snapshots. Test-only, never linked
  * into a ROM. Source SHA158fcec4bddcab1a2294d96352e6bb8153feaeee6e6ed1c9cc50be04c8453a18.
- * Policy/registry helpers are intentionally shared and unchanged; this test
- * isolates XP interval, party traversal and collection-bit optimizations. */
+ * The original algorithms below remain intact: binary-search XP, repeated
+ * party traversal and per-identity collection bits. Registry lookups remain
+ * shared as before. A separate explicit Return7 stage-policy guard adapts
+ * the current semantic domain without copying the optimized implementation. */
 #include "creatures.c"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-int reference_creatures_instance_validate(const CreatureInstance *c) {
+static int reference_legacy_instance_algorithm(const CreatureInstance *c) {
     const CreatureForm *f;
     const CreatureFamilyPolicy *family;
     unsigned j, legacy;
@@ -30,6 +32,44 @@ int reference_creatures_instance_validate(const CreatureInstance *c) {
         if (!e || c->level < e->min_level) return 0;
     }
     return 1;
+}
+
+/* Independent authored stage rules. Never consult form_policy, the production
+ * trial-subset helper, or the production instance validator for expectations. */
+static int reference_current_stage_policy(const CreatureInstance *c) {
+    static const unsigned first_masks[10]={1,2,4,8,16,0,32,64,1,1};
+    unsigned form=c->form_id,allowed=0,required=0,bond=0,mask=c->trial_flags;
+    if (!form) return 1;
+    if (form<=30) {
+        unsigned family=(form-1u)/3u,stage=(form-1u)%3u;
+        if(family==5) {
+            allowed=stage?3072u:1024u;
+            required=stage==2?3072u:stage==1?1024u:0u;
+            if((mask&2048u) && !(mask&1024u)) return 0;
+        } else {
+            allowed=first_masks[family] | (stage?1024u:0u);
+            required=stage==2?allowed:0u;
+            if((mask&1024u) && !(mask&first_masks[family])) return 0;
+        }
+        if(required) bond=stage==1?45u:60u;
+    } else if (form<=36) {
+        allowed=(form-31u)%3u?3u:1u;
+        if((mask&2u) && !(mask&1u)) return 0;
+    } else if (form<=72) {
+        allowed=3;
+        if(form>=49 && (form-49u)%3u) {
+            required=1u<<((form-49u)%3u-1u);bond=45;
+        }
+    } else if (form<=78) allowed=128u<<((form-73u)/2u);
+    else if (form<=100) allowed=1;
+    else if (form<=104) {
+        allowed=1024;
+        if(!(form&1u)) { required=1024;bond=45; }
+    } else return 0;
+    return !(mask&~allowed) && (mask&required)==required && c->bond>=bond;
+}
+int reference_creatures_instance_validate(const CreatureInstance *c) {
+    return reference_legacy_instance_algorithm(c) && reference_current_stage_policy(c);
 }
 
 int reference_creatures_party_validate(const CreatureRoster *r) {

@@ -1,0 +1,313 @@
+{
+  "title": "Where the Mileposts Turn",
+  "bars": 24,
+  "beats_per_bar": 4,
+  "tempo": 112,
+  "duration_seconds": 51.42857142857143,
+  "musicxml_voices": 2,
+  "midi_note_tracks": 3,
+  "bar_sums_valid": true,
+  "melody_range_midi": [
+    66,
+    79
+  ],
+  "left_range_midi": [
+    38,
+    60
+  ],
+  "audible_review_performed": false,
+  "loop": "24 bars / 96 beats; last F#4 resolves upward to initial G4 over D7 -> G. No ritardando, tail, or extra cadence bars.",
+  "xml_voice_bar_totals": [
+    {
+      "bar": 1,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 1,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 2,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 2,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 3,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 3,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 4,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 4,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 5,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 5,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 6,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 6,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 7,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 7,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 8,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 8,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 9,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 9,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 10,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 10,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 11,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 11,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 12,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 12,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 13,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 13,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 14,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 14,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 15,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 15,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 16,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 16,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 17,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 17,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 18,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 18,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 19,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 19,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 20,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 20,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 21,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 21,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 22,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 22,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 23,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 23,
+      "voice": "2",
+      "ticks": 1920
+    },
+    {
+      "bar": 24,
+      "voice": "1",
+      "ticks": 1920
+    },
+    {
+      "bar": 24,
+      "voice": "2",
+      "ticks": 1920
+    }
+  ],
+  "midi_parse": [
+    {
+      "name": "conductor",
+      "end_tick": 46080,
+      "attacks": 0,
+      "velocity_range": null,
+      "all_attacks_on_eighth_grid": true
+    },
+    {
+      "name": "melody",
+      "end_tick": 46080,
+      "attacks": 96,
+      "velocity_range": [
+        72,
+        85
+      ],
+      "all_attacks_on_eighth_grid": true
+    },
+    {
+      "name": "bass",
+      "end_tick": 46080,
+      "attacks": 48,
+      "velocity_range": [
+        59,
+        67
+      ],
+      "all_attacks_on_eighth_grid": true
+    },
+    {
+      "name": "inner",
+      "end_tick": 46080,
+      "attacks": 96,
+      "velocity_range": [
+        45,
+        55
+      ],
+      "all_attacks_on_eighth_grid": true
+    }
+  ],
+  "voice_crossings": [],
+  "minimum_simultaneous_melody_lh_semitones": 9,
+  "midi_all_notes_closed": true,
+  "midi_all_pedals_released": true,
+  "rendered_score": "2-page readable custom engraving; PDF is a review aid, MusicXML is authoritative editable notation",
+  "musicxml_pitch_duration_matches_event_data": true,
+  "midi_pitch_onset_matches_event_data": true,
+  "setting": "Sunmere Grove / sunlit woodland road",
+  "audio_engine_seam_tested": false,
+  "maximum_successive_lh_leap_semitones": 12,
+  "pdf_both_pages_visually_reviewed": true,
+  "independent_music_review": "Pass for revised score-first draft; no required musical changes; audible review pending"
+}

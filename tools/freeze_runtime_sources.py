@@ -17,6 +17,9 @@ def main():
     parser.add_argument('--output', type=Path, default=ROOT / 'build/source-hashes.json')
     args = parser.parse_args()
     paths = sorted(p for p in (ROOT / 'src').rglob('*') if p.is_file())
+    unexpected = [str(p.relative_to(ROOT)) for p in paths
+                  if p.suffix not in {'.c', '.h', '.s', '.inc'}]
+    assert not unexpected, 'Move uncompiled files out of src before freezing: ' + repr(unexpected)
     paths.append(ROOT / 'linker.ld')
     manifest = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in paths}

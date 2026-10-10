@@ -1,0 +1,5 @@
+Original Covenant companion pixels, authored as integer geometric primitives from the original-world design proposal.
+No Nintendo or Tolkien artwork, game sprites, traced assets, downloaded creature pixels or generated-image raster inputs were used.
+The shared game RGB555 palette is preserved verbatim. Existing game silhouettes and six small terrain crops are read-only comparison references; no creature pixels from them enter the new art.
+232 original indexed images: 224 native field/cast poses and eight independently composed 32px portraits.
+This package is an isolated art proposal. It contains no music, ROM, gameplay enablement or source publication.

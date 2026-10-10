@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "purpose": "Read-only exact delivered Underwater C source closure for independent host differential tests. No ROM, executable, SRAM or emulator state is included.",
+  "source_commit": "1acf788854b8ce6827c01a5ddbdd97035a8d9889",
+  "source_tree": "eaa86a6266815b5ff1ff0408f8833d2cca05fb8f",
+  "files": [
+    {
+      "path": "src/creature_admission_job.inc",
+      "bytes": 10787,
+      "sha256": "a971e84833a63ccea93c72d4b01859d965c765bcc95abd7884e33ea544a75cd1",
+      "git_blob": "ae44435f6d5d634f1e9fa0dba4c99b6b4c667ad3"
+    },
+    {
+      "path": "src/creature_data.c",
+      "bytes": 24860,
+      "sha256": "ca93dedb1a0bdd813556ad7d1c63656ff4990dfa4e7dd53156c7166e08661ad3",
+      "git_blob": "aaa0f80c01d4196e09c1ac0954ac6c4a4d760cd0"
+    },
+    {
+      "path": "src/creature_history_v5.inc",
+      "bytes": 4553,
+      "sha256": "8f57c4d177a087cf9866c6188d6698c6cfa07e82f3af3017ff7fee3304d893b0",
+      "git_blob": "9bb055bbb3de080b7a2e2df227abd176a7700ae6"
+    },
+    {
+      "path": "src/creatures.c",
+      "bytes": 81029,
+      "sha256": "d87883e3a737c45be20217d62a534f06b47df7ddb31796d50418274554c56bd2",
+      "git_blob": "1d5cb3202f3d426514337fcea957f2983d76f4a0"
+    },
+    {
+      "path": "src/creatures.h",
+      "bytes": 20581,
+      "sha256": "b6e21b866c55863ecfdf1ff8d2a97098aac60e63047edc29968599d2d29667a9",
+      "git_blob": "8c3e0c24fc3d3327447df30f5b3f8166917c777b"
+    },
+    {
+      "path": "src/equipment.c",
+      "bytes": 15612,
+      "sha256": "79414903f649cb9af3aba502042e366eea215b500869a80223210a0cf6ba02ec",
+      "git_blob": "27f705e93207f90acff8b31de233369bdca11387"
+    },
+    {
+      "path": "src/equipment.h",
+      "bytes": 8070,
+      "sha256": "57cd1272bc13e67031412c189c8ef0bdf3b5f43a4173adcdc93024173b18699f",
+      "git_blob": "5ea9b868dbb039455222d5ac071f8c6ca63b0938"
+    },
+    {
+      "path": "src/equipment_data.c",
+      "bytes": 8179,
+      "sha256": "d28c475fb0142878182c13d75d4b117a968f5e237dce0821b98d7ae264e001d6",
+      "git_blob": "aedaa20d296c334d1b7125a2644dbb72ac233915"
+    },
+    {
+      "path": "src/magma_quests.c",
+      "bytes": 12184,
+      "sha256": "a4aaaaec7a301d8dee1b6316a8fd7feed42d2297a58d4e2ae5da60120a05d617",
+      "git_blob": "ce9631c87cd2588aebbedf284a6fcd1bf7918630"
+    },
+    {
+      "path": "src/magma_quests.h",
+      "bytes": 3393,
+      "sha256": "844ae97ad9600b90b66debecc58865351b3960bdf6cdbd0a8aeafb877b4b75c1",
+      "git_blob": "fd9150a2eda38b7fdb9d9ac31ebcfc1db0b870e3"
+    },
+    {
+      "path": "src/save4.c",
+      "bytes": 11982,
+      "sha256": "c6f15dd66c56cf6f6703742f9e7e02ae1662e124ed1e3260c39c14421cb69c7c",
+      "git_blob": "62701a422eee51ad7aed87759222af2d3d9e8d99"
+    },
+    {
+      "path": "src/save4.h",
+      "bytes": 3477,
+      "sha256": "fc467fed7a5214c43f94cc8248c4e0fb17da0fd030b670ff179b569cf9f25ce2",
+      "git_blob": "1c542d511083e86690678bded6125a8ddfb9a835"
+    },
+    {
+      "path": "src/save5.c",
+      "bytes": 81196,
+      "sha256": "a637429f7e016b3d108b2c526917ab58768fc996a99b35355270114ad27237b1",
+      "git_blob": "3b5b17b2ab55f551d361239c0ee3e02f3caf1007"
+    },
+    {
+      "path": "src/save5.h",
+      "bytes": 5963,
+      "sha256": "70fde544df6e0fab7c61a6aeb213da15d33b502cee3ba70bb141d2a19f1ab509",
+      "git_blob": "266f5f365e54594d7804e8946c2af53ac6c7606b"
+    },
+    {
+      "path": "src/save5_history_policy.h",
+      "bytes": 8216,
+      "sha256": "69dba67ea332f03bab26246b5739662aef7177ff1cabe43bed8b444940d40a13",
+      "git_blob": "c874f2be9831a327f52a6a3b38a601f5f89feacc"
+    },
+    {
+      "path": "src/save5_preflight.inc",
+      "bytes": 5787,
+      "sha256": "14d05e2ff8943f8effa093ba9350e11b2d615bd46951d713bbf1c016f2356eb4",
+      "git_blob": "2ab59bd8fceca6d83457285316e985baee81207d"
+    },
+    {
+      "path": "src/save5_underwater_policy.h",
+      "bytes": 2045,
+      "sha256": "3f78289d79484df9223cc8593166df0c9bfd53a147f9d2347c7a9b9181bb4200",
+      "git_blob": "47ff300d55f4350f75394bd9d97996ec0708bf24"
+    },
+    {
+      "path": "src/save5_underwater_policy.inc",
+      "bytes": 2992,
+      "sha256": "4fd4a4692f0641151abdf6258449dd962979efac8565e1547073304cb8ce2083",
+      "git_blob": "a5a0f94c4d850b27b8f759a36d0160d1e8a20f65"
+    },
+    {
+      "path": "src/southern_quests.c",
+      "bytes": 8670,
+      "sha256": "2fddb635de899cee7d5a83a7812c7a5dfdaeca453a593bbf58a238ce8a00775d",
+      "git_blob": "69790119e20aeaa4c940e27df3d9e6190669ee30"
+    },
+    {
+      "path": "src/southern_quests.h",
+      "bytes": 2990,
+      "sha256": "ce6fc8a626d23ed0d02f24d585db82abb6bba2c4bcb8d23924dfa94421a89881",
+      "git_blob": "65b97b2ce4e2ebf4c9957417dd1ddd54b66e6c04"
+    }
+  ],
+  "archives": [
+    {
+      "path": "source-creatures.tar.gz",
+      "bytes": 32137,
+      "sha256": "2a30c2bc8337bf2f64b83cde5a947e52ed544d5bf9cffa855afa3fd4e4423b98"
+    },
+    {
+      "path": "source-save.tar.gz",
+      "bytes": 45296,
+      "sha256": "282e580c501088962c098f4d2eae427a669fdc817f0e7304bdf59e22084995e7"
+    }
+  ]
+}

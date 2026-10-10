@@ -1,5 +1,6 @@
 #include "gear_runtime.h"
 #include "gear_menu.h"
+#include "economy.h"
 #include "combat_rules.h"
 #include "progression.h"
 #include "assets.h"
@@ -13,6 +14,10 @@
 #include "magma_powers.h"
 #include "underwater_game.h"
 #include "underwater_powers.h"
+#include "return_powers.h"
+#include "horizons_powers.h"
+#include "covenants_powers.h"
+#include "covenants_game.h"
 typedef unsigned char u8;
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
@@ -41,16 +46,39 @@ static unsigned magma_melee_token,magma_arrow_tokens[2];
 static unsigned live_arrows(void){return !!player_arrows[0].active+!!player_arrows[1].active;}
 unsigned game_weapon_class(void){return gear_stats.weapon_class;}
 unsigned game_power_cooldown(unsigned base){unsigned reduction=EQUIPMENT_BASE_POWER_COOLDOWN-gear_stats.power_cooldown;return base>reduction?base-reduction:1;}
-unsigned game_gear_base_hp(void){return (unsigned)max_hp*16u;}
+unsigned game_gear_base_hp(void){return ((unsigned)max_hp+economy_heart_bonus(&adventure_save)+economy_later_heart_bonus(&adventure_save))*16u;}
+void game_gear_bonus_stats(EquipmentStats*stats){
+ unsigned attack=stats->attack_q4+4u*economy_attack_bonus(&adventure_save);
+ unsigned speed=stats->speed_q8+economy_speed_bonus(&adventure_save);
+ unsigned defense=stats->defense_q4+economy_defense_bonus(&adventure_save);
+ /* Former dodge recovery now contributes to the bounded gear power bonus. */
+ unsigned recovery=(EQUIPMENT_BASE_POWER_COOLDOWN-stats->power_cooldown)+(EQUIPMENT_BASE_ROLL_COOLDOWN-stats->roll_cooldown);
+ if(recovery>8u)recovery=8u;
+ recovery+=economy_power_reduction(&adventure_save);
+ stats->speed_q8=(unsigned short)(speed>EQUIPMENT_MAX_SPEED_Q8?EQUIPMENT_MAX_SPEED_Q8:speed);
+ stats->diagonal_q8=(unsigned short)((stats->speed_q8*181u+128u)>>8);
+ stats->defense_q4=(unsigned char)(defense>EQUIPMENT_MAX_DEFENSE_Q4?EQUIPMENT_MAX_DEFENSE_Q4:defense);
+ stats->attack_q4=(unsigned char)(attack>32u?32u:attack);
+ stats->power_cooldown=(unsigned char)(EQUIPMENT_BASE_POWER_COOLDOWN-recovery);
+}
 unsigned game_gear_hp(void){return (unsigned)hero_hp_q4;}
-unsigned game_gear_busy(void){unsigned i,busy=weapon_action_busy(&weapon_action,live_arrows())|(roll_ticks?EQUIPMENT_BUSY_ROLLING:0);for(i=0;i<12;i++)if(shots[i].life&&!shots[i].owner)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;if((regional_power_kind==11&&regional_power_time)||northern_powers_busy()||southern_powers_busy()||magma_powers_busy()||underwater_powers_busy())busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;return busy;}
+unsigned game_gear_busy(void){unsigned i,busy=weapon_action_busy(&weapon_action,live_arrows())|(roll_ticks?EQUIPMENT_BUSY_ROLLING:0);for(i=0;i<12;i++)if(shots[i].life&&!shots[i].owner)busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;if((regional_power_kind==11&&regional_power_time)||northern_powers_busy()||southern_powers_busy()||magma_powers_busy()||underwater_powers_busy()||return_powers_busy()||horizons_powers_busy()||covenants_powers_busy())busy|=EQUIPMENT_BUSY_PLAYER_PROJECTILE;return busy;}
 void game_health_refresh(int fill){
     if(!equipment_derive(&adventure_save.equipment,game_gear_base_hp(),&gear_stats))return;
+    game_gear_bonus_stats(&gear_stats);
     if(fill||hero_hp_q4>gear_stats.max_hp_q4)hero_hp_q4=gear_stats.max_hp_q4;
     if(hero_hp_q4<0)hero_hp_q4=0;
     hp=(hero_hp_q4+15)/16;health_code=-1;
 }
-void game_gear_apply(unsigned clamped){hero_hp_q4=(int)clamped;game_health_refresh(0);gfx_slash_frame=-1;weapon_code=-1;}
+void game_gear_apply(unsigned clamped){covenants_powers_selection_changed();covenants_game_selection_changed();hero_hp_q4=(int)clamped;game_health_refresh(0);gfx_slash_frame=-1;weapon_code=-1;}
+void game_gear_apply_stats(unsigned clamped,const EquipmentStats*fresh){
+    unsigned i;unsigned char*dest=(unsigned char*)&gear_stats;const unsigned char*source=(const unsigned char*)fresh;
+    covenants_powers_selection_changed();covenants_game_selection_changed();
+    for(i=0;i<sizeof gear_stats;i++)dest[i]=source[i];
+    game_gear_bonus_stats(&gear_stats);
+    hero_hp_q4=(int)(clamped<gear_stats.max_hp_q4?clamped:gear_stats.max_hp_q4);
+    hp=(hero_hp_q4+15)/16;health_code=-1;gfx_slash_frame=-1;weapon_code=-1;
+}
 void game_health_fill(void){if(!gear_stats.max_hp_q4){game_health_refresh(1);return;}hero_hp_q4=gear_stats.max_hp_q4;hp=(hero_hp_q4+15)/16;}
 void game_health_heal(unsigned amount){
     if(amount>(unsigned)(gear_stats.max_hp_q4-hero_hp_q4))amount=(unsigned)(gear_stats.max_hp_q4-hero_hp_q4);

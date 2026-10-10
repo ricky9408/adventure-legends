@@ -866,6 +866,262 @@
         "An optional underwater sidegrade.",
         "No breathing meter or route permission."
       ]
+    },
+    {
+      "id": 21,
+      "key": "ITEM_021",
+      "name": "Sailthread Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 8,
+        "stagger": 0
+      },
+      "description": [
+        "A light bow for the returning road.",
+        "Speed +4; arrow range +8."
+      ],
+      "weapon_class": "bow"
+    },
+    {
+      "id": 39,
+      "key": "ITEM_039",
+      "name": "Homeweave Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 3,
+        "hp_q4": 4,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A steady layer for familiar paths.",
+        "Defense +3; health +4; speed -2."
+      ]
+    },
+    {
+      "id": 55,
+      "key": "ITEM_055",
+      "name": "Walkway Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 4,
+        "roll_reduction": 2,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Easy steps over the homeward boards.",
+        "Speed +4; roll cooldown -2."
+      ]
+    },
+    {
+      "id": 69,
+      "key": "ITEM_069",
+      "name": "Reedcourier Belt",
+      "slot": "belt",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 3,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Carry the last reed delivery gently.",
+        "Health +4; power cooldown -3."
+      ]
+    },
+    {
+      "id": 87,
+      "key": "ITEM_087",
+      "name": "Patient Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 1,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "description": [
+        "Stagger +1 with a patient step.",
+        "Guard +1; speed -2; power -1."
+      ]
+    },
+    {
+      "id": 7,
+      "key": "ITEM_007",
+      "name": "Bridgegrain Sword",
+      "slot": "weapon",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 1,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 1,
+        "stagger": 1
+      },
+      "description": [
+        "Attack +1; reach +1; stagger +1.",
+        "Walking speed -2."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 14,
+      "key": "ITEM_014",
+      "name": "Rainstair Lance",
+      "slot": "weapon",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 2,
+        "stagger": 0
+      },
+      "description": [
+        "A lance with a padded grip.",
+        "Health +4; reach +2; speed -2."
+      ],
+      "weapon_class": "lance"
+    },
+    {
+      "id": 56,
+      "key": "ITEM_056",
+      "name": "Shelter Boots",
+      "slot": "boots",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 8,
+        "speed_q8_delta": -2,
+        "roll_reduction": 1,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Soft soles for sheltered paths.",
+        "Health +8; roll -1; speed -2."
+      ]
+    },
+    {
+      "id": 88,
+      "key": "ITEM_088",
+      "name": "Listening Ring",
+      "slot": "ring",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 5,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A ring that catches the quiet.",
+        "Power wait -5; speed -2."
+      ]
+    },
+    {
+      "id": 40,
+      "key": "ITEM_040",
+      "name": "Wayfarer Coat",
+      "slot": "body",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 16,
+        "speed_q8_delta": -4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Defense +1; health +16.",
+        "Walking speed -4."
+      ]
+    },
+    {
+      "id": 89,
+      "key": "ITEM_089",
+      "name": "Porchlight Ring",
+      "slot": "ring",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -4,
+        "roll_reduction": 1,
+        "power_reduction": 4,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Roll wait -1; power wait -4.",
+        "Walking speed -4."
+      ]
     }
   ],
   "weapon_classes": [
@@ -1147,6 +1403,50 @@
     {
       "source_id": 36,
       "item_id": 86
+    },
+    {
+      "source_id": 37,
+      "item_id": 21
+    },
+    {
+      "source_id": 38,
+      "item_id": 39
+    },
+    {
+      "source_id": 39,
+      "item_id": 55
+    },
+    {
+      "source_id": 40,
+      "item_id": 69
+    },
+    {
+      "source_id": 41,
+      "item_id": 87
+    },
+    {
+      "source_id": 42,
+      "item_id": 7
+    },
+    {
+      "source_id": 43,
+      "item_id": 14
+    },
+    {
+      "source_id": 44,
+      "item_id": 56
+    },
+    {
+      "source_id": 45,
+      "item_id": 88
+    },
+    {
+      "source_id": 46,
+      "item_id": 40
+    },
+    {
+      "source_id": 47,
+      "item_id": 89
     }
   ]
 }

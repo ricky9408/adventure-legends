@@ -16,6 +16,15 @@ class Events(unittest.TestCase):
    magma=[f(a,slot) for a,(_,count) in rows.items() for slot in range(count)]
    self.assertEqual(magma,list(range(220,232)))
    self.assertEqual(len(set(old+new+magma)),204)
+   return_rows={54:(296,2),56:(298,2),57:(300,3),58:(303,2),61:(305,3)}
+   current=[f(a,slot) for a,(_,count) in return_rows.items() for slot in range(count)]
+   self.assertEqual(current,list(range(296,308)))
+   self.assertEqual(len(set(old+new+magma+current)),216)
+   horizons_rows={63:(314,3),65:(317,3),66:(320,2),67:(322,3),69:(325,1)}
+   horizons=[f(a,slot) for a,(_,count) in horizons_rows.items() for slot in range(count)]
+   self.assertEqual(horizons,list(range(314,326)))
+   self.assertEqual(len(set(old+new+magma+current+horizons)),228)
+   rows.update(return_rows);rows.update(horizons_rows)
    for a in (*range(30,31),32,*range(34,256),65536,0xffffffff):
     if a in rows:
      for slot in range(rows[a][1],6):self.assertEqual(f(a,slot),512)

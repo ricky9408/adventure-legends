@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "scope": "DESIGN_ONLY_NOT_IN_ROM",
+  "reserved_form_count": 128,
+  "implemented_legacy_form_ids": [1,4,7,10],
+  "phase_order": ["wood","fire","earth","metal","water"],
+  "generation_cycle": [["wood","fire"],["fire","earth"],["earth","metal"],["metal","water"],["water","wood"]],
+  "control_cycle": [["wood","earth"],["earth","water"],["water","fire"],["fire","metal"],["metal","wood"]],
+  "polarity_values": ["yin","yang"],
+  "field_capabilities": ["break_crack","burn_thorns","draw_ore","drive_sail","earth_socket","expose_fire","expose_stone","expose_wind","fill_basin","fire_socket","grow_bridge","grow_roots","ignite","link_pools","press_weight","reveal_current","tune_latch","turn_vane","uncap_well","wind_socket","wood_socket","reel_load","store_heat","float_load","align_rail","refract_beam","echo_outline","shift_ballast","inscribe_trace","unfold_screen"],
+  "stat_budgets": {"tier_1":180,"tier_2":240,"tier_3":285,"legendary":330},
+  "limits": {"max_level":50,"max_bond":100,"party_slots":4,"instance_slots":160,"equipped_abilities":2,"max_learnset":8,"max_ability_id":255,"max_active_legendaries":1},
+  "budget": {"baseline_rom_bytes":1583388,"baseline_ewram_bytes":71908,"baseline_iwram_bytes":24576,"rom_limit_bytes":33554432,"incremental_rom_cap_bytes":1048576,"incremental_ewram_cap_bytes":16384,"ewram_limit_bytes":262144,"iwram_code_limit_bytes":28672,"incremental_iwram_cap_bytes":2048,"sram_limit_bytes":32768,"save_bank_offsets":[512,6656],"save_bank_bytes":6144,"save_blocks":{"header":32,"campaign":64,"collection_bits":64,"instances":3840,"party_and_settings":32,"quest_and_bond_counters":512,"equipment_reserved":512},"instance_bytes":24,"form_rom_record_bytes":32,"ability_rom_record_bytes":24,"learnset_pair_bytes":2,"sprite_w":16,"sprite_h":16,"sprite_bpp":8,"sprite_directions":4,"sprite_frames_per_direction":4}
+}

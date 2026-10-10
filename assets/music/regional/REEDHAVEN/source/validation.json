@@ -1,0 +1,58 @@
+{
+  "title": "Where the Reeds Turn",
+  "bars": 24,
+  "meter": "3/4",
+  "tempo": 88,
+  "beats": 72,
+  "duration_seconds": 49.09090909090909,
+  "bar_totals_pass": true,
+  "xml_pitch_duration_match": true,
+  "midi_note_onsets_match": true,
+  "midi_tracks": [
+    {
+      "track": "conductor",
+      "notes": 0,
+      "max_polyphony": 0,
+      "end_tick": 34560
+    },
+    {
+      "track": "melody",
+      "notes": 94,
+      "max_polyphony": 1,
+      "end_tick": 34560
+    },
+    {
+      "track": "inner",
+      "notes": 96,
+      "max_polyphony": 1,
+      "end_tick": 34560
+    },
+    {
+      "track": "bass",
+      "notes": 26,
+      "max_polyphony": 1,
+      "end_tick": 34560
+    }
+  ],
+  "ranges_midi": {
+    "melody": [
+      66,
+      79
+    ],
+    "inner": [
+      55,
+      69
+    ],
+    "bass": [
+      42,
+      52
+    ]
+  },
+  "simultaneous_voice_crossings": 0,
+  "voice_polyphony_limit": 3,
+  "loop_ticks": 34560,
+  "rests_in_melody": 12,
+  "audible_review_performed": false,
+  "visual_review": "All 3 PDF pages visually inspected after engraving correction.",
+  "independent_review": "Score-level pass for audition candidate; see INDEPENDENT-REVIEW.md. Audio and in-game approval pending."
+}

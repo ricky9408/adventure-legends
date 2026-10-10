@@ -1,0 +1,13 @@
+{
+  "inventory_cues": 23,
+  "expected_final_cues": 23,
+  "is_final": true,
+  "raw_pcm_bytes": 17331092,
+  "raw_pcm_mib": 16.528217315673828,
+  "aliases": {
+    "ROAD": "RIVER",
+    "GROVE_SHRINE": "GROVE"
+  },
+  "home_preserved": true,
+  "notes": "Only raw PCM payload; excludes game code, other assets, alignment and container overhead. No game assets removed or changed by this inventory."
+}

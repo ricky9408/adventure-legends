@@ -1,9 +1,10 @@
-/* Frozen display results are never authority. SELECT prepares both branches;
+/* Frozen display results are never authority. Opening evolution prepares both branches;
  * a fresh A starts a new bounded proof of the exact live Save5 state. The
  * singleton Save5 scratch remains immutable until commit/cancel, then is
  * released before animation can request a writer. No additional Save copy. */
 enum { EVOLUTION_JOB_IDLE, EVOLUTION_JOB_WARM, EVOLUTION_JOB_PREFLIGHT,
        EVOLUTION_JOB_CANDIDATE, EVOLUTION_JOB_ADMISSION, EVOLUTION_JOB_FINISH,
+       EVOLUTION_JOB_COMMITTED,
        EVOLUTION_JOB_SLICES_PER_UPDATE=3 };
 static struct {
     Save4U32 save_token;
@@ -47,6 +48,7 @@ void progression_evolution_cancel(void){
     progression_evolution_reason=CREATURE_EVOLVE_INVALID;
 }
 int progression_evolution_busy(void){return evolution_job.phase!=EVOLUTION_JOB_IDLE;}
+int progression_evolution_handoff(void){return evolution_job.phase==EVOLUTION_JOB_COMMITTED;}
 static void evolution_choice_refresh(void){
     const CreatureEvolution*e=creatures_evolution_at(progression_evolution_source_form,progression_evolution_choice);
     progression_evolution_target=e?e->to:0;
@@ -102,8 +104,9 @@ static void evolution_prepare_step(void){
         if(!--evolution_job.warm)evolution_job.phase=EVOLUTION_JOB_PREFLIGHT;
         return;
     case EVOLUTION_JOB_PREFLIGHT:
-        /* Four roster records at most; no whole-roster validator in UI. */
-        status=save5_preflight_step(evolution_job.save_token,640);
+        /* Three roster records per slice keep the three-slice update below
+         * the90k preparation budget even at the160-record identity tail. */
+        status=save5_preflight_step(evolution_job.save_token,480);
         if(status==SAVE5_DONE)evolution_job.phase=EVOLUTION_JOB_CANDIDATE;
         else if(status!=SAVE5_BUSY)evolution_denied(CREATURE_EVOLVE_INVALID);
         return;
@@ -135,7 +138,10 @@ static void evolution_prepare_step(void){
               evolution_job.context,(int)evolution_job.sanctuary,1);
             evolution_job.admission_token=0;
             if(status!=CREATURE_EVOLVE_READY){evolution_denied(status);return;}
-            evolution_release();progression_refresh();evolution_tick=0;game_state=EVOLVE_ANIM;sfx(2);
+            /* Keep the immutable lease for the commit frame. The renderer holds
+             * the prior confirmation bitmap/OAM; the next input update must
+             * publish refresh/animation before considering any cancel key. */
+            evolution_job.phase=EVOLUTION_JOB_COMMITTED;
         }else{
             if(!evolution_job.manual_choice){
                 progression_evolution_choice=0;

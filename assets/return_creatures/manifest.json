@@ -1,0 +1,1772 @@
+{
+  "schema_version": 1,
+  "design_version": "RETURN_I_DESIGN_R2",
+  "design_manifest_sha256": "52f5f2a7213da4540eb31c85dbe85a1f2a7468ccba9812e78fac3133fee0a4c9",
+  "generator": "assets/generate_return_creatures.py",
+  "form_ids": [
+    3,
+    6,
+    9,
+    12,
+    15,
+    17,
+    18,
+    21,
+    24,
+    27,
+    30,
+    101,
+    102,
+    103,
+    104
+  ],
+  "names": [
+    "Homura Wayhearth",
+    "Midori Orchardkeeper",
+    "Fuuri Skyhem",
+    "Kohaku Waystone",
+    "Riverturn",
+    "Bellstride",
+    "Pealwarden",
+    "Arbourloom",
+    "Hearthrover",
+    "Crownleap",
+    "Terrashaper",
+    "Hingelet",
+    "Hushhinge",
+    "Rillkite",
+    "Wakebraid"
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "status": "ART ONLY: sprite sheets and composites are not emulator captures, proof of obtainability, live rendering, frame budget or VRAM/state acceptance.",
+  "rights": "Original code-native pixel geometry. No Nintendo/Pokemon extraction, tracing, image extraction or third-party raster inputs.",
+  "generator_sha256": "2a4cbb6d9eabb3ad495aeb1c206e5411d7f082c50a8e68b872ec2118fb99c88f",
+  "codegen_sha256": "e843aecec4355478c0c32079bc783f5b382a01ebee6ea83de920591be3cc0a55",
+  "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
+  "data_bytes": 122895,
+  "runtime_data_bytes": 0,
+  "runtime_bss_bytes": 0,
+  "persistent_obj_allocation_bytes": 0,
+  "rom_budget_bytes": 131072,
+  "include_bytes": [
+    29990,
+    29994,
+    29965,
+    29935,
+    29982,
+    29969,
+    29921,
+    29926,
+    29921,
+    29949,
+    5917
+  ],
+  "max_include_bytes": 29994,
+  "scene_review_sources": [
+    {
+      "name": "OLD GRASS",
+      "path": "assets/southern_region/frondshore_commons.png",
+      "crop": [
+        276,
+        262,
+        300,
+        286
+      ],
+      "sha256": "1299ff7353c396c132498ea19ad74944b233e71480cc8b5cb354e0940c41a53f"
+    },
+    {
+      "name": "OLD CREAM",
+      "path": "assets/southern_region/sunlace_anchorage.png",
+      "crop": [
+        40,
+        96,
+        64,
+        120
+      ],
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
+    },
+    {
+      "name": "OLD TEAL",
+      "path": "assets/southern_region/sunlace_anchorage.png",
+      "crop": [
+        32,
+        287,
+        56,
+        311
+      ],
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
+    },
+    {
+      "name": "RETURN GRASS",
+      "path": "assets/return_region/greenwake_common.png",
+      "crop": [
+        208,
+        192,
+        232,
+        216
+      ],
+      "sha256": "deb91cab3e378c94267348ed53051a1c3caa065d458c7ae038d261554becebd0"
+    },
+    {
+      "name": "RETURN CREAM",
+      "path": "assets/return_region/sunlace_shade_terraces.png",
+      "crop": [
+        264,
+        112,
+        288,
+        136
+      ],
+      "sha256": "c7b12adbdbc1a52758dd43731db3fff795b21fd9414c6879500d84919963f75b"
+    },
+    {
+      "name": "RETURN TEAL",
+      "path": "assets/return_region/overflow_gardens.png",
+      "crop": [
+        152,
+        104,
+        176,
+        128
+      ],
+      "sha256": "bd17c8572d562feac4ef09824643fbd141a3c1b410c1d80769d1bac1cf7238dd"
+    },
+    {
+      "path": "assets/evolutions/hearthkeeper_field.png",
+      "sha256": "2d70907ed9b9fa88b19f05173bd748a5f22c76e93f7c6c72d36af7ffaba29778"
+    },
+    {
+      "path": "assets/evolutions/hearthkeeper_portrait.png",
+      "sha256": "45948f959560d7c1223cb29a6d39d307cc0c150fa93155e1cda2043fa94ae422"
+    },
+    {
+      "path": "assets/evolutions/canopykeeper_field.png",
+      "sha256": "b13ce308f69b3a6e9d81ae4f7a9b6d4c689be86e33d0cdc2cbff69e0fe2d2fe1"
+    },
+    {
+      "path": "assets/evolutions/canopykeeper_portrait.png",
+      "sha256": "dcb6cd60a4f9ede0b182695cfa9a5d1fab420f16233b0a34fb6b408a3563a210"
+    },
+    {
+      "path": "assets/evolutions/windweaver_field.png",
+      "sha256": "37255ce41e21efaae741d9a531280d858a3250b4e3c072828e80373abd08c7fc"
+    },
+    {
+      "path": "assets/evolutions/windweaver_portrait.png",
+      "sha256": "3da3d03b1227d362b7ae9cd41081819a39043df502e4c0a43efc23f314eddeb3"
+    },
+    {
+      "path": "assets/evolutions/archwarden_field.png",
+      "sha256": "12fe55ec6b87c0b3bdf057fa2d4d60a163b4c7a56de4ee91c48fef964bba0a18"
+    },
+    {
+      "path": "assets/evolutions/archwarden_portrait.png",
+      "sha256": "4054550b742342b318c157f77e2f00467a00f763d5026466152280091cb22169"
+    },
+    {
+      "path": "assets/regional_creatures/tidewheel_walk.png",
+      "sha256": "6e18fac3a8de261dca20e45e0555cffa779e50da62b5b6e66c6679cbdeed1e60"
+    },
+    {
+      "path": "assets/regional_creatures/tidewheel_portrait.png",
+      "sha256": "896af0467592f37780f4bab791ac45384809795ac5232d4a73361dc27eebe3c5"
+    },
+    {
+      "path": "assets/regional_creatures/chimeclasp_walk.png",
+      "sha256": "beff9d5979508846de35888ddb7c3bacf530241939da6a8d11ec9e88530bb677"
+    },
+    {
+      "path": "assets/regional_creatures/chimeclasp_portrait.png",
+      "sha256": "44d399ae3b4fa76293bf1d6b9fcc86337ee88816ae68bdecafd6b883d7fe6b46"
+    },
+    {
+      "path": "assets/northern_creatures/loomcrown_walk.png",
+      "sha256": "065123618f952a6a1691b8cf639529547b43b98f9fc2671d6e07a67233265379"
+    },
+    {
+      "path": "assets/northern_creatures/loomcrown_portrait.png",
+      "sha256": "ad6e7cf485faa455e1276c861bf6b7e04104f227e1c804e292df99387a103a93"
+    },
+    {
+      "path": "assets/northern_creatures/kilnbarrow_walk.png",
+      "sha256": "5381ac46e1193b40919baabf225d685af35e5f716a78a09765aa03c6c2b93808"
+    },
+    {
+      "path": "assets/northern_creatures/kilnbarrow_portrait.png",
+      "sha256": "af40006c8f61e80dd462034b35f7327e3456e9d6c05711924130540079e9f4c9"
+    },
+    {
+      "path": "assets/southern_creatures/boughvault_walk.png",
+      "sha256": "c66d26f6629537e99291fc776fb3bf4130f2061aa991301251cc473f806df14c"
+    },
+    {
+      "path": "assets/southern_creatures/boughvault_portrait.png",
+      "sha256": "35ab22aaf0b5d414ad1111781b1786c1f3973bfa91779c95da2a49c718590e8f"
+    },
+    {
+      "path": "assets/southern_creatures/dunescoop_walk.png",
+      "sha256": "dfe5f3a80580ead7b7d28211bcd19c14a5f43538d1f264cee606fc441b424a75"
+    },
+    {
+      "path": "assets/southern_creatures/dunescoop_portrait.png",
+      "sha256": "09d8f925d7912be1b18d48f5e5ec05ccb6e94c29829ce5e576ea5224bedda9cc"
+    }
+  ],
+  "anchor": [
+    8,
+    8
+  ],
+  "shadow_anchor": [
+    8,
+    13
+  ],
+  "shadow_in_sprite": false,
+  "idle_frame": 0,
+  "walk_ticks_by_form": {
+    "3": [
+      9,
+      7,
+      9,
+      8
+    ],
+    "6": [
+      12,
+      10,
+      12,
+      9
+    ],
+    "9": [
+      7,
+      7,
+      7,
+      9
+    ],
+    "12": [
+      12,
+      9,
+      12,
+      10
+    ],
+    "15": [
+      7,
+      9,
+      8,
+      10
+    ],
+    "17": [
+      6,
+      9,
+      6,
+      12
+    ],
+    "18": [
+      11,
+      9,
+      13,
+      10
+    ],
+    "21": [
+      10,
+      8,
+      11,
+      8
+    ],
+    "24": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "27": [
+      6,
+      7,
+      6,
+      9
+    ],
+    "30": [
+      10,
+      8,
+      9,
+      11
+    ],
+    "101": [
+      6,
+      5,
+      7,
+      6
+    ],
+    "102": [
+      7,
+      5,
+      8,
+      6
+    ],
+    "103": [
+      8,
+      10,
+      8,
+      12
+    ],
+    "104": [
+      11,
+      8,
+      12,
+      9
+    ]
+  },
+  "ability_poses": [
+    "anticipation",
+    "release",
+    "settle"
+  ],
+  "recovery": "Caller returns to authored walking after settle. Recovery is not a fourth cast frame.",
+  "briefs": [
+    {
+      "id": 3,
+      "family": 1,
+      "name": "Homura Wayhearth",
+      "phase": "fire",
+      "polarity": "yang",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        52,
+        67,
+        40,
+        76,
+        50
+      ],
+      "signature_ability": 91,
+      "capability_keys": [
+        2,
+        6,
+        10,
+        13
+      ],
+      "silhouette": "Long low fox, single sweeping wick tail, open horseshoe mantle over visible shoulders; three feet visible in profile, no extra tails",
+      "motion": "Pads, lowers the mantle, then raises head with the returning spark",
+      "combat_role": "Catch one friendly ember at a placed hearth, then choose when to release its single crescent; immediate release is weaker",
+      "field_role": "Split one tagged hearth charge between two pictured household sockets; base ignition still opens all ordinary fire targets",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 89,
+      "ability_append_row": 89,
+      "learnset": [
+        [
+          1,
+          1
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          32,
+          91
+        ]
+      ],
+      "learnset_append_offset": 142,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 2,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 51,
+        "from": 2,
+        "to": 3,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 1,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 1
+      }
+    },
+    {
+      "id": 6,
+      "family": 2,
+      "name": "Midori Orchardkeeper",
+      "phase": "wood",
+      "polarity": "yin",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        72,
+        29,
+        64,
+        82,
+        38
+      ],
+      "signature_ability": 92,
+      "capability_keys": [
+        11,
+        12,
+        21
+      ],
+      "silhouette": "Tilted living seed body under two uneven boughs, open walk-through root arch and expressive seed face; no umbrella enlargement",
+      "motion": "Roots step in alternating pairs; boughs settle over its gaze",
+      "combat_role": "Place a short shelter whose front catches one ordinary shot and whose open back does not; no heal stacking",
+      "field_role": "Grow a root shelter on a marked channel without covering the drawn drainage gap",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 90,
+      "ability_append_row": 90,
+      "learnset": [
+        [
+          1,
+          2
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          32,
+          92
+        ]
+      ],
+      "learnset_append_offset": 145,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 5,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 52,
+        "from": 5,
+        "to": 6,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 2,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 2
+      }
+    },
+    {
+      "id": 9,
+      "family": 3,
+      "name": "Fuuri Skyhem",
+      "phase": "wood",
+      "polarity": "yang",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        40,
+        42,
+        38,
+        78,
+        87
+      ],
+      "signature_ability": 93,
+      "capability_keys": [
+        4,
+        8,
+        18,
+        20
+      ],
+      "silhouette": "Silk moth with long crescent forewings, short lower steering sails, one unbroken ribbon loop and small forward face",
+      "motion": "Banks with one wing folded, brakes on a downward beat",
+      "combat_role": "Steer a returning gust through one authored right-angle turn; each enemy is hit once over the entire return",
+      "field_role": "Brake a tagged sail at its pictured stop rather than only pushing it onward",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 91,
+      "ability_append_row": 91,
+      "learnset": [
+        [
+          1,
+          3
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          32,
+          93
+        ]
+      ],
+      "learnset_append_offset": 148,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 8,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 53,
+        "from": 8,
+        "to": 9,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 3,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 4
+      }
+    },
+    {
+      "id": 12,
+      "family": 4,
+      "name": "Kohaku Waystone",
+      "phase": "earth",
+      "polarity": "yin",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        80,
+        49,
+        86,
+        36,
+        34
+      ],
+      "signature_ability": 94,
+      "capability_keys": [
+        1,
+        5,
+        7,
+        15,
+        19
+      ],
+      "silhouette": "Amber pillar animal with a low triangular head, two tall offset shoulder arches and visible hollow center; no turtle outline",
+      "motion": "Short four-beat tread followed by a slow shoulder set",
+      "combat_role": "Ground one incoming ordinary projectile into a small forward shock rather than reflecting it; vulnerable from rear",
+      "field_role": "Hold a marked lintel while the player changes the adjacent safe load path",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 92,
+      "ability_append_row": 92,
+      "learnset": [
+        [
+          1,
+          4
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          32,
+          94
+        ]
+      ],
+      "learnset_append_offset": 151,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 11,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 54,
+        "from": 11,
+        "to": 12,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 4,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 8
+      }
+    },
+    {
+      "id": 15,
+      "family": 5,
+      "name": "Riverturn",
+      "phase": "water",
+      "polarity": "yin",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        57,
+        38,
+        49,
+        84,
+        57
+      ],
+      "signature_ability": 95,
+      "capability_keys": [
+        9,
+        14,
+        16
+      ],
+      "silhouette": "Living droplet with wide reed-feet, two joined sideways water loops and a visible central pebble face, unlike the vertical Tidewheel",
+      "motion": "Skims left then rights itself; loops roll out of phase",
+      "combat_role": "Place a hook current that turns an ordinary moving enemy toward a visible empty pocket; no boss displacement",
+      "field_role": "Reroute a tagged pool link to its visible alternate landing; never teleport to an unvalidated or blocked endpoint",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 93,
+      "ability_append_row": 93,
+      "learnset": [
+        [
+          1,
+          9
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          32,
+          95
+        ]
+      ],
+      "learnset_append_offset": 154,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 14,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 55,
+        "from": 14,
+        "to": 15,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 5,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 16
+      }
+    },
+    {
+      "id": 17,
+      "family": 6,
+      "name": "Bellstride",
+      "phase": "metal",
+      "polarity": "yang",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": [
+        42,
+        63,
+        52,
+        46,
+        37
+      ],
+      "signature_ability": 96,
+      "capability_keys": [
+        3,
+        17
+      ],
+      "silhouette": "Bronze spring animal with two long rear prongs, paired cheek clappers and a raised attentive face; torso clearly joins all parts",
+      "motion": "Two short hops and a spring recoil; clappers answer only after landing",
+      "combat_role": "A narrow tuning tap stores one counter only when an ordinary shot crosses the front notch; release with next cast",
+      "field_role": "Read a tagged latch seam from either side and leave a visible alignment mark",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 94,
+      "ability_append_row": 94,
+      "learnset": [
+        [
+          1,
+          11
+        ],
+        [
+          28,
+          96
+        ]
+      ],
+      "learnset_append_offset": 157,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 16,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 56,
+        "from": 16,
+        "to": 17,
+        "level": 28,
+        "bond": 45,
+        "context_bit": 4096,
+        "family": 6,
+        "local_trial_key": 1,
+        "trial_mask": 1024,
+        "inherited_required_mask": 0
+      }
+    },
+    {
+      "id": 18,
+      "family": 6,
+      "name": "Pealwarden",
+      "phase": "metal",
+      "polarity": "yang",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        54,
+        74,
+        63,
+        55,
+        39
+      ],
+      "signature_ability": 97,
+      "capability_keys": [
+        3,
+        17
+      ],
+      "silhouette": "Upright continuous bronze body with a broad open bell collar, three planted prongs and expressive suspended face",
+      "motion": "Plants two prongs, pivots on the third, then opens its collar",
+      "combat_role": "Two offset tuning marks create a deliberate safe middle lane and two short outer pulses; distinct from an all-around ring",
+      "field_role": "Synchronize a pair of already marked seam latches; preserves basic ore and single-latch use",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 95,
+      "ability_append_row": 95,
+      "learnset": [
+        [
+          1,
+          11
+        ],
+        [
+          28,
+          96
+        ],
+        [
+          32,
+          97
+        ]
+      ],
+      "learnset_append_offset": 159,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 17,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 57,
+        "from": 17,
+        "to": 18,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 6,
+        "local_trial_key": 2,
+        "trial_mask": 2048,
+        "inherited_required_mask": 1024
+      }
+    },
+    {
+      "id": 21,
+      "family": 7,
+      "name": "Arbourloom",
+      "phase": "wood",
+      "polarity": "yin",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        57,
+        38,
+        51,
+        84,
+        55
+      ],
+      "signature_ability": 98,
+      "capability_keys": [
+        22
+      ],
+      "silhouette": "Long-legged thicket animal with a low head, swept open shoulder trellis and a vine tail threaded through one living arch",
+      "motion": "Steps over its own slack vine, leans gently, then flicks leaf ears",
+      "combat_role": "Set a slack tether that tightens only after an ordinary target crosses the far endpoint; one swept pull",
+      "field_role": "Reel a load along a pictured bypass while holding the first safe tie; old one-stop reeling unchanged",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 96,
+      "ability_append_row": 96,
+      "learnset": [
+        [
+          1,
+          13
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          32,
+          98
+        ]
+      ],
+      "learnset_append_offset": 162,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 20,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 58,
+        "from": 20,
+        "to": 21,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 7,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 32
+      }
+    },
+    {
+      "id": 24,
+      "family": 8,
+      "name": "Hearthrover",
+      "phase": "fire",
+      "polarity": "yin",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        66,
+        45,
+        66,
+        78,
+        30
+      ],
+      "signature_ability": 99,
+      "capability_keys": [
+        23
+      ],
+      "silhouette": "Ceramic living quadruped with a broad rounded muzzle, joined tall shoulder kiln and low rear heat skirt; open vents do not replace a face",
+      "motion": "Steady warm-footed lope; shoulders open on inhale and close slowly",
+      "combat_role": "Carry one heat packet during a short approach, then leave a slow cooling crescent behind; no persistent player aura",
+      "field_role": "Transfer stored heat between a high and low shelf while preserving the marked warm shelter",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 97,
+      "ability_append_row": 97,
+      "learnset": [
+        [
+          1,
+          15
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          32,
+          99
+        ]
+      ],
+      "learnset_append_offset": 165,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 23,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 59,
+        "from": 23,
+        "to": 24,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 8,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 64
+      }
+    },
+    {
+      "id": 27,
+      "family": 9,
+      "name": "Crownleap",
+      "phase": "wood",
+      "polarity": "yang",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        42,
+        57,
+        38,
+        66,
+        82
+      ],
+      "signature_ability": 100,
+      "capability_keys": [
+        11,
+        12
+      ],
+      "silhouette": "Lean gecko with a single high back fin and connected scalloped foreleg membranes; long tail counterbalances a clear face",
+      "motion": "Runs low, makes a visibly swept bank, then spreads its toes to stop",
+      "combat_role": "A two-stage seed skip follows a previewed dogleg and stops at the first wall; not free hero movement",
+      "field_role": "Lay a marked angled branch span that leaves an awning ventilation slot open",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 98,
+      "ability_append_row": 98,
+      "learnset": [
+        [
+          1,
+          23
+        ],
+        [
+          20,
+          24
+        ],
+        [
+          32,
+          100
+        ]
+      ],
+      "learnset_append_offset": 168,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 26,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 60,
+        "from": 26,
+        "to": 27,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 9,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 1
+      }
+    },
+    {
+      "id": 30,
+      "family": 10,
+      "name": "Terrashaper",
+      "phase": "earth",
+      "polarity": "yin",
+      "tier": 3,
+      "rarity": "ordinary",
+      "stats": [
+        62,
+        70,
+        63,
+        37,
+        53
+      ],
+      "signature_ability": 101,
+      "capability_keys": [
+        19
+      ],
+      "silhouette": "Low dune mammal with very wide split forepaws, raised listening ears and a hooked single tuft tail, with chest clear of the soil",
+      "motion": "Scoops one forepaw, sidesteps, then settles onto its hind feet",
+      "combat_role": "Carve two short offset ridges with a walkable channel between; ordinary enemies are redirected, no solid player trap",
+      "field_role": "Clear a selected shallow spillway so shade-garden runoff avoids its visibly dry root bed",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 99,
+      "ability_append_row": 99,
+      "learnset": [
+        [
+          1,
+          25
+        ],
+        [
+          22,
+          26
+        ],
+        [
+          32,
+          101
+        ]
+      ],
+      "learnset_append_offset": 171,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 29,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 61,
+        "from": 29,
+        "to": 30,
+        "level": 32,
+        "bond": 60,
+        "context_bit": 4096,
+        "family": 10,
+        "local_trial_key": 2,
+        "trial_mask": 1024,
+        "inherited_required_mask": 1
+      }
+    },
+    {
+      "id": 101,
+      "family": 39,
+      "name": "Hingelet",
+      "phase": "metal",
+      "polarity": "yin",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": [
+        33,
+        28,
+        43,
+        46,
+        30
+      ],
+      "signature_ability": 102,
+      "capability_keys": [
+        3,
+        17
+      ],
+      "silhouette": "Small plated shrew with an upturned ear hinge, long whiskers, pointed soft muzzle and one curled copper tail; not a tool on feet",
+      "motion": "Sniffs, ear turns independently, then tiny paws sidestep the seam",
+      "combat_role": "A short quiet cut cancels one marked ordinary enemy windup only from the indicated side; bosses retain telegraphs",
+      "field_role": "Listen to a visible seam and rotate its tagged latch one stop; substitutes for ordinary tune-latch or draw-ore targets",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 100,
+      "ability_append_row": 100,
+      "learnset": [
+        [
+          1,
+          102
+        ]
+      ],
+      "learnset_append_offset": 174,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "quest",
+        "quest": 47,
+        "repeatable": true,
+        "level": 28,
+        "bond": 25,
+        "initial_receipt": "quest_claimed_and_matching_reward_bit",
+        "repeat_receipt": "fresh_consumed_transient_attempt"
+      }
+    },
+    {
+      "id": 102,
+      "family": 39,
+      "name": "Hushhinge",
+      "phase": "metal",
+      "polarity": "yin",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": [
+        46,
+        36,
+        59,
+        64,
+        35
+      ],
+      "signature_ability": 103,
+      "capability_keys": [
+        3,
+        17
+      ],
+      "silhouette": "Low long-backed plated shrew with tall open crescent ears, an arched connected neck and two delicate whisker fans",
+      "motion": "Turns the head before the body, unfolds one ear, then scampers under it",
+      "combat_role": "Leave one direction-facing quiet wedge; it cancels the next eligible ordinary shot entering its front, then closes",
+      "field_role": "Hold a seam open while reading a second marked hinge; no effect on untagged doors",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 101,
+      "ability_append_row": 101,
+      "learnset": [
+        [
+          1,
+          102
+        ],
+        [
+          28,
+          103
+        ]
+      ],
+      "learnset_append_offset": 175,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 101,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 62,
+        "from": 101,
+        "to": 102,
+        "level": 28,
+        "bond": 45,
+        "context_bit": 4096,
+        "family": 39,
+        "local_trial_key": 1,
+        "trial_mask": 1024,
+        "inherited_required_mask": 0
+      }
+    },
+    {
+      "id": 103,
+      "family": 40,
+      "name": "Rillkite",
+      "phase": "water",
+      "polarity": "yang",
+      "tier": 1,
+      "rarity": "ordinary",
+      "stats": [
+        30,
+        40,
+        26,
+        42,
+        42
+      ],
+      "signature_ability": 104,
+      "capability_keys": [
+        14,
+        24
+      ],
+      "silhouette": "Glass-finned living mudskipper with a small smile, two long bowed pectoral fins and a single fan tail; neither seal nor water ring",
+      "motion": "Fin-walks with a forward bob, then lifts the tail for a short skim",
+      "combat_role": "A forward ripple carries one small ordinary enemy at most eight swept pixels and deposits it sideways in a previewed pocket",
+      "field_role": "Float a tagged reed delivery skiff, then connect two existing marked landing pools; no free swimming",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 102,
+      "ability_append_row": 102,
+      "learnset": [
+        [
+          1,
+          104
+        ]
+      ],
+      "learnset_append_offset": 177,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "quest",
+        "quest": 49,
+        "repeatable": true,
+        "level": 28,
+        "bond": 25,
+        "initial_receipt": "quest_claimed_and_matching_reward_bit",
+        "repeat_receipt": "fresh_consumed_transient_attempt"
+      }
+    },
+    {
+      "id": 104,
+      "family": 40,
+      "name": "Wakebraid",
+      "phase": "water",
+      "polarity": "yang",
+      "tier": 2,
+      "rarity": "ordinary",
+      "stats": [
+        42,
+        53,
+        36,
+        56,
+        53
+      ],
+      "signature_ability": 105,
+      "capability_keys": [
+        14,
+        24
+      ],
+      "silhouette": "Long mudskipper with joined broad forefins forming an open shallow arch and a braided-looking continuous tail crest; face leads the body",
+      "motion": "Wide fin-step, low bank and double tail-settle",
+      "combat_role": "Launch paired unequal wakes that meet at one visible tip; each enemy receives only one total hit per cast",
+      "field_role": "Maintain one skiff float while pivoting a marked pool link to an alternate safe landing",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED_OR_OBTAINABLE",
+      "catalog_append_row": 103,
+      "ability_append_row": 103,
+      "learnset": [
+        [
+          1,
+          104
+        ],
+        [
+          28,
+          105
+        ]
+      ],
+      "learnset_append_offset": 178,
+      "art_contract": {
+        "directions": 4,
+        "walk_frames_per_direction": 4,
+        "cast_poses": 3,
+        "cast_pose_scope": "per_direction",
+        "cast_pose_order": [
+          "anticipation",
+          "release",
+          "settle"
+        ],
+        "portrait": [
+          32,
+          32
+        ],
+        "native_sprite": [
+          16,
+          16
+        ],
+        "palette_only_variant": false,
+        "face_required": true
+      },
+      "acquisition": {
+        "kind": "evolution",
+        "from": 103,
+        "confirmation": "explicit_target_at_sanctuary",
+        "same_instance": true
+      },
+      "evolution": {
+        "append_row": 63,
+        "from": 103,
+        "to": 104,
+        "level": 28,
+        "bond": 45,
+        "context_bit": 4096,
+        "family": 40,
+        "local_trial_key": 1,
+        "trial_mask": 1024,
+        "inherited_required_mask": 0
+      }
+    }
+  ],
+  "validation": {
+    "images": 435,
+    "field_dimensions": [
+      15,
+      4,
+      4,
+      256
+    ],
+    "ability_dimensions": [
+      15,
+      4,
+      3,
+      256
+    ],
+    "portrait_dimensions": [
+      15,
+      1024
+    ],
+    "actor_palette_entries": 97,
+    "palette_indices": [
+      0,
+      1,
+      4,
+      6,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14,
+      26,
+      28,
+      29,
+      30,
+      37,
+      40,
+      41,
+      43,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      55,
+      56,
+      58,
+      60,
+      62,
+      63,
+      65,
+      67,
+      69,
+      78,
+      79,
+      80,
+      88,
+      89,
+      96
+    ],
+    "transparent_zero": true,
+    "transparent_outer_field_boundary": true,
+    "unique_direction_masks_per_form": 4,
+    "articulated_walk_masks_per_direction": 4,
+    "articulated_cast_masks_per_direction": 3,
+    "independently_composed_native_portraits": true,
+    "design_identity_match": true
+  },
+  "legacy_prefix": {
+    "baseline": "Return I art start; existing companion pixels and palette remain read-only",
+    "files": 95,
+    "unchanged": false,
+    "reviewed_world_successor": "connected-roads-c4",
+    "reviewed_background_file_exceptions": 27,
+    "protected_creature_palette_arrays_unchanged": true,
+    "unchanged_historical_files": 68
+  },
+  "silhouette_comparison": {
+    "current_unique_front_masks": 15,
+    "released_form_ids": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      19,
+      20,
+      22,
+      23,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      25,
+      26,
+      28,
+      29,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72
+    ],
+    "cross_release_front_mask_matches": 0,
+    "nearest_front_masks": [
+      {
+        "form_id": 3,
+        "nearest_form_id": 24,
+        "different_front_mask_pixels": 32
+      },
+      {
+        "form_id": 6,
+        "nearest_form_id": 30,
+        "different_front_mask_pixels": 48
+      },
+      {
+        "form_id": 9,
+        "nearest_form_id": 30,
+        "different_front_mask_pixels": 50
+      },
+      {
+        "form_id": 12,
+        "nearest_form_id": 21,
+        "different_front_mask_pixels": 45
+      },
+      {
+        "form_id": 15,
+        "nearest_form_id": 58,
+        "different_front_mask_pixels": 51
+      },
+      {
+        "form_id": 17,
+        "nearest_form_id": 46,
+        "different_front_mask_pixels": 26
+      },
+      {
+        "form_id": 18,
+        "nearest_form_id": 100,
+        "different_front_mask_pixels": 44
+      },
+      {
+        "form_id": 21,
+        "nearest_form_id": 3,
+        "different_front_mask_pixels": 34
+      },
+      {
+        "form_id": 24,
+        "nearest_form_id": 22,
+        "different_front_mask_pixels": 25
+      },
+      {
+        "form_id": 27,
+        "nearest_form_id": 40,
+        "different_front_mask_pixels": 32
+      },
+      {
+        "form_id": 30,
+        "nearest_form_id": 25,
+        "different_front_mask_pixels": 33
+      },
+      {
+        "form_id": 101,
+        "nearest_form_id": 73,
+        "different_front_mask_pixels": 38
+      },
+      {
+        "form_id": 102,
+        "nearest_form_id": 3,
+        "different_front_mask_pixels": 35
+      },
+      {
+        "form_id": 103,
+        "nearest_form_id": 104,
+        "different_front_mask_pixels": 32
+      },
+      {
+        "form_id": 104,
+        "nearest_form_id": 103,
+        "different_front_mask_pixels": 32
+      }
+    ]
+  },
+  "terrain_visibility_minimum_opaque": 0.8031,
+  "terrain_visibility_minimum_boundary": 0.7627
+}

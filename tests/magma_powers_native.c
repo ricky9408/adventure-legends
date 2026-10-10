@@ -172,7 +172,8 @@ static void test_freeze_identity_and_validation(void){unsigned c,i;int time,cd,u
  setup(51);assert(magma_power(51));updates(12);assert(!magma_powers_aim());
  setup(43);up=uploads;assert(magma_powers_feedback(43));assert(!magma_powers_busy()&&!ability_cd&&up==uploads);
  assert(!northern_powers_tiles_owner());updates(30);assert(!magma_power_cast_time);
- setup(43);gear_stats.power_cooldown=1;assert(magma_power(43));assert(magma_power_cooldown==82);
+ /* Hostile forged stat is still bounded: gear8 + Feather8 + Bell4. */
+ setup(43);gear_stats.power_cooldown=1;assert(GAME_MAX_POWER_RECOVERY==20);assert(magma_power(43));assert(magma_power_cooldown==70);
 }
 static void test_geometry_and_exclusions(void){unsigned c;int old;
  for(c=43;c<=66;c++){
@@ -224,12 +225,12 @@ static void test_guard_and_screen(void){unsigned i;
  assert(!magma_powers_intercept_shot(UINT_MAX,0,0,0,0,1));
 }
 static void test_shared_lease(void){unsigned owner;
- for(owner=1;owner<=NORTHERN_TILES_UNDERWATER;owner++){
+ for(owner=1;owner<=NORTHERN_TILES_RETURN;owner++){
   setup(43);assert(northern_powers_tiles_claim(owner));assert(!magma_power(43));assert(!ability_cd);
   assert(!northern_powers_tiles_claim(owner));assert(northern_powers_tiles_release(owner));
  }
- setup(43);assert(!northern_powers_tiles_claim(NORTHERN_TILES_UNDERWATER+1));assert(magma_power(43));
- for(owner=1;owner<=NORTHERN_TILES_UNDERWATER;owner++){assert(!northern_powers_tiles_claim(owner));assert(!northern_powers_tiles_release(owner));}
+ setup(43);assert(!northern_powers_tiles_claim(NORTHERN_TILES_COVENANTS+1));assert(magma_power(43));
+ for(owner=1;owner<=NORTHERN_TILES_RETURN;owner++){assert(!northern_powers_tiles_claim(owner));assert(!northern_powers_tiles_release(owner));}
  magma_powers_reset();assert(northern_powers_tiles_owner()==0);
  setup(43);regional_power_time=3;assert(!magma_power(43));regional_power_time=0;
  northern_power_time=3;assert(!magma_power(43));northern_power_time=0;

@@ -1,0 +1,95 @@
+{
+  "palette": [
+    {
+      "name": "breathy warm steam reed",
+      "gain": 0.67,
+      "attack": 0.013,
+      "release": 0.09,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.06
+        ],
+        [
+          3,
+          0.195
+        ],
+        [
+          4,
+          0.018
+        ],
+        [
+          5,
+          0.047
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.9,
+      "vibrato_cents": 3.6
+    },
+    {
+      "name": "light pumice-step triangle",
+      "gain": 0.37,
+      "attack": 0.006,
+      "release": 0.06,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.018
+        ],
+        [
+          3,
+          -0.082
+        ],
+        [
+          5,
+          0.025
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "muted mineral pluck",
+      "gain": 0.245,
+      "attack": 0.0034,
+      "release": 0.055,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.175
+        ],
+        [
+          3,
+          0.062
+        ],
+        [
+          4,
+          0.023
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "pumice-gba-16384-s8.raw": "51de00c6e7543ab6481a6adb55bd62dedc62dff7afbb60b0e52055899a4e61ac"
+  }
+}

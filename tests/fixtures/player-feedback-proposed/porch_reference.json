@@ -1,0 +1,7 @@
+{
+  "scope": "Retained original per-pixel porch renderer, renamed for the independent paired-pixel raster oracle. No gameplay state or assets altered.",
+  "reference_sha256": "dcddf0f90bd02c7c281ffacbd78ffb0b51e5acbf6f6b7a03857ea4b148bd6960",
+  "prior_candidate_rom_sha256": "f00b6d80787ca8d8f988f697b451de0a79b8708430a00de2310064e47745be77",
+  "prior_draw_source_sha256": "b389c6c9c83c4bad426bf9edd3d267aaba03cb169e78b79ee2331151efe546ad",
+  "reference_test": "tests/test_player_feedback_porch.py"
+}

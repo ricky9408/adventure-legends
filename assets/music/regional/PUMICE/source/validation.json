@@ -1,0 +1,34 @@
+{
+  "title": "Steps Through the Steam",
+  "bars": 20,
+  "meter": "4/4",
+  "tempo": 110,
+  "duration_seconds": 43.63636363636363,
+  "pcm_bytes_16384_s8": 714938,
+  "bar_sums": "All voice-bars match meter exactly",
+  "xml": "All 3 parts match JSON pitches, onsets, durations",
+  "midi": "Every binary pitch and onset checked; note-offs 14 ticks before notated end",
+  "tracks": 4,
+  "individual_voice_files": 3,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "end_tick": 38400,
+  "ranges": {
+    "melody": [
+      62,
+      80
+    ],
+    "inner": [
+      51,
+      65
+    ],
+    "bass": [
+      39,
+      53
+    ]
+  },
+  "voice_crossings": 0,
+  "audible_review_performed": false,
+  "visual_review": "Both final PDF pages rasterized and visually inspected: legible staves, keys, accidentals, noteheads, phrase labels, loop text; no clipping or label collisions.",
+  "loop": "Exact whole-bar boundary; no notes or pedal extend past end."
+}

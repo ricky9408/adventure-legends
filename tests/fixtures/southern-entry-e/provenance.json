@@ -1,0 +1,13 @@
+{
+  "scope": "Private read-only regression oracle: exact frozen candidate E Southern entry implementation and original whole-runtime hash manifest; never linked into the current cartridge",
+  "origin": "build/return-boundary-e-source",
+  "candidate_rom_sha256": "2ed2f453b9455469aba5a39ede9bf319ed79df5fd29cea2ce9535337e50ce000",
+  "source_manifest_sha256": "d6a2a1898cdf782dcae2a3001646ee612168b9841662254ae5a3b4033a9db615",
+  "files": {
+    "source-hashes.json": "d6a2a1898cdf782dcae2a3001646ee612168b9841662254ae5a3b4033a9db615",
+    "south_game.c": "a25fb6ed21037785d75562ad8e1af4440c513b7199a3a7439a13100453256e3c"
+  },
+  "minimal_closure": "Harness uses current headers; south_rest_job.inc and south_game_draw.inc are explicitly checked against frozen E before compiling the oracle. The core module closure retains its existing exact E manifest checks.",
+  "purpose": "Strict and ASan/UBSan direct/queued Southern entry byte differential, including stale proof adversaries; no gameplay or native timing claim",
+  "packaged_at": "2026-10-06T05:20:13.391195+00:00"
+}

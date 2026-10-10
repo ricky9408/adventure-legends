@@ -66,6 +66,9 @@ guardian, or six simultaneous incoming shots). These are host fixtures only.
 #include "magma_game.h"
 #include "underwater_powers.h"
 #include "underwater_game.h"
+#include "return_powers.h"
+#include "return_game.h"
+#include "return_legacy_powers.h"
 #include "progression.h"
 #include "ui.h"
 #define MAX_ENEMIES 6
@@ -101,6 +104,19 @@ CreatureInstance *progression_selected(void){return 0;}
 void south_game_reset(void){south_reset_calls++;}
 void magma_game_reset(void){magma_reset_calls++;}
 void underwater_game_reset(void){underwater_reset_calls++;}
+/* Explicit absent-Return bridge for this old-command-only bounded fixture.
+ * Full engine/native tests link real Return modules. No Return power or room
+ * can be selected here; these callbacks preserve that absence. */
+int return_power_time;
+void return_powers_reset(void){assert(return_power_time==0);}
+void return_game_reset(void){}
+void return_legacy_reset(void){}
+void return_powers_shot_spawn(unsigned index){assert(index<12);}
+int return_powers_intercept_shot(unsigned index,int x,int y,int tx,int ty,int eligible){
+ (void)index;(void)x;(void)y;(void)tx;(void)ty;(void)eligible;
+ assert(return_power_time==0);return 0;
+}
+
 void progression_evolution_cancel(void){evolution_cancel_calls++;}
 /* Chapter geometry/tokens are outside this old-command dispatch fixture.
  * Real Magma power handlers must see no target and cannot claim a chapter hit. */
@@ -182,7 +198,7 @@ void source_reset(void){
                         str(ROOT/'src/magma_powers.c'),str(ROOT/'src/magma_power_art.c'),
                         str(ROOT/'src/underwater_powers.c'),str(ROOT/'src/underwater_power_art.c'),str(ROOT/'src/combat_rules.c'),
                         str(ROOT/'src/creatures.c'),
-                        str(ROOT/'src/creature_data.c'),'-o',str(libfile)],check=True)
+                        str(ROOT/'src/creature_data.c'),str(ROOT/'src/assets.c'),'-o',str(libfile)],check=True)
         lib=C.CDLL(str(libfile));enemies=(Enemy*6).in_dll(lib,'enemies')
         shots=(Shot*12).in_dll(lib,'shots');effects=(C.c_ubyte*12).in_dll(lib,'shot_effects')
         ordinary=(C.c_ubyte*12).in_dll(lib,'ordinary_hostile_shots')
@@ -291,7 +307,7 @@ void source_reset(void){
         check('expired guard cannot retain movement penalty charges',not get('advanced_guard_charges'))
         check('Shot ABI stays exactly24bytes with separate12byte metadata',C.sizeof(Shot)==24 and len(effects)==12)
     report={'kind':'supplemental host source-contract tests; synthetic host states',
-            'normal_progression_proof':False,'actual_rom_execution':False,
+            'normal_progression_proof':False,'actual_rom_execution':False,'return_scope':'explicit absent-Return reset/shot bridge; old commands only; real sprite assets linked',
             'source_sha256':{n:sha(ROOT/'src'/n) for n in ('advanced_powers.c','regional_powers.c','northern_powers.c','northern_power_art.c','southern_powers.c','southern_power_art.c','magma_powers.c','magma_power_art.c','magma_powers.h','magma_game.h','underwater_powers.c','underwater_powers.h','underwater_power_art.c','underwater_game.h','combat_rules.c','game.c','creatures.c','creature_data.c')},
             'checks':results,'passed':all(r['passed'] for r in results)}
     (output/'source-contract-report.json').write_text(json.dumps(report,indent=2)+'\n')

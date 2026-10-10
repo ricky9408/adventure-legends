@@ -84,7 +84,7 @@
     {
       "id": 4,
       "key": "sky_path",
-      "name_ja": "風待ちの尾根",
+      "name_ja": "\u98a8\u5f85\u3061\u306e\u5c3e\u6839",
       "size": [
         240,
         160
@@ -129,6 +129,24 @@
           96,
           32,
           24
+        ],
+        [
+          179,
+          44,
+          7,
+          30
+        ],
+        [
+          179,
+          69,
+          17,
+          6
+        ],
+        [
+          214,
+          69,
+          18,
+          6
         ]
       ],
       "dynamic_solids": [],
@@ -254,12 +272,32 @@
       ],
       "retry_spawn": "south",
       "save_on": "room entry, each new permanent flag, rest, boss reward",
-      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint.",
+      "trial_entrance_solids": [
+        [
+          179,
+          44,
+          7,
+          30
+        ],
+        [
+          179,
+          69,
+          17,
+          6
+        ],
+        [
+          214,
+          69,
+          18,
+          6
+        ]
+      ]
     },
     {
       "id": 5,
       "key": "sky_vanes",
-      "name_ja": "ほどける帆橋",
+      "name_ja": "\u307b\u3069\u3051\u308b\u5e06\u6a4b",
       "size": [
         240,
         160
@@ -471,7 +509,7 @@
     {
       "id": 6,
       "key": "sky_patrol",
-      "name_ja": "矢風の回廊",
+      "name_ja": "\u77e2\u98a8\u306e\u56de\u5eca",
       "size": [
         240,
         160
@@ -675,7 +713,7 @@
     {
       "id": 7,
       "key": "sky_relay",
-      "name_ja": "灯風の導き",
+      "name_ja": "\u706f\u98a8\u306e\u5c0e\u304d",
       "size": [
         240,
         160
@@ -919,7 +957,7 @@
     {
       "id": 8,
       "key": "sky_boss",
-      "name_ja": "空織りの座",
+      "name_ja": "\u7a7a\u7e54\u308a\u306e\u5ea7",
       "size": [
         240,
         160
@@ -1047,7 +1085,7 @@
     {
       "id": 9,
       "key": "core_path",
-      "name_ja": "夕灯の坂",
+      "name_ja": "\u5915\u706f\u306e\u5742",
       "size": [
         240,
         160
@@ -1092,6 +1130,18 @@
           80,
           96,
           16
+        ],
+        [
+          184,
+          89,
+          10,
+          23
+        ],
+        [
+          223,
+          89,
+          9,
+          23
         ]
       ],
       "dynamic_solids": [
@@ -1215,12 +1265,26 @@
       ],
       "retry_spawn": "south",
       "save_on": "room entry, each new permanent flag, rest, boss reward",
-      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint."
+      "interactions": "Require summoned companion, fresh R press, ability cooldown zero, nearest compatible object in Manhattan range; consume R once. Wrong companion changes nothing and gives one short hint.",
+      "trial_entrance_solids": [
+        [
+          184,
+          89,
+          10,
+          23
+        ],
+        [
+          223,
+          89,
+          9,
+          23
+        ]
+      ]
     },
     {
       "id": 10,
       "key": "core_weights",
-      "name_ja": "沈み石の門",
+      "name_ja": "\u6c88\u307f\u77f3\u306e\u9580",
       "size": [
         240,
         160
@@ -1394,7 +1458,7 @@
     {
       "id": 11,
       "key": "core_roots",
-      "name_ja": "根の水路",
+      "name_ja": "\u6839\u306e\u6c34\u8def",
       "size": [
         240,
         160
@@ -1663,7 +1727,7 @@
     {
       "id": 12,
       "key": "core_lamps",
-      "name_ja": "四つの灯座",
+      "name_ja": "\u56db\u3064\u306e\u706f\u5ea7",
       "size": [
         240,
         160
@@ -1898,7 +1962,7 @@
     {
       "id": 13,
       "key": "core_boss",
-      "name_ja": "灯核の間",
+      "name_ja": "\u706f\u6838\u306e\u9593",
       "size": [
         240,
         160

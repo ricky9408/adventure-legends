@@ -16,6 +16,7 @@ void save5_preflight_cancel(void) {
  preflight.status=SAVE5_IDLE;preflight.live=0;
 }
 Save4U32 save5_preflight_begin(const Save5State *s) {
+ if(s&&writer_status==SAVE5_BUSY&&writer_preemptible)save5_cancel_background();
  if(!s||writer_status==SAVE5_BUSY||save5_preflight_active()||preflight.generation==0xffffffffu)return 0;
  ++preflight.generation;
  copy_state(&scratch.state,s);clear_bytes(&scan,sizeof scan);
@@ -66,6 +67,9 @@ static int preflight_instance(const CreatureRoster *r,unsigned slot) {
  scan.southern_evidence|=southern_instance_evidence(c);
  magma_instance_evidence(&scan.magma,c);
  underwater_instance_evidence(&scan.underwater,c);
+ return_instance_evidence(&scan.returning,c);
+ horizons_instance_evidence(&scan.horizons,c);
+ covenants_instance_evidence(&scan.covenants,c);
  return 1;
 }
 static int preflight_equipment_record(const EquipmentState *e,unsigned slot) {
@@ -106,7 +110,10 @@ unsigned save5_preflight_step(Save4U32 token,unsigned budget) {
  case 6:ok=quest_creatures_validate(&s->quests,s->roster.obtained,s->roster.rewards,scan.retained_creatures)&&
   southern_sources_validate(&s->quests,s->roster.obtained,scan.southern_evidence);break;
  case 7:ok=magma_sources_validate(&s->quests,s->roster.obtained,&scan.magma)&&
-  underwater_sources_validate(&s->quests,s->roster.obtained,&scan.underwater);break;
+  underwater_sources_validate(&s->quests,s->roster.obtained,&scan.underwater)&&
+  return_sources_validate(&s->quests,s->roster.obtained,&scan.returning)&&
+  horizons_sources_validate(&s->quests,s->roster.obtained,&scan.horizons)&&
+  covenants_sources_validate(&s->quests,s->roster.obtained,&scan.covenants);break;
  case 8:
   n=budget/32;if(!n)n=1;if(n>8)n=8;
   for(i=0;i<n&&preflight.index<48;++i,++preflight.index)
@@ -115,10 +122,17 @@ unsigned save5_preflight_step(Save4U32 token,unsigned budget) {
   preflight.index=0;break;
  case 9:ok=equipment_refs_validate(&s->equipment);break;
  case 10:ok=equipment_reserved_validate(&s->equipment);break;
- case 11:ok=quest_equipment_validate(&s->quests,&s->equipment);break;
+ case 11:ok=quest_equipment_validate(&s->quests,&s->equipment)&&economy_state_validate(&s->economy,s->campaign.chapter_flags)&&save5_later_claims_validate(&s->quests,&s->economy);break;
  default:preflight.status=SAVE5_FAILED;return SAVE5_FAILED;
  }
  if(!ok)preflight.status=SAVE5_FAILED;
  else if(++preflight.phase==12)preflight.status=SAVE5_DONE;
  return preflight.status;
+}
+
+int save5_preflight_store_economy(Save4U32 token,const Save5State *live,const EconomyState *next){
+ if(!next||!save5_preflight_matches(token,live)||next->later_claims!=live->economy.later_claims||!economy_state_validate(next,live->campaign.chapter_flags)||!save5_later_claims_validate(&live->quests,next))return 0;
+ scratch.state.economy=*next;save5_preflight_cancel();
+ writer_status=SAVE5_BUSY;writer_phase=PHASE_META;writer_position=writer_progress=0;writer_preemptible=0;writer_economy=1;
+ bank_valid[0]=bank_valid[1]=0;bank_sequence[0]=bank_sequence[1]=0;return 1;
 }

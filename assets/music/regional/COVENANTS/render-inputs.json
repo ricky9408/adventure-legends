@@ -1,0 +1,95 @@
+{
+  "palette": [
+    {
+      "name": "warm shared-road reed",
+      "gain": 0.67,
+      "attack": 0.016,
+      "release": 0.105,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.09
+        ],
+        [
+          3,
+          0.13
+        ],
+        [
+          4,
+          0.024
+        ],
+        [
+          5,
+          0.03
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.4,
+      "vibrato_cents": 3.8
+    },
+    {
+      "name": "steady rounded promise bass",
+      "gain": 0.35,
+      "attack": 0.01,
+      "release": 0.09,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.012
+        ],
+        [
+          3,
+          -0.06
+        ],
+        [
+          5,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "warm shared-table strings",
+      "gain": 0.245,
+      "attack": 0.004,
+      "release": 0.063,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.145
+        ],
+        [
+          3,
+          0.07
+        ],
+        [
+          4,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "the_roads_that_stay-gba-16384-s8.raw": "a5b1e4f219d4650caa4b595d59ff184dd67bfbc821cca0abb3d90ddd6ab23b81"
+  }
+}

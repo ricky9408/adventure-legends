@@ -1,0 +1,2136 @@
+{
+ "schema": 1,
+ "coordinate_contract": "all actor coordinates are foot centers; rects half-open; full foot radius5; sprite top-left=(x-8,y-15)",
+ "rooms": [
+  {
+   "id": 70,
+   "key": "room70",
+   "name": "Siltwake Steps",
+   "width": 480,
+   "height": 320,
+   "spawns": {
+    "0": [
+     240,
+     288
+    ],
+    "1": [
+     448,
+     160
+    ],
+    "2": [
+     32,
+     160
+    ],
+    "3": [
+     240,
+     32
+    ],
+    "4": [
+     80,
+     272
+    ]
+   },
+   "reset": [
+    48,
+    296
+   ],
+   "invitation": [
+    432,
+    272
+   ],
+   "solids": [
+    {
+     "rect": [
+      184,
+      72,
+      112,
+      144
+     ]
+    },
+    {
+     "rect": [
+      40,
+      40,
+      72,
+      24
+     ]
+    },
+    {
+     "rect": [
+      360,
+      40,
+      72,
+      24
+     ]
+    },
+    {
+     "rect": [
+      40,
+      72,
+      72,
+      40
+     ]
+    },
+    {
+     "rect": [
+      360,
+      72,
+      72,
+      40
+     ]
+    },
+    {
+     "rect": [
+      48,
+      184,
+      48,
+      24
+     ]
+    },
+    {
+     "rect": [
+      384,
+      184,
+      48,
+      24
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    []
+   ],
+   "stations": [
+    {
+     "key": "reed_strainer",
+     "approach": [
+      120,
+      240
+     ],
+     "command": 106,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        120,
+        216
+       ],
+       "radius": 3,
+       "rect": [
+        117,
+        213,
+        7,
+        7
+       ],
+       "kind": "strainer",
+       "expected_age": 11,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "warm_seam",
+     "approach": [
+      160,
+      112
+     ],
+     "command": 108,
+     "face": 3,
+     "targets": [
+      {
+       "center": [
+        170,
+        112
+       ],
+       "radius": 3,
+       "rect": [
+        167,
+        109,
+        7,
+        7
+       ],
+       "kind": "hot_plate",
+       "expected_age": 8,
+       "required_beat": 1
+      },
+      {
+       "center": [
+        160,
+        124
+       ],
+       "radius": 3,
+       "rect": [
+        157,
+        121,
+        7,
+        7
+       ],
+       "kind": "warm_seam",
+       "expected_age": 14,
+       "required_beat": 2
+      }
+     ],
+     "release_age": 10,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "stone_stop",
+     "approach": [
+      320,
+      112
+     ],
+     "command": 110,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        320,
+        92
+       ],
+       "radius": 3,
+       "rect": [
+        317,
+        89,
+        7,
+        7
+       ],
+       "kind": "ballast",
+       "expected_age": 6,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "west_pin",
+     "approach": [
+      320,
+      240
+     ],
+     "command": 102,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        312,
+        220
+       ],
+       "radius": 3,
+       "rect": [
+        309,
+        217,
+        7,
+        7
+       ],
+       "kind": "quiet_pin",
+       "expected_age": 8,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "east_runnel",
+     "approach": [
+      120,
+      160
+     ],
+     "command": 104,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        120,
+        136
+       ],
+       "radius": 3,
+       "rect": [
+        117,
+        133,
+        7,
+        7
+       ],
+       "kind": "water_inlet",
+       "expected_age": 16,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     144,
+     264
+    ],
+    [
+     352,
+     176
+    ]
+   ],
+   "humans": [
+    [
+     "STEWARD",
+     128,
+     272
+    ],
+    [
+     "NEIGHBOR",
+     64,
+     136
+    ],
+    [
+     "FERRY_KEEPER",
+     400,
+     144
+    ],
+    [
+     "GROWER",
+     344,
+     280
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      240,
+      288
+     ],
+     "to": 62,
+     "spawn": 5
+    },
+    {
+     "center": [
+      448,
+      160
+     ],
+     "to": 71,
+     "spawn": 0
+    },
+    {
+     "center": [
+      80,
+      32
+     ],
+     "to": 73,
+     "spawn": 1
+    },
+    {
+     "center": [
+      240,
+      32
+     ],
+     "to": 74,
+     "spawn": 0
+    }
+   ],
+   "rest": [
+    80,
+    272
+   ],
+   "practice": {
+    "form": 121,
+    "command": 12,
+    "area": 70,
+    "start_xy": [
+     120,
+     160
+    ],
+    "tag": "covenant_split_weir",
+    "choice": "Hold water above either completed branch, then release toward the dry stepping shelf you want to reach.",
+    "benefit": "A temporary dry inner crossing; the permanent outer path remains usable.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       120,
+       146
+      ],
+      "radius": 3,
+      "rect": [
+       117,
+       143,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     178,
+     136,
+     124,
+     16
+    ],
+    "shortcut_endpoints": [
+     [
+      168,
+      144
+     ],
+     [
+      312,
+      144
+     ]
+    ],
+    "visible_surface_rect": [
+     173,
+     131,
+     134,
+     26
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "41ce242a69c0b08d9f166282c2437558fbdc625544bd93f895083b0774e775e6",
+   "collision_lookup": {
+    "unique_bands": 6,
+    "maximum_intervals": 5,
+    "row_bytes": 640,
+    "band_bytes": 92
+   }
+  },
+  {
+   "id": 71,
+   "key": "room71",
+   "name": "Bent Orchard",
+   "width": 240,
+   "height": 320,
+   "spawns": {
+    "0": [
+     24,
+     272
+    ],
+    "1": [
+     208,
+     32
+    ]
+   },
+   "reset": [
+    48,
+    296
+   ],
+   "invitation": [
+    192,
+    272
+   ],
+   "solids": [
+    {
+     "rect": [
+      72,
+      64,
+      96,
+      24
+     ]
+    },
+    {
+     "rect": [
+      72,
+      144,
+      96,
+      24
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    [],
+    [
+     [
+      88,
+      104,
+      24,
+      16
+     ]
+    ],
+    [
+     [
+      120,
+      104,
+      24,
+      16
+     ]
+    ],
+    [
+     [
+      152,
+      104,
+      24,
+      16
+     ]
+    ]
+   ],
+   "stations": [
+    {
+     "key": "arbor_pull",
+     "approach": [
+      48,
+      112
+     ],
+     "command": 106,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        48,
+        88
+       ],
+       "radius": 3,
+       "rect": [
+        45,
+        85,
+        7,
+        7
+       ],
+       "kind": "strainer",
+       "expected_age": 11,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "outer_trench",
+     "approach": [
+      192,
+      112
+     ],
+     "command": 104,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        192,
+        88
+       ],
+       "radius": 3,
+       "rect": [
+        189,
+        85,
+        7,
+        7
+       ],
+       "kind": "water_inlet",
+       "expected_age": 16,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     120,
+     232
+    ]
+   ],
+   "humans": [
+    [
+     "GROWER",
+     160,
+     232
+    ],
+    [
+     "NEIGHBOR",
+     48,
+     200
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      32,
+      272
+     ],
+     "to": 70,
+     "spawn": 1
+    },
+    {
+     "center": [
+      208,
+      32
+     ],
+     "to": 72,
+     "spawn": 0
+    }
+   ],
+   "rest": null,
+   "practice": {
+    "form": 122,
+    "command": 122,
+    "area": 71,
+    "start_xy": [
+     48,
+     112
+    ],
+    "tag": "covenant_bent_root_pair",
+    "choice": "Choose the corner of an L-shaped root support before unfolding it.",
+    "benefit": "A shorter inner orchard walk; roots cannot overwrite beds or a required exit.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       48,
+       84
+      ],
+      "radius": 3,
+      "rect": [
+       45,
+       81,
+       7,
+       7
+      ]
+     },
+     {
+      "center": [
+       64,
+       84
+      ],
+      "radius": 3,
+      "rect": [
+       61,
+       81,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     116,
+     138,
+     16,
+     36
+    ],
+    "shortcut_endpoints": [
+     [
+      124,
+      128
+     ],
+     [
+      124,
+      184
+     ]
+    ],
+    "visible_surface_rect": [
+     111,
+     133,
+     26,
+     46
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "c03dd521d33b157a7626323ae1401b8c58d08d3b956b01a45beac2c17baec75e",
+   "collision_lookup": {
+    "unique_bands": 3,
+    "maximum_intervals": 3,
+    "row_bytes": 640,
+    "band_bytes": 30
+   }
+  },
+  {
+   "id": 72,
+   "key": "room72",
+   "name": "Open Kiln",
+   "width": 480,
+   "height": 160,
+   "spawns": {
+    "0": [
+     24,
+     128
+    ],
+    "1": [
+     448,
+     128
+    ]
+   },
+   "reset": [
+    48,
+    136
+   ],
+   "invitation": [
+    432,
+    112
+   ],
+   "solids": [
+    {
+     "rect": [
+      128,
+      24,
+      64,
+      56
+     ]
+    },
+    {
+     "rect": [
+      240,
+      24,
+      64,
+      56
+     ]
+    },
+    {
+     "rect": [
+      352,
+      24,
+      64,
+      56
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    []
+   ],
+   "stations": [
+    {
+     "key": "hot_plate_and_seam",
+     "approach": [
+      96,
+      104
+     ],
+     "command": 108,
+     "face": 3,
+     "targets": [
+      {
+       "center": [
+        106,
+        104
+       ],
+       "radius": 3,
+       "rect": [
+        103,
+        101,
+        7,
+        7
+       ],
+       "kind": "hot_plate",
+       "expected_age": 8,
+       "required_beat": 1
+      },
+      {
+       "center": [
+        96,
+        116
+       ],
+       "radius": 3,
+       "rect": [
+        93,
+        113,
+        7,
+        7
+       ],
+       "kind": "warm_seam",
+       "expected_age": 14,
+       "required_beat": 2
+      }
+     ],
+     "release_age": 10,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "cooling_pin",
+     "approach": [
+      224,
+      104
+     ],
+     "command": 102,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        216,
+        84
+       ],
+       "radius": 3,
+       "rect": [
+        213,
+        81,
+        7,
+        7
+       ],
+       "kind": "quiet_pin",
+       "expected_age": 8,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     336,
+     104
+    ]
+   ],
+   "humans": [
+    [
+     "KILN_KEEPER",
+     360,
+     128
+    ],
+    [
+     "NEIGHBOR",
+     48,
+     72
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      400,
+      128
+     ],
+     "to": 71,
+     "spawn": 1
+    },
+    {
+     "center": [
+      32,
+      128
+     ],
+     "to": 73,
+     "spawn": 0
+    }
+   ],
+   "rest": null,
+   "practice": {
+    "form": 123,
+    "command": 123,
+    "area": 72,
+    "start_xy": [
+     96,
+     104
+    ],
+    "tag": "covenant_banked_kiln_seam",
+    "choice": "Bank at the visible plate, then release into the vent seam in the same cast.",
+    "benefit": "Suppress a local decorative steam curtain briefly to inspect the keepers repair marks; no new item/history reward.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       96,
+       112
+      ],
+      "radius": 3,
+      "rect": [
+       93,
+       109,
+       7,
+       7
+      ]
+     },
+     {
+      "center": [
+       96,
+       76
+      ],
+      "radius": 3,
+      "rect": [
+       93,
+       73,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "shortcut_endpoints": [],
+    "visible_surface_rect": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "933156c931980e8eb00128d114b4294b3b399c1c923257faea71345ecda60acc",
+   "collision_lookup": {
+    "unique_bands": 3,
+    "maximum_intervals": 5,
+    "row_bytes": 320,
+    "band_bytes": 38
+   }
+  },
+  {
+   "id": 73,
+   "key": "room73",
+   "name": "Two-Foot Span",
+   "width": 240,
+   "height": 160,
+   "spawns": {
+    "0": [
+     208,
+     128
+    ],
+    "1": [
+     24,
+     128
+    ]
+   },
+   "reset": [
+    48,
+    136
+   ],
+   "invitation": [
+    192,
+    112
+   ],
+   "solids": [
+    {
+     "rect": [
+      80,
+      32,
+      80,
+      64
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    [],
+    [
+     [
+      88,
+      96,
+      16,
+      12
+     ]
+    ],
+    [
+     [
+      112,
+      96,
+      16,
+      12
+     ]
+    ],
+    [
+     [
+      136,
+      96,
+      16,
+      12
+     ]
+    ]
+   ],
+   "stations": [
+    {
+     "key": "near_weight",
+     "approach": [
+      48,
+      64
+     ],
+     "command": 110,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        48,
+        44
+       ],
+       "radius": 3,
+       "rect": [
+        45,
+        41,
+        7,
+        7
+       ],
+       "kind": "ballast",
+       "expected_age": 6,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "far_tie",
+     "approach": [
+      192,
+      64
+     ],
+     "command": 106,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        192,
+        40
+       ],
+       "radius": 3,
+       "rect": [
+        189,
+        37,
+        7,
+        7
+       ],
+       "kind": "strainer",
+       "expected_age": 11,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     120,
+     128
+    ]
+   ],
+   "humans": [
+    [
+     "WALKER",
+     64,
+     128
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      208,
+      128
+     ],
+     "to": 72,
+     "spawn": 1
+    },
+    {
+     "center": [
+      120,
+      128
+     ],
+     "to": 70,
+     "spawn": 2
+    }
+   ],
+   "rest": null,
+   "practice": {
+    "form": 124,
+    "command": 124,
+    "area": 73,
+    "start_xy": [
+     48,
+     64
+    ],
+    "tag": "covenant_tilting_slab",
+    "choice": "Brace from the side opposite the marked load and wait until it clears.",
+    "benefit": "Keep the inner inspection ledge level for an optional shorter crossing; all main paths remain.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       48,
+       40
+      ],
+      "radius": 3,
+      "rect": [
+       45,
+       37,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     74,
+     56,
+     92,
+     16
+    ],
+    "shortcut_endpoints": [
+     [
+      64,
+      64
+     ],
+     [
+      176,
+      64
+     ]
+    ],
+    "visible_surface_rect": [
+     69,
+     51,
+     102,
+     26
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "561dfc25498c64d83f8faa28a62f398e1c52b55145faf298507db30ca9e9e026",
+   "collision_lookup": {
+    "unique_bands": 3,
+    "maximum_intervals": 3,
+    "row_bytes": 320,
+    "band_bytes": 30
+   }
+  },
+  {
+   "id": 74,
+   "key": "room74",
+   "name": "Hollowbell Court",
+   "width": 480,
+   "height": 320,
+   "spawns": {
+    "0": [
+     240,
+     288
+    ],
+    "1": [
+     448,
+     160
+    ],
+    "2": [
+     32,
+     160
+    ],
+    "3": [
+     80,
+     272
+    ]
+   },
+   "reset": [
+    48,
+    296
+   ],
+   "invitation": [
+    432,
+    272
+   ],
+   "solids": [
+    {
+     "rect": [
+      136,
+      48,
+      208,
+      40
+     ]
+    },
+    {
+     "rect": [
+      136,
+      88,
+      32,
+      72
+     ]
+    },
+    {
+     "rect": [
+      312,
+      88,
+      32,
+      72
+     ]
+    },
+    {
+     "rect": [
+      208,
+      184,
+      64,
+      40
+     ]
+    },
+    {
+     "rect": [
+      40,
+      40,
+      56,
+      48
+     ]
+    },
+    {
+     "rect": [
+      384,
+      40,
+      56,
+      48
+     ]
+    },
+    {
+     "rect": [
+      48,
+      192,
+      40,
+      24
+     ]
+    },
+    {
+     "rect": [
+      392,
+      192,
+      40,
+      24
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    []
+   ],
+   "stations": [
+    {
+     "key": "outer_screen",
+     "approach": [
+      192,
+      112
+     ],
+     "command": 106,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        192,
+        96
+       ],
+       "radius": 3,
+       "rect": [
+        189,
+        93,
+        7,
+        7
+       ],
+       "kind": "strainer",
+       "expected_age": 9,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "quiet_pin",
+     "approach": [
+      288,
+      112
+     ],
+     "command": 102,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        280,
+        96
+       ],
+       "radius": 3,
+       "rect": [
+        277,
+        93,
+        7,
+        7
+       ],
+       "kind": "quiet_pin",
+       "expected_age": 8,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     120,
+     240
+    ],
+    [
+     240,
+     136
+    ]
+   ],
+   "humans": [
+    [
+     "REPAIRER",
+     136,
+     264
+    ],
+    [
+     "NEIGHBOR",
+     376,
+     112
+    ],
+    [
+     "WATCHER",
+     96,
+     120
+    ],
+    [
+     "SEED_KEEPER",
+     344,
+     280
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      240,
+      288
+     ],
+     "to": 70,
+     "spawn": 3
+    },
+    {
+     "center": [
+      448,
+      160
+     ],
+     "to": 75,
+     "spawn": 0
+    },
+    {
+     "center": [
+      240,
+      32
+     ],
+     "to": 77,
+     "spawn": 1
+    }
+   ],
+   "rest": [
+    80,
+    272
+   ],
+   "practice": {
+    "form": 125,
+    "command": 125,
+    "area": 74,
+    "start_xy": [
+     192,
+     112
+    ],
+    "tag": "covenant_acoustic_plate",
+    "choice": "Aim through the open acoustic gap rather than the nearest blocked face.",
+    "benefit": "Reveal the courts quiet-walk outline without waking the alcove; helpful route feedback, no quest/token reuse.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       204,
+       100
+      ],
+      "radius": 3,
+      "rect": [
+       201,
+       97,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "shortcut_endpoints": [],
+    "visible_surface_rect": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "5859403b21c80faac1287e681b1ed6a56048a0918fcdb5688623d47028feeb5e",
+   "collision_lookup": {
+    "unique_bands": 7,
+    "maximum_intervals": 5,
+    "row_bytes": 640,
+    "band_bytes": 110
+   }
+  },
+  {
+   "id": 75,
+   "key": "room75",
+   "name": "Borrowed Shade",
+   "width": 240,
+   "height": 320,
+   "spawns": {
+    "0": [
+     24,
+     272
+    ],
+    "1": [
+     208,
+     32
+    ]
+   },
+   "reset": [
+    48,
+    296
+   ],
+   "invitation": [
+    192,
+    272
+   ],
+   "solids": [
+    {
+     "rect": [
+      56,
+      56,
+      40,
+      48
+     ]
+    },
+    {
+     "rect": [
+      144,
+      120,
+      40,
+      56
+     ]
+    },
+    {
+     "rect": [
+      56,
+      216,
+      64,
+      32
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    []
+   ],
+   "stations": [
+    {
+     "key": "lower_hem",
+     "approach": [
+      120,
+      64
+     ],
+     "command": 106,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        120,
+        40
+       ],
+       "radius": 3,
+       "rect": [
+        117,
+        37,
+        7,
+        7
+       ],
+       "kind": "strainer",
+       "expected_age": 11,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "water_lens",
+     "approach": [
+      112,
+      184
+     ],
+     "command": 112,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        106,
+        160
+       ],
+       "radius": 3,
+       "rect": [
+        103,
+        157,
+        7,
+        7
+       ],
+       "kind": "water_lens",
+       "expected_age": 14,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     192,
+     232
+    ]
+   ],
+   "humans": [
+    [
+     "SEED_KEEPER",
+     160,
+     208
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      32,
+      272
+     ],
+     "to": 74,
+     "spawn": 1
+    },
+    {
+     "center": [
+      208,
+      32
+     ],
+     "to": 76,
+     "spawn": 0
+    }
+   ],
+   "rest": null,
+   "practice": {
+    "form": 126,
+    "command": 126,
+    "area": 75,
+    "start_xy": [
+     120,
+     64
+    ],
+    "tag": "covenant_leaf_canopy",
+    "choice": "Face the canopy toward one bed while preserving the walking/light gap.",
+    "benefit": "Open an optional sheltered inner path through the completed seed house.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       120,
+       48
+      ],
+      "radius": 3,
+      "rect": [
+       117,
+       45,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     80,
+     210,
+     16,
+     44
+    ],
+    "shortcut_endpoints": [
+     [
+      88,
+      200
+     ],
+     [
+      88,
+      264
+     ]
+    ],
+    "visible_surface_rect": [
+     75,
+     205,
+     26,
+     54
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "5e12b163cc9e4f5c692e4246f6fdf0861c741b1fdbb52c37ee4b75967938c961",
+   "collision_lookup": {
+    "unique_bands": 5,
+    "maximum_intervals": 3,
+    "row_bytes": 640,
+    "band_bytes": 58
+   }
+  },
+  {
+   "id": 76,
+   "key": "room76",
+   "name": "Patient Ferry",
+   "width": 480,
+   "height": 160,
+   "spawns": {
+    "0": [
+     24,
+     128
+    ],
+    "1": [
+     448,
+     128
+    ]
+   },
+   "reset": [
+    48,
+    136
+   ],
+   "invitation": [
+    432,
+    112
+   ],
+   "solids": [
+    {
+     "rect": [
+      136,
+      24,
+      80,
+      64
+     ]
+    },
+    {
+     "rect": [
+      280,
+      72,
+      72,
+      32
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    [],
+    [
+     [
+      224,
+      48,
+      24,
+      12
+     ]
+    ],
+    [
+     [
+      248,
+      48,
+      24,
+      12
+     ]
+    ],
+    [
+     [
+      272,
+      48,
+      24,
+      12
+     ]
+    ]
+   ],
+   "stations": [
+    {
+     "key": "dock_ballast",
+     "approach": [
+      96,
+      96
+     ],
+     "command": 110,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        96,
+        76
+       ],
+       "radius": 3,
+       "rect": [
+        93,
+        73,
+        7,
+        7
+       ],
+       "kind": "ballast",
+       "expected_age": 6,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "side_wake",
+     "approach": [
+      240,
+      112
+     ],
+     "command": 104,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        240,
+        88
+       ],
+       "radius": 3,
+       "rect": [
+        237,
+        85,
+        7,
+        7
+       ],
+       "kind": "water_inlet",
+       "expected_age": 16,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "far_signal",
+     "approach": [
+      384,
+      120
+     ],
+     "command": 104,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        384,
+        96
+       ],
+       "radius": 3,
+       "rect": [
+        381,
+        93,
+        7,
+        7
+       ],
+       "kind": "water_inlet",
+       "expected_age": 16,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     384,
+     120
+    ]
+   ],
+   "humans": [
+    [
+     "PASSENGER",
+     112,
+     128
+    ],
+    [
+     "FERRY_KEEPER",
+     384,
+     88
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      400,
+      128
+     ],
+     "to": 75,
+     "spawn": 1
+    },
+    {
+     "center": [
+      32,
+      128
+     ],
+     "to": 77,
+     "spawn": 0
+    }
+   ],
+   "rest": null,
+   "practice": {
+    "form": 127,
+    "command": 127,
+    "area": 76,
+    "start_xy": [
+     240,
+     112
+    ],
+    "tag": "covenant_light_ferry_stop",
+    "choice": "Set side ballast, steady the unloaded ferry, then release it to its marked stop.",
+    "benefit": "Hold a stationary docking plank as a short crossing; do not carry the player on moving geometry.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       240,
+       84
+      ],
+      "radius": 3,
+      "rect": [
+       237,
+       81,
+       7,
+       7
+      ]
+     },
+     {
+      "center": [
+       264,
+       84
+      ],
+      "radius": 3,
+      "rect": [
+       261,
+       81,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     168,
+     18,
+     16,
+     76
+    ],
+    "shortcut_endpoints": [
+     [
+      176,
+      12
+     ],
+     [
+      176,
+      104
+     ]
+    ],
+    "visible_surface_rect": [
+     163,
+     13,
+     26,
+     86
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "c3d5f0990d250a91b6ac93805a78a0dfdf2a7d99e2c91e3456c1a6e41eab1741",
+   "collision_lookup": {
+    "unique_bands": 5,
+    "maximum_intervals": 4,
+    "row_bytes": 320,
+    "band_bytes": 62
+   }
+  },
+  {
+   "id": 77,
+   "key": "room77",
+   "name": "Last Watch",
+   "width": 240,
+   "height": 160,
+   "spawns": {
+    "0": [
+     208,
+     128
+    ],
+    "1": [
+     24,
+     128
+    ]
+   },
+   "reset": [
+    48,
+    136
+   ],
+   "invitation": [
+    192,
+    112
+   ],
+   "solids": [
+    {
+     "rect": [
+      80,
+      32,
+      80,
+      32
+     ]
+    },
+    {
+     "rect": [
+      32,
+      72,
+      24,
+      32
+     ]
+    },
+    {
+     "rect": [
+      184,
+      72,
+      24,
+      32
+     ]
+    }
+   ],
+   "dynamic_solid_states": [
+    []
+   ],
+   "stations": [
+    {
+     "key": "refuge_warm_seam",
+     "approach": [
+      72,
+      112
+     ],
+     "command": 108,
+     "face": 3,
+     "targets": [
+      {
+       "center": [
+        82,
+        112
+       ],
+       "radius": 3,
+       "rect": [
+        79,
+        109,
+        7,
+        7
+       ],
+       "kind": "hot_plate",
+       "expected_age": 8,
+       "required_beat": 1
+      },
+      {
+       "center": [
+        72,
+        124
+       ],
+       "radius": 3,
+       "rect": [
+        69,
+        121,
+        7,
+        7
+       ],
+       "kind": "warm_seam",
+       "expected_age": 14,
+       "required_beat": 2
+      }
+     ],
+     "release_age": 10,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "outside_brace",
+     "approach": [
+      120,
+      96
+     ],
+     "command": 110,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        120,
+        76
+       ],
+       "radius": 3,
+       "rect": [
+        117,
+        73,
+        7,
+        7
+       ],
+       "kind": "ballast",
+       "expected_age": 6,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    },
+    {
+     "key": "quiet_door",
+     "approach": [
+      168,
+      112
+     ],
+     "command": 102,
+     "face": 1,
+     "targets": [
+      {
+       "center": [
+        160,
+        92
+       ],
+       "radius": 3,
+       "rect": [
+        157,
+        89,
+        7,
+        7
+       ],
+       "kind": "quiet_pin",
+       "expected_age": 8,
+       "required_beat": 1
+      }
+     ],
+     "release_age": 0,
+     "origin_kind": "player foot center; effect remains anchored here",
+     "manual_aim_change": false
+    }
+   ],
+   "manual": [
+    [
+     120,
+     120
+    ]
+   ],
+   "humans": [
+    [
+     "WATCHER",
+     144,
+     120
+    ],
+    [
+     "NEIGHBOR",
+     104,
+     112
+    ]
+   ],
+   "portals": [
+    {
+     "center": [
+      208,
+      128
+     ],
+     "to": 76,
+     "spawn": 1
+    },
+    {
+     "center": [
+      120,
+      128
+     ],
+     "to": 74,
+     "spawn": 2
+    }
+   ],
+   "rest": null,
+   "practice": {
+    "form": 128,
+    "command": 128,
+    "area": 77,
+    "start_xy": [
+     120,
+     96
+    ],
+    "tag": "covenant_open_warm_seam",
+    "choice": "Keep the warm seam active while deliberately leaving the shelter mouth open.",
+    "benefit": "Shelter the inner waiting patch from optional ordinary gust particles; no health grant, new rest anchor or boss-hazard cancellation.",
+    "face": 1,
+    "targets": [
+     {
+      "center": [
+       120,
+       76
+      ],
+      "radius": 3,
+      "rect": [
+       117,
+       73,
+       7,
+       7
+      ]
+     }
+    ],
+    "shortcut_center_strip": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "shortcut_endpoints": [],
+    "visible_surface_rect": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "closure_rule": "Do not close while any actor foot overlaps the center strip; no riding moving geometry"
+   },
+   "bitmap_sha256": "4d5cf6fe254c39be21f5b1ae3d6e83859d3df0779957bad54497dd94e6563e7d",
+   "collision_lookup": {
+    "unique_bands": 5,
+    "maximum_intervals": 5,
+    "row_bytes": 320,
+    "band_bytes": 70
+   }
+  }
+ ],
+ "corrections": [
+  "108 gathers at local f8, so proposed north24 plate replaced by faceRIGHT gather(x+10,y), radial release(x,y+12)",
+  "102 uses its actual offset quiet-side line: target offset(-8,-20), default side-left, faceUP",
+  "112 uses its actual default-left blade lane: target offset(-6,-24)",
+  "Area71 form122 second practice target moved to(64,84) to keep its center outside expanded bed",
+  "Area74 targets moved below expanded workshop wall:106=(192,96),102=(280,96);125 practice=(204,100)",
+  "Two town household footprints added outside all required approach and perimeter lanes"
+ ],
+ "moving_resident_frames": {
+  "WALKER": [
+   "WALKER",
+   "WALKER_STEP_A",
+   "WALKER",
+   "WALKER_STEP_B"
+  ],
+  "SEED_KEEPER": [
+   "SEED_KEEPER",
+   "SEED_KEEPER_STEP_A",
+   "SEED_KEEPER",
+   "SEED_KEEPER_STEP_B"
+  ],
+  "PASSENGER": [
+   "PASSENGER",
+   "PASSENGER_STEP_A",
+   "PASSENGER",
+   "PASSENGER_STEP_B"
+  ]
+ },
+ "village_porch": {
+  "area": 0,
+  "blocking": false,
+  "sprites": [
+   "PORCH_LEFT",
+   "PORCH_MARKS",
+   "PORCH_RIGHT"
+  ],
+  "proposed_foot_centers": [
+   [
+    96,
+    136
+   ],
+   [
+    112,
+    136
+   ],
+   [
+    128,
+    136
+   ]
+  ],
+  "semantic": "After confirmed shared-porch commitment and homecoming only; flat shared bench and eight craft marks. Main should verify against existing actor positions before drawing."
+ }
+}

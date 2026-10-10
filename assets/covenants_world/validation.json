@@ -1,0 +1,694 @@
+{
+ "scope": "Generated art and full-foot host geometry only; native controller routing and stateful gameplay are separate",
+ "rooms": {
+  "70": {
+   "shortcut_connects_walkable_endpoints": true,
+   "shortcut_center_strip": [
+    178,
+    136,
+    124,
+    16
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 1,
+   "minimum_reachable_centers": 109520,
+   "critical_points": 24,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "reed_strainer",
+     "kind": "strainer",
+     "rect": [
+      117,
+      213,
+      7,
+      7
+     ],
+     "native_palette_values": 2
+    },
+    {
+     "key": "warm_seam",
+     "kind": "hot_plate",
+     "rect": [
+      167,
+      109,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "warm_seam",
+     "kind": "warm_seam",
+     "rect": [
+      157,
+      121,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "stone_stop",
+     "kind": "ballast",
+     "rect": [
+      317,
+      89,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "west_pin",
+     "kind": "quiet_pin",
+     "rect": [
+      309,
+      217,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "east_runnel",
+     "kind": "water_inlet",
+     "rect": [
+      117,
+      133,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      184,
+      72,
+      112,
+      144
+     ],
+     "native_palette_values": 11
+    },
+    {
+     "rect": [
+      40,
+      40,
+      72,
+      24
+     ],
+     "native_palette_values": 6
+    },
+    {
+     "rect": [
+      360,
+      40,
+      72,
+      24
+     ],
+     "native_palette_values": 6
+    },
+    {
+     "rect": [
+      40,
+      72,
+      72,
+      40
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      360,
+      72,
+      72,
+      40
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      48,
+      184,
+      48,
+      24
+     ],
+     "native_palette_values": 8
+    },
+    {
+     "rect": [
+      384,
+      184,
+      48,
+      24
+     ],
+     "native_palette_values": 8
+    }
+   ]
+  },
+  "71": {
+   "shortcut_connects_walkable_endpoints": true,
+   "shortcut_center_strip": [
+    116,
+    138,
+    16,
+    36
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 66,
+   "minimum_reachable_centers": 63208,
+   "critical_points": 12,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "arbor_pull",
+     "kind": "strainer",
+     "rect": [
+      45,
+      85,
+      7,
+      7
+     ],
+     "native_palette_values": 2
+    },
+    {
+     "key": "outer_trench",
+     "kind": "water_inlet",
+     "rect": [
+      189,
+      85,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      72,
+      64,
+      96,
+      24
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      72,
+      144,
+      96,
+      24
+     ],
+     "native_palette_values": 10
+    }
+   ]
+  },
+  "72": {
+   "shortcut_connects_walkable_endpoints": false,
+   "shortcut_center_strip": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 1,
+   "minimum_reachable_centers": 55848,
+   "critical_points": 12,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "hot_plate_and_seam",
+     "kind": "hot_plate",
+     "rect": [
+      103,
+      101,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "hot_plate_and_seam",
+     "kind": "warm_seam",
+     "rect": [
+      93,
+      113,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "cooling_pin",
+     "kind": "quiet_pin",
+     "rect": [
+      213,
+      81,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      128,
+      24,
+      64,
+      56
+     ],
+     "native_palette_values": 12
+    },
+    {
+     "rect": [
+      240,
+      24,
+      64,
+      56
+     ],
+     "native_palette_values": 12
+    },
+    {
+     "rect": [
+      352,
+      24,
+      64,
+      56
+     ],
+     "native_palette_values": 12
+    }
+   ]
+  },
+  "73": {
+   "shortcut_connects_walkable_endpoints": true,
+   "shortcut_center_strip": [
+    74,
+    56,
+    92,
+    16
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 50,
+   "minimum_reachable_centers": 27528,
+   "critical_points": 11,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "near_weight",
+     "kind": "ballast",
+     "rect": [
+      45,
+      41,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "far_tie",
+     "kind": "strainer",
+     "rect": [
+      189,
+      37,
+      7,
+      7
+     ],
+     "native_palette_values": 2
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      80,
+      32,
+      80,
+      64
+     ],
+     "native_palette_values": 15
+    }
+   ]
+  },
+  "74": {
+   "shortcut_connects_walkable_endpoints": false,
+   "shortcut_center_strip": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 1,
+   "minimum_reachable_centers": 113996,
+   "critical_points": 19,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "outer_screen",
+     "kind": "strainer",
+     "rect": [
+      189,
+      93,
+      7,
+      7
+     ],
+     "native_palette_values": 2
+    },
+    {
+     "key": "quiet_pin",
+     "kind": "quiet_pin",
+     "rect": [
+      277,
+      93,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      136,
+      48,
+      208,
+      40
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      136,
+      88,
+      32,
+      72
+     ],
+     "native_palette_values": 7
+    },
+    {
+     "rect": [
+      312,
+      88,
+      32,
+      72
+     ],
+     "native_palette_values": 7
+    },
+    {
+     "rect": [
+      208,
+      184,
+      64,
+      40
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      40,
+      40,
+      56,
+      48
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      384,
+      40,
+      56,
+      48
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      48,
+      192,
+      40,
+      24
+     ],
+     "native_palette_values": 8
+    },
+    {
+     "rect": [
+      392,
+      192,
+      40,
+      24
+     ],
+     "native_palette_values": 8
+    }
+   ]
+  },
+  "75": {
+   "shortcut_connects_walkable_endpoints": true,
+   "shortcut_center_strip": [
+    80,
+    210,
+    16,
+    44
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 1,
+   "minimum_reachable_centers": 61992,
+   "critical_points": 11,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "lower_hem",
+     "kind": "strainer",
+     "rect": [
+      117,
+      37,
+      7,
+      7
+     ],
+     "native_palette_values": 2
+    },
+    {
+     "key": "water_lens",
+     "kind": "water_lens",
+     "rect": [
+      103,
+      157,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      56,
+      56,
+      40,
+      48
+     ],
+     "native_palette_values": 8
+    },
+    {
+     "rect": [
+      144,
+      120,
+      40,
+      56
+     ],
+     "native_palette_values": 7
+    },
+    {
+     "rect": [
+      56,
+      216,
+      64,
+      32
+     ],
+     "native_palette_values": 9
+    }
+   ]
+  },
+  "76": {
+   "shortcut_connects_walkable_endpoints": true,
+   "shortcut_center_strip": [
+    168,
+    18,
+    16,
+    76
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 50,
+   "minimum_reachable_centers": 59648,
+   "critical_points": 13,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "dock_ballast",
+     "kind": "ballast",
+     "rect": [
+      93,
+      73,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "side_wake",
+     "kind": "water_inlet",
+     "rect": [
+      237,
+      85,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "far_signal",
+     "kind": "water_inlet",
+     "rect": [
+      381,
+      93,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      136,
+      24,
+      80,
+      64
+     ],
+     "native_palette_values": 8
+    },
+    {
+     "rect": [
+      280,
+      72,
+      72,
+      32
+     ],
+     "native_palette_values": 7
+    }
+   ]
+  },
+  "77": {
+   "shortcut_connects_walkable_endpoints": false,
+   "shortcut_center_strip": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "full_11_by_11_foot": true,
+   "dynamic_states_checked": 1,
+   "minimum_reachable_centers": 27864,
+   "critical_points": 13,
+   "all_spawns_portals_manual_rest_invitation_stations_and_people_reachable": true,
+   "row_lookup_exact_for_every_pixel": true,
+   "target_pixel_coverage": [
+    {
+     "key": "refuge_warm_seam",
+     "kind": "hot_plate",
+     "rect": [
+      79,
+      109,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "refuge_warm_seam",
+     "kind": "warm_seam",
+     "rect": [
+      69,
+      121,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "outside_brace",
+     "kind": "ballast",
+     "rect": [
+      117,
+      73,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    },
+    {
+     "key": "quiet_door",
+     "kind": "quiet_pin",
+     "rect": [
+      157,
+      89,
+      7,
+      7
+     ],
+     "native_palette_values": 3
+    }
+   ],
+   "solid_pixel_coverage": [
+    {
+     "rect": [
+      80,
+      32,
+      80,
+      32
+     ],
+     "native_palette_values": 10
+    },
+    {
+     "rect": [
+      32,
+      72,
+      24,
+      32
+     ],
+     "native_palette_values": 7
+    },
+    {
+     "rect": [
+      184,
+      72,
+      24,
+      32
+     ],
+     "native_palette_values": 7
+    }
+   ]
+  }
+ },
+ "rom_art_upper_bound_bytes": 1168178,
+ "budget_bytes": 1300000,
+ "includes_max_bytes": 29000,
+ "generated_includes": 160,
+ "new_ewram_bytes": 0,
+ "new_iwram_bytes": 0,
+ "odd_atlases": [
+  70,
+  72,
+  74,
+  76
+ ]
+}

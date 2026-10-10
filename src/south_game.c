@@ -4,6 +4,7 @@
 #include "south_art.h"
 #include "southern_quests.h"
 #include "progression.h"
+#include "connected_roads.h"
 #include "assets.h"
 #ifdef SOUTH_GAME_HOST_TEST
 #include "south_game_test_ui.h"
@@ -71,7 +72,31 @@ else if(face==3){forward=x-px;side=ab(py-y);}
 else return 0;
 return side<=forward+4;
 }
-static unsigned state(unsigned q){return save5_quest_state(&adventure_save.quests,q);
+static const unsigned char rq_forms[2]={79,85};
+static const unsigned char rq_gear[8]={19,255,255,21,23,22,24,20};
+#define RQ_FIRST 22
+#define RQ_MASK southern_quest_mask
+#define RQ_AVAILABLE southern_quest_available
+#define RQ_LEVEL southern_recruit_level
+#define RQ_FORM(q) rq_forms[(q)-RQ_FIRST]
+#define RQ_GEAR(q) rq_gear[(q)-RQ_FIRST]
+#define RQ_INVALID SOUTH_INVALID
+#define RQ_UNCHANGED SOUTH_UNCHANGED
+#define RQ_CHANGED SOUTH_CHANGED
+#define RQ_NOW_READY SOUTH_NOW_READY
+#define RQ_REWARDED SOUTH_REWARDED
+#define RQ_LOCKED SOUTH_LOCKED
+#define RQ_FULL SOUTH_FULL
+#define RQ_RESERVED SOUTH_RESERVED
+#define RQ_ID_EXHAUSTED SOUTH_INVALID
+#define RQ_DISCOVERY 1
+#define RQ_ID_FIRST 1
+#define RQ_PENDING south_game_quest_pending
+#define RQ_SEAL south_game_quest_seal
+#define RQ_CANCEL south_game_quest_cancel
+#define RQ_PREPARE south_game_quest_prepare
+#include "regional_quest_event.inc"
+static unsigned state(unsigned q){return rq_state(q);
 }
 static int done(unsigned q){return state(q)==3;
 }
@@ -82,26 +107,21 @@ progression_revision++;
 }
 static void sync(void){adventure_save.campaign.chapter_flags=(Save4U8)chapter_flags;
 }
-static COLD void persist(void){if(dirty){sync();
+static COLD void persist(void){if(rq.phase){rq.persist=1;return;}if(dirty){sync();
 if(south_game_is_room((unsigned)room)){adventure_save.campaign.room=(Save4U8)room;
 adventure_save.campaign.spawn=(Save4U8)checkpoint_spawn;
 }changed();
 save_game();
 dirty=0;
 }}
-static COLD void say(int a,int b){persist();
+static COLD void say(int a,int b){if(rq.phase){rq.dialog=1;rq.dialog_a=a;rq.dialog_b=b;rq.persist=1;return;}persist();
 dialogue(a,b,PLAY);
 }
 #include "south_rest_job.inc"
-static COLD int offer(unsigned q){int r=southern_quest_offer(&adventure_save,q);
-if(r==SOUTH_CHANGED)dirty=1;
-return r!=SOUTH_LOCKED&&r!=SOUTH_INVALID;
-}
-static COLD void objective(unsigned q,unsigned bit){int r=southern_quest_objective(&adventure_save,q,bit);
-if(r==SOUTH_CHANGED||r==SOUTH_NOW_READY){dirty=1;
-changed();
-}}
-static COLD void claim(unsigned q){int r=southern_quest_claim(&adventure_save,q);
+#include "south_enter_job.inc"
+static COLD int offer(unsigned q){int r=rq_enqueue(q,RQ_OFFER,0);return r!=RQ_LOCKED&&r!=RQ_INVALID;}
+static COLD void objective(unsigned q,unsigned bit){int r=rq_enqueue(q,RQ_OBJECTIVE,bit);(void)r;}
+static COLD void quest_claim_result(unsigned q,int r){
 if(r==SOUTH_REWARDED){dirty=1;
 progression_refresh();
 say(q==24?TX_ST_RETURN_A:TX_ST_RECEIVED_A,q==24?TX_ST_RETURN_B:TX_ST_RECEIVED_B);
@@ -109,6 +129,14 @@ say(q==24?TX_ST_RETURN_A:TX_ST_RECEIVED_A,q==24?TX_ST_RETURN_B:TX_ST_RECEIVED_B)
 else if(r==SOUTH_RESERVED)say(TX_MG_RESERVED,TX_MG_RESERVEDB);else if(r==SOUTH_FULL)say(TX_ST_FULL_A,TX_ST_FULL_B);
 else if(r==SOUTH_UNCHANGED)say(q==24?TX_ST_RETURN_A:TX_ST_DONE_A,q==24?TX_ST_RETURN_B:TX_ST_DONE_B);
 else say(TX_ST_LOCKED_A,TX_ST_LOCKED_B);
+}
+static COLD void claim(unsigned q){rq_enqueue(q,RQ_CLAIM,0);}
+COLD int south_game_quest_commit(void){unsigned q;int result,has_claim,show,a,b,save,changed;
+ if(!rq_commit_patch()){rq_cancel();return 0;}
+ q=rq.q;result=rq.result;has_claim=rq.claim;show=rq.dialog;a=rq.dialog_a;b=rq.dialog_b;save=rq.persist;changed=rq.changed;
+ rq_cancel();if(changed){dirty=1;south_game_revision++;progression_revision++;}
+ if(has_claim)quest_claim_result(q,result);else if(show)say(a,b);else if(save)persist();
+ return 1;
 }
 static const int qnames[8]={TX_ST_Q22,TX_ST_Q23,TX_ST_Q24,TX_ST_Q25,TX_ST_Q26,TX_ST_Q27,TX_ST_Q28,TX_ST_Q29};
 static const int clues[8][2]={{TX_ST_CLUE22A,TX_ST_CLUE22B},{TX_ST_CLUE23A,TX_ST_CLUE23B},{TX_ST_CLUE24A,TX_ST_CLUE24B},{TX_ST_CLUE25A,TX_ST_CLUE25B},{TX_ST_CLUE26A,TX_ST_CLUE26B},{TX_ST_CLUE27A,TX_ST_CLUE27B},{TX_ST_CLUE28A,TX_ST_CLUE28B},{TX_ST_CLUE29A,TX_ST_CLUE29B}};
@@ -144,64 +172,17 @@ if(act==SOUTH_ACTION_SHADE&&a!=34){p->shade^=1;
 return 1;
 }return -1;
 }
-/* Pixel-stepped rays are bounded by authored room size. First blocker wins;
-* no recursion, loops or dynamic allocation. Every ray uses cardinal lines. */
-static int optical_wall(unsigned area,int x,int y){const SouthArtRoom*r=&south_art_rooms[area-30];
-unsigned i;
-if((unsigned)x>=r->width||(unsigned)y>=r->height)return 1;
-for(i=0;i<r->solid_count;i++){const SouthArtRect*b=&r->solids[i];
-if(x>=b->x&&x<b->x+b->w&&y>=b->y&&y<b->y+b->h)return 1;
-}return 0;
-}
-unsigned south_puzzle_beam(const SouthPuzzle*p,unsigned a,SouthBeam out[4]){static const int dx[4]={1,0,-1,0},dy[4]={0,1,0,-1};
-int mx[2],my[2],rx,ry,x,y,d=0,nx,ny,k,kind,hit;
-unsigned n=0,seen=0,bit;
-if(!out||!puzzle_valid(p,a))return 0;
-mx[0]=a==36?80:112;
-my[0]=a==36?104:56;
-mx[1]=a==36?80:112;
-my[1]=a==36?48:104;
-rx=a==34?112:192;
-ry=a==36?48:104;
-x=32;
-y=a==36?104:56;
-while(n<4){nx=x;
-ny=y;
-hit=-1;
-kind=SOUTH_BEAM_WALL;
-for(k=0;k<240;k++){nx+=dx[d];
-ny+=dy[d];
-if(optical_wall(a,nx,ny))break;
-if(a!=34&&nx==152&&ny==(p->shade?(a==35?104:48):(a==35?56:104))){kind=SOUTH_BEAM_SHADE;
-break;
-}
-if(nx==rx&&ny==ry){kind=SOUTH_BEAM_RECEIVER;
-break;
-}
-if(nx==mx[0]&&ny==my[0]){hit=0;
-kind=SOUTH_BEAM_MIRROR;
-break;
-}
-if(a!=34&&nx==mx[1]&&ny==my[1]){hit=1;
-kind=SOUTH_BEAM_MIRROR;
-break;
-}
-}
-out[n].x1=(short)x;
-out[n].y1=(short)y;
-out[n].x2=(short)nx;
-out[n].y2=(short)ny;
-out[n].end_kind=(unsigned char)kind;
-n++;
-if(hit<0){break;
-}bit=1u<<((unsigned)hit*4+(unsigned)d);
-if(seen&bit){out[n-1].end_kind=SOUTH_BEAM_LOOP;
-break;
-}seen|=bit;
-d=p->mirror[hit]?(d^1):3-d;
-x=nx;
-y=ny;
-}return n;
+/* Exactly three boolean inputs across three authored optical rooms. Baking
+ * the complete finite function avoids ray/rectangle scans on each redraw.
+ * The retained pixel-step reference exhaustively verifies every table row. */
+#include "southern_beams.inc"
+unsigned south_puzzle_beam(const SouthPuzzle*p,unsigned a,SouthBeam out[4]){
+ unsigned row,n,i;const SouthBeam*path;
+ if(!out||!puzzle_valid(p,a))return 0;
+ row=(a-34)*8u+p->mirror[0]+2u*p->mirror[1]+4u*p->shade;
+ n=south_beam_counts[row];path=south_beam_paths[row];
+ for(i=0;i<n;i++){out[i].x1=path[i].x1;out[i].y1=path[i].y1;out[i].x2=path[i].x2;out[i].y2=path[i].y2;out[i].end_kind=path[i].end_kind;}
+ return n;
 }
 static int contains(const SouthBeam*b,int x,int y){return b->x1==b->x2?x==b->x1&&y>=(b->y1<b->y2?b->y1:b->y2)&&y<=(b->y1>b->y2?b->y1:b->y2):y==b->y1&&x>=(b->x1<b->x2?b->x1:b->x2)&&x<=(b->x1>b->x2?b->x1:b->x2);
 }
@@ -217,26 +198,28 @@ static void clear_trial(void){trial_index=trial_slot=255;
 trial_bits=trial_revealed=0;
 trial_id=0;
 }
-static COLD void reset_scene(void){south_game_puzzle.mirror[0]=south_game_puzzle.mirror[1]=(unsigned char)(room==36);
+static COLD void reset_scene(void){rq_cancel();south_game_puzzle.mirror[0]=south_game_puzzle.mirror[1]=(unsigned char)(room==36);
 south_game_puzzle.shade=1;
-if(room>=34&&room<=36&&(adventure_save.quests.objectives[24]&(1u<<(room-34)))){south_game_puzzle.mirror[0]=south_game_puzzle.mirror[1]=(unsigned char)(room!=36);
+if(room>=34&&room<=36&&(rq_objectives(24)&(1u<<(room-34)))){south_game_puzzle.mirror[0]=south_game_puzzle.mirror[1]=(unsigned char)(room!=36);
 south_game_puzzle.shade=0;
 }
 demo=hood=quiet=roots=drain=panels=ripple=runnel=pins=sun=loft=moisture=alignment=overflow=machine_hit=0;
-if(room==32)loft=(unsigned char)(adventure_save.quests.objectives[29]&3);
-south_game_machine_stage=(unsigned char)((adventure_save.quests.objectives[24]&8)?5:0);
+if(room==32)loft=(unsigned char)(rq_objectives(29)&3);
+south_game_machine_stage=(unsigned char)((rq_objectives(24)&8)?5:0);
 south_game_machine_ticks=0;
 south_game_machine_hp=(unsigned char)(south_game_machine_stage==5?0:144);
 machine_x=88;
 changed();
 }
-COLD void south_game_reset(void){south_game_cancel_rest();clear_trial();
+COLD void south_game_reset(void){south_game_cancel_enter();south_game_cancel_rest();clear_trial();
 reset_scene();
 }
-COLD int south_game_enter(unsigned area,unsigned spawn){int r;
+COLD int south_game_enter(unsigned area,unsigned spawn){int r,prepared=0;
 south_game_cancel_rest();sync();
-if(!south_game_is_room(area)||spawn>=counts[area-30]||!southern_can_enter(&adventure_save,area))return 0;
-r=southern_visit(&adventure_save,area);
+if(!south_game_is_room(area)||spawn>=counts[area-30]||!southern_can_enter(&adventure_save,area)){south_game_cancel_enter();return 0;}
+if(south_enter_job.phase==SOUTH_ENTER_COMMIT){prepared=south_enter_apply(area,spawn,&r);if(!prepared)return 0;}
+else if(south_enter_job.owned){south_game_cancel_enter();return 0;}
+else{south_game_cancel_enter();r=southern_visit(&adventure_save,area);}
 if(r==SOUTH_INVALID||r==SOUTH_LOCKED)return 0;
 if(r==SOUTH_CHANGED){dirty=1;
 }room=(int)area;
@@ -245,7 +228,16 @@ px=spawns[area-30][spawn][0];
 py=spawns[area-30][spawn][1];
 reset_scene();
 door_notice=0;
-if(area>=34){offer(24);
+if(area>=34){
+ if(prepared){
+  /* A valid visit into34..37 preserves Save5 validity: its entry gate
+   * includes the required22/23 rewards and ordered24 objectives. Offering24
+   * then only changes INACTIVE to ACTIVE, exactly as southern_quest_offer.
+   * Keep both availability and current-state gates; never fabricate rewards. */
+  if(southern_quest_available(&adventure_save,24)&&!state(24)){
+   save5_quest_set_state(&adventure_save.quests,24,SAVE5_QUEST_ACTIVE);dirty=1;
+  }
+ }else if(southern_quest_offer(&adventure_save,24)==SOUTH_CHANGED)dirty=1;
 }adventure_save.campaign.room=(Save4U8)area;
 adventure_save.campaign.spawn=(Save4U8)spawn;
 dirty=1;
@@ -256,6 +248,7 @@ int south_game_solid(int x,int y){const SouthArtRoom*r;
 const unsigned short*b;
 unsigned n;
 if(!south_game_is_room((unsigned)room))return 0;
+if(game_road_collision){int road=game_road_collision((unsigned)room,x,y);if(road>=0)return road;}
 r=&south_art_rooms[room-30];
 if((unsigned)x>=r->width||(unsigned)y>=r->height)return 1;
 b=r->collision_bands+r->collision_rows[y];
@@ -299,10 +292,8 @@ return c&&close(x,y)&&line_clear(x,y)&&creatures_supports_capability(c->form_id,
 static COLD int wrong(int id){toast(id);
 return 2;
 }
-static COLD void discovery(unsigned d){int r=southern_discover(&adventure_save,d);
-if(r==SOUTH_CHANGED){dirty=1;
-changed();
-toast(TX_ST_DISCOVERED);
+static COLD void discovery(unsigned d){int r=d<2?rq_enqueue(29-d,RQ_DISCOVER,1u<<d):SOUTH_INVALID;
+if(r==SOUTH_CHANGED){toast(TX_ST_DISCOVERED);
 }}
 static COLD int recruit(unsigned token,int valid,int clue){int r;
 if(southern_source_claimed(&adventure_save,token)){toast(TX_ST_KNOWN);
@@ -487,7 +478,7 @@ persist();
 toast(TX_ST_REPAIRED);
 return 1;
 }
-if(close(352,192)){if((adventure_save.quests.objectives[23]&1)&&offer(23)){objective(23,2);
+if(close(352,192)){if((rq_objectives(23)&1)&&offer(23)){objective(23,2);
 persist();
 toast(TX_ST_REPAIRED);
 }else toast(TX_ST_CLUE23A);
@@ -533,7 +524,7 @@ persist();
 toast(TX_ST_CLUE28B);
 return 1;
 }
-if(close(176,48)){if((adventure_save.quests.objectives[28]&1)&&offer(28)){objective(28,2);
+if(close(176,48)){if((rq_objectives(28)&1)&&offer(28)){objective(28,2);
 persist();
 toast(TX_ST_BAT_CLUE);
 }else toast(TX_ST_CLUE28A);
@@ -585,12 +576,12 @@ return 1;
 if(close(40,72))return recruit(18,sun,TX_ST_FROG_CLUE);
 if(close(176,96))return recruit(23,pins==7,TX_ST_PIN_CLUE);
 }else if(room<=36){
-if(room==36&&close(208,112)){if(adventure_save.quests.objectives[24]&4)return door(31,1);
+if(room==36&&close(208,112)){if(rq_objectives(24)&4)return door(31,1);
 toast(TX_ST_ARRANGE);
 return 1;
 }
 if(close(208,56)){unsigned bit=1u<<(room-34);
-if(adventure_save.quests.objectives[24]&bit)return door((unsigned)room+1,0);
+if(rq_objectives(24)&bit)return door((unsigned)room+1,0);
 say(room==34?TX_ST_WATER_A:room==35?TX_ST_METAL_A:TX_ST_ARRANGE,TX_ST_EXIT_A);
 return 1;
 }
@@ -618,7 +609,7 @@ return 1;
 if(close(120,112)){
 if(south_game_machine_stage>=1&&south_game_machine_stage<=4)return 0;
 if(south_game_machine_stage==5){if(done(24)){persist();
-enter_room(30,4);
+say(TX_ST_RECEIVED_A,TX_ST_RECEIVED_B);
 }else claim(24);
 return 1;
 }
@@ -707,10 +698,10 @@ toast(TX_ST_WARN);
 }
 }
 if(transition_lock)return;
-if(room==30){if((keys&UP)&&px>=288&&px<=320&&py<=18){door(31,0);
+if(room==30){if((!game_road_managed||!game_road_managed(30,31))&&(keys&UP)&&px>=288&&px<=320&&py<=18){door(31,0);
 return;
 }}
-else if(room==31){if((keys&DOWN)&&px>=224&&px<=255&&py>=298){door(30,1);
+else if(room==31){if((!game_road_managed||!game_road_managed(31,30))&&(keys&DOWN)&&px>=224&&px<=255&&py>=298){door(30,1);
 return;
 }}
 else if((keys&DOWN)&&px>=108&&px<=132&&py>=143){unsigned dest=room==32?30:room==33||room==34?31:(unsigned)room-1,spawn=room==32?3:room==33?3:room==34?1:0;
@@ -738,7 +729,7 @@ text(s[state(q)],173,54,PAL_TEAL2);
 text(clues[sel][0],14,76,PAL_GOLD4);
 text(clues[sel][1],14,94,PAL_GOLD4);
 text(TX_ST_OBJECTIVES,18,115,PAL_TEAL2);
-for(b=1;b<=8;b<<=1)if(southern_quest_mask(q)&b){rect((int)x,118,8,8,(adventure_save.quests.objectives[q]&b)?PAL_GOLD3:PAL_STONE1);
+for(b=1;b<=8;b<<=1)if(southern_quest_mask(q)&b){rect((int)x,118,8,8,(rq_objectives(q)&b)?PAL_GOLD3:PAL_STONE1);
 x+=13;
 }}
 else{sel-=8;

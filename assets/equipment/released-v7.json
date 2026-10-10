@@ -1,0 +1,1288 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "key": "ITEM_001",
+      "name": "Wayfarer Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "sword",
+      "protected": true,
+      "description": [
+        "A trusty close-range sword.",
+        "Cannot be discarded."
+      ]
+    },
+    {
+      "id": 2,
+      "key": "ITEM_002",
+      "name": "Reedguard Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 4,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "sword",
+      "description": [
+        "A sturdier close-range cut.",
+        "Attack +4; defense +1."
+      ]
+    },
+    {
+      "id": 9,
+      "key": "ITEM_009",
+      "name": "Practice Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "lance",
+      "description": [
+        "A narrow, committed thrust.",
+        "Long reach; watch your sides."
+      ]
+    },
+    {
+      "id": 10,
+      "key": "ITEM_010",
+      "name": "Copperleaf Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 4,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "weapon_class": "lance",
+      "description": [
+        "Copperleaf tips hold firm.",
+        "Attack +4; stagger +1."
+      ]
+    },
+    {
+      "id": 17,
+      "key": "ITEM_017",
+      "name": "Travel Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "bow",
+      "description": [
+        "Aim and release to fire.",
+        "Arrows carry no field magic."
+      ]
+    },
+    {
+      "id": 18,
+      "key": "ITEM_018",
+      "name": "Tidewood Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 4,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "weapon_class": "bow",
+      "description": [
+        "A steady bow for long roads.",
+        "Attack +4 on each arrow."
+      ]
+    },
+    {
+      "id": 33,
+      "key": "ITEM_033",
+      "name": "Patchwork Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 2,
+        "hp_q4": 8,
+        "speed_q8_delta": -4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A half-heart of padding.",
+        "Defense +2; speed -4."
+      ]
+    },
+    {
+      "id": 34,
+      "key": "ITEM_034",
+      "name": "Hearthscale Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 4,
+        "hp_q4": 16,
+        "speed_q8_delta": -8,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A heart of layered armor.",
+        "Defense +4; speed -8."
+      ]
+    },
+    {
+      "id": 49,
+      "key": "ITEM_049",
+      "name": "Trail Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 8,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Light soles for the trail.",
+        "Walking speed +8."
+      ]
+    },
+    {
+      "id": 50,
+      "key": "ITEM_050",
+      "name": "Surestep Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 3,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Sure footing after a dodge.",
+        "Roll cooldown -3."
+      ]
+    },
+    {
+      "id": 65,
+      "key": "ITEM_065",
+      "name": "Woven Belt",
+      "slot": "belt",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 8,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A packmaker's sturdy belt.",
+        "Maximum health +half-heart."
+      ]
+    },
+    {
+      "id": 81,
+      "key": "ITEM_081",
+      "name": "Resonance Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 4,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A clear note for companions.",
+        "Power cooldown -4."
+      ]
+    },
+    {
+      "id": 82,
+      "key": "ITEM_082",
+      "name": "Steady Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "description": [
+        "A ring that steadies the hand.",
+        "Defense +1; stagger +1."
+      ]
+    },
+    {
+      "id": 3,
+      "key": "ITEM_003",
+      "name": "Ropeguard Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 3,
+        "stagger": 0
+      },
+      "description": [
+        "A lighter cut with a longer reach.",
+        "Attack +2; reach +3."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 11,
+      "key": "ITEM_011",
+      "name": "Quay Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A balanced harbor thrust.",
+        "Attack +2; defense +1."
+      ],
+      "weapon_class": "lance"
+    },
+    {
+      "id": 19,
+      "key": "ITEM_019",
+      "name": "Headland Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 1,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 12,
+        "stagger": 0
+      },
+      "description": [
+        "A lighter arrow that travels farther.",
+        "Attack +1; range +12."
+      ],
+      "weapon_class": "bow"
+    },
+    {
+      "id": 35,
+      "key": "ITEM_035",
+      "name": "Sailcloth Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Light padding leaves your stride free.",
+        "Defense +1; health +1/4 heart."
+      ]
+    },
+    {
+      "id": 51,
+      "key": "ITEM_051",
+      "name": "Deck Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 4,
+        "roll_reduction": 1,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Sure steps and a quicker second roll.",
+        "Speed +4; roll recovery -1."
+      ]
+    },
+    {
+      "id": 83,
+      "key": "ITEM_083",
+      "name": "Bearing Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 2,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A measured balance of guard and focus.",
+        "Defense +1; power recovery -2."
+      ]
+    },
+    {
+      "id": 4,
+      "key": "ITEM_004",
+      "name": "Shadecutter Sword",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 1,
+        "stagger": 1
+      },
+      "description": [
+        "A light cut that interrupts.",
+        "Reach +1; stagger +1."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 12,
+      "key": "ITEM_012",
+      "name": "Sunlace Lance",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 4,
+        "stagger": 0
+      },
+      "description": [
+        "A long point for careful spacing.",
+        "Reach +4; no attack bonus."
+      ],
+      "weapon_class": "lance"
+    },
+    {
+      "id": 36,
+      "key": "ITEM_036",
+      "name": "Breezewall Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 3,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A breezy guard without padding.",
+        "Defense +3; speed -2."
+      ]
+    },
+    {
+      "id": 52,
+      "key": "ITEM_052",
+      "name": "Softsand Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -4,
+        "roll_reduction": 4,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Soft soles steady the next roll.",
+        "Roll cooldown -4; speed -4."
+      ]
+    },
+    {
+      "id": 66,
+      "key": "ITEM_066",
+      "name": "Raincatch Belt",
+      "slot": "belt",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 1,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A quarter-heart reserve.",
+        "Power cooldown -1."
+      ]
+    },
+    {
+      "id": 84,
+      "key": "ITEM_084",
+      "name": "Springpin Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 2
+      },
+      "description": [
+        "A firm strike with a slower step.",
+        "Stagger +2; speed -4."
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Ventstring Bow",
+      "slot": "weapon",
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 6,
+        "stagger": 0
+      },
+      "key": "ITEM_020",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A steady short-lane bow.",
+        "Attack +2; reach +6."
+      ],
+      "weapon_class": "bow"
+    },
+    {
+      "id": 37,
+      "name": "Kilnweave Mail",
+      "slot": "body",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 2,
+        "hp_q4": 8,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "key": "ITEM_037",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "Flexible kilnwork padding.",
+        "Guard +2; HP +8; speed -2."
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Pumice Boots",
+      "slot": "boots",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": 4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "key": "ITEM_053",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "Light porous walking soles.",
+        "HP +4; speed +4."
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Bricklayer Belt",
+      "slot": "belt",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "key": "ITEM_067",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A firm belt for steady work.",
+        "Guard +1; stagger +1."
+      ]
+    },
+    {
+      "id": 85,
+      "name": "Quietnote Ring",
+      "slot": "ring",
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 2,
+        "roll_reduction": 0,
+        "power_reduction": 3,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "key": "ITEM_085",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A softly vibrating ring.",
+        "Speed +2; power wait -3."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Terrace Sword",
+      "slot": "weapon",
+      "stats": {
+        "attack_q4": 2,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 2,
+        "stagger": 0
+      },
+      "key": "ITEM_005",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "description": [
+        "A broad terrace-work sword.",
+        "Attack +2; reach +2."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 6,
+      "key": "ITEM_006",
+      "name": "Shellscribe Sword",
+      "slot": "weapon",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 1,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 3,
+        "stagger": 0
+      },
+      "description": [
+        "An optional underwater sidegrade.",
+        "No breathing meter or route permission."
+      ],
+      "weapon_class": "sword"
+    },
+    {
+      "id": 13,
+      "key": "ITEM_013",
+      "name": "Nacrepoint Lance",
+      "slot": "weapon",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 4,
+        "stagger": 0
+      },
+      "description": [
+        "An optional underwater sidegrade.",
+        "No breathing meter or route permission."
+      ],
+      "weapon_class": "lance"
+    },
+    {
+      "id": 38,
+      "key": "ITEM_038",
+      "name": "Pearlweave Mail",
+      "slot": "body",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 2,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "An optional underwater sidegrade.",
+        "No breathing meter or route permission."
+      ]
+    },
+    {
+      "id": 54,
+      "key": "ITEM_054",
+      "name": "Driftstep Boots",
+      "slot": "boots",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 6,
+        "roll_reduction": 1,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "An optional underwater sidegrade.",
+        "No breathing meter or route permission."
+      ]
+    },
+    {
+      "id": 68,
+      "key": "ITEM_068",
+      "name": "Mapfold Belt",
+      "slot": "belt",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 8,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 2,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "An optional underwater sidegrade.",
+        "No breathing meter or route permission."
+      ]
+    },
+    {
+      "id": 86,
+      "key": "ITEM_086",
+      "name": "Quietwater Ring",
+      "slot": "ring",
+      "status": "authored",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 2,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "An optional underwater sidegrade.",
+        "No breathing meter or route permission."
+      ]
+    },
+    {
+      "id": 21,
+      "key": "ITEM_021",
+      "name": "Sailthread Bow",
+      "slot": "weapon",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 8,
+        "stagger": 0
+      },
+      "description": [
+        "A light bow for the returning road.",
+        "Speed +4; arrow range +8."
+      ],
+      "weapon_class": "bow"
+    },
+    {
+      "id": 39,
+      "key": "ITEM_039",
+      "name": "Homeweave Mail",
+      "slot": "body",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 3,
+        "hp_q4": 4,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "A steady layer for familiar paths.",
+        "Defense +3; health +4; speed -2."
+      ]
+    },
+    {
+      "id": 55,
+      "key": "ITEM_055",
+      "name": "Walkway Boots",
+      "slot": "boots",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": 4,
+        "roll_reduction": 2,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Easy steps over the homeward boards.",
+        "Speed +4; roll cooldown -2."
+      ]
+    },
+    {
+      "id": 69,
+      "key": "ITEM_069",
+      "name": "Reedcourier Belt",
+      "slot": "belt",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 4,
+        "speed_q8_delta": 0,
+        "roll_reduction": 0,
+        "power_reduction": 3,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "description": [
+        "Carry the last reed delivery gently.",
+        "Health +4; power cooldown -3."
+      ]
+    },
+    {
+      "id": 87,
+      "key": "ITEM_087",
+      "name": "Patient Ring",
+      "slot": "ring",
+      "status": "proposed",
+      "unique": true,
+      "max_rank": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 0,
+        "speed_q8_delta": -2,
+        "roll_reduction": 0,
+        "power_reduction": 1,
+        "reach_px": 0,
+        "stagger": 1
+      },
+      "description": [
+        "Stagger +1 with a patient step.",
+        "Guard +1; speed -2; power -1."
+      ]
+    }
+  ],
+  "weapon_classes": [
+    {
+      "id": 1,
+      "key": "sword",
+      "attack_edge": "press",
+      "geometry": "forward_sweep",
+      "moves": [
+        {
+          "name": "cut_1",
+          "windup": 2,
+          "active": 1,
+          "recovery": 14,
+          "damage_q4": 32,
+          "reach_px": 29,
+          "half_width_px": 18
+        },
+        {
+          "name": "cut_2",
+          "windup": 2,
+          "active": 1,
+          "recovery": 14,
+          "damage_q4": 32,
+          "reach_px": 29,
+          "half_width_px": 18
+        },
+        {
+          "name": "cut_3",
+          "windup": 3,
+          "active": 1,
+          "recovery": 20,
+          "damage_q4": 48,
+          "reach_px": 35,
+          "half_width_px": 20
+        }
+      ],
+      "combo_window": 44,
+      "buffer": 8,
+      "lunge_q8": 384
+    },
+    {
+      "id": 2,
+      "key": "lance",
+      "attack_edge": "press",
+      "geometry": "forward_rectangle",
+      "moves": [
+        {
+          "name": "thrust",
+          "windup": 6,
+          "active": 3,
+          "recovery": 20,
+          "damage_q4": 48,
+          "reach_px": 43,
+          "half_width_px": 6
+        }
+      ],
+      "combo_window": 0,
+      "buffer": 6,
+      "lunge_q8": 256
+    },
+    {
+      "id": 3,
+      "key": "bow",
+      "attack_edge": "release",
+      "geometry": "swept_projectile",
+      "moves": [
+        {
+          "name": "tap",
+          "windup": 4,
+          "active": 1,
+          "recovery": 23,
+          "damage_q4": 32,
+          "reach_px": 112,
+          "half_width_px": 3
+        },
+        {
+          "name": "charge",
+          "windup": 24,
+          "active": 1,
+          "recovery": 23,
+          "damage_q4": 48,
+          "reach_px": 144,
+          "half_width_px": 3
+        }
+      ],
+      "combo_window": 0,
+      "buffer": 0,
+      "lunge_q8": 0,
+      "charge_min_updates": 24,
+      "charge_max_updates": 45,
+      "projectile_speed_q8": 1024,
+      "max_live_arrows": 2,
+      "ammo": "unlimited",
+      "field_caps": []
+    }
+  ],
+  "stat_bounds": {
+    "attack_q4": [
+      0,
+      24
+    ],
+    "defense_q4": [
+      0,
+      8
+    ],
+    "hp_q4": [
+      0,
+      32
+    ],
+    "speed_q8_delta": [
+      -16,
+      16
+    ],
+    "roll_reduction": [
+      0,
+      6
+    ],
+    "power_reduction": [
+      0,
+      8
+    ],
+    "reach_px": [
+      0,
+      12
+    ],
+    "stagger": [
+      0,
+      3
+    ]
+  },
+  "schema_version": 1,
+  "description": "Authored equipment definitions and weapon parameters; enabled data is not evidence of an in-game acquisition route.",
+  "reward_sources": [
+    {
+      "source_id": 0,
+      "item_id": 1
+    },
+    {
+      "source_id": 1,
+      "item_id": 2
+    },
+    {
+      "source_id": 2,
+      "item_id": 9
+    },
+    {
+      "source_id": 3,
+      "item_id": 10
+    },
+    {
+      "source_id": 4,
+      "item_id": 17
+    },
+    {
+      "source_id": 5,
+      "item_id": 18
+    },
+    {
+      "source_id": 6,
+      "item_id": 33
+    },
+    {
+      "source_id": 7,
+      "item_id": 34
+    },
+    {
+      "source_id": 8,
+      "item_id": 49
+    },
+    {
+      "source_id": 9,
+      "item_id": 50
+    },
+    {
+      "source_id": 10,
+      "item_id": 65
+    },
+    {
+      "source_id": 11,
+      "item_id": 81
+    },
+    {
+      "source_id": 12,
+      "item_id": 82
+    },
+    {
+      "source_id": 13,
+      "item_id": 3
+    },
+    {
+      "source_id": 14,
+      "item_id": 11
+    },
+    {
+      "source_id": 15,
+      "item_id": 19
+    },
+    {
+      "source_id": 16,
+      "item_id": 35
+    },
+    {
+      "source_id": 17,
+      "item_id": 51
+    },
+    {
+      "source_id": 18,
+      "item_id": 83
+    },
+    {
+      "source_id": 19,
+      "item_id": 4
+    },
+    {
+      "source_id": 20,
+      "item_id": 12
+    },
+    {
+      "source_id": 21,
+      "item_id": 36
+    },
+    {
+      "source_id": 22,
+      "item_id": 52
+    },
+    {
+      "source_id": 23,
+      "item_id": 66
+    },
+    {
+      "source_id": 24,
+      "item_id": 84
+    },
+    {
+      "source_id": 25,
+      "item_id": 20
+    },
+    {
+      "source_id": 26,
+      "item_id": 37
+    },
+    {
+      "source_id": 27,
+      "item_id": 53
+    },
+    {
+      "source_id": 28,
+      "item_id": 67
+    },
+    {
+      "source_id": 29,
+      "item_id": 85
+    },
+    {
+      "source_id": 30,
+      "item_id": 5
+    },
+    {
+      "source_id": 31,
+      "item_id": 6
+    },
+    {
+      "source_id": 32,
+      "item_id": 13
+    },
+    {
+      "source_id": 33,
+      "item_id": 38
+    },
+    {
+      "source_id": 34,
+      "item_id": 54
+    },
+    {
+      "source_id": 35,
+      "item_id": 68
+    },
+    {
+      "source_id": 36,
+      "item_id": 86
+    },
+    {
+      "source_id": 37,
+      "item_id": 21
+    },
+    {
+      "source_id": 38,
+      "item_id": 39
+    },
+    {
+      "source_id": 39,
+      "item_id": 55
+    },
+    {
+      "source_id": 40,
+      "item_id": 69
+    },
+    {
+      "source_id": 41,
+      "item_id": 87
+    }
+  ]
+}

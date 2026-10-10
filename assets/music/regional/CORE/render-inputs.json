@@ -1,0 +1,95 @@
+{
+  "palette": [
+    {
+      "name": "hollow stone-chamber pipe",
+      "gain": 0.67,
+      "attack": 0.018,
+      "release": 0.115,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.028
+        ],
+        [
+          3,
+          0.16
+        ],
+        [
+          5,
+          0.05
+        ],
+        [
+          7,
+          0.015
+        ]
+      ],
+      "vibrato_delay": 0.3,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.2,
+      "vibrato_cents": 2.5
+    },
+    {
+      "name": "patient rounded chamber bass",
+      "gain": 0.37,
+      "attack": 0.012,
+      "release": 0.105,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.02
+        ],
+        [
+          3,
+          -0.09
+        ],
+        [
+          5,
+          0.018
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "low muted stone tines",
+      "gain": 0.26,
+      "attack": 0.0045,
+      "release": 0.075,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.12
+        ],
+        [
+          3,
+          0.065
+        ],
+        [
+          4,
+          0.019
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "four_lamps_beneath_the_stone-gba-16384-s8.raw": "43976acb7e26afbd9d56f73148206a9fa2bc689d2d7bdfac2a08efbbe98a84a1"
+  }
+}

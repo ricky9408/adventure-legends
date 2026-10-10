@@ -1,5 +1,11 @@
 # Save format 5, content revision 5
 
+> Historical Magma/content-revision5 checkpoint. Its wire-layout table remains
+> useful, but its current-content, scheduling and test-status statements belong
+> to that release. Shared Horizons writes revision8: see
+> [the current compatibility guide](SAVE5-CURRENT.md) and
+> [C verification](VERIFICATION-HORIZONS.md).
+
 ## Compatibility and wire contract
 
 New saves declare content revision **5**. Wire version, offsets and record sizes are

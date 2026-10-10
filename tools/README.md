@@ -103,7 +103,7 @@ Do not include `downloads/` or `sysroot/` in the game's player release. Players 
 
 `make -B -j4` rebuilt the complete game with zero warnings, producing a 227,452-byte ROM at the time of tool validation. The header logo/identification bytes match the official devkitPro gbafix reference, the complement checksum is valid, and `SRAM_V113` remains in the binary. The linker `.data` load/start/end and `.bss` start/end symbols are 4-byte aligned, matching startup's word copy/zero loops. `.bss` is 608 bytes at that revision, and `.data` is empty. The actual game ROM booted in mGBA to title state after 120 frames and produced a native screenshot. Sizes may change as gameplay is revised.
 
-The custom startup is intentionally minimal: game code is copied to IWRAM, `.bss` is zeroed, and `.data` is copied, but arbitrary unused RAM is not cleared. IRQ/FIQ are disabled; gameplay polls VBlank rather than using an interrupt handler. This is sufficient for this game's globals and main loop.
+The initial tool-validation ROM used minimal startup with IRQ/FIQ disabled and polled VBlank. Current H still polls VBlank for the main loop, but initializes separate SYSTEM/IRQ/SVC stacks and enables the music timer IRQ; see `README_MUSIC.md` and `docs/INDEPENDENT_MUSIC_REVIEW_H.md`. Startup copies IWRAM code and `.data` and zeroes `.bss`; arbitrary unused RAM is not cleared.
 
 ## Audio capture
 

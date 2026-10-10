@@ -22,9 +22,36 @@ def frozen_v5():
     if hashlib.sha256(blob).hexdigest()!=V5_SHA256:raise ValueError('Released revision5 relation snapshot changed')
     return json.loads(blob)
 
+V6_PATH=PATH.with_name('released-creature-relations-v6.json')
+V6_SHA256='8524b49e7ea690dc874d02696be03743a859294aa5ca0d728c5f0f33bcff6544'
+
+def frozen_v6():
+    blob=V6_PATH.read_bytes()
+    if hashlib.sha256(blob).hexdigest()!=V6_SHA256:raise ValueError('Released revision6 relation snapshot changed')
+    return json.loads(blob)
+
+V7_PATH=PATH.with_name('released-creature-relations-v7.json')
+V7_SHA256='18b828c13743a70ec272bde4d1368b0eebdfca426ecba8e0f0bd0f037fbfb805'
+
+def frozen_v7():
+    blob=V7_PATH.read_bytes()
+    if hashlib.sha256(blob).hexdigest()!=V7_SHA256:raise ValueError('Released revision7 relation snapshot changed')
+    manifest=json.loads(blob);result={}
+    for part in manifest['parts']:
+        raw=V7_PATH.with_name(part['file']).read_bytes()
+        if hashlib.sha256(raw).hexdigest()!=part['sha256']:raise ValueError('Released revision7 relation part changed')
+        rows=json.loads(raw)
+        if set(result)&set(rows):raise ValueError('Duplicate revision7 relation section')
+        result.update(rows)
+    canonical=(json.dumps(result,separators=(',',':'),ensure_ascii=False)+'\n').encode()
+    if hashlib.sha256(canonical).hexdigest()!=manifest['semantic_sha256']:raise ValueError('Revision7 relation semantics changed')
+    return result
+
 def validate_compatibility(catalog, revision=4):
     errors=_validate_snapshot(catalog, revision, frozen())
     if revision>=5:errors+=_validate_snapshot(catalog, revision, frozen_v5())
+    if revision>=6:errors+=_validate_snapshot(catalog, revision, frozen_v6())
+    if revision>=7:errors+=_validate_snapshot(catalog, revision, frozen_v7())
     return sorted(set(errors))
 
 def _validate_snapshot(catalog, revision, lock):
@@ -37,7 +64,7 @@ def _validate_snapshot(catalog, revision, lock):
         if old['id'] not in released:continue
         f=forms.get(old['id'])
         if f is None:errors.append(f'released form {old["id"]} removed');continue
-        for key in ('phase','polarity','stats','stat_total','signature_ability'):
+        for key in ('phase','polarity','stats','stat_total','signature_ability') + (('name',) if 'name' in old else ()):
             if f.get(key)!=old[key]:errors.append(f'released form {old["id"]} changed {key}')
         if not set(old['field_caps'])<=set(f.get('field_caps',[])):errors.append(f'released form {old["id"]} lost capability')
         # Exact pairs, including minimum levels, survive. Added commands are
@@ -54,7 +81,7 @@ def _validate_snapshot(catalog, revision, lock):
         if old['from'] in released:
             new=edges.get((old['from'],old['to']))
             if new!=old:errors.append(f'released edge {old["from"]}->{old["to"]} changed')
-    if catalog.get('schema_version')==2:
+    if catalog.get('schema_version') in (2,3):
         for old in lock['trial_bindings']:
             if old['introduced_content_revision']>revision:continue
             new=trials.get(old['trial_id'])

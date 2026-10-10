@@ -26,7 +26,7 @@ SOURCES = [
     'tests/legacy_underwater_hooks.c', 'src/magma_power_art.c',
     'src/southern_powers.c', 'src/southern_power_art.c',
     'src/northern_powers.c', 'src/northern_power_art.c',
-    'src/advanced_powers.c', 'src/regional_powers.c', 'src/gear_runtime.c',
+    'src/advanced_powers.c', 'src/regional_powers.c', 'src/gear_runtime.c', 'tests/legacy_return_hooks.c',
     'src/weapon_actions.c', 'src/combat_rules.c', 'src/equipment.c',
     'src/equipment_data.c', 'src/creatures.c', 'src/creature_data.c', 'src/assets.c',
 ]

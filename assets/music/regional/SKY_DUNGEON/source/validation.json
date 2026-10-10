@@ -1,0 +1,31 @@
+{
+  "title": "Threads Above the Clouds",
+  "bars": 26,
+  "meter": "3/4",
+  "tempo": 108,
+  "duration_seconds": 43.333333333333336,
+  "xml": "All pitches, onsets, durations match event data",
+  "midi": "All four binary tracks parsed; notes match events; 14-tick release gap",
+  "end_tick": 37440,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "voice_crossings": 0,
+  "ranges": {
+    "melody": [
+      67,
+      83
+    ],
+    "inner": [
+      55,
+      67
+    ],
+    "bass": [
+      42,
+      52
+    ]
+  },
+  "audible_review_performed": false,
+  "visual_review": "All 3 final PNG pages inspected after annotation-spacing revision; complete measures, readable explicit accidentals, no high-note/chord collisions or clipping",
+  "independent_review": "See INDEPENDENT-MUSIC-REVIEW.md",
+  "individual_voice_midi": "All three files have valid two-track headers and byte-identical conductor and voice tracks to checked master"
+}

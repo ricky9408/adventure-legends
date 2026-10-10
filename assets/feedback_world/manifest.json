@@ -1,0 +1,103 @@
+{
+  "entries": 30,
+  "palette_bytes": 28858,
+  "runs": 874,
+  "rooms": [
+    {
+      "room": 0,
+      "runs": 65,
+      "opaque_pixels": 816,
+      "image_sha256": "eab1463953a4b19218819bbf96d2d3784f2b42f6ecd8736e00f5218e8e932048"
+    },
+    {
+      "room": 16,
+      "runs": 96,
+      "opaque_pixels": 1804,
+      "image_sha256": "2fd666c3d374f2dae73675b9c501caa2e42db774dd39b51febb94936993c3174"
+    },
+    {
+      "room": 17,
+      "runs": 22,
+      "opaque_pixels": 484,
+      "image_sha256": "9d9c2f2c453acccac232b791179fa5609aef7c60dcff3cd1f2272e826744e344"
+    },
+    {
+      "room": 22,
+      "runs": 115,
+      "opaque_pixels": 1436,
+      "image_sha256": "f303c7a2a18e5482df601402a060670294e632d79b132b9fce41dd2f69e3c56e"
+    },
+    {
+      "room": 23,
+      "runs": 15,
+      "opaque_pixels": 255,
+      "image_sha256": "069f57d1e1ab4fe47c8110ad83598ddc30c4a9975307090df78db0a5150bc100"
+    },
+    {
+      "room": 26,
+      "runs": 19,
+      "opaque_pixels": 323,
+      "image_sha256": "3b10ecafa2cad1d8a444c1b01bff6e6d768d189cde1b866dc348648e37659c31"
+    },
+    {
+      "room": 27,
+      "runs": 19,
+      "opaque_pixels": 323,
+      "image_sha256": "3b10ecafa2cad1d8a444c1b01bff6e6d768d189cde1b866dc348648e37659c31"
+    },
+    {
+      "room": 28,
+      "runs": 19,
+      "opaque_pixels": 323,
+      "image_sha256": "3b10ecafa2cad1d8a444c1b01bff6e6d768d189cde1b866dc348648e37659c31"
+    },
+    {
+      "room": 30,
+      "runs": 212,
+      "opaque_pixels": 2563,
+      "image_sha256": "f95d93bd771c43cff6062505c54b422d23fd1dbe8d01cb0c4afbc3a34ec4059a"
+    },
+    {
+      "room": 31,
+      "runs": 30,
+      "opaque_pixels": 510,
+      "image_sha256": "c2c1f7a1717821a75fca507624e4d9e0975c89d46bb78ba1143a7df872475c37"
+    },
+    {
+      "room": 32,
+      "runs": 17,
+      "opaque_pixels": 221,
+      "image_sha256": "8b222bf841654be16969be5183c9d2365a5ebc9c60ea5968f59d5bfd21039f77"
+    },
+    {
+      "room": 34,
+      "runs": 25,
+      "opaque_pixels": 233,
+      "image_sha256": "dc005e058f352eb603924098ff9039ba56503d878db59e67cd9c991d6a3b190a"
+    },
+    {
+      "room": 35,
+      "runs": 25,
+      "opaque_pixels": 233,
+      "image_sha256": "dc005e058f352eb603924098ff9039ba56503d878db59e67cd9c991d6a3b190a"
+    },
+    {
+      "room": 36,
+      "runs": 42,
+      "opaque_pixels": 454,
+      "image_sha256": "5628aa09bd1f8d3a16f7aa5f792e29ede2c928e10e13dad345e1107938345ddb"
+    },
+    {
+      "room": 38,
+      "runs": 123,
+      "opaque_pixels": 2221,
+      "image_sha256": "f4dd136d010ef93c4d8902fef3f9c427714eec0cfaaddbbc2a660b1392739b98"
+    },
+    {
+      "room": 39,
+      "runs": 30,
+      "opaque_pixels": 510,
+      "image_sha256": "32356dd77e3ef4024f686273209399df611b6310d3bebd7e548694fa0ab397cc"
+    }
+  ]
+}

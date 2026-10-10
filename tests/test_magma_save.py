@@ -198,7 +198,7 @@ class MagmaSaveTests(base.Save5Tests):
    self.assertEqual(self.lib.save5_validate_revision(C.byref(s),4),1)
    self.store(s);self.assertEqual(compare_state(self.load()),compare_state(s))
    latest=max((A,B),key=lambda o:int.from_bytes(bytes(self.sram[o+8:o+12]),'little'))
-   self.assertEqual(bytes(self.sram[latest+12:latest+14]),b'\x06\x00')
+   self.assertEqual(bytes(self.sram[latest+12:latest+14]),b'\x08\x00')
  def test_magma_crc_valid_bad_sources_trials_history_and_reserved_bits(self):
   s=self.completed();self.reset();self.store(s);bank=bytearray(self.sram[A:A+SIZE])
   cases=[]

@@ -1,0 +1,6 @@
+{
+  "scope": "Source-export exclusions only; original historical archives remain unchanged locally.",
+  "reason": "These historical helper snapshots bundle compiled host mGBA/bridge dependencies. Install the documented official dependencies and build the bridge from source for current tests.",
+  "historical_checksum_scope": "Historical CHECKSUMS files describe their original complete evidence sets. This source export does not claim those omitted sets are complete; current source/build/native recipes remain provided.",
+  "omitted_archives": []
+}

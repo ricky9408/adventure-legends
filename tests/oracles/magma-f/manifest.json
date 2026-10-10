@@ -1,0 +1,13 @@
+{
+  "ROM": "20ca4ee45956e0112ecc1bb1731b6cb6386d06fe9785231dc2e47dc7a4d6538c",
+  "files": {
+    "magma_game.c": "fb0f4811d7e26002a9ae99661b1f8959644aa90d12ba04ef8b79934e3aff6e05",
+    "magma_game.h": "fc7520996bd17cc67a1865ba5d812dc183cfaf7922377273a9ca99dce4819491",
+    "magma_puzzle.inc": "e928dd884ff9fb43214a0cceb4264de77e9cbadbc3064af90a14066661904d10",
+    "magma_return_job.inc": "a5dba583ea811b1c96165a699bf44327a77819be4ded0f23e944657051cae236",
+    "magma_recruit_event.inc": "261124262a12fb6317be301523d775581a3fae75b61474ea1d18917aad64012f",
+    "magma_trials.inc": "2fa150b15f11b5fc197009404e0ca2b1119e1f97f7ab9e1de5bf85fe3d1511d8",
+    "magma_game_draw.inc": "320e77514272db2784438ee8d89971495733092bc9c725e48a67246926e11f5d"
+  },
+  "core_hashes_sha256": "1a08a3d802e3d0cb22399a9c80949d643f08cb343bd79f0dd0a0101aa003a157"
+}

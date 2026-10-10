@@ -47,3 +47,19 @@ __pycache__/
 /docs/underwater-memory/candidate-b/native50-all16-cadence-traces.json
 /docs/underwater-memory/candidate-g/native50-all16-cadence-traces.json
 /docs/underwater-memory/candidate-k/native50-all16-cadence-traces.json
+
+# Authenticated delivered Underwater SRAM regression inputs.
+!tests/fixtures/v5-revision6/*.sav
+tools/horizons_mgba_bridge.build.json
+
+# Exact accepted H controller-earned inputs for content8 migration.
+!tests/fixtures/horizons-native-prior-h/*/*.sav
+!tests/fixtures/v5-revision8/*.sav
+
+# Synthetic pinned compatibility/regression fixtures; never ordinary player saves.
+!tests/fixtures/**/*.sav
+# Native bridge products and local toolchain dependencies are not source.
+/tools/*.so
+/tools/*.build.json
+/tools/sysroot/
+/tools/downloads/

@@ -82,18 +82,18 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         cls.directory = Path(cls.tmp.name)
         cls.base = build(cls.directory, 'base')
         cls.broad = build(cls.directory, 'current-quest-broadened', {
-            'save5': [('quest_masks[46] = {7,3,7,7', 'quest_masks[46] = {15,3,7,7')]
+            'save5': [('quest_masks[64] = {7,3,7,7', 'quest_masks[64] = {15,3,7,7')]
         })
         cls.narrow = build(cls.directory, 'current-quest-narrowed', {
-            'save5': [('quest_masks[46] = {7,3,7,7', 'quest_masks[46] = {3,3,7,7')]
+            'save5': [('quest_masks[64] = {7,3,7,7', 'quest_masks[64] = {3,3,7,7')]
         })
         cls.command = build(cls.directory, 'current-command-removed', {
             'creature_data': [('    {1, 1},', '    {1, 23},')]
         })
         cls.gates = build(cls.directory, 'current-gates-and-source-quest-changed', {
             'save5': [
-                ('equipment_source_quest[37] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6',
-                 'equipment_source_quest[37] = {-1,0,-1,6,-1,4,7,8,1,9,5,10,6'),
+                ('equipment_source_quest[48] = {-1,7,-1,6,-1,4,0,8,1,9,5,10,6',
+                 'equipment_source_quest[48] = {-1,0,-1,6,-1,4,7,8,1,9,5,10,6'),
                 ('trial_recruit[5] = {11,12,14,15,13}', 'trial_recruit[5] = {12,11,14,15,13}'),
                 ('if ((q->region_flags[1] & 240u) && !harbor) return 0;',
                  'if ((q->region_flags[1] & 240u) && !harbor) { /* future current gate */ }'),
@@ -115,6 +115,7 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         self.assertEqual(self.base.save5_store(C.byref(s)), 1)
         bank = bytearray(self.base.sram[A:A+SIZE])
         bank[12:14] = revision.to_bytes(2, 'little')
+        bank[6:8]=(5056).to_bytes(2,'little')
         bank[8:12] = (17).to_bytes(4, 'little')
         return repair_crc(bank), s
 
@@ -135,7 +136,7 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         s.quests.objectives[0] = 8
         self.assertEqual(self.base.save5_validate(C.byref(s)), 0)
         self.assertEqual(self.broad.save5_validate(C.byref(s)), 1)  # mutation really broadened CURRENT
-        for revision in (2, 3, 4):
+        for revision in (2, 3, 4, 5, 6, 7):
             with self.subTest(revision=revision):
                 mutated = bytearray(bad)
                 mutated[12:14] = revision.to_bytes(2, 'little')
@@ -148,14 +149,15 @@ class HistoricalSavePolicyTests(unittest.TestCase):
                     self.assertEqual(lib.save5_has_valid(), 0)
                     self.assertEqual(bytes(out), before)
                     self.assertEqual(bytes(lib.sram), data)
-        # Revision5 has an explicit typed policy too: broadening current Q0 cannot
-        # silently change the frozen old quest interpretation in its wire bank.
+        # The synthetic broadened current policy writes only content8. Recorded
+        # revisions2..7 above still reject its newly allowed bit. A writer must
+        # preserve the older rollback bank rather than label new policy as7.
         install(self.broad, image(good))
         before = bytes(self.broad.sram)
         self.assertEqual(self.broad.save5_begin(C.byref(s)), 1)
-        self.assertEqual(finish(self.broad), FAILED)
-        self.assertEqual(self.broad.save5_test_write_count(), 0)
-        self.assertEqual(bytes(self.broad.sram), before)
+        self.assertEqual(finish(self.broad), DONE)
+        self.assertEqual(bytes(self.broad.sram[A:A+SIZE]), before[A:A+SIZE])
+        self.assertEqual(bytes(self.broad.sram[B+12:B+14]), b'\x0b\0')
 
     def test_streamed_old_bank_selection_and_migration_use_exact_policy(self):
         good, s = self.minimal_bank()
@@ -178,7 +180,7 @@ class HistoricalSavePolicyTests(unittest.TestCase):
                 self.assertEqual(bytes(lib.sram[A:A+SIZE]), good)
                 migrated = bytes(lib.sram[B:B+SIZE])
                 self.assertEqual(int.from_bytes(migrated[8:12], 'little'), 18)
-                self.assertEqual(migrated[12:14], b'\x06\0')
+                self.assertEqual(migrated[12:14], b'\x0b\0')
                 self.assertEqual(migrated[32:], good[32:])
                 self.assertEqual(lib.save5_test_write_count(), 6145)
                 self.assertEqual(lib.save5_load(C.byref(loaded)), 1)
@@ -225,8 +227,10 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         install(self.gates, image(repair_crc(bank)))
         self.assertEqual(self.gates.save5_has_valid(), 0)
         self.assertEqual(self.gates.save5_begin(C.byref(s)), 1)
-        self.assertEqual(finish(self.gates), FAILED)
-        self.assertEqual(self.gates.save5_test_write_count(), 0)
+        self.assertEqual(finish(self.gates), DONE)
+        # This intentionally broadened live policy is tagged8. It never makes
+        # the same malformed variable legal under the recorded older policy.
+        self.assertEqual(bytes(self.gates.sram[A+12:A+14]), b'\x0b\0')
         # Source1/item2 used to belong to Q7. Swapping its live Q0 mapping may
         # not admit a source1 claim for Q0 with no Q7 claim.
         bank = bytearray(good)
@@ -246,8 +250,8 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         self.assertEqual(self.gates.save5_validate(C.byref(s)), 1)
         self.assertEqual(self.base.save5_validate(C.byref(s)), 0)
         self.assertEqual(self.gates.save5_begin(C.byref(s)), 1)
-        self.assertEqual(finish(self.gates), FAILED)
-        self.assertEqual(self.gates.save5_test_write_count(), 0)
+        self.assertEqual(finish(self.gates), DONE)
+        self.assertEqual(bytes(self.gates.sram[A+12:A+14]), b'\x0b\0')
         # A legal historical town return spawn cannot be narrowed by today's
         # campaign public validator after its exact historical scan passed.
         bank = bytearray(good)
@@ -293,7 +297,7 @@ class HistoricalSavePolicyTests(unittest.TestCase):
         self.assertEqual(self.base.save5_validate_revision(C.byref(loaded), 1), 1)
         loaded.equipment.reward_claims[0] = 0
         self.assertEqual(self.base.save5_validate_revision(C.byref(loaded), 1), 0)
-        for revision in (0, 7, 0xffffffff):
+        for revision in (0, 12, 0xffffffff):
             self.assertEqual(self.base.save5_validate_revision(C.byref(loaded), revision), 0)
         self.assertEqual(C.sizeof(loaded.roster.instances[0]), 24)
         self.assertEqual(len(loaded.roster.instances), 160)

@@ -14,7 +14,9 @@ import shlex
 import subprocess
 import tempfile
 import unittest
+from retained_source_adapter import expand_local_includes
 from test_save5 import ROOT,Save,Instance,Roster,Equipment,compare_state,repair_crc,A,B,SIZE,BUSY,DONE,FAILED
+(ROOT/'build/current-host-evidence/underwater-return-spawns').mkdir(parents=True,exist_ok=True)
 SOURCES=('save4','save5','creatures','creature_data','equipment','equipment_data','southern_quests','magma_quests','underwater_quests')
 FIXTURE=ROOT/'tests/fixtures/v5-revision5/magma-all65-town.sav'
 FIXTURE_SHA='a4b45873a14d3ca18c3f93678350f8ab2a0a8c6609cdc17d1eb7a609a9760858'
@@ -40,18 +42,20 @@ def prepare(folder,synthetic=False,codec=False):
   p=folder/'synthetic-equipment.c';text=sources['equipment_data'].read_text();mark='const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {\n';assert text.count(mark)==1
   rows=''.join(f' [{i}]={{{i},1,0,0,255,{{0,0}},{{0,0,0,0,0,0,0,0}}}},\n' for i in range(100,147));p.write_text(text.replace(mark,mark+rows));sources['equipment_data']=p
  if codec:
-  assert synthetic;p=folder/'synthetic-save5.c';text=sources['save5'].read_text();mark='static const Save5HistoryItem *history_item(unsigned id, unsigned revision) {\n';assert text.count(mark)==1
-  rows=','.join('{%d,1,0,0,-1}'%i for i in range(100,147));text=text.replace(mark,mark+' static const Save5HistoryItem synthetic_items[47]={'+rows+'};\n if(revision==6&&id>=100&&id<=146)return &synthetic_items[id-100];\n');p.write_text(text);sources['save5']=p
+  assert synthetic;p=folder/'synthetic-save5.c';text=expand_local_includes(sources['save5']);mark='static const Save5HistoryItem *history_item(unsigned id, unsigned revision) {\n';assert text.count(mark)==1
+  rows=','.join('{%d,1,0,0,-1}'%i for i in range(100,147));text=text.replace(mark,mark+' static const Save5HistoryItem synthetic_items[47]={'+rows+'};\n if(revision==7&&id>=100&&id<=146)return &synthetic_items[id-100];\n');p.write_text(text);sources['save5']=p
  return sources
 
 def build(folder,synthetic=False,codec=False,sanitize=False):
+ source_hashes=runtime_hashes()
  sources=prepare(folder,synthetic,codec);out=folder/('sanitizer' if sanitize else 'underwater.so')
  flags=['-std=c99','-O1' if sanitize else '-O2','-Wall','-Wextra','-Werror','-ffreestanding','-fno-builtin','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-I'+str(ROOT/'src'),'-I'+str(folder)]
  if sanitize:flags+=['-g','-fsanitize=address,undefined','-fno-omit-frame-pointer'];extra=[ROOT/'tests/underwater_save_sanitizer.c']
  else:flags+=['-shared','-fPIC'];extra=[]
  subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+flags+[*map(str,sources.values()),str(ROOT/'tests/underwater_save_setup.c'),*map(str,extra),'-o',str(out)],check=True)
+ assert runtime_hashes()==source_hashes,'source closure changed during host compile'
  if sanitize:return out
- lib=C.CDLL(str(out));lib._source_hashes=runtime_hashes();lib.sram=(C.c_ubyte*32768).in_dll(lib,'save5_test_sram')
+ lib=C.CDLL(str(out));lib._source_hashes=source_hashes;lib.sram=(C.c_ubyte*32768).in_dll(lib,'save5_test_sram')
  for n in ('save5_load','save5_store','save5_begin','save5_validate','underwater_test_earned34','underwater_test_recruits'):
   getattr(lib,n).argtypes=[C.POINTER(Save)]
  for n in ('underwater_visit','underwater_anchor','underwater_quest_available','underwater_quest_offer','underwater_quest_claim','underwater_source_claimed','underwater_source_status','underwater_field_recruit','underwater_branch_status','underwater_branch_recruit','underwater_test_ready','underwater_test_completed','underwater_test_slot','underwater_can_enter','underwater_discovery_state','save5_validate_revision'):
@@ -199,5 +203,5 @@ class UnderwaterSaveTests(unittest.TestCase):
   run=subprocess.run([str(exe)],capture_output=True,text=True,env=dict(os.environ,ASAN_OPTIONS='detect_leaks=0:halt_on_error=1',UBSAN_OPTIONS='halt_on_error=1'))
   self.assertEqual(run.returncode,0,run.stdout+'\n'+run.stderr);result=json.loads(run.stdout);self.assertEqual(result['result'],'PASS')
   report=dict(result,scope='Host ASan/UBSan; synthetic Underwater state atop authentic Magma34',fixture_sha256=FIXTURE_SHA,source_sha256=self.lib._source_hashes,source_unchanged_during_measurement=self.lib._source_hashes==runtime_hashes())
-  (ROOT/'docs/evidence/underwater-save-sanitizers.json').write_text(json.dumps(report,indent=2)+'\n')
+  (ROOT/'build/current-host-evidence/underwater-save-sanitizers.json').write_text(json.dumps(report,indent=2)+'\n')
 if __name__=='__main__':unittest.main(verbosity=2)

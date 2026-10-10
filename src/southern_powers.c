@@ -55,7 +55,9 @@ static int distance(int x,int y,int tx,int ty){return absolute(x-tx)+absolute(y-
  * Side cells are tested at every diagonal step: no thin-wall/corner tunnelling. */
 static int clear(int x,int y,int tx,int ty){
     int dx=absolute(tx-x),dy=-absolute(ty-y),sx=x<tx?1:-1,sy=y<ty?1:-1,err=dx+dy;
-    if(distance(x,y,tx,ty)>192||solid(x,y)||solid(tx,ty))return 0;
+    if(distance(x,y,tx,ty)>192)return 0;
+    if(return_legacy_box_clear(x,y,tx,ty))return 1;
+    if(solid(x,y)||solid(tx,ty))return 0;
     while(x!=tx||y!=ty){int twice=err*2,nx=x,ny=y;
         if(twice>=dy){err+=dy;nx+=sx;}if(twice<=dx){err+=dx;ny+=sy;}
         if(nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return 0;
@@ -258,7 +260,7 @@ int southern_power_side(unsigned command,int side){
     southern_power_kind=(int)command;southern_power_form=c->form_id;caster_id=c->instance_id;
     southern_power_direction=face;southern_power_origin_x=px;southern_power_origin_y=py;
     southern_power_phase=a->phase;southern_power_age=0;southern_power_time=lifetimes[command-23];
-    base=a->cooldown_updates;cd=game_power_cooldown(base);if(cd<base-8)cd=base-8;if(cd>base)cd=base;
+    base=a->cooldown_updates;cd=game_power_cooldown(base);if(cd<base-GAME_MAX_POWER_RECOVERY)cd=base-GAME_MAX_POWER_RECOVERY;if(cd>base)cd=base;
     southern_power_cooldown=ability_cd=ability_max=(int)cd;southern_power_cast_time=20;
     ax=x1;ay=y1;bx=x2;by=y2;ex=command==23?cx:px;ey=command==23?cy:py;
     companion_start_x=(short)cx;companion_start_y=(short)cy;hit_mask=spent=delayed=side_changed=redirect_left=0;
@@ -500,13 +502,16 @@ static void draw_checked(int x,int y,int large){
 static void particle(int x,int y,int large){if(!solid(x,y))draw_checked(x,y,large);}
 static int draw_line(int x,int y,int tx,int ty){
     int dx=absolute(tx-x),dy=-absolute(ty-y),sx=x<tx?1:-1,sy=y<ty?1:-1,err=dx+dy,count=0;
-    if(distance(x,y,tx,ty)>96||solid(x,y))return 0;
+    int clear;
+    if(distance(x,y,tx,ty)>96)return 0;
+    clear=return_legacy_box_clear(x,y,tx,ty);
+    if(!clear&&solid(x,y))return 0;
     draw_checked(x,y,0);
     while(x!=tx||y!=ty){int twice=err*2,nx=x,ny=y;
         if(twice>=dy){err+=dy;nx+=sx;}if(twice<=dx){err+=dx;ny+=sy;}
-        if(nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return 0;
+        if(!clear&&nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return 0;
         x=nx;y=ny;
-        if(solid(x,y))return 0;
+        if(!clear&&solid(x,y))return 0;
         if(++count==6||(x==tx&&y==ty)){draw_checked(x,y,0);count=0;}
     }return 1;
 }
@@ -548,4 +553,43 @@ void southern_powers_draw(void){unsigned i;int age=southern_power_age;
     default:break;
     }
     for(i=0;i<3;i++)if(missiles[i].life)particle(missiles[i].x,missiles[i].y,!missiles[i].harmless);
+}
+
+/* No draw_count or caches are changed here. Keep the renderer's24-object cap
+ * local to the export and describe actual opaque sprites, not combat radii. */
+typedef struct {ReturnLegacyEmit emit;void *context;unsigned count;} FieldExport;
+static void field_piece(FieldExport *f,int x,int y,int large){
+ unsigned family=(unsigned)(southern_power_kind-23)/2;
+ if(f->count>=24||solid(x,y))return;
+ f->count++;
+ return_legacy_piece(f->emit,f->context,large?southern_power_marks[family]:southern_power_particles[family],
+  x-(large?8:4),y-(large?8:4),large?16:8,RETURN_LEGACY_PIXELS);
+}
+static int field_line(FieldExport *f,int x,int y,int tx,int ty){
+ int dx=absolute(tx-x),dy=-absolute(ty-y),sx=x<tx?1:-1,sy=y<ty?1:-1,err=dx+dy,count=0;
+ int clear;
+ if(distance(x,y,tx,ty)>96)return 0;
+ clear=return_legacy_box_clear(x,y,tx,ty);
+ if(!clear&&solid(x,y))return 0;
+ field_piece(f,x,y,0);
+ while(x!=tx||y!=ty){int twice=err*2,nx=x,ny=y;
+  if(twice>=dy){err+=dy;nx+=sx;}if(twice<=dx){err+=dx;ny+=sy;}
+  if(!clear&&nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return 0;
+  x=nx;y=ny;if(!clear&&solid(x,y))return 0;
+  if(++count==6||(x==tx&&y==ty)){field_piece(f,x,y,0);count=0;}
+ }return 1;
+}
+void southern_powers_field_geometry(unsigned command,ReturnLegacyEmit emit,void *context){
+ FieldExport f;unsigned i;int age=southern_power_age;
+ if(!emit||command<23||command>26||command!=(unsigned)southern_power_kind||!active())return;
+ f.emit=emit;f.context=context;f.count=0;
+ /* Companion pose markers and the bank's future guide path are previews,
+  * not authoritative moving strokes. Export only the actual active release. */
+ if(command==23){if(age>=6&&age<=12){int x,y,tx,ty;point(12,-18,&x,&y);point(12,2,&tx,&ty);
+  if(clear(ex,ey,x,y))field_line(&f,x,y,tx,ty);}}
+ else if(command==24){/* Only its genuine live missiles below. */}
+ else if(command==25){if(age>=6&&age<=18){int x,y,tx,ty,r=6+(age-6)*2;point(r,-r/2,&x,&y);point(r,r/2,&tx,&ty);
+  field_line(&f,southern_power_origin_x,southern_power_origin_y,x,y);field_line(&f,southern_power_origin_x,southern_power_origin_y,tx,ty);}}
+ else if(age>=30&&origin_clear(ax,ay)){field_line(&f,ax,ay,bx,by);field_piece(&f,ax,ay,1);if(clear(ax,ay,bx,by))field_piece(&f,bx,by,1);}
+ for(i=0;i<3;i++)if(missiles[i].life)field_piece(&f,missiles[i].x,missiles[i].y,!missiles[i].harmless);
 }

@@ -1,0 +1,278 @@
+{
+  "TITLE": {
+    "text": "装備 / 選択技",
+    "size": 12,
+    "height": 15,
+    "width": 64,
+    "ink_bounds": [
+      0,
+      0,
+      62,
+      10
+    ]
+  },
+  "EQUIPPED": {
+    "text": "装備中",
+    "size": 12,
+    "height": 15,
+    "width": 31,
+    "ink_bounds": [
+      0,
+      0,
+      29,
+      10
+    ]
+  },
+  "PREVIEW": {
+    "text": "比較中",
+    "size": 12,
+    "height": 15,
+    "width": 31,
+    "ink_bounds": [
+      1,
+      0,
+      29,
+      10
+    ]
+  },
+  "ATTACK": {
+    "text": "初撃",
+    "size": 12,
+    "height": 15,
+    "width": 21,
+    "ink_bounds": [
+      0,
+      0,
+      20,
+      10
+    ]
+  },
+  "DEFENSE": {
+    "text": "守り",
+    "size": 12,
+    "height": 15,
+    "width": 18,
+    "ink_bounds": [
+      1,
+      0,
+      16,
+      10
+    ]
+  },
+  "HEART": {
+    "text": "ハート",
+    "size": 12,
+    "height": 15,
+    "width": 22,
+    "ink_bounds": [
+      1,
+      2,
+      20,
+      9
+    ]
+  },
+  "WALK": {
+    "text": "歩速%",
+    "size": 12,
+    "height": 15,
+    "width": 28,
+    "ink_bounds": [
+      0,
+      0,
+      27,
+      10
+    ]
+  },
+  "RECOVERY": {
+    "text": "技待(約秒)",
+    "size": 11,
+    "height": 14,
+    "width": 51,
+    "ink_bounds": [
+      0,
+      0,
+      49,
+      10
+    ]
+  },
+  "DISTANCE": {
+    "text": "距離px",
+    "size": 11,
+    "height": 14,
+    "width": 31,
+    "ink_bounds": [
+      0,
+      0,
+      29,
+      11
+    ]
+  },
+  "STAGGER": {
+    "text": "怯み＋",
+    "size": 11,
+    "height": 14,
+    "width": 25,
+    "ink_bounds": [
+      0,
+      0,
+      23,
+      10
+    ]
+  },
+  "SWORD": {
+    "text": "剣:初撃 / 三段目+6px",
+    "size": 11,
+    "height": 14,
+    "width": 104,
+    "ink_bounds": [
+      0,
+      0,
+      102,
+      10
+    ]
+  },
+  "LANCE": {
+    "text": "槍:細い突き / 怯み＋は通常敵",
+    "size": 11,
+    "height": 14,
+    "width": 125,
+    "ink_bounds": [
+      0,
+      0,
+      124,
+      10
+    ]
+  },
+  "BOW": {
+    "text": "弓:通常 / 溜め+32px",
+    "size": 11,
+    "height": 14,
+    "width": 98,
+    "ink_bounds": [
+      1,
+      0,
+      96,
+      10
+    ]
+  },
+  "RECOVERY_CAP": {
+    "text": "技待は装備上限 / 秒は動ける間",
+    "size": 11,
+    "height": 14,
+    "width": 132,
+    "ink_bounds": [
+      0,
+      0,
+      130,
+      11
+    ]
+  },
+  "STAGGER_CAP": {
+    "text": "追加ひるみは通常敵のみ・上限3",
+    "size": 11,
+    "height": 14,
+    "width": 127,
+    "ink_bounds": [
+      0,
+      0,
+      125,
+      10
+    ]
+  },
+  "SAME": {
+    "text": "効果同じ / 秒:動ける間 / 怯+:通常敵",
+    "size": 11,
+    "height": 14,
+    "width": 167,
+    "ink_bounds": [
+      0,
+      0,
+      166,
+      11
+    ]
+  },
+  "NO_COMMAND": {
+    "text": "技待は仲間を選ぶと表示 / 怯+:通常敵",
+    "size": 11,
+    "height": 14,
+    "width": 165,
+    "ink_bounds": [
+      0,
+      0,
+      164,
+      11
+    ]
+  },
+  "UNITS": {
+    "text": "待:動ける間の約秒 距離:px 怯+:通常敵",
+    "size": 12,
+    "height": 15,
+    "width": 173,
+    "ink_bounds": [
+      0,
+      0,
+      172,
+      11
+    ]
+  },
+  "FOOTER": {
+    "text": "A 装備  B 戻る  START 閉じる",
+    "size": 12,
+    "height": 15,
+    "width": 132,
+    "ink_bounds": [
+      1,
+      0,
+      131,
+      11
+    ]
+  },
+  "LEFT": {
+    "text": "←",
+    "size": 12,
+    "height": 15,
+    "width": 11,
+    "ink_bounds": [
+      0,
+      3,
+      10,
+      8
+    ]
+  },
+  "RIGHT": {
+    "text": "→",
+    "size": 12,
+    "height": 15,
+    "width": 11,
+    "ink_bounds": [
+      0,
+      3,
+      10,
+      8
+    ]
+  },
+  "UP": {
+    "text": "↑",
+    "size": 12,
+    "height": 15,
+    "width": 11,
+    "ink_bounds": [
+      3,
+      1,
+      7,
+      10
+    ]
+  },
+  "DOWN": {
+    "text": "↓",
+    "size": 12,
+    "height": 15,
+    "width": 11,
+    "ink_bounds": [
+      3,
+      1,
+      7,
+      10
+    ]
+  }
+}

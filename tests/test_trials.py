@@ -571,9 +571,9 @@ class TrialTests(unittest.TestCase):
                     self.assertIn(y * 240 + x, visited, (room, arch_open, (x, y)))
                     self.assertFalse(self.lib.trials_solid(room, x, y))
                 self.assertEqual(36 * 240 + 120 in visited, room == 4 or arch_open)
-                self.assertEqual(self.lib.trials_interact(room, *entrance, 0), self.event(event))
+                self.assertEqual(self.lib.trials_interact(room, *entrance, 0), self.event('NONE'), 'A no longer duplicates the authored walking doorway')
             for dx, dy in ((18, 0), (0, 18), (9, 9)):
-                self.assertEqual(self.lib.trials_interact(room, entrance[0] + dx, entrance[1] + dy, 0), self.event(event))
+                self.assertEqual(self.lib.trials_interact(room, entrance[0] + dx, entrance[1] + dy, 0), self.event('NONE'), 'nearby A input must not warp into a trial')
             for dx, dy in ((19, 0), (0, 19), (10, 9)):
                 self.assertNotEqual(self.lib.trials_interact(room, entrance[0] + dx, entrance[1] + dy, 0), self.event(event))
 

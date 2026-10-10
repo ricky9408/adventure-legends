@@ -1,6 +1,6 @@
 # Native equipment/stat core
 
-These assets author the thirty-one fixed equipment definitions and three weapon
+These assets author the forty-eight fixed equipment definitions and three weapon
 parameter sets. They do not imply that an acquisition route, weapon action,
 region, or UI has been integrated into the ROM.
 
@@ -16,6 +16,28 @@ compact. Record zero permanently contains protected item 1, the Wayfarer Sword.
 Rank is zero, quantity is one for occupied records, and empty records are all
 zero. A seen bit records acquisition history, not current ownership. Discarding
 an item does not erase its history or allow its unique reward to repeat.
+
+## Return I append and immutable history
+
+Sources37–41 map to21 Sailthread Bow,39 Homeweave Mail,55 Walkway Boots,
+69 Reedcourier Belt and87 Patient Ring, respectively. All five are optional
+sidegrades. The generator verifies an immutable delivered r6 snapshot covering
+all37 prior item definitions, source mappings, weapon parameters and stat bounds.
+`released-v6.json` is never regenerated from the expanded current catalog.
+
+## Shared Horizons append and H boundary
+
+Sources42–45 append7 Bridgegrain Sword,14 Rainstair Lance,56 Shelter Boots and
+88 Listening Ring. Their eight bonus values match the finite Shared Horizons plan;
+each sidegrade trades walking speed for its benefit. The existing runtime handles
+their exact source mappings, atomic claims, explicit equip and clamped previews.
+They add no field capability, saved slot, automatic equip or healing behavior.
+
+The generator also pins released-v7.json, frozen from H's42-item authoring catalog
+before extension, at8f0741e4b24469a7444e9bf62476b1d53d27c587df6cb98b875ef80257d853ab.
+It rejects changes to any of H's definitions, sources, weapon rules or stat bounds.
+The native equipment suite covers all46 enabled definitions, actual effective
+sidegrade differences, HP-cap comparisons and full-bag four-source rollback/retry.
 
 ## Equipment save allocation
 
@@ -37,7 +59,9 @@ Equipment sources 0..12 map respectively to item IDs
 1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82. Northern sources13..18 append
 3, 11, 19, 35, 51, 83. Southern sources 19..24 append 4, 12, 36, 52, 66, 84.
 Magma sources25..30 append20,37,53,67,85,5, with exact stats from
-`docs/magma-design/magma_allocation.json`. Sources31..63 remain reserved.
+`docs/magma-design/magma_allocation.json`. Underwater sources31..36 append
+6,13,38,54,68,86; Return sources37..41 append21,39,55,69,87. Shared Horizons
+sources42..45 append7,14,56,88. Sources46..63 remain reserved.
 This array is stable acquisition order, not sorted item order: inserting item3
 must never shift any published claim. Catalog checks prove exact definition
 coverage and uniqueness. The shared save codec applies revision-specific
@@ -167,3 +191,13 @@ fit in the existing forty-eight-record bag. Source claims use four of the
 existing eight bytes; only bit 0 of claim byte 3 is enabled. Save5 owns historical
 revision whitelists and quest/source relationships; these data/core tests do not
 prove acquisition, localization, combat impact, or native controller gameplay.
+
+## The Roads That Stay append
+
+Sources46/47 complete the48 records with item40 Wayfarer Coat and item89
+Porchlight Ring. The coat trades speed-4 for defense+1 and health+16; the ring
+trades speed-4 for roll cooldown-1 and power cooldown-4. They introduce no new
+weapon class, field authority, automatic equip or route requirement. The
+current generator pins all46 accepted Shared Horizons C definitions, source
+mappings, weapon parameters and stat bounds before appending these two exact
+sidegrades. Existing revision6/7 snapshot files remain unchanged.

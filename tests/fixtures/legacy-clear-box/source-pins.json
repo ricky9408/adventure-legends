@@ -1,0 +1,57 @@
+{
+  "predicates": {
+    "src/game.c:progress_bits": "34afee3638efcac1644d6788d36cb1f7808d43369f85f5ca64005d4d1e5742cc",
+    "src/game.c:ab": "73890e33d97c14543c08f10380c4a6d4f87b5e0f6855670a865c4a3ba52c771d",
+    "src/game.c:solid": "3e9987b26d7eb96d4aec78d6c092f255328cf5ea628027ffd350b442f9b51f02",
+    "src/region_game.c:region_game_is_room": "ddc65539895967a857dfbf584232e480a01314d75c620d24c4a7cf2b53963aff",
+    "src/region_game.c:foot_in": "3abe322e8249f362fea2c6903f48baf79e841d68d4f8d134dd5eee9151341fb3",
+    "src/region_game.c:region_game_solid": "2f75ddbc722c638420b26e8759c1a27822f779251c60acf11553464d1bc2fbeb",
+    "src/north_game.c:north_game_solid": "7c7a5acc238c768f67dc1b8a02fa66802fd85bdea0bba2a8e73bbc7764a512c3",
+    "src/south_game.c:south_game_is_room": "19867267733041c226b343fd9805ee5cc4c6532096694d18b4be8908da14ade6",
+    "src/south_game.c:south_game_solid": "cf15b2c54050e9b2c0bbd6fe4d190e358e030adb9e92b558a3c53e2fdee47c02",
+    "src/trials.c:trials_is_room": "ece1942e45ae53e8b0edf1ffea7943ffb4f3c6429bfd594b44a37adb78b44c55",
+    "src/trials.c:trials_solid": "9eaf5065784bd4c0c0afb6c9007bb110421472bce0f2a8be51a7472b59e9dd47"
+  },
+  "headers": {
+    "src/world.h": "dfb91509403a3cfe35304ab245097422d20d0c6ccf07d9a1e87fc00ea0ea7592",
+    "src/campaign_rules.h": "ffa42f626c1693705d3fb28ebc95db407900d51127ad06a3321216b625c3deac",
+    "src/region_art.h": "ea329d7ecd49de5be60d1cb7029bad55cd2754ba00c53a4b46649417b17ffce9",
+    "src/north_art.h": "b96ea2c201bb7e8821ee00a952ac07d8c60897ae0ceba30582121fdbf20b19aa",
+    "src/south_art.h": "b6166d4895c32ac054417c25905f08a5930866e3a32b5a0595b068aae8e6ae1e",
+    "src/region_game.h": "e0205bacf1b94b46207f3bdd2350d4eb55035fc1464075cbae42a623f8b478a4",
+    "src/trials.h": "b498f63d2d4fe4ca4aa2f4ad628318ed9e288fda640d5be33026a4219a676100",
+    "src/regional_quests.h": "65ef0ac78a30b027d0db531170a30b1d95a9b6d1849305326cc05d625b917857"
+  },
+  "data_closures": {
+    "src/asset_collisions.h": {
+      "sha256": "6cda20675d85f7a9b117dffba2859a262c74398e5082eef1ae3dbaa2d384539f",
+      "files": 1
+    },
+    "src/campaign_rules.c": {
+      "sha256": "1eb7e4bcb3a805b619f06e3607580235423f8014b2b9433eb8c05a3b52e00c5f",
+      "files": 1
+    },
+    "src/world.c": {
+      "sha256": "c9be54d96f87d8f3b60fc5fec32309315a63a8a868688acaf2ffc4999ed4af46",
+      "files": 38
+    },
+    "src/region_art.c": {
+      "sha256": "966ef7adb7502e390a3db72e771c4f50ec1211135a45f6d0191f66e1fe9d50e7",
+      "files": 99
+    },
+    "src/north_art.c": {
+      "sha256": "0d19fd985632bb3651bb4775ac45b1d344e1de6181524f7f27f8bb623d56cdba",
+      "files": 110
+    },
+    "src/south_art.c": {
+      "sha256": "86de2ef4a5cbe8d4b198f9c540b33b888573ae78fcbee78efc9a0e45dca23481",
+      "files": 111
+    }
+  },
+  "unchanged_modules": {
+    "src/region_game.c": "47419a64acbfd6e165fd983228a160266b4fe35d1a0dba248d52fe9fe7c72e6f",
+    "src/north_game.c": "4d8d7842c8008210bb988e1a573a31001c9a7c5068e1094e70bfaa8ed1a20c07",
+    "src/south_game.c": "a25fb6ed21037785d75562ad8e1af4440c513b7199a3a7439a13100453256e3c",
+    "src/trials.c": "9a4803b1517916e6105fddc340b8983d810fc4521006fc3c1bf7141a0067552f"
+  }
+}
