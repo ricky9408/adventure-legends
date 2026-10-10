@@ -36,6 +36,12 @@ contracts remain pinned and separate from current runtime evidence.
   the reward twice without duplication. Prefix and garden reports, inputs,
   screenshots and authenticated earned SRAM are retained together. This proves
   this optional quest/reward route, not full collection.
+- **Fresh Water shortcut:** a separate empty-SRAM original-chapter route earns
+  the Water companion, resets partially filled paired pools, completes the trial,
+  cancels then confirms an earned Water evolution, verifies the old equipped power remains
+  until the new command is inspected and equipped, and traverses the Water
+  shortcut in both directions before proving persistence through cold Continue.
+  This proves the bounded Water route, not every evolution or shortcut.
 - **Save/load:** opening held buttons, all eight skip/interruption points,
   repository-pinned older-save compatibility and power cuts at every frame of
   first-checkpoint publication. Current help/goal/companion browsing and seeded
@@ -158,3 +164,18 @@ hash-bound, same-candidate earned prefix evidence for focused local diagnosis;
 see `--help`. The summary keeps original-prefix and garden metrics separate.
 Their `max_cycles` includes cold Continue; active journey miss/overrun counters
 are the smooth-gameplay gate, and no whole-load performance claim is made.
+
+### Reproduce the fresh Water scenario
+
+After the native lane builds its controller bridge:
+
+```sh
+python3 tests/fresh_water_shortcut.py --output build/water-replay \
+  --bridge build/ci-native-retry/controllers/native-bridge.so
+```
+
+CI always starts this scenario with empty SRAM. Its original-prefix and Water
+reports, replay inputs, screenshots and authenticated earned saves are retained
+under `fresh-water/`; the summary separates their check counts and metrics from
+the garden scenario. Cold-Continue observations remain outside the active-frame
+timing gate, just as in the garden route.

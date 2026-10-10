@@ -199,6 +199,23 @@ def main():
                         or any(garden['metrics'][key] for key in
                                ('faults', 'active_update_misses', 'active_flip_misses', 'active_overruns'))):
                     raise RuntimeError('Fresh garden controller route did not complete cleanly')
+            stage('fresh-water-shortcut', [python, 'tests/fresh_water_shortcut.py',
+                  '--output', str(out / 'fresh-water'), '--bridge', bridge], timeout=600)
+            water_reports = [json.loads((out / 'fresh-water' / chapter / 'report.json').read_text())
+                              for chapter in ('original', 'regions')]
+            for water in water_reports:
+                if (not water['route_complete'] or not water['checks'] or water['failures']
+                        or not all(check['passed'] for check in water['checks'])
+                        or not water['controller_only']
+                        or water['baseline_diagnostic'] or water['cross_rom_earned_sram_diagnostic']
+                        or water['provenance']['initial_sram'] != 'empty cartridge'
+                        or water['candidate']['rom_sha256'] != rom_sha
+                        or water['candidate']['bridge_sha256'] != digest(bridge)
+                        or any(water[key] or water['provenance'][key] for key in
+                               ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports'))
+                        or any(water['metrics'][key] for key in
+                               ('faults', 'active_update_misses', 'active_flip_misses', 'active_overruns'))):
+                    raise RuntimeError('Fresh Water controller route did not complete cleanly')
             stage('opening-save-load', [python, 'tests/opening_scene_native.py', '--bridge',
                                         bridge, '--output', str(out / 'opening')], timeout=600)
             opening = json.loads((out / 'opening/report.json').read_text())
@@ -218,6 +235,9 @@ def main():
                                 'fresh_garden_checks': sum(len(g['checks']) for g in garden_reports),
                                 'fresh_garden_metrics': {name: g['metrics'] for name, g in
                                                          zip(('original', 'garden'), garden_reports)},
+                                'fresh_water_checks': sum(len(w['checks']) for w in water_reports),
+                                'fresh_water_metrics': {name: w['metrics'] for name, w in
+                                                        zip(('original', 'water'), water_reports)},
                                 'opening_cadence': opening['cadence_by_scope']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.
         frozen = json.loads((ROOT / 'build/source-hashes.json').read_text())
