@@ -31,7 +31,9 @@ class ValidationFastPathTests(unittest.TestCase):
             lib.creatures_instance_validate_revision.argtypes=[C.POINTER(Instance),C.c_uint]
             cls.libs.append(lib)
         exported=folder/'export-save5.c'
-        exported.write_text((ROOT/'src/save5.c').read_text()+'\nunsigned southern_evidence_test(const CreatureInstance*c){return southern_instance_evidence(c);}\n')
+        exported.write_text((ROOT/'src/save5.c').read_text()+
+            '\nunsigned southern_evidence_test(const CreatureInstance*c){return southern_instance_evidence(c);}'
+            '\nunsigned historical_southern_evidence_test(const CreatureInstance*c){return history_southern_evidence(c); }\n')
         sources=[ROOT/'src'/f'{name}.c' for name in ('save4','creatures','creature_data','equipment','equipment_data')]
         dest=folder/'source-evidence.so'
         subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-fstrict-aliasing',
@@ -39,6 +41,8 @@ class ValidationFastPathTests(unittest.TestCase):
                         str(exported),*map(str,sources),'-o',str(dest)],check=True)
         cls.evidence=C.CDLL(str(dest));cls.evidence.southern_evidence_test.argtypes=[C.POINTER(Instance)]
         cls.evidence.southern_evidence_test.restype=C.c_uint
+        cls.evidence.historical_southern_evidence_test.argtypes=[C.POINTER(Instance)]
+        cls.evidence.historical_southern_evidence_test.restype=C.c_uint
 
     def test_all24_empty_record_bytes_all255_nonzero_values_and_revisions(self):
         # Both implementations check every byte, even when form_id is zero.
@@ -54,23 +58,30 @@ class ValidationFastPathTests(unittest.TestCase):
                     self.assertEqual(bytes(c),bytes(raw))
 
     def test_keyed_source_evidence_preserves_all256_forms_and_floor_edges(self):
-        count=0
-        for form in range(256):
-            for level in (0,19,20,21,22,23,24,50,255):
-                for bond in (0,39,40,44,45,100,255):
-                    for trial in (0,1,2,3,32768,65535):
-                        c=Instance();c.form_id=form;c.level=level;c.bond=bond;c.trial_flags=trial
-                        expected=0
-                        for i,base in enumerate(FORMS):
-                            if form in (base,base+1):
-                                expected=1<<i
-                                if trial or form==base+1:
-                                    expected=(expected|(1<<(i+10))) if trial==1 and level>=LEVELS[i] and bond>=BONDS[i] else 0x80000000
-                                break
-                        before=bytes(c)
-                        self.assertEqual(self.evidence.southern_evidence_test(C.byref(c)),expected,(form,level,bond,trial))
-                        self.assertEqual(bytes(c),before);count+=1
-        self.assertEqual(count,96768)
+        def reference(form,level,bond,trial,returning):
+            for i,base in enumerate(FORMS):
+                forms=(base,base+1,base+2) if returning and base in (25,28) else (base,base+1)
+                if form not in forms:continue
+                expected=1<<i
+                if trial or form!=base:
+                    masks=(1,1025) if returning and base in (25,28) else (1,)
+                    expected=(expected|(1<<(i+10))) if trial in masks and level>=LEVELS[i] and bond>=BONDS[i] else 0x80000000
+                return expected
+            return 0
+        # Preserve the entire original96768-case set, including the historical
+        # zero result for forms27/30. Independently add96768 Return-mask cases.
+        for trials in ((0,1,2,3,32768,65535),(1024,1025,1026,1027,2048,3072)):
+            count=0
+            for form in range(256):
+                for level in (0,19,20,21,22,23,24,50,255):
+                    for bond in (0,39,40,44,45,100,255):
+                        for trial in trials:
+                            c=Instance();c.form_id=form;c.level=level;c.bond=bond;c.trial_flags=trial
+                            before=bytes(c)
+                            self.assertEqual(self.evidence.historical_southern_evidence_test(C.byref(c)),reference(form,level,bond,trial,False),('history',form,level,bond,trial))
+                            self.assertEqual(self.evidence.southern_evidence_test(C.byref(c)),reference(form,level,bond,trial,True),('current',form,level,bond,trial))
+                            self.assertEqual(bytes(c),before);count+=1
+            self.assertEqual(count,96768)
 
     def test_second_pass_exhaustive_xp_party_collection_differential(self):
         exe=Path(self.tmp.name)/'second-pass-differential'

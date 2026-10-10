@@ -6,6 +6,7 @@ half-open solids generate the engine's exact radius-five collision row tables.
 from pathlib import Path
 import hashlib,json,random,sys
 from PIL import Image,ImageDraw
+import connected_road_art as roads
 sys.dont_write_bytecode=True
 from generate_assets import Art,P,PAL,COLORS,color_background
 from generate_region import odd_bitmap,cbytes,verify_room,paste_sprite
@@ -307,6 +308,54 @@ def detail_scene(r,a):
    for x in(28,205):a.l([(x,47),(x,61),(x+7,65)],'water2',4);a.l([(x-1,47),(x-1,60)],'water4')
    for x in(40,194):shape(x,127,2)
 
+def service_stairwell(a,x,y,w,h,side_wall=False):
+ # A recessed, walkable stair opening. The level stone lip has no raised
+ # collider; the dark inner reveal and shortening treads describe depth.
+ a.r((x,y,x+w-1,y+h-1),'stone2')
+ a.l([(x,y),(x+w-1,y)],'stone5')
+ a.l([(x,y),(x,y+h-1)],'stone4')
+ a.r((x+2,y+2,x+w-3,y+h-3),'purple1')
+ a.r((x+4,y+3,x+w-5,y+7),'deep')
+ for i,yy in enumerate(range(y+8,y+h-3,5)):
+  inset=max(3,7-i)
+  a.r((x+inset,yy,x+w-inset-1,yy+2),'stone3')
+  a.l([(x+inset,yy),(x+w-inset-1,yy)],'stone5')
+  a.l([(x+inset+1,yy+3),(x+w-inset-2,yy+3)],'stone1')
+ a.l([(x+3,y+h-2),(x+w-4,y+h-2)],'stone5')
+ for yy in range(y+5,y+h-2,8):
+  a.dot(x+1,yy,'stone1');a.dot(x+w-2,yy+2,'stone4')
+ if side_wall:
+  # The right reveal joins the existing room wall; all its pixels are in
+  # the existing radius-five wall exclusion, so collision stays identical.
+  a.r((228,y-3,239,y+h-1),'stone1')
+  a.r((229,y-2,233,y+h-2),'stone3')
+  a.l([(229,y-2),(229,y+h-2)],'stone5')
+  for yy in range(y+3,y+h-2,8):a.l([(229,yy),(237,yy)],'stone2')
+  a.l([(x+w-1,y),(233,y)],'stone5',2)
+  a.l([(x+w-1,y+h-2),(233,y+h-2)],'stone2',2)
+
+def service_passages(a,r):
+ # Keep every repair target, entry footprint, spawn and collision byte exact.
+ # These are entrances into the physical workshop/flue service tunnels.
+ if r['id']==39:
+  # An unraised cut-rock apron ties the hatch into the existing grotto wall.
+  a.p([(91,81),(112,77),(121,89),(124,116),(116,126),(92,124)],'stone3')
+  a.p([(94,85),(111,82),(117,91),(120,117),(113,122),(95,120)],'stone4')
+  a.l([(93,85),(103,88),(115,85)],'stone2')
+  a.l([(116,89),(120,97),(119,107)],'stone5')
+  service_stairwell(a,92,95,25,29)
+ elif r['id']==40:
+  service_stairwell(a,198,124,31,29,True)
+ elif r['id'] in(42,43,44):
+  service_stairwell(a,201,33,30,44,True)
+  # The stair's upper jamb joins the existing overhead service wall.
+  a.r((225,18,230,33),'stone2');a.l([(225,18),(225,33)],'stone5')
+ if r['id'] in(43,44,45):
+  # A matching return flight occupies the already-open southern threshold.
+  service_stairwell(a,106,142,29,18)
+ if r['id']==44:
+  service_stairwell(a,201,124,30,29,True)
+
 def emit(sprites):
  h='''/* Generated original Magma art: same palette, shared streamed OBJ slots. */
 #ifndef EMBERBOND_MAGMA_ART_H
@@ -350,7 +399,7 @@ enum {\n'''+''.join(f' MAGMA_SPR_{n}={i},\n'for i,n in enumerate(NAMES))+f' MAGM
 def main():
  ROOMS.clear();OUT.mkdir(exist_ok=True);sprites={n:sprite(n)for n in NAMES};proof={}
  for fn in [town,field]+[lambda i=i:interior(i)for i in range(2,8)]:
-  r,a=fn();detail_scene(r,a);a=color_background(a,'forest'if r['id']<40 else'temple')
+  r,a=fn();detail_scene(r,a);service_passages(a,r);roads.draw(a,r['id'],P);roads.open_borders(r);a=color_background(a,'forest'if r['id']<40 else'temple')
   for o in r['objects']:
    if o['static_baked']:
     im=sprites[o['kind']].im;mask=Image.frombytes('L',(16,16),bytes(255 if v else 0 for v in im.tobytes()));a.im.paste(im,(o['center'][0]-8,o['center'][1]-8),mask)

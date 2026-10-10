@@ -1,0 +1,10 @@
+{
+ "FB_SAVING":"Saving...","FB_SAVED":"Saved","FB_WORKING":"Working...","FB_BACK":"B Back","FB_XP":"EXP","FB_GOLD":"G",
+ "FB_SHOP":"LANTERN SUPPLIES","FB_SHOP_KEYS":"A Choose    B Leave","FB_BUY_KEYS":"A Buy    B Back",
+ "FB_TONIC":"Heart Tonic","FB_SPIRIT":"Spirit Tonic","FB_EDGE":"Iron Edge",
+ "FB_TONIC_DESC":"Restores 2 hearts","FB_SPIRIT_DESC":"Readies companion power","FB_EDGE_DESC":"Permanent attack +4",
+ "FB_BUY_ASK":"Buy this item?","FB_BOUGHT":"Purchase saved","FB_USED":"Item used","FB_NO_GOLD":"Not enough gold","FB_FULL":"You already have enough","FB_NONE":"No items left",
+ "FB_USE_KEYS":"A Use    B Back","FB_USE_ASK":"Use this item?","FB_CLAIM":"Claim boss treasure",
+ "FB_GROVE_RELIC":"Grove Seed: +1 heart","FB_SKY_RELIC":"Sky Feather: faster power","FB_CORE_RELIC":"Core Prism: attack +4","FB_RELIC_SAVED":"Boss treasure saved",
+ "FB_SAVE_RETRY":"Save failed. A retries","FB_HEALTH_FULL":"Hearts are already full","FB_POWER_READY":"Power is already ready","FB_RECEIPT_NEXT":"A Continue","FB_OWNED_KEYS":"Treasures stay with you. B Back","FB_ITEM_BUSY":"Finish the current power first","FB_SAVE_ERROR":"Save failed","FB_TITLE_KEYS":"Up/Down Choose   A Confirm"
+}

@@ -1,0 +1,548 @@
+{
+  "metric": "Native RGB555 distance >=48; all28 poses per terrain. Heuristic readability only, never emulator/gameplay/performance evidence.",
+  "samples": 2520,
+  "rows": [
+    {
+      "form_id": 3,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 3,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 3,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 3,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9909,
+      "minimum_distinct_boundary_fraction": 0.9762
+    },
+    {
+      "form_id": 3,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.9854,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 3,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 6,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 6,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 6,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 0.8431,
+      "minimum_distinct_boundary_fraction": 0.9483
+    },
+    {
+      "form_id": 6,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 6,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 6,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 0.8839,
+      "minimum_distinct_boundary_fraction": 0.8929
+    },
+    {
+      "form_id": 9,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 9,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.8315,
+      "minimum_distinct_boundary_fraction": 0.9474
+    },
+    {
+      "form_id": 9,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 9,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9787,
+      "minimum_distinct_boundary_fraction": 0.96
+    },
+    {
+      "form_id": 9,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.8315,
+      "minimum_distinct_boundary_fraction": 0.9474
+    },
+    {
+      "form_id": 9,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 12,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 0.9915,
+      "minimum_distinct_boundary_fraction": 0.9846
+    },
+    {
+      "form_id": 12,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.9833,
+      "minimum_distinct_boundary_fraction": 0.9846
+    },
+    {
+      "form_id": 12,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 12,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9915,
+      "minimum_distinct_boundary_fraction": 0.9846
+    },
+    {
+      "form_id": 12,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.9667,
+      "minimum_distinct_boundary_fraction": 0.9692
+    },
+    {
+      "form_id": 12,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 15,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 15,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 15,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 0.9159,
+      "minimum_distinct_boundary_fraction": 0.9608
+    },
+    {
+      "form_id": 15,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 15,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 15,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 0.8235,
+      "minimum_distinct_boundary_fraction": 0.7627
+    },
+    {
+      "form_id": 17,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 17,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 17,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 17,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 17,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.9655,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 17,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 18,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 18,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.9406,
+      "minimum_distinct_boundary_fraction": 0.9825
+    },
+    {
+      "form_id": 18,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 18,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 18,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.8868,
+      "minimum_distinct_boundary_fraction": 0.9333
+    },
+    {
+      "form_id": 18,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 21,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 0.9286,
+      "minimum_distinct_boundary_fraction": 0.8852
+    },
+    {
+      "form_id": 21,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.9279,
+      "minimum_distinct_boundary_fraction": 0.9811
+    },
+    {
+      "form_id": 21,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 21,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9211,
+      "minimum_distinct_boundary_fraction": 0.8689
+    },
+    {
+      "form_id": 21,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.9009,
+      "minimum_distinct_boundary_fraction": 0.9508
+    },
+    {
+      "form_id": 21,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 24,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 24,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.9038,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 24,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 24,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 24,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.8942,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 24,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 27,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 0.8652,
+      "minimum_distinct_boundary_fraction": 0.95
+    },
+    {
+      "form_id": 27,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 27,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 27,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.8764,
+      "minimum_distinct_boundary_fraction": 0.9545
+    },
+    {
+      "form_id": 27,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.9753,
+      "minimum_distinct_boundary_fraction": 0.9767
+    },
+    {
+      "form_id": 27,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 0.8876,
+      "minimum_distinct_boundary_fraction": 0.8889
+    },
+    {
+      "form_id": 30,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 30,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.811,
+      "minimum_distinct_boundary_fraction": 0.8704
+    },
+    {
+      "form_id": 30,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 30,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9892,
+      "minimum_distinct_boundary_fraction": 0.9804
+    },
+    {
+      "form_id": 30,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.8031,
+      "minimum_distinct_boundary_fraction": 0.8519
+    },
+    {
+      "form_id": 30,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 101,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 101,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.9239,
+      "minimum_distinct_boundary_fraction": 0.9348
+    },
+    {
+      "form_id": 101,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 101,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9651,
+      "minimum_distinct_boundary_fraction": 0.9512
+    },
+    {
+      "form_id": 101,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.913,
+      "minimum_distinct_boundary_fraction": 0.913
+    },
+    {
+      "form_id": 101,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 102,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 102,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 0.8496,
+      "minimum_distinct_boundary_fraction": 0.8889
+    },
+    {
+      "form_id": 102,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 102,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 0.9727,
+      "minimum_distinct_boundary_fraction": 0.9778
+    },
+    {
+      "form_id": 102,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 0.8319,
+      "minimum_distinct_boundary_fraction": 0.8571
+    },
+    {
+      "form_id": 102,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 103,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 103,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 103,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 0.9438,
+      "minimum_distinct_boundary_fraction": 0.9787
+    },
+    {
+      "form_id": 103,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 103,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 103,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 0.8929,
+      "minimum_distinct_boundary_fraction": 0.8913
+    },
+    {
+      "form_id": 104,
+      "terrain": "OLD GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 104,
+      "terrain": "OLD CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 104,
+      "terrain": "OLD TEAL",
+      "minimum_distinct_opaque_fraction": 0.9518,
+      "minimum_distinct_boundary_fraction": 0.9767
+    },
+    {
+      "form_id": 104,
+      "terrain": "RETURN GRASS",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 104,
+      "terrain": "RETURN CREAM",
+      "minimum_distinct_opaque_fraction": 1.0,
+      "minimum_distinct_boundary_fraction": 1.0
+    },
+    {
+      "form_id": 104,
+      "terrain": "RETURN TEAL",
+      "minimum_distinct_opaque_fraction": 0.8409,
+      "minimum_distinct_boundary_fraction": 0.8864
+    }
+  ],
+  "minimum_opaque_fraction": 0.8031,
+  "minimum_boundary_fraction": 0.7627
+}

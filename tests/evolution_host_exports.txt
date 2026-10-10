@@ -1,0 +1,15 @@
+/* Preserve the public APIs/globals used by the ctypes evolution UI harness.
+ * Current Return dependencies remain real; only unreachable engine paths are
+ * discarded, just as in the executable regional host harness. */
+{
+ global:
+  host_*;
+  progression_*;
+  creatures_*;
+  save5_*;
+  adventure_save;
+  room; px; py; spirit; game_state; has_save; save_failed;
+  chapter_flags; journal_tab; frame; ability_cd; heal_cd;
+  gfx_companion_frame; checkpoint_spawn;
+ local: *;
+};

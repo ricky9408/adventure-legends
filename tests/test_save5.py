@@ -23,7 +23,7 @@ import unittest
 from test_save4 import CampaignSave, AUTHENTIC_FIXTURES, legacy, record, fields, state
 
 ROOT = Path(__file__).resolve().parents[1]
-A, B, SIZE, USED = 0x200, 0x1A00, 6144, 5056
+A, B, SIZE, USED = 0x200, 0x1A00, 6144, 5088
 IDLE, BUSY, DONE, FAILED = range(4)
 LEGACY_ENABLED = (1, 2, 4, 5, 7, 8, 10, 11)
 REVISION2_ENABLED = LEGACY_ENABLED + (13, 14, 16)
@@ -79,9 +79,15 @@ class Equipment(C.Structure):
                 ('reserved', C.c_ubyte * 24)]
 
 
+class Economy(C.Structure):
+    _fields_=[('earned',C.c_uint),('spent',C.c_uint),('gold',C.c_ushort),
+              ('bought',C.c_ushort*2),('used',C.c_ushort*2),('supplies',C.c_ubyte*2),
+              ('relics',C.c_ubyte),('upgrade',C.c_ubyte),('boss_claims',C.c_ubyte),('later_claims',C.c_ubyte),('reserved',C.c_ubyte*8)]
+
+
 class Save(C.Structure):
     _fields_ = [('campaign', CampaignSave), ('roster', Roster),
-                ('quests', Quests), ('equipment', Equipment)]
+                ('quests', Quests), ('equipment', Equipment), ('economy', Economy)]
 
 
 def repair_crc(b):
@@ -94,7 +100,7 @@ def repair_crc(b):
 
 
 def compare_state(s):
-    return fields(s.campaign), bytes(s.roster), bytes(s.quests), bytes(s.equipment)
+    return fields(s.campaign), bytes(s.roster), bytes(s.quests), bytes(s.equipment), bytes(s.economy)
 
 
 # (filename, full32KiB SHA256, exact A32bytes, exact B32bytes)
@@ -243,7 +249,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(compare_state(got), compare_state(s))
         self.assertEqual((got.campaign.sequence, got.campaign.loaded_version), (1, 5))
         b = bytes(self.sram[A:A+SIZE])
-        self.assertEqual(b[:8], b'EB\x05\x20\x00\x18\xc0\x13')
+        self.assertEqual(b[:8], b'EB\x05\x20\x00\x18\xe0\x13')
         self.assertEqual(b[20], 0xA5)
         self.assertEqual(b, repair_crc(b))
         self.assertEqual(b[160+20:160+24], b'\xef\xbe\xad\xde')
@@ -324,9 +330,9 @@ class Save5Tests(unittest.TestCase):
         s = self.fresh()
         self.store(s)
         good = bytes(self.sram[A:A+SIZE])
-        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 7),
+        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 12),
                      (14, 1), (21, 1), (32, 14), (34, 2), (46, 3), (47, 1),
-                     (96, 255), (112, 0), (128, 0), (144, 1),
+                     (112+15, 255), (112, 0), (128, 0), (144, 1),
                      (160+1, 0x81), (160+2, 2), (160+3, 101), (160+8, 0),
                      (160+12, 1), (160+14, 2), (160+16, 255), (160+17, 255),
                      (160+18, 2), (160+19, 2),
@@ -611,7 +617,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(bytes(migrated.roster.lifetime_field_aid), original[4520:4536])
         self.store(migrated)
         newest = bytes(self.sram[B if offset == A else A:(B if offset == A else A)+SIZE])
-        self.assertEqual(newest[12:14], bytes((6,0)))
+        self.assertEqual(newest[12:14], bytes((11,0)))
         self.assertEqual(newest[96:4032], original[96:4032])
         self.assertEqual(newest[4296:4544], original[4296:4544])
         self.assertEqual(bytes(self.sram[:A]), old[:A])
@@ -621,17 +627,17 @@ class Save5Tests(unittest.TestCase):
     def test_revision1_reserved_blocks_and_future_revision_fail_safely(self):
         s = self.fresh()
         self.store(s)
-        rev2 = bytearray(self.sram[A:A+SIZE]); rev2[12:14] = bytes((2,0))
+        rev2 = bytearray(self.sram[A:A+SIZE]); rev2[12:14] = bytes((2,0)); rev2[6:8]=(5056).to_bytes(2,'little')
         rev1 = bytearray(rev2)
-        rev1[12:14] = bytes((1,0)); rev1[4544:5056] = bytes(512)
+        rev1[12:14] = bytes((1,0)); rev1[4544:5056] = bytes(512); rev1[6:8]=(5056).to_bytes(2,'little')
         self.reset(); self.put(repair_crc(rev1), A)
         migrated = self.load()
         self.assertEqual(compare_state(migrated), compare_state(s))
         for offset in (4032,4176,4280,4544,4928,4944,5024):
             bad = bytearray(rev1); bad[offset] = 1
             self.reset(); self.put(repair_crc(bad), A); self.invalid()
-        for revision in (0,7,255,256,65535):
-            bad = bytearray(rev2); bad[12:14] = revision.to_bytes(2,'little')
+        for revision in (0,12,255,256,65535):
+            bad = bytearray(rev2); bad[12:14] = revision.to_bytes(2,'little'); bad[6:8]=(5056).to_bytes(2,'little')
             self.reset(); self.put(repair_crc(bad), A); self.invalid()
             self.put(repair_crc(rev1), B)
             self.assertEqual(compare_state(self.load()), compare_state(s))
@@ -641,12 +647,12 @@ class Save5Tests(unittest.TestCase):
             s = self.fresh(chapter, 3)
             s.campaign.room = 4
             self.reset(); self.store(s)
-            rev2=bytearray(self.sram[A:A+SIZE]);rev2[12:14]=bytes((2,0))
+            rev2=bytearray(self.sram[A:A+SIZE]);rev2[12:14]=bytes((2,0)); rev2[6:8]=(5056).to_bytes(2,'little')
             self.put(repair_crc(rev2),A)
             got = self.load()
             self.assertEqual(got.campaign.room, expected_room)
             self.assertEqual(got.campaign.spawn, 0 if expected_room else 3)
-            old = bytearray(self.sram[A:A+SIZE]); old[12:14] = bytes((1,0))
+            old = bytearray(self.sram[A:A+SIZE]); old[12:14] = bytes((1,0)); old[6:8]=(5056).to_bytes(2,'little')
             old[4544:5056] = bytes(512)
             self.reset(); self.put(repair_crc(old), A)
             got = self.load()
@@ -1015,7 +1021,7 @@ class Save5Tests(unittest.TestCase):
         self.store(migrated)
         destination=B if offset==A else A
         written=bytes(self.sram[destination:destination+SIZE])
-        self.assertEqual(written[12:14],b'\x06\x00')
+        self.assertEqual(written[12:14],b'\x0b\x00')
         self.assertEqual(written[32:],bank[32:],'migration changed earned campaign, roster, commands, credits, quests or equipment')
         self.assertEqual(bytes(self.sram[offset:offset+SIZE]),bank)
         self.assertEqual(bytes(self.sram[:A]),data[:A])
@@ -1026,7 +1032,7 @@ class Save5Tests(unittest.TestCase):
         for revision,allowed in ((1,LEGACY_ENABLED),(2,REVISION2_ENABLED),(3,ENABLED)):
             for form in range(1,129):
                 with self.subTest(revision=revision,seen=form):
-                    b=bytearray(base);b[12:14]=revision.to_bytes(2,'little')
+                    b=bytearray(base);b[12:14]=revision.to_bytes(2,'little'); b[6:8]=(5056).to_bytes(2,'little')
                     if revision==1:b[4544:5056]=bytes(512)
                     b[96+(form-1)//8]|=1<<((form-1)%8)
                     self.reset();self.put(repair_crc(b),A)
@@ -1035,7 +1041,7 @@ class Save5Tests(unittest.TestCase):
             for form in ENABLED:
                 self.reset();s=self.fresh()
                 self.assertLess(self.lib.creatures_grant(C.byref(s.roster),form,50,100,0,0),160)
-                self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=revision.to_bytes(2,'little')
+                self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=revision.to_bytes(2,'little'); b[6:8]=(5056).to_bytes(2,'little')
                 if revision==1:b[4544:5056]=bytes(512)
                 self.reset();self.put(repair_crc(b),A)
                 if form in allowed:self.load()
@@ -1045,19 +1051,19 @@ class Save5Tests(unittest.TestCase):
         self.store(self.fresh(3));base=bytes(self.sram[A:A+SIZE])
         for item in ALL_ITEMS[13:]:
             for record in (False,True):
-                b=bytearray(base);b[12:14]=b'\x02\x00'
+                b=bytearray(base);b[12:14]=b'\x02\x00'; b[6:8]=(5056).to_bytes(2,'little')
                 b[4944+item//8]|=1<<(item%8)
                 if record:b[4552:4560]=item.to_bytes(2,'little')+b'\x00\x00\x01\x00\x00\x00'
                 self.reset();self.put(repair_crc(b),A);self.invalid()
         for source in range(13,64):
-            b=bytearray(base);b[12:14]=b'\x02\x00';b[5024+source//8]|=1<<(source%8)
+            b=bytearray(base);b[12:14]=b'\x02\x00';b[5024+source//8]|=1<<(source%8); b[6:8]=(5056).to_bytes(2,'little')
             self.reset();self.put(repair_crc(b),A);self.invalid()
         # Each of these is otherwise valid current content, rejected only by
         # its revision boundary (no permissive current-catalog migration).
         for qid in (None,11,12,14,15):
             s=self.northern()
             if qid is not None:self.set_quest(s,qid,1,0)
-            self.reset();self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=b'\x02\x00'
+            self.reset();self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=b'\x02\x00'; b[6:8]=(5056).to_bytes(2,'little')
             self.reset();self.put(repair_crc(b),A);self.invalid()
 
     def test_northern_exact_quest_contract_and_prerequisites(self):
@@ -1187,7 +1193,7 @@ class Save5Tests(unittest.TestCase):
             if c.form_id not in NORTHERN_ENABLED:continue
             mutations.extend(((160+slot*24,bytes(24)),(160+slot*24+14,bytes(2)),
                               (160+slot*24+2,b'\x01'),(160+slot*24+3,b'\x01')))
-        mutations.extend(((4048+42,b'\x08\x00'),(4249,b'\x00'),(4281,b'\x04'),
+        mutations.extend(((4048+42,b'\x0a\x00'),(4249,b'\x00'),(4281,b'\x04'),
                           (12,b'\x02\x00'),(32,b'\x20'),(5026,b'\x00')))
         for offset,value in mutations:
             bad=bytearray(base);bad[offset:offset+len(value)]=value

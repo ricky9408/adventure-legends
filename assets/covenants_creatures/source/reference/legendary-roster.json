@@ -1,0 +1,763 @@
+{
+  "scope": "DESIGN_ONLY_NOT_ENABLED_OR_PLAYABLE",
+  "forms": [
+    {
+      "id": 121,
+      "family_id": "F053",
+      "family_numeric": 53,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Stilltide Orrery",
+      "phase": "water",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 70,
+        "power": 45,
+        "guard": 65,
+        "focus": 95,
+        "haste": 55
+      },
+      "stat_total": 330,
+      "signature_command": 12,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 9
+        },
+        {
+          "level": 30,
+          "command": 12
+        }
+      ],
+      "field_capabilities": [
+        "fill_basin",
+        "reveal_current",
+        "link_pools"
+      ],
+      "silhouette": "Preserve existing draft: three independent water arcs around a small dark pebble, a clear central void, no animal head. New pixels must keep the void at native scale.",
+      "gait": "Arcs trade their leading edge on four-direction travel; their grounded oval shadow follows position. Each arc decelerates separately, never one rotating static disk.",
+      "cast_animation": "Arcs widen in three beats, pause independently on an interception, then collapse toward their own counter-shot; central pebble never flashes out of existence.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Quiet Orbit",
+        "cooldown_active_updates": 240,
+        "combat": "Preserve draft: three drops cancel at most three ordinary projectiles over120 active updates; each saved drop becomes one counter-shot on expiry. Proposed precise reading: a spent ward drop is gone; an unspent drop becomes one24-Q4 counter-shot. No shot can hit the same enemy twice in this cast. This interpretation needs review against the original disabled draft.",
+        "field": "At a tagged divided basin, hold up to three drops above marked weirs, then return them to the selected exposed branch. Never floods an unmarked route.",
+        "decision": "Spend the drops for safety now or position surviving drops for delayed counterplay.",
+        "base_damage_q4": 24,
+        "max_effect_updates": 120,
+        "max_effect_parts": 3,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 1,
+        "form": 121,
+        "family": 53,
+        "area": 70,
+        "covenant_bit": 1,
+        "covenant_index": 22,
+        "receipt_bit": 1,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 60,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "Water for Both Banks",
+        "mechanic": "Five-phase distributed work, deliberately kept only for the preserved draft",
+        "required_support_commands": [
+          106,
+          108,
+          110,
+          102,
+          104
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "At area70 manual sluice, choose split flow rather than the blocked straight race; arrows show both destinations.",
+          "Lintail106 tensions the reed strainer on the west bank; latch that physical setting after a valid cast.",
+          "Cindercup108 takes warmth from the dry plate and releases into the marked seam using one same-owner token; the vent must remain open.",
+          "Talusnip110 seats the stone stop from its marked side without occupying the walking lane.",
+          "Hingelet102 quiets the oscillating west pin; Rillkite104 then deposits the side wake into the east runnel. Each station has its own exact cast proof.",
+          "Walk the two dry observation shelves, read both level marks, and confirm at the steward. Five phases are serial, with local sanctuary reassignment available between completed stations. At least two intentional Yang/Yin switches occur; no five-member party is required."
+        ],
+        "win_predicate": "All five distinct ordinary station latches set in this scene; both visible level marks equal their authored middle line; both observation shelves visited after settling. Aggregate local settings are not a reusable cast token.",
+        "failure_recovery": "Wrong sluice or cast changes only that station. Reset returns its controls; leave/reload resets all unfinished stations. Explicit ordinary support changes preserve settled latches but revoke every active proof, effect and invitation prompt.",
+        "journal_clue": "Follow the five work signs around the dry bank. A full river should still leave two dry feet.",
+        "brief_before": "Steward: I can send it all downstream quickly. My sister needs a quiet branch for the late ferry.",
+        "brief_during": "The Orrery lets one arc wander toward each bank. It will not choose a household to abandon.",
+        "brief_after": "Both stewards take the handles. The Orrery may finally travel because people can now keep the balance.",
+        "persistent_consequence": "Two usable channels, dry public benches and two working stewards remain after either invitation choice.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 122,
+      "family_id": "F054",
+      "family_numeric": 54,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Vowbough",
+      "phase": "wood",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 72,
+        "power": 60,
+        "guard": 56,
+        "focus": 74,
+        "haste": 68
+      },
+      "stat_total": 330,
+      "signature_command": 122,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 122
+        }
+      ],
+      "field_capabilities": [
+        "grow_roots",
+        "reel_load"
+      ],
+      "silhouette": "Tall four-legged cervid with a low living face and two outward growing flat branch fans; broad negative space between antlers, neck and high forelegs. No crown icon or weapon silhouette.",
+      "gait": "Foreleg reaches, hindleg pushes, branch fans lag and recover. Short turns lower the head before the torso follows.",
+      "cast_animation": "Plants front hooves, branches flex into a bent green path, then leaves travel outward in an unequal paired pulse.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Bending Bower",
+        "cooldown_active_updates": 180,
+        "combat": "Lay a bent near-ground lane for90 updates. Ordinary enemies touching it take32-Q4 once and are slowed modestly while inside. It does not immobilize a boss or extend beyond wall occlusion.",
+        "field": "Grow a temporary L-shaped support only between two tagged root sockets; the unmarked outer walkway always stays open.",
+        "decision": "Choose the corner you will defend; the open side remains vulnerable.",
+        "base_damage_q4": 32,
+        "max_effect_updates": 90,
+        "max_effect_parts": 3,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 2,
+        "form": 122,
+        "family": 54,
+        "area": 71,
+        "covenant_bit": 2,
+        "covenant_index": 22,
+        "receipt_bit": 2,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 60,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "Shade for the Second Row",
+        "mechanic": "Move a roof rather than collect a key",
+        "required_support_commands": [
+          106,
+          104
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "Read the two sapling beds and the roof shadow before moving anything.",
+          "Use the hand lever to loosen one of three stops; Lintail106 pulls the arbor a single detent from the correct side. One moving solid, reversible and actor-checked.",
+          "Arrange the roof so both sapling rows retain an open diagonal patch of light; fully covering either row fails the visible leaf cue.",
+          "Rillkite104 puts a side wake into the exposed outer trench without washing the inner marked soil.",
+          "Walk the inside bend with the grower, who independently stops if the second row is unshaded."
+        ],
+        "win_predicate": "Arbor at center detent, roof louvre half-open, outer trench settled, grower reaches inside bend while both bed flags stay healthy. No global timer.",
+        "failure_recovery": "Bad shade droops leaves visibly and stops the grower; restore a lever and retry. No sapling dies or item is consumed. Dynamic blockers always leave the outer path open.",
+        "journal_clue": "The youngest bed needs shade too. Look at the ground, then pull from the open side.",
+        "brief_before": "Grower: I promised the first tree a grand roof. The next row cannot live beneath that promise.",
+        "brief_during": "Vowbough steps out of the grand shade so the grower can see the younger leaves.",
+        "brief_after": "The roof is smaller than planned. Both rows will reach it.",
+        "persistent_consequence": "Both rows remain alive, the grower teaches another resident, and a new shade patch is visible.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 123,
+      "family_id": "F055",
+      "family_numeric": 55,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Kilnwhorl",
+      "phase": "fire",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 84,
+        "power": 76,
+        "guard": 70,
+        "focus": 66,
+        "haste": 34
+      },
+      "stat_total": 330,
+      "signature_command": 123,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 123
+        }
+      ],
+      "field_capabilities": [
+        "store_heat",
+        "ignite"
+      ],
+      "silhouette": "Low living nautilus with a huge off-center spiral shell, a soft forward face and broad divided mantle feet; one open shell notch glows, never a wheeled furnace.",
+      "gait": "Mantle ripples pull the shell forward; shell rocks opposite each two-foot step. Pauses let the eye stalk settle independently.",
+      "cast_animation": "Shell notch opens, mantle braces, a short spiral condenses into a single ember, then the notch shuts during recovery.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Banked Spiral",
+        "cooldown_active_updates": 210,
+        "combat": "Hold a short charge behind the caster for36 updates, then release one48-Q4 forward ember. It stops at scenery and the first enemy; changing owner/scene cancels without a cooldown refund.",
+        "field": "Bank warmth at one tagged plate, then release it to one visible seam in the same cast/scene. No heat or proof can travel through a doorway.",
+        "decision": "Accept a readable windup to place a strong narrow shot through a safe lane.",
+        "base_damage_q4": 48,
+        "max_effect_updates": 60,
+        "max_effect_parts": 2,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 3,
+        "form": 123,
+        "family": 55,
+        "area": 72,
+        "covenant_bit": 4,
+        "covenant_index": 22,
+        "receipt_bit": 4,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 60,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "The Common Firing",
+        "mechanic": "Heat timing and ventilation with visible slow cues",
+        "required_support_commands": [
+          108,
+          102
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "Three repair bowls sit on a lower shelf; turn the exhaust handle outward, not toward the display shelf.",
+          "Cindercup108 gathers from the hot plate and releases to the bowl seam with the same fresh token. A bright rim gives a generous18-active-update release window.",
+          "Hingelet102 quiets the side hinge only while the bowl cools; the middle exhaust must remain open.",
+          "Repeat three clearly numbered bowls with distinct vent positions. Manual settings persist within the attempt; each bowl receives its own cast token.",
+          "The kiln keeper moves the exhibition plaque aside and places the repaired household bowls on the best shelf."
+        ],
+        "win_predicate": "Three local bowl states COOL_COMPLETE, no sealed exhaust, keeper has inspected their visible repaired seams.",
+        "failure_recovery": "Mistimed release cools only the current bowl back to its start. No damage, consumed material or real-time deadline. Menus and hold-L viewing freeze heat time.",
+        "journal_clue": "Warm the seam, leave the tall mouth open, then let the rim go pale.",
+        "brief_before": "Keeper: These little repairs will hide the prize piece I wanted everyone to see.",
+        "brief_during": "Kilnwhorl closes its shining notch until the keeper opens the common shelf.",
+        "brief_after": "Keeper: They will use these bowls tomorrow. That can be enough.",
+        "persistent_consequence": "The best shelf holds everyday repaired bowls; a resident carries one away on each harmless ambient cycle.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 124,
+      "family_id": "F056",
+      "family_numeric": 56,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Cairnward",
+      "phase": "earth",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 86,
+        "power": 48,
+        "guard": 90,
+        "focus": 68,
+        "haste": 38
+      },
+      "stat_total": 330,
+      "signature_command": 124,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 124
+        }
+      ],
+      "field_capabilities": [
+        "press_weight",
+        "shift_ballast"
+      ],
+      "silhouette": "Long low anteater-like body with an expressive narrow snout, four stout claws and three tall separated stone ridges along a continuous back; its sweeping tail makes an open arch behind it.",
+      "gait": "Heavy diagonal steps, nose tests the ground before each push, ridges roll in sequence; turns use a broad tail counterbalance.",
+      "cast_animation": "Nose lowers, foreclaws settle, ridges sink one after another to send a wide short ground pulse.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Patient Ground",
+        "cooldown_active_updates": 200,
+        "combat": "Create one24px-radius grounded zone for120 updates. An ordinary enemy crossing its edge takes32-Q4 once; player knockback is shortened while standing inside, without immunity or damage reduction.",
+        "field": "Seat a tagged tilting slab from the correct side and hold it until the marked load leaves; it cannot lift the player across an untagged gap.",
+        "decision": "Trade mobility for a deliberate place to hold your ground.",
+        "base_damage_q4": 32,
+        "max_effect_updates": 120,
+        "max_effect_parts": 2,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 4,
+        "form": 124,
+        "family": 56,
+        "area": 73,
+        "covenant_bit": 8,
+        "covenant_index": 22,
+        "receipt_bit": 8,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 60,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "Both Feet on the Span",
+        "mechanic": "Counterweight crossing with a companion-controlled pace",
+        "required_support_commands": [
+          110,
+          106
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "Inspect both load marks from the dry side galleries. A resident waits at the safe start with a repair frame.",
+          "Talusnip110 seats the near counterweight from the outside. Manually unlatch the far return handle.",
+          "Walk around the open outer bypass; Lintail106 draws the far stabilizing tie from its clear side. These are separate settled work steps.",
+          "Invite the resident to cross. The resident walks only while both support marks show a level line; use the side galleries to correct the shifting near weight at two marked pauses.",
+          "Cross behind the resident only when they invite you. No jumping or body-blocking the resident can count as completion."
+        ],
+        "win_predicate": "Resident and repair frame reach the opposite safe platform, both pause inspections recorded, player crosses after the second inspection.",
+        "failure_recovery": "A bad setting stops movement at the previous safe platform; late obstruction makes the one moving object return to the last socket or wait if that return step is occupied. Nothing falls, despawns or dies.",
+        "journal_clue": "The near weight changes when the traveler moves. Use the side walk; let them choose when to step.",
+        "brief_before": "Resident: Please do not carry me past the part I need to learn.",
+        "brief_during": "Cairnward waits beside the empty platform instead of forcing the crossing.",
+        "brief_after": "Resident: Next time I can be the one waiting on this side.",
+        "persistent_consequence": "The resident becomes the second bridge tender; no earlier crossing is destroyed or re-locked.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 125,
+      "family_id": "F057",
+      "family_numeric": 57,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Bellmantle",
+      "phase": "metal",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 56,
+        "power": 78,
+        "guard": 62,
+        "focus": 70,
+        "haste": 64
+      },
+      "stat_total": 330,
+      "signature_command": 125,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 125
+        }
+      ],
+      "field_capabilities": [
+        "tune_latch",
+        "echo_outline"
+      ],
+      "silhouette": "Upright stag beetle with a small visible face, one narrow curved mandible and one broad crescent mandible, separated long forelegs and two hanging bell-shaped wing cases.",
+      "gait": "Rear legs stride, forelegs tap the ground independently, wing cases swing against the body and stop at different moments.",
+      "cast_animation": "Mandibles part, cases lift, a single off-center crescent appears and contracts with a delayed answer at the far edge.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Answering Edge",
+        "cooldown_active_updates": 165,
+        "combat": "Sweep a short offset crescent for32-Q4 once per enemy. A second visual beat only interrupts an ordinary projectile on its outer edge; it does not deal a second hit or reflect boss hazards.",
+        "field": "Sound one tagged plate through an open acoustic gap; a solid or closed screen blocks it. The visible outline lasts60 updates as a clue, not a permanent route permission.",
+        "decision": "Face outward to catch a shot at the cost of leaving the close center open.",
+        "base_damage_q4": 32,
+        "max_effect_updates": 60,
+        "max_effect_parts": 3,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 5,
+        "form": 125,
+        "family": 57,
+        "area": 74,
+        "covenant_bit": 16,
+        "covenant_index": 22,
+        "receipt_bit": 16,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 61,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "A Bell with a Door",
+        "mechanic": "Occlusion and quiet walking, not receiver order",
+        "required_support_commands": [
+          102,
+          106
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "Talk to the repairer and the neighbor resting behind the wall. They need the court to be heard and the side alcove to stay quiet.",
+          "Move two fabric screens by their manual hinges; Lintail106 tensions only the outer screen to hold an angled gap.",
+          "Hingelet102 quiets the rattling side pin from the marked south side.",
+          "Walk the open dogleg while the small public bell rings three slow visual pulses. The public path must remain open; the resting alcove must remain outside the drawn sound wedges.",
+          "Ring once yourself from the central public mark. Bellmantle answers from the side, never requiring the neighbor to endure a loud demonstration."
+        ],
+        "win_predicate": "Outer angled screen latched, inner doorway unblocked, side pin quiet, three pulses reach public marks but not resting alcove, final player ring from center.",
+        "failure_recovery": "Wrong arrangement cancels that listening pass and draws the leaking wedge. Restore screens and start again. No timed stealth damage or reset of other covenants.",
+        "journal_clue": "A door can stay open without sending every sound through it. Watch where the pale wedges end.",
+        "brief_before": "Repairer: A louder bell would make my work famous. My neighbor asked for a smaller promise.",
+        "brief_during": "Bellmantle turns one bright case toward the street and folds the other toward the alcove.",
+        "brief_after": "The court keeps its sound. The resting room keeps its quiet.",
+        "persistent_consequence": "Public activity and a visibly peaceful alcove coexist; the repairers old contest plaque stays, without defining the next work.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 126,
+      "family_id": "F058",
+      "family_numeric": 58,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Shadeweaver",
+      "phase": "wood",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 54,
+        "power": 46,
+        "guard": 58,
+        "focus": 94,
+        "haste": 78
+      },
+      "stat_total": 330,
+      "signature_command": 126,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 126
+        }
+      ],
+      "field_capabilities": [
+        "unfold_screen",
+        "grow_roots"
+      ],
+      "silhouette": "Broad eight-legged silk spider with a clearly visible gentle two-eyed face, four high arching rear legs and a suspended leaf canopy attached to its living back. Gaps beneath all arches remain readable.",
+      "gait": "Opposite leg pairs lift in a slow woven rhythm; canopy tilts without obscuring the face, shadow remains inside the planted feet.",
+      "cast_animation": "Forelegs draw an empty window, canopy opens to one side, then tightens in a narrow return fold.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Open Shelter",
+        "cooldown_active_updates": 195,
+        "combat": "Unfold a stationary three-sided shelter for100 updates. Ordinary projectiles touching its thin outer edge are cancelled, maximum2; its open mouth and all contact attacks remain dangerous. No invulnerability.",
+        "field": "Open a tagged leaf canopy toward one of two beds; preserve an intentional gap for their light path.",
+        "decision": "Choose the protected direction and the gap you will have to watch yourself.",
+        "base_damage_q4": 0,
+        "max_effect_updates": 100,
+        "max_effect_parts": 3,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 6,
+        "form": 126,
+        "family": 58,
+        "area": 75,
+        "covenant_bit": 32,
+        "covenant_index": 22,
+        "receipt_bit": 32,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 61,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "The Borrowed Afternoon",
+        "mechanic": "Continuous shade geometry with reversible walking choices",
+        "required_support_commands": [
+          106,
+          112
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "The seed keeper shows two beds whose shadows must overlap without closing the walking gap.",
+          "Use manual posts to angle the upper canopy, then Lintail106 tensions the lower hem from the opposite edge.",
+          "Gleamray112 reveals the small water lens under the canopy; one real visible hit lights the shadow boundary for inspection. It is a local clue, not a reusable beam token.",
+          "Walk the narrow but at-least16px-clear gap from the lower shelf to the upper shelf without touching the seed beds; adjust the roof if a silhouette closes the route.",
+          "Invite the keeper through the same route; they can decline a cramped arrangement and explain the blocked side."
+        ],
+        "win_predicate": "Both bed shade indicators overlap in their marked safe bands, middle walking gap connected, player and keeper traverse it after last geometry change.",
+        "failure_recovery": "Settings are reversible; wrong inspection resets only traversal marks. Partial canopy state resets on exit/load. Keeper returns to a safe shelf when blocked.",
+        "journal_clue": "Shade both beds and leave a person-shaped opening. The water lens shows the edge you cannot see.",
+        "brief_before": "Keeper: These seeds were lent to me. I wanted one perfect garden with my name over it.",
+        "brief_during": "Shadeweaver leaves a deliberate gap in its canopy and waits for the keeper to notice.",
+        "brief_after": "Keeper: Then the name over the door can be where the seeds came from.",
+        "persistent_consequence": "The seed house names several contributing communities and retains an open path; no former community is newly harmed.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 127,
+      "family_id": "F059",
+      "family_numeric": 59,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Tideplume",
+      "phase": "water",
+      "polarity": "yang",
+      "stats": {
+        "vitality": 60,
+        "power": 66,
+        "guard": 44,
+        "focus": 82,
+        "haste": 78
+      },
+      "stat_total": 330,
+      "signature_command": 127,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 127
+        }
+      ],
+      "field_capabilities": [
+        "float_load",
+        "shift_ballast"
+      ],
+      "silhouette": "Long-necked shorebird with three connected fan-like tail sails, narrow high legs, a flat beak and a low forward crest; one continuous living torso prevents a floating-boat reading.",
+      "gait": "Two measured high steps then a short skim; tail fans change overlap and the grounded shadow catches up before the next step.",
+      "cast_animation": "Wings lower, one foot traces a hooked wake, tail folds into a single far splash before relaxing.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Waiting Wake",
+        "cooldown_active_updates": 180,
+        "combat": "Send a hooked ground wake for48 updates; deal32-Q4 once per ordinary enemy and displace it at most8px if the destination is collision-free. Bosses take only allowed exposed damage and never move.",
+        "field": "Steady a tagged light ferry at its marked stop; choose which side receives ballast before release. Does not carry a player through walls.",
+        "decision": "Attack around a close obstacle only along the authored visible path, while choosing where enemies can safely be pushed.",
+        "base_damage_q4": 32,
+        "max_effect_updates": 48,
+        "max_effect_parts": 3,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 7,
+        "form": 127,
+        "family": 59,
+        "area": 76,
+        "covenant_bit": 64,
+        "covenant_index": 22,
+        "receipt_bit": 64,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 61,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "Wait on This Shore",
+        "mechanic": "Two-sided ferry steering and a passenger who sets the pace",
+        "required_support_commands": [
+          104,
+          110
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "Speak to the departing passenger and the one waiting to meet them. Read the matching landing marks on both banks.",
+          "Talusnip110 moves the dock ballast to the inside notch; Rillkite104 floats the empty ferry to the near landing using a side deposit. Each step has independent proof.",
+          "Ask the passenger to board. They accept only at a fully settled landing with the escape plank clear.",
+          "Walk the bank path to each of two handling points while the ferry progresses one24px segment at a time. Set the next ballast by hand; a wrong facing lets it settle back to its preceding dock.",
+          "At the far bank, wait on the dry mark until the waiting resident opens the exit rope; then signal with a fresh Rillkite104 deposit."
+        ],
+        "win_predicate": "Passenger reaches far bank through two inspected stop states; waiting resident independently opens exit; ferry settled, no passenger bounding box crossed by movement.",
+        "failure_recovery": "No sink/drown state. Player leaves/death before completion returns passenger and ferry to start. On actor obstruction, pause or reverse only to a known clear prior stop.",
+        "journal_clue": "Watch both landing marks. The last rope belongs to the person waiting on the far shore.",
+        "brief_before": "Ferry keeper: I could send every boat quickly. That does not mean someone is ready to receive it.",
+        "brief_during": "Tideplume rests one foot on the empty shore and refuses the final push until the rope opens.",
+        "brief_after": "The two residents meet without anybody being hurried off a moving deck.",
+        "persistent_consequence": "Two staffed landings and a slower shared timetable become visible; no real clock or scheduled availability.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    },
+    {
+      "id": 128,
+      "family_id": "F060",
+      "family_numeric": 60,
+      "rarity": "legendary",
+      "tier": 1,
+      "name": "Hearthmoth",
+      "phase": "fire",
+      "polarity": "yin",
+      "stats": {
+        "vitality": 76,
+        "power": 40,
+        "guard": 72,
+        "focus": 90,
+        "haste": 52
+      },
+      "stat_total": 330,
+      "signature_command": 128,
+      "learnset": [
+        {
+          "level": 1,
+          "command": 128
+        }
+      ],
+      "field_capabilities": [
+        "store_heat",
+        "unfold_screen"
+      ],
+      "silhouette": "Low broad moth with two huge triangular veined wings, a clear small face between short feathery antennae and two warm abdominal lights. Wing openings make an asymmetric roof shape.",
+      "gait": "Four visible foot steps beneath shallow wing lifts; the abdomen settles after each turn instead of bobbing as one flat sprite.",
+      "cast_animation": "Wings cup inward around a safe empty center, two lights brighten separately, then the wings lay down one low warm veil.",
+      "evolution_edges": [],
+      "ability": {
+        "name": "Last Ember",
+        "cooldown_active_updates": 240,
+        "combat": "Place one warm veil for120 updates. It cancels at most2 ordinary projectiles crossing its front; after a visible60-update settling delay, its outer rim deals32-Q4 once per enemy. It never heals or clears authored boss hazards.",
+        "field": "Keep one tagged heat seam warm while the adjoining shelter mouth remains open. Closing the mouth intentionally cancels the field action.",
+        "decision": "Set up a delayed perimeter and protect its open center while waiting for the rim.",
+        "base_damage_q4": 32,
+        "max_effect_updates": 120,
+        "max_effect_parts": 3,
+        "boss_rule": "No exposure, stun lock, forced movement, hazard cancellation or immunity bypass. At most one damaging contact per boss per cast, only during its authored exposed window. Recheck enemy spawn serial and current vulnerability on contact.",
+        "field_rule": "Only explicit current tagged props accept this command. Capability/phase alone cannot satisfy older authored command-specific gates."
+      },
+      "source": {
+        "namespace": "CovenantRequest.UNIQUE_INVITE",
+        "token": 8,
+        "form": 128,
+        "family": 60,
+        "area": 77,
+        "covenant_bit": 128,
+        "covenant_index": 22,
+        "receipt_bit": 128,
+        "receipt_index": 23,
+        "grant_level": 36,
+        "grant_bond": 60,
+        "grant_trial_flags": 0,
+        "repeatable": false,
+        "exact_count": 1,
+        "requires_quest_claim": 61,
+        "requires_fulfilled_covenant": true,
+        "requires_confirmation": true,
+        "refusal": "Keep fulfilled covenant, story progress and invitation. Journal shows location and Invite later. Guardian stays here until recruited.",
+        "after_recruitment": "Remove free-standing guardian actor; leave a signed resting place. Owned identity remains in roster/party/storage. No second living copy is drawn."
+      },
+      "trial": {
+        "name": "The Last Watch",
+        "mechanic": "A shelter defense with spatial repair, not a legendary boss arena",
+        "required_support_commands": [
+          108,
+          102,
+          110
+        ],
+        "all_supports_guaranteed_before_entry": true,
+        "requires_recruited_legends": [],
+        "steps": [
+          "A rest group chooses the open center of the refuge. Read three clear marks: vent, brace and quiet hinge.",
+          "Manually open the vent; Cindercup108 carries warmth between the adjacent plate and seam in one fresh cast.",
+          "Talusnip110 seats the refuge brace from its outside; Hingelet102 quiets the door pin. These can be done in either order.",
+          "Start three short squall waves only by explicit interaction. At most3 ordinary enemies and3 projectiles appear; each wave lasts up to180 active updates and starts only after the last is cleared with the existing weapon. No auto-running timer between waves.",
+          "During each wave a different marked shutter loosens. Pause in the safe alcove, reset that shutter by hand and defend the visible approach. Residents remain safe and refuse to move while an approach is blocked.",
+          "After the final quiet interval, return to the open center and invite the residents to take turns keeping watch."
+        ],
+        "win_predicate": "All three waves cleared by ordinary combat, vent remains open, brace and hinge restored, all residents in safe center, player explicitly ends watch.",
+        "failure_recovery": "Player defeat follows normal death/rest. A failed wave restarts that wave in this scene; exit/load restarts the local watch. No resident dies, no owned companion sacrifices itself, no prior covenant resets.",
+        "journal_clue": "A shelter needs an opening. Warm its seam, brace its side, and take the watch one storm at a time.",
+        "brief_before": "Watcher: If you keep every watch yourself, nobody here learns how to let you go home.",
+        "brief_during": "Hearthmoth leaves its bright center empty so another watcher can step into it.",
+        "brief_after": "The watch passes to a willing resident. The road home does not need its traveler to disappear.",
+        "persistent_consequence": "A rotating watch and lit refuge remain; Hearthmoth can accompany the player because the residents choose to maintain the work.",
+        "partial_save": "No uncommitted trial mechanics serialize. Exit/death/reset/load rebuilds an unfinished task from a safe initial arrangement. A committed covenant reconstructs its completed community scene; recruitment can wait indefinitely.",
+        "completion_transaction": "Atomically set region_flags[22] covenant bit plus corresponding Q61/Q62 objective, and READY when complete. No creature, obtained history or source receipt is created by completion."
+      }
+    }
+  ],
+  "common_rules": {
+    "guaranteed_grant_level": 36,
+    "guaranteed_grant_bond": 60,
+    "player_min_level_required": null,
+    "stats_are": "Original catalog weights totaling330; do not silently turn them into owner-derived damage bonuses. Current combat uses authored damage/phase resolver. Distinct value comes from tactical command shape and outcomes.",
+    "party_limit": "One legendary in the entire four-member party, as current creatures_party_validate already enforces. Any of the eight can remain in storage; collecting all does not require placing all in party.",
+    "combat": "Respect global effect/equipment locks, unchanged equipment clamps and remaining cooldown across cancel/recast/party swap. Effects cannot overlap to evade their own cap. Proposed numbers require actual combat review.",
+    "acquisition": "One deterministic source each. Trial completion, quest reward claim and optional recruitment are three different operations. No trading, external clock, RNG, payment, unique consumables or required optional evolution.",
+    "language": "English designer copy only; review original Japanese localization and native glyph clipping before enabling.",
+    "art": "Eight independently drawn16x16 native field silhouettes, four directions/four walk frames per direction and original cast sequences/portraits. Existing modes may need art offsets, not enlarged collision or OAM budgets. Distinction at grayscale/native size must be demonstrated, not assumed."
+  }
+}

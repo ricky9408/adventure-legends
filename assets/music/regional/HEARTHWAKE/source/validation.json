@@ -1,0 +1,35 @@
+{
+  "title": "Painted Sails at Hearthwake",
+  "bars": 20,
+  "meter": "4/4",
+  "tempo": 104,
+  "duration_seconds": 46.15384615384615,
+  "pcm_bytes_16384_s8": 756185,
+  "bar_sums": "All voice-bars match meter exactly",
+  "xml": "All 3 parts match JSON pitches, onsets, durations",
+  "midi": "Every binary pitch and onset checked; note-offs 14 ticks before notated end",
+  "tracks": 4,
+  "individual_voice_files": 3,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "end_tick": 38400,
+  "ranges": {
+    "melody": [
+      65,
+      79
+    ],
+    "inner": [
+      57,
+      75
+    ],
+    "bass": [
+      41,
+      55
+    ]
+  },
+  "voice_crossings": 0,
+  "audible_review_performed": false,
+  "visual_review": "Both rendered PDF pages visually inspected: 20 complete bars, readable flats, 4/4, eighth flags and rests, no clipped content.",
+  "loop": "Exact whole-bar boundary; no notes or pedal extend past end.",
+  "individual_voice_validation": "Each separate-voice MIDI conductor and voice track byte-identical to corresponding full-score tracks."
+}

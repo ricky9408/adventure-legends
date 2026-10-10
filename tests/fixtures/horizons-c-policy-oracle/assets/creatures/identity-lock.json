@@ -1,0 +1,901 @@
+{
+  "schema_version": 1,
+  "slots": [
+    {
+      "id": 1,
+      "key": "FORM_001",
+      "family_id": "F001",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 2,
+      "key": "FORM_002",
+      "family_id": "F001",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 3,
+      "key": "FORM_003",
+      "family_id": "F001",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 4,
+      "key": "FORM_004",
+      "family_id": "F002",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 5,
+      "key": "FORM_005",
+      "family_id": "F002",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 6,
+      "key": "FORM_006",
+      "family_id": "F002",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 7,
+      "key": "FORM_007",
+      "family_id": "F003",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 8,
+      "key": "FORM_008",
+      "family_id": "F003",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 9,
+      "key": "FORM_009",
+      "family_id": "F003",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 10,
+      "key": "FORM_010",
+      "family_id": "F004",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 11,
+      "key": "FORM_011",
+      "family_id": "F004",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 12,
+      "key": "FORM_012",
+      "family_id": "F004",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 13,
+      "key": "FORM_013",
+      "family_id": "F005",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 14,
+      "key": "FORM_014",
+      "family_id": "F005",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 15,
+      "key": "FORM_015",
+      "family_id": "F005",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 16,
+      "key": "FORM_016",
+      "family_id": "F006",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 17,
+      "key": "FORM_017",
+      "family_id": "F006",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 18,
+      "key": "FORM_018",
+      "family_id": "F006",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 19,
+      "key": "FORM_019",
+      "family_id": "F007",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 20,
+      "key": "FORM_020",
+      "family_id": "F007",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 21,
+      "key": "FORM_021",
+      "family_id": "F007",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 22,
+      "key": "FORM_022",
+      "family_id": "F008",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 23,
+      "key": "FORM_023",
+      "family_id": "F008",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 24,
+      "key": "FORM_024",
+      "family_id": "F008",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 25,
+      "key": "FORM_025",
+      "family_id": "F009",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 26,
+      "key": "FORM_026",
+      "family_id": "F009",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 27,
+      "key": "FORM_027",
+      "family_id": "F009",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 28,
+      "key": "FORM_028",
+      "family_id": "F010",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 29,
+      "key": "FORM_029",
+      "family_id": "F010",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 30,
+      "key": "FORM_030",
+      "family_id": "F010",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 31,
+      "key": "FORM_031",
+      "family_id": "F011",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 32,
+      "key": "FORM_032",
+      "family_id": "F011",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 33,
+      "key": "FORM_033",
+      "family_id": "F011",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 34,
+      "key": "FORM_034",
+      "family_id": "F012",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 35,
+      "key": "FORM_035",
+      "family_id": "F012",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 36,
+      "key": "FORM_036",
+      "family_id": "F012",
+      "tier": 3,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 37,
+      "key": "FORM_037",
+      "family_id": "F013",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 38,
+      "key": "FORM_038",
+      "family_id": "F013",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 39,
+      "key": "FORM_039",
+      "family_id": "F013",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 40,
+      "key": "FORM_040",
+      "family_id": "F014",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 41,
+      "key": "FORM_041",
+      "family_id": "F014",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 42,
+      "key": "FORM_042",
+      "family_id": "F014",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 43,
+      "key": "FORM_043",
+      "family_id": "F015",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 44,
+      "key": "FORM_044",
+      "family_id": "F015",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 45,
+      "key": "FORM_045",
+      "family_id": "F015",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 46,
+      "key": "FORM_046",
+      "family_id": "F016",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 47,
+      "key": "FORM_047",
+      "family_id": "F016",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 48,
+      "key": "FORM_048",
+      "family_id": "F016",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 49,
+      "key": "FORM_049",
+      "family_id": "F017",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 50,
+      "key": "FORM_050",
+      "family_id": "F017",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 51,
+      "key": "FORM_051",
+      "family_id": "F017",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 52,
+      "key": "FORM_052",
+      "family_id": "F018",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 53,
+      "key": "FORM_053",
+      "family_id": "F018",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 54,
+      "key": "FORM_054",
+      "family_id": "F018",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 55,
+      "key": "FORM_055",
+      "family_id": "F019",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 56,
+      "key": "FORM_056",
+      "family_id": "F019",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 57,
+      "key": "FORM_057",
+      "family_id": "F019",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 58,
+      "key": "FORM_058",
+      "family_id": "F020",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 59,
+      "key": "FORM_059",
+      "family_id": "F020",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 60,
+      "key": "FORM_060",
+      "family_id": "F020",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 61,
+      "key": "FORM_061",
+      "family_id": "F021",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 62,
+      "key": "FORM_062",
+      "family_id": "F021",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 63,
+      "key": "FORM_063",
+      "family_id": "F021",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 64,
+      "key": "FORM_064",
+      "family_id": "F022",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 65,
+      "key": "FORM_065",
+      "family_id": "F022",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 66,
+      "key": "FORM_066",
+      "family_id": "F022",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 67,
+      "key": "FORM_067",
+      "family_id": "F023",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 68,
+      "key": "FORM_068",
+      "family_id": "F023",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 69,
+      "key": "FORM_069",
+      "family_id": "F023",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 70,
+      "key": "FORM_070",
+      "family_id": "F024",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 71,
+      "key": "FORM_071",
+      "family_id": "F024",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 72,
+      "key": "FORM_072",
+      "family_id": "F024",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 73,
+      "key": "FORM_073",
+      "family_id": "F025",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 74,
+      "key": "FORM_074",
+      "family_id": "F025",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 75,
+      "key": "FORM_075",
+      "family_id": "F026",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 76,
+      "key": "FORM_076",
+      "family_id": "F026",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 77,
+      "key": "FORM_077",
+      "family_id": "F027",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 78,
+      "key": "FORM_078",
+      "family_id": "F027",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 79,
+      "key": "FORM_079",
+      "family_id": "F028",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 80,
+      "key": "FORM_080",
+      "family_id": "F028",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 81,
+      "key": "FORM_081",
+      "family_id": "F029",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 82,
+      "key": "FORM_082",
+      "family_id": "F029",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 83,
+      "key": "FORM_083",
+      "family_id": "F030",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 84,
+      "key": "FORM_084",
+      "family_id": "F030",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 85,
+      "key": "FORM_085",
+      "family_id": "F031",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 86,
+      "key": "FORM_086",
+      "family_id": "F031",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 87,
+      "key": "FORM_087",
+      "family_id": "F032",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 88,
+      "key": "FORM_088",
+      "family_id": "F032",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 89,
+      "key": "FORM_089",
+      "family_id": "F033",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 90,
+      "key": "FORM_090",
+      "family_id": "F033",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 91,
+      "key": "FORM_091",
+      "family_id": "F034",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 92,
+      "key": "FORM_092",
+      "family_id": "F034",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 93,
+      "key": "FORM_093",
+      "family_id": "F035",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 94,
+      "key": "FORM_094",
+      "family_id": "F035",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 95,
+      "key": "FORM_095",
+      "family_id": "F036",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 96,
+      "key": "FORM_096",
+      "family_id": "F036",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 97,
+      "key": "FORM_097",
+      "family_id": "F037",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 98,
+      "key": "FORM_098",
+      "family_id": "F037",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 99,
+      "key": "FORM_099",
+      "family_id": "F038",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 100,
+      "key": "FORM_100",
+      "family_id": "F038",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 101,
+      "key": "FORM_101",
+      "family_id": "F039",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 102,
+      "key": "FORM_102",
+      "family_id": "F039",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 103,
+      "key": "FORM_103",
+      "family_id": "F040",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 104,
+      "key": "FORM_104",
+      "family_id": "F040",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 105,
+      "key": "FORM_105",
+      "family_id": "F041",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 106,
+      "key": "FORM_106",
+      "family_id": "F041",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 107,
+      "key": "FORM_107",
+      "family_id": "F042",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 108,
+      "key": "FORM_108",
+      "family_id": "F042",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 109,
+      "key": "FORM_109",
+      "family_id": "F043",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 110,
+      "key": "FORM_110",
+      "family_id": "F043",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 111,
+      "key": "FORM_111",
+      "family_id": "F044",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 112,
+      "key": "FORM_112",
+      "family_id": "F044",
+      "tier": 2,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 113,
+      "key": "FORM_113",
+      "family_id": "F045",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 114,
+      "key": "FORM_114",
+      "family_id": "F046",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 115,
+      "key": "FORM_115",
+      "family_id": "F047",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 116,
+      "key": "FORM_116",
+      "family_id": "F048",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 117,
+      "key": "FORM_117",
+      "family_id": "F049",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 118,
+      "key": "FORM_118",
+      "family_id": "F050",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 119,
+      "key": "FORM_119",
+      "family_id": "F051",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 120,
+      "key": "FORM_120",
+      "family_id": "F052",
+      "tier": 1,
+      "rarity": "ordinary"
+    },
+    {
+      "id": 121,
+      "key": "FORM_121",
+      "family_id": "F053",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 122,
+      "key": "FORM_122",
+      "family_id": "F054",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 123,
+      "key": "FORM_123",
+      "family_id": "F055",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 124,
+      "key": "FORM_124",
+      "family_id": "F056",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 125,
+      "key": "FORM_125",
+      "family_id": "F057",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 126,
+      "key": "FORM_126",
+      "family_id": "F058",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 127,
+      "key": "FORM_127",
+      "family_id": "F059",
+      "tier": 1,
+      "rarity": "legendary"
+    },
+    {
+      "id": 128,
+      "key": "FORM_128",
+      "family_id": "F060",
+      "tier": 1,
+      "rarity": "legendary"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "format": "companion-guide-commands-v1",
+  "command_count": 128,
+  "parts": [
+    {
+      "path": "companion_guide_commands/commands_001_032.json",
+      "first_id": 1,
+      "last_id": 32,
+      "sha256": "1834823dc89d0f1d635df9f77cd3a02325ebd9d662b6b58527da702fbed68774"
+    },
+    {
+      "path": "companion_guide_commands/commands_033_064.json",
+      "first_id": 33,
+      "last_id": 64,
+      "sha256": "9057d9a38adff5953096c843b2a295291cc91bcc26001ed891b6cdd9b733063f"
+    },
+    {
+      "path": "companion_guide_commands/commands_065_096.json",
+      "first_id": 65,
+      "last_id": 96,
+      "sha256": "f478d83bd428b89fb30c650937d8e47cf13296893b1c27228bb263e0acc0a96a"
+    },
+    {
+      "path": "companion_guide_commands/commands_097_128.json",
+      "first_id": 97,
+      "last_id": 128,
+      "sha256": "f43c3b167b318ecd701ecf0043ae99646d31a93f8fa4260981c3c551e9644fab"
+    }
+  ]
+}

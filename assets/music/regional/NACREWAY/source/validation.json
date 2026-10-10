@@ -1,0 +1,35 @@
+{
+  "title": "Windows Under Water",
+  "bars": 24,
+  "meter": "3/4",
+  "tempo": 96,
+  "duration_seconds": 45.0,
+  "pcm_bytes_16384_s8": 737280,
+  "bar_sums": "All voice-bars match meter exactly",
+  "xml": "All 3 parts match JSON pitches, onsets, durations",
+  "midi": "Every binary pitch and onset checked; note-offs 14 ticks before notated end",
+  "tracks": 4,
+  "individual_voice_files": 3,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "end_tick": 34560,
+  "ranges": {
+    "melody": [
+      63,
+      78
+    ],
+    "inner": [
+      51,
+      68
+    ],
+    "bass": [
+      38,
+      51
+    ]
+  },
+  "voice_crossings": 0,
+  "audible_review_performed": false,
+  "visual_review": "Both PDF pages visually inspected: 24 complete bars, four-sharp signatures, bass D natural in bar12, eighth flags, dotted values and 3/4 readable; no clipping.",
+  "loop": "Exact whole-bar boundary; no notes or pedal extend past end.",
+  "individual_voice_validation": "Each separate-voice MIDI conductor and voice track byte-identical to corresponding full-score tracks."
+}

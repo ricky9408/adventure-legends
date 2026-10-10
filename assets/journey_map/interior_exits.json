@@ -1,0 +1,303 @@
+{
+  "schema": 1,
+  "notes": "Only exits not already supplied by connected_roads/connected_doors/travel_entries. Campaign doors are read from campaign_rooms at runtime. No inferred inter-room geography.",
+  "exits": [
+    {
+      "room": 1,
+      "target": 2,
+      "direction": "NE",
+      "kind": "DOOR",
+      "gate": "bridge",
+      "spawn": 0,
+      "source": "game.c: grove north temple threshold"
+    },
+    {
+      "room": 2,
+      "target": 1,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "none",
+      "spawn": 0,
+      "source": "game.c: original south threshold"
+    },
+    {
+      "room": 2,
+      "target": 3,
+      "direction": "N",
+      "kind": "DOOR",
+      "gate": "torches",
+      "spawn": 0,
+      "source": "game.c: original north threshold and torch barrier"
+    },
+    {
+      "room": 3,
+      "target": 2,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "none",
+      "spawn": 0,
+      "source": "game.c: original south threshold"
+    },
+    {
+      "room": 16,
+      "target": 18,
+      "direction": "E",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 16,
+      "target": 20,
+      "direction": "W",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 16,
+      "target": 21,
+      "direction": "SE",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 17,
+      "target": 19,
+      "direction": "NE",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 18,
+      "target": 16,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 19,
+      "target": 17,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 20,
+      "target": 16,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 21,
+      "target": 16,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "region_game.c: region_game_tick"
+    },
+    {
+      "room": 14,
+      "target": 4,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "none",
+      "spawn": 0,
+      "source": "trials.c: trials_exit"
+    },
+    {
+      "room": 15,
+      "target": 9,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "none",
+      "spawn": 0,
+      "source": "trials.c: trials_exit"
+    },
+    {
+      "room": 24,
+      "target": 22,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "north_game.c: north_game_tick"
+    },
+    {
+      "room": 25,
+      "target": 22,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "north_game.c: north_game_tick"
+    },
+    {
+      "room": 26,
+      "target": 23,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "north_game.c: north_game_tick"
+    },
+    {
+      "room": 27,
+      "target": 26,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "north_game.c: north_game_tick"
+    },
+    {
+      "room": 28,
+      "target": 27,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "north_game.c: north_game_tick"
+    },
+    {
+      "room": 29,
+      "target": 28,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "north_game.c: north_game_tick"
+    },
+    {
+      "room": 32,
+      "target": 30,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "south_game.c: south_game_tick"
+    },
+    {
+      "room": 33,
+      "target": 31,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "south_game.c: south_game_tick"
+    },
+    {
+      "room": 34,
+      "target": 31,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "south_game.c: south_game_tick"
+    },
+    {
+      "room": 35,
+      "target": 34,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "south_game.c: south_game_tick"
+    },
+    {
+      "room": 36,
+      "target": 35,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "south_game.c: south_game_tick"
+    },
+    {
+      "room": 37,
+      "target": 36,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "south_game.c: south_game_tick"
+    },
+    {
+      "room": 40,
+      "target": 38,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "magma_game.c: magma_game_tick"
+    },
+    {
+      "room": 41,
+      "target": 39,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "magma_game.c: magma_game_tick"
+    },
+    {
+      "room": 42,
+      "target": 39,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "magma_game.c: magma_game_tick"
+    },
+    {
+      "room": 43,
+      "target": 42,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "magma_game.c: magma_game_tick"
+    },
+    {
+      "room": 44,
+      "target": 43,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "magma_game.c: magma_game_tick"
+    },
+    {
+      "room": 45,
+      "target": 44,
+      "direction": "S",
+      "kind": "DOOR",
+      "gate": "target",
+      "spawn": 0,
+      "source": "magma_game.c: magma_game_tick"
+    },
+    {
+      "room": 46,
+      "target": 38,
+      "direction": "S",
+      "kind": "LIFT",
+      "gate": "target",
+      "spawn": 4,
+      "source": "underwater_game.c: underwater_game_tick; shell lift"
+    }
+  ]
+}

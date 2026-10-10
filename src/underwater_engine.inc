@@ -2,23 +2,46 @@
 static int event_resume_state,event_warmup;
 COLD int event_frame(void){
  if(game_state==EVENT_PENDING)return 1;
- if(game_state==SAVE_PENDING||!(underwater_game_event_pending()||magma_game_return_pending()||south_game_rest_pending()))return 0;
+ if(game_state==SAVE_PENDING||!(south_game_quest_pending()||magma_game_quest_pending()||story_rewards_pending()||south_game_enter_pending()||magma_game_enter_pending()||covenants_game_event_pending()||horizons_game_event_pending()||return_game_event_pending()||magma_game_event_pending()||underwater_game_event_pending()||magma_game_return_pending()||south_game_rest_pending()))return 0;
+ if(south_game_quest_pending()&&!south_game_quest_seal()){toast(TX_UW_NOT_YET);return 1;}
+ if(magma_game_quest_pending()&&!magma_game_quest_seal()){toast(TX_UW_NOT_YET);return 1;}
  event_resume_state=game_state;event_warmup=2;game_attacks_suspend();
  game_state=EVENT_PENDING;return 1;
 }
 COLD void event_step(void){
- unsigned status,area,spawn;int returning,resting;
+ unsigned status,area,spawn;int returning,resting,homeward,branch,entering,magma_entering,horizons,covenants,story,south_quest,magma_quest;
+ if((pressed&KEY_B)&&magma_game_event_pending()){magma_game_cancel_event();game_state=event_resume_state;return;}
  if(event_warmup){event_warmup--;return;}
- returning=magma_game_return_pending();resting=south_game_rest_pending();
- status=returning?magma_game_prepare_return():resting?south_game_prepare_rest():underwater_game_prepare_event();if(status==SAVE5_BUSY)return;
+ south_quest=south_game_quest_pending();magma_quest=magma_game_quest_pending();
+ story=story_rewards_pending();covenants=covenants_game_event_pending();entering=south_game_enter_pending();magma_entering=magma_game_enter_pending();horizons=horizons_game_event_pending();homeward=return_game_event_pending();branch=magma_game_event_pending();returning=magma_game_return_pending();resting=south_game_rest_pending();
+ status=south_quest?south_game_quest_prepare():magma_quest?magma_game_quest_prepare():story?game_story_reward_step():covenants?covenants_game_prepare_event():horizons?horizons_game_prepare_event():entering?south_game_prepare_enter():magma_entering?magma_game_prepare_enter():homeward?return_game_prepare_event():returning?magma_game_prepare_return():resting?south_game_prepare_rest():branch?magma_game_prepare_event():underwater_game_prepare_event();if(status==SAVE5_BUSY)return;
  game_state=event_resume_state;
  if(status==SAVE5_FAILED){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}
- if(returning){if(!magma_game_commit_return()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
+ if(south_quest){if(!south_game_quest_commit()){toast(TX_UW_NOT_YET);return;}}
+ else if(magma_quest){if(!magma_game_quest_commit()){toast(TX_UW_NOT_YET);return;}}
+ else if(story){game_story_reward_finish();}
+ else if(covenants){if(covenants_game_take_transition(&area,&spawn))enter_room((int)area,(int)spawn);}
+ else if(horizons){if(horizons_game_take_transition(&area,&spawn))enter_room((int)area,(int)spawn);}
+ else if(entering){if(!south_game_commit_enter()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
+ else if(magma_entering){if(!magma_game_commit_enter()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
+ else if(homeward){if(return_game_take_transition(&area,&spawn))enter_room((int)area,(int)spawn);}
+ else if(returning){if(!magma_game_commit_return()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
  else if(resting){if(!south_game_commit_rest()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
+ else if(branch){if(!magma_game_commit_event()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
  else if(underwater_game_take_transition(&area,&spawn))enter_room((int)area,(int)spawn);
  save_frame();
 }
 COLD int underwater_portal_interact(void){if(room!=38||!near(px,py,416,224,23)||!game_region_entry_safe())return 0;if(!underwater_game_can_enter(46)){dialogue(TX_UW_PORTAL_WAIT_A,TX_UW_PORTAL_WAIT_B,PLAY);return 1;}enter_room(46,0);return 1;}
 COLD int underwater_hint_text(void){unsigned h=underwater_powers_hint();return h==1?TX_UW_AIM_SIDE:h==2?TX_UW_AIM_CORNER:h==3?TX_UW_AIM_AXIS:0;}
-COLD void copy_underwater(void){const UnderwaterArtRoom*r=&underwater_art_rooms[room-46];int y;if(r->width==240){REG32(0x040000D4)=(u32)r->bitmap;REG32(0x040000D8)=(u32)screen;REG32(0x040000DC)=0x84000000|9600;return;}for(y=0;y<160;y++){const u8*src=((camera_x&1)?r->bitmap_odd:r->bitmap)+(camera_y+y)*r->width+camera_x-(camera_x&1);REG32(0x040000D4)=(u32)src;REG32(0x040000D8)=(u32)(screen+y*120);REG32(0x040000DC)=0x80000000|120;}}
+COLD void copy_underwater(void){
+ const UnderwaterArtRoom*r=&underwater_art_rooms[room-46];u32 src,dst,mode;int y,width=r->width;
+ if(COPY_OPAQUE_MODAL_BITMAP&&copy_modal_background(r->bitmap,r->bitmap_odd,width))return;
+ if(width==240){REG32(0x040000D4)=(u32)(r->bitmap);REG32(0x040000D8)=(u32)screen;REG32(0x040000DC)=0x84000000|9600;return;}
+ src=(u32)(((camera_x&1)?r->bitmap_odd:r->bitmap)+camera_y*width+(camera_x&~1));dst=(u32)screen;
+ /* Retain halfword DMA when either pointer or the authored stride is not
+  * word aligned. Integer MMIO addresses also avoid forming an unused
+  * pointer beyond the bitmap after the final row. */
+ mode=((src|dst|(u32)width)&3u)?0x80000000u|120u:0x84000000u|60u;
+ for(y=0;y<160;y++){REG32(0x040000D4)=src;REG32(0x040000D8)=dst;REG32(0x040000DC)=mode;src+=width;dst+=240;}
+}
 COLD void draw_underwater_map(void){int i,mx=20,my=62;box(8,31,224,123);centered(underwater_game_name(),35,GOLD);rect(mx,my,120,80,PAL_WATER3);rect(mx+12,my+12,96,56,PAL_STONE4);for(i=0;i<8;i++){int x=168+(i&1)*30,y=62+(i/2)*19;rect(x,y,10,10,(adventure_save.quests.region_flags[4]&(1u<<i))?GOLD:PAL_STONE2);if(room==46+i)rect(x-2,y-2,14,2,TEAL);}if(scrolling_room())rect(mx+px/4-1,my+py/4-1,3,3,PAL_HEART);centered(TX_G_NEXT_TAB,140,TEAL);}

@@ -178,7 +178,7 @@ int magma_power_side(unsigned command,int side){CreatureInstance*c;const Creatur
  magma_power_origin_x=px;magma_power_origin_y=py;magma_power_phase=a->phase;magma_power_age=0;
  magma_power_time=s->startup+s->active+s->recovery;magma_power_cast_time=s->startup;
  chapter_token=magma_game_action_begin(3);chapter_hit=0;
- cd=game_power_cooldown(s->cooldown);if(cd<s->cooldown-8u)cd=s->cooldown-8u;if(cd>s->cooldown)cd=s->cooldown;
+ cd=game_power_cooldown(s->cooldown);if(cd<s->cooldown-GAME_MAX_POWER_RECOVERY)cd=s->cooldown-GAME_MAX_POWER_RECOVERY;if(cd>s->cooldown)cd=s->cooldown;
  magma_power_cooldown=ability_cd=ability_max=(int)cd;cast_side=(signed char)side;aim_x=(short)x;aim_y=(short)y;
  hit_mask=spent=aimed=ended_mask=path_count=guard_grace=0;guard_enemy=6;
  for(i=0;i<6;i++){previous_x[i]=(short)enemies[i].x;previous_y[i]=(short)enemies[i].y;}

@@ -1,0 +1,63 @@
+{
+ "scope": "Author visual inspection of native indexed art and staged previews only; not integrated controller screenshots",
+ "reviewed_native_rooms": [
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77
+ ],
+ "reviewed_4x_rooms": [
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77
+ ],
+ "reviewed_grayscale_rooms": [
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77
+ ],
+ "findings": [
+  "Raised static landmarks remain distinct from pale permanent paths in grayscale",
+  "Hot plates and release seams use different silhouettes; quiet pins, inlet, ballast, strainer and lens have distinct marks",
+  "Both town layouts have household fronts and individual residents; shared materials and handwork vary by place",
+  "All dynamic people remain outside the runtime bitmaps; their actual movement and blocking must be tested after integration",
+  "First-town spoiler-free previews are separate from developer scene sheets",
+  "Refuge residents are visibly inside the warm open center",
+  "Companion invitations, local work states and porch ending overlays remain runtime-owned"
+ ],
+ "native_runtime_checks_remaining": [
+  "Camera and floating HUD clipping",
+  "Live actor and companion motion/collision",
+  "Invitation actor disappears after acquisition",
+  "World reconstruction after reset/death/load",
+  "Porch location and exact story-choice ordering in village0"
+ ],
+ "reviewed_file_sha256": {
+  "developer_scene_sheet_native.png": "dc01c05521aad991ea89d2e1007dc4fe981eaf3bf8ebd3161bbd771f3160f196",
+  "developer_scene_sheet_gray.png": "03dd4a460dcfdc629024f1fd28b05cb9781c4a691c0806307f76e5b8d0d94e5c",
+  "actors_4x.png": "8724434f2dee7201ea5f32de315c0d5d471a51b988acd7d6cdb01affaf181b8a",
+  "actors_gray_4x.png": "d2a87e6b847139c6134c0849b0ea7aa527e4344fccf30b0ac6be2f0321db7e19",
+  "room70_staged_4x.png": "ba0825e93844ba140fcb864232baf25723e61efc8aef8f82919bd06623840a52",
+  "room71_staged_4x.png": "be8bd62954ca5a95656c3fcf4cbe00316b0362f98e149bf220320406a17c15d4",
+  "room72_staged_4x.png": "9825810043e00022278ccb59bf6c1d5b205b44f12e2f38a70c21ffe221f9038c",
+  "room73_staged_4x.png": "5e04b79eab6b2008f636dca7516e56e6fb21503e0259137b456500971192d4d4",
+  "room74_staged_4x.png": "0f3032a979e10cf930ad68628f8bef14e23b6d175f04efdb0066ae4379784f2e",
+  "room75_staged_4x.png": "b8507940840b39c82cb3960f18b5a8a7d72e57b7c9e713fe92e1abce9db81bf7",
+  "room76_staged_4x.png": "cad0396c85d46174bed38490291adda2c99efd3527448fa36127a41530d983eb",
+  "room77_staged_4x.png": "43001ec44ea95e626d96343531d2041eb09a5456407ae73e5f4d1d526351bee5"
+ }
+}

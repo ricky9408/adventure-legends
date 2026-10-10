@@ -1,0 +1,45 @@
+{
+  "scope": "Synthetic controller-earned ordinary SRAM from the accepted Experience Polish P2 ROM, never user data. Exact producer retained.",
+  "producer_report_sha256": "55863a999f29af2626b21c5f493ea76b7ed38d91173f252a762316a31891a2e8",
+  "producer_path": "tests/fixtures/experience-polish-p2/producer.json",
+  "rom_sha256": "b643fb74cf4e7bd524ed56dc43056b3662d0f59ae871853ef3e23456eef47086",
+  "input_trace_sha256": "eca90f1d45baaaea9ad6cf4c8c44ab16d74a88762c172624798d922bb1a5598a",
+  "fixtures": [
+    {
+      "path": "tests/fixtures/experience-polish-p2/grove-complete.sav",
+      "sha256": "17e5ecc7bfb2143b740009a0f5d43988bff426a4559509f08af36f9aa8017226",
+      "bytes": 32768,
+      "producer_snapshot": "grove-complete"
+    },
+    {
+      "path": "tests/fixtures/experience-polish-p2/sky-complete.sav",
+      "sha256": "2e589d6e04531dc3224a1c0ba9aafca6ac5dfa4ca3d6749dbe0bd3e312a21790",
+      "bytes": 32768,
+      "producer_snapshot": "sky-complete"
+    },
+    {
+      "path": "tests/fixtures/experience-polish-p2/core-path-entry.sav",
+      "sha256": "477f9978a6a0d773cd54321c110f19e591302deb0ad0a6f80e3a61b48a27defc",
+      "bytes": 32768,
+      "producer_snapshot": "core-path-entry"
+    },
+    {
+      "path": "tests/fixtures/experience-polish-p2/earned-evolution-village.sav",
+      "sha256": "cbac09c5535e4f7821e9505db2d9e1c37a27c2bac084f0ccbf83f455fd5fb745",
+      "bytes": 32768,
+      "producer_snapshot": "earned-evolution-village"
+    },
+    {
+      "path": "tests/fixtures/experience-polish-p2/controller-complete.sav",
+      "sha256": "cbac09c5535e4f7821e9505db2d9e1c37a27c2bac084f0ccbf83f455fd5fb745",
+      "bytes": 32768,
+      "producer_snapshot": "controller-complete"
+    },
+    {
+      "path": "tests/fixtures/experience-polish-p2/controller-complete-cold.sav",
+      "sha256": "64ce405d52df62a7e6c56b195dbac08d36531bc2e6b9d175df70dbb363ffd492",
+      "bytes": 32768,
+      "producer_snapshot": "controller-complete-cold"
+    }
+  ]
+}

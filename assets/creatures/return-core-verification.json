@@ -1,0 +1,78 @@
+{
+  "scope": "Source catalog and native equipment verification only; not full ROM/gameplay/art/controller acceptance",
+  "design": "RETURN_I_DESIGN_R2",
+  "content_revision": 7,
+  "counts": {
+    "forms": 104,
+    "learn_pairs": 180,
+    "edges": 64,
+    "abilities": 104
+  },
+  "enabled_families": 40,
+  "gear_count": 42,
+  "released_forms_unchanged": 90,
+  "immutable_files_unchanged": [
+    "assets/history/creatures-v1-v4.json",
+    "assets/history/creatures-v5.json",
+    "assets/history/released-creature-relations-v4.json",
+    "assets/history/released-creature-relations-v5.json",
+    "assets/creatures/identity-lock.json",
+    "assets/creatures/terminal-topology.json"
+  ],
+  "new_release_locks": {
+    "assets/history/released-creature-relations-v6.json": "8524b49e7ea690dc874d02696be03743a859294aa5ca0d728c5f0f33bcff6544",
+    "assets/equipment/released-v6.json": "9aa8152c04060bc023803cf3adb7f1424fab0da2e5b0dc564f3935527fde4db4"
+  },
+  "new_form_ids": [
+    3,
+    6,
+    9,
+    12,
+    15,
+    17,
+    18,
+    21,
+    24,
+    27,
+    30,
+    101,
+    102,
+    103,
+    104
+  ],
+  "ability_ids": [
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "new_gear_ids": [
+    21,
+    39,
+    55,
+    69,
+    87
+  ],
+  "new_gear_sources": [
+    37,
+    38,
+    39,
+    40,
+    41
+  ],
+  "test_return_catalog": "7 tests passed",
+  "test_equipment": "39 native tests passed, including sanitizer malformed-state fuzz and Return sidegrade/no-heal/idempotency cases",
+  "generated_and_review_text_max_bytes": 69579,
+  "bounds_exclusive_bytes": 75000
+}

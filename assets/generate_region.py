@@ -10,6 +10,7 @@ from collections import deque
 from pathlib import Path
 import hashlib, json, random, sys
 from PIL import Image, ImageDraw, ImageFilter
+import connected_road_art as roads
 sys.dont_write_bytecode = True
 from generate_assets import Art, COLORS, P, PAL, color_background, tree, flowers, stone
 
@@ -221,6 +222,7 @@ def timber_house(a,room,x,y,w,h,roof='teal',door=None,kind='house'):
 
 
 def scenic_tree(a,room,x,y,s=1):
+    if roads.crosses_road(room['id'],(int(x-16*s),int(y-43*s),int(32*s),int(47*s)),2):return
     tree(a,x,y,s)
     x1=max(8,int(x-14*s));y1=max(8,int(y-41*s));x2=min(room['width']-8,int(x+14*s));y2=min(room['height']-8,int(y+3*s))
     if x2>x1 and y2>y1:solid(room,'tree_island',(x1,y1,x2-x1,y2-y1))
@@ -257,6 +259,7 @@ def town():
              ([(112,148),(112,206),(104,232),(152,264),(240,274)],22),
              ([(384,144),(384,212),(344,248),(400,270),(440,280)],25),
              ([(104,232),(172,234),(240,234),(292,248),(344,248)],22)])
+    roads.draw(a,16,P)
     # Hand-built canal network. Three permanent footbridges and two tributary crossings.
     water(a,(8,166,464,25),11)
     for box in [(8,166,88,25),(128,166,96,25),(256,166,112,25),(400,166,72,25)]:solid(room,'canal_water',box)
@@ -300,8 +303,12 @@ def town():
             for xx in range(x+5,x+w-2,8):a.e((xx-2,yy-2,xx+2,yy+1),'pine3');a.dot(xx-1,yy-2,'pine5')
     for x,y in [(70,128),(258,73),(213,206),(305,248),(417,153),(151,258)]:lantern(a,x,y)
     terrace(a,(155,147,35,9),'wood');solid(room,'canal_bench',(155,147,35,9))
-    for x,y in [(53,123),(399,125),(203,224),(332,218)]:
+    for x,y in [(53,123),(416,83),(203,224),(332,218)]:
         a.e((x-4,y-7,x+4,y+1),'wood1');a.e((x-3,y-7,x+3,y-5),'water1');a.l([(x-2,y-4),(x-2,y)],'wood4')
+    # Attic stair is attached to the workshop's east facade and upper landing.
+    terrace(a,(387,95,48,10),'wood')
+    a.r((389,81,400,99),'wood0');a.r((391,83,398,98),'deep')
+    roads.stair(a,416,102,17,48,P)
     gate(a,240,34,54)
     for xx in (209,267):solid(room,'north_gate_post',(xx,11,6,26))
     # Actors, functional signs and all state-bearing objects are separate sprites.
@@ -318,6 +325,8 @@ def town():
     exit_at(room,'bellfoundry',(332,138,24,10),(344,148),{'room':18,'spawn':0})
     exit_at(room,'mira_storehouse',(76,115,24,10),(88,124),{'room':20,'spawn':0})
     exit_at(room,'surestep_garden',(332,218,24,17),(344,230),{'room':21,'spawn':0})
+    # The old forest-facing south road is now a quiet garden boundary.
+    terrace(a,(216,312,48,8));solid(room,'retired_south_road',(216,312,48,8))
     room['camera_crops']=[[0,40],[240,56],[0,160],[240,160],[120,0],[120,160]]
     return room,a
 
@@ -331,6 +340,7 @@ def basin():
              ([(240,110),(272,126),(296,120)],19),
              ([(360,112),(424,104)],20),
              ([(176,104),(184,72)],19)])
+    roads.draw(a,17,P)
     # One river, shaped into low broad pools; permanent west/east loop crossings.
     waters=[(8,144,84,40),(124,144,100,40),(224,152,32,32),(256,160,124,24),(412,160,60,24),(24,80,54,64),(78,80,52,38),(306,184,76,28),(412,184,44,28)]
     water_network(a,waters,140)
@@ -884,7 +894,7 @@ def previews():
 def main():
     contract_before=(OUT/'contract.json').read_bytes();ROOMS.clear();SPRITES.clear()
     for fn in (town,basin,foundry,courtyard,storehouse,garden):
-        room,a=fn();color_background(a,'forest');room['art']=a
+        room,a=fn();roads.open_borders(room);color_background(a,'forest');room['art']=a
     SPRITES.extend((name,sprite(name)) for name in SPRITE_NAMES)
     all_proofs={}
     for room in ROOMS:

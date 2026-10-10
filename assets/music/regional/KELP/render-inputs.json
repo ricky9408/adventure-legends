@@ -1,0 +1,95 @@
+{
+  "palette": [
+    {
+      "name": "flowing mellow tide reed",
+      "gain": 0.67,
+      "attack": 0.016,
+      "release": 0.11,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.045
+        ],
+        [
+          3,
+          0.1
+        ],
+        [
+          4,
+          0.014
+        ],
+        [
+          5,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.3,
+      "vibrato_cents": 3.6
+    },
+    {
+      "name": "rounded current bass",
+      "gain": 0.35,
+      "attack": 0.009,
+      "release": 0.09,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.012
+        ],
+        [
+          3,
+          -0.052
+        ],
+        [
+          5,
+          0.018
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "soft tideglass strings",
+      "gain": 0.245,
+      "attack": 0.0045,
+      "release": 0.067,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.125
+        ],
+        [
+          3,
+          0.055
+        ],
+        [
+          4,
+          0.016
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "kelp-gba-16384-s8.raw": "58ed9a00290dc199daa7ef5b7ee56c6babea8a2eef89c4bcc7750ad9b8470b6d"
+  }
+}

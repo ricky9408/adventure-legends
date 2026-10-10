@@ -18,6 +18,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from retained_source_adapter import expand_local_includes
 
 from test_save5 import ROOT, A, B, SIZE, BUSY, DONE, FAILED, Save, Equipment, compare_state, repair_crc
 
@@ -52,13 +53,13 @@ def prepare(folder, synthetic=False, codec=False):
         result['equipment_data'].write_text(original.replace(marker,marker+rows))
     if codec:
         assert synthetic
-        original=result['save5'].read_text()
+        original=expand_local_includes(ROOT/'src/save5.c')
         marker='static int revision_equipment_allowed(unsigned id) {\n'
         assert original.count(marker)==1
         result['save5']=folder/'synthetic-save5.c'
         original=original.replace(marker,marker+
             '    /* TEST ONLY: synthetic capacity records, never historical content. */\n'
-            '    if (scan.revision == 6 && id >= 100 && id <= 146) return equipment_definition(id) != 0;\n')
+            '    if (scan.revision == 7 && id >= 100 && id <= 146) return equipment_definition(id) != 0;\n')
         # Historical validation now has exact immutable record/category data.
         # Extend ONLY this temporary test source as well; the production policy
         # continues to reject every synthetic ID before any SRAM write.
@@ -67,7 +68,7 @@ def prepare(folder, synthetic=False, codec=False):
         rows=','.join('{%d,0,0,0,-1}'%i for i in range(100,147))
         original=original.replace(marker,marker+
             '    static const Save5HistoryItem synthetic_items[47]={'+rows+'};\n'
-            '    if (revision == 6 && id >= 100 && id <= 146) return &synthetic_items[id-100];\n')
+            '    if (revision == 7 && id >= 100 && id <= 146) return &synthetic_items[id-100];\n')
         result['save5'].write_text(original)
     return result
 

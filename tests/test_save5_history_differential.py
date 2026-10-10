@@ -148,7 +148,9 @@ def build_library(source_root, folder, oracle=False, data_transform=None):
     if data_transform:
         path = folder / 'equipment_data.c'
         path.write_text(data_transform(path.read_text()))
-    (folder / 'history_harness.c').write_text(HARNESS)
+    from history_abi_compat import adapt_harness,bind_compat
+    harness,old_abi=adapt_harness(source_root,HARNESS)
+    (folder / 'history_harness.c').write_text(harness)
     inputs = [folder / f'{name}.c' for name in SOURCES]
     inputs.append(folder / 'history_harness.c')
     if oracle:
@@ -168,6 +170,7 @@ def build_library(source_root, folder, oracle=False, data_transform=None):
         '-DSOUTHERN_SETUP_ONLY', '-shared', '-fPIC', '-I' + str(folder),
         *map(str, inputs), '-o', str(so)], check=True)
     lib = C.CDLL(str(so))
+    bind_compat(lib,old_abi)
     lib.history_probe_bank.argtypes = [C.c_void_p, C.c_uint, C.POINTER(Save)]
     lib.history_probe_image.argtypes = [C.c_void_p, C.POINTER(Save)]
     lib.history_probe_bank.restype = lib.history_probe_image.restype = C.c_uint
@@ -185,6 +188,7 @@ def build_library(source_root, folder, oracle=False, data_transform=None):
 def with_revision(bank, revision):
     result = bytearray(bank)
     result[12:14] = revision.to_bytes(2, 'little')
+    result[6:8]=(5056).to_bytes(2,'little')
     if revision == 1:
         result[4032:4296] = bytes(264)
         result[4544:5056] = bytes(512)
@@ -461,7 +465,7 @@ class HistoricalSaveDifferentialTests(unittest.TestCase):
 
     def test_08_revision_boundaries_and_crc_valid_header_padding(self):
         for revision, original in self.completed.items():
-            for advertised in (0, 1, 2, 3, 4, 7, 255, 256, 65535):
+            for advertised in (0, 1, 2, 3, 4, 11, 255, 256, 65535):
                 bank = bytearray(original)
                 bank[12:14] = advertised.to_bytes(2, 'little')
                 self.compare(bank, (revision, 'advertised', advertised), group='revision_crossovers')

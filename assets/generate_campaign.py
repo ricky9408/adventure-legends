@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets'
 SRC = ROOT / 'src'
 P = {}; PAL = []; RGB = []; Art = None
+import connected_road_art as roads
 DIRECTIONS = ('down', 'up', 'left', 'right')
 PROP_NAMES = ('VANE','WEIGHT','WELL','FIRE_SOCKET','NATURE_SOCKET','WIND_SOCKET',
               'STONE_SOCKET','BRAZIER','LAMP','REST','SIGN','CHIME')
@@ -210,7 +211,8 @@ def background(room):
                 if _%9==0:a.dot(x,y-3,'flower1');a.dot(x+1,y-2,'gold2')
         for x,y in [(30,82),(194,137),(158,52),(27,141)]:
             a.p([(x-5,y),(x-3,y-3),(x+7,y-3),(x+9,y),(x+5,y+3),(x-3,y+3)],'bg_sunlit_grass3')
-        for r in room['static_solids'][2:]:cliff_rock(a,r,True)
+        for r in room['static_solids'][2:]:
+            if r not in room.get('trial_entrance_solids',[]):cliff_rock(a,r,True)
     elif rid==5:
         for x,y in [(36,61),(196,122)]:breeze_scroll(a,x,y,x>120)
         # Saffron sail strips are painted on the deck, not raised obstacles.
@@ -246,7 +248,8 @@ def background(room):
         for x,y in [(31,66),(192,56),(39,139),(211,120),(167,139)]:
             a.l([(x-4,y),(x-2,y-4),(x,y),(x+3,y-3)],'bg_sunlit_moss1')
             a.dot(x+1,y-3,'bg_sunlit_moss3')
-        for r in room['static_solids'][2:]:parapet(a,r,False)
+        for r in room['static_solids'][2:]:
+            if r not in room.get('trial_entrance_solids',[]):parapet(a,r,False)
     elif rid==10:
         ring_floor(a,56,80,27,20,False,8);ring_floor(a,184,80,27,20,False,8)
         for x in (56,184):
@@ -289,6 +292,30 @@ def background(room):
             a.p(pts,'bg_sunlit_wood3')
         a.p([(120,77),(135,85),(135,103),(120,112),(105,103),(105,85)],'bg_sunlit_dirt2')
         a.p([(120,80),(132,87),(132,101),(120,109),(108,101),(108,87)],'bg_sunlit_dirt3')
+    roads.draw(a,rid,P)
+    # Real side destinations belong to the surrounding architecture.
+    if rid==4:
+        # A little walled wind courtyard shares the ridge's north parapet.
+        a.r((186,44,231,68),'bg_temple_stone4')
+        for yy in (49,58,66):a.l([(189,yy),(228,yy)],'bg_temple_stone3')
+        for box in room['trial_entrance_solids']:parapet(a,box,True)
+        a.r((196,57,214,70),'bg_temple_stone1');a.r((199,59,211,69),'shadow')
+        a.l([(197,70),(213,70)],'bg_temple_stone5',2)
+        a.l([(204,72),(204,89)],'bg_sunlit_dirt3',18)
+        for x in (181,229):
+            a.l([(x,38),(x,49)],'wood2',2);a.p([(x+1,38),(x+9,40),(x+1,44)],'gold3')
+    elif rid==9:
+        # Amber workshop is recessed into the existing eastern rock arcade.
+        a.p([(184,112),(184,91),(191,84),(225,84),(232,92),(232,112)],'bg_sunlit_stone1')
+        a.p([(188,110),(188,94),(194,87),(222,87),(228,94),(228,110)],'bg_sunlit_stone3')
+        a.p([(196,113),(196,97),(201,92),(215,92),(220,97),(220,113)],'wood0')
+        a.r((199,99,217,113),'deep');a.l([(198,96),(200,94),(216,94),(218,97)],'bg_sunlit_wood4',2)
+        a.r((194,114,222,116),'bg_sunlit_stone4')
+        a.l([(195,114),(221,114)],'bg_sunlit_stone5')
+        a.r((201,85,214,89),'wood1');a.l([(204,87),(212,87)],'gold3')
+    # Old village return was on the south edge. Close that false opening.
+    if rid in (4,9):
+        parapet(a,[105,149,30,11],sky)
     # North parapet and all footprints come directly from the design JSON.
     for r in room['static_solids'][:2]:parapet(a,r,sky)
     # Add a distant architectural skyline above the blocking parapet.

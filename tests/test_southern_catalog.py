@@ -13,7 +13,7 @@ sys.path.insert(0,str(ROOT/'assets/creatures'))
 from validate_catalog import load_json, validate, validate_enabled
 from generate_data import build_tables, build_indexes, generate
 from catalog_policy import (REVISION_POLICY, SOUTHERN_FORMS, SOUTHERN_EDGES, MAGMA_FORMS, UNDERWATER_FORMS,
-                            CAPABILITY_MASKS, TRIAL_POLICY)
+                            CAPABILITY_MASKS, TRIAL_POLICY, HORIZONS_FORMS, COVENANT_FORMS)
 
 DATA=load_json(ROOT/'assets/creatures/catalog.json')
 ENABLED=load_json(ROOT/'assets/creatures/enabled.json')
@@ -24,9 +24,48 @@ OLD_TRIALS=['balanced_reach','compass_round','dry_ledger','fragile_cargo','join_
 def digest(value):
     return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
+# Explicit Return7 additions, not a live-policy-derived historical whitelist.
+RETURN_FORMS = [3,6,9,12,15,17,18,21,24,27,30,101,102,103,104]
+RETURN_OLD_OUTGOING = {2:51,5:52,8:53,11:54,14:55,16:56,20:58,23:59,26:60,29:61}
+
+def before_return(catalog):
+    """Project only reviewed Return additions away; frozen hashes check the rest."""
+    c=copy.deepcopy(catalog)
+    # Only the previously disabled Stilltide trial is intentionally replaced.
+    # Restore its exact old descriptor when testing historical schema1/2.
+    if c['schema_version']==3:
+        c['schema_version']=2
+        del c['covenant_gates']
+        c['legendary_gates']=load_json(ROOT/'assets/creatures/source/legendary_gates-01.json')
+        c['forms']=[f for f in c['forms'] if f['id']<=121]
+        c['abilities']=[a for a in c['abilities'] if a['id']<=121]
+        c['gates']=[g for g in c['gates'] if not g['id'].startswith('covenant')]
+        c['trials']=[t for t in c['trials'] if not t['id'].startswith('covenant')]
+        next(g for g in c['gates'] if g['id']=='stilltide_covenant')['requires']=['five_phase_shrines']
+        next(t for t in c['trials'] if t['id']=='stilltide_covenant')['description']='Complete the five-phase relay, then survive 90 active-play seconds using two opposite-polarity support switches; failure resets only the trial.'
+        for slot in c['slots']:
+            if slot['id']>121:slot['status']='reserved'
+    # Remove the explicit unreleased Horizons append before reconstructing the
+    # historical Return/Underwater fixture. Its old byte pins remain unchanged.
+    c['forms']=[f for f in c['forms'] if f['id'] not in HORIZONS_FORMS]
+    c['evolutions']=[e for e in c['evolutions'] if e['from'] not in HORIZONS_FORMS]
+    c['gates']=[g for g in c['gates'] if not g['id'].startswith('horizons_')]
+    c['trials']=[t for t in c['trials'] if not t['id'].startswith('horizons_')]
+    for slot in c['slots']:
+        if slot['id'] in HORIZONS_FORMS:slot['status']='reserved'
+    c['forms']=[f for f in c['forms'] if f['id'] not in RETURN_FORMS]
+    c['abilities']=[a for a in c['abilities'] if a['id']<91]
+    c['evolutions']=[e for e in c['evolutions'] if e['from'] not in RETURN_FORMS and e['to'] not in RETURN_FORMS]
+    c['gates']=[g for g in c['gates'] if not g['id'].startswith('return_') and g['id']!='home_map_joined']
+    c['trials']=[t for t in c['trials'] if not t['id'].startswith('return_')]
+    c['trial_bindings']=[t for t in c['trial_bindings'] if t['introduced_content_revision']<7]
+    for slot in c['slots']:
+        if slot['id'] in RETURN_FORMS:slot['status']='reserved'
+    return c
+
 def archive():
     """Reconstruct immutable r3 source without depending on a sibling checkout."""
-    c=copy.deepcopy(DATA);c['schema_version']=1;c['limits']['max_ability_id']=63
+    c=before_return(DATA);c['schema_version']=1;c['limits']['max_ability_id']=63
     c['field_capabilities']=c['field_capabilities'][:25];del c['trial_bindings']
     for s in c['slots']:
         if s['id'] in SOUTHERN_FORMS+MAGMA_FORMS+UNDERWATER_FORMS:s['status']='reserved'
@@ -45,7 +84,7 @@ def manifest(revision):
 
 def branch_fixture():
     """Synthetic F013 on the delivered South design, not today's Magma branch."""
-    c=copy.deepcopy(DATA)
+    c=before_return(DATA)
     # Preserve this adversarial authoring fixture without colliding with the
     # separately reviewed real Magma F013/commands43-66/trial bindings.
     for slot in c['slots']:
@@ -82,9 +121,9 @@ class SouthernAuthoringTests(unittest.TestCase):
 
     def test_reviewed_current_catalog(self):
         self.assertEqual([],validate(DATA,IDENTITY));self.assertEqual([],validate_enabled(DATA,ENABLED))
-        self.assertEqual(90,len(DATA['forms']));self.assertEqual(89,len(ENABLED['enabled_form_ids']))
-        self.assertEqual([121],sorted({f['id'] for f in DATA['forms']}-set(ENABLED['enabled_form_ids'])))
-        self.assertNotIn(12,ENABLED['enabled_ability_ids'])
+        self.assertEqual(128,len(DATA['forms']));self.assertEqual(128,len(ENABLED['enabled_form_ids']))
+        self.assertEqual([],sorted({f['id'] for f in DATA['forms']}-set(ENABLED['enabled_form_ids'])))
+        self.assertIn(12,ENABLED['enabled_ability_ids'])
 
     def test_identity_and_schema1_byte_pins(self):
         self.assertEqual('fe553a9d963de059e7d6c0f8647ab6a3fe736c5fdf7ca8d3b18c6dedd3292969',hashlib.sha256((ROOT/'assets/creatures/identity-lock.json').read_bytes()).hexdigest())
@@ -105,26 +144,35 @@ class SouthernAuthoringTests(unittest.TestCase):
         for name,count,sha in [('creature_forms',21,'f3947892166ca17dbd0d4acf495d51c6e1f8a1affcf5ec08927f700b6b9ddfde'),('creature_learnsets',31,'1d2a9568df1b315af1c2b76e81f4e94bfbe1276b92835cd28adb1f2db8f84e1a'),('creature_evolutions',10,'abe7fce05555a1ad9f2872aa04501d01468faf18708b64612337bfd141b60ade'),('creature_abilities',21,'42497047eae3a86fe56e6244b41e4c759bb456f008e1a5cd2b9cfa95a5653a91')]:
             pattern=r'const [^\n]+ '+name+r'\[[^\n]+\] = \{\n(.*?)\n\};'
             rows=re.search(pattern,new,re.S).group(1).splitlines()
-            block='\n'.join(rows[:count])+'\n'
+            prefix=rows[:count]
+            if name=='creature_forms':
+                # Only the two derived outgoing fields change on reviewed
+                # prior forms; every other textual byte retains its old pin.
+                for i,row in enumerate(prefix):
+                    cells=row.split(',');id_=int(cells[0].strip(' {'))
+                    if id_ in RETURN_OLD_OUTGOING:
+                        self.assertEqual((1,RETURN_OLD_OUTGOING[id_]),(int(cells[-6]),int(cells[-5])))
+                        cells[-6]=' 0';cells[-5]=' 0';prefix[i]=','.join(cells)
+            block='\n'.join(prefix)+'\n'
             self.assertEqual(sha,hashlib.sha256(block.encode()).hexdigest())
             self.assertEqual(block,re.search(pattern,old,re.S).group(1)+'\n')
 
     def test_schema2_ceiling_is_not_runtime_enablement(self):
         for id_ in (91,128,255):
-            c=copy.deepcopy(DATA)
+            c=before_return(DATA)
             a=next(a for a in c['abilities'] if a['id']==12);a['id']=id_;c['abilities'].sort(key=lambda a:a['id'])
             f=next(f for f in c['forms'] if f['id']==121);f['signature_ability']=id_
             for command in f['learnset']:
                 if command['ability_id']==12:command['ability_id']=id_
             f['learnset'].sort(key=lambda x:(x['level'],x['ability_id']))
             self.assertEqual([],validate(c,IDENTITY))
-            m=copy.deepcopy(ENABLED);m['enabled_ability_ids'].append(id_)
+            m=manifest(6);m['enabled_ability_ids'].append(id_)
             self.assertTrue(validate_enabled(c,m))
         c=copy.deepcopy(DATA);c['abilities'][-1]['id']=256;self.assert_invalid(c)
         c=archive();c['abilities'][-1]['id']=64;self.assert_invalid(c)
 
     def test_exact_enabled_revision_and_order(self):
-        for revision in (0,4,5,7,True,6.0):
+        for revision in (0,4,5,6,7,8,10,True,9.0):
             m=copy.deepcopy(ENABLED);m['content_revision']=revision;self.assertTrue(validate_enabled(DATA,m))
         for key in ('enabled_form_ids','enabled_ability_ids','enabled_evolutions'):
             m=copy.deepcopy(ENABLED);m[key][0],m[key][1]=m[key][1],m[key][0];self.assertTrue(validate_enabled(DATA,m))
@@ -140,12 +188,12 @@ class SouthernAuthoringTests(unittest.TestCase):
 
     def test_new_form_contract_and_offsets(self):
         f,l,e,a,layout=build_tables(DATA,ENABLED)
-        self.assertEqual((89,142,51,89),(len(f),len(l),len(e),len(a)))
-        self.assertEqual(REVISION_POLICY[3]['forms']+SOUTHERN_FORMS+MAGMA_FORMS+UNDERWATER_FORMS,[x['id'] for x in f])
+        self.assertEqual((128,209,68,128),(len(f),len(l),len(e),len(a)))
+        self.assertEqual(REVISION_POLICY[3]['forms']+SOUTHERN_FORMS+MAGMA_FORMS+UNDERWATER_FORMS+RETURN_FORMS+HORIZONS_FORMS+COVENANT_FORMS,[x['id'] for x in f])
         self.assertEqual(sorted(x['id'] for x in DATA['forms']),[x['id'] for x in DATA['forms']])
         for pair,(base,evolved) in enumerate(SOUTHERN_EDGES):
             self.assertEqual((31+3*pair,1,10+pair,1),layout[base])
-            self.assertEqual((32+3*pair,2,0,0),layout[evolved])
+            self.assertEqual((32+3*pair,2,RETURN_OLD_OUTGOING.get(evolved,0),int(evolved in RETURN_OLD_OUTGOING)),layout[evolved])
             edge=e[10+pair]
             self.assertEqual('south_ready',edge['required_gate'])
             self.assertEqual((20,40) if pair in (0,2,5) else (24,45) if pair in (6,8) else (22,45),(edge['min_level'],edge['min_bond']))
@@ -158,7 +206,8 @@ class SouthernAuthoringTests(unittest.TestCase):
             p=TRIAL_POLICY[t['trial_id']]
             self.assertEqual((p[0],p[1],p[2]),(t['family_id'],t['local_trial_id'],t['wire_mask']))
             if p[3]==4:self.assertEqual((1,1),(t['local_trial_id'],t['wire_mask']))
-        self.assertNotIn('F006',[t['family_id'] for t in DATA['trial_bindings']])
+        self.assertNotIn('F006',[t['family_id'] for t in before_return(DATA)['trial_bindings']])
+        self.assertEqual([(1,1024),(2,2048)],[(t['local_trial_id'],t['wire_mask']) for t in DATA['trial_bindings'] if t['family_id']=='F006'])
 
     def test_trial_wire_and_local_key_adversaries(self):
         for field,value in [('local_trial_id',0),('local_trial_id',17),('local_trial_id',65537),('local_trial_id',True),('wire_mask',0),('wire_mask',3),('wire_mask',65536),('wire_mask',65537)]:
@@ -167,8 +216,9 @@ class SouthernAuthoringTests(unittest.TestCase):
         c=copy.deepcopy(DATA);c['trial_bindings'][0]['family_id']='F010';self.assert_invalid(c,'family')
         c=copy.deepcopy(DATA);c['trial_bindings'][0]['prerequisite_trial_mask']=1;self.assert_invalid(c,'self prerequisite')
         c=copy.deepcopy(DATA);c['trial_bindings'][0]['prerequisite_trial_mask']=2;self.assert_invalid(c,'unknown prerequisite')
-        c=copy.deepcopy(DATA);t=next(t for t in c['trial_bindings'] if t['family_id']=='F009');t['wire_mask']=2
-        self.assertEqual([],validate(c,IDENTITY));self.assertTrue(validate_enabled(c,ENABLED))
+        c=before_return(DATA);self.assertEqual([],validate_enabled(c,manifest(6)))
+        t=next(t for t in c['trial_bindings'] if t['family_id']=='F009');t['wire_mask']=2
+        self.assertEqual([],validate(c,IDENTITY));self.assertTrue(validate_enabled(c,manifest(6)))
 
     def test_wrong_family_even_with_equal_trial_mask(self):
         c=copy.deepcopy(DATA);e=next(e for e in c['evolutions'] if e['from']==25);e['required_trial']='south_drainage_branches'
@@ -216,8 +266,9 @@ class SouthernAuthoringTests(unittest.TestCase):
             self.assertEqual(expected_forms.get(id_,0),fi[id_])
             self.assertEqual(expected_incoming.get(id_,0),ei[id_])
         for id_ in range(256):self.assertEqual(expected_abilities.get(id_,0),ai[id_])
-        for id_ in (0,12,91,128,255):self.assertEqual(0,ai[id_])
-        for id_ in (0,3,27,30,101,121,128):self.assertEqual((0,0),(fi[id_],ei[id_]))
+        for id_ in (0,129,255):self.assertEqual(0,ai[id_])
+        self.assertEqual((0,0),(fi[0],ei[0]))
+        for id_ in (121,128):self.assertTrue(fi[id_]);self.assertEqual(0,ei[id_])
         for name,expected in [('creature_form_index',fi),('creature_ability_index',ai),('creature_incoming_evolution_index',ei)]:
             contents=re.search(r'const CreatureU8 '+name+r'\[[^\n]+\] = \{\n(.*?)\n\};',generate(),re.S).group(1)
             self.assertEqual(expected,[int(value) for value in re.findall(r'\d+',contents)])

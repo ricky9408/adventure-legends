@@ -66,11 +66,11 @@ enum {
 extern const unsigned char region_sprites[REGION_SPR_COUNT][256];
 extern const unsigned char region_background_reedhaven[153600];
 extern const unsigned char region_background_reedhaven_odd[153600];
-#define REGION_REEDHAVEN_SOLID_COUNT 37
+#define REGION_REEDHAVEN_SOLID_COUNT 39
 extern const RegionArtRect region_reedhaven_solids[REGION_REEDHAVEN_SOLID_COUNT];
 extern const unsigned char region_background_reedbasin[153600];
 extern const unsigned char region_background_reedbasin_odd[153600];
-#define REGION_REEDBASIN_SOLID_COUNT 41
+#define REGION_REEDBASIN_SOLID_COUNT 39
 extern const RegionArtRect region_reedbasin_solids[REGION_REEDBASIN_SOLID_COUNT];
 extern const unsigned char region_background_bellfoundry[38400];
 #define REGION_BELLFOUNDRY_SOLID_COUNT 10

@@ -1,0 +1,47 @@
+{
+  "changes": [
+    {
+      "file": "assets/underwater_region/dialogue.json",
+      "key": "UW_CLUE45A",
+      "old": "Open the archive return arch.",
+      "new": "Leave the guardian court by the west road."
+    },
+    {
+      "file": "assets/underwater_region/dialogue_ja.json",
+      "key": "UW_CLUE45A",
+      "old": "記録庫の帰りのアーチを開こう。",
+      "new": "面影の中庭を、西の道から出よう。"
+    },
+    {
+      "file": "assets/return_region/dialogue.json",
+      "key": "RT_VILLAGE_B",
+      "old": "まず若葉の入口へ。その先は町の机。",
+      "new": "里の南は若葉の広場。次は町の机。"
+    },
+    {
+      "file": "assets/return_region/dialogue_ja.json",
+      "key": "RT_VILLAGE_B",
+      "old": "まず若葉の入口へ。その先は町の机。",
+      "new": "里の南は若葉の広場。次は町の机。"
+    },
+    {
+      "file": "assets/return_region/dialogue.json",
+      "key": "RT_HUD_COMMON",
+      "old": "目的：里の若葉の入口へ",
+      "new": "目的：里の南から若葉の広場へ"
+    },
+    {
+      "file": "assets/return_region/dialogue_ja.json",
+      "key": "RT_HUD_COMMON",
+      "old": "目的：里の若葉の入口へ",
+      "new": "目的：里の南から若葉の広場へ"
+    }
+  ],
+  "unaffected_audit": [
+    "Horizons invitation still correctly directs north from61 to62",
+    "Covenants northeast62letter/escort and north70court directions remain correct",
+    "Return north/south chapter references still name their regional work desks",
+    "Underwater mechanism arches and small creature-trial door clues refer to local work, not map travel",
+    "Magma south interior escapes and Q32 report-to-Ressa clue remain correct without45→38 shortcut"
+  ]
+}

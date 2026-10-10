@@ -1,0 +1,41 @@
+{
+ "scope": "Host geometry/art only; controller path separate",
+ "rooms": {
+  "62": {
+   "reachable_pixels": 120268,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "63": {
+   "reachable_pixels": 63752,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "64": {
+   "reachable_pixels": 32160,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "65": {
+   "reachable_pixels": 127636,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "66": {
+   "reachable_pixels": 61848,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "67": {
+   "reachable_pixels": 127840,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "68": {
+   "reachable_pixels": 32576,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  },
+  "69": {
+   "reachable_pixels": 30284,
+   "all_spawns_reset_and_cardinal_work_approaches": true
+  }
+ },
+ "rom_art_bytes": 1277402,
+ "rom_art_bytes_kind": "Conservative ARM data bound including structures and64 alignment bytes; exact object size is measured separately",
+ "payload_bytes": 1276842,
+ "cap": 1310720
+}

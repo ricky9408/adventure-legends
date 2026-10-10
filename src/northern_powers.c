@@ -19,6 +19,12 @@ extern int southern_power_time;
 /* Optional when older focused harnesses link only historical modules. */
 extern int magma_power_time __attribute__((weak));
 extern int underwater_power_time __attribute__((weak));
+extern int return_power_time __attribute__((weak));
+extern int horizons_power_time __attribute__((weak));
+extern int covenants_power_time __attribute__((weak));
+static int covenants_tiles_live(void){return &covenants_power_time&&covenants_power_time>0;}
+static int horizons_tiles_live(void){return &horizons_power_time&&horizons_power_time>0;}
+static int return_tiles_live(void){return &return_power_time&&return_power_time>0;}
 static int underwater_tiles_live(void){return &underwater_power_time&&underwater_power_time>0;}
 static int magma_tiles_live(void){return &magma_power_time&&magma_power_time>0;}
 extern int solid(int,int);
@@ -54,6 +60,7 @@ static int near_point(int x,int y,int tx,int ty,int radius){
 static int clear_segment(int x,int y,int tx,int ty){
     int dx=absolute(tx-x),dy=-absolute(ty-y),sx=x<tx?1:-1;
     int sy=y<ty?1:-1,error=dx+dy;
+    if(return_legacy_box_clear(x,y,tx,ty))return 1;
     if(solid(x,y)||solid(tx,ty))return 0;
     while(x!=tx||y!=ty){
         int twice=error*2,nx=x,ny=y;
@@ -83,10 +90,10 @@ unsigned northern_powers_tiles_generation(void){return tile_generation;}
 int northern_powers_tiles_claim(unsigned owner){
     if(owner!=NORTHERN_TILES_REGIONAL&&owner!=NORTHERN_TILES_NORTHERN&&
        owner!=NORTHERN_TILES_SOUTHERN&&owner!=NORTHERN_TILES_MAGMA&&
-       owner!=NORTHERN_TILES_UNDERWATER)return 0;
+       owner!=NORTHERN_TILES_UNDERWATER&&owner!=NORTHERN_TILES_RETURN&&owner!=NORTHERN_TILES_HORIZONS&&owner!=NORTHERN_TILES_COVENANTS)return 0;
     /* Also protect a regional effect created before the lease adapter was wired. */
     if(tile_owner!=NORTHERN_TILES_NONE||northern_power_time>0||regional_power_time>0||
-       southern_power_time>0||magma_tiles_live()||underwater_tiles_live())return 0;
+       southern_power_time>0||magma_tiles_live()||underwater_tiles_live()||return_tiles_live()||horizons_tiles_live()||covenants_tiles_live())return 0;
     tile_owner=owner;tile_generation++;
     return 1;
 }
@@ -96,7 +103,10 @@ int northern_powers_tiles_release(unsigned owner){
        (owner==NORTHERN_TILES_REGIONAL&&regional_power_time>0)||
        (owner==NORTHERN_TILES_SOUTHERN&&southern_power_time>0)||
        (owner==NORTHERN_TILES_MAGMA&&magma_tiles_live())||
-       (owner==NORTHERN_TILES_UNDERWATER&&underwater_tiles_live()))return 0;
+       (owner==NORTHERN_TILES_UNDERWATER&&underwater_tiles_live())||
+       (owner==NORTHERN_TILES_RETURN&&return_tiles_live())||
+       (owner==NORTHERN_TILES_HORIZONS&&horizons_tiles_live())||
+       (owner==NORTHERN_TILES_COVENANTS&&covenants_tiles_live()))return 0;
     tile_owner=NORTHERN_TILES_NONE;tile_generation++;
     return 1;
 }
@@ -200,7 +210,11 @@ static int prepare_geometry(unsigned command,int x,int y,int direction,
     if(solid(x,y))return 0;
     if(command==13||command==17){
         int step;distance=command==13?48:24;x1=x;y1=y;
-        for(step=0;step<distance;step++){
+        /* The complete axis-aligned prefix is unchanged when certified. If
+         * any blocker intersects its box, retain the exact clipped walk. */
+        if(return_legacy_box_clear(x,y,x+dx*distance,y+dy*distance)){
+            x1=x+dx*distance;y1=y+dy*distance;
+        }else for(step=0;step<distance;step++){
             int nx=x1+dx,ny=y1+dy;
             if(solid(nx,ny))break;
             x1=nx;y1=ny;
@@ -229,7 +243,7 @@ int northern_power(unsigned command){
     if(!prepare_geometry(command,px,py,face,&x1,&y1,&x2,&y2))return 0;
     if(!northern_powers_tiles_claim(NORTHERN_TILES_NORTHERN))return 0;
     base=ability->cooldown_updates;cooldown=game_power_cooldown(base);
-    if(cooldown<base-8)cooldown=base-8;
+    if(cooldown<base-GAME_MAX_POWER_RECOVERY)cooldown=base-GAME_MAX_POWER_RECOVERY;
     if(cooldown>base)cooldown=base;
     northern_power_kind=(int)command;northern_power_time=spec->lifetime;
     northern_power_form=c->form_id;northern_power_direction=face;
@@ -377,15 +391,16 @@ static void mark(int x,int y){
 static void draw_line(int x,int y,int tx,int ty){
     int dx=absolute(tx-x),dy=-absolute(ty-y),sx=x<tx?1:-1;
     int sy=y<ty?1:-1,error=dx+dy,until_sample=6,samples=1;
-    if(solid(x,y))return;
+    int clear=return_legacy_box_clear(x,y,tx,ty);
+    if(!clear&&solid(x,y))return;
     obj_add(GFX_OBJ_WATER_DROP,x-4,y-4,8,8,1,y+2,0);
     while(x!=tx||y!=ty){
         int twice=error*2,nx=x,ny=y;
         if(twice>=dy){error+=dy;nx+=sx;}
         if(twice<=dx){error+=dx;ny+=sy;}
-        if(nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return;
+        if(!clear&&nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return;
         x=nx;y=ny;
-        if(solid(x,y))return;
+        if(!clear&&solid(x,y))return;
         until_sample--;
         if(samples<10&&(!until_sample||(x==tx&&y==ty))){
             /* This exact center was checked above; particle() would repeat it. */
@@ -420,4 +435,34 @@ void northern_powers_draw(void){
         draw_line(ax,ay,x,y);break;
     default:break;
     }
+}
+
+unsigned northern_powers_shot_serial(unsigned index){return index<12?shot_serial[index]:0;}
+static void field_piece(ReturnLegacyEmit emit,void *context,int x,int y,int large){
+ unsigned phase=specs[northern_power_kind-13].phase;
+ if(!solid(x,y))return_legacy_piece(emit,context,large?northern_power_marks[phase]:northern_power_particles[phase],
+  x-(large?8:4),y-(large?8:4),large?16:8,RETURN_LEGACY_PIXELS);
+}
+/* Exact read-only copy of draw_line's prefix, six-pixel sampling and ten-OBJ
+ * bound. No invisible continuous line is substituted between particles. */
+static void field_line(ReturnLegacyEmit emit,void *context,int x,int y,int tx,int ty){
+ int dx=absolute(tx-x),dy=-absolute(ty-y),sx=x<tx?1:-1,sy=y<ty?1:-1,error=dx+dy,until_sample=6,samples=1;
+ int clear=return_legacy_box_clear(x,y,tx,ty);
+ if(!clear&&solid(x,y))return;
+ field_piece(emit,context,x,y,0);
+ while(x!=tx||y!=ty){int twice=error*2,nx=x,ny=y;
+  if(twice>=dy){error+=dy;nx+=sx;}if(twice<=dx){error+=dx;ny+=sy;}
+  if(!clear&&nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return;
+  x=nx;y=ny;if(!clear&&solid(x,y))return;until_sample--;
+  if(samples<10&&(!until_sample||(x==tx&&y==ty))){field_piece(emit,context,x,y,0);samples++;until_sample=6;}
+ }
+}
+void northern_powers_field_geometry(unsigned command,ReturnLegacyEmit emit,void *context){
+ if(!emit||command<13||command>16||command!=(unsigned)northern_power_kind||
+    !northern_power_time||tile_owner!=NORTHERN_TILES_NORTHERN||cast_tile_generation!=tile_generation)return;
+ if(command==13){field_line(emit,context,northern_power_origin_x,northern_power_origin_y,ax,ay);field_piece(emit,context,ax,ay,1);}
+ else if(command==14){field_line(emit,context,ax,ay,bx,by);field_piece(emit,context,ax,ay,1);field_piece(emit,context,bx,by,1);}
+ else if(command==15){if(northern_power_age<18||northern_power_age>=26)return;field_piece(emit,context,ax,ay,1);{
+  field_piece(emit,context,ax-10,ay,0);field_piece(emit,context,ax+10,ay,0);field_piece(emit,context,ax,ay-10,0);field_piece(emit,context,ax,ay+10,0);}}
+ else if(northern_power_age>=12&&northern_power_age<38)field_piece(emit,context,effect_x,effect_y,1);
 }

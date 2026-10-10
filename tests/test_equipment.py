@@ -21,7 +21,10 @@ LEGACY_IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51
 SOUTHERN_IDS = [4, 12, 36, 52, 66, 84]
 MAGMA_IDS = [20, 37, 53, 67, 85, 5]
 UNDERWATER_IDS = [6, 13, 38, 54, 68, 86]
-IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS + UNDERWATER_IDS
+RETURN_IDS = [21, 39, 55, 69, 87]
+HORIZONS_IDS = [7, 14, 56, 88]
+COVENANT_IDS = [40, 89]
+IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS + UNDERWATER_IDS + RETURN_IDS + HORIZONS_IDS + COVENANT_IDS
 OK, INVALID, BUSY, INCOMPATIBLE, FULL, DUPLICATE, ALREADY, PROTECTED, CONFIRM = range(9)
 
 
@@ -234,6 +237,156 @@ class EquipmentTests(unittest.TestCase):
             self.assertEqual(definition.phase, 255)
             self.assertEqual({key: getattr(definition.stats, key) for key, _ in Bonuses._fields_}, item['stats'])
 
+    def test_return_five_exact_sources_and_sidegrade_previews(self):
+        expected = [
+            (21, 'Sailthread Bow', 0, 3, (0,0,0,4,0,0,8,0)),
+            (39, 'Homeweave Mail', 1, 0, (0,3,4,-2,0,0,0,0)),
+            (55, 'Walkway Boots', 2, 0, (0,0,0,4,2,0,0,0)),
+            (69, 'Reedcourier Belt', 3, 0, (0,0,4,0,0,3,0,0)),
+            (87, 'Patient Ring', 4, 0, (0,1,0,-2,0,1,0,1)),
+        ]
+        for source, (item, name, slot, weapon, stats) in enumerate(expected,37):
+            d=self.lib.equipment_definition(item).contents
+            self.assertEqual((d.id,d.slot,d.weapon_class,d.flags,d.phase),(item,slot,weapon,0,255))
+            self.assertEqual(tuple(getattr(d.stats,k) for k,_ in Bonuses._fields_),stats)
+            self.assertEqual(self.lib.equipment_name(item).decode(),name)
+            self.assertEqual(self.lib.equipment_reward_item(source),item)
+            self.assertEqual(self.lib.equipment_reward_source(item),source)
+            ref=self.claim(item)
+            before=bytes(self.s);preview=Comparison()
+            self.assertEqual(self.lib.equipment_preview(C.byref(self.s),slot,ref,96,self.hp.value,0,C.byref(preview)),OK)
+            self.assertEqual(bytes(self.s),before)
+            old_hp=self.hp.value
+            self.equip(slot,ref)
+            self.assertLessEqual(self.hp.value,old_hp)
+            actual=self.derive()
+            self.assertEqual(bytes(actual),bytes(preview.after))
+            before=bytes(self.s)
+            self.assertEqual(self.lib.equipment_claim(C.byref(self.s),item,source,None),ALREADY)
+            self.assertEqual(bytes(self.s),before)
+            self.valid()
+        actual=self.derive()
+        self.assertEqual((actual.weapon_class,actual.max_hp_q4,actual.speed_q8,actual.reach_px), (3,104,324,8))
+        self.assertEqual((actual.defense_q4,actual.roll_cooldown,actual.power_cooldown,actual.stagger),(4,40,71,1))
+
+    def test_underwater_thirty_seven_definitions_and_rules_are_frozen(self):
+        catalog=json.loads((ROOT/'assets/equipment/catalog.json').read_text())
+        frozen=json.loads((ROOT/'assets/equipment/released-v6.json').read_text())
+        catalog['items']=catalog['items'][:37]
+        catalog['reward_sources']=catalog['reward_sources'][:37]
+        self.assertEqual(catalog,frozen)
+
+    def test_horizons_four_sources_preview_real_effective_differences(self):
+        # Each comparison starts at the protected starter and empty defensive
+        # slots. Claims must never select the newly granted sidegrade.
+        expected = [
+            (42,7,0,1,(96,318,1,0,42,75,1,1)),
+            (43,14,0,2,(100,318,0,0,42,75,2,0)),
+            (44,56,2,1,(104,318,0,0,41,75,0,0)),
+            (45,88,4,1,(96,318,0,0,42,70,0,0)),
+        ]
+        fields = ('max_hp_q4','speed_q8','attack_q4','defense_q4',
+                  'roll_cooldown','power_cooldown','reach_px','stagger')
+        for source,item,slot,weapon,stats in expected:
+            with self.subTest(item=item):
+                self.setUp()
+                refs = bytes(self.s.equipped)
+                ref = self.claim(item)
+                self.assertEqual(bytes(self.s.equipped),refs)
+                self.assertEqual(self.lib.equipment_reward_item(source),item)
+                self.assertEqual(self.lib.equipment_reward_source(item),source)
+                before = bytes(self.s)
+                comparison = Comparison()
+                self.assertEqual(self.lib.equipment_preview(C.byref(self.s),slot,ref,96,96,0,C.byref(comparison)),OK)
+                self.assertEqual(bytes(self.s),before)
+                self.assertEqual(tuple(getattr(comparison.after,k) for k in fields),stats)
+                self.assertEqual(comparison.after.weapon_class,weapon)
+                self.equip(slot,ref)
+                self.assertEqual(bytes(self.derive()),bytes(comparison.after))
+                self.assertEqual(self.hp.value,96)
+                self.valid()
+        # HP sidegrades have zero effective HP difference at the aggregate cap.
+        for item,slot in [(14,0),(56,2)]:
+            self.setUp()
+            ref = self.claim(item)
+            comparison = Comparison()
+            self.assertEqual(self.lib.equipment_preview(C.byref(self.s),slot,ref,192,192,0,C.byref(comparison)),OK)
+            self.assertEqual((comparison.before.max_hp_q4,comparison.after.max_hp_q4),(192,192))
+            self.assertEqual(comparison.after.speed_q8-comparison.before.speed_q8,-2)
+
+    def test_horizons_full_bag_and_retry_preserve_claims_and_slots(self):
+        lib = self.variants['capacity']
+        for ref,item in enumerate(range(100,147),1):
+            self.s.bag[ref].item_id,self.s.bag[ref].quantity = item,1
+            self.s.seen[item>>3] |= 1 << (item&7)
+        before = bytes(self.s)
+        for source,item in enumerate(HORIZONS_IDS,42):
+            out = C.c_uint(999)
+            self.assertEqual(lib.equipment_claim(C.byref(self.s),item,source,C.byref(out)),FULL)
+            self.assertEqual(bytes(self.s),before)
+            self.assertEqual(out.value,999)
+        bundle = (U8*4)(42,43,44,45)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),bundle,4),FULL)
+        self.assertEqual(bytes(self.s),before)
+        for ref in range(44,48):
+            self.assertEqual(lib.equipment_discard(C.byref(self.s),ref,96,C.byref(self.hp),0,1),OK)
+        refs = bytes(self.s.equipped)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),bundle,4),OK)
+        self.assertEqual(bytes(self.s.equipped),refs)
+        self.assertEqual(lib.equipment_count(C.byref(self.s)),48)
+        claimed = bytes(self.s)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),bundle,4),ALREADY)
+        self.assertEqual(bytes(self.s),claimed)
+
+    def test_covenants_two_sources_preview_without_auto_equip_or_heal(self):
+        fields=('max_hp_q4','speed_q8','attack_q4','defense_q4','roll_cooldown','power_cooldown','reach_px','stagger')
+        for source,item,slot,expected in [(46,40,1,(112,316,0,1,42,75,0,0)),
+                                          (47,89,4,(96,316,0,0,41,70,0,0))]:
+            with self.subTest(item=item):
+                self.setUp();original_refs=bytes(self.s.equipped)
+                ref=self.claim(item)
+                self.assertEqual((self.lib.equipment_reward_item(source),self.lib.equipment_reward_source(item)),(item,source))
+                self.assertEqual(bytes(self.s.equipped),original_refs)
+                before=bytes(self.s);comparison=Comparison()
+                self.assertEqual(self.lib.equipment_preview(C.byref(self.s),slot,ref,96,96,0,C.byref(comparison)),OK)
+                self.assertEqual(bytes(self.s),before)
+                self.assertEqual(tuple(getattr(comparison.after,k) for k in fields),expected)
+                self.equip(slot,ref)
+                self.assertEqual(bytes(self.derive()),bytes(comparison.after))
+                self.assertEqual(self.hp.value,96)
+                self.assertEqual(self.lib.equipment_claim(C.byref(self.s),item,source,None),ALREADY)
+                self.valid()
+
+    def test_covenants_last_two_sources_full_bag_retry_is_atomic(self):
+        lib=self.variants['capacity']
+        for ref,item in enumerate(range(100,147),1):
+            self.s.bag[ref].item_id,self.s.bag[ref].quantity=item,1
+            self.s.seen[item>>3] |= 1<<(item&7)
+        sources=(U8*2)(46,47);before=bytes(self.s)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),sources,2),FULL)
+        self.assertEqual(bytes(self.s),before)
+        self.assertEqual(lib.equipment_discard(C.byref(self.s),47,96,C.byref(self.hp),0,1),OK)
+        before=bytes(self.s)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),sources,2),FULL)
+        self.assertEqual(bytes(self.s),before)
+        self.assertEqual(lib.equipment_discard(C.byref(self.s),46,96,C.byref(self.hp),0,1),OK)
+        refs=bytes(self.s.equipped)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),sources,2),OK)
+        self.assertEqual(bytes(self.s.equipped),refs)
+        self.assertEqual((lib.equipment_find(C.byref(self.s),40),lib.equipment_find(C.byref(self.s),89)),(46,47))
+        self.assertEqual(lib.equipment_count(C.byref(self.s)),48)
+        self.assertEqual(lib.equipment_validate(C.byref(self.s)),1)
+        claimed=bytes(self.s)
+        self.assertEqual(lib.equipment_claim_many(C.byref(self.s),sources,2),ALREADY)
+        self.assertEqual(bytes(self.s),claimed)
+
+    def test_return_forty_two_definitions_and_rules_are_frozen(self):
+        catalog=json.loads((ROOT/'assets/equipment/catalog.json').read_text())
+        frozen=json.loads((ROOT/'assets/equipment/released-v7.json').read_text())
+        catalog['items']=catalog['items'][:42]
+        catalog['reward_sources']=catalog['reward_sources'][:42]
+        self.assertEqual(catalog,frozen)
+
     def test_southern_definitions_match_exact_sidegrade_contract(self):
         # All eight bonuses are explicit; an omitted design bonus must be zero.
         expected = [
@@ -256,7 +409,7 @@ class EquipmentTests(unittest.TestCase):
                 self.assertEqual(self.lib.equipment_name(item).decode(), name)
                 self.assertEqual(self.lib.equipment_reward_item(source), item)
                 self.assertEqual(self.lib.equipment_reward_source(item), source)
-        self.assertEqual(self.lib.equipment_reward_item(37), 0)
+        self.assertEqual(self.lib.equipment_reward_item(48), 0)
 
     def test_magma_six_exact_vectors_sources_and_derived_comparisons(self):
         allocation=json.loads((ROOT/'docs/magma-design/magma_allocation.json').read_text())

@@ -129,9 +129,10 @@ static void test_selection_and_snapshot(void){
     assert(northern_power_origin_x==100&&northern_power_origin_y==100);
     assert(!northern_powers_feedback(22));updates(1);
     assert(northern_power_time==17&&northern_power_cooldown==82&&northern_power_form==19);
-    setup(13);gear_stats.power_cooldown=1;assert(northern_power(13));assert(ability_cd==82);
+    /* Hostile forged stat is bounded by gear8 + Feather8 + Bell4. */
+    setup(13);gear_stats.power_cooldown=1;assert(GAME_MAX_POWER_RECOVERY==20);assert(northern_power(13));assert(ability_cd==70);
     setup(13);gear_stats.power_cooldown=EQUIPMENT_BASE_POWER_COOLDOWN+1;
-    assert(northern_power(13));assert(ability_cd>=82&&ability_cd<=90);
+    assert(northern_power(13));assert(ability_cd>=70&&ability_cd<=90);
 }
 static void test_delays_and_ledgers(void){
     unsigned c,i;

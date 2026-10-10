@@ -464,7 +464,7 @@ int underwater_power(unsigned command){CreatureInstance*c;const CreatureAbility*
  cast.caught=6;cast.side=-1;cast.crawl_x=(short)px;cast.crawl_y=(short)py;
  cast.trail_count=1;cast.trail[0].x=(short)px;cast.trail[0].y=(short)py;
  for(i=0;i<6;i++){cast.previous[i].x=(short)enemies[i].x;cast.previous[i].y=(short)enemies[i].y;}
- cd=game_power_cooldown(s->cooldown);if(cd<s->cooldown-8u)cd=s->cooldown-8u;if(cd>s->cooldown)cd=s->cooldown;
+ cd=game_power_cooldown(s->cooldown);if(cd<s->cooldown-GAME_MAX_POWER_RECOVERY)cd=s->cooldown-GAME_MAX_POWER_RECOVERY;if(cd>s->cooldown)cd=s->cooldown;
  underwater_power_cooldown=ability_cd=ability_max=(int)cd;
  obj_upload(underwater_power_marks[command-67],16,16,GFX_OBJ_POWER_PIN);
  obj_upload(underwater_power_particles[command-67][0],8,8,GFX_OBJ_WATER_DROP);geometry();sfx(2);return 1;

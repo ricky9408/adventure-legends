@@ -22,7 +22,7 @@ int northern_powers_busy(void);
  * including an earlier effect of its own. Draw only while its lease is held.
  * Generation changes on successful ownership changes; renderer caches may use
  * it to invalidate stale tile assumptions. No additional resident OBJ bytes. */
-enum { NORTHERN_TILES_NONE, NORTHERN_TILES_REGIONAL, NORTHERN_TILES_NORTHERN, NORTHERN_TILES_SOUTHERN, NORTHERN_TILES_MAGMA, NORTHERN_TILES_UNDERWATER };
+enum { NORTHERN_TILES_NONE, NORTHERN_TILES_REGIONAL, NORTHERN_TILES_NORTHERN, NORTHERN_TILES_SOUTHERN, NORTHERN_TILES_MAGMA, NORTHERN_TILES_UNDERWATER, NORTHERN_TILES_RETURN, NORTHERN_TILES_HORIZONS, NORTHERN_TILES_COVENANTS };
 int northern_powers_tiles_claim(unsigned owner);
 int northern_powers_tiles_release(unsigned owner);
 unsigned northern_powers_tiles_owner(void);
@@ -33,4 +33,10 @@ unsigned northern_powers_tiles_generation(void);
  * plus cast ledger prevents repeat turns of the same live projectile. */
 void northern_powers_shot_spawn(unsigned index);
 int northern_powers_shot_is_reflected(unsigned index);
+
+#include "return_legacy_geometry.h"
+/* Additive read-only export; no field side effects or inferred hit radius. */
+void northern_powers_field_geometry(unsigned command,ReturnLegacyEmit emit,void *context);
+/* Current identity only: changes on every engine assignment to this slot. */
+unsigned northern_powers_shot_serial(unsigned index);
 #endif

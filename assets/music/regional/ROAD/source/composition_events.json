@@ -1,0 +1,1304 @@
+{
+  "title": "Where the Mileposts Turn",
+  "tempo": 112,
+  "key": "G major",
+  "meter": "4/4",
+  "bars": [
+    {
+      "number": 1,
+      "chord": "G",
+      "melody": [
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "A4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "G2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "chord": "D7/F#",
+      "melody": [
+        {
+          "pitch": "A4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "F#2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "A2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "A2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "chord": "Em7",
+      "melody": [
+        {
+          "pitch": "B4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "E2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "chord": "D",
+      "melody": [
+        {
+          "pitch": "F#4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "D2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "F#2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "chord": "Cmaj7",
+      "melody": [
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "B4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "C3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "chord": "G/B",
+      "melody": [
+        {
+          "pitch": "G4",
+          "duration": 3.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 0.5
+        }
+      ],
+      "left": [
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "chord": "Am7",
+      "melody": [
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "A4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "chord": "D7",
+      "melody": [
+        {
+          "pitch": "A4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "F#4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "chord": "Em",
+      "melody": [
+        {
+          "pitch": "B4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "E3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "chord": "B7",
+      "melody": [
+        {
+          "pitch": "D#5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "F#5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "E5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "D#5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "D#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "F#2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "A2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D#3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "chord": "Em7",
+      "melody": [
+        {
+          "pitch": "E5",
+          "duration": 3.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        }
+      ],
+      "left": [
+        {
+          "pitch": "E3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "chord": "C",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "G5",
+          "duration": 2.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "C3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "chord": "D7",
+      "melody": [
+        {
+          "pitch": "F#5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "chord": "G/B",
+      "melody": [
+        {
+          "pitch": "B4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "G5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "chord": "Am7",
+      "melody": [
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "A4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "chord": "D7",
+      "melody": [
+        {
+          "pitch": "A4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "F#4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "chord": "G",
+      "melody": [
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "A4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "G2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "chord": "D7/F#",
+      "melody": [
+        {
+          "pitch": "A4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 0.5
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "F#2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "A2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "A2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "chord": "Em7",
+      "melody": [
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "G5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "F#5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "E5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "E2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "chord": "G/B",
+      "melody": [
+        {
+          "pitch": "B4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "G4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "chord": "Cmaj7",
+      "melody": [
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "B4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "C3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "chord": "G/B",
+      "melody": [
+        {
+          "pitch": "G4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "B4",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "B2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "B2",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "chord": "Am7",
+      "melody": [
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "E5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "D5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "C5",
+          "duration": 0.5
+        },
+        {
+          "pitch": "A4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "A2",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "E3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "G3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C4",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "chord": "D7",
+      "melody": [
+        {
+          "pitch": "A4",
+          "duration": 2.0
+        },
+        {
+          "pitch": "C5",
+          "duration": 1.0
+        },
+        {
+          "pitch": "F#4",
+          "duration": 1.0
+        }
+      ],
+      "left": [
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "F#3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "A3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "D3",
+          "duration": 1,
+          "role": "bass"
+        },
+        {
+          "pitch": "A3",
+          "duration": 0.5,
+          "role": "inner"
+        },
+        {
+          "pitch": "C3",
+          "duration": 0.5,
+          "role": "inner"
+        }
+      ]
+    }
+  ]
+}

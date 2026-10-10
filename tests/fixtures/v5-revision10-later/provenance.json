@@ -1,0 +1,51 @@
+{
+  "scope": "Unmodified controller-earned G7 generated save bytes; no user saves. Synthetic report-context changes are labeled in tests.",
+  "source_directory": "historical-builds/adventure-legends-journey-guidance/build/journey-guidance-earned/g7-fresh-02",
+  "source_manifest_sha256": "747a9e6cbb3bb25d5b8bd11a7643557186038a8615cfa4c865438dfda8f3888b",
+  "source_summary_sha256": "b5c680a572fb0d15e0e18e10316f3378163ef511c9aed29896d6cf8a81756694",
+  "controller_only": true,
+  "game_ram_writes": 0,
+  "machine_state_imports": 0,
+  "fixtures": [
+    {
+      "path": "tests/fixtures/v5-revision10-later/north-machine-1-cleared.sav",
+      "sha256": "c29eecb68fc6ecd6dbaff57edc79cd3d2128d1d6b4f62b8588b379e8b27c12c2",
+      "source_relative": "regions/north-machine-1-cleared.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/north-north-main-before-continue.sav",
+      "sha256": "a788602957ba2b9c54702b3a624dbb56af98aac876431174c4b89346043d1958",
+      "source_relative": "regions/north-north-main-before-continue.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/south-boss-1-cleared.sav",
+      "sha256": "e96a0070c491a8d09a5957af2127b55add1b1a25957eade04c5c7d379b827795",
+      "source_relative": "regions/south-boss-1-cleared.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/south-south-main-before-continue.sav",
+      "sha256": "e21773bd92d49c97be1ea96440dd27e0ea105cdbc691e659362e73c93f0ad675",
+      "source_relative": "regions/south-south-main-before-continue.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/magma-regulator-cleared.sav",
+      "sha256": "b8013b88d9225fd3ade855c1f0a37c89713370a287cad39ada7202025f3c9cda",
+      "source_relative": "regions/magma-regulator-cleared.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/magma-magma-main-before-continue.sav",
+      "sha256": "d44138e53fd6bcee503721d64deeaa89834ab76296a7c26acbd2a32c8da3ba85",
+      "source_relative": "regions/magma-magma-main-before-continue.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/underwater-08-guardian-settled.sav",
+      "sha256": "cb19ff5f222a7d7700825d7a1ac4aaaeb988db8f994819b02ecd5e32665589a5",
+      "source_relative": "regions/underwater-08-guardian-settled.sav"
+    },
+    {
+      "path": "tests/fixtures/v5-revision10-later/underwater-underwater-main-before-continue.sav",
+      "sha256": "1b42ea5b7997b20a76810aac0dec6a6ebbb25a7e82a56a96922d84735df3b286",
+      "source_relative": "regions/underwater-underwater-main-before-continue.sav"
+    }
+  ]
+}

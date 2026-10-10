@@ -1,0 +1,311 @@
+{
+  "scope": "original-native-assets; controller-motion-and-acquisition-unverified",
+  "forms": [
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128
+  ],
+  "images": 232,
+  "pixel_bytes": 65536,
+  "pixel_sha256": "9da8f9c61d2e468086d406ae7458423b1016f1e7f29dd0b88879a7eb900457c9",
+  "authored_source_sha256": "58379375bb2c8eb7df2bb81da720eee766414d209ce87119828ca5f6b8c370b1",
+  "generated_parts": {
+    "src/covenants_creature_art_data/part_000.inc": "5c0ac9c6a0b611836f70f1de9b0ad2d464ac865aec18d9a4c777d441d9766448",
+    "src/covenants_creature_art_data/part_001.inc": "583c5cdabb455557062071b687c032fc4d9c9557f995af0ae4abe329077b6cc2",
+    "src/covenants_creature_art_data/part_002.inc": "857480bd648eba387b0d0d7bd9f71fa7eea8ec449c2337380e53166efa94fde8",
+    "src/covenants_creature_art_data/part_003.inc": "e25133359dfb89dc47ab2b1649f72e27086642848faa86a0e27ab76e66ccd3e3",
+    "src/covenants_creature_art_data/part_004.inc": "2ac74a923246c82d97d6071211b1ba7fecb6d089c6086282d139f8c6a249b700",
+    "src/covenants_creature_art_data/part_005.inc": "8e1fcd6444de9d511d7ad711a0b29cfb06d3d123adbe7813c71601ab51a4250c"
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "images": 232,
+    "direction_rows": [
+      {
+        "id": 121,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 121,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 121,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 121,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 122,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 122,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 122,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 122,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 123,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 123,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 123,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 123,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 124,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 124,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 124,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 124,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 125,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 125,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 125,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 125,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 126,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 126,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 126,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 126,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 127,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 127,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 127,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 127,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 128,
+        "direction": "down",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 128,
+        "direction": "up",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 128,
+        "direction": "left",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      },
+      {
+        "id": 128,
+        "direction": "right",
+        "unique_pixels": 7,
+        "unique_walk_masks": 4,
+        "unique_cast_masks": 3
+      }
+    ],
+    "actor_palette_indices": [
+      0,
+      1,
+      4,
+      6,
+      7,
+      10,
+      11,
+      12,
+      13,
+      26,
+      27,
+      28,
+      29,
+      30,
+      35,
+      36,
+      39,
+      40,
+      41,
+      42,
+      45,
+      46,
+      47,
+      48,
+      50,
+      51,
+      53,
+      54,
+      55,
+      56,
+      59,
+      60,
+      74,
+      79,
+      88,
+      89,
+      96
+    ],
+    "field_dimensions": [
+      8,
+      4,
+      4,
+      256
+    ],
+    "cast_dimensions": [
+      8,
+      4,
+      3,
+      256
+    ],
+    "portrait_dimensions": [
+      8,
+      1024
+    ]
+  }
+}

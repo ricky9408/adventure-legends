@@ -1,0 +1,33 @@
+{
+  "title": "Under the Rootbound Arch",
+  "bars": 24,
+  "meter": "3/4",
+  "tempo": 78,
+  "duration_seconds": 55.38461538461539,
+  "bar_sums": "All 72 voice-bars exactly 3 beats",
+  "xml": "All 3 parts match JSON pitches, onsets, durations",
+  "midi": "Parsed all binary tracks; every pitch and onset matches events; note-offs 14 ticks before notated end",
+  "tracks": 4,
+  "individual_voice_files": 3,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "end_tick": 34560,
+  "ranges": {
+    "melody": [
+      67,
+      81
+    ],
+    "inner": [
+      53,
+      65
+    ],
+    "bass": [
+      43,
+      53
+    ]
+  },
+  "voice_crossings": 0,
+  "audible_review_performed": false,
+  "visual_review": "Both rendered PDF pages inspected; complete 24 bars, readable accidentals/durations, no clipping",
+  "loop": "A7 to Dm(add9): C#5 to D5, G3 to rest then A3, A2 to D3. Exact 72-beat boundary; no notes or pedal extend past end."
+}

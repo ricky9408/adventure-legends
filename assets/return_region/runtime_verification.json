@@ -1,0 +1,38 @@
+{
+ "kind": "Source module verification, not native release acceptance",
+ "world_host_tests": 11,
+ "geometry_host_tests": 5,
+ "real_legacy_power_fixture_cases": 146,
+ "legacy_power_evidence": "build/return-legacy-host/fixture-footprints.json (owned by legacy bridge worker)",
+ "arm_game_object": {
+  "rom_text": 21324,
+  "data": 8,
+  "bss": 340
+ },
+ "arm_art_object": {
+  "rom": 1392372,
+  "data": 0,
+  "bss": 0
+ },
+ "ui_old_raster_statements_exact": 2760,
+ "geometry_policy": "Half-open rectangles, exact5px-square foot;2 dynamic attic supports and1 cargo boom with overlap refusal; all variants free escape",
+ "sources": {
+  "src/return_game.c": "69191563d23710cd41eedcb64c5c194528112bd2080d91844ca5128d46d82b26",
+  "src/return_game.h": "9b51390bf082b014bf7a556578fc64998b7999d82ace5e33d9b85d10bc500969",
+  "src/return_trials.inc": "5b389de9ae474eb44f890d1bdf5780eeba8d34264a3a29667c177a7845867af8",
+  "src/return_trials_data.inc": "a8521eca586cc44bc9515e0a6232d312dc12815dfd953833e372faa9a7ec5030",
+  "src/return_fields.inc": "63168c6dbbb7defcfb17de80c9c7a97e1c6fbcac3ae29a0b1a37accf00139e5d",
+  "src/return_events.inc": "816cb4bc6b74513d68c015dedee6d21e430345eeae981ff84eaefb7eda9aa620",
+  "src/return_interact.inc": "cd41ff33f3e0988158739447683fd548ec2eccd0247a9aa8b80f4581891a282b",
+  "src/return_game_draw.inc": "7a9642fa8d2d81520da5aca34b73554a40b7d8501596798e222f22f66f6234aa",
+  "assets/generate_return_region.py": "6442c81bdac1b1bbfacabba40d139109aa3efdddbd78a8f08174454a126853c5",
+  "assets/generate_return_trials.py": "7afa547093ce25b82a97142d2e780577495a861e102328bceb8978a1908f3bf1",
+  "tests/test_return_world.py": "dfeaf8dd15b18ebe5617b5ae59d2e2950e6f9634f10d82869afc3f66d8ebfb38",
+  "tests/test_return_geometry.py": "acda115a585e756bde8a963c6b31da3eb94b6656775145424c8ac1949007d457",
+  "tests/return_world_host.c": "d7a5e04035915167cbc802b6e68064aff1faeb70f2bed88d83efa8e87ca7aa50",
+  "docs/return-runtime/world.md": "7387d079c9ea2fcd34f1b61bfc95979932a06f5976d513a6653d4605aa80583e"
+ },
+ "legacy_power_launch_tolerance": "9x9:146 cases x81 positions, intended hit and no other fixture hit over full active lifetime (legacy bridge test)",
+ "modal_lifecycle": "Read-only journal/picker freezes personal/repeat proof; real instance/command/party changes including away-and-back cancel; explicit abandonment still cancels",
+ "repeat_confirmation": "B or leaving exact invitation facing cone cancels only prompt; solved attempt remains; fresh first A required after returning; unrelated A cannot grant"
+}

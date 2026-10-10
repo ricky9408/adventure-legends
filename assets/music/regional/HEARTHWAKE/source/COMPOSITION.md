@@ -1,0 +1,6 @@
+# Painted Sails at Hearthwake
+Original B-flat-major harbor song, 20 bars of 4/4 at quarter=104 (46.153846 seconds; 756,185 rounded PCM samples at 16,384 Hz). Fits the 48-second slot without cutting phrases.
+
+The identifying gesture is F4 up a major sixth to D5, followed by C5-Bb4 and a written half-beat breath. A warm walking bass is rooted on beats 1 and 3, never on a displaced offbeat. The first eight bars form two four-bar questions/answers. Bars 9-12 broaden toward Eb with the apex G5 above the harbor's low-register theme; bars 13-20 return and develop it, including a rising G-Bb-D-F response. The final F7 has an actual melodic breath; the returning F-D gesture resolves its suspended expectation without a fade.
+
+Harmony travels through descending bass Bb-A-G-F, then a C-minor to C7 secondary dominant (V/V) in bar 7. This is not a transposition of the approved home theme. Three monophonic engine voices: rounded lead, light plucked interior, soft triangular bass. Full uncompressed notation and separate piano-reference MIDI voices retain every event. No pedal. MIDI reference is neutral piano, not proof of final timbre quality. Independent score review precedes engraving; listening remains a distinct approval gate.

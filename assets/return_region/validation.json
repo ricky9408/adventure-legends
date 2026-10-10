@@ -1,0 +1,46 @@
+{
+ "kind": "Host authored-geometry certificate; native controller acceptance separate",
+ "rooms": {
+  "54": {
+   "reachable_pixels": 123300,
+   "target_count": 18,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "55": {
+   "reachable_pixels": 27472,
+   "target_count": 12,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "56": {
+   "reachable_pixels": 126284,
+   "target_count": 18,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "57": {
+   "reachable_pixels": 124444,
+   "target_count": 24,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "58": {
+   "reachable_pixels": 125404,
+   "target_count": 19,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "59": {
+   "reachable_pixels": 27888,
+   "target_count": 9,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "60": {
+   "reachable_pixels": 29284,
+   "target_count": 13,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  },
+  "61": {
+   "reachable_pixels": 28192,
+   "target_count": 9,
+   "all_spawns_exits_walks_and_cardinal_approaches": true
+  }
+ },
+ "rom_art_bytes": 1391760
+}

@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "name": "companion-browsing-display-r2",
+  "scope": "Display-only roster ordinal/owned count, storage-slot No., level, party slot and same-identity detail; no game input, save, progression or music edits.",
+  "parent_endroll_contract_sha256": "4b1b5583e5f200410f09c48486dda97439b3980776bf1aa0380e6a5c3e30efeb",
+  "parent_snapshot_sha256": "f0bb857c45e3100c0937202c90555f6a8b3df4a770293d7bb516fb967075f26f",
+  "changed_runtime": {
+    "src/companion_guide.c": {
+      "before": "27ed68ce8048879cedd7991707977666821c8e4ce56d8e3a3c0f7469e5ac2fe8",
+      "after": "672c4a1423c14d05d273772a6faf228d93bfe1d6c0b268205d546c57a5e1cec6"
+    },
+    "src/companion_guide.h": {
+      "before": "33ce3d610b5f7a0388e58c202ff272cbad48f87cddabc8e3a0f9c6ee2420a8d1",
+      "after": "237e9626c05f28f7592fccc04a8f6dc60c279b134462b60ab9fdcdb4ad4f5f2d"
+    },
+    "src/companion_guide_text.c": {
+      "before": "b95953cab242f9c7afc2cfeee4f1edc9b8a48f93b082ee8f457e96d76caa3015",
+      "after": "9129e59c86673828c1e9d96e4936e77925fac2acdcc4c9cb671d570435a72e27"
+    },
+    "src/companion_guide_text.h": {
+      "before": "cf877d4d063e1c24b1c2afa9e724297bff7633ae15333c6bfd863a9cba8ad2ed",
+      "after": "99d4a469b22987070622ab492b5621d98ee6b23c52c27bd24139289ac9c3168d"
+    },
+    "src/companion_guide_text_data/part_048.inc": {
+      "before": "4effd6c50b3a97dbefdb192cbae0e55f52fd2ceecaa91eac0b7aa9f500175fe6",
+      "after": "249bc805cce329a903f9411f100d521d21bf58acb732d5c8a912e47be5751d98"
+    },
+    "src/companion_guide_text_data/part_049.inc": {
+      "before": "66fbaa9a2b1600d1149f02332630e438be9a90eca3add743c9371dd45c99e0d9",
+      "after": "1f6b702f1c8e952943eacec4a0f4216530bd897fe41aacc13215d69ed900a7ee"
+    },
+    "src/companion_guide_text_data/part_050.inc": {
+      "before": null,
+      "after": "21a098a4a0ffb826658b53d4db8d7048d655cac8b1a092d8aafa1940c7d63c76"
+    },
+    "src/quickparty.c": {
+      "before": "fb711768b2c248fe23ac7e185caf0497bf75c33884f71b0f991dfd57527c2983",
+      "after": "c0f06386003b521304bebadf5bac246f1029b900af561337d8db042bd65be6ab"
+    }
+  },
+  "authoring_sha256": {
+    "assets/generate_companion_guide.py": "4033bfe3e4bc39c645ea4be35eebcf6d4ed166cd336dab9656259e774ef2b54b"
+  },
+  "parent_authoring_sha256": {
+    "assets/generate_companion_guide.py": "4e0264b64a8e1b66f5b76c3ab0174beb94ab2622beb87aaed26f00620fcbcaf9"
+  }
+}

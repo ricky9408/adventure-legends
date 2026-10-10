@@ -1,0 +1,72 @@
+{
+  "TITLE": {
+    "text": "旅の宝物を受け取った",
+    "size": 12,
+    "height": 15
+  },
+  "COMPASS": {
+    "text": "つり合いの羅針盤",
+    "size": 12,
+    "height": 15
+  },
+  "LENS": {
+    "text": "陽だまりのレンズ",
+    "size": 12,
+    "height": 15
+  },
+  "BELL": {
+    "text": "火口の鈴",
+    "size": 12,
+    "height": 15
+  },
+  "PEARL": {
+    "text": "潮音の真珠",
+    "size": 12,
+    "height": 15
+  },
+  "COMPASS_EFFECT": {
+    "text": "移動が少し速くなる",
+    "size": 12,
+    "height": 15
+  },
+  "LENS_EFFECT": {
+    "text": "守りが少し強くなる",
+    "size": 12,
+    "height": 15
+  },
+  "BELL_EFFECT": {
+    "text": "仲間の力を少し早く使える",
+    "size": 12,
+    "height": 15
+  },
+  "PEARL_EFFECT": {
+    "text": "最大の命がハート1つ増える",
+    "size": 12,
+    "height": 15
+  },
+  "PERMANENT": {
+    "text": "装備せずに いつも働く",
+    "size": 12,
+    "height": 15
+  },
+  "RECEIPT_KEYS": {
+    "text": "A 次へ   B 閉じる",
+    "size": 12,
+    "height": 15
+  },
+  "CLAIM": {
+    "text": "届いた宝物を受け取る",
+    "size": 12,
+    "height": 15
+  },
+  "CLAIM_HINT": {
+    "text": "前に助けた町からの贈り物",
+    "size": 12,
+    "height": 15
+  },
+  "KNOWN": {
+    "text": "受け取った宝物は 道具で確認",
+    "size": 12,
+    "height": 15
+  }
+}

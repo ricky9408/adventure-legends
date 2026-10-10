@@ -1,0 +1,87 @@
+{
+  "palette": [
+    {
+      "name": "warm clay ocarina",
+      "gain": 0.67,
+      "attack": 0.014,
+      "release": 0.105,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.04
+        ],
+        [
+          3,
+          0.055
+        ],
+        [
+          5,
+          0.012
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.5,
+      "vibrato_cents": 4.0
+    },
+    {
+      "name": "rounded hearth bass",
+      "gain": 0.35,
+      "attack": 0.01,
+      "release": 0.09,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.055
+        ],
+        [
+          5,
+          0.018
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "woody small keyboard",
+      "gain": 0.26,
+      "attack": 0.003,
+      "release": 0.06,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.18
+        ],
+        [
+          3,
+          0.09
+        ],
+        [
+          4,
+          0.035
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "kilnstep-gba-16384-s8.raw": "9ca3afda0041a5fd2842003728053a1cd52b94ffe0195e528d8e7f77918c4f1e"
+  }
+}

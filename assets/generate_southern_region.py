@@ -6,6 +6,7 @@ The authoritative fixture/spawn contracts are inputs, never rewritten here.
 from pathlib import Path
 import hashlib,json,random,sys
 from PIL import Image,ImageDraw
+import connected_road_art as roads
 sys.dont_write_bytecode=True
 from generate_assets import Art,P,PAL,COLORS,color_background
 from generate_region import verify_room,odd_bitmap,cbytes,paste_sprite
@@ -105,6 +106,7 @@ def new(i):
 
 def town():
  r,a=new(0);ground(a,930,'dirt3');paving(a,(12,138,456,140));path(a,[(304,0),(304,140),(268,164),(240,216),(240,290)],30)
+ roads.draw(a,30,P)
  # Waterfront terraces continue around a pier, with open views to clear sea.
  sea(a,(8,280,464,32),31);a.r((8,272,471,279),'stone2');a.l([(8,271),(471,271)],'stone5',3)
  solid(r,'harbor_water_west',(8,280,216,32));solid(r,'harbor_water_east',(256,280,216,32));deck(a,(224,267,32,53))
@@ -125,12 +127,12 @@ def town():
  a.r((272,199,288,202),'wood3');a.r((304,199,320,202),'wood3');a.r((336,199,352,202),'wood3')
  # Trees bracket clear openings rather than hiding doors or NPCs.
  frond(a,r,24,126,.85);shade_tree(a,r,438,159,.75);frond(a,r,282,86,.8);shade_tree(a,r,36,252,.75)
- for x,y in[(19,186),(449,243),(422,267),(93,251)]:shrub(a,x,y,.55)
+ for x,y in[(19,186),(449,231),(422,267),(93,251)]:shrub(a,x,y,.55)
  # A bright ferry with a striped cover and plainly open landing at center.
  a.p([(298,291),(348,286),(369,298),(344,309),(306,306)],'wood1');a.p([(304,292),(346,290),(361,299),(343,305),(309,302)],'plaster');a.l([(310,299),(353,299)],'wood3',2);awning(a,314,283,29,9)
  # Fictional fish shop board: a creature shape, never real script or sacred art.
  a.r((383,127,415,139),'wood1');a.r((385,128,413,137),'plaster');a.e((392,130,405,135),'water2');a.p([(405,132),(410,129),(410,136)],'water2');a.dot(395,131,'ink')
- for x,y in[(24,196),(416,238)]:a.r((x,y,x+20,y+4),'wood2');a.l([(x,y),(x+20,y)],'wood5');solid(r,'low_court_bench',(x,y,21,5))
+ for x,y in[(24,196),(416,210)]:a.r((x,y,x+20,y+4),'wood2');a.l([(x,y),(x+20,y)],'wood5');solid(r,'low_court_bench',(x,y,21,5))
  # Paired delivery trays are readable work sites, with a removable central tie.
  for x,y in[(128,248),(384,248)]:
   deck(a,(x-15,y-11,30,20));a.r((x-13,y-9,x-8,y-3),'plaster');a.r((x+8,y-9,x+13,y-3),'fire2');a.l([(x-7,y-5),(x+7,y+4)],'wood1');a.l([(x+7,y-5),(x-7,y+4)],'wood1')
@@ -337,7 +339,7 @@ def creature_preview(o):
 def main():
  ROOMS.clear();SPRITES.clear();SPRITES.extend((n,sprite(n))for n in NAMES);lookup=dict(SPRITES)
  for fn in[town,field]+[lambda i=i:interior(i)for i in range(2,8)]:
-  r,a=fn();a=color_background(a,'forest'if r['id']<34 else'temple');fixtures(r,a,lookup);r['art']=a
+  r,a=fn();roads.open_borders(r);a=color_background(a,'forest'if r['id']<34 else'temple');fixtures(r,a,lookup);r['art']=a
  proofs={}
  for r in ROOMS:
   check={**r,'spawns':{**r['spawns'],**{'enemy_'+str(j):p for j,p in enumerate(r['enemy_spawns'])}}}

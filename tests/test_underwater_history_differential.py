@@ -19,9 +19,11 @@ def build(root,folder):
  for p in (root/'src').iterdir():
   if p.is_file() and p.suffix in ('.c','.h','.inc'):
    data=p.read_bytes();(folder/p.name).write_bytes(data);hashes[p.name]=digest(data)
- (folder/'probe.c').write_text(HARNESS)
+ from history_abi_compat import adapt_harness,bind_compat
+ harness,old_abi=adapt_harness(root,HARNESS)
+ (folder/'probe.c').write_text(harness)
  so=folder/'history.so';subprocess.run(shlex.split(os.environ.get('HOST_CC','cc'))+['-std=c99','-O2','-Wall','-Wextra','-Werror','-ffreestanding','-fno-builtin','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-shared','-fPIC','-I'+str(folder),*[str(folder/(n+'.c')) for n in SOURCES],str(folder/'probe.c'),'-o',str(so)],check=True)
- lib=C.CDLL(str(so));lib.history_probe_bank.argtypes=[C.c_void_p,C.c_uint,C.POINTER(Save)];lib.history_probe_image.argtypes=[C.c_void_p,C.POINTER(Save)];lib.history_encode.argtypes=[C.POINTER(Save),C.c_void_p];lib.save5_validate_revision.argtypes=[C.POINTER(Save),C.c_uint]
+ lib=C.CDLL(str(so));bind_compat(lib,old_abi);lib.history_probe_bank.argtypes=[C.c_void_p,C.c_uint,C.POINTER(Save)];lib.history_probe_image.argtypes=[C.c_void_p,C.POINTER(Save)];lib.history_encode.argtypes=[C.POINTER(Save),C.c_void_p];lib.save5_validate_revision.argtypes=[C.POINTER(Save),C.c_uint]
  lib._hashes=hashes;assert lib.history_state_size()==C.sizeof(Save);return lib
 class UnderwaterHistoricalDifferential(unittest.TestCase):
  @classmethod
@@ -46,11 +48,11 @@ class UnderwaterHistoricalDifferential(unittest.TestCase):
   if expected is not None:self.assertEqual(a,expected,label)
   self.counts[label if label in ('original','weakened','cross-revision') else 'mutants']+=1;self.counts['accepted' if a else 'rejected']+=1
   return a
- def test_original_images_every_historical_fixture_resaves_revision6(self):
+ def test_original_images_every_historical_fixture_resaves_revision7(self):
   for revision,name,data in self.images:
    self.assertEqual(self.old.history_probe_image(data,C.byref(self.oldout)),1,name);self.assertEqual(self.new.history_probe_image(data,C.byref(self.newout)),1,name);self.assertEqual(bytes(self.oldout),bytes(self.newout))
    previous=compare_state(self.newout);out=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(self.newout),out),1,name)
-   self.assertEqual(bytes(out[12:14]),b'\x06\x00');self.assertEqual(self.new.history_probe_bank(out,A,C.byref(self.newout)),1,name);self.assertEqual(compare_state(self.newout),previous)
+   self.assertEqual(bytes(out[12:14]),b'\x0b\x00');self.assertEqual(self.new.history_probe_bank(out,A,C.byref(self.newout)),1,name);self.assertEqual(compare_state(self.newout),previous)
    for src in (A,B):
     bank=data[src:src+SIZE];self.assertEqual(bytes(repair_crc(bank)),bank,name)
     for dst in (A,B):self.compare(bank,1,'original',dst)
@@ -98,7 +100,7 @@ class UnderwaterHistoricalDifferential(unittest.TestCase):
     bank=bytearray(seed);slot=rng.randrange(160);p=160+slot*24;bank[p+14:p+16]=rng.randrange(65536).to_bytes(2,'little');self.compare(bank)
  def test_unknown_revision_and_bad_newer_bank_fallback(self):
   seed=self.seeds[5]
-  for rev in (0,7,255,256,65535):
+  for rev in (0,12,255,256,65535):
    bank=bytearray(seed);bank[12:14]=rev.to_bytes(2,'little');self.compare(bank,0)
    image=bytearray([255])*32768;image[A:A+SIZE]=seed;bank[8:12]=(0x7fffffff).to_bytes(4,'little');image[B:B+SIZE]=repair_crc(bank)
    self.assertEqual(self.old.history_probe_image(bytes(image),C.byref(self.oldout)),1);self.assertEqual(self.new.history_probe_image(bytes(image),C.byref(self.newout)),1);self.assertEqual(bytes(self.oldout),bytes(self.newout))

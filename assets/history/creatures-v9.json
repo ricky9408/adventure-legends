@@ -1,0 +1,2848 @@
+{
+  "schema": 2,
+  "content_revision": 9,
+  "forms": [
+    {
+      "id": 1,
+      "family": 1,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "family": 1,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 12,
+      "trial_mask": 1025,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          1
+        ],
+        [
+          12,
+          5
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "family": 1,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1025,
+      "min_bond": 60,
+      "required_trial": 1025,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          1
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          32,
+          91
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "family": 2,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 2,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "id": 5,
+      "family": 2,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 12,
+      "trial_mask": 1026,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          2
+        ],
+        [
+          12,
+          6
+        ]
+      ]
+    },
+    {
+      "id": 6,
+      "family": 2,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1026,
+      "min_bond": 60,
+      "required_trial": 1026,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          2
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          32,
+          92
+        ]
+      ]
+    },
+    {
+      "id": 7,
+      "family": 3,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 4,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          3
+        ]
+      ]
+    },
+    {
+      "id": 8,
+      "family": 3,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 16,
+      "trial_mask": 1028,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          3
+        ],
+        [
+          16,
+          7
+        ]
+      ]
+    },
+    {
+      "id": 9,
+      "family": 3,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1028,
+      "min_bond": 60,
+      "required_trial": 1028,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          3
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          32,
+          93
+        ]
+      ]
+    },
+    {
+      "id": 10,
+      "family": 4,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 8,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "id": 11,
+      "family": 4,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 20,
+      "trial_mask": 1032,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          4
+        ],
+        [
+          20,
+          8
+        ]
+      ]
+    },
+    {
+      "id": 12,
+      "family": 4,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1032,
+      "min_bond": 60,
+      "required_trial": 1032,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          4
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          32,
+          94
+        ]
+      ]
+    },
+    {
+      "id": 13,
+      "family": 5,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 16,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          9
+        ]
+      ]
+    },
+    {
+      "id": 14,
+      "family": 5,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 15,
+      "trial_mask": 1040,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          9
+        ],
+        [
+          15,
+          10
+        ]
+      ]
+    },
+    {
+      "id": 15,
+      "family": 5,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1040,
+      "min_bond": 60,
+      "required_trial": 1040,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          9
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          32,
+          95
+        ]
+      ]
+    },
+    {
+      "id": 16,
+      "family": 6,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          11
+        ]
+      ]
+    },
+    {
+      "id": 17,
+      "family": 6,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3072,
+      "min_bond": 45,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          11
+        ],
+        [
+          28,
+          96
+        ]
+      ]
+    },
+    {
+      "id": 18,
+      "family": 6,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 3072,
+      "min_bond": 60,
+      "required_trial": 3072,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          11
+        ],
+        [
+          28,
+          96
+        ],
+        [
+          32,
+          97
+        ]
+      ]
+    },
+    {
+      "id": 19,
+      "family": 7,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 32,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          13
+        ]
+      ]
+    },
+    {
+      "id": 20,
+      "family": 7,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 16,
+      "trial_mask": 1056,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          13
+        ],
+        [
+          16,
+          14
+        ]
+      ]
+    },
+    {
+      "id": 21,
+      "family": 7,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1056,
+      "min_bond": 60,
+      "required_trial": 1056,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          13
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          32,
+          98
+        ]
+      ]
+    },
+    {
+      "id": 22,
+      "family": 8,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 64,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          15
+        ]
+      ]
+    },
+    {
+      "id": 23,
+      "family": 8,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 17,
+      "trial_mask": 1088,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          15
+        ],
+        [
+          17,
+          16
+        ]
+      ]
+    },
+    {
+      "id": 24,
+      "family": 8,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1088,
+      "min_bond": 60,
+      "required_trial": 1088,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          15
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          32,
+          99
+        ]
+      ]
+    },
+    {
+      "id": 25,
+      "family": 9,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 26,
+      "family": 9,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 20,
+      "trial_mask": 1025,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          23
+        ],
+        [
+          20,
+          24
+        ]
+      ]
+    },
+    {
+      "id": 27,
+      "family": 9,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1025,
+      "min_bond": 60,
+      "required_trial": 1025,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          23
+        ],
+        [
+          20,
+          24
+        ],
+        [
+          32,
+          100
+        ]
+      ]
+    },
+    {
+      "id": 28,
+      "family": 10,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          25
+        ]
+      ]
+    },
+    {
+      "id": 29,
+      "family": 10,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 22,
+      "trial_mask": 1025,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          25
+        ],
+        [
+          22,
+          26
+        ]
+      ]
+    },
+    {
+      "id": 30,
+      "family": 10,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 1025,
+      "min_bond": 60,
+      "required_trial": 1025,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          25
+        ],
+        [
+          22,
+          26
+        ],
+        [
+          32,
+          101
+        ]
+      ]
+    },
+    {
+      "id": 31,
+      "family": 11,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          43
+        ]
+      ]
+    },
+    {
+      "id": 32,
+      "family": 11,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          43
+        ],
+        [
+          26,
+          44
+        ]
+      ]
+    },
+    {
+      "id": 33,
+      "family": 11,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          43
+        ],
+        [
+          26,
+          44
+        ],
+        [
+          32,
+          45
+        ]
+      ]
+    },
+    {
+      "id": 34,
+      "family": 12,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          46
+        ]
+      ]
+    },
+    {
+      "id": 35,
+      "family": 12,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          46
+        ],
+        [
+          26,
+          47
+        ]
+      ]
+    },
+    {
+      "id": 36,
+      "family": 12,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 32,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          46
+        ],
+        [
+          26,
+          47
+        ],
+        [
+          32,
+          48
+        ]
+      ]
+    },
+    {
+      "id": 37,
+      "family": 13,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          49
+        ]
+      ]
+    },
+    {
+      "id": 38,
+      "family": 13,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          49
+        ],
+        [
+          26,
+          50
+        ]
+      ]
+    },
+    {
+      "id": 39,
+      "family": 13,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          49
+        ],
+        [
+          26,
+          51
+        ]
+      ]
+    },
+    {
+      "id": 40,
+      "family": 14,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          52
+        ]
+      ]
+    },
+    {
+      "id": 41,
+      "family": 14,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          52
+        ],
+        [
+          26,
+          53
+        ]
+      ]
+    },
+    {
+      "id": 42,
+      "family": 14,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          52
+        ],
+        [
+          26,
+          54
+        ]
+      ]
+    },
+    {
+      "id": 43,
+      "family": 15,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          55
+        ]
+      ]
+    },
+    {
+      "id": 44,
+      "family": 15,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          55
+        ],
+        [
+          26,
+          56
+        ]
+      ]
+    },
+    {
+      "id": 45,
+      "family": 15,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          55
+        ],
+        [
+          26,
+          57
+        ]
+      ]
+    },
+    {
+      "id": 46,
+      "family": 16,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          58
+        ]
+      ]
+    },
+    {
+      "id": 47,
+      "family": 16,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          58
+        ],
+        [
+          26,
+          59
+        ]
+      ]
+    },
+    {
+      "id": 48,
+      "family": 16,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          58
+        ],
+        [
+          26,
+          60
+        ]
+      ]
+    },
+    {
+      "id": 49,
+      "family": 17,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          67
+        ]
+      ]
+    },
+    {
+      "id": 50,
+      "family": 17,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          67
+        ],
+        [
+          28,
+          68
+        ]
+      ]
+    },
+    {
+      "id": 51,
+      "family": 17,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          67
+        ],
+        [
+          28,
+          69
+        ]
+      ]
+    },
+    {
+      "id": 52,
+      "family": 18,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          70
+        ]
+      ]
+    },
+    {
+      "id": 53,
+      "family": 18,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          70
+        ],
+        [
+          28,
+          71
+        ]
+      ]
+    },
+    {
+      "id": 54,
+      "family": 18,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          70
+        ],
+        [
+          28,
+          72
+        ]
+      ]
+    },
+    {
+      "id": 55,
+      "family": 19,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          73
+        ]
+      ]
+    },
+    {
+      "id": 56,
+      "family": 19,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          73
+        ],
+        [
+          28,
+          74
+        ]
+      ]
+    },
+    {
+      "id": 57,
+      "family": 19,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          73
+        ],
+        [
+          28,
+          75
+        ]
+      ]
+    },
+    {
+      "id": 58,
+      "family": 20,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          76
+        ]
+      ]
+    },
+    {
+      "id": 59,
+      "family": 20,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          76
+        ],
+        [
+          28,
+          77
+        ]
+      ]
+    },
+    {
+      "id": 60,
+      "family": 20,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          76
+        ],
+        [
+          28,
+          78
+        ]
+      ]
+    },
+    {
+      "id": 61,
+      "family": 21,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          79
+        ]
+      ]
+    },
+    {
+      "id": 62,
+      "family": 21,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          79
+        ],
+        [
+          28,
+          80
+        ]
+      ]
+    },
+    {
+      "id": 63,
+      "family": 21,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          79
+        ],
+        [
+          28,
+          81
+        ]
+      ]
+    },
+    {
+      "id": 64,
+      "family": 22,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          82
+        ]
+      ]
+    },
+    {
+      "id": 65,
+      "family": 22,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          82
+        ],
+        [
+          28,
+          83
+        ]
+      ]
+    },
+    {
+      "id": 66,
+      "family": 22,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          82
+        ],
+        [
+          28,
+          84
+        ]
+      ]
+    },
+    {
+      "id": 67,
+      "family": 23,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          85
+        ]
+      ]
+    },
+    {
+      "id": 68,
+      "family": 23,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          85
+        ],
+        [
+          28,
+          86
+        ]
+      ]
+    },
+    {
+      "id": 69,
+      "family": 23,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          85
+        ],
+        [
+          28,
+          87
+        ]
+      ]
+    },
+    {
+      "id": 70,
+      "family": 24,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 3,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          88
+        ]
+      ]
+    },
+    {
+      "id": 71,
+      "family": 24,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 1,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          88
+        ],
+        [
+          28,
+          89
+        ]
+      ]
+    },
+    {
+      "id": 72,
+      "family": 24,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 3,
+      "min_bond": 45,
+      "required_trial": 2,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          88
+        ],
+        [
+          28,
+          90
+        ]
+      ]
+    },
+    {
+      "id": 73,
+      "family": 25,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 128,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          17
+        ]
+      ]
+    },
+    {
+      "id": 74,
+      "family": 25,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 18,
+      "trial_mask": 128,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          17
+        ],
+        [
+          18,
+          18
+        ]
+      ]
+    },
+    {
+      "id": 75,
+      "family": 26,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 256,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          19
+        ]
+      ]
+    },
+    {
+      "id": 76,
+      "family": 26,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 18,
+      "trial_mask": 256,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          19
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "id": 77,
+      "family": 27,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 512,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          21
+        ]
+      ]
+    },
+    {
+      "id": 78,
+      "family": 27,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 20,
+      "trial_mask": 512,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          21
+        ],
+        [
+          20,
+          22
+        ]
+      ]
+    },
+    {
+      "id": 79,
+      "family": 28,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          27
+        ]
+      ]
+    },
+    {
+      "id": 80,
+      "family": 28,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 20,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          27
+        ],
+        [
+          20,
+          28
+        ]
+      ]
+    },
+    {
+      "id": 81,
+      "family": 29,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          29
+        ]
+      ]
+    },
+    {
+      "id": 82,
+      "family": 29,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 22,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          29
+        ],
+        [
+          22,
+          30
+        ]
+      ]
+    },
+    {
+      "id": 83,
+      "family": 30,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          31
+        ]
+      ]
+    },
+    {
+      "id": 84,
+      "family": 30,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 22,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          31
+        ],
+        [
+          22,
+          32
+        ]
+      ]
+    },
+    {
+      "id": 85,
+      "family": 31,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          33
+        ]
+      ]
+    },
+    {
+      "id": 86,
+      "family": 31,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 20,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          33
+        ],
+        [
+          20,
+          34
+        ]
+      ]
+    },
+    {
+      "id": 87,
+      "family": 32,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          35
+        ]
+      ]
+    },
+    {
+      "id": 88,
+      "family": 32,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 24,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          35
+        ],
+        [
+          24,
+          36
+        ]
+      ]
+    },
+    {
+      "id": 89,
+      "family": 33,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          37
+        ]
+      ]
+    },
+    {
+      "id": 90,
+      "family": 33,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 22,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          37
+        ],
+        [
+          22,
+          38
+        ]
+      ]
+    },
+    {
+      "id": 91,
+      "family": 34,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          39
+        ]
+      ]
+    },
+    {
+      "id": 92,
+      "family": 34,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 24,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          39
+        ],
+        [
+          24,
+          40
+        ]
+      ]
+    },
+    {
+      "id": 93,
+      "family": 35,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          41
+        ]
+      ]
+    },
+    {
+      "id": 94,
+      "family": 35,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 22,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          41
+        ],
+        [
+          22,
+          42
+        ]
+      ]
+    },
+    {
+      "id": 95,
+      "family": 36,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          61
+        ]
+      ]
+    },
+    {
+      "id": 96,
+      "family": 36,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          61
+        ],
+        [
+          26,
+          62
+        ]
+      ]
+    },
+    {
+      "id": 97,
+      "family": 37,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          63
+        ]
+      ]
+    },
+    {
+      "id": 98,
+      "family": 37,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          63
+        ],
+        [
+          26,
+          64
+        ]
+      ]
+    },
+    {
+      "id": 99,
+      "family": 38,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          65
+        ]
+      ]
+    },
+    {
+      "id": 100,
+      "family": 38,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 26,
+      "trial_mask": 1,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          65
+        ],
+        [
+          26,
+          66
+        ]
+      ]
+    },
+    {
+      "id": 101,
+      "family": 39,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          102
+        ]
+      ]
+    },
+    {
+      "id": 102,
+      "family": 39,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 1024,
+      "min_bond": 45,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          102
+        ],
+        [
+          28,
+          103
+        ]
+      ]
+    },
+    {
+      "id": 103,
+      "family": 40,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          104
+        ]
+      ]
+    },
+    {
+      "id": 104,
+      "family": 40,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 28,
+      "trial_mask": 1024,
+      "min_bond": 45,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          104
+        ],
+        [
+          28,
+          105
+        ]
+      ]
+    },
+    {
+      "id": 105,
+      "family": 41,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          106
+        ]
+      ]
+    },
+    {
+      "id": 106,
+      "family": 41,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 34,
+      "trial_mask": 1024,
+      "min_bond": 60,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          106
+        ],
+        [
+          34,
+          107
+        ]
+      ]
+    },
+    {
+      "id": 107,
+      "family": 42,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          108
+        ]
+      ]
+    },
+    {
+      "id": 108,
+      "family": 42,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 34,
+      "trial_mask": 1024,
+      "min_bond": 60,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          108
+        ],
+        [
+          34,
+          109
+        ]
+      ]
+    },
+    {
+      "id": 109,
+      "family": 43,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          110
+        ]
+      ]
+    },
+    {
+      "id": 110,
+      "family": 43,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 34,
+      "trial_mask": 1024,
+      "min_bond": 60,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          110
+        ],
+        [
+          34,
+          111
+        ]
+      ]
+    },
+    {
+      "id": 111,
+      "family": 44,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 1024,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          112
+        ]
+      ]
+    },
+    {
+      "id": 112,
+      "family": 44,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 34,
+      "trial_mask": 1024,
+      "min_bond": 60,
+      "required_trial": 1024,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          112
+        ],
+        [
+          34,
+          113
+        ]
+      ]
+    },
+    {
+      "id": 113,
+      "family": 45,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          114
+        ]
+      ]
+    },
+    {
+      "id": 114,
+      "family": 46,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          115
+        ]
+      ]
+    },
+    {
+      "id": 115,
+      "family": 47,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          116
+        ]
+      ]
+    },
+    {
+      "id": 116,
+      "family": 48,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          117
+        ]
+      ]
+    },
+    {
+      "id": 117,
+      "family": 49,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          118
+        ]
+      ]
+    },
+    {
+      "id": 118,
+      "family": 50,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          119
+        ]
+      ]
+    },
+    {
+      "id": 119,
+      "family": 51,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "id": 120,
+      "family": 52,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 0,
+      "learn": [
+        [
+          1,
+          121
+        ]
+      ]
+    },
+    {
+      "id": 121,
+      "family": 53,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          9
+        ],
+        [
+          30,
+          12
+        ]
+      ]
+    },
+    {
+      "id": 122,
+      "family": 54,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          122
+        ]
+      ]
+    },
+    {
+      "id": 123,
+      "family": 55,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          123
+        ]
+      ]
+    },
+    {
+      "id": 124,
+      "family": 56,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          124
+        ]
+      ]
+    },
+    {
+      "id": 125,
+      "family": 57,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          125
+        ]
+      ]
+    },
+    {
+      "id": 126,
+      "family": 58,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          126
+        ]
+      ]
+    },
+    {
+      "id": 127,
+      "family": 59,
+      "polarity": 1,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          127
+        ]
+      ]
+    },
+    {
+      "id": 128,
+      "family": 60,
+      "polarity": 0,
+      "revision_bits": 0,
+      "min_level": 1,
+      "trial_mask": 0,
+      "min_bond": 0,
+      "required_trial": 0,
+      "rarity": 1,
+      "learn": [
+        [
+          1,
+          128
+        ]
+      ]
+    }
+  ],
+  "trial_dependencies": [
+    {
+      "family": 1,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 2,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 3,
+      "mask": 4,
+      "prerequisite": 0
+    },
+    {
+      "family": 4,
+      "mask": 8,
+      "prerequisite": 0
+    },
+    {
+      "family": 5,
+      "mask": 16,
+      "prerequisite": 0
+    },
+    {
+      "family": 7,
+      "mask": 32,
+      "prerequisite": 0
+    },
+    {
+      "family": 8,
+      "mask": 64,
+      "prerequisite": 0
+    },
+    {
+      "family": 25,
+      "mask": 128,
+      "prerequisite": 0
+    },
+    {
+      "family": 26,
+      "mask": 256,
+      "prerequisite": 0
+    },
+    {
+      "family": 27,
+      "mask": 512,
+      "prerequisite": 0
+    },
+    {
+      "family": 9,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 10,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 28,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 29,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 30,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 31,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 32,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 33,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 34,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 35,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 11,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 11,
+      "mask": 2,
+      "prerequisite": 1
+    },
+    {
+      "family": 12,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 12,
+      "mask": 2,
+      "prerequisite": 1
+    },
+    {
+      "family": 13,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 13,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 14,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 14,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 15,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 15,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 16,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 16,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 36,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 37,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 38,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 17,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 17,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 18,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 18,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 19,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 19,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 20,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 20,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 21,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 21,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 22,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 22,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 23,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 23,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 24,
+      "mask": 1,
+      "prerequisite": 0
+    },
+    {
+      "family": 24,
+      "mask": 2,
+      "prerequisite": 0
+    },
+    {
+      "family": 1,
+      "mask": 1024,
+      "prerequisite": 1
+    },
+    {
+      "family": 2,
+      "mask": 1024,
+      "prerequisite": 2
+    },
+    {
+      "family": 3,
+      "mask": 1024,
+      "prerequisite": 4
+    },
+    {
+      "family": 4,
+      "mask": 1024,
+      "prerequisite": 8
+    },
+    {
+      "family": 5,
+      "mask": 1024,
+      "prerequisite": 16
+    },
+    {
+      "family": 6,
+      "mask": 1024,
+      "prerequisite": 0
+    },
+    {
+      "family": 6,
+      "mask": 2048,
+      "prerequisite": 1024
+    },
+    {
+      "family": 7,
+      "mask": 1024,
+      "prerequisite": 32
+    },
+    {
+      "family": 8,
+      "mask": 1024,
+      "prerequisite": 64
+    },
+    {
+      "family": 9,
+      "mask": 1024,
+      "prerequisite": 1
+    },
+    {
+      "family": 10,
+      "mask": 1024,
+      "prerequisite": 1
+    },
+    {
+      "family": 39,
+      "mask": 1024,
+      "prerequisite": 0
+    },
+    {
+      "family": 40,
+      "mask": 1024,
+      "prerequisite": 0
+    },
+    {
+      "family": 41,
+      "mask": 1024,
+      "prerequisite": 0
+    },
+    {
+      "family": 42,
+      "mask": 1024,
+      "prerequisite": 0
+    },
+    {
+      "family": 43,
+      "mask": 1024,
+      "prerequisite": 0
+    },
+    {
+      "family": 44,
+      "mask": 1024,
+      "prerequisite": 0
+    }
+  ]
+}

@@ -122,7 +122,16 @@
             0,
             0,
             8,
-            320
+            194
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            0,
+            238,
+            8,
+            82
           ]
         },
         {
@@ -131,7 +140,16 @@
             472,
             0,
             8,
-            320
+            122
+          ]
+        },
+        {
+          "kind": "world_edge",
+          "rect": [
+            472,
+            166,
+            8,
+            154
           ]
         },
         {
@@ -139,16 +157,16 @@
           "rect": [
             8,
             0,
-            216,
+            210,
             8
           ]
         },
         {
           "kind": "north_edge_right",
           "rect": [
-            256,
+            262,
             0,
-            216,
+            210,
             8
           ]
         },
@@ -237,7 +255,7 @@
           "kind": "tree_trunk",
           "rect": [
             442,
-            124,
+            28,
             20,
             30
           ]
@@ -246,7 +264,7 @@
           "kind": "work_barrel",
           "rect": [
             20,
-            194,
+            178,
             11,
             13
           ]
@@ -563,12 +581,12 @@
           1
         ]
       ],
-      "bitmap_sha256": "387e6efc49afa4895e37b1ef75066cfc837ab7d5ef19df388aa918220c6d59be",
+      "bitmap_sha256": "1a558e39ad037c25b53a6cd1202d4ec7930f1e196e8e6598f4adaa038aebeff3",
       "collision_lookup": {
-        "unique_bands": 26,
-        "maximum_intervals": 6,
+        "unique_bands": 28,
+        "maximum_intervals": 5,
         "row_bytes": 640,
-        "band_bytes": 436
+        "band_bytes": 460
       }
     },
     {
@@ -640,16 +658,16 @@
           "rect": [
             8,
             312,
-            216,
+            210,
             8
           ]
         },
         {
           "kind": "south_edge_right",
           "rect": [
-            256,
+            262,
             312,
-            216,
+            210,
             8
           ]
         },
@@ -920,10 +938,10 @@
       ],
       "bitmap_sha256": "8b2a96d6f708a8581dc658b984d07707282791b9aaf0d113335ad7f9cf85ce03",
       "collision_lookup": {
-        "unique_bands": 14,
+        "unique_bands": 15,
         "maximum_intervals": 4,
         "row_bytes": 640,
-        "band_bytes": 180
+        "band_bytes": 190
       }
     },
     {
@@ -2216,11 +2234,11 @@
   ],
   "generated": {
     "bitmap_bytes": 844800,
-    "rom_payload_bytes": 857808,
-    "collision_lookup_bytes": 4014,
-    "alignment_bytes": 10,
+    "rom_payload_bytes": 857860,
+    "collision_lookup_bytes": 4048,
+    "alignment_bytes": 12,
     "arm32_room_table_bytes": 224,
-    "largest_include_bytes": 31999,
+    "largest_include_bytes": 31998,
     "sprite_bytes": 8192
   }
 }

@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "name": "ending-only-credits-native-1",
+  "parent_font_contract_sha256": "1b5ff977e4b93156a073aca4017d49aa1f7d99fd37e716d7bf07faf799fb5a81",
+  "parent_runtime_sha256": "6e512f3de69c8f64d0d319fcada3989f91c65d91c7a6d0d585b543922325680a",
+  "candidate_runtime_sha256": "cc17e320c86861dd80e3ab62590a7f8a75042f6c19b1626109450a6e4b9b83f2",
+  "game_changes": [
+    {
+      "before": "#include \"opening_scene.h\"",
+      "after": "#include \"opening_scene.h\"\n#include \"ending_credits.h\"",
+      "occurrences": 1
+    },
+    {
+      "before": "else centered(TX_BUILD,132,CREAM);}centered(TX_FONT_URL,149,CREAM);return;}",
+      "after": "else centered(TX_BUILD,132,CREAM);}return;}",
+      "occurrences": 1
+    },
+    {
+      "before": "if(game_state==WIN){if(gfx_ending_revision",
+      "after": "if(game_state==WIN){if(ending_credits_phase)return;if(gfx_ending_revision",
+      "occurrences": 1
+    },
+    {
+      "before": "chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);game_state=WIN;",
+      "after": "if(!(chapter_flags&SAVE4_ENDING_SEEN)){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);}game_state=WIN;ending_credits_begin();",
+      "occurrences": 1
+    },
+    {
+      "before": "if(game_state==WIN){if(pressed&(KEY_A|KEY_START)){game_state=PLAY;enter_room(0,3);}return;}",
+      "after": "if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;enter_room(0,3);}return;}",
+      "occurrences": 1
+    },
+    {
+      "before": "game_shop_revision,title_option,game_shop_reward_visible()",
+      "after": "game_shop_revision,game_state==WIN?ending_credits_revision:(unsigned)title_option,game_shop_reward_visible()",
+      "occurrences": 1
+    },
+    {
+      "before": "copy_bg(BACK_TITLE);box(8,40,224,105);centered(TX_COMPLETE",
+      "after": "if(!ending_credits_draw()){copy_bg(BACK_TITLE);box(8,40,224,105);centered(TX_COMPLETE",
+      "occurrences": 2
+    },
+    {
+      "before": "centered(TX_C_POSTGAME,126,CREAM);centered(TX_C_FINAL_SMALL,149,GOLD);",
+      "after": "ending_credits_card_hint();centered(TX_C_FINAL_SMALL,149,GOLD);}",
+      "occurrences": 2
+    }
+  ],
+  "changed_runtime": {
+    "src/ending_credits.c": {
+      "before": null,
+      "after": "92f9702ba78265d3e350fce30d15b26e5afb114305a2a804c26fd1274079c82a"
+    },
+    "src/ending_credits.h": {
+      "before": null,
+      "after": "24b80f6ec647807929f12aaa3bb115eb81a152bc610546ac5f1845e3db7d5529"
+    },
+    "src/ending_credits_text.c": {
+      "before": null,
+      "after": "741fafd1d8c3d3f5d7f2d47bd3378969907983bbf833fd6366bda99a09b7c2cb"
+    },
+    "src/ending_credits_text.h": {
+      "before": null,
+      "after": "69e945298bed8c4f1788a2b5ae8b4855104ce696afca34ade0463c3f5b010dc4"
+    },
+    "src/ending_credits_text_data/part_000.inc": {
+      "before": null,
+      "after": "dfa53296948a9916429b33814e6efafafedd5bd430114f2e692517bb3fca45e4"
+    },
+    "src/ending_credits_text_data/part_001.inc": {
+      "before": null,
+      "after": "1a6d408a4a615e73d905634f71d093b5e0ea2b0d387b9c85e79bbce4cee09bc8"
+    },
+    "src/ending_credits_text_data/part_002.inc": {
+      "before": null,
+      "after": "a60110eee93306e9c881def954f5a9dbdb0e06c0190129587431c08d78584bf5"
+    },
+    "src/ending_credits_text_data/part_003.inc": {
+      "before": null,
+      "after": "45a164928263a22f5aa076d01c92a988a27bcda5eba640fe8ddfd819bc98f2e9"
+    },
+    "src/game.c": {
+      "before": "0bbfec58d7d68fd58e337bad403387372fd99331820fb97ea12296c433c19880",
+      "after": "686e9016da2ba43cc63849120dc837a765e7f5b6b9910e53d97b8dd43670b14f"
+    }
+  },
+  "input_sha256": {
+    "assets/ending_credits.json": "df7de4808d78c9b4a022106a3bc85021f5ff24c59b4a5abe28ba5aa22a54cd98",
+    "assets/generate_ending_credits.py": "4e3db913dd4b2c770f0d268f4fcd72ae32ad5b3cfde08e92ec12fa9882367f4f",
+    "Makefile": "7c7200088e7577fbdc165e42573c23b456183c25f8d103f07ca92dc7efd913f4",
+    "tools/generate_font_credits.py": "f2632c6ed6895f30d06dd3881bd3ba1f33a1b008e859a4beb9e355115be58350"
+  },
+  "scope": [
+    "Remove title font attribution.",
+    "Present complete truthful credits only after ending card.",
+    "Keep first ending save; suppress redundant replay save.",
+    "Read-only release-armed scroll/replay/skip presentation, actors hidden during roll.",
+    "Reuse one modal cache-key slot only in WIN state; all other state keys unchanged."
+  ]
+}

@@ -1,0 +1,15 @@
+/* Up to four intents use the core's exclusive shared staging scratch. */
+int return_game_event_pending(void){return event_count!=0;}
+static int bound_event(const WorldIntent*e){const ReturnRequest*r=&e->request;CreatureInstance*c;if(r->operation!=RETURN_REQUEST_TRIAL_STATUS&&r->operation!=RETURN_REQUEST_TRIAL_COMPLETE&&r->operation!=RETURN_REQUEST_REPEAT_RECRUIT)return 1;c=active();return c&&r->slot<160&&c==&adventure_save.roster.instances[r->slot]&&c->instance_id==r->instance_id&&c->form_id==r->form&&progression_command()==r->command&&e->party==party()&&e->selected==adventure_save.roster.selected_party;}
+static COLD void present(const ReturnRequest*r,int result){unsigned aid;int good=result==RETURN_CHANGED||result==RETURN_NOW_READY||result==RETURN_REWARDED;
+ if(r->operation==RETURN_REQUEST_VISIT){if(good||result==RETURN_UNCHANGED)transition_ready=1;else transition_area=0;return;}
+ if(r->operation==RETURN_REQUEST_TRIAL_STATUS){if(good||result==RETURN_UNCHANGED)start_trial(r,result==RETURN_UNCHANGED);else toast(TX_RT_TRIAL_PICK);return;}
+ if(r->operation==RETURN_REQUEST_ANCHOR){if(good||result==RETURN_UNCHANGED){checkpoint_spawn=2;adventure_save.campaign.spawn=2;game_health_fill();dirty=1;toast(TX_RT_RESTED);}return;}
+ if(!good){if(result!=RETURN_UNCHANGED)toast(result==RETURN_FULL?TX_RT_FULL:result==RETURN_SPACE_RESERVED?TX_RT_RESERVED:result==RETURN_ID_EXHAUSTED?TX_RT_ID_LIMIT:TX_RT_NOT_YET);return;}
+ dirty=1;
+ if(r->operation==RETURN_REQUEST_QUEST_CLAIM){creatures_credit_event(&adventure_save.roster,288+r->quest-46,160,CREATURE_CREDIT_PERSONAL_QUEST);progression_refresh();toast(r->quest==51?TX_RT_END:r->quest==47||r->quest==49?TX_RT_RECRUITED:TX_RT_RECEIVED);}
+ else if(r->operation==RETURN_REQUEST_TRIAL_COMPLETE){aid=return_trial_aid(r->family,r->key);if(aid<128)creatures_credit_event(&adventure_save.roster,384+aid,160,CREATURE_CREDIT_FIELD_AID);progression_refresh();cancel_proof();toast(TX_RT_TRIAL_DONE);}
+ else if(r->operation==RETURN_REQUEST_REPEAT_RECRUIT){repeat_used|=1u<<(r->source-17);cancel_proof();progression_refresh();toast(TX_RT_RECRUITED);}
+ changed();
+}
+COLD unsigned return_game_prepare_event(void){unsigned status;int result;WorldIntent e;if(!event_count)return SAVE5_DONE;if(event_scene!=scene||event_attempt!=attempt||!bound_event(&events[event_index])){return_game_cancel_event();return SAVE5_FAILED;}e=events[event_index];if(!event_handle){event_handle=return_job_begin(&adventure_save,&e.request,event_scene,event_attempt);if(!event_handle){return_game_cancel_event();toast(TX_RT_NOT_YET);return SAVE5_FAILED;}return SAVE5_BUSY;}status=return_job_step(event_handle,1024,event_scene,event_attempt);if(status==SAVE5_BUSY)return status;result=return_job_result(event_handle);return_job_cancel();event_handle=0;if(status==SAVE5_FAILED){return_game_cancel_event();toast(TX_RT_NOT_YET);return status;}event_index++;present(&e.request,result);if(event_index>=event_count){event_count=event_index=0;if(transition_ready==2)transition_ready=1;persist();return SAVE5_DONE;}if(event_scene!=scene||event_attempt!=attempt){return_game_cancel_event();return SAVE5_FAILED;}return SAVE5_BUSY;}

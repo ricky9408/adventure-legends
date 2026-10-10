@@ -1,0 +1,91 @@
+{
+  "palette": [
+    {
+      "name": "filtered green glass flute",
+      "gain": 0.67,
+      "attack": 0.016,
+      "release": 0.11,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.055
+        ],
+        [
+          3,
+          0.09
+        ],
+        [
+          4,
+          0.016
+        ],
+        [
+          5,
+          0.013
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.7,
+      "vibrato_cents": 3.4
+    },
+    {
+      "name": "rootwell triangle bass",
+      "gain": 0.34,
+      "attack": 0.012,
+      "release": 0.1,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.048
+        ],
+        [
+          5,
+          0.014
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "small glasshouse pluck",
+      "gain": 0.25,
+      "attack": 0.004,
+      "release": 0.068,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.14
+        ],
+        [
+          3,
+          0.052
+        ],
+        [
+          4,
+          0.017
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "light_between_the_boughs-gba-16384-s8.raw": "5e5244276988057aed1e907f0426a51a7c5c32f361cef80d8e2466a6614a4083"
+  }
+}

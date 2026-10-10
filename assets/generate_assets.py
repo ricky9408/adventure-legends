@@ -6,6 +6,13 @@ Run with Python 3 + Pillow. The shared palette is quantized to native GBA RGB555
 from pathlib import Path
 from PIL import Image, ImageDraw
 import math, random, json
+try:
+    import connected_road_art as roads
+except ModuleNotFoundError:
+    # Palette-only test imports load this module by absolute file path.
+    import importlib.util
+    _roads_spec=importlib.util.spec_from_file_location('connected_road_art',Path(__file__).with_name('connected_road_art.py'))
+    roads=importlib.util.module_from_spec(_roads_spec);_roads_spec.loader.exec_module(roads)
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'; SRC=ROOT/'src'; OUT.mkdir(exist_ok=True); SRC.mkdir(exist_ok=True)
 # Index zero is reserved for transparency, including sprite backgrounds.
@@ -236,10 +243,14 @@ def village():
     a=Art();terrain(a,8)
     for x,y,rx,ry in [(78,112,29,12),(176,124,30,10),(120,62,22,13)]:light_pool(a,x,y,rx,ry)
     path(a,[(105,20,135,159),(40,106,200,128)],9)
+    roads.draw(a,0,P)
     # Dappled stone lane detail.
     for x,y in [(112,35),(122,53),(112,75),(120,97),(116,130),(118,147),(76,111),(162,119)]: stone(a,x,y,9,5)
-    for x,y,s in [(7,40,1.1),(34,32,.9),(61,31,1.0),(88,29,.85),(152,29,.85),(181,31,1.1),(213,34,1),(241,42,1.1),(8,109,1),(236,111,1)]: tree(a,x,y,s,2)
+    for x,y,s in [(7,40,1.1),(34,32,.9),(61,31,1.0),(88,29,.85),(152,29,.85),(181,31,1.1),(213,34,1),(241,42,1.1)]: tree(a,x,y,s,2)
     house(a,25,47,61,47);house(a,154,50,61,45)
+    # The maproom is inside the east house: a dark open doorway and stone sill.
+    a.r((180,78,188,94),'wood0');a.r((182,80,186,94),'deep')
+    a.l([(178,95),(190,95)],'stone4');a.l([(177,97),(191,97)],'stone2')
     # The hamlet's gathering altar sits off the traversable center lane.
     shrine(a,53,141);a.r((40,148,66,150),'stone1');a.r((42,147,64,148),'stone3')
     fence(a,163,140,46)
@@ -587,7 +598,7 @@ def main():
     companion_dir=[[[fn(d,f) for f in range(4)] for d in directions] for fn in (fox_direction,leaf_direction)]
     small_shadow=shadow_sprite();large_shadow=shadow_sprite(32,16)
     canopy_positions=[(0,112,0),(208,112,0),(0,112,1),(208,112,1),(0,112,3),(208,112,3)]
-    canopies=[color_background(foreground_canopy(room,int(x>0)),bnames[room]) for x,y,room in canopy_positions]
+    canopies=[color_background(Art(32,32,'transparent') if room==0 else foreground_canopy(room,int(x>0)),bnames[room]) for x,y,room in canopy_positions]
     # Paste actors AFTER scenery remapping so their exact original colors also
     # remain unchanged in the title illustration.
     for spr,pos in [(sprites[0],(72,103)),(sprites[8],(88,108))]:
@@ -650,7 +661,7 @@ enum {\n'''
     # tree canopy silhouettes, buildings, monuments, fences, and columns are solid.
     # Rectangles are [x,y,width,height], NOT inclusive x2/y2 coordinates.
     trees={
-      'village':[(7,40,1.1),(34,32,.9),(61,31,1.0),(88,29,.85),(152,29,.85),(181,31,1.1),(213,34,1),(241,42,1.1),(8,109,1),(236,111,1)],
+      'village':[(7,40,1.1),(34,32,.9),(61,31,1.0),(88,29,.85),(152,29,.85),(181,31,1.1),(213,34,1),(241,42,1.1)],
       'forest':[(5,44,1.3),(31,43,1.15),(61,33,1.2),(90,27,.9),(151,25,1),(181,36,1.2),(212,43,1.1),(18,85,1.2),(48,74,1),(199,79,1),(9,135,1.3),(46,144,1.1),(200,144,1.1),(235,145,1.2),(27,174,1.1),(75,176,1.1),(169,174,1.1),(217,177,1.2)],
       'boss':[(3,47,1.3),(32,30,1.2),(67,17,1.2),(105,9,1),(137,10,1),(176,18,1.2),(211,31,1.2),(238,52,1.3),(2,103,1.2),(237,102,1.2),(5,161,1.2),(35,191,1.2),(73,199,1.2),(167,199,1.2),(207,193,1.2),(239,160,1.2)]}
     fixed={

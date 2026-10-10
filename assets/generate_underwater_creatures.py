@@ -498,16 +498,15 @@ def terrain_metrics(fields,abilities,patches):
             rows.append({'form_id':fid,'terrain':SCENE_SOURCES[t][0],'minimum_distinct_opaque_fraction':round(min(ratios),4),'minimum_distinct_boundary_fraction':round(min(edge_ratios),4)})
     return {'metric':'Native RGB555 distance >=48; all28 poses per terrain. Visibility heuristic, not emulator/gameplay/performance evidence.',
       'samples':24*28*len(patches),'rows':rows,'minimum_opaque_fraction':min(r['minimum_distinct_opaque_fraction'] for r in rows),'minimum_boundary_fraction':min(r['minimum_distinct_boundary_fraction'] for r in rows)}
-def validate_legacy_prefix():
-    contract=json.loads((OUT/'legacy_prefix_sha256.json').read_text())
-    for path,digest in contract['sha256'].items():assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,('Released art prefix changed',path)
-    return {'baseline':contract['baseline'],'files':len(contract['sha256']),'unchanged':True}
+def validate_legacy_prefix(world_successor=None):
+    from legacy_art_successor import validate_legacy_prefix as validate
+    return validate(ROOT,OUT/'legacy_prefix_sha256.json',world_successor)
 def output_hashes():
     files=sorted(p for p in OUT.iterdir() if p.is_file() and p.suffix in ('.png','.gif','.json','.txt') and p.name not in ('validation.json',))
     files+=sorted((ROOT/'src/underwater_creature_art_data').glob('*.inc'))+[ROOT/'src/underwater_creature_art.c',ROOT/'src/underwater_creature_art.h']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
-def generate():
-    OUT.mkdir(exist_ok=True);legacy=validate_legacy_prefix()
+def generate(world_successor=None):
+    OUT.mkdir(exist_ok=True);legacy=validate_legacy_prefix(world_successor)
     fields=[[[field(fid,d,f) for f in range(4)] for d in DIRECTIONS] for fid in FORM_IDS]
     abilities=[[[field(fid,d,p,cast=p) for p in range(3)] for d in DIRECTIONS] for fid in FORM_IDS];portraits=[portrait(fid) for fid in FORM_IDS]
     validation=validate_pixels(fields,abilities,portraits)
@@ -526,11 +525,11 @@ def generate():
       'terrain_visibility_minimum_opaque':terrain['minimum_opaque_fraction'],'terrain_visibility_minimum_boundary':terrain['minimum_boundary_fraction']}
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     (OUT/'CREDITS.txt').write_text(manifest['rights']+'\n696 original indexed images. All16px fields leave a transparent one-pixel rim. Portraits separately composed at32px.\nShared existing RGB555 palette unchanged. Art reviews are not emulator evidence.\n')
-    validate_legacy_prefix();return manifest
+    validate_legacy_prefix(world_successor);return manifest
 
-def verify(manifest):
-    before=output_hashes();generate();assert before==output_hashes(),'Nondeterministic regeneration'
-    report={'deterministic_regeneration':True,'pixel_validation':manifest['validation'],'legacy_prefix':validate_legacy_prefix(),'output_sha256':output_hashes()}
+def verify(manifest,world_successor=None):
+    before=output_hashes();generate(world_successor);assert before==output_hashes(),'Nondeterministic regeneration'
+    report={'deterministic_regeneration':True,'pixel_validation':manifest['validation'],'legacy_prefix':validate_legacy_prefix(world_successor),'output_sha256':output_hashes()}
     with tempfile.TemporaryDirectory(prefix='underwater-art-') as td:
         td=Path(td);sys.path.insert(0,str(ROOT/'tools'));from arm_toolchain import resolve_arm_tools
         tools=resolve_arm_tools('gcc','size',root=ROOT);obj=td/'underwater_creature_art.o'
@@ -540,6 +539,6 @@ def verify(manifest):
         report.update({'arm_compile':'passed','arm_rom_object_bytes':sections[0],'arm_data_bytes':sections[1],'arm_bss_bytes':sections[2],'max_arm_stack_bytes':max(stack),'max_include_bytes':manifest['max_include_bytes']})
     (OUT/'validation.json').write_text(json.dumps(report,indent=2)+'\n');return {k:v for k,v in report.items() if k not in ('output_sha256','pixel_validation')}
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--verify',action='store_true');args=parser.parse_args()
-    manifest=generate();print(json.dumps(verify(manifest) if args.verify else {'generated_forms':FORM_IDS,'data_bytes':manifest['data_bytes'],'max_include_bytes':manifest['max_include_bytes']},indent=2))
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--verify',action='store_true');parser.add_argument('--world-successor',choices=['connected-roads-c4']);args=parser.parse_args()
+    manifest=generate(args.world_successor);print(json.dumps(verify(manifest,args.world_successor) if args.verify else {'generated_forms':FORM_IDS,'data_bytes':manifest['data_bytes'],'max_include_bytes':manifest['max_include_bytes']},indent=2))
 if __name__=='__main__':main()

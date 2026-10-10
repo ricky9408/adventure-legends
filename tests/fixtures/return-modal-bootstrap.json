@@ -1,0 +1,25 @@
+{
+  "scope": "Exact first362 controller frames of preserved D route. This only cold-loads an authenticated generated revision6 save for synthetic renderer setup; no acquisition claim.",
+  "source_report_sha256": "6d56e50e92cdde5c59068699e940adbbd4fbfbc9573094fe1b47f97c9c9b974d",
+  "provenance": {
+    "fixture_relative": "tests/fixtures/v5-revision6/underwater-all89-town.sav",
+    "sram_sha256": "41cf371618208e0097fe6ee10393e3185b4bffb2af9dad9e5f81e2663d6673a0"
+  },
+  "inputs": [
+    {
+      "frame": 0,
+      "frames": 150,
+      "keys": 0
+    },
+    {
+      "frame": 150,
+      "frames": 2,
+      "keys": "START"
+    },
+    {
+      "frame": 152,
+      "frames": 210,
+      "keys": 0
+    }
+  ]
+}

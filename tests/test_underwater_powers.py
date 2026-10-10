@@ -13,7 +13,7 @@ OUT = ROOT / 'build' / 'underwater-powers-host'
 OUT.mkdir(parents=True, exist_ok=True)
 SOURCES = ['tests/underwater_powers_native.c', 'src/underwater_powers.c', 'src/underwater_power_art.c', 'src/magma_powers.c', 'src/magma_power_art.c', 'src/southern_powers.c', 'src/southern_power_art.c', 'src/northern_powers.c',
            'src/northern_power_art.c', 'src/advanced_powers.c',
-           'src/regional_powers.c', 'src/gear_runtime.c', 'src/weapon_actions.c',
+           'src/regional_powers.c', 'src/gear_runtime.c', 'tests/legacy_feedback_hooks.c', 'tests/legacy_return_hooks.c', 'src/weapon_actions.c',
            'src/combat_rules.c', 'src/equipment.c', 'src/equipment_data.c',
            'src/creatures.c', 'src/creature_data.c', 'src/assets.c']
 INPUT_FILES = sorted(set(SOURCES + ['src/underwater_tip_orbit.inc'] + [str(p.relative_to(ROOT)) for p in (ROOT/'src').glob('*.h')]))

@@ -33,7 +33,7 @@ if __name__ == '__main__':
         old=path.read_text();data=json.loads(old)
         result=json.dumps(data,indent=2)+'\n' if path==PATH and '$catalog_source' in data else format_fragment(data)
         assert json.loads(result)==data
-        if len(result.encode())>=MAX_SOURCE_BYTES:raise ValueError('Public catalog artifact reaches90KB: '+str(path))
+        if len(result.encode())>=MAX_SOURCE_BYTES:raise ValueError('Public catalog artifact reaches75KB: '+str(path))
         if '--check' in sys.argv:
             if old!=result:raise SystemExit('Run assets/creatures/format_catalog.py to normalize authoring JSON')
         else:path.write_text(result)

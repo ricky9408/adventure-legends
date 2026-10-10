@@ -22,7 +22,9 @@ class MagmaRuntime(unittest.TestCase):
  def setUp(self):SRAM[:]=FIXTURE;self.assertEqual(L.fresh(),1);L.set_actor_overlap(0)
  def entry(self,r,s=0):self.assertEqual(L.entry(r,s),1);self.assertLessEqual(L.max_camera_actors()+3,20,r)
  def at(self,x,y,face=1):L.at(x,y);L.facing(face);self.assertFalse(L.magma_game_solid(x,y),(v('room'),x,y))
- def act(self,x,y,face=1):self.at(x,y,face);self.assertIn(L.magma_game_interact(),(1,3),(v('room'),x,y,toast()))
+ def act(self,x,y,face=1):
+  self.at(x,y,face);self.assertIn(L.magma_game_interact(),(1,3),(v('room'),x,y,toast()))
+  self.assertEqual(L.host_settle_event(),1,'bounded event settles before the next synthetic action')
  def target(self,x,y,face=1):
   dx,dy={0:(0,-16),1:(0,16),2:(16,0),3:(-16,0)}[face];self.act(x+dx,y+dy,face)
  def power(self,x,y,form=None,face=1,want=1):

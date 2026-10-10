@@ -1,7 +1,9 @@
-/* Production pure spatial model, shared unchanged by the focused host proof. */
+/* Production pure spatial model, shared by the focused host proof. */
+#include "connected_road_region.h"
 static int ab(int n){return n<0?-n:n;}
 int magma_game_geometry_solid(unsigned area,int x,int y){const MagmaArtRoom*r;const unsigned short*b;unsigned n;
  if(!magma_game_is_room(area))return 0;
+{int seam=road_region_point(area,x,y);if(seam>=0)return seam;}
 r=&magma_art_rooms[area-38];
  if((unsigned)x>=r->width||(unsigned)y>=r->height)return 1;
  b=r->collision_bands+r->collision_rows[y];n=*b++;

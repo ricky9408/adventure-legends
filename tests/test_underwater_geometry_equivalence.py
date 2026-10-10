@@ -10,7 +10,7 @@ import hashlib,json,subprocess,os
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'build/underwater-geometry-equivalence';OUT.mkdir(parents=True,exist_ok=True)
 FROZEN=ROOT/'tests/fixtures/underwater_powers_candidate_a.c'
-SOURCES=['src/underwater_power_art.c','src/magma_powers.c','src/magma_power_art.c','src/southern_powers.c','src/southern_power_art.c','src/northern_powers.c','src/northern_power_art.c','src/advanced_powers.c','src/regional_powers.c','src/gear_runtime.c','src/weapon_actions.c','src/combat_rules.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/assets.c']
+SOURCES=['src/underwater_power_art.c','src/magma_powers.c','src/magma_power_art.c','src/southern_powers.c','src/southern_power_art.c','src/northern_powers.c','src/northern_power_art.c','src/advanced_powers.c','src/regional_powers.c','src/gear_runtime.c', 'tests/legacy_return_hooks.c','src/weapon_actions.c','src/combat_rules.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/assets.c']
 # Pin archived oracle: a future optimized implementation may never rewrite it.
 PIN='e2ec1a0adcb188fe1e69c730d7bd02f17d22eed54484344dcf65e73792bfacd0'
 assert hashlib.sha256(FROZEN.read_bytes()).hexdigest()==PIN

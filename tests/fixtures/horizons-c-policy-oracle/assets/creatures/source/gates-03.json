@@ -1,0 +1,6 @@
+[
+  {"id":"underwater_source_21","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_22","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_23","kind":"side_quest","requires":["underwater_arrival"]},
+  {"id":"underwater_source_24","kind":"side_quest","requires":["underwater_arrival"]}
+]

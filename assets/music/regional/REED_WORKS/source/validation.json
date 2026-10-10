@@ -1,0 +1,35 @@
+{
+  "title": "Water Through the Bellworks",
+  "bars": 16,
+  "meter": "4/4",
+  "tempo": 96,
+  "duration_seconds": 40.0,
+  "pcm_bytes_16384_s8": 655360,
+  "bar_sums": "All voice-bars match meter exactly",
+  "xml": "All 3 parts match JSON pitches, onsets, durations",
+  "midi": "Every binary pitch and onset checked; note-offs 14 ticks before notated end",
+  "tracks": 4,
+  "individual_voice_files": 3,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "end_tick": 30720,
+  "ranges": {
+    "melody": [
+      64,
+      78
+    ],
+    "inner": [
+      55,
+      67
+    ],
+    "bass": [
+      40,
+      52
+    ]
+  },
+  "voice_crossings": 0,
+  "audible_review_performed": false,
+  "visual_review": "All six final PDF pages rendered and inspected. Annotation spacing and final short stave improved; no clipped notes, titles, or accidentals.",
+  "loop": "Exact whole-bar boundary; no notes or pedal extend past end.",
+  "individual_midi_validation": "All three two-track files decoded into chunks and verified byte-identical to corresponding master conductor/voice track"
+}

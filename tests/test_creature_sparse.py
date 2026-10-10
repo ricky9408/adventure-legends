@@ -13,6 +13,7 @@ import shlex
 import subprocess
 import tempfile
 import unittest
+from retained_source_adapter import expand_local_includes
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -52,7 +53,7 @@ def refresh_key_indexes(core, data):
 
 def fixture_sources(*, high_bit=False, reordered=False):
     header = (ROOT / 'src/creatures.h').read_text()
-    core = (ROOT / 'src/creatures.c').read_text()
+    core = expand_local_includes(ROOT / 'src/creatures.c')
     data = (ROOT / 'src/creature_data.c').read_text()
     if high_bit:
         # Synthetic host-only remapping demonstrates the unchanged u16 wire
@@ -62,6 +63,7 @@ def fixture_sources(*, high_bit=False, reordered=False):
         old = '{77, 78, 20, 50, 512,'
         assert data.count(old) == 1
         data = data.replace(old, '{77, 78, 20, 50, 32768,')
+        core = core.replace(old, '{77, 78, 20, 50, 32768,')
         # Current per-form masks are independent of the frozen1–4 snapshot.
         def remap_current_masks(body):
             return re.sub(r'(\{(?:77|78),[^\n]+, )512(, 0x)',r'\g<1>32768\2',body)

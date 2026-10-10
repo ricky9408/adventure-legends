@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "description": "Genuine controller-produced exact-H content7 banks copied unchanged. Host import and mutations are independent persistence evidence, not new chapter gameplay acceptance.",
+  "fixtures": [
+    {
+      "file": "return-all104-52-retained.sav",
+      "sha256": "d482466d04050c3d7f2e8eb8e1960729c9b9b33aa3e32440d186a4b54b854a69",
+      "source_path": "../adventure-legends-return-music-h/docs/native-h-global-01/full/05-all104-cold-reboot-after.sav",
+      "producer_path": "../adventure-legends-return-music-h/docs/native-h-global-01/full/return-journey.json",
+      "producer_sha256": "a87942fda29e848124f4a7439ea96d59d0abcf66807c2a370ec1cbab68b0ab6c",
+      "rom_sha256": "f2330562b2c370d094164e7a5bf1e307da24412c88280cc880744eba072edaec",
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "machine_state_loads": 0
+    },
+    {
+      "file": "return-h-import89.sav",
+      "sha256": "7fdf2de540d205af93767eae0604ede55a64d708eaa5371a87774062a395f071",
+      "source_path": "../adventure-legends-return-music-h/docs/native-h-global-01/full/00-revision7-exact-migration.sav",
+      "producer_path": "../adventure-legends-return-music-h/docs/native-h-global-01/full/return-journey.json",
+      "producer_sha256": "a87942fda29e848124f4a7439ea96d59d0abcf66807c2a370ec1cbab68b0ab6c",
+      "rom_sha256": "f2330562b2c370d094164e7a5bf1e307da24412c88280cc880744eba072edaec",
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "machine_state_loads": 0
+    },
+    {
+      "file": "return-h-earned104-52.sav",
+      "sha256": "bdbe06929d9e9e047c487a49e14a961e8e15ed11dff7086334a5cf6818ba1fce",
+      "source_path": "../adventure-legends-return-music-h/docs/native-h-global-01/full/04-all104-earned52-saved.sav",
+      "producer_path": "../adventure-legends-return-music-h/docs/native-h-global-01/full/return-journey.json",
+      "producer_sha256": "a87942fda29e848124f4a7439ea96d59d0abcf66807c2a370ec1cbab68b0ab6c",
+      "rom_sha256": "f2330562b2c370d094164e7a5bf1e307da24412c88280cc880744eba072edaec",
+      "controller_only": true,
+      "game_ram_writes": 0,
+      "machine_state_loads": 0
+    }
+  ]
+}

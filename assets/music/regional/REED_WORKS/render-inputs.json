@@ -1,0 +1,95 @@
+{
+  "palette": [
+    {
+      "name": "waterwheel soft clarinet",
+      "gain": 0.66,
+      "attack": 0.011,
+      "release": 0.085,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.024
+        ],
+        [
+          3,
+          0.21
+        ],
+        [
+          5,
+          0.075
+        ],
+        [
+          7,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.6,
+      "vibrato_cents": 3.0
+    },
+    {
+      "name": "rounded waterwheel bass",
+      "gain": 0.36,
+      "attack": 0.008,
+      "release": 0.075,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.028
+        ],
+        [
+          3,
+          -0.07
+        ],
+        [
+          5,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "quiet bellwork wood tine",
+      "gain": 0.24,
+      "attack": 0.0035,
+      "release": 0.055,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.19
+        ],
+        [
+          3,
+          0.06
+        ],
+        [
+          4,
+          0.035
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "water_through_the_bellworks-gba-16384-s8.raw": "d5e1c50c1e3c79466bcf1ec19c5fb293baa4011d6448847179112aaffe9e9925"
+  }
+}

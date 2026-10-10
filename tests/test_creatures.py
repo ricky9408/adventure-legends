@@ -10,7 +10,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-ENABLED = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78,25,26,28,29] + list(range(79,95)) + list(range(31,49)) + list(range(95,101)) + list(range(49,73))
+ENABLED = [1,2,4,5,7,8,10,11,13,14,16,19,20,22,23,73,74,75,76,77,78,25,26,28,29] + list(range(79,95)) + list(range(31,49)) + list(range(95,101)) + list(range(49,73)) + [3,6,9,12,15,17,18,21,24,27,30,101,102,103,104] + list(range(105,129))
 U8, U16, U32 = C.c_ubyte, C.c_ushort, C.c_uint
 
 class Instance(C.Structure):
@@ -103,11 +103,11 @@ class CreatureTests(unittest.TestCase):
     def test_catalog_and_generation_match(self):
         self.assertEqual(self.lib.creatures_catalog_validate(),1)
         subprocess.run(['python3', str(ROOT/'assets/creatures/generate_data.py'),'--check'],check=True)
-    def test_valid_reserved_is_not_enabled(self):
+    def test_final_catalog_and_out_of_range_identities(self):
         for i in range(256):
             self.assertEqual(bool(self.lib.creatures_form_id_valid(i)),1<=i<=128)
             self.assertEqual(bool(self.lib.creatures_form(i)),i in ENABLED)
-        for i in [0,3,6,9,12,15,17,121,128,255,256]:
+        for i in [0,129,255,256]:
             before=bytes(self.r)
             self.assertEqual(self.grant(i),255)
             self.assertEqual(bytes(self.r),before)
@@ -145,7 +145,7 @@ class CreatureTests(unittest.TestCase):
             self.assertEqual(self.lib.creatures_capabilities(base),self.lib.creatures_capabilities(base+1))
             self.assertEqual(self.lib.creatures_legacy_spirit(base),self.lib.creatures_legacy_spirit(base+1))
         self.assertFalse(masks[1]&masks[2])
-        self.assertEqual(self.lib.creatures_capabilities(128),0)
+        self.assertEqual(self.lib.creatures_capabilities(128),(1<<22)|(1<<29))
     def test_empty_roster(self):
         self.valid()
         self.assertEqual(list(self.r.party),[255]*4)
@@ -241,7 +241,7 @@ class CreatureTests(unittest.TestCase):
                    lambda r:setattr(r.instances[4],'flags',1),
                    lambda r:r.expedition_bond.__setitem__(4,1),
                    lambda r:r.expedition_bond.__setitem__(0,11),
-                   lambda r:r.seen.__setitem__(15,128),
+                   lambda r:r.obtained.__setitem__(15,128),
                    lambda r:r.obtained.__setitem__(0,0),
                    lambda r:r.rewards.__setitem__(0,0),
                    lambda r:setattr(r,'next_instance_id',1),
@@ -316,7 +316,11 @@ class CreatureTests(unittest.TestCase):
             self.assertEqual(self.lib.creatures_equip(C.byref(c),1,slot+5),1)
             self.assertEqual(self.lib.creatures_select_command(C.byref(c),1),1)
             self.assertEqual(self.lib.creatures_equip(C.byref(c),1,0),0)
-            self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),slot,7,1,1),2)
+            # Return adds a real third tier, but this level20 legacy state cannot
+            # bypass its new level32 requirement and must remain unchanged.
+            retained=bytes(self.r)
+            self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),slot,7,1,1),3)
+            self.assertEqual(bytes(self.r),retained)
             self.valid()
     def test_visible_evolution_blockers(self):
         self.migrate();c=self.r.instances[0]
@@ -342,14 +346,14 @@ class CreatureTests(unittest.TestCase):
                              (family,phase,polarity,tier,signature,caps))
             self.assertEqual(self.lib.creatures_legacy_spirit(form),255)
         for command in range(256):
-            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=11 or 13<=command<=90)
+            self.assertEqual(bool(self.lib.creatures_ability(command)),1<=command<=128)
         self.assertTrue(self.lib.creatures_command_learned(14,15,9))
         self.assertTrue(self.lib.creatures_command_learned(14,15,10))
         self.assertFalse(self.lib.creatures_command_learned(14,14,10))
         self.assertFalse(self.lib.creatures_command_learned(13,50,10))
         self.assertFalse(self.lib.creatures_command_learned(16,50,9))
 
-    def test_northern_exact_policies_evolution_and_disabled_legendary_command(self):
+    def test_northern_exact_policies_evolution_and_unlearned_legendary_command(self):
         # Direct host grants exercise core contracts only, never acquisition.
         rows = [(19,7,0,0,13,0x200000,16,40,32),
                 (22,8,1,0,15,0x400000,17,40,64),
@@ -397,8 +401,8 @@ class CreatureTests(unittest.TestCase):
         result=json.loads(subprocess.check_output(['python3',str(ROOT/'assets/creatures/validate_catalog.py')]))
         self.assertEqual((result['reserved_identities'],result['authored_designs'],
                           result['enabled_native_core_forms'],result['enabled_evolution_edges'],
-                          result['enabled_abilities']),(128,90,89,51,89))
-        self.assertEqual(result['disabled_authored_forms'],[121])
+                          result['enabled_abilities']),(128,128,128,68,128))
+        self.assertEqual(result['disabled_authored_forms'],[])
         self.assertIn('separate native acquisition',result['native_obtainability'])
         # Host grants test data APIs; they do not navigate any acquisition route.
         manifest=json.loads((ROOT/'assets/creatures/enabled.json').read_text())
@@ -525,7 +529,7 @@ class CreatureTests(unittest.TestCase):
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(False),1),5)
         self.assertEqual(self.lib.creatures_can_evolve(C.byref(c),context(True),1),0)
         before=bytes(self.r)
-        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,5),(32,1,1,5),(64,1,1,5),(256,1,1,5),(512,1,1,5),(1024,1,1,5),(2048,1,1,5),(4096,1,1,1),(0x10000,1,1,1)]:
+        for ctx,sanctuary,confirmed,result in [(7,1,1,5),(8,0,1,7),(8,1,0,8),(16,1,1,5),(32,1,1,5),(64,1,1,5),(256,1,1,5),(512,1,1,5),(1024,1,1,5),(2048,1,1,5),(4096,1,1,5),(8192,1,1,5),(16384,1,1,5),(32768,1,1,1),(0x10000,1,1,1)]:
             self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,ctx,sanctuary,confirmed),result)
             self.assertEqual(bytes(self.r),before)
         identity=bytes(c);party=bytes(self.r.party)
@@ -540,7 +544,7 @@ class CreatureTests(unittest.TestCase):
         self.assertEqual(self.lib.creatures_select_command(C.byref(c),1),1)
         self.valid()
         before=bytes(self.r)
-        self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,8,1,1),2)
+        self.assertEqual(self.lib.creatures_evolve(C.byref(self.r),0,8,1,1),3) # Return tier3 remains level-gated
         self.assertEqual(bytes(self.r),before)
 
     def test_evolved_water_invalid_level_and_party_members_rejected(self):

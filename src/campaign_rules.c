@@ -1,5 +1,5 @@
 #include "campaign_rules.h"
-static const CampaignBlock solids_4[]={{8,28,96,16,0},{136,28,96,16,0},{64,72,32,24,0},{152,96,32,24,0}};
+static const CampaignBlock solids_4[]={{8,28,96,16,0},{136,28,96,16,0},{64,72,32,24,0},{152,96,32,24,0},{179,44,7,30,0},{179,69,17,6,0},{214,69,18,6,0}};
 static const CampaignBlock blocks_4[]={{0,0,0,0,0}};
 static const CampaignObject objects_4[]={{48,120,9,255,26,1,0,0,0,0,-1,0,0},{184,64,11,1,28,2,0,0,0,0,CD_OPTIONAL_CHIME,1,0},{48,56,10,255,26,1,0,0,0,0,CD_SKY_PATH_SIGN,0,0}};
 static const CampaignEnemy enemies_4[]={{176,128,2,4},{56,64,0,2}};
@@ -19,7 +19,7 @@ static const CampaignBlock solids_8[]={{8,28,96,16,0},{136,28,96,16,0}};
 static const CampaignBlock blocks_8[]={{104,28,32,16,131072}};
 static const CampaignObject objects_8[]={{120,36,8,255,26,0,0,0,0,131072,-1,0,0}};
 static const CampaignEnemy enemies_8[]={{0}};
-static const CampaignBlock solids_9[]={{8,28,96,16,0},{136,28,96,16,0},{8,80,96,16,0},{136,80,96,16,0}};
+static const CampaignBlock solids_9[]={{8,28,96,16,0},{136,28,96,16,0},{8,80,96,16,0},{136,80,96,16,0},{184,89,10,23,0},{223,89,9,23,0}};
 static const CampaignBlock blocks_9[]={{104,80,32,16,64}};
 static const CampaignObject objects_9[]={{120,88,1,3,32,2,64,0,64,0,CD_CORE_ARCH,0,1},{56,120,9,255,26,1,0,0,0,0,-1,0,0},{184,120,10,255,26,1,0,0,0,0,CD_CORE_PATH_SIGN,0,0}};
 static const CampaignEnemy enemies_9[]={{0}};
@@ -40,12 +40,12 @@ static const CampaignBlock blocks_13[]={{104,28,32,16,262144}};
 static const CampaignObject objects_13[]={{0}};
 static const CampaignEnemy enemies_13[]={{0}};
 const CampaignRoom campaign_rooms[10]={
-{TX_C_ROOM_4,4,0,3,2,solids_4,blocks_4,objects_4,enemies_4,0,5,0,0,4,0},
+{TX_C_ROOM_4,7,0,3,2,solids_4,blocks_4,objects_4,enemies_4,0,5,0,0,4,0},
 {TX_C_ROOM_5,4,2,2,0,solids_5,blocks_5,objects_5,enemies_5,2,6,4,0,1,0},
 {TX_C_ROOM_6,4,1,1,4,solids_6,blocks_6,objects_6,enemies_6,4,7,5,0,1,0},
 {TX_C_ROOM_7,3,1,6,0,solids_7,blocks_7,objects_7,enemies_7,56,8,6,0,1,0},
 {TX_C_ROOM_8,2,1,1,0,solids_8,blocks_8,objects_8,enemies_8,131072,0,7,3,1,1},
-{TX_C_ROOM_9,4,1,3,0,solids_9,blocks_9,objects_9,enemies_9,0,10,0,0,5,0},
+{TX_C_ROOM_9,6,1,3,0,solids_9,blocks_9,objects_9,enemies_9,0,10,0,0,5,0},
 {TX_C_ROOM_10,3,1,3,0,solids_10,blocks_10,objects_10,enemies_10,384,11,9,0,1,0},
 {TX_C_ROOM_11,6,3,3,0,solids_11,blocks_11,objects_11,enemies_11,3072,12,10,0,1,0},
 {TX_C_ROOM_12,3,1,5,0,solids_12,blocks_12,objects_12,enemies_12,61440,13,11,0,1,0},

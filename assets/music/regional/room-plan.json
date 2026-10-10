@@ -1,0 +1,511 @@
+{
+  "cues": [
+    {
+      "id": "HOME",
+      "room_ids": [
+        0,
+        54,
+        60
+      ]
+    },
+    {
+      "id": "RIVER",
+      "room_ids": [
+        1,
+        17,
+        56
+      ]
+    },
+    {
+      "id": "GROVE",
+      "room_ids": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "SKY_ROAD",
+      "room_ids": [
+        4,
+        5,
+        14
+      ]
+    },
+    {
+      "id": "SKY_DUNGEON",
+      "room_ids": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "DUSK_ROAD",
+      "room_ids": [
+        9,
+        15
+      ]
+    },
+    {
+      "id": "CORE",
+      "room_ids": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "id": "REEDHAVEN",
+      "room_ids": [
+        16,
+        20,
+        21,
+        55
+      ]
+    },
+    {
+      "id": "REED_WORKS",
+      "room_ids": [
+        18,
+        19
+      ]
+    },
+    {
+      "id": "HEARTHWAKE",
+      "room_ids": [
+        22,
+        24,
+        57
+      ]
+    },
+    {
+      "id": "HEADLAND",
+      "room_ids": [
+        23,
+        25
+      ]
+    },
+    {
+      "id": "COUNTERWORKS",
+      "room_ids": [
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "id": "SUNLACE",
+      "room_ids": [
+        30,
+        32,
+        58
+      ]
+    },
+    {
+      "id": "FRONDSHORE",
+      "room_ids": [
+        31,
+        33
+      ]
+    },
+    {
+      "id": "CONSERVATORY",
+      "room_ids": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "id": "KILNSTEP",
+      "room_ids": [
+        38,
+        40
+      ]
+    },
+    {
+      "id": "PUMICE",
+      "room_ids": [
+        39,
+        41
+      ]
+    },
+    {
+      "id": "CALDERA",
+      "room_ids": [
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "id": "NACREWAY",
+      "room_ids": [
+        46,
+        47
+      ]
+    },
+    {
+      "id": "KELP",
+      "room_ids": [
+        48,
+        49,
+        59,
+        61
+      ]
+    },
+    {
+      "id": "PALINODE",
+      "room_ids": [
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "id": "HORIZONS",
+      "room_ids": [
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "id": "COVENANTS",
+      "room_ids": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "room_id": 0,
+      "cue": "HOME"
+    },
+    {
+      "room_id": 1,
+      "cue": "RIVER"
+    },
+    {
+      "room_id": 2,
+      "cue": "GROVE"
+    },
+    {
+      "room_id": 3,
+      "cue": "GROVE"
+    },
+    {
+      "room_id": 4,
+      "cue": "SKY_ROAD"
+    },
+    {
+      "room_id": 5,
+      "cue": "SKY_ROAD"
+    },
+    {
+      "room_id": 6,
+      "cue": "SKY_DUNGEON"
+    },
+    {
+      "room_id": 7,
+      "cue": "SKY_DUNGEON"
+    },
+    {
+      "room_id": 8,
+      "cue": "SKY_DUNGEON"
+    },
+    {
+      "room_id": 9,
+      "cue": "DUSK_ROAD"
+    },
+    {
+      "room_id": 10,
+      "cue": "CORE"
+    },
+    {
+      "room_id": 11,
+      "cue": "CORE"
+    },
+    {
+      "room_id": 12,
+      "cue": "CORE"
+    },
+    {
+      "room_id": 13,
+      "cue": "CORE"
+    },
+    {
+      "room_id": 14,
+      "cue": "SKY_ROAD"
+    },
+    {
+      "room_id": 15,
+      "cue": "DUSK_ROAD"
+    },
+    {
+      "room_id": 16,
+      "cue": "REEDHAVEN"
+    },
+    {
+      "room_id": 17,
+      "cue": "RIVER"
+    },
+    {
+      "room_id": 18,
+      "cue": "REED_WORKS"
+    },
+    {
+      "room_id": 19,
+      "cue": "REED_WORKS"
+    },
+    {
+      "room_id": 20,
+      "cue": "REEDHAVEN"
+    },
+    {
+      "room_id": 21,
+      "cue": "REEDHAVEN"
+    },
+    {
+      "room_id": 22,
+      "cue": "HEARTHWAKE"
+    },
+    {
+      "room_id": 23,
+      "cue": "HEADLAND"
+    },
+    {
+      "room_id": 24,
+      "cue": "HEARTHWAKE"
+    },
+    {
+      "room_id": 25,
+      "cue": "HEADLAND"
+    },
+    {
+      "room_id": 26,
+      "cue": "COUNTERWORKS"
+    },
+    {
+      "room_id": 27,
+      "cue": "COUNTERWORKS"
+    },
+    {
+      "room_id": 28,
+      "cue": "COUNTERWORKS"
+    },
+    {
+      "room_id": 29,
+      "cue": "COUNTERWORKS"
+    },
+    {
+      "room_id": 30,
+      "cue": "SUNLACE"
+    },
+    {
+      "room_id": 31,
+      "cue": "FRONDSHORE"
+    },
+    {
+      "room_id": 32,
+      "cue": "SUNLACE"
+    },
+    {
+      "room_id": 33,
+      "cue": "FRONDSHORE"
+    },
+    {
+      "room_id": 34,
+      "cue": "CONSERVATORY"
+    },
+    {
+      "room_id": 35,
+      "cue": "CONSERVATORY"
+    },
+    {
+      "room_id": 36,
+      "cue": "CONSERVATORY"
+    },
+    {
+      "room_id": 37,
+      "cue": "CONSERVATORY"
+    },
+    {
+      "room_id": 38,
+      "cue": "KILNSTEP"
+    },
+    {
+      "room_id": 39,
+      "cue": "PUMICE"
+    },
+    {
+      "room_id": 40,
+      "cue": "KILNSTEP"
+    },
+    {
+      "room_id": 41,
+      "cue": "PUMICE"
+    },
+    {
+      "room_id": 42,
+      "cue": "CALDERA"
+    },
+    {
+      "room_id": 43,
+      "cue": "CALDERA"
+    },
+    {
+      "room_id": 44,
+      "cue": "CALDERA"
+    },
+    {
+      "room_id": 45,
+      "cue": "CALDERA"
+    },
+    {
+      "room_id": 46,
+      "cue": "NACREWAY"
+    },
+    {
+      "room_id": 47,
+      "cue": "NACREWAY"
+    },
+    {
+      "room_id": 48,
+      "cue": "KELP"
+    },
+    {
+      "room_id": 49,
+      "cue": "KELP"
+    },
+    {
+      "room_id": 50,
+      "cue": "PALINODE"
+    },
+    {
+      "room_id": 51,
+      "cue": "PALINODE"
+    },
+    {
+      "room_id": 52,
+      "cue": "PALINODE"
+    },
+    {
+      "room_id": 53,
+      "cue": "PALINODE"
+    },
+    {
+      "room_id": 54,
+      "cue": "HOME"
+    },
+    {
+      "room_id": 55,
+      "cue": "REEDHAVEN"
+    },
+    {
+      "room_id": 56,
+      "cue": "RIVER"
+    },
+    {
+      "room_id": 57,
+      "cue": "HEARTHWAKE"
+    },
+    {
+      "room_id": 58,
+      "cue": "SUNLACE"
+    },
+    {
+      "room_id": 59,
+      "cue": "KELP"
+    },
+    {
+      "room_id": 60,
+      "cue": "HOME"
+    },
+    {
+      "room_id": 61,
+      "cue": "KELP"
+    },
+    {
+      "room_id": 62,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 63,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 64,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 65,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 66,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 67,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 68,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 69,
+      "cue": "HORIZONS"
+    },
+    {
+      "room_id": 70,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 71,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 72,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 73,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 74,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 75,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 76,
+      "cue": "COVENANTS"
+    },
+    {
+      "room_id": 77,
+      "cue": "COVENANTS"
+    }
+  ]
+}

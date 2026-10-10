@@ -1,0 +1,441 @@
+{
+  "schema": 1,
+  "successor": "connected-roads-c4",
+  "scope": "Explicit world-art successor; never a blanket creature-prefix exemption. Historical contracts remain immutable and default validation remains strict.",
+  "reviewed_rom_sha256": "3f4855b03a08b638c40c21274b858dfca18f2988f9f38deb15c35315bdba7423",
+  "baseline": "Accepted Experience Polish P2; every historical contract entry was checked against its source bytes before comparison.",
+  "accepted_source_archive_sha256_from_task": "66ede05f19ad63d0a3caa9903a9f1fc9ce7cbe6938c3dc5b88facb6993129495",
+  "reviewed_scenery_arrays": [
+    "background_village",
+    "foreground_canopy_data"
+  ],
+  "historical_contracts": {
+    "assets/underwater_creatures/legacy_prefix_sha256.json": {
+      "contract_sha256": "44559c077835fcb9a2a8bb9356337353e301d720ad58a6659c145e72aeee8faf",
+      "reviewed_exceptions": {
+        "src/asset_data/part_000.inc": {
+          "historical_sha256": "d4aa561215d2b9e2e99d690ee00a9fc6c5f995512e8497d775e9e4c1d8a8aef8",
+          "successor_sha256": "facfbfccadd27edd8b86b9c79573c17959fa5153c0259c2fa9964c3b25a085a1",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        }
+      }
+    },
+    "assets/return_creatures/legacy_prefix_sha256.json": {
+      "contract_sha256": "57483b15434e299f115901cac00c2da57b0ab50fd5c724ccaf686e521ba2d33d",
+      "reviewed_exceptions": {
+        "assets/generate_assets.py": {
+          "historical_sha256": "117c080a184f0fe3bd629e0c195cb30ced642b74a4f98dc48e641c4d1b5fa9dc",
+          "successor_sha256": "dc6fb8c29f46f6a85b5652c715cefef823e5a683318e191ed38a1381eb8d1bb8",
+          "reason": "Only village/main authoring definitions change; every other definition is checked by AST, and every emitted actor/palette array is checked independently."
+        },
+        "src/asset_data/part_000.inc": {
+          "historical_sha256": "d4aa561215d2b9e2e99d690ee00a9fc6c5f995512e8497d775e9e4c1d8a8aef8",
+          "successor_sha256": "facfbfccadd27edd8b86b9c79573c17959fa5153c0259c2fa9964c3b25a085a1",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_001.inc": {
+          "historical_sha256": "ea06738d35e48c5785b66e55ed219cf0d6308ef679658b7753933e890f393b60",
+          "successor_sha256": "96409818f81cae663e6f34c437d4f47190eccbb0cccaac394a63a9973b71d3d6",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_002.inc": {
+          "historical_sha256": "c3327302d183d01811404784e0a1e502555cd953a3f943d9ca472dbcb0c9bc9e",
+          "successor_sha256": "939ca0c89634d0d71e52d70ef58960a149d6a5931ca8b35f7bc67586498836ac",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_003.inc": {
+          "historical_sha256": "fc3f47ee5e13bc959e68469a56a041465ce67105b494832deaffa4ffcd48018a",
+          "successor_sha256": "a519009f71fd28ac114e52dac37350f33f027960d0c2e6ca7704579c3a132455",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_004.inc": {
+          "historical_sha256": "0457643d555a39032a18753f150cc2a1a28d6aa402a8c5f97e86e4749c277a3e",
+          "successor_sha256": "13c38aeccea2f088792e71327c8e04770b53221fdf3f34a62fa9b82f1b582b1d",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_005.inc": {
+          "historical_sha256": "9956445147752ab66f449ca58af3c21b3a216b1d87e273707266c418d8470330",
+          "successor_sha256": "af3e2301d6882f3d980239444f473a91f777cd200c76d9542271508143dceca6",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_006.inc": {
+          "historical_sha256": "f85ef39fc4bc2be0612108adc7c06f22b92aebd74b53b2aa717e4032d111c672",
+          "successor_sha256": "79f8bdba6019495298db21d4a013ca54b91ab7947651fa92b5b28aecf4c125f3",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_007.inc": {
+          "historical_sha256": "358acbba0f090e2688ee96ffbe1b9ae89ed56ffe5390a81ac216545d6b24be35",
+          "successor_sha256": "5d204c50a11e30be7a9ddeb28bb54b95ca9db391c0a40b00b4b3a4e3319c0d8c",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_008.inc": {
+          "historical_sha256": "835ad0994c62412f53c07749e5162eeffbd453da7d7eab453466d47daa1dbbe4",
+          "successor_sha256": "9c3dc864c0c82860063890d854905822107d80e861740b322fd6f2b112ef431f",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_009.inc": {
+          "historical_sha256": "2bf7efa5d0ace01dbc9c3ed336f2bc800aaf442180289135a3119153d8fa0af4",
+          "successor_sha256": "3d1bfd5b0051db579908f61de56be75e68464122cca56cc1f0c4f340d54c01e3",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_010.inc": {
+          "historical_sha256": "d7e3133600bbb8fbded0a24acbba22a5c47210162aa8fcd4f4eb1e6da76b2e66",
+          "successor_sha256": "c52b8f0e998d68e24b2b010102f059af2a108946022ce008fdd99494c21c49ce",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_011.inc": {
+          "historical_sha256": "1313a15248de7d2e8891ea8ab084ffe38f12b38307b9c5a42c1a33e77c24ebfd",
+          "successor_sha256": "b70a4fe7eb9b3e86372193b217301f8fab63bc740511a7dd994571b4845682b0",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_012.inc": {
+          "historical_sha256": "4daec9b81537075270cbe6cbf78726781f4ef79cbc94987851af1a81d38ede0e",
+          "successor_sha256": "62c3979b55374a15f0a54908a367619a9b62a14e49dc0c444def85d673922462",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_013.inc": {
+          "historical_sha256": "ad01eb5e58a1186506795407f32d8c99b6489f2c3d06147a992899656e3cb1e3",
+          "successor_sha256": "2fb1e19af696f478884ecf92a64295b65f5cdf796678fa1a04850bbf49f4644d",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_014.inc": {
+          "historical_sha256": "4f137f80ff21cc7ef24ff5c27f18971c9c7847cca6ab4229d27c589cc5669b04",
+          "successor_sha256": "6a9fdd013bf475d65ca05eaa5f2dfcb458a426ee84e67e4db29a774ca693013a",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_015.inc": {
+          "historical_sha256": "c36b0eec57761aafb9a2fe3c78bb7c6c5ae75c9c2dec76b190c2d95d9b4266fa",
+          "successor_sha256": "b838bf4be11d8e4af76fb47a5cd027d78da4846ace32021c97d46f60b16c650c",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_016.inc": {
+          "historical_sha256": "b92afa0a20a074dd017b749ab631be1fe71ab35efdc5034a3dc06c5444869d9f",
+          "successor_sha256": "33b9a0b87266ea5d6e60148f22ed2fd5d14de64891fa49f39d42755e0caa8ba4",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_017.inc": {
+          "historical_sha256": "430486d5e7164b1aa9eafecca9eb414c394afcf739648fba3100260a063e8a98",
+          "successor_sha256": "fe76b26406569659cd6edcc4ca446ce40cb3fe967ff6bebf92f3387a83db48a2",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_018.inc": {
+          "historical_sha256": "0c12b14d41ec72366901d73a239436ed45300a99ef6ea3a3b6224892db2a77f7",
+          "successor_sha256": "e8dc880eb1eb9278045d3a2f16fb4ecbd56442a2167fa12da83df8932fb8236b",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_019.inc": {
+          "historical_sha256": "77f17dc5e421f2ebaac2c0d66d7b0b5421ae256336fb98444d4774ce7a7389b5",
+          "successor_sha256": "3237773d8edb153682227608496fde3a1f2b90bcfb80f8a11b085773cd1f0e86",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_020.inc": {
+          "historical_sha256": "86d1afb36af2d980a0d90de15a49757a64cc93e8cefdb0e7d7f04a364184cc35",
+          "successor_sha256": "abe96c2e1d8b85a60639b052999eec86f46442cccf4455c211c273c96a1cbc12",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_021.inc": {
+          "historical_sha256": "ac68f277ec9c898fe56365758dff4e62e1b9f1da0f233dcd44e9d808027a7734",
+          "successor_sha256": "c6e4472aa856b9f8b3f183dd62f00fefac6af6bb005e31f9ced3516a5fbbbcc5",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_022.inc": {
+          "historical_sha256": "5bc1d067bd0cb5d9215b961324b46a8bffa73a80c8434542016a8fcdf830677a",
+          "successor_sha256": "5e57410a0b8a545be692360b3f8343c67f393aec2cf7eed48b681f2f5662f83b",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_023.inc": {
+          "historical_sha256": "5bde8569ccd6091837058af4fbb929e13021fc5cab8217d062b5e7b98b37af2e",
+          "successor_sha256": "739ae9ece0f7e33f18b6e9661270ab74ce12bc6781287dfd7a8630007d8dc7db",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_024.inc": {
+          "historical_sha256": "b845b19f326085df7af25f1823c79a903eb3b591a679895e3a21c319e8a2edff",
+          "successor_sha256": "187ee721f57ac9d2d478fd990a5074d170830e965d44a6a320faa5944efe1a7a",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        },
+        "src/asset_data/part_025.inc": {
+          "historical_sha256": "231d4ce5a2e40d5a84e602c284983383a699e15d200dcf600f07dc073a34392b",
+          "successor_sha256": "8ce44d685b964b08d800e23422fa963434a2c5389a5e82ad9d68d7fcc9597276",
+          "reason": "Exact reviewed base-asset chunk. Changed village and canopy initializer lengths repartition unchanged palette/creature data across chunks; all16 full arrays are independently checked."
+        }
+      }
+    }
+  },
+  "base_arrays": {
+    "game_palette": {
+      "declaration": "const unsigned short game_palette[256]",
+      "historical_initializer_sha256": "d4e647300f711ab4e744ecd429aaa5a2dd93354914d51c7bf44ddaf95d5d0df3",
+      "successor_initializer_sha256": "d4e647300f711ab4e744ecd429aaa5a2dd93354914d51c7bf44ddaf95d5d0df3",
+      "changed": false
+    },
+    "background_village": {
+      "declaration": "const unsigned char background_village[38400]",
+      "historical_initializer_sha256": "3d3b135bb7a45b1734a181b27c37e8322f1e3dd3403fd944b06225d684cc2a88",
+      "successor_initializer_sha256": "b3041af1c94523359f50b1848575756cbe890fb91f7f02cfbb16504eaf4f1d88",
+      "changed": true
+    },
+    "background_forest": {
+      "declaration": "const unsigned char background_forest[38400]",
+      "historical_initializer_sha256": "6a22ca1da2a21575cf74ca4800c2c4fe3b838c8b2a3b04152b0baa3256976027",
+      "successor_initializer_sha256": "6a22ca1da2a21575cf74ca4800c2c4fe3b838c8b2a3b04152b0baa3256976027",
+      "changed": false
+    },
+    "background_temple": {
+      "declaration": "const unsigned char background_temple[38400]",
+      "historical_initializer_sha256": "09616ba2cb565cd0c5e9b7b9faff0e7de00cf63a4190515fb28250db3c3c8041",
+      "successor_initializer_sha256": "09616ba2cb565cd0c5e9b7b9faff0e7de00cf63a4190515fb28250db3c3c8041",
+      "changed": false
+    },
+    "background_boss": {
+      "declaration": "const unsigned char background_boss[38400]",
+      "historical_initializer_sha256": "e09720c004ec68fa41fdd88fa0b24a7712bbc9b65a0a889e3ee3547ee77d3b99",
+      "successor_initializer_sha256": "e09720c004ec68fa41fdd88fa0b24a7712bbc9b65a0a889e3ee3547ee77d3b99",
+      "changed": false
+    },
+    "background_title": {
+      "declaration": "const unsigned char background_title[38400]",
+      "historical_initializer_sha256": "0f2194927a5c0829ba0163938ed82fc99dab36520de94fe5692982c70dae7c2d",
+      "successor_initializer_sha256": "0f2194927a5c0829ba0163938ed82fc99dab36520de94fe5692982c70dae7c2d",
+      "changed": false
+    },
+    "backgrounds": {
+      "declaration": "const unsigned char * const backgrounds[BACK_COUNT]",
+      "historical_initializer_sha256": "725644d81b978030e40c9446e808bb6ce6159ce7b23090661542c5892adcecec",
+      "successor_initializer_sha256": "725644d81b978030e40c9446e808bb6ce6159ce7b23090661542c5892adcecec",
+      "changed": false
+    },
+    "sprite_data": {
+      "declaration": "const unsigned char sprite_data[SPR_COUNT][256]",
+      "historical_initializer_sha256": "f10da7640f79c2b2d8b23fbeaa788a8b09d83f095fd9151cf237bb793ed95711",
+      "successor_initializer_sha256": "f10da7640f79c2b2d8b23fbeaa788a8b09d83f095fd9151cf237bb793ed95711",
+      "changed": false
+    },
+    "boss_data": {
+      "declaration": "const unsigned char boss_data[1024]",
+      "historical_initializer_sha256": "04fa45c6a3060e8c5430abaaaa5652cba36e65c15bb91af49ccc31577efacb24",
+      "successor_initializer_sha256": "04fa45c6a3060e8c5430abaaaa5652cba36e65c15bb91af49ccc31577efacb24",
+      "changed": false
+    },
+    "hero_frames": {
+      "declaration": "const unsigned char hero_frames[4][4][256]",
+      "historical_initializer_sha256": "a74d5cf7656423f87fe8052400d1b80ae3568dfb1946b5f1bfd0242d1371c6ed",
+      "successor_initializer_sha256": "a74d5cf7656423f87fe8052400d1b80ae3568dfb1946b5f1bfd0242d1371c6ed",
+      "changed": false
+    },
+    "companion_frames": {
+      "declaration": "const unsigned char companion_frames[2][4][256]",
+      "historical_initializer_sha256": "475df10c2afe05e2118aa6b518264caf9514377082bd719af862e8c0f6ce9095",
+      "successor_initializer_sha256": "475df10c2afe05e2118aa6b518264caf9514377082bd719af862e8c0f6ce9095",
+      "changed": false
+    },
+    "companion_direction_frames": {
+      "declaration": "const unsigned char companion_direction_frames[2][4][4][256]",
+      "historical_initializer_sha256": "20265fef606fec397f6738764404c3c2449f295ac24d7ba93a1f3ed063b6c731",
+      "successor_initializer_sha256": "20265fef606fec397f6738764404c3c2449f295ac24d7ba93a1f3ed063b6c731",
+      "changed": false
+    },
+    "hero_shadow": {
+      "declaration": "const unsigned char hero_shadow[256]",
+      "historical_initializer_sha256": "51115a781e4d432472043213c677b235348c334fb60548e612dfb1d3c3fb08f4",
+      "successor_initializer_sha256": "51115a781e4d432472043213c677b235348c334fb60548e612dfb1d3c3fb08f4",
+      "changed": false
+    },
+    "boss_shadow": {
+      "declaration": "const unsigned char boss_shadow[512]",
+      "historical_initializer_sha256": "3fd5a99fff6ca153ccca2ce6c06cbd13b24ce541f3a612b9388de5578e62a7e9",
+      "successor_initializer_sha256": "3fd5a99fff6ca153ccca2ce6c06cbd13b24ce541f3a612b9388de5578e62a7e9",
+      "changed": false
+    },
+    "foreground_canopy_data": {
+      "declaration": "const unsigned char foreground_canopy_data[6][1024]",
+      "historical_initializer_sha256": "be57e1458b8ff6a716bd3dc8c87ac46b1d522a5c15e3028daa426638c091f012",
+      "successor_initializer_sha256": "83ce6f1ee8876ab4d1dc0063117ba754eb35a706f52753895097e02221876321",
+      "changed": true
+    },
+    "foreground_canopies": {
+      "declaration": "const ForegroundCanopy foreground_canopies[FOREGROUND_CANOPY_COUNT]",
+      "historical_initializer_sha256": "89f3c6f462ad2df5338ab19b2688d12534332a7bac2366f701509428c78736f0",
+      "successor_initializer_sha256": "89f3c6f462ad2df5338ab19b2688d12534332a7bac2366f701509428c78736f0",
+      "changed": false
+    }
+  },
+  "authoring_definitions": {
+    "Art": {
+      "historical_ast_sha256": "e0ddd77ab4b02233b56d60b4dcdbf90327f825e728b397d3b0884298fdcdd27c",
+      "successor_ast_sha256": "e0ddd77ab4b02233b56d60b4dcdbf90327f825e728b397d3b0884298fdcdd27c"
+    },
+    "color_background": {
+      "historical_ast_sha256": "cd3cc02dc597754e1663ac365983da368c12a9cf85dae60d97c7d047434ea6fe",
+      "successor_ast_sha256": "cd3cc02dc597754e1663ac365983da368c12a9cf85dae60d97c7d047434ea6fe"
+    },
+    "terrain": {
+      "historical_ast_sha256": "9e4270686c02f4b9d1533594296f086c4cb673152cfd805911ab783ea450f6f7",
+      "successor_ast_sha256": "9e4270686c02f4b9d1533594296f086c4cb673152cfd805911ab783ea450f6f7"
+    },
+    "light_pool": {
+      "historical_ast_sha256": "6df58b9eb136e19f307cc4a802339577b83aa03d3e6e3c6f014e8f5a26079448",
+      "successor_ast_sha256": "6df58b9eb136e19f307cc4a802339577b83aa03d3e6e3c6f014e8f5a26079448"
+    },
+    "flowers": {
+      "historical_ast_sha256": "575b141b3cccd8550c320682acd0357fb7d65556e186e925c9d7a4c82ae34312",
+      "successor_ast_sha256": "575b141b3cccd8550c320682acd0357fb7d65556e186e925c9d7a4c82ae34312"
+    },
+    "path": {
+      "historical_ast_sha256": "d3a179a8d20aa44a4d3733a4623091a91263428888fb1f08b31bfcaa5f2424ca",
+      "successor_ast_sha256": "d3a179a8d20aa44a4d3733a4623091a91263428888fb1f08b31bfcaa5f2424ca"
+    },
+    "stone": {
+      "historical_ast_sha256": "401efd4f632d9b621bdb100a00b7af1de09627f42a295367e8a9fddea2ce031a",
+      "successor_ast_sha256": "401efd4f632d9b621bdb100a00b7af1de09627f42a295367e8a9fddea2ce031a"
+    },
+    "leaf_cluster": {
+      "historical_ast_sha256": "1a83f5706252b7f301246db800073a75e90d8316cbafda0123234f2b658836b8",
+      "successor_ast_sha256": "1a83f5706252b7f301246db800073a75e90d8316cbafda0123234f2b658836b8"
+    },
+    "tree": {
+      "historical_ast_sha256": "cb4b076269ef69e9ea4111159d4cadcd68eb6833be0d62668da924ccec10d2d1",
+      "successor_ast_sha256": "cb4b076269ef69e9ea4111159d4cadcd68eb6833be0d62668da924ccec10d2d1"
+    },
+    "bush": {
+      "historical_ast_sha256": "5c9bad347f4b712e047f4e7abc9c7722812327c8c4a1eefa68a44f3e15f7b3e0",
+      "successor_ast_sha256": "5c9bad347f4b712e047f4e7abc9c7722812327c8c4a1eefa68a44f3e15f7b3e0"
+    },
+    "house": {
+      "historical_ast_sha256": "36af9c025bd5c7c2586ceb29f64a517efbe5730b4334d8bd043e6ceaed029872",
+      "successor_ast_sha256": "36af9c025bd5c7c2586ceb29f64a517efbe5730b4334d8bd043e6ceaed029872"
+    },
+    "fence": {
+      "historical_ast_sha256": "5a28db60fee055a7f2098d6057abe71eb107fe7c31ed2c7da2545de407de0851",
+      "successor_ast_sha256": "5a28db60fee055a7f2098d6057abe71eb107fe7c31ed2c7da2545de407de0851"
+    },
+    "shrine": {
+      "historical_ast_sha256": "df16939f86b43380e4c3b0d5f5cd0f1ac74c1589feb32ae7ebf7ce67f0676625",
+      "successor_ast_sha256": "df16939f86b43380e4c3b0d5f5cd0f1ac74c1589feb32ae7ebf7ce67f0676625"
+    },
+    "lamp": {
+      "historical_ast_sha256": "f2c5c0705626f4e3c5b5ec59eb625fac6f482542452431cc36b60e036eb9ce67",
+      "successor_ast_sha256": "f2c5c0705626f4e3c5b5ec59eb625fac6f482542452431cc36b60e036eb9ce67"
+    },
+    "village": {
+      "historical_ast_sha256": "6bab609e56f9689bb8186ad7b7ba3f5c16f7e39122101acc1050a901b34f1c6c",
+      "successor_ast_sha256": "5789cca70e5da9eb0867264ec68e4cd9ac494a815c3a65d048e2284b6ad87576"
+    },
+    "forest": {
+      "historical_ast_sha256": "b7fe749ed5934088a2a820352d5f604b4ff96c31ea96d8ae00bf9d702f9e46b8",
+      "successor_ast_sha256": "b7fe749ed5934088a2a820352d5f604b4ff96c31ea96d8ae00bf9d702f9e46b8"
+    },
+    "masonry": {
+      "historical_ast_sha256": "d1b68446fb5582a99d5c6c1bd59bef51efa6a712466405f7e08759fce0ea6074",
+      "successor_ast_sha256": "d1b68446fb5582a99d5c6c1bd59bef51efa6a712466405f7e08759fce0ea6074"
+    },
+    "temple": {
+      "historical_ast_sha256": "92bd07a1da95c530d784b2c896b06d9488bc8c022fedcea306bbad4b88eee839",
+      "successor_ast_sha256": "92bd07a1da95c530d784b2c896b06d9488bc8c022fedcea306bbad4b88eee839"
+    },
+    "boss": {
+      "historical_ast_sha256": "7c54fc7f5f826ee640dd784dbc0f5d072ab61d6e6632e1763fecde21abad5090",
+      "successor_ast_sha256": "7c54fc7f5f826ee640dd784dbc0f5d072ab61d6e6632e1763fecde21abad5090"
+    },
+    "title": {
+      "historical_ast_sha256": "0d99e1e28a9bd86bbbf214e24d886a3396b1339558736225bc5fcfdbe3753005",
+      "successor_ast_sha256": "0d99e1e28a9bd86bbbf214e24d886a3396b1339558736225bc5fcfdbe3753005"
+    },
+    "hero": {
+      "historical_ast_sha256": "05e4a927cbf46926de9c67c1932fc0e42b4ca0d7d6d2cb7b74771f58588e9b9a",
+      "successor_ast_sha256": "05e4a927cbf46926de9c67c1932fc0e42b4ca0d7d6d2cb7b74771f58588e9b9a"
+    },
+    "fox_direction": {
+      "historical_ast_sha256": "a326b417255ac2414378554d70ed8a474bddf2cb07c37e4d11e30e6fae884701",
+      "successor_ast_sha256": "a326b417255ac2414378554d70ed8a474bddf2cb07c37e4d11e30e6fae884701"
+    },
+    "fox": {
+      "historical_ast_sha256": "08730befb0248559f4eb915c6776fa4dc18ec9ab8c8d95f237085c1974a2bec9",
+      "successor_ast_sha256": "08730befb0248559f4eb915c6776fa4dc18ec9ab8c8d95f237085c1974a2bec9"
+    },
+    "leaf_direction": {
+      "historical_ast_sha256": "b896a4a3303ba5fe3090e6db0d93f9bb103d6bc53d4f56b6eb7859eb2c4d5cb9",
+      "successor_ast_sha256": "b896a4a3303ba5fe3090e6db0d93f9bb103d6bc53d4f56b6eb7859eb2c4d5cb9"
+    },
+    "leaf": {
+      "historical_ast_sha256": "6bddad49a90a7d579435aa9a8500621f71375693a2b93952c8eadc104bbff955",
+      "successor_ast_sha256": "6bddad49a90a7d579435aa9a8500621f71375693a2b93952c8eadc104bbff955"
+    },
+    "shadow_sprite": {
+      "historical_ast_sha256": "e5efc85e4f154fbc34e9afdfab2c771599f47ecab0d4487cc2de786c30971894",
+      "successor_ast_sha256": "e5efc85e4f154fbc34e9afdfab2c771599f47ecab0d4487cc2de786c30971894"
+    },
+    "foreground_canopy": {
+      "historical_ast_sha256": "174a914f3d6a2828f0e65f0707a48c5a4c1d6551d4253a05c2719023338d4654",
+      "successor_ast_sha256": "174a914f3d6a2828f0e65f0707a48c5a4c1d6551d4253a05c2719023338d4654"
+    },
+    "slime": {
+      "historical_ast_sha256": "a7f1517e6034987b2bba800bcb79011b0a1d802530846a0c9d597b3ae83f0dd3",
+      "successor_ast_sha256": "a7f1517e6034987b2bba800bcb79011b0a1d802530846a0c9d597b3ae83f0dd3"
+    },
+    "elder": {
+      "historical_ast_sha256": "fc95f7a92e28d87b4a37cd95c8f3df77fb923656444ba186519292726b5ca291",
+      "successor_ast_sha256": "fc95f7a92e28d87b4a37cd95c8f3df77fb923656444ba186519292726b5ca291"
+    },
+    "heart": {
+      "historical_ast_sha256": "423f3e26f117d24047f6e0ad244b18c91e5cc6b7ee9b3ebc5c1c8122f4737bbc",
+      "successor_ast_sha256": "423f3e26f117d24047f6e0ad244b18c91e5cc6b7ee9b3ebc5c1c8122f4737bbc"
+    },
+    "flame": {
+      "historical_ast_sha256": "93112be72a23746330b834946a4846f21017784a788f5a777bf7916300ffecd9",
+      "successor_ast_sha256": "93112be72a23746330b834946a4846f21017784a788f5a777bf7916300ffecd9"
+    },
+    "projectile": {
+      "historical_ast_sha256": "77b33e1ad608bb563acb009c08699e95fd92c66ff571c8eb9bbd82613aa5871a",
+      "successor_ast_sha256": "77b33e1ad608bb563acb009c08699e95fd92c66ff571c8eb9bbd82613aa5871a"
+    },
+    "golem": {
+      "historical_ast_sha256": "f706cefbd0107bbcfd472e0c936d77870519a62e6b8dcaddb17fcd7976f14c48",
+      "successor_ast_sha256": "f706cefbd0107bbcfd472e0c936d77870519a62e6b8dcaddb17fcd7976f14c48"
+    },
+    "split_generated_source": {
+      "historical_ast_sha256": "eda1ca7643415201285999c8a8095a9e911dfe44eb13e3b8a428d447cab2498c",
+      "successor_ast_sha256": "eda1ca7643415201285999c8a8095a9e911dfe44eb13e3b8a428d447cab2498c"
+    },
+    "emit_array": {
+      "historical_ast_sha256": "f7495a058327f9989eb5e6424fa1497998b1f815ef0575e811bb93ae87212900",
+      "successor_ast_sha256": "f7495a058327f9989eb5e6424fa1497998b1f815ef0575e811bb93ae87212900"
+    },
+    "emit_image_tensor": {
+      "historical_ast_sha256": "6f6aae8b9becaa4d00b883b449c92d94b4a0814498efc04cf43f3eb94b651c35",
+      "successor_ast_sha256": "6f6aae8b9becaa4d00b883b449c92d94b4a0814498efc04cf43f3eb94b651c35"
+    },
+    "main": {
+      "historical_ast_sha256": "bbb1fd03c3610818726dcd775d2c99092fdfa4e6697f99372761d955a8b1a2ab",
+      "successor_ast_sha256": "998bb8e2e7c56ab30a48c27d62f0ef171aacc01b42bf3e199ece72a1b048a44d"
+    }
+  },
+  "preserved_canopy_tail_sha256": "198b87ab259d8cef26374bccb6b0201b92676f3dda74eed96ea3e3cf7cde409f",
+  "base_asset_parts": [
+    "src/asset_data/part_000.inc",
+    "src/asset_data/part_001.inc",
+    "src/asset_data/part_002.inc",
+    "src/asset_data/part_003.inc",
+    "src/asset_data/part_004.inc",
+    "src/asset_data/part_005.inc",
+    "src/asset_data/part_006.inc",
+    "src/asset_data/part_007.inc",
+    "src/asset_data/part_008.inc",
+    "src/asset_data/part_009.inc",
+    "src/asset_data/part_010.inc",
+    "src/asset_data/part_011.inc",
+    "src/asset_data/part_012.inc",
+    "src/asset_data/part_013.inc",
+    "src/asset_data/part_014.inc",
+    "src/asset_data/part_015.inc",
+    "src/asset_data/part_016.inc",
+    "src/asset_data/part_017.inc",
+    "src/asset_data/part_018.inc",
+    "src/asset_data/part_019.inc",
+    "src/asset_data/part_020.inc",
+    "src/asset_data/part_021.inc",
+    "src/asset_data/part_022.inc",
+    "src/asset_data/part_023.inc",
+    "src/asset_data/part_024.inc",
+    "src/asset_data/part_025.inc"
+  ]
+}

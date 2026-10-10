@@ -24,7 +24,7 @@
 #define WORLD_CHEST_Y 72
 #define WORLD_TEMPLE_X 368
 #define WORLD_TEMPLE_Y 24
-#define OVERWORLD_SOLID_COUNT 76
+#define OVERWORLD_SOLID_COUNT 70
 #define WORLD_SOLID_COUNT OVERWORLD_SOLID_COUNT
 /* Half-open rectangles: x <= point.x < x+w, y <= point.y < y+h.
    These are scenery only. Add world bounds and the dynamic river/bridge in game.c.

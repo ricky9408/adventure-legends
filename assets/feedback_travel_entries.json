@@ -1,0 +1,365 @@
+{
+  "activation": "Walk into the rectangular feet footprint; exit the 10px-expanded footprint before rearming.",
+  "entries": [
+    {
+      "room": 22,
+      "action": "TRAVEL_NORTH",
+      "target": 24,
+      "spawn": 0,
+      "footprint": [
+        79,
+        132,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 22,
+      "action": "TRAVEL_NORTH",
+      "target": 25,
+      "spawn": 0,
+      "footprint": [
+        375,
+        132,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 23,
+      "action": "TRAVEL_NORTH",
+      "target": 26,
+      "spawn": 0,
+      "footprint": [
+        391,
+        60,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 26,
+      "action": "TRAVEL_NORTH",
+      "target": 27,
+      "spawn": 0,
+      "footprint": [
+        199,
+        48,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 27,
+      "action": "TRAVEL_NORTH",
+      "target": 28,
+      "spawn": 0,
+      "footprint": [
+        199,
+        48,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 28,
+      "action": "TRAVEL_NORTH",
+      "target": 29,
+      "spawn": 0,
+      "footprint": [
+        199,
+        48,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 22,
+      "action": "TRAVEL_FERRY",
+      "target": 30,
+      "spawn": 0,
+      "footprint": [
+        199,
+        216,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 30,
+      "action": "TRAVEL_SOUTH",
+      "target": 32,
+      "spawn": 0,
+      "footprint": [
+        71,
+        130,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 30,
+      "action": "TRAVEL_SOUTH",
+      "target": 22,
+      "spawn": 0,
+      "footprint": [
+        231,
+        256,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 30,
+      "action": "TRAVEL_LIFT",
+      "target": 38,
+      "spawn": 0,
+      "footprint": [
+        279,
+        240,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 38,
+      "action": "TRAVEL_MAGMA",
+      "target": 40,
+      "spawn": 0,
+      "footprint": [
+        71,
+        142,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 38,
+      "action": "TRAVEL_MAGMA",
+      "target": 30,
+      "spawn": 0,
+      "footprint": [
+        231,
+        260,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 39,
+      "action": "TRAVEL_MAGMA",
+      "target": 41,
+      "spawn": 0,
+      "footprint": [
+        71,
+        96,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 39,
+      "action": "TRAVEL_MAGMA",
+      "target": 42,
+      "spawn": 0,
+      "footprint": [
+        391,
+        64,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 38,
+      "action": "TRAVEL_DIVE",
+      "target": 46,
+      "spawn": 0,
+      "footprint": [
+        407,
+        216,
+        19,
+        17
+      ]
+    },
+    {
+      "room": 31,
+      "action": "TRAVEL_SOUTH",
+      "target": 34,
+      "spawn": 0,
+      "footprint": [
+        391,
+        59,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 31,
+      "action": "TRAVEL_SOUTH",
+      "target": 33,
+      "spawn": 0,
+      "footprint": [
+        71,
+        90,
+        19,
+        13
+      ]
+    },
+    {
+      "room": 32,
+      "action": "TRAVEL_SOUTH",
+      "target": 30,
+      "spawn": 4,
+      "footprint": [
+        201,
+        57,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 34,
+      "action": "TRAVEL_SOUTH",
+      "target": 35,
+      "spawn": 0,
+      "footprint": [
+        201,
+        49,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 35,
+      "action": "TRAVEL_SOUTH",
+      "target": 36,
+      "spawn": 0,
+      "footprint": [
+        201,
+        49,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 36,
+      "action": "TRAVEL_SOUTH",
+      "target": 37,
+      "spawn": 0,
+      "footprint": [
+        201,
+        49,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 36,
+      "action": "TRAVEL_SOUTH",
+      "target": 31,
+      "spawn": 1,
+      "footprint": [
+        201,
+        105,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 39,
+      "action": "TRAVEL_MAGMA",
+      "target": 40,
+      "spawn": 0,
+      "footprint": [
+        98,
+        106,
+        13,
+        13
+      ]
+    },
+    {
+      "room": 40,
+      "action": "TRAVEL_MAGMA",
+      "target": 39,
+      "spawn": 1,
+      "footprint": [
+        201,
+        129,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 42,
+      "action": "TRAVEL_MAGMA",
+      "target": 43,
+      "spawn": 0,
+      "footprint": [
+        209,
+        49,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 43,
+      "action": "TRAVEL_MAGMA",
+      "target": 44,
+      "spawn": 0,
+      "footprint": [
+        209,
+        49,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 44,
+      "action": "TRAVEL_MAGMA",
+      "target": 45,
+      "spawn": 0,
+      "footprint": [
+        209,
+        49,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 44,
+      "action": "TRAVEL_MAGMA",
+      "target": 39,
+      "spawn": 2,
+      "footprint": [
+        209,
+        129,
+        15,
+        15
+      ]
+    },
+    {
+      "room": 4,
+      "action": "TRAVEL_TRIAL",
+      "target": 14,
+      "spawn": 0,
+      "footprint": [
+        196,
+        58,
+        17,
+        13
+      ]
+    },
+    {
+      "room": 9,
+      "action": "TRAVEL_TRIAL",
+      "target": 15,
+      "spawn": 0,
+      "footprint": [
+        200,
+        114,
+        17,
+        13
+      ]
+    }
+  ]
+}

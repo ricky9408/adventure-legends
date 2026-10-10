@@ -1,0 +1,95 @@
+{
+  "palette": [
+    {
+      "name": "low ember reed",
+      "gain": 0.67,
+      "attack": 0.02,
+      "release": 0.12,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.08
+        ],
+        [
+          3,
+          0.24
+        ],
+        [
+          5,
+          0.07
+        ],
+        [
+          7,
+          0.019
+        ]
+      ],
+      "vibrato_delay": 0.34,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.1,
+      "vibrato_cents": 2.2
+    },
+    {
+      "name": "heavy rounded caldera bass",
+      "gain": 0.38,
+      "attack": 0.015,
+      "release": 0.12,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.04
+        ],
+        [
+          3,
+          -0.085
+        ],
+        [
+          5,
+          0.024
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "muted ember tine",
+      "gain": 0.235,
+      "attack": 0.006,
+      "release": 0.075,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.15
+        ],
+        [
+          3,
+          0.07
+        ],
+        [
+          4,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "the_breath_of_the_caldera-gba-16384-s8.raw": "9a8e4a4e135fdce295730638bf44be7edaddf372d92cdbff8e4f9e09629acc01"
+  }
+}

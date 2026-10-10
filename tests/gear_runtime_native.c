@@ -39,6 +39,45 @@ int region_game_practice_hit(unsigned c,int x,int y){(void)c;(void)x;(void)y;ret
 void obj_upload(const unsigned char *p,int w,int h,int off){assert(p&&w>0&&h>0&&w<=32&&h<=32&&off>=0&&off+w*h<=16384);memcpy(vram+off,p,(size_t)w*h);}
 void obj_add(int o,int x,int y,int w,int h,int p,int d,int f){(void)x;(void)y;(void)p;(void)d;(void)f;assert(w>0&&h>0&&w<=32&&h<=32&&o>=0&&o+w*h<=16384);}
 static void equip(unsigned slot,unsigned ref){EquipmentU16 h=(EquipmentU16)hero_hp_q4;assert(equipment_equip(&adventure_save.equipment,slot,ref,96,&h,0,0)==0);game_gear_apply(h);}
+
+/* Synthetic passive ownership/loadouts exercise actual runtime derive,
+ * preview and commit functions; no controller-acquisition claim. */
+static unsigned item_ref(unsigned id){unsigned i;for(i=0;i<48;i++)if(adventure_save.equipment.bag[i].item_id==id)return i;abort();}
+static void passive_equip(unsigned slot,unsigned id){EquipmentU16 h=(EquipmentU16)hero_hp_q4;EquipmentComparison preview,applied;
+ assert(equipment_preview(&adventure_save.equipment,slot,id?item_ref(id):255,game_gear_base_hp(),h,0,&preview)==EQUIPMENT_OK);
+ game_gear_bonus_stats(&preview.before);game_gear_bonus_stats(&preview.after);
+ assert(!memcmp(&preview.before,&gear_stats,sizeof gear_stats));
+ assert(equipment_equip(&adventure_save.equipment,slot,id?item_ref(id):255,game_gear_base_hp(),&h,0,&applied)==EQUIPMENT_OK);
+ game_gear_apply_stats(h,&applied.after);assert(!memcmp(&preview.after,&gear_stats,sizeof gear_stats));
+ assert(hero_hp_q4==preview.hp_after_q4);
+}
+static void later_passive_checks(void){unsigned i,bits;EquipmentStats old,first,raw;
+ memset(&adventure_save,0,sizeof adventure_save);equipment_init(&adventure_save.equipment);max_hp=6;hero_hp_q4=63;ability_cd=37;
+ game_health_refresh(0);old=gear_stats;
+ for(bits=0;bits<16;bits++){
+  adventure_save.economy.later_claims=(unsigned char)bits;game_health_refresh(0);
+  assert(gear_stats.max_hp_q4==96+((bits&8)?16:0));assert(gear_stats.speed_q8==320+((bits&1)?16:0));
+  assert(gear_stats.diagonal_q8==((gear_stats.speed_q8*181u+128u)>>8));
+  assert(gear_stats.defense_q4==((bits&2)?2:0));assert(gear_stats.power_cooldown==75-((bits&4)?4:0));
+  assert(gear_stats.attack_q4==old.attack_q4&&hero_hp_q4==63&&ability_cd==37);
+  first=gear_stats;for(i=0;i<100;i++){game_health_refresh(0);assert(!memcmp(&gear_stats,&first,sizeof first));assert(hero_hp_q4==63&&ability_cd==37);}
+ }
+ game_health_fill();assert(hero_hp_q4==112);passive_equip(0,1);assert(hero_hp_q4==112);
+ for(i=1;i<48;i++)assert(equipment_claim(&adventure_save.equipment,equipment_authored_ids[i],i,0)==EQUIPMENT_OK);
+ adventure_save.economy.relics=3;max_hp=8;game_health_refresh(0);
+ passive_equip(0,14);passive_equip(1,34);passive_equip(2,56);passive_equip(3,65);passive_equip(4,81);
+ assert(gear_stats.max_hp_q4==192);game_health_fill();assert(hero_hp_q4==192);
+ passive_equip(0,14);passive_equip(1,34);passive_equip(2,56);passive_equip(3,65);passive_equip(4,81);assert(hero_hp_q4==192);
+ hero_hp_q4=63;
+ passive_equip(0,2);passive_equip(3,67);passive_equip(4,82);assert(gear_stats.defense_q4==8);
+ passive_equip(2,52);passive_equip(3,69);passive_equip(4,88);
+ assert(gear_stats.power_cooldown==55&&game_power_cooldown(75)==55&&game_power_cooldown(20)==1&&game_power_cooldown(0)==1&&ability_cd==37);
+ for(i=0;i<48;i++)passive_equip(equipment_definition(equipment_authored_ids[i])->slot,equipment_authored_ids[i]);
+ assert(equipment_derive(&adventure_save.equipment,game_gear_base_hp(),&raw));raw.speed_q8=352;raw.defense_q4=8;game_gear_bonus_stats(&raw);
+ assert(raw.speed_q8==352&&raw.diagonal_q8==249&&raw.defense_q4==8);
+ puts("PASS later treasure actual runtime: all16 receipts, HP/defense/speed/diagonal/recovery caps, attack unchanged,100 refreshes each/no refill or cooldown reset, all48 gear preview/commit parity");
+}
+
 int main(void){
  unsigned body,ring,i;unsigned char arrows[128],pin[256],icons[320];
  max_hp=6;equipment_init(&adventure_save.equipment);game_health_refresh(1);assert(hero_hp_q4==96);
@@ -73,6 +112,7 @@ int main(void){
     for(i=0;i<4;i++)game_arrows_update();assert(boss_hp_q4==320&&!player_arrows[0].active);
     wall_x=wall_y=-100;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,(unsigned char)d,32,0,0,255,{0,0}};game_arrows_update();assert(boss_hp_q4==304&&!player_arrows[0].active);boss_live=0;
  }}
+ later_passive_checks();
  puts("PASS four-direction wall/target/boss LOS and exactly-once hit ledger; actual runtime: fractional HP/no-heal100cycles, cooldown cache, two arrows+pin+phase glyph separation, projectile locks, separate stagger timer");
  return 0;
 }

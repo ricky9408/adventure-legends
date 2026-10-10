@@ -1,0 +1,557 @@
+{
+  "commands": [
+    {
+      "id": 65,
+      "combat": [
+        "すき間の大きい水玉３つ",
+        "同じ敵には１回だけ当たる"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/magma_powers.c:203",
+        "src/magma_powers.c:310",
+        "src/magma_powers.c:264",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/magma_powers.c:169",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/magma_powers.c:169 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 66,
+      "combat": [
+        "５つの花びら形に広がる波",
+        "広がる先端だけで攻撃"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/magma_powers.c:203",
+        "src/magma_powers.c:310",
+        "src/magma_powers.c:264",
+        "src/south_game.c:601",
+        "src/south_game.c:38",
+        "src/magma_game.c:243",
+        "src/magma_powers.c:169",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/magma_powers.c:169 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. Earlier southern/legacy regional actions may also use gear-adjusted75; northern field actions for13..22 use the selected ability base. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 67,
+      "combat": [
+        "帰りの波だけが当たる",
+        "前方の印の距離をねらう"
+      ],
+      "field": "印の輪郭を浮かべる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 68,
+      "combat": [
+        "２本の斜線を内側へたたむ",
+        "出始めに左右で形を選ぶ"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 69,
+      "combat": [
+        "四隅を順番に攻撃",
+        "出始めに最初の隅を選ぶ"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 70,
+      "combat": [
+        "前方の敵を攻撃し横へ押す",
+        "出始めに押す左右を選ぶ"
+      ],
+      "field": "印の重りを動かす",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 71,
+      "combat": [
+        "枠に入った敵１体を待つ",
+        "少し後に入った側へ押し戻す"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_powers.c:414",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 72,
+      "combat": [
+        "左右の面が交互に落ちる",
+        "中央のすき間には当たらない"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 73,
+      "combat": [
+        "先端がかぎ形に進んで攻撃",
+        "出始めに曲がる左右を選ぶ"
+      ],
+      "field": "試しの印につるを重ねる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 74,
+      "combat": [
+        "前方の枝を直角に振る",
+        "回転の中心には当たらない"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 75,
+      "combat": [
+        "近くから遠くへ３本の棒で攻撃",
+        "左右にずれた位置をねらう"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 76,
+      "combat": [
+        "前へ進み壁に沿って曲がる",
+        "壁の手前側をなぞって攻撃"
+      ],
+      "field": "試しの印に縁を重ねる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 77,
+      "combat": [
+        "正面から入った敵１体を待つ",
+        "枠の手前へ抜けると攻撃"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_powers.c:414",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 180 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 78,
+      "combat": [
+        "穴が２つある型を押し当てる",
+        "予告後に穴の外側を攻撃"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 79,
+      "combat": [
+        "波打つ細い炎を前へ進める",
+        "出始めに曲がりの左右を選ぶ"
+      ],
+      "field": "試しの印に熱を重ねる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 80,
+      "combat": [
+        "前の弧から後ろの弧へ攻撃",
+        "それぞれの切れ目は安全"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 81,
+      "combat": [
+        "歩いた短い道筋を記録",
+        "少し後に逆向きになぞり攻撃"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 82,
+      "combat": [
+        "５つの先端を少し回して攻撃",
+        "腕や中心には当たらない"
+      ],
+      "field": "試しの印に先端を重ねる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 83,
+      "combat": [
+        "中心を空けた十字を伸ばす",
+        "出始めの上下で長い軸を選ぶ"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 84,
+      "combat": [
+        "折りたたむ帯の先端で攻撃",
+        "帯の線には当たらない"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 85,
+      "combat": [
+        "折れ曲がる道を光が往復",
+        "明るい片方だけが敵に当たる"
+      ],
+      "field": "試しの印に光を重ねる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 86,
+      "combat": [
+        "前方の支点から棒を直角に振る",
+        "出始めに振る左右を選ぶ"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 87,
+      "combat": [
+        "２つの輪を交互に光らせる",
+        "交わる小さな場所だけ攻撃"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 88,
+      "combat": [
+        "４本の歯を並べて前へ進める",
+        "歯のすき間には当たらない"
+      ],
+      "field": "試しの印に歯を重ねる",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 90 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 89,
+      "combat": [
+        "四角の片側ずつを攻撃",
+        "斜めのすき間には当たらない"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 90,
+      "combat": [
+        "予告後に三角の内側を攻撃",
+        "中心の小さな穴は安全"
+      ],
+      "field": "仕掛けは最初の技を使う",
+      "source": [
+        "src/underwater_powers.c:307",
+        "src/underwater_powers.c:476",
+        "src/underwater_game.c:290",
+        "src/underwater_trials.inc:11",
+        "src/underwater_powers.c:452",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/underwater_powers.c:452 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 91,
+      "combat": [
+        "正面で熱をためＲで放つ",
+        "待って放つと強い炎の弧"
+      ],
+      "field": "印の火種をともす",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 135 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 92,
+      "combat": [
+        "正面に小さな囲いを置く",
+        "前から来る敵弾を１発防ぐ"
+      ],
+      "field": "印の根や橋を育てる",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:279",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 150 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 93,
+      "combat": [
+        "１回曲がって戻ってくる風",
+        "往復しても同じ敵へは１回"
+      ],
+      "field": "印の帆に風を送る",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 135 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 94,
+      "combat": [
+        "正面で敵弾を１発受ける",
+        "受けると前へ衝撃を出す"
+      ],
+      "field": "印の重しや岩に働く",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:279",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 150 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 95,
+      "combat": [
+        "動く敵１体を曲がる水路へ誘う",
+        "当たると横の空き場へ引く"
+      ],
+      "field": "印の水場をつなぐ",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 135 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    },
+    {
+      "id": 96,
+      "combat": [
+        "正面の細い口で敵弾を受ける",
+        "受けた後Ｒで反撃を放つ"
+      ],
+      "field": "印の留め具を鳴らす",
+      "source": [
+        "src/return_powers.c:164",
+        "src/return_powers.c:264",
+        "src/return_powers.c:279",
+        "src/return_powers.c:144",
+        "src/return_fields.inc:21",
+        "src/return_powers.c:301",
+        "src/gear_runtime.c:48"
+      ],
+      "recovery": "Base combat cooldown 120 active-play updates. src/return_powers.c:301 assigns ability_cd/ability_max through game_power_cooldown; src/gear_runtime.c:48 applies equipped-gear recovery. This handler clamps recovery to GAME_MAX_POWER_RECOVERY; cooldown is distinct from startup/effect lifetime. game.c:ability_apply checks magma field actions before all combat dispatch; a compatible active-form field success uses gear-adjusted75. No CreatureForm.stats value is used."
+    }
+  ]
+}

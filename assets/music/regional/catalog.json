@@ -1,0 +1,475 @@
+{
+  "schema": 1,
+  "authorship": "Original project-specific compositions created with OpenAI; no third-party recordings or samples.",
+  "cues": [
+    {
+      "id": "HOME",
+      "numeric_id": 0,
+      "render_cue": "HOME",
+      "title": "Lanterns by the Footbridge",
+      "key": "D major",
+      "meter": "4/4",
+      "nominal_bpm": 104,
+      "bars": 24,
+      "sample_rate": 16384,
+      "sample_count": 907421,
+      "duration_seconds": 55.38458251953125,
+      "raw_sha256": "a9ada6ff0b3ef068dc8ab9bfabd02f69521c6ef252420157b9646636e98e4838",
+      "raw_path": "assets/music/lanterns/lanterns-gba-16384-s8.raw",
+      "room_ids": [
+        0,
+        54,
+        60
+      ]
+    },
+    {
+      "id": "RIVER",
+      "numeric_id": 1,
+      "render_cue": "ROAD",
+      "title": "Where the Mileposts Turn",
+      "key": "G major",
+      "meter": "4/4",
+      "nominal_bpm": 112,
+      "bars": 24,
+      "sample_rate": 16384,
+      "sample_count": 842605,
+      "duration_seconds": 51.42852783203125,
+      "raw_sha256": "ee6b2f03e6e985ad4348de3b03e2707ed862fafc7cce819908b9d9af6dcc4a81",
+      "raw_path": "assets/music/regional/ROAD/where_the_mileposts_turn-gba-16384-s8.raw",
+      "room_ids": [
+        1,
+        17,
+        56
+      ]
+    },
+    {
+      "id": "GROVE",
+      "numeric_id": 2,
+      "render_cue": "GROVE_SHRINE",
+      "title": "Under the Rootbound Arch",
+      "key": "D minor with Dorian mixture",
+      "meter": "3/4",
+      "nominal_bpm": 78,
+      "bars": 24,
+      "sample_rate": 16384,
+      "sample_count": 907422,
+      "duration_seconds": 55.3846435546875,
+      "raw_sha256": "dda862c061f2fbaa90e46f8406a83f61928dca1dc95b78a599aa2e9f58407c12",
+      "raw_path": "assets/music/regional/GROVE_SHRINE/under_the_rootbound_arch-gba-16384-s8.raw",
+      "room_ids": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "SKY_ROAD",
+      "numeric_id": 3,
+      "render_cue": "SKY_ROAD",
+      "title": "Wind Along the Ridges",
+      "key": "A major / Lydian",
+      "meter": "4/4",
+      "nominal_bpm": 116,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 677958,
+      "duration_seconds": 41.3792724609375,
+      "raw_sha256": "0fc1343e9d72b3b962fd076ed1cf634b35b388f132a17fe770524230956adb7a",
+      "raw_path": "assets/music/regional/SKY_ROAD/sky_road-gba-16384-s8.raw",
+      "room_ids": [
+        4,
+        5,
+        14
+      ]
+    },
+    {
+      "id": "SKY_DUNGEON",
+      "numeric_id": 4,
+      "render_cue": "SKY_DUNGEON",
+      "title": "Threads Above the Clouds",
+      "key": "B minor",
+      "meter": "3/4",
+      "nominal_bpm": 108,
+      "bars": 26,
+      "sample_rate": 16384,
+      "sample_count": 709974,
+      "duration_seconds": 43.3333740234375,
+      "raw_sha256": "5b323743b5dc5113b2dface4eb673ebaefffbe7601f7e5c7f6ada90702e69ed2",
+      "raw_path": "assets/music/regional/SKY_DUNGEON/threads_above_the_clouds-gba-16384-s8.raw",
+      "room_ids": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "DUSK_ROAD",
+      "numeric_id": 5,
+      "render_cue": "DUSK_ROAD",
+      "title": "The Slope of Evening Lamps",
+      "key": "F major",
+      "meter": "4/4",
+      "nominal_bpm": 96,
+      "bars": 16,
+      "sample_rate": 16384,
+      "sample_count": 655360,
+      "duration_seconds": 40.0,
+      "raw_sha256": "233c3f31dadb6ac838c7ef56519f901797092d30ffb16cbccf1990d7cb3dba7b",
+      "raw_path": "assets/music/regional/DUSK_ROAD/dusk_road-gba-16384-s8.raw",
+      "room_ids": [
+        9,
+        15
+      ]
+    },
+    {
+      "id": "CORE",
+      "numeric_id": 6,
+      "render_cue": "CORE",
+      "title": "Four Lamps Beneath the Stone",
+      "key": "D minor with Dorian sixth",
+      "meter": "5/4",
+      "nominal_bpm": 100,
+      "bars": 16,
+      "sample_rate": 16384,
+      "sample_count": 786432,
+      "duration_seconds": 48.0,
+      "raw_sha256": "43976acb7e26afbd9d56f73148206a9fa2bc689d2d7bdfac2a08efbbe98a84a1",
+      "raw_path": "assets/music/regional/CORE/four_lamps_beneath_the_stone-gba-16384-s8.raw",
+      "room_ids": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "id": "REEDHAVEN",
+      "numeric_id": 7,
+      "render_cue": "REEDHAVEN",
+      "title": "Where the Reeds Turn",
+      "key": "G major",
+      "meter": "3/4",
+      "nominal_bpm": 88,
+      "bars": 24,
+      "sample_rate": 16384,
+      "sample_count": 804305,
+      "duration_seconds": 49.09088134765625,
+      "raw_sha256": "7c76653e1898e020ba22e52b06b9997de9372b58d0869892c1285850a2af40c3",
+      "raw_path": "assets/music/regional/REEDHAVEN/where_the_reeds_turn-gba-16384-s8.raw",
+      "room_ids": [
+        16,
+        20,
+        21,
+        55
+      ]
+    },
+    {
+      "id": "REED_WORKS",
+      "numeric_id": 8,
+      "render_cue": "REED_WORKS",
+      "title": "Water Through the Bellworks",
+      "key": "A Dorian",
+      "meter": "4/4",
+      "nominal_bpm": 96,
+      "bars": 16,
+      "sample_rate": 16384,
+      "sample_count": 655360,
+      "duration_seconds": 40.0,
+      "raw_sha256": "d5e1c50c1e3c79466bcf1ec19c5fb293baa4011d6448847179112aaffe9e9925",
+      "raw_path": "assets/music/regional/REED_WORKS/water_through_the_bellworks-gba-16384-s8.raw",
+      "room_ids": [
+        18,
+        19
+      ]
+    },
+    {
+      "id": "HEARTHWAKE",
+      "numeric_id": 9,
+      "render_cue": "HEARTHWAKE",
+      "title": "Painted Sails at Hearthwake",
+      "key": "B-flat major",
+      "meter": "4/4",
+      "nominal_bpm": 104,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 756185,
+      "duration_seconds": 46.15386962890625,
+      "raw_sha256": "17b9fe328f48b45a8affa667fff026b556d022db7fc62dad70cf8c657f67c2ba",
+      "raw_path": "assets/music/regional/HEARTHWAKE/hearthwake-gba-16384-s8.raw",
+      "room_ids": [
+        22,
+        24,
+        57
+      ]
+    },
+    {
+      "id": "HEADLAND",
+      "numeric_id": 10,
+      "render_cue": "HEADLAND",
+      "title": "The Headland Opens",
+      "key": "E-flat major",
+      "meter": "4/4",
+      "nominal_bpm": 110,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 714939,
+      "duration_seconds": 43.63641357421875,
+      "raw_sha256": "d6e3e608a52f92b139deea9b15505c8371aacb9d3c55ddad33675132a7fa7eb6",
+      "raw_path": "assets/music/regional/HEADLAND/headland-gba-16384-s8.raw",
+      "room_ids": [
+        23,
+        25
+      ]
+    },
+    {
+      "id": "COUNTERWORKS",
+      "numeric_id": 11,
+      "render_cue": "COUNTERWORKS",
+      "title": "The Beacon Counterweight",
+      "key": "G minor",
+      "meter": "4/4",
+      "nominal_bpm": 112,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 702171,
+      "duration_seconds": 42.85711669921875,
+      "raw_sha256": "267decca5b382d2e594f853c64b64bc67e2893d828b65ab1e0fbf1bfb9a1677c",
+      "raw_path": "assets/music/regional/COUNTERWORKS/the_beacon_counterweight-gba-16384-s8.raw",
+      "room_ids": [
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "id": "SUNLACE",
+      "numeric_id": 12,
+      "render_cue": "SUNLACE",
+      "title": "Awnings in the Sun",
+      "key": "F major",
+      "meter": "3/4",
+      "nominal_bpm": 106,
+      "bars": 28,
+      "sample_rate": 16384,
+      "sample_count": 779013,
+      "duration_seconds": 47.54718017578125,
+      "raw_sha256": "7cbb21af49edef759a2a7a08fac35df8f0d12f32cae3bdde2ec3dfebbd01a467",
+      "raw_path": "assets/music/regional/SUNLACE/sunlace-gba-16384-s8.raw",
+      "room_ids": [
+        30,
+        32,
+        58
+      ]
+    },
+    {
+      "id": "FRONDSHORE",
+      "numeric_id": 13,
+      "render_cue": "FRONDSHORE",
+      "title": "Shade Along the Shore",
+      "key": "D major",
+      "meter": "3/4",
+      "nominal_bpm": 108,
+      "bars": 24,
+      "sample_rate": 16384,
+      "sample_count": 655361,
+      "duration_seconds": 40.00006103515625,
+      "raw_sha256": "755eaa7e34767a881a2e4408b1ca5f8b580c72dc6abb162cfb0497d6b1417518",
+      "raw_path": "assets/music/regional/FRONDSHORE/frondshore-gba-16384-s8.raw",
+      "room_ids": [
+        31,
+        33
+      ]
+    },
+    {
+      "id": "CONSERVATORY",
+      "numeric_id": 14,
+      "render_cue": "CONSERVATORY",
+      "title": "Light Between the Boughs",
+      "key": "C minor opening toward E-flat",
+      "meter": "3/4",
+      "nominal_bpm": 98,
+      "bars": 25,
+      "sample_rate": 16384,
+      "sample_count": 752327,
+      "duration_seconds": 45.91839599609375,
+      "raw_sha256": "5e5244276988057aed1e907f0426a51a7c5c32f361cef80d8e2466a6614a4083",
+      "raw_path": "assets/music/regional/CONSERVATORY/light_between_the_boughs-gba-16384-s8.raw",
+      "room_ids": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "id": "KILNSTEP",
+      "numeric_id": 15,
+      "render_cue": "KILNSTEP",
+      "title": "Warm Clay, Open Windows",
+      "key": "A-flat major",
+      "meter": "4/4",
+      "nominal_bpm": 100,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 786432,
+      "duration_seconds": 48.0,
+      "raw_sha256": "9ca3afda0041a5fd2842003728053a1cd52b94ffe0195e528d8e7f77918c4f1e",
+      "raw_path": "assets/music/regional/KILNSTEP/kilnstep-gba-16384-s8.raw",
+      "room_ids": [
+        38,
+        40
+      ]
+    },
+    {
+      "id": "PUMICE",
+      "numeric_id": 16,
+      "render_cue": "PUMICE",
+      "title": "Steps Through the Steam",
+      "key": "F minor / Dorian",
+      "meter": "4/4",
+      "nominal_bpm": 110,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 714939,
+      "duration_seconds": 43.63641357421875,
+      "raw_sha256": "51de00c6e7543ab6481a6adb55bd62dedc62dff7afbb60b0e52055899a4e61ac",
+      "raw_path": "assets/music/regional/PUMICE/pumice-gba-16384-s8.raw",
+      "room_ids": [
+        39,
+        41
+      ]
+    },
+    {
+      "id": "CALDERA",
+      "numeric_id": 17,
+      "render_cue": "CALDERA",
+      "title": "The Breath of the Caldera",
+      "key": "C minor",
+      "meter": "4/4",
+      "nominal_bpm": 106,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 741917,
+      "duration_seconds": 45.28302001953125,
+      "raw_sha256": "9a8e4a4e135fdce295730638bf44be7edaddf372d92cdbff8e4f9e09629acc01",
+      "raw_path": "assets/music/regional/CALDERA/the_breath_of_the_caldera-gba-16384-s8.raw",
+      "room_ids": [
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "id": "NACREWAY",
+      "numeric_id": 18,
+      "render_cue": "NACREWAY",
+      "title": "Windows Under Water",
+      "key": "E major",
+      "meter": "3/4",
+      "nominal_bpm": 96,
+      "bars": 24,
+      "sample_rate": 16384,
+      "sample_count": 737280,
+      "duration_seconds": 45.0,
+      "raw_sha256": "ec12bc46e256191c0967f9aff58031a9fdc207576f91367ba4197aac375b1cda",
+      "raw_path": "assets/music/regional/NACREWAY/nacreway-gba-16384-s8.raw",
+      "room_ids": [
+        46,
+        47
+      ]
+    },
+    {
+      "id": "KELP",
+      "numeric_id": 19,
+      "render_cue": "KELP",
+      "title": "The Current Carries Us",
+      "key": "B major / G-sharp-minor colour",
+      "meter": "4/4",
+      "nominal_bpm": 104,
+      "bars": 18,
+      "sample_rate": 16384,
+      "sample_count": 680566,
+      "duration_seconds": 41.5384521484375,
+      "raw_sha256": "58ed9a00290dc199daa7ef5b7ee56c6babea8a2eef89c4bcc7750ad9b8470b6d",
+      "raw_path": "assets/music/regional/KELP/kelp-gba-16384-s8.raw",
+      "room_ids": [
+        48,
+        49,
+        59,
+        61
+      ]
+    },
+    {
+      "id": "PALINODE",
+      "numeric_id": 20,
+      "render_cue": "PALINODE",
+      "title": "What the Deep Remembers",
+      "key": "F-sharp minor",
+      "meter": "4/4",
+      "nominal_bpm": 88,
+      "bars": 18,
+      "sample_rate": 16384,
+      "sample_count": 804305,
+      "duration_seconds": 49.09088134765625,
+      "raw_sha256": "1e371dc3d0a96c85a605e673e031a5c3ff97bcdf0c68ead2182f0606a9540284",
+      "raw_path": "assets/music/regional/PALINODE/what_the_deep_remembers-gba-16384-s8.raw",
+      "room_ids": [
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "id": "HORIZONS",
+      "numeric_id": 21,
+      "render_cue": "HORIZONS",
+      "title": "Room for Another Traveler",
+      "key": "D major / B minor",
+      "meter": "4/4",
+      "nominal_bpm": 112,
+      "bars": 22,
+      "sample_rate": 16384,
+      "sample_count": 772388,
+      "duration_seconds": 47.142822265625,
+      "raw_sha256": "72dbe8d77a9bdc50e16d55d138faa6d6b88698b8b1fbf77706db95278f11abe4",
+      "raw_path": "assets/music/regional/HORIZONS/room_for_another_traveler-gba-16384-s8.raw",
+      "room_ids": [
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "id": "COVENANTS",
+      "numeric_id": 22,
+      "render_cue": "COVENANTS",
+      "title": "The Roads That Stay",
+      "key": "G major / E minor",
+      "meter": "4/4",
+      "nominal_bpm": 100,
+      "bars": 20,
+      "sample_rate": 16384,
+      "sample_count": 786432,
+      "duration_seconds": 48.0,
+      "raw_sha256": "a5b1e4f219d4650caa4b595d59ff184dd67bfbc821cca0abb3d90ddd6ab23b81",
+      "raw_path": "assets/music/regional/COVENANTS/the_roads_that_stay-gba-16384-s8.raw",
+      "room_ids": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ]
+    }
+  ]
+}

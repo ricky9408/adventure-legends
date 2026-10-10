@@ -25,7 +25,7 @@ CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
-OBJECTS := $(BUILD)/startup.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/progression_events.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o $(BUILD)/equipment.o $(BUILD)/equipment_data.o $(BUILD)/combat_rules.o $(BUILD)/weapon_actions.o $(BUILD)/gear_runtime.o $(BUILD)/gear_menu.o $(BUILD)/regional_quests.o $(BUILD)/regional_creature_art.o $(BUILD)/regional_powers.o $(BUILD)/region_art.o $(BUILD)/region_game.o $(BUILD)/northern_creature_art.o $(BUILD)/north_art.o $(BUILD)/north_game.o $(BUILD)/northern_quests.o $(BUILD)/northern_powers.o $(BUILD)/northern_power_art.o $(BUILD)/south_art.o $(BUILD)/south_game.o $(BUILD)/southern_quests.o $(BUILD)/southern_creature_art.o $(BUILD)/southern_powers.o $(BUILD)/southern_power_art.o $(BUILD)/magma_art.o $(BUILD)/magma_game.o $(BUILD)/magma_quests.o $(BUILD)/magma_creature_art.o $(BUILD)/magma_powers.o $(BUILD)/magma_power_art.o $(BUILD)/underwater_art.o $(BUILD)/underwater_game.o $(BUILD)/underwater_quests.o $(BUILD)/underwater_creature_art.o $(BUILD)/underwater_powers.o $(BUILD)/underwater_power_art.o
+OBJECTS := $(BUILD)/startup.o $(BUILD)/music.o $(BUILD)/music_data.o $(BUILD)/game.o $(BUILD)/assets.o $(BUILD)/ui.o $(BUILD)/world.o $(BUILD)/campaign_art.o $(BUILD)/campaign_rules.o $(BUILD)/save4.o $(BUILD)/creatures.o $(BUILD)/creature_data.o $(BUILD)/save5.o $(BUILD)/progression.o $(BUILD)/progression_events.o $(BUILD)/evolution_art.o $(BUILD)/advanced_powers.o $(BUILD)/trials.o $(BUILD)/trial_art.o $(BUILD)/quickparty.o $(BUILD)/equipment.o $(BUILD)/equipment_data.o $(BUILD)/combat_rules.o $(BUILD)/weapon_actions.o $(BUILD)/gear_runtime.o $(BUILD)/gear_menu.o $(BUILD)/gear_preview.o $(BUILD)/gear_preview_text.o $(BUILD)/regional_quests.o $(BUILD)/regional_creature_art.o $(BUILD)/regional_powers.o $(BUILD)/region_art.o $(BUILD)/region_game.o $(BUILD)/northern_creature_art.o $(BUILD)/north_art.o $(BUILD)/north_game.o $(BUILD)/northern_quests.o $(BUILD)/northern_powers.o $(BUILD)/northern_power_art.o $(BUILD)/south_art.o $(BUILD)/south_game.o $(BUILD)/southern_quests.o $(BUILD)/southern_creature_art.o $(BUILD)/southern_powers.o $(BUILD)/southern_power_art.o $(BUILD)/magma_art.o $(BUILD)/magma_game.o $(BUILD)/magma_quests.o $(BUILD)/magma_creature_art.o $(BUILD)/magma_powers.o $(BUILD)/magma_power_art.o $(BUILD)/underwater_art.o $(BUILD)/underwater_game.o $(BUILD)/underwater_quests.o $(BUILD)/underwater_creature_art.o $(BUILD)/underwater_powers.o $(BUILD)/underwater_power_art.o $(BUILD)/return_art.o $(BUILD)/return_game.o $(BUILD)/return_quests.o $(BUILD)/return_creature_art.o $(BUILD)/return_powers.o $(BUILD)/return_power_art.o $(BUILD)/return_legacy_powers.o $(BUILD)/horizons_art.o $(BUILD)/horizons_game.o $(BUILD)/horizons_quests.o $(BUILD)/horizons_creature_art.o $(BUILD)/horizons_powers.o $(BUILD)/horizons_power_art.o $(BUILD)/horizons_audio.o $(BUILD)/covenants_art.o $(BUILD)/covenants_game.o $(BUILD)/covenants_quests.o $(BUILD)/covenants_creature_art.o $(BUILD)/covenants_powers.o $(BUILD)/covenants_power_art.o $(BUILD)/story_rewards.o $(BUILD)/journal_nav.o $(BUILD)/economy.o $(BUILD)/travel_feedback.o $(BUILD)/connected_roads.o $(BUILD)/save_feedback.o $(BUILD)/game_shop.o $(BUILD)/treasure_text_text.o $(BUILD)/feedback_world.o $(BUILD)/journey_goal.o $(BUILD)/journey_map.o $(BUILD)/journey_map_text.o $(BUILD)/companion_guide.o $(BUILD)/companion_guide_text.o $(BUILD)/opening_scene.o $(BUILD)/opening_scene_data.o $(BUILD)/ending_credits.o $(BUILD)/ending_credits_text.o
 
 .PHONY: all clean tools assets test-tools test test-campaign test-systems test-quickparty test-quickparty-evolved test-equipment test-regional test-northern test-northern-host quickparty-video gameplay-video developer-video
 all: $(TARGET).gba
@@ -35,6 +35,9 @@ $(BUILD):
 
 $(BUILD)/%.o: src/%.c | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/music.o: src/music.c | $(BUILD)
+	$(CC) $(filter-out -mthumb,$(CFLAGS)) -marm -c $< -o $@
 
 $(BUILD)/startup.o: src/startup.s | $(BUILD)
 	$(CC) $(ASFLAGS) -c $< -o $@
@@ -52,8 +55,15 @@ $(TARGET).gba: $(TARGET).elf tools/fix_header.py tools/freeze_runtime_sources.py
 # Generated asset C files ship with the source. Regeneration is optional and
 # needs Pillow plus the fonts used by the artwork/UI generator scripts.
 assets:
+	$(PYTHON) tools/generate_connected_roads.py
 	$(PYTHON) assets/generate_assets.py
 	$(PYTHON) assets/generate_ui.py
+	$(PYTHON) tools/generate_journey_map.py
+	$(PYTHON) assets/generate_companion_guide.py
+	$(PYTHON) assets/generate_gear_preview.py
+	$(PYTHON) assets/generate_treasure_text.py
+	$(PYTHON) assets/generate_opening_scene.py
+	$(PYTHON) assets/generate_ending_credits.py
 	$(PYTHON) assets/generate_world.py
 	$(PYTHON) assets/generate_campaign.py
 	$(PYTHON) assets/generate_campaign_rules.py
@@ -71,12 +81,29 @@ assets:
 	$(PYTHON) assets/generate_magma_region.py
 	$(PYTHON) assets/generate_magma_creatures.py
 	$(PYTHON) assets/generate_underwater_region.py
-	$(PYTHON) assets/generate_underwater_creatures.py
+	$(PYTHON) assets/generate_underwater_creatures.py --world-successor connected-roads-c4
+	$(PYTHON) assets/generate_return_region.py
+	$(PYTHON) assets/generate_return_trials.py
+	$(PYTHON) assets/generate_return_creatures.py --world-successor connected-roads-c4
+	$(PYTHON) assets/generate_return_powers.py
+	$(PYTHON) assets/generate_horizons_region.py
+	$(PYTHON) assets/generate_horizons_creatures.py
+	$(PYTHON) assets/generate_horizons_powers.py
+	$(PYTHON) assets/generate_covenants_region.py
+	$(PYTHON) assets/generate_covenants_work.py
+	$(PYTHON) assets/generate_covenants_creatures.py
+	$(PYTHON) assets/generate_covenants_powers.py
+	$(PYTHON) assets/generate_feedback_world.py
+	$(PYTHON) tools/generate_feedback_title.py
+	$(PYTHON) tools/generate_southern_beams.py
+	$(PYTHON) tools/generate_font_credits.py
 
 tools:
 	./tools/install_tools.sh
 
-test: all
+# Retained early controller recipes target their historical navigation.
+# They are not the current release acceptance aggregate.
+test-historical-workflows: all
 	$(PYTHON) tests/playthrough.py
 	$(PYTHON) tests/review_tests.py
 	$(PYTHON) tests/exploration_tests.py
@@ -118,8 +145,8 @@ test-systems: all
 	$(PYTHON) tests/advanced_power_tests.py --journey build/evolution-qa/evolution-report.json --output build/advanced-power-qa --source-contracts
 
 gameplay-video: all
-	$(PYTHON) tools/archive_test_output.py build/underwater-teaser-release
-	$(PYTHON) tests/capture_underwater_teaser.py $(NORTHERN_ARGS) --source-manifest build/source-hashes.json --output build/underwater-teaser-release
+	$(PYTHON) tools/archive_test_output.py build/horizons-teaser
+	$(PYTHON) tests/capture_horizons_teaser.py --candidate-root build/horizons-native --prior-h-root build/horizons-prior-h-inputs --producer-report build/horizons-native/minimal-water/horizons-journey.json --producer-sha $$( $(PYTHON) tools/file_sha256.py build/horizons-native/minimal-water/horizons-journey.json ) --output build/horizons-teaser
 
 # Spoiler-bearing full route is development evidence, not the default trailer.
 developer-video: all
@@ -127,6 +154,11 @@ developer-video: all
 
 test-tools:
 	$(PYTHON) tools/smoke_tests/test_bridge.py
+
+.PHONY: test-journey-guidance-host
+test-journey-guidance-host: all
+	$(PYTHON) tools/archive_test_output.py build/journey-guidance-host
+	$(PYTHON) tools/run_journey_guidance_host.py --output build/journey-guidance-host
 
 clean:
 	rm -f $(BUILD)/*.o $(BUILD)/*.d $(TARGET).elf $(TARGET).gba $(TARGET).map $(TARGET).sym
@@ -242,7 +274,9 @@ test-magma-host: test-magma-architecture
 	mkdir -p $(BUILD)
 	$(PYTHON) tests/test_deferred_probe_launcher.py
 	$(PYTHON) tests/test_deferred_probe_mapping.py
-	$(PYTHON) tests/underwater_engine_review/run_probe.py test_legacy_deferred_anchor_current.py
+	# The original one-update anchor oracle remains preserved with frozen F.
+	# Current runtime validates the same transaction across bounded updates.
+	$(PYTHON) tools/run_bounded_magma_save_probe.py
 
 # New native outputs are archived before replay; no old run is relabeled.
 test-magma: test-magma-host test-magma-native
@@ -283,3 +317,139 @@ test-underwater: test-underwater-host test-underwater-native
 test-underwater-native: all
 	$(PYTHON) tools/archive_test_output.py build/underwater-native
 	$(PYTHON) tools/run_underwater_native.py --rom $(TARGET).gba --symbols $(TARGET).sym --source-manifest build/source-hashes.json --output build/underwater-native
+
+# Current Return7 authoring/core/geometry/transaction gates. Native controller
+# acquisition, combat and presentation remain a separate exact-ROM recipe.
+.PHONY: test-return-host
+test-return-host:
+	$(PYTHON) tests/test_return_catalog.py
+	$(PYTHON) tests/test_return_history_core.py
+	$(PYTHON) tests/test_return_history_differential.py
+	$(PYTHON) tests/test_return_current_masks.py
+	$(PYTHON) tests/test_return_creature_art.py
+	$(PYTHON) tests/test_return_geometry.py
+	$(PYTHON) tests/test_return_world.py
+	$(PYTHON) tests/test_return_transactions.py
+	$(PYTHON) tests/test_return_powerloss.py
+	$(PYTHON) tests/test_return_migration_powerloss.py
+	$(PYTHON) tests/test_return_sanitizers.py
+	$(PYTHON) tests/test_return_powers.py
+	$(PYTHON) tests/test_return_legacy_powers.py
+	$(PYTHON) tests/test_return_tile_lease.py
+	$(PYTHON) tests/test_magma_recruit_transactions.py
+	$(PYTHON) tests/test_magma_recruit_runtime.py
+	$(PYTHON) tests/test_magma_evolution_ui.py
+	$(PYTHON) tests/test_obj_upload_wordpath.py
+	$(PYTHON) tests/test_magma_boundary_engine_contract.py
+	$(PYTHON) tools/archive_test_output.py build/return-host-boundaries
+	$(PYTHON) tests/test_magma_boundaries.py --output build/return-host-boundaries/magma-strict.json
+	$(PYTHON) tests/test_magma_boundaries.py --sanitize --output build/return-host-boundaries/magma-sanitized.json
+	$(PYTHON) tests/test_southern_enter_job.py --output build/return-host-boundaries/southern-strict.json
+	$(PYTHON) tests/test_southern_enter_job.py --sanitize --output build/return-host-boundaries/southern-sanitized.json
+	$(PYTHON) tools/run_bounded_magma_save_probe.py
+	$(PYTHON) tests/underwater_engine_review/run_probe.py test_bounded_southern_rest.py
+
+.PHONY: test-return-native test-return-modal
+test-return-native: all
+	$(PYTHON) tools/archive_test_output.py build/return-native
+	$(PYTHON) tools/run_return_native.py $(NORTHERN_ARGS) --elf $(TARGET).elf --source-manifest build/source-hashes.json --source-root . --expected-elf-sha $$( $(PYTHON) tools/file_sha256.py $(TARGET).elf ) --expected-manifest-sha $$( $(PYTHON) tools/file_sha256.py build/source-hashes.json ) --output build/return-native
+
+# Frozen prior native hashes make the synthetic full-screen comparison portable.
+# This is pixel regression coverage, separate from controller/timing acceptance.
+test-return-modal: all
+	$(PYTHON) tools/archive_test_output.py build/return-modal-pixels
+	$(PYTHON) tests/return_modal_boundary_matrix.py --baseline-report tests/fixtures/return-modal-e-golden.json.gz --after-root . --output build/return-modal-pixels
+
+# Shared Horizons content8: host correctness and native controller acquisition
+# are separate gates. The native bridge exposes no game-memory write or
+# machine-state loading API; prior inputs are exact accepted H ordinary saves.
+.PHONY: test-horizons-host test-horizons-native test-horizons
+test-horizons: test-horizons-host test-horizons-native
+test-horizons-host:
+	$(PYTHON) tests/test_horizons_catalog.py
+	$(PYTHON) tests/test_horizons_history.py
+	$(PYTHON) tests/test_horizons_transactions.py
+	$(PYTHON) tests/test_horizons_preflight_ownership.py
+	$(PYTHON) tests/test_horizons_powerloss.py
+	$(PYTHON) tests/test_horizons_sanitizers.py
+	$(PYTHON) tests/test_horizons_creature_art.py
+	$(PYTHON) tests/test_horizons_geometry.py
+	$(PYTHON) tests/test_horizons_world.py
+	$(PYTHON) tests/test_horizons_aim_binding.py
+	$(PYTHON) tests/test_horizons_powers.py
+	$(PYTHON) tests/test_horizons_power_rows.py
+	$(PYTHON) tests/test_horizons_snapshot_contract.py
+	$(PYTHON) tests/test_collision_rects.py
+	COLLISION_RECTS_SANITIZE=1 $(PYTHON) tests/test_collision_rects.py
+	$(PYTHON) tests/test_collision_rects_capacity.py
+	$(PYTHON) tests/test_collision_rects_arm.py
+	$(PYTHON) tests/test_horizons_audio.py
+	$(PYTHON) tests/test_horizons_camera.py --report build/horizons-camera-host.json
+	$(PYTHON) tests/test_horizons_stage_panel.py --report build/horizons-stage-panel-host.json
+	$(PYTHON) tests/check_horizons_field_feasibility.py
+	$(PYTHON) tests/test_return_tile_lease.py
+
+test-horizons-native: all
+	./tools/build_horizons_mgba_bridge.sh
+	$(PYTHON) tools/prepare_horizons_prior_fixtures.py --output build/horizons-prior-h-inputs
+	$(PYTHON) tools/archive_test_output.py build/horizons-native
+	$(PYTHON) tools/run_horizons_native.py --candidate build --source-root . --h-native-root build/horizons-prior-h-inputs --output build/horizons-native
+
+# Run test-return-native first; this gate authenticates that earned same-ROM
+# producer and its SRAM. NumPy/SciPy are used only for sample comparison.
+.PHONY: test-music
+test-music: all
+	$(PYTHON) tools/archive_test_output.py build/music-transport
+	$(PYTHON) tests/music_transport.py --rom $(TARGET).gba --producer-report build/return-native/full/return-journey.json --producer-sha $$( $(PYTHON) tools/file_sha256.py build/return-native/full/return-journey.json ) --output build/music-transport
+
+# Content9 host correctness and genuine controller acceptance are separate.
+# Native acceptance earns both original Core preludes and all dependent routes.
+.PHONY: test-covenants test-covenants-host test-covenants-native
+test-covenants: test-covenants-host test-covenants-native
+
+test-covenants-host: all
+	$(PYTHON) tools/archive_test_output.py build/covenants-host
+	$(PYTHON) tools/run_covenants_host.py --output build/covenants-host
+
+test-covenants-native: all
+	./tools/build_horizons_mgba_bridge.sh
+	$(PYTHON) tools/archive_test_output.py build/covenants-native
+	$(PYTHON) tools/run_covenants_acceptance.py --candidate build --source-root . --prior-root . --output build/covenants-native
+
+.PHONY: test-player-feedback-host
+test-player-feedback-host: all
+	$(PYTHON) tools/archive_test_output.py build/player-feedback-host
+	$(PYTHON) tools/run_player_feedback_host.py --output build/player-feedback-host
+
+.PHONY: test-connected-roads-host
+test-connected-roads-host: all
+	$(PYTHON) tools/archive_test_output.py build/connected-roads-host
+	$(PYTHON) tools/run_connected_roads_host.py --output build/connected-roads-host
+
+.PHONY: test-gear-preview-host
+test-gear-preview-host: all
+	$(PYTHON) tests/test_gear_preview.py
+	$(PYTHON) tests/gear_readable_layout.py
+	$(PYTHON) tests/test_player_feedback_gear_cache.py
+	$(PYTHON) tests/test_gear_numbers.py
+	$(PYTHON) tests/test_gear_hearts.py
+	$(PYTHON) tests/test_shared_text_spans.py
+	$(PYTHON) tests/test_player_feedback_menu.py
+	$(PYTHON) tests/test_companion_guide.py
+
+.PHONY: test-equipment-rewards-host test-historical-workflows
+test: test-equipment-rewards-host
+test-equipment-rewards-host: all
+	$(PYTHON) tools/archive_test_output.py build/equipment-rewards-host-current
+	$(PYTHON) tools/run_equipment_rewards_host.py --output build/equipment-rewards-host-current
+
+.PHONY: font-assets
+font-assets:
+	$(PYTHON) assets/generate_ui.py
+	$(PYTHON) tools/generate_journey_map.py
+	$(PYTHON) assets/generate_companion_guide.py
+	$(PYTHON) assets/generate_gear_preview.py
+	$(PYTHON) assets/generate_treasure_text.py
+	$(PYTHON) assets/generate_opening_scene.py
+	$(PYTHON) assets/generate_ending_credits.py
+	$(PYTHON) tools/generate_font_credits.py

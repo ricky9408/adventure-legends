@@ -1,0 +1,18 @@
+{
+  "purpose": "Exact provided original v2 source arrangements for deterministic GBA PCM conversion",
+  "source_archive_filename": "emberbond-music-handoff-v2.zip",
+  "source_archive_sha256": "524d77baa59412115fb3cd04e0fc2cf4e89b7ec085e8351e590e76a2ef587828",
+  "files": [
+    {
+      "path": "village_gba_synthetic_v2.wav",
+      "bytes": 4536044,
+      "sha256": "1c2d3f4371be46d64785ddf2938ed8edb3c1e87b402c36375c68b47ad010c1c5"
+    },
+    {
+      "path": "dungeon_gba_synthetic_v2.wav",
+      "bytes": 3528044,
+      "sha256": "c3bf48b359d5ce96beeec7981dfcae7a02684ce71254f5909aa4a28983a9b2d4"
+    }
+  ],
+  "excluded": "Source handoff ZIP, draft arrangements, and rendered auditions are not packaged"
+}

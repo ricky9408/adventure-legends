@@ -1,0 +1,170 @@
+{
+  "TITLE": {
+    "text": "旅の宝物を受け取った",
+    "size": 12,
+    "height": 15,
+    "width": 85,
+    "ink_bounds": [
+      0,
+      0,
+      84,
+      11
+    ]
+  },
+  "COMPASS": {
+    "text": "つり合いの羅針盤",
+    "size": 12,
+    "height": 15,
+    "width": 69,
+    "ink_bounds": [
+      1,
+      0,
+      68,
+      11
+    ]
+  },
+  "LENS": {
+    "text": "陽だまりのレンズ",
+    "size": 12,
+    "height": 15,
+    "width": 60,
+    "ink_bounds": [
+      1,
+      0,
+      59,
+      10
+    ]
+  },
+  "BELL": {
+    "text": "火口の鈴",
+    "size": 12,
+    "height": 15,
+    "width": 38,
+    "ink_bounds": [
+      1,
+      0,
+      36,
+      11
+    ]
+  },
+  "PEARL": {
+    "text": "潮音の真珠",
+    "size": 12,
+    "height": 15,
+    "width": 48,
+    "ink_bounds": [
+      0,
+      0,
+      47,
+      10
+    ]
+  },
+  "COMPASS_EFFECT": {
+    "text": "移動が少し速くなる",
+    "size": 12,
+    "height": 15,
+    "width": 76,
+    "ink_bounds": [
+      0,
+      0,
+      75,
+      10
+    ]
+  },
+  "LENS_EFFECT": {
+    "text": "守りが少し強くなる",
+    "size": 12,
+    "height": 15,
+    "width": 73,
+    "ink_bounds": [
+      1,
+      0,
+      72,
+      11
+    ]
+  },
+  "BELL_EFFECT": {
+    "text": "仲間の力を少し早く使える",
+    "size": 12,
+    "height": 15,
+    "width": 103,
+    "ink_bounds": [
+      0,
+      0,
+      102,
+      11
+    ]
+  },
+  "PEARL_EFFECT": {
+    "text": "最大の命がハート1つ増える",
+    "size": 12,
+    "height": 15,
+    "width": 104,
+    "ink_bounds": [
+      0,
+      0,
+      103,
+      11
+    ]
+  },
+  "PERMANENT": {
+    "text": "装備せずに いつも働く",
+    "size": 12,
+    "height": 15,
+    "width": 83,
+    "ink_bounds": [
+      0,
+      0,
+      81,
+      10
+    ]
+  },
+  "RECEIPT_KEYS": {
+    "text": "A 次へ   B 閉じる",
+    "size": 12,
+    "height": 15,
+    "width": 71,
+    "ink_bounds": [
+      1,
+      0,
+      70,
+      11
+    ]
+  },
+  "CLAIM": {
+    "text": "届いた宝物を受け取る",
+    "size": 12,
+    "height": 15,
+    "width": 86,
+    "ink_bounds": [
+      0,
+      0,
+      85,
+      11
+    ]
+  },
+  "CLAIM_HINT": {
+    "text": "前に助けた町からの贈り物",
+    "size": 12,
+    "height": 15,
+    "width": 100,
+    "ink_bounds": [
+      0,
+      0,
+      99,
+      11
+    ]
+  },
+  "KNOWN": {
+    "text": "受け取った宝物は 道具で確認",
+    "size": 12,
+    "height": 15,
+    "width": 118,
+    "ink_bounds": [
+      1,
+      0,
+      117,
+      11
+    ]
+  }
+}

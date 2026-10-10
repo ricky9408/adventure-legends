@@ -148,6 +148,47 @@ class UnderwaterWorld(unittest.TestCase):
   self.sources();slot=self.start(17,1);self.manual(0);self.manual(1);self.cast(0);L.underwater_game_selection_changed();L.select_form(52);L.select_slot(slot);self.assertEqual(trial().index,255);self.assertEqual(L.trial(slot),0)
  def test_pending_visit_keeps_old_checkpoint_and_cancel_is_unchanged(self):
   old=(v('room'),L.host_campaign_spawn());L.snapshot_state();self.assertEqual(L.underwater_game_request_enter(46,0),2);self.assertEqual((v('room'),L.host_campaign_spawn()),old);self.assertEqual(L.unchanged(),1);L.underwater_game_cancel_event();self.assertEqual(L.unchanged(),1);self.assertEqual(L.underwater_game_event_pending(),0)
+ def test_connected_guardian_return_cancel_retry_and_walk_home(self):
+  # These are real typed world jobs with synthetic positions, not native input.
+  self.main();self.entry(53);self.at(32,112,2);L.host_set_auto_settle(0)
+  self.assertEqual(b('underwater_game_guardian_stage'),4);self.assertEqual(L.qo(45),0)
+  old=(v('room'),L.host_campaign_spawn());L.snapshot_state()
+  self.assertEqual(L.underwater_game_road_departure(52,1),1)
+  self.assertEqual((v('room'),L.host_campaign_spawn()),old);self.assertEqual(L.qo(45),0)
+  self.assertEqual(L.underwater_game_event_pending(),1)
+  L.modal(10);self.assertEqual(L.underwater_game_prepare_event(),1)
+  L.underwater_game_cancel_event();L.modal(1)
+  self.assertEqual(L.unchanged(),1);self.assertEqual(L.underwater_game_event_pending(),0)
+  self.assertEqual(L.underwater_game_road_departure(52,1),1)
+  self.assertEqual(v('room'),53);self.assertEqual(L.settle_events(),1)
+  self.assertEqual((v('room'),L.host_campaign_spawn()),(52,1));self.assertEqual(L.qo(45),1)
+  self.assertEqual(L.roundtrip(),1);L.host_set_auto_settle(1)
+  # Ordinary roads bring the player back to town; this alone is not the Q45 loop.
+  for r,s in ((51,1),(48,2),(46,1)):self.entry(r,s)
+  self.assertEqual(L.qo(45),1)
+  for r in (48,49,48,46):self.entry(r)
+  self.assertEqual(L.qo(45),3);self.target(240,272)
+  self.assertEqual(L.qs(45),3);self.assertEqual(L.roundtrip(),1)
+  self.assertEqual(L.invalid_saves(),0)
+ def test_connected_guardian_return_committed_cancel_and_revisit_are_idempotent(self):
+  self.main();self.entry(53);L.host_set_auto_settle(0)
+  self.assertEqual(L.underwater_game_road_departure(52,1),1);L.modal(10)
+  for _ in range(1000):
+   if not L.underwater_game_event_pending():break
+   self.assertIn(L.underwater_game_prepare_event(),(1,2))
+  else:self.fail('Guardian departure event did not finish')
+  # The quest fact committed, but only the engine's later callback may travel.
+  self.assertEqual(v('room'),53);self.assertEqual(L.qo(45),1)
+  L.underwater_game_cancel_event();L.modal(1)
+  self.assertEqual(L.underwater_game_road_departure(52,1),1)
+  self.assertEqual((v('room'),L.host_campaign_spawn()),(52,1));self.assertEqual(L.valid(),1)
+  self.assertEqual(L.roundtrip(),1);L.host_set_auto_settle(1)
+  self.entry(53);L.snapshot_state();count=L.roster_count()
+  self.assertEqual(L.underwater_game_road_departure(46,1),0)
+  self.assertEqual(L.unchanged(),1);self.assertEqual(v('room'),53)
+  self.assertEqual(L.underwater_game_road_departure(52,1),1)
+  self.assertEqual(L.qo(45),1);self.assertEqual(L.roster_count(),count)
+  self.assertEqual(L.roundtrip(),1);self.assertEqual(L.invalid_saves(),0)
  def test_reset_confirmation_isolated_and_every_small_puzzle_exit_reachable(self):
   # Exact pixel flood of every unique movable solid configuration. These are
   # synthetic geometry checks, not native controller traversal evidence.

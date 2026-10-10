@@ -1,0 +1,1127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emberbond:creature-catalog:3",
+  "title": "Emberbond creature design catalog",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "scope": {
+      "const": "DESIGN_ONLY_NOT_IN_ROM"
+    },
+    "reserved_form_count": {
+      "const": 128
+    },
+    "implemented_legacy_form_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 128
+      },
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true
+    },
+    "phase_order": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "wood",
+          "fire",
+          "earth",
+          "metal",
+          "water"
+        ]
+      },
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "generation_cycle": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "wood",
+            "fire",
+            "earth",
+            "metal",
+            "water"
+          ]
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "control_cycle": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "wood",
+            "fire",
+            "earth",
+            "metal",
+            "water"
+          ]
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "polarity_values": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "yin",
+          "yang"
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "field_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 32
+      },
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "stat_budgets": {
+      "type": "object",
+      "properties": {
+        "tier_1": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "tier_2": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "tier_3": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "legendary": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "tier_1",
+        "tier_2",
+        "tier_3",
+        "legendary"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "max_level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "max_bond": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "party_slots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "instance_slots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "equipped_abilities": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "max_learnset": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "max_ability_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "max_active_legendaries": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        }
+      },
+      "required": [
+        "max_level",
+        "max_bond",
+        "party_slots",
+        "instance_slots",
+        "equipped_abilities",
+        "max_learnset",
+        "max_ability_id",
+        "max_active_legendaries"
+      ],
+      "additionalProperties": false
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/family"
+      },
+      "minItems": 60,
+      "maxItems": 60
+    },
+    "slots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/slot"
+      },
+      "minItems": 128,
+      "maxItems": 128
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ability"
+      },
+      "minItems": 1,
+      "maxItems": 255
+    },
+    "forms": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/form"
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
+    "evolutions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evolution"
+      },
+      "minItems": 0,
+      "maxItems": 127
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gate"
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
+    "trials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trial"
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "baseline_rom_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "baseline_ewram_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "baseline_iwram_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "rom_limit_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "incremental_rom_cap_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "incremental_ewram_cap_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "ewram_limit_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "iwram_code_limit_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "incremental_iwram_cap_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "sram_limit_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "save_bank_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "instance_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "form_rom_record_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "ability_rom_record_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "learnset_pair_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "sprite_w": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "sprite_h": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "sprite_bpp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "sprite_directions": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "sprite_frames_per_direction": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33554432
+        },
+        "save_bank_offsets": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 32767
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "save_blocks": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            },
+            "campaign": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            },
+            "collection_bits": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            },
+            "instances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            },
+            "party_and_settings": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            },
+            "quest_and_bond_counters": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            },
+            "equipment_reserved": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6144
+            }
+          },
+          "required": [
+            "header",
+            "campaign",
+            "collection_bits",
+            "instances",
+            "party_and_settings",
+            "quest_and_bond_counters",
+            "equipment_reserved"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "baseline_rom_bytes",
+        "baseline_ewram_bytes",
+        "baseline_iwram_bytes",
+        "rom_limit_bytes",
+        "incremental_rom_cap_bytes",
+        "incremental_ewram_cap_bytes",
+        "ewram_limit_bytes",
+        "iwram_code_limit_bytes",
+        "incremental_iwram_cap_bytes",
+        "sram_limit_bytes",
+        "save_bank_bytes",
+        "instance_bytes",
+        "form_rom_record_bytes",
+        "ability_rom_record_bytes",
+        "learnset_pair_bytes",
+        "sprite_w",
+        "sprite_h",
+        "sprite_bpp",
+        "sprite_directions",
+        "sprite_frames_per_direction",
+        "save_bank_offsets",
+        "save_blocks"
+      ],
+      "additionalProperties": false
+    },
+    "trial_bindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trial_binding"
+      },
+      "minItems": 0,
+      "maxItems": 960
+    },
+    "covenant_gates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/covenant_gate"
+      },
+      "minItems": 8,
+      "maxItems": 8
+    }
+  },
+  "required": [
+    "schema_version",
+    "scope",
+    "reserved_form_count",
+    "implemented_legacy_form_ids",
+    "phase_order",
+    "generation_cycle",
+    "control_cycle",
+    "polarity_values",
+    "field_capabilities",
+    "stat_budgets",
+    "limits",
+    "families",
+    "slots",
+    "abilities",
+    "forms",
+    "evolutions",
+    "gates",
+    "trials",
+    "covenant_gates",
+    "budget",
+    "trial_bindings"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "slot": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^FORM_[0-9]{3}$"
+        },
+        "family_id": {
+          "type": "string",
+          "pattern": "^F[0-9]{3}$"
+        },
+        "tier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "rarity": {
+          "enum": [
+            "ordinary",
+            "legendary"
+          ]
+        },
+        "status": {
+          "enum": [
+            "reserved",
+            "legacy_reference",
+            "proposed"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "key",
+        "family_id",
+        "tier",
+        "rarity",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "family": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4
+        },
+        "shape": {
+          "enum": [
+            "linear_three",
+            "branch_three",
+            "linear_two",
+            "single",
+            "legendary_single"
+          ]
+        },
+        "form_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 128
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        },
+        "planned_edges": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 0,
+          "maxItems": 2,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "shape",
+        "form_ids",
+        "planned_edges"
+      ],
+      "additionalProperties": false
+    },
+    "ability": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "phase": {
+          "enum": [
+            "wood",
+            "fire",
+            "earth",
+            "metal",
+            "water"
+          ]
+        },
+        "handler": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "cooldown_updates": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "effect": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "field_caps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "phase",
+        "handler",
+        "cooldown_updates",
+        "effect",
+        "field_caps"
+      ],
+      "additionalProperties": false
+    },
+    "acquisition": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "story",
+            "bond_trial",
+            "evolution",
+            "legendary_trial"
+          ]
+        },
+        "gate": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "repeatable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "repeatable"
+      ],
+      "additionalProperties": false
+    },
+    "learn": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "ability_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        }
+      },
+      "required": [
+        "level",
+        "ability_id"
+      ],
+      "additionalProperties": false
+    },
+    "form": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "phase": {
+          "enum": [
+            "wood",
+            "fire",
+            "earth",
+            "metal",
+            "water"
+          ]
+        },
+        "polarity": {
+          "enum": [
+            "yin",
+            "yang"
+          ]
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "vitality": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "power": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "guard": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "focus": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "haste": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "vitality",
+            "power",
+            "guard",
+            "focus",
+            "haste"
+          ],
+          "additionalProperties": false
+        },
+        "stat_total": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 500
+        },
+        "signature_ability": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "learnset": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/learn"
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "field_caps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "silhouette": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "motion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 250
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "acquisition": {
+          "$ref": "#/$defs/acquisition"
+        },
+        "legacy_spirit_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "phase",
+        "polarity",
+        "stats",
+        "stat_total",
+        "signature_ability",
+        "learnset",
+        "field_caps",
+        "silhouette",
+        "motion",
+        "role",
+        "acquisition"
+      ],
+      "additionalProperties": false
+    },
+    "evolution": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "to": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "min_level": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 50
+        },
+        "min_bond": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "required_gate": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "required_trial": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "location": {
+          "enum": [
+            "sanctuary"
+          ]
+        },
+        "player_confirm": {
+          "const": true
+        },
+        "consumed_item": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "min_level",
+        "min_bond",
+        "required_gate",
+        "required_trial",
+        "location",
+        "player_confirm",
+        "consumed_item"
+      ],
+      "additionalProperties": false
+    },
+    "gate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "kind": {
+          "enum": [
+            "story",
+            "side_quest",
+            "legendary"
+          ]
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "minItems": 0,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "requires"
+      ],
+      "additionalProperties": false
+    },
+    "trial": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        }
+      },
+      "required": [
+        "id",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "trial_binding": {
+      "type": "object",
+      "properties": {
+        "trial_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "family_id": {
+          "type": "string",
+          "pattern": "^F[0-9]{3}$"
+        },
+        "local_trial_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "wire_mask": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32768
+        },
+        "introduced_content_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "prerequisite_trial_mask": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "from_form_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 128
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "trial_id",
+        "family_id",
+        "local_trial_id",
+        "wire_mask",
+        "introduced_content_revision",
+        "prerequisite_trial_mask",
+        "from_form_ids"
+      ],
+      "additionalProperties": false
+    },
+    "covenant_gate": {
+      "type": "object",
+      "properties": {
+        "form_id": {
+          "type": "integer",
+          "minimum": 121,
+          "maximum": 128
+        },
+        "family_id": {
+          "type": "string",
+          "pattern": "^F0(5[3-9]|60)$"
+        },
+        "gate": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "trial": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "area": {
+          "type": "integer",
+          "minimum": 70,
+          "maximum": 77
+        },
+        "source_namespace": {
+          "const": "CovenantRequest.UNIQUE_INVITE"
+        },
+        "source_token": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "covenant_index": {
+          "const": 22
+        },
+        "covenant_bit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "receipt_index": {
+          "const": 23
+        },
+        "receipt_bit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "objective_quest": {
+          "type": "integer",
+          "minimum": 61,
+          "maximum": 62
+        },
+        "objective_bit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "requires_quest_claim": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 61
+        },
+        "grant_level": {
+          "const": 36
+        },
+        "grant_bond": {
+          "const": 60
+        },
+        "grant_trial_flags": {
+          "const": 0
+        },
+        "required_support_commands": {
+          "type": "array",
+          "items": {
+            "enum": [
+              102,
+              104,
+              106,
+              108,
+              110,
+              112
+            ]
+          },
+          "minItems": 2,
+          "maxItems": 5,
+          "uniqueItems": true
+        },
+        "serial_station_reassignment": {
+          "const": true
+        },
+        "required_phase_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "opposite_polarity_switches": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "repeatable": {
+          "const": false
+        },
+        "requires_confirmation": {
+          "const": true
+        }
+      },
+      "required": [
+        "form_id",
+        "family_id",
+        "gate",
+        "trial",
+        "area",
+        "source_namespace",
+        "source_token",
+        "covenant_index",
+        "covenant_bit",
+        "receipt_index",
+        "receipt_bit",
+        "objective_quest",
+        "objective_bit",
+        "requires_quest_claim",
+        "grant_level",
+        "grant_bond",
+        "grant_trial_flags",
+        "required_support_commands",
+        "serial_station_reassignment",
+        "required_phase_count",
+        "opposite_polarity_switches",
+        "repeatable",
+        "requires_confirmation"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "routes": {
     "hearthwake_quay": {
       "all_dynamic_open": {
-        "reachable_pixels": 66711,
+        "reachable_pixels": 67364,
         "targets": [
           {
             "target": "spawn_0",
@@ -159,7 +159,7 @@
         ]
       },
       "all_dynamic_closed": {
-        "reachable_pixels": 66711,
+        "reachable_pixels": 67364,
         "targets": [
           {
             "target": "spawn_0",
@@ -318,7 +318,7 @@
     },
     "headland_roads": {
       "all_dynamic_open": {
-        "reachable_pixels": 106824,
+        "reachable_pixels": 106920,
         "targets": [
           {
             "target": "spawn_0",
@@ -443,7 +443,7 @@
         ]
       },
       "all_dynamic_closed": {
-        "reachable_pixels": 106824,
+        "reachable_pixels": 106920,
         "targets": [
           {
             "target": "spawn_0",
@@ -1555,11 +1555,11 @@
   },
   "budget": {
     "bitmap_bytes": 844800,
-    "rom_payload_bytes": 857808,
-    "collision_lookup_bytes": 4014,
-    "alignment_bytes": 10,
+    "rom_payload_bytes": 857860,
+    "collision_lookup_bytes": 4048,
+    "alignment_bytes": 12,
     "arm32_room_table_bytes": 224,
-    "largest_include_bytes": 31999,
+    "largest_include_bytes": 31998,
     "sprite_bytes": 8192
   }
 }

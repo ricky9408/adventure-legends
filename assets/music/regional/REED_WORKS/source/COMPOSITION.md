@@ -1,0 +1,5 @@
+# Water Through the Bellworks
+
+Rooms 18–19, two town-side craft/water trials. Sixteen 4/4 bars at 96 bpm = 40 seconds exactly. The half-note E opens like a held water surface, then a small falling connector supplies its fingerprint. Its reply drops inward; the second statement reaches F-sharp, the Dorian craft-light colour. Bars 9–12 contrast F-major warmth with D/F-sharp and a gathering dominant, rather than turning this safe craft area into a dungeon. The return shortens the opening question into a homeward A, then E7 prepares the loop. The bass has a deliberate four-step waterwheel in statement bars and broad half-note support elsewhere. Independent inner responses fill held melody notes; register is separated. G-sharp appears only in cadential E7, purposefully borrowing a leading tone from tonal A minor. A3 contains a D/A suspension-like descending melodic line. No literal transposition of HOME or town material.
+
+Three monophonic reference voices, with no pedal. These MIDI channels describe score parts only, not extra runtime sound channels. Rendering/integration and audible review remain separate gates. No game files changed.

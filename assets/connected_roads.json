@@ -1,0 +1,4879 @@
+{
+  "schema": 1,
+  "coordinates": "World pixels; aperture and rectangles are half-open. Each endpoint owns its inbound gate/checkpoint and its source scenery. Arrivals are transient; saved geometry remains authoritative.",
+  "roads": [
+    {
+      "key": "village_grove",
+      "ends": [
+        {
+          "room": 0,
+          "edge": "N",
+          "center": 120,
+          "aperture": [
+            108,
+            132
+          ],
+          "size": [
+            240,
+            160
+          ],
+          "arrival": [
+            120,
+            24
+          ],
+          "saved_spawn": 1,
+          "gate": "none",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  24
+                ],
+                [
+                  120,
+                  0
+                ]
+              ],
+              "width": 30,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              98,
+              0,
+              44,
+              16
+            ]
+          ]
+        },
+        {
+          "room": 1,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            296
+          ],
+          "saved_spawn": 0,
+          "gate": "none",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  286
+                ],
+                [
+                  240,
+                  320
+                ]
+              ],
+              "width": 30,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              304,
+              44,
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "village_sky",
+      "ends": [
+        {
+          "room": 0,
+          "edge": "E",
+          "center": 124,
+          "aperture": [
+            112,
+            136
+          ],
+          "size": [
+            240,
+            160
+          ],
+          "arrival": [
+            216,
+            124
+          ],
+          "saved_spawn": 4,
+          "gate": "none",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  180,
+                  124
+                ],
+                [
+                  240,
+                  124
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              224,
+              102,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 4,
+          "edge": "W",
+          "center": 124,
+          "aperture": [
+            112,
+            136
+          ],
+          "size": [
+            240,
+            160
+          ],
+          "arrival": [
+            24,
+            124
+          ],
+          "saved_spawn": 0,
+          "gate": "campaign_grove",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  124
+                ],
+                [
+                  52,
+                  124
+                ],
+                [
+                  96,
+                  124
+                ],
+                [
+                  119,
+                  134
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              102,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "village_core",
+      "ends": [
+        {
+          "room": 0,
+          "edge": "W",
+          "center": 116,
+          "aperture": [
+            104,
+            128
+          ],
+          "size": [
+            240,
+            160
+          ],
+          "arrival": [
+            24,
+            116
+          ],
+          "saved_spawn": 5,
+          "gate": "none",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  116
+                ],
+                [
+                  24,
+                  116
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            },
+            {
+              "points": [
+                [
+                  24,
+                  116
+                ],
+                [
+                  32,
+                  109
+                ],
+                [
+                  83,
+                  109
+                ],
+                [
+                  105,
+                  117
+                ]
+              ],
+              "width": 22,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              94,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 9,
+          "edge": "E",
+          "center": 132,
+          "aperture": [
+            120,
+            144
+          ],
+          "size": [
+            240,
+            160
+          ],
+          "arrival": [
+            216,
+            132
+          ],
+          "saved_spawn": 0,
+          "gate": "campaign_sky",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  132
+                ],
+                [
+                  188,
+                  132
+                ],
+                [
+                  120,
+                  132
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              224,
+              110,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "grove_reedhaven",
+      "ends": [
+        {
+          "room": 1,
+          "edge": "E",
+          "center": 248,
+          "aperture": [
+            236,
+            260
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            456,
+            248
+          ],
+          "saved_spawn": 0,
+          "gate": "none",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  248
+                ],
+                [
+                  480,
+                  248
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              464,
+              226,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 16,
+          "edge": "W",
+          "center": 248,
+          "aperture": [
+            236,
+            260
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            24,
+            248
+          ],
+          "saved_spawn": 0,
+          "gate": "region",
+          "entry_safe": true,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  248
+                ],
+                [
+                  64,
+                  248
+                ],
+                [
+                  104,
+                  232
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              226,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "reedhaven_basin",
+      "ends": [
+        {
+          "room": 16,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            24
+          ],
+          "saved_spawn": 1,
+          "gate": "region",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  36
+                ],
+                [
+                  240,
+                  0
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              0,
+              44,
+              16
+            ]
+          ]
+        },
+        {
+          "room": 17,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            296
+          ],
+          "saved_spawn": 0,
+          "gate": "region",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  284
+                ],
+                [
+                  240,
+                  320
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              304,
+              44,
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "reedhaven_hearthwake",
+      "ends": [
+        {
+          "room": 16,
+          "edge": "E",
+          "center": 216,
+          "aperture": [
+            204,
+            228
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            456,
+            216
+          ],
+          "saved_spawn": 0,
+          "gate": "region",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  384,
+                  212
+                ],
+                [
+                  432,
+                  216
+                ],
+                [
+                  480,
+                  216
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              464,
+              194,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 22,
+          "edge": "W",
+          "center": 216,
+          "aperture": [
+            204,
+            228
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            24,
+            216
+          ],
+          "saved_spawn": 0,
+          "gate": "north",
+          "entry_safe": true,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  216
+                ],
+                [
+                  72,
+                  216
+                ]
+              ],
+              "width": 34,
+              "material": "wood"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              194,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "hearthwake_headland",
+      "ends": [
+        {
+          "room": 22,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            24
+          ],
+          "saved_spawn": 1,
+          "gate": "north",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  32
+                ],
+                [
+                  240,
+                  0
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              0,
+              44,
+              16
+            ]
+          ]
+        },
+        {
+          "room": 23,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            296
+          ],
+          "saved_spawn": 0,
+          "gate": "north",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  284
+                ],
+                [
+                  240,
+                  320
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              304,
+              44,
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "sunlace_frondshore",
+      "ends": [
+        {
+          "room": 30,
+          "edge": "N",
+          "center": 304,
+          "aperture": [
+            292,
+            316
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            304,
+            24
+          ],
+          "saved_spawn": 1,
+          "gate": "south",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  304,
+                  32
+                ],
+                [
+                  304,
+                  0
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              282,
+              0,
+              44,
+              16
+            ]
+          ]
+        },
+        {
+          "room": 31,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            296
+          ],
+          "saved_spawn": 0,
+          "gate": "south",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  284
+                ],
+                [
+                  240,
+                  320
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              304,
+              44,
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "village_greenwake",
+      "ends": [
+        {
+          "room": 0,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            108,
+            132
+          ],
+          "size": [
+            240,
+            160
+          ],
+          "arrival": [
+            120,
+            136
+          ],
+          "saved_spawn": 0,
+          "gate": "none",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  136
+                ],
+                [
+                  120,
+                  160
+                ]
+              ],
+              "width": 30,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              98,
+              144,
+              44,
+              16
+            ]
+          ]
+        },
+        {
+          "room": 54,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            228,
+            252
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 0,
+          "gate": "return",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  40
+                ]
+              ],
+              "width": 40,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              218,
+              0,
+              44,
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "basin_overflow",
+      "ends": [
+        {
+          "room": 17,
+          "edge": "W",
+          "center": 272,
+          "aperture": [
+            260,
+            284
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            24,
+            272
+          ],
+          "saved_spawn": 0,
+          "gate": "region",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  272
+                ],
+                [
+                  80,
+                  272
+                ],
+                [
+                  120,
+                  264
+                ],
+                [
+                  164,
+                  252
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              250,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 56,
+          "edge": "E",
+          "center": 256,
+          "aperture": [
+            244,
+            268
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            448,
+            256
+          ],
+          "saved_spawn": 0,
+          "gate": "return",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  416,
+                  256
+                ],
+                [
+                  480,
+                  256
+                ]
+              ],
+              "width": 40,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              464,
+              234,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "hearthwake_sailwalk",
+      "ends": [
+        {
+          "room": 22,
+          "edge": "E",
+          "center": 144,
+          "aperture": [
+            132,
+            156
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            456,
+            144
+          ],
+          "saved_spawn": 4,
+          "gate": "north",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  384,
+                  144
+                ],
+                [
+                  480,
+                  144
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              464,
+              122,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 57,
+          "edge": "W",
+          "center": 272,
+          "aperture": [
+            260,
+            284
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            32,
+            272
+          ],
+          "saved_spawn": 0,
+          "gate": "return",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  272
+                ],
+                [
+                  80,
+                  272
+                ],
+                [
+                  80,
+                  240
+                ]
+              ],
+              "width": 40,
+              "material": "wood"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              250,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "sunlace_terraces",
+      "ends": [
+        {
+          "room": 30,
+          "edge": "E",
+          "center": 256,
+          "aperture": [
+            244,
+            268
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            456,
+            256
+          ],
+          "saved_spawn": 4,
+          "gate": "south",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  400,
+                  256
+                ],
+                [
+                  480,
+                  256
+                ]
+              ],
+              "width": 34,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              464,
+              234,
+              16,
+              44
+            ]
+          ]
+        },
+        {
+          "room": 58,
+          "edge": "W",
+          "center": 256,
+          "aperture": [
+            244,
+            268
+          ],
+          "size": [
+            480,
+            320
+          ],
+          "arrival": [
+            32,
+            256
+          ],
+          "saved_spawn": 0,
+          "gate": "return",
+          "entry_safe": false,
+          "barrier_inset": 16,
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  256
+                ],
+                [
+                  80,
+                  256
+                ],
+                [
+                  80,
+                  272
+                ]
+              ],
+              "width": 40,
+              "material": "dirt"
+            }
+          ],
+          "clear_rects": [
+            [
+              0,
+              234,
+              16,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "key": "road_38_39",
+      "ends": [
+        {
+          "room": 38,
+          "edge": "N",
+          "center": 304,
+          "aperture": [
+            286,
+            322
+          ],
+          "arrival": [
+            304,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "magma",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              280,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  304,
+                  0
+                ],
+                [
+                  304,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 39,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "magma",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_46_47",
+      "ends": [
+        {
+          "room": 46,
+          "edge": "E",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            448,
+            160
+          ],
+          "saved_spawn": 3,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              448,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  480,
+                  160
+                ],
+                [
+                  448,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 47,
+          "edge": "W",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            32,
+            160
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              0,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  160
+                ],
+                [
+                  32,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_46_48",
+      "ends": [
+        {
+          "room": 46,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 48,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_47_50",
+      "ends": [
+        {
+          "room": 47,
+          "edge": "N",
+          "center": 400,
+          "aperture": [
+            382,
+            418
+          ],
+          "arrival": [
+            400,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              376,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  400,
+                  0
+                ],
+                [
+                  400,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 50,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_48_49",
+      "ends": [
+        {
+          "room": 48,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 49,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_48_51",
+      "ends": [
+        {
+          "room": 48,
+          "edge": "E",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            448,
+            160
+          ],
+          "saved_spawn": 2,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              448,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  480,
+                  160
+                ],
+                [
+                  448,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 51,
+          "edge": "W",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            32,
+            160
+          ],
+          "saved_spawn": 2,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              0,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  160
+                ],
+                [
+                  32,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_49_52",
+      "ends": [
+        {
+          "room": 49,
+          "edge": "E",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            208,
+            112
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              208,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  112
+                ],
+                [
+                  208,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 52,
+          "edge": "W",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            32,
+            112
+          ],
+          "saved_spawn": 2,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  112
+                ],
+                [
+                  32,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_50_51",
+      "ends": [
+        {
+          "room": 50,
+          "edge": "N",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  0
+                ],
+                [
+                  120,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 51,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_51_52",
+      "ends": [
+        {
+          "room": 51,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 52,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_52_53",
+      "ends": [
+        {
+          "room": 52,
+          "edge": "E",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            208,
+            112
+          ],
+          "saved_spawn": 1,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              208,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  112
+                ],
+                [
+                  208,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 53,
+          "edge": "W",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            32,
+            112
+          ],
+          "saved_spawn": 0,
+          "gate": "underwater",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  112
+                ],
+                [
+                  32,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ],
+      "departure_callback": "underwater_game_road_departure:53->52:s1 after guardian stage4 preserves Q45; earlier retreat ordinary"
+    },
+    {
+      "key": "road_58_59",
+      "ends": [
+        {
+          "room": 58,
+          "edge": "E",
+          "center": 256,
+          "aperture": [
+            238,
+            274
+          ],
+          "arrival": [
+            448,
+            256
+          ],
+          "saved_spawn": 1,
+          "gate": "return",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              448,
+              232,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  480,
+                  256
+                ],
+                [
+                  448,
+                  256
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 59,
+          "edge": "W",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            32,
+            112
+          ],
+          "saved_spawn": 0,
+          "gate": "return",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  112
+                ],
+                [
+                  32,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_60_61",
+      "ends": [
+        {
+          "room": 60,
+          "edge": "E",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            208,
+            112
+          ],
+          "saved_spawn": 1,
+          "gate": "return",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              208,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  112
+                ],
+                [
+                  208,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 61,
+          "edge": "W",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            32,
+            112
+          ],
+          "saved_spawn": 0,
+          "gate": "return",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  112
+                ],
+                [
+                  32,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ],
+      "meaning": "real Maproom east wall doorway and exterior Causeway west road"
+    },
+    {
+      "key": "road_61_62",
+      "ends": [
+        {
+          "room": 61,
+          "edge": "N",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "return",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  0
+                ],
+                [
+                  120,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 62,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_62_63",
+      "ends": [
+        {
+          "room": 62,
+          "edge": "E",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            448,
+            160
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              448,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  480,
+                  160
+                ],
+                [
+                  448,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  448,
+                  160
+                ],
+                [
+                  408,
+                  160
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 63,
+          "edge": "W",
+          "center": 128,
+          "aperture": [
+            110,
+            146
+          ],
+          "arrival": [
+            32,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              104,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  128
+                ],
+                [
+                  32,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "wood",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  32,
+                  128
+                ],
+                [
+                  64,
+                  128
+                ]
+              ],
+              "width": 22,
+              "material": "wood",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_62_66",
+      "ends": [
+        {
+          "room": 62,
+          "edge": "N",
+          "center": 64,
+          "aperture": [
+            46,
+            82
+          ],
+          "arrival": [
+            64,
+            32
+          ],
+          "saved_spawn": 2,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              40,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  64,
+                  0
+                ],
+                [
+                  64,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  64,
+                  24
+                ],
+                [
+                  128,
+                  24
+                ],
+                [
+                  128,
+                  96
+                ],
+                [
+                  80,
+                  96
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 66,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            288
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              96,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  320
+                ],
+                [
+                  120,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  120,
+                  288
+                ],
+                [
+                  112,
+                  284
+                ]
+              ],
+              "width": 22,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_62_64",
+      "ends": [
+        {
+          "room": 62,
+          "edge": "S",
+          "center": 96,
+          "aperture": [
+            78,
+            114
+          ],
+          "arrival": [
+            96,
+            288
+          ],
+          "saved_spawn": 3,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              72,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  96,
+                  320
+                ],
+                [
+                  96,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  96,
+                  288
+                ],
+                [
+                  112,
+                  280
+                ],
+                [
+                  144,
+                  264
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 64,
+          "edge": "N",
+          "center": 32,
+          "aperture": [
+            14,
+            50
+          ],
+          "arrival": [
+            32,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              8,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "wood",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  112
+                ]
+              ],
+              "width": 22,
+              "material": "wood",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_63_65",
+      "ends": [
+        {
+          "room": 63,
+          "edge": "N",
+          "center": 336,
+          "aperture": [
+            318,
+            354
+          ],
+          "arrival": [
+            336,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              312,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  336,
+                  0
+                ],
+                [
+                  336,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "wood",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  336,
+                  32
+                ],
+                [
+                  336,
+                  128
+                ]
+              ],
+              "width": 22,
+              "material": "wood",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 65,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  240,
+                  288
+                ],
+                [
+                  240,
+                  276
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_63_64",
+      "ends": [
+        {
+          "room": 63,
+          "edge": "S",
+          "center": 208,
+          "aperture": [
+            190,
+            226
+          ],
+          "arrival": [
+            208,
+            128
+          ],
+          "saved_spawn": 2,
+          "gate": "horizons",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              184,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  208,
+                  160
+                ],
+                [
+                  208,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "wood",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 64,
+          "edge": "N",
+          "center": 208,
+          "aperture": [
+            190,
+            226
+          ],
+          "arrival": [
+            208,
+            32
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              184,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  208,
+                  0
+                ],
+                [
+                  208,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "wood",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  208,
+                  32
+                ],
+                [
+                  208,
+                  112
+                ]
+              ],
+              "width": 22,
+              "material": "wood",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_63_67",
+      "ends": [
+        {
+          "room": 63,
+          "edge": "N",
+          "center": 384,
+          "aperture": [
+            366,
+            402
+          ],
+          "arrival": [
+            384,
+            32
+          ],
+          "saved_spawn": 3,
+          "gate": "horizons",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              360,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  384,
+                  0
+                ],
+                [
+                  384,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "wood",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  384,
+                  32
+                ],
+                [
+                  384,
+                  128
+                ]
+              ],
+              "width": 22,
+              "material": "wood",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 67,
+          "edge": "S",
+          "center": 80,
+          "aperture": [
+            62,
+            98
+          ],
+          "arrival": [
+            80,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              56,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  80,
+                  320
+                ],
+                [
+                  80,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  80,
+                  288
+                ],
+                [
+                  80,
+                  272
+                ],
+                [
+                  64,
+                  264
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_65_66",
+      "ends": [
+        {
+          "room": 65,
+          "edge": "W",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            32,
+            160
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              0,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  160
+                ],
+                [
+                  32,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  32,
+                  160
+                ],
+                [
+                  64,
+                  160
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 66,
+          "edge": "E",
+          "center": 272,
+          "aperture": [
+            254,
+            290
+          ],
+          "arrival": [
+            208,
+            272
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              208,
+              248,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  272
+                ],
+                [
+                  208,
+                  272
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  208,
+                  272
+                ],
+                [
+                  176,
+                  272
+                ]
+              ],
+              "width": 22,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_65_67",
+      "ends": [
+        {
+          "room": 65,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 2,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  240,
+                  32
+                ],
+                [
+                  240,
+                  56
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 67,
+          "edge": "S",
+          "center": 400,
+          "aperture": [
+            382,
+            418
+          ],
+          "arrival": [
+            400,
+            288
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              376,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  400,
+                  320
+                ],
+                [
+                  400,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  400,
+                  288
+                ],
+                [
+                  400,
+                  264
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_66_69",
+      "ends": [
+        {
+          "room": 66,
+          "edge": "N",
+          "center": 48,
+          "aperture": [
+            30,
+            66
+          ],
+          "arrival": [
+            48,
+            32
+          ],
+          "saved_spawn": 2,
+          "gate": "horizons",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              24,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  96
+                ]
+              ],
+              "width": 22,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 69,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_67_68",
+      "ends": [
+        {
+          "room": 67,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 2,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  240,
+                  32
+                ],
+                [
+                  240,
+                  48
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 68,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "horizons",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  120,
+                  128
+                ],
+                [
+                  120,
+                  112
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_67_69",
+      "ends": [
+        {
+          "room": 67,
+          "edge": "W",
+          "center": 144,
+          "aperture": [
+            126,
+            162
+          ],
+          "arrival": [
+            32,
+            144
+          ],
+          "saved_spawn": 3,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              0,
+              120,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  144
+                ],
+                [
+                  32,
+                  144
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  32,
+                  144
+                ],
+                [
+                  72,
+                  144
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 69,
+          "edge": "E",
+          "center": 112,
+          "aperture": [
+            94,
+            130
+          ],
+          "arrival": [
+            208,
+            112
+          ],
+          "saved_spawn": 1,
+          "gate": "horizons",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              208,
+              88,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  112
+                ],
+                [
+                  208,
+                  112
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  208,
+                  112
+                ],
+                [
+                  192,
+                  112
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_62_70",
+      "ends": [
+        {
+          "room": 62,
+          "edge": "N",
+          "center": 416,
+          "aperture": [
+            398,
+            434
+          ],
+          "arrival": [
+            416,
+            32
+          ],
+          "saved_spawn": 5,
+          "gate": "horizons",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              392,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  416,
+                  0
+                ],
+                [
+                  416,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            },
+            {
+              "points": [
+                [
+                  416,
+                  32
+                ],
+                [
+                  384,
+                  32
+                ]
+              ],
+              "width": 22,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 70,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_70_71",
+      "ends": [
+        {
+          "room": 70,
+          "edge": "E",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            448,
+            160
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              448,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  480,
+                  160
+                ],
+                [
+                  448,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 71,
+          "edge": "W",
+          "center": 272,
+          "aperture": [
+            254,
+            290
+          ],
+          "arrival": [
+            32,
+            272
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              0,
+              248,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  272
+                ],
+                [
+                  32,
+                  272
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_71_72",
+      "ends": [
+        {
+          "room": 71,
+          "edge": "N",
+          "center": 208,
+          "aperture": [
+            190,
+            226
+          ],
+          "arrival": [
+            208,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              184,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  208,
+                  0
+                ],
+                [
+                  208,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 72,
+          "edge": "S",
+          "center": 400,
+          "aperture": [
+            382,
+            418
+          ],
+          "arrival": [
+            400,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              376,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  400,
+                  160
+                ],
+                [
+                  400,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_72_73",
+      "ends": [
+        {
+          "room": 72,
+          "edge": "W",
+          "center": 128,
+          "aperture": [
+            110,
+            146
+          ],
+          "arrival": [
+            32,
+            128
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              104,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  128
+                ],
+                [
+                  32,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 73,
+          "edge": "E",
+          "center": 128,
+          "aperture": [
+            110,
+            146
+          ],
+          "arrival": [
+            208,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              208,
+              104,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  128
+                ],
+                [
+                  208,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_73_70",
+      "ends": [
+        {
+          "room": 73,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 70,
+          "edge": "N",
+          "center": 80,
+          "aperture": [
+            62,
+            98
+          ],
+          "arrival": [
+            80,
+            32
+          ],
+          "saved_spawn": 2,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              56,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  80,
+                  0
+                ],
+                [
+                  80,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_70_74",
+      "ends": [
+        {
+          "room": 70,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 3,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 74,
+          "edge": "S",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            288
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              288,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  320
+                ],
+                [
+                  240,
+                  288
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_74_75",
+      "ends": [
+        {
+          "room": 74,
+          "edge": "E",
+          "center": 160,
+          "aperture": [
+            142,
+            178
+          ],
+          "arrival": [
+            448,
+            160
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              448,
+              136,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  480,
+                  160
+                ],
+                [
+                  448,
+                  160
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 75,
+          "edge": "W",
+          "center": 272,
+          "aperture": [
+            254,
+            290
+          ],
+          "arrival": [
+            32,
+            272
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              0,
+              248,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  272
+                ],
+                [
+                  32,
+                  272
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_75_76",
+      "ends": [
+        {
+          "room": 75,
+          "edge": "N",
+          "center": 208,
+          "aperture": [
+            190,
+            226
+          ],
+          "arrival": [
+            208,
+            32
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            240,
+            320
+          ],
+          "clear_rects": [
+            [
+              184,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  208,
+                  0
+                ],
+                [
+                  208,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 76,
+          "edge": "S",
+          "center": 400,
+          "aperture": [
+            382,
+            418
+          ],
+          "arrival": [
+            400,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              376,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  400,
+                  160
+                ],
+                [
+                  400,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_76_77",
+      "ends": [
+        {
+          "room": 76,
+          "edge": "W",
+          "center": 128,
+          "aperture": [
+            110,
+            146
+          ],
+          "arrival": [
+            32,
+            128
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            480,
+            160
+          ],
+          "clear_rects": [
+            [
+              0,
+              104,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  0,
+                  128
+                ],
+                [
+                  32,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 77,
+          "edge": "E",
+          "center": 128,
+          "aperture": [
+            110,
+            146
+          ],
+          "arrival": [
+            208,
+            128
+          ],
+          "saved_spawn": 0,
+          "gate": "covenants",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              208,
+              104,
+              32,
+              48
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  128
+                ],
+                [
+                  208,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    },
+    {
+      "key": "road_77_74",
+      "ends": [
+        {
+          "room": 77,
+          "edge": "S",
+          "center": 120,
+          "aperture": [
+            102,
+            138
+          ],
+          "arrival": [
+            120,
+            128
+          ],
+          "saved_spawn": 1,
+          "gate": "covenants",
+          "size": [
+            240,
+            160
+          ],
+          "clear_rects": [
+            [
+              96,
+              128,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  120,
+                  160
+                ],
+                [
+                  120,
+                  128
+                ]
+              ],
+              "width": 44,
+              "material": "dirt",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        },
+        {
+          "room": 74,
+          "edge": "N",
+          "center": 240,
+          "aperture": [
+            222,
+            258
+          ],
+          "arrival": [
+            240,
+            32
+          ],
+          "saved_spawn": 2,
+          "gate": "covenants",
+          "size": [
+            480,
+            320
+          ],
+          "clear_rects": [
+            [
+              216,
+              0,
+              48,
+              32
+            ]
+          ],
+          "paint": [
+            {
+              "points": [
+                [
+                  240,
+                  0
+                ],
+                [
+                  240,
+                  32
+                ]
+              ],
+              "width": 44,
+              "material": "stone",
+              "flat_caps": true
+            }
+          ],
+          "entry_safe": false,
+          "barrier_inset": 16
+        }
+      ]
+    }
+  ],
+  "doorways": [
+    {
+      "key": "village_maproom",
+      "room": 0,
+      "target": 60,
+      "kind": "house_door",
+      "footprint": [
+        177,
+        98,
+        15,
+        9
+      ],
+      "arrival": [
+        184,
+        108
+      ],
+      "target_arrival": [
+        120,
+        140
+      ],
+      "saved_spawn": 0
+    },
+    {
+      "key": "bellfoundry_attic",
+      "room": 16,
+      "target": 55,
+      "kind": "exterior_stair",
+      "footprint": [
+        415,
+        136,
+        19,
+        17
+      ],
+      "arrival": [
+        424,
+        156
+      ],
+      "target_arrival": [
+        120,
+        140
+      ],
+      "saved_spawn": 3
+    }
+  ]
+}

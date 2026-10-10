@@ -1,0 +1,32 @@
+{
+  "scope": "Native controller-earned accepted H prior inputs for content8 migration. SRAM bytes and measured values are unchanged. Reports are portable public copies with machine-specific absolute path prefixes removed. Original and portable producer digests are both recorded; no prior ROM or tool binary bundled.",
+  "source_rom_sha256": "f2330562b2c370d094164e7a5bf1e307da24412c88280cc880744eba072edaec",
+  "files": [
+    {
+      "stage": "full",
+      "snapshot": "05-all104-cold-reboot-after",
+      "producer_sha256": "eb62317f54af072892e9eadc3b4e73ad5cd70788e9c20053afba2eeb897f2b82",
+      "producer_gzip_sha256": "3bd5893d32c4a3c44edb7fb5364ccd94c1d2ea01d6d3970c29bd55674db34209",
+      "sram_filename": "05-all104-cold-reboot-after.sav",
+      "sram_sha256": "d482466d04050c3d7f2e8eb8e1960729c9b9b33aa3e32440d186a4b54b854a69",
+      "producer_bytes": 12571469,
+      "gzip_bytes": 416240,
+      "sram_bytes": 32768,
+      "original_producer_sha256": "a87942fda29e848124f4a7439ea96d59d0abcf66807c2a370ec1cbab68b0ab6c",
+      "original_producer_gzip_sha256": "e625ebd36ad37232abb624b5fcb4984813e4e41a07bffd7d94ee423fa6a01bac"
+    },
+    {
+      "stage": "minimal-north-lifecycle",
+      "snapshot": "main-route-cold-save-after",
+      "producer_sha256": "e99750715413bd8a1ae62b70a064c4f7e22be3ea5f72ff8cf59a9b95dda416e7",
+      "producer_gzip_sha256": "81a28d162e8b174e74ecbe46162c6a3ab07bd04d12bb5400fcfe22777925bbf3",
+      "sram_filename": "main-route-cold-save-after.sav",
+      "sram_sha256": "0c49f8cee8c601dbc3de35f2f98911b96f483fc32060b4b6817e650151fee970",
+      "producer_bytes": 2257946,
+      "gzip_bytes": 83193,
+      "sram_bytes": 32768,
+      "original_producer_sha256": "0f40dd7f394909893f676c30b157b95d621bfba95ad5c97bd5196ff9a1af44c3",
+      "original_producer_gzip_sha256": "d8508179ee4e5fbded8f01ca1690dd6a47b457858c8c01d4492bc9208d080835"
+    }
+  ]
+}

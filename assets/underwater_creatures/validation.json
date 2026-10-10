@@ -57,7 +57,11 @@
   "legacy_prefix": {
     "baseline": "0a8b05c3e24d02bd350a11c32289fb5686641535",
     "files": 48,
-    "unchanged": true
+    "unchanged": false,
+    "reviewed_world_successor": "connected-roads-c4",
+    "reviewed_background_file_exceptions": 1,
+    "protected_creature_palette_arrays_unchanged": true,
+    "unchanged_historical_files": 47
   },
   "output_sha256": {
     "assets/underwater_creatures/CREDITS.txt": "bc00a2eb209d4a701bfda0f753ac8a0e123f072d49a4efb5a1e91cbb959f8223",
@@ -169,7 +173,7 @@
     "assets/underwater_creatures/linkeel_portrait.png": "3f9b2991c032738d6e6a5a25f157f359c5cd69e8385f6ed5b6b69b1aea02de6a",
     "assets/underwater_creatures/linkeel_terrain_native.png": "76a44f6d38a44e42a35fd8a11ff89688b3591c337cfd5d3b20cc5fd4e5f52c81",
     "assets/underwater_creatures/linkeel_walk.png": "659464fb5969fbe7a08a049285f6ec9b0093ad2828ce382479c2add6d7a126ca",
-    "assets/underwater_creatures/manifest.json": "1ab839c65fbe773d618514105ef43d01bd7c9d49dfa3649134b51a4e1ec75bc9",
+    "assets/underwater_creatures/manifest.json": "3cc02201d2c9106a6f18b1acf6562bd9c072bf51a200b32886e602e476c01b7b",
     "assets/underwater_creatures/nacreway_composite_3x.png": "127542d57c2ebe0f5a0589c09803ea07f05f753500670581c41eecac5ea44dc1",
     "assets/underwater_creatures/nacreway_composite_native.png": "3541852d0821a8d0fa87a4262907afbf9e178bbef7020b17e7101bea3fdf7ea1",
     "assets/underwater_creatures/palmstar_3x.png": "b8966968e2c264a21b4eed1865b67555bb3d47574fd444ffe49363b849835c4a",

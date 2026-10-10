@@ -1,0 +1,23 @@
+[
+  [
+    "python3",
+    "tools/run_bounded_magma_save_probe.py",
+    "--output",
+    "build/current-host-evidence/h-bounded-magma-save"
+  ],
+  [
+    "python3",
+    "tests/underwater_engine_review/run_probe.py",
+    "test_engine_lifecycle.py"
+  ],
+  [
+    "python3",
+    "tests/underwater_engine_review/run_probe.py",
+    "test_bounded_magma_return.py"
+  ],
+  [
+    "python3",
+    "tests/underwater_engine_review/run_probe.py",
+    "test_bounded_southern_rest.py"
+  ]
+]

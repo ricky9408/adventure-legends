@@ -1,0 +1,8 @@
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
+#include "travel_feedback.h"
+#include "save_feedback.h"
+int main(void){Save5State state;unsigned i,n;memset(&state,0,sizeof state);save_feedback_reset();assert(!save_feedback_same(&state));save_feedback_capture(&state);assert(!save_feedback_same(&state));save_feedback_complete(1);assert(save_feedback_same(&state));state.campaign.room=1;assert(!save_feedback_same(&state));state.campaign.room=0;state.roster.instances[159].instance_id=~0u;assert(!save_feedback_same(&state));state.roster.instances[159].instance_id=0;state.economy.gold=1;assert(!save_feedback_same(&state));state.economy.gold=0;assert(save_feedback_same(&state));save_feedback_background=1;assert(save_feedback_badge()==1);save_feedback_background=0;assert(save_feedback_badge()==2);for(i=0;i<80;i++)save_feedback_tick();assert(!save_feedback_badge());save_feedback_capture(&state);save_feedback_complete(0);assert(!save_feedback_same(&state));
+for(i=0;i<travel_entry_count;i++){const TravelEntry*e=&travel_entries[i];int x=e->x+e->w/2,y=e->y+e->h/2;travel_feedback_reset();assert(travel_feedback_step(e->room,x,y,1,0)==-1);assert(travel_feedback_step(e->room,x,y,64,1)==-1);assert(travel_feedback_step(e->room,x,y,64,0)==(int)i);for(n=0;n<100;n++)assert(travel_feedback_step(e->room,x,y,64,0)==-1);travel_feedback_arrive(e->room,x,y);assert(travel_feedback_step(e->room,x,y,64,0)==-1);travel_feedback_step(e->room,-100,-100,64,0);assert(travel_feedback_step(e->room,x,y,64,0)==(int)i);}
+printf("PASS %u exact foot thresholds and verified snapshot dedup\n",travel_entry_count);return 0;}

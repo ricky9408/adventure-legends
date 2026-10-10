@@ -4,6 +4,7 @@
 #include "north_art.h"
 #include "northern_quests.h"
 #include "progression.h"
+#include "connected_roads.h"
 #include "assets.h"
 #ifdef NORTH_GAME_HOST_TEST
 #include "north_game_test_ui.h"
@@ -54,7 +55,7 @@ int north_game_is_room(unsigned a){return a>=22&&a<=29;}
 static int swept_cart(unsigned which,unsigned from,unsigned to,int x,int y){int yy=which?96:64,xx1=which?160-(int)from*32:80+(int)from*32,xx2=which?160-(int)to*32:80+(int)to*32,tmp;
  if(xx1>xx2){tmp=xx1;xx1=xx2;xx2=tmp;}return ab(y-yy)<=12&&x>=xx1-12&&x<=xx2+12;
 }
-int north_puzzle_step(NorthPuzzle*p,unsigned area,unsigned act,int x,int y){unsigned which;
+COLD int north_puzzle_step(NorthPuzzle*p,unsigned area,unsigned act,int x,int y){unsigned which;
  if(!p||area<26||area>28||p->rail>3||p->weight>1||p->cart[0]>2||p->cart[1]>2)return -1;
  if(act==NORTH_ACTION_RESET){p->rail=p->weight=p->cart[0]=p->cart[1]=0;return 1;}
  if(act==NORTH_ACTION_TURN){p->rail=(unsigned char)((p->rail+1)&3);return 1;}
@@ -68,7 +69,7 @@ int north_puzzle_step(NorthPuzzle*p,unsigned area,unsigned act,int x,int y){unsi
  if(swept_cart(which,p->cart[which],p->cart[which]+1,x,y))return -1;
  p->cart[which]++;return 1;
 }
-int north_puzzle_solved(const NorthPuzzle*p,unsigned area){return p&&area>=26&&area<=28&&p->weight==1&&p->cart[0]==2&&(area==26||p->cart[1]==2);}
+COLD int north_puzzle_solved(const NorthPuzzle*p,unsigned area){return p&&area>=26&&area<=28&&p->weight==1&&p->cart[0]==2&&(area==26||p->cart[1]==2);}
 COLD void north_game_reset(void){unsigned bit=room>=26&&room<=28?1u<<(room-26):0;
  north_game_puzzle.rail=north_game_puzzle.weight=north_game_puzzle.cart[0]=north_game_puzzle.cart[1]=0;
  if(bit&&(adventure_save.quests.objectives[21]&bit)){north_game_puzzle.weight=1;north_game_puzzle.cart[0]=2;north_game_puzzle.cart[1]=(unsigned char)(room==26?0:2);north_game_puzzle.rail=(unsigned char)(room==28?0:1);}
@@ -83,6 +84,7 @@ COLD int north_game_enter(unsigned area,unsigned spawn){int r;sync();if(!north_g
 }
 int north_game_solid(int x,int y){const NorthArtRoom*r;const unsigned short*band;unsigned count,area=(unsigned)room;
  if(area<22||area>29)return 0;
+ if(game_road_collision){int road=game_road_collision(area,x,y);if(road>=0)return road;}
  r=&north_art_rooms[area-22];
  /* Casting before bounds checks covers negative/large signed coordinates
   * without overflow. Generated rows already include the exact foot radius. */
@@ -97,12 +99,12 @@ static COLD void puzzle_action(unsigned act){int r=north_puzzle_step(&north_game
  if(north_puzzle_solved(&north_game_puzzle,(unsigned)room)){objective(21,1u<<(room-26));persist();toast(TX_NT_SOLVED);}
 }
 COLD int north_game_interact(void){unsigned i;dirty=0;sync();if(game_state!=PLAY)return 0;
- if(room==16){if(!close(400,280)||!game_region_entry_safe())return 0;if(!northern_can_enter(&adventure_save,22)){say(TX_NT_ENTRY_A,TX_NT_ENTRY_B);return 1;}enter_room(22,0);return 1;}
+ if(room==16){if(game_road_managed&&game_road_managed(16,22))return 0;if(!close(400,280)||!game_region_entry_safe())return 0;if(!northern_can_enter(&adventure_save,22)){say(TX_NT_ENTRY_A,TX_NT_ENTRY_B);return 1;}enter_room(22,0);return 1;}
  if(!north_game_is_room((unsigned)room))return 0;
  if(room==22){
   if(face==1&&near(px,py,88,138,18))return door(24,0);
   if(face==1&&near(px,py,384,138,18))return door(25,0);
-  if(close(240,264)){persist();enter_room(16,0);return 1;}
+  if((!game_road_managed||!game_road_managed(22,16))&&close(240,264)){persist();enter_room(16,0);return 1;}
   if(close(104,192)){northern_anchor(&adventure_save,22);game_health_fill();checkpoint_spawn=2;dirty=1;say(TX_NT_REST_A,TX_NT_REST_B);return 1;}
   if(close(168,192)){talk(done(11)?16:11);return 1;}
   if(close(312,192)){talk(!done(13)?13:ready(21)?21:20);return 1;}
@@ -186,8 +188,8 @@ COLD void north_game_tick(void){if(game_state!=PLAY)return;if(door_notice)door_n
   if(!north_game_machine_ticks){if(north_game_machine_stage==1){north_game_machine_stage=2;north_game_machine_ticks=24;machine_hit=0;}else if(north_game_machine_stage==2){north_game_machine_stage=3;north_game_machine_ticks=90;toast(TX_NT_OPEN);}else if(north_game_machine_stage==3){north_game_machine_stage=4;north_game_machine_ticks=30;}else{north_game_machine_stage=1;north_game_machine_ticks=60;toast(TX_NT_WARN);}changed();}
  }
  if(transition_lock)return;
- if(room==22){if((keys&UP)&&px>=224&&px<=255&&py<=18){door(23,0);return;}}
- else if(room==23){if((keys&DOWN)&&px>=224&&px<=255&&py>=298){door(22,1);return;}}
+ if(room==22){if((!game_road_managed||!game_road_managed(22,23))&&(keys&UP)&&px>=224&&px<=255&&py<=18){door(23,0);return;}}
+ else if(room==23){if((!game_road_managed||!game_road_managed(23,22))&&(keys&DOWN)&&px>=224&&px<=255&&py>=298){door(22,1);return;}}
  else if((keys&DOWN)&&px>=108&&px<=131&&py>=143){unsigned dest=room==24||room==25?22:room==26?23:(unsigned)room-1,spawn=room==24?3:room==25?4:room==26?1:0;door(dest,spawn);}
 }
 COLD int north_game_name(void){static const int n[8]={TX_NT_ROOM22,TX_NT_ROOM23,TX_NT_ROOM24,TX_NT_ROOM25,TX_NT_ROOM26,TX_NT_ROOM27,TX_NT_ROOM28,TX_NT_ROOM29};return north_game_is_room((unsigned)room)?n[room-22]:0;}
@@ -198,9 +200,9 @@ COLD void north_game_draw_journal(void){static const int s[4]={TX_NT_UNSEEN,TX_N
  centered(TX_NT_KEYS,138,PAL_TEAL2);
 }
 COLD int north_game_menu_input(int k){if(journal_tab!=JOURNAL_TAB)return 0;if(k&UP){north_game_journal_selection=(north_game_journal_selection+10)%11;changed();return 1;}if(k&DOWN){north_game_journal_selection=(north_game_journal_selection+1)%11;changed();return 1;}return 0;}
-COLD void north_game_draw_actors(void){unsigned i;if(room==16){if(northern_can_enter(&adventure_save,22))north_actor(NORTH_SPR_FERRY_SIGN,400,280);return;}
+COLD void north_game_draw_actors(void){unsigned i;if(room==16){return;}
  if(!north_game_is_room((unsigned)room))return;
- if(room==22){north_actor(NORTH_SPR_EDDA,168,192);north_actor(NORTH_SPR_NERI,312,192);north_actor(NORTH_SPR_PELL,64,192);north_actor(NORTH_SPR_TOVE,384,160);north_actor(NORTH_SPR_IVEN,416,208);north_actor(adventure_save.quests.anchors[1]&1?NORTH_SPR_REST_LIT:NORTH_SPR_REST,104,192);north_actor(NORTH_SPR_FERRY_SIGN,240,264);north_actor(NORTH_SPR_FORECAST,240,192);
+ if(room==22){north_actor(NORTH_SPR_EDDA,168,192);north_actor(NORTH_SPR_NERI,312,192);north_actor(NORTH_SPR_PELL,64,192);north_actor(NORTH_SPR_TOVE,384,160);north_actor(NORTH_SPR_IVEN,416,208);north_actor(adventure_save.quests.anchors[1]&1?NORTH_SPR_REST_LIT:NORTH_SPR_REST,104,192);north_actor(NORTH_SPR_FORECAST,240,192);
   north_actor(adventure_save.quests.objectives[11]&1?NORTH_SPR_HANDLE_DONE:NORTH_SPR_HANDLE,160,224);north_actor(adventure_save.quests.objectives[11]&2?NORTH_SPR_HANDLE_DONE:NORTH_SPR_HANDLE,304,224);if(done(21))north_actor(NORTH_SPR_BEACON_LIT,240,216);
  }else if(room==23){north_actor(north_game_puzzle.rail&1?NORTH_SPR_JUNCTION_EW:NORTH_SPR_JUNCTION_NS,240,192);north_actor(NORTH_SPR_BEARING,320,192);north_actor(NORTH_SPR_NERI,352,160);north_actor(NORTH_SPR_FERRY_SIGN,112,96);north_actor(NORTH_SPR_TENDER,144+(int)tender_steps*8,112);north_actor(NORTH_SPR_FORECAST,176,144);north_actor(adventure_save.quests.anchors[1]&2?NORTH_SPR_REST_LIT:NORTH_SPR_REST,80,248);
   {static const short xy[3][2]={{176,224},{288,112},{368,240}};for(i=0;i<3;i++)north_actor(adventure_save.quests.objectives[15]&(1u<<i)?NORTH_SPR_SOCKET:NORTH_SPR_MARKER,xy[i][0],xy[i][1]);}

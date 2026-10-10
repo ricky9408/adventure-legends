@@ -1,10 +1,60 @@
-# Underwater authoring schema2, development content revision6
+# The Roads That Stay authoring schema3, development content revision9
 
-The current catalog has90 authored designs and128 immutable reserved identities.
-The development core manifest selects89 forms,142 learned-command pairs,51 edges
-and89 commands. This append is forms49–72 and signatures67–90 in families17–24.
-Ability12, legends121–128 and every unlisted form remain disabled. Table enablement
-is not evidence of acquisition, artwork, handlers, controller routes or delivery.
+The current catalog authors and enables128 forms,209 learned-command pairs,
+68 evolution edges and128 commands in60 families. The final eight forms121–128
+are unique, single-form legendary families53–60. Command121 still belongs to
+Cymbalop/form120. Stilltide/form121 retains its entire disabled draft form and
+command12 rows, including command9 at level1 and command12 at level30.
+Table enablement is not evidence of acquisition, artwork, handlers, controller
+routes or delivery.
+
+Schema3 introduces `covenant_gates` with explicit room, source token, fulfilled
+right, receipt, quest objective and guaranteed support command contracts.
+Covenant completion and unique invitation are separate operations. Each grant
+uses level36/bond60 with no personal trial flags. Only Stilltide retains the
+five-phase/two-polarity-switch motif, now serial settled work without its old
+unimplemented 90-second placeholder. Other covenants have no phase-count or
+polarity-switch requirement. Historical `catalog.schema.json` remains exact
+schema2; `catalog.v1.schema.json` and all archived relations remain unchanged.
+
+The120 accepted Shared Horizons C form rows,200 learned pairs,68 edges and120
+ability rows remain exact generated prefixes. Current-preservation hashes in
+the authoring validator enforce the existing rows, including draft Stilltide;
+they are independent of, and do not replace, the immutable content8 save reader.
+Run `tests/test_covenants_catalog.py` for schema, namespace, source, preservation
+and strict C catalog checks, including corrupted legendary rows.
+
+## Preserved Shared Horizons contract
+
+The four linear families F041–F044 use qualified trial key1/mask1024 introduced
+in revision8. Their two stages retain only that trial bit, with evolution floors
+level34/bond60 and HORIZONS_READY=16384; the resulting context mask is32767.
+Evolved forms retain their base command at level1 and learn their new signature
+at34. F045–F052 are singles with no evolution or trial registration. All thirty
+existing capability keys retain their values; no new capability bit is allocated.
+
+The immutable H relation snapshot is assets/history/released-creature-relations-v7.json,
+pinned at7dce9352cdcf12c3edce66b5539663619b33444aac526283025b4121d6a2f9f4.
+It freezes104 forms,180 learns,64 edges and104 abilities before live8 extension.
+Run tests/test_horizons_catalog.py for exact design, namespace, trial-owner,
+historical-prefix and equipment-source checks. These are data/core checks only.
+
+## Preserved Return I contract
+
+Return I completes families1–10 and introduces families39–40. Existing learned
+commands retain their original levels. Ordinary third tiers require level32,
+bond60 and their exact Return trial plus inherited prerequisite. Bellstride and
+new-family terminal forms require level28/bond45. Trial1024 is family-qualified;
+family6 uses1024 at form16 and permits2048 only after reaching form17. Old tier1
+forms cannot carry Return trial1024. Legacy scalar trial APIs retain old meaning.
+RETURN_READY=4096 and HOME_MAP_JOINED=8192 extend the context mask to16383.
+
+The immutable r6 relation snapshot in assets/history/released-creature-relations-v6.json
+was derived from delivered Underwater K before expansion; its SHA256 is
+8524b49e7ea690dc874d02696be03743a859294aa5ca0d728c5f0f33bcff6544.
+All earlier historical snapshots remain byte-identical. Validate/generate checks
+preserve released89 form relationships,51 edges,89 commands and142 learn pairs.
+Historical manifest generation ignores only explicitly reviewed future edges.
 
 ## Bounded source fragments
 
@@ -12,8 +62,8 @@ catalog.json is a strict source descriptor, not the assembled schema2 document.
 Use catalog_source.load_catalog(path), or validate_catalog.load_json(path), for
 all consumers. The loader also accepts archived monolithic JSON. It preserves
 row order, rejects duplicate keys/paths, unsafe relative paths, nested descriptor
-fragments and files reaching90,000 bytes.31 source files each stay below90KB;
-metadata is separate and row arrays use stable24-record chunks. format_catalog.py
+fragments and files reaching75,000 bytes.33 source files each stay below75KB;
+metadata is separate and row arrays use bounded fragments. format_catalog.py
 checks deterministic formatting without changing parsed values. No assembled
 oversize JSON needs to be published or committed.
 
@@ -33,7 +83,7 @@ capabilities and proposed slot statuses49–72. Its canonical SHA256 remains
   those snapshots from expanded current data. Separate creatures-v5.json and
   released-creature-relations-v5.json freeze finally delivered Magma commit
   0a8b05c3e24d02bd350a11c32289fb5686641535 before revision6 expansion
-- Revision APIs dispatch1–5 to frozen policies and6 to current policy. Admission is
+- Revision APIs dispatch1–7 to frozen policies and8 to current policy. Admission is
   absent from all revision/current instance and roster legality predicates
 - Current per-form policy specifies each polarity and field-capability set. Only
   individually approved branch polarities may differ. The old39/48 exceptions
@@ -59,7 +109,7 @@ requiring only the selected edge's bit. Families36–38 have key1 only. World qu
 code must separately prove source, from-form, context and same-individual floors.
 
 MAGMA_READY=256 and CALDERA_OPEN=512 belong to the u16 evolution-context namespace,
-not CampaignSave chapter flags. The current context mask is4095. Magma context derives
+not CampaignSave chapter flags. The historical revision6 context mask is4095. Magma context derives
 from claimed quests30/31 and32 respectively. Every evolution requires its exact
 level, bond, trial, context, sanctuary and explicit target confirmation. Third
 forms33/36 total285 stat points and retain all earlier field actions/commands.

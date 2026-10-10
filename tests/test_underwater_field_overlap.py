@@ -3,7 +3,7 @@
 from pathlib import Path
 import subprocess,json,hashlib
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'build/underwater-field-overlap';OUT.mkdir(exist_ok=True,parents=True)
-SOURCES=['src/underwater_power_art.c','src/magma_powers.c','src/magma_power_art.c','src/southern_powers.c','src/southern_power_art.c','src/northern_powers.c','src/northern_power_art.c','src/advanced_powers.c','src/regional_powers.c','src/gear_runtime.c','src/weapon_actions.c','src/combat_rules.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/assets.c']
+SOURCES=['src/underwater_power_art.c','src/magma_powers.c','src/magma_power_art.c','src/southern_powers.c','src/southern_power_art.c','src/northern_powers.c','src/northern_power_art.c','src/advanced_powers.c','src/regional_powers.c','src/gear_runtime.c', 'tests/legacy_return_hooks.c','src/weapon_actions.c','src/combat_rules.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/assets.c']
 wrapper=r'''
 int optimized_field(int x,int y,int r){return field_contains(x,y,r);}
 int exhaustive_field(int x,int y,int r){int xx,yy;

@@ -1,0 +1,35 @@
+{
+  "title": "Awnings in the Sun",
+  "bars": 28,
+  "meter": "3/4",
+  "tempo": 106,
+  "duration_seconds": 47.54716981132076,
+  "pcm_bytes_16384_s8": 779013,
+  "bar_sums": "All voice-bars match meter exactly",
+  "xml": "All 3 parts match JSON pitches, onsets, durations",
+  "midi": "Every binary pitch and onset checked; note-offs 14 ticks before notated end",
+  "tracks": 4,
+  "individual_voice_files": 3,
+  "maximum_polyphony": 3,
+  "pedal_events": 0,
+  "end_tick": 40320,
+  "ranges": {
+    "melody": [
+      67,
+      82
+    ],
+    "inner": [
+      55,
+      76
+    ],
+    "bass": [
+      43,
+      55
+    ]
+  },
+  "voice_crossings": 0,
+  "audible_review_performed": false,
+  "visual_review": "All three PDF pages visually inspected: 28 complete bars, readable 3/4, eighth flags, dotted halves, naturals and C-sharp, no clipping.",
+  "loop": "Exact whole-bar boundary; no notes or pedal extend past end.",
+  "individual_voice_validation": "Each separate-voice MIDI conductor and voice track byte-identical to corresponding full-score tracks."
+}

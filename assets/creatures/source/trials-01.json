@@ -1,8 +1,19 @@
 [
   {"id":"balanced_reach","description":"Balance unequal loads while preserving the reachable exit and reset handle."},
   {"id":"compass_round","description":"Route the marked carriage through three bearings and prove its return path."},
+  {"id":"covenant_bellmantle","description":"A Bell with a Door: Outer angled screen latched, inner doorway unblocked, side pin quiet, three pulses reach public marks but not resting alcove, final player ring from center."},
+  {"id":"covenant_cairnward","description":"Both Feet on the Span: Resident and repair frame reach the opposite safe platform, both pause inspections recorded, player crosses after the second inspection."},
+  {"id":"covenant_hearthmoth","description":"The Last Watch: All three waves cleared by ordinary combat, vent remains open, brace and hinge restored, all residents in safe center, player explicitly ends watch."},
+  {"id":"covenant_kilnwhorl","description":"The Common Firing: Three local bowl states COOL_COMPLETE, no sealed exhaust, keeper has inspected their visible repaired seams."},
+  {"id":"covenant_shadeweaver","description":"The Borrowed Afternoon: Both bed shade indicators overlap in their marked safe bands, middle walking gap connected, player and keeper traverse it after last geometry change."},
+  {"id":"covenant_tideplume","description":"Wait on This Shore: Passenger reaches far bank through two inspected stop states; waiting resident independently opens exit; ferry settled, no passenger bounding box crossed by movement."},
+  {"id":"covenant_vowbough","description":"Shade for the Second Row: Arbor at center detent, roof louvre half-open, outer trench settled, grower reaches inside bend while both bed flags stay healthy. No global timer."},
   {"id":"dry_ledger","description":"Carry bounded heat to all three visible chart-drying stations."},
   {"id":"fragile_cargo","description":"Float, pivot and unload the marked tender cargo using freely resettable safe stops."},
+  {"id":"horizons_a_hem_with_an_opening","description":"Draw two translucent panel hems to the pictured marks, leave the broad sky opening empty, then walk the audience aisle."},
+  {"id":"horizons_a_warmth_that_can_breathe","description":"Receive heat, manually shelter the wax seam without blocking its vent, release the same cast and walk the cool loading side."},
+  {"id":"horizons_a_weight_with_a_way_back","description":"Nudge the print weight from the marked side to its center notch, operate its hand latch and walk along the dry unprinted aisle."},
+  {"id":"horizons_light_through_two_hands","description":"Set the tray shutter, tilt the lens to the painted bearing and walk between its two clear viewing marks."},
   {"id":"join_two_pools","description":"Reconnect the paired marked pools in the reed-basin side quest."},
   {"id":"magma_a_walkable_load","description":"Press three marked braces while each pedestrian side lane remains open; dragging a baffle into a walking lane invalidates only that attempt."},
   {"id":"magma_balance_the_hanging_note","description":"Draw two counterweights to opposite marked rests until the hanging clapper clears both sides; the player can inspect its entire swing."},
@@ -15,12 +26,5 @@
   {"id":"magma_share_the_runnel","description":"Reveal both branch arrows and fill alternating receiving bowls without feeding the already-full trough; no timer or random rain."},
   {"id":"magma_shelter_the_roots","description":"Grow roots into two dry hedge ties while a third living opening stays clear; choose the low sheltered plot, not every green target."},
   {"id":"magma_the_cloth_stays_clear","description":"Reel the drying line through three marked hooks from different safe approaches while a wide worker passage remains unobstructed."},
-  {"id":"magma_the_quiet_chord","description":"Tune three mechanically distinct catches after placing sound baffles on their pictogram rests; the source is geometry and vibration cues, not hearing acuity."},
-  {"id":"magma_the_unbroken_crossing","description":"As form35, brace the high and low supports from opposite landings and move the central slab between them without blocking the marked return loop."},
-  {"id":"magma_three_cool_shelves","description":"Store heat from each of three numbered refractory jars, then park each at the matching safe shelf; never warm the seedling tray."},
-  {"id":"magma_true_the_buried_seam","description":"Draw three sample pins out in the diagrammed direction while the protected pot is behind its baffle; each pin has an independent identity."},
-  {"id":"mend_wind_loom","description":"Complete the fixed three-vane no-projectile-hit wind-loom challenge after Sky clear; retries cost nothing."},
-  {"id":"raise_amber_arch","description":"Brace the two restoration pillars in one timed trial after Core clear; retries cost nothing."},
-  {"id":"restore_canopy","description":"Restore three distinct damaged root beds; repeated healing never counts."},
-  {"id":"restore_hearth","description":"Light three distinct abandoned hearths once each, then choose to nurture Homura at the sanctuary."}
+  {"id":"magma_the_quiet_chord","description":"Tune three mechanically distinct catches after placing sound baffles on their pictogram rests; the source is geometry and vibration cues, not hearing acuity."}
 ]

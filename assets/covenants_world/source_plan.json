@@ -1,0 +1,1779 @@
+{
+  "scope": "DESIGN_ONLY_NOT_ENABLED_OR_PLAYABLE",
+  "title": "The Roads That Stay",
+  "proposed_content_revision": 9,
+  "save_wire": 5,
+  "requested_facts": [
+    "Finite 128 forms including evolutions; eight legendary families",
+    "Original five-phase world with independent Yin/Yang polarity",
+    "Evolution, useful special abilities, equipment, culturally varied towns, hinted spatial quests",
+    "Bright original pixel art with native motion, full viewport/floating HUD and hold-L selection",
+    "High-level fellowship story structure, personal promises, earned sacrifice and changed homecoming"
+  ],
+  "authoring_choices": [
+    "Two connected four-place circuits with eight different community covenants",
+    "Existing original village (area0) begins and ends this chapter",
+    "Covenant completion fulfills story; optional invitation separately grants one unique retained legendary",
+    "A promised private porch becomes a shared waiting place; no owned creature, equipment or progress is taken"
+  ],
+  "counts": {
+    "before": {
+      "enabled_forms": 120,
+      "families": 52,
+      "retained_full_route": 64,
+      "areas": 70,
+      "quests": 60,
+      "equipment": 46
+    },
+    "after": {
+      "enabled_forms": 128,
+      "families": 60,
+      "retained_full_route": 72,
+      "areas": 78,
+      "quests": 64,
+      "equipment": 48,
+      "enabled_commands": 128,
+      "learned_command_pairs": 209,
+      "evolution_edges": 68
+    },
+    "released_controller_verified_forms": 104,
+    "new_evolutions": 0,
+    "ordinary_evolution_edges_preserved": 68,
+    "roster_capacity": 160,
+    "protected_terminal_opportunities": 72,
+    "extra_copy_budget": 88,
+    "party_slots": 4,
+    "max_active_legendaries": 1,
+    "obtained_bits": 128
+  },
+  "ids": {
+    "forms": [
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128
+    ],
+    "families": [
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "commands": [
+      12,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128
+    ],
+    "quests": [
+      60,
+      61,
+      62,
+      63
+    ],
+    "areas": [
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "gear_sources": [
+      46,
+      47
+    ],
+    "gear_items": [
+      40,
+      89
+    ],
+    "ordinary_command_121_owner": 120,
+    "new_trial_bits": [],
+    "new_capability_bits": [],
+    "new_evolution_context_bits": [],
+    "new_credit_event_ids": []
+  },
+  "storage": [
+    {
+      "field": "quests.region_flags",
+      "index": 7,
+      "mask": 255,
+      "meaning": "Visited areas70..77, bit(area-70)",
+      "current_policy": "Must be zero; src/save5.c quest_fields_validate",
+      "constraints": [
+        "Any bit implies bit0, Q57 CLAIMED and Q60 objective bits1|2",
+        "Areas71..73 require Q60 CLAIMED",
+        "Areas74..77 require Q61 CLAIMED"
+      ]
+    },
+    {
+      "field": "quests.region_flags",
+      "index": 22,
+      "mask": 255,
+      "meaning": "Fulfilled covenants forms121..128, bit(form-121); durable invitation rights",
+      "current_policy": "Part of zero_bytes(region_flags+22,10)",
+      "constraints": [
+        "Each bit implies corresponding visit and preceding main quest claimed",
+        "Bits0..3 exactly equal Q61 objectives low four bits",
+        "Bits4..7 shifted down exactly equal Q62 objectives low four bits",
+        "No ownership or invitation acceptance required"
+      ]
+    },
+    {
+      "field": "quests.region_flags",
+      "index": 23,
+      "mask": 255,
+      "meaning": "Unique legendary source receipts, bit(form-121)",
+      "current_policy": "Part of zero_bytes(region_flags+22,10)",
+      "constraints": [
+        "Subset of region_flags[22]",
+        "Receipt iff exactly one retained instance of the mapped family and its obtained bit",
+        "Without receipt: no retained instance or obtained bit; seen-only permitted",
+        "No repeats, release path, replacement or auto-party eviction"
+      ]
+    },
+    {
+      "field": "quests.anchors",
+      "index": 7,
+      "mask": 3,
+      "meaning": "bit0 area70/spawn4; bit1 area74/spawn3",
+      "current_policy": "Part of zero_bytes(anchors+7,9)",
+      "constraints": [
+        "bit0 requires visit70",
+        "bit1 requires visit74 and Q61 CLAIMED"
+      ]
+    }
+  ],
+  "unallocated_remain_zero": {
+    "region_flags": [
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "anchors": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "anchors7_high_mask": 252,
+    "all_quest_variables_except_existing": [
+      3,
+      9
+    ],
+    "notes": "Only variables3/9 keep their existing meanings; allocate none. Do not fill reserve/padding, CampaignSave future flags, old history or trial words."
+  },
+  "entry": {
+    "requires": [
+      {
+        "quest": 57,
+        "state": "CLAIMED"
+      }
+    ],
+    "origin_area": 0,
+    "home_interaction": [
+      120,
+      94
+    ],
+    "home_existing_spawn": 0,
+    "fair_area": 62,
+    "fair_existing_interaction": [
+      120,
+      208
+    ],
+    "portal_area": 62,
+    "portal": [
+      416,
+      16
+    ],
+    "append_spawn": 5,
+    "append_spawn_xy": [
+      416,
+      32
+    ],
+    "destination_area": 70,
+    "destination_spawn": 0,
+    "return_rule": "Append only spawn5 to current count5; preserve original spawns0..4 and their inbound meanings. New return spawn5 requires visit70 and Q60 bits1|2 under content9 only.",
+    "preserve_original_ending_priority": true,
+    "requires_original_ending_seen": true
+  },
+  "guaranteed_supports": [
+    {
+      "family": 39,
+      "base_form": 101,
+      "allowed_forms": [
+        101,
+        102
+      ],
+      "command": 102,
+      "phase": "metal",
+      "polarity": "yin",
+      "source": "Return source1, Q47; Q51 prerequisites imply it"
+    },
+    {
+      "family": 40,
+      "base_form": 103,
+      "allowed_forms": [
+        103,
+        104
+      ],
+      "command": 104,
+      "phase": "water",
+      "polarity": "yang",
+      "source": "Return source2, Q49; Q51 prerequisites imply it"
+    },
+    {
+      "family": 41,
+      "base_form": 105,
+      "allowed_forms": [
+        105,
+        106
+      ],
+      "command": 106,
+      "phase": "wood",
+      "polarity": "yang",
+      "source": "Horizons initial1/Q54"
+    },
+    {
+      "family": 42,
+      "base_form": 107,
+      "allowed_forms": [
+        107,
+        108
+      ],
+      "command": 108,
+      "phase": "fire",
+      "polarity": "yin",
+      "source": "Horizons initial2/Q55"
+    },
+    {
+      "family": 43,
+      "base_form": 109,
+      "allowed_forms": [
+        109,
+        110
+      ],
+      "command": 110,
+      "phase": "earth",
+      "polarity": "yang",
+      "source": "Horizons initial3/Q56"
+    },
+    {
+      "family": 44,
+      "base_form": 111,
+      "allowed_forms": [
+        111,
+        112
+      ],
+      "command": 112,
+      "phase": "water",
+      "polarity": "yin",
+      "source": "Horizons initial4/Q57"
+    }
+  ],
+  "main_route": {
+    "new_optional_sources_required": 0,
+    "legendary_recruitments_required": 0,
+    "optional_evolutions_required": 0,
+    "ordinary_collection_completion_required": false,
+    "grind_required": false,
+    "weapon": "Existing starter sword; also verify starter lance and bow routes",
+    "phase_and_polarity": "Five-phase naming is cultural inspiration. Keep the original numeric relation resolver; polarity gives no damage bonus. Phase alone never implies a field capability."
+  },
+  "schema_delta": {
+    "current": "catalog.schema.json schema2 legendary_gate.required_phase_count is const5; opposite_polarity_switches minimum1; min_level required",
+    "proposal": "Introduce a new current-only heterogeneous covenant-gate definition/schema3. Preserve old schema2 and historic readers. Explicit support bindings/step prerequisites replace mandatory universal five-phase/switch counts. No player level gate. Keep form121 identity, stats, command12, learnset and ability behavior; replace its disabled 90-second arena/five_phase_shrines placeholder with authored area70 work. Retain a five-phase motif and at least two intentional opposite-polarity transitions for121 only. Schema revision is an implementation dependency, not applied here."
+  },
+  "areas": [
+    {
+      "id": 70,
+      "name": "Siltwake Steps",
+      "width": 480,
+      "height": 320,
+      "visit_byte": 7,
+      "visit_bit": 1,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            240,
+            288
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            448,
+            160
+          ]
+        },
+        {
+          "id": 2,
+          "xy": [
+            32,
+            160
+          ]
+        },
+        {
+          "id": 3,
+          "xy": [
+            240,
+            32
+          ]
+        },
+        {
+          "id": 4,
+          "xy": [
+            80,
+            272
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        296
+      ],
+      "invitation_xy": [
+        432,
+        272
+      ],
+      "static_solids": [
+        [
+          184,
+          72,
+          112,
+          144
+        ],
+        [
+          40,
+          40,
+          72,
+          24
+        ],
+        [
+          360,
+          40,
+          72,
+          24
+        ]
+      ],
+      "work_approaches": [
+        [
+          120,
+          240
+        ],
+        [
+          160,
+          112
+        ],
+        [
+          320,
+          112
+        ],
+        [
+          320,
+          240
+        ],
+        [
+          120,
+          160
+        ]
+      ],
+      "presentation": "Water-sharing terraces, reed awnings, glazed measuring stones and public benches; residents disagree over waiting versus flow. No real culture is reduced to one costume.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        []
+      ]
+    },
+    {
+      "id": 71,
+      "name": "Bent Orchard",
+      "width": 240,
+      "height": 320,
+      "visit_byte": 7,
+      "visit_bit": 2,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            24,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            208,
+            32
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        296
+      ],
+      "invitation_xy": [
+        192,
+        272
+      ],
+      "static_solids": [
+        [
+          72,
+          64,
+          96,
+          24
+        ],
+        [
+          72,
+          144,
+          96,
+          24
+        ]
+      ],
+      "work_approaches": [
+        [
+          48,
+          112
+        ],
+        [
+          192,
+          112
+        ],
+        [
+          120,
+          208
+        ]
+      ],
+      "presentation": "A staggered orchard under cloth roof ribs; growers preserve two generations of grafts.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        [],
+        [
+          [
+            88,
+            104,
+            24,
+            16
+          ]
+        ],
+        [
+          [
+            120,
+            104,
+            24,
+            16
+          ]
+        ],
+        [
+          [
+            152,
+            104,
+            24,
+            16
+          ]
+        ]
+      ]
+    },
+    {
+      "id": 72,
+      "name": "Open Kiln",
+      "width": 480,
+      "height": 160,
+      "visit_byte": 7,
+      "visit_bit": 4,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            24,
+            128
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            448,
+            128
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        136
+      ],
+      "invitation_xy": [
+        432,
+        112
+      ],
+      "static_solids": [
+        [
+          128,
+          24,
+          64,
+          56
+        ],
+        [
+          240,
+          24,
+          64,
+          56
+        ],
+        [
+          352,
+          24,
+          64,
+          56
+        ]
+      ],
+      "work_approaches": [
+        [
+          96,
+          104
+        ],
+        [
+          224,
+          104
+        ],
+        [
+          336,
+          104
+        ]
+      ],
+      "presentation": "A shared kiln with fired clay benches, repair shelves and deliberately unequal vent towers.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        []
+      ]
+    },
+    {
+      "id": 73,
+      "name": "Two-Foot Span",
+      "width": 240,
+      "height": 160,
+      "visit_byte": 7,
+      "visit_bit": 8,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            208,
+            128
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            24,
+            128
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        136
+      ],
+      "invitation_xy": [
+        192,
+        112
+      ],
+      "static_solids": [
+        [
+          80,
+          32,
+          80,
+          64
+        ]
+      ],
+      "work_approaches": [
+        [
+          48,
+          64
+        ],
+        [
+          192,
+          64
+        ],
+        [
+          120,
+          128
+        ]
+      ],
+      "presentation": "A short stone crossing whose two side galleries let walkers tend both counterweights.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        [],
+        [
+          [
+            88,
+            96,
+            16,
+            12
+          ]
+        ],
+        [
+          [
+            112,
+            96,
+            16,
+            12
+          ]
+        ],
+        [
+          [
+            136,
+            96,
+            16,
+            12
+          ]
+        ]
+      ]
+    },
+    {
+      "id": 74,
+      "name": "Hollowbell Court",
+      "width": 480,
+      "height": 320,
+      "visit_byte": 7,
+      "visit_bit": 16,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            240,
+            288
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            448,
+            160
+          ]
+        },
+        {
+          "id": 2,
+          "xy": [
+            32,
+            160
+          ]
+        },
+        {
+          "id": 3,
+          "xy": [
+            80,
+            272
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        296
+      ],
+      "invitation_xy": [
+        432,
+        272
+      ],
+      "static_solids": [
+        [
+          136,
+          48,
+          208,
+          40
+        ],
+        [
+          136,
+          88,
+          32,
+          72
+        ],
+        [
+          312,
+          88,
+          32,
+          72
+        ],
+        [
+          208,
+          184,
+          64,
+          40
+        ]
+      ],
+      "work_approaches": [
+        [
+          192,
+          112
+        ],
+        [
+          288,
+          112
+        ],
+        [
+          120,
+          240
+        ]
+      ],
+      "presentation": "A second lived-in settlement of sloping roofs, woven wind screens, scored brass and a communal repair court; names and craft habits are original.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        []
+      ]
+    },
+    {
+      "id": 75,
+      "name": "Borrowed Shade",
+      "width": 240,
+      "height": 320,
+      "visit_byte": 7,
+      "visit_bit": 32,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            24,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            208,
+            32
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        296
+      ],
+      "invitation_xy": [
+        192,
+        272
+      ],
+      "static_solids": [
+        [
+          56,
+          56,
+          40,
+          48
+        ],
+        [
+          144,
+          120,
+          40,
+          56
+        ],
+        [
+          56,
+          216,
+          64,
+          32
+        ]
+      ],
+      "work_approaches": [
+        [
+          120,
+          64
+        ],
+        [
+          112,
+          184
+        ],
+        [
+          192,
+          232
+        ]
+      ],
+      "presentation": "Seed-house terraces with overlapping shade, open shelves and a walking route visible in leaf shadows.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        []
+      ]
+    },
+    {
+      "id": 76,
+      "name": "Patient Ferry",
+      "width": 480,
+      "height": 160,
+      "visit_byte": 7,
+      "visit_bit": 64,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            24,
+            128
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            448,
+            128
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        136
+      ],
+      "invitation_xy": [
+        432,
+        112
+      ],
+      "static_solids": [
+        [
+          136,
+          24,
+          80,
+          64
+        ],
+        [
+          280,
+          72,
+          72,
+          32
+        ]
+      ],
+      "work_approaches": [
+        [
+          96,
+          96
+        ],
+        [
+          240,
+          112
+        ],
+        [
+          384,
+          120
+        ]
+      ],
+      "presentation": "A shallow cable ferry with two independently marked landing shelves and banks close enough to watch each other.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        [],
+        [
+          [
+            224,
+            48,
+            24,
+            12
+          ]
+        ],
+        [
+          [
+            248,
+            48,
+            24,
+            12
+          ]
+        ],
+        [
+          [
+            272,
+            48,
+            24,
+            12
+          ]
+        ]
+      ]
+    },
+    {
+      "id": 77,
+      "name": "Last Watch",
+      "width": 240,
+      "height": 160,
+      "visit_byte": 7,
+      "visit_bit": 128,
+      "spawns": [
+        {
+          "id": 0,
+          "xy": [
+            208,
+            128
+          ]
+        },
+        {
+          "id": 1,
+          "xy": [
+            24,
+            128
+          ]
+        }
+      ],
+      "reset_xy": [
+        48,
+        136
+      ],
+      "invitation_xy": [
+        192,
+        112
+      ],
+      "static_solids": [
+        [
+          80,
+          32,
+          80,
+          32
+        ],
+        [
+          32,
+          72,
+          24,
+          32
+        ],
+        [
+          184,
+          72,
+          24,
+          32
+        ]
+      ],
+      "work_approaches": [
+        [
+          72,
+          112
+        ],
+        [
+          120,
+          96
+        ],
+        [
+          168,
+          112
+        ]
+      ],
+      "presentation": "A low refuge around a warm open center; its walls shelter travelers without becoming a sealed fortress.",
+      "geometry_scope": "Planned half-open rectangles and radius5 center connectivity only; not generated art or renderer/cast/controller proof",
+      "safe_exits": "Outer walking perimeter remains open in every ordinary work state; no task controls a required escape portal",
+      "dynamic_solid_states": [
+        []
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "a": 62,
+      "a_portal": [
+        416,
+        16
+      ],
+      "a_spawn": 5,
+      "b": 70,
+      "b_portal": [
+        240,
+        304
+      ],
+      "b_spawn": 0,
+      "gate": "Q57 CLAIMED and Q60 bits1|2"
+    },
+    {
+      "a": 70,
+      "a_portal": [
+        464,
+        160
+      ],
+      "a_spawn": 1,
+      "b": 71,
+      "b_portal": [
+        8,
+        272
+      ],
+      "b_spawn": 0,
+      "gate": "Q60 CLAIMED"
+    },
+    {
+      "a": 71,
+      "a_portal": [
+        224,
+        32
+      ],
+      "a_spawn": 1,
+      "b": 72,
+      "b_portal": [
+        8,
+        128
+      ],
+      "b_spawn": 0,
+      "gate": "Q60 CLAIMED"
+    },
+    {
+      "a": 72,
+      "a_portal": [
+        464,
+        128
+      ],
+      "a_spawn": 1,
+      "b": 73,
+      "b_portal": [
+        224,
+        128
+      ],
+      "b_spawn": 0,
+      "gate": "Q60 CLAIMED"
+    },
+    {
+      "a": 73,
+      "a_portal": [
+        8,
+        128
+      ],
+      "a_spawn": 1,
+      "b": 70,
+      "b_portal": [
+        16,
+        160
+      ],
+      "b_spawn": 2,
+      "gate": "Q60 CLAIMED"
+    },
+    {
+      "a": 70,
+      "a_portal": [
+        240,
+        16
+      ],
+      "a_spawn": 3,
+      "b": 74,
+      "b_portal": [
+        240,
+        304
+      ],
+      "b_spawn": 0,
+      "gate": "Q61 CLAIMED"
+    },
+    {
+      "a": 74,
+      "a_portal": [
+        464,
+        160
+      ],
+      "a_spawn": 1,
+      "b": 75,
+      "b_portal": [
+        8,
+        272
+      ],
+      "b_spawn": 0,
+      "gate": "Q61 CLAIMED"
+    },
+    {
+      "a": 75,
+      "a_portal": [
+        224,
+        32
+      ],
+      "a_spawn": 1,
+      "b": 76,
+      "b_portal": [
+        8,
+        128
+      ],
+      "b_spawn": 0,
+      "gate": "Q61 CLAIMED"
+    },
+    {
+      "a": 76,
+      "a_portal": [
+        464,
+        128
+      ],
+      "a_spawn": 1,
+      "b": 77,
+      "b_portal": [
+        224,
+        128
+      ],
+      "b_spawn": 0,
+      "gate": "Q61 CLAIMED"
+    },
+    {
+      "a": 77,
+      "a_portal": [
+        8,
+        128
+      ],
+      "a_spawn": 1,
+      "b": 74,
+      "b_portal": [
+        16,
+        160
+      ],
+      "b_spawn": 2,
+      "gate": "Q61 CLAIMED"
+    }
+  ],
+  "rests": [
+    {
+      "area": 70,
+      "spawn": 4,
+      "xy": [
+        80,
+        272
+      ],
+      "anchor_index": 7,
+      "anchor_bit": 1,
+      "visit_bit": 1
+    },
+    {
+      "area": 74,
+      "spawn": 3,
+      "xy": [
+        80,
+        272
+      ],
+      "anchor_index": 7,
+      "anchor_bit": 2,
+      "visit_bit": 16
+    }
+  ],
+  "quests": [
+    {
+      "id": 60,
+      "name": "A Place to Return",
+      "requires_quests": [
+        57
+      ],
+      "offer_area": 0,
+      "claim_area": 70,
+      "mask": 7,
+      "gear_source": null,
+      "objectives": [
+        {
+          "bit": 1,
+          "area": 0,
+          "requires_bits": 0,
+          "action": "Discuss finishing the quiet porch with the original elder; agree to carry the fair household letter"
+        },
+        {
+          "bit": 2,
+          "area": 62,
+          "requires_bits": 1,
+          "action": "Read the makers exchange reply after Q57; the fair keeper opens the marked northeast footpath"
+        },
+        {
+          "bit": 4,
+          "area": 70,
+          "requires_bits": 3,
+          "action": "Meet both water stewards and set the public rest bench by hand; no legendary invitation"
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "name": "The Low Road Keeps Us",
+      "requires_quests": [
+        60
+      ],
+      "offer_area": 70,
+      "claim_area": 70,
+      "mask": 15,
+      "gear_source": 46,
+      "objectives": [
+        {
+          "bit": 1,
+          "area": 70,
+          "requires_bits": 0,
+          "covenant": 121
+        },
+        {
+          "bit": 2,
+          "area": 71,
+          "requires_bits": 0,
+          "covenant": 122
+        },
+        {
+          "bit": 4,
+          "area": 72,
+          "requires_bits": 0,
+          "covenant": 123
+        },
+        {
+          "bit": 8,
+          "area": 73,
+          "requires_bits": 0,
+          "covenant": 124
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Leave a Place",
+      "requires_quests": [
+        61
+      ],
+      "offer_area": 74,
+      "claim_area": 74,
+      "mask": 15,
+      "gear_source": null,
+      "objectives": [
+        {
+          "bit": 1,
+          "area": 74,
+          "requires_bits": 0,
+          "covenant": 125
+        },
+        {
+          "bit": 2,
+          "area": 75,
+          "requires_bits": 0,
+          "covenant": 126
+        },
+        {
+          "bit": 4,
+          "area": 76,
+          "requires_bits": 0,
+          "covenant": 127
+        },
+        {
+          "bit": 8,
+          "area": 77,
+          "requires_bits": 0,
+          "covenant": 128
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "name": "A Door Both Ways",
+      "requires_quests": [
+        61,
+        62
+      ],
+      "offer_area": 70,
+      "claim_area": 0,
+      "mask": 7,
+      "gear_source": 47,
+      "objectives": [
+        {
+          "bit": 1,
+          "area": 70,
+          "requires_bits": 0,
+          "action": "Read the concrete shared-porch promise; explicitly accept making the home porch a public waiting place instead of the proposed private retreat"
+        },
+        {
+          "bit": 2,
+          "area": 62,
+          "requires_bits": 1,
+          "action": "Meet the returning group at area62 northeast entry and walk it across the fair with a fresh local attempt; optional rest stops, no race, no death or permanent failure"
+        },
+        {
+          "bit": 4,
+          "area": 0,
+          "requires_bits": 3,
+          "action": "Return by established routes and speak to the elder; place the exchanged marks on the shared porch and listen to each companions chosen role"
+        }
+      ]
+    }
+  ],
+  "gear": [
+    {
+      "source_id": 46,
+      "item_id": 40,
+      "name": "Wayfarer Coat",
+      "slot": "body",
+      "quest": 61,
+      "claim_area": 70,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 1,
+        "hp_q4": 16,
+        "speed_q8_delta": -4,
+        "roll_reduction": 0,
+        "power_reduction": 0,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "role": "Optional survival-for-speed sidegrade, never a route permission"
+    },
+    {
+      "source_id": 47,
+      "item_id": 89,
+      "name": "Porchlight Ring",
+      "slot": "ring",
+      "quest": 63,
+      "claim_area": 0,
+      "stats": {
+        "attack_q4": 0,
+        "defense_q4": 0,
+        "hp_q4": 0,
+        "speed_q8_delta": -4,
+        "roll_reduction": 1,
+        "power_reduction": 4,
+        "reach_px": 0,
+        "stagger": 0
+      },
+      "role": "Optional recovery sidegrade; no special ending or recruitment power"
+    }
+  ],
+  "transaction_policy": {
+    "event_queue_max": 4,
+    "preflight_records_per_step_max": 8,
+    "admission_records_per_step_max": 4,
+    "new_full_state_clones": 0,
+    "second_legend_with_vacant_party_slot": "Admit to storage; never auto-fill a second legendary into party",
+    "source_and_covenant_operations_separate": true,
+    "credit_event_ids_authoritative": false,
+    "cross_scene_cast_or_escort_proof": false
+  },
+  "resource_budget": {
+    "measurement_status": "Unaccepted diagnostic, not an accepted Horizons release",
+    "baseline_rom_bytes": 15270948,
+    "baseline_ewram_occupied_bytes": 60728,
+    "baseline_iwram_bytes": 27128,
+    "rom_ceiling_bytes": 33554432,
+    "ewram_ceiling_bytes": 262144,
+    "iwram_code_floor": "0x03007000",
+    "proposed_incremental_rom_bytes": 2097152,
+    "proposed_incremental_ewram_bytes": 2048,
+    "proposed_incremental_iwram_bytes": 0,
+    "rom_shares": {
+      "room_actor_art": 1300000,
+      "creature_portrait_cast_art": 196608,
+      "localized_ui_dialogue": 196608,
+      "orchestration_policies": 131072,
+      "unspent_integration_margin": 272864
+    },
+    "ewram_shares": {
+      "world_state": 512,
+      "typed_job_cursor": 256,
+      "single_legend_effect": 512,
+      "npc_dynamic_movement": 256,
+      "ui_cursor": 256,
+      "margin": 256
+    },
+    "stack_reservations": {
+      "system": 3840,
+      "irq": 160,
+      "svc": 64
+    },
+    "new_timers_dma_irqs_pcm_buffers": 0,
+    "native_frame_headroom_available_for_spending": false,
+    "active_update_and_flip_required": true,
+    "global_enemy_max_unchanged": 6,
+    "new_authored_enemy_peak": 3,
+    "new_projectile_peak": 3,
+    "field_target_max": 8,
+    "moving_solid_max": 1,
+    "effect_parts_max": 3
+  },
+  "local_fair_escort": {
+    "area": 62,
+    "requires_q63_bits": 1,
+    "completion_q63_bit": 2,
+    "start_from_fresh_local_attempt": true,
+    "centerline": [
+      [
+        416,
+        32
+      ],
+      [
+        336,
+        24
+      ],
+      [
+        336,
+        112
+      ],
+      [
+        384,
+        112
+      ],
+      [
+        384,
+        192
+      ],
+      [
+        272,
+        192
+      ],
+      [
+        272,
+        208
+      ],
+      [
+        120,
+        240
+      ]
+    ],
+    "route_scope": "Proposed read-only static-foot connectivity; dynamic actors and controller proof still required"
+  },
+  "station_plan": [
+    {
+      "area": 70,
+      "stations": [
+        {
+          "key": "reed_strainer",
+          "approach": [
+            120,
+            240
+          ],
+          "command": 106
+        },
+        {
+          "key": "warm_seam",
+          "approach": [
+            160,
+            112
+          ],
+          "command": 108
+        },
+        {
+          "key": "stone_stop",
+          "approach": [
+            320,
+            112
+          ],
+          "command": 110
+        },
+        {
+          "key": "west_pin",
+          "approach": [
+            320,
+            240
+          ],
+          "command": 102
+        },
+        {
+          "key": "east_runnel",
+          "approach": [
+            120,
+            160
+          ],
+          "command": 104
+        }
+      ],
+      "inspection": [
+        "west_level_mark",
+        "east_level_mark"
+      ],
+      "party_reassignment": "Allowed at local rest between settled ordinary stations; active proofs revoked"
+    },
+    {
+      "area": 71,
+      "stations": [
+        {
+          "key": "arbor_pull",
+          "approach": [
+            48,
+            112
+          ],
+          "command": 106
+        },
+        {
+          "key": "outer_trench",
+          "approach": [
+            192,
+            112
+          ],
+          "command": 104
+        }
+      ],
+      "inspection": [
+        "two_shade_bands",
+        "grower_inside_bend"
+      ]
+    },
+    {
+      "area": 72,
+      "stations": [
+        {
+          "key": "hot_plate_and_seam",
+          "approach": [
+            96,
+            104
+          ],
+          "command": 108
+        },
+        {
+          "key": "cooling_pin",
+          "approach": [
+            224,
+            104
+          ],
+          "command": 102
+        }
+      ],
+      "inspection": [
+        "three_cooled_bowls",
+        "exhaust_open"
+      ]
+    },
+    {
+      "area": 73,
+      "stations": [
+        {
+          "key": "near_weight",
+          "approach": [
+            48,
+            64
+          ],
+          "command": 110
+        },
+        {
+          "key": "far_tie",
+          "approach": [
+            192,
+            64
+          ],
+          "command": 106
+        }
+      ],
+      "inspection": [
+        "first_pause",
+        "second_pause",
+        "resident_safe_far_platform"
+      ]
+    },
+    {
+      "area": 74,
+      "stations": [
+        {
+          "key": "outer_screen",
+          "approach": [
+            192,
+            112
+          ],
+          "command": 106
+        },
+        {
+          "key": "quiet_pin",
+          "approach": [
+            288,
+            112
+          ],
+          "command": 102
+        }
+      ],
+      "inspection": [
+        "three_sound_wedges",
+        "public_door_gap"
+      ]
+    },
+    {
+      "area": 75,
+      "stations": [
+        {
+          "key": "lower_hem",
+          "approach": [
+            120,
+            64
+          ],
+          "command": 106
+        },
+        {
+          "key": "water_lens",
+          "approach": [
+            112,
+            184
+          ],
+          "command": 112
+        }
+      ],
+      "inspection": [
+        "bed_shade_overlap",
+        "middle_gap",
+        "keeper_traversal"
+      ]
+    },
+    {
+      "area": 76,
+      "stations": [
+        {
+          "key": "dock_ballast",
+          "approach": [
+            96,
+            96
+          ],
+          "command": 110
+        },
+        {
+          "key": "side_wake",
+          "approach": [
+            240,
+            112
+          ],
+          "command": 104
+        },
+        {
+          "key": "far_signal",
+          "approach": [
+            384,
+            120
+          ],
+          "command": 104
+        }
+      ],
+      "inspection": [
+        "boarding_consent",
+        "two_stops",
+        "far_rope_open"
+      ]
+    },
+    {
+      "area": 77,
+      "stations": [
+        {
+          "key": "refuge_warm_seam",
+          "approach": [
+            72,
+            112
+          ],
+          "command": 108
+        },
+        {
+          "key": "outside_brace",
+          "approach": [
+            120,
+            96
+          ],
+          "command": 110
+        },
+        {
+          "key": "quiet_door",
+          "approach": [
+            168,
+            112
+          ],
+          "command": 102
+        }
+      ],
+      "inspection": [
+        "three_waves",
+        "open_center",
+        "watch_transfer"
+      ]
+    }
+  ],
+  "station_geometry_limit": "Approaches are specific coarse-layout commitments, not yet field-hit origins. Implementer must attach visible-pixel targets and prove actual renderer rays, facings, ranges and both-beat feasibility before authoring acceptance.",
+  "legendary_field_exhibits": [
+    {
+      "form": 121,
+      "command": 12,
+      "area": 70,
+      "start_xy": [
+        120,
+        160
+      ],
+      "tag": "covenant_split_weir",
+      "choice": "Hold water above either completed branch, then release toward the dry stepping shelf you want to reach.",
+      "benefit": "A temporary dry inner crossing; the permanent outer path remains usable."
+    },
+    {
+      "form": 122,
+      "command": 122,
+      "area": 71,
+      "start_xy": [
+        48,
+        112
+      ],
+      "tag": "covenant_bent_root_pair",
+      "choice": "Choose the corner of an L-shaped root support before unfolding it.",
+      "benefit": "A shorter inner orchard walk; roots cannot overwrite beds or a required exit."
+    },
+    {
+      "form": 123,
+      "command": 123,
+      "area": 72,
+      "start_xy": [
+        96,
+        104
+      ],
+      "tag": "covenant_banked_kiln_seam",
+      "choice": "Bank at the visible plate, then release into the vent seam in the same cast.",
+      "benefit": "Suppress a local decorative steam curtain briefly to inspect the keepers repair marks; no new item/history reward."
+    },
+    {
+      "form": 124,
+      "command": 124,
+      "area": 73,
+      "start_xy": [
+        48,
+        64
+      ],
+      "tag": "covenant_tilting_slab",
+      "choice": "Brace from the side opposite the marked load and wait until it clears.",
+      "benefit": "Keep the inner inspection ledge level for an optional shorter crossing; all main paths remain."
+    },
+    {
+      "form": 125,
+      "command": 125,
+      "area": 74,
+      "start_xy": [
+        192,
+        112
+      ],
+      "tag": "covenant_acoustic_plate",
+      "choice": "Aim through the open acoustic gap rather than the nearest blocked face.",
+      "benefit": "Reveal the courts quiet-walk outline without waking the alcove; helpful route feedback, no quest/token reuse."
+    },
+    {
+      "form": 126,
+      "command": 126,
+      "area": 75,
+      "start_xy": [
+        120,
+        64
+      ],
+      "tag": "covenant_leaf_canopy",
+      "choice": "Face the canopy toward one bed while preserving the walking/light gap.",
+      "benefit": "Open an optional sheltered inner path through the completed seed house."
+    },
+    {
+      "form": 127,
+      "command": 127,
+      "area": 76,
+      "start_xy": [
+        240,
+        112
+      ],
+      "tag": "covenant_light_ferry_stop",
+      "choice": "Set side ballast, steady the unloaded ferry, then release it to its marked stop.",
+      "benefit": "Hold a stationary docking plank as a short crossing; do not carry the player on moving geometry."
+    },
+    {
+      "form": 128,
+      "command": 128,
+      "area": 77,
+      "start_xy": [
+        120,
+        96
+      ],
+      "tag": "covenant_open_warm_seam",
+      "choice": "Keep the warm seam active while deliberately leaving the shelter mouth open.",
+      "benefit": "Shelter the inner waiting patch from optional ordinary gust particles; no health grant, new rest anchor or boss-hazard cancellation."
+    }
+  ],
+  "exhibit_policy": "After that covenant is fulfilled and its companion is owned, an explicit Practice prompt repurposes its existing settled work props into this optional local use. New exact tags/command proof, no receipts/gear/XP/quest bits, no cross-scene state, no obstacle on permanent escape routes. Preserve completed scene on exit/reset. Reuse the same bounded targets and single dynamic object budget; actual art/collision/field-hit feasibility remains unverified."
+}

@@ -1,3 +1,5 @@
+ 0,0,0,0,0,92,44,44,44,44,92,0,0,0,0,0,0,0,0,0,0,92,92,92,92,92,92,0,0,0,0,0,
+ 0,0,0,0,0,92,92,92,92,92,92,0,0,0,0,0,0,0,33,33,33,92,92,92,92,92,92,33,33,33,0,0,
  0,0,33,33,33,92,92,92,92,92,92,33,33,33,0,0,0,0,33,33,33,33,33,33,33,33,33,33,33,33,0,0,
  0,0,33,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  },
@@ -313,7 +315,7 @@
  },
 };
 const SouthArtRoom south_art_rooms[SOUTH_ART_ROOM_COUNT] = {
- {480,320,south_background_sunlace_anchorage,south_background_sunlace_anchorage_odd,south_sunlace_anchorage_solids,18,south_sunlace_anchorage_collision_rows,south_sunlace_anchorage_collision_bands},
+ {480,320,south_background_sunlace_anchorage,south_background_sunlace_anchorage_odd,south_sunlace_anchorage_solids,19,south_sunlace_anchorage_collision_rows,south_sunlace_anchorage_collision_bands},
  {480,320,south_background_frondshore_commons,south_background_frondshore_commons_odd,south_frondshore_commons_solids,15,south_frondshore_commons_collision_rows,south_frondshore_commons_collision_bands},
  {240,160,south_background_awning_loft,0,south_awning_loft_solids,6,south_awning_loft_collision_rows,south_awning_loft_collision_bands},
  {240,160,south_background_chalkspring_hollow,0,south_chalkspring_hollow_solids,5,south_chalkspring_hollow_collision_rows,south_chalkspring_hollow_collision_bands},

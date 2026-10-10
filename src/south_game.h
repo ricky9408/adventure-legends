@@ -22,6 +22,16 @@ typedef struct SouthEnemySpawn { short x,y; unsigned char hp,kind,phase; } South
 unsigned south_game_enemy_spawns(unsigned area,const SouthEnemySpawn **spawns);
 int south_game_is_room(unsigned area);
 int south_game_enter(unsigned area,unsigned spawn);
+/* Engine entry: sync chapter and perform any expedition reset first; request
+ * before changing room/scene. 0=reject,2=queued,1=one-use ready token armed.
+ * Warm EVENT_PENDING pages, prepare fixed bounded slices, restore source state,
+ * commit through the job's own synchronous engine call. The adapter consumes an exact
+ * full-state proof after only idempotent engine setup. Direct entry stays strict. */
+int south_game_request_enter(unsigned area,unsigned spawn);
+int south_game_enter_pending(void);
+unsigned south_game_prepare_enter(void);
+int south_game_commit_enter(void);
+void south_game_cancel_enter(void);
 int south_game_solid(int x,int y);
 int south_game_interact(void);
 /* 0: no field target; 1: success; 2: rejected target, no cooldown/resource. */
@@ -55,4 +65,11 @@ void region_form_actor(unsigned form,int x,int y);
 void game_health_fill(void);
 unsigned game_weapon_class(void);
 void game_north_hurt(unsigned damage_q4);
+/* Engine-private typed quest action queue. Seal once after the action, freeze
+ * input, prepare bounded frames, restore PLAY and commit once. */
+int south_game_quest_pending(void);
+int south_game_quest_seal(void);
+unsigned south_game_quest_prepare(void);
+int south_game_quest_commit(void);
+void south_game_quest_cancel(void);
 #endif

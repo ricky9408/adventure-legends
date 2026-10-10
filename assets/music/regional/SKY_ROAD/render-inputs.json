@@ -1,0 +1,91 @@
+{
+  "palette": [
+    {
+      "name": "clear ridgewind reed",
+      "gain": 0.66,
+      "attack": 0.0065,
+      "release": 0.06,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.07
+        ],
+        [
+          3,
+          0.18
+        ],
+        [
+          5,
+          0.048
+        ],
+        [
+          7,
+          0.015
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 5.4,
+      "vibrato_cents": 4.5
+    },
+    {
+      "name": "quick ridge triangle bass",
+      "gain": 0.36,
+      "attack": 0.0045,
+      "release": 0.05,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.08
+        ],
+        [
+          5,
+          0.029
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "light sail-string pluck",
+      "gain": 0.255,
+      "attack": 0.0027,
+      "release": 0.042,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.21
+        ],
+        [
+          3,
+          0.095
+        ],
+        [
+          4,
+          0.029
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "sky_road-gba-16384-s8.raw": "0fc1343e9d72b3b962fd076ed1cf634b35b388f132a17fe770524230956adb7a"
+  }
+}

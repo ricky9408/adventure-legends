@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
 """Deterministic data-only equipment catalog. No runtime/content fallback IDs."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path(__file__).with_name('catalog.json')
 TARGET = ROOT / 'src/equipment_data.c'
+RELEASED = SOURCE.with_name('released-v6.json')
+RELEASED_SHA256 = '9aa8152c04060bc023803cf3adb7f1424fab0da2e5b0dc564f3935527fde4db4'
 # Persistent source order: never insert into the published sources 0..18.
 LEGACY_IDS = [1, 2, 9, 10, 17, 18, 33, 34, 49, 50, 65, 81, 82, 3, 11, 19, 35, 51, 83]
 SOUTHERN_IDS = [4, 12, 36, 52, 66, 84]
 MAGMA_IDS = [20, 37, 53, 67, 85, 5]
 UNDERWATER_IDS = [6, 13, 38, 54, 68, 86]
-IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS + UNDERWATER_IDS
+RETURN_IDS = [21, 39, 55, 69, 87]
+HORIZONS_IDS = [7, 14, 56, 88]
+COVENANT_IDS = [40, 89]
+RELEASED_V7 = SOURCE.with_name('released-v7.json')
+RELEASED_V7_SHA256 = '8f0741e4b24469a7444e9bf62476b1d53d27c587df6cb98b875ef80257d853ab'
+IDS = LEGACY_IDS + SOUTHERN_IDS + MAGMA_IDS + UNDERWATER_IDS + RETURN_IDS + HORIZONS_IDS + COVENANT_IDS
+HORIZONS_CATALOG_SHA256 = 'da7acb332f10967d9fbf10bf2c75b5670025c0b88d94053a35c2e2f0a3a4d62a'
 SLOTS = ['weapon', 'body', 'boots', 'belt', 'ring']
 STATS = ['attack_q4', 'defense_q4', 'hp_q4', 'speed_q8_delta',
          'roll_reduction', 'power_reduction', 'reach_px', 'stagger']
@@ -21,6 +30,27 @@ STATS = ['attack_q4', 'defense_q4', 'hp_q4', 'speed_q8_delta',
 def generate():
     data = json.loads(SOURCE.read_text())
     items, weapons = data['items'], data['weapon_classes']
+    blob = RELEASED.read_bytes()
+    assert hashlib.sha256(blob).hexdigest() == RELEASED_SHA256, 'released equipment snapshot changed'
+    old = json.loads(blob)
+    assert items[:len(old['items'])] == old['items'], 'released equipment definitions changed'
+    assert data['reward_sources'][:len(old['reward_sources'])] == old['reward_sources'], 'released equipment source mappings changed'
+    assert all(data[key] == value for key, value in old.items()
+               if key not in ('items', 'reward_sources')), 'released equipment rules changed'
+    v7_blob = RELEASED_V7.read_bytes()
+    assert hashlib.sha256(v7_blob).hexdigest() == RELEASED_V7_SHA256, 'released revision7 equipment snapshot changed'
+    v7 = json.loads(v7_blob)
+    assert items[:42] == v7['items'], 'released revision7 equipment definitions changed'
+    assert data['reward_sources'][:42] == v7['reward_sources'], 'released revision7 equipment source mappings changed'
+    assert all(data[key] == value for key, value in v7.items()
+               if key not in ('items', 'reward_sources')), 'released revision7 equipment rules changed'
+    prior = dict(data, items=items[:46], reward_sources=data['reward_sources'][:46])
+    canonical = json.dumps(prior, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
+    assert hashlib.sha256(canonical).hexdigest() == HORIZONS_CATALOG_SHA256, 'accepted revision8 equipment definitions or rules changed'
+    for item, name, slot, bonuses in zip(items[46:], ['Wayfarer Coat', 'Porchlight Ring'],
+            ['body', 'ring'], [[0,1,16,-4,0,0,0,0], [0,0,0,-4,1,4,0,0]]):
+        assert item['name'] == name and item['slot'] == slot, 'Covenants equipment identity changed'
+        assert [item['stats'].get(k) for k in STATS] == bonuses, 'Covenants equipment sidegrade changed'
     assert [x['id'] for x in items] == IDS
     assert [x['id'] for x in weapons] == [1, 2, 3]
     assert data['reward_sources'] == [dict(source_id=i, item_id=n) for i, n in enumerate(IDS)]

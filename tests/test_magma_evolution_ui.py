@@ -28,7 +28,7 @@ TMP = tempfile.TemporaryDirectory(prefix="magma-evolution-ui-")
 OUT = Path(TMP.name)
 CC = os.environ.get("HOST_CC", "cc")
 FLAGS = ["-std=c99", "-O1", "-g", "-Wall", "-Wextra", "-Werror", "-fPIC",
-         "-DSAVE4_HOST_TEST", "-DSAVE5_HOST_TEST", "-Isrc"]
+         "-DSAVE4_HOST_TEST", "-DSAVE5_HOST_TEST", "-Isrc", "-ffunction-sections", "-fdata-sections"]
 if os.environ.get("MAGMA_EVOLUTION_SANITIZERS"):
     FLAGS += ["-fsanitize=" + os.environ["MAGMA_EVOLUTION_SANITIZERS"], "-fno-omit-frame-pointer"]
 # Function instrumentation covers production core and Save5 objects. It counts
@@ -36,11 +36,11 @@ if os.environ.get("MAGMA_EVOLUTION_SANITIZERS"):
 for module in ("creatures", "save5"):
     subprocess.run([CC, *FLAGS, "-finstrument-functions", "-fno-inline", "-c",
                     f"src/{module}.c", "-o", str(OUT / f"{module}.o")], cwd=ROOT, check=True)
-MODULES = ["progression", "creature_data", "equipment", "equipment_data", "save4",
+MODULES = ["horizons_quests", "horizons_game", "horizons_art", "horizons_powers", "horizons_power_art", "horizons_creature_art", "return_quests", "return_game", "return_art", "return_powers", "return_power_art", "return_legacy_powers", "return_creature_art", "progression", "creature_data", "equipment", "equipment_data", "save4",
            "underwater_quests", "magma_quests", "southern_quests", "northern_quests", "regional_quests",
            "campaign_rules", "progression_events", "evolution_art", "regional_creature_art",
            "northern_creature_art", "southern_creature_art", "magma_creature_art", "underwater_creature_art", "ui", "assets"]
-subprocess.run([CC, *FLAGS, "-shared", "-Wl,-Bsymbolic", "tests/magma_evolution_ui_host.c",
+subprocess.run([CC, *FLAGS, "-shared", "-Wl,-Bsymbolic,--gc-sections,--no-undefined,--version-script=tests/evolution_host_exports.txt", "tests/magma_evolution_ui_host.c",
                 str(OUT / "creatures.o"), str(OUT / "save5.o"), *[f"src/{m}.c" for m in MODULES],
                 "-o", str(OUT / "test.so")], cwd=ROOT, check=True)
 L = C.CDLL(str(OUT / "test.so"))

@@ -1,0 +1,58 @@
+{
+  "$catalog_source": 1,
+  "sections": {
+    "$metadata": [
+      "source/metadata.json"
+    ],
+    "families": [
+      "source/families-01.json",
+      "source/families-02.json",
+      "source/families-03.json"
+    ],
+    "slots": [
+      "source/slots-01.json",
+      "source/slots-02.json",
+      "source/slots-03.json",
+      "source/slots-04.json",
+      "source/slots-05.json",
+      "source/slots-06.json"
+    ],
+    "abilities": [
+      "source/abilities-01.json",
+      "source/abilities-02.json",
+      "source/abilities-03.json",
+      "source/abilities-04.json",
+      "source/abilities-05.json"
+    ],
+    "forms": [
+      "source/forms-01.json",
+      "source/forms-02.json",
+      "source/forms-03.json",
+      "source/forms-04.json",
+      "source/forms-05.json"
+    ],
+    "evolutions": [
+      "source/evolutions-01.json",
+      "source/evolutions-02.json",
+      "source/evolutions-03.json"
+    ],
+    "gates": [
+      "source/gates-01.json",
+      "source/gates-02.json",
+      "source/gates-03.json"
+    ],
+    "trials": [
+      "source/trials-01.json",
+      "source/trials-02.json",
+      "source/trials-03.json"
+    ],
+    "legendary_gates": [
+      "source/legendary_gates-01.json"
+    ],
+    "trial_bindings": [
+      "source/trial_bindings-01.json",
+      "source/trial_bindings-02.json",
+      "source/trial_bindings-03.json"
+    ]
+  }
+}

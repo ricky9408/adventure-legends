@@ -15,7 +15,10 @@ GENERATION=list(zip(PHASES,PHASES[1:]+PHASES[:1]))
 CONTROL=[('wood','earth'),('earth','water'),('water','fire'),('fire','metal'),('metal','wood')]
 from catalog_policy import (LEGACY_FIELD_CAPABILITIES, FIELD_CAPABILITIES,
                             REVISION_POLICY, TRIAL_POLICY, TRIAL_PREREQUISITES, GATE_MASKS,
-                            CURRENT_POLARITY_OVERRIDES)
+                            CURRENT_POLARITY_OVERRIDES, HORIZONS_SIGNATURES,
+                            HORIZONS_INHERITED_COMMANDS, HORIZONS_EDGES,
+                            COVENANT_FORMS, COVENANT_SIGNATURES, COVENANT_SUPPORT_COMMANDS,
+                            COVENANT_GATE_NAMES, COVENANT_PRESERVATION_SHA256)
 KEYWORDS={'$schema','$id','$defs','title','$ref','type','enum','const','properties','required','additionalProperties','items','minItems','maxItems','uniqueItems','minimum','maximum','minLength','maxLength','pattern'}
 
 from catalog_source import CatalogError, load_json
@@ -53,9 +56,9 @@ def structure(value,schema,root,path='$'):
 
 def validate(data,identity=None,schema=None):
     version=data.get('schema_version') if isinstance(data,dict) else None
-    if type(version) is not int or version not in (1,2):
+    if type(version) is not int or version not in (1,2,3):
         return ['schema_version: unsupported authoring revision']
-    schema=schema or load_json(ROOT/('catalog.v1.schema.json' if version==1 else 'catalog.schema.json'))
+    schema=schema or load_json(ROOT/{1:'catalog.v1.schema.json',2:'catalog.schema.json',3:'catalog.v3.schema.json'}[version])
     errors=structure(data,schema,schema)
     if errors:return sorted(errors)
     def check(test,msg):
@@ -137,7 +140,7 @@ def validate(data,identity=None,schema=None):
     check(data['implemented_legacy_form_ids']==[1,4,7,10],'legacy: exact implemented list required')
     # Trial identity is family-local. Numeric bits may repeat across families only.
     bindings={}; family_keys=set(); family_bits=set(); allowed_masks={}
-    if version==2:
+    if version>=2:
         authored_bindings=data['trial_bindings']
         check(authored_bindings==sorted(authored_bindings,key=lambda x:(x['family_id'],x['local_trial_id'])), 'trial_bindings: family/key order required')
         for t in authored_bindings:
@@ -172,7 +175,7 @@ def validate(data,identity=None,schema=None):
         if a in S and b in S:
             check(S[a]['family_id']==S[b]['family_id'],f'evolution {a}->{b}: cross-family edge')
             check(S[b]['tier']==S[a]['tier']+1,f'evolution {a}->{b}: tier must increase by one')
-        if version==2:
+        if version>=2:
             t=bindings.get(e['required_trial'])
             check(t is not None,f'evolution {a}->{b}: missing family-qualified trial binding')
             if t is not None and a in S:
@@ -203,11 +206,25 @@ def validate(data,identity=None,schema=None):
     for g in G.values():
         for requirement in g['requires']:check(requirement in G,f'gate {g["id"]}: unknown prerequisite');gate_edges.append([requirement,g['id']])
     acyclic(G,gate_edges,'gates')
-    legends=index(data['legendary_gates'],'legendary_gates','form_id')
+    legend_section='covenant_gates' if version==3 else 'legendary_gates'
+    legends=index(data[legend_section],legend_section,'form_id')
     for id_,rule in legends.items():
         check(id_ in F and id_ in S and S[id_]['rarity']=='legendary',f'legendary gate {id_}: missing designed legendary')
         check(rule['gate'] in G and rule['trial'] in T,f'legendary gate {id_}: unknown gate or trial')
         if id_ in F:check(F[id_]['acquisition'].get('gate')==rule['gate'],f'legendary gate {id_}: acquisition mismatch')
+        if version==3:
+            i=id_-121
+            expected=dict(form_id=id_,family_id=f'F{id_-68:03d}',gate=COVENANT_GATE_NAMES[i],
+                trial=COVENANT_GATE_NAMES[i],area=70+i,source_namespace='CovenantRequest.UNIQUE_INVITE',
+                source_token=i+1,covenant_index=22,covenant_bit=1<<i,receipt_index=23,receipt_bit=1<<i,
+                objective_quest=61 if i<4 else 62,objective_bit=1<<(i%4),requires_quest_claim=60 if i<4 else 61,
+                grant_level=36,grant_bond=60,grant_trial_flags=0,required_support_commands=COVENANT_SUPPORT_COMMANDS[i],
+                serial_station_reassignment=True,required_phase_count=5 if i==0 else 0,
+                opposite_polarity_switches=2 if i==0 else 0,repeatable=False,requires_confirmation=True)
+            check(rule==expected,f'covenant gate {id_}: exact source, objective and support contract required')
+            check(rule['family_id']==S[id_]['family_id'],f'covenant gate {id_}: family mismatch')
+            check(G.get(rule['gate'],{}).get('requires')==['covenants_lower_ready' if i<4 else 'covenants_upper_ready'],
+                  f'covenant gate {id_}: prerequisite mismatch')
     for id_ in F:
         if id_ in S and S[id_]['rarity']=='legendary':check(id_ in legends,f'form {id_}: legendary gate required')
     B=data['budget'];L=data['limits'];offsets=B['save_bank_offsets'];size=B['save_bank_bytes']
@@ -232,8 +249,10 @@ def validate_enabled(data, enabled):
     if type(revision) is not int or revision not in REVISION_POLICY:
         return ['enabled: unsupported content revision']
     policy=REVISION_POLICY[revision]
-    if revision>=4 and data['schema_version']!=2:
-        errors.append('enabled: current content revision requires authoring schema 2')
+    if revision>=4 and data['schema_version'] not in (2,3):
+        errors.append('enabled: current content revision requires authoring schema 2 or 3')
+    if revision==9 and data['schema_version']!=3:
+        errors.append('enabled: Covenants requires authoring schema 3')
     for key,expected in [('enabled_form_ids',policy['forms']),('enabled_evolutions',policy['edges']),('enabled_ability_ids',policy['abilities'])]:
         if json.dumps(enabled.get(key))!=json.dumps(expected):
             errors.append(f'enabled: {key} differs from reviewed core table order')
@@ -245,7 +264,48 @@ def validate_enabled(data, enabled):
         errors.append(f'enabled: expected exactly {policy["learns"]} learnset entries')
     if sorted({l['ability_id'] for f in selected for l in f['learnset']})!=sorted(policy['abilities']):
         errors.append('enabled: learned commands differ from reviewed core')
-    edges=[[e['from'],e['to']] for e in data['evolutions'] if e['from'] in policy['forms'] or e['to'] in policy['forms']]
+    if revision>=9:
+        for id_,signature in COVENANT_SIGNATURES.items():
+            f=forms.get(id_)
+            learns=([dict(level=1,ability_id=9),dict(level=30,ability_id=12)] if id_==121
+                    else [dict(level=1,ability_id=signature)])
+            if not f or f['signature_ability']!=signature or f['learnset']!=learns:
+                errors.append(f'enabled: Covenant form {id_} command ownership differs')
+        preserved={key:data[key] for key in ('families','evolutions','trial_bindings','field_capabilities')}
+        # Authored edge order is deliberately independent of ROM manifest order.
+        preserved['evolutions']=sorted(data['evolutions'],key=lambda e:(e['from'],e['to']))
+        preserved.update(forms=[f for f in data['forms'] if f['id']<=120],
+            abilities=[a for a in data['abilities'] if a['id']<=121],stilltide=forms.get(121),
+            gates=[g for g in data['gates'] if g['id'] not in COVENANT_GATE_NAMES and not g['id'].startswith('covenants_')],
+            trials=[t for t in data['trials'] if t['id'] not in COVENANT_GATE_NAMES])
+        for key,value in preserved.items():
+            digest=hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+            if digest!=COVENANT_PRESERVATION_SHA256[key]:
+                errors.append(f'enabled: accepted Shared Horizons or disabled Stilltide {key} changed')
+    if revision>=8:
+        for f in selected:
+            signature=HORIZONS_SIGNATURES.get(f['id'])
+            if signature is not None:
+                inherited=HORIZONS_INHERITED_COMMANDS.get(f['id'])
+                learns=([{'level':1,'ability_id':inherited},
+                         {'level':34,'ability_id':signature}] if inherited is not None
+                        else [{'level':1,'ability_id':signature}])
+                if f['signature_ability']!=signature or f['learnset']!=learns:
+                    errors.append(f'enabled: Shared Horizons form {f["id"]} command ownership differs')
+            elif any(l['ability_id'] in HORIZONS_SIGNATURES.values() for l in f['learnset']):
+                errors.append(f'enabled: Shared Horizons command assigned to prior form {f["id"]}')
+        for e in data['evolutions']:
+            if [e['from'],e['to']] in HORIZONS_EDGES and (
+                    e['min_level']!=34 or e['min_bond']!=60 or
+                    e['required_gate']!='horizons_ready'):
+                errors.append('enabled: Shared Horizons evolution floors or gate differ')
+    # A current append may start at a released evolved form. Older manifests
+    # ignore only explicitly reviewed future edges, never arbitrary extras.
+    future_edges={tuple(edge) for rev,p in REVISION_POLICY.items() if rev>revision
+                  for edge in p['edges'] if edge not in policy['edges']}
+    edges=[[e['from'],e['to']] for e in data['evolutions']
+           if (e['from'] in policy['forms'] or e['to'] in policy['forms'])
+           and (e['from'],e['to']) not in future_edges]
     if sorted(edges)!=sorted(policy['edges']):errors.append('enabled: evolution graph differs from reviewed core')
     # Generating current ROMs uses reviewed wire maps, not arbitrary authored bits.
     for e in data['evolutions']:
@@ -254,10 +314,12 @@ def validate_enabled(data, enabled):
             trial=TRIAL_POLICY.get(e['required_trial'])
             if trial is None or e['from'] not in trial[4] or trial[3]>revision:
                 errors.append('enabled: unreviewed family-qualified evolution trial')
-    if data['schema_version']==2:
+    if data['schema_version']>=2:
         enabled_families={s['family_id'] for s in data['slots'] if s['id'] in policy['forms']}
         expected={name:value for name,value in TRIAL_POLICY.items() if value[3]<=revision}
-        actual={t['trial_id']:t for t in data['trial_bindings'] if t['family_id'] in enabled_families}
+        actual={t['trial_id']:t for t in data['trial_bindings']
+                if t['family_id'] in enabled_families
+                and TRIAL_POLICY.get(t['trial_id'], ('',0,0,0,()))[3]<=revision}
         if set(actual)!=set(expected):errors.append('enabled: trial bindings differ from reviewed revision')
         for name,value in expected.items():
             t=actual.get(name)

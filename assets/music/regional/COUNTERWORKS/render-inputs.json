@@ -1,0 +1,99 @@
+{
+  "palette": [
+    {
+      "name": "restrained brass-reed beacon",
+      "gain": 0.66,
+      "attack": 0.013,
+      "release": 0.078,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.18
+        ],
+        [
+          3,
+          0.17
+        ],
+        [
+          4,
+          0.055
+        ],
+        [
+          5,
+          0.045
+        ],
+        [
+          7,
+          0.015
+        ]
+      ],
+      "vibrato_delay": 0.3,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.7,
+      "vibrato_cents": 2.8
+    },
+    {
+      "name": "rounded counterweight bass",
+      "gain": 0.37,
+      "attack": 0.008,
+      "release": 0.063,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.035
+        ],
+        [
+          3,
+          -0.075
+        ],
+        [
+          5,
+          0.028
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "muted brass tine",
+      "gain": 0.245,
+      "attack": 0.003,
+      "release": 0.052,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.2
+        ],
+        [
+          3,
+          0.075
+        ],
+        [
+          4,
+          0.024
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "the_beacon_counterweight-gba-16384-s8.raw": "267decca5b382d2e594f853c64b64bc67e2893d828b65ab1e0fbf1bfb9a1677c"
+  }
+}

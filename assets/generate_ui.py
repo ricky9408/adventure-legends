@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Rasterize the original Japanese UI to compact monochrome glyph masks."""
 from PIL import Image, ImageDraw, ImageFont
+from gbj_font import render_text
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
@@ -64,24 +65,29 @@ texts.update({'NEW_CONFIRM':'新しい冒険を始めますか？','NEW_WARNING'
 texts.update({'E_SOUTH_MORE': '南のふたりと契約しよう', 'E_WISH_SOUTH_0': '願い：三つの根をつなぐ', 'E_WISH_SOUTH_1': '願い：砂の水路をたどる', 'E_WISH_SOUTH_2': '願い：三つの光を届ける', 'E_WISH_SOUTH_3': '願い：干し布を整える', 'E_WISH_SOUTH_4': '願い：日陰の輪を守る', 'E_WISH_SOUTH_5': '願い：三つの留め金を開く', 'E_WISH_SOUTH_6': '願い：葉陰の道を結ぶ', 'E_WISH_SOUTH_7': '願い：小川の曇りをほどく', 'E_WISH_SOUTH_8': '願い：布越しの灯をつなぐ', 'E_WISH_SOUTH_9': '願い：三つの針を合わせる'})
 texts.update({'ST_FERRY_WAIT_A':'南の島へは、この船で。','ST_FERRY_WAIT_B':'港の灯を直したら、声をかけて。'})
 texts.update({'SP_AIM_CLEAR':'狙いを変えてみよう','SP_OTHER_SIDE':'R もう一度で反対側へ','SP_SECOND_TARGET':'別の相手を向いて、もう一度R'})
-for extra in ('assets/magma_ui.json','assets/magma_region/dialogue.json','assets/underwater_ui.json','assets/underwater_region/dialogue_ja.json'):
+for extra in ('assets/magma_ui.json','assets/magma_region/dialogue.json','assets/underwater_ui.json','assets/underwater_region/dialogue_ja.json','assets/return_ui.json','assets/return_region/dialogue_ja.json','assets/horizons_region/dialogue_ja.json','assets/horizons_ui.json','assets/covenants_ui_texts.json','assets/covenants_power_ui.json'):
     additions=ROOT/extra
     if additions.exists():
         for key,value in json.loads(additions.read_text()).items():
             assert key not in texts or texts[key]==value,key
             texts[key]=value
+# Intentional feedback overrides preserve old enum positions.
+for extra in ('economy_ui.json','feedback_engine_ui.json','player_feedback_ui.json','player_feedback_copy.json','journey_guidance_ui.json'):
+    additions=ROOT/'assets'/extra
+    if additions.exists():texts.update(json.loads(additions.read_text()))
 # Both authoring languages retain identical Underwater message identifiers.
 uw_english=ROOT/'assets/underwater_region/dialogue.json'
 uw_japanese=ROOT/'assets/underwater_region/dialogue_ja.json'
 if uw_english.exists() or uw_japanese.exists():
     assert uw_english.exists() and uw_japanese.exists(), 'Underwater localization is incomplete'
     assert set(json.loads(uw_english.read_text()))==set(json.loads(uw_japanese.read_text())), 'Underwater message keys drifted'
+texts.update({'FONT_CREDIT':'FONT: GeeBee / GBJ','FONT_URL':'GeeBee https://geebeegb.itch.io/gbj'})
 items=[]
 for name,text in texts.items():
-    f=small if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL') else font
-    box=f.getbbox(text); w=box[2]+1; h=15 if f==font else 10
+    h=10 if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL','FONT_CREDIT','FONT_URL') else 15
+    im=render_text(text,h,slim=h==10)
+    w=im.width
     assert w<=214,(name,text,w)
-    im=Image.new('1',(w,h),0); ImageDraw.Draw(im).text((0,-(box[1] if f==small else 2)),text,font=f,fill=1,stroke_width=0)
     variants=[]
     for align in (0,1):
         runs=[]
@@ -126,5 +132,17 @@ folder=ROOT/'src/ui_data';folder.mkdir(exist_ok=True)
 for old in folder.glob('part_*.inc'):old.unlink()
 for i,part in enumerate(parts):(folder/f'part_{i:03}.inc').write_text(part)
 (ROOT/'src/ui.c').write_text('#include "ui.h"\n/* Generated text masks; edit assets/generate_ui.py. */\n'+''.join(f'#include "ui_data/part_{i:03}.inc"\n' for i in range(len(parts))))
-(ROOT/'assets/ui_texts.json').write_text(json.dumps(texts,ensure_ascii=False,indent=2)+'\n')
+# Preserve the released metadata dictionary under its75KB artifact limit.
+# Runtime enum/raster order above remains a single append-only namespace.
+legacy={k:v for k,v in texts.items() if not k.startswith(('RT_','E_RT_','RP_','HZ_','E_HZ_','HP_','CV_','E_CV_','CP_','PF_','FB_','EC_','JG_'))}
+horizons={k:v for k,v in texts.items() if k.startswith(('HZ_','E_HZ_','HP_'))}
+returns={k:v for k,v in texts.items() if k.startswith(('RT_','E_RT_','RP_'))}
+(ROOT/'assets/ui_texts.json').write_text(json.dumps(legacy,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'assets/ui_texts_return.json').write_text(json.dumps(returns,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'assets/ui_texts_horizons.json').write_text(json.dumps(horizons,ensure_ascii=False,indent=2)+'\n')
+covenants={k:v for k,v in texts.items() if k.startswith(('CV_','E_CV_','CP_'))}
+(ROOT/'assets/ui_texts_covenants.json').write_text(json.dumps(covenants,ensure_ascii=False,indent=2)+'\n')
+feedback={k:v for k,v in texts.items() if k.startswith(('PF_','FB_','EC_'))}
+(ROOT/'assets/ui_texts_player_feedback.json').write_text(json.dumps(feedback,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'assets/ui_texts_journey_guidance.json').write_text(json.dumps({k:v for k,v in texts.items() if k.startswith('JG_')},ensure_ascii=False,indent=2)+'\n')
 print('Generated',len(items),'Japanese paired-span text masks')

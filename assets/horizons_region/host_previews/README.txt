@@ -1,0 +1,1 @@
+Synthetic host previews of generated background plus actual world bitmap overlays and original actor pixels. No player, gameplay HUD or native acquisition evidence is fabricated. Pixel assertions verify the gallery dry opening remains blank and bar/dot symbols match the positive clue.

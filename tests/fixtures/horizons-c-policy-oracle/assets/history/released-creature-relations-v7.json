@@ -1,0 +1,16 @@
+{
+  "snapshot_schema": 1,
+  "content_revision": 7,
+  "original_formatted_sha256": "7dce9352cdcf12c3edce66b5539663619b33444aac526283025b4121d6a2f9f4",
+  "semantic_sha256": "9ce1943b2673789d68371732e98a0bda859c6101dc832a27b84033e7d6bfe832",
+  "parts": [
+    {
+      "file": "released-creature-relations-v7-core.json",
+      "sha256": "71d59030cf3e9163b1df6451eea58a07da433fe97a52ee5a9242ebef98ed2813"
+    },
+    {
+      "file": "released-creature-relations-v7-edges.json",
+      "sha256": "10784162ab0a830662dcaab0b8195c27f0099e7c2f2999584a51e5739c631df5"
+    }
+  ]
+}

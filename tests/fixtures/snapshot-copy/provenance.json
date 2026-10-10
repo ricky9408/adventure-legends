@@ -1,0 +1,8 @@
+{
+  "scope": "Synthetic valid full 160-companion/48-gear room43 state; never controller-earned acquisition or a user save. Retained as a byte-exact host snapshot/ownership/dedup/capacity fixture.",
+  "source": "I3 full-capacity room44 controller diagnostic, synthetic-full160-gear48-room43.sav",
+  "sha256": "35390f2c949d75cd5dcaff6eb264bb493e869bfd7afb914c4caac124eb402494",
+  "bytes": 32768,
+  "historical_inputs": "The other 12 fixtures are existing SHA-authenticated revision1..9 SRAMs; paths and pins are resolved within this checkout.",
+  "required_external_paths": []
+}

@@ -12,6 +12,7 @@ static const unsigned old_forms[] = {1,2,4,5,7,8,10,11,13,14,16};
 static const unsigned old_trials[] = {1,1,2,2,4,4,8,8,16,16,0};
 static const unsigned southern_forms[] = {25,26,28,29,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94};
 static const unsigned magma_forms[] = {31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,95,96,97,98,99,100};
+static const unsigned return_forms[] = {3,6,9,12,15,17,18,21,24,27,30,101,102,103,104};
 static const unsigned new_forms[] = {19,20,22,23,73,74,75,76,77,78};
 static void check_trials(CreatureInstance *c, unsigned trial) {
     static const unsigned flags[] = {0,1,2,4,8,16,32,64,128,256,512,1024,
@@ -26,7 +27,16 @@ static void check_trials(CreatureInstance *c, unsigned trial) {
         if (flags[i] <= 65535) {
             probe = original;
             probe.trial_flags = (CreatureU16)flags[i];
-            assert(creatures_instance_validate(&probe) == (int)(!flags[i] || flags[i] == trial));
+            {
+                unsigned return_mask = (c->form_id == 16) ? 1024u : trial | 1024u;
+                int expected = !flags[i] || flags[i] == trial;
+                if (c->form_id <= 23 && (c->form_id == 16 || trial))
+                    expected |= flags[i] == return_mask;
+                assert(creatures_instance_validate(&probe) == expected);
+                /* Historical revisions retain the old mask contract exactly. */
+                if (trial != 32768u) assert(creatures_instance_validate_revision(&probe, 6) ==
+                       (int)(!flags[i] || flags[i] == trial));
+            }
         }
     }
     if (trial) {
@@ -54,7 +64,8 @@ int main(void) {
     assert(sizeof(CreatureInstance) == 24 && sizeof(CreatureRoster) == 4140);
     assert(offsetof(CreatureInstance, trial_flags) == 14);
     assert(offsetof(CreatureInstance, equipped) == 16);
-    assert(!creatures_ability(0) && !creatures_ability(12));
+    assert(!creatures_ability(0));
+    assert((creatures_ability(12)!=0)==(CREATURE_CONTENT_REVISION>=9));
     assert(!creatures_ability(256) && !creatures_ability(0xffffffffu));
     assert(!creatures_family_trial(0) && !creatures_family_trial(128));
     assert(!creatures_family_trial(256) && !creatures_family_trial(0xffffffffu));
@@ -66,8 +77,8 @@ int main(void) {
     }
 #ifdef SPARSE_FIXTURE
     for (i = 13; i <= 22; ++i) assert(creatures_ability(i)->id == i);
-    for (i = 23; i <= 90; ++i) assert(creatures_ability(i)->id == i);
-    assert(!creatures_ability(91) && !creatures_ability(255));
+    for (i = 23; i <= (CREATURE_CONTENT_REVISION>=9?128u:121u); ++i) assert(creatures_ability(i)->id == i);
+    assert(!creatures_ability(CREATURE_CONTENT_REVISION>=9?129u:122u) && !creatures_ability(255));
     for (i = 0; i < sizeof(new_forms) / sizeof(new_forms[0]); ++i) {
         unsigned trial = i < 8 ? 32u << (i / 2) : LAST_TRIAL;
         CreatureInstance before;
@@ -107,6 +118,8 @@ int main(void) {
         for (j = 0; j < sizeof(new_forms) / sizeof(new_forms[0]); ++j) enabled |= new_forms[j] == i;
         for (j = 0; j < sizeof(southern_forms) / sizeof(southern_forms[0]); ++j) enabled |= southern_forms[j] == i;
         for (j = 0; j < sizeof(magma_forms) / sizeof(magma_forms[0]); ++j) enabled |= magma_forms[j] == i;
+        enabled |= i >= 105 && i <= (CREATURE_CONTENT_REVISION>=9?128u:120u);
+        for (j = 0; j < sizeof(return_forms) / sizeof(return_forms[0]); ++j) enabled |= return_forms[j] == i;
 #endif
         assert((creatures_form(i) != 0) == (int)enabled);
     }

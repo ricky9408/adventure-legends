@@ -10,6 +10,7 @@ native controller gameplay nor hardware timing/pixel correctness evidence.
 import ctypes as C
 import hashlib
 import json
+import re
 import os
 from pathlib import Path
 import shlex
@@ -30,6 +31,10 @@ MODULES=['game','assets','ui','world','campaign_art','campaign_rules','save4',
  'northern_quests','magma_game','magma_art','magma_quests','magma_creature_art',
  'magma_powers','magma_power_art','underwater_game','underwater_quests',
  'underwater_art','underwater_powers','underwater_power_art','underwater_creature_art']
+# Full current-engine probes link actual Return dependencies; old snapshots
+# that predate Return retain their original module closure.
+if (ROOT/'src/return_game.c').is_file():
+ MODULES += ['return_game','return_art','return_quests','return_creature_art','return_powers','return_power_art','return_legacy_powers']
 RESULT={'scope':'Synthetic host state and input-edge integration; real production functions with entry instrumentation',
  'native_controller_gameplay':False,'native_hardware_timing':False,'emulator_ram_injection':False,
  'dma_emulated':False,'compiler':os.environ.get('HOST_CC','cc'),'checks':[],'source_sha256':{}}
@@ -70,7 +75,10 @@ for name in ('save5_load','save5_store','save5_validate'):
 L.save5_test_fail_after.argtypes=[C.c_int]
 S=Save.in_dll(L,'adventure_save');SRAM=(C.c_ubyte*32768).in_dll(L,'save5_test_sram')
 OLD=(C.c_ubyte*256).in_dll(L,'save4_test_sram');OLD[:]=b'\xff'*256
-CACHE=(C.c_uint*64).in_dll(L,'cache_fields')
+CACHE_FIELD_COUNT=int(re.search(r'#define\s+CACHE_FIELDS\s+(\d+)',(ROOT/'src/game.c').read_text())[1])
+assert CACHE_FIELD_COUNT in (32,34),'Retained indices require an explicit adapter for any other layout'
+CACHE=(C.c_uint*(2*CACHE_FIELD_COUNT)).in_dll(L,'cache_fields')
+RESULT['cache_fields_per_page']=CACHE_FIELD_COUNT
 VALID=(C.c_int*2).in_dll(L,'cache_valid')
 class Enemy(C.Structure):_fields_=[(n,C.c_int)for n in ('x','y','hp','flash','kind')]
 class Shot(C.Structure):_fields_=[(n,C.c_int)for n in ('x','y','dx','dy','life','owner')]

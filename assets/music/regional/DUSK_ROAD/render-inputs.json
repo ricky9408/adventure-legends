@@ -1,0 +1,91 @@
+{
+  "palette": [
+    {
+      "name": "lamplit soft oboe",
+      "gain": 0.67,
+      "attack": 0.015,
+      "release": 0.1,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.04
+        ],
+        [
+          3,
+          0.185
+        ],
+        [
+          5,
+          0.055
+        ],
+        [
+          7,
+          0.012
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.4,
+      "vibrato_cents": 3.5
+    },
+    {
+      "name": "warm evening triangle",
+      "gain": 0.35,
+      "attack": 0.01,
+      "release": 0.095,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.058
+        ],
+        [
+          5,
+          0.019
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "quiet lamplit lute",
+      "gain": 0.25,
+      "attack": 0.004,
+      "release": 0.06,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.16
+        ],
+        [
+          3,
+          0.075
+        ],
+        [
+          4,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "dusk_road-gba-16384-s8.raw": "233c3f31dadb6ac838c7ef56519f901797092d30ffb16cbccf1990d7cb3dba7b"
+  }
+}

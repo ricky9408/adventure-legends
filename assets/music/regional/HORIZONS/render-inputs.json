@@ -1,0 +1,83 @@
+{
+  "palette": [
+    {
+      "name": "low gentle traveler reed",
+      "gain": 0.64,
+      "attack": 0.013,
+      "release": 0.085,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.055
+        ],
+        [
+          3,
+          0.085
+        ],
+        [
+          5,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.6,
+      "vibrato_cents": 3.2
+    },
+    {
+      "name": "soft communal triangle bass",
+      "gain": 0.34,
+      "attack": 0.01,
+      "release": 0.08,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.048
+        ],
+        [
+          5,
+          0.015
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "pianissimo traveler pluck",
+      "gain": 0.19,
+      "attack": 0.0045,
+      "release": 0.045,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.09
+        ],
+        [
+          3,
+          0.025
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "room_for_another_traveler-gba-16384-s8.raw": "72dbe8d77a9bdc50e16d55d138faa6d6b88698b8b1fbf77706db95278f11abe4"
+  }
+}

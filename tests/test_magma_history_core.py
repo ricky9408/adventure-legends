@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Historical validation is independent of changed current authored relations."""
-import ctypes as C, hashlib, itertools, json, random, subprocess, tempfile, unittest
+import ctypes as C, hashlib, itertools, json, random, re, subprocess, tempfile, unittest
 from pathlib import Path
 from test_save5 import ROOT, Instance, Roster
+from test_creature_sparse import edit_array
 POLICY=json.loads((ROOT/'assets/history/creatures-v1-v4.json').read_text())['forms']
 LOOKUP={f['id']:f for f in POLICY}
 
@@ -25,7 +26,12 @@ class HistoricalCoreTests(unittest.TestCase):
         data=(ROOT/'src/creature_data.c').read_text()
         mutated=data.replace('    {1, 1},','    {1, 23},',1)
         # Removing a CURRENT form-index row is also irrelevant to past policy.
-        broken=data.replace('0, 1, 2, 0, 3, 4, 0, 5, 6, 0, 7, 8, 0, 9, 10, 0,','0, 0, 2, 0, 3, 4, 0, 5, 6, 0, 7, 8, 0, 9, 10, 0,',1)
+        def remove_form1(body):
+            values=[int(x) for x in re.findall(r'\d+',body)]
+            assert len(values)==129 and values[1]==1
+            values[1]=0
+            return '    '+', '.join(map(str,values))+','
+        broken=edit_array(data,'creature_form_index',remove_form1)
         assert data!=mutated and data!=broken
         for name,text in [('normal',data),('command-removed',mutated),('form-index-removed',broken)]:
             source=p/(name+'.c');source.write_text(text);so=p/(name+'.so')

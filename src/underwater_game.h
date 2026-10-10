@@ -19,6 +19,8 @@ int underwater_game_is_room(unsigned area);
 unsigned underwater_game_spawn_count(unsigned area);
 int underwater_game_spawn(unsigned area,unsigned spawn,int*x,int*y);
 int underwater_game_can_enter(unsigned area);
+/* Returns1 for the guardian return it owns, otherwise0 for ordinary entry. */
+int underwater_game_road_departure(unsigned area,unsigned spawn);
 int underwater_game_enter(unsigned area,unsigned spawn);
 /* Call before any engine room/checkpoint mutation:0deny,1ready,2queued.
  * A new visit is committed while the old scene/checkpoint remains intact. */

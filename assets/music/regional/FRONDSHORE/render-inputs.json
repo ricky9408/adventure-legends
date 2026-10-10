@@ -1,0 +1,87 @@
+{
+  "palette": [
+    {
+      "name": "shaded bamboo flute",
+      "gain": 0.67,
+      "attack": 0.013,
+      "release": 0.09,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.025
+        ],
+        [
+          3,
+          0.115
+        ],
+        [
+          5,
+          0.022
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.8,
+      "vibrato_cents": 4.0
+    },
+    {
+      "name": "soft shore triangle bass",
+      "gain": 0.35,
+      "attack": 0.007,
+      "release": 0.075,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          3,
+          -0.065
+        ],
+        [
+          5,
+          0.016
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "quiet bamboo pluck",
+      "gain": 0.245,
+      "attack": 0.004,
+      "release": 0.053,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.17
+        ],
+        [
+          3,
+          0.04
+        ],
+        [
+          4,
+          0.015
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "frondshore-gba-16384-s8.raw": "755eaa7e34767a881a2e4408b1ca5f8b580c72dc6abb162cfb0497d6b1417518"
+  }
+}

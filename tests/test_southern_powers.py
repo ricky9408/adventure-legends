@@ -13,7 +13,7 @@ OUT = ROOT / 'build' / 'southern-powers-host'
 OUT.mkdir(parents=True, exist_ok=True)
 SOURCES = ['tests/southern_powers_native.c', 'src/southern_powers.c', 'src/southern_power_art.c', 'src/northern_powers.c',
            'src/northern_power_art.c', 'src/advanced_powers.c',
-           'src/regional_powers.c', 'src/gear_runtime.c', 'tests/legacy_magma_hooks.c', 'tests/legacy_underwater_hooks.c', 'src/weapon_actions.c',
+           'src/regional_powers.c', 'src/gear_runtime.c', 'tests/legacy_feedback_hooks.c', 'tests/legacy_return_hooks.c', 'tests/legacy_magma_hooks.c', 'tests/legacy_underwater_hooks.c', 'src/weapon_actions.c',
            'src/combat_rules.c', 'src/equipment.c', 'src/equipment_data.c',
            'src/creatures.c', 'src/creature_data.c', 'src/assets.c']
 for name, flags in [('strict', []), ('sanitized', ['-fsanitize=address,undefined',

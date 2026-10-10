@@ -73,7 +73,7 @@ class NorthernArt(unittest.TestCase):
      lo,hi=key[i*2:i*2+2];self.assertLess(lo,hi);self.assertGreater(lo,last);self.assertGreaterEqual(lo,0);self.assertLessEqual(hi,r['width']);last=hi
      rebuilt[y*r['width']+lo:y*r['width']+hi]=bytes([1])*(hi-lo)
    self.assertEqual(rebuilt,expected,r['key']);self.assertEqual(len(unique),r['collision_lookup']['unique_bands'])
-  self.assertEqual(LAYOUT['generated']['collision_lookup_bytes'],4014)
+  self.assertEqual(LAYOUT['generated']['collision_lookup_bytes'],2*sum(len(v) for v in arrays.values()))
  def test_japanese_ui_width_and_keys(self):
   f=ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',12,index=0)
   for k,v in json.loads((OUT/'ui_additions.json').read_text()).items():self.assertLessEqual(f.getbbox(v)[2]+1,214,(k,v))

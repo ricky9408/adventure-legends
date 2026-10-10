@@ -1,6 +1,7 @@
 /* Nacreway: original world, reversible acoustic/ballast puzzles and sixteen
  * same-individual field trials. Durable changes use underwater_quests only. */
 #include "underwater_game.h"
+#include "connected_road_region.h"
 #include "magma_game.h"
 #include "underwater_art.h"
 #include "underwater_quests.h"
@@ -76,7 +77,7 @@ static unsigned party_signature(void){const CreatureRoster*r=&adventure_save.ros
 static void clear_trial(void){unsigned i,old=projection;if(projection)projection=(unsigned char)(underwater_game_is_room((unsigned)room)&&underwater_puzzle_solid(&underwater_game_puzzle,(unsigned)room,px,py)?2:0);if(old!=projection)underwater_powers_geometry_changed();underwater_game_trial.index=255;underwater_game_trial.instance_id=0;underwater_game_trial.generation=0;underwater_game_trial.slot=255;for(i=0;i<4;i++)underwater_game_trial.setting[i]=0;underwater_game_trial.casts=underwater_game_trial.walk=underwater_game_trial.order=underwater_game_trial.failed=0;}
 static void invalidate_actions(void){unsigned i;for(i=0;i<4;i++)action_token[i]=0;cast_id=cast_form=cast_generation=cast_command=0;field_hits=action_hits=0;}
 void underwater_puzzle_reset(UnderwaterPuzzle*p,unsigned a){unsigned char*z=(unsigned char*)p;unsigned i;for(i=0;i<sizeof(*p);i++)z[i]=0;p->mode=(unsigned char)a;}
-COLLISION_HOT int underwater_game_geometry_solid(unsigned a,int x,int y){const UnderwaterArtRoom*r;const unsigned short*b;unsigned n,i;if(!underwater_game_is_room(a))return 1;r=&underwater_art_rooms[a-46];if(x<5||y<5||x>r->width-6||y>r->height-6)return 1;b=r->collision_bands+r->collision_rows[y];n=*b++;for(i=0;i<n;i++,b+=2)if(x>=b[0]&&x<b[1])return 1;return 0;}
+COLLISION_HOT int underwater_game_geometry_solid(unsigned a,int x,int y){const UnderwaterArtRoom*r;const unsigned short*b;unsigned n,i;if(!underwater_game_is_room(a))return 1;{int seam=road_region_point(a,x,y);if(seam>=0)return seam;}r=&underwater_art_rooms[a-46];if(x<5||y<5||x>r->width-6||y>r->height-6)return 1;b=r->collision_bands+r->collision_rows[y];n=*b++;for(i=0;i<n;i++,b+=2)if(x>=b[0]&&x<b[1])return 1;return 0;}
 COLLISION_HOT int underwater_puzzle_solid(const UnderwaterPuzzle*p,unsigned a,int x,int y){if(underwater_game_geometry_solid(a,x,y))return 1;
  if(a==50)return p->ballast?hit(x,y,100,48,32,12):hit(x,y,132,80,40,12);
  if(a==51)return p->ballast?hit(x,y,272,128,24,16):hit(x,y,208,128,64,16);
@@ -99,6 +100,7 @@ static int clear_box_overlaps(int x0,int y0,int x1,int y1,int bx,int by,int w,in
 COLLISION_HOT int underwater_game_clear_box(int x0,int y0,int x1,int y1){
  const UnderwaterArtRoom*r;const unsigned short*previous=0;unsigned a=(unsigned)room;int y;
  if(!underwater_game_is_room(a)||x0>x1||y0>y1)return 0;
+ if(road_region_box_added(a,x0,y0,x1,y1))return 0;
  r=&underwater_art_rooms[a-46];
  if(x0<5||y0<5||x1>r->width-6||y1>r->height-6)return 0;
  for(y=y0;y<=y1;y++){const unsigned short*b=r->collision_bands+r->collision_rows[y];unsigned n,i;
@@ -142,6 +144,7 @@ static COLLISION_HOT unsigned ray_span(UnderwaterRayWorld*c,int x,int y){const u
 }
 COLLISION_HOT int underwater_game_supercover(int x,int y,int tx,int ty){UnderwaterRayWorld context;unsigned span;int ax,ay,sx,sy,e;
  if(!underwater_game_is_room((unsigned)room))return -1;
+ {int seam=road_region_ray((unsigned)room,x,y,tx,ty,underwater_game_solid);if(seam>=0)return seam;}
  if((unsigned)x>1023u||(unsigned)y>1023u||(unsigned)tx>1023u||(unsigned)ty>1023u)return 0;
  ax=tx-x;ay=ty-y;sx=ax<0?-1:1;sy=ay<0?-1:1;if(ax<0)ax=-ax;if(ay<0)ay=-ay;
  if(ax+ay>160||underwater_game_solid(x,y)||underwater_game_solid(tx,ty))return 0;
@@ -168,6 +171,14 @@ int underwater_game_take_transition(unsigned*a,unsigned*s){if(!transition_ready)
 COLD int underwater_game_enter(unsigned a,unsigned s){int x,y;if(!underwater_game_spawn(a,s,&x,&y)||!underwater_can_enter(&adventure_save,a)||!(adventure_save.quests.region_flags[4]&(1u<<(a-46))))return 0;if(s==2&&(a==46||a==47)&&!(adventure_save.quests.anchors[4]&(1u<<(a-46))))return 0;underwater_game_cancel_event();room=(int)a;checkpoint_spawn=(int)s;px=x;py=y;reset_scene();adventure_save.campaign.room=(Save4U8)a;adventure_save.campaign.spawn=(Save4U8)s;if(done(40)&&(adventure_save.quests.objectives[45]&1)){if(a==46&&route_stage==4){route_stage=5;objective(45,2);}else if(a==46&&route_stage!=5)route_stage=1;else if(a==48&&route_stage==1)route_stage=2;else if(a==49&&route_stage==2)route_stage=3;else if(a==48&&route_stage==3)route_stage=4;else if(a!=46&&a!=48&&a!=49)route_stage=0;}if(a>=50)offer(40);dirty=1;persist();return 1;}
 unsigned underwater_game_enemy_spawns(unsigned a,const UnderwaterEnemySpawn**out){static const UnderwaterEnemySpawn commons[4]={{96,176,5,0,0},{304,264,5,0,1},{432,112,5,2,3},{304,80,5,0,4}},promenade[2]={{320,272,5,0,2},{416,176,5,0,3}},vestibule[1]={{200,32,4,0,2}},stacks[2]={{64,112,5,0,3},{424,208,5,2,1}},listening[1]={{200,32,4,0,4}},court[2]={{32,40,4,0,2},{208,40,4,0,0}};const UnderwaterEnemySpawn*p=a==47?commons:a==48?promenade:a==50?vestibule:a==51?stacks:a==52?listening:a==53?court:0;if(out)*out=p;return a==47?4:a==48||a==51||a==53?2:a==50||a==52?1:0;}
 static COLD int door(unsigned a,unsigned s){if(event_count){transition_area=(unsigned char)a;transition_spawn=(unsigned char)s;transition_ready=2;return 1;}if(!underwater_can_enter(&adventure_save,a)){if(!door_notice){say(TX_UW_LOCKED,TX_UW_LOCKEDB);door_notice=40;}return 1;}persist();enter_room((int)a,(int)s);return 1;}
+/* The physical court return preserves the same queued story operation as the
+ * old portal. The engine binds its live road landing before this call; door()
+ * waits for those intents and lets the normal event callback perform entry. */
+COLD int underwater_game_road_departure(unsigned a,unsigned s){
+ if(room!=53||a!=52||s!=1||underwater_game_guardian_stage!=4)return 0;
+ if(game_state!=PLAY||event_count)return 1;
+ offer(45);objective(45,1);persist();return door(a,s);
+}
 /* Kept for older engine bridge callers; rest now uses the ordinary intent job. */
 int underwater_game_save_prepare_pending(void){return 0;}
 int underwater_game_prepare_save(void){return 0;}
@@ -268,7 +279,7 @@ COLD int underwater_game_interact(void){if(!underwater_game_is_room((unsigned)ro
  if(room==53){
   if(close(176,80)){underwater_game_puzzle.aux=1;changed();say(TX_UW_MEMORY,TX_UW_MEMORYB);return 1;}
   if(close(120,112)){if(underwater_game_guardian_stage==0&&underwater_game_puzzle.echo&&underwater_game_puzzle.ballast&&underwater_game_puzzle.aux){underwater_game_guardian_stage=1;underwater_game_guardian_ticks=72;guardian_side=(unsigned char)(px>120);changed();toast(TX_UW_GUARDIAN_WAKE);}else say(TX_UW_COURT,TX_UW_COURTB);return 1;}
-  if(close(208,112)&&underwater_game_guardian_stage==4){offer(45);objective(45,1);persist();return door(46,1);}
+  if(!road_region_managed(53,46)&&close(208,112)&&underwater_game_guardian_stage==4){offer(45);objective(45,1);persist();return door(46,1);}
  }
  /* General signs give the next readable clue; no invisible range pickup. */
  return 0;
@@ -296,14 +307,14 @@ COLD void underwater_game_tick(void){int x,y;if(!underwater_game_is_room((unsign
   if(room==53&&underwater_game_guardian_stage>0&&underwater_game_guardian_stage<3){if(underwater_game_guardian_ticks)underwater_game_guardian_ticks--;if(underwater_game_guardian_stage==1&&!underwater_game_guardian_ticks){underwater_game_guardian_stage=2;underwater_game_guardian_ticks=36;guardian_hurt=0;changed();}else if(underwater_game_guardian_stage==2){int sy=80, sx=guardian_side?24:88;if(!guardian_hurt&&px>=sx&&px<=sx+128&&py>=sy&&py<=sy+24){guardian_hurt=1;game_north_hurt(16);if(game_state!=PLAY)return;}changed();if(!underwater_game_guardian_ticks){underwater_game_guardian_stage=3;changed();toast(TX_UW_JOINT_OPEN);}}}
  }
  persist();if(transition_lock||game_state!=PLAY)return;
- if(room==46){if(py>=304&&ab(px-240)<=16&&(keys&DOWN)){enter_room(38,4);return;}if(px>=464&&ab(py-160)<=16&&(keys&RIGHT)){door(47,0);return;}if(py<=16&&ab(px-240)<=16&&(keys&UP)){door(48,0);return;}}
- else if(room==47){if(py>=304&&ab(px-240)<=16&&(keys&DOWN)){door(46,3);return;}if(py<=16&&ab(px-400)<=16&&(keys&UP)){door(50,0);return;}}
- else if(room==48){if(py>=304&&ab(px-240)<=16&&(keys&DOWN)){door(46,1);return;}if(py<=16&&ab(px-240)<=16&&(keys&UP)){door(49,0);return;}if(px>=464&&ab(py-160)<=16&&(keys&RIGHT)){door(51,2);return;}}
- else if(room==49){if(py>=144&&ab(px-120)<=16&&(keys&DOWN)){door(48,1);return;}if(px>=224&&ab(py-112)<=16&&(keys&RIGHT)){door(52,2);return;}}
- else if(room==50){if(py>=144&&ab(px-120)<=16&&(keys&DOWN)){door(47,1);return;}if(px>=224&&ab(py-112)<=16&&(keys&RIGHT)){door(51,0);return;}}
- else if(room==51){if(py>=304&&ab(px-240)<=16&&(keys&DOWN)){door(50,1);return;}if(px>=464&&ab(py-112)<=16&&(keys&RIGHT)){door(52,0);return;}if(px<=16&&ab(py-160)<=16&&(keys&LEFT)){door(48,2);return;}}
- else if(room==52){if(py>=144&&ab(px-120)<=16&&(keys&DOWN)){door(51,1);return;}if(px>=224&&ab(py-112)<=16&&(keys&RIGHT)){door(53,0);return;}if(px<=16&&ab(py-112)<=16&&(keys&LEFT)){door(49,1);return;}}
- else if(room==53){if(py>=144&&ab(px-120)<=16&&(keys&DOWN)){door(52,1);return;}if(px>=224&&ab(py-112)<=16&&(keys&RIGHT)&&underwater_game_guardian_stage==4){offer(45);objective(45,1);persist();door(46,1);return;}}
+ if(room==46){if(py>=304&&ab(px-240)<=16&&(keys&DOWN)){enter_room(38,4);return;}if(!road_region_managed((unsigned)room,47)&&(px>=464&&ab(py-160)<=16&&(keys&RIGHT))){door(47,0);return;}if(!road_region_managed((unsigned)room,48)&&(py<=16&&ab(px-240)<=16&&(keys&UP))){door(48,0);return;}}
+ else if(room==47){if(!road_region_managed((unsigned)room,46)&&(py>=304&&ab(px-240)<=16&&(keys&DOWN))){door(46,3);return;}if(!road_region_managed((unsigned)room,50)&&(py<=16&&ab(px-400)<=16&&(keys&UP))){door(50,0);return;}}
+ else if(room==48){if(!road_region_managed((unsigned)room,46)&&(py>=304&&ab(px-240)<=16&&(keys&DOWN))){door(46,1);return;}if(!road_region_managed((unsigned)room,49)&&(py<=16&&ab(px-240)<=16&&(keys&UP))){door(49,0);return;}if(!road_region_managed((unsigned)room,51)&&(px>=464&&ab(py-160)<=16&&(keys&RIGHT))){door(51,2);return;}}
+ else if(room==49){if(!road_region_managed((unsigned)room,48)&&(py>=144&&ab(px-120)<=16&&(keys&DOWN))){door(48,1);return;}if(!road_region_managed((unsigned)room,52)&&(px>=224&&ab(py-112)<=16&&(keys&RIGHT))){door(52,2);return;}}
+ else if(room==50){if(!road_region_managed((unsigned)room,47)&&(py>=144&&ab(px-120)<=16&&(keys&DOWN))){door(47,1);return;}if(!road_region_managed((unsigned)room,51)&&(px>=224&&ab(py-112)<=16&&(keys&RIGHT))){door(51,0);return;}}
+ else if(room==51){if(!road_region_managed((unsigned)room,50)&&(py>=304&&ab(px-240)<=16&&(keys&DOWN))){door(50,1);return;}if(!road_region_managed((unsigned)room,52)&&(px>=464&&ab(py-112)<=16&&(keys&RIGHT))){door(52,0);return;}if(!road_region_managed((unsigned)room,48)&&(px<=16&&ab(py-160)<=16&&(keys&LEFT))){door(48,2);return;}}
+ else if(room==52){if(!road_region_managed((unsigned)room,51)&&(py>=144&&ab(px-120)<=16&&(keys&DOWN))){door(51,1);return;}if(!road_region_managed((unsigned)room,53)&&(px>=224&&ab(py-112)<=16&&(keys&RIGHT))){door(53,0);return;}if(!road_region_managed((unsigned)room,49)&&(px<=16&&ab(py-112)<=16&&(keys&LEFT))){door(49,1);return;}}
+ else if(room==53){if(!road_region_managed((unsigned)room,52)&&(py>=144&&ab(px-120)<=16&&(keys&DOWN))){door(52,1);return;}if(!road_region_managed(53,46)&&px>=224&&ab(py-112)<=16&&(keys&RIGHT)&&underwater_game_guardian_stage==4){offer(45);objective(45,1);persist();door(46,1);return;}}
 }
 COLD int underwater_game_name(void){return room_text((unsigned)room);}
 COLD int underwater_game_quest_text(void){if(!done(38))return TX_UW_HUD_ECHO;if(!done(39))return TX_UW_HUD_BALLAST;if(!done(40))return TX_UW_HUD_ARCHIVE;return TX_UW_HUD_HOME;}

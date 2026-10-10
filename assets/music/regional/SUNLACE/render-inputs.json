@@ -1,0 +1,99 @@
+{
+  "palette": [
+    {
+      "name": "bright awning whistle",
+      "gain": 0.66,
+      "attack": 0.007,
+      "release": 0.065,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.075
+        ],
+        [
+          3,
+          0.115
+        ],
+        [
+          4,
+          0.022
+        ],
+        [
+          5,
+          0.03
+        ]
+      ],
+      "vibrato_delay": 0.26,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 5.3,
+      "vibrato_cents": 4.0
+    },
+    {
+      "name": "sunlit round bass",
+      "gain": 0.36,
+      "attack": 0.005,
+      "release": 0.068,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.025
+        ],
+        [
+          3,
+          -0.07
+        ],
+        [
+          5,
+          0.025
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "small warm mandolin",
+      "gain": 0.245,
+      "attack": 0.0028,
+      "release": 0.044,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.22
+        ],
+        [
+          3,
+          0.12
+        ],
+        [
+          4,
+          0.045
+        ],
+        [
+          5,
+          0.016
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "sunlace-gba-16384-s8.raw": "7cbb21af49edef759a2a7a08fac35df8f0d12f32cae3bdde2ec3dfebbd01a467"
+  }
+}

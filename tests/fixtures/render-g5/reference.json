@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "scope": "Portable reproduction of the reviewed pure host renderer differential; native DMA and gameplay/pacing remain separate.",
+  "baseline": {
+    "name": "Journey Guidance + Village Morning G5",
+    "rom_sha256": "751ca387ab0d5baf56a5d35c00251ccce7d1096075eaf85959f1321005e0a265",
+    "symbols_sha256": "8d50921abc7c005b335b0a69b757ebaf825fa120187a6d79d32e1254650d2890",
+    "elf_sha256": "cb5427fc4d5354aed0842a39dd577a38ccd985a0756a4082f357df33751ec0f0",
+    "source_manifest_sha256": "24709ec0f38885071ef95ebaadff8cbb05d06b5c40b43b58205a330ba4167dd5"
+  },
+  "reviewed_candidate": {
+    "name": "Finite renderer V5 / integrated G6",
+    "rom_sha256": "d73152ac48f0b6a6fd4b1234e4dd6a2266807a138093caa7b208db77cf98e440",
+    "game_source_sha256": "62b5bc5554843e12309e809a8710715732c3c20bb3121c514786f84e7b9b8233"
+  },
+  "fixture_files": {
+    "reference-game.c": "fdfa6fa005ae180a8ad908f55548f0ce6beb854108545253e9822161bf50c3a8",
+    "raster_differential.c": "e6a60a7953076ee5b0a39858a4e1fbf96796e1f6b3f161dc699493d239b89cfa",
+    "obj_hud_differential.c": "ae3b8b53444c5dbc54402a08e7aa66cb0cb7314877d57d074d9fd3433849ffd7"
+  },
+  "reference_function_sha256": {
+    "ab": "73890e33d97c14543c08f10380c4a6d4f87b5e0f6855670a865c4a3ba52c771d",
+    "sign": "8bd93bf7800ef282820ef9b73368b8666dc069281dc9322d8bec506dfb90be58",
+    "game_world_rect_hidden": "4d4c606e0ecb9c775485a9a5c52bb26bd5aa726f300ed9d66b5cde67c5452eeb",
+    "pix": "eb8afd2820f984e7e9d664e5b432f552f12a0ba5b5717d739964dacebd151bdd",
+    "rect": "d73a6c27748bc3c47c00291154ddfab8c33e55d110e22dee3fbd9d462dd499f2",
+    "line": "f91741d96ae7c54ab682949893691d64093de60eeee462f2c90f23b076830db2",
+    "scrolling_room": "ba36acc0e0b92b6a45ba510a61c5f69406f09f70fe5432ed74d206a291f582fc",
+    "obj_add": "e5293f238af37de451eff458fe2f46bf3ddd26fc5226c92c3f11d564492c3d22",
+    "draw_floating_hud": "28b1221c780f4daeb485dede7940b82e2f8c02d9e47850dde712328cf4fd12da"
+  },
+  "candidate_function_sha256": {
+    "ab": "73890e33d97c14543c08f10380c4a6d4f87b5e0f6855670a865c4a3ba52c771d",
+    "sign": "8bd93bf7800ef282820ef9b73368b8666dc069281dc9322d8bec506dfb90be58",
+    "game_world_rect_hidden": "4d4c606e0ecb9c775485a9a5c52bb26bd5aa726f300ed9d66b5cde67c5452eeb",
+    "pix": "eb8afd2820f984e7e9d664e5b432f552f12a0ba5b5717d739964dacebd151bdd",
+    "rect": "910221941ce8b41234ab78c5d3702f5db7098acb8cf8cf288be16b1ca3f1ce25",
+    "line": "795fd5b5f37cbdd74bd5374b0923d699d7ab74352623992ced592d96af47bcad",
+    "scrolling_room": "1aa7b5dca8fb0aaddfaa1025f81d13e5430e19e6c4ceaf31f545bcf90a762060",
+    "obj_add": "f3c7a4dde5dd1892853eb8a57255ebce400007d248b1746ca7adf5052a2bb3fe",
+    "draw_floating_hud": "a750c86647abc6385022f12cb60ee1bf8c9a4d28d895fb78a73aab2d4fc7e7be"
+  },
+  "suites": [
+    {
+      "name": "raster",
+      "fixture": "raster_differential.c",
+      "candidate_marker": "#define ab after_ab",
+      "functions": [
+        "ab",
+        "sign",
+        "game_world_rect_hidden",
+        "pix",
+        "rect",
+        "line",
+        "scrolling_room"
+      ],
+      "expected_counts": {
+        "rectangles": 2276514,
+        "lines": 2532101,
+        "scrolling": 1133397
+      }
+    },
+    {
+      "name": "obj_hud",
+      "fixture": "obj_hud_differential.c",
+      "candidate_marker": "#define obj_entries after_obj_entries",
+      "functions": [
+        "obj_add",
+        "draw_floating_hud"
+      ],
+      "expected_counts": {
+        "object_comparisons": 7269120,
+        "hud_comparisons": 264612
+      }
+    }
+  ],
+  "context_source_pins": {
+    "src/assets.h": "70303ad72341adf154e05a8b782c52d3ab5cb8d96a8d51ef51a0b7e8d4d93977",
+    "src/game_shop.c": "307c9fb9979285ec7a3a2560fc771843e9d3f7d129a6b3486810c16c6e93c041",
+    "src/save_feedback.c": "9a9a8ae19527ab9c67df9e51f27942d1abaa0e9010bde42f55d5af3b36bf7be0",
+    "src/economy.c": "3e2c1d910b6d658b8542cd3d400f0bc53021fc335d33ecb60e22245a9ce9abb8",
+    "src/save5_preflight.inc": "4931f090625ed794084c12ed28b58509f217cbd009887ae2e419a25cdf33feb6"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "palette": [
+    {
+      "name": "gentle reed pipe",
+      "gain": 0.67,
+      "attack": 0.012,
+      "release": 0.092,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.065
+        ],
+        [
+          3,
+          0.15
+        ],
+        [
+          4,
+          0.017
+        ],
+        [
+          5,
+          0.037
+        ],
+        [
+          7,
+          0.012
+        ]
+      ],
+      "vibrato_delay": 0.29,
+      "vibrato_ramp": 0.18,
+      "vibrato_rate": 4.6,
+      "vibrato_cents": 4.4
+    },
+    {
+      "name": "soft water-town triangle bass",
+      "gain": 0.36,
+      "attack": 0.007,
+      "release": 0.075,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.012
+        ],
+        [
+          3,
+          -0.075
+        ],
+        [
+          5,
+          0.02
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    },
+    {
+      "name": "quiet round harp pluck",
+      "gain": 0.225,
+      "attack": 0.004,
+      "release": 0.047,
+      "harmonics": [
+        [
+          1,
+          1.0
+        ],
+        [
+          2,
+          0.14
+        ],
+        [
+          3,
+          0.06
+        ],
+        [
+          4,
+          0.018
+        ]
+      ],
+      "vibrato_delay": 0.0,
+      "vibrato_ramp": 0.0,
+      "vibrato_rate": 0.0,
+      "vibrato_cents": 0.0
+    }
+  ],
+  "output_sha256": {
+    "where_the_reeds_turn-gba-16384-s8.raw": "7c76653e1898e020ba22e52b06b9997de9372b58d0869892c1285850a2af40c3"
+  }
+}

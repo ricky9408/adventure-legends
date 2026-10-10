@@ -4,6 +4,7 @@
 #include "region_art.h"
 #include "regional_quests.h"
 #include "progression.h"
+#include "connected_roads.h"
 #include "assets.h"
 #ifdef REGION_GAME_HOST_TEST
 #include "region_game_test_ui.h"
@@ -40,8 +41,8 @@ extern void rect(int,int,int,int,unsigned char),line(int,int,int,int,int),sprite
 unsigned region_game_revision,region_game_journal_selection;
 short region_game_crates[2][2];
 unsigned char region_game_foundry_step,region_game_pool_levels[2],region_game_valves[2],region_game_garden_step;
-static unsigned event_dirty,field_pool_mask,target_flash,door_notice,roll_serial,last_garden_roll;
-static int was_rolling;
+static unsigned event_dirty,field_pool_mask,target_flash,door_notice,garden_sensor_previous;
+
 static const short spawns[6][6][2]={
  {{240,284},{240,52},{104,232},{344,152},{88,128},{344,248}},
  {{240,284},{360,72},{120,232},{0,0},{0,0},{0,0}},
@@ -89,7 +90,7 @@ COLD void region_game_reset(void){unsigned solved=ready(Q_WEAVER);
  region_game_crates[0][0]=80;region_game_crates[0][1]=(short)(solved?56:88);
  region_game_crates[1][0]=(short)(solved?160:144);region_game_crates[1][1]=(short)(solved?104:88);
  region_game_garden_step=(unsigned char)(ready(Q_GARDEN)?3:0);
- field_pool_mask=0;was_rolling=0;roll_serial=0;last_garden_roll=~0u;
+ field_pool_mask=0;garden_sensor_previous=~0u;
  target_flash=0;changed();
 }
 COLD int region_game_enter(unsigned area,unsigned spawn){int r;
@@ -102,7 +103,7 @@ COLD int region_game_enter(unsigned area,unsigned spawn){int r;
  return 1;
 }
 static int foot_in(int x,int y,int rx,int ry,int w,int h){return x+FOOT>=rx&&x-FOOT<rx+w&&y+FOOT>=ry&&y-FOOT<ry+h;}
-int region_game_solid(int x,int y){const RegionArtRoom*r;unsigned i;if(!region_game_is_room((unsigned)room))return 0;r=&region_art_rooms[room-16];
+int region_game_solid(int x,int y){const RegionArtRoom*r;unsigned i;if(!region_game_is_room((unsigned)room))return 0;if(game_road_collision){int road=game_road_collision((unsigned)room,x,y);if(road>=0)return road;}r=&region_art_rooms[room-16];
  if(x<FOOT||y<FOOT||x>=r->width-FOOT||y>=r->height-FOOT)return 1;
  for(i=0;i<r->solid_count;i++){const RegionArtRect*s=&r->solids[i];if(foot_in(x,y,s->x,s->y,s->w,s->h))return 1;}
  if(room==17&&!(adventure_save.quests.objectives[Q_DRY]&2)&&foot_in(x,y,224,152,32,32))return 1;
@@ -143,7 +144,7 @@ static COLD int reset_interaction(int y){if(!close_to(32,y,22))return 0;
  else{region_game_reset();toast(TX_RG_RESET);}return 1;
 }
 COLD int region_game_interact(void){int r;event_dirty=0;sync_chapter();if(game_state!=PLAY)return 0;
- if(room==1){if(!close_to(168,248,18)||!game_region_entry_safe())return 0;
+ if(room==1){if(game_road_managed&&game_road_managed(1,16))return 0;if(!close_to(168,248,18)||!game_region_entry_safe())return 0;
   if(!(chapter_flags&SAVE4_GROVE_CLEAR)){say(TX_RG_ENTRY_A,TX_RG_ENTRY_B);return 1;}enter_room(16,0);return 1;
  }
  if(!region_game_is_room((unsigned)room))return 0;
@@ -276,28 +277,27 @@ COLD void region_game_tick(void){unsigned i;int sensor=-1;if(game_state!=PLAY)re
  if(door_notice)door_notice--;
  if(!region_game_is_room((unsigned)room))return;
  if(room==21){
-  if(roll_ticks&&!was_rolling)roll_serial++;
-  was_rolling=roll_ticks!=0;
   if(state(Q_GARDEN)==SAVE5_QUEST_ACTIVE){
    for(i=0;i<3;i++)if(close_to(garden_stones[i][0],garden_stones[i][1],11)){sensor=(int)i;break;}
-   if(roll_ticks&&sensor>=0&&roll_serial!=last_garden_roll){
-    last_garden_roll=roll_serial;event_dirty=0;
+   if(sensor>=0&&(unsigned)sensor!=garden_sensor_previous){
+    garden_sensor_previous=(unsigned)sensor;event_dirty=0;
     if((unsigned)sensor==region_game_garden_step){region_game_garden_step++;if(region_game_garden_step==3){if(regional_quest_variable(&adventure_save,Q_GARDEN,3)==REGION_QUEST_CHANGED)event_dirty=1;complete(Q_GARDEN);persist();toast(TX_RG_GARDEN_DONE);}else toast(TX_RG_GARDEN_STEP);}
     else{region_game_garden_step=(unsigned char)(sensor==0?1:0);toast(TX_RG_GARDEN_RETRY);}changed();
    }
   }
  }
+ if(sensor<0)garden_sensor_previous=~0u;
  if(transition_lock||game_state!=PLAY)return;
  if(room==16){
-  if((keys&KEY_DOWN)&&px>=224&&px<=255&&py>=298){enter_room(1,3);return;}
+  if((!game_road_managed||!game_road_managed(16,1))&&(keys&KEY_DOWN)&&px>=224&&px<=255&&py>=298){enter_room(1,3);return;}
   if(keys&KEY_UP){
-   if(px>=224&&px<=255&&py<=32){try_door(17,0);return;}
+   if((!game_road_managed||!game_road_managed(16,17))&&px>=224&&px<=255&&py<=32){try_door(17,0);return;}
    if(px>=332&&px<=355&&py>=136&&py<=148){try_door(18,0);return;}
    if(px>=76&&px<=99&&py>=115&&py<=128){try_door(20,0);return;}
    if(px>=332&&px<=355&&py>=218&&py<=236){try_door(21,0);return;}
   }
  }else if(room==17){
-  if((keys&KEY_DOWN)&&px>=224&&px<=255&&py>=298){enter_room(16,1);return;}
+  if((!game_road_managed||!game_road_managed(17,16))&&(keys&KEY_DOWN)&&px>=224&&px<=255&&py>=298){enter_room(16,1);return;}
   if((keys&KEY_UP)&&px>=348&&px<=371&&py>=43&&py<=62){try_door(19,0);return;}
  }else if((keys&KEY_DOWN)&&px>=108&&px<=131&&py>=143){int target=room==19?17:16,spawn=room==18?3:room==19?1:room==20?4:5;enter_room(target,spawn);}
 }
@@ -317,7 +317,7 @@ COLD void region_game_draw_journal(void){static const int states[4]={TX_RG_UNSEE
  numeral(q+1,190,118);centered(TX_RG_JOURNAL_KEYS,138,PAL_TEAL2);
 }
 COLD int region_game_menu_input(int input){if(journal_tab!=JOURNAL_TAB)return 0;if(input&KEY_UP){region_game_journal_selection=(region_game_journal_selection+10)%11;changed();return 1;}if(input&KEY_DOWN){region_game_journal_selection=(region_game_journal_selection+1)%11;changed();return 1;}return 0;}
-COLD void region_game_draw_actors(void){unsigned m;if(room==1){if(chapter_flags&SAVE4_GROVE_CLEAR)region_actor(REGION_SPR_SIGN_WORKSHOP,168,248);return;}
+COLD void region_game_draw_actors(void){unsigned m;if(room==1){if(chapter_flags&SAVE4_GROVE_CLEAR)return;}
  if(room==16){
   region_actor(REGION_SPR_NPC_SMITH,320,150);region_actor(REGION_SPR_NPC_WEAVER,88,136);region_actor(REGION_SPR_NPC_WARDEN,264,236);region_actor(REGION_SPR_NPC_APPRENTICE,416,264);region_actor(REGION_SPR_NPC_REST_KEEPER,182,234);
   region_actor((adventure_save.quests.anchors[0]&1)?REGION_SPR_REST_LIT:REGION_SPR_REST_IDLE,104,216);

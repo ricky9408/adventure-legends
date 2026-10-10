@@ -1,0 +1,26 @@
+{
+  "scope": "Generated controller regression saves, never user save data. Includes the pre-ending original Core state; its documented resume policy may return to the elder.",
+  "producer_report_sha256": "792d16f981c4a3ee38cb65313b8c454fdc4c2d5bde3a7258e109a5f87e34673e",
+  "rom_sha256": "fdd1d74a5bac8109820f88a7a7421f9280f18656022a96c1c183ffbb82d9f2f2",
+  "input_trace_sha256": "797e99afdbe66e1e9d8bd445be0e0ddf42db6e30e98abc68e26f2bce07ca16c6",
+  "fixtures": [
+    {
+      "path": "tests/fixtures/player-feedback-r7/grove-complete.sav",
+      "sha256": "17e5ecc7bfb2143b740009a0f5d43988bff426a4559509f08af36f9aa8017226",
+      "bytes": 32768,
+      "producer_snapshot": "grove-complete"
+    },
+    {
+      "path": "tests/fixtures/player-feedback-r7/controller-complete.sav",
+      "sha256": "cbac09c5535e4f7821e9505db2d9e1c37a27c2bac084f0ccbf83f455fd5fb745",
+      "bytes": 32768,
+      "producer_snapshot": "controller-complete"
+    },
+    {
+      "path": "tests/fixtures/player-feedback-r7/controller-complete-cold.sav",
+      "sha256": "64ce405d52df62a7e6c56b195dbac08d36531bc2e6b9d175df70dbb363ffd492",
+      "bytes": 32768,
+      "producer_snapshot": "controller-complete-cold"
+    }
+  ]
+}

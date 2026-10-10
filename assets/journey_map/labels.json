@@ -1,0 +1,21 @@
+{
+  "CURRENT": "現在地",
+  "RECORD": "道の記録",
+  "CLOSE": "START 閉じる",
+  "OPEN": "通行可",
+  "CLOSED": "未開通",
+  "UNKNOWN": "まだ知らない場所",
+  "DETAIL_KEYS": "↑↓ 道を選ぶ  A 地名  B 戻る",
+  "LIST_KEYS": "←→地方  ↑↓場所  A 見る  B 戻る",
+  "LIST_NOTE": "● 現在地   ○ 訪問・道の記録",
+  "EMPTY": "まだ道の記録がない",
+  "REGION_0": "里と三つの灯",
+  "REGION_1": "川辺の地方",
+  "REGION_2": "北の地方",
+  "REGION_3": "南の地方",
+  "REGION_4": "火山の地方",
+  "REGION_5": "水底の地方",
+  "REGION_6": "帰り道の地方",
+  "REGION_7": "地平の地方",
+  "REGION_8": "約束の地方"
+}
