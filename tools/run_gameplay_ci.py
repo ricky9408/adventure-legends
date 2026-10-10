@@ -120,12 +120,13 @@ def main():
     python = sys.executable
     try:
         stage('tool-versions', [python, '-c',
-              "import subprocess,sys; sys.path.insert(0,'tools'); "
+              "import os,subprocess,sys; sys.path.insert(0,'tools'); "
               "from arm_toolchain import resolve_arm_tools; "
               "from PIL import __version__ as pil; import numpy,scipy; "
               "print('Pillow',pil,'NumPy',numpy.__version__,'SciPy',scipy.__version__); "
+              "assert pil == '12.3.0', 'Pixel generation requires pinned Pillow 12.3.0; see docs/GAMEPLAY_CI.md'; "
               "[subprocess.run(c,check=True) for c in "
-              "[['git','rev-parse','HEAD'],['cc','--version'],['ffmpeg','-version'],"
+              "[['git','-c','safe.directory='+os.getcwd(),'rev-parse','HEAD'],['cc','--version'],['ffmpeg','-version'],"
               "[resolve_arm_tools('gcc')['gcc'],'--version'],"
               "[resolve_arm_tools('objcopy')['objcopy'],'--version']]]"])
         # A full clean rebuild twice catches omitted generated dependencies and

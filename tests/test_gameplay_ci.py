@@ -3,6 +3,7 @@ import importlib.util
 import os
 from pathlib import Path
 import sys
+import subprocess
 import tempfile
 import unittest
 
@@ -38,6 +39,17 @@ class GameplayCITests(unittest.TestCase):
             import time
             time.sleep(2.1)
             self.assertFalse(marker.exists())
+
+    def test_git_metadata_trust_is_checkout_scoped(self):
+        env = {**os.environ, 'GIT_TEST_ASSUME_DIFFERENT_OWNER': '1'}
+        denied = subprocess.run(['git', '-c', 'safe.directory=', 'rev-parse', 'HEAD'],
+                                cwd=ROOT, env=env, capture_output=True)
+        self.assertNotEqual(denied.returncode, 0)
+        trusted = subprocess.run(['git', '-c', 'safe.directory=', '-c',
+                                  'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'],
+                                 cwd=ROOT, env=env, capture_output=True, text=True)
+        self.assertEqual(trusted.returncode, 0, trusted.stderr)
+        self.assertRegex(trusted.stdout.strip(), r'^[0-9a-f]{40}$')
 
     def test_atomic_report_replaces_complete_json(self):
         with tempfile.TemporaryDirectory() as directory:

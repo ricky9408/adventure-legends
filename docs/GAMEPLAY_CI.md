@@ -45,7 +45,9 @@ that report before interpreting a green check as whole-game performance approval
 ## Reproduce locally
 
 Use Linux x86_64 with the dependencies in `tools/README.md`, plus NumPy, SciPy
-and FFmpeg. `tools/install_tools.sh` extracts the existing checksum-pinned
+and FFmpeg. Pixel regeneration requires **Pillow 12.3.0**: Debian's Pillow 11.1
+changes Covenant polygon rasterization and is deliberately rejected before the
+aggregate can change generated pixels. `tools/install_tools.sh` extracts the existing checksum-pinned
 Debian ARM GCC 14.2.1/binutils 2.44/mGBA 0.10.5 packages into `tools/sysroot`.
 It does not install their host runtime dependencies. The runner itself never
 installs software or edits system settings.
@@ -68,7 +70,24 @@ fixed frame/button sequences. No time-based/randomized gameplay fixture is used.
 
 For the closest hosted match, use the official Debian image digest in the
 workflow and its signed `20250910T000000Z` package snapshot, then execute the
-same setup commands. That older snapshot is a reproducibility pin, not an
+same setup commands. Debian supplies Python 3.13, NumPy 2.2.4 and SciPy 1.15.3.
+CI creates an isolated venv with those system packages, then installs only the
+hash-pinned official Pillow 12.3.0 CPython 3.13/manylinux x86_64 wheel from PyPI.
+The requirements file intentionally rejects other wheel builds/interpreters.
+On a prepared Debian 13 host with `python3-venv` installed:
+
+```sh
+python3 -m venv --system-site-packages build/ci-venv
+build/ci-venv/bin/python -m pip install --no-deps --require-hashes \
+  --only-binary=:all: --index-url https://pypi.org/simple -r tools/ci-requirements.txt
+export PATH="$PWD/build/ci-venv/bin:$PATH"
+python3 tools/run_gameplay_ci.py --suite all --output build/ci-debian
+```
+
+No system Python package is replaced. The Git commit metadata command trusts
+only this known checkout for that one invocation (`git -c safe.directory=…`),
+which handles container mount ownership without global or wildcard trust.
+ That older snapshot is a reproducibility pin, not an
 assertion that it contains current security updates. Update image/snapshot/tool
 pins in a reviewed PR and rerun both lanes. The ARM/mGBA package downloads have
 independent SHA-256 checks in the existing installer. Action references are
