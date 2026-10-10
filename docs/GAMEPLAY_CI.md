@@ -29,6 +29,13 @@ contracts remain pinned and separate from current runtime evidence.
   held-button purchase safety, item use, three optional Fire requests, an earned
   evolution with cancel/accept, equipment preview and same-run earned-save
   Continue. No historical progress, game RAM writes or machine-state imports.
+- **Fresh garden reward:** a separate empty-SRAM original-chapter route earns
+  access to Reedhaven, walks the three garden stones in order, claims exactly
+  one Surestep Boots, previews/equips it with Left/Right and A, verifies its
+  actual three-update power-cooldown benefit, then cold Continues and revisits
+  the reward twice without duplication. Prefix and garden reports, inputs,
+  screenshots and authenticated earned SRAM are retained together. This proves
+  this optional quest/reward route, not full collection.
 - **Save/load:** opening held buttons, all eight skip/interruption points,
   repository-pinned older-save compatibility and power cuts at every frame of
   first-checkpoint publication. Current help/goal/companion browsing and seeded
@@ -135,3 +142,19 @@ Artifacts are restricted to fresh generated test directories, candidate build
 files, repository-owned fixtures and their test derivatives. No home directory,
 whole workspace, credential dump, personal save, external BIOS, or unrelated
 file is uploaded. Treat CI artifacts as public-safe development data.
+
+### Reproduce the fresh garden scenario
+
+After the native CI lane builds its controller bridge, run the standalone
+empty-SRAM scenario with a new output directory:
+
+```sh
+python3 tests/fresh_garden_reward.py --output build/garden-replay \
+  --bridge build/ci-native-retry/controllers/native-bridge.so
+```
+
+CI always uses this standalone route. The helper also supports explicitly
+hash-bound, same-candidate earned prefix evidence for focused local diagnosis;
+see `--help`. The summary keeps original-prefix and garden metrics separate.
+Their `max_cycles` includes cold Continue; active journey miss/overrun counters
+are the smooth-gameplay gate, and no whole-load performance claim is made.

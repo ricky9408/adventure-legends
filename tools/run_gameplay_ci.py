@@ -182,6 +182,23 @@ def main():
             early = json.loads((out / 'fresh-early/original/report.json').read_text())
             if not early['route_complete'] or early['failures'] or not early['controller_only'] or any(early[key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
                 raise RuntimeError('Fresh early controller route did not complete cleanly')
+            stage('fresh-garden-reward', [python, 'tests/fresh_garden_reward.py',
+                  '--output', str(out / 'fresh-garden'), '--bridge', bridge], timeout=600)
+            garden_reports = [json.loads((out / 'fresh-garden' / chapter / 'report.json').read_text())
+                              for chapter in ('original', 'regions')]
+            for garden in garden_reports:
+                if (not garden['route_complete'] or not garden['checks'] or garden['failures']
+                        or not all(check['passed'] for check in garden['checks'])
+                        or not garden['controller_only']
+                        or garden['baseline_diagnostic'] or garden['cross_rom_earned_sram_diagnostic']
+                        or garden['provenance']['initial_sram'] != 'empty cartridge'
+                        or garden['candidate']['rom_sha256'] != rom_sha
+                        or garden['candidate']['bridge_sha256'] != digest(bridge)
+                        or any(garden[key] or garden['provenance'][key] for key in
+                               ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports'))
+                        or any(garden['metrics'][key] for key in
+                               ('faults', 'active_update_misses', 'active_flip_misses', 'active_overruns'))):
+                    raise RuntimeError('Fresh garden controller route did not complete cleanly')
             stage('opening-save-load', [python, 'tests/opening_scene_native.py', '--bridge',
                                         bridge, '--output', str(out / 'opening')], timeout=600)
             opening = json.loads((out / 'opening/report.json').read_text())
@@ -198,6 +215,9 @@ def main():
             report['native'] = {'controller_metrics': native['metrics'],
                                 'opening_checks': len(opening['checks']),
                                 'fresh_early_checks': len(early['checks']),
+                                'fresh_garden_checks': sum(len(g['checks']) for g in garden_reports),
+                                'fresh_garden_metrics': {name: g['metrics'] for name, g in
+                                                         zip(('original', 'garden'), garden_reports)},
                                 'opening_cadence': opening['cadence_by_scope']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.
         frozen = json.loads((ROOT / 'build/source-hashes.json').read_text())
