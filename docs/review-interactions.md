@@ -87,6 +87,12 @@ python3 tests/interaction_readability_native.py \
 
 Other cases are `underwater`, `return`, `horizons`, and `covenants`. Use their
 corresponding earned main checkpoints; Covenants uses its chapter welcome.
+For an integrated renderer build, add `--check-prompts`. It reads hardware OAM
+to require exactly one existing A glyph at the actual target, checks dialogue
+and quick-picker suppression, and verifies that the regional merchant retains
+its single cue and opens the shop with A. Other recruitment notices use the same
+glyph and are recorded separately rather than being counted as duplicate focus.
+`--source-root` can authenticate an immutable source copy matching the candidate.
 
 The implementation pass produced passing, visually inspected240×160 captures:
 
@@ -103,6 +109,40 @@ Each approach is outside the former taper but inside the new bounds. Across
 or native faults. Cold-load cost is reported separately. Earlier rail-script
 development attempts used the exterior with live enemies and failed from damage;
 only the successful v4 interior record is the four-bearing diagnostic.
+
+The parent renderer was inspected read-only at pinned commit `2049e1405ec09885a8cffdec6ac1067e3a725406`.
+The ROM, ELF, symbols and source manifest were copied to `build/pinned-2049`;
+all 2,954 runtime paths matched that commit's immutable Git blobs and the
+manifest. Its ROM SHA-256 is
+`8b64f8f9abc17e3419c55d0f579526ef175fe761306330f118ba3ea96c2b9228`.
+The dispatch is COLD, queries one active late region, uses the existing 8px
+glyph once, and yields to the shop, quick picker, scene and modal guards.
+Integrated captures confirm the actual target cue, its disappearance during
+dialogue/quick-picker overlays, shop priority, and all four stable rail bearings.
+The separately visible Horizons source recruitment notice is not a second
+ordinary target. Camera motion is allowed to settle before exact OAM-coordinate
+checks because the publication pipeline displays the prior camera frame.
+
+| Integrated diagnostic under `build/` | Hardware frames |
+|---|---:|
+| `integrated-2049-rails/regions` | 2,652 |
+| `integrated-2049-underwater-complete/regions` | 1,145 |
+| `integrated-2049-return-complete/regions` | 1,188 |
+| `integrated-2049-horizons-complete/regions` | 1,023 |
+| `integrated-2049-covenants-complete/regions` | 941 |
+
+All five pass: 6,949 hardware frames, zero active update/flip misses, active
+overruns or native faults. Producer SRAM hashes remain unchanged. Failed earlier
+helper-development runs (missing bitmap tile base, counting unrelated recruit
+notices, and checking before camera publication settled) are not acceptance
+evidence and revealed no candidate runtime defect.
+
+This integrated pin predates the disappearing-source and practice-eligibility
+follow-up commits. Those corrections have passing focused host coverage; the
+parent's newly pinned whole-build acceptance is still required. These captures
+remain cross-ROM compatibility diagnostics from earned SRAM, with one explicitly
+reported historical progress import per run and zero RAM writes or machine-state
+imports. They must not be presented as fresh empty-SRAM acceptance.
 
 Fresh integrated acceptance must still start with empty SRAM, run the full main
 journey, and measure the whole merged build. Include Return trial ownership,

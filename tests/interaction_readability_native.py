@@ -6,12 +6,47 @@ acceptance. Original saves are read only; outputs and SRAM exports are private.
 """
 import argparse
 import json
+import struct
 from pathlib import Path
 from types import SimpleNamespace
 
 from journey_guidance_earned import RegionalJourney, sha
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def field_hints(run):
+    rows = []
+    for index, (a0, a1, a2, _) in enumerate(struct.iter_unpack('<4H', run.e.bytes(0x07000000, 1024))):
+        # Bitmap modes reserve the lower 512 OBJ tiles (see obj_add).
+        if not a0 & 0x200 and a2 & 1023 == 512 + 10496 // 32:
+            rows.append(dict(index=index, x=a1 & 511, y=a0 & 255))
+    return rows
+
+
+def check_hint(run, point, label='contextual A cue', visible=True):
+    hints = field_hints(run)
+    expected = ((point[0] - 4 - run.get('camera_x')) & 511, (point[1] - 21 - run.get('camera_y')) & 255)
+    matching = [h for h in hints if (h['x'], h['y']) == expected]
+    # Optional companions already use the same glyph for recruitment notices.
+    # Keep that independent cue in the record; require one at the real A target.
+    run.cases.append(dict(case=label, target=list(point), expected_visible=visible,
+                          hints=hints, matching=matching, status=run.status()))
+    run.check(len(matching) == int(visible), label + ' has exactly the expected active OAM count at its target')
+
+
+def settle_camera(run):
+    stable = 0
+    for _ in range(90):
+        before = (run.get('camera_x'), run.get('camera_y'))
+        run.raw_step(1)
+        if before == (run.get('camera_x'), run.get('camera_y')):
+            stable += 1
+            if stable == 6:
+                return
+        else:
+            stable = 0
+    raise AssertionError('camera did not settle for the OAM position check')
 
 
 def main():
@@ -22,6 +57,7 @@ def main():
     p.add_argument('--source-report', type=Path, required=True)
     p.add_argument('--source-snapshot', required=True)
     p.add_argument('--case', choices=('rails', 'underwater', 'return', 'horizons', 'covenants'), required=True)
+    p.add_argument('--check-prompts', action='store_true', help='requires the integrated OBJ_HINT renderer hook')
     p.add_argument('--output', type=Path, required=True)
     a = p.parse_args()
     for name in ('candidate', 'source_root', 'bridge', 'source_report', 'output'):
@@ -92,10 +128,31 @@ def main():
                 setting = run.locals['horizons_game.c:setting'][0]
                 before = run.e.read(setting, 1)
             run.snapshot('off-axis-before-A')
+            if a.check_prompts:
+                settle_camera(run)
+                check_hint(run, target)
             run.tap('A')
             run.check(run.get('game_state') == 2 if setting is None else run.e.read(setting, 1) != before,
                       'ordinary A reaches the intended dialogue or manual')
             run.snapshot('off-axis-after-A', settle=False)
+            if a.check_prompts:
+                if run.get('game_state') == 2:
+                    check_hint(run, target, 'dialogue hides ordinary A cue', visible=False)
+                run.settle()
+                run.raw_step(4, 'L')
+                run.check(run.get('quickparty_open'), 'real L hold opens the quick picker')
+                check_hint(run, target, 'quick picker hides ordinary A cue', visible=False)
+                run.e.screenshot(run.out / 'picker-no-hint.png')
+                run.raw_step(4)
+                merchant = (304, 284) if a.case == 'underwater' else (208, 284)
+                run.goto(merchant[0], merchant[1] + 16, radius=2)
+                settle_camera(run)
+                check_hint(run, merchant, 'merchant takes A cue priority')
+                run.snapshot('merchant-one-hint')
+                run.tap('A')
+                run.check(run.get('game_state') == 11, 'A opens the regional merchant instead of a field target')
+                check_hint(run, merchant, 'shop modal hides merchant A cue', visible=False)
+                run.snapshot('merchant-shop-priority', settle=False)
         run.coverage.append('targeted-readability-cross-ROM-diagnostic')
     except Exception as e:
         if run is not None:
