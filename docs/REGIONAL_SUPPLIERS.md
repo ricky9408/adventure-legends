@@ -81,3 +81,14 @@ Do not run these checks against a personal save.
 5. Inspect merchant sprites, A hints, selected rows and feedback at native
    240×160 in all eight towns. Check for authored actor/hint overlap and verify
    normal frame timing on the final combined ROM.
+
+`tests/regional_suppliers_credits_native.py` automates these controller branches
+from authenticated snapshots of this review's accepted main campaign. It blocks
+game-RAM writes and machine-state imports, records the producer and candidate
+hashes, labels cross-ROM SRAM use, copies input saves into a fresh evidence
+directory, and records every hardware frame. This diagnostic checks all eight
+regional Heart Tonic and newly introduced gear purchases, exact debits, unique
+ownership, unchanged equipment selection/health, cold Continue and refusal to
+charge for already owned gear. Its completed-Q63 replay covers A/B offer,
+full credits, GBJ author, replay and read-only field return. Fresh first-Q63
+acquisition and the queued narrative gate require the full campaign route.
