@@ -21,17 +21,17 @@ def main():
  for name,cmd,extra in commands:
   if name=='verify_late_renderer':cmd.append('--equipment-rewards-successor')
  commands += [('retained-parent-negatives',[sys.executable,'tests/test_retained_ui_successor.py','--journey-story-ui-successor'],{}),('regional-quest-ubsan',[sys.executable,'tests/test_regional_quest_events.py'],{'QUEST_SANITIZE':'1'})]
- additions=['test_snapshot_copy_canaries','test_snapshot_copy','test_later_rewards_codec','test_later_rewards_capacity','test_gear_preview','gear_readable_layout','gear_treasure_host','gear_treasure_porchlight_test','test_renderer_equipment_successor','test_save5_load_job','test_growth_collection','test_recruit_notice','test_recruit_reserve_notice','test_readable_aim_input','test_enemy_tactics','test_regional_shop_positions','test_save5_history','test_save5_history_differential','test_return_history_differential','test_underwater_history_differential','test_horizons_history']
+ additions=['test_snapshot_copy_canaries','test_snapshot_copy','test_later_rewards_codec','test_later_rewards_capacity','test_gear_preview','gear_readable_layout','gear_treasure_host','gear_treasure_porchlight_test','test_renderer_equipment_successor','test_save5_load_job','test_review_successor','test_growth_collection','test_recruit_notice','test_recruit_reserve_notice','test_readable_aim_input','test_enemy_tactics','test_regional_shop_positions','test_save5_history','test_save5_history_differential','test_return_history_differential','test_underwater_history_differential','test_horizons_history']
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{})for n in additions]
  commands += [('later-reward-all-write-cuts',[sys.executable,'tests/test_later_rewards.py','--full-cuts'],{})]
  # Explicit current release routing. Historical contracts are unmodified;
  # source-only inverse tests and current behavior are distinct report rows.
  routed=[]
  for name,cmd,extra in commands:
-  if name=='test_retained_ui_story_successor':name='historical-g5-story-negatives';cmd=[sys.executable,'tests/test_soundtrack_historical_ui.py']
-  elif name=='retained-parent-negatives':name='historical-g5-parent-negatives';cmd=[sys.executable,'tests/test_soundtrack_historical_ui.py','--parent']
-  elif name=='verify_late_renderer':name='soundtrack-boundary-and-historical-renderer';cmd=[sys.executable,'tests/verify_soundtrack_successor.py']
-  elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_soundtrack_successor.py','--renderer-negatives']
+  if name=='test_retained_ui_story_successor':name='historical-g5-story-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--historical-ui']
+  elif name=='retained-parent-negatives':name='historical-g5-parent-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--historical-ui','--parent']
+  elif name=='verify_late_renderer':name='soundtrack-boundary-and-historical-renderer';cmd=[sys.executable,'tests/verify_review_successor.py']
+  elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--renderer-negatives']
   routed.append((name,cmd,extra))
  commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime')]
  report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}

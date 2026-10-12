@@ -29,7 +29,7 @@ def main():
   # Current geometry/authoring plus authenticated historical font/renderer
   # proofs. Do not route current pixels through obsolete G5 corpus pins.
   for name,cmd in commands:
-   if name in ('test_return_geometry','test_connected_route_copy'):cmd[1]='tests/test_soundtrack_geometry.py'
+   if name in ('test_return_geometry','test_connected_route_copy'):cmd[1]='tests/verify_review_successor.py';cmd.append('--current-geometry')
   report['explicit_soundtrack_successor']={'scope':'Current geometry and authoring; old pixel tests run separately on authenticated historical-only corpus. All current gameplay checks remain actual current code.'}
  for index,(name,cmd) in enumerate(commands):
   assert unchanged(),'Runtime changed between checks';helper=ROOT/cmd[1];before=sha(helper);log=out/(f'{index:02d}-'+name+'.log');start=time.monotonic();row={'name':name,'command':cmd,'helper_sha256':before,'log':log.name,'status':'RUNNING','is_test':name!='fixture-preparation'};report['runs'].append(row);save()
