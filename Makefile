@@ -452,7 +452,6 @@ test-equipment-rewards-host: all
 	$(PYTHON) tools/run_equipment_rewards_host.py --output build/equipment-rewards-host-current
 
 .PHONY: test-readable-aim-input
-test: test-readable-aim-input
 test-readable-aim-input:
 	$(PYTHON) tests/test_readable_aim_input.py
 	$(PYTHON) tests/test_play_notice_cache.py
