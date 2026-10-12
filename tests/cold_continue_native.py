@@ -60,6 +60,19 @@ def full_roster(lib, out):
     return path
 
 
+def pending_story(lib, out):
+    # Prepared codec input proves that the extra loading presentation retains
+    # the constructor's dialogue result; it is not an earned boss clear.
+    s=Save();s.campaign.chapter_flags=1
+    assert lib.creatures_migrate_legacy(C.byref(s.roster),1,0)==1
+    lib.equipment_init(C.byref(s.equipment))
+    assert lib.save5_validate(C.byref(s))==1
+    lib.save5_test_reset_writer();lib.save5_test_fail_after(-1);lib.sram[:]=b'\xff'*32768
+    assert lib.save5_store(C.byref(s))==1
+    path=out/'synthetic-story-pending.sav';path.write_bytes(bytes(lib.sram))
+    return path
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('rom','symbols','bridge','output'):p.add_argument('--'+name,type=Path,required=True)
@@ -73,8 +86,9 @@ def main():
     lib=codec(a.output)
     saves=[ROOT/'tests/fixtures/legacy/baseline-v2-bridge.sav',
            ROOT/'tests/fixtures/v4/finished-ending.sav',
+           ROOT/'tests/fixtures/v4/sky-complete.sav',
            ROOT/'tests/fixtures/v5-revision9/covenants-all128-72-cold.sav',
-           full_roster(lib,a.output),*a.save]
+           full_roster(lib,a.output),pending_story(lib,a.output),*a.save]
     report={'suite':'bounded-cold-continue-native','rom_sha256':sha(a.rom),'symbols_sha256':sha(a.symbols),
             'source_manifest_sha256':sha(manifest),
             'bridge_sha256':sha(a.bridge),'helper_sha256':sha(__file__),
@@ -99,9 +113,13 @@ def main():
                 e.frames(1,keys)
                 serial=g('render_profile_serial');flip=e.read(0x04000000,2)&16
                 sample={'case':case,'scope':scope,'hardware_frame':e.frame,'serial':serial,'state':g('game_state'),
+                        'presented_state':g('render_profile_state'),'presented_frame':g('render_profile_frame'),
                         'frame':g('frame'),'flip':flip,'cycles':g('render_cycles'),
                         'update_cycles':g('render_profile_update'),'render_cycles':g('render_profile_render'),
-                        'music_cycles':g('render_profile_music')}
+                        'music_cycles':g('render_profile_music'),'save_cycles':g('render_profile_save'),
+                        'save_begin_cycles':g('render_profile_save_begin'),'save_step_cycles':g('render_profile_save_step'),
+                        'scene_phase':g('scene_present_phase'),'loading_phase':g('load_resume_phase'),
+                        'save_requested':g('save_requested'),'save_background':g('save_feedback_background')}
                 if serial and last is not None:
                     row['native_frames']+=1
                     row['missed_updates']+=int(serial-last[0]!=2)
@@ -128,6 +146,12 @@ def main():
             check('B cancels loading to title',g('game_state')==0)
             check('cancel preserves SRAM byte for byte',e.bytes(0x0e000000,32768)==before)
             step('A');step();
+            wait(lambda:g('game_state')==15 and g('load_resume_phase')==2,
+                 scope='derived-state-cancel')
+            step('B');step();step()
+            check('B can cancel after decode and before room reconstruction',g('game_state')==0)
+            check('late cancel preserves SRAM byte for byte',e.bytes(0x0e000000,32768)==before)
+            step('A');step();
             # No publication, migration or ordinary save can modify SRAM while
             # the read job itself owns the loading state.
             while g('game_state')==15:
@@ -137,6 +161,15 @@ def main():
             check('native decode preserves every named field and ledger',compare_state(got)==compare_state(expected))
             wait(lambda:not g('scene_present_phase'),scope='room-presentation')
             for _ in range(4):step(scope='room-presentation')
+            # A compatible checkpoint can schedule an ordinary upgrade/visit
+            # save. Measure that initial work too; decoder-only cadence cannot
+            # establish responsive existing-save Continue.
+            wait(lambda:not g('save_requested') and not g('save_feedback_background')
+                 and g('game_state')!=6,scope='initial-save-completion')
+            for _ in range(4):step(scope='post-load-idle')
+            if path.name=='synthetic-story-pending.sav':
+                check('reconstructed story dialogue survives deferred publication',g('game_state')==2)
+                check('load does not acknowledge the pending story',g('story_seen')==0)
             e.screenshot(a.output/f'{case:02d}-resumed.png')
             check('loading progress was visible',row['loading_seen'])
             check('native mGBA reports no faults',e.lib.eb_faults(e.ptr)==0)
@@ -144,6 +177,7 @@ def main():
             check('loading has no missed update or flip',not(row['missed_updates'] or row['missed_flips']))
             check('all presented loading updates fit frame budget',not row['overruns'])
             check('music remains serviced with no fault or recovery',not(row['music_faults'] or row['music_recoveries']))
+            check('source save file remains unchanged',sha(path)==row['source_sha256'])
             e.close();trace.flush()
         report['result']='PASS'
     except Exception:

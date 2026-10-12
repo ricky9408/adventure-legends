@@ -693,13 +693,16 @@ COLD void resume_loaded_game(void){CampaignSave v=adventure_save.campaign;game_s
  * B cancels only the read job; neither cancellation nor failure writes SRAM. */
 COLD void update_loading(void){
  unsigned status;
+ /* Reconstruction has committed its local result. Publish it on a cheap
+  * update so a large room constructor never shares its first scene copy. */
+ if(load_resume_phase>=16){game_state=load_resume_phase-16;load_resume_phase=0;return;}
  if(!load_boot_check&&(pressed&KEY_B)){
   save5_load_cancel();game_state=TITLE;load_resume_phase=0;return;
  }
  if(load_present_wait){--load_present_wait;return;}
  if(load_resume_phase==-1){reset_start_game(1);load_present_wait=0;return;}
  if(load_resume_phase==1){progression_load_finish();load_resume_phase=2;return;}
- if(load_resume_phase==2){load_resume_phase=0;resume_loaded_game();return;}
+ if(load_resume_phase==2){resume_loaded_game();load_resume_phase=16+game_state;game_state=LOAD_PENDING;return;}
  status=save5_load_step(SAVE5_RECOMMENDED_BUDGET);
  if(status==SAVE5_BUSY)return;
  if(load_boot_check){has_save=status==SAVE5_DONE;load_boot_check=0;game_state=TITLE;return;}
