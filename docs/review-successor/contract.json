@@ -37,8 +37,8 @@
     "src/save5_load_job.inc",
     "src/underwater_hint.inc"
   ],
-  "candidate_commit": "ede70a7b7043195e5051183221f68b15bddcab3e",
-  "candidate_tree": "906fc80a507fdec4169d96fe58aa63cf3078790a",
+  "candidate_commit": "1f6d9c65469cef6745b6107fa74ec84b0074b376",
+  "candidate_tree": "654a1a60920a34f6ccd6b289349bf4b9f417b1ec",
   "changed": [
     "Makefile",
     "assets/companion_guide_text_metrics.json",
@@ -5312,6 +5312,7 @@
     "tests/return_world_host.c": "d7a5e04035915167cbc802b6e68064aff1faeb70f2bed88d83efa8e87ca7aa50",
     "tests/shop_experience_host.c": "e6040309c306a83ab5e7b71685a1cccfb535218b37dea64457e262a54b059bd7",
     "tests/southern_powers_native.c": "0128673eb8470052883bcb73d277bf8b9469b4879c0f6d2db547e019a634cba0",
+    "tests/test_covenants_art.py": "0dab6aeaeb99f7f86e81e6d856413c373243c0027c6ce91b83a8e2f2844a35d7",
     "tests/test_covenants_camera.py": "28e27d6671a45ae6e6d69d24698ecc446c49883491b26e4ac893a370130cd4be",
     "tests/test_covenants_history.py": "024733d6cfd7e0738d81480756065620051515937b1ebfc65c5fbbdbca0b7903",
     "tests/test_covenants_party_notice.py": "0a72020170572a065e1e75a584a0d824e3e1462f82f3ee701b5b936602c95ccf",
@@ -5329,6 +5330,7 @@
     "tests/test_player_feedback_engine.py": "640d0e20eb35688d753dff2d6d83a1ee9da1155c56c6061fa3835be13d7776ee",
     "tests/test_player_feedback_menu.py": "e649cfed90e6e13b5f9d7cc1a229464adb2913e2354b376fe92a199eb39eb79c",
     "tests/test_player_feedback_party_pixels.py": "a56a9437a688f16f35b4c771435c51106d300cf0ecfd504fb4d8b589ae1e3908",
+    "tests/test_region_art.py": "fcbbdf4e03c0f5366b95cfe7b3a954e42ed97bbb84b2251ba04f4fd2805b8296",
     "tests/test_return_history_differential.py": "1e416ffc2b3b32ffdc8bdfe01a99fe623e66a92ca6ff4cad9f0b742e9173344d",
     "tests/test_return_world.py": "dfeaf8dd15b18ebe5617b5ae59d2e2950e6f9634f10d82869afc3f66d8ebfb38",
     "tests/test_save5.py": "fcd1bacb53a4b8ff305692bc15e8c77b3c2a54e803d86c47cc73ee380f035e29",
@@ -5347,7 +5349,7 @@
     "tools/run_equipment_rewards_host.py": "d79c59cb62b2a88b2d7568c5591d1c1b380549bf8aa6b843424db0846a0804c4",
     "tools/run_gameplay_ci.py": "22478fa57fa5e6bc160d4b1859d264f534a5b1380d1f51a97c9287615c203f5e"
   },
-  "inverse_sha256": "e7f1ef67ce2712067f2ff7b31fd43e731a72d1f5a9c5362b4f100ba26667ab2d",
+  "inverse_sha256": "d0dacaf8b196f4839c21af46fc4f5f9297cdf71c163ec3bb7c708a6aa4a91296",
   "music_license": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "assets/fonts/DEJAVU-LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
