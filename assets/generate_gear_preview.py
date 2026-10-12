@@ -2,14 +2,14 @@
 """Original isolated gear labels. Shared UiRun format; global UI IDs unchanged."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text
+from gbj_font import render_text,deduplicate_spans
 import json
 ROOT=Path(__file__).resolve().parents[1]
 labels=json.loads((ROOT/'assets/gear_preview_labels.json').read_text())
 items=[];metrics={}
 for name,spec in labels.items():
  string=spec['text'];h=spec['height']
- im=render_text(string,h);w=im.width
+ im=render_text(string,h,compact=name=='UNITS');w=im.width
  assert w<=214,(name,string,w)
  variants=[]
  for align in (0,1):
@@ -40,6 +40,7 @@ for name,w,h,v in items:
 lines.append('const UiText gear_preview_texts[GP_COUNT] = {\n')
 for n,w,h,v in items:lines.append('{%d,%d,0,{gp_%s_0,gp_%s_1},{%d,%d}},\n'%(w,h,n,n,len(v[0]),len(v[1])))
 lines.append('};\n')
+lines=deduplicate_spans(''.join(lines)).splitlines(True)
 folder=ROOT/'src/gear_preview_text_data';folder.mkdir(exist_ok=True)
 for p in folder.glob('part_*.inc'):p.unlink()
 parts=[];part=''

@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """Rasterize the original Japanese UI to compact monochrome glyph masks."""
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text
+from gbj_font import render_text,deduplicate_spans
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
-font=ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',12,index=0)
-small=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',8)
 texts={
  'SUBTITLE':'灯の契約', 'START':'START  はじめる', 'CONTINUE':'START  つづきから', 'NEW':'SELECT  新しい冒険',
  'TAGLINE':'小さな灯が、森を変える。','VILLAGE':'灯守りの里','FOREST':'こもれびの川','TEMPLE':'忘れられた祠','BOSS':'森の心臓',
@@ -123,6 +121,7 @@ for n,w,h,variants in items:
         source+='static const UiRun txt_'+n+'_'+str(align)+'[] = {'+','.join('{%d,%d,%d}'%r for r in runs)+'};\n'
 source+='const UiText ui_texts[TX_COUNT] = {\n'+''.join('{%d,%d,0,{txt_%s_0,txt_%s_1},{%d,%d}},\n'%(w,h,n,n,len(v[0]),len(v[1])) for n,w,h,v in items)+'};\n'
 (ROOT/'src/ui.h').write_text(header)
+source=deduplicate_spans(source)
 parts=[];part=''
 for line in source.splitlines(True):
     if len((part+line).encode())>32000:parts.append(part);part=''

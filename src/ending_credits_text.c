@@ -4,3 +4,6 @@
 #include "ending_credits_text_data/part_001.inc"
 #include "ending_credits_text_data/part_002.inc"
 #include "ending_credits_text_data/part_003.inc"
+#include "ending_credits_text_data/part_004.inc"
+#include "ending_credits_text_data/part_005.inc"
+#include "ending_credits_text_data/part_006.inc"

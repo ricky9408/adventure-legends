@@ -3,10 +3,9 @@
 from pathlib import Path
 import json,re
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text
+from gbj_font import render_text,deduplicate_spans
 ROOT=Path(__file__).resolve().parents[1]
 source=json.loads((ROOT/'assets/opening_scene.json').read_text())
-font=ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',12,index=0)
 labels={'TITLE':source['title'],'CONTROLS':source['controls']}
 assert len(source['pages'])==8
 for p,page in enumerate(source['pages']):
@@ -69,6 +68,7 @@ for x in (20,25,28):
  d.line((x,9,x,4),fill=p('PINE2'));d.rectangle((x-2,4,x,5),fill=p('PINE4'));d.rectangle((x,2,x+2,3),fill=p('MINT'))
 lines.append('const unsigned char opening_lantern[3][384] __attribute__((aligned(4)))={\n'+',\n'.join('{'+','.join(map(str,raw))+'}' for raw in lanterns)+'\n};\n')
 lines.append('const unsigned char opening_chore_props[32*16] __attribute__((aligned(4)))={'+','.join(map(str,props.tobytes()))+'};\n')
+lines=deduplicate_spans(''.join(lines)).splitlines(True)
 folder=ROOT/'src/opening_scene_data';folder.mkdir(exist_ok=True)
 for old in folder.glob('part_*.inc'):old.unlink()
 parts=[];part=''

@@ -6,3 +6,5 @@
 #include "growth_journal_text_data/part_003.inc"
 #include "growth_journal_text_data/part_004.inc"
 #include "growth_journal_text_data/part_005.inc"
+#include "growth_journal_text_data/part_006.inc"
+#include "growth_journal_text_data/part_007.inc"

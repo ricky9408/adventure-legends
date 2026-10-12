@@ -2,7 +2,7 @@
 """Compile all ending-roll credits into isolated, native GBJ UiRun text."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text
+from gbj_font import render_text,deduplicate_spans
 import json
 ROOT=Path(__file__).resolve().parents[1]
 credits=json.loads((ROOT/'assets/ending_credits.json').read_text())
@@ -42,6 +42,7 @@ for name,w,h,v in items:
 lines.append('const UiText ending_credits_texts[EC_COUNT] = {\n')
 for n,w,h,v in items:lines.append('{%d,%d,0,{ec_%s_0,ec_%s_1},{%d,%d}},\n'%(w,h,n,n,len(v[0]),len(v[1])))
 lines.append('};\n')
+lines=deduplicate_spans(''.join(lines)).splitlines(True)
 folder=ROOT/'src/ending_credits_text_data';folder.mkdir(exist_ok=True)
 for p in folder.glob('part_*.inc'):p.unlink()
 parts=[];part=''

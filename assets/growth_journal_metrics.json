@@ -1,361 +1,361 @@
 {
   "COLLECTION": {
-    "width": 48,
+    "width": 61,
     "height": 15,
     "text": "仲間の図鑑"
   },
   "CURRENT_REQUIRED": {
-    "width": 139,
+    "width": 199,
     "height": 15,
     "text": "現在 / 目標（進化は元に戻せない）"
   },
   "LEVEL": {
-    "width": 16,
+    "width": 19,
     "height": 15,
     "text": "Lv."
   },
   "BOND": {
-    "width": 11,
+    "width": 13,
     "height": 15,
     "text": "絆"
   },
   "SLASH": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "/"
   },
   "NEXT_XP": {
-    "width": 65,
+    "width": 79,
     "height": 15,
     "text": "次のLvまでEXP"
   },
   "LEVEL_MAX": {
-    "width": 42,
+    "width": 61,
     "height": 15,
     "text": "最高レベル"
   },
   "STORY": {
-    "width": 38,
+    "width": 49,
     "height": 15,
     "text": "旅の条件"
   },
   "REST": {
-    "width": 31,
+    "width": 37,
     "height": 15,
     "text": "休息地"
   },
   "STORY_GROVE": {
-    "width": 69,
+    "width": 97,
     "height": 15,
     "text": "森の守り神を救う"
   },
   "STORY_SKY": {
-    "width": 69,
+    "width": 97,
     "height": 15,
     "text": "風の守り神を救う"
   },
   "STORY_CORE": {
-    "width": 59,
+    "width": 85,
     "height": 15,
     "text": "閉じた核を解く"
   },
   "STORY_REED": {
-    "width": 66,
+    "width": 97,
     "height": 15,
     "text": "川の水路をつなぐ"
   },
   "STORY_NORTH": {
-    "width": 79,
+    "width": 109,
     "height": 15,
     "text": "港の線と方位を直す"
   },
   "STORY_COUNTER": {
-    "width": 62,
+    "width": 85,
     "height": 15,
     "text": "港の機械を直す"
   },
   "STORY_SOUTH": {
-    "width": 62,
+    "width": 85,
     "height": 15,
     "text": "窓と日陰を直す"
   },
   "STORY_SUNWELL": {
-    "width": 62,
+    "width": 85,
     "height": 15,
     "text": "南の水源を開く"
   },
   "STORY_MAGMA": {
-    "width": 89,
+    "width": 121,
     "height": 15,
     "text": "火山の炉と歩道を直す"
   },
   "STORY_CALDERA": {
-    "width": 72,
+    "width": 97,
     "height": 15,
     "text": "火山の機械を直す"
   },
   "STORY_UNDERWATER": {
-    "width": 103,
+    "width": 145,
     "height": 15,
     "text": "水底の地図と棚を確かめる"
   },
   "STORY_PALINODE": {
-    "width": 79,
+    "width": 109,
     "height": 15,
     "text": "水底の守り手を救う"
   },
   "STORY_RETURN": {
-    "width": 93,
+    "width": 133,
     "height": 15,
     "text": "里に新しい足音を迎える"
   },
   "STORY_HORIZONS": {
-    "width": 89,
+    "width": 121,
     "height": 15,
     "text": "車輪の招待状を届ける"
   },
   "TRIAL": {
-    "width": 76,
+    "width": 109,
     "height": 15,
     "text": "この姿の個体の願い"
   },
   "DONE": {
-    "width": 79,
+    "width": 109,
     "height": 15,
     "text": "この個体で達成済み"
   },
   "SAME_INDIVIDUAL": {
-    "width": 110,
+    "width": 157,
     "height": 15,
     "text": "選んだ同じ個体で達成しよう"
   },
   "INSPECT_KEYS": {
-    "width": 151,
+    "width": 199,
     "height": 15,
     "text": "↑↓ 説明   B 戻る   START 閉じる"
   },
   "GOAL_KEYS": {
-    "width": 116,
+    "width": 157,
     "height": 15,
     "text": "←→ 姿  ↑↓ 説明  B 戻る"
   },
   "GOAL_SINGLE_KEYS": {
-    "width": 145,
+    "width": 187,
     "height": 15,
     "text": "↑↓ 説明  B 戻る  START 閉じる"
   },
   "READY_KEYS": {
-    "width": 113,
+    "width": 151,
     "height": 15,
     "text": "↑↓ 説明  A 進化  B 戻る"
   },
   "READY_BRANCH_KEYS": {
-    "width": 152,
+    "width": 205,
     "height": 15,
     "text": "←→ 姿  ↑↓ 説明  A 進化  B 戻る"
   },
   "KNOWN": {
-    "width": 55,
+    "width": 73,
     "height": 15,
     "text": "発見した一族"
   },
   "OWNED_FILTER": {
-    "width": 62,
+    "width": 85,
     "height": 15,
     "text": "編成できる一族"
   },
   "MISSING_FILTER": {
-    "width": 89,
+    "width": 121,
     "height": 15,
     "text": "未収集の姿がある一族"
   },
   "FORMS": {
-    "width": 11,
+    "width": 13,
     "height": 15,
     "text": "姿"
   },
   "FAMILIES": {
-    "width": 21,
+    "width": 25,
     "height": 15,
     "text": "一族"
   },
   "UNKNOWN": {
-    "width": 69,
+    "width": 109,
     "height": 15,
     "text": "まだ出会っていない"
   },
   "NO_FAMILIES": {
-    "width": 104,
+    "width": 157,
     "height": 15,
     "text": "この分類の一族はまだいない"
   },
   "FAMILY_KEYS": {
-    "width": 129,
+    "width": 169,
     "height": 15,
     "text": "↑↓ 一族  ←→ 分類  A 詳細"
   },
   "FORM_KEYS": {
-    "width": 130,
+    "width": 175,
     "height": 15,
     "text": "←→ 姿  A 詳細・編成  B 戻る"
   },
   "OWNED": {
-    "width": 45,
+    "width": 61,
     "height": 15,
     "text": "今いる仲間"
   },
   "HISTORY": {
-    "width": 55,
+    "width": 73,
     "height": 15,
     "text": "収集済みの姿"
   },
   "MISSING": {
-    "width": 80,
+    "width": 121,
     "height": 15,
     "text": "まだ収集していない姿"
   },
   "HISTORY_KEEP": {
-    "width": 113,
+    "width": 157,
     "height": 15,
     "text": "進化しても図鑑の記録は残る"
   },
   "FROM": {
-    "width": 31,
+    "width": 37,
     "height": 15,
     "text": "進化前"
   },
   "RECRUIT_FIRST": {
-    "width": 107,
+    "width": 157,
     "height": 15,
     "text": "この一族との出会いを探そう"
   },
   "PREDECESSOR_FIRST": {
-    "width": 99,
+    "width": 133,
     "height": 15,
     "text": "進化前の仲間が必要です"
   },
   "REPEAT_FIRST": {
-    "width": 137,
+    "width": 193,
     "height": 15,
     "text": "町の再会の印から同じ一族を探そう"
   },
   "OPEN_PARTY": {
-    "width": 91,
+    "width": 127,
     "height": 15,
     "text": "A 編成で選ぶ   B 戻る"
   },
   "GOALS_OPEN": {
-    "width": 94,
+    "width": 127,
     "height": 15,
     "text": "A 成長の目標   B 戻る"
   },
   "FAMILY_NUMBER": {
-    "width": 39,
+    "width": 49,
     "height": 15,
     "text": "一族 No."
   },
   "INSTANCE": {
-    "width": 16,
+    "width": 19,
     "height": 15,
     "text": "No."
   },
   "REGION": {
-    "width": 21,
+    "width": 25,
     "height": 15,
     "text": "地域"
   },
   "REGION_CORE": {
-    "width": 62,
+    "width": 85,
     "height": 15,
     "text": "灯守りの里と森"
   },
   "REGION_REED": {
-    "width": 38,
+    "width": 49,
     "height": 15,
     "text": "川辺の町"
   },
   "REGION_NORTH": {
-    "width": 28,
+    "width": 37,
     "height": 15,
     "text": "北の港"
   },
   "REGION_SOUTH": {
-    "width": 28,
+    "width": 37,
     "height": 15,
     "text": "南の庭"
   },
   "REGION_MAGMA": {
-    "width": 48,
+    "width": 61,
     "height": 15,
     "text": "火山の工房"
   },
   "REGION_UNDERWATER": {
-    "width": 48,
+    "width": 61,
     "height": 15,
     "text": "水底の書庫"
   },
   "REGION_RETURN": {
-    "width": 38,
+    "width": 49,
     "height": 15,
     "text": "帰郷の道"
   },
   "REGION_HORIZONS": {
-    "width": 45,
+    "width": 61,
     "height": 15,
     "text": "新たな地平"
   },
   "REGION_COVENANTS": {
-    "width": 35,
+    "width": 49,
     "height": 15,
     "text": "誓いの地"
   },
   "DIGIT_0": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "0"
   },
   "DIGIT_1": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "1"
   },
   "DIGIT_2": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "2"
   },
   "DIGIT_3": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "3"
   },
   "DIGIT_4": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "4"
   },
   "DIGIT_5": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "5"
   },
   "DIGIT_6": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "6"
   },
   "DIGIT_7": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "7"
   },
   "DIGIT_8": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "8"
   },
   "DIGIT_9": {
-    "width": 8,
+    "width": 7,
     "height": 15,
     "text": "9"
   }

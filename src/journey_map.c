@@ -224,26 +224,26 @@ void journey_map_draw(void){unsigned i,first,total;JourneyMapExit e;
  if(map.overview){
   jm_center(JM_REGION_0+map.region,35,PAL_GOLD3);jm_center(JM_LIST_NOTE,50,PAL_TEAL2);
   total=place_count(map.region);first=map.selection>3?map.selection-3:0;
-  for(i=first;i<total&&i<first+4;i++){unsigned a=places(map.region,i);int y=64+(int)(i-first)*18;
-   if(i==map.selection)rect(13,y,211,18,PAL_STONE2);
+  for(i=first;i<total&&i<first+4;i++){unsigned a=places(map.region,i);int y=66+(int)(i-first)*17;
+   if(i==map.selection)rect(13,y,211,16,PAL_STONE2);
    if(a==(unsigned)room)rect(16,y+5,4,4,PAL_HEART);
    else{rect(16,y+5,4,4,PAL_TEAL2);rect(17,y+6,2,2,i==map.selection?PAL_STONE2:1);}
    text(place_names[a],23,y,i==map.selection?PAL_GOLD3:PAL_GOLD4);
   }
-  scroll_marks(first,first+4,total);jm_center(JM_LIST_KEYS,139,PAL_TEAL2);return;
+  scroll_marks(first,first+4,total);jm_center(JM_LIST_KEYS,138,PAL_TEAL2);return;
  }
  centered(place_names[map.place],35,PAL_GOLD3);
  journey_map_text(map.place==(unsigned)room?JM_CURRENT:JM_RECORD,16,50,PAL_TEAL2);
  journey_map_text(JM_CLOSE,224-journey_map_texts[JM_CLOSE].width,50,PAL_TEAL2);
  total=map.count;first=map.exit/2*2;
  for(i=first;i<total&&i<first+2;i++){
-  int y=64+(int)(i-first)*34;e=map.exits[i];
-  if(i==map.exit)rect(13,y-1,211,31,PAL_STONE2);
+  int y=65+(int)(i-first)*34;e=map.exits[i];
+  if(i==map.exit)rect(13,y-1,211,32,PAL_STONE2);
   journey_map_text(JM_N_ROAD+e.direction*7+e.kind,18,y,e.open?PAL_TEAL2:PAL_STONE4);
   journey_map_text(e.open?JM_OPEN:JM_CLOSED,187,y,e.open?PAL_TEAL2:PAL_GOLD3);
-  if(e.named&&journey_map_is_known(e.target))text(place_names[e.target],18,y+14,i==map.exit?PAL_GOLD3:PAL_GOLD4);
-  else journey_map_text(JM_UNKNOWN,18,y+14,PAL_GOLD4);
+  if(e.named&&journey_map_is_known(e.target))text(place_names[e.target],18,y+15,i==map.exit?PAL_GOLD3:PAL_GOLD4);
+  else journey_map_text(JM_UNKNOWN,18,y+15,PAL_GOLD4);
  }
  if(!total)jm_center(JM_EMPTY,91,PAL_GOLD4);
- scroll_marks(first,first+2,total);jm_center(JM_DETAIL_KEYS,139,PAL_TEAL2);
+ scroll_marks(first,first+2,total);jm_center(JM_DETAIL_KEYS,138,PAL_TEAL2);
 }

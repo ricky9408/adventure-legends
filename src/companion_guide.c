@@ -64,7 +64,7 @@ void companion_guide_axes(unsigned form,unsigned polarity,int y){
  companion_guide_text(CG_PHASE,24,y,TEAL);text(phases[f->phase],62,y,GOLD);
  companion_guide_text(CG_POLARITY,132,y,TEAL);text(polarity?TX_E_YANG:TX_E_YIN,170,y,GOLD);
 }
-void companion_guide_combat(unsigned command,int y){const CompanionGuideCopy*c;if(!command||command>128||!creatures_ability(command))return;c=&companion_guide_commands[command];companion_guide_center(c->combat[0],y,CREAM);companion_guide_center(c->combat[1],y+14,CREAM);}
+void companion_guide_combat(unsigned command,int y){const CompanionGuideCopy*c;if(!command||command>128||!creatures_ability(command))return;c=&companion_guide_commands[command];companion_guide_center(c->combat[0],y,CREAM);companion_guide_center(c->combat[1],y+15,CREAM);}
 static void number(unsigned value,int x,int y){
  static const unsigned char digits[10][5]={{7,5,5,5,7},{2,6,2,2,7},{7,1,7,4,7},{7,1,7,1,7},{5,5,7,1,1},{7,4,7,1,7},{7,4,7,5,7},{7,1,1,1,1},{7,5,7,5,7},{7,5,7,1,7}};
  unsigned values[3]={0,0,0},i,row,col,started=0;if(value>999)value=999;while(value>=100){value-=100;values[0]++;}while(value>=10){value-=10;values[1]++;}values[2]=value;
@@ -73,9 +73,11 @@ static void number(unsigned value,int x,int y){
 void companion_guide_draw(const CreatureInstance*c,unsigned command,unsigned destination){
  const CompanionGuideCopy*copy;unsigned action;box(8,31,224,123);
  if(!c||!creatures_form(c->form_id)||!command||command>128||!creatures_ability(command)){centered(TX_E_NO_MEMBER,87,CREAM);centered(TX_PF_BACK_CLOSE,138,TEAL);return;}
- copy=&companion_guide_commands[command];party_title(c,progression_name_id(c->form_id),destination);companion_guide_axes(c->form_id,c->polarity,49);
- if(companion_guide_page){int aimable=command==51||(command>=67&&command<=90&&command!=67&&command!=71&&command!=77&&command!=81)||(command>=91&&command<=121);centered(progression_command_name_id(command),65,GOLD);companion_guide_center(copy->field,81,CREAM);companion_guide_center(aimable?CG_AIM_HOLD:CG_FIELD_CONTEXT,95,TEAL);companion_guide_center(CG_FIELD_WAIT,109,TEAL);}
- else{centered(progression_command_name_id(command),65,GOLD);companion_guide_combat(command,81);companion_guide_text(CG_COMBAT_WAIT,38,109,TEAL);number(companion_guide_recovery(command),132,111);companion_guide_text(CG_FRAMES,160,109,CREAM);}
+ /* Eight native 15px text cells fill33..152 without compressed glyphs or
+  * intersecting the neighbouring combat/field explanation. */
+ copy=&companion_guide_commands[command];party_title(c,progression_name_id(c->form_id),destination);companion_guide_axes(c->form_id,c->polarity,48);
+ if(companion_guide_page){int aimable=command==51||(command>=67&&command<=90&&command!=67&&command!=71&&command!=77&&command!=81)||(command>=91&&command<=121);centered(progression_command_name_id(command),63,GOLD);companion_guide_center(copy->field,78,CREAM);companion_guide_center(aimable?CG_AIM_HOLD:CG_FIELD_CONTEXT,93,TEAL);companion_guide_center(CG_FIELD_WAIT,108,TEAL);}
+ else{centered(progression_command_name_id(command),63,GOLD);companion_guide_combat(command,78);companion_guide_text(CG_COMBAT_WAIT,38,108,TEAL);number(companion_guide_recovery(command),132,110);companion_guide_text(CG_FRAMES,160,108,CREAM);}
  companion_guide_center(companion_guide_page?CG_BROWSE_FIELD:CG_BROWSE_COMBAT,123,TEAL);
  if(destination<4){unsigned slot=adventure_save.roster.party[destination];int assigned=slot<CREATURE_ROSTER_CAPACITY&&c==&adventure_save.roster.instances[slot];action=(assigned?CG_ASSIGNED_0:CG_ASSIGN_0)+destination*2;}
  else action=c->selected_command<2&&c->equipped[c->selected_command]==command?CG_EQUIPPED:CG_EQUIP;
