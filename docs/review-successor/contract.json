@@ -143,8 +143,8 @@
     "src/ui_data/part_324.inc",
     "src/underwater_hint.inc"
   ],
-  "candidate_commit": "097fee433d3a8fc4bff7cc5c1426983cbdc3c197",
-  "candidate_tree": "ef3c723b669452d55566a841100f26dd54271d33",
+  "candidate_commit": "46823965ddf3f72b0b357bc95089713204cb0ddd",
+  "candidate_tree": "4b288625ba48aaa3253e6a4f00f518f32228c461",
   "changed": [
     "Makefile",
     "assets/CREDITS.txt",
@@ -2920,7 +2920,7 @@
     "src/feedback_world_data/part_003.inc": "b554e74b04529b6f38a2329e886c5a9450885bcc21a1fbf36deeeb53e33f0835",
     "src/feedback_world_data/part_004.inc": "4e8b4a44997b8316aa1446b68ed5cca1ebe4968596e58bbd1f0667db63238045",
     "src/field_world.h": "a7adaf647ccbb581347539f85b112367444a3cabc152aaff3882f6754aa9fcf3",
-    "src/game.c": "dbf8963f555ccbbcd0f4393effd3fdef19bf11e3482bba8adfc409ec86b9d7be",
+    "src/game.c": "c020e06361c56e5f174d62dcdd207b61392cbc82c3aec5c83e4c0c2c295e40e2",
     "src/game_shop.c": "2a9141e975324bde1f50d801f02df1158444eaa728356bc4adb401bef8ce4e10",
     "src/game_shop.h": "a7e20334e1106f282d32b11602201c4baa74041c070854f54657309e046306d9",
     "src/gear_menu.c": "688006afbe2d814efd0827b5c1112f5fbfe8a510cc8ea21829e7e2a6bebf4f8e",
@@ -6025,6 +6025,7 @@
     "tests/covenants_powers_host.c": "6cccafb21888ff35137eb036e1c9a892a88cf241aec26f25f96c2c577e5f1881",
     "tests/covenants_world_host.c": "c99423dbb7b2d21100a255d5b7fa58aa670e2923d89d8708264a34647753a70b",
     "tests/ending_credits_state_host.c": "dcc5d18068034dc5282107f0cd1b804443ea0d44f921e9526b7f70009efdd07d",
+    "tests/gear_heart_native.c": "814406c0eb20213d7afd87160d043d90bf9c0ec6f9ef2ef3b17e9cf4ab8e9989",
     "tests/gear_readable_layout_host.c": "7e960cc82a25ee6b8d133a30004a62c39d8a183798cf15328b3e95a35de63000",
     "tests/gear_readable_native.py": "d70a76da30457220d3c2903f1f1e9f914bdddf6d8d616b795fc1d9a1c725c6ff",
     "tests/gear_treasure_native.py": "3fee02f3ec760edd1e3693f3729881ceadb2fcd1f1def57acdc1d90c1d5ce3e2",
@@ -6081,7 +6082,7 @@
     "tools/run_equipment_rewards_host.py": "d79c59cb62b2a88b2d7568c5591d1c1b380549bf8aa6b843424db0846a0804c4",
     "tools/run_gameplay_ci.py": "22478fa57fa5e6bc160d4b1859d264f534a5b1380d1f51a97c9287615c203f5e"
   },
-  "inverse_sha256": "8700df4a2737f04edd8a0e4445901e56a3ce02e9563e1a430d6a1025e3d2ac96",
+  "inverse_sha256": "6ec4648e4913ea4a522188c2548d4c2ca04a776675078dac844dcf31727c5047",
   "music_license": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "assets/fonts/DEJAVU-LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
