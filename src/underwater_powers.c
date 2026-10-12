@@ -2,6 +2,7 @@
  * code, bounded geometry and no allocation. Synthetic host tests are not a
  * controller acquisition or full-engine cadence claim. */
 #include "underwater_powers.h"
+#include "enemy_types.h"
 #include "underwater_power_art.h"
 #include "underwater_game.h"
 #include "northern_powers.h"
@@ -104,7 +105,7 @@ int underwater_powers_companion_pose(void){const Spec*s=spec();
  if(underwater_power_age<s->startup+10)return 2;
  return -1;
 }
-static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=2&&coord(enemies[i].x,enemies[i].y);}
+static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&enemy_kind_is_ordinary(enemies[i].kind)&&coord(enemies[i].x,enemies[i].y);}
 static void finish(void){underwater_power_time=0;northern_powers_tiles_release(NORTHERN_TILES_UNDERWATER);cast.mark_count=cast.count=0;}
 void underwater_powers_reset(void){unsigned i;finish();power_aim_hold_reset(&aim_hold);underwater_power_kind=underwater_power_form=underwater_power_direction=0;
  underwater_power_origin_x=underwater_power_origin_y=underwater_power_age=underwater_power_cooldown=underwater_power_cast_time=underwater_power_phase=0;

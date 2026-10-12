@@ -1,6 +1,7 @@
 /* Twenty bounded Southern commands. Damage uses the real Q4/phase resolver.
  * No player movement, generic damage interception, boss retiming or heap use. */
 #include "southern_powers.h"
+#include "enemy_types.h"
 #include "southern_power_art.h"
 #include "northern_powers.h"
 #include "advanced_powers.h"
@@ -80,7 +81,7 @@ static void relative(int x,int y,int *f,int *s){int dx=fx[southern_power_directi
     x-=southern_power_origin_x;y-=southern_power_origin_y;*f=x*dx+y*dy;*s=-x*dy+y*dx;
 }
 static int origin_clear(int x,int y){return clear(southern_power_origin_x,southern_power_origin_y,x,y);}
-static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=2;}
+static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&enemy_kind_is_ordinary(enemies[i].kind);}
 static int mark_live(unsigned slot){unsigned i=slot?mark_b:mark_a;
     return i<6&&enemies[i].hp>0&&enemy_serial[i]==mark_serial[slot];
 }
@@ -200,7 +201,7 @@ static void push(unsigned i,int dx,int dy,unsigned n){unsigned step;
     }
 }
 static unsigned aimed_target(int x,int y,int direction,unsigned exclude,int ranged){unsigned i,chosen=6;int best=57;
-    for(i=0;i<6;i++)if(i!=exclude&&enemies[i].hp>0&&(!ranged||(enemies[i].kind==2&&
+    for(i=0;i<6;i++)if(i!=exclude&&ordinary(i)&&(!ranged||(enemies[i].kind==2&&
        ((enemy_windups[i]>0&&enemy_windups[i]<=120)||
         (!enemy_windups[i]&&enemy_clocks[i]>=0&&enemy_clocks[i]<=40))))){int dx=enemies[i].x-x,dy=enemies[i].y-y;
         int f=dx*fx[direction]+dy*fy[direction],s=-dx*fy[direction]+dy*fx[direction];
@@ -303,7 +304,7 @@ int southern_powers_melee_guard(unsigned i,int x,int y){int f,s;
     impact(x,y);return 1;
 }
 unsigned southern_powers_windup(unsigned i,unsigned base){
-    if(!active()||hitstop||southern_power_kind!=29||spent||i!=mark_a||!ordinary(i)||
+    if(!active()||hitstop||southern_power_kind!=29||spent||i!=mark_a||!ordinary(i)||enemies[i].kind!=ENEMY_RANGER||
        !mark_live(0)||southern_power_time<=12||base==0||base>120||!origin_clear(enemies[i].x,enemies[i].y))return base;
     spent=1;delayed=12;delay_x=enemies[i].x;delay_y=enemies[i].y;return base+12;
 }

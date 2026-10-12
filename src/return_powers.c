@@ -2,6 +2,7 @@
  * receipts, save validation, new OBJ storage, or IWRAM code. Every damaging/
  * field pixel is one of the diamonds actually submitted to the OBJ renderer. */
 #include "return_powers.h"
+#include "enemy_types.h"
 #include "return_power_art.h"
 #include "return_game.h"
 #include "field_world.h"
@@ -109,7 +110,7 @@ static void crescent(int x,int y,int size,unsigned flags){int d=return_power_dir
  int cx=x-size*dx[d]+size*dy[d],cy=y-size*dy[d]-size*dx[d];
  line_world(ax,ay,bx,by,flags,clear(x,y,ax,ay));line_world(bx,by,cx,cy,flags,clear(x,y,bx,by));
 }
-static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=2&&coord(enemies[i].x,enemies[i].y);}
+static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&enemy_kind_is_ordinary(enemies[i].kind)&&coord(enemies[i].x,enemies[i].y);}
 static int bound(unsigned i){return ordinary(i)&&cast.serial[i]==cast.bound_serial[i];}
 int return_powers_cast_matches_selected(void){CreatureInstance*c=progression_selected();return c&&(c->flags&CREATURE_OCCUPIED)&&cast.caster&&c->instance_id==cast.caster&&c->form_id==return_power_form;}
 static int same_selected(void){CreatureInstance*c=progression_selected();return return_powers_cast_matches_selected()&&c->selected_command<2&&c->equipped[c->selected_command]==return_power_kind;}
@@ -274,7 +275,7 @@ static void combat(void){unsigned i;int f,z,pf,pz,x,y;
   if(return_power_kind==95){if(cast.spent||!honest_move(i)||dist(cast.previous[i].x,cast.previous[i].y,enemies[i].x,enemies[i].y)==0)continue;
    cast.spent=1;world(28,cast.side*12,&x,&y);hurt(i);if(pocket_open(i,x,y))push(i,x,y,8);}
   else if(return_power_kind==102){if(!quiet_side(i))continue;cast.quiet_used=1;enemy_windups[i]=0;enemy_clocks[i]=60;hurt(i);}
-  else if(return_power_kind==104){if(cast.spent||enemies[i].kind>1)continue;cast.spent=1;
+  else if(return_power_kind==104){if(cast.spent||!enemy_kind_is_melee(enemies[i].kind))continue;cast.spent=1;
    x=enemies[i].x-dy[return_power_direction]*cast.side*8;y=enemies[i].y+dx[return_power_direction]*cast.side*8;hurt(i);if(pocket_open(i,x,y))push(i,x,y,8);}
   else if(return_power_kind==101){local(enemies[i].x,enemies[i].y,&f,&z);x=enemies[i].x-dy[return_power_direction]*(z<0?-6:6);y=enemies[i].y+dx[return_power_direction]*(z<0?-6:6);hurt(i);push(i,x,y,6);}
   else hurt(i);

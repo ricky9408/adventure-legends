@@ -2,6 +2,7 @@
  * solely of the exact radius2 diamond pixels submitted to OBJ. No heap,
  * persistent state, music/DMA ownership, resident OBJ or IWRAM allocation. */
 #include "horizons_powers.h"
+#include "enemy_types.h"
 #include "horizons_power_art.h"
 #include "horizons_game.h"
 #include "field_world.h"
@@ -202,8 +203,8 @@ static void blade(int f,int side,unsigned flags,int moving){int z,x,y,sx,sy;
 static void splash(int f,int s,int radius,unsigned flags){int a,b;
  for(b=-radius;b<=radius;b+=4)for(a=-radius;a<=radius;a+=4)if(ab(a)+ab(b)<=radius)point(f+a,s+b,flags);
 }
-static int enemy_live(unsigned i){return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=3&&coord(enemies[i].x,enemies[i].y);}
-static int ordinary(unsigned i){return enemy_live(i)&&(unsigned)enemies[i].kind<=2;}
+static int enemy_live(unsigned i){return i<6&&enemies[i].hp>0&&enemy_kind_is_ordinary(enemies[i].kind)&&coord(enemies[i].x,enemies[i].y);}
+static int ordinary(unsigned i){return enemy_live(i);}
 static int bound(unsigned i){return enemy_live(i)&&cast.serial[i]==cast.bound_serial[i];}
 int horizons_powers_cast_matches_selected(void){CreatureInstance*c=progression_selected();return c&&(c->flags&CREATURE_OCCUPIED)&&cast.caster&&c->instance_id==cast.caster&&c->form_id==horizons_power_form;}
 static int same_selected(void){CreatureInstance*c=progression_selected();return horizons_powers_cast_matches_selected()&&c->selected_command<2&&c->equipped[c->selected_command]==horizons_power_kind;}

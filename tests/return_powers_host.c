@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "return_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "return_power_art.h"
 #include "northern_powers.h"
 #include "return_game.h"
@@ -48,7 +49,7 @@ unsigned return_game_action_begin(unsigned c){assert(c==3);return ++token;}
 int return_game_field_target(unsigned i,int*x,int*y,int*r){if(i>=field_count)return 0;*x=field_x;*y=field_y;*r=field_radius;return 1;}
 int return_game_field_hit(unsigned i,unsigned command,unsigned identity,unsigned form,unsigned t){assert(i<field_count);field_calls++;
  if(identity!=caster.instance_id||form!=caster.form_id||command!=caster.equipped[caster.selected_command]||t!=token)return 0;field_accepts++;return 1;}
-static void enemy(unsigned i,int f,int s,int kind){enemies[i]=(Enemy){100+f,100+s,100,0,kind};enemy_hp_q4[i]=1600;enemy_phases[i]=255;return_powers_enemy_spawn(i);}
+static void enemy(unsigned i,int f,int s,int kind){enemies[i]=(Enemy){100+f,100+s,100,0,test_ordinary_enemy_kind(kind)};enemy_hp_q4[i]=1600;enemy_phases[i]=255;return_powers_enemy_spawn(i);}
 static void shot(unsigned i,int f,int s,int df,int ds,int hostile){shots[i]=(Shot){100+f,100+s,df,ds,90,hostile};return_powers_shot_spawn(i);}
 static void wall(int x,int y,int w,int h){assert(wall_count<8);walls[wall_count].x=x;walls[wall_count].y=y;walls[wall_count].w=w;walls[wall_count++].h=h;return_powers_geometry_changed();}
 static void setup(unsigned c){const CreatureForm*f;return_powers_reset();owner=0;memset(enemies,0,sizeof enemies);memset(shots,0,sizeof shots);memset(enemy_windups,0,sizeof enemy_windups);memset(enemy_aimx,0,sizeof enemy_aimx);memset(enemy_aimy,0,sizeof enemy_aimy);
@@ -107,7 +108,8 @@ static void geometry_cases(void){unsigned c;for(c=91;c<=105;c++){setup(c);field_
  setup(97);field_count=1;field_x=120;field_y=112;assert(return_power(97));return_powers_selection_changed();updates(40);assert(!field_accepts);puts("geometry: exact visible diamond/target extents, gaps, wall LOS, revoked fields");}
 static void identity_displacement(void){unsigned c;setup(97);enemy(0,20,12,0);assert(return_power(97));updates(12);assert(enemy_hp_q4[0]<1600);enemy(0,20,12,0);updates(40);assert(enemy_hp_q4[0]==1600);
  for(c=95;c<=104;c++){int x,y;if(c!=95&&c!=98&&c!=101&&c!=104)continue;setup(c);prepare_hit(c);assert(return_power(c));x=enemies[0].x;y=enemies[0].y;wall(x+3,y-16,1,32);{unsigned a;for(a=1;a<=lifetime[c-91];a++){tick();help(c,a);}}assert(abs(enemies[0].x-x)+abs(enemies[0].y-y)<=9);assert(!solid(enemies[0].x,enemies[0].y));}
- setup(104);enemy(0,14,0,3);assert(return_power(104));updates(40);assert(enemy_hp_q4[0]==1600&&enemies[0].y==100);
+ setup(104);enemy(0,14,0,4);assert(return_power(104));updates(40);assert(enemy_hp_q4[0]==1600&&enemies[0].y==100);
+ setup(104);enemy(0,14,0,2);assert(return_power(104));updates(40);assert(enemy_hp_q4[0]==1600&&enemies[0].y==100); /* ranger remains outside melee diversion */
  setup(102);prepare_hit(102);enemy_aimy[0]=2;assert(return_power(102));updates(24);assert(enemy_windups[0]==30&&enemy_hp_q4[0]==1600);puts("identity/displacement: slot reuse, walls, ordinary-only, quiet-cut wrong side");}
 static void art_contract(void){unsigned c,k;int x,y;assert(return_power_marks[0][11*16+3]==13);assert(return_power_marks[1][4*16+12]==50);
  for(c=0;c<15;c++)for(k=0;k<2;k++)for(y=0;y<8;y++)for(x=0;x<8;x++)assert(!!return_power_particles[c][k][y*8+x]==(abs(x-3)+abs(y-3)<=2));

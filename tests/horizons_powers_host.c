@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "horizons_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "horizons_power_art.h"
 #include "northern_powers.h"
 #include "horizons_game.h"
@@ -41,14 +42,24 @@ int solid(int x,int y){int i;solid_calls++;if(x<0||y<0||x>=480||y>=320)return 1;
  for(i=0;i<wall_count;i++)if(x>=walls[i].x&&y>=walls[i].y&&x<walls[i].x+walls[i].w&&y<walls[i].y+walls[i].h)return 1;return 0;}
 int game_clear_box(int x0,int y0,int x1,int y1){int i;if(x0<0||y0<0||x1>=480||y1>=320||x0>x1||y0>y1)return 0;
  for(i=0;i<wall_count;i++)if(x0<walls[i].x+walls[i].w&&x1>=walls[i].x&&y0<walls[i].y+walls[i].h&&y1>=walls[i].y)return 0;return 1;}
-int horizons_game_supercover(int x,int y,int tx,int ty){(void)x;(void)y;(void)tx;(void)ty;return -1;}
+/* Current successor dispatch requires its owning backend to answer exact
+ * geometry. This independent synthetic map uses inclusive side-cell checks. */
+int horizons_game_supercover(int x,int y,int tx,int ty){
+ int ax=abs(tx-x),ay=-abs(ty-y),sx=x<tx?1:-1,sy=y<ty?1:-1,e=ax+ay;
+ if(solid(x,y)||solid(tx,ty))return 0;
+ while(x!=tx||y!=ty){int q=e*2,nx=x,ny=y;
+  if(q>=ay){e+=ay;nx+=sx;}if(q<=ax){e+=ax;ny+=sy;}
+  if(nx!=x&&ny!=y&&(solid(nx,y)||solid(x,ny)))return 0;
+  x=nx;y=ny;if(solid(x,y))return 0;
+ }return 1;
+}
 unsigned horizons_game_action_begin(unsigned c){assert(c==3);revoked=0;return ++token;}
 void horizons_game_revoke_cast(unsigned t){if(t==token)revoked=1;}
 int horizons_game_field_target(unsigned i,int*x,int*y,int*r){if(i>=field_count)return 0;*x=field_x;*y=field_y;*r=field_radius;return 1;}
 int horizons_game_field_hit(unsigned i,unsigned command,unsigned identity,unsigned form,unsigned t){assert(i<field_count);field_calls++;
  if(revoked||identity!=caster.instance_id||form!=caster.form_id||command!=caster.equipped[caster.selected_command]||t!=token)return 0;
  field_accepts++;field_beats|=1u<<horizons_powers_beat();return 1;}
-static void enemy(unsigned i,int f,int s,int kind){enemies[i]=(Enemy){100+f,100+s,100,0,kind};enemy_hp_q4[i]=1600;enemy_phases[i]=255;horizons_powers_enemy_spawn(i);}
+static void enemy(unsigned i,int f,int s,int kind){enemies[i]=(Enemy){100+f,100+s,100,0,test_ordinary_enemy_kind(kind)};enemy_hp_q4[i]=1600;enemy_phases[i]=255;horizons_powers_enemy_spawn(i);}
 static void shot(unsigned i,int f,int s,int df,int ds,int hostile){shots[i]=(Shot){100+f,100+s,df,ds,90,hostile};horizons_powers_shot_spawn(i);}
 static void wall(int x,int y,int w,int h){assert(wall_count<8);walls[wall_count].x=x;walls[wall_count].y=y;walls[wall_count].w=w;walls[wall_count++].h=h;horizons_powers_geometry_changed();}
 static void setup(unsigned c){const CreatureForm*f;horizons_powers_reset();owner=0;memset(enemies,0,sizeof enemies);memset(shots,0,sizeof shots);memset(slowed_enemies,0,sizeof slowed_enemies);memset(enemy_stagger_ticks,0,6);
@@ -104,14 +115,14 @@ static void geometry_cases(void){unsigned c;for(c=106;c<=121;c++){setup(c);field
  puts("fields: exact pixels/octagon, gaps, one-pixel first-wall stops, radial LOS, permanent revocation, same-token two beats");}
 static void identity_movement(void){setup(114);enemy(0,24,0,0);assert(horizons_power(114));updates(12);assert(enemy_hp_q4[0]==1552);enemy(0,24,0,0);updates(24);assert(enemy_hp_q4[0]==1600);
  setup(110);enemy(0,24,0,0);assert(horizons_power(110));updates(6);assert(enemy_hp_q4[0]==1568&&enemies[0].x==132);
- setup(110);enemy(0,24,0,3);assert(horizons_power(110));updates(6);assert(enemy_hp_q4[0]==1568&&enemies[0].x==124);
+ setup(110);enemy(0,24,0,4);assert(horizons_power(110));updates(6);assert(enemy_hp_q4[0]==1600&&enemies[0].x==124);
  setup(110);enemy(0,24,0,0);wall(130,104,1,1);assert(horizons_power(110));updates(6);assert(enemies[0].x==125);
  setup(110);enemy(0,24,0,0);enemy(1,33,0,0);assert(horizons_power(110));updates(6);assert(enemies[0].x==124);
  setup(110);enemy(0,24,0,0);assert(horizons_power(110));px=134;py=106;updates(6);assert(enemies[0].x==125);
  setup(117);enemy(0,18,0,0);assert(horizons_power(117));updates(8);assert(enemy_stagger_ticks[0]==18);
  setup(120);enemy(0,24,0,0);assert(horizons_power(120));updates(12);assert(enemy_hp_q4[0]==1600&&!slowed_enemies[0]);
  setup(120);enemy(0,23,0,0);assert(horizons_power(120));updates(9);enemies[0].x++;tick();assert(enemy_hp_q4[0]==1568&&slowed_enemies[0]==18);slowed_enemies[0]=3;updates(8);assert(slowed_enemies[0]==3);
- setup(120);enemy(0,23,0,3);assert(horizons_power(120));updates(9);enemies[0].x++;tick();assert(enemy_hp_q4[0]==1600&&!slowed_enemies[0]);
+ setup(120);enemy(0,23,0,4);assert(horizons_power(120));updates(9);enemies[0].x++;tick();assert(enemy_hp_q4[0]==1600&&!slowed_enemies[0]);
  puts("enemy serials and movement: recycle immunity, swept feet, boss immobility, grounded stagger and nonstacking crossing slow");}
 static void spacing(void){setup(106);enemy(0,70,0,0);assert(horizons_power(106));updates(18);enemies[0].x=140;updates(20);assert(enemy_hp_q4[0]==1568);
  setup(111);enemy(0,38,-8,0);assert(horizons_power(111));updates(42);assert(enemy_hp_q4[0]==1552);

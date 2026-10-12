@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "northern_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "regional_powers.h"
 #include "advanced_powers.h"
 #include "gear_runtime.h"
@@ -78,7 +79,7 @@ static void setup(unsigned command){
     game_health_refresh(1);game_attacks_reset();select_command(command);
 }
 static void enemy(unsigned i,int x,int y,int hearts){
-    enemies[i]=(Enemy){x,y,hearts,0,0};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;
+    enemies[i]=(Enemy){x,y,hearts,0,test_ordinary_enemy_kind(0)};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;
 }
 static void shot(unsigned i,int x,int y,int dx,int dy,int life,int owner){
     shots[i]=(Shot){x,y,dx,dy,life,owner};shot_phases[i]=CREATURE_FIRE;
@@ -171,7 +172,7 @@ static void test_walls_displacement_and_phase(void){
     }
     setup(13);enemy(0,136,105,10);assert(northern_power(13));
     assert(abs(enemies[0].x-136)+abs(enemies[0].y-105)<=8);
-    setup(17);enemy(0,124,100,10);enemies[0].kind=3;boss_x=124;boss_y=100;boss_live=1;
+    setup(17);enemy(0,124,100,10);enemies[0].kind=4;boss_x=124;boss_y=100;boss_live=1;
     assert(northern_power(17));assert(enemies[0].x==124&&boss_x==124&&boss_y==100);
     setup(17);enemy(0,124,100,10);enemy_phases[0]=CREATURE_FIRE;assert(northern_power(17));
     assert(enemy_hp_q4[0]==160-(int)combat_damage_q4(24,0,0,CREATURE_WATER,CREATURE_FIRE,0));

@@ -2,6 +2,7 @@
  * Every collision path uses endpoint-inclusive integer raster + corner cells.
  * Static scenery checks are cached, while enemy occupancy/identity remains live. */
 #include "magma_powers.h"
+#include "enemy_types.h"
 #include "magma_power_art.h"
 #include "magma_game.h"
 #include "northern_powers.h"
@@ -68,7 +69,7 @@ static int clear(int x,int y,int tx,int ty){
   x=nx;y=ny;if(solid(x,y))return 0;
  }return 1;
 }
-static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=2&&coordinate(enemies[i].x,enemies[i].y);}
+static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&enemy_kind_is_ordinary(enemies[i].kind)&&coordinate(enemies[i].x,enemies[i].y);}
 static int active(void){return magma_power_time>0&&northern_powers_tiles_owner()==NORTHERN_TILES_MAGMA&&
  lease_generation==northern_powers_tiles_generation();}
 static const Spec *spec(void){return magma_power_kind>=43&&magma_power_kind<=66?&specs[magma_power_kind-43]:0;}

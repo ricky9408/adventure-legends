@@ -1,6 +1,7 @@
 #ifndef ADVENTURE_ENEMY_TACTICS_H
 #define ADVENTURE_ENEMY_TACTICS_H
-enum { ENEMY_LANE_CHARGER=3, ENEMY_CHARGE_RANGE=64,
+#include "enemy_types.h"
+enum { ENEMY_CHARGE_RANGE=64,
        ENEMY_CHARGE_WARNING=42, ENEMY_CHARGE_STEPS=18,
        ENEMY_CHARGE_SPEED=3, ENEMY_CHARGE_RECOVERY=90 };
 /* Reuses the existing per-actor clock, warning and aim storage. Positive clock

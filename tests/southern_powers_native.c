@@ -7,6 +7,7 @@
 #include <string.h>
 #include "northern_powers.h"
 #include "southern_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "regional_powers.h"
 #include "advanced_powers.h"
 #include "gear_runtime.h"
@@ -80,7 +81,7 @@ static void setup(unsigned command){
     game_health_refresh(1);game_attacks_reset();select_command(command);
 }
 static void enemy(unsigned i,int x,int y,int hearts){
-    enemies[i]=(Enemy){x,y,hearts,0,0};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;southern_powers_enemy_spawn(i);
+    enemies[i]=(Enemy){x,y,hearts,0,test_ordinary_enemy_kind(0)};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;southern_powers_enemy_spawn(i);
 }
 static void shot(unsigned i,int x,int y,int dx,int dy,int life,int owner){
     shots[i]=(Shot){x,y,dx,dy,life,owner};shot_phases[i]=CREATURE_FIRE;
@@ -143,7 +144,7 @@ static void test_guards_and_aim(void){unsigned c;int t,cd;
         setup(c);enemy(0,c==33?110:100,c==33?100:90,10);assert(southern_power(c));
         assert(!southern_powers_melee_guard(0,enemies[0].x,enemies[0].y));updates(8);
         assert(!southern_powers_melee_guard(0,90,100));assert(!southern_powers_melee_guard(0,100,110));
-        enemies[0].kind=3;assert(!southern_powers_melee_guard(0,enemies[0].x,enemies[0].y));enemies[0].kind=0;
+        enemies[0].kind=4;assert(!southern_powers_melee_guard(0,enemies[0].x,enemies[0].y));enemies[0].kind=test_ordinary_enemy_kind(0);
         enemies[0].kind=2;assert(!southern_powers_melee_guard(0,enemies[0].x,enemies[0].y));enemies[0].kind=0;
         px=110;assert(!southern_powers_melee_guard(0,enemies[0].x,enemies[0].y));px=100;
         assert(southern_powers_melee_guard(0,enemies[0].x,enemies[0].y));
@@ -236,14 +237,14 @@ static void test_geometry_once_and_walls(void){unsigned c,d,i;static const int d
     setup(24);enemy(0,116,84,10);wall(101,100,1,1);assert(!southern_power(24));
     setup(24);enemy(0,116,84,10);wall(100,99,1,1);assert(!southern_power(24));
     setup(37);enemy(0,124,112,10);assert(southern_power(37));updates(15);assert(slowed_enemies[0]);southern_powers_reset();assert(!slowed_enemies[0]);
-    setup(25);enemy(0,124,100,10);enemies[0].kind=3;assert(southern_power(25));updates(24);assert(enemies[0].x==124);
+    setup(25);enemy(0,124,100,10);enemies[0].kind=4;assert(southern_power(25));updates(24);assert(enemies[0].x==124);
 }
 static void test_decoys_and_lease(void){int tx,ty,up;unsigned owner;
     setup(35);enemy(0,124,100,10);enemy(1,126,100,10);assert(southern_power(35));updates(6);
     tx=ty=100;assert(southern_powers_approach(0,&tx,&ty));assert(tx==120&&ty==84);
     assert(enemies[0].x==124&&enemies[0].y==100);assert(!southern_powers_approach(1,&tx,&ty));
     updates(12);assert(!southern_powers_approach(0,&tx,&ty));expect_damage(0,0);
-    setup(36);enemy(0,120,100,10);enemies[0].kind=3;assert(southern_power(36));updates(6);
+    setup(36);enemy(0,120,100,10);enemies[0].kind=4;assert(southern_power(36));updates(6);
     assert(!southern_powers_approach(0,&tx,&ty));enemies[0].kind=0;wall(120,90,1,1);assert(!southern_powers_approach(0,&tx,&ty));
     for(owner=1;owner<=3;owner++){
         setup(23);assert(northern_powers_tiles_claim(owner));up=uploads;

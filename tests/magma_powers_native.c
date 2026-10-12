@@ -8,6 +8,7 @@
 #include "northern_powers.h"
 #include "southern_powers.h"
 #include "magma_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "magma_game.h"
 #include <limits.h>
 #include "regional_powers.h"
@@ -100,7 +101,7 @@ static void setup(unsigned command){
     game_health_refresh(1);game_attacks_reset();select_command(command);
 }
 static void enemy(unsigned i,int x,int y,int hearts){
-    enemies[i]=(Enemy){x,y,hearts,0,0};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;southern_powers_enemy_spawn(i);magma_powers_enemy_spawn(i);
+    enemies[i]=(Enemy){x,y,hearts,0,test_ordinary_enemy_kind(0)};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;southern_powers_enemy_spawn(i);magma_powers_enemy_spawn(i);
 }
 static void shot(unsigned i,int x,int y,int dx,int dy,int life,int owner){
     shots[i]=(Shot){x,y,dx,dy,life,owner};shot_phases[i]=CREATURE_FIRE;
@@ -177,7 +178,7 @@ static void test_freeze_identity_and_validation(void){unsigned c,i;int time,cd,u
 }
 static void test_geometry_and_exclusions(void){unsigned c;int old;
  for(c=43;c<=66;c++){
-  setup(c);enemy(0,positions[c-43][0],positions[c-43][1],10);enemies[0].kind=3;
+  setup(c);enemy(0,positions[c-43][0],positions[c-43][1],10);enemies[0].kind=4;
   assert(magma_power(c));updates(90);expect_damage(0,0);
   setup(c);enemy(0,positions[c-43][0],positions[c-43][1],10);wall(103,0,1,320);
   old=magma_power(c);if(old)updates(90);expect_damage(0,0);

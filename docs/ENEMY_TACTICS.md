@@ -43,3 +43,12 @@ retry. The controller sidestep preserved all 144q4 HP.
 This is a focused cross-ROM integration follow-up from an authenticated earned
 save, not a fresh candidate campaign or a subjective balance/fun assessment.
 The combined changes still need the full fresh native campaign gate.
+
+Companion classification follow-up: the new lane charger is an ordinary melee
+actor (kind3), while unsupported pool kinds remain excluded and bosses continue
+through their separate APIs. The shared enemy_types.h predicates now cover
+all seven affected power modules, Northern displacement, Return104 melee and
+Southern aimed selection. Southern29 windup retiming explicitly remains ranger
+only. The real-cast matrix tests established actors and chargers separately in
+strict and ASan/UBSan modes, retaining existing damage/geometry/identity oracles.
+This is host evidence; controller play is documented separately above.
