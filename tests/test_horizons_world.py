@@ -91,6 +91,23 @@ class World(unittest.TestCase):
   cases=[(63,105,106,(336,128),(336,104),(336,54,0),(336,112),(400,112)),(67,107,108,(368,208),(300,232),(268,208,3),(400,240),(368,272)),(66,109,110,(48,72),(80,160),(132,256,3),(80,248),(64,288)),(68,111,112,(48,112),(80,112),(64,94,3),(112,112),(160,136))]
   for i,(area,base,cmd,lectern,manual,origin,w1,w2) in enumerate(cases):
    slot=self.select(base,cmd);self.assertEqual(self.l.evolve(slot,base+1),0);self.entry(area);self.select(base+1,cmd+1);self.act(*lectern);self.assertEqual(self.l.get_mode(),4,i);self.act(*manual);self.l.snapshot_state();self.at(*origin);t=self.l.action();self.assertEqual(self.l.hit(0,t,1,0),1);self.assertEqual(self.l.hit(0,t,2,1 if i==1 else 0),0);self.assertEqual(self.l.get_stage(),0);self.assertEqual(self.l.hit(1,t,2,1 if i==1 else 0),1);self.walk(*w1);self.walk(*w2);self.assertEqual(self.l.get_mode(),0);self.assertEqual(self.l.unchanged(),1);self.assertEqual(self.l.valid(),1)
+ def test_practice_hint_requires_the_actual_command_and_qualified_trial(self):
+  self.test_all_four_personal_trials_and_rehearsal()
+  slot=self.select(105,106);self.assertEqual(self.l.evolve(slot,106),0);self.entry(63)
+  self.select(106,106);self.at(336,146,1);before=bytes(self.s)
+  self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+  self.assertEqual(self.l.horizons_game_interact(),0);self.assertEqual(self.l.get_mode(),0)
+  self.assertEqual(bytes(self.s),before)
+  self.select(106,107);self.at(336,146,1)
+  qualified=self.s.roster.instances[slot].trial_flags;self.s.roster.instances[slot].trial_flags=0
+  self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+  self.assertEqual(self.l.horizons_game_interact(),0);self.assertEqual(self.l.get_mode(),0)
+  self.s.roster.instances[slot].trial_flags=qualified
+  x=C.c_int();y=C.c_int();before=bytes(self.s)
+  self.assertEqual(self.l.horizons_game_target_hint(C.byref(x),C.byref(y)),1)
+  self.assertEqual((x.value,y.value),(336,128));self.assertEqual(bytes(self.s),before)
+  self.assertEqual(self.l.get_mode(),0);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.get_mode(),4);self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
  def first_optional(self,i):
   data={4:(63,(64,64),(80,96),(112,96)),5:(64,(200,112),(176,120),(160,112)),6:(65,(416,256),(384,224),(416,224)),7:(67,(64,192),(48,144),(96,192)),8:(69,(208,112),(48,48),(176,112)),9:(66,(48,208),(48,176),(80,208)),10:(62,(304,272),(304,240),(336,272)),11:(68,(48,112),(80,112),(48,136))}
   area,invite,manual,walk=data[i];self.entry(area)

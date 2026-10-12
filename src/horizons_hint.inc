@@ -27,7 +27,7 @@ COLD int horizons_game_target_hint(int*x,int*y){
    continue; /* Other room actors are hidden during this work projection. */
   }
   for(i=0;i<4;i++)if(trials[i].area==room&&c&&(c->form_id==trials[i].form||c->form_id==trials[i].form+1u)&&hint_at(trials[i].lectern[0],trials[i].lectern[1],pass,x,y))return 1;
-  if(room==63&&c&&c->form_id==106&&hint_at(336,128,pass,x,y))return 1;
+  if(room==63&&practice_eligible(0)&&hint_at(336,128,pass,x,y))return 1;
   for(i=0;i<12;i++)if(sources[i].area==room&&hint_at(sources[i].invite[0],sources[i].invite[1],pass,x,y))return 1;
   for(i=0;i<sizeof hint_points/sizeof hint_points[0];i++){
    const HintPoint*p=&hint_points[i];if(p->area!=room)continue;
