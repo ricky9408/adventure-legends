@@ -123,6 +123,9 @@ int equipment_reward_claimed(const EquipmentState *state, unsigned reward_id);
  * including after a discard; seen is collection history, never ownership. */
 unsigned equipment_claim(EquipmentState *state, unsigned item_id,
                          unsigned reward_id, unsigned *out_ref);
+/* Unique paid acquisition uses owned/seen fields, leaving the quest receipt
+ * unclaimed. Later earning that receipt cannot duplicate the same item. */
+unsigned equipment_purchase(EquipmentState *state,unsigned item_id,unsigned *out_ref);
 /* Atomic small reward bundles. Sources must be distinct enabled IDs, count
  * 1..4. Stages one 512-byte temporary state; FULL/INVALID changes nothing.
  * OK means some new gear, DUPLICATE means only new history claims, and

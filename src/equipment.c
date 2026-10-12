@@ -205,6 +205,17 @@ unsigned equipment_claim(EquipmentState *s, unsigned id, unsigned reward, unsign
     if (out_ref) *out_ref = i;
     return EQUIPMENT_OK;
 }
+unsigned equipment_purchase(EquipmentState *s,unsigned id,unsigned *out_ref){
+ const EquipmentDefinition*d=equipment_definition(id);unsigned i;
+ /* Only the pre-Return catalog permits acquisition independent of a typed
+  * quest receipt. Current shop policy narrows this further to eight items. */
+ if(!d||id==EQUIPMENT_STARTER_ID||equipment_reward_source(id)>=37||!equipment_validate(s))return EQUIPMENT_INVALID;
+ if(equipment_seen(s,id))return EQUIPMENT_DUPLICATE;
+ for(i=1;i<EQUIPMENT_BAG_CAPACITY;++i)if(!s->bag[i].item_id)break;
+ if(i==EQUIPMENT_BAG_CAPACITY)return EQUIPMENT_FULL;
+ s->bag[i].item_id=(EquipmentU16)id;s->bag[i].flags=d->flags;s->bag[i].quantity=1;
+ bit_set(s->seen,id);if(out_ref)*out_ref=i;return EQUIPMENT_OK;
+}
 unsigned equipment_claim_many(EquipmentState *s, const EquipmentU8 *sources, unsigned count) {
     EquipmentState staged;
     unsigned i, j, result = EQUIPMENT_ALREADY_CLAIMED;

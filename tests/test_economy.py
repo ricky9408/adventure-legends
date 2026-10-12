@@ -14,6 +14,8 @@ class EconomyTests(unittest.TestCase):
   subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-ffreestanding','-fno-builtin','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-shared','-fPIC',*flags,*[str(ROOT/'src'/n)for n in ('save4.c','save5.c','creatures.c','creature_data.c','equipment.c','equipment_data.c','economy.c')],'-o',str(out)],check=True)
   cls.l=C.CDLL(str(out));cls.ram=(C.c_ubyte*32768).in_dll(cls.l,'save5_test_sram')
   for n in ('save5_validate','save5_begin','save5_store','save5_load','save5_preflight_begin'):getattr(cls.l,n).argtypes=[C.POINTER(Save)]
+  cls.l.save5_validate_revision.argtypes=[C.POINTER(Save),C.c_uint]
+  cls.l.equipment_purchase.argtypes=[C.c_void_p,C.c_uint,C.c_void_p]
   for n in ('economy_begin_purchase','economy_begin_use','economy_begin_claim','economy_award_combat'):getattr(cls.l,n).argtypes=[C.POINTER(Save),C.c_uint]
   cls.l.save5_test_fail_after.argtypes=[C.c_int]
  def setUp(self):
@@ -52,7 +54,43 @@ class EconomyTests(unittest.TestCase):
   self.assertEqual(self.l.economy_begin_purchase(C.byref(s),2),0);self.assertEqual(self.l.economy_last_error(),5)
   for item in range(2):self.job(s,'economy_begin_use',item)
   self.assertEqual(self.l.economy_begin_use(C.byref(s),0),0);self.assertEqual(self.l.economy_last_error(),7);self.assertEqual(bytes(s.equipment),gear);self.assertEqual(compare_state(self.reload()),compare_state(s))
-  bank=bytes(self.ram[A:A+SIZE]);self.assertEqual(bank[6:8],(5088).to_bytes(2,'little'));self.assertEqual(bank[12:14],b'\x0b\0')
+  bank=bytes(self.ram[A:A+SIZE]);self.assertEqual(bank[6:8],(5088).to_bytes(2,'little'));self.assertEqual(bank[12:14],b'\x0c\0')
+ def test_content12_receipts_keep_revision11_wallet_exact(self):
+  s=self.fresh(1,gold=200);s.quests.region_flags[0]=1
+  self.assertEqual(self.l.save5_validate_revision(C.byref(s),11),1)
+  self.assertEqual(self.l.save5_store(C.byref(s)),1);prior=bytearray(self.ram[A:A+SIZE])
+  prior[12:14]=(11).to_bytes(2,'little');prior=repair_crc(prior)
+  self.ram[A:A+SIZE]=prior
+  ref=C.c_uint();self.assertEqual(self.l.equipment_purchase(C.byref(s.equipment),2,C.byref(ref)),0)
+  s.economy.reserved[0]=1;s.economy.spent=96;s.economy.gold=104
+  self.assertEqual(self.l.save5_validate_revision(C.byref(s),12),1)
+  self.assertEqual(self.l.save5_validate_revision(C.byref(s),11),0)
+  self.assertEqual(self.l.save5_store(C.byref(s)),1);self.assertEqual(compare_state(self.reload()),compare_state(s))
+  purchased=bytearray(self.ram[B:B+SIZE]);self.assertEqual(purchased[5080],1)
+  purchased[12:14]=(11).to_bytes(2,'little');purchased=repair_crc(purchased)
+  self.ram[B:B+SIZE]=purchased;recovered=self.reload()
+  self.assertEqual(recovered.economy.gold,200);self.assertFalse(recovered.economy.reserved[0])
+  self.assertEqual(self.l.equipment_find(C.byref(recovered.equipment),2),255)
+  self.ram[:]=bytes([255])*32768;self.ram[A:A+SIZE]=purchased
+  self.assertEqual(self.l.save5_load(C.byref(Save())),0)
+ def test_paid_gear_requires_visited_source_and_unique_seen_history(self):
+  s=self.fresh(1,gold=200);s.economy.reserved[0]=1;s.economy.spent=96;s.economy.gold=104
+  self.assertEqual(self.l.save5_validate(C.byref(s)),0)
+  self.assertEqual(self.l.equipment_purchase(C.byref(s.equipment),2,None),0)
+  self.assertEqual(self.l.save5_validate(C.byref(s)),0)
+  s.quests.region_flags[0]=1;self.assertEqual(self.l.save5_validate(C.byref(s)),1)
+  before=bytes(s.equipment);self.assertEqual(self.l.equipment_purchase(C.byref(s.equipment),2,None),5)
+  self.assertEqual(bytes(s.equipment),before)
+  self.assertEqual(self.l.equipment_claim(C.byref(s.equipment),2,1,None),5)
+  self.assertEqual(sum(x.item_id==2 for x in s.equipment.bag),1)
+ def test_inspected_story_mask_is_revision12_and_prerequisite_scoped(self):
+  s=self.fresh();s.economy.reserved[1]=1;self.assertEqual(self.l.save5_validate(C.byref(s)),0)
+  s=self.fresh(1);s.economy.reserved[1]=1;self.assertEqual(self.l.save5_validate(C.byref(s)),1)
+  self.assertEqual(self.l.save5_validate_revision(C.byref(s),11),0)
+  s.economy.reserved[1]=2;self.assertEqual(self.l.save5_validate(C.byref(s)),0)
+  s=self.fresh(3);s.economy.reserved[1]=3;self.assertEqual(self.l.save5_validate(C.byref(s)),1)
+  self.assertEqual(self.l.save5_store(C.byref(s)),1);self.assertEqual(compare_state(self.reload()),compare_state(s))
+  s.economy.reserved[1]=4;self.assertEqual(self.l.save5_validate(C.byref(s)),0)
  def test_old_bosses_explicit_one_time_no_reload_gain(self):
   s=self.fresh(7);self.assertEqual(self.l.economy_claimable(C.byref(s)),7)
   for boss,gold in enumerate((60,160,320)):
