@@ -161,7 +161,9 @@ static COLD int complete_covenant(void){
 }
 COLD int covenants_game_event_pending(void){return event_count!=0;}
 COLD int covenants_game_take_homecoming_offer(int save_verified){
- if(!homecoming_offer||!save_verified||game_state!=PLAY||room!=0||event_count||!done(63))return 0;
+ /* Claim publication leaves the original multi-page homecoming narrative in
+  * setting[23]. Its old-town tick owns that sequence until it reaches zero. */
+ if(!homecoming_offer||!save_verified||game_state!=PLAY||room!=0||event_count||setting[23]||!done(63))return 0;
  homecoming_offer=0;return 1;
 }
 COLD int covenants_game_route_allowed(unsigned a,unsigned s){return spawn_allowed(a,s);}

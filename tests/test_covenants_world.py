@@ -137,6 +137,16 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
   self.assertEqual(self.l.settle(),1);claimed=bytes(self.s)
   self.assertEqual(self.l.covenants_game_take_homecoming_offer(0),0)
+  # Claim publication owns the original final narrative stages 1,2,3. An
+  # early engine offer hook may run first, but must wait through each page.
+  for stage in (2,3):
+   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+   self.l.covenants_game_tick_old();self.assertEqual(self.l.get_setting(23),stage)
+   self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
+   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+   self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+  self.l.covenants_game_tick_old();self.assertEqual(self.l.get_setting(23),0)
   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),1)
   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
   self.assertEqual(bytes(self.s),claimed)

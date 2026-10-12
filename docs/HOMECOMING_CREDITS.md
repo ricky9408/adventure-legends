@@ -16,6 +16,8 @@ No soundtrack or music data is changed.
 An existing completed Q63 save can see the offer again by speaking to the
 village elder. The normal completed-quest dialogue plays first. A pending
 event, dialogue or unverified save prevents the offer from taking control.
+The original queued final story stages must also reach zero: verified claim
+publication alone does not mean those closing dialogue pages have finished.
 
 ## Validation
 
