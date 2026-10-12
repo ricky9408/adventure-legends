@@ -10,6 +10,7 @@ import ctypes as C
 import gzip
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 
@@ -64,6 +65,10 @@ def main():
     for name in ('rom','symbols','bridge','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--save',type=Path,action='append',default=[])
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    manifest=a.rom.parent/'source-hashes.json'
+    sources=json.loads(manifest.read_text())
+    assert all(sha(ROOT/name)==digest for name,digest in sources.items()),'ROM source manifest must match checkout'
+    shutil.copyfile(manifest,a.output/'candidate-source-hashes.json')
     symbols={v[2]:int(v[0],16) for line in a.symbols.read_text().splitlines() if len(v:=line.split())==3}
     lib=codec(a.output)
     saves=[ROOT/'tests/fixtures/legacy/baseline-v2-bridge.sav',
@@ -71,6 +76,7 @@ def main():
            ROOT/'tests/fixtures/v5-revision9/covenants-all128-72-cold.sav',
            full_roster(lib,a.output),*a.save]
     report={'suite':'bounded-cold-continue-native','rom_sha256':sha(a.rom),'symbols_sha256':sha(a.symbols),
+            'source_manifest_sha256':sha(manifest),
             'bridge_sha256':sha(a.bridge),'helper_sha256':sha(__file__),
             'native_game_ram_writes':0,'machine_state_imports':0,'cases':[],'result':'RUNNING'}
     trace=gzip.open(a.output/'native-frames.jsonl.gz','wt')

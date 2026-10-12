@@ -59,6 +59,9 @@ static int load_creatures_valid(const Save5State*s,unsigned r){
 unsigned save5_load_step(unsigned budget){
  Save5State*s=&scratch.state;unsigned i,n,ok=1,r=loader.revision;
  Save4U8 b[32];
+#ifdef SAVE5_HOST_TEST
+ test_step_work=0;
+#endif
  if(loader.status!=SAVE5_BUSY||!budget)return loader.status;
  if(budget>1024)budget=1024;
 #ifdef SAVE5_HOST_TEST

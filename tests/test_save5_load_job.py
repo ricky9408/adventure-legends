@@ -37,11 +37,13 @@ class LoadJobTests(unittest.TestCase):
         self.assertEqual(self.lib.save5_load_begin(None if probe else C.byref(output)), 1)
         previous = self.lib.save5_load_progress()
         self.assertEqual(self.lib.save5_load_step(0), BUSY)
+        self.assertEqual(self.lib.save5_test_step_work(), 0)
         self.assertEqual(self.lib.save5_load_progress(), previous)
         calls = 0
         while self.lib.save5_load_status() == BUSY:
             self.assertEqual(bytes(output), b'\xcc' * C.sizeof(Save))
             status = self.lib.save5_load_step(budget)
+            self.assertLessEqual(self.lib.save5_test_step_work(), min(budget, 1024))
             calls += 1
             self.assertLess(calls, 100000)
             progress = self.lib.save5_load_progress()
