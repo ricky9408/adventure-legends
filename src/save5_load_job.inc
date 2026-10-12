@@ -28,22 +28,22 @@ int save5_load_begin(Save5State *out){
  scan_start(SAVE5_BANK_A,0);return 1;
 }
 static int load_campaign_valid(const Save5State*s,unsigned r){
- return r==11?save5_campaign_validate(&s->campaign):r==10?history10_save5_campaign_validate(&s->campaign):
+ return r>=11?save5_campaign_validate(&s->campaign):r==10?history10_save5_campaign_validate(&s->campaign):
   r==9?history9_save5_campaign_validate(&s->campaign):r==8?history8_save5_campaign_validate(&s->campaign):
   r==7?history7_save5_campaign_validate(&s->campaign):history_campaign_validate(&s->campaign,r);
 }
 static int load_objective_valid(const Save5Quests*q,unsigned i,unsigned r){
- return r==11?quest_objective_validate(q,i):r==10?history10_quest_objective_validate(q,i):
+ return r>=11?quest_objective_validate(q,i):r==10?history10_quest_objective_validate(q,i):
   r==9?history9_quest_objective_validate(q,i):r==8?history8_quest_objective_validate(q,i):
   r==7?history7_quest_objective_validate(q,i):history_objective_validate(q,i,r);
 }
 static int load_fields_valid(const Save5Quests*q,unsigned r){
- return r==11?quest_fields_validate(q):r==10?history10_quest_fields_validate(q):
+ return r>=11?quest_fields_validate(q):r==10?history10_quest_fields_validate(q):
   r==9?history9_quest_fields_validate(q):r==8?history8_quest_fields_validate(q):
   r==7?history7_quest_fields_validate(q):history_quest_fields_validate(q,r);
 }
 static int load_quest_campaign_valid(const Save5State*s,unsigned r){
- return r==11?quest_campaign_validate(&s->campaign,&s->quests):r==10?history10_quest_campaign_validate(&s->campaign,&s->quests):
+ return r>=11?quest_campaign_validate(&s->campaign,&s->quests):r==10?history10_quest_campaign_validate(&s->campaign,&s->quests):
   r==9?history9_quest_campaign_validate(&s->campaign,&s->quests):r==8?history8_quest_campaign_validate(&s->campaign,&s->quests):
   r==7?history7_quest_campaign_validate(&s->campaign,&s->quests):history_quest_campaign_validate(&s->campaign,&s->quests,r);
 }
@@ -91,7 +91,7 @@ unsigned save5_load_step(unsigned budget){
    equipment_init(&s->equipment);
    if(!creatures_migrate_legacy(&s->roster,legacy.chapter_flags,legacy.spirit)){ok=0;break;}
    /* Legacy migration receives the full current decoded-state check too. */
-   loader.revision=11;loader.phase=LOAD_VALIDATE;return SAVE5_BUSY;
+   loader.revision=SAVE5_CONTENT_REVISION;loader.phase=LOAD_VALIDATE;return SAVE5_BUSY;
   }
   break;
  }
@@ -110,7 +110,7 @@ unsigned save5_load_step(unsigned budget){
    read_bytes(s->quests.region_flags,o+4248,32);read_bytes(s->quests.anchors,o+4280,16);
    read_bytes(s->equipment.equipped,o+4928,5);read_bytes(s->equipment.seen,o+4944,64);read_bytes(s->equipment.reward_claims,o+5024,8);
   }
-  if(r==10||r==11){read_bytes(b,o+SAVE5_ECONOMY_OFFSET,32);decode_economy(&s->economy,b);}
+  if(r>=10){read_bytes(b,o+SAVE5_ECONOMY_OFFSET,32);decode_economy(&s->economy,b);}
   normalize_resume(&s->campaign,r);loader.index=0;break;
  }
  case LOAD_INSTANCES:
@@ -162,7 +162,7 @@ unsigned save5_load_step(unsigned budget){
   for(i=0;i<8&&loader.index<48;++i,++loader.index){encode_equipment_record(scan.block,&s->equipment.bag[loader.index]);if(!scan_equipment_record(loader.index)){ok=0;break;}}
   if(ok&&loader.index<48)return SAVE5_BUSY;
   loader.index=0;break;
- case LOAD_GEAR_REFS:ok=r==1?1:r==11?equipment_refs_validate(&s->equipment):history_equipment_refs_validate(&s->equipment,r);break;
+ case LOAD_GEAR_REFS:ok=r==1?1:r>=11?equipment_refs_validate(&s->equipment):history_equipment_refs_validate(&s->equipment,r);break;
  case LOAD_GEAR_SEEN:
   if(r==1)break;
   for(i=0;i<8&&loader.index<64;++i,++loader.index)if(!equipment_seen_byte(loader.index,s->equipment.seen[loader.index])){ok=0;break;}
@@ -170,10 +170,11 @@ unsigned save5_load_step(unsigned budget){
   loader.index=0;break;
  case LOAD_GEAR_CLAIMS:
   ok=r==1?1:(zero_bytes(s->equipment.settings_reserved,11)&&zero_bytes(s->equipment.wallet_key_reserved,16)&&zero_bytes(s->equipment.reserved,24)&&
-   (r==11?quest_equipment_validate(&s->quests,&s->equipment):history_equipment_claims_validate(&s->quests,&s->equipment,r)));break;
+   (r>=11?quest_equipment_validate(&s->quests,&s->equipment):history_equipment_claims_validate(&s->quests,&s->equipment,r)));break;
  case LOAD_ECONOMY:
   ok=r<10?zero_bytes((const Save4U8*)&s->economy,32):r==10?history10_economy_validate(&s->economy,s->campaign.chapter_flags):
-   economy_state_validate(&s->economy,s->campaign.chapter_flags)&&save5_later_claims_validate(&s->quests,&s->economy);break;
+   economy_state_validate_revision(&s->economy,s->campaign.chapter_flags,r)&&save5_later_claims_validate(&s->quests,&s->economy)&&
+   save5_economy_sources_validate(&s->quests,&s->equipment,&s->economy,s->roster.rewards[0]);break;
  case LOAD_PUBLISH:
   if(loader.out)copy_state(loader.out,s);
   loader.out=0;loader.status=SAVE5_DONE;loader.progress=save5_load_progress_total();return SAVE5_DONE;

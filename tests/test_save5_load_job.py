@@ -133,6 +133,24 @@ class LoadJobTests(unittest.TestCase):
         self.reset(); self.put(corrupt)
         self.assertEqual(self.run_reader()[0], 1)
 
+    def test_revision11_wallet_is_immutable_and_revision12_ack_survives(self):
+        s = self.fresh(3, 2)
+        self.store(s)
+        old = bytearray(self.sram)
+        old[A+12:A+14] = (11).to_bytes(2, 'little')
+        old[A:A+SIZE] = repair_crc(old[A:A+SIZE])
+        self.reset(); self.put(old)
+        self.assertEqual(self.run_reader()[0], 1)
+        # A prior save cannot carry future story acknowledgement or paid gear.
+        for reserved_offset, value in ((5080, 1), (5081, 3)):
+            bad = bytearray(old)
+            bad[A+reserved_offset] = value
+            bad[A:A+SIZE] = repair_crc(bad[A:A+SIZE])
+            self.reset(); self.put(bad)
+            self.assertEqual(self.run_reader()[0], 0)
+        self.reset(); s.economy.reserved[1] = 3; self.store(s)
+        self.assertEqual(self.run_reader()[0], 1)
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='LoadJobTests')
