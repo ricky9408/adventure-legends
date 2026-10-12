@@ -51,7 +51,7 @@ def main():
     root=opts.source_root.resolve();out=opts.output.resolve()
     assert out!=root and out not in root.parents,'output may not replace the source checkout or its parent'
     out.mkdir(parents=True,exist_ok=False)
-    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
+    head=subprocess.check_output(['git','-c','safe.directory='+str(root),'rev-parse','HEAD'],cwd=root,text=True).strip()
     manifest=root/'build/source-hashes.json'
     sources=json.loads(manifest.read_text())
     assert all(sha(root/name)==digest for name,digest in sources.items()),'candidate source receipt differs from production files'

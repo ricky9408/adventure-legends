@@ -86,8 +86,8 @@ def main():
               'seed': args.seed, 'extended_audio': args.extended_audio,
               'platform': platform.platform(), 'stages': [],
               'limitations': [
-                  'Native mGBA, not physical GBA hardware or a full campaign/collection run.',
-                  'Bounded opening/early gameplay includes the first boss, shop, Fire trial/evolution and earned-save Continue; later bosses and complete collection are not covered.',
+                  'Native mGBA rather than physical hardware; full128-form acquisition and every optional quest remain unproven.',
+                  'Fresh main campaign reaches all regional main stories and Q63; separate early/Garden/Water/reserve routes cover additional branches.',
                   'Loading cadence/cancellation uses labeled historical and prepared fixtures; it does not prove full-collection acquisition.',
                   'Synthetic audio diagnostics do not prove controller-earned region access.']}
     report_file = out / 'summary.json'
@@ -237,6 +237,16 @@ def main():
             reserve = json.loads((out/'fresh-reserve/summary.json').read_text())
             if not reserve['accepted'] or not reserve['controller_only'] or reserve['candidate']['rom_sha256'] != rom_sha or any(reserve['provenance'][key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
                 raise RuntimeError('Fresh reserved companion route did not pass the exact candidate')
+            stage('fresh-main-campaign', [python, 'tests/treasure_full_journey.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--source-root', str(ROOT), '--source-manifest', str(ROOT/'build/source-hashes.json'),
+                  '--output', str(out/'full-main'), '--expected-rom-sha', rom_sha,
+                  '--expected-symbols-sha', snapshots[-1]['emberbond.sym'],
+                  '--expected-elf-sha', snapshots[-1]['emberbond.elf'],
+                  '--expected-manifest-sha', snapshots[-1]['source-hashes.json']], timeout=900)
+            campaign = json.loads((out/'full-main/summary.json').read_text())
+            if not campaign['accepted'] or not campaign['complete_fresh_main_journey'] or not campaign['presented_journey_pacing_passed'] or campaign['candidate']['rom_sha256'] != rom_sha:
+                raise RuntimeError('Fresh main campaign or its unwaived presentation cadence did not pass')
             stage('synthetic-audio-diagnostics', common + ['--cases', 'synthetic',
                   '--output', str(out / 'synthetic-audio')], timeout=600)
             if args.extended_audio:
@@ -254,7 +264,10 @@ def main():
                                 'opening_cadence': opening['cadence_by_scope'],
                                 'bounded_load_cases': len(loading['cases']),
                                 'fresh_reserve_checks': reserve['checks'],
-                                'fresh_reserve_metrics': reserve['metrics']}
+                                'fresh_reserve_metrics': reserve['metrics'],
+                                'fresh_main_checks': campaign['passed_checks'],
+                                'fresh_main_rooms': campaign['visited_rooms'],
+                                'fresh_main_presented_cadence_passed': campaign['presented_journey_pacing_passed']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.
         frozen = json.loads((ROOT / 'build/source-hashes.json').read_text())
         if any(digest(ROOT / name) != expected for name, expected in frozen.items()):
