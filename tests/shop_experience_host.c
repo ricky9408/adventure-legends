@@ -11,13 +11,20 @@
 #include "gear_runtime.h"
 #include "journal_nav.h"
 #include "ui.h"
+#include "regional_shop_text.h"
+#include "regional_shop.h"
 volatile int game_state,room,px,py,has_save,save_failed;
 int face,pressed,keys,journal_tab,ability_cd,heal_cd,save_failure_notice,save_requested,save_ordinary_scope,quickparty_open,hero_hp_q4;
 unsigned save_feedback_background,north_game_revision,south_game_revision,magma_game_revision,underwater_game_revision;
+unsigned gear_menu_revision;
 unsigned char north_game_machine_stage,south_game_machine_stage;
 void progression_refresh(void){}
+void obj_sprite(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
+void region_actor(unsigned a,int b,int c){(void)a;(void)b;(void)c;}
+void obj_add(int a,int b,int c,int d,int e,int f,int g,int h){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;(void)h;}
 void dialogue(int a,int b,int state){(void)a;(void)b;game_state=state;}
-void text_spans(const UiText*t,int x,int y,int c){(void)c;assert(x>=0&&y>=0&&x+t->width<=240&&y+t->height<=160);}
+static unsigned regional_labels_seen;
+void text_spans(const UiText*t,int x,int y,int c){unsigned i;(void)c;assert(x>=0&&y>=0&&x+t->width<=240&&y+t->height<=160);for(i=0;i<RS_COUNT;++i)if(t==&regional_shop_texts[i])regional_labels_seen|=1u<<i;}
 unsigned later_rewards_claimable(const Save5State*s){(void)s;return 0;}
 unsigned later_rewards_check(const Save5State*s,unsigned t,unsigned source,const LaterRewardContext*c){(void)s;(void)t;(void)source;(void)c;return LATER_NOT_EARNED;}
 int later_rewards_begin(Save5State*s,unsigned t,unsigned source,const LaterRewardContext*c){(void)s;(void)t;(void)source;(void)c;return 0;}
@@ -41,11 +48,13 @@ void toast(int id){(void)id;}void save_game(void){}void acknowledge_save_failure
 void save_feedback_capture(const Save5State*s){(void)s;}void save_feedback_complete(int ok){(void)ok;}void save_feedback_invalidate(void){}
 unsigned economy_gold(const Save5State*s){return s->economy.gold;}
 unsigned economy_supply_count(const Save5State*s,unsigned i){return i<2?s->economy.supplies[i]:0;}
-unsigned economy_price(unsigned i){static const unsigned p[3]={18,24,120};return i<3?p[i]:0;}
+unsigned economy_price(unsigned i){static const unsigned p[3]={18,24,120};return i<3?p[i]:economy_gear_price(i-3);}
+int equipment_seen(const EquipmentState*s,unsigned i){return i<512&&!!(s->seen[i>>3]&(1u<<(i&7)));}
 unsigned economy_claimable(const Save5State*s){(void)s;return claimed;}
 unsigned economy_last_error(void){return error_code;}unsigned economy_last_gold(void){return last_gold;}
 int economy_pending(void){return pending;}unsigned economy_step(void){if(status!=SAVE5_BUSY)pending=0;return status;}
 int economy_begin_purchase(Save5State*s,unsigned i){(void)s;(void)i;calls++;if(error_code)return 0;pending=1;return 1;}
+int economy_begin_market_purchase(Save5State*s,unsigned i){return economy_begin_purchase(s,i);}
 int economy_begin_use(Save5State*s,unsigned i){return economy_begin_purchase(s,i);}
 int economy_begin_claim(Save5State*s,unsigned i){return economy_begin_purchase(s,i);}
 unsigned game_gear_busy(void){return busy;}
@@ -55,7 +64,7 @@ static void reset(void){memset(&adventure_save,0,sizeof adventure_save);game_sta
 static void input(int held,int edge){int expected=game_state==11||game_state==12||game_state==13;keys=held;pressed=edge;game_shop_tick();assert(game_shop_update()==expected);}
 static void tap(int key){input(key,key);input(0,0);}
 static int saw(int id){int i;for(i=0;i<render_count;i++)if(rendered[i]==id)return 1;return 0;}
-static void draw(void){render_count=0;memset(framebuffer,0,sizeof framebuffer);framebuffer[0]=framebuffer[1]=framebuffer[19202]=framebuffer[19203]=0xbeef;if(game_state==3)game_shop_draw_items();else game_shop_draw();assert(framebuffer[0]==0xbeef&&framebuffer[1]==0xbeef&&framebuffer[19202]==0xbeef&&framebuffer[19203]==0xbeef);}
+static void draw(void){render_count=regional_labels_seen=0;memset(framebuffer,0,sizeof framebuffer);framebuffer[0]=framebuffer[1]=framebuffer[19202]=framebuffer[19203]=0xbeef;if(game_state==3)game_shop_draw_items();else game_shop_draw();assert(framebuffer[0]==0xbeef&&framebuffer[1]==0xbeef&&framebuffer[19202]==0xbeef&&framebuffer[19203]==0xbeef);}
 static void context_and_errors(void){reset();assert(game_shop_in_range()&&game_shop_interact());error_code=ECONOMY_NO_GOLD;tap(1);tap(1);draw();assert(saw(TX_FB_NO_GOLD)&&saw(TX_FB_BUY_KEYS));assert(calls==1);tap(2);draw();assert(!saw(TX_FB_NO_GOLD)&&saw(TX_FB_SHOP_KEYS));tap(2);assert(game_state==1);game_state=3;journal_tab=JOURNAL_ITEMS;game_shop_tick();draw();assert(!saw(TX_FB_NO_GOLD)&&saw(TX_FB_TONIC_DESC)&&saw(TX_PF_ITEM_KEYS));
  adventure_save.economy.supplies[0]=1;adventure_save.economy.supplies[1]=1;game_shop_items_input(1);draw();assert(saw(TX_FB_HEALTH_FULL)&&saw(TX_PF_ITEM_KEYS));game_shop_items_input(128);draw();assert(!saw(TX_FB_HEALTH_FULL)&&saw(TX_FB_SPIRIT_DESC));game_shop_items_input(1);draw();assert(saw(TX_FB_POWER_READY)&&saw(TX_PF_ITEM_KEYS));journal_tab=JOURNAL_HUB;game_shop_tick();journal_tab=JOURNAL_ITEMS;draw();assert(!saw(TX_FB_POWER_READY));
  ability_cd=20;busy=1;game_shop_items_input(1);draw();assert(saw(TX_FB_ITEM_BUSY)&&saw(TX_PF_ITEM_KEYS));busy=0;game_shop_items_input(1);draw();assert(game_shop_confirm&&saw(TX_FB_SPIRIT_DESC)&&saw(TX_FB_USE_KEYS)&&!saw(TX_FB_ITEM_BUSY));game_shop_items_input(2);assert(!game_shop_confirm);adventure_save.economy.supplies[1]=0;game_shop_items_input(1);draw();assert(saw(TX_FB_NONE)&&saw(TX_PF_ITEM_KEYS));game_shop_cancel_items();draw();assert(!saw(TX_FB_NONE));
@@ -68,4 +77,15 @@ static void repeat_and_commit(void){unsigned i;reset();game_shop_interact();inpu
  puts("PASS held directions repeat at18/6; A remains edge-triggered; pending, done, and failed transactions stay singular");}
 static void rewards(void){unsigned i,gold,xp;reset();game_shop_reward(180,6);gold=game_shop_reward_gold;xp=game_shop_reward_xp;for(i=0;i<40;i++)game_shop_tick();assert(game_shop_reward_visible());game_state=3;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();game_state=2;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();game_state=1;quickparty_open=1;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();render_count=0;game_shop_draw_reward();assert(!render_count&&!game_shop_reward_visible());quickparty_open=0;assert(game_shop_reward_visible());for(i=0;i<54;i++)game_shop_tick();assert(game_shop_reward_visible());game_shop_tick();assert(!game_shop_reward_visible());assert(game_shop_reward_gold==gold&&game_shop_reward_xp==xp&&!adventure_save.economy.gold);puts("PASS reward gets95 visible play updates across hub/dialogue/picker pauses without changing credits");}
 static void layout(void){int selection;reset();adventure_save.economy.gold=9999;adventure_save.economy.supplies[0]=9;adventure_save.economy.supplies[1]=9;adventure_save.economy.relics=7;adventure_save.economy.upgrade=1;game_shop_interact();claimed=7;for(selection=0;selection<4;selection++){game_shop_selection=selection;draw();assert(saw(TX_PF_STOCK)&&saw(TX_EC_PRICE)&&saw(TX_FB_SHOP_KEYS));tap(1);draw();assert(saw(TX_FB_BUY_KEYS));tap(2);}game_state=3;journal_tab=JOURNAL_ITEMS;for(selection=0;selection<10;selection++){draw();assert(saw(TX_PF_STOCK));game_shop_items_input(128);}assert(!calls);puts("PASS all shop/claim/ten item rows render within240x160 with stock, prices, effects and separate controls");}
-int main(void){context_and_errors();repeat_and_commit();rewards();layout();return 0;}
+static void regional_layout(void){static const unsigned areas[8]={16,22,30,38,46,54,62,70};unsigned region,selection;int x,y;
+ for(region=0;region<8;++region){reset();room=(int)areas[region];assert(regional_shop_position((unsigned)room,&x,&y));px=x;py=y;assert(game_shop_in_range());
+  px=x+22;assert(!game_shop_in_range());px=x;assert(game_shop_interact());
+  for(selection=0;selection<4+region;++selection){game_shop_selection=(int)selection;draw();assert(saw(TX_PF_STOCK)&&saw(TX_EC_PRICE)&&saw(TX_FB_SHOP_KEYS));tap(1);draw();assert(saw(TX_FB_BUY_KEYS));tap(2);}
+  game_shop_selection=3;error_code=ECONOMY_ALREADY_OWNED;tap(1);tap(1);draw();assert((regional_labels_seen&(1u<<RS_OWNED))&&saw(TX_FB_BUY_KEYS));
+ }
+ reset();room=30;px=240;py=280;assert(!game_shop_in_range());
+ room=38;px=240;py=284;assert(!game_shop_in_range());px=208;py=288;assert(!game_shop_in_range());
+ room=46;px=240;py=288;assert(!game_shop_in_range());px=200;py=288;assert(!game_shop_in_range());
+ puts("PASS all eight regional supplier stocks, range boundary, gear effect/price rows and confirmation fit native240x160");
+}
+int main(void){context_and_errors();repeat_and_commit();rewards();layout();regional_layout();return 0;}

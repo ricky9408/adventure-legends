@@ -8,11 +8,12 @@ No bitmap rescaling, smoothing, per-frame decoding or GB Studio runtime needed.
 """
 from pathlib import Path
 import json
+import os
 from functools import lru_cache
 from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent
 ATLAS = ROOT / 'fonts/gbj'
-FALLBACK = '/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc'
+FALLBACK = os.environ.get('EMBERBOND_NOTO_FONT','/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc')
 MAGENTA = (255, 0, 255)
 
 @lru_cache(None)
@@ -44,7 +45,7 @@ def glyph(char, slim=False):
 def fallback(): return ImageFont.truetype(FALLBACK, 10, index=0)
 
 @lru_cache(None)
-def latin_fallback(): return ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',8)
+def latin_fallback(): return ImageFont.truetype(os.environ.get('EMBERBOND_DEJAVU_FONT','/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'),8)
 
 @lru_cache(None)
 def fallback_glyph(char):

@@ -8,6 +8,7 @@ int game_shop_later_interact(void);
 void game_shop_tick(void);
 void game_shop_cancel_items(void);
 int game_shop_in_range(void);
+void game_shop_draw_merchants(void);
 int game_shop_interact(void);
 int game_shop_update(void);
 int game_shop_draw(void);
