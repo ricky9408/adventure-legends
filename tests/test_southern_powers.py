@@ -120,7 +120,7 @@ int main(void){unsigned c,i,n,t,elapsed;
     harness=harness.replace('static void updates(unsigned n){while(n--){southern_powers_tick();regional_powers_tick();if(ability_cd&&!hitstop)ability_cd--;}}','')
     harness=harness.replace('static void wall(int x,int y,int w,int h){assert(wall_count<8);walls[wall_count].x=x;\n    walls[wall_count].y=y;walls[wall_count].w=w;walls[wall_count++].h=h;southern_powers_geometry_changed();}','')
     (bench/'main.c').write_text(prelude+harness+main)
-    flags=['-mcpu=arm7tdmi','-mthumb-interwork','-mthumb','-O2','-std=c99','-ffreestanding','-fno-builtin','-fno-strict-aliasing','-fomit-frame-pointer','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fstack-usage','-ffunction-sections','-fdata-sections','-Isrc']
+    flags=['-mcpu=arm7tdmi','-mthumb-interwork','-mthumb','-O2','-std=c99','-ffreestanding','-fno-builtin','-fno-strict-aliasing','-fomit-frame-pointer','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fstack-usage','-ffunction-sections','-fdata-sections','-Isrc','-Itests']
     objects=[]
     for src in [str(bench/'main.c'),*SOURCES[1:]]:
         obj=bench/(Path(src).stem+'.o')

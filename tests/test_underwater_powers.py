@@ -16,7 +16,7 @@ SOURCES = ['tests/underwater_powers_native.c', 'src/underwater_powers.c', 'src/u
            'src/regional_powers.c', 'src/gear_runtime.c', 'tests/legacy_feedback_hooks.c', 'tests/legacy_return_hooks.c', 'src/weapon_actions.c',
            'src/combat_rules.c', 'src/equipment.c', 'src/equipment_data.c',
            'src/creatures.c', 'src/creature_data.c', 'src/assets.c']
-INPUT_FILES = sorted(set(SOURCES + ['src/underwater_tip_orbit.inc'] + [str(p.relative_to(ROOT)) for p in (ROOT/'src').glob('*.h')]))
+INPUT_FILES = sorted(set(SOURCES + ['tests/ordinary_enemy_fixture.h', 'src/underwater_tip_orbit.inc'] + [str(p.relative_to(ROOT)) for p in (ROOT/'src').glob('*.h')]))
 source_pins = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in INPUT_FILES}
 for name, flags in [('strict', []), ('sanitized', ['-fsanitize=address,undefined',
                                                 '-fno-omit-frame-pointer'])]:
@@ -138,7 +138,7 @@ int main(void){unsigned c,i,n,t,elapsed;
 }
 '''
     (bench/'main.c').write_text(prelude+harness+main)
-    flags=['-mcpu=arm7tdmi','-mthumb-interwork','-mthumb','-O2','-std=c99','-ffreestanding','-fno-builtin','-fno-strict-aliasing','-fomit-frame-pointer','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fstack-usage','-ffunction-sections','-fdata-sections','-Isrc']
+    flags=['-mcpu=arm7tdmi','-mthumb-interwork','-mthumb','-O2','-std=c99','-ffreestanding','-fno-builtin','-fno-strict-aliasing','-fomit-frame-pointer','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fstack-usage','-ffunction-sections','-fdata-sections','-Isrc','-Itests']
     objects=[]
     for source in [str(bench/'main.c'),*SOURCES[1:]]:
         obj=bench/(Path(source).stem+'.o')
