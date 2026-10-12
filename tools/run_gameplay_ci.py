@@ -78,7 +78,8 @@ def main():
     if out.exists():
         parser.error('output already exists; choose a new directory to retain prior evidence')
     out.mkdir(parents=True)
-    env = {**os.environ, 'PYTHONHASHSEED': '0', 'TZ': 'UTC', 'LC_ALL': 'C.UTF-8',
+    env = {**os.environ, 'PYTHONHASHSEED': '0', 'PYTHONDONTWRITEBYTECODE': '1',
+           'TZ': 'UTC', 'LC_ALL': 'C.UTF-8',
            'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1',
            'ASAN_OPTIONS': 'detect_leaks=0:halt_on_error=1',
            'UBSAN_OPTIONS': 'halt_on_error=1'}
@@ -92,14 +93,14 @@ def main():
                   'Synthetic audio diagnostics do not prove controller-earned region access.']}
     report_file = out / 'summary.json'
     save = lambda: write_json(report_file, report)
-    deadline = time.monotonic() + 35 * 60
-    report['total_budget_seconds'] = 35 * 60
+    deadline = time.monotonic() + 45 * 60
+    report['total_budget_seconds'] = 45 * 60
     save()
 
     def stage(name, command, timeout=300):
         remaining = deadline - time.monotonic()
         if remaining <= 0:
-            raise RuntimeError('Total 35-minute regression budget exceeded')
+            raise RuntimeError('Total 45-minute regression budget exceeded')
         timeout = min(timeout, remaining)
         row = {'name': name, 'command': command, 'timeout_seconds': timeout,
                'status': 'RUNNING', 'log': name + '.log'}
@@ -156,7 +157,7 @@ def main():
             stage('archive-host-output', [python, 'tools/archive_test_output.py',
                   'build/equipment-rewards-host-current'])
             try:
-                stage('host', ['make', 'test'], timeout=1800)
+                stage('host', ['make', 'test'], timeout=2400)
             finally:
                 # Preserve the canonical Makefile byte-for-byte: historical
                 # authoring contracts intentionally pin it. Copy only this

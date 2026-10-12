@@ -5,7 +5,8 @@ manual **Actions → Gameplay regression → Run workflow** requests. Host and n
 lanes run independently. An optional manual checkbox adds exhaustive two-loop
 regional audio diagnostics. An older run of the same PR/ref is cancelled when a
 new commit arrives. Jobs have a 60-minute ceiling with separately bounded setup/upload steps and a
-35-minute regression budget (leaving time to upload failure evidence); each build/test subprocess
+45-minute regression budget (leaving time to upload failure evidence); the expanded
+host aggregate has a 40-minute subprocess limit, and each other build/test subprocess
 also has a bounded timeout and its entire process group is stopped on timeout.
 
 This is a focused regression gate, not proof that every campaign route, boss,
@@ -50,10 +51,17 @@ contracts remain pinned and separate from current runtime evidence.
   The optional long run checks two exact loops for every regional cue. These
   intentionally prepared room states do not establish earned region access.
 
-Known inherited cold-Continue stalls are measured under `cold_continue_observed`
-and shown in the summary. A green opening/save result proves persistence and
-opening cadence; it does **not** mean the synchronous load path is smooth. See
-that report before interpreting a green check as whole-game performance approval.
+- **Cold Continue:** bounded decoding, cancel before publication, prepared pending
+  story resumption and older saves are measured across every displayed loading,
+  resumed field and dialogue frame. They must meet the same native frame budget.
+- **Fresh reserve notice:** an empty-SRAM route fills all four party slots, earns
+  the Stone boss recruit into reserve, inspects its NEW marker with A, and proves
+  party and acknowledgment persistence through its own earned-save Continue.
+- **Fresh main campaign:** a new cartridge reaches all nine chapters, the three
+  original bosses, all eight Covenant works and Q63. The credits choice must wait
+  for durable rewards; B must return to the same field position. Every presented
+  frame must pass timing. This proves the main route and guaranteed recruits,
+  not acquisition of all128 forms or every optional quest.
 
 ## Reproduce locally
 
@@ -65,7 +73,9 @@ Pixel regeneration requires **Pillow 12.3.0**: Debian's Pillow 11.1
 changes Covenant polygon rasterization and is deliberately rejected before the
 aggregate can change generated pixels. `tools/install_tools.sh` extracts the existing checksum-pinned
 Debian ARM GCC 14.2.1/binutils 2.44/mGBA 0.10.5 packages into `tools/sysroot`.
-It does not install their host runtime dependencies. The runner itself never
+It does not install their host runtime dependencies. Python bytecode writing is
+disabled so generator imports cannot add unreviewed cache files to the authenticated
+production asset inventory. The runner itself never
 installs software or edits system settings.
 
 ```sh

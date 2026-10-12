@@ -35,6 +35,7 @@ jobs:
         shell: bash
     env:
       PYTHONHASHSEED: '0'
+      PYTHONDONTWRITEBYTECODE: '1'
       TZ: UTC
       LC_ALL: C.UTF-8
       OPENBLAS_NUM_THREADS: '1'
@@ -60,7 +61,7 @@ jobs:
           python3 -m venv --system-site-packages build/ci-venv
           build/ci-venv/bin/python -m pip install --no-deps --require-hashes --only-binary=:all: --index-url https://pypi.org/simple -r tools/ci-requirements.txt
       - name: Run clean build and gameplay gates
-        timeout-minutes: 37
+        timeout-minutes: 47
         env:
           CI_SUITE: ${{ matrix.suite }}
           CI_EXTENDED_AUDIO: ${{ inputs.extended_audio == true && '1' || '0' }}

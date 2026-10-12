@@ -22,6 +22,7 @@ def main():
   if name=='verify_late_renderer':cmd.append('--equipment-rewards-successor')
  commands += [('retained-parent-negatives',[sys.executable,'tests/test_retained_ui_successor.py','--journey-story-ui-successor'],{}),('regional-quest-ubsan',[sys.executable,'tests/test_regional_quest_events.py'],{'QUEST_SANITIZE':'1'})]
  additions=['test_snapshot_copy_canaries','test_snapshot_copy','test_later_rewards_codec','test_later_rewards_capacity','test_gear_preview','gear_readable_layout','gear_treasure_host','gear_treasure_porchlight_test','test_renderer_equipment_successor','test_save5_load_job','test_review_successor','test_growth_collection','test_recruit_notice','test_recruit_reserve_notice','test_readable_aim_input','test_enemy_tactics','test_charger_companion_powers','test_regional_shop_positions','test_save5_history','test_save5_history_differential','test_return_history_differential','test_underwater_history_differential','test_horizons_history']
+ additions.append('test_horizons_cast_admission')
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{})for n in additions]
  commands += [('later-reward-all-write-cuts',[sys.executable,'tests/test_later_rewards.py','--full-cuts'],{})]
  # Explicit current release routing. Historical contracts are unmodified;
@@ -40,7 +41,7 @@ def main():
  for i,(name,cmd,extra)in enumerate(commands):
   assert unchanged();helper=ROOT/cmd[1];before=sha(helper);log=out/(f'{i:02d}-'+name+'.log');t=time.monotonic()
   row={'name':name,'command':cmd,'environment':extra,'helper_sha256':before,'log':log.name,'status':'RUNNING'};report['runs'].append(row);save()
-  with log.open('w')as f:r=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,env={**os.environ,'ASAN_OPTIONS':'detect_leaks=0:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1',**extra})
+  with log.open('w')as f:r=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','ASAN_OPTIONS':'detect_leaks=0:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1',**extra})
   row.update(exit_code=r.returncode,seconds=round(time.monotonic()-t,3),log_sha256=sha(log),runtime_unchanged=unchanged(),helper_unchanged=sha(helper)==before)
   row['status']='PASS'if not r.returncode and row['runtime_unchanged']and row['helper_unchanged']else'FAIL';print(name,row['status'],flush=True);save()
   if not row['runtime_unchanged']:break
