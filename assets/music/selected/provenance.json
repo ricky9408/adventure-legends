@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "previous_soundtrack_commit": "cc5e88edcd27722d4e48c449fcc8d7d94f87f733",
+  "comparison_manifest_sha256": "a5b34bc94e08465e0176be910e2882e8d80a318c73784821159701f3550ffff1",
+  "direction": "19 independent BGM melodies; main-theme arrangements only in HOME, CORE, HORIZONS, COVENANTS and MAKERS_ASSEMBLY. CORE is an orchestral ancient-boss arrangement. Original melodies; no recordings or melodies extracted from the reference games.",
+  "approved_sources": [
+    {
+      "cue_id": "HOME",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "f79428bf4078d3e7230605eb577a901a6897ed965c03676bae00b6cb78d26921",
+      "approved_master_sha256": "d7504c21352607c19a89886ecbc6d89f26fe9d6cf739051dba0b5f45288d6277",
+      "original_score_sha256": "ca38359931b71e2b83f30c7335eb2638a68b8225043395f70d3028ed8366f5e5",
+      "pcm_sha256": "909cad26dd068e6478bb27d909ee25216d7a02971fa5817f66eead968f9bfbaf"
+    },
+    {
+      "cue_id": "RIVER",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "2c2f422b7c38202f2e3666b99da131c55bac60c1c2a8d2f0a724b400d4699fe2",
+      "approved_master_sha256": "8d5e2fdbc2c6b9762eb797ed9b361b25ea9f28ef0fcb329ca4345fa2bf2ec5fe",
+      "original_score_sha256": "c440919d0196954a6cd1bbf35f692c6783650136c345748bf19d1fa692ba1add",
+      "pcm_sha256": "a1add6de9e01b336f5f3162c74cdffa5c3c828e538e4d69b57752910364501f7"
+    },
+    {
+      "cue_id": "GROVE",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "49c60a2e01bea3f0e09e9180e95e8720f08bbdf925fbd2cde1e998a97d7f863b",
+      "approved_master_sha256": "1b7b7026b539aa2a173bc363f7b8252b887c95bb730c04e362d612f3ce6ace33",
+      "original_score_sha256": "525fa9652269c80494fe367c5406ede729244746a5823213cbf6a214c3137cb7",
+      "pcm_sha256": "7874bf2f5aab3d736f888ae09bc4112ae45b56935c9c519f3ce5c465d4b55cb6"
+    },
+    {
+      "cue_id": "SKY_ROAD",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "75db460f42b8cc4732b040e309eb0fa46aa313aa680dd33d1b5257f87542a393",
+      "approved_master_sha256": "6aefeefce25ea3e38affa8ba02280bd98fedad1e2f7d61d5c7a2253f77bfea9d",
+      "original_score_sha256": "bca875b59071b56a01de6b2acb1b52808b58fc0cd579723f0243c1030eb79cd7",
+      "pcm_sha256": "34b4bec218d0526a36f5aae7543807340eba3fb7f0c2ecdd7b89352685eff94f"
+    },
+    {
+      "cue_id": "SKY_DUNGEON",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "30e50778c6a1fede0b48373efd742df59196be666a4d1d70fe98d5ab7ce7b160",
+      "approved_master_sha256": "601ac34d7209e607a8bc9d4235fd27bb3cdb01c025840ca169abb9bf9a78abf2",
+      "original_score_sha256": "6c635e326c8b0a23e8f155b0fb928c9d77c115be9e2d3079a4c482e9a5dec3b7",
+      "pcm_sha256": "7f1d90ce11c53c88be0dfc93691fa609ebbd47cbe55eef27b0129f1fe7dbf26c"
+    },
+    {
+      "cue_id": "DUSK_ROAD",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "e04a9027cec715652ff3472c7180dee83acfbcb0281d3d4e059fb592c5fff8f6",
+      "approved_master_sha256": "ff448b49f5c2d5821095542ed35bac809acc8e2b4608f56955eb9ee534ab2a45",
+      "original_score_sha256": "d9596c2f699f85173103af22405b2da89afc89aff1eedfce82b60d4cb69e4476",
+      "pcm_sha256": "93c40ec3273611499a9c8dc22077a8e67e59a2f697ccb9a0de039cf712fb36b2"
+    },
+    {
+      "cue_id": "CORE",
+      "revision": "core-noise-clean",
+      "approved_preview_sha256": "dbdd83593a9694f7522a6bbe3ac006a8d7e5262158f90949a3953b06409a6e4f",
+      "approved_master_sha256": "56fb70d5ecdf1dec6730481ad390913aeb165f8c44e028e6440e17f45546cb97",
+      "original_score_sha256": "8864dbee3e401842484285c8f310fd03c4a824b0a61dba4d02e10e77e616cb5a",
+      "pcm_sha256": "dc26f90664b8a1f23edbc9e767b706677caf10dacb9cc9fdd5e4b4f157e30731"
+    },
+    {
+      "cue_id": "REEDHAVEN",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "a0304da42783f923ce7a40ac4f76bfe15a367b6ede66105460df136d830fbeca",
+      "approved_master_sha256": "1baa1f2ae3812044a8393b22926afdb65c34af63c0c7d4c2a94b522236f17b6d",
+      "original_score_sha256": "9bd99e502bb67dcef6aec47d6906c19db01440ee3c0efa94dc3af9e09371b131",
+      "pcm_sha256": "b296732fcda75eb8acae2876432bd2cbefa504706c6e94c2781d540f30e7bf57"
+    },
+    {
+      "cue_id": "REED_WORKS",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "afd1855c2f292c30f935f69c5cebceb0ebdb40b83fe150258858dc7ce11400ef",
+      "approved_master_sha256": "f2b88ce996b785ff53c49ce32b4b3f4346132344c3843a58d0ec69db0f8f8597",
+      "original_score_sha256": "402c24398a25e4f4b90388d18c17225cd12f1c2045ba86a9a63b3f33174ea0bf",
+      "pcm_sha256": "9a76d22a24d1b9e45e05e511de6e8e9bcbcfa387476a83b4f0f2a4fe6a63a3e6"
+    },
+    {
+      "cue_id": "HEARTHWAKE",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "f8ca53637148061a67e145bfe5a4063f7d42ed2d1c3c15ff26ac682cdffb248a",
+      "approved_master_sha256": "0f64e373cff37e7d773268cd0ab20374b4eb2cfa918728478423e96ab583c26d",
+      "original_score_sha256": "b4b83c72f89b51b7d58e0f6564414d341bbd4ff777a5021c43036ace6f1b6d0b",
+      "pcm_sha256": "a72c0d1001e523ee95efaf5c82122b861c825af0c9e427e7fca55085a13c08aa"
+    },
+    {
+      "cue_id": "HEADLAND",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "b364688b1c4a37fe7d331b34cb4eb3eadce30137dc994b461befeea301736994",
+      "approved_master_sha256": "7ae4465c5b17763195a5c0be58fe55a17fa780318798d946eabdda335289a6cb",
+      "original_score_sha256": "badd27802756f8389088e6b40435bef676fc798774d698ef46de523a9ce4df0c",
+      "pcm_sha256": "ed5c34112bfe7e85514a14584100b924b6db5bd55c73f5fd04f14d06e4401b71"
+    },
+    {
+      "cue_id": "COUNTERWORKS",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "0b6f5e3ac0f64a68d16ce08a2adf694c0016e4530d36b2f9319eae524c90bcd6",
+      "approved_master_sha256": "62a9a953d94d6c9d0f8861d9480c5c2e0f81bce8e9ebf2342560e54d81dc67bc",
+      "original_score_sha256": "6fb310eb3c1997d04ca31af46c8736d39f7eb5ff1f1b76c7b45caac278495421",
+      "pcm_sha256": "967d17a62fde0c519d1cb9515a51e6ca4f1fb225fe9cbef55d9239f0a02db2b5"
+    },
+    {
+      "cue_id": "SUNLACE",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "4936c9235cd7f3c7f5f61ab701dadc9851721690779593b2467eff4dfdf470ac",
+      "approved_master_sha256": "130aa9295ac8488beb554130d8ff1273c39fb485a7e0c70a8d13a45842d59cf9",
+      "original_score_sha256": "50dd692baff986ee852a688ea4d2c6780767d5ea7c1af54474d1d8b6e08fe066",
+      "pcm_sha256": "78f1bd60f5abc5a6b2971e8827dd05605197d19ff9a01f0380697fe387133a12"
+    },
+    {
+      "cue_id": "FRONDSHORE",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "65607c3773c544636ed2336df85f35e4c75a835d3db24717a82f2151a50b41a0",
+      "approved_master_sha256": "a7b5fe3d8bf6c956586582e0a540e8e8b0849188007c62cceb58734bcc21cb20",
+      "original_score_sha256": "9a312cdfa3a5b20722be6b088a641999ad7a058eafc26b0814e112672fc8fdf4",
+      "pcm_sha256": "ea015f728c60aad4fa500779b4b9cd2f7c498bd6fb16993b3c7bc587ff314498"
+    },
+    {
+      "cue_id": "CONSERVATORY",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "dd905d187034fe97a052a6bee2283d1b96b08c2f196538c1fff159e4847da923",
+      "approved_master_sha256": "a881282088e253d2fb8106789a705160151b84568d3c9b066361b00c89347e11",
+      "original_score_sha256": "0ccdec4c8b7372b25002308340bbe201fa4d1305e738a2786132d8afbaa268e8",
+      "pcm_sha256": "01fa14f48669f7db025ad0122df4b16e09f223757c42c6a64e00a84580f46578"
+    },
+    {
+      "cue_id": "KILNSTEP",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "213ffd7c546532b13191a12b3196452c63d0f3a89cf47dd0cdec9c136de4a508",
+      "approved_master_sha256": "3602dc35b9f2aaae0c60a16e02b3f3b98b1bee1c22d46f49ea4fe392ac101709",
+      "original_score_sha256": "3690a03e587201719bf1cb144547ff51b2e1aae90a29fc4a3fa8c1101a134982",
+      "pcm_sha256": "87b89674c879f8d82f41da510b764f34af70bee0abc90efde332d6865433f38c"
+    },
+    {
+      "cue_id": "PUMICE",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "38a05d83242d42a740079548002e2f265e17a4bd0d8ffcfd144e85ad86e2bb6b",
+      "approved_master_sha256": "416345f9c06af18d1fdd21b8362635bd03c5d04aacf9da8f7cf0d3a1b61cba58",
+      "original_score_sha256": "6a6f4c119dd9ac20d338337b059f522847bf5d8a0797ed51d535463221781da8",
+      "pcm_sha256": "903e54722054aabdb246857e9efa6884aecb90f5eafda9ed69823df9caa49a6d"
+    },
+    {
+      "cue_id": "CALDERA",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "3ec657f986ca68abeb16536ede2b471c0269a6408cac846528af4d86a6f6a79e",
+      "approved_master_sha256": "5e03a020868d2c5a673ac76b0dd4db0bd8cd5356a9c451eb3de55671d551cc36",
+      "original_score_sha256": "99a39bb15c57cb2002ecee01c47f5f5e0d2c72fa846a0aa6010b75bb0e77edea",
+      "pcm_sha256": "7dbcb451e05663d7f2adc36759f6dd41d15beda92adb78d0b6b63c0925dafded"
+    },
+    {
+      "cue_id": "NACREWAY",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "d5740ee562efefb2ebd151435098895ae313b93a190f8eac3dde65f96627debf",
+      "approved_master_sha256": "94dbb46dce25772f2403f9d8cab391d3ae3c79a592f23718201a648aea50fc14",
+      "original_score_sha256": "be6a55c4d046626c9d48fbd87d440ef1f5c1dc4c8f4b72cb417f21ec7cbed701",
+      "pcm_sha256": "dbcf0bf25813676e879ffbf4e58f517460d4e050771bcc238a734f2cc522d075"
+    },
+    {
+      "cue_id": "KELP",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "82d404d43ab38b3909c49a1bcd1b1c4e28762b96f4696d9ee51e1fcae445302e",
+      "approved_master_sha256": "e23f85f09e587b6fd3b6b85fa13d33b2cdc0cfffc0646eb184ca61ba06eb3440",
+      "original_score_sha256": "60519aee6e7572293a3ee8a69a2ba88f0c8e558028a16e02d36c515f9f1b1376",
+      "pcm_sha256": "78e484bbd24d8059bd3f807f543fed782c2b1ea355adc18c0a4422263d24f50e"
+    },
+    {
+      "cue_id": "PALINODE",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "4b785c78ddd43e1ba210cd2b70e833743befbe368642964080b8791678cf20c1",
+      "approved_master_sha256": "11746fa2a50092017558c21976b063777e131d626a562e999754d19144d5c112",
+      "original_score_sha256": "70ea3a2528cbc0bba1206b43de2d64478b9c43e67a690c3a7665c38cc0ba7008",
+      "pcm_sha256": "38c994b553cedbf1c49e87ee7e566b803ecec020630b3274fcc7b8b28520aaf2"
+    },
+    {
+      "cue_id": "HORIZONS",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "b5048a7ab39d3f5b54d4b9398d825c845a40005c83ecb2586c8262166eab6a99",
+      "approved_master_sha256": "77b954d8fc292c1aac7bc99157fd5cfb02551c90602a0d72cdaadadd86c94ea1",
+      "original_score_sha256": "a45fcba9b85736a0ad4519cd6eb4c37f4a115d0d7766b133918a4ed9700e8694",
+      "pcm_sha256": "5559f0c40f80f8c7dc056058f1e79e322aff1f33d4836f1b9dd308c9f4983151"
+    },
+    {
+      "cue_id": "COVENANTS",
+      "revision": "core-orchestra",
+      "approved_preview_sha256": "01400157ef8d97d39f6694868928e01c28fc64b2117207708ec908a05f4945d7",
+      "approved_master_sha256": "f0ea6e61ca7c3a6b7069e1f08553976159b08827731e07c40f5305fe55accdf9",
+      "original_score_sha256": "2cdf367ffb7b627c79b1e74b9613e32e7df67b79898652b96a22c0c69de0b9c9",
+      "pcm_sha256": "7ced3d9ac109f6afded34da0a036edefbf15893873a832a8f5b6848cae51e296"
+    }
+  ],
+  "assembly": {
+    "midi_notes": [
+      62,
+      66,
+      69,
+      66,
+      62,
+      66,
+      69,
+      66,
+      62,
+      66,
+      69,
+      66
+    ],
+    "lengths": [
+      20,
+      10,
+      10,
+      20,
+      20,
+      10,
+      10,
+      20,
+      20,
+      10,
+      10,
+      20
+    ],
+    "approved_audition_sha256": "1cc4b713ba84ce9ed7ee787941b573dc6e3fdb56c766ff1e2316b6d6f4f59f15",
+    "master_sha256": "e16a177fa78522ce623b5d742508c4d77674ccb5e2d8285b517f517361545f04"
+  },
+  "reproduction": "The committed raw PCM and MIDI are pinned exact final inputs. generate_music.py reproduces cartridge data, not a rerender of FluidSynth masters."
+}

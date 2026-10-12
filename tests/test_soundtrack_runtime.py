@@ -9,10 +9,11 @@ with tempfile.TemporaryDirectory(prefix='current-soundtrack-runtime-')as d:
  subprocess.run([str(exe)],check=True,env={**os.environ,'ASAN_OPTIONS':'detect_leaks=0:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'})
  work=t/'import';(work/'tools').mkdir(parents=True);(work/'src').mkdir();(work/'docs').mkdir();(work/'assets/music/regional').mkdir(parents=True)
  shutil.copyfile(ROOT/'tools/generate_music.py',work/'tools/generate_music.py');shutil.copyfile(ROOT/'assets/music/regional/room-plan.json',work/'assets/music/regional/room-plan.json')
- original=json.loads((ROOT/'assets/music/regional/catalog.json').read_text())
+ shutil.copyfile(ROOT/'assets/music/regional/catalog.json',work/'assets/music/regional/catalog.json')
+ original=json.loads((ROOT/'assets/music/selected/catalog.json').read_text())
  for cue in original['cues']:
   target=work/cue['raw_path'];target.parent.mkdir(parents=True,exist_ok=True);target.symlink_to(ROOT/cue['raw_path'])
- catalog=work/'assets/music/regional/catalog.json';catalog.write_text(json.dumps(original))
+ catalog=work/'assets/music/selected/catalog.json';catalog.parent.mkdir(parents=True,exist_ok=True);catalog.write_text(json.dumps(original))
  subprocess.run([sys.executable,str(work/'tools/generate_music.py')],check=True)
  generated=[p for p in(work/'src').rglob('*')if p.is_file()]+[work/'docs/music-conversion.json']
  assert all(p.read_bytes()==(ROOT/p.relative_to(work)).read_bytes()for p in generated)

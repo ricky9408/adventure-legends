@@ -11,10 +11,10 @@ extern unsigned short horizons_audio_host_registers[128];
 #else
 #define SREG(offset) (*(volatile unsigned short*)(0x04000000u+(offset)))
 #endif
-/* Composed for the makers' assembly: a rising invitation, an answering turn,
- * then a quiet return. Rates use 2048-131072/f; no borrowed melody/sample.
- * D5,A5,F#5,E5,G5,B5,A5,F#5,E5,A4,E5,D5; total180 active updates. */
-static const unsigned short notes[12]={1825,1899,1871,1849,1881,1915,1899,1871,1849,1750,1849,1825};
+/* Owner-selected arrangement of the original HORIZONS theme for PSG2.
+ * D4,F#4,A4,F#4 repeated three times; total180 active updates.
+ * Rates use nearest 2048-131072/f; no borrowed song melody/sample. */
+static const unsigned short notes[12]={1602,1694,1750,1694,1602,1694,1750,1694,1602,1694,1750,1694};
 static const unsigned char lengths[12]={20,10,10,20,20,10,10,20,20,10,10,20};
 unsigned char horizons_music_active,horizons_music_note,horizons_music_left,horizons_music_paused;
 static void silence(void){SREG(0x68)=0;SREG(0x80)&=(unsigned short)~0x2200u;}

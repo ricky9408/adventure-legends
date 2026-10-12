@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Import hash-pinned original regional PCM without resampling or padding.
+"""Import the owner-selected PCM without resampling or padding.
 
 Only Python's standard library is required. Exact track sizes are declared in
 C; alignment between symbols is never part of the playable period.
@@ -9,7 +9,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'src/music_data'
 def main():
-    manifest=json.loads((ROOT/'assets/music/regional/catalog.json').read_text())
+    manifest=json.loads((ROOT/'assets/music/selected/catalog.json').read_text())
+    budgets=json.loads((ROOT/'assets/music/regional/catalog.json').read_text())['cues']
     cues=manifest['cues']
     assert len(cues)==23 and len({c['id'] for c in cues})==23
     # Validate the entire input set before touching generated output.
@@ -19,8 +20,8 @@ def main():
         assert len(raw)==c['sample_count']>512
         assert c['sample_rate']==16384
         assert hashlib.sha256(raw).hexdigest()==c['raw_sha256'],c['id']
-        if c['id']=='HOME':
-            assert len(raw)==907421 and c['raw_sha256']=='a9ada6ff0b3ef068dc8ab9bfabd02f69521c6ef252420157b9646636e98e4838'
+        assert c['id']==budgets[len(inputs)]['id']
+        assert len(raw)<=budgets[len(inputs)]['sample_count'],c['id']
         inputs.append((c,raw))
     plan=json.loads((ROOT/'assets/music/regional/room-plan.json').read_text())
     assert [c['id'] for c in cues]==[c['id'] for c in plan['cues']]
@@ -37,10 +38,10 @@ def main():
     table += ['};','static const unsigned char room_themes[MUSIC_ROOM_COUNT] = {']
     table += ['    MUSIC_'+v['cue']+', /* '+str(v['room_id'])+' */' for v in plan['rooms']]
     table += ['};','#endif','']
-    (ROOT/'src/music_catalog.h').write_text('\n'.join(table))
+    (ROOT/'src/music_catalog.h').write_text('\n'.join(table),newline='\n')
     OUT.mkdir(exist_ok=True)
     for path in OUT.glob('*.inc'):path.unlink()
-    declarations=['/* Generated original regional soundtrack; exact unpadded periods. */','#include "music_data.h"']
+    declarations=['/* Generated owner-selected soundtrack; exact unpadded periods. */','#include "music_data.h"']
     header=['#ifndef EMBERBOND_MUSIC_DATA_H','#define EMBERBOND_MUSIC_DATA_H']
     report=[]
     for c,raw in inputs:
@@ -48,13 +49,13 @@ def main():
         declarations.append(f'const signed char music_{slug}[{length}] __attribute__((aligned(4))) = {{')
         for part,offset in enumerate(range(0,length,16384)):
             name=f'{slug}_{part:03d}.inc';values=[v if v<128 else v-256 for v in raw[offset:offset+16384]]
-            (OUT/name).write_text(''.join(','.join(map(str,values[j:j+32]))+',\n' for j in range(0,len(values),32)))
+            (OUT/name).write_text(''.join(','.join(map(str,values[j:j+32]))+',\n' for j in range(0,len(values),32)),newline='\n')
             declarations.append('#include "music_data/'+name+'"')
         declarations.append('};');header.append(f'extern const signed char music_{slug}[{length}];')
         report.append(dict(track=c['id'],samples=length,sample_rate=16384,seconds=length/16384,pcm_sha256=c['raw_sha256']))
     header+=['#endif','']
-    (ROOT/'src/music_data.h').write_text('\n'.join(header))
-    (ROOT/'src/music_data.c').write_text('\n'.join(declarations)+'\n')
-    (ROOT/'docs/music-conversion.json').write_text(json.dumps(report,indent=2)+'\n')
+    (ROOT/'src/music_data.h').write_text('\n'.join(header),newline='\n')
+    (ROOT/'src/music_data.c').write_text('\n'.join(declarations)+'\n',newline='\n')
+    (ROOT/'docs/music-conversion.json').write_text(json.dumps(report,indent=2)+'\n',newline='\n')
     print(json.dumps(report,indent=2))
 if __name__=='__main__':main()

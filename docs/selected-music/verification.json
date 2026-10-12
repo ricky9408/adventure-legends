@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "scope": "Fresh builds and actual mGBA verification of owner-selected audio after rebasing onto the native Japanese font main; no physical-hardware or full-campaign claim.",
+  "catalog_sha256": "3b5853c9aa75d627b80aa70c5830161b2af74a57997962d07cd208dae5807a1c",
+  "rom_bytes": 28765196,
+  "remaining_32_mib_bytes": 4789236,
+  "identical_independent_builds": {
+    "outputs": {
+      "emberbond.gba": "a3db616af87412795e417d5af532931ee6a67fe49e1240bdacbe98d637fb15e8",
+      "emberbond.elf": "469ff6bb2e04dd7926b4dff0e71e2bdb76b8eb4cf812922a97878cd3449a434d",
+      "emberbond.sym": "d54257642ae9e571fbb6cce3938e96e66f0789662fed9ebb1c83b70bcf047077",
+      "source-hashes.json": "556e3b44ce3ef4d1992452abe0b56ddb83496e3c0612bf15d32402924cfb63ef"
+    },
+    "note": "ROM, ELF, symbols and runtime input manifests match; map filenames reflect separate build directories."
+  },
+  "native": {
+    "result": "PASS",
+    "cases": 26,
+    "checks": 736,
+    "exact_pcm_cues": 23,
+    "exact_loop_wraps": 46,
+    "all_room_routes": 78,
+    "assembly_notes": 12,
+    "assembly_active_ticks": 180,
+    "quality_channels": 52,
+    "maximum_native_true_peak_4x": 0.3949622151051423,
+    "clipped_samples": 0,
+    "metrics": {
+      "measured_hardware_frames": 122376,
+      "maximum_render_cycles": 248662,
+      "maximum_music_cycles": 18068,
+      "maximum_irq_lateness_samples": 50,
+      "music_faults": 0,
+      "music_recoveries": 0,
+      "core_faults": 0,
+      "page_flip_misses": 0,
+      "source_loop_count": 46
+    }
+  },
+  "host": {
+    "current_transport": "PASS actual C under ASan/UBSan",
+    "import_reproduction": "PASS 937 byte-identical generated files; hash/length/rate/duplicate mutations rejected before output changes",
+    "psg": "PASS strict + ASan/UBSan committed trigger, ownership, 180 active ticks, pause/exit contract",
+    "credits": "PASS strict + ASan/UBSan clipping/canaries and input/scroll behavior",
+    "historical_boundary": "PASS current geometry (6 tests), exact prior-main proofs (3 tests), 82 tamper controls",
+    "packaging": "PASS all178 pinned historical/current music binary inputs present in source export",
+    "ci_runner": "PASS four CI runner tests; source export initialized with disposable Git metadata for the checkout ownership test"
+  },
+  "limits": [
+    "Native controller coverage is the opening/village/river route; room routing, all-cue long loops and assembly preparation are labeled synthetic.",
+    "Human listening approval is the owner instruction in the selected catalog; automated tests do not evaluate subjective musical quality.",
+    "Physical hardware and a full earned campaign were not rerun for this music change.",
+    "GitHub gameplay CI runs separately on the PR; its result is not asserted by this focused verification summary.",
+    "The pinned Debian mGBA 0.10.5 bridge was compiled and its default sysroot/RPATH verified; local Ubuntu playback used explicit system mGBA because Debian FFmpeg/zip dependencies are unavailable. CI uses the pinned Debian environment."
+  ],
+  "source_base_commit": "d9e466fd880b9393700a8b237db384f3e33fc7f6",
+  "native_font": {
+    "passed": true,
+    "families": {
+      "ui": 2190,
+      "companion_guide_text": 427,
+      "growth_journal_text": 72,
+      "gear_preview_text": 23,
+      "treasure_text_text": 14,
+      "opening_scene_data": 26,
+      "ending_credits_text": 57,
+      "regional_shop_text": 11,
+      "journey_map_text": 138
+    },
+    "texts": 2958,
+    "exact_alignment_roundtrips": 5916,
+    "compiled_rom_pixel_roundtrips": 5916,
+    "compiled_rom_unique_span_pointers": 5545,
+    "compiled_rom_wrong_endian_negative_rejected": true,
+    "unique_characters": 1030,
+    "unique_bmp_cjk": 781,
+    "missing_native_glyphs": 0,
+    "missing_compact_cjk": 0,
+    "preclip_height_negative_rejected": true,
+    "unsupported_character_negative_rejected": true,
+    "native_kanji_to10px_negative_rejected": true,
+    "packed_span_overflow_negatives": 4,
+    "span_storage_bytes": 2,
+    "span_field_format": "little-endian offset11/count3/mask2",
+    "native_size": 12,
+    "runtime_font_decoding": false
+  },
+  "toolchain": {
+    "arm_compiler": "Ubuntu arm-none-eabi-gcc 13.2.1 20231009",
+    "pillow": "12.3.0, official CPython 3.12 manylinux wheel",
+    "pillow_wheel_sha256": "78cb2c6865a35ab8ff8b75fd122f6033b92a62c82801110e48ddd6c936a45d91",
+    "native_emulator": "Ubuntu mGBA 0.10.2; explicit --sysroot /",
+    "native_libmgba_sha256": "0c87a12341640e6a2d325e59e76eb4b002947771ad4d8814b216e3b99817d68d"
+  },
+  "review_default_sysroot": {
+    "result": "PASS",
+    "default_sysroot": "ROOT/tools/sysroot",
+    "pinned_libmgba_sha256": "a1d7713cc89e3a4e4eeaf2bc7a523115356ebe14e057805c06f5e9d4a328be63",
+    "bridge_sha256": "ea00f2546b41e0de18bf1e9a974b9ac837b9cde7487cb9f9002dd44c338c1979",
+    "scope": "Actual CLI default and bridge compilation/linking against checksum-verified repository sysroot. No emulator playback in this construction-only check.",
+    "rpath_matches_default_sysroot": true
+  }
+}

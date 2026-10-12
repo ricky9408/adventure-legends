@@ -1,68 +1,78 @@
-# Original regional soundtrack
+# Selected game soundtrack
 
-All 78 rooms now have explicit assignments to 23 original project-specific
-cues. Connected rooms in the same musical area preserve the current phrase;
-a change of cue uses the existing bounded 512-sample fade out and fade in.
-Unknown room IDs safely select HOME. Title and new-game confirmation use HOME.
+The owner approved replacing all 23 BGMs and the room-68 makers' assembly
+jingle after the final old/new listening comparison on 2026-10-12.
+`assets/music/selected/catalog.json` is the current cartridge input catalog.
+It records exact PCM hashes, lengths, keys, meters, tempos and room membership.
+The previous `regional` and `lanterns` catalogs remain historical sources.
 
-Lanterns by the Footbridge remains the exact approved HOME master: 907,421
-signed 8-bit mono samples at 16,384 Hz, SHA-256
-`a9ada6ff0b3ef068dc8ab9bfabd02f69521c6ef252420157b9646636e98e4838`.
-No resampling, gain change, appended silence or playable alignment bytes were
-added. Every cue loops at its own exact sample count, including odd lengths.
-There is no new compression or sequencer architecture.
+The score has 19 independent BGM melodies. The original main theme is arranged
+only in HOME, CORE, HORIZONS, COVENANTS and MAKERS_ASSEMBLY. The reference brief
+was the adventure and instrumental colors of Pokemon Ruby/Sapphire/Emerald,
+A Link to the Past, and selective theme arrangements as in Undertale; these
+are original melodies, without audio or melodies extracted from those games.
+CORE, covering rooms 10-13 including the main-story final boss, uses the heavy
+orchestral arrangement and its accepted noise-clean cartridge conversion.
 
-## Cartridge and ownership
+## Cartridge and playback
 
-The immutable catalog is `assets/music/regional/catalog.json`; it records
-actual titles, keys, meters, tempos, exact sizes, SHA-256s and room membership.
-`room-plan.json` maps every room explicitly. RIVER uses the reviewed ROAD
-render, and GROVE uses the reviewed GROVE_SHRINE render. Proposed planning
-metadata is not substituted for the final scores.
+All 78 room assignments and the existing title/HOME selection remain intact.
+Connected rooms using the same cue preserve its phrase; changing cues uses
+existing bounded 512-sample fades. Each cue loops at its exact unpadded sample
+count. Pause, dialogue, saves and death preserve the ongoing room BGM.
 
-The total PCM payload is 17,331,092 bytes. The two obsolete shared village and
-dungeon cartridge arrays have been removed. Historical v2 source inputs and
-old release evidence remain provenance only; they are not linked into music.
+The payload is 15,097,961 bytes of signed 8-bit mono PCM at 16,384 Hz.
+CORE is 702,172 samples, SHA-256
+`dc26f90664b8a1f23edbc9e767b706677caf10dacb9cc9fdd5e4b4f157e30731`.
+Its final quantization adds no random dither, reducing the previously heard
+noise without changing the arrangement, gain or period. The other 22 cues are
+the exact accepted game-format bytes from the orchestral review edition.
 
-Direct Sound A retains DMA1 and timers 0/1, an 8 KiB EWRAM ring and 256-byte
-repeated guard. Refills remain at most one 512-sample block per eligible frame.
-PSG1 effects, PSG2's room-68 assembly chime, DMA3 graphics and timers 2/3 retain
-their existing roles. Pause, dialogue, saves and death do not restart a cue.
-The existing recovery, startup, IRQ and fade implementation is unchanged.
+Direct Sound A retains DMA1, timers 0/1, the 8 KiB EWRAM ring and 256-byte
+guard. PSG1 effects and PSG2's assembly jingle retain their existing roles.
+The jingle is D4-F#4-A4-F#4 repeated three times, with the existing 12-note,
+180-active-tick timing, trigger, pause and exit behavior.
 
-## Build and reproduction
+## Build and exact reproduction
 
 Generated cartridge C is included. Build with an ARM7TDMI GCC toolchain:
 
     make ARM_PREFIX=/path/to/arm-none-eabi-
 
-Regenerate the exact cartridge data and routing catalog using standard Python:
+Regenerate exact cartridge data with Python's standard library:
 
     python3 tools/generate_music.py
 
-This validates every exact raw input hash, length and rate before generation.
-The source packager includes only explicitly hash-pinned music binaries.
-Each regional folder includes the original score/event sources, performance
-manifest and synthesis palette. Recreate the
-22 regional raw assets with standard Python (several minutes):
+The importer validates all 23 hashes, lengths, rates, previous per-cue size
+budgets and the complete 78-room mapping before changing generated output.
+It copies approved PCM; it does not rerender or requantize music.
+The source packager includes selected PCM and 24 canonical MIDIs through
+explicit binary hash pins. Note-level scores accompany those files; only
+historical provenance path labels were made portable, with original source
+hashes retained in `assets/music/selected/provenance.json`. Stereo masters and
+historical trials remain in the local production archive.
 
-    python3 assets/music/regional/reproduce_raw.py --output-dir build/regional-reproduced
+## Credits and checks
 
-HOME's approved renderer and sources remain under `assets/music/lanterns`.
-Its byte identity is independently checked against the approved source archive.
+Original game music credit: **GarlicDot**, as supplied by the owner.
+Current music is original score work created with OpenAI and rendered with
+FluidSynth 2.3.4 / FluidR3 GM 3.1; primary audio was not generated with Suno or
+ACE-Step. The FluidR3 sample-library notice is included in
+`assets/music/selected/FLUIDR3-LICENSE.txt`; the soundfont itself is not bundled.
+Earlier repository authorship records remain unchanged.
 
-## Authorship and verification
+Run current host transport/import checks and the PSG sequence contract:
 
-These are original compositions created with OpenAI for Adventure Legends.
-The synthesizer uses original additive instruments, with no third-party
-recordings or samples. The ending roll now credits this regional soundtrack;
-its row count, presentation and controls are unchanged.
+    python3 tests/test_soundtrack_runtime.py
+    python3 tests/test_horizons_audio.py
+    python3 tests/test_ending_credits_host.py
 
-The accepted cartridge is SHA-256
-`f3731bad2290aa680edc6c2cb191e945dd24bc4dcb3fdc16dc6343e91959e913`.
-It is 32,194,208 bytes, below the 32 MiB cartridge limit. Regional integration
-was checked with actual-C tests, exact PCM readback and native emulator timing.
-These checks do not establish subjective listening approval or physical GBA
-compatibility. See [publication scope and verification](docs/PUBLICATION.md)
-for the current GitHub tree and the distinction between included source and
-separately retained historical evidence.
+For actual mGBA audio, build first and run:
+
+    python3 tests/selected_music_native.py --expected-rom-sha SHA256 --output build/selected-native
+
+This checks controller playback, all room transitions, two exact loops per
+BGM, PSG coexistence, frame cadence and sample/inter-sample headroom. Room and
+long-loop fixtures are labeled synthetic. Emulator checks do not establish
+physical GBA compatibility or a full campaign replay. Historical proof suites
+run separately on their authenticated prior source tree.

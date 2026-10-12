@@ -1,6 +1,6 @@
-/* Generated original regional soundtrack; exact unpadded periods. */
+/* Generated owner-selected soundtrack; exact unpadded periods. */
 #include "music_data.h"
-const signed char music_home[907421] __attribute__((aligned(4))) = {
+const signed char music_home[842606] __attribute__((aligned(4))) = {
 #include "music_data/home_000.inc"
 #include "music_data/home_001.inc"
 #include "music_data/home_002.inc"
@@ -53,12 +53,8 @@ const signed char music_home[907421] __attribute__((aligned(4))) = {
 #include "music_data/home_049.inc"
 #include "music_data/home_050.inc"
 #include "music_data/home_051.inc"
-#include "music_data/home_052.inc"
-#include "music_data/home_053.inc"
-#include "music_data/home_054.inc"
-#include "music_data/home_055.inc"
 };
-const signed char music_river[842605] __attribute__((aligned(4))) = {
+const signed char music_river[714938] __attribute__((aligned(4))) = {
 #include "music_data/river_000.inc"
 #include "music_data/river_001.inc"
 #include "music_data/river_002.inc"
@@ -103,16 +99,8 @@ const signed char music_river[842605] __attribute__((aligned(4))) = {
 #include "music_data/river_041.inc"
 #include "music_data/river_042.inc"
 #include "music_data/river_043.inc"
-#include "music_data/river_044.inc"
-#include "music_data/river_045.inc"
-#include "music_data/river_046.inc"
-#include "music_data/river_047.inc"
-#include "music_data/river_048.inc"
-#include "music_data/river_049.inc"
-#include "music_data/river_050.inc"
-#include "music_data/river_051.inc"
 };
-const signed char music_grove[907422] __attribute__((aligned(4))) = {
+const signed char music_grove[776085] __attribute__((aligned(4))) = {
 #include "music_data/grove_000.inc"
 #include "music_data/grove_001.inc"
 #include "music_data/grove_002.inc"
@@ -161,16 +149,8 @@ const signed char music_grove[907422] __attribute__((aligned(4))) = {
 #include "music_data/grove_045.inc"
 #include "music_data/grove_046.inc"
 #include "music_data/grove_047.inc"
-#include "music_data/grove_048.inc"
-#include "music_data/grove_049.inc"
-#include "music_data/grove_050.inc"
-#include "music_data/grove_051.inc"
-#include "music_data/grove_052.inc"
-#include "music_data/grove_053.inc"
-#include "music_data/grove_054.inc"
-#include "music_data/grove_055.inc"
 };
-const signed char music_sky_road[677958] __attribute__((aligned(4))) = {
+const signed char music_sky_road[561737] __attribute__((aligned(4))) = {
 #include "music_data/sky_road_000.inc"
 #include "music_data/sky_road_001.inc"
 #include "music_data/sky_road_002.inc"
@@ -206,15 +186,8 @@ const signed char music_sky_road[677958] __attribute__((aligned(4))) = {
 #include "music_data/sky_road_032.inc"
 #include "music_data/sky_road_033.inc"
 #include "music_data/sky_road_034.inc"
-#include "music_data/sky_road_035.inc"
-#include "music_data/sky_road_036.inc"
-#include "music_data/sky_road_037.inc"
-#include "music_data/sky_road_038.inc"
-#include "music_data/sky_road_039.inc"
-#include "music_data/sky_road_040.inc"
-#include "music_data/sky_road_041.inc"
 };
-const signed char music_sky_dungeon[709974] __attribute__((aligned(4))) = {
+const signed char music_sky_dungeon[655360] __attribute__((aligned(4))) = {
 #include "music_data/sky_dungeon_000.inc"
 #include "music_data/sky_dungeon_001.inc"
 #include "music_data/sky_dungeon_002.inc"
@@ -255,12 +228,8 @@ const signed char music_sky_dungeon[709974] __attribute__((aligned(4))) = {
 #include "music_data/sky_dungeon_037.inc"
 #include "music_data/sky_dungeon_038.inc"
 #include "music_data/sky_dungeon_039.inc"
-#include "music_data/sky_dungeon_040.inc"
-#include "music_data/sky_dungeon_041.inc"
-#include "music_data/sky_dungeon_042.inc"
-#include "music_data/sky_dungeon_043.inc"
 };
-const signed char music_dusk_road[655360] __attribute__((aligned(4))) = {
+const signed char music_dusk_road[610163] __attribute__((aligned(4))) = {
 #include "music_data/dusk_road_000.inc"
 #include "music_data/dusk_road_001.inc"
 #include "music_data/dusk_road_002.inc"
@@ -299,10 +268,8 @@ const signed char music_dusk_road[655360] __attribute__((aligned(4))) = {
 #include "music_data/dusk_road_035.inc"
 #include "music_data/dusk_road_036.inc"
 #include "music_data/dusk_road_037.inc"
-#include "music_data/dusk_road_038.inc"
-#include "music_data/dusk_road_039.inc"
 };
-const signed char music_core[786432] __attribute__((aligned(4))) = {
+const signed char music_core[702172] __attribute__((aligned(4))) = {
 #include "music_data/core_000.inc"
 #include "music_data/core_001.inc"
 #include "music_data/core_002.inc"
@@ -346,13 +313,8 @@ const signed char music_core[786432] __attribute__((aligned(4))) = {
 #include "music_data/core_040.inc"
 #include "music_data/core_041.inc"
 #include "music_data/core_042.inc"
-#include "music_data/core_043.inc"
-#include "music_data/core_044.inc"
-#include "music_data/core_045.inc"
-#include "music_data/core_046.inc"
-#include "music_data/core_047.inc"
 };
-const signed char music_reedhaven[804305] __attribute__((aligned(4))) = {
+const signed char music_reedhaven[737280] __attribute__((aligned(4))) = {
 #include "music_data/reedhaven_000.inc"
 #include "music_data/reedhaven_001.inc"
 #include "music_data/reedhaven_002.inc"
@@ -398,13 +360,8 @@ const signed char music_reedhaven[804305] __attribute__((aligned(4))) = {
 #include "music_data/reedhaven_042.inc"
 #include "music_data/reedhaven_043.inc"
 #include "music_data/reedhaven_044.inc"
-#include "music_data/reedhaven_045.inc"
-#include "music_data/reedhaven_046.inc"
-#include "music_data/reedhaven_047.inc"
-#include "music_data/reedhaven_048.inc"
-#include "music_data/reedhaven_049.inc"
 };
-const signed char music_reed_works[655360] __attribute__((aligned(4))) = {
+const signed char music_reed_works[593214] __attribute__((aligned(4))) = {
 #include "music_data/reed_works_000.inc"
 #include "music_data/reed_works_001.inc"
 #include "music_data/reed_works_002.inc"
@@ -442,11 +399,8 @@ const signed char music_reed_works[655360] __attribute__((aligned(4))) = {
 #include "music_data/reed_works_034.inc"
 #include "music_data/reed_works_035.inc"
 #include "music_data/reed_works_036.inc"
-#include "music_data/reed_works_037.inc"
-#include "music_data/reed_works_038.inc"
-#include "music_data/reed_works_039.inc"
 };
-const signed char music_hearthwake[756185] __attribute__((aligned(4))) = {
+const signed char music_hearthwake[542367] __attribute__((aligned(4))) = {
 #include "music_data/hearthwake_000.inc"
 #include "music_data/hearthwake_001.inc"
 #include "music_data/hearthwake_002.inc"
@@ -481,21 +435,8 @@ const signed char music_hearthwake[756185] __attribute__((aligned(4))) = {
 #include "music_data/hearthwake_031.inc"
 #include "music_data/hearthwake_032.inc"
 #include "music_data/hearthwake_033.inc"
-#include "music_data/hearthwake_034.inc"
-#include "music_data/hearthwake_035.inc"
-#include "music_data/hearthwake_036.inc"
-#include "music_data/hearthwake_037.inc"
-#include "music_data/hearthwake_038.inc"
-#include "music_data/hearthwake_039.inc"
-#include "music_data/hearthwake_040.inc"
-#include "music_data/hearthwake_041.inc"
-#include "music_data/hearthwake_042.inc"
-#include "music_data/hearthwake_043.inc"
-#include "music_data/hearthwake_044.inc"
-#include "music_data/hearthwake_045.inc"
-#include "music_data/hearthwake_046.inc"
 };
-const signed char music_headland[714939] __attribute__((aligned(4))) = {
+const signed char music_headland[655361] __attribute__((aligned(4))) = {
 #include "music_data/headland_000.inc"
 #include "music_data/headland_001.inc"
 #include "music_data/headland_002.inc"
@@ -537,11 +478,8 @@ const signed char music_headland[714939] __attribute__((aligned(4))) = {
 #include "music_data/headland_038.inc"
 #include "music_data/headland_039.inc"
 #include "music_data/headland_040.inc"
-#include "music_data/headland_041.inc"
-#include "music_data/headland_042.inc"
-#include "music_data/headland_043.inc"
 };
-const signed char music_counterworks[702171] __attribute__((aligned(4))) = {
+const signed char music_counterworks[542367] __attribute__((aligned(4))) = {
 #include "music_data/counterworks_000.inc"
 #include "music_data/counterworks_001.inc"
 #include "music_data/counterworks_002.inc"
@@ -576,17 +514,8 @@ const signed char music_counterworks[702171] __attribute__((aligned(4))) = {
 #include "music_data/counterworks_031.inc"
 #include "music_data/counterworks_032.inc"
 #include "music_data/counterworks_033.inc"
-#include "music_data/counterworks_034.inc"
-#include "music_data/counterworks_035.inc"
-#include "music_data/counterworks_036.inc"
-#include "music_data/counterworks_037.inc"
-#include "music_data/counterworks_038.inc"
-#include "music_data/counterworks_039.inc"
-#include "music_data/counterworks_040.inc"
-#include "music_data/counterworks_041.inc"
-#include "music_data/counterworks_042.inc"
 };
-const signed char music_sunlace[779013] __attribute__((aligned(4))) = {
+const signed char music_sunlace[561738] __attribute__((aligned(4))) = {
 #include "music_data/sunlace_000.inc"
 #include "music_data/sunlace_001.inc"
 #include "music_data/sunlace_002.inc"
@@ -622,21 +551,8 @@ const signed char music_sunlace[779013] __attribute__((aligned(4))) = {
 #include "music_data/sunlace_032.inc"
 #include "music_data/sunlace_033.inc"
 #include "music_data/sunlace_034.inc"
-#include "music_data/sunlace_035.inc"
-#include "music_data/sunlace_036.inc"
-#include "music_data/sunlace_037.inc"
-#include "music_data/sunlace_038.inc"
-#include "music_data/sunlace_039.inc"
-#include "music_data/sunlace_040.inc"
-#include "music_data/sunlace_041.inc"
-#include "music_data/sunlace_042.inc"
-#include "music_data/sunlace_043.inc"
-#include "music_data/sunlace_044.inc"
-#include "music_data/sunlace_045.inc"
-#include "music_data/sunlace_046.inc"
-#include "music_data/sunlace_047.inc"
 };
-const signed char music_frondshore[655361] __attribute__((aligned(4))) = {
+const signed char music_frondshore[567139] __attribute__((aligned(4))) = {
 #include "music_data/frondshore_000.inc"
 #include "music_data/frondshore_001.inc"
 #include "music_data/frondshore_002.inc"
@@ -672,14 +588,8 @@ const signed char music_frondshore[655361] __attribute__((aligned(4))) = {
 #include "music_data/frondshore_032.inc"
 #include "music_data/frondshore_033.inc"
 #include "music_data/frondshore_034.inc"
-#include "music_data/frondshore_035.inc"
-#include "music_data/frondshore_036.inc"
-#include "music_data/frondshore_037.inc"
-#include "music_data/frondshore_038.inc"
-#include "music_data/frondshore_039.inc"
-#include "music_data/frondshore_040.inc"
 };
-const signed char music_conservatory[752327] __attribute__((aligned(4))) = {
+const signed char music_conservatory[655361] __attribute__((aligned(4))) = {
 #include "music_data/conservatory_000.inc"
 #include "music_data/conservatory_001.inc"
 #include "music_data/conservatory_002.inc"
@@ -721,13 +631,8 @@ const signed char music_conservatory[752327] __attribute__((aligned(4))) = {
 #include "music_data/conservatory_038.inc"
 #include "music_data/conservatory_039.inc"
 #include "music_data/conservatory_040.inc"
-#include "music_data/conservatory_041.inc"
-#include "music_data/conservatory_042.inc"
-#include "music_data/conservatory_043.inc"
-#include "music_data/conservatory_044.inc"
-#include "music_data/conservatory_045.inc"
 };
-const signed char music_kilnstep[786432] __attribute__((aligned(4))) = {
+const signed char music_kilnstep[670255] __attribute__((aligned(4))) = {
 #include "music_data/kilnstep_000.inc"
 #include "music_data/kilnstep_001.inc"
 #include "music_data/kilnstep_002.inc"
@@ -769,15 +674,8 @@ const signed char music_kilnstep[786432] __attribute__((aligned(4))) = {
 #include "music_data/kilnstep_038.inc"
 #include "music_data/kilnstep_039.inc"
 #include "music_data/kilnstep_040.inc"
-#include "music_data/kilnstep_041.inc"
-#include "music_data/kilnstep_042.inc"
-#include "music_data/kilnstep_043.inc"
-#include "music_data/kilnstep_044.inc"
-#include "music_data/kilnstep_045.inc"
-#include "music_data/kilnstep_046.inc"
-#include "music_data/kilnstep_047.inc"
 };
-const signed char music_pumice[714939] __attribute__((aligned(4))) = {
+const signed char music_pumice[644616] __attribute__((aligned(4))) = {
 #include "music_data/pumice_000.inc"
 #include "music_data/pumice_001.inc"
 #include "music_data/pumice_002.inc"
@@ -818,12 +716,8 @@ const signed char music_pumice[714939] __attribute__((aligned(4))) = {
 #include "music_data/pumice_037.inc"
 #include "music_data/pumice_038.inc"
 #include "music_data/pumice_039.inc"
-#include "music_data/pumice_040.inc"
-#include "music_data/pumice_041.inc"
-#include "music_data/pumice_042.inc"
-#include "music_data/pumice_043.inc"
 };
-const signed char music_caldera[741917] __attribute__((aligned(4))) = {
+const signed char music_caldera[624152] __attribute__((aligned(4))) = {
 #include "music_data/caldera_000.inc"
 #include "music_data/caldera_001.inc"
 #include "music_data/caldera_002.inc"
@@ -863,15 +757,8 @@ const signed char music_caldera[741917] __attribute__((aligned(4))) = {
 #include "music_data/caldera_036.inc"
 #include "music_data/caldera_037.inc"
 #include "music_data/caldera_038.inc"
-#include "music_data/caldera_039.inc"
-#include "music_data/caldera_040.inc"
-#include "music_data/caldera_041.inc"
-#include "music_data/caldera_042.inc"
-#include "music_data/caldera_043.inc"
-#include "music_data/caldera_044.inc"
-#include "music_data/caldera_045.inc"
 };
-const signed char music_nacreway[737280] __attribute__((aligned(4))) = {
+const signed char music_nacreway[637648] __attribute__((aligned(4))) = {
 #include "music_data/nacreway_000.inc"
 #include "music_data/nacreway_001.inc"
 #include "music_data/nacreway_002.inc"
@@ -911,14 +798,8 @@ const signed char music_nacreway[737280] __attribute__((aligned(4))) = {
 #include "music_data/nacreway_036.inc"
 #include "music_data/nacreway_037.inc"
 #include "music_data/nacreway_038.inc"
-#include "music_data/nacreway_039.inc"
-#include "music_data/nacreway_040.inc"
-#include "music_data/nacreway_041.inc"
-#include "music_data/nacreway_042.inc"
-#include "music_data/nacreway_043.inc"
-#include "music_data/nacreway_044.inc"
 };
-const signed char music_kelp[680566] __attribute__((aligned(4))) = {
+const signed char music_kelp[620868] __attribute__((aligned(4))) = {
 #include "music_data/kelp_000.inc"
 #include "music_data/kelp_001.inc"
 #include "music_data/kelp_002.inc"
@@ -957,12 +838,8 @@ const signed char music_kelp[680566] __attribute__((aligned(4))) = {
 #include "music_data/kelp_035.inc"
 #include "music_data/kelp_036.inc"
 #include "music_data/kelp_037.inc"
-#include "music_data/kelp_038.inc"
-#include "music_data/kelp_039.inc"
-#include "music_data/kelp_040.inc"
-#include "music_data/kelp_041.inc"
 };
-const signed char music_palinode[804305] __attribute__((aligned(4))) = {
+const signed char music_palinode[761064] __attribute__((aligned(4))) = {
 #include "music_data/palinode_000.inc"
 #include "music_data/palinode_001.inc"
 #include "music_data/palinode_002.inc"
@@ -1010,11 +887,8 @@ const signed char music_palinode[804305] __attribute__((aligned(4))) = {
 #include "music_data/palinode_044.inc"
 #include "music_data/palinode_045.inc"
 #include "music_data/palinode_046.inc"
-#include "music_data/palinode_047.inc"
-#include "music_data/palinode_048.inc"
-#include "music_data/palinode_049.inc"
 };
-const signed char music_horizons[772388] __attribute__((aligned(4))) = {
+const signed char music_horizons[702172] __attribute__((aligned(4))) = {
 #include "music_data/horizons_000.inc"
 #include "music_data/horizons_001.inc"
 #include "music_data/horizons_002.inc"
@@ -1058,13 +932,8 @@ const signed char music_horizons[772388] __attribute__((aligned(4))) = {
 #include "music_data/horizons_040.inc"
 #include "music_data/horizons_041.inc"
 #include "music_data/horizons_042.inc"
-#include "music_data/horizons_043.inc"
-#include "music_data/horizons_044.inc"
-#include "music_data/horizons_045.inc"
-#include "music_data/horizons_046.inc"
-#include "music_data/horizons_047.inc"
 };
-const signed char music_covenants[786432] __attribute__((aligned(4))) = {
+const signed char music_covenants[719298] __attribute__((aligned(4))) = {
 #include "music_data/covenants_000.inc"
 #include "music_data/covenants_001.inc"
 #include "music_data/covenants_002.inc"
@@ -1109,8 +978,4 @@ const signed char music_covenants[786432] __attribute__((aligned(4))) = {
 #include "music_data/covenants_041.inc"
 #include "music_data/covenants_042.inc"
 #include "music_data/covenants_043.inc"
-#include "music_data/covenants_044.inc"
-#include "music_data/covenants_045.inc"
-#include "music_data/covenants_046.inc"
-#include "music_data/covenants_047.inc"
 };

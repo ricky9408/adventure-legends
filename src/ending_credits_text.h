@@ -57,6 +57,8 @@ enum {
  EC_LINE_42,
  EC_LINE_43,
  EC_LINE_44,
+ EC_LINE_45,
+ EC_LINE_46,
  EC_COUNT };
 extern const UiText ending_credits_texts[EC_COUNT];
 #endif
