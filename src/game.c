@@ -863,7 +863,8 @@ void kill_enemy(Enemy*e){unsigned slot=(unsigned)(e-enemies),i,xp=0,gold;Creatur
 /* Consume charger contact eligibility in ROM so its terminating-rush flag
  * does not stay live across the hot updater's unrelated enemy paths. */
 static COLD void update_charger_contact(unsigned i){Enemy*e;
- if(!enemy_tactics_update(i))return;e=&enemies[i];
+ if(!enemy_tactics_update(i))return;
+ e=&enemies[i];
  if(ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard(i,e->x,e->y)||magma_powers_melee_guard(i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
 }
 void update_enemies(void){int i,j;for(i=0;i<MAX_ENEMIES;i++){Enemy*e=&enemies[i];if(!e->hp)continue;if(e->flash)e->flash--;if(!e->flash&&game_melee_hit((unsigned)i,e->x,e->y,0)){game_enemy_hurt((unsigned)i,weapon_action.damage_q4,weapon_action.attack_q4,weapon_action.element);southern_powers_weapon_hit((unsigned)i);game_enemy_stagger((unsigned)i,weapon_action.stagger);e->flash=16;hitstop=3;sfx(4);if(e->hp<=0)kill_enemy(e);else{int nx=e->x+sign(e->x-px)*5,ny=e->y+sign(e->y-py)*5;if(!solid(nx,ny)){e->x=nx;e->y=ny;}}}if(!e->hp)continue;
