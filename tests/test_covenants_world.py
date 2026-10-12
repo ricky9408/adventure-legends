@@ -5,7 +5,7 @@ Renderer geometry is independently proven elsewhere. This suite is not native
 controller acquisition or pacing acceptance. No production state is edited.
 """
 from pathlib import Path
-import ctypes as C, hashlib, json, os, subprocess, unittest, sys
+import ctypes as C, hashlib, json, os, subprocess, sys, unittest
 import covenants_host_support as H
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'build/covenants-world-review'
@@ -25,9 +25,8 @@ class World(unittest.TestCase):
   cls.sanitized=sanitized
   p=OUT/('world-sanitized.so' if sanitized else 'world.so')
   sanitize=['-fsanitize=address,undefined','-fno-omit-frame-pointer'] if sanitized else []
-  # Apple ld rejects --no-undefined and already defaults to strict resolution.
-  strict_link=[] if sys.platform=='darwin' else ['-Wl,--no-undefined']
-  subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic',*strict_link,'-fPIC','-shared','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-Isrc','-I'+str(OUT),*sanitize,*files,'-o',str(p)],cwd=ROOT,check=True)
+  undefined=['-Wl,-undefined,error'] if sys.platform=='darwin' else ['-Wl,--no-undefined']
+  subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic',*undefined,'-fPIC','-shared','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-Isrc','-I'+str(OUT),*sanitize,*files,'-o',str(p)],cwd=ROOT,check=True)
   subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Isrc','-c','src/covenants_game.c','-o',str(OUT/'strict-world.o')],cwd=ROOT,check=True)
   cls.l=C.CDLL(str(p));cls.l.sram=(C.c_ubyte*32768).in_dll(cls.l,'save5_test_sram');cls.s=H.Save.in_dll(cls.l,'adventure_save')
   cls.l.covenants_job_begin.argtypes=[C.POINTER(H.Save),C.POINTER(H.Request),C.c_uint,C.c_uint]
@@ -124,6 +123,27 @@ class World(unittest.TestCase):
     for t in station['targets']:
      x=C.c_int();y=C.c_int();rad=C.c_int();self.assertEqual(self.l.covenants_game_field_target(idx,C.byref(x),C.byref(y),C.byref(rad)),1)
      self.assertEqual([x.value,y.value],t['center']);self.assertEqual(rad.value,t['radius']);idx+=1
+ def test_homecoming_offer_waits_for_verified_claim_and_replays_read_only(self):
+  complete=H.story(self.l,False)
+  # Synthetic READY checkpoint: all ordinary objectives were earned through
+  # real typed jobs; remove only the final claimed receipt for this host case.
+  self.l.save5_quest_set_state(C.byref(complete.quests),63,2);complete.quests.rewards[7]&=127
+  ref=self.l.equipment_find(C.byref(complete.equipment),89);self.assertLess(ref,48)
+  C.memset(C.addressof(complete.equipment.bag[ref]),0,C.sizeof(complete.equipment.bag[ref]))
+  complete.equipment.seen[89>>3]&=~(1<<(89&7));complete.equipment.reward_claims[47>>3]&=~(1<<(47&7))
+  self.assertEqual(self.l.save5_validate(C.byref(complete)),1)
+  C.memmove(C.addressof(self.s),C.addressof(complete),C.sizeof(complete));self.l.adopt_fixture(H.generation())
+  self.at(120,112,1);self.assertEqual(self.l.covenants_game_old_interact(),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+  self.assertEqual(self.l.settle(),1);claimed=bytes(self.s)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(0),0)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+  self.assertEqual(bytes(self.s),claimed)
+  self.at(120,112,1);self.assertEqual(self.l.covenants_game_old_interact(),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0) # dialogue owns input
+  self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),1)
+  self.assertEqual(bytes(self.s),claimed)
  def test_stale_source_scene_owner_geometry_and_overlap(self):
   for fault in range(9):
    self.setUp();self.entry(70);self.select(105,106);self.at(120,240);t=self.l.action();self.l.fault(fault);self.assertEqual(self.l.hit(0,t,1,0),0,fault);self.assertEqual(self.l.get_setting(0),0)

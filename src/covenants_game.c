@@ -56,6 +56,7 @@ static WorldCast cast;
 static CovenantsRequest events[4];
 static unsigned event_handle,event_scene,event_attempt;
 static unsigned char event_count,event_index;
+static unsigned char homecoming_offer;
 static const unsigned char spawn_counts[8]={5,2,2,2,4,2,2,2};
 static const short spawns[8][5][2]={
  {{240,288},{448,160},{32,160},{240,32},{80,272}},
@@ -159,6 +160,10 @@ static COLD int complete_covenant(void){
  return simple(COVENANTS_REQUEST_COVENANT_COMPLETE,(unsigned)room,0,0,i+1);
 }
 COLD int covenants_game_event_pending(void){return event_count!=0;}
+COLD int covenants_game_take_homecoming_offer(int save_verified){
+ if(!homecoming_offer||!save_verified||game_state!=PLAY||room!=0||event_count||!done(63))return 0;
+ homecoming_offer=0;return 1;
+}
 COLD int covenants_game_route_allowed(unsigned a,unsigned s){return spawn_allowed(a,s);}
 COLD int covenants_game_request_enter(unsigned a,unsigned s){
  if(!spawn_allowed(a,s))return 0;
@@ -185,7 +190,7 @@ static COLD void present(const CovenantsRequest*r,int result){
  dirty=1;
  if(r->operation==COVENANTS_REQUEST_UNIQUE_INVITE){invite_confirm=0;progression_refresh();toast(TX_CV_INVITED);}
  else if(r->operation==COVENANTS_REQUEST_COVENANT_COMPLETE){invalidate_cast();invite_confirm=0;toast(TX_CV_FULFILLED);}
- else if(r->operation==COVENANTS_REQUEST_QUEST_CLAIM){progression_refresh();if(r->quest==63)setting[23]=1;toast(TX_CV_RECEIVED);}
+ else if(r->operation==COVENANTS_REQUEST_QUEST_CLAIM){progression_refresh();if(r->quest==63){setting[23]=1;homecoming_offer=1;}toast(TX_CV_RECEIVED);}
  else if(result==COVENANTS_NOW_READY)toast(TX_CV_READY);
  changed();
 }

@@ -151,7 +151,7 @@ COLD int covenants_game_old_interact(void){
   if(!done(63)&&state(63)&&((bits(63)&3)==3)){
    if(state(63)==SAVE5_QUEST_READY)claim(63);else{objective(63,4);say(TX_CV_HOME_RETURN_A,TX_CV_HOME_RETURN_B);}return 1;
   }
-  if(done(63)){say(TX_CV_END_A,TX_CV_END_B);return 1;}
+  if(done(63)){homecoming_offer=1;say(TX_CV_END_A,TX_CV_END_B);return 1;}
   say(TX_CV_CLUE60A,TX_CV_CLUE60B);return 1;
  }
  if(room==62&&close(120,208)){

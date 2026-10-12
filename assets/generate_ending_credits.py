@@ -6,7 +6,7 @@ from gbj_font import render_text
 import json
 ROOT=Path(__file__).resolve().parents[1]
 credits=json.loads((ROOT/'assets/ending_credits.json').read_text())
-labels={name.upper():{'text':credits[name],'height':15} for name in ('title','roll_hint','card_hint','done_hint','release_hint','thanks')}
+labels={name.upper():{'text':credits[name],'height':15} for name in ('title','roll_hint','card_hint','done_hint','release_hint','thanks','homecoming_title','homecoming_line','homecoming_optional','homecoming_keys')}
 labels.update({f'LINE_{i}':{'text':line,'height':15} for i,line in enumerate(credits['lines'])})
 items=[];metrics={}
 for name,spec in labels.items():

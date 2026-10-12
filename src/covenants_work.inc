@@ -25,7 +25,7 @@ COLD void covenants_game_reset(void){
  covenants_game_cancel_event();invalidate_cast();
  if(room==77)game_covenants_spawn_wave(0);
  next_generation(&scene);next_generation(&attempt);next_generation(&geometry);
- reset_confirm=invite_confirm=porch_confirm=0;ambient=0;reconstruct();changed();
+ reset_confirm=invite_confirm=porch_confirm=homecoming_offer=0;ambient=0;reconstruct();changed();
 }
 /* Author the old-town adapter before either arrival bitmap is cached. The
  * fallback tick also uses this for external checkpoint/scene reconstruction.

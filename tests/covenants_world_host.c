@@ -62,8 +62,17 @@ void game_region_warp(int x,int y){if(!covenants_game_solid(x,y)){px=x;py=y;}}
 int game_covenants_spawn_wave(unsigned wave){enemy_count=wave?wave+1:0;return 1;}
 unsigned game_covenants_enemies_alive(void){return enemy_count;}
 int solid(int x,int y){(void)x;(void)y;return 0;}
+
 void enter_room(int r,int s){if(r>=70){int q=covenants_game_request_enter(r,s);if(q==1)covenants_game_enter(r,s);}else{covenants_game_reset();room=r;checkpoint_spawn=s;adventure_save.campaign.room=r;adventure_save.campaign.spawn=s;}}
 #include "covenants_world_source.inc"
+#if defined(__APPLE__)
+/* Mach-O needs explicit absent-bridge doubles; ELF's weak null hooks use the
+ * identical original chapter geometry/door fallback in this isolated suite. */
+int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
+int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
+int game_road_box_added(unsigned a,int x,int y,int tx,int ty){(void)a;(void)x;(void)y;(void)tx;(void)ty;return 0;}
+int game_road_box_touched(unsigned a,int x,int y,int tx,int ty){(void)a;(void)x;(void)y;(void)tx;(void)ty;return 0;}
+#endif
 int settle(void){unsigned n=0,a,s;while(covenants_game_event_pending()&&n++<2000)if(covenants_game_prepare_event()==SAVE5_FAILED)return 0;if(n>=2000)return 0;if(covenants_game_take_transition(&a,&s))enter_room(a,s);game_state=1;return save5_validate(&adventure_save);}
 void fresh_world(void){room=adventure_save.campaign.room;checkpoint_spawn=adventure_save.campaign.spawn;covenants_game_reset();game_state=summoned=1;face=1;keys=transition_lock=camera_x=camera_y=0;last_toast=toast_count=saved=geometry_changes=0;power_beat=1;power_release=0;overlap=1;}
 void at(int x,int y,int f){px=x;py=y;face=f;game_state=1;keys=0;}
@@ -85,7 +94,7 @@ unsigned get_moving_state(void){return moving_state;}
 unsigned get_practice_ticks(void){return practice_ticks;}
 unsigned confirmation(unsigned which){return which==0?reset_confirm:which==1?invite_confirm:porch_confirm;}
 unsigned cast_id(void){return cast.token;}
-unsigned world_bytes(void){return sizeof setting+sizeof reset_confirm+sizeof invite_confirm+sizeof porch_confirm+sizeof dirty+sizeof transition_area+sizeof transition_spawn+sizeof transition_ready+sizeof moving_x+sizeof npc_x+sizeof npc_y+sizeof movement_ticks+sizeof practice_ticks+sizeof moving_state+sizeof npc_stage+sizeof practice_mode+sizeof escort_stage+sizeof npc_walk_recent+sizeof npc_walk_phase+sizeof npc_blocked_ticks+sizeof heat_token+sizeof work_area+sizeof cast+sizeof events+sizeof event_handle+sizeof event_scene+sizeof event_attempt+sizeof event_count+sizeof event_index+sizeof relaxed_interaction+7*sizeof(unsigned);}
+unsigned world_bytes(void){return sizeof setting+sizeof reset_confirm+sizeof invite_confirm+sizeof porch_confirm+sizeof dirty+sizeof transition_area+sizeof transition_spawn+sizeof transition_ready+sizeof moving_x+sizeof npc_x+sizeof npc_y+sizeof movement_ticks+sizeof practice_ticks+sizeof moving_state+sizeof npc_stage+sizeof practice_mode+sizeof escort_stage+sizeof npc_walk_recent+sizeof npc_walk_phase+sizeof npc_blocked_ticks+sizeof heat_token+sizeof work_area+sizeof cast+sizeof events+sizeof event_handle+sizeof event_scene+sizeof event_attempt+sizeof event_count+sizeof event_index+sizeof relaxed_interaction+sizeof homecoming_offer+7*sizeof(unsigned);}
 /* Negative controls deliberately mutate owner/proof independently of world. */
 void fault(unsigned k){switch(k){case 0:mock_token++;power_proof.token++;break;case 1:mock_id++;power_proof.caster++;break;case 2:horizons_power_origin_x++;return_power_origin_x++;power_proof.origin_x++;break;case 3:geometry_changed();break;case 4:next_generation(&scene);break;case 5:next_generation(&attempt);break;case 6:overlap=0;break;case 7:horizons_power_kind=return_power_kind=0;mock_token=0;break;case 8:horizons_power_direction=return_power_direction=4;power_proof.direction=4;break;}}
 void enemies_clear(void){enemy_count=0;}

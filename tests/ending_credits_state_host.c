@@ -28,6 +28,17 @@ int main(void){
   step(0,0);keys=(int)button;pressed=(int)button;arrival_input_mask=0;
   assert(ending_credits_update()==1);assert(!pressed&&arrival_input_mask==(int)button);checks++;
  }
+ /* Final closure is an explicit offer, not an automatic re-run. Waiting and
+  * held activation buttons cannot begin it; replay retains the same mode. */
+ ending_credits_offer_homecoming();assert(ending_credits_returns_to_field());
+ for(unsigned i=0;i<300;i++)step(1,i?0:1);
+ assert(!ending_credits_armed&&!ending_credits_phase);step(0,0);
+ for(unsigned i=0;i<1000;i++)step(0,0);
+ assert(ending_credits_armed&&!ending_credits_phase&&!ending_credits_scroll);
+ assert(ending_credits_draw());step(1,1);assert(ending_credits_phase==1);
+ step(0,0);keys=2;pressed=2;arrival_input_mask=0;
+ assert(ending_credits_update()==1&&ending_credits_returns_to_field()&&!pressed&&arrival_input_mask==2);
+ ending_credits_begin();assert(!ending_credits_returns_to_field());
  printf("PASS %u state/input updates, all held-button combinations, automatic/full roll, stable end, replay and B/Start exits; full scroll %u updates\n",checks,full_steps);
  return 0;
 }
