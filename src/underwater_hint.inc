@@ -30,6 +30,10 @@ COLD int underwater_game_target_hint(int*x,int*y){
    else if(room==48){if(p->x==368)visible=p->y==112?0:branch_visible&4;else if(p->y==80&&(p->x==304||p->x==272||p->x==336))visible=branch_visible&32;}
    else if(room==49){if(p->x==208)visible=branch_visible&16;else if(p->y==88)visible=branch_visible&128;else if(p->x==64&&p->y==56)visible=adventure_save.quests.region_flags[21]>=3;}
    else if(room==51&&(p->x==384||p->x==416||p->x==400))visible=branch_visible&64;
+   if(room==47&&p->x==376&&underwater_source_claimed(&adventure_save,4))visible=0;
+   if(room==48&&((p->x==144&&p->y==92&&underwater_source_claimed(&adventure_save,3))||(p->x==96&&p->y==224&&underwater_source_claimed(&adventure_save,6))))visible=0;
+   if(room==49&&((p->x==172&&underwater_source_claimed(&adventure_save,5))||(p->x==64&&p->y==56&&underwater_source_claimed(&adventure_save,8))))visible=0;
+   if(room==51&&p->x==144&&(!adventure_save.quests.region_flags[20]||underwater_source_claimed(&adventure_save,7)))visible=0;
    if(room==53&&p->x==208){if(road_region_managed(53,46)||underwater_game_guardian_stage!=4)continue;return 0;}
    if(!visible)return 0;
    if(x)*x=p->x;if(y)*y=p->y;return 1;

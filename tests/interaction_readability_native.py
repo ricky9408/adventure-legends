@@ -17,13 +17,14 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--candidate', type=Path, required=True)
+    p.add_argument('--source-root', type=Path, default=ROOT)
     p.add_argument('--bridge', type=Path, required=True)
     p.add_argument('--source-report', type=Path, required=True)
     p.add_argument('--source-snapshot', required=True)
     p.add_argument('--case', choices=('rails', 'underwater', 'return', 'horizons', 'covenants'), required=True)
     p.add_argument('--output', type=Path, required=True)
     a = p.parse_args()
-    for name in ('candidate', 'bridge', 'source_report', 'output'):
+    for name in ('candidate', 'source_root', 'bridge', 'source_report', 'output'):
         setattr(a, name, getattr(a, name).resolve())
     assert not a.output.exists(), 'Use a new evidence directory'
     a.output.mkdir(parents=True)
@@ -31,7 +32,7 @@ def main():
     symbols = rom.with_suffix('.sym')
     manifest = a.candidate / 'source-hashes.json'
     hashes = json.loads(manifest.read_text())
-    assert all(sha(ROOT / name) == value for name, value in hashes.items())
+    assert all(sha(a.source_root / name) == value for name, value in hashes.items())
     producer = json.loads(a.source_report.read_text())
     assert producer['controller_only'] and producer['route_complete']
     assert not producer['failures'] and all(c['passed'] for c in producer['checks'])
@@ -39,7 +40,7 @@ def main():
     source_save = Path(producer['snapshots'][a.source_snapshot]['sram_path']).resolve()
     source_hash = sha(source_save)
     args = SimpleNamespace(output=a.output, rom=rom, symbols=symbols, bridge=a.bridge,
-                           source_root=ROOT, baseline=False, cross_rom_diagnostic=True,
+                           source_root=a.source_root, baseline=False, cross_rom_diagnostic=True,
                            diagnostic_boundary_report=a.source_report,
                            expected_rom_sha=sha(rom), expected_symbols_sha=sha(symbols))
     args.candidate = dict(rom_sha256=args.expected_rom_sha, symbols_sha256=args.expected_symbols_sha,

@@ -47,7 +47,8 @@ python3 tests/test_covenants_world.py
 
 Passing first batch: Northern14, Underwater19, Return13, Horizons17, Covenants21,
 plus the Underwater real-power mode19. The hint follow-up adds one passing test
-per late region: Underwater20, Return14, Horizons18, Covenants22. New checks cover off-axis A success, outside/behind
+per late region: Underwater21 (including disappearing claimed sources), Return14,
+Horizons18, Covenants22. New checks cover off-axis A success, outside/behind
 rejection, reset/invitation retention and cancellation, all four stable rail
 outputs, camera translation, and the room70 steward/manual precedence case.
 Hint tests also assert repeated queries preserve save/quest data, settings,
@@ -112,7 +113,8 @@ by the host drawing test; the four-bearing native set is room26.
 
 Official ARM14.2.Rel1 scoped build succeeds with linker assertions. First batch
 ROM:32,194,920bytes, +712bytes versus `cc5e88e`. With read-only hint APIs it is
-32,198,480bytes (+4,272bytes versus baseline). IWRAM code stays0x6ea8:344bytes of
+32,198,944bytes (+4,736bytes versus baseline), including claimed-source visibility.
+IWRAM code stays0x6ea8:344bytes of
 reserved code margin remain. Allocated BSS adds16bytes; initialized data is
 unchanged. Existing OBJ allocation is unchanged, preserving its128byte margin.
 No music, save-format, catalog, generated sprite or shared renderer change.

@@ -75,6 +75,11 @@ class UnderwaterWorld(unittest.TestCase):
   self.at(64,88,1);self.assertEqual(L.underwater_game_target_hint(None,None),0)
   self.at(136,116,1);C.c_int.in_dll(L,'game_state').value=2
   self.assertEqual(L.underwater_game_target_hint(None,None),0)
+ def test_claimed_source_actor_does_not_leave_an_empty_focus_hint(self):
+  self.sources();self.entry(48);self.at(144,110,1)
+  before=(L.qs(40),L.qo(40),L.get_toast())
+  self.assertEqual(L.underwater_game_target_hint(None,None),0)
+  self.assertEqual((L.qs(40),L.qo(40),L.get_toast()),before)
  def test_off_axis_reset_needs_second_a_and_facing_away_cancels(self):
   self.entry(46);self.act(32,288,1)
   self.assertEqual(toast(),'TX_UW_RESET_CONFIRM')
