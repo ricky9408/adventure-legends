@@ -330,7 +330,7 @@ class Save5Tests(unittest.TestCase):
         s = self.fresh()
         self.store(s)
         good = bytes(self.sram[A:A+SIZE])
-        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 12),
+        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 13),
                      (14, 1), (21, 1), (32, 14), (34, 2), (46, 3), (47, 1),
                      (112+15, 255), (112, 0), (128, 0), (144, 1),
                      (160+1, 0x81), (160+2, 2), (160+3, 101), (160+8, 0),
@@ -617,7 +617,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(bytes(migrated.roster.lifetime_field_aid), original[4520:4536])
         self.store(migrated)
         newest = bytes(self.sram[B if offset == A else A:(B if offset == A else A)+SIZE])
-        self.assertEqual(newest[12:14], bytes((11,0)))
+        self.assertEqual(newest[12:14], bytes((12,0)))
         self.assertEqual(newest[96:4032], original[96:4032])
         self.assertEqual(newest[4296:4544], original[4296:4544])
         self.assertEqual(bytes(self.sram[:A]), old[:A])
@@ -1021,7 +1021,7 @@ class Save5Tests(unittest.TestCase):
         self.store(migrated)
         destination=B if offset==A else A
         written=bytes(self.sram[destination:destination+SIZE])
-        self.assertEqual(written[12:14],b'\x0b\x00')
+        self.assertEqual(written[12:14],b'\x0c\x00')
         self.assertEqual(written[32:],bank[32:],'migration changed earned campaign, roster, commands, credits, quests or equipment')
         self.assertEqual(bytes(self.sram[offset:offset+SIZE]),bank)
         self.assertEqual(bytes(self.sram[:A]),data[:A])

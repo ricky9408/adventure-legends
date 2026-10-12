@@ -153,6 +153,30 @@ class LoadJobTests(unittest.TestCase):
         self.reset(); s.economy.reserved[1] = 3; self.store(s)
         self.assertEqual(self.run_reader()[0], 1)
 
+    def test_current_paid_gear_receipt_keeps_its_town_and_item_provenance(self):
+        s = self.fresh(1)
+        s.quests.region_flags[0] = 1
+        s.equipment.bag[1].item_id = 2
+        s.equipment.bag[1].quantity = 1
+        s.equipment.seen[0] |= 4
+        s.economy.earned = s.economy.spent = 96
+        s.economy.reserved[0] = 1
+        self.store(s)
+        image = bytearray(self.sram)
+        self.assertEqual(self.run_reader()[0], 1)
+        for missing in ('town', 'gear', 'old_revision'):
+            bad = bytearray(image)
+            if missing == 'town':
+                bad[A+4248] = 0
+            elif missing == 'gear':
+                bad[A+4552:A+4560] = bytes(8)
+                bad[A+4944] &= ~4
+            else:
+                bad[A+12:A+14] = (11).to_bytes(2, 'little')
+            bad[A:A+SIZE] = repair_crc(bad[A:A+SIZE])
+            self.reset(); self.put(bad)
+            self.assertEqual(self.run_reader()[0], 0)
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='LoadJobTests')
