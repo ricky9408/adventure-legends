@@ -37,8 +37,8 @@
     "src/save5_load_job.inc",
     "src/underwater_hint.inc"
   ],
-  "candidate_commit": "1f6d9c65469cef6745b6107fa74ec84b0074b376",
-  "candidate_tree": "654a1a60920a34f6ccd6b289349bf4b9f417b1ec",
+  "candidate_commit": "640ca3a7b0829e172d07b294acddf8fd2e8ef144",
+  "candidate_tree": "89d08d4833bba271bcb4ff3127f9d8fa4a180ae7",
   "changed": [
     "Makefile",
     "assets/companion_guide_text_metrics.json",
@@ -5297,6 +5297,7 @@
     "src/underwater_game.h": "1f26483eb8e617aceac5e7c9a209b01c46e850932fcb7352b7fa81540098d870",
     "src/underwater_powers.c": "8a7b03120bcea615f8aa3270294031b935f64ea0129229003751e2ac6c7ea2d7",
     "src/underwater_powers.h": "8a352896dbbc250a9941e98621b585d70dd8ed45dbd4065fd758c7ff5a2197d8",
+    "tests/check_covenants_field_feasibility.py": "7020c139f7d9d8a6fbdf9fda4a6aeb9e7ae6fc76150c9579e739573ebbb68a23",
     "tests/covenants_powers_host.c": "6cccafb21888ff35137eb036e1c9a892a88cf241aec26f25f96c2c577e5f1881",
     "tests/covenants_world_host.c": "c99423dbb7b2d21100a255d5b7fa58aa670e2923d89d8708264a34647753a70b",
     "tests/ending_credits_state_host.c": "dcc5d18068034dc5282107f0cd1b804443ea0d44f921e9526b7f70009efdd07d",
@@ -5349,7 +5350,7 @@
     "tools/run_equipment_rewards_host.py": "d79c59cb62b2a88b2d7568c5591d1c1b380549bf8aa6b843424db0846a0804c4",
     "tools/run_gameplay_ci.py": "22478fa57fa5e6bc160d4b1859d264f534a5b1380d1f51a97c9287615c203f5e"
   },
-  "inverse_sha256": "d0dacaf8b196f4839c21af46fc4f5f9297cdf71c163ec3bb7c708a6aa4a91296",
+  "inverse_sha256": "5364d64269299dc73622a9235b44e9c110a4a505fda87a82c24d83a08674d703",
   "music_license": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
     "assets/fonts/DEJAVU-LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
