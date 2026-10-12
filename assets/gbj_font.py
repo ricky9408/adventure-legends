@@ -19,6 +19,11 @@ FALLBACK = os.environ.get('EMBERBOND_NOTO_FONT','/usr/share/fonts/opentype/noto/
 MAGENTA = (255, 0, 255)
 NATIVE_FONT = ROOT / 'fonts/pixelmplus/PixelMplus12-Regular.ttf'
 COMPACT_FONT = ROOT / 'fonts/k8x12/k8x12.bdf'
+# Every text raster is at most 15 rows of 120 halfword positions. Store the
+# precompiled span metadata in one aligned halfword: offset11/count3/mask2.
+# Longer uniform runs are split while compiling, never decoded as glyph bits.
+UI_RUN_COUNT_MAX = 7
+UI_RUN_OFFSET_MAX = 2047
 
 @lru_cache(None)
 def atlas(slim=False):
@@ -154,7 +159,7 @@ def render_text(text, height=15, slim=False, compact=False):
     return full.crop((0,0,width,height))
 
 def deduplicate_spans(source):
-    """Share exact immutable pixel-pair arrays; UiText IDs/ABI stay unchanged.
+    """Share exact immutable pixel-pair arrays; UiText IDs/table ABI stay unchanged.
 
     This compile-time alias needs no cartridge state, decoding or extra work.
     Different strings are shared only if every offset/count/mask byte matches.
@@ -163,6 +168,11 @@ def deduplicate_spans(source):
     pattern=re.compile(r'^(static const UiRun\s+)(\w+)\[\]\s*=\s*\{([^;]+)\};$',re.M)
     def replace(match):
         name=match[2];data=re.sub(r'\s+','',match[3])
+        spans=[tuple(map(int,row)) for row in re.findall(r'\{(\d+),(\d+),(\d+)\}',data)]
+        assert spans,('empty span initializer',name)
+        for offset,count,mask in spans:
+            assert (offset,count,mask)==(0,0,0) or (0<=offset<=UI_RUN_OFFSET_MAX
+                and 1<=count<=UI_RUN_COUNT_MAX and mask in (1,2,3)),('packed span overflow',name,offset,count,mask)
         if data in seen:return '#define '+name+' '+seen[data]
         seen[data]=name
         return match[0]

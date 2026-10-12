@@ -3,7 +3,7 @@
 from pathlib import Path
 import json,sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"assets"))
-from gbj_font import render_text,deduplicate_spans
+from gbj_font import render_text,deduplicate_spans,UI_RUN_COUNT_MAX
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,7 +42,7 @@ def generate():
                 while x<len(masks):
                     if not masks[x]:x+=1;continue
                     end=x+1
-                    while end<len(masks) and masks[end]==masks[x]:end+=1
+                    while end<len(masks) and masks[end]==masks[x] and end-x<UI_RUN_COUNT_MAX:end+=1
                     runs.append((y*120+x,end-x,masks[x]));x=end
             decoded=Image.new('1',(width+align,12),0)
             for offset,count,mask in runs:

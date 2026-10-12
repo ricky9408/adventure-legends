@@ -23,7 +23,7 @@ static const UiRun gj_DIGIT_8_1[] = {{241,1,3},{242,1,1},{360,1,2},{362,1,2},{48
 static const UiRun gj_DIGIT_9_0[] = {{240,1,2},{241,1,3},{360,1,1},{362,1,1},{480,1,1},{482,1,1},{600,1,1},{602,1,1},{720,1,1},{722,1,1},{840,1,2},{841,1,3},{842,1,1},{962,1,1},{1081,1,2},{1200,1,2},{1201,1,1}};
 static const UiRun gj_DIGIT_9_1[] = {{241,1,3},{242,1,1},{360,1,2},{362,1,2},{480,1,2},{482,1,2},{600,1,2},{602,1,2},{720,1,2},{722,1,2},{841,2,3},{962,1,2},{1082,1,1},{1201,1,3}};
 const UiText growth_journal_texts[GJ_COUNT] = {
-{61,15,0,{gj_COLLECTION_0,gj_COLLECTION_1},{137,132}},
+{61,15,0,{gj_COLLECTION_0,gj_COLLECTION_1},{138,133}},
 {199,15,0,{gj_CURRENT_REQUIRED_0,gj_CURRENT_REQUIRED_1},{348,337}},
 {19,15,0,{gj_LEVEL_0,gj_LEVEL_1},{22,22}},
 {13,15,0,{gj_BOND_0,gj_BOND_1},{27,29}},
@@ -66,7 +66,7 @@ const UiText growth_journal_texts[GJ_COUNT] = {
 {61,15,0,{gj_OWNED_0,gj_OWNED_1},{119,118}},
 {73,15,0,{gj_HISTORY_0,gj_HISTORY_1},{157,149}},
 {121,15,0,{gj_MISSING_0,gj_MISSING_1},{206,203}},
-{157,15,0,{gj_HISTORY_KEEP_0,gj_HISTORY_KEEP_1},{319,310}},
+{157,15,0,{gj_HISTORY_KEEP_0,gj_HISTORY_KEEP_1},{320,311}},
 {37,15,0,{gj_FROM_0,gj_FROM_1},{97,89}},
 {157,15,0,{gj_RECRUIT_FIRST_0,gj_RECRUIT_FIRST_1},{246,230}},
 {133,15,0,{gj_PREDECESSOR_FIRST_0,gj_PREDECESSOR_FIRST_1},{288,278}},

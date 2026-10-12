@@ -15,7 +15,7 @@ symbols={v[2]:int(v[0],16)for line in args.symbols.read_text().splitlines()if le
 rom_tables={'ui':'ui_texts','companion_guide_text':'companion_guide_texts','growth_journal_text':'growth_journal_texts',
  'gear_preview_text':'gear_preview_texts','treasure_text_text':'treasure_text_texts','opening_scene_data':'opening_scene_texts',
  'ending_credits_text':'ending_credits_texts','regional_shop_text':'regional_shop_texts','journey_map_text':'journey_map_texts'}
-rom_checked=0;rom_pointers={}
+rom_checked=0;rom_pointers={};rom_endian_negative=False
 def rom_read(address,length):
  offset=address-0x08000000;assert 0<=offset<=len(rom)-length,(hex(address),length)
  return rom[offset:offset+length]
@@ -60,7 +60,7 @@ for family,metadata,prefix in families:
    raw=Image.new('1',(w+align,h));runs=arrays[array]
    assert len(runs)==count or count==0 and runs==[(0,0,0)],(family,name,align)
    for offset,run,mask in runs[:count]:
-    assert mask in (1,2,3)and run>0
+    assert mask in (1,2,3)and 0<run<=7 and 0<=offset<2048
     for half in range(run):
      y,x=divmod(offset+half,120)
      for bit in (0,1):
@@ -74,11 +74,20 @@ for family,metadata,prefix in families:
    assert (rw,rh,reserved,na,nb)==(w,h,0,n,m),(family,name,'ROM metadata drift')
    for align,(pointer,count)in enumerate(((pa,n),(pb,m))):
     assert pointer%2==0,(family,name,align,'UiRun must remain halfword aligned')
-    payload=rom_read(pointer,count*4);raw=Image.new('1',(w+align,h))
+    payload=rom_read(pointer,count*2);raw=Image.new('1',(w+align,h))
     if pointer in rom_pointers:assert payload==rom_pointers[pointer][:len(payload)]
     else:rom_pointers[pointer]=payload
-    for offset,run,mask in struct.iter_unpack('<HBB',payload):
-     assert mask in (1,2,3)and run>0
+    compiled=[(word&2047,(word>>11)&7,word>>14)for(word,)in struct.iter_unpack('<H',payload)]
+    assert compiled==arrays[(a,b)[align]][:count],(family,name,align,'packed ROM field layout drift')
+    if payload and not rom_endian_negative:
+     # Replay this real compiled array with byte-swapped field words. The
+     # independent source tuples must reject a wrong-endian layout, even when
+     # the pixels happen to look plausible. No cartridge bytes are changed.
+     swapped=[(word&2047,(word>>11)&7,word>>14)for(word,)in struct.iter_unpack('>H',payload)]
+     assert swapped!=arrays[(a,b)[align]][:count],(family,name,'endian control ineffective')
+     rom_endian_negative=True
+    for offset,run,mask in compiled:
+     assert mask in (1,2,3)and 0<run<=7
      for half in range(run):
       y,x=divmod(offset+half,120)
       for bit in (0,1):
@@ -89,6 +98,7 @@ for family,metadata,prefix in families:
     rom_checked+=1
   checked+=1
  family_counts[family]=len(tables)
+if rom is not None:assert rom_endian_negative,'compiled endian rejection control was not exercised'
 
 cjk={c for c in chars if 0x3400<=ord(c)<=0x9fff}
 assert cjk and cjk<=font.native_coverage() and cjk<=font.compact_atlas().keys()
@@ -117,6 +127,10 @@ probe='static const UiRun a[]={{1,2,3}};\nstatic const UiRun b[]={ {1,2,3} };\ns
 shared=font.deduplicate_spans(probe)
 assert '#define b a' in shared and 'static const UiRun c[]' in shared
 assert font.deduplicate_spans(probe)==shared==font.deduplicate_spans(shared)
+for triple in ('{2048,1,1}','{0,8,1}','{0,0,1}','{0,1,4}'):
+ try:font.deduplicate_spans('static const UiRun bad[]={'+triple+'};\n')
+ except AssertionError:pass
+ else:raise AssertionError('packed span overflow accepted: '+triple)
 
 opening=json.loads((ROOT/'assets/opening_scene.json').read_text())
 assert len(opening['pages'])==8 and all(len(page['lines'])==2 for page in opening['pages'])
@@ -126,6 +140,9 @@ credits=json.loads((ROOT/'assets/ending_credits.json').read_text())['lines']
 for name in ('PixelMplus12 Regular','itouhiro / M+ FONTS PROJECT','k8x12 bitmap font','Num Kadoma','GeeBee'):assert name in credits
 print(json.dumps({'passed':True,'families':family_counts,'texts':checked,'exact_alignment_roundtrips':rows_checked,
  'compiled_rom_pixel_roundtrips':rom_checked,'compiled_rom_unique_span_pointers':len(rom_pointers),
+ 'compiled_rom_wrong_endian_negative_rejected':rom_endian_negative,
  'unique_characters':len(chars),'unique_bmp_cjk':len(cjk),'missing_native_glyphs':0,'missing_compact_cjk':0,
  'preclip_height_negative_rejected':True,'unsupported_character_negative_rejected':True,
- 'native_kanji_to10px_negative_rejected':True,'native_size':12,'runtime_font_decoding':False},indent=2))
+ 'native_kanji_to10px_negative_rejected':True,'packed_span_overflow_negatives':4,
+ 'span_storage_bytes':2,'span_field_format':'little-endian offset11/count3/mask2',
+ 'native_size':12,'runtime_font_decoding':False},indent=2))

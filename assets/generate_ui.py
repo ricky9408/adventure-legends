@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rasterize the original Japanese UI to compact monochrome glyph masks."""
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text,deduplicate_spans
+from gbj_font import render_text,deduplicate_spans,UI_RUN_COUNT_MAX
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
@@ -102,7 +102,7 @@ for name,text in texts.items():
                 mask=masks[x]
                 if not mask:x+=1;continue
                 end=x+1
-                while end<len(masks) and masks[end]==mask and end-x<255:end+=1
+                while end<len(masks) and masks[end]==mask and end-x<UI_RUN_COUNT_MAX:end+=1
                 runs.append((y*120+x,end-x,mask));x=end
         # Both halfword alignments must reconstruct the original exact pixels.
         decoded=Image.new('1',(w+align,h),0)
@@ -114,7 +114,7 @@ for name,text in texts.items():
         assert decoded.crop((align,0,w+align,h)).tobytes()==im.tobytes(),name
         variants.append(runs)
     items.append((name,w,h,variants))
-header='#ifndef EMBER_UI_H\n#define EMBER_UI_H\n/* Precompiled nonzero pixel-pair spans: no per-frame glyph bit decoding. */\ntypedef struct { unsigned short offset; unsigned char count, mask; } UiRun;\ntypedef struct { unsigned short width; unsigned char height, reserved; const UiRun *runs[2]; unsigned short count[2]; } UiText;\nenum {\n'+''.join(' TX_'+n+',\n' for n,*_ in items)+' TX_COUNT };\nextern const UiText ui_texts[TX_COUNT];\n#endif\n'
+header='#ifndef EMBER_UI_H\n#define EMBER_UI_H\n/* Precompiled nonzero pixel-pair spans: no per-frame glyph bit decoding. */\n/* Internal span ABI: packed field extraction, never glyph-bit decoding. */\ntypedef struct { unsigned short offset:11, count:3, mask:2; } UiRun;\ntypedef char UiRun_one_halfword[(sizeof(UiRun)==2)?1:-1];\ntypedef char UiRun_halfword_alignment[(__alignof__(UiRun)==2)?1:-1];\ntypedef struct { unsigned short width; unsigned char height, reserved; const UiRun *runs[2]; unsigned short count[2]; } UiText;\nenum {\n'+''.join(' TX_'+n+',\n' for n,*_ in items)+' TX_COUNT };\nextern const UiText ui_texts[TX_COUNT];\n#endif\n'
 source=''
 for n,w,h,variants in items:
     for align,runs in enumerate(variants):

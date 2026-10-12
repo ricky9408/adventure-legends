@@ -49,7 +49,7 @@ def main():
      mask=masks[x]
      if not mask:x+=1;continue
      end=x+1
-     while end<len(masks) and masks[end]==mask and end-x<255:end+=1
+     while end<len(masks) and masks[end]==mask and end-x<gbj_font.UI_RUN_COUNT_MAX:end+=1
      runs.append((y*120+x,end-x,mask));x=end
    decoded=Image.new('1',(w+align,15))
    for offset,count,mask in runs:

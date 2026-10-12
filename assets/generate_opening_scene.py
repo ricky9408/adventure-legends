@@ -3,7 +3,7 @@
 from pathlib import Path
 import json,re
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text,deduplicate_spans
+from gbj_font import render_text,deduplicate_spans,UI_RUN_COUNT_MAX
 ROOT=Path(__file__).resolve().parents[1]
 source=json.loads((ROOT/'assets/opening_scene.json').read_text())
 labels={'TITLE':source['title'],'CONTROLS':source['controls']}
@@ -25,7 +25,7 @@ for name,label in labels.items():
    while x<len(masks):
     if not masks[x]:x+=1;continue
     end=x+1
-    while end<len(masks) and masks[end]==masks[x] and end-x<255:end+=1
+    while end<len(masks) and masks[end]==masks[x] and end-x<UI_RUN_COUNT_MAX:end+=1
     runs.append((y*120+x,end-x,masks[x]));x=end
   decoded=Image.new('1',(width+align,height))
   for offset,count,mask in runs:

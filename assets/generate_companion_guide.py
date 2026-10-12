@@ -2,7 +2,7 @@
 """Generate isolated companion-guide raster text without changing shared UI IDs."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text,deduplicate_spans
+from gbj_font import render_text,deduplicate_spans,UI_RUN_COUNT_MAX
 import json
 from companion_guide_source import load_commands
 ROOT=Path(__file__).resolve().parents[1]
@@ -54,7 +54,7 @@ for name,string in labels.items():
     mask=masks[x]
     if not mask:x+=1;continue
     end=x+1
-    while end<len(masks) and masks[end]==mask and end-x<255:end+=1
+    while end<len(masks) and masks[end]==mask and end-x<UI_RUN_COUNT_MAX:end+=1
     runs.append((y*120+x,end-x,mask));x=end
   decoded=Image.new('1',(w+align,h))
   for offset,count,mask in runs:
