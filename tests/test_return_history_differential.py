@@ -182,7 +182,7 @@ class ReturnHistoricalDifferential(unittest.TestCase):
             encoded = (C.c_ubyte * SIZE)()
             self.assertEqual(self.new.history_encode(C.byref(self.newout), encoded), 1, name)
             self.assertEqual(bytes(encoded)[2:3], b'\x05', name)
-            self.assertEqual(bytes(encoded)[12:14], b'\x0b\x00', name)
+            self.assertEqual(bytes(encoded)[12:14], b'\x0c\x00', name)
             self.assertEqual(self.new.history_probe_bank(encoded, A, C.byref(self.newout)), 1, name)
             self.assertEqual(compare_state(self.newout), before, (name, 'unearned state gain'))
             self.counts['unchanged_resaved_images'] += 1
@@ -308,7 +308,7 @@ class ReturnHistoricalDifferential(unittest.TestCase):
             for offset in (0, 12, 16, 20, 160, 4032, 4544, SIZE - 1):
                 bank = bytearray(seed); bank[offset] ^= 1
                 self.compare(bank, 0, (rev, 'bad-crc', offset), crc=False)
-            for unknown in (0, 12, 255, 256, 65535):
+            for unknown in (0, 13, 255, 256, 65535):
                 bank = bytearray(seed); bank[12:14] = unknown.to_bytes(2, 'little')
                 self.compare(bank, 0, (rev, 'unknown', unknown))
                 for good, bad in ((A, B), (B, A)):

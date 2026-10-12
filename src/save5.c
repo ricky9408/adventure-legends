@@ -704,9 +704,18 @@ static Save4U8 equipment_tail_byte(const EquipmentState *e, unsigned p) {
     if (p < 488) return e->reward_claims[p - 480];
     return e->reserved[p - 488];
 }
-/* Save content11 only changes economy receipts; creature content remains10. */
+/* Save content11/12 change economy receipts; creature content remains10. */
 static unsigned save5_creature_revision(unsigned revision) {
-    return revision == 11 ? 10 : revision;
+    return revision >= 11 ? 10 : revision;
+}
+int save5_economy_sources_validate(const Save5Quests*q,const EquipmentState*gear,
+                                   const EconomyState*e,unsigned story_rewards){
+ unsigned i,mask;if(!q||!gear||!e)return 0;mask=e->reserved[ECONOMY_GEAR_MASK_BYTE];
+ for(i=0;i<8;++i)if((mask&(1u<<i))&&
+   (!(q->region_flags[i]&1u)||!equipment_seen(gear,economy_gear_item(i))))return 0;
+ mask=economy_story_inspected(e);
+ return (!(mask&ECONOMY_STORY_WIND)||(story_rewards&4u))&&
+        (!(mask&ECONOMY_STORY_STONE)||(story_rewards&8u));
 }
 int save5_later_claims_validate(const Save5Quests *q,const EconomyState *e) {
     static const Save4U8 quests[4]={21,24,32,40};
@@ -730,7 +739,8 @@ int save5_validate(const Save5State *s) {
         covenants_roster_sources_validate(&s->quests,&s->roster) &&
         equipment_validate(&s->equipment) && quest_equipment_validate(&s->quests, &s->equipment) &&
         economy_state_validate(&s->economy,s->campaign.chapter_flags) &&
-        save5_later_claims_validate(&s->quests,&s->economy);
+        save5_later_claims_validate(&s->quests,&s->economy) &&
+        save5_economy_sources_validate(&s->quests,&s->equipment,&s->economy,s->roster.rewards[0]);
 }
 static void encode_economy(Save4U8 *b,const EconomyState *e) {
     unsigned i;put32(b,e->earned);put32(b+4,e->spent);put16(b+8,e->gold);
@@ -825,7 +835,7 @@ static int scan_header(void) {
     const Save4U8 *b = scan.block;
     if (b[0] != 0x45 || b[1] != 0x42 || b[2] != 5 || b[3] != 32 ||
         get16(b + 4) != SAVE5_BANK_SIZE ||
-        get16(b + 6) != ((get16(b+12)==10 || get16(b+12)==11) ? 5088 : 5056) ||
+        get16(b + 6) != ((get16(b+12)>=10) ? 5088 : 5056) ||
         (get16(b + 12) < 1 || get16(b + 12) > SAVE5_CONTENT_REVISION) ||
         b[20] != (scan.memory ? 0 : SAVE5_COMMIT) ||
         !zero_bytes(b + 14, 2) || !zero_bytes(b + 21, 11)) return 0;
@@ -838,7 +848,7 @@ static int revision_form_allowed(unsigned id) {
         creatures_form_allowed_revision(id, save5_creature_revision(scan.revision));
 }
 static int revision_equipment_allowed(unsigned id) {
-    return scan.revision==11 ? equipment_definition(id)!=0 : history_item(id, scan.revision)!=0;
+    return scan.revision>=11 ? equipment_definition(id)!=0 : history_item(id, scan.revision)!=0;
 }
 static int scan_collection(void) {
     unsigned i;
@@ -874,10 +884,10 @@ static int scan_instance(unsigned slot) {
     if(scan.revision==8)history8_horizons_instance_evidence(&scan.horizons,&c);
     if(scan.revision==9)history9_horizons_instance_evidence(&scan.horizons,&c);
     if(scan.revision==10)history10_horizons_instance_evidence(&scan.horizons,&c);
-    if(scan.revision==11)horizons_instance_evidence(&scan.horizons,&c);
+    if(scan.revision>=11)horizons_instance_evidence(&scan.horizons,&c);
     if(scan.revision==9)history9_covenants_instance_evidence(&scan.covenants,&c);
     if(scan.revision==10)history10_covenants_instance_evidence(&scan.covenants,&c);
-    if(scan.revision==11)covenants_instance_evidence(&scan.covenants,&c);
+    if(scan.revision>=11)covenants_instance_evidence(&scan.covenants,&c);
     if(scan.revision>=9&&c.form_id>=121)set_bit(scan.legendary,slot);
     if (c.instance_id > scan.max_id) scan.max_id = c.instance_id;
     legacy = scan.revision==10 ? history10_legacy(c.form_id) :
@@ -908,7 +918,7 @@ static int scan_party(void) {
 static int scan_equipment_record(unsigned slot) {
     EquipmentRecord *r = &scan.equipment.bag[slot];
     decode_equipment_record(r, scan.block);
-    if (!(scan.revision==11 ? equipment_record_validate(r) : history_equipment_record_validate(r, scan.revision))) return 0;
+    if (!(scan.revision>=11 ? equipment_record_validate(r) : history_equipment_record_validate(r, scan.revision))) return 0;
     if (!slot && (r->item_id != EQUIPMENT_STARTER_ID || r->flags != EQUIPMENT_PROTECTED)) return 0;
     if (r->item_id) {
         if (bit(scan.item_owned, r->item_id)) return 0;
@@ -946,7 +956,7 @@ static unsigned scan_run(unsigned budget) {
                 !history9_quest_campaign_validate(&scan.campaign,&scan.quests)))scan.valid=0;
             if (scan.revision==10 && (!history10_quest_fields_validate(&scan.quests) ||
                 !history10_quest_campaign_validate(&scan.campaign,&scan.quests)))scan.valid=0;
-            if (scan.revision==11 && (!quest_fields_validate(&scan.quests) ||
+            if (scan.revision>=11 && (!quest_fields_validate(&scan.quests) ||
                 !quest_campaign_validate(&scan.campaign,&scan.quests)))scan.valid=0;
             scan.pending_quest_check=2;
         } else if(stage==2) {
@@ -969,9 +979,9 @@ static unsigned scan_run(unsigned budget) {
                 (scan.revision==9 && !history9_horizons_sources_validate(&scan.quests,scan.collection+16,&scan.horizons)) ||
                 (scan.revision==9 && !history9_covenants_sources_validate(&scan.quests,scan.collection+16,&scan.covenants)) ||
                 (scan.revision==10 && !history10_horizons_sources_validate(&scan.quests,scan.collection+16,&scan.horizons)) ||
-                (scan.revision==11 && !horizons_sources_validate(&scan.quests,scan.collection+16,&scan.horizons)) ||
+                (scan.revision>=11 && !horizons_sources_validate(&scan.quests,scan.collection+16,&scan.horizons)) ||
                 (scan.revision==10 && !history10_covenants_sources_validate(&scan.quests,scan.collection+16,&scan.covenants)) ||
-                (scan.revision==11 && !covenants_sources_validate(&scan.quests,scan.collection+16,&scan.covenants)) ||
+                (scan.revision>=11 && !covenants_sources_validate(&scan.quests,scan.collection+16,&scan.covenants)) ||
                 !(scan.revision==10 ? history10_southern_sources_validate(&scan.quests,scan.collection+16,scan.southern_evidence) :
                 southern_sources_validate(&scan.quests, scan.collection + 16, scan.southern_evidence))) scan.valid=0;
             scan.pending_quest_check=0;
@@ -997,7 +1007,7 @@ static unsigned scan_run(unsigned budget) {
                 if (!scan.memory) crc = crc_byte(crc, p+i >= 16 && p+i <= 20 ? 0 : v);
             }
         } else if (scan.stage == SCAN_COLLECTION) {
-            Save4U8 *dst = scan.collection + p - 96;
+            Save4U8 *dst = scan.collection + (p - 96);
             if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
             else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
         } else if (scan.stage == SCAN_BOND) {
@@ -1015,7 +1025,7 @@ static unsigned scan_run(unsigned budget) {
         } else if (scan.stage == SCAN_EVENTS) {
             if (!scan.memory) for (i = 0; i < n; ++i) crc = crc_byte(crc, src[i]);
         } else {
-            Save4U8 *dst = scan.block + p - scan.base;
+            Save4U8 *dst = scan.block + (p - scan.base);
             if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
             else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
         }
@@ -1030,7 +1040,7 @@ static unsigned scan_run(unsigned budget) {
                 CampaignSave c;
                 decode_campaign(&c, scan.block);
                 scan.campaign = c;
-                if (!(scan.revision==11 ? save5_campaign_validate(&c) : scan.revision==10 ? history10_save5_campaign_validate(&c) : scan.revision==9 ? history9_save5_campaign_validate(&c) : scan.revision==8 ? history8_save5_campaign_validate(&c) : scan.revision==7 ? history7_save5_campaign_validate(&c) : history_campaign_validate(&c, scan.revision)) ||
+                if (!(scan.revision>=11 ? save5_campaign_validate(&c) : scan.revision==10 ? history10_save5_campaign_validate(&c) : scan.revision==9 ? history9_save5_campaign_validate(&c) : scan.revision==8 ? history8_save5_campaign_validate(&c) : scan.revision==7 ? history7_save5_campaign_validate(&c) : history_campaign_validate(&c, scan.revision)) ||
                     !zero_bytes(scan.block+15, 49)) scan.valid = 0;
                 scan_next(SCAN_COLLECTION, 48); charge = 32; break;
             }
@@ -1055,7 +1065,7 @@ static unsigned scan_run(unsigned budget) {
                 scan.slot = 0; scan_next(SCAN_QUEST_OBJECTIVE, 2); break;
             case SCAN_QUEST_OBJECTIVE:
                 scan.quests.objectives[scan.slot] = get16(scan.block);
-                if (!(scan.revision==11 ? quest_objective_validate(&scan.quests,scan.slot) : scan.revision==10 ? history10_quest_objective_validate(&scan.quests,scan.slot) : scan.revision==9 ? history9_quest_objective_validate(&scan.quests,scan.slot) : scan.revision==8 ? history8_quest_objective_validate(&scan.quests,scan.slot) : scan.revision==7 ? history7_quest_objective_validate(&scan.quests,scan.slot) : history_objective_validate(&scan.quests, scan.slot, scan.revision))) scan.valid = 0;
+                if (!(scan.revision>=11 ? quest_objective_validate(&scan.quests,scan.slot) : scan.revision==10 ? history10_quest_objective_validate(&scan.quests,scan.slot) : scan.revision==9 ? history9_quest_objective_validate(&scan.quests,scan.slot) : scan.revision==8 ? history8_quest_objective_validate(&scan.quests,scan.slot) : scan.revision==7 ? history7_quest_objective_validate(&scan.quests,scan.slot) : history_objective_validate(&scan.quests, scan.slot, scan.revision))) scan.valid = 0;
                 ++scan.slot;
                 scan_next(scan.slot == 64 ? SCAN_QUEST_REWARDS : SCAN_QUEST_OBJECTIVE,
                           scan.slot == 64 ? 8 : 2); charge = 16; break;
@@ -1091,7 +1101,7 @@ static unsigned scan_run(unsigned budget) {
                           scan.slot == 48 ? 5 : 8); charge = 32; break;
             case SCAN_EQUIPMENT_REFS:
                 copy_bytes(scan.equipment.equipped, scan.block, 5);
-                if (!(scan.revision==11 ? equipment_refs_validate(&scan.equipment) : history_equipment_refs_validate(&scan.equipment, scan.revision))) scan.valid = 0;
+                if (!(scan.revision>=11 ? equipment_refs_validate(&scan.equipment) : history_equipment_refs_validate(&scan.equipment, scan.revision))) scan.valid = 0;
                 scan_next(SCAN_EQUIPMENT_SETTINGS, 11); charge = 64; break;
             case SCAN_EQUIPMENT_SETTINGS: scan.slot = 0; scan_next(SCAN_EQUIPMENT_SEEN, 1); break;
             case SCAN_EQUIPMENT_SEEN:
@@ -1103,15 +1113,16 @@ static unsigned scan_run(unsigned budget) {
             case SCAN_EQUIPMENT_WALLET: scan_next(SCAN_EQUIPMENT_CLAIMS, 8); break;
             case SCAN_EQUIPMENT_CLAIMS:
                 copy_bytes(scan.equipment.reward_claims, scan.block, 8);
-                if (!(scan.revision==11 ? quest_equipment_validate(&scan.quests,&scan.equipment) : history_equipment_claims_validate(&scan.quests, &scan.equipment, scan.revision))) scan.valid = 0;
+                if (!(scan.revision>=11 ? quest_equipment_validate(&scan.quests,&scan.equipment) : history_equipment_claims_validate(&scan.quests, &scan.equipment, scan.revision))) scan.valid = 0;
                 scan_next(SCAN_EQUIPMENT_RESERVED, 24); charge = 128; break;
             case SCAN_EQUIPMENT_RESERVED:
-                scan_next((scan.revision==10||scan.revision==11)?SCAN_ECONOMY:SCAN_PADDING,(scan.revision==10||scan.revision==11)?32:1088);break;
+                scan_next((scan.revision>=10)?SCAN_ECONOMY:SCAN_PADDING,(scan.revision>=10)?32:1088);break;
             case SCAN_ECONOMY: {
                 EconomyState e;decode_economy(&e,scan.block);
                 if(!(scan.revision==10 ? history10_economy_validate(&e,scan.campaign.chapter_flags) :
-                    economy_state_validate(&e,scan.campaign.chapter_flags) &&
-                    save5_later_claims_validate(&scan.quests,&e)))scan.valid=0;
+                    economy_state_validate_revision(&e,scan.campaign.chapter_flags,scan.revision) &&
+                    save5_later_claims_validate(&scan.quests,&e) &&
+                    save5_economy_sources_validate(&scan.quests,&scan.equipment,&e,scan.collection[32])))scan.valid=0;
                 scan_next(SCAN_PADDING,1056);charge=32;break;
             }
             default: break;
@@ -1181,7 +1192,7 @@ static unsigned decode_valid_bank(Save5State *s, unsigned offset, Save4U32 seque
         read_bytes(s->equipment.seen, offset + 4944, 64);
         read_bytes(s->equipment.reward_claims, offset + 5024, 8);
     }
-    if(revision==10||revision==11){read_bytes(b,offset+SAVE5_ECONOMY_OFFSET,32);decode_economy(&s->economy,b);}
+    if(revision>=10){read_bytes(b,offset+SAVE5_ECONOMY_OFFSET,32);decode_economy(&s->economy,b);}
     normalize_resume(&s->campaign, revision);
     return revision;
 }
@@ -1213,15 +1224,16 @@ static int load_internal(Save5State *out) {
 }
 int save5_load(Save5State *out) {
     save5_preflight_cancel();
-    if (!out || writer_status == SAVE5_BUSY) return 0;
+    if (!out || writer_status == SAVE5_BUSY || save5_load_status()==SAVE5_BUSY) return 0;
     return load_internal(out);
 }
 int save5_has_valid(void) {
     save5_preflight_cancel();
-    if (writer_status == SAVE5_BUSY) return 0;
+    if (writer_status == SAVE5_BUSY || save5_load_status()==SAVE5_BUSY) return 0;
     return load_internal(0);
 }
 int save5_begin(const Save5State *s) {
+    if (save5_load_status()==SAVE5_BUSY) return 0;
     if (save5_preflight_active()) return 0;
     if (writer_status == SAVE5_BUSY) return 0;
     if (!s || !save5_campaign_validate(&s->campaign) ||
@@ -1377,6 +1389,7 @@ int save5_store(const Save5State *s) {
 }
 #ifdef SAVE5_HOST_TEST
 void save5_test_reset_writer(void) {
+    save5_load_cancel();
     save5_preflight_cancel();
     writer_status = SAVE5_IDLE; writer_progress = 0; test_step_work = 0;
     writer_preemptible=writer_preempted=writer_economy=0;
@@ -1384,4 +1397,5 @@ void save5_test_reset_writer(void) {
 #endif
 
 #include "save5_preflight.inc"
+#include "save5_load_job.inc"
 #include "save5_later_rewards.inc"

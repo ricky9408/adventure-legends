@@ -26,6 +26,9 @@ unsigned economy_boss_gold(unsigned boss);
  * Freeze gameplay/input; no live money/item change or tonic effect before DONE.
  * Purchases are village-only; claims require earned clear and village/boss room. */
 int economy_begin_purchase(Save5State*,unsigned item);
+/* Actual visited regional town; its stock adds one unique choice per region.
+ * Items0..2 retain their exact prices/supply history;3..10 use paid receipts. */
+int economy_begin_market_purchase(Save5State*,unsigned item);
 int economy_begin_use(Save5State*,unsigned supply);
 int economy_begin_claim(Save5State*,unsigned boss);
 unsigned economy_step(void);

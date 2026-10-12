@@ -6,6 +6,14 @@
 #include "return_quests.h"
 #include "progression.h"
 Save5State adventure_save;
+#ifdef __APPLE__
+#include "connected_road_region.h"
+/* Preserve the standalone chapter's absent-road-hook behavior on Mach-O. */
+int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
+int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
+int game_road_box_added(unsigned a,int x0,int y0,int x1,int y1){(void)a;(void)x0;(void)y0;(void)x1;(void)y1;return 0;}
+int game_road_box_touched(unsigned a,int x0,int y0,int x1,int y1){(void)a;(void)x0;(void)y0;(void)x1;(void)y1;return 0;}
+#endif
 unsigned progression_revision;
 volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
 int face,keys,journal_tab;
@@ -59,6 +67,8 @@ unsigned repeat_status(void){return repeat_stage;}
 unsigned phase(void){return phase_step;}
 
 unsigned confirmation(void){return invite_confirm;}
+unsigned reset_confirmation(void){return reset_confirm;}
+unsigned get_setting(unsigned i){return i<6?setting[i]:255;}
 unsigned attempt_id(void){return attempt;}
 unsigned room_scene(void){return scene;}
 unsigned repeat_source(void){return repeat_active;}

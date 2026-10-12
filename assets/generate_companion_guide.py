@@ -37,6 +37,7 @@ labels.update({'PARTY_SLASH':'/', 'PARTY_INSTANCE':'No.', 'PARTY_LEVEL':'Lv.',
                'PARTY_FOOTER':'A 詳細   B 戻る   START 閉じる',
                'PARTY_EMPTY_FOOTER':'A 空枠へ   B 戻る   START 閉じる'})
 for digit in range(10):labels[f'PARTY_DIGIT_{digit}']=str(digit)
+labels['AIM_HOLD']='R長押し＋十字、離して放つ'
 items=[]
 for name,string in labels.items():
  h=15;im=render_text(string,h);w=im.width

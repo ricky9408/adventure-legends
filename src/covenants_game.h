@@ -25,6 +25,9 @@ unsigned covenants_game_attempt_generation(void);
 unsigned covenants_game_geometry_revision(void);
 int covenants_game_is_sanctuary(void);
 int covenants_game_event_pending(void);
+/* Consume only after the requesting reward's save has verified. The offer is
+ * transient; existing Q63 completion and optional invitations are untouched. */
+int covenants_game_take_homecoming_offer(int save_verified);
 unsigned covenants_game_prepare_event(void);
 void covenants_game_cancel_event(void);
 void covenants_game_reset(void);
@@ -33,6 +36,8 @@ void covenants_game_selection_changed(void);
 void covenants_game_menu_abandoned(void);
 int covenants_game_input(unsigned pressed,unsigned held);
 int covenants_game_interact(void);
+/* Pure ordinary-A focus; rendering must never invoke the interaction. */
+int covenants_game_target_hint(int*,int*);
 int covenants_game_old_interact(void);
 void covenants_game_tick(void);
 void covenants_game_tick_old(void);

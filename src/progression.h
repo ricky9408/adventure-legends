@@ -16,8 +16,11 @@ unsigned progression_current_spirit(void); /* selected instance, safe0 if absent
 unsigned progression_current_form(void);   /* selected actual form, 0 if absent */
 int progression_name_id(unsigned form_id); /* raster UI ID, unknown if disabled */
 int progression_command_name_id(unsigned command);
+int progression_wish_id(unsigned form_id); /* known individual's authored clue */
 unsigned progression_evolution_context(void);
 int progression_load(void);
+/* Called only after the budgeted reader has atomically published its state. */
+void progression_load_finish(void);
 void progression_new(void);
 void progression_refresh(void);
 /* Notify only actual selected identity/form/command or four-slot mapping edits. */

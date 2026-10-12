@@ -213,7 +213,21 @@ COLD void north_game_draw_actors(void){unsigned i;if(room==16){return;}
   else{north_actor(machine_couplings&1?NORTH_SPR_REEL_HELD:NORTH_SPR_REEL,64,108);north_actor(machine_couplings&2?NORTH_SPR_JUNCTION_EW:NORTH_SPR_JUNCTION_NS,176,108);north_actor(NORTH_SPR_HANDLE,120,108);north_actor(north_game_machine_stage==5?NORTH_SPR_BEACON_LIT:north_game_machine_stage==3?NORTH_SPR_MACHINE_OPEN:north_game_machine_stage==1?NORTH_SPR_MACHINE_WARN:NORTH_SPR_MACHINE_IDLE,120,68);}
  }
 }
+/* A persistent pointer carries the signed bearing after its toast expires.
+ * It sits outside the existing 16px junction sprite and consumes no OBJ art. */
+static COLD void rail_pointer(int x,int y){
+ static const signed char dx[4]={0,1,0,-1},dy[4]={-1,0,1,0};
+ unsigned r=north_game_puzzle.rail&3;int a=dx[r],b=dy[r],sx,sy,tx,ty;
+ x-=camera_x;y-=camera_y;sx=x+a*10;sy=y+b*10;tx=x+a*19;ty=y+b*19;
+ line(sx+1,sy+1,tx+1,ty+1,PAL_STONE1);
+ line(tx+1,ty+1,tx-a*4-b*3+1,ty-b*4+a*3+1,PAL_STONE1);
+ line(tx+1,ty+1,tx-a*4+b*3+1,ty-b*4-a*3+1,PAL_STONE1);
+ line(sx,sy,tx,ty,PAL_GOLD3);
+ line(tx,ty,tx-a*4-b*3,ty-b*4+a*3,PAL_GOLD3);
+ line(tx,ty,tx-a*4+b*3,ty-b*4-a*3,PAL_GOLD3);
+}
 COLD void north_game_draw_overlay(void){
+ if(room==23)rail_pointer(240,192);else if(room>=26&&room<=28)rail_pointer(120,96);
  if(room>=26&&room<=28){int x=80+north_game_puzzle.cart[0]*32;line(64,64,x,64,PAL_GOLD3);if(north_game_puzzle.weight)line(176,96,176,52,PAL_GOLD3);}
  if(room==29){if(north_game_machine_stage==1){line(48,85,192,85,PAL_GOLD3);line(48,88,192,88,PAL_GOLD3);}else if(north_game_machine_stage==2)rect(48,81,145,12,PAL_ROSE4);else if(north_game_machine_stage==3){line(106,54,133,54,PAL_WATER4);line(106,81,133,81,PAL_WATER4);}if(north_game_machine_stage&&north_game_machine_stage<5){rect(87,42,66,4,PAL_STONE1);rect(88,43,north_game_machine_hp/2,2,PAL_GOLD3);}}
 }

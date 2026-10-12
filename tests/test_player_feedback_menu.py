@@ -3,7 +3,8 @@
 from pathlib import Path
 import os,subprocess,tempfile
 ROOT=Path(__file__).resolve().parents[1]
-MODULES=['gear_preview','gear_preview_text','companion_guide','companion_guide_text','journal_nav','gear_menu','quickparty','progression','creatures','creature_data','equipment','equipment_data','economy','save5','save4','regional_quests','northern_quests','southern_quests','magma_quests','underwater_quests','return_quests','horizons_quests','covenants_quests','campaign_rules','progression_events','ui','assets']
+MODULES=['gear_preview','gear_preview_text','companion_guide','companion_guide_text','journal_nav','gear_menu','quickparty','recruit_notice','progression','creatures','creature_data','equipment','equipment_data','economy','save5','save4','regional_quests','northern_quests','southern_quests','magma_quests','underwater_quests','return_quests','horizons_quests','covenants_quests','campaign_rules','progression_events','ui','assets']
+MODULES += ['growth_goals','growth_journal_text','collection_journal']
 def main():
  with tempfile.TemporaryDirectory(prefix='player-menu-host-') as tmp:
   for label,flags in [('strict',[]),('sanitized',['-fsanitize=address,undefined','-fno-omit-frame-pointer'])]:

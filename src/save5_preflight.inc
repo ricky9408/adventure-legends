@@ -16,6 +16,7 @@ void save5_preflight_cancel(void) {
  preflight.status=SAVE5_IDLE;preflight.live=0;
 }
 Save4U32 save5_preflight_begin(const Save5State *s) {
+ if(save5_load_status()==SAVE5_BUSY)return 0;
  if(s&&writer_status==SAVE5_BUSY&&writer_preemptible)save5_cancel_background();
  if(!s||writer_status==SAVE5_BUSY||save5_preflight_active()||preflight.generation==0xffffffffu)return 0;
  ++preflight.generation;
@@ -122,7 +123,7 @@ unsigned save5_preflight_step(Save4U32 token,unsigned budget) {
   preflight.index=0;break;
  case 9:ok=equipment_refs_validate(&s->equipment);break;
  case 10:ok=equipment_reserved_validate(&s->equipment);break;
- case 11:ok=quest_equipment_validate(&s->quests,&s->equipment)&&economy_state_validate(&s->economy,s->campaign.chapter_flags)&&save5_later_claims_validate(&s->quests,&s->economy);break;
+ case 11:ok=quest_equipment_validate(&s->quests,&s->equipment)&&economy_state_validate(&s->economy,s->campaign.chapter_flags)&&save5_later_claims_validate(&s->quests,&s->economy)&&save5_economy_sources_validate(&s->quests,&s->equipment,&s->economy,s->roster.rewards[0]);break;
  default:preflight.status=SAVE5_FAILED;return SAVE5_FAILED;
  }
  if(!ok)preflight.status=SAVE5_FAILED;
@@ -131,8 +132,18 @@ unsigned save5_preflight_step(Save4U32 token,unsigned budget) {
 }
 
 int save5_preflight_store_economy(Save4U32 token,const Save5State *live,const EconomyState *next){
- if(!next||!save5_preflight_matches(token,live)||next->later_claims!=live->economy.later_claims||!economy_state_validate(next,live->campaign.chapter_flags)||!save5_later_claims_validate(&live->quests,next))return 0;
+ if(!next||!save5_preflight_matches(token,live)||next->later_claims!=live->economy.later_claims||!economy_state_validate(next,live->campaign.chapter_flags)||!save5_later_claims_validate(&live->quests,next)||!save5_economy_sources_validate(&live->quests,&live->equipment,next,live->roster.rewards[0]))return 0;
  scratch.state.economy=*next;save5_preflight_cancel();
+ writer_status=SAVE5_BUSY;writer_phase=PHASE_META;writer_position=writer_progress=0;writer_preemptible=0;writer_economy=1;
+ bank_valid[0]=bank_valid[1]=0;bank_sequence[0]=bank_sequence[1]=0;return 1;
+}
+int save5_preflight_store_purchase(Save4U32 token,const Save5State*live,const EconomyState*next,const EquipmentState*gear){
+ if(gear!=save5_preflight_equipment_stage(token)||!next||!save5_preflight_matches(token,live)||
+    next->later_claims!=live->economy.later_claims||!equipment_validate(gear)||
+    !quest_equipment_validate(&live->quests,gear)||!economy_state_validate(next,live->campaign.chapter_flags)||
+    !save5_later_claims_validate(&live->quests,next)||
+    !save5_economy_sources_validate(&live->quests,gear,next,live->roster.rewards[0]))return 0;
+ scratch.state.equipment=*gear;scratch.state.economy=*next;save5_preflight_cancel();
  writer_status=SAVE5_BUSY;writer_phase=PHASE_META;writer_position=writer_progress=0;writer_preemptible=0;writer_economy=1;
  bank_valid[0]=bank_valid[1]=0;bank_sequence[0]=bank_sequence[1]=0;return 1;
 }

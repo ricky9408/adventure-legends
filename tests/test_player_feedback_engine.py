@@ -94,7 +94,7 @@ static void reference_ending_presentation(void){
   modes=[]
   for _ in range(limit):
    modes.append(get('game_state'));frame()
-   if not get('save_requested') and not get('save_feedback_background') and get('game_state') not in (6,10,12):return modes
+   if not get('save_requested') and not get('save_feedback_background') and get('game_state') not in (6,10,12,15):return modes
   raise AssertionError('Writer or event failed to settle')
  def new_game():
   # Complete the real opening before making assertions about the initial
@@ -186,11 +186,49 @@ static void reference_ending_presentation(void){
  lib.save5_test_fail_after(0);lib.save_game_ordinary();assert set(drain())=={1}
  assert get('save_failed')==get('save_failure_notice')==1 and bytes(ram)==prior and load().economy.gold==12
  put('game_state',3);put('journal_tab',13)
+ paused_toast=get('toast_ticks');assert paused_toast>0
  for _ in range(140):frame()
- assert get('toast_ticks')==0 and get('save_failure_notice')==1
+ assert get('toast_ticks')==paused_toast,'modal time must not consume an unseen ordinary toast'
+ assert get('save_failed')==get('save_failure_notice')==1 and lib.game_save_badge_id()==0
  lib.toast(ids.index('TX_HEALED'))
  for _ in range(140):frame()
- assert get('save_failed')==get('save_failure_notice')==1
+ assert get('toast_ticks')==110 and get('save_failed')==get('save_failure_notice')==1
+ # A real held landing preview owns the bottom notice. Its queued ordinary
+ # toast cannot expire while hidden; the durable save error survives both
+ # that ownership and the subsequent exact PLAY-only toast countdown.
+ saved_live=bytes(live)
+ notice_globals=('game_state','summoned','spirit','ability_cd','ability_max','face','px','py','cx','cy','cx_q8','cy_q8','keys','pressed')
+ saved_globals={name:get(name) for name in notice_globals}
+ lib.creatures_grant.argtypes=[C.c_void_p,*([C.c_uint]*5)]
+ lib.creatures_equip.argtypes=[C.c_void_p,C.c_uint,C.c_uint]
+ lib.creatures_select_command.argtypes=[C.c_void_p,C.c_uint]
+ slot=lib.creatures_grant(C.byref(live.roster),39,40,80,0,0);assert slot<160
+ party=next(i for i,n in enumerate(live.roster.party) if n==slot)
+ live.roster.selected_party=party;caster=live.roster.instances[slot]
+ assert lib.creatures_equip(C.byref(caster),0,51)==1 and lib.creatures_select_command(C.byref(caster),0)==1
+ lib.progression_refresh()
+ for name,value in {'game_state':1,'summoned':1,'ability_cd':0,'face':1,'px':120,'py':126}.items():put(name,value)
+ assert not get('scene_present_phase') and not get('save_requested') and not get('save_feedback_background')
+ frame(256,256);assert get('magma_power_kind')==51 and lib.play_hint_text()==ids.index('TX_MP_LANDING')
+ lib.toast(ids.index('TX_HEALED'));held_time=get('magma_power_time');held_pose=get('magma_power_cast_time')
+ held_cooldown=get('ability_cd');held_ticks=get('ticks')
+ for _ in range(60):
+  frame(256,0)
+  assert get('game_state')==1 and lib.play_hint_text()==ids.index('TX_MP_LANDING')
+  assert get('magma_power_age')==0 and get('magma_power_time')==held_time and get('magma_power_cast_time')==held_pose
+  assert get('toast_ticks')==110 and get('save_failed')==get('save_failure_notice')==1
+  assert lib.game_save_badge_id()==ids.index('TX_FB_SAVE_ERROR') and bytes(ram)==prior
+ assert get('ticks')==held_ticks+60 and get('ability_cd')==max(0,held_cooldown-60)
+ frame();assert lib.play_hint_text()==0 and get('toast_ticks')==110,'release clears hint after this update\'s toast tick'
+ for remaining in range(109,-1,-1):
+  frame()
+  assert get('game_state')==1 and lib.play_hint_text()==0 and get('toast_ticks')==remaining
+  assert get('save_failed')==get('save_failure_notice')==1 and lib.game_save_badge_id()==ids.index('TX_FB_SAVE_ERROR')
+  assert bytes(ram)==prior
+ assert not get('magma_power_time')
+ C.memmove(C.addressof(live),saved_live,len(saved_live));lib.progression_refresh()
+ for name,value in saved_globals.items():put(name,value)
+ assert bytes(live)==saved_live and bytes(ram)==prior and get('game_state')==3
  # Independent glyph, border and OBJ clipping oracle for the durable notice.
  notice=(UiText*len(ids)).in_dll(lib,'ui_texts')[ids.index('TX_C_SAVE_FAILED')]
  x=(240-notice.width)//2;left=(240-notice.width-10)//2;top=8;height=19;width=240-2*left
@@ -478,5 +516,6 @@ static void reference_ending_presentation(void){
  assert lib.game_save_badge_left()==240
  put('obj_count',0);lib.obj_add(0,196,3,64,8,0,9999,0);assert get('obj_count')==1
  report={'passed':True,'scope':'fresh reconstructed real-engine host integration','walking_entries':count,'hostile_and_quest_gates':True,'closed_routes_keep_actions_and_latches':4,'shop_prompt_exact_range':True,'ordinary_blocked_updates':0,'dirty_requests':21,'coalesced_writes':2,'critical_frozen_updates':critical.count(6),'failure_glyph_pixels':len(glyphs),'failure_retry_verified_only':True,'card_and_animation_pixel_exact':True,'world_composite_views':len(covers)*count,'bottom_strip_pages_pixel_exact':True,'clean_strip_lazy_capture_pages':2,'title_wordmark_pixel_exact':True,'status_badge_labels_pixel_exact':4,'arrival_reset_and_wave_teardown':True,'scene_handoff_bitmap_oam_brightness_and_input':True,'arrival_obj_tile_upload_deferred':True,'queued_critical_arrival_status':True,'win_current_ending_full_frame_cases':win_cases,'win_mutation_negatives':win_negatives,'tonic_reset_boundary_safe':True,'gold_once_per_spawn':6,'actual_party_xp':xp}
+ report.update(modal_toast_pause_updates=140,held_hint_toast_pause_updates=60,post_hint_toast_expiry_updates=110,persistent_failure_badge_during_hint_and_expiry=True)
  if os.environ.get('PLAYER_FEEDBACK_RESULT'):Path(os.environ['PLAYER_FEEDBACK_RESULT']).write_text(json.dumps(report,indent=2)+'\n')
  print(json.dumps(report,indent=2))

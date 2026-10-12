@@ -12,9 +12,16 @@
 #include "gear_menu.h"
 #include "journal_nav.h"
 #include "quickparty.h"
+#include "regional_shop.h"
+#include "regional_shop_text.h"
+#include "region_art.h"
 #include "ui.h"
 #include "assets.h"
+#if defined(__arm__)
 #define COLD __attribute__((section(".text.rom"),long_call,noinline))
+#else
+#define COLD
+#endif
 #define PLAY 1
 #define PAUSE 3
 #define SHOP 11
@@ -30,6 +37,7 @@ extern int face,pressed,keys,journal_tab,ability_cd,heal_cd,save_failure_notice,
 extern void dialogue(int,int,int),text_spans(const UiText*,int,int,int);
 extern void box(int,int,int,int),text(int,int,int,int),centered(int,int,int),rect(int,int,int,int,unsigned char),toast(int),save_game(void),acknowledge_save_failure(void);
 extern int near(int,int,int,int,int),game_region_entry_safe(void);
+extern void region_actor(unsigned,int,int),obj_add(int,int,int,int,int,int,int,int);
 unsigned game_shop_revision,game_shop_reward_xp,game_shop_reward_gold;
 int game_shop_selection,game_shop_confirm;
 static int item_selection,return_state,pending_kind,pending_item,feedback,feedback_ticks;
@@ -40,6 +48,14 @@ static LaterRewardContext later_context(void){LaterRewardContext c;c.scene=later
 int game_shop_scene_change(void){if(later_rewards_pending()&&!later_rewards_cancel())return 0;if(!++later_scene)later_scene=1;return 1;}
 static void treasure_text(unsigned id,int x,int y,int color){text_spans(&treasure_text_texts[id],x,y,color);}
 static void treasure_center(unsigned id,int y,int color){treasure_text(id,(240-treasure_text_texts[id].width)/2,y,color);}
+static unsigned next_claim(void);
+static COLD void market_center(unsigned id,int y,int color){text_spans(&regional_shop_texts[id],(240-regional_shop_texts[id].width)/2,y,color);}
+static COLD void feedback_center(int id,int y,int color){if(id>=TX_COUNT)market_center((unsigned)(id-TX_COUNT),y,color);else centered(id,y,color);}
+static unsigned market_count(void){unsigned region=regional_shop_region((unsigned)room);return region<8?4u+region:next_claim()<7?4u:3u;}
+static unsigned market_item(unsigned selection){return room==0&&selection>=3?255u:selection;}
+static int market_name(unsigned item){static const int names[11]={TX_FB_TONIC,TX_FB_SPIRIT,TX_FB_EDGE,TX_G_ITEM2,TX_G_ITEM49,TX_G_ITEM67,TX_G_ITEM85,TX_G_ITEM54,TX_G_ITEM68,TX_G_ITEM86,TX_G_ITEM6};return item<11?names[item]:TX_FB_CLAIM;}
+static unsigned market_owned(unsigned item){return item<2?economy_supply_count(&adventure_save,item):item==2?adventure_save.economy.upgrade:!!equipment_seen(&adventure_save.equipment,economy_gear_item(item-3));}
+static COLD void market_description(unsigned item,int y){static const int desc[3]={TX_FB_TONIC_DESC,TX_FB_SPIRIT_DESC,TX_FB_EDGE_DESC};if(feedback)feedback_center(feedback,y,PAL_TEAL2);else if(item<3)centered(desc[item],y,PAL_TEAL2);else market_center(RS_EFFECT_0+item-3,y,PAL_TEAL2);}
 static const unsigned char digits[10][5]={{7,5,5,5,7},{2,6,2,2,7},{7,1,7,4,7},{7,1,7,1,7},{5,5,7,1,1},{7,4,7,1,7},{7,4,7,5,7},{7,1,1,1,1},{7,5,7,5,7},{7,5,7,1,7}};
 #if defined(__arm__)
 #define SHOP_DIGITS __attribute__((section(".iwram.text.shop_digits"),long_call,noinline))
@@ -75,7 +91,7 @@ static int shop_input(void){unsigned direction=(unsigned)keys&240u;int input=pre
 }
 static void notify(int id){feedback=id;feedback_ticks=140;feedback_context=menu_context();changed();}
 static unsigned next_claim(void){unsigned mask=economy_claimable(&adventure_save),i;for(i=0;i<3;i++)if(mask&(1u<<i))return i;mask=later_rewards_claimable(&adventure_save);for(i=0;i<4;i++)if(mask&(1u<<i))return i+3;return 7;}
-static int error_text(void){unsigned e=economy_last_error();return e==ECONOMY_NO_GOLD?TX_FB_NO_GOLD:e==ECONOMY_EMPTY?TX_FB_NONE:e==ECONOMY_FULL||e==ECONOMY_ALREADY_OWNED?TX_FB_FULL:TX_FB_SAVE_RETRY;}
+static int error_text(void){unsigned e=economy_last_error();return e==ECONOMY_NO_GOLD?TX_FB_NO_GOLD:e==ECONOMY_EMPTY?TX_FB_NONE:e==ECONOMY_ALREADY_OWNED?TX_COUNT+RS_OWNED:e==ECONOMY_FULL?TX_FB_FULL:TX_FB_SAVE_RETRY;}
 void game_shop_reset(void){game_shop_scene_change();receipt_later=receipt_fresh=receipt_xp=0;game_shop_selection=game_shop_confirm=item_selection=pending_kind=pending_item=feedback=feedback_ticks=0;reward_ticks=game_shop_reward_xp=game_shop_reward_gold=shop_repeat_direction=shop_repeat_delay=0;feedback_context=0;changed();}
 void game_shop_cancel_items(void){game_shop_confirm=0;clear_feedback();changed();}
 void game_shop_tick(void){
@@ -86,7 +102,7 @@ void game_shop_tick(void){
  if(game_state==PLAY&&!quickparty_open&&reward_ticks&&!--reward_ticks)changed();
 }
 static COLD int begin(unsigned kind,unsigned item,int resume){int ok;if(kind!=3){save_ordinary_scope=1;save_game();save_ordinary_scope=0;}
- ok=kind==1?economy_begin_purchase(&adventure_save,item):kind==2?economy_begin_use(&adventure_save,item):economy_begin_claim(&adventure_save,item);
+ ok=kind==1?economy_begin_market_purchase(&adventure_save,item):kind==2?economy_begin_use(&adventure_save,item):economy_begin_claim(&adventure_save,item);
  if(!ok){notify(error_text());return 0;}
  save_requested=0;return_state=resume;pending_kind=(int)kind;pending_item=(int)item;feedback=feedback_ticks=0;game_state=SHOP_BUSY;changed();return 1;
 }
@@ -104,8 +120,9 @@ COLD int game_shop_later_interact(void){unsigned source,treasure,error;LaterRewa
 }
 static COLD void begin_shop_claim(void){unsigned claim=next_claim();if(claim<3)begin(3,claim,SHOP);else if(claim<7)begin_later(claim-3,LATER_SOURCE_VILLAGE_SHOP,SHOP);}
 static COLD void finish_later_story(void){static const int lines[4][2]={{TX_NT_RETURN_A,TX_NT_RETURN_B},{TX_ST_RETURN_A,TX_ST_RETURN_B},{TX_MG_END,TX_MG_ENDB},{TX_UW_END,TX_UW_HOME}};if(receipt_later&&receipt_fresh&&return_state==PLAY)dialogue(lines[receipt_boss][0],lines[receipt_boss][1],PLAY);receipt_fresh=0;}
-int game_shop_in_range(void){return game_state==PLAY&&room==0&&near(px,py,56,100,22);}
-int game_shop_interact(void){if(!game_shop_in_range())return 0;game_shop_confirm=0;clear_feedback();shop_repeat_direction=shop_repeat_delay=0;if(next_claim()>=3&&next_claim()<7)game_shop_selection=3;game_state=SHOP;changed();return 1;}
+int game_shop_in_range(void){int x,y;if(game_state!=PLAY)return 0;if(room==0)return near(px,py,56,100,22);return regional_shop_position((unsigned)room,&x,&y)&&near(px,py,x,y,22);}
+COLD void game_shop_draw_merchants(void){int x,y;if(!regional_shop_position((unsigned)room,&x,&y))return;region_actor(REGION_SPR_NPC_MERCHANT,x,y);if(game_shop_in_range()&&!quickparty_open)obj_add(10496,x-4,y-21,8,8,1,999,0);}
+int game_shop_interact(void){if(!game_shop_in_range())return 0;game_shop_confirm=0;clear_feedback();shop_repeat_direction=shop_repeat_delay=0;if(room==0&&next_claim()>=3&&next_claim()<7)game_shop_selection=3;else if(game_shop_selection>=(int)market_count())game_shop_selection=0;game_state=SHOP;changed();return 1;}
 int game_shop_display_state(void){return game_state==SHOP_BUSY?return_state:game_state;}
 int game_shop_begin_boss(unsigned boss){if(boss>=3)return 0;return begin(3,boss,game_state);}
 COLD int game_shop_update(void){unsigned status;int input;
@@ -117,7 +134,7 @@ COLD int game_shop_update(void){unsigned status;int input;
    if(pending_kind==4){receipt_later=1;receipt_boss=(unsigned)pending_item;receipt_gold=later_rewards_last_gold();receipt_xp=later_rewards_last_xp();receipt_fresh=later_rewards_last_fresh();progression_refresh();game_health_refresh(0);north_game_revision++;south_game_revision++;magma_game_revision++;underwater_game_revision++;game_shop_reward(receipt_xp,receipt_gold);game_state=SHOP_RECEIPT;if(next_claim()>=7&&game_shop_selection>=3)game_shop_selection=0;}
    else if(pending_kind==2){if(!pending_item)game_health_heal(32);else ability_cd=0;notify(TX_FB_USED);}
    else if(pending_kind==3){receipt_later=receipt_fresh=receipt_xp=0;game_health_refresh(0);receipt_boss=(unsigned)pending_item;receipt_gold=economy_last_gold();game_shop_reward(0,receipt_gold);game_state=SHOP_RECEIPT;notify(TX_FB_RELIC_SAVED);if(next_claim()>=7&&game_shop_selection>=3)game_shop_selection=0;}
-   else{if(pending_item==2)game_health_refresh(0);notify(TX_FB_BOUGHT);}
+   else{if(pending_item==2)game_health_refresh(0);if(pending_item>=3){gear_menu_revision++;notify(TX_COUNT+RS_BOUGHT);}else notify(TX_FB_BOUGHT);}
    save_requested=0;save_feedback_background=0;save_feedback_capture(&adventure_save);save_feedback_complete(1);has_save=1;save_failed=0;acknowledge_save_failure();game_shop_confirm=0;
   }else{save_feedback_background=0;save_feedback_invalidate();save_failed=save_failure_notice=1;notify(TX_FB_SAVE_RETRY);toast(TX_C_SAVE_FAILED);}
   pending_kind=0;changed();return 1;
@@ -126,8 +143,8 @@ COLD int game_shop_update(void){unsigned status;int input;
  input=shop_input();
  if(input&(B|START)){clear_feedback();if(game_shop_confirm&&!(input&START)){game_shop_confirm=0;changed();}else{game_state=PLAY;acknowledge_save_failure();}return 1;}
  if(input&4)return 1;
- if(game_shop_confirm){if(input&A){if(game_shop_selection<3)begin(1,(unsigned)game_shop_selection,SHOP);else begin_shop_claim();}return 1;}
- if(input&(UP|DOWN)){int count=next_claim()<7?4:3;game_shop_selection=(game_shop_selection+(input&UP?count-1:1))%count;clear_feedback();changed();return 1;}
+ if(game_shop_confirm){if(input&A){unsigned item=market_item((unsigned)game_shop_selection);if(item<11)begin(1,item,SHOP);else begin_shop_claim();}return 1;}
+ if(input&(UP|DOWN)){int count=(int)market_count();game_shop_selection=(game_shop_selection+(input&UP?count-1:1))%count;clear_feedback();changed();return 1;}
  if(input&A){clear_feedback();game_shop_confirm=1;changed();}return 1;
 }
 COLD int game_shop_items_input(int input){if(game_state!=PAUSE||journal_tab!=JOURNAL_ITEMS)return 0;
@@ -138,23 +155,24 @@ COLD int game_shop_items_input(int input){if(game_state!=PAUSE||journal_tab!=JOU
 }
 static void heading(int title){box(8,31,224,123);centered(title,35,PAL_GOLD3);text(TX_FB_GOLD,20,53,PAL_GOLD3);menu_number(economy_gold(&adventure_save),34,57,PAL_GOLD4);}
 static void scroll_marks(int first,int more){if(first){rect(225,67,1,1,PAL_GOLD3);rect(224,68,3,1,PAL_GOLD3);rect(223,69,5,1,PAL_GOLD3);}if(more){rect(223,115,5,1,PAL_GOLD3);rect(224,116,3,1,PAL_GOLD3);rect(225,117,1,1,PAL_GOLD3);}}
-static void shop_amounts(unsigned item,int y){unsigned owned=item<2?economy_supply_count(&adventure_save,item):adventure_save.economy.upgrade;menu_number(owned,164,y+3,PAL_GOLD3);menu_number(economy_price(item),196,y+3,PAL_GOLD3);}
+static void shop_amounts(unsigned item,int y){menu_number(market_owned(item),164,y+3,PAL_GOLD3);menu_number(economy_price(item),196,y+3,PAL_GOLD3);}
 static void claim_name(unsigned claim,int y,int color){if(claim<3)centered(claim==0?TX_FB_GROVE_RELIC:claim==1?TX_FB_SKY_RELIC:TX_FB_CORE_RELIC,y,color);else if(claim<7)treasure_center(TT_COMPASS+claim-3,y,color);}
-COLD int game_shop_draw(void){unsigned i,count,first;static const int names[3]={TX_FB_TONIC,TX_FB_SPIRIT,TX_FB_EDGE};static const int desc[3]={TX_FB_TONIC_DESC,TX_FB_SPIRIT_DESC,TX_FB_EDGE_DESC};
+COLD int game_shop_draw(void){unsigned i,count,first,item;
  if(game_state==SHOP_RECEIPT){
   if(receipt_later){box(8,31,224,123);treasure_center(TT_TITLE,35,PAL_GOLD3);treasure_center(TT_COMPASS+receipt_boss,59,PAL_GOLD4);treasure_center(TT_COMPASS_EFFECT+receipt_boss,79,PAL_TEAL2);treasure_center(TT_PERMANENT,97,PAL_TEAL2);text(TX_FB_GOLD,44,115,PAL_GOLD3);menu_number(receipt_gold,64,118,PAL_GOLD4);if(receipt_xp){text(TX_FB_XP,128,115,PAL_TEAL2);menu_number(receipt_xp,166,118,PAL_GOLD4);}treasure_center(TT_RECEIPT_KEYS,138,PAL_TEAL2);}
   else{heading(TX_FB_RELIC_SAVED);claim_name(receipt_boss,75,PAL_GOLD4);text(TX_FB_GOLD,90,102,PAL_GOLD3);menu_number(receipt_gold,118,106,PAL_GOLD4);treasure_center(TT_RECEIPT_KEYS,138,PAL_TEAL2);}return 1;
  }
  if(game_shop_display_state()!=SHOP)return 0;
- heading(TX_FB_SHOP);count=next_claim()<7?4:3;if(game_shop_selection>=(int)count)game_shop_selection=0;
+ heading(TX_FB_SHOP);if(room!=0){rect(10,33,220,17,PAL_INK);market_center(RS_TITLE,35,PAL_GOLD3);}count=market_count();if(game_shop_selection>=(int)count)game_shop_selection=0;
  text(TX_PF_STOCK,150,53,PAL_TEAL2);text(TX_EC_PRICE,196,53,PAL_TEAL2);
- if(game_shop_confirm){unsigned claim=next_claim();centered(game_shop_selection<3?TX_FB_BUY_ASK:TX_FB_CLAIM,73,PAL_GOLD4);
-  if(game_shop_selection<3){text(names[game_shop_selection],20,95,PAL_TEAL2);shop_amounts((unsigned)game_shop_selection,95);}else claim_name(claim,95,PAL_TEAL2);
-  if(feedback||game_shop_selection<3)centered(feedback?feedback:desc[game_shop_selection],119,PAL_TEAL2);else if(claim>=3)treasure_center(TT_CLAIM_HINT,119,PAL_TEAL2);else centered(TX_EC_CLAIM_HINT,119,PAL_TEAL2);
+ item=market_item((unsigned)game_shop_selection);
+ if(game_shop_confirm){unsigned claim=next_claim();centered(item<11?TX_FB_BUY_ASK:TX_FB_CLAIM,73,PAL_GOLD4);
+  if(item<11){text(market_name(item),20,95,PAL_TEAL2);shop_amounts(item,95);}else claim_name(claim,95,PAL_TEAL2);
+  if(item<11)market_description(item,119);else if(feedback)feedback_center(feedback,119,PAL_TEAL2);else if(claim>=3)treasure_center(TT_CLAIM_HINT,119,PAL_TEAL2);else centered(TX_EC_CLAIM_HINT,119,PAL_TEAL2);
   centered(TX_FB_BUY_KEYS,138,PAL_TEAL2);return 1;}
  first=game_shop_selection>2?(unsigned)game_shop_selection-2:0;
- for(i=first;i<count&&i<first+3;i++){int y=69+(int)(i-first)*15;if((int)i==game_shop_selection)rect(15,y,210,15,PAL_STONE1);if(i<3){text(names[i],20,y,PAL_GOLD4);shop_amounts(i,y);}else if(next_claim()>=3)treasure_text(TT_CLAIM,20,y,PAL_GOLD4);else text(TX_FB_CLAIM,20,y,PAL_GOLD4);}
- scroll_marks((int)first,first+3<count);if(feedback||game_shop_selection<3)centered(feedback?feedback:desc[game_shop_selection],119,PAL_TEAL2);else if(next_claim()>=3)treasure_center(TT_CLAIM_HINT,119,PAL_TEAL2);else centered(TX_EC_CLAIM_HINT,119,PAL_TEAL2);
+ for(i=first;i<count&&i<first+3;i++){unsigned row_item=market_item(i);int y=69+(int)(i-first)*15;if((int)i==game_shop_selection)rect(15,y,210,15,PAL_STONE1);if(row_item<11){text(market_name(row_item),20,y,PAL_GOLD4);shop_amounts(row_item,y);}else if(next_claim()>=3)treasure_text(TT_CLAIM,20,y,PAL_GOLD4);else text(TX_FB_CLAIM,20,y,PAL_GOLD4);}
+ scroll_marks((int)first,first+3<count);if(item<11)market_description(item,119);else if(feedback)feedback_center(feedback,119,PAL_TEAL2);else if(next_claim()>=3)treasure_center(TT_CLAIM_HINT,119,PAL_TEAL2);else centered(TX_EC_CLAIM_HINT,119,PAL_TEAL2);
  centered(TX_FB_SHOP_KEYS,138,PAL_TEAL2);return 1;
 }
 static unsigned item_owned(unsigned i){return i<2?economy_supply_count(&adventure_save,i):i<5?!!(adventure_save.economy.relics&(1u<<(i-2))):i==5?adventure_save.economy.upgrade:!!(adventure_save.economy.later_claims&(1u<<(i-6)));}

@@ -78,11 +78,16 @@ class UnderwaterArt(unittest.TestCase):
     for x in range(cx-64,cx+65):self.assertFalse(blocked[y*r['width']+x],(r['key'],'trial board',x,y))
  def test_actual_runtime_a_targets_have_reachable_facing_approaches(self):
   source=(ROOT/'src/underwater_game.c').read_text()
-  source=source[source.index('COLD int underwater_game_interact'):source.index('int underwater_game_power')]
+  # The public entry point now tries the original strict cone before the
+  # relaxed fallback. Both passes dispatch the same authored target body.
+  wrapper=source[source.index('COLD int underwater_game_interact'):source.index('int underwater_game_power')]
+  self.assertRegex(wrapper,r'relaxed_interaction\s*=\s*0\s*;\s*r\s*=\s*interact_targets\(\)\s*;\s*if\s*\(!r\)\s*\{\s*relaxed_interaction\s*=\s*1\s*;\s*r\s*=\s*interact_targets\(\)\s*;\s*\}\s*relaxed_interaction\s*=\s*0')
+  source=source[source.index('static COLD int interact_targets'):source.index('COLD int underwater_game_interact')]
   for r in DATA['rooms']:
    part=re.search(r'if\(room=='+str(r['id'])+r'\)\{(.*?)(?=\n if\(room==|\n /\* General)',source,re.S)
    actual=set(tuple(map(int,p)) for p in re.findall(r'close\((\d+),(\d+)\)',part[1])) if part else set()
    recorded={tuple(t['center']) for t in r['reserved_runtime_targets']}
+   self.assertTrue(actual,(r['key'],'runtime interaction body was not parsed'))
    self.assertEqual(actual,recorded,(r['key'],'runtime targets changed; review authoring snapshot'))
    for t in r['reserved_runtime_targets']:
     x,y=t['center'];xx,yy=t['approach'];distance=abs(x-xx)+abs(y-yy)

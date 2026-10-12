@@ -43,6 +43,7 @@ def main():
   def shot(name):
    step(4);path=a.output/(name+'.png');e.screenshot(path);report['screenshots'].append({'file':path.name,'sha256':sha(path)})
   tap('START');assert g('journal_tab')==13;shot('post-skip-hub')
+  tap('UP');assert g('journal_nav_category')==8  # Appended collection row.
   tap('UP');tap('A');assert g('journal_tab')==16;shot('post-skip-controls')
   tap('B');tap('RIGHT');tap('UP');tap('A');assert g('journal_tab')==14;tap('A');assert g('journal_tab')==0;shot('post-skip-goal')
   tap('B');tap('B');tap('UP');tap('LEFT');tap('A');assert g('journal_tab')==2;tap('A');tap('DOWN');shot('post-skip-companion-field')

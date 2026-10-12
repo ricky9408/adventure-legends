@@ -15,7 +15,7 @@ TEMPLATE_FIXTURE=ROOT/'tests/fixtures/v5-revision6/underwater-minimal12-town.sav
 TEMPLATE_SHA='3f5bbccab022f86b38f4d180e8cf66b04c055791fe4804ddbebbdefb5406aeda'
 
 def historical_template():
- """Current revision11 used-size5088 is not the historical revision6 size5056."""
+ """Current revision12 used-size5088 is not the historical revision6 size5056."""
  raw=TEMPLATE_FIXTURE.read_bytes();assert hashlib.sha256(raw).hexdigest()==TEMPLATE_SHA
  provenance=json.loads((TEMPLATE_FIXTURE.parent/'provenance.json').read_text())
  row=next(x for x in provenance['fixtures'] if x['fixture']==TEMPLATE_FIXTURE.name)
@@ -47,7 +47,7 @@ class ReturnSpawnTests(unittest.TestCase):
   cls.lib=configure(build(folder/'current'));cls.oracle=history_build(ORACLE,folder/'oracle');cls.checks=0;cls.failed=False
   s=Save();assert cls.lib.underwater_test_earned34(C.byref(s))==0;cls.old=bytes(s)
   # Keep testing the current writer, but independently seed raw legacy cases
-  # from a real old bank. Relabeling revision11 retains an invalid used-size.
+  # from a real old bank. Relabeling revision12 retains an invalid used-size.
   assert cls.lib.save5_store(C.byref(s))==1;latest=max((A,B),key=lambda p:int.from_bytes(bytes(cls.lib.sram[p+8:p+12]),'little'));cls.current_template=bytes(cls.lib.sram[latest:latest+SIZE])
   cls.template=historical_template()
   assert cls.lib.underwater_test_completed(C.byref(s),0)==0
@@ -63,12 +63,18 @@ class ReturnSpawnTests(unittest.TestCase):
   (ROOT/'build/current-host-evidence/underwater-return-spawns/host.json').write_text(json.dumps(report,indent=2)+'\n')
  def clone(self,complete=True):return Save.from_buffer_copy(self.complete if complete else self.old)
  def test_current_writer_cannot_be_relabelled_as_historical_template(self):
-  self.assertEqual(int.from_bytes(self.current_template[12:14],'little'),11)
+  self.assertEqual(int.from_bytes(self.current_template[12:14],'little'),12)
   self.assertEqual(int.from_bytes(self.current_template[6:8],'little'),5088)
   self.assertEqual(int.from_bytes(self.template[6:8],'little'),5056)
   bank=encode_state(self.current_template,self.clone(),6)
+  self.assertEqual(bytes(repair_crc(bank)),bank)
+  self.assertEqual(int.from_bytes(bank[12:14],'little'),6)
+  self.assertEqual(int.from_bytes(bank[6:8],'little'),5088)
   self.lib.save5_test_reset_writer();self.lib.sram[:]=bytes([255])*32768;self.lib.sram[A:A+SIZE]=bank
-  out=Save();self.assertEqual(self.lib.save5_load(C.byref(out)),0)
+  before=bytes(self.lib.sram);out=Save.from_buffer_copy(bytes([0x91])*C.sizeof(Save));out_before=bytes(out)
+  self.assertEqual(self.lib.save5_load(C.byref(out)),0)
+  self.assertEqual(bytes(out),out_before);self.assertEqual(bytes(self.lib.sram),before)
+  self.assertEqual(self.lib.save5_test_write_count(),0)
  def assert_state(self,s,expected,raw=True):
   lib=self.lib;before=bytes(s);lib.save5_test_reset_writer();lib.save5_test_fail_after(-1)
   self.assertEqual(lib.save5_validate(C.byref(s)),expected,(s.campaign.room,s.campaign.spawn))

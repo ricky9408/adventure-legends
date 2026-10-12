@@ -19,9 +19,9 @@ static COLD int door(unsigned a,unsigned s){
 }
 static COLD void clear_prompts(void){
  unsigned i=(unsigned)room-70;
- if(invite_confirm&&(i>=8||invite_confirm!=i+1||!close(invitations[i][0],invitations[i][1])))invite_confirm=0;
- if(reset_confirm&&(i>=8||!close(resets[i][0],resets[i][1])))reset_confirm=0;
- if(porch_confirm&&(room!=70||!close(128,272)))porch_confirm=0;
+ if(invite_confirm&&(i>=8||invite_confirm!=i+1||!prompt_close(invitations[i][0],invitations[i][1])))invite_confirm=0;
+ if(reset_confirm&&(i>=8||!prompt_close(resets[i][0],resets[i][1])))reset_confirm=0;
+ if(porch_confirm&&(room!=70||!prompt_close(128,272)))porch_confirm=0;
 }
 COLD int covenants_game_input(unsigned pressed,unsigned held){
  (void)held;if(game_state!=PLAY)return 0;clear_prompts();
@@ -122,7 +122,7 @@ static COLD int inspect_work(void){
  }else return 0;
  changed();toast(TX_CV_TRACE);return 1;
 }
-COLD int covenants_game_interact(void){
+static COLD int interact_targets(void){
  unsigned i=(unsigned)room-70,j;int x,y;
  if(i>=8||game_state!=PLAY||event_count)return 0;
  clear_prompts();
@@ -142,6 +142,8 @@ COLD int covenants_game_interact(void){
  }
  return 0;
 }
+/* Preserve previously eligible targets before trying the forgiving reach. */
+COLD int covenants_game_interact(void){int r;relaxed_interaction=0;r=interact_targets();if(!r){relaxed_interaction=1;r=interact_targets();}relaxed_interaction=0;return r;}
 COLD int covenants_game_old_interact(void){
  if(game_state!=PLAY||event_count||!done(57)||!(adventure_save.campaign.chapter_flags&SAVE4_ENDING_SEEN))return 0;
  if(room==0&&close(120,94)){
@@ -149,7 +151,7 @@ COLD int covenants_game_old_interact(void){
   if(!done(63)&&state(63)&&((bits(63)&3)==3)){
    if(state(63)==SAVE5_QUEST_READY)claim(63);else{objective(63,4);say(TX_CV_HOME_RETURN_A,TX_CV_HOME_RETURN_B);}return 1;
   }
-  if(done(63)){say(TX_CV_END_A,TX_CV_END_B);return 1;}
+  if(done(63)){homecoming_offer=1;say(TX_CV_END_A,TX_CV_END_B);return 1;}
   say(TX_CV_CLUE60A,TX_CV_CLUE60B);return 1;
  }
  if(room==62&&close(120,208)){

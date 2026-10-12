@@ -78,7 +78,8 @@ def main():
     if out.exists():
         parser.error('output already exists; choose a new directory to retain prior evidence')
     out.mkdir(parents=True)
-    env = {**os.environ, 'PYTHONHASHSEED': '0', 'TZ': 'UTC', 'LC_ALL': 'C.UTF-8',
+    env = {**os.environ, 'PYTHONHASHSEED': '0', 'PYTHONDONTWRITEBYTECODE': '1',
+           'TZ': 'UTC', 'LC_ALL': 'C.UTF-8',
            'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1',
            'ASAN_OPTIONS': 'detect_leaks=0:halt_on_error=1',
            'UBSAN_OPTIONS': 'halt_on_error=1'}
@@ -86,20 +87,20 @@ def main():
               'seed': args.seed, 'extended_audio': args.extended_audio,
               'platform': platform.platform(), 'stages': [],
               'limitations': [
-                  'Native mGBA, not physical GBA hardware or a full campaign/collection run.',
-                  'Bounded opening/early gameplay includes the first boss, shop, Fire trial/evolution and earned-save Continue; later bosses and complete collection are not covered.',
-                  'Inherited cold-Continue stalls are reported separately, not a measured-play cadence pass.',
+                  'Native mGBA rather than physical hardware; full128-form acquisition and every optional quest remain unproven.',
+                  'Fresh main campaign reaches all regional main stories and Q63; separate early/Garden/Water/reserve routes cover additional branches.',
+                  'Loading cadence/cancellation uses labeled historical and prepared fixtures; it does not prove full-collection acquisition.',
                   'Synthetic audio diagnostics do not prove controller-earned region access.']}
     report_file = out / 'summary.json'
     save = lambda: write_json(report_file, report)
-    deadline = time.monotonic() + 35 * 60
-    report['total_budget_seconds'] = 35 * 60
+    deadline = time.monotonic() + 45 * 60
+    report['total_budget_seconds'] = 45 * 60
     save()
 
     def stage(name, command, timeout=300):
         remaining = deadline - time.monotonic()
         if remaining <= 0:
-            raise RuntimeError('Total 35-minute regression budget exceeded')
+            raise RuntimeError('Total 45-minute regression budget exceeded')
         timeout = min(timeout, remaining)
         row = {'name': name, 'command': command, 'timeout_seconds': timeout,
                'status': 'RUNNING', 'log': name + '.log'}
@@ -152,11 +153,16 @@ def main():
         stage('native-bridge', ['sh', 'tools/build_mgba_bridge.sh'])
         stage('ci-runner-tests', [python, '-m', 'unittest', 'discover', '-s', 'tests',
                                   '-p', 'test_gameplay_ci.py'])
+        stage('review-inventory-preflight', [python, '-c',
+              "import sys; sys.path.insert(0,'tests'); "
+              "from verify_review_successor import verify; "
+              "c,_=verify(chain=False); "
+              "print('Exact production inventory PASS:',len(c['current_production']),'files')"])
         if args.suite in ('all', 'host'):
             stage('archive-host-output', [python, 'tools/archive_test_output.py',
                   'build/equipment-rewards-host-current'])
             try:
-                stage('host', ['make', 'test'], timeout=1800)
+                stage('host', ['make', 'test'], timeout=2400)
             finally:
                 # Preserve the canonical Makefile byte-for-byte: historical
                 # authoring contracts intentionally pin it. Copy only this
@@ -224,6 +230,29 @@ def main():
             stage('companion-help-menus', [python, 'tests/opening_skip_guides_native.py',
                   '--bridge', bridge, '--save', str(out / 'opening/skip-0-village.sav'),
                   '--seed', str(args.seed), '--output', str(out / 'guides')])
+            stage('bounded-cold-continue', [python, 'tests/cold_continue_native.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--output', str(out/'cold-continue')], timeout=600)
+            loading = json.loads((out/'cold-continue/report.json').read_text())
+            if loading['result'] != 'PASS' or loading['rom_sha256'] != rom_sha:
+                raise RuntimeError('Bounded cold Continue did not pass the exact candidate')
+            commit = subprocess.check_output(['git', '-c', 'safe.directory='+str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+            stage('fresh-reserve-recruit', [python, 'tests/fresh_reserve_notice.py',
+                  '--source-root', str(ROOT), '--bridge', bridge, '--expected-commit', commit,
+                  '--output', str(out/'fresh-reserve')], timeout=600)
+            reserve = json.loads((out/'fresh-reserve/summary.json').read_text())
+            if not reserve['accepted'] or not reserve['controller_only'] or reserve['candidate']['rom_sha256'] != rom_sha or any(reserve['provenance'][key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
+                raise RuntimeError('Fresh reserved companion route did not pass the exact candidate')
+            stage('fresh-main-campaign', [python, 'tests/treasure_full_journey.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--source-root', str(ROOT), '--source-manifest', str(ROOT/'build/source-hashes.json'),
+                  '--output', str(out/'full-main'), '--expected-rom-sha', rom_sha,
+                  '--expected-symbols-sha', snapshots[-1]['emberbond.sym'],
+                  '--expected-elf-sha', snapshots[-1]['emberbond.elf'],
+                  '--expected-manifest-sha', snapshots[-1]['source-hashes.json']], timeout=900)
+            campaign = json.loads((out/'full-main/summary.json').read_text())
+            if not campaign['accepted'] or not campaign['complete_fresh_main_journey'] or not campaign['presented_journey_pacing_passed'] or campaign['candidate']['rom_sha256'] != rom_sha:
+                raise RuntimeError('Fresh main campaign or its unwaived presentation cadence did not pass')
             stage('synthetic-audio-diagnostics', common + ['--cases', 'synthetic',
                   '--output', str(out / 'synthetic-audio')], timeout=600)
             if args.extended_audio:
@@ -238,7 +267,13 @@ def main():
                                 'fresh_water_checks': sum(len(w['checks']) for w in water_reports),
                                 'fresh_water_metrics': {name: w['metrics'] for name, w in
                                                         zip(('original', 'water'), water_reports)},
-                                'opening_cadence': opening['cadence_by_scope']}
+                                'opening_cadence': opening['cadence_by_scope'],
+                                'bounded_load_cases': len(loading['cases']),
+                                'fresh_reserve_checks': reserve['checks'],
+                                'fresh_reserve_metrics': reserve['metrics'],
+                                'fresh_main_checks': campaign['passed_checks'],
+                                'fresh_main_rooms': campaign['visited_rooms'],
+                                'fresh_main_presented_cadence_passed': campaign['presented_journey_pacing_passed']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.
         frozen = json.loads((ROOT / 'build/source-hashes.json').read_text())
         if any(digest(ROOT / name) != expected for name, expected in frozen.items()):

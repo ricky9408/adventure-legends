@@ -40,6 +40,18 @@ class TreasureRegionalJourney(journey.RegionalJourney):
     def __init__(self,*a,**kw):
         self.treasure_reports=[];self.treasure_pending=None;self.treasure_pending_stable=True
         super().__init__(*a,**kw)
+    def settle(self):
+        super().settle()
+        if self.get('game_state')==5:
+            self.check(self.quest(63)==3,'credits offer follows earned final homecoming')
+            self.check(not self.get('save_requested') and not self.get('save_feedback_background') and not self.get('save_failed'),'credits offer waits for verified durable save')
+            signature=self.state_signature();position=tuple(self.get(n)for n in ('room','px','py'))
+            self.raw_step(3);self.e.screenshot(self.out/'homecoming-optional-credits-offer.png')
+            self.tap('B',2,4)
+            self.check(self.get('game_state')==1,'fresh B declines optional homecoming credits')
+            self.check(self.state_signature()==signature and tuple(self.get(n)for n in ('room','px','py'))==position,'declining credits preserves earned save and exact field position')
+            self.coverage.append('earned-homecoming-verified-optional-credits-B-return')
+            super().settle()
     def state(self):return Save.from_buffer_copy(self.e.bytes(self.sym['adventure_save'],C.sizeof(Save)))
     save_state=state
     def raw_step(self,count,keys=0):

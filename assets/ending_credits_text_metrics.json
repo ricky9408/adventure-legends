@@ -65,6 +65,50 @@
       10
     ]
   },
+  "HOMECOMING_TITLE": {
+    "text": "帰り道の灯は、つづいていく",
+    "height": 15,
+    "width": 98,
+    "ink_bounds": [
+      1,
+      0,
+      96,
+      11
+    ]
+  },
+  "HOMECOMING_LINE": {
+    "text": "みんなとの約束が、暮らしに戻る。",
+    "height": 15,
+    "width": 120,
+    "ink_bounds": [
+      1,
+      0,
+      118,
+      11
+    ]
+  },
+  "HOMECOMING_OPTIONAL": {
+    "text": "これからも、仲間に会いに行けます",
+    "height": 15,
+    "width": 122,
+    "ink_bounds": [
+      1,
+      0,
+      121,
+      11
+    ]
+  },
+  "HOMECOMING_KEYS": {
+    "text": "A クレジット   B 冒険をつづける",
+    "height": 15,
+    "width": 119,
+    "ink_bounds": [
+      1,
+      0,
+      118,
+      11
+    ]
+  },
   "LINE_0": {
     "text": "ADVENTURE LEGENDS",
     "height": 15,

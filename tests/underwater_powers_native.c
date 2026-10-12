@@ -9,6 +9,7 @@
 #include "southern_powers.h"
 #include "magma_powers.h"
 #include "underwater_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "underwater_game.h"
 #include "magma_game.h"
 #include <limits.h>
@@ -120,7 +121,7 @@ static void setup(unsigned command){
     game_health_refresh(1);game_attacks_reset();select_command(command);
 }
 static void enemy(unsigned i,int x,int y,int hearts){
-    enemies[i]=(Enemy){x,y,hearts,0,0};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;southern_powers_enemy_spawn(i);magma_powers_enemy_spawn(i);underwater_powers_enemy_spawn(i);
+    enemies[i]=(Enemy){x,y,hearts,0,test_ordinary_enemy_kind(0)};enemy_hp_q4[i]=hearts*16;enemy_phases[i]=255;southern_powers_enemy_spawn(i);magma_powers_enemy_spawn(i);underwater_powers_enemy_spawn(i);
 }
 static void shot(unsigned i,int x,int y,int dx,int dy,int life,int owner){
     shots[i]=(Shot){x,y,dx,dy,life,owner};shot_phases[i]=CREATURE_FIRE;
@@ -218,7 +219,7 @@ static void test_catch_push_and_slots(void){unsigned n;int oldx,oldy;
  setup(77);enemy(0,130,100,10);assert(underwater_power(77));updates(14);enemies[0].x=112;finish_case(77);expected(0,0); /* No real front entry. */
  setup(78);enemy(0,124,100,10);assert(underwater_power(78));updates(18);expected(0,24);enemy(0,124,100,10);
  for(n=0;n<65536;n++)underwater_powers_enemy_spawn(0);finish_case(78);expected(0,0);
- setup(70);enemy(0,124,100,10);enemies[0].kind=3;oldx=enemies[0].x;oldy=enemies[0].y;assert(underwater_power(70));finish_case(70);expected(0,0);assert(enemies[0].x==oldx&&enemies[0].y==oldy);
+ setup(70);enemy(0,124,100,10);enemies[0].kind=4;oldx=enemies[0].x;oldy=enemies[0].y;assert(underwater_power(70));finish_case(70);expected(0,0);assert(enemies[0].x==oldx&&enemies[0].y==oldy);
  setup(78);enemy(0,INT_MAX,INT_MIN,10);assert(underwater_power(78));finish_case(78);expected(0,0);underwater_powers_enemy_spawn(UINT_MAX);
 }
 static void test_field_boss_and_provenance(void){unsigned c,n;
@@ -309,7 +310,7 @@ static void test_independent_geometry_grid(void){static const unsigned commands[
 static void test_every_slot_and_ordinary_kind(void){unsigned c,k;
  for(c=67;c<=90;c++){
   setup(c);enemy(0,positions[c-67][0],positions[c-67][1],10);assert(underwater_power(c));enemy(0,positions[c-67][0],positions[c-67][1],10);finish_case(c);expected(0,0);
-  for(k=1;k<=2;k++){setup(c);enemy(0,positions[c-67][0],positions[c-67][1],10);enemies[0].kind=(int)k;assert(underwater_power(c));finish_case(c);expected(0,(c-67)%3?24:16);}
+  for(k=1;k<=3;k++){setup(c);enemy(0,positions[c-67][0],positions[c-67][1],10);enemies[0].kind=(int)k;assert(underwater_power(c));finish_case(c);expected(0,(c-67)%3?24:16);}
  }
  setup(81);enemy(0,100,100,10);assert(underwater_power(81));for(k=0;k<12;k++){if(k<8)px++;updates(1);}wall(104,80,1,40);finish_case(81);expected(0,0);
 }

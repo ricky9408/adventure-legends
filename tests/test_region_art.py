@@ -54,9 +54,10 @@ OPTIONAL_OVERVIEWS={
 }
 
 
-def generated_hashes(include_optional=False):
-    files=list(OUT.rglob('*'))+[ROOT/'src/region_art.c',ROOT/'src/region_art.h']+list((ROOT/'src/region_art_data').glob('*.inc'))
-    return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files if p.is_file() and (include_optional or p.name not in OPTIONAL_OVERVIEWS)}
+def generated_hashes(include_optional=False,root=ROOT):
+    out=root/'assets/region'
+    files=list(out.rglob('*'))+[root/'src/region_art.c',root/'src/region_art.h']+list((root/'src/region_art_data').glob('*.inc'))
+    return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files if p.is_file() and (include_optional or p.name not in OPTIONAL_OVERVIEWS)}
 
 
 class RegionArtTests(unittest.TestCase):
@@ -171,21 +172,35 @@ class RegionArtTests(unittest.TestCase):
                     self.assertEqual(int(match[2],16),room['width']*room['height'])
 
     def test_z_deterministic_regeneration_and_readonly_contract(self):
-        before=generated_hashes();contract=(OUT/'contract.json').read_bytes()
-        existing_optional={k:v for k,v in generated_hashes(True).items() if Path(k).name in OPTIONAL_OVERVIEWS}
-        with tempfile.TemporaryDirectory(prefix='region-regenerate-') as cwd:
-            subprocess.run([sys.executable,str(ROOT/'assets/generate_region.py')],cwd=cwd,check=True,capture_output=True,text=True)
+        before=generated_hashes();all_before=generated_hashes(True);contract=(OUT/'contract.json').read_bytes()
+        existing_optional={k:v for k,v in all_before.items() if Path(k).name in OPTIONAL_OVERVIEWS}
+        try:
+            with tempfile.TemporaryDirectory(prefix='region-regenerate-') as tmp:
+                # The generator resolves outputs beside its own source file.
+                # Run the unchanged complete source closure privately so omitted
+                # optional sheets never enter the authenticated candidate assets.
+                private=Path(tmp)/'source';(private/'assets').mkdir(parents=True);(private/'src').mkdir()
+                for name in ('generate_region.py','generate_assets.py','connected_road_art.py','connected_roads.json'):
+                    shutil.copy2(ROOT/'assets'/name,private/'assets'/name)
+                shutil.copytree(OUT,private/'assets/region')
+                shutil.copytree(ROOT/'src/region_art_data',private/'src/region_art_data')
+                for name in ('region_art.c','region_art.h'):shutil.copy2(ROOT/'src'/name,private/'src'/name)
+                cwd=Path(tmp)/'unrelated-cwd';cwd.mkdir()
+                script=private/'assets/generate_region.py';private_out=private/'assets/region'
+                subprocess.run([sys.executable,str(script)],cwd=cwd,check=True,capture_output=True,text=True)
+                self.assertEqual((private_out/'contract.json').read_bytes(),contract)
+                self.assertEqual(generated_hashes(root=private),before,'Every shipped artifact must reproduce exactly')
+                all_after=generated_hashes(True,root=private)
+                for name,digest in existing_optional.items():self.assertEqual(all_after[name],digest)
+                self.assertEqual({Path(k).name for k in all_after if Path(k).name in OPTIONAL_OVERVIEWS},OPTIONAL_OVERVIEWS)
+                # First generation may create omitted sheets only in this private
+                # archive. The second must reproduce every optional/shipped byte.
+                subprocess.run([sys.executable,str(script)],cwd=cwd,check=True,capture_output=True,text=True)
+                self.assertEqual((private_out/'contract.json').read_bytes(),contract)
+                self.assertEqual(generated_hashes(True,root=private),all_after)
+        finally:
             self.assertEqual((OUT/'contract.json').read_bytes(),contract)
-            self.assertEqual(generated_hashes(),before,'Every shipped artifact must reproduce exactly')
-            all_after=generated_hashes(True)
-            for name,digest in existing_optional.items():self.assertEqual(all_after[name],digest)
-            self.assertEqual({Path(k).name for k in all_after if Path(k).name in OPTIONAL_OVERVIEWS},OPTIONAL_OVERVIEWS)
-            # A clean source archive intentionally omits these large, redundant
-            # review sheets. Their first generation is allowed; the second must
-            # reproduce every optional and shipped byte without changing input.
-            subprocess.run([sys.executable,str(ROOT/'assets/generate_region.py')],cwd=cwd,check=True,capture_output=True,text=True)
-        self.assertEqual((OUT/'contract.json').read_bytes(),contract)
-        self.assertEqual(generated_hashes(True),all_after)
+            self.assertEqual(generated_hashes(True),all_before,'Regeneration must not alter candidate bytes or file set')
 
 
 if __name__=='__main__':unittest.main(verbosity=2)

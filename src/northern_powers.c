@@ -1,6 +1,7 @@
 /* Bounded Northern companion combat. No field tags are inferred from phase,
  * ownership, or form. Geometry and damage are deliberately separate. */
 #include "northern_powers.h"
+#include "enemy_types.h"
 #include "northern_power_art.h"
 #include "advanced_powers.h"
 #include "regional_powers.h"
@@ -162,11 +163,11 @@ static void radius_damage(int x,int y,int radius,unsigned q4,unsigned phase){
        near_point(x,y,enemies[i].x,enemies[i].y,radius))hurt(i,q4,phase,x,y);
 }
 /* Each step moves exactly one pixel in one axis; displacement is <=the budget
- * even diagonally. Only the three existing ordinary pool kinds can move. Bosses
+ * even diagonally. Only supported ordinary pool kinds can move. Bosses
  * use a separate runtime and are never addressed or moved here. */
 static void displace(unsigned i,int dx,int dy,unsigned budget,int pull){
     Enemy *e=&enemies[i];unsigned step;
-    if(e->hp<=0||(unsigned)e->kind>2)return;
+    if(e->hp<=0||!enemy_kind_is_ordinary(e->kind))return;
     for(step=0;step<budget;step++){
         int nx=e->x,ny=e->y;
         if(pull){

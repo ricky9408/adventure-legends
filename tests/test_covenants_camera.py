@@ -6,7 +6,7 @@ import test_horizons_camera as old
 from test_covenants_engine import function
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- paths=['src/game.c','src/covenants_engine.inc','src/modal_blit.inc','src/covenants_art.h','src/covenants_art.c','src/covenants_creature_art.c','src/covenants_creature_art.h','src/covenants_draw.inc','assets/covenants_world/geometry.json']
+ paths=['src/game.c','src/covenants_engine.inc','src/modal_blit.inc','src/covenants_art.h','src/covenants_art.c','src/covenants_creature_art.c','src/covenants_creature_art.h','src/covenants_draw.inc','src/recruit_notice.c','src/recruit_notice.h','src/save5.h','src/creatures.h','src/obj_layout.h','assets/covenants_world/geometry.json']
  sources={p:(ROOT/p).read_text()for p in paths}
  for inc in re.findall(r'^#include "(covenants_art_data/[^\"]+)"',sources['src/covenants_art.c'],re.M):
   p='src/'+inc;t=(ROOT/p).read_text()
@@ -17,12 +17,14 @@ def main():
  geometry=json.loads(sources['assets/covenants_world/geometry.json'])['rooms']
  assert [(r['id'],r['width'],r['height'])for r in geometry]==[r[:3]for r in rooms]
  game=sources['src/game.c'];defines=[]
- for name in ('PLAY','DIALOG','PAUSE','DEAD','SAVE_PENDING','EVOLVE_CONFIRM','EVOLVE_ANIM','EVENT_PENDING','SAVE_NOTICE_Y','SAVE_NOTICE_H'):
+ for name in ('PLAY','DIALOG','PAUSE','DEAD','SAVE_PENDING','EVOLVE_CONFIRM','EVOLVE_ANIM','EVENT_PENDING','SAVE_NOTICE_Y','SAVE_NOTICE_H','OBJ_HINT'):
   defines+=re.findall(r'^#define '+name+r'\s+[^\n]+',game,re.M)
  head=old.HEAD.replace('#include "horizons_art.h"','#include "horizons_art.h"').replace('const CovenantsArtRoom covenants_art_rooms[8] = {};','const HorizonsArtRoom horizons_art_rooms[8] = {};').replace('unsigned covenants_creature_art_walk_index(unsigned, unsigned) { std::abort(); }','')
  head=head.replace('const u8 horizons_sprites[HORIZONS_SPR_COUNT][256]','const u8 covenants_sprites[COVENANTS_SPR_COUNT][256]').replace('return horizons_sprites[0];','return covenants_sprites[0];')
  head+='#include "journal_nav.h"\nint world_mask_disabled; int display_state_override=-1; int save_failed; int economy_pending(void){return 0;} unsigned save_feedback_badge(void){return 0;} unsigned game_shop_reward_visible(void){return 0;} int game_save_badge_id(void){return 0;} int game_save_badge_left(void){return 240;} int game_display_state(void){return display_state_override<0?game_state:display_state_override;}\n'
  head+='#include "covenants_creature_art.h"\n'
+ # Use the actual obtained-history predicate, not a permanently hidden badge.
+ head+='#include "save5.h"\nSave5State adventure_save;\n'+function(sources['src/recruit_notice.c'],'recruit_notice_world')
  art=sources['src/covenants_creature_art.c'];start=art.index('const struct CovenantsCreatureArtEntry');end=art.index('\n};',start)+3
  head+=art[start:end]+'\n'+function(art,'covenants_creature_art_index')+function(art,'covenants_creature_art_walk_index')
  storage=[];maps=[]
@@ -41,15 +43,19 @@ def main():
  checks=old.CHECKS.replace('room = 62; room < 70','room = 70; room < 78').replace('HorizonsArtRoom','CovenantsArtRoom').replace('horizons_art_rooms[room - 62]','covenants_art_rooms[room - 70]').replace('copy_horizons()','copy_covenants()').replace('rf(105,','rf(121,')
  actor=r'''static unsigned actor_checks(void) {
     unsigned checks=0;
-    for(room=70;room<78;++room)for(int xc:sample_cameras(world_width()-240,false))for(int yc:sample_cameras(world_height()-160,true)) {
+    for(bool obtained:{true,false})for(room=70;room<78;++room)for(int xc:sample_cameras(world_width()-240,false))for(int yc:sample_cameras(world_height()-160,true)) {
         camera_x=xc;camera_y=yc;game_state=PLAY;
+        adventure_save.roster.obtained[15]=obtained?1:0;
         for(int y:{-16,-2,-1,0,7,15,159,160,167,168,174,175,176})for(int x=-10;x<252;x+=7) {
             obj_count=region_actor_cursor=0;ra(0,xc+x,yc+y);rf(121,xc+x,yc+y);
             bool npc=x>-8&&x<248&&y>-1&&y<175,creature=x>-8&&x<248&&y>-8&&y<168;
-            check(obj_count==(int)npc+(int)creature,"actor foot-anchor visible count");int n=0;
+            bool badge=!obtained&&x>-4&&x<244&&y>13&&y<181;
+            check(obj_count==(int)npc+(int)creature+(int)badge,"actor foot-anchor visible count");int n=0;
             if(npc){check((obj_entries[n].a0&255)==((y-15)&255),"actor NPC foot anchor y");n++;}
             if(creature)check((obj_entries[n].a0&255)==((y-8)&255),"actor creature center anchor y");
-            for(n=0;n<obj_count;n++){check((obj_entries[n].a1&511)==((x-8)&511),"actor x exactly one camera subtraction");check(obj_depth[n]==yc+y,"actor world foot depth");}checks++;
+            for(n=0;n<(int)npc+(int)creature;n++){check((obj_entries[n].a1&511)==((x-8)&511),"actor x exactly one camera subtraction");check(obj_depth[n]==yc+y,"actor world foot depth");}
+            if(badge){check((obj_entries[n].a1&511)==((x-4)&511),"actor recruit hint x camera subtraction");check((obj_entries[n].a0&255)==((y-21)&255),"actor recruit hint y camera subtraction");check(obj_depth[n]==999,"actor recruit hint foreground depth");check((obj_entries[n].a2&1023)==512+OBJ_HINT/32,"actor recruit hint tile");}
+            check(adventure_save.roster.obtained[15]==(obtained?1:0),"actor inspection changes no history");checks++;
         }
     }
     return checks;

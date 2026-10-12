@@ -7,6 +7,9 @@ extern int horizons_power_kind,horizons_power_time,horizons_power_form;
 extern int horizons_power_direction,horizons_power_origin_x,horizons_power_origin_y;
 extern int horizons_power_age,horizons_power_cooldown,horizons_power_cast_time,horizons_power_phase;
 int horizons_power(unsigned command);
+/* Optional age0 R hold, <=90 PLAY updates; return1 owns direction input.
+ * Damage/field/startup/release ages do not advance, cooldown still does. */
+int horizons_powers_hold_input(unsigned held);
 int horizons_powers_busy(void);
 int horizons_powers_cast_matches_selected(void);
 void horizons_powers_selection_changed(void);
@@ -18,7 +21,8 @@ void horizons_powers_tick(void);
 void horizons_powers_draw(void);
 /* Result1 accepts one fresh cardinal edge, result2 consumes fresh R for the
  * current cast. Call before shared cooldown rejects R; never also start a cast.
- * Direction/side can change once in first8 updates. Identity, command, origin,
+ * Direction/side can be revised while R is held before startup, otherwise
+ * once in first8 updates. Identity, command, origin,
  * expiry and action token remain the initial snapshot. */
 int horizons_powers_input(unsigned pressed);
 int horizons_powers_can_aim(void);

@@ -136,7 +136,7 @@ int main(void){unsigned c,i,n,t,elapsed;
 }
 '''
     (bench/'main.c').write_text(prelude+harness+main)
-    flags=['-mcpu=arm7tdmi','-mthumb-interwork','-mthumb','-O2','-std=c99','-ffreestanding','-fno-builtin','-fno-strict-aliasing','-fomit-frame-pointer','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fstack-usage','-ffunction-sections','-fdata-sections','-Isrc']
+    flags=['-mcpu=arm7tdmi','-mthumb-interwork','-mthumb','-O2','-std=c99','-ffreestanding','-fno-builtin','-fno-strict-aliasing','-fomit-frame-pointer','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-fstack-usage','-ffunction-sections','-fdata-sections','-Isrc','-Itests']
     objects=[]
     for source in [str(bench/'main.c'),*SOURCES[1:]]:
         obj=bench/(Path(source).stem+'.o')

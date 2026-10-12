@@ -7,6 +7,7 @@ extern unsigned short *screen;
 extern void rect(int,int,int,int,unsigned char),text_spans(const UiText*,int,int,int);
 unsigned ending_credits_phase,ending_credits_scroll,ending_credits_revision,ending_credits_armed;
 static unsigned clock_ticks;
+static unsigned homecoming;
 #define BUTTONS (1u|2u|8u)
 #define TOP 24
 #define BOTTOM 138
@@ -15,9 +16,14 @@ static unsigned clock_ticks;
 #define LINE_COUNT (EC_COUNT-EC_LINE_0)
 
 ENDING_CODE void ending_credits_begin(void){
+ homecoming=0;
  ending_credits_phase=ending_credits_scroll=ending_credits_armed=clock_ticks=0;
  ending_credits_revision++;
 }
+ENDING_CODE void ending_credits_offer_homecoming(void){
+ ending_credits_begin();homecoming=1;
+}
+ENDING_CODE int ending_credits_returns_to_field(void){return homecoming!=0;}
 static ENDING_CODE void roll_begin(void){
  ending_credits_phase=1;ending_credits_scroll=clock_ticks=ending_credits_armed=0;ending_credits_revision++;
 }
@@ -26,7 +32,7 @@ ENDING_CODE int ending_credits_update(void){
   * final-dialogue A, B or Start can neither skip nor leak into the field. */
  if(!ending_credits_armed){if(!((unsigned)keys&BUTTONS)){ending_credits_armed=1;ending_credits_revision++;}return 0;}
  if((unsigned)pressed&(2u|8u)){arrival_input_mask|=keys;pressed=0;return 1;}
- if(!ending_credits_phase){if(((unsigned)pressed&1u)||++clock_ticks>=180)roll_begin();return 0;}
+ if(!ending_credits_phase){if(((unsigned)pressed&1u)||(!homecoming&&++clock_ticks>=180))roll_begin();return 0;}
  if(ending_credits_phase==2){if((unsigned)pressed&1u)roll_begin();return 0;}
  if(++clock_ticks<3)return 0;
  clock_ticks=0;ending_credits_scroll++;ending_credits_revision++;
@@ -53,6 +59,11 @@ static ENDING_CODE void clipped(unsigned id,int y,int col){
 }
 ENDING_CODE void ending_credits_card_hint(void){center(ending_credits_armed?EC_CARD_HINT:EC_RELEASE_HINT,128,PAL_TEAL2);}
 ENDING_CODE int ending_credits_draw(void){unsigned i;
+ if(homecoming&&!ending_credits_phase){
+  rect(0,0,240,160,PAL_INK);center(EC_HOMECOMING_TITLE,33,PAL_GOLD3);
+  center(EC_HOMECOMING_LINE,61,PAL_GOLD4);center(EC_HOMECOMING_OPTIONAL,83,PAL_TEAL2);
+  center(ending_credits_armed?EC_HOMECOMING_KEYS:EC_RELEASE_HINT,121,PAL_TEAL2);return 1;
+ }
  if(!ending_credits_phase)return 0;
  rect(0,0,240,160,PAL_INK);center(EC_TITLE,5,PAL_GOLD3);
  rect(12,20,216,1,PAL_TEAL2);rect(12,140,216,1,PAL_TEAL2);

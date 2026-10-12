@@ -5,7 +5,7 @@ Renderer geometry is independently proven elsewhere. This suite is not native
 controller acquisition or pacing acceptance. No production state is edited.
 """
 from pathlib import Path
-import ctypes as C, hashlib, json, os, subprocess, unittest
+import ctypes as C, hashlib, json, os, subprocess, sys, unittest
 import covenants_host_support as H
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'build/covenants-world-review'
@@ -25,7 +25,8 @@ class World(unittest.TestCase):
   cls.sanitized=sanitized
   p=OUT/('world-sanitized.so' if sanitized else 'world.so')
   sanitize=['-fsanitize=address,undefined','-fno-omit-frame-pointer'] if sanitized else []
-  subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Wl,--no-undefined','-fPIC','-shared','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-Isrc','-I'+str(OUT),*sanitize,*files,'-o',str(p)],cwd=ROOT,check=True)
+  undefined=['-Wl,-undefined,error'] if sys.platform=='darwin' else ['-Wl,--no-undefined']
+  subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic',*undefined,'-fPIC','-shared','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-Isrc','-I'+str(OUT),*sanitize,*files,'-o',str(p)],cwd=ROOT,check=True)
   subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Isrc','-c','src/covenants_game.c','-o',str(OUT/'strict-world.o')],cwd=ROOT,check=True)
   cls.l=C.CDLL(str(p));cls.l.sram=(C.c_ubyte*32768).in_dll(cls.l,'save5_test_sram');cls.s=H.Save.in_dll(cls.l,'adventure_save')
   cls.l.covenants_job_begin.argtypes=[C.POINTER(H.Save),C.POINTER(H.Request),C.c_uint,C.c_uint]
@@ -50,6 +51,65 @@ class World(unittest.TestCase):
  def heat(self,a,b,x,y):
   self.select(107,108);self.at(x,y,3);token=self.l.action();self.assertEqual(self.l.hit(a,token,1,0),1);self.assertEqual(self.l.hit(b,token,2,1),1)
  def tick(self,n=1):self.l.tick(n);self.assertEqual(self.l.settle(),1)
+ def test_reviewed_off_axis_steward_a_keeps_direction_and_range_limits(self):
+  self.entry(70)
+  for x,y,f in ((117,260,0),(120,260,1),(120,245,0),(120,267,0)):
+   self.at(x,y,f);before=bytes(self.s)
+   self.assertEqual(self.l.covenants_game_interact(),0,(x,y,f))
+   self.assertEqual(bytes(self.s),before);self.assertEqual(self.l.get_setting(1),0)
+  # Reviewed native-world coordinates: forward12/side8 from the steward.
+  self.at(120,260,0);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
+  self.assertEqual(self.l.get_setting(1),0,'talk must not operate the nearby manual')
+  self.assertEqual(self.l.settle(),1)
+ def test_old_valid_steward_precedes_newly_reachable_manual(self):
+  self.entry(70);self.at(136,254,0)
+  # Manual144,264 is forward10/side8; steward128,272 is forward18/side8.
+  # The steward was already eligible before the forgiving reach was added.
+  before=bytes(self.s);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
+  self.assertEqual(self.l.get_setting(1),0,'forgiving manual must not steal an old valid talk')
+  self.assertEqual(bytes(self.s),before);self.assertEqual(self.l.settle(),1)
+ def test_target_hint_is_pure_and_matches_strict_first_steward_priority(self):
+  self.entry(70);x=C.c_int();y=C.c_int()
+  for px,py in ((120,260),(136,254)):
+   self.at(px,py,0);before=bytes(self.s);settings=[self.l.get_setting(i) for i in range(24)]
+   for _ in range(3):
+    self.assertEqual(self.l.covenants_game_target_hint(C.byref(x),C.byref(y)),1)
+    self.assertEqual((x.value,y.value),(128,272))
+   self.assertEqual(bytes(self.s),before);self.assertEqual([self.l.get_setting(i) for i in range(24)],settings)
+   self.assertEqual(self.l.covenants_game_event_pending(),0);self.assertEqual(self.l.confirmation(0),0)
+   self.assertEqual(self.l.confirmation(1),0);self.assertEqual(self.l.confirmation(2),0)
+   self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,1)
+  self.at(120,260,1);self.assertEqual(self.l.covenants_game_target_hint(None,None),0)
+  self.at(120,260,0);C.c_int.in_dll(self.l,'game_state').value=2
+  self.assertEqual(self.l.covenants_game_target_hint(None,None),0)
+ def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
+  self.entry(70);self.hit(0,105,106,120,240)
+  self.at(40,308,1);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(self.l.confirmation(0),1);self.tick()
+  self.assertEqual(self.l.confirmation(0),1);self.assertEqual(self.l.get_setting(0),1)
+  self.at(40,308,0);self.tick();self.assertEqual(self.l.confirmation(0),0)
+  self.at(40,308,1);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(self.l.covenants_game_input(2,0),1);self.assertEqual(self.l.confirmation(0),0)
+  self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.covenants_game_interact(),1);self.tick()
+  self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.confirmation(0),0)
+  self.assertEqual(self.l.get_setting(0),0,'only a second A may discard partial work')
+ def test_off_axis_invitation_retains_prompt_and_facing_away_revokes_it(self):
+  H.fulfill(self.l,self.s,1);self.l.adopt_fixture(H.generation());self.entry(70)
+  before=self.l.creatures_roster_count(C.byref(self.s.roster))
+  self.at(424,284,1);self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.confirmation(1),1);self.tick()
+  self.assertEqual(self.l.confirmation(1),1);self.assertEqual(self.l.creatures_roster_count(C.byref(self.s.roster)),before)
+  self.at(424,284,0);self.tick();self.assertEqual(self.l.confirmation(1),0)
+  self.at(424,284,1);self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.creatures_roster_count(C.byref(self.s.roster)),before)
+  self.assertEqual(self.l.covenants_game_input(2,0),1);self.assertEqual(self.l.confirmation(1),0)
+  self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.creatures_roster_count(C.byref(self.s.roster)),before+1)
+  self.assertEqual(self.l.confirmation(1),0)
  def test_geometry_data_targets_match_actual_world(self):
   data=json.loads((ROOT/'assets/covenants_world/geometry.json').read_text())
   for r in data['rooms']:
@@ -63,6 +123,37 @@ class World(unittest.TestCase):
     for t in station['targets']:
      x=C.c_int();y=C.c_int();rad=C.c_int();self.assertEqual(self.l.covenants_game_field_target(idx,C.byref(x),C.byref(y),C.byref(rad)),1)
      self.assertEqual([x.value,y.value],t['center']);self.assertEqual(rad.value,t['radius']);idx+=1
+ def test_homecoming_offer_waits_for_verified_claim_and_replays_read_only(self):
+  complete=H.story(self.l,False)
+  # Synthetic READY checkpoint: all ordinary objectives were earned through
+  # real typed jobs; remove only the final claimed receipt for this host case.
+  self.l.save5_quest_set_state(C.byref(complete.quests),63,2);complete.quests.rewards[7]&=127
+  ref=self.l.equipment_find(C.byref(complete.equipment),89);self.assertLess(ref,48)
+  C.memset(C.addressof(complete.equipment.bag[ref]),0,C.sizeof(complete.equipment.bag[ref]))
+  complete.equipment.seen[89>>3]&=~(1<<(89&7));complete.equipment.reward_claims[47>>3]&=~(1<<(47&7))
+  self.assertEqual(self.l.save5_validate(C.byref(complete)),1)
+  C.memmove(C.addressof(self.s),C.addressof(complete),C.sizeof(complete));self.l.adopt_fixture(H.generation())
+  self.at(120,112,1);self.assertEqual(self.l.covenants_game_old_interact(),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+  self.assertEqual(self.l.settle(),1);claimed=bytes(self.s)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(0),0)
+  # Claim publication owns the original final narrative stages 1,2,3. An
+  # early engine offer hook may run first, but must wait through each page.
+  for stage in (2,3):
+   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+   self.l.covenants_game_tick_old();self.assertEqual(self.l.get_setting(23),stage)
+   self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
+   self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+   self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+  self.l.covenants_game_tick_old();self.assertEqual(self.l.get_setting(23),0)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0)
+  self.assertEqual(bytes(self.s),claimed)
+  self.at(120,112,1);self.assertEqual(self.l.covenants_game_old_interact(),1)
+  self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),0) # dialogue owns input
+  self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.covenants_game_take_homecoming_offer(1),1)
+  self.assertEqual(bytes(self.s),claimed)
  def test_stale_source_scene_owner_geometry_and_overlap(self):
   for fault in range(9):
    self.setUp();self.entry(70);self.select(105,106);self.at(120,240);t=self.l.action();self.l.fault(fault);self.assertEqual(self.l.hit(0,t,1,0),0,fault);self.assertEqual(self.l.get_setting(0),0)

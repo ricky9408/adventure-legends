@@ -41,6 +41,38 @@ class World(unittest.TestCase):
   if reverse:self.water();self.stage()
   else:self.stage();self.water()
   self.finale()
+ def test_off_axis_manual_a_keeps_direction_and_range_limits(self):
+  self.old(60);self.act(64,112,True);self.old(61);self.entry(62)
+  for x,y,f in ((197,220,1),(200,220,0),(200,235,1),(200,213,1)):
+   self.at(x,y,f);before=bytes(self.s)
+   self.assertEqual(self.l.horizons_game_interact(),0,(x,y,f))
+   self.assertEqual(self.l.get_setting(0),0);self.assertEqual(bytes(self.s),before)
+  self.at(200,220,1);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.get_mode(),0,'ordinary handle must not start a trial or invitation')
+ def test_target_hint_is_read_only_and_matches_the_manual(self):
+  self.old(60);self.act(64,112,True);self.old(61);self.entry(62);self.at(200,220,1)
+  x=C.c_int();y=C.c_int();before=bytes(self.s);settings=[self.l.get_setting(i) for i in range(16)]
+  for _ in range(3):
+   self.assertEqual(self.l.horizons_game_target_hint(C.byref(x),C.byref(y)),1)
+   self.assertEqual((x.value,y.value),(208,208))
+  self.assertEqual(bytes(self.s),before);self.assertEqual([self.l.get_setting(i) for i in range(16)],settings)
+  self.assertEqual(self.l.horizons_game_event_pending(),0);self.assertEqual(self.l.confirmation(),0)
+  self.assertEqual(self.l.get_mode(),0);self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,1)
+  self.at(200,220,0);self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+  self.at(200,220,1);C.c_int.in_dll(self.l,'game_state').value=2
+  self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+ def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
+  self.intro();self.act(208,208);before=self.l.get_setting(0)
+  self.at(16,304,1);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1);self.l.tick()
+  self.assertEqual(self.l.reset_confirmation(),1);self.assertEqual(self.l.get_setting(0),before)
+  self.at(16,304,0);self.l.tick();self.assertEqual(self.l.reset_confirmation(),0)
+  self.at(16,304,1);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.horizons_game_input(2,0),1);self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.horizons_game_interact(),1);self.l.tick()
+  self.assertEqual(self.l.horizons_game_interact(),1);self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.get_setting(0),3,'reset reconstructs committed fair work')
  def test_main_both_orders(self):
   self.chapter();self.setUp();self.chapter(True)
  def test_all_four_personal_trials_and_rehearsal(self):
@@ -59,6 +91,23 @@ class World(unittest.TestCase):
   cases=[(63,105,106,(336,128),(336,104),(336,54,0),(336,112),(400,112)),(67,107,108,(368,208),(300,232),(268,208,3),(400,240),(368,272)),(66,109,110,(48,72),(80,160),(132,256,3),(80,248),(64,288)),(68,111,112,(48,112),(80,112),(64,94,3),(112,112),(160,136))]
   for i,(area,base,cmd,lectern,manual,origin,w1,w2) in enumerate(cases):
    slot=self.select(base,cmd);self.assertEqual(self.l.evolve(slot,base+1),0);self.entry(area);self.select(base+1,cmd+1);self.act(*lectern);self.assertEqual(self.l.get_mode(),4,i);self.act(*manual);self.l.snapshot_state();self.at(*origin);t=self.l.action();self.assertEqual(self.l.hit(0,t,1,0),1);self.assertEqual(self.l.hit(0,t,2,1 if i==1 else 0),0);self.assertEqual(self.l.get_stage(),0);self.assertEqual(self.l.hit(1,t,2,1 if i==1 else 0),1);self.walk(*w1);self.walk(*w2);self.assertEqual(self.l.get_mode(),0);self.assertEqual(self.l.unchanged(),1);self.assertEqual(self.l.valid(),1)
+ def test_practice_hint_requires_the_actual_command_and_qualified_trial(self):
+  self.test_all_four_personal_trials_and_rehearsal()
+  slot=self.select(105,106);self.assertEqual(self.l.evolve(slot,106),0);self.entry(63)
+  self.select(106,106);self.at(336,146,1);before=bytes(self.s)
+  self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+  self.assertEqual(self.l.horizons_game_interact(),0);self.assertEqual(self.l.get_mode(),0)
+  self.assertEqual(bytes(self.s),before)
+  self.select(106,107);self.at(336,146,1)
+  qualified=self.s.roster.instances[slot].trial_flags;self.s.roster.instances[slot].trial_flags=0
+  self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+  self.assertEqual(self.l.horizons_game_interact(),0);self.assertEqual(self.l.get_mode(),0)
+  self.s.roster.instances[slot].trial_flags=qualified
+  x=C.c_int();y=C.c_int();before=bytes(self.s)
+  self.assertEqual(self.l.horizons_game_target_hint(C.byref(x),C.byref(y)),1)
+  self.assertEqual((x.value,y.value),(336,128));self.assertEqual(bytes(self.s),before)
+  self.assertEqual(self.l.get_mode(),0);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.get_mode(),4);self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
  def first_optional(self,i):
   data={4:(63,(64,64),(80,96),(112,96)),5:(64,(200,112),(176,120),(160,112)),6:(65,(416,256),(384,224),(416,224)),7:(67,(64,192),(48,144),(96,192)),8:(69,(208,112),(48,48),(176,112)),9:(66,(48,208),(48,176),(80,208)),10:(62,(304,272),(304,240),(336,272)),11:(68,(48,112),(80,112),(48,136))}
   area,invite,manual,walk=data[i];self.entry(area)
@@ -117,6 +166,9 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.get_setting(0),0)
  def test_recruit_prompt_cancel_leave_and_preflight_abandon(self):
   self.intro();self.select(105,106);self.act(352,224);self.act(352,256);self.field(0,384,176,2);self.walk(384,208);before=self.l.count();self.act(352,224);self.assertNotEqual(self.l.confirmation(),0);self.at(240,240);self.l.tick();self.assertEqual(self.l.confirmation(),0);self.act(352,224);self.assertEqual(self.l.count(),before)
+  self.at(344,236,1);self.l.tick();self.assertNotEqual(self.l.confirmation(),0,'off-axis reach retains invitation confirmation');self.assertEqual(self.l.count(),before)
+  self.at(344,236,0);self.l.tick();self.assertEqual(self.l.confirmation(),0);self.assertEqual(self.l.count(),before)
+  self.act(352,224);self.assertNotEqual(self.l.confirmation(),0)
   self.at(352,242);self.assertEqual(self.l.horizons_game_interact(),1);self.l.snapshot_state();self.assertEqual(self.l.horizons_game_prepare_event(),1);self.l.horizons_game_menu_abandoned();self.assertEqual(self.l.unchanged(),1);self.assertEqual(self.l.count(),before);self.assertEqual(self.l.get_mode(),0)
  def test_reset_reconstructs_committed_work_and_closes_prompts(self):
   self.intro();self.entry(63);self.act(136,80);self.act(80,96);self.select(105,106);self.field(0,224,90,2)

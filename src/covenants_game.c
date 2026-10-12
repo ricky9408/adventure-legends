@@ -56,6 +56,7 @@ static WorldCast cast;
 static CovenantsRequest events[4];
 static unsigned event_handle,event_scene,event_attempt;
 static unsigned char event_count,event_index;
+static unsigned char homecoming_offer;
 static const unsigned char spawn_counts[8]={5,2,2,2,4,2,2,2};
 static const short spawns[8][5][2]={
  {{240,288},{448,160},{32,160},{240,32},{80,272}},
@@ -74,12 +75,16 @@ static const int after_lines[8][2]={{TX_CV_AFTER1A,TX_CV_AFTER1B},{TX_CV_AFTER2A
 static const int invite_lines[8][2]={{TX_CV_INVITE1A,TX_CV_INVITE1B},{TX_CV_INVITE2A,TX_CV_INVITE2B},{TX_CV_INVITE3A,TX_CV_INVITE3B},{TX_CV_INVITE4A,TX_CV_INVITE4B},{TX_CV_INVITE5A,TX_CV_INVITE5B},{TX_CV_INVITE6A,TX_CV_INVITE6B},{TX_CV_INVITE7A,TX_CV_INVITE7B},{TX_CV_INVITE8A,TX_CV_INVITE8B}};
 static COLD int ab(int x){return x<0?-x:x;}
 static COLD int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
-static COLD int close(int x,int y){
+/* Only A target selection uses this reach; cast geometry remains separate. */
+static unsigned char relaxed_interaction;
+static COLD int target_reach(int x,int y,unsigned relaxed){
  int f,s;
  if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}
  else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}
- return f>=6&&f<=26&&s<=10&&s<=f/2;
+ return f>=6&&f<=26&&s<=10&&(relaxed||s<=f/2);
 }
+static COLD int close(int x,int y){return target_reach(x,y,relaxed_interaction);}
+static COLD int prompt_close(int x,int y){return target_reach(x,y,1);}
 static COLD void next_generation(unsigned *p){if(++*p==0)++*p;}
 static COLD void changed(void){next_generation(&covenants_game_revision);}
 static COLD unsigned state(unsigned q){return save5_quest_state(&adventure_save.quests,q);}
@@ -155,6 +160,12 @@ static COLD int complete_covenant(void){
  return simple(COVENANTS_REQUEST_COVENANT_COMPLETE,(unsigned)room,0,0,i+1);
 }
 COLD int covenants_game_event_pending(void){return event_count!=0;}
+COLD int covenants_game_take_homecoming_offer(int save_verified){
+ /* Claim publication leaves the original multi-page homecoming narrative in
+  * setting[23]. Its old-town tick owns that sequence until it reaches zero. */
+ if(!homecoming_offer||!save_verified||game_state!=PLAY||room!=0||event_count||setting[23]||!done(63))return 0;
+ homecoming_offer=0;return 1;
+}
 COLD int covenants_game_route_allowed(unsigned a,unsigned s){return spawn_allowed(a,s);}
 COLD int covenants_game_request_enter(unsigned a,unsigned s){
  if(!spawn_allowed(a,s))return 0;
@@ -181,7 +192,7 @@ static COLD void present(const CovenantsRequest*r,int result){
  dirty=1;
  if(r->operation==COVENANTS_REQUEST_UNIQUE_INVITE){invite_confirm=0;progression_refresh();toast(TX_CV_INVITED);}
  else if(r->operation==COVENANTS_REQUEST_COVENANT_COMPLETE){invalidate_cast();invite_confirm=0;toast(TX_CV_FULFILLED);}
- else if(r->operation==COVENANTS_REQUEST_QUEST_CLAIM){progression_refresh();if(r->quest==63)setting[23]=1;toast(TX_CV_RECEIVED);}
+ else if(r->operation==COVENANTS_REQUEST_QUEST_CLAIM){progression_refresh();if(r->quest==63){setting[23]=1;homecoming_offer=1;}toast(TX_CV_RECEIVED);}
  else if(result==COVENANTS_NOW_READY)toast(TX_CV_READY);
  changed();
 }
@@ -209,4 +220,5 @@ COLD unsigned covenants_game_prepare_event(void){
 #include "covenants_work.inc"
 #include "covenants_fields.inc"
 #include "covenants_interact.inc"
+#include "covenants_hint.inc"
 #include "covenants_draw.inc"

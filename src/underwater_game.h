@@ -45,6 +45,8 @@ int underwater_puzzle_toggle(UnderwaterPuzzle*,unsigned area,unsigned target,int
 int underwater_puzzle_solved(const UnderwaterPuzzle*,unsigned area);
 int underwater_game_input(unsigned pressed,unsigned held);
 int underwater_game_interact(void);
+/* Pure ordinary-A focus; rendering must never invoke the interaction. */
+int underwater_game_target_hint(int*,int*);
 int underwater_game_power(unsigned command); /* feedback only, grants no proof */
 void underwater_game_tick(void);
 void underwater_game_reset(void);

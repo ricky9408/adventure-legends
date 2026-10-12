@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "covenants_powers.h"
+#include "ordinary_enemy_fixture.h"
 #include "covenants_power_art.h"
 #include "covenants_creature_art.h"
 #include "covenants_game.h"
@@ -127,7 +128,7 @@ static void setup(unsigned command) {
     gear_stats.power_cooldown=EQUIPMENT_BASE_POWER_COOLDOWN;
 }
 static void enemy(unsigned i,int f,int s,int kind) {
-    enemies[i]=(Enemy){100+f,100+s,100,0,kind};enemy_hp_q4[i]=1600;enemy_phases[i]=255;
+    enemies[i]=(Enemy){100+f,100+s,100,0,test_ordinary_enemy_kind(kind)};enemy_hp_q4[i]=1600;enemy_phases[i]=255;
     covenants_powers_enemy_spawn(i);
 }
 static void shot(unsigned i,int f,int s,int df,int ds,int hostile) {
@@ -252,10 +253,10 @@ static void guards(void) {
     puts("guard caps3/1/2/2, hostile provenance, exact segment, spawn reuse, side protection/open mouth and spent-drop counterplay");
 }
 static void movement_bosses(void) {
-    setup(127);enemy(0,16,0,3);assert(covenants_power(127));updates(30);assert(enemies[0].x==116);
+    setup(127);enemy(0,16,0,4);assert(covenants_power(127));updates(30);assert(enemies[0].x==116);
     setup(127);enemy(0,16,0,0);wall(123,104,1,1);assert(covenants_power(127));updates(30);assert(enemies[0].x<=118);
     setup(127);enemy(0,16,0,0);enemy(1,25,0,0);assert(covenants_power(127));updates(30);assert(enemies[0].x==116);
-    setup(122);enemy(0,20,0,3);assert(covenants_power(122));updates(6);assert(!slowed_enemies[0]);
+    setup(122);enemy(0,20,0,4);assert(covenants_power(122));updates(6);assert(!slowed_enemies[0]);
     setup(122);enemy(0,20,0,0);assert(covenants_power(122));updates(6);assert(slowed_enemies[0]);
     enemy(0,20,0,0);updates(90);assert(enemy_hp_q4[0]==1600);
     setup(128);assert(covenants_power(128));updates(65);assert(!covenants_powers_boss_damage(120,100,0,1));tick();

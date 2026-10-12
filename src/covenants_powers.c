@@ -1,6 +1,7 @@
 /* Original finite legendary decisions. Only visible indexed pixels collide.
  * No heap, new timer/IRQ/DMA/audio, private cooldown, save writes or IWRAM. */
 #include "covenants_powers.h"
+#include "enemy_types.h"
 #include "covenants_power_art.h"
 #include "covenants_game.h"
 #include "horizons_game.h"
@@ -460,10 +461,10 @@ int covenants_powers_overlap(int x,int y,int radius) {
     return covenants_powers_proof()!=0&&overlap(x,y,radius,FIELD);
 }
 static int enemy_bound(unsigned i) {
-    return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=3&&coord(enemies[i].x,enemies[i].y)&&
+    return i<6&&enemies[i].hp>0&&enemy_kind_is_ordinary(enemies[i].kind)&&coord(enemies[i].x,enemies[i].y)&&
            cast.serial[i]&&cast.serial[i]==cast.bound_serial[i];
 }
-static int ordinary(unsigned i) { return enemy_bound(i)&&(unsigned)enemies[i].kind<=2; }
+static int ordinary(unsigned i) { return enemy_bound(i); }
 static void push(unsigned i) {
     unsigned n,j;int x,y;
     if(!ordinary(i)||!clear_box(enemies[i].x-4,enemies[i].y-4,enemies[i].x+4,enemies[i].y+4))return;

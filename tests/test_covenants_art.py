@@ -41,5 +41,5 @@ class CovenantsArt(unittest.TestCase):
   sections=subprocess.check_output([prefix+'objdump','-h',str(obj)],text=True);self.assertNotIn('.iwram',sections)
   inc=list((ROOT/'src/covenants_art_data').glob('*.inc'));self.assertLess(max(p.stat().st_size for p in inc),30000)
   report={'scope':'Exact ARM art object only; chapter link size and runtime allocation are separate','rom_bytes':rom,'budget_bytes':1300000,'data_bytes':int(fields[1]),'bss_bytes':int(fields[2]),'iwram_bytes':0,'object_sha256':hashlib.sha256(obj.read_bytes()).hexdigest(),'sources':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in [ROOT/'src/covenants_art.c',ROOT/'src/covenants_art.h',*inc]}}
-  (art.OUT/'arm_resources.json').write_text(json.dumps(report,indent=1)+'\n')
+  (out/'arm_resources.json').write_text(json.dumps(report,indent=1)+'\n')
 if __name__=='__main__':unittest.main()

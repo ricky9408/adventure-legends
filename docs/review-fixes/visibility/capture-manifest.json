@@ -1,0 +1,27 @@
+[
+  {
+    "capture": "bell-before.png",
+    "sha256": "adde5221936eae002a0994d9992f7bb97bbe032f5c8f73aef712140c74ef2e49",
+    "provenance": "baseline-visibility"
+  },
+  {
+    "capture": "bell-after.png",
+    "sha256": "57f0a61c336f57acbc685e1a0700c138a6b7012b24e2b550cfb6efc0a4311f23",
+    "provenance": "after-visibility-01"
+  },
+  {
+    "capture": "party-before.png",
+    "sha256": "7ce6ed04ca2549172e1288c5dee7668e189a91d52669110093f7a2c67a07a5df",
+    "provenance": "baseline-visibility"
+  },
+  {
+    "capture": "party-after.png",
+    "sha256": "e92f6a1803ab170bfdfdb561c1f0cef2f19a37aa0249fb86fb0d4664137dbb75",
+    "provenance": "after-visibility-01"
+  },
+  {
+    "capture": "party-after-continue.png",
+    "sha256": "e61b3564e49df8792eaef065b694eaa986be478379bf75c035b6edf46cc25e36",
+    "provenance": "after-visibility-01"
+  }
+]

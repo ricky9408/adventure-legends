@@ -46,7 +46,7 @@ class EconomyHistory(unittest.TestCase):
    old=OldSave();self.assertEqual(self.old.history_probe_image(image,C.byref(old)),1)
    for l in (self.new,self.poisoned):
     out=Save();self.assertEqual(l.history_probe_image(image,C.byref(out)),1);self.assertEqual(bytes(out),bytes(old)+bytes(32));self.assertEqual(l.save5_validate_revision(C.byref(out),9),1)
-   s=Save.from_buffer_copy(bytes(old)+bytes(32));b=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(s),b),1);self.assertEqual(bytes(b)[12:14],b'\x0b\0');self.assertEqual(bytes(b)[6:8],(5088).to_bytes(2,'little'));self.assertEqual(self.old.history_probe_bank(b,A,C.byref(OldSave())),0)
+   s=Save.from_buffer_copy(bytes(old)+bytes(32));b=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(s),b),1);self.assertEqual(bytes(b)[12:14],b'\x0c\0');self.assertEqual(bytes(b)[6:8],(5088).to_bytes(2,'little'));self.assertEqual(self.old.history_probe_bank(b,A,C.byref(OldSave())),0)
    out=Save();self.assertEqual(self.new.history_probe_bank(b,B,C.byref(out)),1);self.assertEqual(compare_state(out),compare_state(s))
  def test_genuine_revisions1_to8_unchanged(self):
   images=[(r,n,(ROOT/f'tests/fixtures/v5-revision{r}'/n).read_bytes())for r,n,_ in FIXTURES]
@@ -81,7 +81,7 @@ class EconomyHistory(unittest.TestCase):
   for pos in (*range(32,47),*range(4032,4296),*range(4544,5056),96+15,112+15,160+16):
    for value in (0,1,3,7,15,31,63,127,128,254,255):
     b=bytearray(self.seed);b[pos]=value;self.bank(b,(pos,value))
-  for revision in (0,12,255,256,65535):
+  for revision in (0,13,255,256,65535):
    b=bytearray(self.seed);b[12:14]=revision.to_bytes(2,'little');self.bank(b,revision,0)
   for pos in range(5056,6144):
    b=bytearray(self.seed);b[pos]=1;self.bank(b,('reserved',pos),0)

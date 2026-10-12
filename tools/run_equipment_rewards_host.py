@@ -6,6 +6,7 @@ input, save migration, frame pacing and the earned journey are separate gates.
 """
 import argparse,hashlib,json,os,subprocess,sys,time
 from pathlib import Path
+from host_production_guard import ProductionGuard
 ROOT=Path(__file__).resolve().parents[1]
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def main():
@@ -14,6 +15,7 @@ def main():
  manifest=ROOT/'build/source-hashes.json';runtime=json.loads(manifest.read_text())
  def unchanged():return all((ROOT/k).is_file()and sha(ROOT/k)==v for k,v in runtime.items())
  assert unchanged(),'Current source must match the frozen build'
+ production=ProductionGuard()
  commands=[('retained-62',[sys.executable,'tools/run_connected_roads_host.py','--soundtrack-successor','--output',str(out/'retained-62')],{})]
  names=['test_journey_goals','test_journey_arrival_latch','test_journey_map','test_companion_guide','test_shared_text_spans','test_play_notice_cache','test_retained_ui_story_successor','test_regional_quest_events','verify_late_renderer']
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{}) for n in names]
@@ -21,17 +23,18 @@ def main():
  for name,cmd,extra in commands:
   if name=='verify_late_renderer':cmd.append('--equipment-rewards-successor')
  commands += [('retained-parent-negatives',[sys.executable,'tests/test_retained_ui_successor.py','--journey-story-ui-successor'],{}),('regional-quest-ubsan',[sys.executable,'tests/test_regional_quest_events.py'],{'QUEST_SANITIZE':'1'})]
- additions=['test_snapshot_copy_canaries','test_snapshot_copy','test_later_rewards_codec','test_later_rewards_capacity','test_gear_preview','gear_readable_layout','gear_treasure_host','gear_treasure_porchlight_test','test_renderer_equipment_successor','test_save5_history','test_save5_history_differential','test_return_history_differential','test_underwater_history_differential','test_horizons_history']
+ additions=['test_snapshot_copy_canaries','test_snapshot_copy','test_later_rewards_codec','test_later_rewards_capacity','test_gear_preview','gear_readable_layout','gear_treasure_host','gear_treasure_porchlight_test','test_renderer_equipment_successor','test_save5_load_job','test_review_successor','test_growth_collection','test_recruit_notice','test_recruit_reserve_notice','test_readable_aim_input','test_enemy_tactics','test_charger_companion_powers','test_regional_shop_positions','test_save5_history','test_save5_history_differential','test_return_history_differential','test_underwater_history_differential','test_horizons_history']
+ additions.append('test_horizons_cast_admission')
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{})for n in additions]
  commands += [('later-reward-all-write-cuts',[sys.executable,'tests/test_later_rewards.py','--full-cuts'],{})]
  # Explicit current release routing. Historical contracts are unmodified;
  # source-only inverse tests and current behavior are distinct report rows.
  routed=[]
  for name,cmd,extra in commands:
-  if name=='test_retained_ui_story_successor':name='historical-g5-story-negatives';cmd=[sys.executable,'tests/test_soundtrack_historical_ui.py']
-  elif name=='retained-parent-negatives':name='historical-g5-parent-negatives';cmd=[sys.executable,'tests/test_soundtrack_historical_ui.py','--parent']
-  elif name=='verify_late_renderer':name='soundtrack-boundary-and-historical-renderer';cmd=[sys.executable,'tests/verify_soundtrack_successor.py']
-  elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_soundtrack_successor.py','--renderer-negatives']
+  if name=='test_retained_ui_story_successor':name='historical-g5-story-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--historical-ui']
+  elif name=='retained-parent-negatives':name='historical-g5-parent-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--historical-ui','--parent']
+  elif name=='verify_late_renderer':name='soundtrack-boundary-and-historical-renderer';cmd=[sys.executable,'tests/verify_review_successor.py']
+  elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--renderer-negatives']
   routed.append((name,cmd,extra))
  commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime')]
  report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}
@@ -40,9 +43,11 @@ def main():
  for i,(name,cmd,extra)in enumerate(commands):
   assert unchanged();helper=ROOT/cmd[1];before=sha(helper);log=out/(f'{i:02d}-'+name+'.log');t=time.monotonic()
   row={'name':name,'command':cmd,'environment':extra,'helper_sha256':before,'log':log.name,'status':'RUNNING'};report['runs'].append(row);save()
-  with log.open('w')as f:r=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,env={**os.environ,'ASAN_OPTIONS':'detect_leaks=0:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1',**extra})
-  row.update(exit_code=r.returncode,seconds=round(time.monotonic()-t,3),log_sha256=sha(log),runtime_unchanged=unchanged(),helper_unchanged=sha(helper)==before)
-  row['status']='PASS'if not r.returncode and row['runtime_unchanged']and row['helper_unchanged']else'FAIL';print(name,row['status'],flush=True);save()
-  if not row['runtime_unchanged']:break
+  with log.open('w')as f:r=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','ASAN_OPTIONS':'detect_leaks=0:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1',**extra})
+  production_error=production.error()
+  row.update(exit_code=r.returncode,seconds=round(time.monotonic()-t,3),log_sha256=sha(log),runtime_unchanged=unchanged(),helper_unchanged=sha(helper)==before,production_unchanged=production_error is None)
+  if production_error is not None:row['production_error']=production_error;print('Production changed by '+name+': '+json.dumps(production_error,sort_keys=True),flush=True)
+  row['status']='PASS'if not r.returncode and row['runtime_unchanged']and row['helper_unchanged']and row['production_unchanged']else'FAIL';print(name,row['status'],flush=True);save()
+  if not row['runtime_unchanged'] or production_error is not None:break
  report['result']='PASS'if len(report['runs'])==len(commands)and all(r['status']=='PASS'for r in report['runs'])else'FAIL';save();return report['result']!='PASS'
 if __name__=='__main__':raise SystemExit(main())

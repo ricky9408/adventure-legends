@@ -7,6 +7,14 @@
 #include "underwater_art.h"
 #include "underwater_quests.h"
 #include "progression.h"
+#ifdef __APPLE__
+/* This standalone chapter harness has no connected-road engine. Match the
+ * absent weak hooks on ELF without allowing unrelated undefined symbols. */
+int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
+int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
+int game_road_box_added(unsigned a,int x0,int y0,int x1,int y1){(void)a;(void)x0;(void)y0;(void)x1;(void)y1;return 0;}
+int game_road_box_touched(unsigned a,int x0,int y0,int x1,int y1){(void)a;(void)x0;(void)y0;(void)x1;(void)y1;return 0;}
+#endif
 Save5State adventure_save;
 unsigned progression_revision,progression_forms[PROGRESSION_SPIRIT_COUNT];
 volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
@@ -97,6 +105,9 @@ int sample_overlay_sweep_y(void){return overlay_sweep_y;}
 /* Link-time observation wraps the real typed transaction, never stubs it. */
 int __real_underwater_anchor(Save5State*,unsigned);
 int __wrap_underwater_anchor(Save5State*s,unsigned area){anchor_prepare_calls++;return __real_underwater_anchor(s,area);}
+#ifdef __APPLE__
+int underwater_anchor(Save5State*s,unsigned area){return __wrap_underwater_anchor(s,area);}
+#endif
 void host_set_auto_settle(unsigned n){host_auto_settle=n;}
 int host_settle_save(void){return host_finish_save();}
 unsigned host_anchor_calls(void){return anchor_prepare_calls;}

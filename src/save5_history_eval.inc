@@ -277,7 +277,10 @@ static int history_starter_validate(const EquipmentState *e) {
     return 1;
 }
 int save5_validate_revision(const Save5State *s, unsigned revision) {
-    if(revision==11)return save5_validate(s);
+    if(revision==12)return save5_validate(s);
+    /* Same immutable catalog/quest identities as11, with its exact original
+     * wallet rule. New receipt bytes must never authenticate as an old bank. */
+    if(revision==11)return s&&economy_state_validate_revision(&s->economy,s->campaign.chapter_flags,11)&&save5_validate(s);
     if(revision==10) {
         return s && history10_save5_campaign_validate(&s->campaign) &&
           history10_roster_validate(&s->roster) && history10_save5_quests_validate(&s->quests) &&

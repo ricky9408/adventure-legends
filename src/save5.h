@@ -15,17 +15,17 @@
  * revision6 (89 forms/37 items, Underwater quests38..45/areas46..53). Revision1
  * installs only starter equipment; revision2/3/4/5->6 preserves existing typed bytes
  * and adds no recruit, trial, quest, gear, visit or reward on load. Revision7 adds Return quests46..53/areas54..61,104 forms/42 items. All writes
- * use revision11, adding four later boss receipts at5079 to the32-byte
- * revision10 wallet/pouch at5056. Revision10 is immutable
+ * use revision12, adding paid gear/story receipts at5080/5081 to the32-byte
+ * revision10 wallet/pouch at5056. Revision11 preserves four later boss receipts at5079. Revision10 is immutable
  * (128 forms/48 items,quests60..63/areas70..77). Revision8
  * is immutable Shared Horizons C (120 forms/46 items,quests54..59/areas62..69).
- * Exact immutable revisions1..10 authenticate prior banks before migration. No new source,
+ * Exact immutable revisions1..11 authenticate prior banks before migration. No new source,
  * history, visit, trial or equipment is awarded on load. Unknown revisions and
  * cross-revision content are rejected. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
     SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5088,
-    SAVE5_CONTENT_REVISION = 11, SAVE5_COMMIT = 0xA5,
+    SAVE5_CONTENT_REVISION = 12, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,
@@ -49,6 +49,10 @@ typedef struct Save5Quests {
 unsigned save5_quest_state(const Save5Quests *quests, unsigned quest_id);
 int save5_quest_set_state(Save5Quests *quests, unsigned quest_id, unsigned state);
 int save5_quests_validate(const Save5Quests *quests);
+/* Content12 paid receipts retain unique seen history and an authored town
+ * visit. Inspected Wind/Stone stories require their retained story rewards. */
+int save5_economy_sources_validate(const Save5Quests*,const EquipmentState*,
+                                   const EconomyState*,unsigned story_rewards);
 
 typedef struct Save5State {
     CampaignSave campaign;
@@ -64,6 +68,17 @@ typedef struct Save5State {
  * story creatures. No implicit migration write. Metadata is in campaign. */
 int save5_load(Save5State *out);
 int save5_has_valid(void);
+/* Read-only cold load, one bounded slice per displayed update. A null out
+ * probes validity. The caller's output changes only after complete decode and
+ * immutable revision validation; cancel/failure leave output and SRAM intact.
+ * Owns the same scratch as writer/preflight. Zero budget performs no work;
+ * byte scans are capped at1024, semantic/decode slices at8 records. */
+int save5_load_begin(Save5State *out);
+unsigned save5_load_step(unsigned byte_budget);
+unsigned save5_load_status(void);
+unsigned save5_load_progress(void);
+unsigned save5_load_progress_total(void);
+void save5_load_cancel(void);
 /* Full blocking validator for host tools/transitions, not active-game ticks. */
 int save5_validate(const Save5State *state);
 int save5_later_claims_validate(const Save5Quests *quests,const EconomyState *economy);
@@ -118,6 +133,10 @@ void save5_preflight_cancel(void);
  * Freeze live state until DONE and apply the delta only after verification. */
 int save5_preflight_store_economy(Save4U32 token,const Save5State *live,
                                   const EconomyState *next);
+/* Same immutable lease, plus existing scan equipment stage. Publish no live
+ * gear or gold until the resulting dual-bank writer reaches verified DONE. */
+int save5_preflight_store_purchase(Save4U32 token,const Save5State *live,
+                                    const EconomyState *next,const EquipmentState *gear);
 
 #ifdef SAVE5_HOST_TEST
 extern Save4U8 save5_test_sram[32768];
