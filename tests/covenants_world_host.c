@@ -65,14 +65,6 @@ int solid(int x,int y){(void)x;(void)y;return 0;}
 
 void enter_room(int r,int s){if(r>=70){int q=covenants_game_request_enter(r,s);if(q==1)covenants_game_enter(r,s);}else{covenants_game_reset();room=r;checkpoint_spawn=s;adventure_save.campaign.room=r;adventure_save.campaign.spawn=s;}}
 #include "covenants_world_source.inc"
-#if defined(__APPLE__)
-/* Mach-O needs explicit absent-bridge doubles; ELF's weak null hooks use the
- * identical original chapter geometry/door fallback in this isolated suite. */
-int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
-int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
-int game_road_box_added(unsigned a,int x,int y,int tx,int ty){(void)a;(void)x;(void)y;(void)tx;(void)ty;return 0;}
-int game_road_box_touched(unsigned a,int x,int y,int tx,int ty){(void)a;(void)x;(void)y;(void)tx;(void)ty;return 0;}
-#endif
 int settle(void){unsigned n=0,a,s;while(covenants_game_event_pending()&&n++<2000)if(covenants_game_prepare_event()==SAVE5_FAILED)return 0;if(n>=2000)return 0;if(covenants_game_take_transition(&a,&s))enter_room(a,s);game_state=1;return save5_validate(&adventure_save);}
 void fresh_world(void){room=adventure_save.campaign.room;checkpoint_spawn=adventure_save.campaign.spawn;covenants_game_reset();game_state=summoned=1;face=1;keys=transition_lock=camera_x=camera_y=0;last_toast=toast_count=saved=geometry_changes=0;power_beat=1;power_release=0;overlap=1;}
 void at(int x,int y,int f){px=x;py=y;face=f;game_state=1;keys=0;}
