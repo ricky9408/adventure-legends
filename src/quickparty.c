@@ -8,12 +8,14 @@
 #include "ui.h"
 #include "companion_guide.h"
 #include "companion_guide_text.h"
+#include "recruit_notice.h"
 typedef unsigned char u8;
 extern volatile int spirit,game_state,room;
 extern int journal_tab,gfx_companion_frame;
 extern void rect(int,int,int,int,u8),box(int,int,int,int),text(int,int,int,int),centered(int,int,int),sprite(const u8*,int,int,int,int,int),save_game(void),toast(int),sfx(int);
 extern const u8 *companion_form_pixels(unsigned,unsigned,unsigned);
 extern void game_companion_reseat(void) __attribute__((weak));
+extern void save_game_ordinary(void) __attribute__((weak));
 #define L 512
 #define B 2
 #define START 8
@@ -34,7 +36,8 @@ static CreatureInstance *member(unsigned slot){CreatureRoster*r=&adventure_save.
 
 static void changed(void){quickparty_revision++;}
 static void synchronize(void){CreatureRoster*r=&adventure_save.roster;CreatureInstance*c=member(r->selected_party);if(c){spirit=(int)progression_current_spirit();adventure_save.campaign.spirit=(unsigned)spirit<CREATURE_LEGACY_COUNT?(unsigned)spirit:0;gfx_companion_frame=-1;progression_selection_changed();if(game_companion_reseat)game_companion_reseat();progression_revision++;changed();}}
-int quickparty_select(unsigned slot){CreatureRoster*r=&adventure_save.roster;if(!member(slot))return 0;if(r->selected_party==slot)return 0;r->selected_party=slot;synchronize();sfx(2);return 1;}
+static void acknowledge(CreatureInstance*c){if(recruit_notice_acknowledge(c)){progression_revision++;changed();if(save_game_ordinary)save_game_ordinary();}}
+int quickparty_select(unsigned slot){CreatureRoster*r=&adventure_save.roster;CreatureInstance*c=member(slot);if(!c)return 0;if(r->selected_party==slot){acknowledge(c);return 0;}r->selected_party=slot;synchronize();acknowledge(c);sfx(2);return 1;}
 int quickparty_cycle(void){CreatureRoster*r=&adventure_save.roster;unsigned i;for(i=1;i<=4;i++){unsigned next=(r->selected_party+i)&3;if(member(next))return quickparty_select(next);}return 0;}
 void quickparty_reset(int held){if(quickparty_open){quickparty_open=0;changed();}quickparty_candidate=EMPTY;quickparty_hold_updates=0;had_direction=0;blocked=(held&L)!=0;}
 int quickparty_update(int held,int pressed){unsigned dir=held&DIRECTIONS;int candidate=EMPTY;
@@ -81,11 +84,11 @@ int quickparty_menu_input(int pressed){CreatureRoster*r=&adventure_save.roster;i
  if(dir==16||dir==32){quickparty_menu_slot=(quickparty_menu_slot+(dir==16?1:3))&3;quickparty_menu_candidate=r->party[quickparty_menu_slot];menu_notice=0;changed();return 1;}
  if(dir==64||dir==128){menu_move(dir==128?1:-1);return 1;}
  if(dir)return 1;
- if(pressed&1){CreatureInstance*c=menu_member();if(c&&c->selected_command<2){quickparty_menu_detail=1;quickparty_menu_command=c->equipped[c->selected_command];companion_guide_page=0;changed();}else quickparty_assign((unsigned)quickparty_menu_slot,(unsigned)quickparty_menu_candidate);return 1;}
+ if(pressed&1){CreatureInstance*c=menu_member();if(c&&c->selected_command<2){acknowledge(c);quickparty_menu_detail=1;quickparty_menu_command=c->equipped[c->selected_command];companion_guide_page=0;changed();}else quickparty_assign((unsigned)quickparty_menu_slot,(unsigned)quickparty_menu_candidate);return 1;}
  return 0;
 }
 static void arrow(unsigned slot,int x,int y,int col){int j;for(j=0;j<4;j++){if(slot==0||slot==2)rect(x+3-j,y+(slot==0?j:3-j),j*2+1,1,col);else rect(x+(slot==3?j:3-j),y+3-j,1,j*2+1,col);}}
-static void card(unsigned slot,int x,int y,int w,int chosen){CreatureInstance*c=member(slot);/* Both callers already paint one enclosing UI_BG panel. */rect(x,y,w,1,PAL_GOLD2);rect(x,y+27,w,1,PAL_GOLD2);rect(x,y,1,28,PAL_GOLD2);rect(x+w-1,y,1,28,PAL_GOLD2);if(chosen){rect(x,y,w,2,GOLD);rect(x,y+26,w,2,GOLD);rect(x,y,2,28,GOLD);rect(x+w-2,y,2,28,GOLD);}arrow(slot,x+4,y+10,c?TEAL:PAL_SLATE);if(c){const u8*p=companion_form_pixels(c->form_id,0,0);if(p)sprite(p,x+w/2-5,y+5,16,16,0);}else{rect(x+w/2-2,y+13,9,2,PAL_SLATE);}if(slot==adventure_save.roster.selected_party)rect(x+w-5,y+4,2,2,CREAM);}
+static void card(unsigned slot,int x,int y,int w,int chosen){CreatureInstance*c=member(slot);/* Both callers already paint one enclosing UI_BG panel. */rect(x,y,w,1,PAL_GOLD2);rect(x,y+27,w,1,PAL_GOLD2);rect(x,y,1,28,PAL_GOLD2);rect(x+w-1,y,1,28,PAL_GOLD2);if(chosen){rect(x,y,w,2,GOLD);rect(x,y+26,w,2,GOLD);rect(x,y,2,28,GOLD);rect(x+w-2,y,2,28,GOLD);}arrow(slot,x+4,y+10,c?TEAL:PAL_SLATE);if(c){const u8*p=companion_form_pixels(c->form_id,0,0);if(p)sprite(p,x+w/2-5,y+5,16,16,0);if(recruit_notice_pending(c))recruit_notice_badge(x+4,y+2);}else{rect(x+w/2-2,y+13,9,2,PAL_SLATE);}if(slot==adventure_save.roster.selected_party)rect(x+w-5,y+4,2,2,CREAM);}
 void quickparty_draw(void){CreatureInstance*c=quickparty_candidate==EMPTY?0:member((unsigned)quickparty_candidate);box(26,29,188,131);centered(c?progression_name_id(c->form_id):TX_Q_CHOOSE,31,GOLD);card(0,96,50,48,quickparty_candidate==0);card(1,150,77,48,quickparty_candidate==1);card(2,96,103,48,quickparty_candidate==2);card(3,42,77,48,quickparty_candidate==3);centered(TX_Q_RELEASE,130,CREAM);centered(TX_Q_CANCEL,144,TEAL);}
 /* Journal slots alone have fixed even x/width and remain inside the screen.
  * Write each border once; preserve the adjacent interior byte of thin edges.
@@ -104,6 +107,7 @@ static void journal_card(unsigned slot,int chosen){
   for(column=0;column<4;column++){unsigned mask=bits&3u;if(mask==3)p[column]=ink;else if(mask==1)p[column]=(unsigned short)((p[column]&65280)|(ink&255));else if(mask==2)p[column]=(unsigned short)((p[column]&255)|(ink&65280));bits>>=2;}
  }
  if(c){const u8*p=companion_form_pixels(c->form_id,0,0);if(p)sprite(p,x+18,57,16,16,0);}else rect(x+21,65,9,2,PAL_SLATE);
+ if(recruit_notice_pending(c))recruit_notice_badge(x+4,54);
  if(slot==adventure_save.roster.selected_party)rect(x+41,56,2,2,CREAM);
 }
 /* Count only browsable owned individuals, never obtained-form history or holes.

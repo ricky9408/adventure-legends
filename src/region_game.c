@@ -173,7 +173,7 @@ COLD int region_game_interact(void){int r;event_dirty=0;sync_chapter();if(game_s
   if(rest_here())return 1;
   if(close_to(264,200,24)){offer(Q_DRY);if(!ready(Q_DRY))objective(Q_DRY,1);persist();toast(done(Q_DRY)?TX_RG_FIXED:TX_RG_DRY_HANDLE);return 1;}
   if(close_to(348,268,24)){offer(Q_WATER);if(done(Q_WATER))say(TX_RG_RETURN_A,TX_RG_RETURN_B);else say(TX_RG_BASIN_A,TX_RG_BASIN_B);return 1;}
-  if(close_to(184,72,24)){
+  if(close_to(184,72,24)||(!done(Q_WATER)&&close_to(216,72,24))){
    if(done(Q_WATER)){say(TX_RG_RETURN_A,TX_RG_RETURN_B);return 1;}offer(Q_WATER);
    if((adventure_save.quests.objectives[Q_WATER]&3)==3){objective(Q_WATER,4);claim_scene(Q_WATER);}else say(TX_RG_BASIN_A,TX_RG_BASIN_B);return 1;
   }
@@ -329,7 +329,10 @@ COLD void region_game_draw_actors(void){unsigned m;if(room==1){if(chapter_flags&
   region_actor((field_pool_mask&1)?REGION_SPR_POOL_HIGH:REGION_SPR_POOL_LOW,296,120);region_actor((field_pool_mask&2)?REGION_SPR_POOL_HIGH:REGION_SPR_POOL_LOW,424,104);
   region_actor(ready(Q_WEAVER)?REGION_SPR_SPINDLE_LIT:REGION_SPR_SPINDLE_IDLE,60,40);
   region_actor((adventure_save.quests.objectives[Q_WATER]&1)?REGION_SPR_REED_PARTED:REGION_SPR_REED_SCREEN,84,44);
-  if(!done(Q_WATER))region_form_actor(13,184,72);else region_actor(REGION_SPR_BELL_RING,184,72);
+  /* The bell is a separate landmark, including while Water waits to join.
+   * Keep its original action/power coordinate; the creature stands beside it. */
+  region_actor(done(Q_WATER)?REGION_SPR_BELL_RING:REGION_SPR_BELL_IDLE,184,72);
+  if(!done(Q_WATER))region_form_actor(13,216,72);
   region_actor(REGION_SPR_NPC_WARDEN,348,268);region_actor(REGION_SPR_SIGN_TIDE,384,80);
  }else if(room==18){
   if(ready(Q_METAL)&&!done(Q_METAL))region_form_actor(16,96,64);else region_actor((region_game_foundry_step==3||done(Q_RING))?REGION_SPR_BELL_RING:REGION_SPR_BELL_IDLE,96,64);

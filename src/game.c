@@ -12,6 +12,7 @@
 #include "advanced_powers.h"
 #include "trials.h"
 #include "quickparty.h"
+#include "recruit_notice.h"
 #include "gear_runtime.h"
 #include "regional_powers.h"
 #include "region_game.h"
@@ -421,7 +422,7 @@ COLD void covenants_actor(unsigned id,int x,int y){
 COLD void underwater_actor(unsigned id,int x,int y){if(id<UNDERWATER_SPR_COUNT)region_pixels_actor(7168+id,underwater_sprites[id],x,y);}
 COLD void magma_actor(unsigned id,int x,int y){if(id<MAGMA_SPR_COUNT)region_pixels_actor(6144+id,magma_sprites[id],x,y);}
 COLD int game_magma_actor_overlap(int x,int y,int radius){unsigned i;for(i=0;i<MAX_ENEMIES;i++)if(enemies[i].hp&&ab(x-enemies[i].x)<radius+5&&ab(y-enemies[i].y)<radius+5)return 1;return 0;}
-COLD void region_form_actor(unsigned form,int x,int y){unsigned pose=form>=121&&form<=128?covenants_creature_art_walk_index(form,(unsigned)ticks):(unsigned)(frame/7)&3;region_pixels_actor(1024+form*16+pose,companion_form_pixels(form,0,pose),x,y);}
+COLD void region_form_actor(unsigned form,int x,int y){unsigned pose=form>=121&&form<=128?covenants_creature_art_walk_index(form,(unsigned)ticks):(unsigned)(frame/7)&3;region_pixels_actor(1024+form*16+pose,companion_form_pixels(form,0,pose),x,y);if(recruit_notice_world(form))obj_add(OBJ_HINT,x-4,y-21,8,8,1,999,0);}
 COLD int game_region_entry_safe(void){int i;for(i=0;i<6;i++)if(enemies[i].hp&&near(px,py,enemies[i].x,enemies[i].y,24))return 0;return 1;}
 COLD int game_companion_position_open(int x,int y){return x>=ROAD_FOOT&&y>=ROAD_FOOT&&x<world_width()-ROAD_FOOT&&y<world_height()-ROAD_FOOT&&!solid(x,y);}
 COLD void game_companion_reanchor(int x,int y){if(!game_companion_position_open(x,y)){x=px;y=py;}cx=x;cy=y;cx_q8=x*256;cy_q8=y*256;}
