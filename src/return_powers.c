@@ -9,6 +9,7 @@
 #include "progression.h"
 #include "gear_runtime.h"
 #include "obj_layout.h"
+#include "power_aim_hold.h"
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
 extern Enemy enemies[6];extern Shot shots[12];
@@ -44,6 +45,7 @@ typedef struct {
  signed char side;
 } Cast;
 static Cast cast;
+static PowerAimHold aim_hold;
 typedef char return_cast_budget[(sizeof(Cast)+10*sizeof(int)<=512)?1:-1];
 static const signed char dx[4]={0,0,-1,1},dy[4]={1,-1,0,0};
 static int ab(int v){return v<0?-v:v;}
@@ -112,7 +114,7 @@ static int bound(unsigned i){return ordinary(i)&&cast.serial[i]==cast.bound_seri
 int return_powers_cast_matches_selected(void){CreatureInstance*c=progression_selected();return c&&(c->flags&CREATURE_OCCUPIED)&&cast.caster&&c->instance_id==cast.caster&&c->form_id==return_power_form;}
 static int same_selected(void){CreatureInstance*c=progression_selected();return return_powers_cast_matches_selected()&&c->selected_command<2&&c->equipped[c->selected_command]==return_power_kind;}
 static void finish(void){return_power_time=0;cast.count=0;northern_powers_tiles_release(NORTHERN_TILES_RETURN);}
-void return_powers_reset(void){unsigned i;finish();for(i=0;i<sizeof cast;i++)((unsigned char*)&cast)[i]=0;
+void return_powers_reset(void){unsigned i;finish();power_aim_hold_reset(&aim_hold);for(i=0;i<sizeof cast;i++)((unsigned char*)&cast)[i]=0;
  return_power_kind=return_power_form=return_power_direction=0;return_power_origin_x=return_power_origin_y=0;
  return_power_age=return_power_cooldown=return_power_cast_time=return_power_phase=0;cast.side=-1;cast.caught_shot=12;
  /* The engine alone decides whether room/death rules also clear ability_cd. */
@@ -132,7 +134,9 @@ static void release(void){if(cast.released)return;cast.released=1;cast.release_a
  if(return_power_kind==99){cast.drop_x=cast.last_x;cast.drop_y=cast.last_y;}
 }
 static int side_command(void){return return_power_kind==93||return_power_kind==95||return_power_kind==98||return_power_kind==100||return_power_kind==101||return_power_kind==102||return_power_kind==104||return_power_kind==105;}
-int return_powers_can_aim(void){return active()&&!hitstop&&!cast.revoked&&!cast.aimed&&return_power_age<8&&same_selected();}
+static void geometry(void);
+int return_powers_hold_input(unsigned held){return power_aim_hold_input(&aim_hold,held,active()&&!hitstop&&!cast.revoked&&return_power_age==0&&same_selected());}
+int return_powers_can_aim(void){return active()&&!hitstop&&!cast.revoked&&(!cast.aimed||aim_hold.held)&&return_power_age<8&&same_selected();}
 int return_powers_can_release(void){return active()&&!hitstop&&!cast.revoked&&same_selected()&&!cast.released&&return_power_age>=8&&
  (return_power_kind==91||return_power_kind==99||(return_power_kind==96&&cast.charged));}
 unsigned return_powers_hint(void){if(!active()||cast.revoked||!same_selected())return RETURN_POWER_HINT_NONE;
@@ -143,9 +147,9 @@ unsigned return_powers_hint(void){if(!active()||cast.revoked||!same_selected())r
 }
 int return_powers_input(unsigned pressed){unsigned p=pressed&240u;int result=0,d=-1;
  if(return_powers_can_aim()&&p&&!(p&(p-1))){d=p==16?3:p==32?2:p==64?1:0;
-  if(side_command()){int cross=-dx[d]*dy[return_power_direction]+dy[d]*dx[return_power_direction];if(cross){cast.side=(signed char)(cross>0?1:-1);cast.aimed=1;result=1;}}
-  else{ return_power_direction=d;cast.aimed=1;result=1;}
-  if(result)cast.dirty=1;
+  if(side_command()){int cross=-dx[d]*dy[return_power_direction]+dy[d]*dx[return_power_direction];if(cross&&(!cast.aimed||cast.side!=(cross>0?1:-1))){cast.side=(signed char)(cross>0?1:-1);cast.aimed=1;result=1;}}
+  else if(!cast.aimed||return_power_direction!=d){return_power_direction=d;cast.aimed=1;result=1;}
+  if(result){cast.dirty=1;if(aim_hold.held&&!return_power_age)geometry();}
  }
  if((pressed&256u)&&return_powers_can_release()){release();result|=2;}
  return result;
@@ -305,6 +309,7 @@ int return_power(unsigned command){CreatureInstance*c;const CreatureAbility*a;co
  if(!northern_powers_tiles_claim(NORTHERN_TILES_RETURN))return 0;
  return_power_kind=(int)command;return_power_form=c->form_id;return_power_direction=face;return_power_phase=a->phase;
  return_power_origin_x=px;return_power_origin_y=py;return_power_age=0;return_power_time=s->lifetime;return_power_cast_time=s->startup;
+ power_aim_hold_reset(&aim_hold);
  cast.caster=c->instance_id;cast.lease=northern_powers_tiles_generation();cast.token=field_world_action_begin(3);
  cast.count=cast.hits=cast.fields=cast.revoked=cast.aimed=cast.art_live=cast.spent=0;
  cast.released=cast.release_age=cast.charged=cast.guard_used=cast.stopped=cast.carry_steps=cast.moving=cast.quiet_used=0;
@@ -316,6 +321,7 @@ int return_power(unsigned command){CreatureInstance*c;const CreatureAbility*a;co
 }
 void return_powers_tick(void){const Spec*s;unsigned i;int x,y,r,moved;
  if(hitstop)return;
+ if(active()&&!cast.revoked&&same_selected()&&power_aim_hold_tick(&aim_hold))return;
  if(return_power_cast_time)return_power_cast_time--;
  if(!return_power_time)return;
  if(!active()||!(s=spec())){finish();return;}

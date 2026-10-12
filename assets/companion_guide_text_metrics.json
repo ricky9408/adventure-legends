@@ -2128,5 +2128,10 @@
     "width": 8,
     "height": 15,
     "text": "9"
+  },
+  "AIM_HOLD": {
+    "width": 107,
+    "height": 15,
+    "text": "R長押し＋十字、離して放つ"
   }
 }

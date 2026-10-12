@@ -34,7 +34,7 @@ int underwater_hint_text(void){return 0;} int magma_powers_hint(void){return 0;}
 int southern_hint_text(void){return 0;}
 static u32 before[9600],reference[9600],actual[9600];
 '''
-body=''.join(function(game,name)for name in ('game_world_rect_hidden','pix','rect','box','text_spans','text','centered','draw_play_toast','draw_play_hint'))
+body=''.join(function(game,name)for name in ('game_world_rect_hidden','pix','rect','box','text_spans','text','centered','play_hint_text','tick_play_toast','draw_play_toast','draw_play_hint'))
 body+=game[game.index('u16 play_notice_pixels['):game.index('COLD void draw_play_notices(')]
 body+=function(game,'draw_play_notices')
 tail=r'''
@@ -55,6 +55,17 @@ static void compare(int toast,int hint,int mode,int disabled){
 }
 int main(void){
  unsigned eligible=0;
+ /* Required hints own the whole slot, even if a wider toast is queued.
+  * This checks readable composition rather than cache/oracle equivalence alone. */
+ game_state=PLAY;toast_ticks=110;toast_id=TX_SUMMONED;fixture_hint=TX_UW_AIM_SIDE;
+ for(unsigned i=0;i<9600;i++)reference[i]=actual[i]=next();
+ screen=(u16*)reference;draw_play_hint();
+ screen=(u16*)actual;draw_play_toast();draw_play_hint();
+ assert(!memcmp(reference,actual,sizeof actual));
+ for(unsigned i=0;i<90;i++)tick_play_toast();assert(toast_ticks==110);
+ fixture_hint=0;tick_play_toast();assert(toast_ticks==109);
+ game_state=3;tick_play_toast();assert(toast_ticks==109);
+ game_state=PLAY;toast_ticks=0;tick_play_toast();assert(!toast_ticks);
  for(int id=0;id<TX_COUNT;id++){
   const UiText*t=&ui_texts[id];
   /* Production toasts/hints have one line; unrelated oversized menu lines
@@ -72,7 +83,7 @@ int main(void){
    compare(id,other,3,0);
   }
  }
- printf("PASS: %u full-frame comparisons, %u real text IDs, cold/warm/disabled and overlap/expiry\n",comparisons,eligible);
+ printf("PASS: hint ownership/deferred toast timing, %u full-frame comparisons, %u real text IDs, cold/warm/disabled and overlap/expiry\n",comparisons,eligible);
 }
 '''
 with tempfile.TemporaryDirectory(prefix='notice-cache-')as folder:

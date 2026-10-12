@@ -7,6 +7,9 @@ extern int magma_power_kind,magma_power_time,magma_power_form;
 extern int magma_power_direction,magma_power_origin_x,magma_power_origin_y;
 extern int magma_power_age,magma_power_cooldown,magma_power_cast_time,magma_power_phase;
 int magma_power(unsigned command);
+/* Cone Drop may hold R at age0 for <=90 active updates; return1 owns direction
+ * input. Release resolves the existing validated landing from current facing. */
+int magma_powers_hold_input(unsigned held);
 /* -1/+1 chooses Cinder Tilt side and Trellis Bend turn. */
 int magma_power_side(unsigned command,int side);
 /* One startup-only retarget of Cone Drop; exact original expiration/cooldown. */

@@ -9,6 +9,7 @@
 #include "gear_runtime.h"
 #include "combat_rules.h"
 #include "obj_layout.h"
+#include "power_aim_hold.h"
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 extern Enemy enemies[6];
 extern volatile int px,py;
@@ -49,6 +50,7 @@ typedef struct {
  unsigned char collision[64];
 } Cast;
 static Cast cast;
+static PowerAimHold aim_hold;
 typedef char underwater_cast_budget[(sizeof(Cast)+10*sizeof(int)<=512)?1:-1];
 static const signed char dx[4]={0,0,-1,1},dy[4]={1,-1,0,0};
 /* quarter circle in Q4, inclusive endpoints, generated from original geometry */
@@ -104,7 +106,7 @@ int underwater_powers_companion_pose(void){const Spec*s=spec();
 }
 static int ordinary(unsigned i){return i<6&&enemies[i].hp>0&&(unsigned)enemies[i].kind<=2&&coord(enemies[i].x,enemies[i].y);}
 static void finish(void){underwater_power_time=0;northern_powers_tiles_release(NORTHERN_TILES_UNDERWATER);cast.mark_count=cast.count=0;}
-void underwater_powers_reset(void){unsigned i;finish();underwater_power_kind=underwater_power_form=underwater_power_direction=0;
+void underwater_powers_reset(void){unsigned i;finish();power_aim_hold_reset(&aim_hold);underwater_power_kind=underwater_power_form=underwater_power_direction=0;
  underwater_power_origin_x=underwater_power_origin_y=underwater_power_age=underwater_power_cooldown=underwater_power_cast_time=underwater_power_phase=0;
  /* Engine cooldown deliberately survives this reset. Death/entry may clear it
   * according to engine rules, but selecting an individual must never do so. */
@@ -437,16 +439,19 @@ static void catch_target(void){unsigned i;int f,s,pf,ps;if(cast.spent)return;
   break;
  }
 }
-int underwater_powers_can_aim(void){return active()&&!hitstop&&!cast.aimed&&underwater_power_age<8&&same_selected()&&underwater_power_kind!=67&&underwater_power_kind!=71&&underwater_power_kind!=77&&underwater_power_kind!=81;}
+static int aimable_command(void){return underwater_power_kind!=67&&underwater_power_kind!=71&&underwater_power_kind!=77&&underwater_power_kind!=81;}
+int underwater_powers_hold_input(unsigned held){return power_aim_hold_input(&aim_hold,held,active()&&!hitstop&&cast.fields!=255&&underwater_power_age==0&&same_selected()&&aimable_command());}
+int underwater_powers_can_aim(void){return active()&&!hitstop&&cast.fields!=255&&(!cast.aimed||aim_hold.held)&&underwater_power_age<8&&same_selected()&&aimable_command();}
 unsigned underwater_powers_hint(void){if(!underwater_powers_can_aim())return 0;return underwater_power_kind==69?2:(underwater_power_kind==83||underwater_power_kind==90)?3:1;}
 int underwater_powers_input(unsigned pressed){unsigned p=pressed&240u;if(!underwater_powers_can_aim()||!p||(p&(p-1)))return 0;
- if(underwater_power_kind==69)cast.choice=(unsigned char)(p==64?0:p==16?1:p==128?2:3);
- else if(underwater_power_kind==83||underwater_power_kind==90){if(p!=64&&p!=128)return 0;cast.side=p==64?1:-1;}
- else{if(p!=16&&p!=32)return 0;cast.side=p==16?1:-1;}
+ if(underwater_power_kind==69){unsigned choice=p==64?0:p==16?1:p==128?2:3;if(cast.aimed&&cast.choice==choice)return 0;cast.choice=(unsigned char)choice;}
+ else if(underwater_power_kind==83||underwater_power_kind==90){if(p!=64&&p!=128)return 0;if(cast.aimed&&cast.side==(p==64?1:-1))return 0;cast.side=p==64?1:-1;}
+ else{if(p!=16&&p!=32)return 0;if(cast.aimed&&cast.side==(p==16?1:-1))return 0;cast.side=p==16?1:-1;}
  cast.aimed=1;
  /* Both ring warnings are identical under either startup side choice. The
   * active phase key rebuilds their differing live lobe at startup completion. */
  if(underwater_power_kind!=87){cast.dirty=1;cast.box_known=cast.box_open=0;}
+ if(aim_hold.held&&!underwater_power_age)geometry();
  return 1;
 }
 int underwater_power(unsigned command){CreatureInstance*c;const CreatureAbility*a;const Spec*s;unsigned i,cd;
@@ -458,6 +463,7 @@ int underwater_power(unsigned command){CreatureInstance*c;const CreatureAbility*
  underwater_power_kind=(int)command;underwater_power_form=c->form_id;underwater_power_direction=face;
  underwater_power_origin_x=px;underwater_power_origin_y=py;underwater_power_phase=a->phase;underwater_power_age=0;
  underwater_power_time=s->lifetime;underwater_power_cast_time=s->startup;
+ power_aim_hold_reset(&aim_hold);
  cast.caster=c->instance_id;cast.lease=northern_powers_tiles_generation();cast.token=underwater_game_action_begin(3);
  cast.hits=cast.fields=cast.spent=cast.choice=cast.aimed=cast.art_live=cast.boss_hit=cast.stopped=cast.crawl_mode=cast.crawl_steps=0;
  cast.path_checked=cast.box_known=cast.box_open=0;for(i=0;i<sizeof cast.collision;i++)cast.collision[i]=0;
@@ -474,6 +480,7 @@ int underwater_powers_feedback(unsigned command){CreatureInstance*c;if(command<6
  underwater_power_cast_time=12;return 1;
 }
 void underwater_powers_tick(void){unsigned i;const Spec*s;int x,y,r;if(hitstop)return;
+ if(active()&&cast.fields!=255&&same_selected()&&power_aim_hold_tick(&aim_hold))return;
  if(underwater_power_cast_time)underwater_power_cast_time--;
  if(!underwater_power_time)return;
  if(!active()||!(s=spec())){finish();return;}

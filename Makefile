@@ -445,6 +445,12 @@ test-equipment-rewards-host: all
 	$(PYTHON) tools/archive_test_output.py build/equipment-rewards-host-current
 	$(PYTHON) tools/run_equipment_rewards_host.py --output build/equipment-rewards-host-current
 
+.PHONY: test-readable-aim-input
+test: test-readable-aim-input
+test-readable-aim-input:
+	$(PYTHON) tests/test_readable_aim_input.py
+	$(PYTHON) tests/test_play_notice_cache.py
+
 .PHONY: font-assets
 font-assets:
 	$(PYTHON) assets/generate_ui.py

@@ -11,6 +11,7 @@
 #include "progression.h"
 #include "combat_rules.h"
 #include "obj_layout.h"
+#include "power_aim_hold.h"
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
 extern Enemy enemies[6];extern Shot shots[12];
@@ -52,6 +53,7 @@ static unsigned char chapter_hit;
 static unsigned char path_count,hit_mask,spent,aimed,ended_mask,guard_enemy,guard_grace,draw_count;
 static signed char cast_side;
 static unsigned char own_slow,own_root,own_stagger;
+static PowerAimHold aim_hold;
 static const signed char fx[4]={0,0,-1,1},fy[4]={1,-1,0,0};
 static int absolute(int x){return x<0?-x:x;}
 static int dist(int x,int y,int tx,int ty){return absolute(x-tx)+absolute(y-ty);}
@@ -95,6 +97,7 @@ void magma_powers_reset(void){unsigned i;
   if((own_stagger&(1u<<i))&&enemy_stagger_ticks[i]<=16)enemy_stagger_ticks[i]=0;
  }own_slow=own_root=own_stagger=0;finish();magma_power_kind=magma_power_form=magma_power_direction=0;
  magma_power_origin_x=magma_power_origin_y=magma_power_age=magma_power_cooldown=magma_power_cast_time=magma_power_phase=0;
+ power_aim_hold_reset(&aim_hold);
  caster_id=chapter_token=0;chapter_hit=0;path_count=hit_mask=spent=aimed=ended_mask=0;guard_enemy=6;aim_x=aim_y=0;cast_side=-1;
  for(i=0;i<6;i++){previous_x[i]=(short)enemies[i].x;previous_y[i]=(short)enemies[i].y;}
  magma_powers_geometry_changed();}
@@ -177,6 +180,7 @@ int magma_power_side(unsigned command,int side){CreatureInstance*c;const Creatur
  magma_power_kind=(int)command;magma_power_form=c->form_id;caster_id=c->instance_id;magma_power_direction=face;
  magma_power_origin_x=px;magma_power_origin_y=py;magma_power_phase=a->phase;magma_power_age=0;
  magma_power_time=s->startup+s->active+s->recovery;magma_power_cast_time=s->startup;
+ power_aim_hold_reset(&aim_hold);
  chapter_token=magma_game_action_begin(3);chapter_hit=0;
  cd=game_power_cooldown(s->cooldown);if(cd<s->cooldown-GAME_MAX_POWER_RECOVERY)cd=s->cooldown-GAME_MAX_POWER_RECOVERY;if(cd>s->cooldown)cd=s->cooldown;
  magma_power_cooldown=ability_cd=ability_max=(int)cd;cast_side=(signed char)side;aim_x=(short)x;aim_y=(short)y;
@@ -192,7 +196,18 @@ int magma_powers_feedback(unsigned command){CreatureInstance*c;if(command<43||co
  caster_id=c->instance_id;magma_power_form=c->form_id;magma_power_kind=(int)command;magma_power_direction=face;
  magma_power_origin_x=px;magma_power_origin_y=py;magma_power_cast_time=16;return 1;
 }
-int magma_powers_can_aim(void){return active()&&!hitstop&&!aimed&&magma_power_kind==51&&magma_power_age<12&&same_caster();}
+int magma_powers_can_aim(void){return active()&&!hitstop&&(!aimed||aim_hold.held)&&magma_power_kind==51&&magma_power_age<12&&same_caster();}
+int magma_powers_hold_input(unsigned held){int was_held=aim_hold.held,x,y;
+ int holding=power_aim_hold_input(&aim_hold,held,active()&&!hitstop&&magma_power_kind==51&&magma_power_age==0&&same_caster());
+ if(holding&&face>=0&&face<=3&&aim_point(&x,&y)&&dist(magma_power_origin_x,magma_power_origin_y,x,y)<=48&&
+    (x!=aim_x||y!=aim_y)&&clear(magma_power_origin_x,magma_power_origin_y,x,y)){
+  aim_x=(short)x;aim_y=(short)y;magma_powers_geometry_changed();
+ }
+ /* A held preview follows facing without moving the player. Release uses
+  * the existing exact landing/LOS validator, never a new action token. */
+ if(was_held&&!holding&&active()&&!hitstop&&magma_power_age==0&&same_caster()&&!aimed)magma_powers_aim();
+ return holding;
+}
 unsigned magma_powers_hint(void){return magma_powers_can_aim()?MAGMA_HINT_LANDING:MAGMA_HINT_NONE;}
 int magma_powers_aim(void){int x,y;if(!magma_powers_can_aim()||face<0||face>3||!aim_point(&x,&y)||
  dist(magma_power_origin_x,magma_power_origin_y,x,y)>48||!clear(magma_power_origin_x,magma_power_origin_y,x,y))return 0;
@@ -309,6 +324,7 @@ int magma_powers_intercept_shot(unsigned i,int x,int y,int tx,int ty,int eligibl
 }
 void magma_powers_tick(void){const Spec*s;unsigned i,mask;
  if(hitstop)return;
+ if(active()&&same_caster()&&power_aim_hold_tick(&aim_hold))return;
  if(magma_power_cast_time)magma_power_cast_time--;
  if(!magma_power_time)return;
  if(!active()||!(s=spec())){finish();return;}
@@ -340,6 +356,7 @@ static void draw_path(unsigned n,int large){Path*p=&paths[n];int x,y,dx,dy,sx,sy
 void magma_powers_draw(void){const Spec*s=spec();unsigned mask,p;
  if(!active()||!s)return;
  draw_count=0;mask=geometry();
+ if(aim_hold.held&&!magma_power_age){refresh(0);if(paths[0].open)draw_at(aim_x,aim_y,1);}
  if(magma_power_age>=s->startup+s->active){
   if(magma_power_kind==60&&magma_power_age<s->startup+s->active+6)mask=1;
   else return;

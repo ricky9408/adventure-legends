@@ -428,6 +428,7 @@ enum {
  CG_PARTY_DIGIT_7,
  CG_PARTY_DIGIT_8,
  CG_PARTY_DIGIT_9,
+ CG_AIM_HOLD,
  CG_COUNT };
 typedef struct { unsigned short combat[2],field; } CompanionGuideCopy;
 extern const UiText companion_guide_texts[CG_COUNT];

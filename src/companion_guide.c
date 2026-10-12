@@ -74,7 +74,7 @@ void companion_guide_draw(const CreatureInstance*c,unsigned command,unsigned des
  const CompanionGuideCopy*copy;unsigned action;box(8,31,224,123);
  if(!c||!creatures_form(c->form_id)||!command||command>128||!creatures_ability(command)){centered(TX_E_NO_MEMBER,87,CREAM);centered(TX_PF_BACK_CLOSE,138,TEAL);return;}
  copy=&companion_guide_commands[command];party_title(c,progression_name_id(c->form_id),destination);companion_guide_axes(c->form_id,c->polarity,49);
- if(companion_guide_page){centered(progression_command_name_id(command),65,GOLD);companion_guide_center(copy->field,81,CREAM);companion_guide_center(CG_FIELD_CONTEXT,95,TEAL);companion_guide_center(CG_FIELD_WAIT,109,TEAL);}
+ if(companion_guide_page){int aimable=command==51||(command>=67&&command<=90&&command!=67&&command!=71&&command!=77&&command!=81)||(command>=91&&command<=121);centered(progression_command_name_id(command),65,GOLD);companion_guide_center(copy->field,81,CREAM);companion_guide_center(aimable?CG_AIM_HOLD:CG_FIELD_CONTEXT,95,TEAL);companion_guide_center(CG_FIELD_WAIT,109,TEAL);}
  else{centered(progression_command_name_id(command),65,GOLD);companion_guide_combat(command,81);companion_guide_text(CG_COMBAT_WAIT,38,109,TEAL);number(companion_guide_recovery(command),132,111);companion_guide_text(CG_FRAMES,160,109,CREAM);}
  companion_guide_center(companion_guide_page?CG_BROWSE_FIELD:CG_BROWSE_COMBAT,123,TEAL);
  if(destination<4){unsigned slot=adventure_save.roster.party[destination];int assigned=slot<CREATURE_ROSTER_CAPACITY&&c==&adventure_save.roster.instances[slot];action=(assigned?CG_ASSIGNED_0:CG_ASSIGN_0)+destination*2;}

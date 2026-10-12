@@ -7,6 +7,9 @@ extern int return_power_kind,return_power_time,return_power_form;
 extern int return_power_direction,return_power_origin_x,return_power_origin_y;
 extern int return_power_age,return_power_cooldown,return_power_cast_time,return_power_phase;
 int return_power(unsigned command);
+/* Before PLAY-only tick: hold R at age0 for <=90 updates, then release.
+ * Return1 owns direction input without player movement. Cooldown continues. */
+int return_powers_hold_input(unsigned held);
 int return_powers_busy(void);
 int return_powers_cast_matches_selected(void);
 /* Actual selection/party/form/command edits irreversibly invalidate field rights.
@@ -18,7 +21,9 @@ void return_powers_shot_spawn(unsigned index);
 void return_powers_reset(void);
 void return_powers_tick(void);
 void return_powers_draw(void);
-/* One fresh cardinal edge in first8 updates selects facing or local turn side.
+/* During held anticipation, cardinal input may revise the preview; repeated
+ * identical held input is ignored. Pass held cardinal bits only while holding.
+ * Otherwise one fresh cardinal edge in first8 updates selects facing/side.
  * Fresh R(256) during a hinted live91/96/99 cast releases the CURRENT cast.
  * It never starts a second cast or changes expiry/cooldown. Parent must call
  * this before ability_cd rejects R and must not also start a cast that update. */

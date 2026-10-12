@@ -513,6 +513,16 @@ COLD int check_save(void){return save5_has_valid();}
 #include "return_engine.inc"
 #include "horizons_engine.inc"
 #include "covenants_engine.inc"
+COLD int southern_hint_text(void);
+COLD int play_hint_text(void){int hint=covenants_hint_text();if(!hint)hint=horizons_hint_text();if(!hint)hint=return_hint_text();if(!hint)hint=underwater_hint_text();if(!hint)hint=magma_powers_hint()==MAGMA_HINT_LANDING?TX_MP_LANDING:southern_hint_text();return hint;}
+COLD void tick_play_toast(void){if(game_state==PLAY&&toast_ticks&&!play_hint_text())toast_ticks--;}
+COLD int game_power_aim_hold(unsigned held){int holding=0;
+ holding|=underwater_powers_hold_input(held);holding|=return_powers_hold_input(held);
+ holding|=horizons_powers_hold_input(held);holding|=magma_powers_hold_input(held);
+ /* The private flag keeps an R-only hold distinct from no preview. Low bits
+  * carry held cardinal input; all other physical actions remain fresh edges. */
+ return holding?(1024|(int)(held&240u)):0;
+}
 int game_display_state(void){if(game_state==SAVE_PENDING)return save_resume_state;if(game_state==EVENT_PENDING)return event_resume_state;return game_shop_display_state();}
 COLD void save_frame(void){unsigned status;
  if(scene_present_phase||game_state==OPENING_SCENE||game_state==LOAD_PENDING)return;
@@ -867,7 +877,7 @@ COLD void game_geometry_sync(void){
  if(changed){southern_powers_geometry_changed();magma_powers_geometry_changed();underwater_powers_geometry_changed();return_powers_geometry_changed();horizons_powers_geometry_changed();covenants_powers_geometry_changed();}
 }
 COLD unsigned journal_page_count(void){return save5_quest_state(&adventure_save.quests,57)==SAVE5_QUEST_CLAIMED?13:save5_quest_state(&adventure_save.quests,51)==SAVE5_QUEST_CLAIMED?12:(adventure_save.quests.region_flags[5]&1)?11:(adventure_save.quests.region_flags[4]&1)?10:(adventure_save.quests.region_flags[3]&1)?9:(adventure_save.quests.region_flags[2]&1)?8:7;}
-void update(void){int dx=0,dy=0,return_input=0;frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY)quickparty_reset(keys);else if(quickparty_update(keys,pressed))return;if(transition)transition--;if(toast_ticks)toast_ticks--;if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
+void update(void){int dx=0,dy=0,return_input=0,aim_holding=0;frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY)quickparty_reset(keys);else if(quickparty_update(keys,pressed))return;if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
  if(game_shop_update())return;
  if(game_state==EVENT_PENDING){event_step();if(game_state!=EVENT_PENDING)game_road_cancel();return;}
  if(event_frame())return;
@@ -896,13 +906,13 @@ void update(void){int dx=0,dy=0,return_input=0;frame++;if(game_state==LOAD_PENDI
  if(game_state==PAUSE){int input=journal_nav_keys(keys,pressed),nav;if(journal_tab==JOURNAL_ITEMS&&game_shop_confirm&&(input&KEY_B)){game_shop_items_input(input);return;}nav=journal_nav_input(input);if(nav==JOURNAL_CLOSE){game_shop_cancel_items();acknowledge_save_failure();game_state=PLAY;return;}if(nav==JOURNAL_CONSUMED)return;if(game_shop_items_input(input)||quickparty_menu_input(input)||progression_menu_input(input)||gear_menu_input(input)||region_game_menu_input(input)||north_game_menu_input(input)||south_game_menu_input(input)||magma_game_menu_input(input)||underwater_game_menu_input(input)||return_game_menu_input(input)||horizons_game_menu_input(input)||covenants_game_menu_input(input))return;if((input&KEY_A)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);}return;}
  if(game_state==DEAD){if(pressed&KEY_A){game_health_fill();ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,room>=16?checkpoint_spawn:2);}return;}
  if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;enter_room(0,3);}return;}
- ticks++;{int i;for(i=0;i<6;i++)if(impacts[i].life)impacts[i].life--;}if(hitstop){hitstop--;return;}if(pressed&KEY_START){journal_nav_open();game_state=PAUSE;return;}if(area_ticks)area_ticks--;if(invuln)invuln--;if(ability_cd)ability_cd--;if(!ability_cd)covenants_cooldown_owned=0;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;advanced_tick();regional_powers_tick();northern_powers_tick();game_geometry_sync();southern_powers_tick();magma_powers_tick();if(underwater_power_time||underwater_power_cast_time)underwater_powers_tick();if(return_power_time||return_power_cast_time)return_powers_tick();if(horizons_power_time||horizons_power_cast_time)horizons_powers_tick();if(covenants_power_time||covenants_power_cast_time)covenants_powers_tick();if(event_frame())return;game_combat_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;
- underwater_powers_input((unsigned)pressed);if(return_power_time)return_input=return_powers_input((unsigned)pressed);if(horizons_power_time)return_input|=horizons_powers_input((unsigned)pressed);if(covenants_power_time)return_input|=covenants_powers_input((unsigned)pressed);
+ ticks++;{int i;for(i=0;i<6;i++)if(impacts[i].life)impacts[i].life--;}if(hitstop){hitstop--;return;}if(pressed&KEY_START){journal_nav_open();game_state=PAUSE;return;}if(area_ticks)area_ticks--;if(invuln)invuln--;if(ability_cd)ability_cd--;if(!ability_cd)covenants_cooldown_owned=0;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;aim_holding=game_power_aim_hold(summoned&&!(pressed&KEY_B)?(unsigned)keys:0);advanced_tick();regional_powers_tick();northern_powers_tick();game_geometry_sync();southern_powers_tick();magma_powers_tick();if(underwater_power_time||underwater_power_cast_time)underwater_powers_tick();if(return_power_time||return_power_cast_time)return_powers_tick();if(horizons_power_time||horizons_power_cast_time)horizons_powers_tick();if(covenants_power_time||covenants_power_cast_time)covenants_powers_tick();if(event_frame())return;game_combat_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;
+ underwater_powers_input((unsigned)(pressed|(aim_holding&240)));if(return_power_time)return_input=return_powers_input((unsigned)(pressed|(aim_holding&240)));if(horizons_power_time)return_input|=horizons_powers_input((unsigned)(pressed|(aim_holding&240)));if(covenants_power_time)return_input|=covenants_powers_input((unsigned)pressed);
  {int grabbing=covenants_game_input((unsigned)pressed,(unsigned)keys)||horizons_game_input((unsigned)pressed,(unsigned)keys)||return_game_input((unsigned)pressed,(unsigned)keys)||underwater_game_input((unsigned)pressed,(unsigned)keys)||magma_game_input((unsigned)pressed,(unsigned)keys);if(grabbing){walk=0;game_attacks_suspend();if(event_frame()||game_state!=PLAY)return;goto movement_done;}}
  if(pressed&KEY_B){summoned=!summoned;if(!summoned){return_legacy_cancel();covenants_powers_selection_changed();covenants_game_selection_changed();}game_companion_reanchor(px+14,py);sfx(2);if(summoned)toast(TX_SUMMONED);}
- if(keys&KEY_LEFT){dx=-1;face=2;}if(keys&KEY_RIGHT){dx=1;face=3;}if(keys&KEY_UP){dy=-1;face=1;}if(keys&KEY_DOWN){dy=1;face=0;}if(swing||weapon_action.phase==WEAPON_WINDUP||weapon_action.phase==WEAPON_ACTIVE)face=weapon_action.direction;walk=dx||dy;if(walk)walk_phase++;
+ if(keys&KEY_LEFT){dx=-1;face=2;}if(keys&KEY_RIGHT){dx=1;face=3;}if(keys&KEY_UP){dy=-1;face=1;}if(keys&KEY_DOWN){dy=1;face=0;}if(swing||weapon_action.phase==WEAPON_WINDUP||weapon_action.phase==WEAPON_ACTIVE)face=weapon_action.direction;walk=(dx||dy)&&!aim_holding;if(walk)walk_phase++;
  /* Select has no field action and no input grants dodge invulnerability. */
- {int speed=advanced_guard_charges?224:gear_stats.speed_q8,diag=advanced_guard_charges?158:gear_stats.diagonal_q8;if(weapon_action.phase==WEAPON_CHARGING){speed=speed*3/4;diag=diag*3/4;}move_player(dx*(dx&&dy?diag:speed),dy*(dx&&dy?diag:speed));}
+ if(aim_holding)walk=0;else{int speed=advanced_guard_charges?224:gear_stats.speed_q8,diag=advanced_guard_charges?158:gear_stats.diagonal_q8;if(weapon_action.phase==WEAPON_CHARGING){speed=speed*3/4;diag=diag*3/4;}move_player(dx*(dx&&dy?diag:speed),dy*(dx&&dy?diag:speed));}
  if(game_road_step()||walk_entry())return;
  game_attack_update(keys,pressed);
  if(event_frame())return;
@@ -944,11 +954,11 @@ COLD int game_save_badge_left(void){int id=game_save_badge_id();return id?192-ui
 COLD void game_draw_save_badge(void){int id=game_save_badge_id();if(id){int w=ui_texts[id].width+8;box(200-w,3,w,17);text(id,204-w,3,TEAL);}}
 COLD void draw_save_failure_notice(void){if(save_notice_visible()){int left=save_notice_left();box(left,SAVE_NOTICE_Y,240-left*2,SAVE_NOTICE_H);centered(TX_C_SAVE_FAILED,SAVE_NOTICE_Y+2,CREAM);}}
 COLD int southern_hint_text(void){unsigned h=southern_powers_hint();return h==SOUTHERN_HINT_OTHER_SIDE?TX_SP_OTHER_SIDE:h==SOUTHERN_HINT_SECOND_TARGET?TX_SP_SECOND_TARGET:0;}
-COLD void draw_play_toast(void){if(toast_ticks&&game_state==PLAY){const UiText*t=&ui_texts[toast_id];box((240-t->width-10)/2,143,t->width+10,17);centered(toast_id,143,CREAM);}}
-COLD void draw_play_hint(void){if(game_state==PLAY){int hint=covenants_hint_text();if(!hint)hint=horizons_hint_text();if(!hint)hint=return_hint_text();if(!hint)hint=underwater_hint_text();if(!hint)hint=magma_powers_hint()==MAGMA_HINT_LANDING?TX_MP_LANDING:southern_hint_text();if(hint){int w=ui_texts[hint].width+12;box((240-w)/2,138,w,19);centered(hint,140,TEAL);}}}
+COLD void draw_play_toast(void){if(toast_ticks&&game_state==PLAY&&!play_hint_text()){const UiText*t=&ui_texts[toast_id];box((240-t->width-10)/2,143,t->width+10,17);centered(toast_id,143,CREAM);}}
+COLD void draw_play_hint(void){if(game_state==PLAY){int hint=play_hint_text();if(hint){int w=ui_texts[hint].width+12;box((240-w)/2,138,w,19);centered(hint,140,TEAL);}}}
 /* Toast and hint pixels depend only on their immutable text IDs. Keep one
  * bounded buffer for their 22-row union, never the changing world beneath it.
- * The two centered cards overlap in one interval on each shared row. Odd
+ * A live action hint owns this slot; ordinary toast time pauses behind it. Odd
  * boundary bytes are masked so adjacent world/earlier-overlay pixels survive.
  * The uncached routines above remain the same-ROM differential reference. */
 u16 play_notice_pixels[120*22] __attribute__((aligned(4)));
@@ -956,8 +966,7 @@ int play_notice_valid,play_notice_toast,play_notice_hint,play_notice_cache_disab
 COLD void draw_play_notices(int build_cache){
  int tid,hid,tx=0,tw=0,hx=0,hw=0,y;u16 *target=screen;
  if(game_state!=PLAY)return;
- tid=toast_ticks?toast_id:-1;
- hid=covenants_hint_text();if(!hid)hid=horizons_hint_text();if(!hid)hid=return_hint_text();if(!hid)hid=underwater_hint_text();if(!hid)hid=magma_powers_hint()==MAGMA_HINT_LANDING?TX_MP_LANDING:southern_hint_text();
+ hid=play_hint_text();tid=toast_ticks&&!hid?toast_id:-1;
  if(tid<0&&!hid)return;
  if(tid>=0){tw=ui_texts[tid].width+10;tx=(240-tw)/2;}
  if(hid){hw=ui_texts[hid].width+12;hx=(240-hw)/2;}

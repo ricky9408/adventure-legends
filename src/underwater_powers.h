@@ -8,7 +8,12 @@ extern int underwater_power_kind,underwater_power_time,underwater_power_form;
 extern int underwater_power_direction,underwater_power_origin_x,underwater_power_origin_y;
 extern int underwater_power_age,underwater_power_cooldown,underwater_power_cast_time,underwater_power_phase;
 int underwater_power(unsigned command);
-/* First8 gameplay updates only, one cardinal direction edge. Pass GBA pressed
+/* Optional age0 R hold, <=90 active updates; return1 owns direction input.
+ * Pause/hitstop do not spend the budget. Release preserves the effect timeline. */
+int underwater_powers_hold_input(unsigned held);
+/* Held anticipation accepts revised cardinal choices; repeated identical
+ * held input is ignored. Pass held cardinal bits only while holding. Otherwise first8
+ * gameplay updates only, one cardinal direction edge. Pass GBA pressed
  * keys (RIGHT16 LEFT32 UP64 DOWN128) BEFORE movement. Does not consume movement,
  * restart cast, change origin/identity or reset any lifetime/cooldown. */
 int underwater_powers_input(unsigned pressed);

@@ -9,6 +9,7 @@
 #include "progression.h"
 #include "gear_runtime.h"
 #include "obj_layout.h"
+#include "power_aim_hold.h"
 #include "north_art.h"
 #include "south_art.h"
 #include "collision_rects.h"
@@ -48,6 +49,7 @@ typedef struct {
  signed char side;
 } Cast;
 static Cast cast;
+static PowerAimHold aim_hold;
 enum { GEOMETRY_RECT_CAP=48,GEOMETRY_RADIUS=64 };
 typedef struct {short walls[GEOMETRY_RECT_CAP][4],x0,y0,x1,y1,area;unsigned char valid,count;} Geometry;
 static Geometry collision;
@@ -207,7 +209,7 @@ int horizons_powers_cast_matches_selected(void){CreatureInstance*c=progression_s
 static int same_selected(void){CreatureInstance*c=progression_selected();return horizons_powers_cast_matches_selected()&&c->selected_command<2&&c->equipped[c->selected_command]==horizons_power_kind;}
 static void revoke(void){if(cast.token)field_world_revoke_cast(cast.token);cast.revoked=1;cast.aimed=1;}
 static void finish(void){horizons_power_time=0;cast.count=0;northern_powers_tiles_release(NORTHERN_TILES_HORIZONS);}
-void horizons_powers_reset(void){unsigned i;collision.valid=0;if(horizons_power_time)revoke();finish();for(i=0;i<sizeof cast;i++)((unsigned char*)&cast)[i]=0;
+void horizons_powers_reset(void){unsigned i;collision.valid=0;if(horizons_power_time)revoke();finish();power_aim_hold_reset(&aim_hold);for(i=0;i<sizeof cast;i++)((unsigned char*)&cast)[i]=0;
  horizons_power_kind=horizons_power_form=horizons_power_direction=0;horizons_power_origin_x=horizons_power_origin_y=0;
  horizons_power_age=horizons_power_cooldown=horizons_power_cast_time=horizons_power_phase=0;cast.side=-1;cast.caught_shot=12;
  /* Only engine room/death policy may clear ability_cd. */
@@ -226,7 +228,9 @@ unsigned horizons_powers_moving_objects(void){return active()?cast.moving:0;}
 unsigned horizons_powers_beat(void){return window()&&!cast.dirty?cast.beat:0;}
 unsigned horizons_powers_release_phase(void){return window()&&cast.released&&!cast.dirty?1u:0u;}
 static int side_command(void){return horizons_power_kind==107||horizons_power_kind==111||horizons_power_kind==112;}
-int horizons_powers_can_aim(void){return active()&&!hitstop&&!cast.revoked&&!cast.aimed&&horizons_power_age<8&&same_selected();}
+static void geometry(void);
+int horizons_powers_hold_input(unsigned held){return power_aim_hold_input(&aim_hold,held,active()&&!hitstop&&!cast.revoked&&horizons_power_age==0&&same_selected());}
+int horizons_powers_can_aim(void){return active()&&!hitstop&&!cast.revoked&&(!cast.aimed||aim_hold.held)&&horizons_power_age<8&&same_selected();}
 int horizons_powers_can_release(void){return active()&&!hitstop&&!cast.revoked&&same_selected()&&!cast.released&&horizons_power_age>=8&&
  ((horizons_power_kind==108&&horizons_power_age<30)||(horizons_power_kind==109&&horizons_power_age<36));}
 unsigned horizons_powers_hint(void){if(!active()||cast.revoked||!same_selected())return HORIZONS_POWER_HINT_NONE;
@@ -239,9 +243,9 @@ unsigned horizons_powers_hint(void){if(!active()||cast.revoked||!same_selected()
 }
 int horizons_powers_input(unsigned pressed){unsigned p=pressed&240u;int result=0,d=-1;
  if(horizons_powers_can_aim()&&p&&!(p&(p-1))){d=p==16?3:p==32?2:p==64?1:0;
-  if(side_command()){int cross=-dx[d]*dy[horizons_power_direction]+dy[d]*dx[horizons_power_direction];if(cross){cast.side=(signed char)(cross>0?1:-1);cast.aimed=1;result=1;}}
-  else{horizons_power_direction=d;cast.aimed=1;result=1;}
-  if(result)cast.dirty=1;
+  if(side_command()){int cross=-dx[d]*dy[horizons_power_direction]+dy[d]*dx[horizons_power_direction];if(cross&&(!cast.aimed||cast.side!=(cross>0?1:-1))){cast.side=(signed char)(cross>0?1:-1);cast.aimed=1;result=1;}}
+  else if(!cast.aimed||horizons_power_direction!=d){horizons_power_direction=d;cast.aimed=1;result=1;}
+  if(result){cast.dirty=1;if(aim_hold.held&&!horizons_power_age)geometry();}
  }
  if((pressed&256u)&&horizons_powers_can_release()){cast.released=1;cast.release_age=(unsigned char)horizons_power_age;cast.dirty=1;result|=2;}
  return result;
@@ -362,6 +366,7 @@ int horizons_power(unsigned command){CreatureInstance*c;const CreatureAbility*a;
  if(!northern_powers_tiles_claim(NORTHERN_TILES_HORIZONS))return 0;
  collision.valid=0;horizons_power_kind=(int)command;horizons_power_form=c->form_id;horizons_power_direction=face;horizons_power_phase=a->phase;
  horizons_power_origin_x=px;horizons_power_origin_y=py;horizons_power_age=0;horizons_power_time=s->startup+s->active+s->settle;horizons_power_cast_time=s->startup;
+ power_aim_hold_reset(&aim_hold);
  cast.caster=c->instance_id;cast.lease=northern_powers_tiles_generation();cast.token=(unsigned)(room-62)<16u?field_world_action_begin(3):0;
  cast.count=cast.hits=cast.fields[0]=cast.fields[1]=cast.revoked=cast.aimed=cast.art_live=0;
  cast.released=cast.release_age=cast.guard_used=cast.moving=cast.stopped=0;cast.side=-1;cast.caught_shot=12;
@@ -371,6 +376,7 @@ int horizons_power(unsigned command){CreatureInstance*c;const CreatureAbility*a;
  obj_upload(horizons_power_marks[command-106],16,16,GFX_OBJ_POWER_PIN);obj_upload(horizons_power_particles[command-106][0],8,8,GFX_OBJ_WATER_DROP);geometry();sfx(2);return 1;
 }
 void horizons_powers_tick(void){const Spec*s;unsigned i;int x,y,r;if(hitstop)return;
+ if(active()&&!cast.revoked&&same_selected()&&power_aim_hold_tick(&aim_hold))return;
  if(horizons_power_cast_time)horizons_power_cast_time--;
  if(!horizons_power_time)return;
  if(!active()||!(s=spec())){finish();return;}
