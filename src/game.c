@@ -235,29 +235,41 @@ void rect(int x,int y,int w,int h,u8 c){
  }
 }
 /* Common opaque cards need one pass over each interior row. The original
- * five-rectangle behavior remains authoritative for clipped/small/unaligned
- * boxes and while a world cover is active. Keep this routine in ROM. */
+ * five-rectangle behavior remains authoritative for clipped/small boxes,
+ * unaligned left edges, and active world covers. Keep this routine in ROM. */
 COLD void box(int x,int y,int w,int h){
- if(!world_mask_active&&x>=0&&y>=0&&x+w<=240&&y+h<=160&&!(x&3)&&!(w&3)&&w>=32&&h>=3){
+ if(!world_mask_active&&x>=0&&y>=0&&x+w<=240&&y+h<=160&&!(x&3)&&w>=32&&h>=3){
   /* DMA reads through MMIO addresses; volatile keeps source initialization
    * observable to the compiler even though no C pointer reads these words. */
   volatile u32 fill=(u32)UI_BG*0x01010101u,border=(u32)UI_BORDER*0x01010101u;
   u32 left=(fill&0xffffff00u)|UI_BORDER,right=(fill&0x00ffffffu)|((u32)UI_BORDER<<24);
-  int row,words=w>>2;
+  int row,words=w>>2,tail=w&3;
+  if(tail){rect(x,y,w,1,UI_BORDER);rect(x,y+h-1,w,1,UI_BORDER);}
+  else {
 #ifndef GAME_HOST_TEST
   REG32(0x040000D4)=(u32)&border;REG32(0x040000D8)=(u32)(screen+y*120+(x>>1));REG32(0x040000DC)=0x85000000|words;
   REG32(0x040000D8)=(u32)(screen+(y+h-1)*120+(x>>1));REG32(0x040000DC)=0x85000000|words;
-  REG32(0x040000D4)=(u32)&fill;
 #else
   {int col;for(col=x;col<x+w;col+=2){screen[y*120+(col>>1)]=(u16)border;screen[(y+h-1)*120+(col>>1)]=(u16)border;}}
 #endif
-  for(row=y+1;row<y+h-1;row++){
-   u32 *dst=(u32*)(screen+row*120+(x>>1));dst[0]=left;dst[words-1]=right;
+  }
 #ifndef GAME_HOST_TEST
-   REG32(0x040000D8)=(u32)(dst+1);REG32(0x040000DC)=0x85000000|(words-2);
-#else
-   {int col;for(col=1;col<words-1;col++)dst[col]=fill;}
+  REG32(0x040000D4)=(u32)&fill;
 #endif
+  for(row=y+1;row<y+h-1;row++){
+   u32 *dst=(u32*)(screen+row*120+(x>>1));dst[0]=left;if(!tail)dst[words-1]=right;
+#ifndef GAME_HOST_TEST
+   REG32(0x040000D8)=(u32)(dst+1);REG32(0x040000DC)=0x85000000|(words-(tail?1:2));
+#else
+   {int col;for(col=1;col<words-(tail?0:1);col++)dst[col]=fill;}
+#endif
+   /* An incomplete final word has 1–3 pixels. Use halfwords and preserve
+    * its unused neighbor byte exactly, matching the clipped rect reference. */
+   if(tail){u16*end=(u16*)(dst+words);
+    if(tail==1)*end=(*end&0xff00)|UI_BORDER;
+    else if(tail==2)*end=UI_BG|(UI_BORDER<<8);
+    else{end[0]=(u16)fill;end[1]=(end[1]&0xff00)|UI_BORDER;}
+   }
   }
   return;
  }
@@ -991,12 +1003,12 @@ COLD void draw_play_notices(int build_cache){
  if(tid>=0){tw=ui_texts[tid].width+10;tx=(240-tw)/2;}
  if(hid){hw=ui_texts[hid].width+12;hx=(240-hw)/2;}
  /* Retain the original clipping/masking behavior outside these card bounds. */
- if(play_notice_cache_disabled||world_mask_active||tw>240||hw>240){draw_play_toast();draw_play_hint();return;}
+ if(play_notice_cache_disabled||world_mask_active||tw>240||hw>240)goto uncached;
  if(!play_notice_valid||play_notice_toast!=tid||play_notice_hint!=hid){
   /* A first/changed notice must not add cache construction to a full world
    * paint. Reused underlays leave room to build; later full paints can copy
    * that same immutable card without carrying any old world pixels. */
-  if(!build_cache){draw_play_toast();draw_play_hint();return;}
+  if(!build_cache)goto uncached;
   screen=play_notice_pixels;
   if(tid>=0){box(tx,5,tw,17);centered(tid,5,CREAM);}
   if(hid){box(hx,0,hw,19);centered(hid,2,TEAL);}
@@ -1016,6 +1028,13 @@ COLD void draw_play_notices(int build_cache){
   {int x;for(x=first;x<last;x++)dst[x]=src[x];}
 #endif
  }
+ return;
+uncached:
+ /* The immutable IDs and bounds were already resolved above. Drawing them
+  * directly keeps the reference pixels without repeating power/party queries
+  * on a cold full-world frame. No state can change during this raster pass. */
+ if(tid>=0){box(tx,143,tw,17);centered(tid,143,CREAM);}
+ if(hid){box(hx,138,hw,19);centered(hid,140,TEAL);}
 }
 COLD void draw_journal_panel(void){if(journal_nav_draw()){}
  else if(journal_tab==JOURNAL_ITEMS){game_shop_draw_items();}

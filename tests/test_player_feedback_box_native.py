@@ -31,6 +31,17 @@ CASES = [
     ('one_pixel', 5, 5, 1, 1), ('short_height', 8, 40, 224, 2),
     ('minimal_fast', 8, 40, 32, 3), ('clipped', -4, -3, 224, 123),
     ('outside', 242, 163, 24, 12), ('full_screen', 0, 0, 240, 160),
+    # The native-font notice has a 199px box at a word-aligned left edge.
+    # These real-DMA comparisons cover every partial final word and neighbor
+    # byte, plus the minimum height, bottom/right bounds and fallback edges.
+    ('native_font_notice', 20, 138, 199, 19),
+    ('notice_tail1', 20, 143, 197, 17), ('notice_tail2', 20, 138, 198, 19),
+    ('minimal_tail1', 8, 40, 33, 3), ('minimal_tail2', 8, 40, 34, 3),
+    ('minimal_tail3', 8, 40, 35, 3),
+    ('screen_edge_tail1', 0, 141, 237, 19), ('screen_edge_tail2', 0, 141, 238, 19),
+    ('screen_edge_tail3', 0, 141, 239, 19),
+    ('unaligned_tail1', 9, 40, 33, 3), ('unaligned_tail2', 10, 40, 34, 3),
+    ('unaligned_tail3', 11, 40, 35, 3),
 ]
 MODES = ('forced_blank_line_0', 'mode4_line_0', 'mode4_line_80', 'mode4_vblank_160')
 FUNCTIONS = ('reference_iwram', 'production_rom', 'empty_iwram')
@@ -112,7 +123,7 @@ def color_constant(text, name):
     raise ValueError('Recursive color macro')
 
 
-def build(output, arm_prefix, host_cc):
+def build(output, arm_prefix, host_cc, mgba_prefix):
     inputs = output / 'inputs'
     sources = ('src/game.c', 'src/assets.h', 'src/startup.s', 'linker.ld',
                'tests/player_feedback_mgba_bridge.c', 'tools/mgba_bridge.c',
@@ -136,8 +147,14 @@ def build(output, arm_prefix, host_cc):
     cpu = ['-mcpu=arm7tdmi', '-mthumb-interwork']
     flags = [*cpu, '-mthumb', '-O2', '-g', '-std=c99', '-ffreestanding', '-fno-builtin',
              '-fno-strict-aliasing', '-fomit-frame-pointer', '-Wall', '-Wextra']
-    sysroot = ROOT / 'tools/sysroot/usr'
-    library = sysroot / 'lib/x86_64-linux-gnu'
+    sysroot = mgba_prefix.resolve()
+    candidates = [p for folder in (sysroot / 'lib/x86_64-linux-gnu', sysroot / 'lib')
+                  for name in ('libmgba.so', 'libmgba.dylib')
+                  if (p := folder / name).is_file()]
+    if len(candidates) != 1:
+        raise ValueError('Expected one mGBA library under --mgba-prefix: ' + str(candidates))
+    mgba_library = candidates[0].resolve()
+    library = candidates[0].parent
     commands = [
         [arm_prefix + 'gcc', *flags, '-c', str(output / 'game.c'), '-o', str(output / 'game.o')],
         [arm_prefix + 'gcc', *cpu, '-marm', '-g', '-x', 'assembler-with-cpp', '-c', str(inputs / 'src/startup.s'), '-o', str(output / 'startup.o')],
@@ -155,7 +172,8 @@ def build(output, arm_prefix, host_cc):
     compiler = Path(shutil.which(arm_prefix + 'gcc') or arm_prefix + 'gcc').resolve()
     manifest = {'created_at': datetime.now(timezone.utc).isoformat(), 'commands': commands,
                 'compiler': subprocess.check_output([str(compiler), '--version'], text=True).splitlines()[0],
-                'compiler_sha256': sha(compiler), 'libmgba_sha256': sha(library / 'libmgba.so'),
+                'compiler_sha256': sha(compiler), 'libmgba_sha256': sha(mgba_library),
+                'libmgba_path': str(mgba_library),
                 'input_sha256': {relative: sha(inputs / relative) for relative in sources},
                 'artifact_sha256': {p.name: sha(p) for p in sorted(output.iterdir()) if p.is_file()}}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
@@ -252,12 +270,14 @@ def main():
     parser.add_argument('--output', type=Path)
     parser.add_argument('--arm-prefix', default=os.environ.get('ARM_PREFIX') or str(ROOT / 'tools/sysroot/usr/bin/arm-none-eabi-'))
     parser.add_argument('--host-cc', default=os.environ.get('HOST_CC', 'cc'))
+    parser.add_argument('--mgba-prefix', type=Path, default=ROOT / 'tools/sysroot/usr',
+                        help='mGBA include/lib prefix; accepts Linux or macOS library layout')
     args = parser.parse_args()
     output = (args.output or ROOT / ('build/player-feedback-box-native-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))).resolve()
     if output.exists() and any(output.iterdir()):
         raise FileExistsError('Use a fresh output directory; existing evidence is never overwritten: ' + str(output))
     output.mkdir(parents=True, exist_ok=True)
-    run(output, build(output, args.arm_prefix, args.host_cc))
+    run(output, build(output, args.arm_prefix, args.host_cc, args.mgba_prefix))
 
 
 if __name__ == '__main__':
