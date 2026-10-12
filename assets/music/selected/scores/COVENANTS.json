@@ -1,0 +1,2466 @@
+{
+  "schema": 2,
+  "cue_id": "COVENANTS",
+  "title": "The Roads That Stay",
+  "bpm": 82,
+  "key": "D major",
+  "meter": "3/4",
+  "bars": 20,
+  "melody_bars": [
+    [
+      [
+        69,
+        2
+      ],
+      [
+        71,
+        0.5
+      ],
+      [
+        74,
+        0.5
+      ]
+    ],
+    [
+      [
+        73,
+        1
+      ],
+      [
+        71,
+        1
+      ],
+      [
+        69,
+        1
+      ]
+    ],
+    [
+      [
+        66,
+        1.5
+      ],
+      [
+        69,
+        0.5
+      ],
+      [
+        73,
+        1
+      ]
+    ],
+    [
+      [
+        74,
+        2
+      ],
+      [
+        null,
+        1
+      ]
+    ],
+    [
+      [
+        76,
+        1
+      ],
+      [
+        74,
+        0.5
+      ],
+      [
+        71,
+        0.5
+      ],
+      [
+        69,
+        1
+      ]
+    ],
+    [
+      [
+        66,
+        2
+      ],
+      [
+        64,
+        0.5
+      ],
+      [
+        62,
+        0.5
+      ]
+    ],
+    [
+      [
+        64,
+        1
+      ],
+      [
+        66,
+        1
+      ],
+      [
+        69,
+        1
+      ]
+    ],
+    [
+      [
+        73,
+        2
+      ],
+      [
+        null,
+        1
+      ]
+    ],
+    [
+      [
+        71,
+        1.5
+      ],
+      [
+        74,
+        0.5
+      ],
+      [
+        78,
+        1
+      ]
+    ],
+    [
+      [
+        81,
+        1
+      ],
+      [
+        78,
+        1
+      ],
+      [
+        74,
+        1
+      ]
+    ],
+    [
+      [
+        76,
+        1
+      ],
+      [
+        74,
+        0.5
+      ],
+      [
+        71,
+        0.5
+      ],
+      [
+        67,
+        1
+      ]
+    ],
+    [
+      [
+        69,
+        2
+      ],
+      [
+        null,
+        1
+      ]
+    ],
+    [
+      [
+        74,
+        1.125
+      ],
+      [
+        78,
+        0.375
+      ],
+      [
+        81,
+        1.5
+      ]
+    ],
+    [
+      [
+        78,
+        0.75
+      ],
+      [
+        74,
+        0.75
+      ],
+      [
+        78,
+        1.5
+      ]
+    ],
+    [
+      [
+        76,
+        0.75
+      ],
+      [
+        73,
+        0.75
+      ],
+      [
+        69,
+        1.5
+      ]
+    ],
+    [
+      [
+        73,
+        0.75
+      ],
+      [
+        76,
+        0.75
+      ],
+      [
+        73,
+        1.5
+      ]
+    ],
+    [
+      [
+        74,
+        1
+      ],
+      [
+        71,
+        1
+      ],
+      [
+        67,
+        1
+      ]
+    ],
+    [
+      [
+        66,
+        1.5
+      ],
+      [
+        69,
+        0.5
+      ],
+      [
+        74,
+        1
+      ]
+    ],
+    [
+      [
+        76,
+        1
+      ],
+      [
+        73,
+        1
+      ],
+      [
+        69,
+        1
+      ]
+    ],
+    [
+      [
+        73,
+        1.5
+      ],
+      [
+        null,
+        1.5
+      ]
+    ]
+  ],
+  "chords_bars": [
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "I"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 47,
+      "notes": [
+        54,
+        59,
+        62
+      ],
+      "symbol": "vi"
+    },
+    {
+      "root": 43,
+      "notes": [
+        55,
+        59,
+        62
+      ],
+      "symbol": "IV"
+    },
+    {
+      "root": 40,
+      "notes": [
+        55,
+        59,
+        64
+      ],
+      "symbol": "ii"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "I"
+    },
+    {
+      "root": 43,
+      "notes": [
+        55,
+        59,
+        62
+      ],
+      "symbol": "IV"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 47,
+      "notes": [
+        54,
+        59,
+        62
+      ],
+      "symbol": "vi"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "I"
+    },
+    {
+      "root": 43,
+      "notes": [
+        55,
+        59,
+        62
+      ],
+      "symbol": "IV"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "I"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "I"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 43,
+      "notes": [
+        55,
+        59,
+        62
+      ],
+      "symbol": "IV"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "I"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "V"
+    }
+  ],
+  "melody_voices_by_bar": [
+    "piano",
+    "piano",
+    "piano",
+    "piano",
+    "piano",
+    "piano",
+    "piano",
+    "piano",
+    "strings",
+    "strings",
+    "strings",
+    "strings",
+    "horn",
+    "horn",
+    "horn",
+    "horn",
+    "piano",
+    "piano",
+    "piano",
+    "piano"
+  ],
+  "arrangement": {
+    "profile": "reflective",
+    "explicit_parts": true,
+    "melody_volume": 79,
+    "bass_volume": 57,
+    "description_ja": "3拍子の終章、ピアノから弦へ、13〜16小節目だけ主題が帰る"
+  },
+  "caption": "Instrumental original handheld JRPG reflective cue in D major, 3/4, 82 quarter-note BPM. Preserve the complete supplied 20-bar independent melody, varied phrase rests, explicit scene-specific support and bass. piano lead with strings support. Clean restrained timbres, no extra notes or reharmonization, no distortion, vocals or fade.",
+  "form_description": "20 bars in 3/4: eight-bar original piano farewell; four-bar warming string bridge; four-bar augmented title call and answer at the late arrival; four-bar piano coda. Only bars 13-16 quote the original main theme, at one-and-a-half times its original durations.",
+  "reference_tracks": [
+    3,
+    103,
+    106
+  ],
+  "composition_notes": "Independently authored literal tune, meter, form and groove for this region. Scalar passing notes retain their melodic shape while accompaniment thins to a consonant single tone or dyad; they are not forced into arpeggiated triads. A nearest-motion triadic anchor path guides harmonic direction. Independently selected bass avoids exposed parallel fifths/octaves, and scene-specific rests break its automatic doubling of the lead rhythm. Actual score and MIDI events are separately audited; this is not a claim of human listening approval.",
+  "bass_bars": [
+    [
+      [
+        38,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        40,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        42,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        47,
+        2.0
+      ],
+      [
+        43,
+        0.20000000000000018
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        43,
+        2.0
+      ],
+      [
+        40,
+        0.20000000000000018
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        38,
+        2.0
+      ],
+      [
+        33,
+        0.20000000000000018
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        43,
+        1.0
+      ],
+      [
+        38,
+        1.2000000000000002
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        45,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        47,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        42,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        43,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        40,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        38,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        38,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        45,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        45,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        43,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        38,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        45,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ],
+    [
+      [
+        45,
+        2.2
+      ],
+      [
+        null,
+        0.7999999999999998
+      ]
+    ]
+  ],
+  "harmonic_policy": {
+    "consonant_pitch_class_intervals": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9
+    ],
+    "intentional_exceptions": [],
+    "scalar_melody_policy": "Thinned support at nonchord melodic notes; independently scored bass, no fixed-root pedal that clashes with passing tones",
+    "bass_voice": "Independent movement with exposed parallel fifth/octave avoidance",
+    "release_policy": "Per-part release gates before unsafe pitch/harmony transitions; no old support tail may create an unintended clash"
+  },
+  "voice_leading": {
+    "independent_parts": [
+      "melody",
+      "bass"
+    ],
+    "parallel_perfect_policy": "Avoid exposed same-direction parallel fifths/octaves, including loop",
+    "counterpoint_scope": "Independent melody and bass; explicit chordal orchestration is not claimed as species counterpoint",
+    "harmony": "Voice-led triadic anchors; only consonant filtered portions are sounded during passing notes",
+    "bass_bars_are_authoritative": true
+  },
+  "leitmotif": {
+    "id": "promise-of-the-lantern",
+    "name_ja": "灯火の約束",
+    "original": true,
+    "reference_main_theme_track": 3,
+    "main_theme_used": true,
+    "appearances": [
+      {
+        "bar": 13,
+        "end_bar": 14,
+        "figure": "main_theme_call",
+        "transformation": "rhythmic_augmentation_1_5_in_3_4",
+        "notes": [
+          [
+            [
+              74,
+              1.125
+            ],
+            [
+              78,
+              0.375
+            ],
+            [
+              81,
+              1.5
+            ]
+          ],
+          [
+            [
+              78,
+              0.75
+            ],
+            [
+              74,
+              0.75
+            ],
+            [
+              78,
+              1.5
+            ]
+          ]
+        ]
+      },
+      {
+        "bar": 15,
+        "end_bar": 16,
+        "figure": "main_theme_answer",
+        "transformation": "rhythmic_augmentation_1_5_in_3_4",
+        "notes": [
+          [
+            [
+              76,
+              0.75
+            ],
+            [
+              73,
+              0.75
+            ],
+            [
+              69,
+              1.5
+            ]
+          ],
+          [
+            [
+              73,
+              0.75
+            ],
+            [
+              76,
+              0.75
+            ],
+            [
+              73,
+              1.5
+            ]
+          ]
+        ]
+      }
+    ],
+    "description_ja": "13〜16小節目の到着場面だけ、主題の呼びかけと返答を1.5倍の長さで3拍子にアレンジ。前後は独自の別旋律です。"
+  },
+  "revision_origin": {
+    "score_path": "historical-revisions/hoenn-cohesion/scores/COVENANTS.json",
+    "sha256": "cf10756bfdf7a4b22c3c42f832069c13f0f099f3e2278f24aaf771356065f63a",
+    "existing_audio_reused": false,
+    "prior_every_track_theme_requirement_revoked": true
+  },
+  "beats_per_bar": 3,
+  "bass_voice": "cello",
+  "harmony_segments": [
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 2.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 1,
+        "notes": [
+          52
+        ],
+        "root": 40,
+        "anchor_root": 45,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1.5,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          62
+        ],
+        "root": 50,
+        "anchor_root": 47,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 2.0,
+        "duration_beats": 1,
+        "notes": [
+          54
+        ],
+        "root": 42,
+        "anchor_root": 47,
+        "support": "single_tone_or_rest"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59,
+          64
+        ],
+        "root": 40,
+        "anchor_root": 40,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 0.5,
+        "notes": [
+          55,
+          59
+        ],
+        "root": 43,
+        "anchor_root": 40,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 0.5,
+        "notes": [
+          55,
+          59,
+          64
+        ],
+        "root": 40,
+        "anchor_root": 40,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2.0,
+        "duration_beats": 1,
+        "notes": [
+          64
+        ],
+        "root": 40,
+        "anchor_root": 40,
+        "support": "single_tone_or_rest"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 0.5,
+        "notes": [
+          57
+        ],
+        "root": 33,
+        "anchor_root": 38,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 2.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 1,
+        "notes": [
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 43,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          62
+        ],
+        "root": 38,
+        "anchor_root": 43,
+        "support": "single_tone_or_rest"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1.5,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2.0,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 0.5,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 0.5,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2.0,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1.125,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.125,
+        "duration_beats": 0.375,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 1.5,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 0.75,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 0.75,
+        "duration_beats": 0.75,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 1.5,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 0.75,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 0.75,
+        "duration_beats": 0.75,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 1.5,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 0.75,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 0.75,
+        "duration_beats": 0.75,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 1.5,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          55,
+          59,
+          62
+        ],
+        "root": 43,
+        "anchor_root": 43,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1.5,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2.0,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1.5,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 1.5,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ]
+  ],
+  "accompaniment_parts": [
+    {
+      "name": "local_support",
+      "voice": "strings",
+      "volume": 55,
+      "events": [
+        {
+          "pitch": 54,
+          "start_beat": 0,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 0,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 0,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 3,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 3,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 3,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 4,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 5,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 5,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 5,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 6,
+          "duration_beats": 1.5,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 6,
+          "duration_beats": 1.5,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 6,
+          "duration_beats": 1.5,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 8.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 9,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 9,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 9,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 11,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 11,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 11,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 12,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 12,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 64,
+          "start_beat": 12,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 64,
+          "start_beat": 14.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 15,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 15,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 15,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 18,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 18,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 19,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 19,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 20,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 21,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 21,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 21,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 23,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 23,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 23,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 24,
+          "duration_beats": 1.5,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 24,
+          "duration_beats": 1.5,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 24,
+          "duration_beats": 1.5,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 26.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 26.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 26.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 27,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 27,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 27,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 28,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 28,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 28,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 29,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 29,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 29,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 30,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 30,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 32.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 32.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 32.0,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 33,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 33,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 33,
+          "duration_beats": 2,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 35,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 35,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 35,
+          "duration_beats": 1,
+          "velocity": 31,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 36,
+          "duration_beats": 1.125,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 36,
+          "duration_beats": 1.125,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 36,
+          "duration_beats": 1.125,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 37.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 37.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 37.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 39,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 39,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 39,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 39.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 39.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 39.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 40.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 40.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 40.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 42,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 42,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 42,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 42.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 42.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 42.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 43.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 43.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 43.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 45,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 45,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 45,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 45.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 45.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 45.75,
+          "duration_beats": 0.75,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 46.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 46.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 46.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 48,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 48,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 48,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 49,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 49,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 49,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 55,
+          "start_beat": 50,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 50,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 50,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 51,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 51,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 51,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 53.0,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 53.0,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 53.0,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 54,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 54,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 54,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 55,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 55,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 55,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 56,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 56,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 56,
+          "duration_beats": 1,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 57,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 57,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 57,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 52,
+          "start_beat": 58.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 58.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 58.5,
+          "duration_beats": 1.5,
+          "velocity": 37,
+          "articulation": 0.95
+        }
+      ]
+    }
+  ],
+  "drum_events": [],
+  "uses_main_theme": true,
+  "identity_description_ja": "3拍子の終章、ピアノから弦へ、13〜16小節目だけ主題が帰る。13〜16小節目の到着場面だけ、主題の呼びかけと返答を1.5倍の長さで3拍子にアレンジ。前後は独自の別旋律です。",
+  "individuality": {
+    "melody_source": "independently authored literal note rows; no shared figure library",
+    "musical_dna_ja": "3拍子の終章、ピアノから弦へ、13〜16小節目だけ主題が帰る",
+    "meter": "3/4",
+    "groove": "farewell",
+    "main_theme_used": true,
+    "source_audio_reused": false
+  }
+}

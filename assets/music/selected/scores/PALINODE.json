@@ -1,0 +1,1061 @@
+{
+  "schema": 2,
+  "cue_id": "PALINODE",
+  "title": "What the Deep Remembers",
+  "bpm": 62,
+  "key": "F# minor",
+  "meter": "4/4",
+  "bars": 12,
+  "melody_bars": [
+    [
+      [
+        66,
+        3
+      ],
+      [
+        68,
+        0.5
+      ],
+      [
+        69,
+        0.5
+      ]
+    ],
+    [
+      [
+        73,
+        2
+      ],
+      [
+        71,
+        1
+      ],
+      [
+        69,
+        1
+      ]
+    ],
+    [
+      [
+        68,
+        1.5
+      ],
+      [
+        66,
+        0.5
+      ],
+      [
+        64,
+        1
+      ],
+      [
+        61,
+        1
+      ]
+    ],
+    [
+      [
+        65,
+        2.5
+      ],
+      [
+        null,
+        1.5
+      ]
+    ],
+    [
+      [
+        69,
+        2
+      ],
+      [
+        73,
+        1
+      ],
+      [
+        76,
+        1
+      ]
+    ],
+    [
+      [
+        78,
+        3
+      ],
+      [
+        76,
+        0.5
+      ],
+      [
+        73,
+        0.5
+      ]
+    ],
+    [
+      [
+        71,
+        1
+      ],
+      [
+        69,
+        1
+      ],
+      [
+        66,
+        2
+      ]
+    ],
+    [
+      [
+        65,
+        2
+      ],
+      [
+        68,
+        1
+      ],
+      [
+        null,
+        1
+      ]
+    ],
+    [
+      [
+        66,
+        2
+      ],
+      [
+        73,
+        1
+      ],
+      [
+        71,
+        0.5
+      ],
+      [
+        69,
+        0.5
+      ]
+    ],
+    [
+      [
+        68,
+        2.5
+      ],
+      [
+        66,
+        0.5
+      ],
+      [
+        64,
+        1
+      ]
+    ],
+    [
+      [
+        62,
+        2
+      ],
+      [
+        64,
+        1
+      ],
+      [
+        66,
+        1
+      ]
+    ],
+    [
+      [
+        65,
+        3
+      ],
+      [
+        null,
+        1
+      ]
+    ]
+  ],
+  "chords_bars": [
+    {
+      "root": 42,
+      "notes": [
+        54,
+        57,
+        61
+      ],
+      "symbol": "i"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "VI"
+    },
+    {
+      "root": 47,
+      "notes": [
+        54,
+        59,
+        62
+      ],
+      "symbol": "iv"
+    },
+    {
+      "root": 37,
+      "notes": [
+        53,
+        56,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 45,
+      "notes": [
+        52,
+        57,
+        61
+      ],
+      "symbol": "III"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "VI"
+    },
+    {
+      "root": 47,
+      "notes": [
+        54,
+        59,
+        62
+      ],
+      "symbol": "iv"
+    },
+    {
+      "root": 37,
+      "notes": [
+        53,
+        56,
+        61
+      ],
+      "symbol": "V"
+    },
+    {
+      "root": 42,
+      "notes": [
+        54,
+        57,
+        61
+      ],
+      "symbol": "i"
+    },
+    {
+      "root": 47,
+      "notes": [
+        54,
+        59,
+        62
+      ],
+      "symbol": "iv"
+    },
+    {
+      "root": 38,
+      "notes": [
+        54,
+        57,
+        62
+      ],
+      "symbol": "VI"
+    },
+    {
+      "root": 37,
+      "notes": [
+        53,
+        56,
+        61
+      ],
+      "symbol": "V"
+    }
+  ],
+  "melody_voices_by_bar": [
+    "cello",
+    "cello",
+    "cello",
+    "cello",
+    "organ",
+    "organ",
+    "organ",
+    "organ",
+    "cello",
+    "cello",
+    "cello",
+    "cello"
+  ],
+  "arrangement": {
+    "profile": "underwater",
+    "explicit_parts": true,
+    "melody_volume": 75,
+    "bass_volume": 57,
+    "description_ja": "最も遅いチェロの独白、オルガンの記憶と長い静けさ"
+  },
+  "caption": "Instrumental original handheld JRPG underwater cue in F# minor, 4/4, 62 quarter-note BPM. Preserve the complete supplied 12-bar independent melody, varied phrase rests, explicit scene-specific support and bass. cello lead with organ support. Clean restrained timbres, no extra notes or reharmonization, no distortion, vocals or fade.",
+  "form_description": "12 bars in slow 4/4: four-bar lonely cello cantilena with long rests; four-bar muted organ recollection; four-bar lower cello answer that ends before the loop. A deliberately sparse independent melody carries the deep sanctuary.",
+  "reference_tracks": [
+    80,
+    82,
+    91
+  ],
+  "composition_notes": "Independently authored literal tune, meter, form and groove for this region. Scalar passing notes retain their melodic shape while accompaniment thins to a consonant single tone or dyad; they are not forced into arpeggiated triads. A nearest-motion triadic anchor path guides harmonic direction. Independently selected bass avoids exposed parallel fifths/octaves, and scene-specific rests break its automatic doubling of the lead rhythm. Actual score and MIDI events are separately audited; this is not a claim of human listening approval.",
+  "bass_bars": [
+    [
+      [
+        37,
+        3.5
+      ],
+      [
+        42,
+        0.5
+      ]
+    ],
+    [
+      [
+        42,
+        4.0
+      ]
+    ],
+    [
+      [
+        47,
+        3.0
+      ],
+      [
+        42,
+        1.0
+      ]
+    ],
+    [
+      [
+        41,
+        4.0
+      ]
+    ],
+    [
+      [
+        45,
+        4.0
+      ]
+    ],
+    [
+      [
+        45,
+        4.0
+      ]
+    ],
+    [
+      [
+        42,
+        4.0
+      ]
+    ],
+    [
+      [
+        37,
+        4.0
+      ]
+    ],
+    [
+      [
+        42,
+        4.0
+      ]
+    ],
+    [
+      [
+        47,
+        4.0
+      ]
+    ],
+    [
+      [
+        45,
+        3.0
+      ],
+      [
+        38,
+        1.0
+      ]
+    ],
+    [
+      [
+        37,
+        4.0
+      ]
+    ]
+  ],
+  "harmonic_policy": {
+    "consonant_pitch_class_intervals": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9
+    ],
+    "intentional_exceptions": [],
+    "scalar_melody_policy": "Thinned support at nonchord melodic notes; independently scored bass, no fixed-root pedal that clashes with passing tones",
+    "bass_voice": "Independent movement with exposed parallel fifth/octave avoidance",
+    "release_policy": "Per-part release gates before unsafe pitch/harmony transitions; no old support tail may create an unintended clash"
+  },
+  "voice_leading": {
+    "independent_parts": [
+      "melody",
+      "bass"
+    ],
+    "parallel_perfect_policy": "Avoid exposed same-direction parallel fifths/octaves, including loop",
+    "counterpoint_scope": "Independent melody and bass; explicit chordal orchestration is not claimed as species counterpoint",
+    "harmony": "Voice-led triadic anchors; only consonant filtered portions are sounded during passing notes",
+    "bass_bars_are_authoritative": true
+  },
+  "revision_origin": {
+    "score_path": "historical-revisions/hoenn-cohesion/scores/PALINODE.json",
+    "sha256": "fb6b24d64fc8db7a05f8ae4a6faa15f0d07c5a4887e9f3049403263bf9c63c2d",
+    "existing_audio_reused": false,
+    "prior_every_track_theme_requirement_revoked": true
+  },
+  "beats_per_bar": 4,
+  "bass_voice": "cello",
+  "harmony_segments": [
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 3,
+        "notes": [
+          54,
+          57,
+          61
+        ],
+        "root": 42,
+        "anchor_root": 42,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 0.5,
+        "notes": [
+          61
+        ],
+        "root": 37,
+        "anchor_root": 42,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 3.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          57,
+          61
+        ],
+        "root": 42,
+        "anchor_root": 42,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          54,
+          57
+        ],
+        "root": 42,
+        "anchor_root": 38,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1.5,
+        "notes": [
+          59
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 1.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2.0,
+        "duration_beats": 1,
+        "notes": [
+          59
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 3.0,
+        "duration_beats": 1,
+        "notes": [
+          54
+        ],
+        "root": 42,
+        "anchor_root": 47,
+        "support": "single_tone_or_rest"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2.5,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2.5,
+        "duration_beats": 1.5,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 1,
+        "notes": [
+          52,
+          57,
+          61
+        ],
+        "root": 45,
+        "anchor_root": 45,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 3,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 0.5,
+        "notes": [
+          57
+        ],
+        "root": 33,
+        "anchor_root": 38,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 3.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          57
+        ],
+        "root": 42,
+        "anchor_root": 38,
+        "support": "consonant_dyad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 1,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          62
+        ],
+        "root": 50,
+        "anchor_root": 47,
+        "support": "consonant_dyad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 2,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 1,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          54,
+          57,
+          61
+        ],
+        "root": 42,
+        "anchor_root": 42,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          61
+        ],
+        "root": 42,
+        "anchor_root": 42,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 0.5,
+        "notes": [
+          54
+        ],
+        "root": 42,
+        "anchor_root": 42,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 3.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          57,
+          61
+        ],
+        "root": 42,
+        "anchor_root": 42,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2.5,
+        "notes": [
+          59
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 2.5,
+        "duration_beats": 0.5,
+        "notes": [
+          54,
+          59,
+          62
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3.0,
+        "duration_beats": 1,
+        "notes": [
+          59
+        ],
+        "root": 47,
+        "anchor_root": 47,
+        "support": "single_tone_or_rest"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 2,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 2,
+        "duration_beats": 1,
+        "notes": [
+          57
+        ],
+        "root": 33,
+        "anchor_root": 38,
+        "support": "single_tone_or_rest"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 1,
+        "notes": [
+          54,
+          57,
+          62
+        ],
+        "root": 38,
+        "anchor_root": 38,
+        "support": "full_triad"
+      }
+    ],
+    [
+      {
+        "start_beat": 0,
+        "duration_beats": 3,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      },
+      {
+        "start_beat": 3,
+        "duration_beats": 1,
+        "notes": [
+          53,
+          56,
+          61
+        ],
+        "root": 37,
+        "anchor_root": 37,
+        "support": "full_triad"
+      }
+    ]
+  ],
+  "accompaniment_parts": [
+    {
+      "name": "local_support",
+      "voice": "organ",
+      "volume": 55,
+      "events": [
+        {
+          "pitch": 57,
+          "start_beat": 0,
+          "duration_beats": 3,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 0,
+          "duration_beats": 3,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 54,
+          "start_beat": 4,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 4,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 8,
+          "duration_beats": 1.5,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 56,
+          "start_beat": 12,
+          "duration_beats": 2.5,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 12,
+          "duration_beats": 2.5,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 56,
+          "start_beat": 14.5,
+          "duration_beats": 1.5,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 14.5,
+          "duration_beats": 1.5,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 16,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 16,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 20,
+          "duration_beats": 3,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 20,
+          "duration_beats": 3,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 26,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 26,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 56,
+          "start_beat": 28,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 28,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 32,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 32,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 59,
+          "start_beat": 36,
+          "duration_beats": 2.5,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 57,
+          "start_beat": 40,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 62,
+          "start_beat": 40,
+          "duration_beats": 2,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 56,
+          "start_beat": 44,
+          "duration_beats": 3,
+          "velocity": 26,
+          "articulation": 0.95
+        },
+        {
+          "pitch": 61,
+          "start_beat": 44,
+          "duration_beats": 3,
+          "velocity": 26,
+          "articulation": 0.95
+        }
+      ]
+    }
+  ],
+  "drum_events": [],
+  "uses_main_theme": false,
+  "identity_description_ja": "最も遅いチェロの独白、オルガンの記憶と長い静けさ。この曲にはメインテーマを引用せず、この地域だけの独立した旋律・展開・拍子と音色を使っています。",
+  "individuality": {
+    "melody_source": "independently authored literal note rows; no shared figure library",
+    "musical_dna_ja": "最も遅いチェロの独白、オルガンの記憶と長い静けさ",
+    "meter": "4/4",
+    "groove": "memory",
+    "main_theme_used": false,
+    "source_audio_reused": false
+  }
+}

@@ -22,10 +22,12 @@
     "Characters / worlds / effects",
     "Code-native Python / Pillow art",
     "",
+    "Original game music",
+    "GarlicDot",
     "Original regional music",
     "Composed with OpenAI",
     "23 original area themes",
-    "Lanterns by the Footbridge",
+    "FluidSynth / FluidR3 GM",
     "",
     "PixelMplus12 Regular",
     "itouhiro / M+ FONTS PROJECT",
@@ -60,7 +62,7 @@
     "project": "Repository owner ricky9408/adventure-legends; identity credit, not a claim of sole asset authorship.",
     "development_assistance": "OpenAI Codex implementation work on this project.",
     "art": "assets/*/CREDITS.txt and assets/CAMPAIGN_CREDITS.txt document original project code-native geometry.",
-    "music": "Original project-specific compositions created with OpenAI for this game. HOME preserves the approved Lanterns master exactly. All 23 cue credits and source provenance are in assets/music/regional/catalog.json and README_MUSIC.md. No third-party recordings or samples.",
+    "music": "Original game music credit: GarlicDot, as supplied by the owner. Current 23 BGMs are original scores created with OpenAI and rendered with FluidSynth / FluidR3 GM; room-68 PSG2 is an original theme arrangement. Final owner selection and exact cartridge inputs: assets/music/selected/catalog.json and README_MUSIC.md. Earlier regional catalog remains historical provenance.",
     "fonts": "assets/fonts/README_NATIVE.md; official PixelMplus LICENSE_E and k8x12 author notices; original GBJ, Noto and DejaVu notices are retained.",
     "tools": "Actual Makefile, generators and capture/test scripts; tools are credited for production/testing, not as embedded game assets."
   }

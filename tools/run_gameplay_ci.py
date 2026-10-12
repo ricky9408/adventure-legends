@@ -155,7 +155,7 @@ def main():
                                   '-p', 'test_gameplay_ci.py'])
         stage('review-inventory-preflight', [python, '-c',
               "import sys; sys.path.insert(0,'tests'); "
-              "from verify_review_successor import verify; "
+              "from selected_music_boundary import verify; "
               "c,_=verify(chain=False); "
               "print('Exact production inventory PASS:',len(c['current_production']),'files')"])
         if args.suite in ('all', 'host'):
@@ -178,7 +178,7 @@ def main():
             rom_sha = snapshots[-1]['emberbond.gba']
             stage('native-font-corpus', [python, 'tests/test_native_japanese_font.py',
                   '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym')], timeout=300)
-            common = [python, 'tests/regional_music_native.py', '--expected-rom-sha', rom_sha]
+            common = [python, 'tests/selected_music_native.py', '--expected-rom-sha', rom_sha]
             stage('controller-route', common + ['--cases', 'controllers', '--output',
                                                 str(out / 'controllers')], timeout=600)
             native = json.loads((out / 'controllers/report.json').read_text())

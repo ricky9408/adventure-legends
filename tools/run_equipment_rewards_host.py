@@ -39,6 +39,9 @@ def main():
   elif name=='verify_late_renderer':name='soundtrack-boundary-and-historical-renderer';cmd=[sys.executable,'tests/verify_review_successor.py']
   elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--renderer-negatives']
   routed.append((name,cmd,extra))
+ for name,cmd,extra in routed:
+  if cmd[1]=='tests/verify_review_successor.py':cmd[1]='tests/selected_music_boundary.py'
+  elif name=='test_review_successor':cmd[1]='tests/selected_music_boundary.py';cmd.append('--parent-tests')
  commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime')]
  report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}
  def save():(out/'report.json').write_text(json.dumps(report,indent=2)+'\n')

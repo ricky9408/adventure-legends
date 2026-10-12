@@ -26,6 +26,7 @@ MUSIC_INPUTS={'assets/music/original-v2/village_gba_synthetic_v2.wav':'1c2d3f437
 MUSIC_INPUTS.update({'assets/music/lanterns/lanterns-gba-16384-s8.raw': 'a9ada6ff0b3ef068dc8ab9bfabd02f69521c6ef252420157b9646636e98e4838', 'assets/music/lanterns/source/lanterns_by_the_footbridge.mid': 'cacfafc0fc305e60b696de01e3bb9b3401dffcbcc0952d6f77f3485294ef60a3', 'assets/music/lanterns/source/lanterns_by_the_footbridge.musicxml': '5dd3c8463f147760785998518d9be1a32a790e7921461b9cf6fd38fef53046a2'})
 # Reviewed regional source/render binary inputs. Hash checked on every export.
 MUSIC_INPUTS.update(json.loads((ROOT/'assets/music/regional/binary-input-pins.json').read_text()))
+MUSIC_INPUTS.update(json.loads((ROOT/'assets/music/selected/binary-input-pins.json').read_text()))
 # Redundant large contact sheets are reproducible with make assets. Individual
 # region/camera PNGs remain included; these are not ROM inputs or test fixtures.
 # Exact oversized historical reports ship as deterministic gzip, with raw hashes
@@ -83,6 +84,7 @@ def source_files():
     for name in SOURCE_ROOTS:
         for p in (ROOT/name).rglob('*'):
             rel=p.relative_to(ROOT)
+            if rel.parts[:3] in {('assets','music','ace'),('assets','music','suno')}:continue
             if p.is_symlink() or not p.is_file() or EXCLUDED.intersection(rel.parts):continue
             # The bridge smoke test creates a disposable color screenshot in
             # its own directory. Ship its self-generating script, not outputs.
@@ -109,7 +111,7 @@ def source_files():
 def main():
     OUT.mkdir(exist_ok=True)
     files=source_files()
-    manifest={'schema':1,'purpose':'Original 23-cue regional soundtrack, explicit78room mapping, exact unpadded PCM, preserved HOME and gameplay/save/font, updated music credits; current evidence and historical limits','files':[]}
+    manifest={'schema':1,'purpose':'Owner-selected 23-cue soundtrack and PSG jingle, exact unpadded PCM, preserved78room routing and gameplay/save/font; current evidence and historical limits','files':[]}
     target=OUT/'Adventure-Legends-Emberbond-source.zip'
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
         for p in files:

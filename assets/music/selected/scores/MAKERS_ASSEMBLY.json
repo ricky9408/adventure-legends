@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "cue_id": "MAKERS_ASSEMBLY",
+  "title": "The Lanterns Answer Together",
+  "midi_notes": [
+    62,
+    66,
+    69,
+    66,
+    62,
+    66,
+    69,
+    66,
+    62,
+    66,
+    69,
+    66
+  ],
+  "lengths": [
+    20,
+    10,
+    10,
+    20,
+    20,
+    10,
+    10,
+    20,
+    20,
+    10,
+    10,
+    20
+  ],
+  "bpm": 120,
+  "key": "D major",
+  "meter": "4/4",
+  "source_theme": {
+    "cue_id": "HORIZONS",
+    "score": {
+      "path": "historical-revisions/hoenn-variety/scores/HORIZONS.json",
+      "sha256": "a45fcba9b85736a0ad4519cd6eb4c37f4a115d0d7766b133918a4ed9700e8694"
+    },
+    "selected_event_indices": [
+      0,
+      1,
+      2,
+      3,
+      0,
+      1,
+      2,
+      3,
+      0,
+      1,
+      2,
+      3
+    ],
+    "pitch_transposition_semitones": -12,
+    "indexing_basis": "Flatten melody_bars omitting rests; repeat the original core motif first four notes three times, one octave lower for PSG2."
+  },
+  "caption": "Original monophonic handheld makers-assembly jingle. Preserve the supplied twelve-note Promise-of-the-Lantern motif and exact timing. One warm square lead, three short calls, no chords, backing parts, vocals or fade.",
+  "note_origin": "Original main theme leitmotif as reused in HORIZONS, then arranged one octave lower for the fixed twelve-note 180-update PSG2 contract.",
+  "leitmotif": {
+    "id": "promise-of-the-lantern",
+    "name_ja": "灯火の約束",
+    "original": true,
+    "appearances": [
+      {
+        "notes": [
+          62,
+          66,
+          69,
+          66,
+          62,
+          66,
+          69,
+          66,
+          62,
+          66,
+          69,
+          66
+        ],
+        "transformation": "first_four_notes_repeated_three_times_octave_lower"
+      }
+    ],
+    "main_theme_used": true,
+    "description_ja": "共同体の作業場だけ、メインテーマの最初の4音を1オクターブ低く3回返す短い合図。12音・180更新のゲーム動作を維持。"
+  },
+  "harmonic_policy": {
+    "intentional_exceptions": [],
+    "monophonic": true
+  },
+  "uses_main_theme": true,
+  "identity_description_ja": "共同体の作業場の短い合図。主題の4音を低い矩形波で3回返します。",
+  "revision_origin": {
+    "score_path": "historical-revisions/hoenn-cohesion/scores/MAKERS_ASSEMBLY.json",
+    "sha256": "a4ac43b9f9fbcb3abe0d79d069c7de608d4f9bc0483c24dd1b7ea019a13077c1",
+    "existing_audio_reused": false
+  }
+}

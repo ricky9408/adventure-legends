@@ -227,6 +227,28 @@
     "ink_bounds": null
   },
   "LINE_12": {
+    "text": "Original game music",
+    "height": 15,
+    "width": 115,
+    "ink_bounds": [
+      0,
+      0,
+      113,
+      14
+    ]
+  },
+  "LINE_13": {
+    "text": "GarlicDot",
+    "height": 15,
+    "width": 55,
+    "ink_bounds": [
+      0,
+      0,
+      53,
+      11
+    ]
+  },
+  "LINE_14": {
     "text": "Original regional music",
     "height": 15,
     "width": 139,
@@ -237,7 +259,7 @@
       14
     ]
   },
-  "LINE_13": {
+  "LINE_15": {
     "text": "Composed with OpenAI",
     "height": 15,
     "width": 121,
@@ -248,7 +270,7 @@
       14
     ]
   },
-  "LINE_14": {
+  "LINE_16": {
     "text": "23 original area themes",
     "height": 15,
     "width": 139,
@@ -259,24 +281,24 @@
       14
     ]
   },
-  "LINE_15": {
-    "text": "Lanterns by the Footbridge",
+  "LINE_17": {
+    "text": "FluidSynth / FluidR3 GM",
     "height": 15,
-    "width": 157,
+    "width": 139,
     "ink_bounds": [
       0,
       0,
-      155,
+      137,
       14
     ]
   },
-  "LINE_16": {
+  "LINE_18": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_17": {
+  "LINE_19": {
     "text": "PixelMplus12 Regular",
     "height": 15,
     "width": 121,
@@ -287,7 +309,7 @@
       14
     ]
   },
-  "LINE_18": {
+  "LINE_20": {
     "text": "itouhiro / M+ FONTS PROJECT",
     "height": 15,
     "width": 163,
@@ -298,7 +320,7 @@
       12
     ]
   },
-  "LINE_19": {
+  "LINE_21": {
     "text": "github.com/itouhiro/PixelMplus",
     "height": 15,
     "width": 181,
@@ -309,13 +331,13 @@
       14
     ]
   },
-  "LINE_20": {
+  "LINE_22": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_21": {
+  "LINE_23": {
     "text": "k8x12 bitmap font",
     "height": 15,
     "width": 103,
@@ -326,7 +348,7 @@
       14
     ]
   },
-  "LINE_22": {
+  "LINE_24": {
     "text": "Num Kadoma",
     "height": 15,
     "width": 61,
@@ -337,7 +359,7 @@
       11
     ]
   },
-  "LINE_23": {
+  "LINE_25": {
     "text": "littlelimit.net/k8x12.htm",
     "height": 15,
     "width": 151,
@@ -348,13 +370,13 @@
       12
     ]
   },
-  "LINE_24": {
+  "LINE_26": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_25": {
+  "LINE_27": {
     "text": "GBJ / GBJ-Slim fonts",
     "height": 15,
     "width": 121,
@@ -365,7 +387,7 @@
       12
     ]
   },
-  "LINE_26": {
+  "LINE_28": {
     "text": "GeeBee",
     "height": 15,
     "width": 37,
@@ -376,7 +398,7 @@
       11
     ]
   },
-  "LINE_27": {
+  "LINE_29": {
     "text": "https://geebeegb.itch.io/gbj",
     "height": 15,
     "width": 169,
@@ -387,13 +409,13 @@
       14
     ]
   },
-  "LINE_28": {
+  "LINE_30": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_29": {
+  "LINE_31": {
     "text": "Retained earlier font license",
     "height": 15,
     "width": 175,
@@ -404,7 +426,7 @@
       11
     ]
   },
-  "LINE_30": {
+  "LINE_32": {
     "text": "Noto Sans CJK / Google",
     "height": 15,
     "width": 133,
@@ -415,7 +437,7 @@
       14
     ]
   },
-  "LINE_31": {
+  "LINE_33": {
     "text": "SIL Open Font License 1.1",
     "height": 15,
     "width": 151,
@@ -426,7 +448,7 @@
       14
     ]
   },
-  "LINE_32": {
+  "LINE_34": {
     "text": "Small footer Latin",
     "height": 15,
     "width": 109,
@@ -437,7 +459,7 @@
       11
     ]
   },
-  "LINE_33": {
+  "LINE_35": {
     "text": "DejaVu Fonts / Bitstream Vera",
     "height": 15,
     "width": 175,
@@ -448,7 +470,7 @@
       14
     ]
   },
-  "LINE_34": {
+  "LINE_36": {
     "text": "Copyright 2003 Bitstream Inc.",
     "height": 15,
     "width": 175,
@@ -459,13 +481,13 @@
       14
     ]
   },
-  "LINE_35": {
+  "LINE_37": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_36": {
+  "LINE_38": {
     "text": "Build / artwork / audio tools",
     "height": 15,
     "width": 175,
@@ -476,7 +498,7 @@
       12
     ]
   },
-  "LINE_37": {
+  "LINE_39": {
     "text": "GNU Arm GCC / Python / Pillow",
     "height": 15,
     "width": 175,
@@ -487,7 +509,7 @@
       14
     ]
   },
-  "LINE_38": {
+  "LINE_40": {
     "text": "NumPy / SciPy",
     "height": 15,
     "width": 79,
@@ -498,7 +520,7 @@
       14
     ]
   },
-  "LINE_39": {
+  "LINE_41": {
     "text": "Testing / capture tools",
     "height": 15,
     "width": 139,
@@ -509,7 +531,7 @@
       14
     ]
   },
-  "LINE_40": {
+  "LINE_42": {
     "text": "mGBA / FFmpeg",
     "height": 15,
     "width": 79,
@@ -520,13 +542,13 @@
       14
     ]
   },
-  "LINE_41": {
+  "LINE_43": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_42": {
+  "LINE_44": {
     "text": "Full license notices in source",
     "height": 15,
     "width": 181,
@@ -537,7 +559,7 @@
       11
     ]
   },
-  "LINE_43": {
+  "LINE_45": {
     "text": "ありがとう！",
     "height": 15,
     "width": 73,
@@ -548,7 +570,7 @@
       12
     ]
   },
-  "LINE_44": {
+  "LINE_46": {
     "text": "THANK YOU FOR PLAYING",
     "height": 15,
     "width": 127,
