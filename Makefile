@@ -453,6 +453,7 @@ test-equipment-rewards-host: all
 .PHONY: test-readable-aim-input
 test-readable-aim-input:
 	$(PYTHON) tests/test_readable_aim_input.py
+	$(PYTHON) tests/test_horizons_cast_admission.py
 	$(PYTHON) tests/test_play_notice_cache.py
 
 .PHONY: font-assets

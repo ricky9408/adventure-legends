@@ -361,7 +361,10 @@ int horizons_powers_intercept_shot(unsigned i,int x,int y,int tx,int ty,int elig
  }return 0;
 }
 int horizons_power(unsigned command){CreatureInstance*c;const CreatureAbility*a;const Spec*s;unsigned i,cd;
- if(command<106||command>121||ability_cd||horizons_power_time||hitstop||face<0||face>3||!coord(px,py)||blocked(px,py))return 0;
+ /* Admission needs one authoritative point, before this cast has an origin.
+  * A lazy rectangle snapshot here would use the previous origin and be
+  * discarded below; build only the actual effect's geometry after admission. */
+ if(command<106||command>121||ability_cd||horizons_power_time||hitstop||face<0||face>3||!coord(px,py)||solid(px,py))return 0;
  c=progression_selected();a=creatures_ability(command);s=&specs[command-106];
  if(!c||!creatures_instance_validate(c)||c->selected_command>=2||c->equipped[c->selected_command]!=command||!creatures_command_learned(c->form_id,c->level,command)||!a||a->phase!=s->phase||a->cooldown_updates!=s->cooldown)return 0;
  if(!northern_powers_tiles_claim(NORTHERN_TILES_HORIZONS))return 0;
