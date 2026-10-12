@@ -6,6 +6,7 @@ scenery, trial navigation and historical-return checks. Native timing is separat
 """
 import argparse,ast,hashlib,json,os,subprocess,sys,time
 from pathlib import Path
+from host_production_guard import ProductionGuard
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
@@ -16,6 +17,7 @@ def main():
  names=list(dict.fromkeys(names+extras));assert len(names)==62
  def unchanged():return all(sha(ROOT/k)==v for k,v in runtime.items())
  assert unchanged()
+ production=ProductionGuard()
  report={'scope':__doc__,'result':'RUNNING','baseline_aggregate_sha256':sha(base),'runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n) for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}
  def save():(out/'run-status.json').write_text(json.dumps(report,indent=2)+'\n')
  save();fixture_dir=out/'checkpoint-fixtures';environment={**os.environ,'CONNECTED_ROAD_FIXTURES':str(fixture_dir),'ASAN_OPTIONS':'detect_leaks=0:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'}
@@ -34,7 +36,10 @@ def main():
  for index,(name,cmd) in enumerate(commands):
   assert unchanged(),'Runtime changed between checks';helper=ROOT/cmd[1];before=sha(helper);log=out/(f'{index:02d}-'+name+'.log');start=time.monotonic();row={'name':name,'command':cmd,'helper_sha256':before,'log':log.name,'status':'RUNNING','is_test':name!='fixture-preparation'};report['runs'].append(row);save()
   with log.open('w') as f:r=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,env=environment)
-  row.update(exit_code=r.returncode,seconds=round(time.monotonic()-start,3),log_sha256=sha(log),runtime_unchanged=unchanged(),helper_unchanged=sha(helper)==before);row['status']='PASS' if not r.returncode and row['runtime_unchanged'] and row['helper_unchanged'] else 'FAIL';print(name,row['status'],flush=True);save()
-  if not row['runtime_unchanged'] or (name=='fixture-preparation' and r.returncode):report['result']='FAIL';save();return 1
+  production_error=production.error()
+  row.update(exit_code=r.returncode,seconds=round(time.monotonic()-start,3),log_sha256=sha(log),runtime_unchanged=unchanged(),helper_unchanged=sha(helper)==before,production_unchanged=production_error is None)
+  if production_error is not None:row['production_error']=production_error;print('Production changed by '+name+': '+json.dumps(production_error,sort_keys=True),flush=True)
+  row['status']='PASS' if not r.returncode and row['runtime_unchanged'] and row['helper_unchanged'] and row['production_unchanged'] else 'FAIL';print(name,row['status'],flush=True);save()
+  if not row['runtime_unchanged'] or production_error is not None or (name=='fixture-preparation' and r.returncode):report['result']='FAIL';save();return 1
  report['test_commands']=sum(r['is_test'] for r in report['runs']);report['result']='PASS' if all(r['status']=='PASS' for r in report['runs']) else 'FAIL';save();return int(report['result']!='PASS')
 if __name__=='__main__':raise SystemExit(main())
