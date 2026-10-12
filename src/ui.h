@@ -1,7 +1,10 @@
 #ifndef EMBER_UI_H
 #define EMBER_UI_H
 /* Precompiled nonzero pixel-pair spans: no per-frame glyph bit decoding. */
-typedef struct { unsigned short offset; unsigned char count, mask; } UiRun;
+/* Internal span ABI: packed field extraction, never glyph-bit decoding. */
+typedef struct { unsigned short offset:11, count:3, mask:2; } UiRun;
+typedef char UiRun_one_halfword[(sizeof(UiRun)==2)?1:-1];
+typedef char UiRun_halfword_alignment[(__alignof__(UiRun)==2)?1:-1];
 typedef struct { unsigned short width; unsigned char height, reserved; const UiRun *runs[2]; unsigned short count[2]; } UiText;
 enum {
  TX_SUBTITLE,

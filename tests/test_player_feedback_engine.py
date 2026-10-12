@@ -21,8 +21,9 @@ if __name__=='__main__' and os.environ.get('PLAYER_FEEDBACK_PROBE_CHILD')!='1':
  raise SystemExit(run_protected_probe(Path(__file__).resolve()))
 # Reserve before loading any game code or beginning any game assertion.
 libc=reserve_gba_pages()
-class UiRun(C.Structure):
- _fields_=[('offset',C.c_ushort),('count',C.c_ubyte),('mask',C.c_ubyte)]
+class UiRun(C.LittleEndianStructure):
+ _fields_=[('offset',C.c_ushort,11),('count',C.c_ushort,3),('mask',C.c_ushort,2)]
+assert C.sizeof(UiRun)==2 and C.alignment(UiRun)==2,'current packed span ABI'
 class UiText(C.Structure):
  _fields_=[('width',C.c_ushort),('height',C.c_ubyte),('reserved',C.c_ubyte),('runs',C.POINTER(UiRun)*2),('count',C.c_ushort*2)]
 class Entry(C.Structure):

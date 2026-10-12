@@ -2,133 +2,133 @@
   "TITLE": {
     "text": "スタッフロール",
     "height": 15,
-    "width": 49,
+    "width": 85,
     "ink_bounds": [
       1,
-      2,
-      48,
-      9
+      1,
+      83,
+      12
     ]
   },
   "ROLL_HINT": {
     "text": "B / START  里へ戻る",
     "height": 15,
-    "width": 96,
+    "width": 115,
     "ink_bounds": [
+      0,
       1,
-      1,
-      95,
-      11
+      112,
+      12
     ]
   },
   "CARD_HINT": {
     "text": "A クレジット   B / START 里へ",
     "height": 15,
-    "width": 129,
+    "width": 175,
     "ink_bounds": [
-      1,
-      1,
-      128,
-      11
+      0,
+      0,
+      173,
+      12
     ]
   },
   "DONE_HINT": {
     "text": "A もう一度   B / START 里へ",
     "height": 15,
-    "width": 129,
+    "width": 163,
     "ink_bounds": [
-      1,
       0,
-      128,
-      11
+      0,
+      161,
+      12
     ]
   },
   "RELEASE_HINT": {
     "text": "ボタンを離してください",
     "height": 15,
-    "width": 81,
+    "width": 133,
     "ink_bounds": [
-      1,
       0,
-      80,
-      10
+      0,
+      131,
+      12
     ]
   },
   "THANKS": {
     "text": "遊んでくれて、ありがとう！",
     "height": 15,
-    "width": 91,
+    "width": 157,
     "ink_bounds": [
       0,
       0,
-      89,
-      10
+      150,
+      12
     ]
   },
   "HOMECOMING_TITLE": {
     "text": "帰り道の灯は、つづいていく",
     "height": 15,
-    "width": 98,
+    "width": 157,
     "ink_bounds": [
-      1,
       0,
-      96,
-      11
+      0,
+      153,
+      12
     ]
   },
   "HOMECOMING_LINE": {
     "text": "みんなとの約束が、暮らしに戻る。",
     "height": 15,
-    "width": 120,
+    "width": 193,
     "ink_bounds": [
-      1,
       0,
-      118,
-      11
+      0,
+      185,
+      12
     ]
   },
   "HOMECOMING_OPTIONAL": {
     "text": "これからも、仲間に会いに行けます",
     "height": 15,
-    "width": 122,
+    "width": 193,
     "ink_bounds": [
-      1,
+      2,
       0,
-      121,
-      11
+      191,
+      12
     ]
   },
   "HOMECOMING_KEYS": {
     "text": "A クレジット   B 冒険をつづける",
     "height": 15,
-    "width": 119,
+    "width": 187,
     "ink_bounds": [
-      1,
       0,
-      118,
-      11
+      0,
+      184,
+      12
     ]
   },
   "LINE_0": {
     "text": "ADVENTURE LEGENDS",
     "height": 15,
-    "width": 116,
+    "width": 103,
     "ink_bounds": [
-      1,
+      0,
       2,
-      114,
-      9
+      101,
+      11
     ]
   },
   "LINE_1": {
     "text": "EMBERBOND / 灯の契約",
     "height": 15,
-    "width": 114,
+    "width": 121,
     "ink_bounds": [
-      1,
       0,
-      112,
-      11
+      0,
+      119,
+      12
     ]
   },
   "LINE_2": {
@@ -140,45 +140,45 @@
   "LINE_3": {
     "text": "Project",
     "height": 15,
-    "width": 31,
+    "width": 43,
     "ink_bounds": [
+      0,
       1,
-      1,
-      30,
-      9
+      41,
+      14
     ]
   },
   "LINE_4": {
     "text": "ricky9408 / Adventure Legends",
     "height": 15,
-    "width": 145,
+    "width": 175,
     "ink_bounds": [
-      1,
       0,
-      144,
-      9
+      0,
+      173,
+      14
     ]
   },
   "LINE_5": {
     "text": "Development assistance",
     "height": 15,
-    "width": 100,
+    "width": 133,
     "ink_bounds": [
-      1,
       0,
-      99,
-      9
+      0,
+      131,
+      14
     ]
   },
   "LINE_6": {
     "text": "OpenAI Codex",
     "height": 15,
-    "width": 67,
+    "width": 73,
     "ink_bounds": [
-      1,
       0,
-      65,
-      9
+      2,
+      71,
+      14
     ]
   },
   "LINE_7": {
@@ -190,34 +190,34 @@
   "LINE_8": {
     "text": "Original project pixel art",
     "height": 15,
-    "width": 101,
+    "width": 157,
     "ink_bounds": [
-      1,
       0,
-      100,
-      9
+      0,
+      155,
+      14
     ]
   },
   "LINE_9": {
     "text": "Characters / worlds / effects",
     "height": 15,
-    "width": 127,
+    "width": 175,
     "ink_bounds": [
-      1,
       0,
-      126,
-      9
+      2,
+      173,
+      12
     ]
   },
   "LINE_10": {
     "text": "Code-native Python / Pillow art",
     "height": 15,
-    "width": 137,
+    "width": 187,
     "ink_bounds": [
-      1,
       0,
-      136,
-      9
+      0,
+      185,
+      14
     ]
   },
   "LINE_11": {
@@ -229,45 +229,45 @@
   "LINE_12": {
     "text": "Original regional music",
     "height": 15,
-    "width": 95,
+    "width": 139,
     "ink_bounds": [
-      1,
       0,
-      94,
-      9
+      0,
+      137,
+      14
     ]
   },
   "LINE_13": {
     "text": "Composed with OpenAI",
     "height": 15,
-    "width": 104,
+    "width": 121,
     "ink_bounds": [
-      1,
       0,
-      101,
-      9
+      0,
+      118,
+      14
     ]
   },
   "LINE_14": {
     "text": "23 original area themes",
     "height": 15,
-    "width": 103,
+    "width": 139,
     "ink_bounds": [
-      1,
       0,
-      102,
-      9
+      0,
+      137,
+      14
     ]
   },
   "LINE_15": {
     "text": "Lanterns by the Footbridge",
     "height": 15,
-    "width": 117,
+    "width": 157,
     "ink_bounds": [
-      1,
       0,
-      116,
-      9
+      0,
+      155,
+      14
     ]
   },
   "LINE_16": {
@@ -277,36 +277,36 @@
     "ink_bounds": null
   },
   "LINE_17": {
-    "text": "GBJ / GBJ-Slim fonts",
+    "text": "PixelMplus12 Regular",
     "height": 15,
-    "width": 101,
+    "width": 121,
     "ink_bounds": [
-      1,
       0,
-      100,
-      9
+      0,
+      119,
+      14
     ]
   },
   "LINE_18": {
-    "text": "GeeBee",
+    "text": "itouhiro / M+ FONTS PROJECT",
     "height": 15,
-    "width": 35,
-    "ink_bounds": [
-      1,
-      2,
-      34,
-      9
-    ]
-  },
-  "LINE_19": {
-    "text": "https://geebeegb.itch.io/gbj",
-    "height": 15,
-    "width": 127,
+    "width": 163,
     "ink_bounds": [
       1,
       0,
-      126,
-      9
+      161,
+      12
+    ]
+  },
+  "LINE_19": {
+    "text": "github.com/itouhiro/PixelMplus",
+    "height": 15,
+    "width": 181,
+    "ink_bounds": [
+      0,
+      0,
+      179,
+      14
     ]
   },
   "LINE_20": {
@@ -316,169 +316,247 @@
     "ink_bounds": null
   },
   "LINE_21": {
-    "text": "Kanji fallback",
+    "text": "k8x12 bitmap font",
     "height": 15,
-    "width": 56,
+    "width": 103,
     "ink_bounds": [
-      1,
       0,
-      54,
-      9
+      0,
+      101,
+      14
     ]
   },
   "LINE_22": {
-    "text": "Noto Sans CJK / Google",
+    "text": "Num Kadoma",
     "height": 15,
-    "width": 111,
+    "width": 61,
     "ink_bounds": [
-      1,
       0,
-      110,
-      9
+      2,
+      59,
+      11
     ]
   },
   "LINE_23": {
-    "text": "SIL Open Font License 1.1",
+    "text": "littlelimit.net/k8x12.htm",
     "height": 15,
-    "width": 125,
+    "width": 151,
     "ink_bounds": [
       1,
-      1,
-      122,
-      9
+      0,
+      149,
+      12
     ]
   },
   "LINE_24": {
-    "text": "Latin fallback",
+    "text": "",
     "height": 15,
-    "width": 57,
-    "ink_bounds": [
-      1,
-      0,
-      55,
-      9
-    ]
+    "width": 1,
+    "ink_bounds": null
   },
   "LINE_25": {
-    "text": "DejaVu Fonts / Bitstream Vera",
+    "text": "GBJ / GBJ-Slim fonts",
     "height": 15,
-    "width": 137,
+    "width": 121,
     "ink_bounds": [
-      1,
-      1,
-      136,
-      9
+      0,
+      0,
+      119,
+      12
     ]
   },
   "LINE_26": {
-    "text": "Copyright 2003 Bitstream Inc.",
+    "text": "GeeBee",
     "height": 15,
-    "width": 139,
+    "width": 37,
     "ink_bounds": [
-      1,
       0,
-      137,
-      9
+      2,
+      35,
+      11
     ]
   },
   "LINE_27": {
+    "text": "https://geebeegb.itch.io/gbj",
+    "height": 15,
+    "width": 169,
+    "ink_bounds": [
+      0,
+      0,
+      166,
+      14
+    ]
+  },
+  "LINE_28": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_28": {
-    "text": "Build / artwork / audio tools",
-    "height": 15,
-    "width": 125,
-    "ink_bounds": [
-      1,
-      0,
-      124,
-      9
-    ]
-  },
   "LINE_29": {
-    "text": "GNU Arm GCC / Python / Pillow",
+    "text": "Retained earlier font license",
     "height": 15,
-    "width": 149,
+    "width": 175,
     "ink_bounds": [
-      1,
       0,
-      147,
-      9
+      0,
+      173,
+      11
     ]
   },
   "LINE_30": {
-    "text": "NumPy / SciPy",
+    "text": "Noto Sans CJK / Google",
     "height": 15,
-    "width": 71,
+    "width": 133,
     "ink_bounds": [
-      1,
-      1,
-      70,
-      9
+      0,
+      2,
+      131,
+      14
     ]
   },
   "LINE_31": {
-    "text": "Testing / capture tools",
+    "text": "SIL Open Font License 1.1",
     "height": 15,
-    "width": 98,
+    "width": 151,
     "ink_bounds": [
-      1,
       0,
-      97,
-      9
+      0,
+      147,
+      14
     ]
   },
   "LINE_32": {
-    "text": "mGBA / FFmpeg",
+    "text": "Small footer Latin",
     "height": 15,
-    "width": 80,
+    "width": 109,
     "ink_bounds": [
-      1,
-      2,
-      79,
-      9
+      0,
+      0,
+      107,
+      11
     ]
   },
   "LINE_33": {
+    "text": "DejaVu Fonts / Bitstream Vera",
+    "height": 15,
+    "width": 175,
+    "ink_bounds": [
+      0,
+      0,
+      173,
+      14
+    ]
+  },
+  "LINE_34": {
+    "text": "Copyright 2003 Bitstream Inc.",
+    "height": 15,
+    "width": 175,
+    "ink_bounds": [
+      0,
+      0,
+      172,
+      14
+    ]
+  },
+  "LINE_35": {
     "text": "",
     "height": 15,
     "width": 1,
     "ink_bounds": null
   },
-  "LINE_34": {
+  "LINE_36": {
+    "text": "Build / artwork / audio tools",
+    "height": 15,
+    "width": 175,
+    "ink_bounds": [
+      0,
+      0,
+      173,
+      12
+    ]
+  },
+  "LINE_37": {
+    "text": "GNU Arm GCC / Python / Pillow",
+    "height": 15,
+    "width": 175,
+    "ink_bounds": [
+      0,
+      0,
+      173,
+      14
+    ]
+  },
+  "LINE_38": {
+    "text": "NumPy / SciPy",
+    "height": 15,
+    "width": 79,
+    "ink_bounds": [
+      0,
+      0,
+      77,
+      14
+    ]
+  },
+  "LINE_39": {
+    "text": "Testing / capture tools",
+    "height": 15,
+    "width": 139,
+    "ink_bounds": [
+      0,
+      0,
+      137,
+      14
+    ]
+  },
+  "LINE_40": {
+    "text": "mGBA / FFmpeg",
+    "height": 15,
+    "width": 79,
+    "ink_bounds": [
+      0,
+      2,
+      77,
+      14
+    ]
+  },
+  "LINE_41": {
+    "text": "",
+    "height": 15,
+    "width": 1,
+    "ink_bounds": null
+  },
+  "LINE_42": {
     "text": "Full license notices in source",
     "height": 15,
-    "width": 118,
+    "width": 181,
     "ink_bounds": [
-      1,
       0,
-      117,
-      9
+      0,
+      179,
+      11
     ]
   },
-  "LINE_35": {
+  "LINE_43": {
     "text": "ありがとう！",
     "height": 15,
-    "width": 42,
+    "width": 73,
     "ink_bounds": [
       1,
-      2,
-      40,
-      9
+      1,
+      66,
+      12
     ]
   },
-  "LINE_36": {
+  "LINE_44": {
     "text": "THANK YOU FOR PLAYING",
     "height": 15,
-    "width": 136,
+    "width": 127,
     "ink_bounds": [
-      1,
+      0,
       2,
-      134,
-      9
+      125,
+      11
     ]
   }
 }

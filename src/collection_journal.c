@@ -87,7 +87,9 @@ COLD void collection_journal_draw(void){unsigned i,p,shown=0,family=collection_j
    int y=82+(int)shown*17;if(i==family)rect(13,y-1,214,16,PAL_STONE2);
    /* One known family reveals its potential evolution names, just as Growth
     * does. Completely unseen families never enter this list. */
-   text(progression_name_id(root[i-1]),18,y,i==family?GOLD:CREAM);ratio(obtained[i-1],total[i-1],172,y);shown++;
+   /* The longest authored family name occupies157px. The generated seven
+    * pixel digit cells make the cumulative ratio49px, with a3px gap. */
+   text(progression_name_id(root[i-1]),18,y,i==family?GOLD:CREAM);ratio(obtained[i-1],total[i-1],178,y);shown++;
   }
   if(!shown)growth_goals_center(GJ_NO_FAMILIES,99,CREAM);
   growth_goals_center(GJ_FAMILY_KEYS,138,TEAL);return;

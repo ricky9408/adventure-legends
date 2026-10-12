@@ -235,29 +235,41 @@ void rect(int x,int y,int w,int h,u8 c){
  }
 }
 /* Common opaque cards need one pass over each interior row. The original
- * five-rectangle behavior remains authoritative for clipped/small/unaligned
- * boxes and while a world cover is active. Keep this routine in ROM. */
+ * five-rectangle behavior remains authoritative for clipped/small boxes,
+ * unaligned left edges, and active world covers. Keep this routine in ROM. */
 COLD void box(int x,int y,int w,int h){
- if(!world_mask_active&&x>=0&&y>=0&&x+w<=240&&y+h<=160&&!(x&3)&&!(w&3)&&w>=32&&h>=3){
+ if(!world_mask_active&&x>=0&&y>=0&&x+w<=240&&y+h<=160&&!(x&3)&&w>=32&&h>=3){
   /* DMA reads through MMIO addresses; volatile keeps source initialization
    * observable to the compiler even though no C pointer reads these words. */
   volatile u32 fill=(u32)UI_BG*0x01010101u,border=(u32)UI_BORDER*0x01010101u;
   u32 left=(fill&0xffffff00u)|UI_BORDER,right=(fill&0x00ffffffu)|((u32)UI_BORDER<<24);
-  int row,words=w>>2;
+  int row,words=w>>2,tail=w&3;
+  if(tail){rect(x,y,w,1,UI_BORDER);rect(x,y+h-1,w,1,UI_BORDER);}
+  else {
 #ifndef GAME_HOST_TEST
   REG32(0x040000D4)=(u32)&border;REG32(0x040000D8)=(u32)(screen+y*120+(x>>1));REG32(0x040000DC)=0x85000000|words;
   REG32(0x040000D8)=(u32)(screen+(y+h-1)*120+(x>>1));REG32(0x040000DC)=0x85000000|words;
-  REG32(0x040000D4)=(u32)&fill;
 #else
   {int col;for(col=x;col<x+w;col+=2){screen[y*120+(col>>1)]=(u16)border;screen[(y+h-1)*120+(col>>1)]=(u16)border;}}
 #endif
-  for(row=y+1;row<y+h-1;row++){
-   u32 *dst=(u32*)(screen+row*120+(x>>1));dst[0]=left;dst[words-1]=right;
+  }
 #ifndef GAME_HOST_TEST
-   REG32(0x040000D8)=(u32)(dst+1);REG32(0x040000DC)=0x85000000|(words-2);
-#else
-   {int col;for(col=1;col<words-1;col++)dst[col]=fill;}
+  REG32(0x040000D4)=(u32)&fill;
 #endif
+  for(row=y+1;row<y+h-1;row++){
+   u32 *dst=(u32*)(screen+row*120+(x>>1));dst[0]=left;if(!tail)dst[words-1]=right;
+#ifndef GAME_HOST_TEST
+   REG32(0x040000D8)=(u32)(dst+1);REG32(0x040000DC)=0x85000000|(words-(tail?1:2));
+#else
+   {int col;for(col=1;col<words-(tail?0:1);col++)dst[col]=fill;}
+#endif
+   /* An incomplete final word has 1–3 pixels. Use halfwords and preserve
+    * its unused neighbor byte exactly, matching the clipped rect reference. */
+   if(tail){u16*end=(u16*)(dst+words);
+    if(tail==1)*end=(*end&0xff00)|UI_BORDER;
+    else if(tail==2)*end=UI_BG|(UI_BORDER<<8);
+    else{end[0]=(u16)fill;end[1]=(end[1]&0xff00)|UI_BORDER;}
+   }
   }
   return;
  }
@@ -848,11 +860,18 @@ void kill_enemy(Enemy*e){unsigned slot=(unsigned)(e-enemies),i,xp=0,gold;Creatur
  for(i=0;i<4;i++){unsigned member=adventure_save.roster.party[i];if(member<CREATURE_ROSTER_CAPACITY&&adventure_save.roster.instances[member].xp>before[i])xp+=(unsigned)(adventure_save.roster.instances[member].xp-before[i]);}
  gold=economy_award_combat(&adventure_save,e->kind==2?10u:6u);game_shop_reward(xp,gold);save_game_ordinary();if(hero_hp_q4<gear_stats.max_hp_q4&&kills%3==0)game_health_heal(16);
 }
+/* Consume charger contact eligibility in ROM so its terminating-rush flag
+ * does not stay live across the hot updater's unrelated enemy paths. */
+static COLD void update_charger_contact(unsigned i){Enemy*e;
+ if(!enemy_tactics_update(i))return;
+ e=&enemies[i];
+ if(ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard(i,e->x,e->y)||magma_powers_melee_guard(i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
+}
 void update_enemies(void){int i,j;for(i=0;i<MAX_ENEMIES;i++){Enemy*e=&enemies[i];if(!e->hp)continue;if(e->flash)e->flash--;if(!e->flash&&game_melee_hit((unsigned)i,e->x,e->y,0)){game_enemy_hurt((unsigned)i,weapon_action.damage_q4,weapon_action.attack_q4,weapon_action.element);southern_powers_weapon_hit((unsigned)i);game_enemy_stagger((unsigned)i,weapon_action.stagger);e->flash=16;hitstop=3;sfx(4);if(e->hp<=0)kill_enemy(e);else{int nx=e->x+sign(e->x-px)*5,ny=e->y+sign(e->y-py)*5;if(!solid(nx,ny)){e->x=nx;e->y=ny;}}}if(!e->hp)continue;
- if(e->kind==ENEMY_LANE_CHARGER)enemy_tactics_update((unsigned)i);
+ if(e->kind==ENEMY_LANE_CHARGER)update_charger_contact((unsigned)i);
  else if(e->kind==2&&!rooted_enemies[i]){if(e->flash||enemy_stagger_ticks[i])enemy_windups[i]=0;else if(enemy_windups[i]){if(--enemy_windups[i]==0){{int shot=fire_shot(e->x,e->y,enemy_aimx[i],enemy_aimy[i],1);if(shot>=0){shot_phases[shot]=enemy_phases[i];ordinary_hostile_shots[shot]=1;if(room==77&&(covenants_wave_enemies&(1u<<i)))covenants_wave_shots|=(unsigned short)(1u<<shot);}}enemy_clocks[i]=100;}}else if(enemy_clocks[i])enemy_clocks[i]--;else if(near(px,py,e->x,e->y,145)){int dx=px-e->x,dy=py-e->y,m=ab(dx)>ab(dy)?ab(dx):ab(dy);if(!m)m=1;enemy_aimx[i]=dx*2/m;enemy_aimy[i]=dy*2/m;enemy_windups[i]=(int)southern_powers_windup((unsigned)i,30);}}
  else if(!rooted_enemies[i]&&!enemy_stagger_ticks[i]&&!e->flash&&frame%3==0&&(!slowed_enemies[i]||frame%2==0)&&near(px,py,e->x,e->y,70)){int tx=px,ty=py,dx,dy;southern_powers_approach((unsigned)i,&tx,&ty);dx=sign(tx-e->x);dy=sign(ty-e->y);if((frame+i)&1){if(!solid(e->x+dx,e->y))e->x+=dx;}else if(!solid(e->x,e->y+dy))e->y+=dy;}
- if((e->kind!=ENEMY_LANE_CHARGER||enemy_clocks[i]<0)&&ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(e->kind!=2&&!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard((unsigned)i,e->x,e->y)||magma_powers_melee_guard((unsigned)i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
+ if(e->kind!=ENEMY_LANE_CHARGER&&ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(e->kind!=2&&!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard((unsigned)i,e->x,e->y)||magma_powers_melee_guard((unsigned)i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
  for(j=0;j<12;j++)if(shots[j].life&&!shots[j].owner&&near(e->x,e->y,shots[j].x,shots[j].y,14)){shots[j].life=0;game_enemy_hurt((unsigned)i,32,0,shot_phases[j]);e->flash=16;enemy_windups[i]=0;if(e->hp<=0)kill_enemy(e);break;}}
 }
 void campaign_boss_update(void);
@@ -991,12 +1010,12 @@ COLD void draw_play_notices(int build_cache){
  if(tid>=0){tw=ui_texts[tid].width+10;tx=(240-tw)/2;}
  if(hid){hw=ui_texts[hid].width+12;hx=(240-hw)/2;}
  /* Retain the original clipping/masking behavior outside these card bounds. */
- if(play_notice_cache_disabled||world_mask_active||tw>240||hw>240){draw_play_toast();draw_play_hint();return;}
+ if(play_notice_cache_disabled||world_mask_active||tw>240||hw>240)goto uncached;
  if(!play_notice_valid||play_notice_toast!=tid||play_notice_hint!=hid){
   /* A first/changed notice must not add cache construction to a full world
    * paint. Reused underlays leave room to build; later full paints can copy
    * that same immutable card without carrying any old world pixels. */
-  if(!build_cache){draw_play_toast();draw_play_hint();return;}
+  if(!build_cache)goto uncached;
   screen=play_notice_pixels;
   if(tid>=0){box(tx,5,tw,17);centered(tid,5,CREAM);}
   if(hid){box(hx,0,hw,19);centered(hid,2,TEAL);}
@@ -1016,6 +1035,13 @@ COLD void draw_play_notices(int build_cache){
   {int x;for(x=first;x<last;x++)dst[x]=src[x];}
 #endif
  }
+ return;
+uncached:
+ /* The immutable IDs and bounds were already resolved above. Drawing them
+  * directly keeps the reference pixels without repeating power/party queries
+  * on a cold full-world frame. No state can change during this raster pass. */
+ if(tid>=0){box(tx,143,tw,17);centered(tid,143,CREAM);}
+ if(hid){box(hx,138,hw,19);centered(hid,140,TEAL);}
 }
 COLD void draw_journal_panel(void){if(journal_nav_draw()){}
  else if(journal_tab==JOURNAL_ITEMS){game_shop_draw_items();}

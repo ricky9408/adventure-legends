@@ -156,15 +156,16 @@ static void arrow(int x,int y){rect(x,y+3,7,1,TEAL);rect(x+5,y+2,1,3,TEAL);rect(
 /* Labels sit above each54px pair.22px + gap1 + arrow7 + gap1 +22px fits. */
 static MENU_COLD void stat(unsigned before,unsigned after,int id,int x,unsigned format){
  int color=after>before?GOLD:after<before?PAL_HEART:CREAM;
- label((unsigned)id,x+(54-gear_preview_texts[id].width)/2,80,CREAM);
- cell_number(before,format,x+23-(int)cell_width(before,format,22),93,CREAM,22);arrow(x+24,93);cell_number(after,format,x+32,93,color,22);
+ label((unsigned)id,x+(54-gear_preview_texts[id].width)/2,77,CREAM);
+ /* Native15px labels and independent7px stat digits have separate rows. */
+ cell_number(before,format,x+23-(int)cell_width(before,format,22),92,CREAM,22);arrow(x+24,92);cell_number(after,format,x+32,92,color,22);
 }
 /* Three72px columns leave31px per value, comfortably wider than seconds. */
 static void detail_stat(unsigned before,unsigned after,unsigned id,int x,unsigned format,int lower,int missing){
  int color=after==before?CREAM:((after>before)!=lower?GOLD:PAL_HEART);
- label(id,x+(72-gear_preview_texts[id].width)/2,102,CREAM);arrow(x+33,115);
- if(missing){rect(x+26,118,6,2,CREAM);rect(x+41,118,6,2,CREAM);return;}
- cell_number(before,format,x+32-(int)cell_width(before,format,31),115,CREAM,31);cell_number(after,format,x+41,115,color,31);
+ label(id,x+(72-gear_preview_texts[id].width)/2,99,CREAM);arrow(x+33,114);
+ if(missing){rect(x+26,117,6,2,CREAM);rect(x+41,117,6,2,CREAM);return;}
+ cell_number(before,format,x+32-(int)cell_width(before,format,31),114,CREAM,31);cell_number(after,format,x+41,114,color,31);
 }
 static unsigned context_label(const EquipmentComparison*c,const GearPreview*before,const GearPreview*after,unsigned command){
  unsigned equal;
@@ -186,12 +187,12 @@ MENU_COLD void gear_menu_draw(void){
  const int labels[]={TX_G_TAB_WEAPON,TX_G_TAB_BODY,TX_G_TAB_BOOTS,TX_G_TAB_BELT,TX_G_TAB_RING};
  if(!item&&gear_menu_slot==EQUIPMENT_WEAPON)item=EQUIPMENT_STARTER_ID;
  box(8,31,224,123);
- if(notice)centered(TX_G_BUSY,33,GOLD);
- else{label(GP_TITLE,14,33,GOLD);label(gear_menu_candidate==e->equipped[gear_menu_slot]?GP_EQUIPPED:GP_PREVIEW,185,33,TEAL);}
- label(GP_LEFT,12,49,TEAL);label(GP_RIGHT,216,49,TEAL);
- for(i=0;i<5;i++){int x=30+i*38;if((int)i==gear_menu_slot)rect(x-3,49,33,15,PAL_STONE2);text(labels[i],x,49,(int)i==gear_menu_slot?GOLD:CREAM);}
- label(GP_UP,12,65,TEAL);label(GP_DOWN,216,65,TEAL);
- centered(gear_menu_candidate==EQUIPMENT_EMPTY_REF?(gear_menu_slot==EQUIPMENT_WEAPON?TX_PF_STARTER:TX_PF_UNEQUIP):name_id(item),65,GOLD);
+ if(notice)centered(TX_G_BUSY,32,GOLD);
+ else{label(GP_TITLE,14,32,GOLD);label(gear_menu_candidate==e->equipped[gear_menu_slot]?GP_EQUIPPED:GP_PREVIEW,185,32,TEAL);}
+ label(GP_LEFT,12,47,TEAL);label(GP_RIGHT,216,47,TEAL);
+ for(i=0;i<5;i++){int x=30+i*38;if((int)i==gear_menu_slot)rect(x-3,47,33,15,PAL_STONE2);text(labels[i],x,47,(int)i==gear_menu_slot?GOLD:CREAM);}
+ label(GP_UP,12,62,TEAL);label(GP_DOWN,216,62,TEAL);
+ centered(gear_menu_candidate==EQUIPMENT_EMPTY_REF?(gear_menu_slot==EQUIPMENT_WEAPON?TX_PF_STARTER:TX_PF_UNEQUIP):name_id(item),62,GOLD);
  result=preview_display(&cmp);
  if(result==EQUIPMENT_OK){
   gear_preview_project(&cmp.before,command,&before);gear_preview_project(&cmp.after,command,&after);
@@ -199,7 +200,7 @@ MENU_COLD void gear_menu_draw(void){
   stat(before.hearts,after.hearts,GP_HEART,120,1);stat(before.walk_tenths,after.walk_tenths,GP_WALK,174,2);
   detail_stat(before.recovery_hundredths,after.recovery_hundredths,GP_RECOVERY,12,3,1,!command);
   detail_stat(before.distance,after.distance,GP_DISTANCE,84,0,0,0);detail_stat(before.stagger,after.stagger,GP_STAGGER,156,0,0,0);
-  label_center(context_label(&cmp,&before,&after,command),124,TEAL);
+  label_center(context_label(&cmp,&before,&after,command),122,TEAL);
  }
  label_center(GP_FOOTER,138,TEAL);
 }

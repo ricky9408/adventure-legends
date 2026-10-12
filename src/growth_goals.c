@@ -106,10 +106,16 @@ COLD void growth_goals_draw(const CreatureInstance*c,unsigned target,unsigned co
   growth_goals_center(GJ_CURRENT_REQUIRED,49,TEAL);
   mark(16,65,g.met&GROWTH_LEVEL);growth_goals_text(GJ_LEVEL,27,65,CREAM);growth_goals_number(c->level,1,46,65,CREAM);growth_goals_text(GJ_SLASH,63,65,TEAL);growth_goals_number(g.min_level,1,72,65,GOLD);
   mark(119,65,g.met&GROWTH_BOND);growth_goals_text(GJ_BOND,130,65,CREAM);growth_goals_number(c->bond,1,146,65,CREAM);growth_goals_text(GJ_SLASH,171,65,TEAL);growth_goals_number(g.min_bond,1,180,65,GOLD);
-  growth_goals_text(GJ_NEXT_XP,22,81,TEAL);if(c->level==CREATURE_MAX_LEVEL)growth_goals_text(GJ_LEVEL_MAX,131,81,GOLD);else growth_goals_number(g.next_xp,1,131,81,CREAM);
+  /* Story requirements use the full next row. Rest shares the shorter XP row
+   * so a144px native story label cannot collide with its checkmark. */
+  growth_goals_text(GJ_NEXT_XP,16,81,TEAL);if(c->level==CREATURE_MAX_LEVEL)growth_goals_text(GJ_LEVEL_MAX,104,81,GOLD);else growth_goals_number(g.next_xp,1,104,81,CREAM);
+  mark(173,81,g.met&GROWTH_REST);growth_goals_text(GJ_REST,184,81,CREAM);
   mark(16,97,g.met&GROWTH_STORY);growth_goals_text(story_label(e->chapter_flags),27,97,CREAM);
-  mark(159,97,g.met&GROWTH_REST);growth_goals_text(GJ_REST,170,97,CREAM);
-  mark(16,113,g.met&GROWTH_TRIAL);text((int)growth_goals_trial_text(c->form_id,target,0),27,113,CREAM);
+  mark(16,113,g.met&GROWTH_TRIAL);
+  {unsigned trial=growth_goals_trial_text(c->form_id,target,0);
+   if(ui_texts[trial].width<=205&&ui_texts[trial].height<=15)text((int)trial,27,113,CREAM);
+   else growth_goals_text(GJ_TRIAL,27,113,CREAM); /* Named wish remains on page1. */
+  }
  }
  if(preparing)centered(TX_UW_PREPARING,138,TEAL);
  else growth_goals_center(!confirm?GJ_INSPECT_KEYS:g.met==GROWTH_ALL?(confirm>1?GJ_READY_BRANCH_KEYS:GJ_READY_KEYS):(confirm>1?GJ_GOAL_KEYS:GJ_GOAL_SINGLE_KEYS),138,TEAL);

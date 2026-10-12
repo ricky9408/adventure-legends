@@ -3,7 +3,7 @@
 from pathlib import Path
 import json,sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"assets"))
-from gbj_font import render_text
+from gbj_font import render_text,deduplicate_spans,UI_RUN_COUNT_MAX
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +21,6 @@ def generate():
     for direction,jpdir in zip(DIRECTIONS,JP_DIR):
         for kind,jpkind in zip(KINDS,JP_KIND):
             texts[f'{direction}_{kind}'] = f'{jpdir}の{jpkind}'
-    font = ImageFont.truetype(FONT,10,index=0)
     rows = []
     source = ['#include "journey_map_text.h"',
               '/* Generated paired spans; edit assets/journey_map/labels.json. */']
@@ -43,7 +42,7 @@ def generate():
                 while x<len(masks):
                     if not masks[x]:x+=1;continue
                     end=x+1
-                    while end<len(masks) and masks[end]==masks[x]:end+=1
+                    while end<len(masks) and masks[end]==masks[x] and end-x<UI_RUN_COUNT_MAX:end+=1
                     runs.append((y*120+x,end-x,masks[x]));x=end
             decoded=Image.new('1',(width+align,12),0)
             for offset,count,mask in runs:
@@ -75,7 +74,7 @@ void journey_map_text(unsigned id,int x,int y,unsigned char color){
 ''')
     header='#ifndef EMBER_JOURNEY_MAP_TEXT_H\n#define EMBER_JOURNEY_MAP_TEXT_H\n#include "ui.h"\nenum {\n'+''.join(' JM_'+n+',\n' for n in texts)+' JM_TEXT_COUNT };\nextern const UiText journey_map_texts[JM_TEXT_COUNT];\nvoid journey_map_text(unsigned,int,int,unsigned char);\n#endif\n'
     (ROOT/'src/journey_map_text.h').write_text(header)
-    (ROOT/'src/journey_map_text.c').write_text('\n'.join(source))
+    (ROOT/'src/journey_map_text.c').write_text(deduplicate_spans('\n'.join(source)))
     (ROOT/'assets/journey_map/text_metrics.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n')
     roads=json.loads((ROOT/'assets/connected_roads.json').read_text())
     sizes=[(240,160)]*78

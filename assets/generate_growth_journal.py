@@ -49,7 +49,7 @@ def main():
      mask=masks[x]
      if not mask:x+=1;continue
      end=x+1
-     while end<len(masks) and masks[end]==mask and end-x<255:end+=1
+     while end<len(masks) and masks[end]==mask and end-x<gbj_font.UI_RUN_COUNT_MAX:end+=1
      runs.append((y*120+x,end-x,mask));x=end
    decoded=Image.new('1',(w+align,15))
    for offset,count,mask in runs:
@@ -60,6 +60,7 @@ def main():
    assert decoded.crop((align,0,w+align,15)).tobytes()==im.tobytes(),(name,align)
    variants.append(runs);lines.append(f'static const UiRun gj_{name}_{align}[] = {{'+(','.join('{%d,%d,%d}'%r for r in runs) if runs else '{0,0,0}')+'};\n')
   items.append((name,w,variants))
+ lines=gbj_font.deduplicate_spans(''.join(lines)).splitlines(True)
  h='#ifndef EMBER_GROWTH_JOURNAL_TEXT_H\n#define EMBER_GROWTH_JOURNAL_TEXT_H\n#include "ui.h"\nenum {\n'+''.join(f' GJ_{n},\n'for n,_,_ in items)+' GJ_COUNT };\nextern const UiText growth_journal_texts[GJ_COUNT];\n#endif\n'
  (ROOT/'src/growth_journal_text.h').write_text(h)
  lines.append('const UiText growth_journal_texts[GJ_COUNT] = {\n')

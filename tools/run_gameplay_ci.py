@@ -176,6 +176,8 @@ def main():
             report['host_checks'] = len(host['runs'])
         if args.suite in ('all', 'native'):
             rom_sha = snapshots[-1]['emberbond.gba']
+            stage('native-font-corpus', [python, 'tests/test_native_japanese_font.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym')], timeout=300)
             common = [python, 'tests/regional_music_native.py', '--expected-rom-sha', rom_sha]
             stage('controller-route', common + ['--cases', 'controllers', '--output',
                                                 str(out / 'controllers')], timeout=600)

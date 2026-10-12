@@ -50,13 +50,13 @@ DIGITS = (
 )
 
 LAYOUT = (
-    ('attack', 'ATTACK', 12, 80, 93, 54, 0),
-    ('defense', 'DEFENSE', 66, 80, 93, 54, 0),
-    ('hearts', 'HEART', 120, 80, 93, 54, 1),
-    ('walk', 'WALK', 174, 80, 93, 54, 2),
-    ('recovery', 'RECOVERY', 12, 102, 115, 72, 3),
-    ('distance', 'DISTANCE', 84, 102, 115, 72, 0),
-    ('stagger', 'STAGGER', 156, 102, 115, 72, 0),
+    ('attack', 'ATTACK', 12, 77, 92, 54, 0),
+    ('defense', 'DEFENSE', 66, 77, 92, 54, 0),
+    ('hearts', 'HEART', 120, 77, 92, 54, 1),
+    ('walk', 'WALK', 174, 77, 92, 54, 2),
+    ('recovery', 'RECOVERY', 12, 99, 114, 72, 3),
+    ('distance', 'DISTANCE', 84, 99, 114, 72, 0),
+    ('stagger', 'STAGGER', 156, 99, 114, 72, 0),
 )
 CONTROLLER_CASES = 'fresh_start,prepare_fixture,sweep,commits,boundary_caps,busy'
 PASSIVE_CASES = 'combinations,boundary_cases,cache,compass,ring_choice,no_command'
@@ -130,9 +130,8 @@ class ReadableRaster:
         record = self.ui_record(name, table)
         pixels = {}
         for i in range(record['count']):
-            address = record['runs'] + i * 4
-            offset = self.e.read(address, 2)
-            count, mask = self.e.read(address + 2, 1), self.e.read(address + 3, 1)
+            word = self.e.read(record['runs'] + i * 2, 2)
+            offset, count, mask = word & 2047, (word >> 11) & 7, word >> 14
             assert count and 1 <= mask <= 3
             for half in range(count):
                 y, x = divmod(offset + half, 120)
@@ -172,7 +171,7 @@ class ReadableRaster:
 
     def context(self, name):
         # Inherited passive cases use this to verify the cap explanation.
-        self.verify_label(name, 124, TEAL, height=14)
+        self.verify_label(name, 122, TEAL, height=15)
 
     def context_name(self, comparison, before, after, command):
         if not command:
@@ -206,8 +205,8 @@ class ReadableRaster:
                 expected[py * 240 + x + px] = ink
             records.append(dict(label=label, x=x, width=record['width']))
         _, vram = self.displayed_vram()
-        actual = vram[65 * 240:80 * 240]
-        diffs = [dict(x=i % 240, y=65 + i // 240, expected_palette=a, actual_palette=b)
+        actual = vram[62 * 240:77 * 240]
+        diffs = [dict(x=i % 240, y=62 + i // 240, expected_palette=a, actual_palette=b)
                  for i, (a, b) in enumerate(zip(expected, actual))
                  if 12 <= i % 240 < 228 and a != b]
         row = dict(capture=capture, item_id=item, slot=slot, texts=records,
@@ -252,7 +251,7 @@ class ReadableRaster:
                                mismatched_pixels=len(diffs), first_differences=diffs[:12]))
             label_x = x + (width - self.ui_record(label)['width']) // 2
             self.verify_label(label, label_y, CREAM, x=label_x, capture=name + '.png',
-                              height=13, bounds=(x, x + width))
+                              height=15, bounds=(x, x + width))
         row = dict(case=self.case, capture=name + '.png', hardware_frame=self.e.frame,
                    displayed_page=page, command=command, fields=fields,
                    displayed_vram_sha256=hashlib.sha256(vram).hexdigest())
@@ -263,7 +262,7 @@ class ReadableRaster:
                    all(not field['mismatched_pixels'] for field in fields), row)
         self.verify_candidate_name(name + '.png')
         self.verify_label(self.context_name(comparison, before, after, command),
-                          124, TEAL, height=14, capture=name + '.png')
+                          122, TEAL, height=15, capture=name + '.png')
         self.verify_label('FOOTER', 138, TEAL, capture=name + '.png')
         path = self.out / (name + '.png')
         with Image.open(path) as image:
@@ -281,7 +280,7 @@ class ReadableRaster:
                           native_image_checks=self.native_image_checks,
                           readable_geometry={'digits': [4, 7], 'decimal_dot': [2, 2],
                                              'arrow': [7, 5], 'layout': LAYOUT,
-                                             'context_y': 124, 'footer_y': 138})
+                                             'context_y': 122, 'footer_y': 138})
             result['pixel_coverage']['label_checks'] = len(self.label_checks)
             result['pixel_coverage']['mismatched_label_pixels'] = sum(
                 row['mismatches'] for row in self.label_checks)

@@ -55,17 +55,21 @@ class TreasureGear(GearNative):
         self.passive_rows.append({'later':later,'old':old,'loadout':loadout,'base':base,'stats':dict((n,int(getattr(self.expected().after,n)))for n,_ in Stats._fields_)})
     def context(self,name):
         idx=self.gp_names.index(name);address=self.sym['gear_preview_texts']+idx*16
-        width=self.e.read(address,2);height=self.e.read(address+2,1);x=(240-width)//2;y=110
+        width=self.e.read(address,2);height=self.e.read(address+2,1);x=(240-width)//2;y=122
+        cell_height=15
+        assert 0<height<=cell_height,'current native-font context fits its complete 15px cell'
         runs=self.e.read(address+4+(x&1)*4);count=self.e.read(address+12+(x&1)*2,2)
-        expected=bytearray([BACKGROUND]*(240*14))
+        expected=bytearray([BACKGROUND]*(240*cell_height))
         for i in range(count):
-            offset=self.e.read(runs+i*4,2);length=self.e.read(runs+i*4+2,1);mask=self.e.read(runs+i*4+3,1)
+            word=self.e.read(runs+i*2,2)
+            offset=word&2047;length=(word>>11)&7;mask=word>>14
+            assert length and 1<=mask<=3 and offset//120<height
             for step in range(length):
                 p=((x&~1)+2*(offset+step))
                 for bit in range(2):
                     if mask&(1<<bit):expected[p+bit]=TEAL
         page=0x0600a000 if self.e.read(0x04000000,2)&16 else 0x06000000
-        actual=self.e.bytes(page+y*240,240*14)
+        actual=self.e.bytes(page+y*240,240*cell_height)
         diffs=[i for i,(a,b)in enumerate(zip(expected,actual))if 12<=i%240<228 and a!=b]
         self.context_rows.append({'label':name,'frame':self.e.frame,'mismatches':len(diffs)})
         self.check('Actual context pixels '+name,not diffs,{'first':diffs[:8]})

@@ -3,3 +3,4 @@
 #include "opening_scene_data/part_000.inc"
 #include "opening_scene_data/part_001.inc"
 #include "opening_scene_data/part_002.inc"
+#include "opening_scene_data/part_003.inc"

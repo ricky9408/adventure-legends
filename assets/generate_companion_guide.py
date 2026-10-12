@@ -2,11 +2,10 @@
 """Generate isolated companion-guide raster text without changing shared UI IDs."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-from gbj_font import render_text
+from gbj_font import render_text,deduplicate_spans,UI_RUN_COUNT_MAX
 import json
 from companion_guide_source import load_commands
 ROOT=Path(__file__).resolve().parents[1]
-FONT=ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',12,index=0)
 labels={
  'PHASE':'五行：','POLARITY':'陰陽：',
  'COMBAT_WAIT':'戦闘の再使用', 'FRAMES':'コマ',
@@ -55,7 +54,7 @@ for name,string in labels.items():
     mask=masks[x]
     if not mask:x+=1;continue
     end=x+1
-    while end<len(masks) and masks[end]==mask and end-x<255:end+=1
+    while end<len(masks) and masks[end]==mask and end-x<UI_RUN_COUNT_MAX:end+=1
     runs.append((y*120+x,end-x,mask));x=end
   decoded=Image.new('1',(w+align,h))
   for offset,count,mask in runs:
@@ -85,6 +84,7 @@ lines.append('};\nconst CompanionGuideCopy companion_guide_commands[129] = {\n{{
 for c in sorted(commands,key=lambda c:c['id']):
  i=c['id'];lines.append(f'{{{{CG_C{i}_0,CG_C{i}_1}},CG_F{i}}},\n')
 lines.append('};\n')
+lines=deduplicate_spans(''.join(lines)).splitlines(True)
 folder=ROOT/'src/companion_guide_text_data';folder.mkdir(exist_ok=True)
 for p in folder.glob('part_*.inc'):p.unlink()
 parts=[];part=''

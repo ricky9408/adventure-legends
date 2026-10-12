@@ -31,14 +31,20 @@ static unsigned rng=84921;static unsigned next(void){rng=rng*1664525u+1013904223
 int main(void){unsigned count=0;
  for(unsigned i=0;i<12000;i++){
   int x=(int)(next()%280)-20,y=(int)(next()%190)-15,w=(int)(next()%270)-8,h=(int)(next()%180)-6;
-  if(i<4000){x=(int)(next()%52)*4;y=(int)(next()%120);w=(int)(next()%52+8)*4;h=(int)(next()%130+3);}
+  if(i<4000){x=(int)(next()%52)*4;y=(int)(next()%120);w=(int)(next()%52+8)*4+(int)(next()%4);h=(int)(next()%130+3);}
   for(unsigned n=0;n<9600;n++)reference_pixels[n]=actual_pixels[n]=next();
   world_mask_active=i%3==0;world_mask_left=8;world_mask_right=232;world_mask_top=31;world_mask_bottom=153;
   screen=(u16*)reference_pixels;reference_box(x,y,w,h);
   screen=(u16*)actual_pixels;proposal_box(x,y,w,h);
   assert(!memcmp(reference_pixels,actual_pixels,sizeof reference_pixels));count++;
  }
- const int cards[][4]={{8,31,224,123},{8,31,224,122},{8,31,224,119},{12,42,216,105},{20,38,200,114},{26,29,188,131},{136,3,64,17},{5,99,230,56}};
+ const int cards[][4]={{8,31,224,123},{8,31,224,122},{8,31,224,119},{12,42,216,105},{20,38,200,114},{26,29,188,131},{136,3,64,17},{5,99,230,56},
+  /* Real 12px-font notice and each incomplete word at minimum/edge bounds.
+   * Whole randomized frames also verify the neighbor byte outside the box. */
+  {20,138,199,19},{20,143,197,17},{20,138,198,19},
+  {8,40,33,3},{8,40,34,3},{8,40,35,3},
+  {0,141,237,19},{0,141,238,19},{0,141,239,19},
+  {9,40,33,3},{10,40,34,3},{11,40,35,3}};
  for(unsigned i=0;i<sizeof cards/sizeof cards[0];i++)for(int cover=0;cover<2;cover++){
   for(unsigned n=0;n<9600;n++)reference_pixels[n]=actual_pixels[n]=next();world_mask_active=cover;
   screen=(u16*)reference_pixels;reference_box(cards[i][0],cards[i][1],cards[i][2],cards[i][3]);

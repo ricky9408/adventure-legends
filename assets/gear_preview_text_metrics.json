@@ -3,276 +3,276 @@
     "text": "装備 / 選択技",
     "size": 12,
     "height": 15,
-    "width": 64,
+    "width": 79,
     "ink_bounds": [
       0,
       0,
-      62,
-      10
+      77,
+      12
     ]
   },
   "EQUIPPED": {
     "text": "装備中",
     "size": 12,
     "height": 15,
-    "width": 31,
+    "width": 37,
     "ink_bounds": [
       0,
       0,
-      29,
-      10
+      35,
+      12
     ]
   },
   "PREVIEW": {
     "text": "比較中",
     "size": 12,
     "height": 15,
-    "width": 31,
+    "width": 37,
     "ink_bounds": [
-      1,
       0,
-      29,
-      10
+      0,
+      35,
+      12
     ]
   },
   "ATTACK": {
     "text": "初撃",
     "size": 12,
     "height": 15,
-    "width": 21,
+    "width": 25,
     "ink_bounds": [
       0,
       0,
-      20,
-      10
+      23,
+      12
     ]
   },
   "DEFENSE": {
     "text": "守り",
     "size": 12,
     "height": 15,
-    "width": 18,
+    "width": 25,
     "ink_bounds": [
-      1,
       0,
-      16,
-      10
+      0,
+      21,
+      12
     ]
   },
   "HEART": {
     "text": "ハート",
     "size": 12,
     "height": 15,
-    "width": 22,
+    "width": 37,
     "ink_bounds": [
       1,
-      2,
-      20,
-      9
+      1,
+      34,
+      12
     ]
   },
   "WALK": {
     "text": "歩速%",
     "size": 12,
     "height": 15,
-    "width": 28,
+    "width": 31,
     "ink_bounds": [
       0,
       0,
-      27,
-      10
+      29,
+      12
     ]
   },
   "RECOVERY": {
     "text": "技待(約秒)",
     "size": 11,
     "height": 14,
-    "width": 51,
+    "width": 61,
     "ink_bounds": [
       0,
       0,
-      49,
-      10
+      58,
+      12
     ]
   },
   "DISTANCE": {
     "text": "距離px",
     "size": 11,
     "height": 14,
-    "width": 31,
+    "width": 37,
     "ink_bounds": [
       0,
       0,
-      29,
-      11
+      35,
+      14
     ]
   },
   "STAGGER": {
     "text": "怯み＋",
     "size": 11,
     "height": 14,
-    "width": 25,
+    "width": 37,
     "ink_bounds": [
       0,
       0,
-      23,
-      10
+      34,
+      12
     ]
   },
   "SWORD": {
     "text": "剣:初撃 / 三段目+6px",
     "size": 11,
     "height": 14,
-    "width": 104,
+    "width": 121,
     "ink_bounds": [
       0,
       0,
-      102,
-      10
+      119,
+      14
     ]
   },
   "LANCE": {
     "text": "槍:細い突き / 怯み＋は通常敵",
     "size": 11,
     "height": 14,
-    "width": 125,
+    "width": 169,
     "ink_bounds": [
       0,
       0,
-      124,
-      10
+      167,
+      12
     ]
   },
   "BOW": {
     "text": "弓:通常 / 溜め+32px",
     "size": 11,
     "height": 14,
-    "width": 98,
+    "width": 115,
     "ink_bounds": [
       1,
       0,
-      96,
-      10
+      113,
+      14
     ]
   },
   "RECOVERY_CAP": {
     "text": "技待は装備上限 / 秒は動ける間",
     "size": 11,
     "height": 14,
-    "width": 132,
+    "width": 175,
     "ink_bounds": [
       0,
       0,
-      130,
-      11
+      173,
+      12
     ]
   },
   "STAGGER_CAP": {
     "text": "追加ひるみは通常敵のみ・上限3",
     "size": 11,
     "height": 14,
-    "width": 127,
+    "width": 175,
     "ink_bounds": [
       0,
       0,
-      125,
-      10
+      173,
+      12
     ]
   },
   "SAME": {
     "text": "効果同じ / 秒:動ける間 / 怯+:通常敵",
     "size": 11,
     "height": 14,
-    "width": 167,
+    "width": 211,
     "ink_bounds": [
       0,
       0,
-      166,
-      11
+      209,
+      12
     ]
   },
   "NO_COMMAND": {
     "text": "技待は仲間を選ぶと表示 / 怯+:通常敵",
     "size": 11,
     "height": 14,
-    "width": 165,
+    "width": 211,
     "ink_bounds": [
       0,
       0,
-      164,
-      11
+      209,
+      12
     ]
   },
   "UNITS": {
     "text": "待:動ける間の約秒 距離:px 怯+:通常敵",
     "size": 12,
     "height": 15,
-    "width": 173,
+    "width": 145,
     "ink_bounds": [
       0,
-      0,
-      172,
-      11
+      1,
+      143,
+      12
     ]
   },
   "FOOTER": {
     "text": "A 装備  B 戻る  START 閉じる",
     "size": 12,
     "height": 15,
-    "width": 132,
+    "width": 169,
     "ink_bounds": [
-      1,
       0,
-      131,
-      11
+      0,
+      166,
+      12
     ]
   },
   "LEFT": {
     "text": "←",
     "size": 12,
     "height": 15,
-    "width": 11,
+    "width": 13,
     "ink_bounds": [
       0,
-      3,
-      10,
-      8
+      1,
+      11,
+      10
     ]
   },
   "RIGHT": {
     "text": "→",
     "size": 12,
     "height": 15,
-    "width": 11,
+    "width": 13,
     "ink_bounds": [
       0,
-      3,
-      10,
-      8
+      1,
+      11,
+      10
     ]
   },
   "UP": {
     "text": "↑",
     "size": 12,
     "height": 15,
-    "width": 11,
+    "width": 13,
     "ink_bounds": [
-      3,
       1,
-      7,
-      10
+      1,
+      10,
+      12
     ]
   },
   "DOWN": {
     "text": "↓",
     "size": 12,
     "height": 15,
-    "width": 11,
+    "width": 13,
     "ink_bounds": [
-      3,
       1,
-      7,
-      10
+      1,
+      10,
+      12
     ]
   }
 }
