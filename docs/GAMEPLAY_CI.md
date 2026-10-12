@@ -78,6 +78,11 @@ disabled so generator imports cannot add unreviewed cache files to the authentic
 production asset inventory. The runner itself never
 installs software or edits system settings.
 
+Asset-regeneration checks use a disposable source copy, and compiler-dependent
+resource reports belong under `build/`. Both lanes authenticate the production
+inventory before regressions; later boundary checks still reject any new or
+changed production file and identify the offending paths in failure logs.
+
 ```sh
 sh tools/install_tools.sh
 python3 tools/run_gameplay_ci.py --suite all --output build/ci-local

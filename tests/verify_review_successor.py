@@ -110,7 +110,13 @@ def state(c):
 
 
 def authenticate(c, s):
-    assert s['production'] == c['current_production'], 'unreviewed production bytes or file set'
+    actual, expected = s['production'], c['current_production']
+    if actual != expected:
+        added = sorted(actual.keys() - expected.keys())
+        removed = sorted(expected.keys() - actual.keys())
+        changed = sorted(p for p in actual.keys() & expected.keys() if actual[p] != expected[p])
+        raise AssertionError({'error': 'unreviewed production bytes or file set',
+                              'added': added, 'removed': removed, 'changed': changed})
     assert s['proofs'] == c['immutable_proofs'], 'historical proof input changed'
     assert s['inverse'] == c['inverse_sha256'], 'main inverse archive changed'
 

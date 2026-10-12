@@ -153,6 +153,11 @@ def main():
         stage('native-bridge', ['sh', 'tools/build_mgba_bridge.sh'])
         stage('ci-runner-tests', [python, '-m', 'unittest', 'discover', '-s', 'tests',
                                   '-p', 'test_gameplay_ci.py'])
+        stage('review-inventory-preflight', [python, '-c',
+              "import sys; sys.path.insert(0,'tests'); "
+              "from verify_review_successor import verify; "
+              "c,_=verify(chain=False); "
+              "print('Exact production inventory PASS:',len(c['current_production']),'files')"])
         if args.suite in ('all', 'host'):
             stage('archive-host-output', [python, 'tools/archive_test_output.py',
                   'build/equipment-rewards-host-current'])
