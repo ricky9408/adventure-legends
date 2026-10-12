@@ -11,6 +11,14 @@
 #include "../src/gear_menu.c"
 
 enum { WIDTH = 240, HEIGHT = 160, PIXELS = WIDTH * HEIGHT };
+/* Current native-font layout contract, independently authored from the
+ * documented 15px text cells and unchanged 7px decimal glyphs. */
+enum {
+    HEADER_Y = 32, TABS_Y = 47, NAME_Y = 62,
+    STAT_LABEL_Y = 77, STAT_VALUE_Y = 92,
+    DETAIL_LABEL_Y = 99, DETAIL_VALUE_Y = 114,
+    CONTEXT_Y = 122, FOOTER_Y = 138, TEXT_CELL = 15, VALUE_CELL = 7
+};
 static union { unsigned short words[PIXELS / 2]; unsigned char pixels[PIXELS]; } actual;
 static unsigned char expected[PIXELS];
 unsigned short *screen = actual.words;
@@ -51,11 +59,12 @@ static void component_bounds(unsigned group, int x, int y) {
         int detail = which >= 4;
         int cell_left = detail ? 12 + (int)(which - 4) * 72 : 12 + (int)which * 54;
         int cell_right = cell_left + (detail ? 72 : 54);
-        int top = detail ? 102 : 80, bottom = detail ? 115 : 93;
+        int top = detail ? DETAIL_LABEL_Y : STAT_LABEL_Y;
+        int bottom = top + TEXT_CELL;
         int left = cell_left, right = cell_right;
         if (part) {
-            top = detail ? 115 : 93;
-            bottom = top + 7;
+            top = detail ? DETAIL_VALUE_Y : STAT_VALUE_Y;
+            bottom = top + VALUE_CELL;
             if (part == 1) right = cell_left + (detail ? 32 : 23);
             else if (part == 2) {
                 left = cell_left + (detail ? 33 : 24);
@@ -303,10 +312,11 @@ static void expected_stat(unsigned which, unsigned before, unsigned after, int m
     int group = collect ? FIRST_STAT + (int)which * 4 : -1;
     int color = before == after ? CREAM : ((after > before) != entry->lower ? GOLD : PAL_HEART);
     int detail = which >= 4;
-    int cell_width = detail ? 72 : 54, value_y = detail ? 115 : 93;
+    int cell_width = detail ? 72 : 54;
+    int value_y = detail ? DETAIL_VALUE_Y : STAT_VALUE_Y;
     int before_right = entry->x + (detail ? 32 : 23), after_left = entry->x + (detail ? 41 : 32);
     oracle_label(entry->id, entry->x + (cell_width - gear_preview_texts[entry->id].width) / 2,
-                 detail ? 102 : 80, CREAM, group);
+                 detail ? DETAIL_LABEL_Y : STAT_LABEL_Y, CREAM, group);
     oracle_arrow(entry->x + (detail ? 33 : 24), value_y + 1, collect ? group + 2 : -1);
     if (missing) {
         assert(which == 4);
@@ -479,25 +489,25 @@ static unsigned fixture_context(unsigned label_id) {
 static void expected_menu(unsigned item_label, unsigned context, int header) {
     static const unsigned tabs[] = {TX_G_TAB_WEAPON, TX_G_TAB_BODY, TX_G_TAB_BOOTS, TX_G_TAB_BELT, TX_G_TAB_RING};
     unsigned i;
-    if (header == 2) oracle_text(&ui_texts[TX_G_BUSY], (WIDTH - ui_texts[TX_G_BUSY].width) / 2, 33, GOLD, BUSY);
+    if (header == 2) oracle_text(&ui_texts[TX_G_BUSY], (WIDTH - ui_texts[TX_G_BUSY].width) / 2, HEADER_Y, GOLD, BUSY);
     else {
-        oracle_label(GP_TITLE, 14, 33, GOLD, TITLE);
-        oracle_label(header ? GP_PREVIEW : GP_EQUIPPED, 185, 33, TEAL, STATUS);
+        oracle_label(GP_TITLE, 14, HEADER_Y, GOLD, TITLE);
+        oracle_label(header ? GP_PREVIEW : GP_EQUIPPED, 185, HEADER_Y, TEAL, STATUS);
     }
-    oracle_label(GP_LEFT, 12, 49, TEAL, LEFT);
-    oracle_label(GP_RIGHT, 216, 49, TEAL, RIGHT);
+    oracle_label(GP_LEFT, 12, TABS_Y, TEAL, LEFT);
+    oracle_label(GP_RIGHT, 216, TABS_Y, TEAL, RIGHT);
     for (i = 0; i < 5; ++i) {
         int x = 30 + (int)i * 38;
         if ((int)i == gear_menu_slot) {
             int row, column;
-            for (row = 49; row < 64; ++row) for (column = x - 3; column < x + 30; ++column)
+            for (row = TABS_Y; row < TABS_Y + TEXT_CELL; ++row) for (column = x - 3; column < x + 30; ++column)
                 pixel(expected, column, row, PAL_STONE2, -1);
         }
-        oracle_text(&ui_texts[tabs[i]], x, 49, (int)i == gear_menu_slot ? GOLD : CREAM, TAB0 + (int)i);
+        oracle_text(&ui_texts[tabs[i]], x, TABS_Y, (int)i == gear_menu_slot ? GOLD : CREAM, TAB0 + (int)i);
     }
-    oracle_label(GP_UP, 12, 65, TEAL, UP);
-    oracle_label(GP_DOWN, 216, 65, TEAL, DOWN);
-    oracle_text(&ui_texts[item_label], (WIDTH - ui_texts[item_label].width) / 2, 65, GOLD, NAME);
+    oracle_label(GP_UP, 12, NAME_Y, TEAL, UP);
+    oracle_label(GP_DOWN, 216, NAME_Y, TEAL, DOWN);
+    oracle_text(&ui_texts[item_label], (WIDTH - ui_texts[item_label].width) / 2, NAME_Y, GOLD, NAME);
     expected_stat(0, fixture_before.attack, fixture_after.attack, 0, 1);
     expected_stat(1, fixture_before.defense, fixture_after.defense, 0, 1);
     expected_stat(2, fixture_before.hearts, fixture_after.hearts, 0, 1);
@@ -505,8 +515,8 @@ static void expected_menu(unsigned item_label, unsigned context, int header) {
     expected_stat(4, fixture_before.recovery_hundredths, fixture_after.recovery_hundredths, !selected_command, 1);
     expected_stat(5, fixture_before.distance, fixture_after.distance, 0, 1);
     expected_stat(6, fixture_before.stagger, fixture_after.stagger, 0, 1);
-    oracle_center(context, 124, TEAL, CONTEXT);
-    oracle_center(GP_FOOTER, 138, TEAL, FOOTER);
+    oracle_center(context, CONTEXT_Y, TEAL, CONTEXT);
+    oracle_center(GP_FOOTER, FOOTER_Y, TEAL, FOOTER);
 }
 
 static void check_menus(void) {
@@ -638,11 +648,25 @@ static void write_synthetic_screenshot(const char *directory, const char *name, 
 int main(int argc, char **argv) {
     assert(argc == 1 || argc == 2);
     assert(GOLD != CREAM && GOLD != PAL_HEART && CREAM != PAL_HEART && TEAL != CREAM);
+    /* Cells must remain separate even if the current glyphs have blank edge
+     * rows. A future font change cannot borrow a neighboring value row. */
+    assert(HEADER_Y >= 31 && HEADER_Y + TEXT_CELL <= TABS_Y);
+    assert(TABS_Y + TEXT_CELL <= NAME_Y);
+    assert(NAME_Y + TEXT_CELL <= STAT_LABEL_Y);
+    assert(STAT_LABEL_Y + TEXT_CELL <= STAT_VALUE_Y);
+    assert(STAT_VALUE_Y + VALUE_CELL <= DETAIL_LABEL_Y);
+    assert(DETAIL_LABEL_Y + TEXT_CELL <= DETAIL_VALUE_Y);
+    assert(DETAIL_VALUE_Y + VALUE_CELL < CONTEXT_Y);
+    assert(CONTEXT_Y + TEXT_CELL < FOOTER_Y);
+    assert(FOOTER_Y + TEXT_CELL <= 154);
     check_values();
     check_digit_edges();
     check_synthetic();
     check_menus();
     check_disjoint();
+    /* Guard the complete retained sweep, not just whichever cases ran. */
+    assert(helper_cases == 22203 && text_cases == 316);
+    assert(menu_cases == 1113 && synthetic_cases == 5757 && GROUPS == 43);
     printf("PASS %u decimal/color/helper cases, %u text parity/background cases, %u complete menus (48 names + 5 removal slots, 7 contexts, 3 headers)\n", helper_cases, text_cases, menu_cases);
     printf("PASS %u synthetic/fallback cases; exact quarter values remain unrounded; oversized/invalid fields are neutral question marks\n", synthetic_cases);
     puts("PASS exact helper Q4 0..196; quarter-heart 22px limit; tenths 900..1100 including 98.8/99.4; hundredths 0..402; neutral/up/down colors and lower-is-better recovery; absent-command dashes");
