@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Revision11 receipt codec and exact frozen10 differential tests (host only)."""
+"""Current12 receipts, immutable11 wallet and frozen10 differential (host only)."""
 import ctypes as C
 import hashlib
 import json
@@ -159,9 +159,19 @@ class LaterRewardsCodecTests(unittest.TestCase):
             install(self.current)
             self.assertEqual(self.current.save5_store(C.byref(s)), 1)
             bank = bytes(self.current.ram[A:A + SIZE])
+            self.assertEqual(bank[12:14], bytes((12, 0)))
             self.assertEqual(bank[5079], receipt)
             self.assertEqual(bank[5080:5088], bytes(8))
             self.assertEqual(compare_state(self.read(self.current, bank)), compare_state(s))
+            # Current writers use12, but revision11-compatible receipts retain
+            # their original acceptance and do not gain either new receipt.
+            prior11 = bytearray(bank)
+            prior11[12:14] = (11).to_bytes(2, 'little')
+            self.assertEqual(compare_state(self.read(self.current, repair_crc(prior11))), compare_state(s))
+            for offset in range(5080, 5088):
+                bad = bytearray(prior11)
+                bad[offset] = 1
+                self.read(self.current, repair_crc(bad), False)
         for revision in (0, 13, 255, 256, 65535):
             bad = bytearray(bank)
             bad[12:14] = revision.to_bytes(2, 'little')
@@ -169,8 +179,19 @@ class LaterRewardsCodecTests(unittest.TestCase):
             self.assertEqual(self.current.save5_validate_revision(C.byref(s), revision), 0)
         for offset in range(5079, 5088):
             bad = bytearray(bank)
-            bad[offset] = 128 if offset == 5079 else 1
+            #12 admits prerequisite-scoped story acknowledgement at5081.
+            # Unused bytes, unsupported story bits, unbacked paid gear and
+            # unsupported later receipts must still reject.
+            bad[offset] = 128 if offset == 5079 else 4 if offset == 5081 else 1
             self.read(self.current, repair_crc(bad), False)
+        for inspected in range(4):
+            current12 = bytearray(bank)
+            current12[5081] = inspected
+            expected = Save.from_buffer_copy(bytes(s))
+            expected.economy.reserved[1] = inspected
+            self.assertEqual(compare_state(self.read(self.current, repair_crc(current12))), compare_state(expected))
+            self.assertEqual(self.current.save5_validate_revision(C.byref(expected), 11), int(not inspected))
+            self.assertEqual(self.current.save5_validate_revision(C.byref(expected), 12), 1)
 
     def test_later_receipt_earned_floors_and_zero_earned_forgery(self):
         for receipt in range(1, 16):
@@ -238,12 +259,14 @@ class LaterRewardsCodecTests(unittest.TestCase):
             self.read(self.current, repair_crc(bad), False)
 
     def test_invalid_newer_bank_falls_back_without_writes(self):
-        for revision, receipt in ((10, 1), (11, 16), (12, 0)):
+        for revision, receipt in ((10, 1), (11, 16), (13, 0)):
             bad = bytearray(self.bank)
             bad[12:14] = revision.to_bytes(2, 'little')
             bad[8:12] = (99).to_bytes(4, 'little')
             bad[5079] = receipt
+            self.read(self.current, repair_crc(bad), False)
             s = self.read(self.current, repair_crc(bad), other=self.bank)
+            self.assertEqual(s.campaign.sequence, int.from_bytes(self.bank[8:12], 'little'))
             self.assertEqual(compare_state(s), compare_state(self.complete))
 
     def test_revision10_is_independent_of_live_policy_mutations(self):

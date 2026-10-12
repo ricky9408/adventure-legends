@@ -9,11 +9,12 @@
 #include "connected_roads.h"
 #include "travel_feedback.h"
 #include "progression.h"
+#include "collection_journal.h"
 #include "assets.h"
 Save5State adventure_save;
 volatile int room,bridge_open,torches,save_failed;
 volatile unsigned chapter_flags,room_flags,story_seen;
-int seen_temple,seen_boss,journal_tab;
+int seen_temple,seen_boss,journal_tab,quickparty_menu_candidate;
 unsigned region_game_journal_selection,north_game_journal_selection,south_game_journal_selection;
 unsigned magma_game_journal_selection,underwater_game_journal_selection,return_game_journal_selection;
 static unsigned short pixels[19200];
@@ -43,6 +44,13 @@ void quickparty_menu_reset(void){}
 void progression_menu_reset(void){}
 int quickparty_menu_back(void){return 0;}
 int progression_menu_back(void){return 0;}
+/* This map-specific fixture proves Map/Back/overview routing. Collection has
+ * its real raster/inspection coverage in test_growth_collection.py. Reject
+ * accidental navigation there, rather than silently substituting a UI. */
+void collection_journal_open(void){assert(!"Map inspection entered Collection");}
+int collection_journal_back(void){assert(!"Map inspection entered Collection");return 0;}
+int collection_journal_input(int input){(void)input;assert(!"Map inspection entered Collection");return 0;}
+unsigned collection_journal_instance(void){assert(!"Map inspection entered Collection");return CREATURE_EMPTY_SLOT;}
 unsigned journal_page_count(void){return 13;}
 void save_game(void){assert(!"Map inspection attempted a save");}
 void rect(int x,int y,int w,int h,unsigned char c){int xx,yy;assert(x>=8&&y>=31&&x+w<=232&&y+h<=154);for(yy=y;yy<y+h;yy++)for(xx=x;xx<x+w;xx++)((unsigned char*)pixels)[yy*240+xx]=c;}

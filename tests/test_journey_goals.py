@@ -54,7 +54,9 @@ class JourneyGoals(unittest.TestCase):
         source = (ROOT/'src/game.c').read_text()
         # Source integration contract only. Native endroll and independent
         # state tests separately establish released-key behavior and save I/O.
-        handoff = 'if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;enter_room(0,3);}return;}'
+        # The original chapter ending reconstructs its village checkpoint;
+        # optional homecoming credits return to the existing field scene.
+        handoff = 'if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;if(!ending_credits_returns_to_field())enter_room(0,3);}return;}'
         first_ending = 'if(!(chapter_flags&SAVE4_ENDING_SEEN)){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);}game_state=WIN;ending_credits_begin();'
         def integrated(text):
             return text.count(handoff) == 1 and text.count(first_ending) == 1
@@ -64,6 +66,8 @@ class JourneyGoals(unittest.TestCase):
             (first_ending, first_ending.replace('save_at(0,3);', '')),
             (first_ending, first_ending.replace('ending_credits_begin();', '')),
             (handoff, handoff.replace('enter_room(0,3)', 'enter_room(1,3)')),
+            (handoff, handoff.replace('if(!ending_credits_returns_to_field())', '')),
+            (handoff, handoff.replace('if(!ending_credits_returns_to_field())', 'if(ending_credits_returns_to_field())')),
             (handoff, handoff.replace('ending_credits_update()', 'pressed&(KEY_A|KEY_START)')),
         ]
         for before, after in mutations:
