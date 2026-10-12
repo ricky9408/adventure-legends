@@ -55,8 +55,8 @@ def main():
     manifest=root/'build/source-hashes.json'
     sources=json.loads(manifest.read_text())
     assert all(sha(root/name)==digest for name,digest in sources.items()),'candidate source receipt differs from production files'
-    subprocess.run(['git','merge-base','--is-ancestor',opts.expected_commit,head],cwd=root,check=True)
-    changed=subprocess.check_output(['git','diff','--name-only',opts.expected_commit,head],cwd=root,text=True).splitlines()
+    subprocess.run(['git','-c','safe.directory='+str(root),'merge-base','--is-ancestor',opts.expected_commit,head],cwd=root,check=True)
+    changed=subprocess.check_output(['git','-c','safe.directory='+str(root),'diff','--name-only',opts.expected_commit,head],cwd=root,text=True).splitlines()
     assert not set(changed)&set(sources),'runtime build inputs differ from explicit pinned commit'
     candidate=out/'candidate';candidate.mkdir()
     for suffix in ('gba','sym','elf'):
