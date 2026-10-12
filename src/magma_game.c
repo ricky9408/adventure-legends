@@ -1,6 +1,7 @@
 /* Original Kilnstep chapter. Regional transient state is bounded; all durable
  * changes go through reviewed magma_quests transactions. No SRAM side route. */
 #include "magma_game.h"
+#include "enemy_tactics.h"
 #include "connected_road_region.h"
 #include "magma_art.h"
 #include "magma_quests.h"
@@ -156,7 +157,7 @@ COLD int magma_game_clear_box(int x0,int y0,int x1,int y1){const MagmaArtRoom*r;
  return !(x1>=ox-11&&x0<ox+11&&y1>=oy-11&&y0<oy+11);
 }
 void magma_game_collision_inputs(unsigned out[3]){if(!out)return;out[0]=out[1]=out[2]=0;if(room>=42&&room<=44){out[0]=magma_game_puzzle.cell[0];out[1]=magma_puzzle_count((unsigned)room)>1?magma_game_puzzle.cell[1]:0;}else if(trial_brick()){out[0]=magma_game_puzzle.cell[0];out[2]=1;}else if(room==38)out[0]=lesson_x;else if(room==39)out[0]=screen_x;}
-unsigned magma_game_enemy_spawns(unsigned a,const MagmaEnemySpawn**out){static const MagmaEnemySpawn f[5]={{184,116,5,0,0},{256,264,5,0,1},{424,120,5,2,3},{328,56,5,0,4},{56,232,5,0,2}},g[2]={{56,120,4,0,3},{184,136,4,0,1}},one[1]={{24,88,4,0,2}},two[2]={{24,88,4,0,2},{216,88,4,0,0}};const MagmaEnemySpawn*p=a==39?f:a==41?g:a==42||a==43?one:a==44?two:0;if(out)*out=p;return a==39?5:a==41||a==44?2:a==42||a==43?1:0;}
+unsigned magma_game_enemy_spawns(unsigned a,const MagmaEnemySpawn**out){static const MagmaEnemySpawn f[5]={{184,116,5,0,0},{256,264,5,0,1},{424,120,5,2,3},{328,56,5,ENEMY_LANE_CHARGER,4},{56,232,5,0,2}},g[2]={{56,120,4,0,3},{184,136,4,0,1}},one[1]={{24,88,4,0,2}},two[2]={{24,88,4,0,2},{216,88,4,0,0}};const MagmaEnemySpawn*p=a==39?f:a==41?g:a==42||a==43?one:a==44?two:0;if(out)*out=p;return a==39?5:a==41||a==44?2:a==42||a==43?1:0;}
 static COLD int door(unsigned dest,unsigned spawn){if(!magma_can_enter(&adventure_save,dest)){if(!door_notice){say(TX_MG_LOCKED,TX_MG_LOCKEDB);door_notice=40;}return 1;}persist();enter_room((int)dest,(int)spawn);return 1;}
 int magma_game_save_prepare_pending(void){return pending_anchor_area!=0;}
 COLD int magma_game_prepare_save(void){unsigned area=pending_anchor_area;int r;
