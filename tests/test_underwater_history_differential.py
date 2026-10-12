@@ -52,7 +52,7 @@ class UnderwaterHistoricalDifferential(unittest.TestCase):
   for revision,name,data in self.images:
    self.assertEqual(self.old.history_probe_image(data,C.byref(self.oldout)),1,name);self.assertEqual(self.new.history_probe_image(data,C.byref(self.newout)),1,name);self.assertEqual(bytes(self.oldout),bytes(self.newout))
    previous=compare_state(self.newout);out=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(self.newout),out),1,name)
-   self.assertEqual(bytes(out[12:14]),b'\x0b\x00');self.assertEqual(self.new.history_probe_bank(out,A,C.byref(self.newout)),1,name);self.assertEqual(compare_state(self.newout),previous)
+   self.assertEqual(bytes(out[12:14]),b'\x0c\x00');self.assertEqual(self.new.history_probe_bank(out,A,C.byref(self.newout)),1,name);self.assertEqual(compare_state(self.newout),previous)
    for src in (A,B):
     bank=data[src:src+SIZE];self.assertEqual(bytes(repair_crc(bank)),bank,name)
     for dst in (A,B):self.compare(bank,1,'original',dst)
@@ -100,7 +100,7 @@ class UnderwaterHistoricalDifferential(unittest.TestCase):
     bank=bytearray(seed);slot=rng.randrange(160);p=160+slot*24;bank[p+14:p+16]=rng.randrange(65536).to_bytes(2,'little');self.compare(bank)
  def test_unknown_revision_and_bad_newer_bank_fallback(self):
   seed=self.seeds[5]
-  for rev in (0,12,255,256,65535):
+  for rev in (0,13,255,256,65535):
    bank=bytearray(seed);bank[12:14]=rev.to_bytes(2,'little');self.compare(bank,0)
    image=bytearray([255])*32768;image[A:A+SIZE]=seed;bank[8:12]=(0x7fffffff).to_bytes(4,'little');image[B:B+SIZE]=repair_crc(bank)
    self.assertEqual(self.old.history_probe_image(bytes(image),C.byref(self.oldout)),1);self.assertEqual(self.new.history_probe_image(bytes(image),C.byref(self.newout)),1);self.assertEqual(bytes(self.oldout),bytes(self.newout))

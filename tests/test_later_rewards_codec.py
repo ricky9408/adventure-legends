@@ -130,7 +130,7 @@ class LaterRewardsCodecTests(unittest.TestCase):
         newer = bytes(self.current.ram[B:B + SIZE])
         self.assertEqual(bytes(self.current.ram[A:A + SIZE]), self.bank)
         self.assertEqual(bytes(self.current.ram[:A]), original[:A])
-        self.assertEqual(newer[12:14], bytes((11, 0)))
+        self.assertEqual(newer[12:14], bytes((12, 0)))
         self.assertEqual(newer[6:8], (5088).to_bytes(2, 'little'))
         self.assertEqual(newer[32:], self.bank[32:])
         self.assertEqual(compare_state(self.read(self.current, newer)), compare_state(s))
@@ -162,7 +162,7 @@ class LaterRewardsCodecTests(unittest.TestCase):
             self.assertEqual(bank[5079], receipt)
             self.assertEqual(bank[5080:5088], bytes(8))
             self.assertEqual(compare_state(self.read(self.current, bank)), compare_state(s))
-        for revision in (0, 12, 255, 256, 65535):
+        for revision in (0, 13, 255, 256, 65535):
             bad = bytearray(bank)
             bad[12:14] = revision.to_bytes(2, 'little')
             self.read(self.current, repair_crc(bad), False)

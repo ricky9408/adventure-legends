@@ -35,7 +35,7 @@ class HorizonsHistory(unittest.TestCase):
     out=Save();self.assertEqual(lib.history_probe_image(data,C.byref(out)),1,name);outputs.append(bytes(out))
    self.assertEqual(outputs[0],outputs[1]);self.assertEqual(outputs[0],outputs[2])
    s=Save.from_buffer_copy(outputs[1]);before=compare_state(s);encoded=(C.c_ubyte*SIZE)()
-   self.assertEqual(self.new.history_encode(C.byref(s),encoded),1);self.assertEqual(bytes(encoded)[12:14],b'\x0b\0')
+   self.assertEqual(self.new.history_encode(C.byref(s),encoded),1);self.assertEqual(bytes(encoded)[12:14],b'\x0c\0')
    self.assertEqual(self.old.history_probe_bank(encoded,A,C.byref(Save())),0)
    out=Save();self.assertEqual(self.new.history_probe_bank(encoded,B,C.byref(out)),1);self.assertEqual(compare_state(out),before)
    self.assertEqual(bytes(out.quests.region_flags[6:8]),bytes(2));self.assertEqual(bytes(out.quests.region_flags[12:16]),bytes(4));self.assertEqual(bytes(out.quests.anchors[6:]),bytes(10))

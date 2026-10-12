@@ -45,7 +45,7 @@ class CovenantsHistory(unittest.TestCase):
     out=Save();self.assertEqual(lib.history_probe_image(data,C.byref(out)),1,name);outputs.append(bytes(out))
    self.assertEqual(outputs[0],outputs[1]);self.assertEqual(outputs[0],outputs[2])
    s=Save.from_buffer_copy(outputs[1]);before=compare_state(s);encoded=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(s),encoded),1)
-   self.assertEqual(bytes(encoded)[2],5);self.assertEqual(bytes(encoded)[12:14],b'\x0b\0');self.assertEqual(self.old.history_probe_bank(encoded,A,C.byref(Save())),0)
+   self.assertEqual(bytes(encoded)[2],5);self.assertEqual(bytes(encoded)[12:14],b'\x0c\0');self.assertEqual(self.old.history_probe_bank(encoded,A,C.byref(Save())),0)
    out=Save();self.assertEqual(self.new.history_probe_bank(encoded,B,C.byref(out)),1);self.assertEqual(compare_state(out),before)
    self.assertEqual((out.quests.region_flags[7],out.quests.region_flags[22],out.quests.region_flags[23],out.quests.anchors[7]),(0,0,0,0))
    self.assertEqual(list(out.quests.objectives[60:]),[0]*4);self.assertEqual(out.roster.obtained[15],0)
@@ -85,7 +85,7 @@ class CovenantsHistory(unittest.TestCase):
   for form in range(121,129):
    b=bytearray(seed);b[96+(form-1)//8]|=1<<((form-1)%8);b=bytes(repair_crc(b))
    for l in (self.old,self.new,self.erased):self.assertEqual(l.history_probe_bank(b,A,C.byref(Save())),0)
-  for revision in (0,12,255,256,65535):
+  for revision in (0,13,255,256,65535):
    b=bytearray(seed);b[12:14]=revision.to_bytes(2,'little');b=bytes(repair_crc(b))
    for l in (self.old,self.new,self.erased):self.assertEqual(l.history_probe_bank(b,A,C.byref(Save())),0)
  def test_legal_full_overbudget_revision8_and_non_authoritative_credit(self):
