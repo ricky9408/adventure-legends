@@ -11,7 +11,7 @@ static const DoorDef doors[]={
 static COLD void reset_point(int*x,int*y){*x=24;*y=horizons_art_rooms[room-62].height-28;}
 static COLD int door(unsigned a,unsigned s){if(event_count)return 1;if((a==69&&room==67)||(a==67&&room==69)){if(!done(57)){say(TX_HZ_LOCKED_FINAL,TX_HZ_HUD_REPORT);return 1;}}
  if(horizons_game_is_room(a)&&!spawn_allowed(a,s)){say(a==67||a==68?TX_HZ_LOCKED_FINAL:TX_HZ_LOCKED,TX_HZ_HUD_WORK);return 1;}persist();enter_room(a,s);return 1;}
-static COLD void clear_prompt(void){if(invite_confirm&&(!horizons_game_is_room((unsigned)room)||invite_confirm>12||!close(sources[invite_confirm-1].invite[0],sources[invite_confirm-1].invite[1])))invite_confirm=0;}
+static COLD void clear_prompt(void){if(invite_confirm&&(!horizons_game_is_room((unsigned)room)||invite_confirm>12||!prompt_close(sources[invite_confirm-1].invite[0],sources[invite_confirm-1].invite[1])))invite_confirm=0;}
 COLD int horizons_game_input(unsigned pressed,unsigned held){(void)held;if(game_state!=PLAY)return 0;clear_prompt();if(!horizons_game_is_room((unsigned)room))return 0;if(pressed&B){if(reset_confirm||invite_confirm){reset_confirm=invite_confirm=0;toast(TX_HZ_WAIT);return 1;}}return 0;}
 static COLD int reset_interact(void){int x,y,xx=120,yy=140;reset_point(&x,&y);if(!close(x,y))return 0;if(!reset_confirm){reset_confirm=1;toast(TX_HZ_RESET_ASK);return 1;}horizons_game_spawn((unsigned)room,0,&xx,&yy);horizons_game_reset();game_region_warp(xx,yy);toast(TX_HZ_RESET_DONE);return 1;}
 COLD int horizons_game_old_interact(void){if(game_state!=PLAY||!done(51)||event_count)return 0;
@@ -20,7 +20,7 @@ COLD int horizons_game_old_interact(void){if(game_state!=PLAY||!done(51)||event_
  return 0;
 }
 static COLD int main_report(unsigned q,int a,int b){if(state(q)==2)claim(q);else {if(!state(q))offer(q);say(a,b);}return 1;}
-COLD int horizons_game_interact(void){unsigned i;CreatureInstance*c=active();if(!horizons_game_is_room((unsigned)room)||game_state!=PLAY||event_count)return 0;clear_prompt();if(reset_interact())return 1;
+static COLD int interact_targets(void){unsigned i;CreatureInstance*c=active();if(!horizons_game_is_room((unsigned)room)||game_state!=PLAY||event_count)return 0;clear_prompt();if(reset_interact())return 1;
  for(i=0;i<sizeof doors/sizeof doors[0];i++)if(doors[i].area==room&&!road_region_managed((unsigned)room,doors[i].to)&&close(doors[i].x,doors[i].y))return door(doors[i].to,doors[i].spawn);
  if(proof.mode){unsigned j=proof.index;if(proof.mode==MODE_INITIAL||proof.mode==MODE_REPEAT){const SourceDef*d=&sources[j];if(close(d->invite[0],d->invite[1]))return begin_source(j);if(close(d->manual[0],d->manual[1]))return attempt_manual(0);if((j==7&&close(80,144))||(j==8&&close(192,32)))return attempt_manual(1);}else {const TrialDef*d=work_trial();if(close(d->manual[0],d->manual[1]))return attempt_manual(0);if(close(d->lectern[0],d->lectern[1])){say(d->clue[0],d->clue[1]);return 1;}}}
  else {
@@ -50,7 +50,9 @@ COLD int horizons_game_interact(void){unsigned i;CreatureInstance*c=active();if(
  else if(room==69){if(close(40,80)){objective(59,4);say(TX_HZ_SOURCE9A,TX_HZ_SOURCE9B);return 1;}if(close(48,104)||close(80,104)){setting[8]^=close(48,104)?1:2;if(setting[8]==3)objective(58,2);changed();toast(TX_HZ_ADJUST);return 1;}}
  return 0;
 }
-COLD void horizons_game_tick(void){unsigned i;int x,y;if(!horizons_game_is_room((unsigned)room)||game_state!=PLAY)return;clear_prompt();ambient++;reset_point(&x,&y);if(reset_confirm&&!close(x,y))reset_confirm=0;if(event_count)return;
+/* Preserve previously eligible targets before trying the forgiving reach. */
+COLD int horizons_game_interact(void){int r;relaxed_interaction=0;r=interact_targets();if(!r){relaxed_interaction=1;r=interact_targets();}relaxed_interaction=0;return r;}
+COLD void horizons_game_tick(void){unsigned i;int x,y;if(!horizons_game_is_room((unsigned)room)||game_state!=PLAY)return;clear_prompt();ambient++;reset_point(&x,&y);if(reset_confirm&&!prompt_close(x,y))reset_confirm=0;if(event_count)return;
  if(performance_ticks)performance_ticks--;
  horizons_audio_tick();
  if(room==63&&setting[3]){int goal=192+(setting[3]==2?setting[0]:setting[4])*32,next=carriage_x+(carriage_x<goal?2:-2);if(carriage_x==goal){if(setting[3]==1)setting[0]=setting[4];setting[3]=0;}else if(!load_clear(next)){if(setting[3]==1){setting[3]=2;toast(TX_HZ_CLEAR);}}else{carriage_x=next;if(carriage_x==goal){if(setting[3]==1)setting[0]=setting[4];setting[3]=0;toast(TX_HZ_TRACE);}horizons_powers_geometry_changed();return_powers_geometry_changed();changed();}}

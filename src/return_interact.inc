@@ -1,6 +1,6 @@
-/* A repeat invitation confirmation is scoped to this exact facing cone.
+/* A repeat invitation confirmation is scoped to its facing interaction reach.
  * Leaving it clears only the prompt, never the solved encounter or its token. */
-static void clear_departed_repeat_prompt(void){if(invite_confirm==1&&!((repeat_active==17&&room==55&&close(208,80))||(repeat_active==18&&room==58&&close(400,240))))invite_confirm=0;}
+static void clear_departed_repeat_prompt(void){if(invite_confirm==1&&!((repeat_active==17&&room==55&&prompt_close(208,80))||(repeat_active==18&&room==58&&prompt_close(400,240))))invite_confirm=0;}
 static void reset_point(int*x,int*y){int big=room==54||room==56||room==57||room==58;*x=big?40:24;*y=big?276:132;}
 static COLD int door(unsigned a,unsigned s){if(event_count){transition_area=a;transition_spawn=s;transition_ready=2;return 1;}if(return_game_is_room(a)&&!return_can_enter(&adventure_save,a)){say(TX_RT_LOCKED,TX_RT_LOCKEDB);return 1;}persist();enter_room(a,s);return 1;}
 static COLD int reset_interact(void){int x,y,xx=120,yy=140;reset_point(&x,&y);if(!close(x,y))return 0;if(!reset_confirm){reset_confirm=1;toast(TX_RT_RESET_CONFIRM);return 1;}return_game_spawn((unsigned)room,0,&xx,&yy);return_game_reset();game_region_warp(xx,yy);toast(TX_RT_RESET_DONE);return 1;}
@@ -27,7 +27,7 @@ COLD int return_game_old_interact(void){if(game_state!=PLAY||!done(40))return 0;
  if(room==38&&close(208,272)&&done(52)){say(TX_RT_RESSA_DONE,TX_RT_OLD_ACCESS);return 1;}
  return 0;
 }
-COLD int return_game_interact(void){unsigned i;if(!return_game_is_room((unsigned)room)||game_state!=PLAY||event_count)return 0;clear_departed_repeat_prompt();if(reset_interact())return 1;
+static COLD int interact_targets(void){unsigned i;if(!return_game_is_room((unsigned)room)||game_state!=PLAY||event_count)return 0;clear_departed_repeat_prompt();if(reset_interact())return 1;
  if(return_game_trial.index<13)return trial_interact();
  /* Multiple nearby lessons share no invisible activation; exact lectern wins
   * only when the selected predecessor matches that visibly named lesson. */
@@ -54,11 +54,13 @@ COLD int return_game_interact(void){unsigned i;if(!return_game_is_room((unsigned
  else if(room==61){if(close(64,56)||close(176,56)){say(TX_RT_HINGE,TX_RT_FLOAT);return 1;}}
  return 0;
 }
-COLD void return_game_tick(void){int x,y;if(!return_game_is_room((unsigned)room)||game_state!=PLAY)return;clear_departed_repeat_prompt();ambient_clock++;reset_point(&x,&y);if(reset_confirm&&!close(x,y))reset_confirm=0;if(event_count)return;
+COLD void return_game_tick(void){int x,y;if(!return_game_is_room((unsigned)room)||game_state!=PLAY)return;clear_departed_repeat_prompt();ambient_clock++;reset_point(&x,&y);if(reset_confirm&&!prompt_close(x,y))reset_confirm=0;if(event_count)return;
  if(return_game_trial.index<13)trial_walk();
  else if(repeat_active){if(!repeat_participant()){cancel_proof();changed();}else if(repeat_stage==1&&near(px,py,room==55?208:400,room==55?112:272,9)){repeat_stage=2;changed();toast(TX_RT_TRACE);}}
  if(transition_lock)return;
  {const ReturnArtRoom*r=&return_art_rooms[room-54];if(!road_region_managed((unsigned)room,parents[room-54])&&py>=r->height-16&&ab(px-r->width/2)<=16&&(keys&DOWN)){door(parents[room-54],parent_spawns[room-54]);return;}}
 }
+/* Preserve previously eligible targets before trying the forgiving reach. */
+COLD int return_game_interact(void){int r;relaxed_interaction=0;r=interact_targets();if(!r){relaxed_interaction=1;r=interact_targets();}relaxed_interaction=0;return r;}
 int return_game_name(void){return return_game_is_room((unsigned)room)?room_names[room-54]:TX_RT_JOURNAL;}
 int return_game_quest_text(void){if(!done(46))return TX_RT_HUD_HOME;if(!(adventure_save.quests.region_flags[5]&1))return TX_RT_HUD_COMMON;if(!done(48)||!done(50))return TX_RT_HUD_ARMS;if(!done(51))return(adventure_save.quests.objectives[51]&7)==7?TX_RT_HUD_RETURN:TX_RT_HUD_MAP;return TX_RT_HUD_DONE;}

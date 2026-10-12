@@ -41,6 +41,26 @@ class World(unittest.TestCase):
   if reverse:self.water();self.stage()
   else:self.stage();self.water()
   self.finale()
+ def test_off_axis_manual_a_keeps_direction_and_range_limits(self):
+  self.old(60);self.act(64,112,True);self.old(61);self.entry(62)
+  for x,y,f in ((197,220,1),(200,220,0),(200,235,1),(200,213,1)):
+   self.at(x,y,f);before=bytes(self.s)
+   self.assertEqual(self.l.horizons_game_interact(),0,(x,y,f))
+   self.assertEqual(self.l.get_setting(0),0);self.assertEqual(bytes(self.s),before)
+  self.at(200,220,1);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.get_mode(),0,'ordinary handle must not start a trial or invitation')
+ def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
+  self.intro();self.act(208,208);before=self.l.get_setting(0)
+  self.at(16,304,1);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1);self.l.tick()
+  self.assertEqual(self.l.reset_confirmation(),1);self.assertEqual(self.l.get_setting(0),before)
+  self.at(16,304,0);self.l.tick();self.assertEqual(self.l.reset_confirmation(),0)
+  self.at(16,304,1);self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.horizons_game_input(2,0),1);self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.horizons_game_interact(),1);self.l.tick()
+  self.assertEqual(self.l.horizons_game_interact(),1);self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.get_setting(0),3,'reset reconstructs committed fair work')
  def test_main_both_orders(self):
   self.chapter();self.setUp();self.chapter(True)
  def test_all_four_personal_trials_and_rehearsal(self):
@@ -117,6 +137,9 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.get_setting(0),0)
  def test_recruit_prompt_cancel_leave_and_preflight_abandon(self):
   self.intro();self.select(105,106);self.act(352,224);self.act(352,256);self.field(0,384,176,2);self.walk(384,208);before=self.l.count();self.act(352,224);self.assertNotEqual(self.l.confirmation(),0);self.at(240,240);self.l.tick();self.assertEqual(self.l.confirmation(),0);self.act(352,224);self.assertEqual(self.l.count(),before)
+  self.at(344,236,1);self.l.tick();self.assertNotEqual(self.l.confirmation(),0,'off-axis reach retains invitation confirmation');self.assertEqual(self.l.count(),before)
+  self.at(344,236,0);self.l.tick();self.assertEqual(self.l.confirmation(),0);self.assertEqual(self.l.count(),before)
+  self.act(352,224);self.assertNotEqual(self.l.confirmation(),0)
   self.at(352,242);self.assertEqual(self.l.horizons_game_interact(),1);self.l.snapshot_state();self.assertEqual(self.l.horizons_game_prepare_event(),1);self.l.horizons_game_menu_abandoned();self.assertEqual(self.l.unchanged(),1);self.assertEqual(self.l.count(),before);self.assertEqual(self.l.get_mode(),0)
  def test_reset_reconstructs_committed_work_and_closes_prompts(self):
   self.intro();self.entry(63);self.act(136,80);self.act(80,96);self.select(105,106);self.field(0,224,90,2)

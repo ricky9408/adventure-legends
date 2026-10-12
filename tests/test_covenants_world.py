@@ -5,7 +5,7 @@ Renderer geometry is independently proven elsewhere. This suite is not native
 controller acquisition or pacing acceptance. No production state is edited.
 """
 from pathlib import Path
-import ctypes as C, hashlib, json, os, subprocess, unittest
+import ctypes as C, hashlib, json, os, subprocess, unittest, sys
 import covenants_host_support as H
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'build/covenants-world-review'
@@ -25,7 +25,9 @@ class World(unittest.TestCase):
   cls.sanitized=sanitized
   p=OUT/('world-sanitized.so' if sanitized else 'world.so')
   sanitize=['-fsanitize=address,undefined','-fno-omit-frame-pointer'] if sanitized else []
-  subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Wl,--no-undefined','-fPIC','-shared','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-Isrc','-I'+str(OUT),*sanitize,*files,'-o',str(p)],cwd=ROOT,check=True)
+  # Apple ld rejects --no-undefined and already defaults to strict resolution.
+  strict_link=[] if sys.platform=='darwin' else ['-Wl,--no-undefined']
+  subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic',*strict_link,'-fPIC','-shared','-DSAVE4_HOST_TEST','-DSAVE5_HOST_TEST','-Isrc','-I'+str(OUT),*sanitize,*files,'-o',str(p)],cwd=ROOT,check=True)
   subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Isrc','-c','src/covenants_game.c','-o',str(OUT/'strict-world.o')],cwd=ROOT,check=True)
   cls.l=C.CDLL(str(p));cls.l.sram=(C.c_ubyte*32768).in_dll(cls.l,'save5_test_sram');cls.s=H.Save.in_dll(cls.l,'adventure_save')
   cls.l.covenants_job_begin.argtypes=[C.POINTER(H.Save),C.POINTER(H.Request),C.c_uint,C.c_uint]
@@ -50,6 +52,51 @@ class World(unittest.TestCase):
  def heat(self,a,b,x,y):
   self.select(107,108);self.at(x,y,3);token=self.l.action();self.assertEqual(self.l.hit(a,token,1,0),1);self.assertEqual(self.l.hit(b,token,2,1),1)
  def tick(self,n=1):self.l.tick(n);self.assertEqual(self.l.settle(),1)
+ def test_reviewed_off_axis_steward_a_keeps_direction_and_range_limits(self):
+  self.entry(70)
+  for x,y,f in ((117,260,0),(120,260,1),(120,245,0),(120,267,0)):
+   self.at(x,y,f);before=bytes(self.s)
+   self.assertEqual(self.l.covenants_game_interact(),0,(x,y,f))
+   self.assertEqual(bytes(self.s),before);self.assertEqual(self.l.get_setting(1),0)
+  # Reviewed native-world coordinates: forward12/side8 from the steward.
+  self.at(120,260,0);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
+  self.assertEqual(self.l.get_setting(1),0,'talk must not operate the nearby manual')
+  self.assertEqual(self.l.settle(),1)
+ def test_old_valid_steward_precedes_newly_reachable_manual(self):
+  self.entry(70);self.at(136,254,0)
+  # Manual144,264 is forward10/side8; steward128,272 is forward18/side8.
+  # The steward was already eligible before the forgiving reach was added.
+  before=bytes(self.s);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
+  self.assertEqual(self.l.get_setting(1),0,'forgiving manual must not steal an old valid talk')
+  self.assertEqual(bytes(self.s),before);self.assertEqual(self.l.settle(),1)
+ def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
+  self.entry(70);self.hit(0,105,106,120,240)
+  self.at(40,308,1);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(self.l.confirmation(0),1);self.tick()
+  self.assertEqual(self.l.confirmation(0),1);self.assertEqual(self.l.get_setting(0),1)
+  self.at(40,308,0);self.tick();self.assertEqual(self.l.confirmation(0),0)
+  self.at(40,308,1);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(self.l.covenants_game_input(2,0),1);self.assertEqual(self.l.confirmation(0),0)
+  self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.covenants_game_interact(),1);self.tick()
+  self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.confirmation(0),0)
+  self.assertEqual(self.l.get_setting(0),0,'only a second A may discard partial work')
+ def test_off_axis_invitation_retains_prompt_and_facing_away_revokes_it(self):
+  H.fulfill(self.l,self.s,1);self.l.adopt_fixture(H.generation());self.entry(70)
+  before=self.l.creatures_roster_count(C.byref(self.s.roster))
+  self.at(424,284,1);self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.confirmation(1),1);self.tick()
+  self.assertEqual(self.l.confirmation(1),1);self.assertEqual(self.l.creatures_roster_count(C.byref(self.s.roster)),before)
+  self.at(424,284,0);self.tick();self.assertEqual(self.l.confirmation(1),0)
+  self.at(424,284,1);self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.creatures_roster_count(C.byref(self.s.roster)),before)
+  self.assertEqual(self.l.covenants_game_input(2,0),1);self.assertEqual(self.l.confirmation(1),0)
+  self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.settle(),1)
+  self.assertEqual(self.l.creatures_roster_count(C.byref(self.s.roster)),before+1)
+  self.assertEqual(self.l.confirmation(1),0)
  def test_geometry_data_targets_match_actual_world(self):
   data=json.loads((ROOT/'assets/covenants_world/geometry.json').read_text())
   for r in data['rooms']:

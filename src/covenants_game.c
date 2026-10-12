@@ -74,12 +74,15 @@ static const int after_lines[8][2]={{TX_CV_AFTER1A,TX_CV_AFTER1B},{TX_CV_AFTER2A
 static const int invite_lines[8][2]={{TX_CV_INVITE1A,TX_CV_INVITE1B},{TX_CV_INVITE2A,TX_CV_INVITE2B},{TX_CV_INVITE3A,TX_CV_INVITE3B},{TX_CV_INVITE4A,TX_CV_INVITE4B},{TX_CV_INVITE5A,TX_CV_INVITE5B},{TX_CV_INVITE6A,TX_CV_INVITE6B},{TX_CV_INVITE7A,TX_CV_INVITE7B},{TX_CV_INVITE8A,TX_CV_INVITE8B}};
 static COLD int ab(int x){return x<0?-x:x;}
 static COLD int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
+/* Only A target selection uses this reach; cast geometry remains separate. */
+static unsigned char relaxed_interaction;
 static COLD int close(int x,int y){
  int f,s;
  if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}
  else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}
- return f>=6&&f<=26&&s<=10&&s<=f/2;
+ return f>=6&&f<=26&&s<=10&&(relaxed_interaction||s<=f/2);
 }
+static COLD int prompt_close(int x,int y){unsigned char old=relaxed_interaction;int r;relaxed_interaction=1;r=close(x,y);relaxed_interaction=old;return r;}
 static COLD void next_generation(unsigned *p){if(++*p==0)++*p;}
 static COLD void changed(void){next_generation(&covenants_game_revision);}
 static COLD unsigned state(unsigned q){return save5_quest_state(&adventure_save.quests,q);}

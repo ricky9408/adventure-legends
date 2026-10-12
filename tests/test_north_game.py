@@ -4,7 +4,7 @@ This proves bounded puzzle/reward behavior; controller-native QA is separate.
 """
 from collections import deque
 from pathlib import Path
-import ctypes,json,os,subprocess,tempfile,unittest
+import ctypes,json,os,subprocess,sys,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='north-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/northern_region/ui_additions.json').read_text())
@@ -34,10 +34,16 @@ void text(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void centered(int a,int b,int c){(void)a;(void)b;(void)c;}
 void box(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void rect(int a,int b,int c,int d,unsigned char e){(void)a;(void)b;(void)c;(void)d;(void)e;}
-void line(int a,int b,int c,int d,int e){(void)a;(void)b;(void)c;(void)d;(void)e;}
+static unsigned overlay_count;
+static int overlay_lines[16][5];
+void line(int a,int b,int c,int d,int e){if(overlay_count<16){int*p=overlay_lines[overlay_count];p[0]=a;p[1]=b;p[2]=c;p[3]=d;p[4]=e;}overlay_count++;}
+unsigned overlay(unsigned area,unsigned rail,int cx,int cy){room=(int)area;north_game_puzzle.rail=(unsigned char)rail;camera_x=cx;camera_y=cy;overlay_count=0;north_game_draw_overlay();return overlay_count;}
+int overlay_coordinate(unsigned n,unsigned coord){return n<overlay_count&&n<16&&coord<5?overlay_lines[n][coord]:-999;}
 void north_actor(unsigned a,int b,int c){(void)a;(void)b;(void)c;actor_calls++;}
 void region_form_actor(unsigned a,int b,int c){(void)a;(void)b;(void)c;actor_calls++;}
 int game_region_entry_safe(void){return 1;}
+int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
+int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
 void game_health_fill(void){}
 unsigned game_weapon_class(void){return weapon_class;}
 void game_north_hurt(unsigned d){damage_calls+=d;}
@@ -101,9 +107,17 @@ void visits(unsigned b){adventure_save.quests.region_flags[0]=(Save4U8)b;}
 unsigned trial(unsigned form){unsigned i;for(i=0;i<160;i++)if(adventure_save.roster.instances[i].form_id==form)return adventure_save.roster.instances[i].trial_flags;return 0;}
 unsigned level(unsigned form){unsigned i;for(i=0;i<160;i++)if(adventure_save.roster.instances[i].form_id==form)return adventure_save.roster.instances[i].level;return 0;}
 '''
-(OUT/'h.c').write_text(HARNESS)
+(OUT/'h.c').write_text(HARNESS.replace('__wrap_equipment_claim_many','equipment_claim_many') if sys.platform=='darwin' else HARNESS)
 sources=['src/north_game.c','src/northern_quests.c','src/north_art.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c']
-subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DNORTH_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),str(OUT/'h.c'),*sources,'-Wl,--wrap=equipment_claim_many',*(['-fsanitize=undefined','-fno-sanitize-recover=all'] if os.environ.get('NORTH_SANITIZE') else []),'-o',str(OUT/'test.so')],cwd=ROOT,check=True)
+sanitize=['-fsanitize=undefined','-fno-sanitize-recover=all'] if os.environ.get('NORTH_SANITIZE') else []
+wrap=['-Wl,--wrap=equipment_claim_many']
+if sys.platform=='darwin':
+ # Apple ld lacks GNU --wrap. Rename only the equipment implementation;
+ # production callers still reach the same failure-injection test wrapper.
+ obj=OUT/'equipment.o'
+ subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-fPIC','-Isrc','-Dequipment_claim_many=__real_equipment_claim_many',*sanitize,'-c','src/equipment.c','-o',str(obj)],cwd=ROOT,check=True)
+ sources.remove('src/equipment.c');sources.append(str(obj));wrap=[]
+subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DNORTH_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),str(OUT/'h.c'),*sources,*wrap,*sanitize,'-o',str(OUT/'test.so')],cwd=ROOT,check=True)
 L=ctypes.CDLL(str(OUT/'test.so'))
 class Puzzle(ctypes.Structure):_fields_=[('rail',ctypes.c_ubyte),('cart',ctypes.c_ubyte*2),('weight',ctypes.c_ubyte)]
 L.north_puzzle_step.argtypes=[ctypes.POINTER(Puzzle),ctypes.c_uint,ctypes.c_uint,ctypes.c_int,ctypes.c_int]
@@ -114,6 +128,24 @@ def value(n):return ctypes.c_int.in_dll(L,n).value
 def byte(n):return ctypes.c_ubyte.in_dll(L,n).value
 class NorthRuntime(unittest.TestCase):
  def setUp(self):L.fresh()
+ def test_persistent_four_bearings_and_camera_translation(self):
+  # Each bearing remains visible without a toast. Signed arrow tips distinguish
+  # the two directions that share the existing junction actor artwork.
+  directions=((0,-1),(1,0),(0,1),(-1,0))
+  for area,cx,cy,x,y in ((23,120,80,120,112),(26,0,0,120,96),(27,0,0,120,96),(28,0,0,120,96)):
+   renderings=[]
+   for rail,(dx,dy) in enumerate(directions):
+    self.assertGreaterEqual(L.overlay(area,rail,cx,cy),6)
+    segments=[tuple(L.overlay_coordinate(i,j) for j in range(5)) for i in range(6)]
+    # Foreground pointer stays outside the unchanged 16x16 junction sprite.
+    self.assertEqual(segments[3][:4],(x+dx*10,y+dy*10,x+dx*19,y+dy*19))
+    self.assertEqual(segments[4][:2],(x+dx*19,y+dy*19))
+    self.assertEqual(segments[5][:2],(x+dx*19,y+dy*19))
+    renderings.append(tuple(segments))
+   self.assertEqual(len(set(renderings)),4,area)
+  # A boss coupling's binary art does not acquire unrelated rail-direction UI.
+  ctypes.c_ubyte.in_dll(L,'north_game_machine_stage').value=0
+  self.assertEqual(L.overlay(29,0,0,0),0)
  def act(self,x,y):L.at(x,y);self.assertEqual(L.north_game_interact(),1)
  def power(self,x,y,cmd):L.at(x,y);L.select_cmd(cmd);self.assertEqual(L.north_game_power(cmd),1)
  def grant(self,q):

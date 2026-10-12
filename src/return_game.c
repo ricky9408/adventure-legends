@@ -44,7 +44,10 @@ static const int qnames[8]={TX_RT_Q46,TX_RT_Q47,TX_RT_Q48,TX_RT_Q49,TX_RT_Q50,TX
 static const int qclues[8][2]={{TX_RT_CLUE46A,TX_RT_CLUE46B},{TX_RT_CLUE47A,TX_RT_CLUE47B},{TX_RT_CLUE48A,TX_RT_CLUE48B},{TX_RT_CLUE49A,TX_RT_CLUE49B},{TX_RT_CLUE50A,TX_RT_CLUE50B},{TX_RT_CLUE51A,TX_RT_CLUE51B},{TX_RT_CLUE52A,TX_RT_CLUE52B},{TX_RT_CLUE53A,TX_RT_CLUE53B}};
 static int ab(int n){return n<0?-n:n;}
 static int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
-static int close(int x,int y){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&s<=f/2;}
+/* Only A target selection uses this reach; cast geometry remains separate. */
+static unsigned char relaxed_interaction;
+static COLD int close(int x,int y){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&(relaxed_interaction||s<=f/2);}
+static COLD int prompt_close(int x,int y){unsigned char old=relaxed_interaction;int r;relaxed_interaction=1;r=close(x,y);relaxed_interaction=old;return r;}
 static void changed(void){return_game_revision++;progression_revision++;}
 static unsigned party(void){const CreatureRoster*r=&adventure_save.roster;return r->party[0]|(unsigned)r->party[1]<<8|(unsigned)r->party[2]<<16|(unsigned)r->party[3]<<24;}
 static CreatureInstance*active(void){unsigned p=adventure_save.roster.selected_party,s;if(!summoned||p>=4)return 0;s=adventure_save.roster.party[p];return s<160?&adventure_save.roster.instances[s]:0;}

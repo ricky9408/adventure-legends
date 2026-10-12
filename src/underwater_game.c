@@ -54,8 +54,11 @@ static const short spawns[8][4][2]={
  {{240,288},{432,112},{32,160}},{{120,140},{208,112},{32,112}},{{120,140},{208,112}}};
 static int ab(int x){return x<0?-x:x;}
 static int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
-/* Deliberate facing cone; reset/talk/rest never steal an adjacent object A. */
-static int close(int x,int y){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&s<=f/2;}
+/* A first keeps its existing target, then accepts a nearby off-axis target.
+ * Field-power overlaps/rays are separate; this is not a casting predicate. */
+static unsigned char relaxed_interaction;
+static COLD int close(int x,int y){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&(relaxed_interaction||s<=f/2);}
+static COLD int prompt_close(int x,int y){unsigned char old=relaxed_interaction;int r;relaxed_interaction=1;r=close(x,y);relaxed_interaction=old;return r;}
 static int hit(int x,int y,int bx,int by,int w,int h){return x+5>=bx&&x-5<bx+w&&y+5>=by&&y-5<by+h;}
 int underwater_game_is_room(unsigned a){return a>=46&&a<=53;}
 unsigned underwater_game_spawn_count(unsigned a){return !underwater_game_is_room(a)?0:a==46?4:a==47||a==48||a==51||a==52?3:2;}
@@ -196,7 +199,7 @@ static void reset_point(int*x,int*y){*x=(room==46||room==47||room==48||room==51)
 static COLD int reset_interact(void){int x,y,xx=120,yy=140;reset_point(&x,&y);if(!close(x,y))return 0;if(!reset_pending){reset_pending=1;toast(TX_UW_RESET_CONFIRM);return 1;}underwater_game_spawn((unsigned)room,0,&xx,&yy);reset_scene();game_region_warp(xx,yy);toast(TX_UW_RESET_DONE);return 1;}
 COLD int underwater_game_input(unsigned pressed,unsigned held){(void)held;if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return 0;if(pressed&KEY_B)reset_pending=0;return 0;}
 static COLD int toggle_main(unsigned n){int r=underwater_puzzle_toggle(&underwater_game_puzzle,(unsigned)room,n,px,py);if(r==1){underwater_powers_geometry_changed();changed();toast(TX_UW_ADJUSTED);}else toast(TX_UW_STEP_CLEAR);return 1;}
-COLD int underwater_game_interact(void){if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return 0;
+static COLD int interact_targets(void){if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return 0;
  if(reset_interact())return 1;
  if(projection==2){toast(TX_UW_STEP_CLEAR);return 1;}
  /* Trial lecterns have separate floor markings; no source or ordinary prop
@@ -284,6 +287,7 @@ COLD int underwater_game_interact(void){if(!underwater_game_is_room((unsigned)ro
  /* General signs give the next readable clue; no invisible range pickup. */
  return 0;
 }
+COLD int underwater_game_interact(void){int r;relaxed_interaction=0;r=interact_targets();if(!r){relaxed_interaction=1;r=interact_targets();}relaxed_interaction=0;return r;}
 int underwater_game_power(unsigned command){(void)command;return 0;}
 unsigned underwater_game_action_begin(unsigned channel){CreatureInstance*c;if(channel>3)return 0;if(++action_serial==0)++action_serial;action_token[channel]=action_serial;action_hits&=(unsigned char)~(1u<<channel);if(channel==3){c=active();cast_id=c?c->instance_id:0;cast_form=c?c->form_id:0;cast_generation=room_generation;cast_command=progression_command();field_hits=0;}return action_serial;}
 int underwater_game_field_target(unsigned i,int*x,int*y,int*r){int xx=0,yy=0;if(!underwater_game_is_room((unsigned)room)||i>=8||projection==2)return 0;if(underwater_game_trial.index<16){if(i>=6)return 0;trial_point(i,&xx,&yy);}else if(room==50&&i<2){xx=i?152:88;yy=72;}else if(room==51&&i<2){xx=i?304:176;yy=144;}else if(room==52&&i==0){xx=120;yy=48;}else if(room==53&&i<2){xx=i?64:120;yy=i?80:48;}else if(room==49&&i==0){xx=120;yy=48;}else if(room==47&&i<2){xx=i?240:144;yy=i?144:112;}else return 0;if(x)*x=xx;if(y)*y=yy;if(r)*r=10;return 1;}
@@ -295,7 +299,7 @@ COLD int underwater_game_field_hit(unsigned i,unsigned command,unsigned id,unsig
 int underwater_game_target(int*x,int*y,int*r){if(room!=53||underwater_game_guardian_stage!=3||!underwater_game_puzzle.ballast)return 0;if(x)*x=120;if(y)*y=48;if(r)*r=14;return 1;}
 COLD int underwater_game_weapon_hit(unsigned cls,int x,int y,unsigned damage,unsigned channel,unsigned token){if(channel>3||!token||token!=action_token[channel]||(action_hits&(1u<<channel))||(cls<1||cls>3)||!damage||!underwater_game_target(0,0,0)||!near(x,y,120,48,20))return 0;action_hits|=(unsigned char)(1u<<channel);underwater_game_guardian_hits++;if(underwater_game_guardian_hits>=3){underwater_game_guardian_stage=4;objective(40,8);persist();toast(TX_UW_GUARDIAN_DONE);}else{underwater_game_guardian_stage=1;underwater_game_guardian_ticks=72;guardian_side=(unsigned char)(px>120);guardian_hurt=0;toast(TX_UW_GUARDIAN_REST);}changed();return 1;}
 int underwater_game_command_hit(int x,int y,unsigned damage,unsigned token){(void)x;(void)y;(void)damage;(void)token;return 0;}
-COLD void underwater_game_tick(void){int x,y;if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return;world_clock++;if(projection==2&&!underwater_puzzle_solid(&underwater_game_puzzle,(unsigned)room,px,py)){projection=0;underwater_powers_geometry_changed();changed();}if(door_notice)door_notice--;reset_point(&x,&y);if(reset_pending&&!close(x,y))reset_pending=0;
+COLD void underwater_game_tick(void){int x,y;if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return;world_clock++;if(projection==2&&!underwater_puzzle_solid(&underwater_game_puzzle,(unsigned)room,px,py)){projection=0;underwater_powers_geometry_changed();changed();}if(door_notice)door_notice--;reset_point(&x,&y);if(reset_pending&&!prompt_close(x,y))reset_pending=0;
  if(event_count)return;
  if(underwater_game_trial.index<16)trial_walk();
  else {

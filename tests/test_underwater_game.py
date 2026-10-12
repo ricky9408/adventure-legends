@@ -3,7 +3,7 @@
 This is not controller acquisition, native power-shape proof or cadence evidence.
 """
 from pathlib import Path
-import ctypes as C,json,subprocess,tempfile,unittest,os
+import ctypes as C,json,subprocess,tempfile,unittest,os,sys
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='underwater-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/underwater_region/dialogue.json').read_text());IDS={'TX_'+k:4000+i for i,k in enumerate(UI)}
@@ -11,7 +11,14 @@ UI=json.loads((ROOT/'assets/underwater_region/dialogue.json').read_text());IDS={
 sources=['src/underwater_game.c','src/underwater_art.c','src/underwater_quests.c','src/magma_quests.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c']
 WORLD_POWERS=os.environ.get('UNDERWATER_WORLD_POWERS')=='1'
 extra=['-DUNDERWATER_WORLD_POWERS','tests/underwater_world_power_bridge.c','src/underwater_powers.c','src/underwater_power_art.c','src/combat_rules.c'] if WORLD_POWERS else []
-subprocess.run(['cc',*extra,'-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DUNDERWATER_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),'tests/underwater_game_host.c',*sources,'-Wl,--wrap=underwater_anchor','-o',str(OUT/'test.so')],cwd=ROOT,check=True)
+wrap=['-Wl,--wrap=underwater_anchor']
+if sys.platform=='darwin':
+ # Apple ld has no --wrap. Rename only the real implementation; callers still
+ # reach the same observation wrapper and production transaction logic.
+ obj=OUT/'underwater_quests.o'
+ subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-fPIC','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-Dunderwater_anchor=__real_underwater_anchor','-c','src/underwater_quests.c','-o',str(obj)],cwd=ROOT,check=True)
+ sources.remove('src/underwater_quests.c');sources.append(str(obj));wrap=[]
+subprocess.run(['cc',*extra,'-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DUNDERWATER_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),'tests/underwater_game_host.c',*sources,*wrap,'-o',str(OUT/'test.so')],cwd=ROOT,check=True)
 L=C.CDLL(str(OUT/'test.so'))
 SRAM=(C.c_ubyte*32768).in_dll(L,'save5_test_sram')
 FIXTURE=(ROOT/'tests/fixtures/v5-revision5/magma-all65-town.sav').read_bytes()
@@ -46,6 +53,26 @@ class UnderwaterWorld(unittest.TestCase):
   self.target(340,108);self.target(340,108);self.entry(47)
   for p in [(176,164),(304,164),(240,192)]:self.at(*p);L.tick(1)
   self.entry(46);self.target(340,72);self.assertEqual(L.qs(39),3);self.assertEqual(L.valid(),1)
+ def test_off_axis_plaque_a_keeps_direction_and_range_limits(self):
+  self.entry(46)
+  # The hollow plaque is an ordinary A target, not a power-shape callback.
+  for x,y,f in ((133,116,1),(136,116,0),(136,131,1),(136,109,1)):
+   self.at(x,y,f);before=L.qo(38)
+   self.assertEqual(L.underwater_game_interact(),0,(x,y,f,toast()))
+   self.assertEqual(L.qo(38),before);self.assertEqual(L.underwater_game_event_pending(),0)
+  self.act(136,116,1)
+  self.assertEqual(L.qo(38)&1,1,'off-axis A must examine the hollow plaque')
+  self.assertEqual(L.qs(38),1)
+ def test_off_axis_reset_needs_second_a_and_facing_away_cancels(self):
+  self.entry(46);self.act(32,288,1)
+  self.assertEqual(toast(),'TX_UW_RESET_CONFIRM')
+  L.tick(1);self.act(32,288,1)
+  self.assertEqual(toast(),'TX_UW_RESET_DONE','tick must retain off-axis confirmation')
+  self.act(32,288,1);self.assertEqual(toast(),'TX_UW_RESET_CONFIRM')
+  self.at(32,288,0);L.tick(1);self.act(32,288,1)
+  self.assertEqual(toast(),'TX_UW_RESET_CONFIRM','turning away must require a new first A')
+  L.underwater_game_input(2,0);self.act(32,288,1)
+  self.assertEqual(toast(),'TX_UW_RESET_CONFIRM','B must cancel the pending reset')
  def main(self):
   self.guarantees();self.entry(50);self.field(0,49);self.field(1,52);self.target(120,104);self.assertEqual(L.qo(40),1,toast())
   self.entry(51);self.field(0,52);self.at(312,112);L.tick(1);self.field(1);self.target(240,80);self.assertEqual(L.qo(40),3)

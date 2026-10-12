@@ -36,6 +36,27 @@ class World(unittest.TestCase):
    self.field(i,f,c)
   self.assertEqual(self.l.phase(),5);self.entry(61);self.field(0,101,102);self.field(1,103,104);self.old(0);self.act(152,112,True);self.assertEqual(self.l.qs(51),3);self.assertEqual(self.l.valid(),1)
  def chapter(self):self.intro();self.north();self.south();self.finale()
+ def test_off_axis_manual_a_keeps_direction_and_range_limits(self):
+  self.intro();self.entry(55)
+  for x,y,f in ((53,124,1),(56,124,0),(56,139,1),(56,117,1)):
+   self.at(x,y,f);before=bytes(self.s)
+   self.assertEqual(self.l.return_game_interact(),0,(x,y,f))
+   self.assertEqual(self.l.get_setting(0),0);self.assertEqual(bytes(self.s),before)
+  self.at(56,124,1);self.assertEqual(self.l.return_game_interact(),1)
+  self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.get_setting(1),0,'adjacent mechanism must stay unchanged')
+ def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
+  self.intro();self.entry(55);self.act(64,112)
+  self.at(16,144,1);self.assertEqual(self.l.return_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1);self.l.tick()
+  self.assertEqual(self.l.reset_confirmation(),1);self.assertEqual(self.l.get_setting(0),1)
+  self.at(16,144,0);self.l.tick();self.assertEqual(self.l.reset_confirmation(),0)
+  self.at(16,144,1);self.assertEqual(self.l.return_game_interact(),1)
+  self.l.return_game_input(2,0);self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.return_game_interact(),1);self.l.tick()
+  self.assertEqual(self.l.return_game_interact(),1);self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.get_setting(0),0,'only a second A may reset partial mechanisms')
  def test_main_both_arm_orders(self):
   self.chapter();self.setUp();self.intro();self.south();self.north();self.finale()
  def test_minimal_route_both_orders_no_evolution_or_new_gear(self):
@@ -132,6 +153,9 @@ class World(unittest.TestCase):
    for mode in (0,1):
     self.l.view_roundtrip(mode);self.assertEqual(bytes(self.s),before);self.assertEqual((self.l.repeat_status(),self.l.attempt_id(),self.l.repeat_source()),(2,attempt,source))
    self.act(*invite);self.assertEqual(self.l.confirmation(),1)
+   self.at(invite[0]-8,invite[1]+12,1);self.l.tick()
+   self.assertEqual(self.l.confirmation(),1,'off-axis reach must retain the invitation prompt')
+   self.assertEqual(self.l.count(),n);self.assertEqual(self.l.repeat_status(),2)
    # Merely facing away cancels the prompt, while the solved attempt survives.
    self.at(invite[0],invite[1]+18,0);self.l.tick();self.assertEqual(self.l.confirmation(),0);self.assertEqual(self.l.repeat_status(),2);self.assertEqual(self.l.attempt_id(),attempt)
    # An unrelated A on empty safe floor cannot grant, even if the input hook
