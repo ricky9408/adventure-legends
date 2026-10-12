@@ -6,6 +6,8 @@
 #include "../src/gear_menu.c"
 static union {unsigned short words[19200];unsigned char pixels[160][240];} actual,expected;
 static unsigned char canvas[160][240];
+/* Current native-font cell contract, independent of the production draw. */
+enum { HEART_LABEL_Y=77, HEART_NUMBER_Y=92, TEXT_CELL=15, NUMBER_CELL=7 };
 #define got actual.pixels
 #define want expected.pixels
 unsigned short *screen=actual.words;
@@ -16,16 +18,39 @@ static const unsigned char glyphs[10][7]={{6,9,9,9,9,9,6},{2,6,2,2,2,2,7},{6,9,1
 static void oracle_decimal(unsigned n,char*s){char tail[8];unsigned r=n%16;snprintf(s,16,"%u",n/16);if(r){/* 1/16=.0625; a fully independent integer-to-string oracle. */snprintf(tail,sizeof tail,"%04u",r*625);while(tail[strlen(tail)-1]=='0')tail[strlen(tail)-1]=0;strcat(s,".");strcat(s,tail);}}
 static unsigned oracle_width(const char*s){unsigned width=0;for(;*s;s++)width+=*s=='.'?3u:5u;return width-1;}
 static void oracle_paint(const char*s,int x,int y,unsigned char color){unsigned a,b;for(;*s;s++){if(*s=='.'){want[y+5][x]=want[y+5][x+1]=want[y+6][x]=want[y+6][x+1]=color;x+=3;}else{for(b=0;b<7;b++)for(a=0;a<4;a++)if(glyphs[(unsigned)(*s-'0')][b]&(8u>>a))want[y+b][x+a]=color;x+=5;}}}
-int main(int argc,char**argv){unsigned n,parity,bg,before,after,pairs=0;char s[16],t[16];
+/* Translate canonical even-parity pixels into the expected frame. The actual
+ * frame stays untouched until stat(), so omitting its label cannot pass. */
+static void oracle_label(int x,int y,unsigned char color){
+ const UiText*t=&gear_preview_texts[GP_HEART];unsigned i,j,bit;
+ assert(t->count[0]&&t->height<=TEXT_CELL);
+ for(i=0;i<t->count[0];i++){const UiRun*r=&t->runs[0][i];
+  for(j=0;j<r->count;j++)for(bit=0;bit<2;bit++)if(r->mask&(1u<<bit)){
+   unsigned offset=r->offset+j,column=(offset%120)*2+bit,row=offset/120;
+   assert(column<t->width&&row<t->height&&x+(int)column<240&&y+(int)row<160);
+   want[y+row][x+column]=color;
+  }
+ }
+}
+int main(int argc,char**argv){unsigned n,parity,bg,before,after,pairs=0,q4_checks=0;char s[16],t[16];
+ assert(HEART_LABEL_Y+TEXT_CELL==HEART_NUMBER_Y);
  /* Every Q4 value in the supported96..192 range, including quarter examples. */
- for(bg=0;bg<2;++bg)for(parity=0;parity<2;++parity)for(n=96;n<=192;++n){memset(got,bg?0x5a:0,sizeof got);memset(want,bg?0x5a:0,sizeof want);oracle_decimal(n,s);heart_number(n,10+(int)parity,10,4);oracle_paint(s,10+(int)parity,10,4);assert(heart_width(n)==oracle_width(s));assert(!memcmp(got,want,sizeof got));}
+ for(bg=0;bg<2;++bg)for(parity=0;parity<2;++parity)for(n=96;n<=192;++n){memset(got,bg?0x5a:0,sizeof got);memset(want,bg?0x5a:0,sizeof want);oracle_decimal(n,s);heart_number(n,10+(int)parity,10,4);oracle_paint(s,10+(int)parity,10,4);assert(heart_width(n)==oracle_width(s));assert(!memcmp(got,want,sizeof got));q4_checks++;}
+ assert(q4_checks==97*4);
  assert(gear_preview_texts[GP_HEART].width<=54);
  /* All625 quarter-heart comparisons at both pixel parities, two backgrounds. */
- for(bg=0;bg<2;++bg)for(parity=0;parity<2;++parity)for(before=96;before<=192;before+=4)for(after=96;after<=192;after+=4){unsigned width;int x=120+(int)parity,col=after>before?GOLD:after<before?PAL_HEART:CREAM;memset(got,bg?0x5a:0,sizeof got);label(GP_HEART,x+(54-gear_preview_texts[GP_HEART].width)/2,80,CREAM);memcpy(want,got,sizeof want);oracle_decimal(before,s);oracle_decimal(after,t);width=oracle_width(s);assert(width<=22&&oracle_width(t)<=22);oracle_paint(s,x+23-(int)width,93,CREAM);oracle_paint(t,x+32,93,(unsigned char)col);{unsigned k;for(k=0;k<7;k++)want[96][x+24+k]=TEAL;for(k=0;k<3;k++)want[95+k][x+29]=TEAL;for(k=0;k<5;k++)want[94+k][x+28]=TEAL;}stat(before,after,GP_HEART,x,1);assert(!memcmp(got,want,sizeof got));pairs++;}
+ for(bg=0;bg<2;++bg)for(parity=0;parity<2;++parity)for(before=96;before<=192;before+=4)for(after=96;after<=192;after+=4){unsigned width;int x=120+(int)parity,col=after>before?GOLD:after<before?PAL_HEART:CREAM;
+  memset(got,bg?0x5a:0,sizeof got);memset(want,bg?0x5a:0,sizeof want);
+  oracle_label(x+(54-gear_preview_texts[GP_HEART].width)/2,HEART_LABEL_Y,CREAM);
+  oracle_decimal(before,s);oracle_decimal(after,t);width=oracle_width(s);assert(width<=22&&oracle_width(t)<=22);
+  oracle_paint(s,x+23-(int)width,HEART_NUMBER_Y,CREAM);oracle_paint(t,x+32,HEART_NUMBER_Y,(unsigned char)col);
+  {unsigned k;for(k=0;k<7;k++)want[HEART_NUMBER_Y+3][x+24+k]=TEAL;for(k=0;k<3;k++)want[HEART_NUMBER_Y+2+k][x+29]=TEAL;for(k=0;k<5;k++)want[HEART_NUMBER_Y+1+k][x+28]=TEAL;}
+  stat(before,after,GP_HEART,x,1);assert(!memcmp(got,want,sizeof got));pairs++;
+ }
+ assert(pairs==625*4);
  /* A240x160 native-size canvas for visual inspection. Each row uses four
   * real54px columns, real generated Japanese labels, and actual color roles. */
  if(argc>1){static const unsigned cases[3][4][2]={{{96,100},{100,104},{104,108},{108,96}},{{160,164},{164,168},{172,192},{192,192}},{{188,192},{192,188},{180,188},{188,180}}};unsigned row,column,y;FILE*f;memset(got,0,sizeof got);
-  for(row=0;row<3;++row){memset(got,0,sizeof got);for(column=0;column<4;++column)stat(cases[row][column][0],cases[row][column][1],GP_HEART,12+(int)column*54,1);for(y=80;y<100;++y)memcpy(canvas[22+row*42+y-80],got[y],240);}
+  for(row=0;row<3;++row){memset(got,0,sizeof got);for(column=0;column<4;++column)stat(cases[row][column][0],cases[row][column][1],GP_HEART,12+(int)column*54,1);for(y=HEART_LABEL_Y;y<HEART_NUMBER_Y+NUMBER_CELL;++y)memcpy(canvas[22+row*42+y-HEART_LABEL_Y],got[y],240);}
   f=fopen(argv[1],"wb");assert(f);assert(fwrite(canvas,1,sizeof canvas,f)==sizeof canvas);fclose(f);
  }
  printf("PASS exact97 Q4 values x4 canvas conditions; %u quarter comparisons;54px columns and adjacent pixels preserved\n",pairs);return 0;}
