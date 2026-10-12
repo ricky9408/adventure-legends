@@ -11,7 +11,7 @@ import argparse, base64, copy, gzip, hashlib, json, os, subprocess, sys, tempfil
 ROOT = Path(__file__).resolve().parents[1]
 PARENT_COMMIT = 'cc5e88edcd27722d4e48c449fcc8d7d94f87f733'
 PARENT_TREE = '362d43f452b2826bd42fa1761e27109f2a818b0c'
-CONTRACT_SHA = 'UNAUTHORED_REVIEW_RUNTIME'
+CONTRACT_SHA = '5c313c2b29a36f8795c624bf229fbb97cf8a4a430bc42d5006b5ea3f95a420e4'
 CONTRACT_PATH = 'docs/review-successor/contract.json'
 INVERSE_PATH = 'docs/review-successor/main-inverse.json.gz'
 sha = lambda b: hashlib.sha256(b).hexdigest()
