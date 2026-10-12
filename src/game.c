@@ -860,11 +860,17 @@ void kill_enemy(Enemy*e){unsigned slot=(unsigned)(e-enemies),i,xp=0,gold;Creatur
  for(i=0;i<4;i++){unsigned member=adventure_save.roster.party[i];if(member<CREATURE_ROSTER_CAPACITY&&adventure_save.roster.instances[member].xp>before[i])xp+=(unsigned)(adventure_save.roster.instances[member].xp-before[i]);}
  gold=economy_award_combat(&adventure_save,e->kind==2?10u:6u);game_shop_reward(xp,gold);save_game_ordinary();if(hero_hp_q4<gear_stats.max_hp_q4&&kills%3==0)game_health_heal(16);
 }
+/* Consume charger contact eligibility in ROM so its terminating-rush flag
+ * does not stay live across the hot updater's unrelated enemy paths. */
+static COLD void update_charger_contact(unsigned i){Enemy*e;
+ if(!enemy_tactics_update(i))return;e=&enemies[i];
+ if(ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard(i,e->x,e->y)||magma_powers_melee_guard(i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
+}
 void update_enemies(void){int i,j;for(i=0;i<MAX_ENEMIES;i++){Enemy*e=&enemies[i];if(!e->hp)continue;if(e->flash)e->flash--;if(!e->flash&&game_melee_hit((unsigned)i,e->x,e->y,0)){game_enemy_hurt((unsigned)i,weapon_action.damage_q4,weapon_action.attack_q4,weapon_action.element);southern_powers_weapon_hit((unsigned)i);game_enemy_stagger((unsigned)i,weapon_action.stagger);e->flash=16;hitstop=3;sfx(4);if(e->hp<=0)kill_enemy(e);else{int nx=e->x+sign(e->x-px)*5,ny=e->y+sign(e->y-py)*5;if(!solid(nx,ny)){e->x=nx;e->y=ny;}}}if(!e->hp)continue;
- if(e->kind==ENEMY_LANE_CHARGER)enemy_tactics_update((unsigned)i);
+ if(e->kind==ENEMY_LANE_CHARGER)update_charger_contact((unsigned)i);
  else if(e->kind==2&&!rooted_enemies[i]){if(e->flash||enemy_stagger_ticks[i])enemy_windups[i]=0;else if(enemy_windups[i]){if(--enemy_windups[i]==0){{int shot=fire_shot(e->x,e->y,enemy_aimx[i],enemy_aimy[i],1);if(shot>=0){shot_phases[shot]=enemy_phases[i];ordinary_hostile_shots[shot]=1;if(room==77&&(covenants_wave_enemies&(1u<<i)))covenants_wave_shots|=(unsigned short)(1u<<shot);}}enemy_clocks[i]=100;}}else if(enemy_clocks[i])enemy_clocks[i]--;else if(near(px,py,e->x,e->y,145)){int dx=px-e->x,dy=py-e->y,m=ab(dx)>ab(dy)?ab(dx):ab(dy);if(!m)m=1;enemy_aimx[i]=dx*2/m;enemy_aimy[i]=dy*2/m;enemy_windups[i]=(int)southern_powers_windup((unsigned)i,30);}}
  else if(!rooted_enemies[i]&&!enemy_stagger_ticks[i]&&!e->flash&&frame%3==0&&(!slowed_enemies[i]||frame%2==0)&&near(px,py,e->x,e->y,70)){int tx=px,ty=py,dx,dy;southern_powers_approach((unsigned)i,&tx,&ty);dx=sign(tx-e->x);dy=sign(ty-e->y);if((frame+i)&1){if(!solid(e->x+dx,e->y))e->x+=dx;}else if(!solid(e->x,e->y+dy))e->y+=dy;}
- if((e->kind!=ENEMY_LANE_CHARGER||enemy_clocks[i]<0)&&ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(e->kind!=2&&!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard((unsigned)i,e->x,e->y)||magma_powers_melee_guard((unsigned)i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
+ if(e->kind!=ENEMY_LANE_CHARGER&&ab(px-e->x)<11&&ab(py-e->y)<11){int blocked=0;if(e->kind!=2&&!invuln&&!guard_invuln&&game_state==PLAY)blocked=southern_powers_melee_guard((unsigned)i,e->x,e->y)||magma_powers_melee_guard((unsigned)i,e->x,e->y);if(!blocked)damage_phase(enemy_phases[i]);}
  for(j=0;j<12;j++)if(shots[j].life&&!shots[j].owner&&near(e->x,e->y,shots[j].x,shots[j].y,14)){shots[j].life=0;game_enemy_hurt((unsigned)i,32,0,shot_phases[j]);e->flash=16;enemy_windups[i]=0;if(e->hp<=0)kill_enemy(e);break;}}
 }
 void campaign_boss_update(void);

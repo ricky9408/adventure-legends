@@ -20,36 +20,37 @@ static COLD void recover(unsigned i){
  enemy_windups[i]=0;enemy_clocks[i]=ENEMY_CHARGE_RECOVERY;
  enemy_aimx[i]=enemy_aimy[i]=0;
 }
-COLD void enemy_tactics_update(unsigned i){
+COLD int enemy_tactics_update(unsigned i){
  Enemy*e;int dx,dy,n;
- if(i>=6||game_state!=1)return;
- e=&enemies[i];if(e->kind!=ENEMY_LANE_CHARGER||e->hp<=0)return;
+ if(i>=6||game_state!=1)return 0;
+ e=&enemies[i];if(e->kind!=ENEMY_LANE_CHARGER||e->hp<=0)return 0;
  /* All existing attacks/roots can interrupt the warning or rush. Releasing a
   * root never resumes a stale aimed attack. The engine owns hitstop/modal freeze. */
- if(e->flash||enemy_stagger_ticks[i]||rooted_enemies[i]){recover(i);return;}
- if(enemy_clocks[i]>0){enemy_clocks[i]--;return;}
+ if(e->flash||enemy_stagger_ticks[i]||rooted_enemies[i]){recover(i);return 0;}
+ if(enemy_clocks[i]>0){enemy_clocks[i]--;return 0;}
  if(enemy_windups[i]>0){
   if(--enemy_windups[i]==0)enemy_clocks[i]=-ENEMY_CHARGE_STEPS;
-  return;
+  return enemy_clocks[i]<0;
  }
  if(enemy_clocks[i]<0){
-  if(slowed_enemies[i]&&(frame&1))return;
+  if(slowed_enemies[i]&&(frame&1))return 1;
   /* Probe every radius-five foot position: never jump over a thin wall. */
   for(n=0;n<ENEMY_CHARGE_SPEED;n++){
    int x=e->x+enemy_aimx[i],y=e->y+enemy_aimy[i];
-   if(solid(x,y)){recover(i);return;}e->x=x;e->y=y;
+   if(solid(x,y)){recover(i);return n>0;}e->x=x;e->y=y;
   }
   if(++enemy_clocks[i]==0)recover(i);
-  return;
+  return 1;
  }
  dx=px-e->x;dy=py-e->y;
- if(magnitude(dx)+magnitude(dy)>ENEMY_CHARGE_RANGE)return;
+ if(magnitude(dx)+magnitude(dy)>ENEMY_CHARGE_RANGE)return 0;
  /* Cardinal lane is locked now, not homed during the rush. A side-step can
   * avoid contact and leaves a long, vulnerable recovery at the endpoint. */
  enemy_aimx[i]=enemy_aimy[i]=0;
  if(magnitude(dx)>magnitude(dy))enemy_aimx[i]=dx<0?-1:1;
  else enemy_aimy[i]=dy<0?-1:1;
  enemy_windups[i]=(int)southern_powers_windup(i,ENEMY_CHARGE_WARNING);
+ return 0;
 }
 COLD void enemy_tactics_draw(unsigned i){
  unsigned direction=0,pose,index;
