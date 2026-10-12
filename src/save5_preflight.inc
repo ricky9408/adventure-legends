@@ -16,6 +16,7 @@ void save5_preflight_cancel(void) {
  preflight.status=SAVE5_IDLE;preflight.live=0;
 }
 Save4U32 save5_preflight_begin(const Save5State *s) {
+ if(save5_load_status()==SAVE5_BUSY)return 0;
  if(s&&writer_status==SAVE5_BUSY&&writer_preemptible)save5_cancel_background();
  if(!s||writer_status==SAVE5_BUSY||save5_preflight_active()||preflight.generation==0xffffffffu)return 0;
  ++preflight.generation;

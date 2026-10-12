@@ -68,6 +68,17 @@ typedef struct Save5State {
  * story creatures. No implicit migration write. Metadata is in campaign. */
 int save5_load(Save5State *out);
 int save5_has_valid(void);
+/* Read-only cold load, one bounded slice per displayed update. A null out
+ * probes validity. The caller's output changes only after complete decode and
+ * immutable revision validation; cancel/failure leave output and SRAM intact.
+ * Owns the same scratch as writer/preflight. Zero budget performs no work;
+ * byte scans are capped at1024, semantic/decode slices at8 records. */
+int save5_load_begin(Save5State *out);
+unsigned save5_load_step(unsigned byte_budget);
+unsigned save5_load_status(void);
+unsigned save5_load_progress(void);
+unsigned save5_load_progress_total(void);
+void save5_load_cancel(void);
 /* Full blocking validator for host tools/transitions, not active-game ticks. */
 int save5_validate(const Save5State *state);
 int save5_later_claims_validate(const Save5Quests *quests,const EconomyState *economy);

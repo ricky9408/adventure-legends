@@ -1007,7 +1007,7 @@ static unsigned scan_run(unsigned budget) {
                 if (!scan.memory) crc = crc_byte(crc, p+i >= 16 && p+i <= 20 ? 0 : v);
             }
         } else if (scan.stage == SCAN_COLLECTION) {
-            Save4U8 *dst = scan.collection + p - 96;
+            Save4U8 *dst = scan.collection + (p - 96);
             if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
             else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
         } else if (scan.stage == SCAN_BOND) {
@@ -1025,7 +1025,7 @@ static unsigned scan_run(unsigned budget) {
         } else if (scan.stage == SCAN_EVENTS) {
             if (!scan.memory) for (i = 0; i < n; ++i) crc = crc_byte(crc, src[i]);
         } else {
-            Save4U8 *dst = scan.block + p - scan.base;
+            Save4U8 *dst = scan.block + (p - scan.base);
             if (scan.memory) for (i = 0; i < n; ++i) dst[i] = src[i];
             else for (i = 0; i < n; ++i) { Save4U8 v = src[i]; dst[i] = v; crc = crc_byte(crc, v); }
         }
@@ -1224,15 +1224,16 @@ static int load_internal(Save5State *out) {
 }
 int save5_load(Save5State *out) {
     save5_preflight_cancel();
-    if (!out || writer_status == SAVE5_BUSY) return 0;
+    if (!out || writer_status == SAVE5_BUSY || save5_load_status()==SAVE5_BUSY) return 0;
     return load_internal(out);
 }
 int save5_has_valid(void) {
     save5_preflight_cancel();
-    if (writer_status == SAVE5_BUSY) return 0;
+    if (writer_status == SAVE5_BUSY || save5_load_status()==SAVE5_BUSY) return 0;
     return load_internal(0);
 }
 int save5_begin(const Save5State *s) {
+    if (save5_load_status()==SAVE5_BUSY) return 0;
     if (save5_preflight_active()) return 0;
     if (writer_status == SAVE5_BUSY) return 0;
     if (!s || !save5_campaign_validate(&s->campaign) ||
@@ -1388,6 +1389,7 @@ int save5_store(const Save5State *s) {
 }
 #ifdef SAVE5_HOST_TEST
 void save5_test_reset_writer(void) {
+    save5_load_cancel();
     save5_preflight_cancel();
     writer_status = SAVE5_IDLE; writer_progress = 0; test_step_work = 0;
     writer_preemptible=writer_preempted=writer_economy=0;
@@ -1395,4 +1397,5 @@ void save5_test_reset_writer(void) {
 #endif
 
 #include "save5_preflight.inc"
+#include "save5_load_job.inc"
 #include "save5_later_rewards.inc"

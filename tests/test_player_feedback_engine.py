@@ -94,7 +94,7 @@ static void reference_ending_presentation(void){
   modes=[]
   for _ in range(limit):
    modes.append(get('game_state'));frame()
-   if not get('save_requested') and not get('save_feedback_background') and get('game_state') not in (6,10,12):return modes
+   if not get('save_requested') and not get('save_feedback_background') and get('game_state') not in (6,10,12,15):return modes
   raise AssertionError('Writer or event failed to settle')
  def new_game():
   # Complete the real opening before making assertions about the initial

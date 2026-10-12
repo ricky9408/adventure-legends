@@ -159,7 +159,8 @@ void progression_new(void){
     creatures_migrate_legacy(&adventure_save.roster,0,0);
     progression_refresh();save_requested=0;
 }
-int progression_load(void){progression_evolution_cancel();if(!save5_load(&adventure_save))return 0;progression_refresh();save_requested=0;return 1;}
+void progression_load_finish(void){progression_evolution_cancel();progression_refresh();save_requested=0;}
+int progression_load(void){progression_evolution_cancel();if(!save5_load(&adventure_save))return 0;progression_load_finish();return 1;}
 void progression_story(void){
     unsigned i;
     for(i=0;i<CREATURE_LEGACY_COUNT;i++)creatures_grant_story(&adventure_save.roster,i,chapter_flags);
