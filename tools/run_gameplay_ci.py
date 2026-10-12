@@ -88,7 +88,7 @@ def main():
               'limitations': [
                   'Native mGBA, not physical GBA hardware or a full campaign/collection run.',
                   'Bounded opening/early gameplay includes the first boss, shop, Fire trial/evolution and earned-save Continue; later bosses and complete collection are not covered.',
-                  'Inherited cold-Continue stalls are reported separately, not a measured-play cadence pass.',
+                  'Loading cadence/cancellation uses labeled historical and prepared fixtures; it does not prove full-collection acquisition.',
                   'Synthetic audio diagnostics do not prove controller-earned region access.']}
     report_file = out / 'summary.json'
     save = lambda: write_json(report_file, report)
@@ -224,6 +224,19 @@ def main():
             stage('companion-help-menus', [python, 'tests/opening_skip_guides_native.py',
                   '--bridge', bridge, '--save', str(out / 'opening/skip-0-village.sav'),
                   '--seed', str(args.seed), '--output', str(out / 'guides')])
+            stage('bounded-cold-continue', [python, 'tests/cold_continue_native.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--output', str(out/'cold-continue')], timeout=600)
+            loading = json.loads((out/'cold-continue/report.json').read_text())
+            if loading['result'] != 'PASS' or loading['rom_sha256'] != rom_sha:
+                raise RuntimeError('Bounded cold Continue did not pass the exact candidate')
+            commit = subprocess.check_output(['git', '-c', 'safe.directory='+str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+            stage('fresh-reserve-recruit', [python, 'tests/fresh_reserve_notice.py',
+                  '--source-root', str(ROOT), '--bridge', bridge, '--expected-commit', commit,
+                  '--output', str(out/'fresh-reserve')], timeout=600)
+            reserve = json.loads((out/'fresh-reserve/summary.json').read_text())
+            if not reserve['accepted'] or not reserve['controller_only'] or reserve['candidate']['rom_sha256'] != rom_sha or any(reserve['provenance'][key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
+                raise RuntimeError('Fresh reserved companion route did not pass the exact candidate')
             stage('synthetic-audio-diagnostics', common + ['--cases', 'synthetic',
                   '--output', str(out / 'synthetic-audio')], timeout=600)
             if args.extended_audio:
@@ -238,7 +251,10 @@ def main():
                                 'fresh_water_checks': sum(len(w['checks']) for w in water_reports),
                                 'fresh_water_metrics': {name: w['metrics'] for name, w in
                                                         zip(('original', 'water'), water_reports)},
-                                'opening_cadence': opening['cadence_by_scope']}
+                                'opening_cadence': opening['cadence_by_scope'],
+                                'bounded_load_cases': len(loading['cases']),
+                                'fresh_reserve_checks': reserve['checks'],
+                                'fresh_reserve_metrics': reserve['metrics']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.
         frozen = json.loads((ROOT / 'build/source-hashes.json').read_text())
         if any(digest(ROOT / name) != expected for name, expected in frozen.items()):
