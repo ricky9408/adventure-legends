@@ -34,6 +34,8 @@
 #include "covenants_creature_art.h"
 #include "companion_guide.h"
 #include "companion_guide_text.h"
+#include "growth_goals.h"
+#include "growth_journal_text.h"
 typedef unsigned char u8;
 extern volatile int room,px,py,spirit,game_state,has_save,save_failed;
 extern volatile unsigned chapter_flags;
@@ -49,6 +51,7 @@ static unsigned evolution_tick,evolution_before;
 unsigned progression_evolution_target,progression_evolution_choice,progression_evolution_count;
 unsigned progression_evolution_reason,progression_evolution_slot;
 static unsigned progression_evolution_source_form;
+static unsigned progression_goal_page;
 static CreatureU32 progression_evolution_instance;
 #define INK 1
 #define CREAM PAL_GOLD4
@@ -281,7 +284,7 @@ static int reason_id(unsigned reason,unsigned form){
     default:return TX_E_NO_MEMBER;
     }
 }
-static int wish_id(unsigned form){
+int progression_wish_id(unsigned form){
     static const int wishes[PROGRESSION_SPIRIT_COUNT]={TX_E_WISH_FIRE,TX_E_WISH_ROOT,TX_E_WISH_WIND,TX_E_WISH_STONE,TX_E_WISH_WATER,TX_E_FIXED_FORM,TX_E_WISH_NORTH_WOOD,TX_E_WISH_NORTH_FIRE,TX_E_WISH_NORTH_WATER,TX_E_WISH_NORTH_EARTH,TX_E_WISH_NORTH_METAL,TX_E_WISH_SOUTH_0,TX_E_WISH_SOUTH_1,TX_E_WISH_SOUTH_2,TX_E_WISH_SOUTH_3,TX_E_WISH_SOUTH_4,TX_E_WISH_SOUTH_5,TX_E_WISH_SOUTH_6,TX_E_WISH_SOUTH_7,TX_E_WISH_SOUTH_8,TX_E_WISH_SOUTH_9,TX_E_MG_WISH_0,TX_E_MG_WISH_1,TX_E_MG_WISH_2,TX_E_MG_WISH_3,TX_E_MG_WISH_4,TX_E_MG_WISH_5,TX_E_MG_WISH_6,TX_E_MG_WISH_7,TX_E_MG_WISH_8,TX_E_UW_WISH_0,TX_E_UW_WISH_1,TX_E_UW_WISH_2,TX_E_UW_WISH_3,TX_E_UW_WISH_4,TX_E_UW_WISH_5,TX_E_UW_WISH_6,TX_E_UW_WISH_7,TX_E_RT_WISH_11,TX_E_RT_WISH_12};
     static const int returning[13]={TX_E_RT_WISH_0,TX_E_RT_WISH_1,TX_E_RT_WISH_2,TX_E_RT_WISH_3,TX_E_RT_WISH_4,TX_E_RT_WISH_5,TX_E_RT_WISH_6,TX_E_RT_WISH_7,TX_E_RT_WISH_8,TX_E_RT_WISH_9,TX_E_RT_WISH_10,TX_E_RT_WISH_11,TX_E_RT_WISH_12};
     unsigned family=progression_form_spirit(form);int index=return_wish_index(form);
@@ -325,13 +328,16 @@ void progression_draw_tab(void){CreatureInstance*c=progression_selected();unsign
  if(progression_menu_detail){companion_guide_draw(c,progression_menu_command,COMPANION_GUIDE_GROWTH);return;}
  box(8,31,224,123);centered(TX_E_GROWTH,33,GOLD);
  if(!c){centered(TX_E_NO_MEMBER,87,CREAM);centered(TX_PF_BACK_CLOSE,138,TEAL);return;}
- centered(progression_name_id(c->form_id),51,CREAM);
- text(TX_E_LEVEL,59,69,CREAM);number(c->level,101,71);text(TX_E_BOND,135,69,CREAM);number(c->bond,177,71);
+ centered(progression_name_id(c->form_id),49,CREAM);
+ text(TX_E_LEVEL,59,65,CREAM);number(c->level,101,67);text(TX_E_BOND,135,65,CREAM);number(c->bond,177,67);
+ growth_goals_text(GJ_NEXT_XP,25,81,TEAL);
+ if(c->level>=CREATURE_MAX_LEVEL)growth_goals_text(GJ_LEVEL_MAX,139,81,GOLD);
+ else{unsigned next=creatures_xp_threshold(c->level+1);growth_goals_number(next>c->xp?next-c->xp:0,1,139,81,CREAM);}
  reason=creatures_can_evolve(c,progression_evolution_context(),progression_is_sanctuary());
- rect(14,progression_menu_row?105:87,212,17,PAL_STONE2);centered(progression_command_name_id(progression_menu_command),88,progression_menu_row?CREAM:GOLD);
- if(progression_menu_command==progression_command())rect(216,94,3,3,TEAL);
- text(TX_PF_EVOLVE,21,105,reason==CREATURE_EVOLVE_READY?GOLD:PAL_SLATE);
- centered(reason==CREATURE_EVOLVE_TRIAL?wish_id(c->form_id):reason_id(reason,c->form_id),121,CREAM);companion_guide_center(CG_GROWTH_KEYS,138,TEAL);
+ rect(14,progression_menu_row?115:98,212,17,PAL_STONE2);centered(progression_command_name_id(progression_menu_command),99,progression_menu_row?CREAM:GOLD);
+ if(progression_menu_command==progression_command())rect(216,105,3,3,TEAL);
+ text(TX_PF_EVOLVE,21,116,reason==CREATURE_EVOLVE_READY?GOLD:reason==CREATURE_EVOLVE_NO_EDGE?PAL_SLATE:CREAM);
+ companion_guide_center(CG_GROWTH_KEYS,138,TEAL);
 }
 #include "progression_evolution_job.inc"
 int progression_menu_input(int pressed){
@@ -365,7 +371,9 @@ int progression_menu_input(int pressed){
               progression_evolution_context(),progression_is_sanctuary()):CREATURE_EVOLVE_INVALID;
         }
         evolution_choice_refresh();
-        if(count<2&&progression_evolution_reason!=CREATURE_EVOLVE_READY){toast(reason_id(progression_evolution_reason,c->form_id));return 1;}
+        /* The requirements are useful before any gate is met. Opening this
+         * read-only view never grants a trial, changes a command or saves. */
+        progression_goal_page=0;
         game_state=EVOLVE_CONFIRM;
         evolution_job.a_latched=1;
         if(evolution_job.reasons[0]==CREATURE_EVOLVE_READY||(count==2&&evolution_job.reasons[1]==CREATURE_EVOLVE_READY))evolution_prepare(0);
@@ -375,18 +383,11 @@ int progression_menu_input(int pressed){
     return 0;
 }
 void progression_draw_confirm(void){
-    const CreatureForm*f=creatures_form(progression_evolution_target);
-    box(8,31,224,123);
-    if(!f){centered(TX_E_NO_MEMBER,87,CREAM);centered(TX_E_CONFIRM_KEYS,138,TEAL);return;}
-    /* One full-width candidate avoids truncating either irreversible branch.
-     * Only drawing changes: the existing frozen transaction owns every input. */
-    centered(progression_name_id(f->id),33,GOLD);
-    companion_guide_axes(f->id,f->polarity,49);
-    centered(progression_command_name_id(f->signature_ability),65,GOLD);
-    companion_guide_combat(f->signature_ability,81);
-    companion_guide_center(CG_EVOLVE,109,TEAL);
-    centered(progression_evolution_busy()?TX_UW_PREPARING:reason_id(progression_evolution_reason,progression_evolution_source_form),123,CREAM);
-    companion_guide_center(progression_evolution_count>1?CG_EVOLVE_KEYS:CG_EVOLVE_SINGLE_KEYS,138,TEAL);
+    growth_goals_draw(progression_selected(),progression_evolution_target,
+      progression_evolution_context(),progression_is_sanctuary(),progression_goal_page,progression_evolution_count>1?2:1,progression_evolution_busy());
+    if(!progression_evolution_busy()&&progression_evolution_reason==CREATURE_EVOLVE_COLLECTION_RESERVED){
+      rect(14,138,212,15,INK);centered(TX_E_SPACE_RESERVED,138,TEAL);
+    }
 }
 void progression_confirm_input(int pressed){
     unsigned fresh_a;
@@ -408,6 +409,9 @@ void progression_confirm_input(int pressed){
         if(progression_evolution_count==2&&((pressed&240)==16||(pressed&240)==32)){
             progression_evolution_choice^=1;evolution_job.manual_choice=1;
             evolution_choice_refresh();progression_revision++;
+        }
+        else if((pressed&240)==64||(pressed&240)==128){
+            progression_goal_page=(progression_goal_page+((pressed&240)==64?2u:1u))%3u;progression_revision++;
         }
         return;
     }

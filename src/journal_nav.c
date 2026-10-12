@@ -8,6 +8,9 @@ extern void journey_map_draw(void) __attribute__((weak));
 #include "gear_menu.h"
 #include "quickparty.h"
 #include "progression.h"
+#include "collection_journal.h"
+#include "growth_goals.h"
+#include "growth_journal_text.h"
 #include "assets.h"
 #include "ui.h"
 extern int journal_tab;
@@ -30,11 +33,11 @@ static unsigned repeat_direction,repeat_delay;
 #define GOLD PAL_GOLD3
 #define CREAM PAL_GOLD4
 #define TEAL PAL_TEAL2
-static const unsigned char destinations[8]={JOURNAL_ITEMS,JOURNAL_GEAR,JOURNAL_PARTY,JOURNAL_GROWTH,JOURNAL_MAP,JOURNAL_QUESTS,JOURNAL_CONTROLS,255};
+static const unsigned char destinations[9]={JOURNAL_ITEMS,JOURNAL_GEAR,JOURNAL_PARTY,JOURNAL_GROWTH,JOURNAL_MAP,JOURNAL_QUESTS,JOURNAL_CONTROLS,255,JOURNAL_COLLECTION};
 #include "journal_quest_list.inc"
 static unsigned quest_count(void){unsigned pages=journal_page_count();if(pages<5)return 1;if(pages>13)pages=13;return pages-4;}
 static void changed(void){journal_nav_revision++;}
-static void enter(int page){journal_tab=page;journal_nav_detail=0;repeat_direction=repeat_delay=0;if(page==JOURNAL_GEAR)gear_menu_reset();else if(page==JOURNAL_PARTY)quickparty_menu_reset();else if(page==JOURNAL_GROWTH)progression_menu_reset();else if(page==JOURNAL_MAP&&journey_map_open)journey_map_open();changed();}
+static void enter(int page){journal_tab=page;journal_nav_detail=0;repeat_direction=repeat_delay=0;if(page==JOURNAL_GEAR)gear_menu_reset();else if(page==JOURNAL_PARTY)quickparty_menu_reset();else if(page==JOURNAL_GROWTH)progression_menu_reset();else if(page==JOURNAL_COLLECTION)collection_journal_open();else if(page==JOURNAL_MAP&&journey_map_open)journey_map_open();changed();}
 void journal_nav_open(void){if(journey_map_begin)journey_map_begin();journal_nav_category=0;journal_nav_quest=0;enter(JOURNAL_HUB);}
 int journal_nav_keys(int held,int pressed){unsigned direction=(unsigned)held&DIRECTIONS;int input=pressed&~DIRECTIONS;
  if(direction!=RIGHT&&direction!=LEFT&&direction!=UP&&direction!=DOWN){repeat_direction=repeat_delay=0;return input|(pressed&DIRECTIONS);}
@@ -47,6 +50,7 @@ int journal_nav_input(int input){int direction=input&DIRECTIONS;
  if(input&START){repeat_direction=repeat_delay=0;return JOURNAL_CLOSE;}
  if(input&B){
   if((journal_tab==JOURNAL_PARTY&&quickparty_menu_back())||(journal_tab==JOURNAL_GROWTH&&progression_menu_back()))return JOURNAL_CONSUMED;
+  if(journal_tab==JOURNAL_COLLECTION&&collection_journal_back()){changed();return JOURNAL_CONSUMED;}
   if(journal_tab==JOURNAL_MAP&&journey_map_input&&journey_map_input(input)){changed();return JOURNAL_CONSUMED;}
   if(journal_tab==JOURNAL_HUB)return JOURNAL_CLOSE;
   if(journal_nav_detail&&journal_tab>=JOURNAL_REGION_FIRST&&journal_tab<=JOURNAL_REGION_LAST){journal_nav_detail=0;changed();return JOURNAL_CONSUMED;}
@@ -55,11 +59,15 @@ int journal_nav_input(int input){int direction=input&DIRECTIONS;
  if(input&SELECT)return JOURNAL_CONSUMED;
  if(journal_tab==JOURNAL_HUB){
   if(direction){int row=journal_nav_category>>1,column=journal_nav_category&1;
-   if(direction==RIGHT||direction==LEFT)column^=1;else if(direction==UP)row=(row+3)&3;else if(direction==DOWN)row=(row+1)&3;else return JOURNAL_CONSUMED;
+   if(direction==RIGHT||direction==LEFT){if(row<4)column^=1;}
+   else if(direction==UP){row=row?row-1:4;if(row==4&&column)row=3;}
+   else if(direction==DOWN){row=row<4?row+1:0;if(row==4&&column)row=0;}
+   else return JOURNAL_CONSUMED;
    journal_nav_category=row*2+column;changed();return JOURNAL_CONSUMED;
   }
   if(input&A){unsigned page=destinations[journal_nav_category];if(page==255)return JOURNAL_CLOSE;enter((int)page);}return JOURNAL_CONSUMED;
  }
+ if(journal_tab==JOURNAL_COLLECTION){int result=collection_journal_input(input);if(result==COLLECTION_OPEN_PARTY){unsigned member=collection_journal_instance();enter(JOURNAL_PARTY);if(member<CREATURE_ROSTER_CAPACITY)quickparty_menu_candidate=(int)member;}changed();return JOURNAL_CONSUMED;}
  if(journal_tab==JOURNAL_QUESTS){unsigned count=quest_count();if((unsigned)journal_nav_quest>=count)journal_nav_quest=0;
   if(direction){if(direction==UP)journal_nav_quest=journal_nav_quest?journal_nav_quest-1:(int)count-1;else if(direction==DOWN)journal_nav_quest=(unsigned)(journal_nav_quest+1)<count?journal_nav_quest+1:0;else return JOURNAL_CONSUMED;changed();return JOURNAL_CONSUMED;}
   if(input&A)enter(journal_nav_quest?journal_nav_quest+4:JOURNAL_GOAL);return JOURNAL_CONSUMED;
@@ -75,6 +83,7 @@ int journal_nav_input(int input){int direction=input&DIRECTIONS;
  if(direction&&(direction!=RIGHT&&direction!=LEFT&&direction!=UP&&direction!=DOWN))return JOURNAL_CONSUMED;return JOURNAL_DISPATCH;
 }
 int journal_nav_draw(void){unsigned i;
+ if(journal_tab==JOURNAL_COLLECTION){collection_journal_draw();return 1;}
  if(journal_tab==JOURNAL_MAP&&journey_map_draw){journey_map_draw();return 1;}
  if(journal_tab>=JOURNAL_REGION_FIRST&&journal_tab<=JOURNAL_REGION_LAST&&!journal_nav_detail){const struct QuestList*list=&quest_lists[journal_tab-JOURNAL_REGION_FIRST];unsigned selection=*list->selection<list->count?*list->selection:0,first=selection>4?selection-4:0;
   box(8,31,224,123);centered(list->title,33,GOLD);
@@ -82,7 +91,7 @@ int journal_nav_draw(void){unsigned i;
   if(first)rect(224,49,3,2,GOLD);if(first+5<list->count)rect(224,132,3,2,GOLD);centered(TX_PF_QUEST_KEYS,137,TEAL);return 1;
  }
  if(journal_tab==JOURNAL_HUB){static const int labels[8]={TX_PF_ITEMS,TX_PF_GEAR,TX_PF_PARTY,TX_PF_GROWTH,TX_PF_MAP,TX_PF_QUESTS,TX_PF_CONTROLS,TX_PF_RESUME};box(8,31,224,123);centered(TX_PF_HUB,33,GOLD);
-  for(i=0;i<8;i++){int x=17+(int)(i&1)*108,y=54+(int)(i>>1)*19;if((int)i==journal_nav_category)rect(x-3,y-1,102,18,PAL_STONE2);text(labels[i],x,y,(int)i==journal_nav_category?GOLD:CREAM);}centered(TX_PF_HUB_KEYS,136,TEAL);return 1;
+  for(i=0;i<9;i++){int x=17+(int)(i&1)*108,y=51+(int)(i>>1)*16;if((int)i==journal_nav_category)rect(x-3,y-1,102,16,PAL_STONE2);if(i<8)text(labels[i],x,y,(int)i==journal_nav_category?GOLD:CREAM);else growth_goals_text(GJ_COLLECTION,x,y,(int)i==journal_nav_category?GOLD:CREAM);}centered(TX_PF_HUB_KEYS,136,TEAL);return 1;
  }
  if(journal_tab==JOURNAL_QUESTS){static const int labels[9]={TX_PF_CURRENT_QUEST,TX_PF_REGION_0,TX_PF_REGION_1,TX_PF_REGION_2,TX_PF_REGION_3,TX_PF_REGION_4,TX_PF_REGION_5,TX_PF_REGION_6,TX_PF_REGION_7};unsigned count=quest_count(),first=journal_nav_quest>4?(unsigned)journal_nav_quest-4:0;box(8,31,224,123);centered(TX_PF_QUESTS,33,GOLD);
   for(i=first;i<count&&i<first+5;i++){int y=52+(int)(i-first)*16;if((int)i==journal_nav_quest)rect(18,y,204,16,PAL_STONE2);text(labels[i],28,y,(int)i==journal_nav_quest?GOLD:CREAM);}if(first)rect(213,49,4,2,GOLD);if(first+5<count)rect(213,132,4,2,GOLD);centered(TX_PF_QUEST_KEYS,137,TEAL);return 1;
