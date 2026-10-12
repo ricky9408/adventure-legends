@@ -13,6 +13,19 @@ ray/obstruction checks, cooldowns and directional power geometry are unchanged.
 Old-town overlays retain their original target bounds. The temporary fallback
 flag is cleared before every public interaction return and is never serialized.
 
+The four `*_game_target_hint(int *x,int *y)` APIs provide read-only ordinary A
+focus for the renderer. They share the exact reach predicate and strict-first
+ordering; they do not invoke interaction, offer, claim, clear-prompt, or tick
+functions. Hidden branch props, modal/pending-job states, and walking-door
+targets do not acquire floating A icons. Work projections expose only their
+visible controls. Original Underwater/Return active trial boards retain their
+existing specialized markings rather than ordinary NPC hints.
+
+The parent integration paints the existing8px `OBJ_HINT` at the returned world
+coordinate during normal play, prioritizing shop hints and hiding prompts during
+the quick picker and scene/modal presentation. This worktree provides/query-tests
+the API; it intentionally leaves the shared `game.c` integration to its owner.
+
 Northern junctions in room23 and rooms26–28 have a persistent signed arrow just
 outside their existing16px actor. N/S and E/W now remain distinguishable after
 the toast expires. The arrow follows camera translation. It uses existing
@@ -32,10 +45,13 @@ python3 tests/test_horizons_world.py
 python3 tests/test_covenants_world.py
 ```
 
-Passing: Northern14, Underwater19, Return13, Horizons17, Covenants21, plus the
-Underwater real-power mode19. New checks cover off-axis A success, outside/behind
+Passing first batch: Northern14, Underwater19, Return13, Horizons17, Covenants21,
+plus the Underwater real-power mode19. The hint follow-up adds one passing test
+per late region: Underwater20, Return14, Horizons18, Covenants22. New checks cover off-axis A success, outside/behind
 rejection, reset/invitation retention and cancellation, all four stable rail
 outputs, camera translation, and the room70 steward/manual precedence case.
+Hint tests also assert repeated queries preserve save/quest data, settings,
+confirmation/proof state and event queues, and suppress hidden/modal targets.
 World fixtures are synthetic host positions and typed jobs; they are not earned
 campaign acquisition evidence. Harness portability preserves transaction failure
 injection on Apple ld, whose default shared-library link checks remain strict.
@@ -94,8 +110,9 @@ by the host drawing test; the four-bearing native set is room26.
 
 ## Resource receipt
 
-Official ARM14.2.Rel1 scoped build succeeds with linker assertions. ROM:
-32,194,920bytes, +712bytes versus `cc5e88e`. IWRAM code stays0x6ea8:344bytes of
+Official ARM14.2.Rel1 scoped build succeeds with linker assertions. First batch
+ROM:32,194,920bytes, +712bytes versus `cc5e88e`. With read-only hint APIs it is
+32,198,480bytes (+4,272bytes versus baseline). IWRAM code stays0x6ea8:344bytes of
 reserved code margin remain. Allocated BSS adds16bytes; initialized data is
 unchanged. Existing OBJ allocation is unchanged, preserving its128byte margin.
 No music, save-format, catalog, generated sprite or shared renderer change.

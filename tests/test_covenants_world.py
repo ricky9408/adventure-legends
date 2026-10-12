@@ -71,6 +71,20 @@ class World(unittest.TestCase):
   self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,2)
   self.assertEqual(self.l.get_setting(1),0,'forgiving manual must not steal an old valid talk')
   self.assertEqual(bytes(self.s),before);self.assertEqual(self.l.settle(),1)
+ def test_target_hint_is_pure_and_matches_strict_first_steward_priority(self):
+  self.entry(70);x=C.c_int();y=C.c_int()
+  for px,py in ((120,260),(136,254)):
+   self.at(px,py,0);before=bytes(self.s);settings=[self.l.get_setting(i) for i in range(24)]
+   for _ in range(3):
+    self.assertEqual(self.l.covenants_game_target_hint(C.byref(x),C.byref(y)),1)
+    self.assertEqual((x.value,y.value),(128,272))
+   self.assertEqual(bytes(self.s),before);self.assertEqual([self.l.get_setting(i) for i in range(24)],settings)
+   self.assertEqual(self.l.covenants_game_event_pending(),0);self.assertEqual(self.l.confirmation(0),0)
+   self.assertEqual(self.l.confirmation(1),0);self.assertEqual(self.l.confirmation(2),0)
+   self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,1)
+  self.at(120,260,1);self.assertEqual(self.l.covenants_game_target_hint(None,None),0)
+  self.at(120,260,0);C.c_int.in_dll(self.l,'game_state').value=2
+  self.assertEqual(self.l.covenants_game_target_hint(None,None),0)
  def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
   self.entry(70);self.hit(0,105,106,120,240)
   self.at(40,308,1);self.assertEqual(self.l.covenants_game_interact(),1)

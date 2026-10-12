@@ -57,8 +57,9 @@ static int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
 /* A first keeps its existing target, then accepts a nearby off-axis target.
  * Field-power overlaps/rays are separate; this is not a casting predicate. */
 static unsigned char relaxed_interaction;
-static COLD int close(int x,int y){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&(relaxed_interaction||s<=f/2);}
-static COLD int prompt_close(int x,int y){unsigned char old=relaxed_interaction;int r;relaxed_interaction=1;r=close(x,y);relaxed_interaction=old;return r;}
+static COLD int target_reach(int x,int y,unsigned relaxed){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&(relaxed||s<=f/2);}
+static COLD int close(int x,int y){return target_reach(x,y,relaxed_interaction);}
+static COLD int prompt_close(int x,int y){return target_reach(x,y,1);}
 static int hit(int x,int y,int bx,int by,int w,int h){return x+5>=bx&&x-5<bx+w&&y+5>=by&&y-5<by+h;}
 int underwater_game_is_room(unsigned a){return a>=46&&a<=53;}
 unsigned underwater_game_spawn_count(unsigned a){return !underwater_game_is_room(a)?0:a==46?4:a==47||a==48||a==51||a==52?3:2;}
@@ -322,4 +323,5 @@ COLD void underwater_game_tick(void){int x,y;if(!underwater_game_is_room((unsign
 }
 COLD int underwater_game_name(void){return room_text((unsigned)room);}
 COLD int underwater_game_quest_text(void){if(!done(38))return TX_UW_HUD_ECHO;if(!done(39))return TX_UW_HUD_BALLAST;if(!done(40))return TX_UW_HUD_ARCHIVE;return TX_UW_HUD_HOME;}
+#include "underwater_hint.inc"
 #include "underwater_game_draw.inc"

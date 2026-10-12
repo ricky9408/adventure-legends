@@ -63,6 +63,18 @@ class UnderwaterWorld(unittest.TestCase):
   self.act(136,116,1)
   self.assertEqual(L.qo(38)&1,1,'off-axis A must examine the hollow plaque')
   self.assertEqual(L.qs(38),1)
+ def test_target_hint_is_read_only_and_hidden_branches_stay_hidden(self):
+  self.entry(46);x=C.c_int();y=C.c_int();self.at(136,116,1)
+  before=(L.qs(38),L.qo(38),L.get_toast())
+  for _ in range(3):
+   self.assertEqual(L.underwater_game_target_hint(C.byref(x),C.byref(y)),1)
+   self.assertEqual((x.value,y.value),(144,104))
+  self.assertEqual((L.qs(38),L.qo(38),L.get_toast()),before)
+  self.assertEqual(L.underwater_game_event_pending(),0);self.assertEqual(v('game_state'),1)
+  self.at(136,116,0);self.assertEqual(L.underwater_game_target_hint(None,None),0)
+  self.at(64,88,1);self.assertEqual(L.underwater_game_target_hint(None,None),0)
+  self.at(136,116,1);C.c_int.in_dll(L,'game_state').value=2
+  self.assertEqual(L.underwater_game_target_hint(None,None),0)
  def test_off_axis_reset_needs_second_a_and_facing_away_cancels(self):
   self.entry(46);self.act(32,288,1)
   self.assertEqual(toast(),'TX_UW_RESET_CONFIRM')

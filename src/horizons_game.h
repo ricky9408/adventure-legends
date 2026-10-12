@@ -27,6 +27,8 @@ void horizons_game_selection_changed(void);
 void horizons_game_menu_abandoned(void);
 int horizons_game_input(unsigned pressed,unsigned held);
 int horizons_game_interact(void);
+/* Pure ordinary-A focus; rendering must never invoke the interaction. */
+int horizons_game_target_hint(int*,int*);
 int horizons_game_old_interact(void);
 void horizons_game_tick(void);
 void horizons_game_draw_actors(void);

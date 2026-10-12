@@ -33,6 +33,8 @@ void covenants_game_selection_changed(void);
 void covenants_game_menu_abandoned(void);
 int covenants_game_input(unsigned pressed,unsigned held);
 int covenants_game_interact(void);
+/* Pure ordinary-A focus; rendering must never invoke the interaction. */
+int covenants_game_target_hint(int*,int*);
 int covenants_game_old_interact(void);
 void covenants_game_tick(void);
 void covenants_game_tick_old(void);

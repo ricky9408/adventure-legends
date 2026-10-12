@@ -76,13 +76,14 @@ static COLD int ab(int x){return x<0?-x:x;}
 static COLD int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
 /* Only A target selection uses this reach; cast geometry remains separate. */
 static unsigned char relaxed_interaction;
-static COLD int close(int x,int y){
+static COLD int target_reach(int x,int y,unsigned relaxed){
  int f,s;
  if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}
  else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}
- return f>=6&&f<=26&&s<=10&&(relaxed_interaction||s<=f/2);
+ return f>=6&&f<=26&&s<=10&&(relaxed||s<=f/2);
 }
-static COLD int prompt_close(int x,int y){unsigned char old=relaxed_interaction;int r;relaxed_interaction=1;r=close(x,y);relaxed_interaction=old;return r;}
+static COLD int close(int x,int y){return target_reach(x,y,relaxed_interaction);}
+static COLD int prompt_close(int x,int y){return target_reach(x,y,1);}
 static COLD void next_generation(unsigned *p){if(++*p==0)++*p;}
 static COLD void changed(void){next_generation(&covenants_game_revision);}
 static COLD unsigned state(unsigned q){return save5_quest_state(&adventure_save.quests,q);}
@@ -212,4 +213,5 @@ COLD unsigned covenants_game_prepare_event(void){
 #include "covenants_work.inc"
 #include "covenants_fields.inc"
 #include "covenants_interact.inc"
+#include "covenants_hint.inc"
 #include "covenants_draw.inc"

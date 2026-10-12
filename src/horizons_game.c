@@ -82,8 +82,9 @@ static COLD int ab(int n){return n<0?-n:n;}
 static COLD int near(int x,int y,int xx,int yy,int r){return ab(x-xx)+ab(y-yy)<=r;}
 /* Only A target selection uses this reach; cast geometry remains separate. */
 static unsigned char relaxed_interaction;
-static COLD int close(int x,int y){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&(relaxed_interaction||s<=f/2);}
-static COLD int prompt_close(int x,int y){unsigned char old=relaxed_interaction;int r;relaxed_interaction=1;r=close(x,y);relaxed_interaction=old;return r;}
+static COLD int target_reach(int x,int y,unsigned relaxed){int f,s;if(face==1){f=py-y;s=ab(px-x);}else if(face==0){f=y-py;s=ab(px-x);}else if(face==2){f=px-x;s=ab(py-y);}else{f=x-px;s=ab(py-y);}return f>=6&&f<=26&&s<=10&&(relaxed||s<=f/2);}
+static COLD int close(int x,int y){return target_reach(x,y,relaxed_interaction);}
+static COLD int prompt_close(int x,int y){return target_reach(x,y,1);}
 static COLD void changed(void){horizons_game_revision++;progression_revision++;}
 static COLD unsigned party(void){CreatureRoster*r=&adventure_save.roster;return r->party[0]|(unsigned)r->party[1]<<8|(unsigned)r->party[2]<<16|(unsigned)r->party[3]<<24;}
 static COLD CreatureInstance*active(void){unsigned p=adventure_save.roster.selected_party,s;if(!summoned||p>=4)return 0;s=adventure_save.roster.party[p];return s<160?&adventure_save.roster.instances[s]:0;}
@@ -133,4 +134,5 @@ COLD unsigned horizons_game_enemy_spawns(unsigned a,const HorizonsEnemySpawn**ou
 #include "horizons_events.inc"
 #include "horizons_fields.inc"
 #include "horizons_interact.inc"
+#include "horizons_hint.inc"
 #include "horizons_game_draw.inc"

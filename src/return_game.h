@@ -33,6 +33,8 @@ void return_game_selection_changed(void);
 void return_game_menu_abandoned(void);
 int return_game_input(unsigned pressed,unsigned held);
 int return_game_interact(void);
+/* Pure ordinary-A focus; rendering must never invoke the interaction. */
+int return_game_target_hint(int*,int*);
 int return_game_old_interact(void);
 void return_game_tick(void);
 void return_game_draw_actors(void);

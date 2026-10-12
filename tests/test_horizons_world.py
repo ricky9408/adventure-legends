@@ -50,6 +50,18 @@ class World(unittest.TestCase):
   self.at(200,220,1);self.assertEqual(self.l.horizons_game_interact(),1)
   self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.get_setting(0),1)
   self.assertEqual(self.l.get_mode(),0,'ordinary handle must not start a trial or invitation')
+ def test_target_hint_is_read_only_and_matches_the_manual(self):
+  self.old(60);self.act(64,112,True);self.old(61);self.entry(62);self.at(200,220,1)
+  x=C.c_int();y=C.c_int();before=bytes(self.s);settings=[self.l.get_setting(i) for i in range(16)]
+  for _ in range(3):
+   self.assertEqual(self.l.horizons_game_target_hint(C.byref(x),C.byref(y)),1)
+   self.assertEqual((x.value,y.value),(208,208))
+  self.assertEqual(bytes(self.s),before);self.assertEqual([self.l.get_setting(i) for i in range(16)],settings)
+  self.assertEqual(self.l.horizons_game_event_pending(),0);self.assertEqual(self.l.confirmation(),0)
+  self.assertEqual(self.l.get_mode(),0);self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,1)
+  self.at(200,220,0);self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
+  self.at(200,220,1);C.c_int.in_dll(self.l,'game_state').value=2
+  self.assertEqual(self.l.horizons_game_target_hint(None,None),0)
  def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
   self.intro();self.act(208,208);before=self.l.get_setting(0)
   self.at(16,304,1);self.assertEqual(self.l.horizons_game_interact(),1)

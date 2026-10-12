@@ -45,6 +45,18 @@ class World(unittest.TestCase):
   self.at(56,124,1);self.assertEqual(self.l.return_game_interact(),1)
   self.assertEqual(self.l.settle(),1);self.assertEqual(self.l.get_setting(0),1)
   self.assertEqual(self.l.get_setting(1),0,'adjacent mechanism must stay unchanged')
+ def test_target_hint_is_read_only_and_matches_the_manual(self):
+  self.intro();self.entry(55);self.at(56,124,1);x=C.c_int();y=C.c_int()
+  before=bytes(self.s);settings=[self.l.get_setting(i) for i in range(16)]
+  for _ in range(3):
+   self.assertEqual(self.l.return_game_target_hint(C.byref(x),C.byref(y)),1)
+   self.assertEqual((x.value,y.value),(64,112))
+  self.assertEqual(bytes(self.s),before);self.assertEqual([self.l.get_setting(i) for i in range(16)],settings)
+  self.assertEqual(self.l.return_game_event_pending(),0);self.assertEqual(self.l.confirmation(),0)
+  self.assertEqual(C.c_int.in_dll(self.l,'game_state').value,1)
+  self.at(56,124,0);self.assertEqual(self.l.return_game_target_hint(None,None),0)
+  self.at(56,124,1);C.c_int.in_dll(self.l,'game_state').value=2
+  self.assertEqual(self.l.return_game_target_hint(None,None),0)
  def test_off_axis_reset_confirmation_retention_cancel_and_commit(self):
   self.intro();self.entry(55);self.act(64,112)
   self.at(16,144,1);self.assertEqual(self.l.return_game_interact(),1)
