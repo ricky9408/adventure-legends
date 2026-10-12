@@ -25,7 +25,10 @@ def main():
  commands += [('retained-parent-negatives',[sys.executable,'tests/test_retained_ui_successor.py','--journey-story-ui-successor'],{}),('regional-quest-ubsan',[sys.executable,'tests/test_regional_quest_events.py'],{'QUEST_SANITIZE':'1'})]
  additions=['test_snapshot_copy_canaries','test_snapshot_copy','test_later_rewards_codec','test_later_rewards_capacity','test_gear_preview','gear_readable_layout','gear_treasure_host','gear_treasure_porchlight_test','test_renderer_equipment_successor','test_save5_load_job','test_review_successor','test_growth_collection','test_recruit_notice','test_recruit_reserve_notice','test_readable_aim_input','test_enemy_tactics','test_charger_companion_powers','test_regional_shop_positions','test_save5_history','test_save5_history_differential','test_return_history_differential','test_underwater_history_differential','test_horizons_history']
  additions.append('test_horizons_cast_admission')
+ additions.append('test_native_japanese_font')
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{})for n in additions]
+ for name,cmd,extra in commands:
+  if name=='test_native_japanese_font':cmd += ['--rom',str(ROOT/'build/emberbond.gba'),'--symbols',str(ROOT/'build/emberbond.sym')]
  commands += [('later-reward-all-write-cuts',[sys.executable,'tests/test_later_rewards.py','--full-cuts'],{})]
  # Explicit current release routing. Historical contracts are unmodified;
  # source-only inverse tests and current behavior are distinct report rows.

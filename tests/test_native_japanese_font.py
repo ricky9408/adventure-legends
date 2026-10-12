@@ -1,11 +1,24 @@
 #!/usr/bin/env python3
 """Current native font/corpus proofs; historical GBJ fixtures stay unchanged."""
 from pathlib import Path
-import hashlib,json,re,sys
+import argparse,hashlib,json,re,struct,sys
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'assets'))
 import gbj_font as font
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--rom',type=Path);parser.add_argument('--symbols',type=Path)
+args=parser.parse_args()
+assert bool(args.rom)==bool(args.symbols),'--rom and --symbols must be supplied together'
+rom=args.rom.read_bytes()if args.rom else None
+symbols={v[2]:int(v[0],16)for line in args.symbols.read_text().splitlines()if len(v:=line.split())==3}if args.symbols else {}
+rom_tables={'ui':'ui_texts','companion_guide_text':'companion_guide_texts','growth_journal_text':'growth_journal_texts',
+ 'gear_preview_text':'gear_preview_texts','treasure_text_text':'treasure_text_texts','opening_scene_data':'opening_scene_texts',
+ 'ending_credits_text':'ending_credits_texts','regional_shop_text':'regional_shop_texts','journey_map_text':'journey_map_texts'}
+rom_checked=0;rom_pointers={}
+def rom_read(address,length):
+ offset=address-0x08000000;assert 0<=offset<=len(rom)-length,(hex(address),length)
+ return rom[offset:offset+length]
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 assert sha(font.NATIVE_FONT)=='02f19467ea7cc235cc06c570b7f6c3b0a12a6f682bc8d74c43f2d323d97bcd12'
@@ -35,11 +48,12 @@ for family,metadata,prefix in families:
   arrays[alias]=arrays[canonical]
  tables=re.findall(r'\{(\d+),(\d+),0,\{(\w+),(\w+)\},\{(\d+),(\d+)\}\}',src)
  assert len(tables)==len(metadata),(family,len(tables),len(metadata))
- for w,h,a,b,n,m in tables:
+ for table_index,(w,h,a,b,n,m)in enumerate(tables):
   w,h,n,m=map(int,(w,h,n,m));name=a.removeprefix(prefix).removesuffix('_0');spec=metadata[name]
   text=spec if isinstance(spec,str)else spec['text'];chars.update(text)
   compact=(family=='regional_shop_text'and name.startswith('EFFECT_'))or(family=='gear_preview_text'and name=='UNITS')
   expected=font.render_text(text,h,slim=family=='ui'and h==10,compact=compact)
+  if family=='ui'and h==10:assert text.isascii(),('small footer needs Japanese reflow',name)
   assert (w,h)==expected.size,(family,name,w,h,expected.size)
   assert w<=214 and h<=15,(family,name,w,h)
   for align,(array,count)in enumerate(((a,n),(b,m))):
@@ -55,6 +69,23 @@ for family,metadata,prefix in families:
        raw.putpixel((xx,y),1)
    assert raw.crop((align,0,w+align,h)).tobytes()==expected.tobytes(),(family,name,align)
    rows_checked+=1
+  if rom is not None:
+   rw,rh,reserved,pa,pb,na,nb=struct.unpack('<HBBIIHH',rom_read(symbols[rom_tables[family]]+table_index*16,16))
+   assert (rw,rh,reserved,na,nb)==(w,h,0,n,m),(family,name,'ROM metadata drift')
+   for align,(pointer,count)in enumerate(((pa,n),(pb,m))):
+    payload=rom_read(pointer,count*4);raw=Image.new('1',(w+align,h))
+    if pointer in rom_pointers:assert payload==rom_pointers[pointer][:len(payload)]
+    else:rom_pointers[pointer]=payload
+    for offset,run,mask in struct.iter_unpack('<HBB',payload):
+     assert mask in (1,2,3)and run>0
+     for half in range(run):
+      y,x=divmod(offset+half,120)
+      for bit in (0,1):
+       if mask&(1<<bit):
+        xx=x*2+bit;assert xx<w+align and y<h
+        raw.putpixel((xx,y),1)
+    assert raw.crop((align,0,w+align,h)).tobytes()==expected.tobytes(),(family,name,align,'ROM pixel drift')
+    rom_checked+=1
   checked+=1
  family_counts[family]=len(tables)
 
@@ -62,7 +93,7 @@ cjk={c for c in chars if 0x3400<=ord(c)<=0x9fff}
 assert cjk and cjk<=font.native_coverage() and cjk<=font.compact_atlas().keys()
 for char in cjk:
  native=font.native_glyph(char);assert native.width==12 and native.getbbox()
- assert set(native.getdata())<={0,1}
+ assert {native.getpixel((x,y))for y in range(native.height)for x in range(native.width)}<={0,1}
  assert native.getbbox()[3]<=15
 try:font.native_glyph('\U0010ffff')
 except ValueError:pass
@@ -93,6 +124,7 @@ assert all(1<=len(scene['pages'])<=6 and all(len(page)==2 for page in scene['pag
 credits=json.loads((ROOT/'assets/ending_credits.json').read_text())['lines']
 for name in ('PixelMplus12 Regular','itouhiro / M+ FONTS PROJECT','k8x12 bitmap font','Num Kadoma','GeeBee'):assert name in credits
 print(json.dumps({'passed':True,'families':family_counts,'texts':checked,'exact_alignment_roundtrips':rows_checked,
+ 'compiled_rom_pixel_roundtrips':rom_checked,'compiled_rom_unique_span_pointers':len(rom_pointers),
  'unique_characters':len(chars),'unique_bmp_cjk':len(cjk),'missing_native_glyphs':0,'missing_compact_cjk':0,
  'preclip_height_negative_rejected':True,'unsupported_character_negative_rejected':True,
  'native_kanji_to10px_negative_rejected':True,'native_size':12,'runtime_font_decoding':False},indent=2))
