@@ -73,6 +73,7 @@ for family,metadata,prefix in families:
    rw,rh,reserved,pa,pb,na,nb=struct.unpack('<HBBIIHH',rom_read(symbols[rom_tables[family]]+table_index*16,16))
    assert (rw,rh,reserved,na,nb)==(w,h,0,n,m),(family,name,'ROM metadata drift')
    for align,(pointer,count)in enumerate(((pa,n),(pb,m))):
+    assert pointer%2==0,(family,name,align,'UiRun must remain halfword aligned')
     payload=rom_read(pointer,count*4);raw=Image.new('1',(w+align,h))
     if pointer in rom_pointers:assert payload==rom_pointers[pointer][:len(payload)]
     else:rom_pointers[pointer]=payload
