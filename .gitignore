@@ -63,3 +63,6 @@ tools/horizons_mgba_bridge.build.json
 /tools/*.build.json
 /tools/sysroot/
 /tools/downloads/
+
+# MacOS
+.DS_Store
