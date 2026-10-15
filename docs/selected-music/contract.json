@@ -26520,8 +26520,9 @@
     "tests/verify_late_renderer.py": "c715e1b49e571c509a578811111655c836220591428345b608fe5fb125826cc9",
     "tests/verify_soundtrack_successor.py": "acaf45be82a253b58ffdd8c093c0f9e5c73f1d8e2a4521d5993bb6a325ff3d00"
   },
-  "inverse_sha256": "9a5ad0f59d4a94ccd16a83e900b2c500d677265fe3305574bec7993f785f99cc",
+  "inverse_sha256": "7fd2a2d690c8867215c858f1aaddec04aafff37546cd5fe47caa071018fb031c",
   "inverse_files_sha256": {
+    ".gitignore": "3e767e1caab75fa5c228f95cccaade0e8d135bb2e983551dab00ecff4e5fcec1",
     "README_MUSIC.md": "60e57b8f49e27644c226b6bead1a8c119ba0033bc6b17f1e9e4351121651dc6e",
     "assets/ending_credits.json": "2f9e21cd823ba91009c1a1db467c2631a7993bc2e83723f98fbfe961bc5ad5e6",
     "assets/ending_credits_text_metrics.json": "f3fd7e6d7c8b9d2ee3fc96ff0ddcf8c6205de8567e40d4ddbc95cfdbe2a17109",
@@ -27613,6 +27614,7 @@
   },
   "current_helpers": {
     "tests/selected_music_native.py": "80eb7b67297a7d7695fa43c3b8cc274c3a8e46355f5b0a4030f0840b72b28520",
+    "tests/test_selected_music_snapshot.py": "92f1213d74b3d46b1d679bf610303a1979e68e6438fe9da9b9c62355e6b7ecdf",
     "tests/test_soundtrack_runtime.py": "e088eed2a12baa99be4cb47d7e3115ada6013bccd54181ec58fecc87a5a16e03",
     "tools/generate_music.py": "591a7f763fba6c82191e4caceb204514db81b550047e485d58c867dfea357bea",
     "tools/host_production_guard.py": "d9ef47ef3bab62f908cb1bc57e1ba7833dce8a73cdc9f48eb61f82d8af00a985",

@@ -13,7 +13,7 @@ import verify_review_successor as prior
 ROOT=Path(__file__).resolve().parents[1]
 CONTRACT_PATH='docs/selected-music/contract.json'
 INVERSE_PATH='docs/selected-music/parent-inverse.json.gz'
-CONTRACT_SHA='623cbcc958f7a0d51951444cbe250d31fe77b955f4323e30c31eca0b27b746a1'
+CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
 def allowed(path):
@@ -73,9 +73,9 @@ def negatives(c,s):
 
 @contextmanager
 def parent_view(c):
-    packed=(ROOT/INVERSE_PATH).read_bytes();assert sha(packed)==c['inverse_sha256']
+    packed=(ROOT/INVERSE_PATH).read_bytes();assert sha(packed)==c['inverse_sha256'],'selected music inverse changed'
     restored={k:base64.b64decode(v,validate=True) for k,v in json.loads(gzip.decompress(packed)).items()}
-    assert {k:sha(v) for k,v in restored.items()}==c['inverse_files_sha256']
+    assert {k:sha(v) for k,v in restored.items()}==c['inverse_files_sha256'],'inverse byte set changed'
     files={k:restored[k] if k in restored else (ROOT/k).read_bytes() for k in c['parent_files']}
     assert {k:sha(v) for k,v in files.items()}==c['parent_files'],'parent bytes changed'
     assert prior.git_tree(files,c['parent_modes'])==c['parent_tree'],'not the exact previous main tree'
@@ -122,6 +122,9 @@ def main():
             if args.renderer_negatives:command.append('--renderer-negatives')
             if args.parent:command.append('--parent')
             subprocess.run(command,cwd=view,check=True,env={**os.environ,'PYTHONPATH':str(view/'tests')})
+        if args.parent_tests:
+            subprocess.run([sys.executable,str(ROOT/'tests/test_selected_music_snapshot.py')],
+                           cwd=ROOT,check=True,env={**os.environ,'PYTHONPATH':str(ROOT/'tests')})
     report={'result':'PASS','scope':__doc__,'production_files':len(c['current_production']),
             'exact_parent_commit':c['parent_commit'],'contract_sha256':CONTRACT_SHA,
             'rejected_mutations':len(rejected),'historical_gameplay_claimed':False}
