@@ -519,7 +519,7 @@ class ReturnJourney(ReturnCollectionRoute, MagmaJourney):
         before = {'instance_id': self.selected().instance_id, 'form': self.selected().form_id,
                   'command': self.command(), 'hero': [self.get('px'), self.get('py')], 'target': [x, y],
                   'direction': direction, 'trial': {n: getattr(self.trial(), n) for n, _ in ReturnTrial._fields_}}
-        self.measured(label or f'cast-{form}-{command}-area{self.get("room")}', lambda: (self.tap('R', 2, 120), self.settle()))
+        self.measured(label or f'cast-{form}-{command}-area{self.get("room")}', lambda: (self.field_ability(2, 120), self.settle()))
         self.check(self.selected().instance_id == before['instance_id'], 'actual cast retains exact selected individual')
         self.cases.append({'field_cast': before, 'after_setting': self.setting(), 'frame': self.e.frame})
 
@@ -743,6 +743,10 @@ def main():
         r.e.close()
     return bool(r.failures)
 
+
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
 
 if __name__ == '__main__':
     raise SystemExit(main())

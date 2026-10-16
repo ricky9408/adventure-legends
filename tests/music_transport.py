@@ -89,4 +89,8 @@ def main():
     result=dict(rom_sha256=sha(a.rom),symbols_sha256=sha(a.rom.with_suffix('.sym')),elf_sha256=sha(a.rom.with_suffix('.elf')),source_manifest_sha256=sha(a.rom.parent/'source-hashes.json'),producer_sha256=a.producer_sha,game_ram_writes=0,cross_rom_machine_states=0,physical_hardware_tested=False,listening_review=False,cases=cases,audio=audio)
     (a.output/'report.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
 
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

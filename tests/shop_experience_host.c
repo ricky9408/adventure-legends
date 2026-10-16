@@ -14,14 +14,15 @@
 #include "regional_shop_text.h"
 #include "regional_shop.h"
 volatile int game_state,room,px,py,has_save,save_failed;
-int face,pressed,keys,journal_tab,ability_cd,heal_cd,save_failure_notice,save_requested,save_ordinary_scope,quickparty_open,hero_hp_q4;
+int face,pressed,keys,journal_tab,ability_cd,heal_cd,save_failure_notice,save_requested,save_ordinary_scope,quickparty_open,quickparty_visible,hero_hp_q4;
 unsigned save_feedback_background,north_game_revision,south_game_revision,magma_game_revision,underwater_game_revision;
 unsigned gear_menu_revision;
 unsigned char north_game_machine_stage,south_game_machine_stage;
 void progression_refresh(void){}
 void obj_sprite(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void region_actor(unsigned a,int b,int c){(void)a;(void)b;(void)c;}
-void obj_add(int a,int b,int c,int d,int e,int f,int g,int h){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;(void)h;}
+static unsigned merchant_markers;
+void obj_add(int a,int b,int c,int d,int e,int f,int g,int h){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;(void)h;merchant_markers++;}
 void dialogue(int a,int b,int state){(void)a;(void)b;game_state=state;}
 static unsigned regional_labels_seen;
 void text_spans(const UiText*t,int x,int y,int c){unsigned i;(void)c;assert(x>=0&&y>=0&&x+t->width<=240&&y+t->height<=160);for(i=0;i<RS_COUNT;++i)if(t==&regional_shop_texts[i])regional_labels_seen|=1u<<i;}
@@ -60,7 +61,7 @@ int economy_begin_claim(Save5State*s,unsigned i){return economy_begin_purchase(s
 unsigned game_gear_busy(void){return busy;}
 void game_health_refresh(int fill){(void)fill;refreshes++;}
 void game_health_heal(unsigned n){heals++;hero_hp_q4+=(int)n;if(hero_hp_q4>gear_stats.max_hp_q4)hero_hp_q4=gear_stats.max_hp_q4;}
-static void reset(void){memset(&adventure_save,0,sizeof adventure_save);game_state=1;room=0;px=56;py=100;pressed=keys=journal_tab=quickparty_open=0;calls=error_code=pending=claimed=heals=refreshes=busy=0;status=SAVE5_BUSY;hero_hp_q4=gear_stats.max_hp_q4=144;save_failed=save_failure_notice=0;game_shop_reset();}
+static void reset(void){memset(&adventure_save,0,sizeof adventure_save);game_state=1;room=0;px=56;py=100;pressed=keys=journal_tab=quickparty_open=quickparty_visible=0;calls=error_code=pending=claimed=heals=refreshes=busy=0;status=SAVE5_BUSY;hero_hp_q4=gear_stats.max_hp_q4=144;save_failed=save_failure_notice=0;game_shop_reset();}
 static void input(int held,int edge){int expected=game_state==11||game_state==12||game_state==13;keys=held;pressed=edge;game_shop_tick();assert(game_shop_update()==expected);}
 static void tap(int key){input(key,key);input(0,0);}
 static int saw(int id){int i;for(i=0;i<render_count;i++)if(rendered[i]==id)return 1;return 0;}
@@ -75,8 +76,47 @@ static void repeat_and_commit(void){unsigned i;reset();game_shop_interact();inpu
  reset();game_state=3;journal_tab=JOURNAL_ITEMS;adventure_save.economy.supplies[0]=1;hero_hp_q4=96;game_shop_items_input(1);game_shop_items_input(1);assert(game_state==12&&calls==1&&!heals);for(i=0;i<30;i++)input(0,0);assert(!heals&&hero_hp_q4==96);status=SAVE5_DONE;input(0,0);assert(heals==1&&hero_hp_q4==128&&game_state==3);game_shop_tick();assert(heals==1);draw();assert(saw(TX_FB_USED)&&saw(TX_PF_ITEM_KEYS));
  reset();game_shop_interact();tap(1);tap(1);status=SAVE5_FAILED;input(0,0);assert(save_failed&&save_failure_notice);draw();assert(saw(TX_FB_SAVE_RETRY)&&saw(TX_FB_BUY_KEYS));
  puts("PASS held directions repeat at18/6; A remains edge-triggered; pending, done, and failed transactions stay singular");}
-static void rewards(void){unsigned i,gold,xp;reset();game_shop_reward(180,6);gold=game_shop_reward_gold;xp=game_shop_reward_xp;for(i=0;i<40;i++)game_shop_tick();assert(game_shop_reward_visible());game_state=3;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();game_state=2;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();game_state=1;quickparty_open=1;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();render_count=0;game_shop_draw_reward();assert(!render_count&&!game_shop_reward_visible());quickparty_open=0;assert(game_shop_reward_visible());for(i=0;i<54;i++)game_shop_tick();assert(game_shop_reward_visible());game_shop_tick();assert(!game_shop_reward_visible());assert(game_shop_reward_gold==gold&&game_shop_reward_xp==xp&&!adventure_save.economy.gold);puts("PASS reward gets95 visible play updates across hub/dialogue/picker pauses without changing credits");}
+static void rewards(void){
+ unsigned i,gold,xp;unsigned short expected_pixels[19204];int expected_text_count;
+ reset();game_shop_reward(180,6);gold=game_shop_reward_gold;xp=game_shop_reward_xp;
+ for(i=0;i<40;i++)game_shop_tick();assert(game_shop_reward_visible());
+ game_state=3;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();
+ game_state=2;assert(!game_shop_reward_visible());for(i=0;i<300;i++)game_shop_tick();
+ game_state=1;render_count=0;memset(framebuffer,0,sizeof framebuffer);game_shop_draw_reward();
+ assert(render_count&&saw(TX_FB_XP)&&saw(TX_FB_GOLD));
+ expected_text_count=render_count;memcpy(expected_pixels,framebuffer,sizeof framebuffer);
+ /* Arming owns input and pauses the timer, while its hidden panel leaves the
+  * reward fully visible. Hundreds of owned updates must consume no duration. */
+ quickparty_open=1;assert(!quickparty_visible&&game_shop_reward_visible());
+ for(i=0;i<300;i++)game_shop_tick();
+ render_count=0;memset(framebuffer,0,sizeof framebuffer);game_shop_draw_reward();
+ assert(game_shop_reward_visible()&&render_count==expected_text_count);
+ assert(!memcmp(expected_pixels,framebuffer,sizeof framebuffer));
+ /* Only visible panel coverage suppresses reward pixels. The same timer is
+  * still paused, and disappearing panel coverage restores the earned card. */
+ quickparty_visible=1;assert(!game_shop_reward_visible());
+ for(i=0;i<300;i++)game_shop_tick();
+ render_count=0;memset(framebuffer,0,sizeof framebuffer);game_shop_draw_reward();
+ assert(!render_count&&!game_shop_reward_visible());
+ for(i=0;i<19204;i++)assert(!framebuffer[i]);
+ quickparty_visible=0;render_count=0;game_shop_draw_reward();
+ assert(game_shop_reward_visible()&&render_count==expected_text_count);
+ assert(!memcmp(expected_pixels,framebuffer,sizeof framebuffer));
+ quickparty_open=0;assert(game_shop_reward_visible());
+ for(i=0;i<54;i++)game_shop_tick();assert(game_shop_reward_visible());
+ game_shop_tick();assert(!game_shop_reward_visible());
+ assert(game_shop_reward_gold==gold&&game_shop_reward_xp==xp&&!adventure_save.economy.gold);
+ puts("PASS reward duration pauses during hidden arming and visible selector; hidden arming preserves field pixels and release resumes exactly95 play updates");
+}
 static void layout(void){int selection;reset();adventure_save.economy.gold=9999;adventure_save.economy.supplies[0]=9;adventure_save.economy.supplies[1]=9;adventure_save.economy.relics=7;adventure_save.economy.upgrade=1;game_shop_interact();claimed=7;for(selection=0;selection<4;selection++){game_shop_selection=selection;draw();assert(saw(TX_PF_STOCK)&&saw(TX_EC_PRICE)&&saw(TX_FB_SHOP_KEYS));tap(1);draw();assert(saw(TX_FB_BUY_KEYS));tap(2);}game_state=3;journal_tab=JOURNAL_ITEMS;for(selection=0;selection<10;selection++){draw();assert(saw(TX_PF_STOCK));game_shop_items_input(128);}assert(!calls);puts("PASS all shop/claim/ten item rows render within240x160 with stock, prices, effects and separate controls");}
+static void merchant_arming(void){
+ int x,y;reset();room=16;assert(regional_shop_position(16,&x,&y));px=x;py=y;
+ merchant_markers=0;game_shop_draw_merchants();assert(merchant_markers==1);
+ quickparty_open=1;merchant_markers=0;game_shop_draw_merchants();assert(merchant_markers==1);
+ quickparty_visible=1;merchant_markers=0;game_shop_draw_merchants();assert(!merchant_markers);
+ quickparty_open=quickparty_visible=0;merchant_markers=0;game_shop_draw_merchants();assert(merchant_markers==1);
+ puts("PASS supplier hint stays visible during hidden arming and returns after selector release");
+}
 static void regional_layout(void){static const unsigned areas[8]={16,22,30,38,46,54,62,70};unsigned region,selection;int x,y;
  for(region=0;region<8;++region){reset();room=(int)areas[region];assert(regional_shop_position((unsigned)room,&x,&y));px=x;py=y;assert(game_shop_in_range());
   px=x+22;assert(!game_shop_in_range());px=x;assert(game_shop_interact());
@@ -88,4 +128,4 @@ static void regional_layout(void){static const unsigned areas[8]={16,22,30,38,46
  room=46;px=240;py=288;assert(!game_shop_in_range());px=200;py=288;assert(!game_shop_in_range());
  puts("PASS all eight regional supplier stocks, range boundary, gear effect/price rows and confirmation fit native240x160");
 }
-int main(void){context_and_errors();repeat_and_commit();rewards();layout();regional_layout();return 0;}
+int main(void){context_and_errors();repeat_and_commit();rewards();layout();merchant_arming();regional_layout();return 0;}

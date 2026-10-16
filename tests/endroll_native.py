@@ -69,6 +69,10 @@ class Endroll(Run):
  def title_only(self):self.boot(True);self.shot('native-title-no-credit')
  def report(self):
   d=super().report();d['suite']='endroll-native';d['scope']='Historical completed-save controller-only replay; authentic pending-save first-ending controller route unless separately labeled RAM-prepared.';d['provenance']['endroll_test_sha256']=sha(__file__);(self.out/'report.json').write_text(json.dumps(d,indent=2)+'\n');return d
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--rom',type=Path,default=ROOT/'build/emberbond.gba');p.add_argument('--symbols',type=Path,default=ROOT/'build/emberbond.sym');p.add_argument('--expected-rom-sha');p.add_argument('--expected-symbols-sha');p.add_argument('--cases',default='title_only,replay,boundaries,first_ending,save_failure_diagnostic');a=p.parse_args();r=Endroll(a)
  for name in a.cases.split(','):r.section(name,getattr(r,name))

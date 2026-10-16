@@ -54,7 +54,7 @@ class UnderwaterCollectionRoute:
   x,y=self.trial_point(n);forward=(24,24,12,12,8,16,6,12)[family];side=-10 if family==7 else 0
   # Ordinary approach tolerance must be sufficient for the visible target.
   self.ready();self.goto(x-side,y+forward,radius=4);self.face(1);self.ready()
-  self.tap('R',2,55);self.settle()
+  self.field_ability(2, 55);self.settle()
  def trial_walk(self,x,y):
   cx,cy=(240,160) if self.get('room') in (48,51) else (120,80)
   self.goto(cx+x,cy+y,radius=3);self.step(3);self.settle()

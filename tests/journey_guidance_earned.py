@@ -239,6 +239,7 @@ class Evidence:
               'route_complete':self.route_complete,'checks':self.checks,'failures':self.failures,
               'snapshots':self.snapshots,'visited_rooms':self.visits,'transitions':self.transitions,
               'coverage':self.coverage,'acquisitions':self.acquisitions,'cases':self.cases,'metrics':self.metrics,
+              'field_controls':getattr(self,'field_control_events',[]),
               'completed_chapters':self.history,'last_chapter_selected_forms':sorted(set(self.main_selections)),
               'final':self.proof_state(),'inputs_sha256':sha(self.out/'controller-inputs.jsonl.gz'),
               'native_frames_sha256':sha(self.out/'native-frames.jsonl.gz'),
@@ -293,7 +294,7 @@ class OriginalJourney(OpeningJourneyMixin,Evidence,FeedbackCampaign):
         if target==4 and not self.death_done:
             self.snapshot('ridge-before-natural-death')
             self.navigate(176,128)
-            if self.get('summoned'):self.tap('B')
+            if self.get('summoned'):self.set_summoned(False)
             for _ in range(4000):
                 if self.get('game_state')==4:break
                 self.step(2)
@@ -405,7 +406,7 @@ class RegionalJourney(Evidence,ConnectedRoadJourneyMixin,RegionMaskDispatch):
             if not self.get('ability_cd'):break
             self.step(1)
         self.check(not self.get('ability_cd'),'companion cooldown completes without injected timing')
-        if not self.get('summoned'):self.tap('B');self.settle()
+        if not self.get('summoned'):self.set_summoned(True);self.settle()
     def assign(self,slot,form):
         r=self.roster();index=next(i for i,c in enumerate(r.instances) if c.flags&1 and c.form_id==form)
         self.open_tab(2)
@@ -697,7 +698,7 @@ class RegionalJourney(Evidence,ConnectedRoadJourneyMixin,RegionMaskDispatch):
         self.check(self.cv_local('porch_confirm')==1,'deferred porch decision can be reopened normally')
         self.tap('A');self.settle();self.check(self.state().quests.objectives[63]&1,'shared porch commitment is explicitly recorded')
         self.snapshot('porch-commitment-earned');self.travel(62)
-        if self.get('summoned'):self.tap('B');self.settle()
+        if self.get('summoned'):self.set_summoned(False);self.settle()
         self.target(self.cv_local('npc_x'),self.cv_local('npc_y'),0)
         self.follow_resident(lambda:bool(self.state().quests.objectives[63]&2),'return companion walks the ordinary fairground path home',limit=1200)
         self.travel(0);self.target(120,94,1);self.target(120,94,1)

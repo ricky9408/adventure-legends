@@ -47,7 +47,7 @@ class FreshEarly(TreasureOriginalJourney):
   self.check(self.state().economy.gold==gold-18 and self.state().economy.supplies[0]==1,'fresh held confirmation buys one Heart tonic for 18G')
   self.shot('heart-purchase-saved');self.tap('DOWN');self.tap('A');self.tap('A')
   self.check(self.state().economy.gold==gold-42 and self.state().economy.supplies[1]==1,'Spirit tonic costs 24G once')
-  self.tap('B');self.tap('B');self.select(2);self.ready();self.tap('R')
+  self.tap('B');self.tap('B');self.select(2);self.ready();self.field_ability()
   self.check(self.get('ability_cd')>0,'earned wind companion power causes actual cooldown')
   self.open_tab(15);self.tap('DOWN');self.tap('A');self.shot('spirit-use-confirm');self.tap('A')
   self.check(self.state().economy.supplies[1]==0 and self.get('ability_cd')==0,'Spirit tonic consumes once and clears actual cooldown')

@@ -114,7 +114,7 @@ class MagmaJourney(SouthernJourney):
         self.owned_select(form);dx,dy={0:(0,-16),1:(0,16),2:(16,0),3:(-16,0)}[face]
         self.goto(x+dx,y+dy,radius=4);self.face(face)
         self.check(abs(self.get('px')-x)+abs(self.get('py')-y)<23,'field approach is inside actual interaction range')
-        self.ready();self.tap('R');self.settle()
+        self.ready();self.field_ability();self.settle()
     def slide(self,index,dirs,side=1):
         cell=self.puzzle()[index];x,y=48+cell%7*24,32+cell//7*18;self.target(x,y,side)
         self.check(self.local('grab')==index,'A grabs the actual movable object')
@@ -358,4 +358,8 @@ def main():
     try:run.run(a.scope)
     except Exception as exc:run.failures.append({'error':str(exc),'status':run.status()});run.snapshot('failure',settle=False);raise
     finally:run.report();run.e.close()
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

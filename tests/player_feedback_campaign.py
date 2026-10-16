@@ -39,7 +39,7 @@ class FeedbackCampaign(EvolutionRun):
   self.candidate.update(bridge_sha256=sha(self.bridge),helper_sha256=sha(__file__),elf_sha256=sha(self.out/'tested.elf'),source_manifest_sha256=sha(self.out/'candidate-source-hashes.json'))
   (self.out/'candidate.json').write_text(json.dumps(self.candidate,indent=2)+'\n')
   producer_sources={}
-  for rel in ('tests/player_feedback_campaign.py','tests/campaign_tests.py','tests/evolution_tests.py','tests/region_journey.py','tests/player_feedback_native.py','tools/mgba_runner.py','tests/test_save5.py','tests/test_save4.py','tests/test_creatures.py'):
+  for rel in ('tests/current_field_controls.py','tests/player_feedback_campaign.py','tests/campaign_tests.py','tests/evolution_tests.py','tests/region_journey.py','tests/player_feedback_native.py','tools/mgba_runner.py','tests/test_save5.py','tests/test_save4.py','tests/test_creatures.py'):
    target=self.out/'test-source'/rel;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/rel,target);producer_sources[rel]=sha(target)
   assert producer_sources['tests/player_feedback_campaign.py']==self.candidate['helper_sha256']
   (self.out/'producer-source-receipt.json').write_text(json.dumps({'candidate':self.candidate,'sources':producer_sources},indent=2)+'\n')
@@ -130,16 +130,16 @@ class FeedbackCampaign(EvolutionRun):
   self.step(160);self.check(self.get('game_state')==0,'fresh cartridge boots to title');self.shot('01-title');self.tap('A',4,4);self.dialogs();self.mode='journey'
   self.check(self.get('game_state')==1 and self.get('room')==0,'A begins a genuine fresh adventure');self.check(self.get('chapter_flags')==self.get('room_flags')==0,'fresh adventure has no progression');self.menu_case('village');self.nextroom(1)
   self.goto(y=272);self.goto(x=120);self.goto(y=248);self.tap('A');self.dialogs();self.goto(y=272);self.goto(x=240);self.goto(y=180)
-  self.select(1);self.ready();self.tap('R');self.dialogs();self.check(self.get('bridge_open')==1,'Midori earns grove bridge')
+  self.select(1);self.ready();self.field_ability();self.dialogs();self.check(self.get('bridge_open')==1,'Midori earns grove bridge')
   self.goto(x=240);self.goto(y=92);self.goto(x=92);self.goto(y=72);self.tap('A');self.dialogs();self.check(self.get('max_hp')==8,'optional heart earned by interaction')
   self.goto(y=92);self.goto(x=368);self.nextroom(2);self.dialogs();self.select(0)
   for x,bit in ((64,1),(176,2)):
-   self.goto(y=94);self.goto(x=x);self.goto(y=84);self.defend(300);self.goto(x=x,y=84);self.ready();self.tap('R');self.dialogs();self.check(self.get('torches')&bit,'authored brazier lit with Homura')
-  self.goto(y=94);self.goto(x=120);self.nextroom(3);self.dialogs();self.snapshot('grove-boss-entry');self.goto(y=100);self.ready();self.tap('R');self.goto(y=96)
+   self.goto(y=94);self.goto(x=x);self.goto(y=84);self.defend(300);self.goto(x=x,y=84);self.ready();self.field_ability();self.dialogs();self.check(self.get('torches')&bit,'authored brazier lit with Homura')
+  self.goto(y=94);self.goto(x=120);self.nextroom(3);self.dialogs();self.snapshot('grove-boss-entry');self.goto(y=100);self.ready();self.field_ability();self.goto(y=96)
   for _ in range(6000):
    if self.get('game_state')==2:break
    if self.get('game_state')!=1:self.check(False,'grove boss route remains alive')
-   if not self.get('boss_armor') and not self.get('ability_cd'):self.step(10,'RIGHT');self.tap('R')
+   if not self.get('boss_armor') and not self.get('ability_cd'):self.step(10,'RIGHT');self.field_ability()
    if self.get('boss_armor')>12 and not self.get('combo_timer') and not self.get('sword_cd'):self.goto(x=self.get('boss_x'),y=self.get('boss_y')+30);self.step(1,'UP');self.tap('A')
    else:self.step(1)
   self.check(self.get('boss_hp')==0 and self.flags(['GROVE_CLEAR']),'first boss and story reward earned');self.dialogs('grove-reward');self.check(self.get('room')==0,'first boss returns to village');self.select(2);self.reload_case('grove-complete')
@@ -149,7 +149,7 @@ class FeedbackCampaign(EvolutionRun):
  def earned_fire_trial(self):
   self.nextroom(1)
   for i,(x,y) in enumerate(((184,280),(296,208),(320,72))):
-   self.navigate(x,y,radius=16);self.select(0);self.ready();self.tap('R');self.dialogs();self.check(self.roster().lifetime_field_aid[0]&(1<<i),f'fire wish{i+1} earned at real object');self.snapshot('earned-fire-wish-'+str(i+1))
+   self.navigate(x,y,radius=16);self.select(0);self.ready();self.field_ability();self.dialogs();self.check(self.roster().lifetime_field_aid[0]&(1<<i),f'fire wish{i+1} earned at real object');self.snapshot('earned-fire-wish-'+str(i+1))
   self.check(self.instance(0).trial_flags&1,'three field objects earn fire trial');self.navigate(240,292);self.nextroom(0,'DOWN')
  def capture_cut(self,label):
   path=self.out/f'evolution-cut-{len(self.powercuts):03d}-{label}.sav';method=self.e.save(path)

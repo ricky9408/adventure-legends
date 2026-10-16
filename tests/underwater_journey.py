@@ -126,7 +126,7 @@ class UnderwaterJourney(UnderwaterCollectionRoute,MagmaJourney):
         if command is not None:self.set_command(command)
         self.ready();self.goto(x,y,radius=4);self.face(direction);self.ready()
         identity=self.selected().instance_id
-        self.cadence(label or f'cast-form{form}-area{self.get("room")}',120,lambda n:'R' if n==0 else 0)
+        self.cadence(label or f'cast-form{form}-area{self.get("room")}',120,lambda n:self.field_ability_key() if n==0 else 0)
         self.settle();self.check(self.selected().instance_id==identity,'actual field cast retains selected individual')
     def main_route(self):
         self.equip_item(0,1)
@@ -190,4 +190,8 @@ def main():
  except Exception as exc:r.failures.append({'error':str(exc),'status':r.status()});r.snapshot('failure',settle=False);raise
  finally:r.report();r.e.close()
  return bool(r.failures)
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

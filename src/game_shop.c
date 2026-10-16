@@ -121,7 +121,7 @@ COLD int game_shop_later_interact(void){unsigned source,treasure,error;LaterRewa
 static COLD void begin_shop_claim(void){unsigned claim=next_claim();if(claim<3)begin(3,claim,SHOP);else if(claim<7)begin_later(claim-3,LATER_SOURCE_VILLAGE_SHOP,SHOP);}
 static COLD void finish_later_story(void){static const int lines[4][2]={{TX_NT_RETURN_A,TX_NT_RETURN_B},{TX_ST_RETURN_A,TX_ST_RETURN_B},{TX_MG_END,TX_MG_ENDB},{TX_UW_END,TX_UW_HOME}};if(receipt_later&&receipt_fresh&&return_state==PLAY)dialogue(lines[receipt_boss][0],lines[receipt_boss][1],PLAY);receipt_fresh=0;}
 int game_shop_in_range(void){int x,y;if(game_state!=PLAY)return 0;if(room==0)return near(px,py,56,100,22);return regional_shop_position((unsigned)room,&x,&y)&&near(px,py,x,y,22);}
-COLD void game_shop_draw_merchants(void){int x,y;if(!regional_shop_position((unsigned)room,&x,&y))return;region_actor(REGION_SPR_NPC_MERCHANT,x,y);if(game_shop_in_range()&&!quickparty_open)obj_add(10496,x-4,y-21,8,8,1,999,0);}
+COLD void game_shop_draw_merchants(void){int x,y;if(!regional_shop_position((unsigned)room,&x,&y))return;region_actor(REGION_SPR_NPC_MERCHANT,x,y);if(game_shop_in_range()&&!quickparty_visible)obj_add(10496,x-4,y-21,8,8,1,999,0);}
 int game_shop_interact(void){if(!game_shop_in_range())return 0;game_shop_confirm=0;clear_feedback();shop_repeat_direction=shop_repeat_delay=0;if(room==0&&next_claim()>=3&&next_claim()<7)game_shop_selection=3;else if(game_shop_selection>=(int)market_count())game_shop_selection=0;game_state=SHOP;changed();return 1;}
 int game_shop_display_state(void){return game_state==SHOP_BUSY?return_state:game_state;}
 int game_shop_begin_boss(unsigned boss){if(boss>=3)return 0;return begin(3,boss,game_state);}
@@ -185,5 +185,5 @@ COLD void game_shop_draw_items(void){int i,first=item_selection>2?item_selection
 }
 /* EXP is the sum of actual before/after gains across occupied party slots. */
 void game_shop_reward(unsigned xp,unsigned gold){if(!xp&&!gold)return;game_shop_reward_xp=xp;game_shop_reward_gold=gold;reward_ticks=95;changed();}
-unsigned game_shop_reward_visible(void){return game_state==PLAY&&!quickparty_open&&reward_ticks!=0;}
-COLD void game_shop_draw_reward(void){int x=8;if(game_state!=PLAY||quickparty_open||!reward_ticks)return;box(5,122,116,17);if(game_shop_reward_xp){text(TX_FB_XP,x,122,PAL_TEAL2);gain(game_shop_reward_xp,x+30,127,PAL_GOLD4);x+=66;}if(game_shop_reward_gold){text(TX_FB_GOLD,x,122,PAL_GOLD3);gain(game_shop_reward_gold,x+13,127,PAL_GOLD4);}}
+unsigned game_shop_reward_visible(void){return game_state==PLAY&&!quickparty_visible&&reward_ticks!=0;}
+COLD void game_shop_draw_reward(void){int x=8;if(game_state!=PLAY||quickparty_visible||!reward_ticks)return;box(5,122,116,17);if(game_shop_reward_xp){text(TX_FB_XP,x,122,PAL_TEAL2);gain(game_shop_reward_xp,x+30,127,PAL_GOLD4);x+=66;}if(game_shop_reward_gold){text(TX_FB_GOLD,x,122,PAL_GOLD3);gain(game_shop_reward_gold,x+13,127,PAL_GOLD4);}}

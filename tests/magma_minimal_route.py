@@ -180,4 +180,8 @@ def main():
     print(json.dumps({'completed': run.completed, 'checks': len(run.checks), 'report_sha256': digest(run.out/'magma-minimal-route.json')}))
 
 if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
+if __name__ == '__main__':
     main()

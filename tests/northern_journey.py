@@ -132,12 +132,11 @@ class NorthernJourney(RegionJourney):
     def live(self):return [c for c in self.roster().instances if c.flags&1]
     def puzzle(self):return list(self.e.bytes(self.sym['north_game_puzzle'],4))
     def owned_select(self,form):
-        if not any(i<160 and self.roster().instances[i].form_id==form for i in self.roster().party):self.assign(3,form)
         self.select_form(form)
     def cast_owned(self,form,x,y,cmd=None):
         self.owned_select(form)
         if cmd is not None:self.set_command(cmd)
-        self.goto(x,y);self.ready();before=self.selected().instance_id;self.tap('R');self.settle()
+        self.goto(x,y);self.ready();before=self.selected().instance_id;self.field_ability();self.settle()
         self.check(self.selected().instance_id==before,'field command keeps selected instance identity')
     def reward(self,q,form=None):
         self.check(self.quest(q)==3,f'quest{q} reward really claimed by controller')
@@ -308,7 +307,7 @@ class NorthernJourney(RegionJourney):
             self.check(bytes(self.selected())==bytes(expected),'evolution changes form only and retains identity/selected command')
             old_cmd=self.command();self.tap('R',2,25);self.settle()
             self.check(self.command()==old_cmd+1,'new learned evolved command explicitly selected in journal')
-            self.close_menu();self.ready();self.tap('R');self.step(10);self.settle()
+            self.close_menu();self.ready();self.field_ability();self.step(10);self.settle()
             self.snapshot(f'evolved-{base+1}-actual-command')
             changes.append({'base':base,'evolved':base+1,'instance_id':self.selected().instance_id,'command':self.command()})
         self.check(self.collection()==ALL_FORMS,'one actual save earns all21 historical form bits')
@@ -402,4 +401,8 @@ def main():
         run.failures.append({'error':str(exc),'status':run.status()});run.snapshot('failure',settle=False);raise
     finally:run.report();run.e.close()
     return 0
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

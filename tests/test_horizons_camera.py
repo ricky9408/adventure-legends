@@ -11,6 +11,8 @@ Requires Python 3 and a C++17 compiler (CXX, or c++), including ASan/UBSan.
 Only temporary C++/executables and an explicitly requested report are written.
 Patterned atlases and synchronous DMA stand in for hardware. This is not native
 gameplay, actual artwork, VBlank/audio timing, or release-performance evidence.
+The real native DMA branches are simulated synchronously; hidden selector arming
+must leave bitmap and actor coverage identical to an ordinary field update.
 """
 
 from pathlib import Path
@@ -32,6 +34,7 @@ SOURCE_PATHS = (
     "src/horizons_game_draw.inc",
     "src/horizons_art.h",
     "src/obj_layout.h",
+    "src/journal_nav.h",
     "assets/horizons_region/geometry.json",
 )
 
@@ -104,6 +107,7 @@ HEAD = r'''
 #include "horizons_art.h"
 #include "covenants_art.h"
 #include "obj_layout.h"
+#include "journal_nav.h"
 #define COLD
 using u8 = unsigned char;
 using u16 = unsigned short;
@@ -113,7 +117,8 @@ static void check(bool ok, const char *what) {
     if (!ok) { std::fprintf(stderr, "FAIL: %s\n", what); std::exit(1); }
 }
 int room, px, py, camera_x, camera_y, camera_fx, camera_fy, game_state, journal_tab;
-int quickparty_open, obj_count, obj_depth[128], region_actor_cursor, frame, ticks;
+int quickparty_open, quickparty_visible, world_mask_disabled;
+int obj_count, obj_depth[128], region_actor_cursor, frame, ticks;
 // New chapter branches cannot execute in this historical62..69 oracle.
 const CovenantsArtRoom covenants_art_rooms[8] = {};
 unsigned covenants_creature_art_walk_index(unsigned, unsigned) { std::abort(); }
@@ -128,6 +133,11 @@ int ab(int value) { return value < 0 ? -value : value; }
 void *progression_selected(void) { return selected ? pixels : nullptr; }
 int save_notice_visible(void) { return 0; }
 int save_notice_left(void) { return 0; }
+// Explicit unrelated HUD/save/recruit boundary doubles: no coverage is active.
+int game_display_state(void) { return game_state; }
+int game_save_badge_left(void) { return 200; }
+int game_shop_reward_visible(void) { return 0; }
+int recruit_notice_world(unsigned) { return 0; }
 void obj_upload(const u8 *, int, int, int) {}
 const u8 *companion_form_pixels(unsigned, unsigned, unsigned) {
     return horizons_sprites[0];
@@ -175,30 +185,40 @@ static unsigned actor_checks(void) {
         for (int xcam : sample_cameras(world_width() - 240, false)) {
             for (int ycam : sample_cameras(world_height() - 160, true)) {
                 camera_x = xcam; camera_y = ycam; game_state = PLAY;
-                for (int y = -10; y < 172; y += 7) {
-                    for (int x = -10; x < 252; x += 7) {
-                        obj_count = region_actor_cursor = 0;
-                        ra(0, xcam + x, ycam + y);
-                        rf(105, xcam + x, ycam + y);
-                        bool visible = x > -8 && x < 248 && y > -8 && y < 168;
-                        check(obj_count == (visible ? 2 : 0), "actor visible count");
-                        if (visible) for (int n = 0; n < 2; ++n) {
-                            check((obj_entries[n].a1 & 511) == ((x - 8) & 511),
-                                  "actor x must subtract camera exactly once");
-                            check((obj_entries[n].a0 & 255) == ((y - 8) & 255),
-                                  "actor y must subtract camera exactly once");
-                            check(obj_depth[n] == ycam + y, "actor world depth");
+                for (int selector : {0, 1, 2}) {
+                    quickparty_open = selector != 0; quickparty_visible = selector == 2;
+                    for (int y = -10; y < 172; y += 7) {
+                        for (int x = -10; x < 252; x += 7) {
+                            obj_count = region_actor_cursor = 0;
+                            ra(0, xcam + x, ycam + y);
+                            rf(105, xcam + x, ycam + y);
+                            bool visible = x > -8 && x < 248 && y > -8 && y < 168;
+                            if (selector == 2 && x > 18 && x < 222 && y > 21 && y < 168)
+                                visible = false;
+                            check(obj_count == (visible ? 2 : 0), "actor visible count");
+                            if (visible) for (int n = 0; n < 2; ++n) {
+                                check((obj_entries[n].a1 & 511) == ((x - 8) & 511),
+                                      "actor x must subtract camera exactly once");
+                                check((obj_entries[n].a0 & 255) == ((y - 8) & 255),
+                                      "actor y must subtract camera exactly once");
+                                check(obj_depth[n] == ycam + y, "actor world depth");
+                            }
+                            ++checks;
                         }
-                        ++checks;
                     }
                 }
             }
         }
     }
+    quickparty_open = quickparty_visible = 0;
     return checks;
 }
 int main(void) {
-    unsigned copies = 0, snaps = 0;
+    unsigned copies = 0, snaps = 0, hidden_arming_copies = 0;
+    // Even a visible selector cannot bypass the real world-mask opt-out.
+    game_state = PLAY; quickparty_open = quickparty_visible = world_mask_disabled = 1;
+    check(!modal_coverage(nullptr, nullptr, nullptr), "disabled world mask guard");
+    quickparty_open = quickparty_visible = world_mask_disabled = 0;
     for (room = 62; room < 70; ++room) {
         const HorizonsArtRoom &map = horizons_art_rooms[room - 62];
         int width = map.width, height = map.height;
@@ -235,34 +255,39 @@ int main(void) {
                     for (journal_tab = 0; journal_tab < 2; ++journal_tab) {
                         for (int has_selected = 0; has_selected < 2; ++has_selected) {
                             selected = has_selected; game_state = state;
-                            std::memset(pixels, 253, sizeof(pixels));
-                            copy_horizons();
-                            const u8 *actual = reinterpret_cast<const u8 *>(pixels);
-                            int left = 0, first = 0, last = 0;
-                            if (width == 480 || (width == 240 && state == PAUSE && journal_tab == 0)) {
-                                if (state == PAUSE && journal_tab == 0)
-                                    { left = 8; first = 31; last = 150; }
+                            for (int selector : {0, 1, 2}) {
+                                if (state != PLAY && selector != 0) continue;
+                                quickparty_open = selector != 0; quickparty_visible = selector == 2;
+                                std::memset(pixels, 253, sizeof(pixels));
+                                copy_horizons();
+                                const u8 *actual = reinterpret_cast<const u8 *>(pixels);
+                                int left = 0, first = 0, last = 0;
+                                // Expected physical pixel coverage, independent of modal_coverage.
+                                // Logical arming owns input but has no panel pixels to occlude.
+                                if (selector == 2)
+                                    { left = 26; first = 29; last = 160; }
+                                else if (state == PAUSE)
+                                    { left = 8; first = 31; last = journal_tab == 0 ? 150 : 153; }
                                 else if (state == EVOLVE_CONFIRM)
                                     { left = 12; first = 42; last = 147; }
                                 else if (state == EVOLVE_ANIM && selected)
                                     { left = 20; first = 38; last = 152; }
-                                else if (state == SAVE_PENDING || state == EVENT_PENDING)
-                                    { left = 38; first = 77; last = 111; }
-                            }
-                            for (int y = 0; y < 160; ++y) for (int x = 0; x < 240; ++x) {
-                                bool covered = left && y >= first && y < last &&
-                                               x >= left && x < 240 - left;
-                                int expected = covered ? 253 :
-                                    bitmap[(ycam + y) * width + xcam + x];
-                                if (actual[y * 240 + x] != expected) {
-                                    std::fprintf(stderr, "FAIL: bitmap room=%d camera=%d,%d "
-                                        "state=%d tab=%d selected=%d pixel=%d,%d\n",
-                                        room, xcam, ycam, state, journal_tab,
-                                        has_selected, x, y);
-                                    return 1;
+                                for (int y = 0; y < 160; ++y) for (int x = 0; x < 240; ++x) {
+                                    bool covered = left && y >= first && y < last &&
+                                                   x >= left && x < 240 - left;
+                                    int expected = covered ? 253 :
+                                        bitmap[(ycam + y) * width + xcam + x];
+                                    if (actual[y * 240 + x] != expected) {
+                                        std::fprintf(stderr, "FAIL: bitmap room=%d camera=%d,%d "
+                                            "state=%d tab=%d selected=%d selector=%d pixel=%d,%d\n",
+                                            room, xcam, ycam, state, journal_tab,
+                                            has_selected, selector, x, y);
+                                        return 1;
+                                    }
                                 }
+                                ++copies;
+                                if (selector == 1) ++hidden_arming_copies;
                             }
-                            ++copies;
                         }
                     }
                 }
@@ -271,18 +296,19 @@ int main(void) {
     }
     unsigned actors = actor_checks();
     std::printf("{\"camera_snap_cases\":%u,\"bitmap_copy_cases\":%u,"
-                "\"actor_coordinate_cases\":%u}\n", snaps, copies, actors);
+                "\"actor_coordinate_cases\":%u,\"hidden_arming_bitmap_cases\":%u}\n",
+                snaps, copies, actors, hidden_arming_copies);
     return 0;
 }
 '''
 
 
-def harness(sources, rooms, double_camera=False):
+def harness(sources, rooms, double_camera=False, hidden_occlusion=False):
     game = sources["src/game.c"]
     defines = []
     for name in ("PLAY", "DIALOG", "PAUSE", "DEAD", "SAVE_PENDING",
                  "EVOLVE_CONFIRM", "EVOLVE_ANIM", "EVENT_PENDING",
-                 "SAVE_NOTICE_Y", "SAVE_NOTICE_H"):
+                 "SAVE_NOTICE_Y", "SAVE_NOTICE_H", "OBJ_HINT"):
         found = re.findall(r"^#define " + name + r"\s+[^\n]+", game, re.MULTILINE)
         assert len(found) == 1, name
         defines.extend(found)
@@ -299,7 +325,12 @@ def harness(sources, rooms, double_camera=False):
     parts = [HEAD, "\n".join(defines), "\n".join(storage)]
     for name in ("scrolling_room", "world_width", "world_height", "camera_update"):
         parts.append(extract_function(game, name, "src/game.c"))
-    parts.append('#line 1 "src/modal_blit.inc"\n' + sources["src/modal_blit.inc"])
+    modal_source = sources["src/modal_blit.inc"]
+    if hidden_occlusion:
+        # Negative control only: recreate invisible panel masking while arming.
+        assert modal_source.count("if(quickparty_visible)") == 1
+        modal_source = modal_source.replace("if(quickparty_visible)", "if(quickparty_open)")
+    parts.append('#line 1 "src/modal_blit.inc"\n' + modal_source)
     parts.append(extract_function(sources["src/horizons_engine.inc"],
                                   "copy_horizons", "src/horizons_engine.inc"))
     for name in ("obj_add", "region_pixels_actor", "horizons_actor", "region_form_actor"):
@@ -317,7 +348,8 @@ def harness(sources, rooms, double_camera=False):
     return "\n".join(parts)
 
 
-def run(compiler, folder, name, source, sanitize=False, must_fail=False):
+def run(compiler, folder, name, source, sanitize=False, must_fail=False,
+        failure_message="FAIL: actor"):
     cpp, executable = folder / (name + ".cpp"), folder / name
     cpp.write_text(source)
     flags = ["-std=c++17", "-O1", "-g", "-Wall", "-Wextra", "-Werror",
@@ -334,8 +366,8 @@ def run(compiler, folder, name, source, sanitize=False, must_fail=False):
     result = subprocess.run([str(executable)], capture_output=True, text=True,
                             env=env, timeout=120)
     if must_fail:
-        if result.returncode != 1 or "FAIL: actor" not in result.stderr:
-            raise AssertionError(f"Mutation did not fail the actor oracle: {result}")
+        if result.returncode != 1 or failure_message not in result.stderr:
+            raise AssertionError(f"Mutation did not fail the {failure_message!r} oracle: {result}")
         return result.stderr.strip()
     if result.returncode:
         raise AssertionError(f"{name} failed ({result.returncode}):\n{result.stderr}")
@@ -362,6 +394,9 @@ def main():
         assert strict == sanitized, (strict, sanitized)
         mutation = run(compiler, folder, "double-camera-negative-control",
                        harness(sources, rooms, double_camera=True), must_fail=True)
+        invisible_mutation = run(compiler, folder, "hidden-occlusion-negative-control",
+                       harness(sources, rooms, hidden_occlusion=True), must_fail=True,
+                       failure_message="FAIL: bitmap")
     assert all(hashlib.sha256((ROOT / p).read_bytes()).hexdigest() == digest
                for p, digest in pins.items()), "Reviewed source changed during the test"
     evidence = {
@@ -371,6 +406,9 @@ def main():
         "address_and_undefined_sanitizers": sanitized,
         "initial_bug": "ra/rf subtracted the camera before the engine subtracted it again",
         "double_camera_mutation_rejected": mutation,
+        "hidden_selector_occlusion_mutation_rejected": invisible_mutation,
+        "unrelated_boundary_doubles": ["identity display state", "no save notice",
+            "no save badge", "no reward card", "no recruit marker"],
         "room_dimensions": [{"area": a, "width": w, "height": h}
                             for a, w, h, _ in rooms],
         "source_sha256": pins,
@@ -380,7 +418,7 @@ def main():
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(evidence, indent=2) + "\n")
     print("PASS:", json.dumps(strict, sort_keys=True))
-    print("PASS: strict + ASan/UBSan; original double-camera mutation rejected")
+    print("PASS: strict + ASan/UBSan; double-camera and hidden-selector-occlusion mutations rejected")
     print("Scope: current-source host checks, not native gameplay or timing")
 
 

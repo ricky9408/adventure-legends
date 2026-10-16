@@ -87,4 +87,8 @@ def main():
  failures=[dict(before=x,after=y) for x,y in zip(b['results'],c['results']) if any(x.get(k)!=y.get(k)for k in identity) or x['rgb']!=y['rgb'] or x['oam']!=y['oam']]
  report=dict(suite='native-modal-cache-and-opaque-boundary-all-scenes',before_rom=b['rom_sha256'],after_rom=c['rom_sha256'],cases=len(c['results']),full_screen_pixels_compared=38400*len(c['results']),failures=failures,helper_sha256=hashlib.sha256(SCRIPT_BYTES).hexdigest(),synthetic_setup=True)
  (a.output/'comparison.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2));assert not failures
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

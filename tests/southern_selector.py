@@ -51,4 +51,8 @@ def main():
     except Exception as exc:run.failures.append({'error':str(exc),'status':run.status()});run.snapshot('failure',settle=False);raise
     finally:run.report();run.e.close()
     if run.failures:raise SystemExit(1)
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

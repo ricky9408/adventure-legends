@@ -34,14 +34,17 @@ class Enemy(C.Structure):
  _fields_=[(n,C.c_int) for n in ('x','y','hp','flash','kind')]
 with tempfile.TemporaryDirectory(prefix='feedback-engine-') as tmp:
  library=Path(tmp)/'engine.so'
- # Keep the pinned historical full-world/picker underlay byte-for-byte. Only
- # the intentionally superseded WIN presentation is adapted to the current
- # ending contract. This independent byte renderer does not call either
+ # Keep the pinned historical full-world/picker underlay bytes. Adapt only
+ # the current visible-picker predicate and intentionally superseded WIN
+ # presentation to their current contracts. This independent byte renderer does not call either
  # production ending_credits_draw or ending_credits_card_hint.
  reference=(ROOT/'tests/fixtures/player-feedback-prior/render_static_r5.inc').read_text()
  prior_card='if(game_state==WIN){copy_bg(BACK_TITLE);box(17,40,206,103);centered(TX_COMPLETE,49,GOLD);centered(TX_THANKS,75,CREAM);centered(TX_C_POSTGAME,122,CREAM);centered(TX_C_FINAL_SMALL,149,GOLD);}'
  assert reference.count(prior_card)==1
  reference=reference.replace(prior_card,'if(game_state==WIN)reference_ending_presentation();')
+ prior_picker='if(quickparty_open)quickparty_draw();'
+ assert reference.count(prior_picker)==1
+ reference=reference.replace(prior_picker,'if(quickparty_visible)quickparty_draw();')
  ending_reference=r'''
 #include "ending_credits_text.h"
 int reference_ending_mutation;
@@ -210,11 +213,11 @@ static void reference_ending_presentation(void){
  lib.progression_refresh()
  for name,value in {'game_state':1,'summoned':1,'ability_cd':0,'face':1,'px':120,'py':126}.items():put(name,value)
  assert not get('scene_present_phase') and not get('save_requested') and not get('save_feedback_background')
- frame(256,256);assert get('magma_power_kind')==51 and lib.play_hint_text()==ids.index('TX_MP_LANDING')
+ frame(2,2);assert get('magma_power_kind')==51 and lib.play_hint_text()==ids.index('TX_MP_LANDING')
  lib.toast(ids.index('TX_HEALED'));held_time=get('magma_power_time');held_pose=get('magma_power_cast_time')
  held_cooldown=get('ability_cd');held_ticks=get('ticks')
  for _ in range(60):
-  frame(256,0)
+  frame(2,0)
   assert get('game_state')==1 and lib.play_hint_text()==ids.index('TX_MP_LANDING')
   assert get('magma_power_age')==0 and get('magma_power_time')==held_time and get('magma_power_cast_time')==held_pose
   assert get('toast_ticks')==110 and get('save_failed')==get('save_failure_notice')==1
@@ -333,7 +336,7 @@ static void reference_ending_presentation(void){
  # Bottom-overlay reuse restores only the raw strip belonging to this
  # framebuffer page. Every non-bottom key remains an exact world guard.
  for test_page in (0,1):
-  put('page',test_page);put('game_state',1);put('quickparty_open',0)
+  put('page',test_page);put('game_state',1);put('quickparty_open',0);put('quickparty_visible',0)
   pattern=bytes((value+test_page*7)%240 for value in backdrop);framebuffer[:]=pattern
   lib.toast(ids.index('TX_SAVED'));lib.game_shop_reward(12,6);lib.capture_play_strip()
   lib.draw_play_toast();lib.draw_play_hint();lib.game_shop_draw_reward()
@@ -352,7 +355,7 @@ static void reference_ending_presentation(void){
  # every non-overlay key and the old no-overlay provenance both match.
  strip_state=(C.c_int*2).in_dll(lib,'play_strip_valid');strip_clean=(C.c_int*2).in_dll(lib,'play_strip_clean')
  for test_page in (0,1):
-  put('page',test_page);put('game_state',1);put('quickparty_open',0);put('toast_ticks',0);lib.game_shop_reset()
+  put('page',test_page);put('game_state',1);put('quickparty_open',0);put('quickparty_visible',0);put('toast_ticks',0);lib.game_shop_reset()
   for reset in ('southern_powers_reset','magma_powers_reset','underwater_powers_reset','return_powers_reset','horizons_powers_reset','covenants_powers_reset'):getattr(lib,reset)()
   put('room',0);pattern=bytes((i*17+test_page)%256 for i in range(38400));framebuffer[:]=pattern;lib.capture_play_strip();assert not strip_state[test_page] and strip_clean[test_page]
   off=test_page*45
@@ -470,7 +473,7 @@ static void reference_ending_presentation(void){
      put('ending_credits_phase',ending_phase);put('ending_credits_scroll',scroll);put('ending_credits_armed',armed)
      for failure in (0,1):
       for picker in (0,1):
-       put('save_failed',failure);put('save_failure_notice',failure);put('quickparty_open',picker)
+       put('save_failed',failure);put('save_failure_notice',failure);put('quickparty_open',picker);put('quickparty_visible',picker)
        before=(bytes(live),bytes(ram),tuple(get(n)for n in ('ending_credits_phase','ending_credits_scroll','ending_credits_armed','ending_credits_revision','save_feedback_requests')))
        put('reference_ending_mutation',0)
        vram[test_page][:]=bytes([219])*38400;lib.reference_render_static();expected_win=bytes(vram[test_page])
@@ -484,7 +487,7 @@ static void reference_ending_presentation(void){
         put('reference_ending_mutation',mutation);lib.reference_render_static()
         assert bytes(vram[test_page])!=expected_win,('insensitive ending oracle',mutation);win_negatives+=1
  put('reference_ending_mutation',0);put('ending_credits_phase',0);put('ending_credits_scroll',0);put('ending_credits_armed',0)
- put('quickparty_open',0);C.c_void_p.in_dll(lib,'screen').value=C.addressof(framebuffer)
+ put('quickparty_open',0);put('quickparty_visible',0);C.c_void_p.in_dll(lib,'screen').value=C.addressof(framebuffer)
  print('PASS current ending composition:',win_cases,'full frames;',win_negatives,'mutation negatives')
  # The four compact status labels occupy only the reserved HUD gap. Exact
  # rendered glyphs/borders and OBJ edge exclusion are checked independently.

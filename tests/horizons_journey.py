@@ -323,7 +323,7 @@ class HorizonsJourney(ReturnJourney):
         self.ready();self.goto(x,y,radius=4);self.face(direction);self.ready()
         before={'form':self.selected().form_id,'instance_id':self.selected().instance_id,'command':self.command(),'origin':[self.get('px'),self.get('py')],'face':direction,'proof':self.proof_dict(),'setting':self.hz_setting()}
         def actual_cast():
-            self.step(1,'R')
+            self.hold_field_ability(1)
             if command>=106:self.check(self.get('horizons_power_kind')==command and self.get('horizons_power_time')>0,'requested learned signature starts as a genuine live native cast')
             self.step(wait);self.settle()
         self.measured(f'cast{command}-room{self.get("room")}',actual_cast)
@@ -331,9 +331,9 @@ class HorizonsJourney(ReturnJourney):
     def warm_at(self,x,y,prepare=True,manual=None):
         if prepare:self.owned_select(self.base_form(107));self.set_command(108)
         self.ready();self.goto(x,y,radius=4);self.face(2);self.ready()
-        self.tap('R',1,12)
+        self.field_ability(1, 12)
         if manual:self.target(*manual)
-        self.tap('R',1,100);self.settle()
+        self.field_ability(1, 100);self.settle()
     def invite(self,index):
         area,form,command,point,*_=SOURCES[index]
         before=self.state_signature();r=self.roster();party=bytes(r.party);selected=r.selected_party;ids={c.instance_id for c in self.live()}
@@ -650,7 +650,7 @@ class HorizonsJourney(ReturnJourney):
     def controls(self):
         self.travel(62);self.owned_select(self.base_form(105));self.set_command(106);self.ready()
         self.target(352,224);self.target(352,256);self.goto(384,176,radius=4);self.face(2);self.ready()
-        self.tap('R',1,1)
+        self.field_ability(1, 1)
         p=self.proof_dict();age=self.get('horizons_power_age');cd=self.get('ability_cd')
         self.step(36,'L')
         self.check(self.proof_dict()==p and self.get('horizons_power_age')==age and self.get('ability_cd')==cd,'held L freezes exact proof cast age and shared cooldown')
@@ -664,20 +664,20 @@ class HorizonsJourney(ReturnJourney):
         self.goto(384,208,radius=4);self.step(4)
         self.check(self.proof().stage==3,'viewed repeat remains solvable after ordinary walk')
         self.reset_horizons()
-        self.target(352,224);self.target(352,256);self.goto(384,176,radius=4);self.face(2);self.ready();self.tap('R',1,1)
+        self.target(352,224);self.target(352,256);self.goto(384,176,radius=4);self.face(2);self.ready();self.field_ability(1, 1)
         oldid=self.selected().instance_id;cooldown=self.get('ability_cd');oldtime=self.get('horizons_power_time')
         current=self.roster().selected_party;other=next(i for i,v in enumerate(self.roster().party) if v<160 and i!=current)
-        self.tap('L+'+('UP','RIGHT','DOWN','LEFT')[other],1,1)
+        self.select_slot(other)
         self.check(self.selected().instance_id!=oldid and not self.proof().mode,'actual party selection change revokes bound repeat proof')
         self.check(0<self.get('ability_cd')<=cooldown and 0<self.get('horizons_power_time')<=oldtime,'selection edit preserves live immutable cast and cooldown rather than refunding them')
         self.step(100);self.check(not self.proof().mode,'revoked cast cannot rebuild proof after resume')
         self.owned_select(106);self.set_command(106);self.ready();self.target(352,224);self.target(352,256)
-        self.goto(384,176,radius=4);self.face(2);self.ready();self.tap('R',1,1);cooldown=self.get('ability_cd')
+        self.goto(384,176,radius=4);self.face(2);self.ready();self.field_ability(1, 1);cooldown=self.get('ability_cd')
         self.set_command(107)
         self.check(not self.proof().mode and 0<self.get('ability_cd')<=cooldown,'actual command edit revokes source rights without cooldown refund')
         self.step(100)
         self.set_command(106);self.ready();self.target(352,224);self.target(352,256)
-        self.goto(384,176,radius=4);self.face(2);self.ready();self.tap('R',1,1)
+        self.goto(384,176,radius=4);self.face(2);self.ready();self.field_ability(1, 1)
         identity=self.selected().instance_id;cooldown=self.get('ability_cd');selected_slot=self.roster().selected_party
         other_slot=next(i for i in range(4) if i!=selected_slot)
         self.assign(other_slot,113)
@@ -685,7 +685,7 @@ class HorizonsJourney(ReturnJourney):
         self.check(0<self.get('ability_cd')<=cooldown,'party assignment cannot refund the live cast cooldown')
         self.step(100);self.target(352,224);self.target(352,256);self.target(24,292,0)
         self.check(self.hz_local('reset_confirm',1)==1,'live-reset test previews the ordinary reset sign')
-        self.ready();self.tap('R',1,1);cooldown=self.get('ability_cd');self.tap('A');self.settle()
+        self.ready();self.field_ability(1, 1);cooldown=self.get('ability_cd');self.tap('A');self.settle()
         self.check(not self.proof().mode and 0<self.get('ability_cd')<=cooldown,'confirmed reset revokes the unfinished attempt without refunding its active cooldown')
         self.step(100);self.snapshot('controls-heldL-journal-and-edit')
         self.travel(68);self.owned_select(120);self.set_command(121);self.ready()
@@ -695,10 +695,10 @@ class HorizonsJourney(ReturnJourney):
             self.cast_at(120,121,x,y,d)
         self.travel(67);self.owned_select(self.base_form(107));self.set_command(108);self.ready()
         for x,y,d in ((40,48,0),(240,48,0),(448,160,1),(300,208,2)):
-            self.goto(x,y,radius=4);self.face(d);self.ready();self.tap('R',1,12);self.tap('R',1,100);self.settle()
+            self.goto(x,y,radius=4);self.face(d);self.ready();self.field_ability(1, 12);self.field_ability(1, 100);self.settle()
         self.snapshot('controls-wall-adjacent108-121')
         self.travel(63);self.cast_at(106,107,336,54,0)
-        self.travel(67);self.owned_select(108);self.set_command(109);self.ready();self.goto(268,208,radius=4);self.face(3);self.ready();self.tap('R',1,12);self.tap('R',1,100);self.settle()
+        self.travel(67);self.owned_select(108);self.set_command(109);self.ready();self.goto(268,208,radius=4);self.face(3);self.ready();self.field_ability(1, 12);self.field_ability(1, 100);self.settle()
         self.travel(66);self.cast_at(110,111,132,256,3)
         self.travel(68);self.cast_at(112,113,64,94,3)
         self.snapshot('controls-four-evolved-signatures')
@@ -743,10 +743,10 @@ class HorizonsJourney(ReturnJourney):
                 for x,y,d in chosen:
                     self.owned_select(form);self.set_command(command);self.ready();self.goto(x,y,radius=4);self.face(d);self.ready()
                     self.check(self.get('room')==area,'old-wall probe remains in its controller-reached area')
-                    self.step(1,'R');self.check(self.get('horizons_power_kind')==command and self.get('horizons_power_time')>0,'new signature genuinely starts beside an old-region obstruction')
+                    self.hold_field_ability(1);self.check(self.get('horizons_power_kind')==command and self.get('horizons_power_time')>0,'new signature genuinely starts beside an old-region obstruction')
                     origin=[self.get('horizons_power_origin_x'),self.get('horizons_power_origin_y')]
                     self.step(12)
-                    if command==108:self.tap('R',1,110)
+                    if command==108:self.field_ability(1, 110)
                     else:self.step(110)
                     self.settle()
                     self.cases.append({'old_field_wall_cast':command,'requested_origin':[x,y],'actual_cast_origin':origin,'direction':d,'room':area,'frame':self.e.frame})
@@ -771,5 +771,9 @@ def main():
         r.snapshot('failure',settle=False);raise
     finally:r.close_global_trace();r.report();r.e.close()
     return bool(r.failures)
+
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
 
 if __name__=='__main__':raise SystemExit(main())

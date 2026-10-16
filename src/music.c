@@ -164,6 +164,7 @@ void music_init(void) {
      * Direct Sound uses 50% gain, leaving headroom when an effect overlaps. */
     R16(0x04000080)=0x1177;
     R32(0x03007ffc)=(u32)music_irq;
-    R16(0x04000200)=16;start_output();
+    R16(0x04000004)=8; /* VBlank IRQ for BIOS wait; Timer1 retains PCM IRQ. */
+    R16(0x04000200)=17;start_output();
     R16(0x04000208)=1;
 }

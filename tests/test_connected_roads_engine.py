@@ -117,12 +117,12 @@ def main():
         for target in (1,4,9,54):
             load(0);r=row(0,target);place(r,7);put('summoned',0)
             for _ in range(4):
-                frame(2,2)
+                frame(256,256)
                 assert 5<=get('cx')<240-5 and 5<=get('cy')<160-5
                 assert not lib.solid(get('cx'),get('cy'))
                 assert get('cx')==get('cx_q8')>>8 and get('cy')==get('cy_q8')>>8
                 frame()
-            frame(2,2);assert get('summoned')==1
+            frame(256,256);assert get('summoned')==1
             lib.quickparty_cycle()
             assert 5<=get('cx')<240-5 and 5<=get('cy')<160-5 and not lib.solid(get('cx'),get('cy'))
             for _ in range(40):

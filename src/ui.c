@@ -325,3 +325,4 @@
 #include "ui_data/part_322.inc"
 #include "ui_data/part_323.inc"
 #include "ui_data/part_324.inc"
+#include "ui_data/part_325.inc"

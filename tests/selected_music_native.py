@@ -5,7 +5,7 @@ Regional's independent transport oracle is reused unchanged. Room/assembly
 fixtures are synthetic; controller footage uses a blank cartridge. This suite
 verifies native output, not physical hardware or subjective music quality.
 """
-import argparse, gzip, hashlib, json, shutil, subprocess, sys, traceback
+import argparse, ctypes as C, gzip, hashlib, json, shutil, subprocess, sys, traceback
 from pathlib import Path
 import numpy as np
 from scipy.signal import resample_poly
@@ -15,6 +15,17 @@ from regional_music_native import Regional, wav_read
 from test_save5 import Save
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def write_json(p,value):p.write_text(json.dumps(value,indent=2)+'\n')
+
+def loaded_mgba(bridge,expected):
+    """Authenticate the library actually resolving the bridge's mCoreFind."""
+    class DlInfo(C.Structure):
+        _fields_=[('name',C.c_char_p),('base',C.c_void_p),('symbol',C.c_char_p),('address',C.c_void_p)]
+    handle=C.CDLL(str(Path(bridge).resolve()));info=DlInfo()
+    dladdr=C.CDLL(None).dladdr;dladdr.argtypes=[C.c_void_p,C.POINTER(DlInfo)];dladdr.restype=C.c_int
+    assert dladdr(C.cast(handle.mCoreFind,C.c_void_p),C.byref(info)) and info.name,'Cannot resolve loaded mGBA dependency'
+    actual=Path(info.name.decode()).resolve();wanted=Path(expected).resolve()
+    assert actual.samefile(wanted),('Supplied bridge loaded a different mGBA library',str(actual),str(wanted))
+    return actual
 
 class Selected(Regional):
     def __init__(self,args):
@@ -43,12 +54,22 @@ class Selected(Regional):
             'limitations':['Native mGBA, not physical hardware.','Exhaustive room, long-loop and assembly fixtures are synthetic, not a full earned campaign.',
                 'Controller footage covers the opening/village/river route. Listening approval is the recorded owner instruction, not this test.']}
         self.bridge=self.out/'native-bridge.so';sysroot=args.sysroot.resolve();libdir=sysroot/'usr/lib/x86_64-linux-gnu'
-        subprocess.run(['cc','-std=c11','-D_GNU_SOURCE','-O2','-fPIC','-shared',str(ROOT/'tests/player_feedback_mgba_bridge.c'),
-            '-I'+str(sysroot/'usr/include'),'-L'+str(libdir),'-Wl,-rpath,'+str(libdir),'-o',str(self.bridge),'-lmgba'],check=True)
-        self.report['provenance']={'bridge_sha256':sha(self.bridge),'libmgba_sha256':sha(libdir/'libmgba.so'),
+        if args.bridge:
+            assert args.libmgba,'A supplied bridge requires the exact linked libmgba path'
+            shutil.copyfile(args.bridge,self.bridge)
+            assert sha(args.bridge)==sha(self.bridge),'Supplied bridge copy changed'
+            native_library=loaded_mgba(self.bridge,args.libmgba)
+        else:
+            subprocess.run(['cc','-std=c11','-D_GNU_SOURCE','-O2','-fPIC','-shared',str(ROOT/'tests/player_feedback_mgba_bridge.c'),
+                '-I'+str(sysroot/'usr/include'),'-L'+str(libdir),'-Wl,-rpath,'+str(libdir),'-o',str(self.bridge),'-lmgba'],check=True)
+            native_library=loaded_mgba(self.bridge,libdir/'libmgba.so')
+        self.report['provenance']={'bridge_sha256':sha(self.bridge),'libmgba_sha256':sha(native_library),
+            'supplied_bridge':bool(args.bridge),'native_library':str(native_library),
+            'native_library_verified_by':'dladdr of loaded bridge mCoreFind; samefile with requested library',
+            'supplied_binary_source_derivation_verified':False if args.bridge else True,
             'harness_sha256':sha(__file__),'source_hashes_sha256':sha(self.rom.parent/'source-hashes.json')}
         for rel in ('tests/selected_music_native.py','tests/regional_music_native.py','tests/lanterns_native.py',
-            'tests/player_feedback_native.py','tests/player_feedback_mgba_bridge.c','tools/mgba_bridge.c','tools/mgba_runner.py','tests/test_save5.py'):
+            'tests/current_field_controls.py','tests/player_feedback_native.py','tests/player_feedback_mgba_bridge.c','tools/mgba_bridge.c','tools/mgba_runner.py','tests/test_save5.py'):
             target=self.out/'test-source'/rel;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/rel,target)
         self.encoder=None;self.recording=False;self.rgb_hash=None;self.video_frames=0
         self.trace=gzip.open(self.out/'frames.jsonl.gz','wt');self.rows=[];self.case=None;self.assembly_rows=None
@@ -60,6 +81,12 @@ class Selected(Regional):
         self.check('IWRAM below stack reserve',self.sym['__iwram_end']<=0x03007000)
         self.check('EWRAM holds ring and guard',0x02000000<=self.sym['music_ring'] and self.sym['music_ring']+8448<=self.sym['__bss_end']<=0x02040000)
         self.report['rom_bytes']=len(rom)
+    def boot(self,name,capture=None):
+        super().boot(name,capture)
+        if name.startswith('controller'):
+            def denied(*args,**kwargs):raise AssertionError('Controller evidence forbids synthetic fixture writes')
+            self.native_write=denied
+            self.report['controller_fixture_write_blocked']=True
     def step(self, n, keys=0, measured=True):
         if self.assembly_rows is None:
             return Regional.step(self, n, keys, measured)
@@ -146,6 +173,8 @@ def main():
     p.add_argument('--expected-rom-sha',required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--sysroot',type=Path,default=ROOT/'tools/sysroot')
+    p.add_argument('--bridge',type=Path,help='Use an existing strict bridge, copied without rebuilding')
+    p.add_argument('--libmgba',type=Path,help='Expected mGBA library; verified against the actually loaded mCoreFind dependency')
     p.add_argument('--cases',default='controllers,synthetic,regional_loops,assembly')
     args=p.parse_args();suite=Selected(args)
     try:

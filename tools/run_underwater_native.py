@@ -45,4 +45,10 @@ def main():
  run('phase','tests/underwater_phase_stress_native.py',args+['--acceptance','--output',str(out/'phase')])
  run('scenery-aim','tests/underwater_geometry_stress_native.py',args+['--acceptance','--only','87:5','--aim-right','--output',str(out/'scenery-aim')])
  print('All sequenced native suites passed; see verification guide for independent host, legacy, stack and clean-export gates.')
+if __name__ == '__main__':
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tests'))
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

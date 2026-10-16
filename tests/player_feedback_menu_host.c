@@ -13,6 +13,16 @@ unsigned region_game_journal_selection,north_game_journal_selection,south_game_j
 static unsigned pages=13,saves,hp=96,busy,applies;
 unsigned journal_page_count(void){return pages;}
 void save_game(void){saves++;}
+#ifdef __APPLE__
+/* Match the isolated Linux harness's absent weak engine hooks. Geometry,
+ * journey-map rendering and ordinary-save persistence have separate gates. */
+void save_game_ordinary(void){}
+void game_companion_reseat(void){}
+void journey_map_begin(void){}
+void journey_map_open(void){}
+void journey_map_draw(void){}
+int journey_map_input(int input){(void)input;return 0;}
+#endif
 void toast(int id){(void)id;}
 void sfx(int id){(void)id;}
 unsigned game_gear_base_hp(void){return 96;}
@@ -62,7 +72,35 @@ static void party(void){CreatureRoster before;unsigned second,third;fresh(1);jou
  fresh(1);journal_tab=2;quickparty_menu_candidate=255;before=adventure_save.roster;assert(quickparty_menu_input(1)==1&&!memcmp(&before,&adventure_save.roster,sizeof before)&&!saves);assert(!quickparty_menu_input(3)&&!quickparty_menu_input(9));
  fresh(1);second=creatures_grant(&adventure_save.roster,121,50,100,0,0);third=creatures_grant(&adventure_save.roster,122,50,100,0,0);assert(second<160&&third<160);assert(quickparty_assign(1,second)||adventure_save.roster.party[1]==second);before=adventure_save.roster;assert(!quickparty_assign(2,third)&&!memcmp(&before,&adventure_save.roster,sizeof before));assert(creatures_roster_validate(&adventure_save.roster));
 }
-static void field_picker(void){fresh(1);assert(creatures_grant(&adventure_save.roster,4,50,100,0,0)==1);game_state=1;quickparty_reset(0);assert(quickparty_update(512,512)&&quickparty_open);assert(quickparty_update(528,16)&&quickparty_candidate==1&&!adventure_save.roster.selected_party);assert(quickparty_update(0,0)&&!quickparty_open&&adventure_save.roster.selected_party==1);assert(quickparty_update(512,512));assert(quickparty_update(576,64));assert(quickparty_update(514,2)&&!quickparty_open&&adventure_save.roster.selected_party==1);assert(quickparty_update(512,0)&&!quickparty_open);assert(quickparty_update(0,0));assert(quickparty_update(512,512));assert(quickparty_update(520,8)&&game_state==3&&journal_tab==13);}
+static void field_open_current(unsigned current){
+ CreatureRoster before=adventure_save.roster;unsigned i;
+ for(i=0;i<13;i++){
+  assert(quickparty_update(512,i?0:512)&&quickparty_open);
+  assert(quickparty_visible==(i==12));
+  assert(quickparty_candidate==(i==12?(int)current:255));
+  assert(!memcmp(&before,&adventure_save.roster,sizeof before));
+ }
+}
+static void field_picker(void){
+ CreatureRoster before;unsigned selected;
+ fresh(1);assert(creatures_grant(&adventure_save.roster,4,50,100,0,0)==1);
+ game_state=1;quickparty_reset(0);before=adventure_save.roster;
+ field_open_current(0);
+ assert(quickparty_update(528,16)&&quickparty_candidate==1);
+ assert(!memcmp(&before,&adventure_save.roster,sizeof before));
+ assert(quickparty_update(0,0)&&!quickparty_open&&adventure_save.roster.selected_party==1);
+ selected=adventure_save.roster.selected_party;
+ field_open_current(1);
+ assert(quickparty_update(576,64)&&quickparty_candidate==1); /* Up is not a slot shortcut. */
+ assert(quickparty_update(514,2)&&!quickparty_open&&adventure_save.roster.selected_party==selected);
+ assert(!quickparty_update(512,0)&&!quickparty_open);assert(!quickparty_update(0,0));
+ before=adventure_save.roster;
+ assert(quickparty_update(512,512)&&quickparty_open&&!quickparty_visible&&quickparty_candidate==255);
+ assert(quickparty_update(0,0)&&!quickparty_open&&adventure_save.roster.selected_party==0); /* Original short L cycles assigned slots in order. */
+ before.selected_party=0;assert(!memcmp(&before,&adventure_save.roster,sizeof before));
+ field_open_current(0);
+ assert(quickparty_update(520,8)&&game_state==3&&journal_tab==13);
+}
 static void settle(void){unsigned i;for(i=0;i<300&&progression_evolution_busy();i++)progression_confirm_input(0);assert(i<300);}
 static void growth(void){CreatureRoster before;unsigned original;fresh(2);journal_tab=3;before=adventure_save.roster;original=progression_command();assert(progression_menu_input(16)==1&&progression_menu_command!=original);assert(!memcmp(&before,&adventure_save.roster,sizeof before)&&!saves);assert(!progression_menu_input(256)&&!progression_menu_input(4)&&progression_command()==original);assert(progression_menu_input(1)==1&&progression_menu_detail&&!memcmp(&before,&adventure_save.roster,sizeof before)&&!saves);assert(progression_menu_input(1)==1&&progression_command()==progression_menu_command&&saves==1);assert(creatures_roster_validate(&adventure_save.roster));
  fresh(1);journal_tab=3;adventure_save.roster.instances[0].bond=0;before=adventure_save.roster;assert(progression_menu_input(128)==1&&progression_menu_row==1);assert(progression_menu_input(1)==1&&game_state==7&&!memcmp(&before,&adventure_save.roster,sizeof before));progression_confirm_input(2);assert(game_state==3&&!memcmp(&before,&adventure_save.roster,sizeof before));

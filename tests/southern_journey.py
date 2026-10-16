@@ -126,10 +126,10 @@ class SouthernJourney(NorthernJourney):
         self.check(abs(self.get('px')-cx)+abs(self.get('py')-cy)<18,f'{key} controller reaches exact marked interaction range')
     def use(self,key):self.approach(key);self.tap('A');self.settle()
     def field_object(self,key,form):
-        self.owned_select(form);self.approach(key);self.ready();before=self.get('ability_cd');identity=self.selected().instance_id;self.tap('R');self.settle()
+        self.owned_select(form);self.approach(key);self.ready();before=self.get('ability_cd');identity=self.selected().instance_id;self.field_ability();self.settle()
         self.check(self.selected().instance_id==identity,'field action keeps individual identity')
     def field_point(self,form,x,y):
-        self.owned_select(form);self.goto(x,y+10,radius=4);self.face(1);self.ready();self.tap('R');self.settle()
+        self.owned_select(form);self.goto(x,y+10,radius=4);self.face(1);self.ready();self.field_ability();self.settle()
     def entry(self,target):
         here=self.get('room')
         if here==22 and target==30:self.act(208,224,1)
@@ -424,4 +424,8 @@ def main():
     except Exception as exc:
         run.failures.append({'error':str(exc),'status':run.status()});run.snapshot('failure',settle=False);raise
     finally:run.report();run.e.close()
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

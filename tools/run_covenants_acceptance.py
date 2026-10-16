@@ -107,4 +107,10 @@ def main():
     state['all_native_gates_passed']=len(state['required_reports'])==10 and all(r['passed'] for r in state['required_reports']) and all(r['state']=='passed' for r in state['stages']) and state['candidate_closure_exact'] and state['runtime_closure_exact'] and state['helper_closure_exact']
     record();return not state['all_native_gates_passed']
 
+if __name__ == '__main__':
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tests'))
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

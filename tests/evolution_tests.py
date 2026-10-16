@@ -73,7 +73,7 @@ class EvolutionRun(CampaignRun):
         for _ in range(180):
             if self.get('game_state') != SAVE_PENDING:
                 break
-            self.raw_step(1,'A+R+RIGHT+START+SELECT' if intrusive else 0)
+            self.raw_step(1,'A+B+R+RIGHT+START+SELECT' if intrusive else 0)
             current = self.get('frame'); newpage = self.e.read(0x04000000,2)&16
             deltas.append((current-frame)&0xffffffff); flips.append(page != newpage)
             cycles.append(self.get('render_cycles')); frame,page=current,newpage
@@ -216,7 +216,7 @@ class EvolutionRun(CampaignRun):
         for i in range(180):
             samples.append(self.save(f'command-{family}-power-cut-{i:02d}'))
             if self.get('game_state')!=SAVE_PENDING:break
-            self.raw_step(1,'A+RIGHT+R+SELECT+START')
+            self.raw_step(1,'A+B+RIGHT+R+SELECT+START')
             self.check(all(self.get(n)==v for n,v in frozen.items()),f'command {family} write tick{i}: mixed inputs cannot change gameplay or dialogue')
         else:self.check(False,'command save finishes')
         self.raw_step(1);self.auto_save=True
@@ -249,13 +249,13 @@ class EvolutionRun(CampaignRun):
     def grove_trials(self):
         self.nextroom(1)
         for i,(x,y,family) in enumerate(AIDS):
-            self.navigate(x,y,radius=16);self.select(1-family);self.ready();before=bytes(self.roster());self.tap('R')
+            self.navigate(x,y,radius=16);self.select(1-family);self.ready();before=bytes(self.roster());self.field_ability()
             self.check(bytes(self.roster())==before,f'grove aid {i}: wrong family awards nothing')
-            self.select(family);self.ready();self.tap('R');self.dialogs()
+            self.select(family);self.ready();self.field_ability();self.dialogs()
             self.check(self.roster().lifetime_field_aid[0]&(1<<i),f'grove aid {i}: correct controller power restores object')
             self.reload_roster(f'grove-aid-{i}')
             c=self.instance(family);kills=self.get('kills');ledger=self.roster().lifetime_field_aid[0]
-            self.ready();self.tap('R');self.dialogs();after=self.instance(family)
+            self.ready();self.field_ability();self.dialogs();after=self.instance(family)
             combat_kills=self.get('kills')-kills
             self.check(after.trial_flags==c.trial_flags and self.roster().lifetime_field_aid[0]==ledger and 0<=after.xp-c.xp<=60*combat_kills,
                        f'grove aid {i}: repeat awards no trial/aid progress beyond legitimate encounter XP')
@@ -276,22 +276,22 @@ class EvolutionRun(CampaignRun):
         self.nextroom(0,'DOWN')
 
     def wind_trial(self):
-        self.enter_optional(14);self.select(2);self.navigate(88,80,radius=1);self.ready();self.tap('R')
+        self.enter_optional(14);self.select(2);self.navigate(88,80,radius=1);self.ready();self.field_ability()
         self.check(self.e.bytes(self.sym['trial_vanes'],3)==bytes((1,0,0)),'wind trial first controller pulse rotates only nearest vane')
         self.partial_optional_reload('wind-loom',2)
         self.navigate(32,120,radius=4);self.tap('A')
         self.check(self.e.bytes(self.sym['trial_vanes'],3)==bytes(3),'wind trial reset clears partial orientation')
         for x,y,n in ((88,80,2),(88,128,1)):
             self.navigate(x,y,radius=1)
-            for _ in range(n):self.ready();self.tap('R');self.dialogs()
+            for _ in range(n):self.ready();self.field_ability();self.dialogs()
         self.check(self.e.bytes(self.sym['trial_vanes'],3)==bytes((2,1,0)),'wind loom reaches authored solved orientations')
         self.check(self.instance(2).trial_flags&4,'wind loom grants Fuuri personal trial')
-        before=bytes(self.instance(2));self.ready();self.tap('R')
+        before=bytes(self.instance(2));self.ready();self.field_ability()
         self.check(bytes(self.instance(2))==before,'completed wind trial is idempotent')
         self.reload_roster('wind-trial-complete');self.shot('wind-trial-complete');self.leave_optional(4)
 
     def stone_trial(self):
-        self.enter_optional(15);self.select(3);self.navigate(200,80,radius=1);self.ready();before=bytes(self.roster());self.tap('R')
+        self.enter_optional(15);self.select(3);self.navigate(200,80,radius=1);self.ready();before=bytes(self.roster());self.field_ability()
         self.check(bytes(self.roster())==before,'amber arch refuses power before both parcels reach plates')
         self.navigate(88,104,radius=1);self.step(1,'UP');self.step(1);self.tap('A')
         self.partial_optional_reload('amber-workshop',3)
@@ -302,9 +302,9 @@ class EvolutionRun(CampaignRun):
             self.navigate(x,y,radius=1);self.step(1,face);self.step(1);self.tap('A')
         parcels=[self.e.read(self.sym['trial_parcels']+i*2,2) for i in range(4)]
         self.check(parcels==[88,56,152,104],'both controller-pushed parcels occupy distinct plates')
-        self.navigate(200,80,radius=1);self.ready();self.tap('R');self.dialogs()
+        self.navigate(200,80,radius=1);self.ready();self.field_ability();self.dialogs()
         self.check(self.instance(3).trial_flags&8,'amber arch grants Kohaku personal trial')
-        before=bytes(self.instance(3));self.ready();self.tap('R')
+        before=bytes(self.instance(3));self.ready();self.field_ability()
         self.check(bytes(self.instance(3))==before,'completed amber trial is idempotent')
         self.reload_roster('stone-trial-complete');self.shot('stone-trial-complete');self.leave_optional(9)
 
@@ -383,5 +383,9 @@ def main():
         r.failures.append({'error':str(exc),'status':r.status()});r.shot('failure');raise
     finally:r.report();r.e.close()
     return int(bool(r.failures))
+
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
 
 if __name__=='__main__':raise SystemExit(main())

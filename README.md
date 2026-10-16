@@ -18,10 +18,10 @@ Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulato
 | --- | --- |
 | D-pad | Move and face; follow roads across map boundaries and walk through doors/stairs |
 | A | Attack, talk or examine; hold and release to fire a bow |
-| B | Call or recall your companion |
-| Hold L + D-pad, release L | Choose a quick-slot companion; B cancels |
-| Tap L | Cycle assigned companions with a short tap |
-| R | Your summoned companion's selected power |
+| B | Use the selected companion’s power; a recalled companion joins you automatically |
+| Short L press | Switch to the next occupied party slot |
+| Hold L, then Left/Right; release L | Browse every owned companion, including reserves; B cancels |
+| R | Call or recall your companion |
 | Start | Open or close the menu |
 | Select | Unused |
 
@@ -39,9 +39,9 @@ Start opens Items & Money, Equipment, Party, Skills & Evolution, Map, Quests, Co
 
 Previewing changes nothing until A. Equipping never heals. Finish an attack, recovery or live arrow before changing equipment. Attack and defense use game stat points; health is in hearts; ordinary walking speed is indexed at 100.0. The arrows compare current and selected equipment after active treasure effects and caps. Companion recovery is approximate active-play seconds for the selected command; a smaller value is faster. Weapon reach is the ordinary opening attack in pixels, and stagger applies to ordinary enemies. Recovery gear affects future companion uses without restarting a timer already running.
 
-Hold L for the familiar Up/Right/Down/Left four-slot picker and release L to switch. A summoned companion is replaced immediately; an uncalled one stays uncalled. A short tap cycles assigned companions. Looking for longer without choosing keeps the current companion. After B cancels, release L before reopening.
+A short L press switches once to the next occupied party slot, skipping empty slots and wrapping in the existing party order. Hold L until the horizontal carousel appears, then press Left or Right to browse every owned individual, including reserves. Holding a direction repeats after a short delay. The center card is the preview; the small cream marker identifies the active individual. Release L to choose, or press B to cancel. A reserve replaces the current party slot; a legendary reserve replaces an existing legendary party member when necessary. Displaced companions remain owned. A summoned companion is replaced immediately; a recalled one stays recalled. A long neutral hold keeps the current companion. A direction during a short hold suppresses the short-press cycle. After cancellation, release L before reopening.
 
-Menus and the picker pause the world and power recovery. Viewing preserves an ongoing attempt; actually changing an individual, command or party can require that companion's action to be started again. Evolution changes the same individual, preserves familiar field powers and may be deferred. Completed evolution cannot be reversed.
+Menus and the picker pause the world and power recovery. Opening the picker cancels a power that is still being aimed, without refunding its cooldown. Already emitted effects keep their existing lifetimes; changing an individual, command or party can require that companion's field action to be started again. B uses the selected power and automatically calls a recalled companion. R calls or recalls without using a power. When R and B overlap, release B before using a power again. Evolution changes the same individual, preserves familiar field powers and may be deferred. Completed evolution cannot be reversed.
 
 Swords link three cuts, lances make a narrow longer thrust and bows can be charged. Opening a menu or the field picker cancels an unfired bow draw.
 
@@ -92,6 +92,20 @@ current checks include:
     python3 tests/test_ending_credits_host.py
     python3 tests/test_gbj_font.py
     python3 tests/test_horizons_audio.py
+    python3 tests/test_field_controls.py
+    python3 tests/test_field_carousel.py
+    python3 tests/test_short_l.py
+
+For current release acceptance, run both suites:
+
+    python3 tools/run_gameplay_ci.py --suite host --output build/ci-host
+    python3 tools/run_gameplay_ci.py --suite native --output build/ci-native
+
+These exercise physical B powers, the preserved short-L party switch, and the
+held-L+Left/Right owned-companion carousel. The native capacity gate separately
+labels historical and prepared 160-companion saves. Older
+standalone control routes explicitly refuse current acceptance; their original
+tests remain available in the historical checkout.
 
 Native scripts under tests execute the actual ROM in mGBA. Run their `--help`
 for explicit ROM/symbol hashes, output and dependency options. Start every run

@@ -342,4 +342,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--rom',type=Path,default=ROOT/'build/emberbond.gba');p.add_argument('--symbols',type=Path,default=ROOT/'build/emberbond.sym');p.add_argument('--output',type=Path,required=True);p.add_argument('--expected-rom-sha');p.add_argument('--expected-symbols-sha');p.add_argument('--earned-shop-save',type=Path);p.add_argument('--allow-pacing-exceptions',action='store_true',help='Diagnostic only; all timing exceptions remain in evidence');p.add_argument('--cases',default='title,menus,legacy_shop,town_travel,portals,combat_save,full_roster_scroll,garden,save_fault,supply_caps,reward_caps,death_retry,power_cooldowns');a=p.parse_args();r=Run(a)
     for name in a.cases.split(','):r.section(name,getattr(r,name))
     d=r.finish();return int(bool(d['failures']) or not d['exact_files_unchanged'] or (not a.allow_pacing_exceptions and not d['performance']['strict_measured_pacing_pass']))
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

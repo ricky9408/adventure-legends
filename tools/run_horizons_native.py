@@ -81,4 +81,10 @@ def main():
   print(stage+': '+row['state'],flush=True);record()
  status['finished']=True;status['runtime_closure_still_exact']=all(sha(runtime/f)==h for f,h in manifest.items());status['helper_closure_still_exact']=all(sha(helpers/f)==h for f,h in hashes.items());status['all_requested_stages_passed']=all(s['state']=='passed' for s in status['stages']) and status['runtime_closure_still_exact'] and status['helper_closure_still_exact'];record()
  return not status['all_requested_stages_passed']
+if __name__ == '__main__':
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tests'))
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

@@ -21,7 +21,9 @@ PLAY,DIALOG,PAUSE,DEAD,SAVING,CONFIRM,EVOLVING,EVENT_PENDING=1,2,3,4,6,7,8,10
 FIXTURE_SHA='8f603dff9d9893675b2864a900f77a4608d7de43b85fa1464ad3b5f820607809'
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-class RegionJourney:
+from current_field_controls import CurrentFieldControls
+
+class RegionJourney(CurrentFieldControls):
     def __init__(self,rom,symbols,output,fixture):
         self.source_rom=Path(rom).resolve();self.source_symbols=Path(symbols).resolve();self.out=Path(output).resolve();self.out.mkdir(parents=True,exist_ok=True)
         self.rom=self.out/'tested.gba';self.symbol_path=self.out/'tested.sym'
@@ -122,7 +124,7 @@ class RegionJourney:
         for _ in range(200):
             if not self.get('ability_cd') and not self.get('roll_cd'):break
             self.step(2)
-        if not self.get('summoned'):self.tap('B');self.settle()
+        if not self.get('summoned'):self.set_summoned(True);self.settle()
     def snapshot(self,name):
         self.settle();self.e.screenshot(self.out/(name+'.png'));state=self.out/(name+'.state');save=self.out/(name+'.sav')
         self.e.state(state);save.write_bytes(self.e.bytes(0x0e000000,32768))
@@ -247,10 +249,14 @@ class RegionJourney:
         before=bytes(self.state().equipment);self.tap('RIGHT',2,3);self.tap('R',2,3)
         self.check(bytes(self.state().equipment)==before,'live attack/recovery refuses gear mutation')
         self.e.screenshot(self.out/'gear-change-refused-while-busy.png');self.close_menu();self.step(90)
-    def select_slot(self,slot):self.tap('L+'+('UP','RIGHT','DOWN','LEFT')[slot],2,3);self.settle();self.check(self.roster().selected_party==slot,f'L direction selects party slot{slot}')
+    def select_slot(self,slot):
+        index=self.roster().party[slot]
+        self.check(index<160,f'party slot{slot} contains an actual owned individual')
+        self.select_owned_instance(index);self.settle()
+        self.check(self.roster().selected_party==slot,f'carousel selects the individual already in party slot{slot}')
     def select_form(self,form):
-        r=self.roster();slot=next((i for i in range(4) if r.party[i]<160 and r.instances[r.party[i]].form_id==form),None)
-        self.check(slot is not None,f'form{form} is available in active party');self.select_slot(slot)
+        self.select_owned_form(form);self.settle()
+        self.check(self.selected().form_id==form,f'carousel selects actual owned form{form}, including reserves')
     def assign(self,slot,form):
         r=self.roster();index=next(i for i,c in enumerate(r.instances) if c.flags&1 and c.form_id==form)
         self.open_tab(2)
@@ -260,8 +266,10 @@ class RegionJourney:
         for _ in range(161):
             if self.get('quickparty_menu_candidate')==index:break
             self.tap('DOWN',2,3)
-        self.tap('R',2,25);self.settle();self.close_menu();self.check(self.roster().party[slot]==index,f'owned form{form} assigned to party slot{slot}')
-    def cast(self,form,x,y):self.goto(x,y);self.select_form(form);self.ready();self.tap('R');self.settle()
+        self.tap('A',2,25);self.settle()
+        if self.get('quickparty_menu_detail'):self.tap('A',2,25);self.settle()
+        self.close_menu();self.check(self.roster().party[slot]==index,f'owned form{form} assigned to party slot{slot}')
+    def cast(self,form,x,y):self.goto(x,y);self.select_form(form);self.ready();self.field_ability();self.settle()
     def leave_interior(self,target):
         self.goto(120,149);self.settle()
         if self.get('room')!=target:self.step(6,'DOWN');self.settle()
@@ -316,8 +324,8 @@ class RegionJourney:
         self.leave_interior(17);self.goto(120,232);self.act(120,232);self.select_form(13)
         self.open_tab(3);before=bytes(self.selected());self.tap('SELECT',2,4);self.check(self.get('game_state')==CONFIRM,'Water evolution requires confirmation');self.e.screenshot(self.out/'water-confirmation.png');self.tap('B',2,4);self.check(bytes(self.selected())==before,'decline preserves exact Water instance')
         self.tap('SELECT',2,4);self.wait_evolution();self.tap('A',2,3);self.wait_evolution(EVOLVING);self.settle();self.check(self.selected().form_id==14,'confirmed Water evolution completes');self.check(self.selected().equipped[self.selected().selected_command]==9,'Water evolution keeps old command');self.close_menu()
-        self.goto(296,140);self.ready();self.tap('R');self.settle();self.check(abs(self.get('px')-296)<=3,'retained Water9 fills rather than teleports')
-        self.open_tab(3);self.tap('R',2,25);self.settle();self.check(self.selected().equipped[self.selected().selected_command]==10,'growth journal selects newly learned Water10');self.close_menu();self.ready();self.tap('R');self.settle()
+        self.goto(296,140);self.ready();self.field_ability();self.settle();self.check(abs(self.get('px')-296)<=3,'retained Water9 fills rather than teleports')
+        self.open_tab(3);self.tap('R',2,25);self.settle();self.check(self.selected().equipped[self.selected().selected_command]==10,'growth journal selects newly learned Water10');self.close_menu();self.ready();self.field_ability();self.settle()
         self.check(abs(self.get('px')-424)<=1 and abs(self.get('py')-124)<=1,'Water10 links to the other authored basin');self.snapshot('09-water-evolved-shortcut')
     def personal_wishes(self):
         # The first four personal trials are earned here too; the old-save
@@ -345,8 +353,8 @@ class RegionJourney:
             self.face(1);self.tap('A',2,22);self.settle()
         self.check(self.get('room')==16,'revisit town through guarded Grove sign');self.act(182,250);self.check(self.quest(6)==3,'all four real wishes earn return reward');self.snapshot('10-all-eleven-quests')
     def lifecycle(self):
-        self.assign(1,16);self.select_form(16);self.ready();self.tap('R');self.settle();self.snapshot('11-metal-reselected-from-storage')
-        self.assign(3,14);self.select_form(14);self.ready();self.tap('R');self.settle();self.snapshot('11-water-reselected-from-storage')
+        self.assign(1,16);self.select_form(16);self.ready();self.field_ability();self.settle();self.snapshot('11-metal-reselected-from-storage')
+        self.assign(3,14);self.select_form(14);self.ready();self.field_ability();self.settle();self.snapshot('11-water-reselected-from-storage')
         # L selection is intentionally volatile until a normal save event.
         self.act(104,232)
         self.check(all(self.quest(q)==3 for q in range(11)),'all eleven regional quests claimed')
@@ -382,4 +390,8 @@ def main():
         run.failures.append({'error':str(exc),'status':run.status()});run.e.screenshot(run.out/'failure.png');run.e.state(run.out/'failure.state');(run.out/'failure.sav').write_bytes(run.e.bytes(0x0e000000,32768));raise
     finally:run.report();run.e.close()
     return 0
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

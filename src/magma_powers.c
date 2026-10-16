@@ -102,6 +102,13 @@ void magma_powers_reset(void){unsigned i;
  caster_id=chapter_token=0;chapter_hit=0;path_count=hit_mask=spent=aimed=ended_mask=0;guard_enemy=6;aim_x=aim_y=0;cast_side=-1;
  for(i=0;i<6;i++){previous_x[i]=(short)enemies[i].x;previous_y[i]=(short)enemies[i].y;}
  magma_powers_geometry_changed();}
+void magma_powers_cancel_preview(void){
+ if(!magma_power_time||magma_power_age)return;
+ /* Ownership masks can outlive their original cast. A newer weapon or power
+  * may have refreshed those timers, so leave timers and ownership intact. */
+ finish();power_aim_hold_reset(&aim_hold);
+ magma_power_cast_time=0;path_count=0;chapter_token=0;
+}
 /* path_set does not invalidate unchanged geometry when only active masks change. */
 static void path_set(unsigned n,int x,int y,int tx,int ty,unsigned radius,unsigned group,unsigned parent){Path*p;
  if(n>=12)return;

@@ -34,6 +34,10 @@ class Demo(EvolutionRun):
         (OUT/'capture.json').write_text(json.dumps(manifest,indent=2)+'\n')
         self.e.close()
 
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':
     p=Demo()
     try:

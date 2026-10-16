@@ -54,4 +54,8 @@ def main():
     try:run.run()
     except Exception as e:run.failures.append({'error':str(e),'status':run.status()});run.snapshot('boss-controls-failure',settle=False);raise
     finally:run.report();run.e.close()
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()
