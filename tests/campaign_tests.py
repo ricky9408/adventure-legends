@@ -32,7 +32,10 @@ def read_symbols(path):
             if len(w := line.split()) == 3}
 
 
-class CampaignRun:
+from current_field_controls import CurrentFieldControls
+
+
+class CampaignRun(CurrentFieldControls):
     def __init__(self, rom, symbols, output, optional=False, exhaustive=True):
         self.out = Path(output).resolve()
         self.out.mkdir(parents=True, exist_ok=True)
@@ -279,14 +282,15 @@ class CampaignRun:
         self.goto(*last)
 
     def select(self, spirit, summon=True):
-        for _ in range(5):
-            if self.get('spirit') == spirit:
-                break
-            self.tap('L')
-        self.check(self.get('spirit') == spirit, f'L selects unlocked companion {spirit}')
-        if bool(self.get('summoned')) != summon:
-            self.tap('B')
-        self.check(bool(self.get('summoned')) == summon, 'B sets expected summon state')
+        roster = self._field_roster()
+        matches = [i for i,c in enumerate(roster.instances)
+                   if c.flags & 1 and c.form_id in range(spirit * 3 + 1, spirit * 3 + 4)]
+        self.check(bool(matches), f'companion family {spirit} is actually earned')
+        current = roster.party[roster.selected_party]
+        self.select_owned_instance(current if current in matches else matches[0])
+        self.check(self.get('spirit') == spirit, f'held L carousel selects earned companion {spirit}')
+        self.set_summoned(summon)
+        self.check(bool(self.get('summoned')) == summon, 'physical R sets expected summon state')
 
     def ready(self):
         self.step(self.get('ability_cd') + 2)
@@ -300,19 +304,22 @@ class CampaignRun:
         before = self.get('room_flags')
         if negatives and power is not None:
             self.select(power,False)
-            self.ready();self.tap('R')
-            self.check(self.get('room_flags') == before, oid + ': unsummoned R changes no flags')
+            self.ready();self.set_summoned(True)
+            self.check(self.get('room_flags') == before, oid + ': physical R changes presence without casting or setting puzzle flags')
             unlocked = 4 if self.flags(['SKY_CLEAR']) else 3
             for wrong in range(unlocked):
                 if wrong == power:
                     continue
                 self.select(wrong)
-                self.ready();self.tap('R')
+                self.ready();self.field_ability()
                 self.check(self.get('room_flags') == before, oid + f': wrong power {wrong} changes no flags')
         if power is not None:
-            self.select(power)
+            self.select(power, summon=not negatives)
             self.ready()
-        self.tap(obj.get('input','R'))
+        action = obj.get('input','R')
+        self.field_ability() if action == 'R' else self.tap(action)
+        if negatives and power is not None and action == 'R':
+            self.check(self.get('summoned') == 1, oid + ': physical B auto-summons the recalled companion and attempts its power')
         if obj.get('sets_flag'):
             bit = self.flag_bits[obj['sets_flag']]
             self.check(self.get('room_flags') == before | bit, oid + ': exactly its monotonic puzzle flag is set')
@@ -322,9 +329,9 @@ class CampaignRun:
         self.shot('object-' + oid)
         if power is not None and self.exhaustive:
             committed = self.get('room_flags')
-            self.ready();self.tap('R');self.dialogs()
+            self.ready();self.field_ability();self.dialogs()
             self.check(self.get('room_flags') == committed, oid + ': repeat cannot toggle or duplicate progress')
-            self.tap('B');self.tap('L')
+            self.set_summoned(False);self.select_next_owned()
             self.check(self.get('room_flags') == committed, oid + ': dismissal and companion change retain progress')
         if persistence:
             self.reload_case('object-' + oid)
@@ -498,7 +505,7 @@ class CampaignRun:
             self.goto(y=248);self.goto(x=120);self.tap('A');self.dialogs()
             self.goto(x=240)
         self.goto(y=180)
-        self.select(1);self.ready();self.tap('R');self.dialogs()
+        self.select(1);self.ready();self.field_ability();self.dialogs()
         self.check(self.get('bridge_open')==1,'Midori grows original grove bridge')
         self.goto(x=240);self.goto(y=92)
         if self.optional:
@@ -510,22 +517,22 @@ class CampaignRun:
             self.death_case('original-shrine');rt=self.snapshot('original-shrine-roundtrip');self.nextroom(1,'DOWN');self.nextroom(2);self.restore(rt)
         self.select(0)
         self.goto(y=94);self.goto(x=64);self.goto(y=84)
-        self.defend(240);self.goto(x=64,y=84);self.ready();self.tap('R')
+        self.defend(240);self.goto(x=64,y=84);self.ready();self.field_ability()
         self.check(self.get('torches')&1,'first original shrine brazier lit')
         self.goto(y=94);self.goto(x=176);self.goto(y=84)
-        self.defend(240);self.goto(x=176,y=84);self.ready();self.tap('R');self.dialogs()
+        self.defend(240);self.goto(x=176,y=84);self.ready();self.field_ability();self.dialogs()
         self.check(self.get('torches')==3,'original shrine gate opens')
         self.goto(y=94);self.goto(x=120);self.nextroom(3);self.dialogs()
         self.snapshot('grove-boss-entry');self.shot('02-grove-guardian')
         if self.exhaustive:
             self.death_case('original-guardian');rt=self.snapshot('original-guardian-roundtrip');self.nextroom(2,'DOWN');self.nextroom(3);self.restore(rt)
-        self.goto(y=100);self.ready();self.tap('R');self.goto(y=96)
+        self.goto(y=100);self.ready();self.field_ability();self.goto(y=96)
         for i in range(5000):
             if self.get('game_state')==DIALOG:break
             if self.get('boss_armor')==0 and self.get('ability_cd')==0:
                 if self.get('roll_cd')==0:
                     self.step(1,'RIGHT+SELECT');self.step(12,'RIGHT')
-                self.tap('R')
+                self.field_ability()
             if self.get('boss_armor')>12 and self.get('combo_timer')==0 and self.get('sword_cd')==0:
                 self.goto(x=self.get('boss_x'),y=self.get('boss_y')+30)
                 self.step(1,'UP');self.tap('A')
@@ -645,7 +652,7 @@ class CampaignRun:
         self.nextroom(11);self.snapshot('roots-entry');self.shot('08-root-waterway')
         if self.exhaustive:
             self.roundtrip(10);self.barrier_case('root-channel-gap',120,120,108)
-            self.navigate(76,120);self.select(1);self.ready();prior=self.get('room_flags');self.tap('R')
+            self.navigate(76,120);self.select(1);self.ready();prior=self.get('room_flags');self.field_ability()
             self.check(self.get('room_flags')==prior,'Midori cannot grow bridge before well is uncapped')
         for oid in ['well_cap','dry_well','dry_thorns']:
             if oid=='dry_thorns' and self.exhaustive:self.barrier_case('thorn-screen',120,78,72)
@@ -677,12 +684,12 @@ class CampaignRun:
             self.step(1)
         while self.get('boss_timer')<10:self.step(1)
         self.ready();before_hp=self.get('hp')
-        self.tap('R',1,0)
+        self.field_ability(1, 0)
         self.check(self.get('guard_ticks')==36 and self.get('ability_cd')==75,
                    'Kohaku combat cast grants exactly 36-frame guard and 75-frame cooldown')
         cast=self.snapshot('stone-guard-cast')
-        self.step(1);self.tap('B');self.tap('B');self.tap('L');self.select(3)
-        cd=self.get('ability_cd');guard=self.get('guard_ticks');self.tap('R')
+        self.step(1);self.set_summoned(False);self.set_summoned(True);self.select_next_owned();self.select(3)
+        cd=self.get('ability_cd');guard=self.get('guard_ticks');self.field_ability()
         self.check(self.get('ability_cd')<cd and self.get('guard_ticks')<=guard,
                    'dismissal, companion cycling and repeated R cannot refresh guard or cooldown')
         self.restore(cast)
@@ -715,7 +722,7 @@ class CampaignRun:
                 for _ in range(1600):
                     if self.get('boss_state')==4:break
                     self.step(1)
-                self.tap('R')
+                self.field_ability()
                 self.check(self.get('boss_state')==5,'retreat fixture reaches exposure through correct power')
             self.goto(x=120,y=138)
             for _ in range(1600):
@@ -789,7 +796,7 @@ class CampaignRun:
                     probes.add((room,phase))
                 self.select(power);self.ready()
                 if self.get('boss_state')==recover:
-                    self.tap('R')
+                    self.field_ability()
             elif state==exposed:
                 if self.get('combo_timer')==0 and self.get('sword_cd')==0:
                     self.boss_stand(30)
@@ -837,13 +844,13 @@ class CampaignRun:
             if wrong==power:continue
             self.restore(start);self.select(wrong);self.ready()
             self.check(self.get('boss_state')==recover,'wrong-power probe occurs inside recovery window')
-            hp=self.get('boss_hp');self.tap('R')
+            hp=self.get('boss_hp');self.field_ability()
             self.check(self.get('boss_state')!=exposed and self.get('boss_armor')==0 and self.get('boss_hp')==hp,
                        f'boss {room} phase {phase}: wrong power {wrong} cannot expose or damage')
-        self.restore(start);self.select(power);self.ready();self.tap('R')
+        self.restore(start);self.select(power);self.ready();self.field_ability()
         self.check(self.get('boss_state')==exposed,f'boss {room} phase {phase}: required power exposes during recovery')
         self.shot(f'boss-{room}-phase-{phase}-exposed')
-        before=self.get('boss_armor');self.step(80);self.tap('R')
+        before=self.get('boss_armor');self.step(80);self.field_ability()
         self.check(self.get('boss_armor')<before-60,f'boss {room} phase {phase}: repeat R cannot extend exposure')
         self.restore(start)
 
@@ -990,6 +997,10 @@ def main():
         run.report();run.e.close()
     return int(bool(run.failures))
 
+
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
 
 if __name__=='__main__':
     raise SystemExit(main())

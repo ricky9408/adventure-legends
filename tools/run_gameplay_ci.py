@@ -155,7 +155,7 @@ def main():
                                   '-p', 'test_gameplay_ci.py'])
         stage('review-inventory-preflight', [python, '-c',
               "import sys; sys.path.insert(0,'tests'); "
-              "from selected_music_boundary import verify; "
+              "from field_controls_boundary import verify; "
               "c,_=verify(chain=False); "
               "print('Exact production inventory PASS:',len(c['current_production']),'files')"])
         if args.suite in ('all', 'host'):
@@ -182,9 +182,20 @@ def main():
             stage('controller-route', common + ['--cases', 'controllers', '--output',
                                                 str(out / 'controllers')], timeout=600)
             native = json.loads((out / 'controllers/report.json').read_text())
-            if native['result'] != 'PASS' or not native['controller_only'] or native['game_ram_writes'] or native['machine_state_loads']:
+            if native['result'] != 'PASS' or not native['controller_only'] or not native['controller_fixture_write_blocked'] or native['game_ram_writes'] or native['machine_state_loads']:
                 raise RuntimeError('Controller route did not establish clean controller-only acceptance')
             bridge = str(out / 'controllers/native-bridge.so')
+            stage('field-audio-vblank', [python, 'tests/field_audio_wait_native.py',
+                  '--source-root', str(ROOT), '--rom', str(ROOT/'build/emberbond.gba'),
+                  '--symbols', str(ROOT/'build/emberbond.sym'), '--bridge', bridge,
+                  '--output', str(out/'field-audio')], timeout=600)
+            field_audio = json.loads((out/'field-audio/report.json').read_text())
+            if (field_audio['result'] != 'PASS' or field_audio['rom_sha256'] != rom_sha
+                    or field_audio['bridge_sha256'] != digest(bridge)
+                    or not field_audio['controller_only'] or field_audio['game_ram_writes']
+                    or field_audio['machine_state_loads'] or not field_audio['checks']
+                    or not all(check['passed'] for check in field_audio['checks'])):
+                raise RuntimeError('Current VBlank/PCM controller gate did not pass the exact candidate')
             stage('fresh-early-gameplay', [python, 'tests/fresh_early_optional.py',
                   str(out / 'fresh-early'), '--bridge', bridge], timeout=600)
             early = json.loads((out / 'fresh-early/original/report.json').read_text())
@@ -238,12 +249,27 @@ def main():
             loading = json.loads((out/'cold-continue/report.json').read_text())
             if loading['result'] != 'PASS' or loading['rom_sha256'] != rom_sha:
                 raise RuntimeError('Bounded cold Continue did not pass the exact candidate')
+            stage('field-carousel-capacity', [python, 'tests/field_carousel_capacity_native.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--source-root', str(ROOT), '--expected-rom-sha', rom_sha,
+                  '--output', str(out/'field-carousel-capacity')], timeout=600)
+            capacity = json.loads((out/'field-carousel-capacity/report.json').read_text())
+            if (capacity['result'] != 'PASS' or capacity['rom_sha256'] != rom_sha
+                    or capacity['bridge_sha256'] != digest(bridge)
+                    or capacity['native_game_ram_writes'] or capacity['machine_state_imports']
+                    or not capacity['native_mutation_apis_disabled'] or capacity['fresh_campaign_acceptance']
+                    or len(capacity['cases']) != 6
+                    or not all(case['pacing_passed'] and not case['earned_collection_claim']
+                               and not any(case['active_summary'][key] for key in
+                                           ('update_misses','flip_misses','overrun_samples','core_faults'))
+                               for case in capacity['cases'])):
+                raise RuntimeError('Historical/prepared native carousel capacity gate did not pass')
             commit = subprocess.check_output(['git', '-c', 'safe.directory='+str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
             stage('fresh-reserve-recruit', [python, 'tests/fresh_reserve_notice.py',
                   '--source-root', str(ROOT), '--bridge', bridge, '--expected-commit', commit,
                   '--output', str(out/'fresh-reserve')], timeout=600)
             reserve = json.loads((out/'fresh-reserve/summary.json').read_text())
-            if not reserve['accepted'] or not reserve['controller_only'] or reserve['candidate']['rom_sha256'] != rom_sha or any(reserve['provenance'][key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
+            if not reserve['accepted'] or not reserve['controller_only'] or reserve['candidate']['rom_sha256'] != rom_sha or not reserve.get('earned_field_controls') or any(reserve['provenance'][key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
                 raise RuntimeError('Fresh reserved companion route did not pass the exact candidate')
             stage('fresh-main-campaign', [python, 'tests/treasure_full_journey.py',
                   '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
@@ -261,6 +287,12 @@ def main():
                 stage('synthetic-exact-loops', common + ['--cases', 'regional_loops',
                       '--output', str(out / 'synthetic-loops')], timeout=1200)
             report['native'] = {'controller_metrics': native['metrics'],
+                                'field_audio_checks': len(field_audio['checks']),
+                                'field_audio_cases': field_audio['cases'],
+                                'earned_field_controls': reserve['earned_field_controls'],
+                                'carousel_capacity_cases': [{key: case[key] for key in
+                                    ('name','owned_count','opening_mode','pacing_passed','active_summary')}
+                                    for case in capacity['cases']],
                                 'opening_checks': len(opening['checks']),
                                 'fresh_early_checks': len(early['checks']),
                                 'fresh_garden_checks': sum(len(g['checks']) for g in garden_reports),

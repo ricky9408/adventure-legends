@@ -156,4 +156,10 @@ def main():
 
 
 if __name__ == '__main__':
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tests'))
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
+if __name__ == '__main__':
     raise SystemExit(main())

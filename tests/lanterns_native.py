@@ -30,7 +30,9 @@ def wav_read(path):
     meta.update(file=path.name,sha256=sha(path),seconds=len(a)/32768,peak=int(np.max(abs(a))),rms=float(np.sqrt(np.mean(a.astype(float)**2))),clipped_samples=int(np.count_nonzero(abs(a)>=32767)))
     return a,meta
 
-class Suite:
+from current_field_controls import CurrentFieldControls
+
+class Suite(CurrentFieldControls):
     def __init__(self,a):
         self.a=a;self.out=a.output.resolve();self.rom=a.rom.resolve();self.e=None
         assert not self.out.exists(), 'Evidence directory must be new'
@@ -43,7 +45,7 @@ class Suite:
         self.bridge=self.out/'native-bridge.so';sysroot=a.sysroot.resolve()
         subprocess.run(['cc','-std=c11','-D_GNU_SOURCE','-O2','-fPIC','-shared',str(ROOT/'tests/player_feedback_mgba_bridge.c'),'-I'+str(sysroot/'usr/include'),'-L'+str(sysroot/'usr/lib/x86_64-linux-gnu'),'-Wl,-rpath,'+str(sysroot/'usr/lib/x86_64-linux-gnu'),'-o',str(self.bridge),'-lmgba'],check=True)
         self.report['provenance']={'bridge_sha256':sha(self.bridge),'libmgba_sha256':sha(sysroot/'usr/lib/x86_64-linux-gnu/libmgba.so'),'harness_sha256':sha(__file__),'source_hashes_sha256':sha(self.rom.parent/'source-hashes.json')}
-        for file in ('tests/lanterns_native.py','tests/player_feedback_native.py','tests/player_feedback_mgba_bridge.c','tools/mgba_bridge.c','tools/mgba_runner.py'):
+        for file in ('tests/lanterns_native.py','tests/current_field_controls.py','tests/player_feedback_native.py','tests/player_feedback_mgba_bridge.c','tools/mgba_bridge.c','tools/mgba_runner.py'):
             p=self.out/'test-source'/file;p.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/file,p)
         self.encoder=None;self.recording=False;self.rgb_hash=None;self.video_frames=0;self.trace=gzip.open(self.out/'frames.jsonl.gz','wt');self.rows=[];self.case=None
         self.check('Candidate ROM contains the exact unpadded approved PCM stream',a.raw.read_bytes() in self.rom.read_bytes())
@@ -169,8 +171,8 @@ class Suite:
         for _ in range(12):
             if self.g('game_state')!=2:break
             self.tap('A');self.step(12)
-        self.settle();self.navigate(166,126);self.tap('A',2,28);self.tap('A',2,30);self.tap('B',2,80);self.shot('controller-companion');self.step(24,'RIGHT');self.tap('R',2,50);self.tap('B',2,50)
-        self.navigate(120,120);self.wait(lambda:self.g('room')==1,200,'UP');self.check('Controller walk enters scrolling grove',self.g('room')==1);self.step(24,'UP');self.shot('controller-grove');self.tap('A',2,24);self.tap('B',2,45);self.tap('START');self.check('Travel scene retains usable pause menu',self.g('game_state')==3);self.step(90);self.tap('START');self.step(90)
+        self.settle();self.navigate(166,126);self.tap('A',2,28);self.tap('A',2,30);self.set_summoned(True,2,80);self.shot('controller-companion');self.step(24,'RIGHT');self.field_ability(2,50);self.set_summoned(False,2,50)
+        self.navigate(120,120);self.wait(lambda:self.g('room')==1,200,'UP');self.check('Controller walk enters scrolling grove',self.g('room')==1);self.step(24,'UP');self.shot('controller-grove');self.tap('A',2,24);self.set_summoned(True,2,45);self.tap('START');self.check('Travel scene retains usable pause menu',self.g('game_state')==3);self.step(90);self.tap('START');self.step(90)
         # Stay in the controller-earned grove so the full theme plays without
         # relying on a new navigator route or injected game state.
         self.step(max(0,4050-self.video_frames))
@@ -178,6 +180,7 @@ class Suite:
         self.check('Swords and companion occur in real controller footage',any(r['swing']for r in rows)and{r['summoned']for r in rows}=={0,1})
         self.check('Native PSG1 runs concurrently with Direct Sound score',any(r['psg1_on']and r['music']['music_consumed']>0 for r in rows))
         self.check('Title, opening, play, dialogue, pause and save states are exercised',set((0,1,2,3,6,14)).issubset({r['state']for r in rows}),{'states':sorted({r['state']for r in rows}),'rooms':sorted({r['room']for r in rows})})
+        self.report['field_controls']=getattr(self,'field_control_events',[])
         self.report['cases'].append({'name':self.case,'states':sorted({r['state']for r in rows}),'rooms':sorted({r['room']for r in rows}),'sword_frames':sum(bool(r['swing'])for r in rows),'psg1_frames':sum(r['psg1_on']for r in rows),'controller_only':True,'game_ram_writes':0});self.save_report()
     def model_block(self):
         m=self.transport_model;produced=self.g('music_produced')

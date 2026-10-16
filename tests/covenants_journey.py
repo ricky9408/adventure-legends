@@ -355,9 +355,9 @@ class CovenantsJourney(HorizonsJourney):
         self.station_origin(x,y,direction);self.ready()
         before={'room':room,'station':station['key'],'command':command,'form':self.selected().form_id,
                 'id':self.selected().instance_id,'origin':[self.get('px'),self.get('py')],'setting':self.cv_setting()}
-        self.step(1,'R')
+        self.hold_field_ability(1)
         self.step(station['release_age'] or 100)
-        if station['release_age']:self.step(1,'R');self.step(100)
+        if station['release_age']:self.hold_field_ability(1);self.step(100)
         self.settle()
         self.cases.append({'station_cast':before,'setting_after':self.cv_setting(),'frame':self.e.frame})
         self.check(bool(self.cv_setting()[0]&(1<<index)),f'actual cast settles {station["key"]}')
@@ -510,7 +510,7 @@ class CovenantsJourney(HorizonsJourney):
             self.check(self.get('game_state')==PLAY,'ordinary between-wave healing stays alive')
             if self.hp_q4()>=self.stats()['max_hp']:break
             if not self.get('heal_cd') and not self.get('ability_cd'):
-                old=self.hp_q4();self.tap('R',1,2);casts+=1
+                old=self.hp_q4();self.field_ability(1, 2);casts+=1
                 self.check(self.hp_q4()>old,'actual Midori cast restores ordinary health')
             else:self.step(1)
         self.check(self.hp_q4()==self.stats()['max_hp'],'ordinary Midori healing restores full health before the next wave')
@@ -535,7 +535,7 @@ class CovenantsJourney(HorizonsJourney):
         self.target(128,272,1);self.check(self.cv_local('porch_confirm')==1,'porch commitment requires second deliberate A')
         self.tap('A');self.settle();self.check(self.state().quests.objectives[63]&1,'porch commitment recorded explicitly')
         self.travel(62)
-        if self.get('summoned'):self.tap('B');self.settle()
+        if self.get('summoned'):self.set_summoned(False);self.settle()
         self.target(self.cv_local('npc_x'),self.cv_local('npc_y'),0)
         self.follow_resident(lambda:bool(self.state().quests.objectives[63]&2),'return companion walks ordinary fairground path home',limit=1200)
         self.travel(0);self.target(120,94,1);self.target(120,94,1)
@@ -571,7 +571,7 @@ class CovenantsJourney(HorizonsJourney):
         self.target(120,120,0)
         for i in range(3):self.station(i)
         self.target(120,120,0);self.check(self.cv_setting()[4]==1,'death control explicitly begins first finite wave')
-        if self.get('summoned'):self.tap('B');self.settle()
+        if self.get('summoned'):self.set_summoned(False);self.settle()
         before=self.state_signature()
         for _ in range(8000):
             if self.get('game_state')==DEAD:break
@@ -627,9 +627,9 @@ class CovenantsJourney(HorizonsJourney):
     def practice_route(self):
         for i in range(8):
             practice=self.prepare_practice(i);before=self.state_signature();history=self.collection();ids={c.instance_id for c in self.live()}
-            self.step(1,'R');self.check(self.get('covenants_power_kind')==practice['command'] and self.get('covenants_power_time')>0,'owned legendary begins its exact real signature')
+            self.hold_field_ability(1);self.check(self.get('covenants_power_kind')==practice['command'] and self.get('covenants_power_time')>0,'owned legendary begins its exact real signature')
             self.cases.append({'legendary_practice':121+i,'frame':self.e.frame,'origin':[self.get('covenants_power_origin_x'),self.get('covenants_power_origin_y')],'face':self.get('covenants_power_direction'),'command':practice['command']})
-            if i==0:self.step(36);self.step(1,'R')
+            if i==0:self.step(36);self.hold_field_ability(1)
             self.wait_for(lambda:self.cv_local('practice_ticks')>0,f'command{practice["command"]} completes its own optional field practice',limit=180)
             self.check(self.state_signature()==before and self.collection()==history and {c.instance_id for c in self.live()}==ids,'optional field benefit changes no durable quest, roster, gear or identity')
             endpoints=practice['shortcut_endpoints']
@@ -643,7 +643,7 @@ class CovenantsJourney(HorizonsJourney):
                 self.goto(endpoints[-1][0]+(16 if dx>0 else -16 if dx<0 else 0),endpoints[-1][1]+(16 if dy>0 else -16 if dy<0 else 0));self.step(30)
                 if self.cv_local('practice_ticks') and self.get('summoned'):
                     self.check(self.cv_local('practice_ticks')==1,'path also waits for trailing companion occupancy')
-                    self.tap('B');self.settle();self.step(2)
+                    self.set_summoned(False);self.settle();self.step(2)
                 self.check(not self.cv_local('practice_ticks'),'temporary path closes after player and companion clear it')
             self.snapshot(f'practice-{121+i}-real-field')
         self.commit_current_selection();self.cold_reboot('practice-all8-cold')
@@ -666,7 +666,7 @@ class CovenantsJourney(HorizonsJourney):
         self.check(self.get('quickparty_menu_slot')==slot and self.get('quickparty_menu_candidate')==instance,'real party menu selects exact proposed slot and instance')
 
     def legendary_party_notice(self):
-        self.prepare_practice(0);self.step(1,'R');self.step(1)
+        self.prepare_practice(0);self.hold_field_ability(1);self.step(1)
         selected=self.roster().selected_party;first=self.selected().instance_id
         second=next(i for i,c in enumerate(self.roster().instances) if c.flags&1 and c.form_id==122)
         target=next(i for i in range(4) if i!=selected)
@@ -711,7 +711,7 @@ class CovenantsJourney(HorizonsJourney):
         self.check(self.completed_source,'controls start from exact authenticated complete native route')
         if self.minimal:self.late_invitations()
         self.legendary_party_notice()
-        self.prepare_practice(0);self.step(1,'R');self.step(1)
+        self.prepare_practice(0);self.hold_field_ability(1);self.step(1)
         proof=self.cv_cast_bytes();age=self.get('covenants_power_age');cd=self.get('ability_cd')
         self.step(36,'L')
         self.check(self.cv_cast_bytes()==proof and self.get('covenants_power_age')==age and self.get('ability_cd')==cd,'held L freezes exact final field proof age and cooldown')
@@ -719,16 +719,16 @@ class CovenantsJourney(HorizonsJourney):
         proof=self.cv_cast_bytes();age=self.get('covenants_power_age');cd=self.get('ability_cd')
         self.step(36)
         self.check(self.cv_cast_bytes()==proof and self.get('covenants_power_age')==age and self.get('ability_cd')==cd,'viewing journal preserves exact final field proof and cooldown')
-        self.tap('B',1,1);self.step(36);self.step(1,'R')
+        self.tap('B',1,1);self.step(36);self.hold_field_ability(1)
         self.wait_for(lambda:self.cv_local('practice_ticks')>0,'viewed immutable cast can still complete its practice')
         self.step(400)
-        self.prepare_practice(0);self.step(1,'R');self.step(1)
+        self.prepare_practice(0);self.hold_field_ability(1);self.step(1)
         cd=self.get('ability_cd');selected=self.roster().selected_party;other=next(i for i,v in enumerate(self.roster().party) if v<160 and i!=selected)
-        self.tap('L+'+('UP','RIGHT','DOWN','LEFT')[other],1,1)
+        self.select_slot(other)
         self.check(not self.cv_local('practice_mode') and int.from_bytes(self.cv_cast_bytes()[:4],'little')==0,'actual selector edit revokes final cast field rights')
         self.check(0<self.get('ability_cd')<=cd,'actual selector edit does not refund legendary cooldown')
         self.step(180);self.check(not self.cv_local('practice_ticks'),'revoked cast cannot rebuild final field rights')
-        self.prepare_practice(0);self.step(1,'R');self.step(1)
+        self.prepare_practice(0);self.hold_field_ability(1);self.step(1)
         cd=self.get('ability_cd');selected_id=self.selected().instance_id;selected_slot=self.roster().selected_party
         party=set(self.roster().party);replacement=next(c.form_id for j,c in enumerate(self.roster().instances) if c.flags&1 and j not in party and c.form_id<121)
         other_slot=next(i for i in range(4) if i!=selected_slot)
@@ -738,7 +738,7 @@ class CovenantsJourney(HorizonsJourney):
         self.step(220)
         self.owned_select(121);self.set_command(12);self.ready();self.target(48,296,0)
         self.check(self.cv_local('reset_confirm')==1,'reset requires deliberate second A')
-        self.step(1,'R');cd=self.get('ability_cd');before=self.state_signature();self.tap('A');self.settle()
+        self.hold_field_ability(1);cd=self.get('ability_cd');before=self.state_signature();self.tap('A');self.settle()
         self.check(self.state_signature()==before and not self.cv_local('practice_mode'),'confirmed local reset preserves all durable history and clears transient work')
         self.check(0<self.get('ability_cd')<=cd,'confirmed local reset does not refund legendary cooldown')
         self.step(240);self.practice_route();self.full_menu_matrix()
@@ -785,4 +785,8 @@ def main():
         r.snapshot('failure',settle=False);raise
     finally:r.close_global_trace();r.report();r.e.close()
     return bool(r.failures)
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

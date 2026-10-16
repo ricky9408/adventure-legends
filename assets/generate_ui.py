@@ -11,32 +11,32 @@ texts={
  'ELDER':'灯守り リュマ','FOX':'ホムラ','LEAF':'ミドリ',
  'INTRO1A':'森の灯が、消えかけている。','INTRO1B':'奥の祠で、守り神が眠れずにいる。',
  'INTRO2A':'この剣と、ふたつの契約を授けよう。','INTRO2B':'ホムラは炎。ミドリは芽吹きの精。',
- 'INTRO3A':'Bで呼び出し、L＋十字で選ぶ。','INTRO3B':'Rで力を借りる。Aで剣を振る。',
+ 'INTRO3A':'Bで仲間の力。Rで呼ぶ・帰す。','INTRO3B':'L短押しで仲間切替。Aで剣。',
  'INTRO4A':'北へ。川ではミドリを頼りなさい。','INTRO4B':'祠の灯は、ホムラで灯すのだ。',
  'VILLAGETALK1':'光は、ひとりでは取り戻せない。','VILLAGETALK2':'傷ついたら、ここへお帰り。',
  'BRIDGE1':'ミドリの力で、根が橋になった！','BRIDGE2':'川を渡り、北の祠を目指そう。',
- 'BRIDGEHINT1':'川の向こうへ、道がない。','BRIDGEHINT2':'ミドリをBで呼び、岸でRを押そう。',
- 'TEMPLE1':'ふたつの台座に、火の気配がある。','TEMPLE2':'ホムラを呼び、台座の近くでR。',
+ 'BRIDGEHINT1':'川の向こうへ、道がない。','BRIDGEHINT2':'ミドリを選び、岸でBを押そう。',
+ 'TEMPLE1':'ふたつの台座に、火の気配がある。','TEMPLE2':'ホムラを選び、台座の近くでB。',
  'GATE1':'ふたつの炎が、封印をほどいた。','GATE2':'北の扉の奥から、鼓動が聞こえる。',
  'BOSS1':'苔の鎧が、守り神を縛っている。','BOSS2':'炎で鎧を砕き、剣で闇を払おう！',
  'WIN1':'最後の闇が、静かにほどけた。','WIN2':'守り神は、また森の夢を見る。',
  'WIN3':'里に、あたたかな灯が戻った。','WIN4':'ふたりの仲間と、次の旅へ。',
  'COMPLETE':'灯をつなぐ者', 'THANKS':'冒険してくれて、ありがとう', 'RESTART':'START  タイトルへ',
  'DEAD':'灯は、まだ消えない', 'RETRY':'A  祠の記憶から再挑戦',
- 'PAUSE':'旅のしおり', 'CONTROL1':'十字キー  移動     A  剣・会話', 'CONTROL2':'B  召喚・帰還   L＋十字  仲間',
- 'CONTROL3':'R  仲間の力       START  続ける', 'CONTROL4':'ミドリは橋を育て、傷を癒す', 'CONTROL5':'ホムラは炎で台座と鎧を破る',
+ 'PAUSE':'旅のしおり', 'CONTROL1':'十字キー  移動     A  剣・会話', 'CONTROL2':'B  仲間の力   L短押し  切替',
+ 'CONTROL3':'R  呼ぶ・帰す    START  続ける', 'CONTROL4':'ミドリは橋を育て、傷を癒す', 'CONTROL5':'ホムラは炎で台座と鎧を破る',
  'QUEST0':'目的：里を北へ出る', 'QUEST1':'目的：ミドリで川に橋を育てる', 'QUEST2':'目的：北東の祠へ進む',
  'QUEST3':'目的：ホムラで２つの台座に点火', 'QUEST4':'目的：北の扉へ進む', 'QUEST5':'目的：炎で鎧を砕き、剣で攻撃',
  'ARMORED':'苔の守り神：炎で鎧を砕け', 'EXPOSED':'鎧が崩れた！ 剣で攻撃！',
- 'BHUD':'B 召喚', 'RHUD':'R 力', 'LHUD':'L 切替', 'NEXT':'A ▼', 'SAVED':'記録しました', 'HEALED':'傷が癒えた',
- 'NEEDSUMMON':'Bで仲間を呼び出そう', 'COOLDOWN':'力をためている…', 'SUMMONED':'いっしょに行こう',
+ 'BHUD':'B 力', 'RHUD':'R 呼ぶ・帰す', 'LHUD':'L 切替', 'NEXT':'A ▼', 'SAVED':'記録しました', 'HEALED':'傷が癒えた',
+ 'NEEDSUMMON':'Bで仲間の力を使おう', 'COOLDOWN':'力をためている…', 'SUMMONED':'いっしょに行こう',
  'FIREHINT':'炎は台座の近くから放とう', 'TOUCHHINT':'炎を当てると、鎧が崩れる',
  'ENDINGSMALL':'EMBERBOND / THE LANTERNS', 'BUILD':'ORIGINAL GBA HOMEBREW  v0.3',
- 'EXPLORE1':'STARTで地図、SELECTで回避。', 'EXPLORE2':'寄り道には、小さな発見がある。',
+ 'EXPLORE1':'STARTで旅のメニューを開く。', 'EXPLORE2':'寄り道には、小さな発見がある。',
  'CAMP1':'たき火のぬくもりが、傷を癒す。', 'CAMP2':'次はここから、旅を続けられる。',
  'RELIC1':'命のかけらを見つけた！', 'RELIC2':'ハートの最大数が、２つ増えた。',
  'MAP':'こもれびの森の地図', 'MAP_KEYS':'A 仲間へ     B 戻る',
- 'ROLL_CONTROL':'SELECT 回避   A ページ切替',
+ 'ROLL_CONTROL':'START メニュー   B 戻る',
  'CAMP_GUIDE1':'たき火でA。休んで、記録しよう。', 'CAMP_GUIDE2':'剣は三連撃。最後の一撃が強い。'
 }
 campaign=json.loads((ROOT/'assets/campaign_dialogue.json').read_text())
@@ -50,9 +50,9 @@ texts.update({'C_SELECTED':'仲間の力', 'C_JOURNAL_HINT':'A  地図・仲間 
 texts.update({'C_MAP_ROUTE':'三つの灯をつなぐ道','C_MAP_GROVE':'森の灯','C_MAP_SKY':'空の灯','C_MAP_CORE':'核の灯','C_MAP_RETURN':'里から東へ空、西へ核','C_MAP_NEXT':'A 仲間へ   B 戻る'})
 texts.update({'E_HOMURA':'ホムラ・炉守','E_MIDORI':'ミドリ・樹冠','E_FUURI':'フウリ・風織','E_KOHAKU':'コハク・岩門','E_WOOD':'木','E_FIRE':'火','E_EARTH':'土','E_METAL':'金','E_WATER':'水','E_YIN':'陰','E_YANG':'陽','E_GROWTH':'仲間の成長','E_LEVEL':'レベル','E_BOND':'きずな','E_READY':'進化の準備が整った','E_LEVEL_MORE':'冒険で経験を積もう','E_BOND_MORE':'いっしょに絆を育てよう','E_STORY_MORE':'先の旅が力を呼び覚ます','E_TRIAL_MORE':'仲間の願いをかなえよう','E_SANCTUARY':'里か休憩所で進化できる','E_GROWN':'新たな姿で、次の旅へ','E_COMMAND_NEW':'新しい技を選択中','E_COMMAND_OLD':'いつもの技を選択中','E_KEYS':'R 技変更  SELECT 進化','E_CONFIRM':'新しい姿へ進化しますか','E_KEEP_POWER':'大切な力と絆は引き継ぐ','E_CHOICE':'今は待つこともできる','E_CONFIRM_KEYS':'A 進化する   B いまは待つ','E_BOND_LIGHT':'きずなが、光になる','E_SAVING':'冒険を記録しています'})
 texts.update({'E_WISH_FIRE':'森の忘れ火に、小さな炎を','E_WISH_ROOT':'森の枯れ芽を、三つ育てよう','E_WISH_WIND':'風待ちの尾根の、風の工房へ','E_WISH_STONE':'夕灯の坂の、石の作業場へ','E_MOVE_FIRE':'技：火のしずく','E_MOVE_HEAL':'技：芽吹きの癒し','E_MOVE_WIND':'技：ひとひらの風','E_MOVE_STONE':'技：小さな石の守り','E_MOVE_HEARTH':'技：三つの炉火','E_MOVE_CANOPY':'技：根の庇護','E_MOVE_REFLECT':'技：返し風','E_MOVE_ARCH':'技：岩門の構え','E_LEVEL_UP':'仲間が成長した！'})
-texts.update({'T_ROOM_WIND':'風織りの庭','T_ROOM_STONE':'琥珀の工房','T_WIND_HINT1':'風を、金の糸へつなごう。','T_WIND_HINT2':'Rで風車の向きが変わる。','T_STONE_HINT1':'ふたつの印に、重みを集めよう。','T_STONE_HINT2':'Aで押して、最後に石の力を。','T_COMPLETE1':'仲間の願いが、かなった！','T_COMPLETE2':'里のしおりで、新たな一歩を。','T_FIRE_HINT1':'忘れられた炉に、火の気配。','T_FIRE_HINT2':'ホムラは、小さく尾を揺らした。','T_ROOT_HINT1':'枯れた根に、芽吹きの気配。','T_ROOT_HINT2':'ミドリは、そっと葉を広げた。','T_RESTORED':'小さな場所に、灯が戻った','T_NEED_PLATES':'ふたつの印が、重みを待つ','T_ALREADY':'この願いは、もうかなった','T_RESET':'仕掛けを元に戻した','T_BLOCKED':'こちらには押せない'})
+texts.update({'T_ROOM_WIND':'風織りの庭','T_ROOM_STONE':'琥珀の工房','T_WIND_HINT1':'風を、金の糸へつなごう。','T_WIND_HINT2':'Bで風車の向きが変わる。','T_STONE_HINT1':'ふたつの印に、重みを集めよう。','T_STONE_HINT2':'Aで押して、最後に石の力を。','T_COMPLETE1':'仲間の願いが、かなった！','T_COMPLETE2':'里のしおりで、新たな一歩を。','T_FIRE_HINT1':'忘れられた炉に、火の気配。','T_FIRE_HINT2':'ホムラは、小さく尾を揺らした。','T_ROOT_HINT1':'枯れた根に、芽吹きの気配。','T_ROOT_HINT2':'ミドリは、そっと葉を広げた。','T_RESTORED':'小さな場所に、灯が戻った','T_NEED_PLATES':'ふたつの印が、重みを待つ','T_ALREADY':'この願いは、もうかなった','T_RESET':'仕掛けを元に戻した','T_BLOCKED':'こちらには押せない'})
 texts.update({'E_NEXT_GROWTH':'A 成長へ    B 戻る'})
-texts.update({'Q_CHOOSE':'L＋十字で仲間を選ぶ','Q_RELEASE':'Lを離して決定','Q_CANCEL':'B やめる','Q_PARTY':'仲間の編成','Q_EMPTY':'空き枠','Q_MENU_MOVE':'←→ 枠を選ぶ  ↑↓ 仲間','Q_MENU_ASSIGN':'R 入替  SELECT 外す','Q_LAST_MEMBER':'仲間はひとり以上必要'})
+texts.update({'Q_CHOOSE':'L＋左右で全ての仲間を選ぶ','Q_RELEASE':'Lを離して決定','Q_CANCEL':'B やめる','Q_PARTY':'仲間の編成','Q_EMPTY':'空き枠','Q_MENU_MOVE':'←→ 枠を選ぶ  ↑↓ 仲間','Q_MENU_ASSIGN':'R 入替  SELECT 外す','Q_LAST_MEMBER':'仲間はひとり以上必要'})
 for extra in ('equipment','creatures','region','northern_region','southern_region'):
     additions=ROOT/'assets'/extra/'ui_additions.json'
     if additions.exists():
@@ -62,7 +62,7 @@ for extra in ('equipment','creatures','region','northern_region','southern_regio
 texts.update({'NEW_CONFIRM':'新しい冒険を始めますか？','NEW_WARNING':'今の記録は上書きされます','NEW_CHOICE':'A 始める   B 戻る'})
 texts.update({'E_SOUTH_MORE': '南のふたりと契約しよう', 'E_WISH_SOUTH_0': '願い：三つの根をつなぐ', 'E_WISH_SOUTH_1': '願い：砂の水路をたどる', 'E_WISH_SOUTH_2': '願い：三つの光を届ける', 'E_WISH_SOUTH_3': '願い：干し布を整える', 'E_WISH_SOUTH_4': '願い：日陰の輪を守る', 'E_WISH_SOUTH_5': '願い：三つの留め金を開く', 'E_WISH_SOUTH_6': '願い：葉陰の道を結ぶ', 'E_WISH_SOUTH_7': '願い：小川の曇りをほどく', 'E_WISH_SOUTH_8': '願い：布越しの灯をつなぐ', 'E_WISH_SOUTH_9': '願い：三つの針を合わせる'})
 texts.update({'ST_FERRY_WAIT_A':'南の島へは、この船で。','ST_FERRY_WAIT_B':'港の灯を直したら、声をかけて。'})
-texts.update({'SP_AIM_CLEAR':'狙いを変えてみよう','SP_OTHER_SIDE':'R もう一度で反対側へ','SP_SECOND_TARGET':'別の相手を向いて、もう一度R'})
+texts.update({'SP_AIM_CLEAR':'狙いを変えてみよう','SP_OTHER_SIDE':'B もう一度で反対側へ','SP_SECOND_TARGET':'別の相手を向いて、もう一度B'})
 for extra in ('assets/magma_ui.json','assets/magma_region/dialogue.json','assets/underwater_ui.json','assets/underwater_region/dialogue_ja.json','assets/return_ui.json','assets/return_region/dialogue_ja.json','assets/horizons_region/dialogue_ja.json','assets/horizons_ui.json','assets/covenants_ui_texts.json','assets/covenants_power_ui.json'):
     additions=ROOT/extra
     if additions.exists():

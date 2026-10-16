@@ -33,7 +33,7 @@ class TreasureOriginalJourney(journey.OriginalJourney):
             self.cases.append({'case':'first-grove-approach-natural-death-and-retry','before':before,'after':self.status(),'controller_only':True,'game_ram_writes':0})
             self.coverage.append('first-grove-approach-ordinary-A-death-retry')
             self.select(0,summon=True)
-            self.check(self.get('summoned')==1,'ordinary B resummons Fire after death cleared the companion')
+            self.check(self.get('summoned')==1,'physical R resummons Fire after death cleared the companion')
             return super().goto(*a,**kw)
 
 class TreasureRegionalJourney(journey.RegionalJourney):

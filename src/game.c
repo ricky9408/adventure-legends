@@ -12,6 +12,7 @@
 #include "advanced_powers.h"
 #include "trials.h"
 #include "quickparty.h"
+#include "field_controls.h"
 #include "recruit_notice.h"
 #include "gear_runtime.h"
 #include "enemy_tactics.h"
@@ -149,6 +150,7 @@ volatile int camera_x,camera_y,max_hp,relic_found,camp_unlocked,roll_ticks,roll_
 int camera_fx,camera_fy;
 int enemy_clocks[MAX_ENEMIES],enemy_windups[MAX_ENEMIES],enemy_aimx[MAX_ENEMIES],enemy_aimy[MAX_ENEMIES];
 int roll_dx,roll_dy,combo_timer,swing_damage,attack_buffer,journal_tab;
+static FieldControlState field_controls;
 volatile unsigned int chapter_flags,room_flags,optional_flags,story_seen;
 volatile int boss_state,boss_phase,boss_state_ticks,boss_hp_max,stone_guard,guard_invuln,transition_lock,save_failed,checkpoint_spawn;
 int boss_aimx,boss_aimy,boss_dx,boss_dy,boss_pattern,hazard_mode,power_effect;
@@ -235,46 +237,39 @@ void rect(int x,int y,int w,int h,u8 c){
  }
 }
 /* Common opaque cards need one pass over each interior row. The original
- * five-rectangle behavior remains authoritative for clipped/small boxes,
- * unaligned left edges, and active world covers. Keep this routine in ROM. */
+ * five-rectangle behavior remains authoritative for clipped/small boxes
+ * and active world covers. Masked edge words preserve every outside byte.
+ * Keep this routine in ROM. */
 COLD void box(int x,int y,int w,int h){
- if(!world_mask_active&&x>=0&&y>=0&&x+w<=240&&y+h<=160&&!(x&3)&&w>=32&&h>=3){
-  /* DMA reads through MMIO addresses; volatile keeps source initialization
-   * observable to the compiler even though no C pointer reads these words. */
-  volatile u32 fill=(u32)UI_BG*0x01010101u,border=(u32)UI_BORDER*0x01010101u;
-  u32 left=(fill&0xffffff00u)|UI_BORDER,right=(fill&0x00ffffffu)|((u32)UI_BORDER<<24);
-  int row,words=w>>2,tail=w&3;
-  if(tail){rect(x,y,w,1,UI_BORDER);rect(x,y+h-1,w,1,UI_BORDER);}
-  else {
-#ifndef GAME_HOST_TEST
-  REG32(0x040000D4)=(u32)&border;REG32(0x040000D8)=(u32)(screen+y*120+(x>>1));REG32(0x040000DC)=0x85000000|words;
-  REG32(0x040000D8)=(u32)(screen+(y+h-1)*120+(x>>1));REG32(0x040000DC)=0x85000000|words;
-#else
-  {int col;for(col=x;col<x+w;col+=2){screen[y*120+(col>>1)]=(u16)border;screen[(y+h-1)*120+(col>>1)]=(u16)border;}}
-#endif
-  }
+ if(!world_mask_active&&x>=0&&y>=0&&x+w<=240&&y+h<=160&&w>=32&&h>=3){
+  volatile u32 fill=(u32)UI_BG*0x01010101u;
+  unsigned lead=(unsigned)x&3u,tail=(unsigned)(x+w)&3u;
+  unsigned words=((unsigned)(x+w-1)>>2)-((unsigned)x>>2)+1;
+  u32 left_keep=lead?(1u<<(lead*8))-1u:0u;
+  u32 right_keep=tail?~((1u<<(tail*8))-1u):0u;
+  u32 left=(fill&~left_keep&~(255u<<(lead*8)))|((u32)UI_BORDER<<(lead*8));
+  unsigned last=tail?tail-1u:3u;
+  u32 right=(fill&~right_keep&~(255u<<(last*8)))|((u32)UI_BORDER<<(last*8));
+  int row;
+  rect(x,y,w,1,UI_BORDER);rect(x,y+h-1,w,1,UI_BORDER);
 #ifndef GAME_HOST_TEST
   REG32(0x040000D4)=(u32)&fill;
 #endif
   for(row=y+1;row<y+h-1;row++){
-   u32 *dst=(u32*)(screen+row*120+(x>>1));dst[0]=left;if(!tail)dst[words-1]=right;
+   u32 *dst=(u32*)(screen+row*120+((unsigned)x>>2)*2);
+   dst[0]=(dst[0]&left_keep)|left;
+   dst[words-1]=(dst[words-1]&right_keep)|right;
 #ifndef GAME_HOST_TEST
-   REG32(0x040000D8)=(u32)(dst+1);REG32(0x040000DC)=0x85000000|(words-(tail?1:2));
+   REG32(0x040000D8)=(u32)(dst+1);REG32(0x040000DC)=0x85000000|(words-2);
 #else
-   {int col;for(col=1;col<words-(tail?0:1);col++)dst[col]=fill;}
+   {unsigned col;for(col=1;col<words-1;col++)dst[col]=fill;}
 #endif
-   /* An incomplete final word has 1–3 pixels. Use halfwords and preserve
-    * its unused neighbor byte exactly, matching the clipped rect reference. */
-   if(tail){u16*end=(u16*)(dst+words);
-    if(tail==1)*end=(*end&0xff00)|UI_BORDER;
-    else if(tail==2)*end=UI_BG|(UI_BORDER<<8);
-    else{end[0]=(u16)fill;end[1]=(end[1]&0xff00)|UI_BORDER;}
-   }
   }
   return;
  }
  rect(x,y,w,h,UI_BG);rect(x,y,w,1,UI_BORDER);rect(x,y+h-1,w,1,UI_BORDER);rect(x,y,1,h,UI_BORDER);rect(x+w-1,y,1,h,UI_BORDER);
 }
+
 void text_spans(const UiText*t,int x,int y,int col){const UiRun*r=t->runs[x&1];int n=t->count[x&1];u16 *base=screen+y*120+(x>>1),color=col|(col<<8);
  while(n--){u16 *dst=base+r->offset;int count=r->count;u16 mask=r->mask;r++;
   if(mask==3)while(count--)*dst++=color;
@@ -324,6 +319,9 @@ u16 modal_world_row[2][112];
 u16 play_world_strip[2][120*38] __attribute__((aligned(4)));
 /* Raw-buffer validity and clean framebuffer provenance are distinct. */
 int play_strip_valid[2],play_strip_clean[2],play_strip_disabled;
+/* Short notices cover only the bottom22 rows. A first taller reward captures
+ * the still-clean prefix before restoring this page's older raw pixels. */
+int play_strip_top[2];
 unsigned play_strip_reuses;
 #define OBJ_HERO 6144
 #define OBJ_COMPANION 6400
@@ -342,14 +340,15 @@ unsigned play_strip_reuses;
 #define OBJ_HUD_ACTION 14656
 #define OBJ_HUD_COOLDOWN 14720
 COLD void capture_play_strip(void){
- if(game_state!=PLAY||quickparty_open){play_strip_valid[page]=play_strip_clean[page]=0;return;}
+ int top=game_shop_reward_visible()?122:138;
+ if(game_state!=PLAY||quickparty_visible){play_strip_valid[page]=play_strip_clean[page]=0;return;}
  if(!boss_active()&&!toast_ticks&&!game_shop_reward_visible()&&!southern_powers_hint()&&!magma_powers_hint()&&!underwater_powers_hint()&&!return_powers_hint()&&!horizons_powers_hint()&&!covenants_powers_hint()){play_strip_valid[page]=0;play_strip_clean[page]=1;return;}
 #ifndef GAME_HOST_TEST
- REG32(0x040000D4)=(u32)(screen+122*120);REG32(0x040000D8)=(u32)play_world_strip[page];REG32(0x040000DC)=0x84000000|2280;
+ REG32(0x040000D4)=(u32)(screen+top*120);REG32(0x040000D8)=(u32)(play_world_strip[page]+(top-122)*120);REG32(0x040000DC)=0x84000000|((160-top)*60);
 #else
- {unsigned i;for(i=0;i<120u*38u;i++)play_world_strip[page][i]=screen[122*120+i];}
+ {int i;for(i=top*120;i<120*160;i++)play_world_strip[page][i-122*120]=screen[i];}
 #endif
- play_strip_valid[page]=1;play_strip_clean[page]=0;
+ play_strip_valid[page]=1;play_strip_clean[page]=0;play_strip_top[page]=top;
 }
 void obj_upload(const u8 *data,int w,int h,int offset){int tx,ty,x,y,k=0;u16 *dst=(u16*)(0x06014000+offset);
  /* Aligned source rows already contain the exact little-endian pixel bytes.
@@ -400,7 +399,7 @@ void obj_add(int off,int x,int y,int w,int h,int priority,int depth,int flip){in
  if(x+w>136&&x<200&&y+h>3&&y<20){int left=game_save_badge_left();if(left<200&&x+w>left)return;}
  if(game_state==PLAY&&x+w>5&&x<121&&y+h>122&&y<139&&game_shop_reward_visible())return;
  /* Menus are background pixels: hide actors where a panel covers them. */
- if(priority==1||priority==2){int display=game_display_state();if(quickparty_open&&x+w>26&&x<214&&y+h>29&&y<160)return;if(display==PAUSE||display==11||game_state==13||game_state==DEAD||game_state==EVOLVE_CONFIRM||game_state==EVOLVE_ANIM)return;if(display==DIALOG&&y+h>99)return;}
+ if(priority==1||priority==2){int display=game_display_state();if(quickparty_visible&&x+w>26&&x<214&&y+h>29&&y<160)return;if(display==PAUSE||display==11||game_state==13||game_state==DEAD||game_state==EVOLVE_CONFIRM||game_state==EVOLVE_ANIM)return;if(display==DIALOG&&y+h>99)return;}
  if(w==16&&h==16)size=1;else if(w==32&&h==32)size=2;else if(w==32&&h==16){shape=1;size=2;}else if(w==32&&h==8){shape=1;size=1;}else if(w==16&&h==8){shape=1;size=0;}
  o.a0=(y&255)|0x2000|(shape<<14);o.a1=(x&511)|(size<<14)|(flip?0x1000:0);o.a2=(512+off/32)|(priority<<10);o.pad=0;
  obj_entries[obj_count]=o;obj_depth[obj_count]=depth;obj_count++;
@@ -448,7 +447,7 @@ COLD void game_companion_reseat(void){game_companion_reanchor(cx,cy);}
 COLD void game_region_warp(int x,int y){game_road_interrupt();if(solid(x,y))return;px=x;py=y;px_q8=x*256;py_q8=y*256;game_companion_reanchor(x+14,y+3);game_attacks_suspend();travel_feedback_arrive((unsigned)room,x,y);camera_update(1);cache_valid[0]=cache_valid[1]=0;}
 void draw_campaign_actors(void);
 void draw_floating_hud(void){int code=(int)progression_current_form()*2+summoned;int width=ability_cd?(ability_max-ability_cd)*16/ability_max:16;
- if(code!=gfx_hud_code){u8 pixels[64];int x,y;const u8 rr[7]={30,17,17,30,20,18,17},bb[7]={30,17,17,30,17,17,30};const u8*rows=summoned?rr:bb;obj_upload(companion_form_pixels(progression_current_form(),0,0),16,16,OBJ_HUD_COMPANION);for(y=0;y<8;y++)for(x=0;x<8;x++)pixels[y*8+x]=(x>=1&&x<=5&&y<7&&(rows[y]&(1<<(5-x))))?WHITE:INK;obj_upload(pixels,8,8,OBJ_HUD_ACTION);gfx_hud_code=code;}
+ if(code!=gfx_hud_code){u8 pixels[64];int x,y;const u8 rows[7]={30,17,17,30,17,17,30};obj_upload(companion_form_pixels(progression_current_form(),0,0),16,16,OBJ_HUD_COMPANION);for(y=0;y<8;y++)for(x=0;x<8;x++)pixels[y*8+x]=(x>=1&&x<=5&&y<7&&(rows[y]&(1<<(5-x))))?WHITE:INK;obj_upload(pixels,8,8,OBJ_HUD_ACTION);gfx_hud_code=code;}
  if(width!=gfx_hud_bar){u32 pixels[64];u8*bytes=(u8*)pixels;u32 ink=(u32)INK*0x01010101u;int x,y;
   /* Exact same 32x8 tile: only rows2..5 and columns0..17 are opaque. */
   for(x=0;x<64;x++)pixels[x]=0;
@@ -459,7 +458,7 @@ void draw_floating_hud(void){int code=(int)progression_current_form()*2+summoned
 }
 /* Read-only interaction query uses the same strict-first target as A. */
 COLD void draw_contextual_a_hint(void){int x,y,found=0;
- if(game_state!=PLAY||quickparty_open||scene_present_phase||game_shop_in_range())return;
+ if(game_state!=PLAY||quickparty_visible||scene_present_phase||game_shop_in_range())return;
  if((unsigned)(room-46)<8u)found=underwater_game_target_hint(&x,&y);
  else if((unsigned)(room-54)<8u)found=return_game_target_hint(&x,&y);
  else if((unsigned)(room-62)<8u)found=horizons_game_target_hint(&x,&y);
@@ -483,7 +482,7 @@ void draw_actors(void){int i,anim=(swing||weapon_action.phase==WEAPON_CHARGING||
  hero=sprite_data[SPR_HERO_DOWN_0+face*2+(anim&1)];
 #endif
  if(code!=gfx_hero_frame){obj_upload(hero,16,16,OBJ_HERO);gfx_hero_frame=code;}
- if(room==0){obj_sprite(SPR_ELDER,120,92,92);if(game_state==PLAY&&near(px,py,120,94,29))obj_add(OBJ_HINT,116,75,8,8,1,999,0);if(game_shop_in_range()&&!quickparty_open&&!scene_present_phase)obj_add(OBJ_HINT,52,73,8,8,1,999,0);}
+ if(room==0){obj_sprite(SPR_ELDER,120,92,92);if(game_state==PLAY&&near(px,py,120,94,29))obj_add(OBJ_HINT,116,75,8,8,1,999,0);if(game_shop_in_range()&&!quickparty_visible&&!scene_present_phase)obj_add(OBJ_HINT,52,73,8,8,1,999,0);}
  game_shop_draw_merchants();draw_contextual_a_hint();draw_campaign_actors();trials_draw_actors(room,camera_x,camera_y);
  if(room==2){if(torches&1)obj_sprite(SPR_FLAME_0+(frame/7&1),64,57,70);if(torches&2)obj_sprite(SPR_FLAME_0+(frame/7&1),176,57,70);}
  for(i=0;i<MAX_ENEMIES;i++)if(enemies[i].hp){Enemy *e=&enemies[i];obj_add(OBJ_SHADOW,e->x-8,e->y-6,16,16,2,e->y-1,0);if(!e->flash||(frame&2)){if(e->kind==ENEMY_LANE_CHARGER)enemy_tactics_draw((unsigned)i);else if(e->kind==2){int f=enemy_windups[i]?WORLD_SPR_RANGER_WINDUP:WORLD_SPR_RANGER_IDLE;if(room>=16)region_pixels_actor(200+(unsigned)f,world_sprites[f],e->x,e->y);else obj_add(OBJ_WORLD+f*256,e->x-8,e->y-8,16,16,1,e->y,0);}else obj_sprite(SPR_SLIME_0+(frame/10&1),e->x,e->y,e->y);}if(enemy_windups[i])obj_add(OBJ_SPARK,e->x-4,e->y-29,8,8,1,e->y+1,0);game_draw_enemy_phase((unsigned)i,e->x,e->y);}
@@ -541,7 +540,7 @@ COLD void tick_play_toast(void){if(game_state==PLAY&&toast_ticks&&!play_hint_tex
 COLD int game_power_aim_hold(unsigned held){int holding=0;
  holding|=underwater_powers_hold_input(held);holding|=return_powers_hold_input(held);
  holding|=horizons_powers_hold_input(held);holding|=magma_powers_hold_input(held);
- /* The private flag keeps an R-only hold distinct from no preview. Low bits
+ /* The private flag keeps an ability-only hold distinct from no preview. Low bits
   * carry held cardinal input; all other physical actions remain fresh edges. */
  return holding?(1024|(int)(held&240u)):0;
 }
@@ -814,6 +813,28 @@ COLD void ability_apply(void){int i;legacy_ability_success=0;legacy_ability_shot
  if(progression_command()>4&&advanced_power(progression_command())){legacy_ability_success=1;return;}
  if(spirit==0){legacy_ability_shot=fire_shot(px,py,face==2?-2:face==3?2:0,face==1?-2:face==0?2:0,0);legacy_ability_success=legacy_ability_shot>=0;}}
 COLD void ability(void){unsigned token=0;if((unsigned)room-54u<24u&&summoned&&!ability_cd)token=return_legacy_begin(progression_command());ability_apply();if(token)return_legacy_confirm(legacy_ability_success,legacy_ability_shot);}
+/* Opening a selector or recalling cannot release a still-held anticipation.
+ * Already emitted effects keep their original lifetime; no cooldown is refunded. */
+COLD void game_power_preview_cancel(void){
+ if(magma_power_time&&!magma_power_age)magma_powers_cancel_preview();
+ if(underwater_power_time&&!underwater_power_age)underwater_powers_reset();
+ if(return_power_time&&!return_power_age)return_powers_reset();
+ if(horizons_power_time&&!horizons_power_age)horizons_powers_reset();
+}
+COLD void game_field_companion_toggle(void){
+ summoned=!summoned;
+ if(!summoned){game_power_preview_cancel();return_legacy_cancel();covenants_powers_selection_changed();covenants_game_selection_changed();}
+ game_companion_reanchor(px+14,py);sfx(2);if(summoned)toast(TX_SUMMONED);
+}
+COLD int game_field_context_input(void){
+ return covenants_game_input((unsigned)pressed,(unsigned)keys)||horizons_game_input((unsigned)pressed,(unsigned)keys)||return_game_input((unsigned)pressed,(unsigned)keys)||underwater_game_input((unsigned)pressed,(unsigned)keys)||magma_game_input((unsigned)pressed,(unsigned)keys);
+}
+COLD void game_field_ability(void){
+ if(!progression_selected()){toast(TX_E_NO_MEMBER);return;}
+ if(!summoned){summoned=1;game_companion_reanchor(px+14,py);}
+ ability();
+}
+
 COLD int southern_ferry_interact(void){
  if(room!=22||!near(px,py,208,224,22)||!game_region_entry_safe())return 0;
  if(!southern_can_enter(&adventure_save,30)){dialogue(TX_ST_FERRY_WAIT_A,TX_ST_FERRY_WAIT_B,PLAY);return 1;}
@@ -915,7 +936,7 @@ COLD int begin_homecoming_credits(void){
  if(game_state!=PLAY||quickparty_open||!covenants_game_take_homecoming_offer(!save_requested&&!save_feedback_background&&!save_failed))return 0;
  game_attacks_suspend();game_state=WIN;ending_credits_offer_homecoming();return 1;
 }
-void update(void){int dx=0,dy=0,return_input=0,aim_holding=0;frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY)quickparty_reset(keys);else if(quickparty_update(keys,pressed))return;if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
+void update(void){int dx=0,dy=0,return_input=0,aim_holding=0,context_owned=0;FieldControlInput controls;frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY){quickparty_reset(keys);field_controls_reset(&field_controls,(unsigned)keys);}else{quickparty_filter_input(&keys,&pressed);if(pressed&KEY_L)game_power_preview_cancel();if(quickparty_update(keys,pressed))return;}if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
  if(begin_homecoming_credits())return;
  if(game_shop_update())return;
  if(game_state==EVENT_PENDING){event_step();if(game_state!=EVENT_PENDING)game_road_cancel();return;}
@@ -945,10 +966,16 @@ void update(void){int dx=0,dy=0,return_input=0,aim_holding=0;frame++;if(game_sta
  if(game_state==PAUSE){int input=journal_nav_keys(keys,pressed),nav;if(journal_tab==JOURNAL_ITEMS&&game_shop_confirm&&(input&KEY_B)){game_shop_items_input(input);return;}nav=journal_nav_input(input);if(nav==JOURNAL_CLOSE){game_shop_cancel_items();acknowledge_save_failure();game_state=PLAY;return;}if(nav==JOURNAL_CONSUMED)return;if(game_shop_items_input(input)||quickparty_menu_input(input)||progression_menu_input(input)||gear_menu_input(input)||region_game_menu_input(input)||north_game_menu_input(input)||south_game_menu_input(input)||magma_game_menu_input(input)||underwater_game_menu_input(input)||return_game_menu_input(input)||horizons_game_menu_input(input)||covenants_game_menu_input(input))return;if((input&KEY_A)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);}return;}
  if(game_state==DEAD){if(pressed&KEY_A){game_health_fill();ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,room>=16?checkpoint_spawn:2);}return;}
  if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;if(!ending_credits_returns_to_field())enter_room(0,3);}return;}
- ticks++;{int i;for(i=0;i<6;i++)if(impacts[i].life)impacts[i].life--;}if(hitstop){hitstop--;return;}if(pressed&KEY_START){journal_nav_open();game_state=PAUSE;return;}if(area_ticks)area_ticks--;if(invuln)invuln--;if(ability_cd)ability_cd--;if(!ability_cd)covenants_cooldown_owned=0;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;aim_holding=game_power_aim_hold(summoned&&!(pressed&KEY_B)?(unsigned)keys:0);advanced_tick();regional_powers_tick();northern_powers_tick();game_geometry_sync();southern_powers_tick();magma_powers_tick();if(underwater_power_time||underwater_power_cast_time)underwater_powers_tick();if(return_power_time||return_power_cast_time)return_powers_tick();if(horizons_power_time||horizons_power_cast_time)horizons_powers_tick();if(covenants_power_time||covenants_power_cast_time)covenants_powers_tick();if(event_frame())return;game_combat_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;
- underwater_powers_input((unsigned)(pressed|(aim_holding&240)));if(return_power_time)return_input=return_powers_input((unsigned)(pressed|(aim_holding&240)));if(horizons_power_time)return_input|=horizons_powers_input((unsigned)(pressed|(aim_holding&240)));if(covenants_power_time)return_input|=covenants_powers_input((unsigned)pressed);
- {int grabbing=covenants_game_input((unsigned)pressed,(unsigned)keys)||horizons_game_input((unsigned)pressed,(unsigned)keys)||return_game_input((unsigned)pressed,(unsigned)keys)||underwater_game_input((unsigned)pressed,(unsigned)keys)||magma_game_input((unsigned)pressed,(unsigned)keys);if(grabbing){walk=0;game_attacks_suspend();if(event_frame()||game_state!=PLAY)return;goto movement_done;}}
- if(pressed&KEY_B){summoned=!summoned;if(!summoned){return_legacy_cancel();covenants_powers_selection_changed();covenants_game_selection_changed();}game_companion_reanchor(px+14,py);sfx(2);if(summoned)toast(TX_SUMMONED);}
+ ticks++;{int i;for(i=0;i<6;i++)if(impacts[i].life)impacts[i].life--;}if(hitstop){hitstop--;return;}if(pressed&KEY_START){journal_nav_open();game_state=PAUSE;return;}/* Contextual B cancellation owns the press before any power release.
+ * R recall runs before power ticks, so a held preview cannot fire on hiding. */
+ context_owned=game_field_context_input();
+ if(context_owned)game_power_preview_cancel();
+ if(event_frame()||game_state!=PLAY)return;
+ controls=field_controls_read(&field_controls,(unsigned)keys,(unsigned)pressed);
+ if(!context_owned&&controls.companion_pressed)game_field_companion_toggle();
+ if(area_ticks)area_ticks--;if(invuln)invuln--;if(ability_cd)ability_cd--;if(!ability_cd)covenants_cooldown_owned=0;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;aim_holding=game_power_aim_hold(summoned&&!context_owned&&!controls.companion_pressed?controls.power_held:0);advanced_tick();regional_powers_tick();northern_powers_tick();game_geometry_sync();southern_powers_tick();magma_powers_tick();if(underwater_power_time||underwater_power_cast_time)underwater_powers_tick();if(return_power_time||return_power_cast_time)return_powers_tick();if(horizons_power_time||horizons_power_cast_time)horizons_powers_tick();if(covenants_power_time||covenants_power_cast_time)covenants_powers_tick();if(event_frame())return;game_combat_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;
+ if(context_owned){walk=0;game_attacks_suspend();goto movement_done;}
+ if(summoned){underwater_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(return_power_time)return_input=return_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(horizons_power_time)return_input|=horizons_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(covenants_power_time)return_input|=covenants_powers_input(controls.power_pressed);}
  if(keys&KEY_LEFT){dx=-1;face=2;}if(keys&KEY_RIGHT){dx=1;face=3;}if(keys&KEY_UP){dy=-1;face=1;}if(keys&KEY_DOWN){dy=1;face=0;}if(swing||weapon_action.phase==WEAPON_WINDUP||weapon_action.phase==WEAPON_ACTIVE)face=weapon_action.direction;walk=(dx||dy)&&!aim_holding;if(walk)walk_phase++;
  /* Select has no field action and no input grants dodge invulnerability. */
  if(aim_holding)walk=0;else{int speed=advanced_guard_charges?224:gear_stats.speed_q8,diag=advanced_guard_charges?158:gear_stats.diagonal_q8;if(weapon_action.phase==WEAPON_CHARGING){speed=speed*3/4;diag=diag*3/4;}move_player(dx*(dx&&dy?diag:speed),dy*(dx&&dy?diag:speed));}
@@ -958,10 +985,10 @@ void update(void){int dx=0,dy=0,return_input=0,aim_holding=0;frame++;if(game_sta
  /* A deferred rest must freeze before another hostile simulation update.
   * SaveFrame paints the notice now; proof and snapshot occur on later frames. */
  if(save_requested&&(room==38||room==39)&&magma_game_save_prepare_pending()){save_frame();return;}
- /* An A interaction may have opened dialogue. Do not let a simultaneous R
+ /* An A interaction may have opened dialogue. Do not let a simultaneous B
   * start a cast after the action state has already changed. */
  if(game_state!=PLAY)return;
- if((pressed&KEY_R)&&!(return_input&2))ability();
+ if((controls.power_pressed&FIELD_POWER_ACTION)&&!(return_input&2))game_field_ability();
  if(event_frame())return;
  if(game_state!=PLAY)return;
  movement_done:
@@ -990,20 +1017,41 @@ COLD void draw_map(void){int mx=48,my=56,mw=144,mh=76;box(8,31,224,122);centered
 COLD int quest_id(void){if((unsigned)room-70u<8u)return covenants_game_quest_text();if((unsigned)room-62u<8u)return horizons_game_quest_text();if((unsigned)room-54u<8u)return return_game_quest_text();if((unsigned)(room-46)<8u)return underwater_game_quest_text();if(((unsigned)(room-38)<8u))return magma_game_quest_text();if(south_game_is_room((unsigned)room))return south_game_quest_text();if(north_game_is_room((unsigned)room))return north_game_quest_text();if(region_game_is_room((unsigned)room))return region_game_quest_text();if(room==14)return TX_T_WIND_HINT1;if(room==15)return TX_T_STONE_HINT1;if(room<4&&(chapter_flags&SAVE4_CORE_CLEAR))return chapter_flags&SAVE4_ENDING_SEEN?TX_C_QUEST_COMPLETE:TX_C_QUEST_RETURN;if(room<4&&(chapter_flags&SAVE4_SKY_CLEAR))return TX_C_QUEST_ACT3;if(room<4&&(chapter_flags&SAVE4_GROVE_CLEAR))return TX_C_QUEST_ACT2;if(room==0)return TX_QUEST0;if(room==1)return bridge_open?TX_QUEST2:TX_QUEST1;if(room==2)return torches==3?TX_QUEST4:TX_QUEST3;if(room==3)return TX_QUEST5;{const int q[]={TX_C_QUEST_ACT2,TX_C_QUEST_SKY_VANE,TX_C_QUEST_SKY_PATROL,TX_C_QUEST_SKY_RELAY,TX_C_QUEST_SKY_BOSS,TX_C_QUEST_ACT3,TX_C_QUEST_CORE_WEIGHTS,TX_C_QUEST_CORE_ROOTS,TX_C_QUEST_CORE_LAMPS,TX_C_QUEST_CORE_BOSS};return q[room-4];}}
 int game_save_badge_id(void){if(save_notice_visible())return 0;if(save_failed)return TX_FB_SAVE_ERROR;if(game_state==EVENT_PENDING)return TX_FB_WORKING;if(game_state==SAVE_PENDING||economy_pending()||later_rewards_pending()||save_feedback_badge()==1||(save_requested&&!save5_preflight_active()))return TX_FB_SAVING;return save_feedback_badge()==2?TX_FB_SAVED:0;}
 COLD int game_save_badge_left(void){int id=game_save_badge_id();return id?192-ui_texts[id].width:240;}
-COLD void game_draw_save_badge(void){int id=game_save_badge_id();if(id){int w=ui_texts[id].width+8;box(200-w,3,w,17);text(id,204-w,3,TEAL);}}
+/* Immutable badge pixels are keyed only by their text ID; durable save state
+ * still decides which badge is shown and when it changes. */
+u16 save_badge_pixels[120*17] __attribute__((aligned(4)));
+int save_badge_cached_id;
+COLD void game_draw_save_badge(void){
+ int id=game_save_badge_id(),row;if(id){int w=ui_texts[id].width+8,left=200-w,first=(left+1)>>1;u16*target=screen;
+  if(world_mask_active||w>200){box(left,3,w,17);text(id,left+4,3,TEAL);return;}
+  if(save_badge_cached_id!=id){screen=save_badge_pixels;box(left,0,w,17);text(id,left+4,0,TEAL);screen=target;save_badge_cached_id=id;}
+  for(row=0;row<17;row++){
+   const u16*src=save_badge_pixels+row*120;u16*dst=target+(row+3)*120;
+   if(left&1)dst[left>>1]=(dst[left>>1]&255)|(src[left>>1]&0xff00);
+#ifndef GAME_HOST_TEST
+   REG32(0x040000D4)=(u32)(src+first);REG32(0x040000D8)=(u32)(dst+first);REG32(0x040000DC)=0x80000000|(100-first);
+#else
+   {int x;for(x=first;x<100;x++)dst[x]=src[x];}
+#endif
+  }
+ }
+}
 COLD void draw_save_failure_notice(void){if(save_notice_visible()){int left=save_notice_left();box(left,SAVE_NOTICE_Y,240-left*2,SAVE_NOTICE_H);centered(TX_C_SAVE_FAILED,SAVE_NOTICE_Y+2,CREAM);}}
 COLD int southern_hint_text(void){unsigned h=southern_powers_hint();return h==SOUTHERN_HINT_OTHER_SIDE?TX_SP_OTHER_SIDE:h==SOUTHERN_HINT_SECOND_TARGET?TX_SP_SECOND_TARGET:0;}
 COLD void draw_play_toast(void){if(toast_ticks&&game_state==PLAY&&!play_hint_text()){const UiText*t=&ui_texts[toast_id];box((240-t->width-10)/2,143,t->width+10,17);centered(toast_id,143,CREAM);}}
 COLD void draw_play_hint(void){if(game_state==PLAY){int hint=play_hint_text();if(hint){int w=ui_texts[hint].width+12;box((240-w)/2,138,w,19);centered(hint,140,TEAL);}}}
-/* Toast and hint pixels depend only on their immutable text IDs. Keep one
- * bounded buffer for their 22-row union, never the changing world beneath it.
+/* Toast and hint pixels depend only on their immutable text IDs. Keep a
+ * bounded toast buffer and four reusable19-row hint cards, never the changing
+ * world beneath them.
  * A live action hint owns this slot; ordinary toast time pauses behind it. Odd
  * boundary bytes are masked so adjacent world/earlier-overlay pixels survive.
  * The uncached routines above remain the same-ROM differential reference. */
 u16 play_notice_pixels[120*22] __attribute__((aligned(4)));
+u16 play_hint_pixels[4][120*19] __attribute__((aligned(4)));
+int play_hint_ids[4];unsigned play_hint_cursor;
 int play_notice_valid,play_notice_toast,play_notice_hint,play_notice_cache_disabled;
 COLD void draw_play_notices(int build_cache){
- int tid,hid,tx=0,tw=0,hx=0,hw=0,y;u16 *target=screen;
+ int tid,hid,tx=0,tw=0,hx=0,hw=0,y;u16 *target=screen,*notice_source=play_notice_pixels;
  if(game_state!=PLAY)return;
  hid=play_hint_text();tid=toast_ticks&&!hid?toast_id:-1;
  if(tid<0&&!hid)return;
@@ -1011,7 +1059,17 @@ COLD void draw_play_notices(int build_cache){
  if(hid){hw=ui_texts[hid].width+12;hx=(240-hw)/2;}
  /* Retain the original clipping/masking behavior outside these card bounds. */
  if(play_notice_cache_disabled||world_mask_active||tw>240||hw>240)goto uncached;
- if(!play_notice_valid||play_notice_toast!=tid||play_notice_hint!=hid){
+ if(hid){
+  unsigned i;
+  for(i=0;i<4;i++)if(play_hint_ids[i]==hid)break;
+  if(i==4){
+   if(!build_cache)goto uncached;
+   i=play_hint_cursor++&3u;
+   screen=play_hint_pixels[i];box(hx,0,hw,19);centered(hid,2,TEAL);
+   screen=target;play_hint_ids[i]=hid;
+  }
+  notice_source=play_hint_pixels[i];
+ }else if(!play_notice_valid||play_notice_toast!=tid||play_notice_hint!=hid){
   /* A first/changed notice must not add cache construction to a full world
    * paint. Reused underlays leave room to build; later full paints can copy
    * that same immutable card without carrying any old world pixels. */
@@ -1026,7 +1084,7 @@ COLD void draw_play_notices(int build_cache){
   if(tid>=0&&y>=5){left=tx;right=tx+tw;}
   if(hid&&y<19){if(hx<left)left=hx;if(hx+hw>right)right=hx+hw;}
   first=(left+1)>>1;last=right>>1;
-  src=play_notice_pixels+y*120;dst=target+(y+138)*120;
+  src=notice_source+y*120;dst=target+(y+138)*120;
   if(left&1)dst[left>>1]=(dst[left>>1]&255)|(src[left>>1]&0xff00);
   if(right&1)dst[last]=(dst[last]&0xff00)|(src[last]&255);
 #ifndef GAME_HOST_TEST
@@ -1068,7 +1126,7 @@ COLD void render_static(void){int display_state=game_display_state();
 #endif
  /* The ending paints a complete opaque title backdrop. No world pixels
   * survive it; keep the raw-strip invalidation without painting underneath. */
- if(game_state==WIN&&!quickparty_open){world_mask_active=0;play_strip_valid[page]=play_strip_clean[page]=0;if(!ending_credits_draw()){copy_bg(BACK_TITLE);box(8,40,224,105);centered(TX_COMPLETE,49,GOLD);centered(TX_THANKS,67,CREAM);{JourneyGoal g=journey_goal_read(&adventure_save,chapter_flags,(unsigned)room);centered(g.title,83,TEAL);}ending_credits_card_hint();centered(TX_C_FINAL_SMALL,149,GOLD);}game_draw_save_badge();draw_save_failure_notice();
+ if(game_state==WIN&&!quickparty_visible){world_mask_active=0;play_strip_valid[page]=play_strip_clean[page]=0;if(!ending_credits_draw()){copy_bg(BACK_TITLE);box(8,40,224,105);centered(TX_COMPLETE,49,GOLD);centered(TX_THANKS,67,CREAM);{JourneyGoal g=journey_goal_read(&adventure_save,chapter_flags,(unsigned)room);centered(g.title,83,TEAL);}ending_credits_card_hint();centered(TX_C_FINAL_SMALL,149,GOLD);}game_draw_save_badge();draw_save_failure_notice();
 #ifndef GAME_HOST_TEST
   render_card_cycles=cycle_now()-profile_started;
 #endif
@@ -1081,7 +1139,7 @@ COLD void render_static(void){int display_state=game_display_state();
 #endif
  if(display_state==PAUSE){int n;for(n=0;n<112;n++)modal_world_row[page][n]=screen[153*120+4+n];}draw_play_notices(0);if(display_state==DIALOG){box(5,99,230,56);text(dialog_speakers[dpage],13,103,GOLD);text(dialog_lines[dpage*2],13,120,CREAM);text(dialog_lines[dpage*2+1],13,136,CREAM);text(TX_NEXT,207,102,GOLD);}
  if(!game_shop_draw()&&display_state==PAUSE)draw_journal_panel();
- if(quickparty_open)quickparty_draw();
+ if(quickparty_visible)quickparty_draw();
 
  if(display_state==EVOLVE_CONFIRM)progression_draw_confirm();
  if(display_state==EVOLVE_ANIM)progression_draw_evolution();
@@ -1122,13 +1180,14 @@ COLD int reuse_play_strip(const u32*key){unsigned i;int raw;
 #ifndef GAME_HOST_TEST
  unsigned started;
 #endif
- if(play_strip_disabled||game_state!=PLAY||quickparty_open||!cache_valid[page]||(!play_strip_valid[page]&&!play_strip_clean[page])||cache_fields[page][1]!=PLAY)return 0;
+ if(play_strip_disabled||game_state!=PLAY||quickparty_visible||!cache_valid[page]||(!play_strip_valid[page]&&!play_strip_clean[page])||cache_fields[page][1]!=PLAY)return 0;
  /* Campaign4..13 backgrounds use the explicit room/chapter flags below.
   * EXP/level bookkeeping changes progression_revision but only the HUD/actors
   * and earned notice; both are still drawn this update. Other chapters keep
   * their full progression key because it can change authored scenery. */
  for(i=0;i<CACHE_FIELDS;i++)if(i!=7&&i!=8&&i!=27&&i!=29&&i!=31&&i!=33&&i!=35&&i!=37&&i!=40&&i!=42&&!(i==19&&room>=4&&room<14)&&cache_fields[page][i]!=key[i])return 0;
  raw=play_strip_valid[page];
+ if(raw&&play_strip_top[page]!=122&&play_strip_top[page]!=138)return 0;
  if(!raw&&(!play_strip_clean[page]||boss_active()||cache_fields[page][7]||cache_fields[page][27]||cache_fields[page][29]||cache_fields[page][31]||cache_fields[page][33]||cache_fields[page][35]||cache_fields[page][37]||cache_fields[page][42]))return 0;
 #ifndef GAME_HOST_TEST
  started=cycle_now();
@@ -1136,11 +1195,19 @@ COLD int reuse_play_strip(const u32*key){unsigned i;int raw;
  /* A clean page is already the exact underlay. Capture before its first
   * overlay; never restore an uninitialized raw buffer or invent new keys. */
  if(!raw)capture_play_strip();
- if(raw){
+ if(raw){int top=play_strip_top[page];
+  if(top>122&&game_shop_reward_visible()){
 #ifndef GAME_HOST_TEST
-  REG32(0x040000D4)=(u32)play_world_strip[page];REG32(0x040000D8)=(u32)(screen+122*120);REG32(0x040000DC)=0x84000000|2280;
+   REG32(0x040000D4)=(u32)(screen+122*120);REG32(0x040000D8)=(u32)play_world_strip[page];REG32(0x040000DC)=0x84000000|((top-122)*60);
 #else
-  unsigned n;for(n=0;n<120u*38u;n++)screen[122*120+n]=play_world_strip[page][n];
+   int n;for(n=122*120;n<top*120;n++)play_world_strip[page][n-122*120]=screen[n];
+#endif
+   top=play_strip_top[page]=122;
+  }
+#ifndef GAME_HOST_TEST
+  REG32(0x040000D4)=(u32)(play_world_strip[page]+(top-122)*120);REG32(0x040000D8)=(u32)(screen+top*120);REG32(0x040000DC)=0x84000000|((160-top)*60);
+#else
+  int n;for(n=top*120;n<120*160;n++)screen[n]=play_world_strip[page][n-122*120];
 #endif
  }
  draw_play_notices(1);game_shop_draw_reward();
@@ -1189,11 +1256,13 @@ COLD void finish_scene_presentation(void){int i,other=page^1;
  for(i=0;i<CACHE_FIELDS;i++)cache_fields[page][i]=cache_fields[other][i];
  for(i=0;i<112;i++)modal_world_row[page][i]=modal_world_row[other][i];
  cache_valid[page]=cache_valid[other];cached_armor[page]=cached_armor[other];play_strip_valid[page]=play_strip_valid[other];play_strip_clean[page]=play_strip_clean[other];
- if(play_strip_valid[other]){
+ play_strip_top[page]=play_strip_top[other];
+ if(play_strip_valid[page]&&play_strip_top[page]!=122&&play_strip_top[page]!=138){play_strip_valid[page]=play_strip_clean[page]=0;}
+ if(play_strip_valid[page]){int top=play_strip_top[page];
 #ifndef GAME_HOST_TEST
-  REG32(0x040000D4)=(u32)play_world_strip[other];REG32(0x040000D8)=(u32)play_world_strip[page];REG32(0x040000DC)=0x84000000|2280;
+  REG32(0x040000D4)=(u32)(play_world_strip[other]+(top-122)*120);REG32(0x040000D8)=(u32)(play_world_strip[page]+(top-122)*120);REG32(0x040000DC)=0x84000000|((160-top)*60);
 #else
-  for(i=0;i<120*38;i++)play_world_strip[page][i]=play_world_strip[other][i];
+  for(i=(top-122)*120;i<120*38;i++)play_world_strip[page][i]=play_world_strip[other][i];
 #endif
  }
  scene_present_phase=0;
@@ -1205,20 +1274,20 @@ COLD int game_display_brightness(void){if(scene_present_phase==2)return presente
 void render(void){render_world_cycles=render_card_cycles=render_actors_cycles=0;
  if(game_state==LOAD_PENDING){screen=(u16*)(page?0x0600A000:0x06000000);draw_loading();obj_count=0;cache_valid[page]=0;return;}
  if(game_state==OPENING_SCENE){opening_scene_render();return;}
- if(game_state!=PLAY||quickparty_open)play_strip_valid[page]=play_strip_clean[page]=0;
+ if(game_state!=PLAY||quickparty_visible)play_strip_valid[page]=play_strip_clean[page]=0;
  if(scene_present_phase==1){copy_previous_bitmap();scene_present_phase=2;return;}
  if(scene_present_phase==3){finish_scene_presentation();return;}
  if(progression_evolution_handoff()){
   /* Retain the exact last confirmation and OAM until publication. */
   copy_previous_bitmap();return;
  }
- game_geometry_sync();u32 key[CACHE_FIELDS]={room,game_state,spirit,summoned,bridge_open,torches,dpage,game_state==PLAY&&toast_ticks>0,game_state==PLAY?toast_id:0,has_save,journal_tab,room_flags,chapter_flags,optional_flags,game_state==DIALOG?dialog_lines[dpage*2]:-1,game_state==DIALOG?dialog_lines[dpage*2+1]:-1,game_state==DIALOG?dialog_speakers[dpage]:-1,scrolling_room()?camera_x:0,scrolling_room()?camera_y:0,progression_revision,area_ticks>0,quickparty_revision,save_notice_visible(),gear_menu_revision,region_game_revision,north_game_revision,south_game_revision,game_state==PLAY?southern_powers_hint():0,magma_game_revision,game_state==PLAY?magma_powers_hint():0,underwater_game_revision,game_state==PLAY?underwater_powers_hint():0,return_game_revision,game_state==PLAY?return_powers_hint():0,horizons_game_revision,game_state==PLAY?horizons_powers_hint():0,covenants_game_revision,game_state==PLAY?covenants_powers_hint():0,journal_nav_revision,game_save_badge_id(),game_shop_revision,game_state==WIN?ending_credits_revision:(unsigned)title_option,game_shop_reward_visible(),save_failed,game_display_state()};int i,changed=!cache_valid[page],world_changed=!cache_valid[page],other=page^1,reusable=quickparty_open&&cache_valid[page^1];
+ game_geometry_sync();u32 key[CACHE_FIELDS]={room,game_state,spirit,summoned,bridge_open,torches,dpage,game_state==PLAY&&toast_ticks>0,game_state==PLAY?toast_id:0,has_save,journal_tab,room_flags,chapter_flags,optional_flags,game_state==DIALOG?dialog_lines[dpage*2]:-1,game_state==DIALOG?dialog_lines[dpage*2+1]:-1,game_state==DIALOG?dialog_speakers[dpage]:-1,scrolling_room()?camera_x:0,scrolling_room()?camera_y:0,progression_revision,area_ticks>0,quickparty_revision,save_notice_visible(),gear_menu_revision,region_game_revision,north_game_revision,south_game_revision,game_state==PLAY?southern_powers_hint():0,magma_game_revision,game_state==PLAY?magma_powers_hint():0,underwater_game_revision,game_state==PLAY?underwater_powers_hint():0,return_game_revision,game_state==PLAY?return_powers_hint():0,horizons_game_revision,game_state==PLAY?horizons_powers_hint():0,covenants_game_revision,game_state==PLAY?covenants_powers_hint():0,journal_nav_revision,game_save_badge_id(),game_shop_revision,game_state==WIN?ending_credits_revision:(unsigned)title_option,game_shop_reward_visible(),save_failed,game_display_state()};int i,changed=!cache_valid[page],world_changed=!cache_valid[page],other=page^1,reusable=quickparty_visible&&cache_valid[page^1];
  screen=(u16*)(page?0x0600A000:0x06000000);for(i=0;i<CACHE_FIELDS;i++){if(cache_fields[page][i]!=key[i]){changed=1;if(i!=21)world_changed=1;}if(i!=21&&cache_fields[other][i]!=key[i])reusable=0;}
  /* Picker-only changes cannot alter the frozen world. A moving camera may
   * leave this back page stale; reuse the other bitmap ONLY when every world
   * key matches. The opaque picker repaints any prior picker pixels. */
- if(changed){if(reuse_play_strip(key)){}else if(game_state!=PLAY&&reuse_modal_bitmap(key)){}else if(quickparty_open&&(!world_changed||reusable)){if(world_changed){REG32(0x040000D4)=other?0x0600A000:0x06000000;REG32(0x040000D8)=(u32)screen;REG32(0x040000DC)=0x84000000|9600;}quickparty_draw();game_draw_save_badge();draw_save_failure_notice();}else render_static();cached_armor[page]=-1;cache_valid[page]=1;for(i=0;i<CACHE_FIELDS;i++)cache_fields[page][i]=key[i];}
- if(game_state==PLAY&&!quickparty_open&&boss_active()){rect(57,153,126,5,INK);rect(59,154,boss_hp_q4*120/(boss_hp_max*16),3,boss_armor?GOLD:GREEN);}
+ if(changed){if(reuse_play_strip(key)){}else if(game_state!=PLAY&&reuse_modal_bitmap(key)){}else if(quickparty_visible&&(!world_changed||reusable)){if(world_changed){REG32(0x040000D4)=other?0x0600A000:0x06000000;REG32(0x040000D8)=(u32)screen;REG32(0x040000DC)=0x84000000|9600;}quickparty_draw();game_draw_save_badge();draw_save_failure_notice();}else render_static();cached_armor[page]=-1;cache_valid[page]=1;for(i=0;i<CACHE_FIELDS;i++)cache_fields[page][i]=key[i];}
+ if(game_state==PLAY&&!quickparty_visible&&boss_active()){rect(57,153,126,5,INK);rect(59,154,boss_hp_q4*120/(boss_hp_max*16),3,boss_armor?GOLD:GREEN);}
  if(scene_present_phase==2){scene_actor_pending=1;scene_present_phase=3;}
  else {
 #ifndef GAME_HOST_TEST
@@ -1370,6 +1439,10 @@ int main(void){int i;REG16(0x04000208)=0;REG16(0x04000000)=0x80;REG16(0x04000204
   * continues; optional foreground refill resumes on the next warm update. */
  if(!scene_actor_pending&&cycle_now()-started<260000){music_update((unsigned)room,(unsigned)game_state);music_service();}
  horizons_audio_poll();music_cost=cycle_now()-phase_started;active_cost=cycle_now()-started;
- while(REG16(0x04000006)>=160){}while(REG16(0x04000006)<160){}
+ /* BIOS waits for the next VBlank flag while halting the CPU. Timer1 IRQ
+  * continues its independent PCM DMA rewind during the wait. */
+#ifndef GAME_HOST_TEST
+ __asm__ volatile("swi 0x05" : : : "r0","r1","r2","r3","r12","lr","cc","memory");
+#endif
  complete_presentation(active_cost,update_cost,save_cost,render_cost,music_cost);
  }return 0;}

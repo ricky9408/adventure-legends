@@ -61,6 +61,10 @@ class Movie(T.CampaignRun):
         (OUT/'capture.json').write_text(json.dumps({'rom_sha256':hashlib.sha256(self.rom.read_bytes()).hexdigest(),'controller_only':True,'game_ram_writes':0,'savestate_restores':0,'sram_reloads':0,'recorded_frames':self.recorded_frames,'frame_rate':T.REFRESH_HZ,'duration_seconds':self.recorded_frames/T.REFRESH_HZ,'audio':'actual emulator PSG audio','route':'optional relic and chime; all14areas; all3bosses; ending and peaceful village','final':self.status()},indent=2)+'\n')
         self.e.close()
 
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':
     p=Movie()
     try:

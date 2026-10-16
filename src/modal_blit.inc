@@ -1,7 +1,7 @@
 /* Guaranteed opaque interiors only. Journal row153 remains true world. */
 COLD int modal_coverage(int*out_left,int*out_first,int*out_last){int mode=game_display_state(),left,first,last;
  if(world_mask_disabled)return 0;
- if(quickparty_open){left=13;first=29;last=160;}
+ if(quickparty_visible){left=13;first=29;last=160;}
  else if(mode==PAUSE){left=4;first=31;last=journal_tab==JOURNAL_GOAL?150:153;}
  else if(mode==11||game_state==13){left=4;first=31;last=153;}
  else if(mode==EVOLVE_CONFIRM){left=6;first=42;last=147;}

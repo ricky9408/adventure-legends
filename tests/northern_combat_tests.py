@@ -685,4 +685,8 @@ def main():
     try:run.run(a.case)
     finally:run.report();run.e.close()
     return bool(run.failures)
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

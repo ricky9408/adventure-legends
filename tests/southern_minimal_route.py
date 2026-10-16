@@ -292,4 +292,8 @@ def main():
                       'report_sha256':digest(run.out/'southern-minimal-route.json'),'checks':len(run.checks)}),flush=True)
 
 
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

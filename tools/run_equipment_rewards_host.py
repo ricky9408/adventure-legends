@@ -16,7 +16,7 @@ def main():
  def unchanged():return all((ROOT/k).is_file()and sha(ROOT/k)==v for k,v in runtime.items())
  assert unchanged(),'Current source must match the frozen build'
  production=ProductionGuard()
- commands=[('retained-62',[sys.executable,'tools/run_connected_roads_host.py','--soundtrack-successor','--output',str(out/'retained-62')],{})]
+ commands=[('retained-62',[sys.executable,'tools/run_connected_roads_host.py','--field-controls-successor','--output',str(out/'retained-62')],{})]
  names=['test_journey_goals','test_journey_arrival_latch','test_journey_map','test_companion_guide','test_shared_text_spans','test_play_notice_cache','test_retained_ui_story_successor','test_regional_quest_events','verify_late_renderer']
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{}) for n in names]
  
@@ -40,9 +40,9 @@ def main():
   elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--renderer-negatives']
   routed.append((name,cmd,extra))
  for name,cmd,extra in routed:
-  if cmd[1]=='tests/verify_review_successor.py':cmd[1]='tests/selected_music_boundary.py'
-  elif name=='test_review_successor':cmd[1]='tests/selected_music_boundary.py';cmd.append('--parent-tests')
- commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime')]
+  if cmd[1]=='tests/verify_review_successor.py':cmd[1]='tests/field_controls_boundary.py'
+  elif name=='test_review_successor':cmd[1]='tests/field_controls_boundary.py';cmd.append('--parent-tests')
+ commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime','test_field_controls','test_field_carousel','test_field_preview_cancel','test_field_context_cancel','test_current_field_controls','test_save_badge_cache','test_play_strip_ranges','test_short_l')]
  report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}
  def save():(out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  save()

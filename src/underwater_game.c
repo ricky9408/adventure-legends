@@ -198,7 +198,7 @@ static COLD int repeat_invite(unsigned token,unsigned goal){if(!(branch_visible&
  * itself after success: a new attempt needs this RESET or room re-entry. */
 static void reset_point(int*x,int*y){*x=(room==46||room==47||room==48||room==51)?40:24;*y=(room==46||room==47||room==48||room==51)?276:132;}
 static COLD int reset_interact(void){int x,y,xx=120,yy=140;reset_point(&x,&y);if(!close(x,y))return 0;if(!reset_pending){reset_pending=1;toast(TX_UW_RESET_CONFIRM);return 1;}underwater_game_spawn((unsigned)room,0,&xx,&yy);reset_scene();game_region_warp(xx,yy);toast(TX_UW_RESET_DONE);return 1;}
-COLD int underwater_game_input(unsigned pressed,unsigned held){(void)held;if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return 0;if(pressed&KEY_B)reset_pending=0;return 0;}
+COLD int underwater_game_input(unsigned pressed,unsigned held){(void)held;if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return 0;if((pressed&KEY_B)&&reset_pending){reset_pending=0;return 1;}return 0;}
 static COLD int toggle_main(unsigned n){int r=underwater_puzzle_toggle(&underwater_game_puzzle,(unsigned)room,n,px,py);if(r==1){underwater_powers_geometry_changed();changed();toast(TX_UW_ADJUSTED);}else toast(TX_UW_STEP_CLEAR);return 1;}
 static COLD int interact_targets(void){if(!underwater_game_is_room((unsigned)room)||game_state!=PLAY)return 0;
  if(reset_interact())return 1;

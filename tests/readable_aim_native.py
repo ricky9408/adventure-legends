@@ -77,4 +77,8 @@ def main():
   assert sha(source)==snapshot['sram_sha256'],'source earned save changed'
   (a.output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  print(json.dumps({'passed':report.get('passed',False),'metrics':report['metrics'],'cross_rom_ordinary_sram_diagnostic':report['cross_rom_ordinary_sram_diagnostic']},indent=2))
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':main()

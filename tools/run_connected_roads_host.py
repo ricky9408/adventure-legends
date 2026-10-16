@@ -10,7 +10,7 @@ from host_production_guard import ProductionGuard
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);flags=p.add_mutually_exclusive_group();flags.add_argument('--journey-ui-successor',action='store_true');flags.add_argument('--journey-story-ui-successor',action='store_true');flags.add_argument('--soundtrack-successor',action='store_true');a=p.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=False)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);flags=p.add_mutually_exclusive_group();flags.add_argument('--journey-ui-successor',action='store_true');flags.add_argument('--journey-story-ui-successor',action='store_true');flags.add_argument('--soundtrack-successor',action='store_true');flags.add_argument('--field-controls-successor',action='store_true');a=p.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=False)
  manifest=ROOT/'build/source-hashes.json';runtime=json.loads(manifest.read_text());base=ROOT/'tools/run_player_feedback_host.py'
  names=next(ast.literal_eval(n.value) for n in ast.walk(ast.parse(base.read_text())) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='names' for t in n.targets))
  extras=['test_connected_roads_geometry','test_connected_roads_engine','test_connected_road_art','test_trials','test_region_art','test_north_art','test_south_art','test_magma_art','test_underwater_art','test_return_geometry','test_horizons_geometry','test_underwater_return_spawns','test_connected_route_copy']
@@ -27,12 +27,12 @@ def main():
   for name,cmd in commands:
    if name in ('test_return_geometry','test_connected_route_copy'):cmd.append(selected)
   report['explicit_retained_ui_successor']={'flag':selected,'scope':'Separately pinned verifier; original assertions and historical source remain unchanged.'}
- if a.soundtrack_successor:
+ if a.soundtrack_successor or a.field_controls_successor:
   # Current geometry/authoring plus authenticated historical font/renderer
   # proofs. Do not route current pixels through obsolete G5 corpus pins.
   for name,cmd in commands:
-   if name in ('test_return_geometry','test_connected_route_copy'):cmd[1]='tests/selected_music_boundary.py';cmd.append('--current-geometry')
-  report['explicit_soundtrack_successor']={'scope':'Current geometry and authoring; old pixel tests run separately on authenticated historical-only corpus. All current gameplay checks remain actual current code.'}
+   if name in ('test_return_geometry','test_connected_route_copy'):cmd[1]='tests/field_controls_boundary.py' if a.field_controls_successor else 'tests/selected_music_boundary.py';cmd.append('--current-geometry')
+  report['explicit_field_controls_successor' if a.field_controls_successor else 'explicit_soundtrack_successor']={'scope':'Current geometry and authoring; old pixel tests run separately on authenticated historical-only corpus. All current gameplay checks remain actual current code.'}
  for index,(name,cmd) in enumerate(commands):
   assert unchanged(),'Runtime changed between checks';helper=ROOT/cmd[1];before=sha(helper);log=out/(f'{index:02d}-'+name+'.log');start=time.monotonic();row={'name':name,'command':cmd,'helper_sha256':before,'log':log.name,'status':'RUNNING','is_test':name!='fixture-preparation'};report['runs'].append(row);save()
   with log.open('w') as f:r=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,env=environment)

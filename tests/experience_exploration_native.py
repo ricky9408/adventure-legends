@@ -110,4 +110,8 @@ def main():
   except Exception:c.shot('failure');traceback.print_exc();return 1
   finally:c.report();c.trace.close();c.e.close()
  return 0
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())

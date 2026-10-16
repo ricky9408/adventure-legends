@@ -856,5 +856,9 @@ def main():
     return int(bool(run.failures) or bool(run.unavailable) or (source_result is not None and not source_result['passed']))
 
 
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':
     raise SystemExit(main())

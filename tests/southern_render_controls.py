@@ -57,4 +57,8 @@ def main():
  try:r.run()
  finally:r.report();r.e.close()
  return bool(r.failures)
+if __name__ == '__main__':
+    from current_field_controls import require_current_acceptance
+    require_current_acceptance(__file__)
+
 if __name__=='__main__':raise SystemExit(main())
