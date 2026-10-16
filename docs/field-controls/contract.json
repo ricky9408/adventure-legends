@@ -690,7 +690,7 @@
     "tests/test_connected_roads_geometry.py": "6ab5957702950a4b7d5cd59450313d4656f05e763de0d038b7f80d0d06d98f77",
     "tests/test_connected_route_copy.py": "a20fb28111f306603bafcb25038f2a2f13e7302fc20ff85d47e08fd9a5b04ec5",
     "tests/test_covenants_art.py": "6237245a35e14f1ac33a2e1e062a840cceb09af84cd5f8b06a2ae46939e4073c",
-    "tests/test_covenants_camera.py": "cbea31cd32022653b01633d8d2de99dd4dfcfbedd2c38918e0a4dec03d7ee6b7",
+    "tests/test_covenants_camera.py": "1b314e8d7de56a04d14b1d8ac55bd86f2dde5a16efd5a94aba489eab22bd09e3",
     "tests/test_covenants_catalog.py": "ff5eaae3066a18d7d678035c2f622d5110dd21079d92b3c99bee81e4fccdb03d",
     "tests/test_covenants_creature_art.py": "fd4df71710ea3eb5c0133056c812e5cdbcd66c3f411a5a3454498158360a5f77",
     "tests/test_covenants_engine.py": "eefc39572e00436ea427d894a899be1b0f654112f67c0b3a02cfdad68c52e456",
@@ -7381,6 +7381,7 @@
     "tests/southern_selector.py": "cb338d101b087748f577594cf4472aefdd1ed4bb1a37ac8897f6236d99eaae06",
     "tests/southern_targeting.py": "add73bf0d9fdd6a24b0c7e23c29ae891f6309526ffaed3766101319816014aab",
     "tests/test_connected_roads_engine.py": "ddee547718fa40c47cb264f8e3283bae9cf0d2eec1632b449e71e2a50b72f88e",
+    "tests/test_covenants_camera.py": "cbea31cd32022653b01633d8d2de99dd4dfcfbedd2c38918e0a4dec03d7ee6b7",
     "tests/test_horizons_camera.py": "5af715bcdafdcbe0da259fbdc86fd6e9125dbec06ebbcda30f726a24afc3593b",
     "tests/test_player_feedback_engine.py": "6484e376d304632bc924d5ebeb59b9911782b65f1cc1d98969b10e8e309dd350",
     "tests/test_player_feedback_menu.py": "13c6181fdad861906aa38a245080c44c9c23e1e124d4caf5c3c4c6a5a88ac6f4",
@@ -7396,7 +7397,7 @@
     "tools/run_return_native.py": "c592fcec74b0751eb65b552d2945013097e368085b3881c45b72d893b55e967b",
     "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc"
   },
-  "inverse_sha256": "c5fe868087f8fcf0bbb06165f9efb30cf389aa020793126a63437e2bff65083e",
+  "inverse_sha256": "835a0270de74595680f580f624000e489cf2ad9c8e1da271ab43dc57d60a23a9",
   "name": "field-controls-audio-successor",
   "parent_commit": "4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8",
   "parent_files": {
