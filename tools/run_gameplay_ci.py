@@ -125,7 +125,7 @@ def main():
               "from arm_toolchain import resolve_arm_tools; "
               "from PIL import __version__ as pil, ImageFont; import numpy,scipy; "
               "print('Pillow',pil,'NumPy',numpy.__version__,'SciPy',scipy.__version__); "
-              "assert pil == '12.3.0', 'Pixel generation requires pinned Pillow 12.3.0; see docs/GAMEPLAY_CI.md'; "
+              "assert pil == '13.0.0', 'Pixel generation requires pinned Pillow 13.0.0; see docs/GAMEPLAY_CI.md'; "
               "[ImageFont.truetype(p,12,index=0) for p in "
               "['/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',"
               "'/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf']]; "

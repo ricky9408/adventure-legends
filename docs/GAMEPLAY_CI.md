@@ -69,7 +69,7 @@ Use Linux x86_64 with the dependencies in `tools/README.md`, plus NumPy, SciPy
 and FFmpeg. The UI/art checks also require Debian `fonts-noto-cjk` and
 `fonts-dejavu-core` (NotoSansCJK-Bold.ttc and DejaVuSans.ttf at their standard
 `/usr/share/fonts` paths). The preflight loads both fonts before building.
-Pixel regeneration requires **Pillow 12.3.0**: Debian's Pillow 11.1
+Pixel regeneration requires **Pillow 13.0.0**: Debian's Pillow 11.1
 changes Covenant polygon rasterization and is deliberately rejected before the
 aggregate can change generated pixels. `tools/install_tools.sh` extracts the existing checksum-pinned
 Debian ARM GCC 14.2.1/binutils 2.44/mGBA 0.10.5 packages into `tools/sysroot`.
@@ -103,7 +103,7 @@ For the closest hosted match, use the official Debian image digest in the
 workflow and its signed `20250910T000000Z` package snapshot, then execute the
 same setup commands. Debian supplies Python 3.13, NumPy 2.2.4 and SciPy 1.15.3.
 CI creates an isolated venv with those system packages, then installs only the
-hash-pinned official Pillow 12.3.0 CPython 3.13/manylinux x86_64 wheel from PyPI.
+hash-pinned official Pillow 13.0.0 CPython 3.13/manylinux x86_64 wheel from PyPI.
 The requirements file intentionally rejects other wheel builds/interpreters.
 On a prepared Debian 13 host with `python3-venv` installed:
 
