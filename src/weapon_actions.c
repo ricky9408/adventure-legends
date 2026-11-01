@@ -26,6 +26,15 @@ static unsigned begin(WeaponAttack*a,const EquipmentStats*s,unsigned direction){
     if(a->phase==WEAPON_CHARGING)a->charge=1;
     return WEAPON_EVENT_START;
 }
+/* Authored sword cuts are active for one update, then recover. The drawn
+ * slash stays out longer, and the lance already holds contact for three
+ * updates. Lend three recovery updates to that sword hit window. Swing
+ * length, damage, reach and the one-hit ledger stay as authored. */
+static void sword_contact(const WeaponAttack *a,const EquipmentMove *m,
+                          unsigned *windup,unsigned *active,unsigned *recovery){
+    *windup=m->windup;*active=m->active;*recovery=m->recovery;
+    if(a->weapon_class==EQUIPMENT_SWORD&&*active==1&&*recovery>=3){*active=4;*recovery-=3;}
+}
 static unsigned release_bow(WeaponAttack*a,unsigned live){
     const EquipmentWeapon*w=&equipment_weapons[EQUIPMENT_BOW];
     const EquipmentMove*m=&w->moves[a->move];
@@ -69,10 +78,14 @@ unsigned weapon_action_tick(WeaponAttack*a,const EquipmentStats*s,unsigned d,
     }
     if(pressed)a->buffer=w->buffer;
     ++a->age;
-    if(a->age<m->windup)a->phase=WEAPON_WINDUP;
-    else if(a->age<m->windup+m->active){a->phase=WEAPON_ACTIVE;result=WEAPON_EVENT_ACTIVE;}
-    else if(a->age<m->windup+m->active+m->recovery)a->phase=WEAPON_RECOVERY;
-    else {a->phase=WEAPON_IDLE;result=WEAPON_EVENT_FINISH;if(a->buffer)result|=begin(a,s,d);}
+    {
+        unsigned windup, active, recovery;
+        sword_contact(a, m, &windup, &active, &recovery);
+        if(a->age<windup)a->phase=WEAPON_WINDUP;
+        else if(a->age<windup+active){a->phase=WEAPON_ACTIVE;result=WEAPON_EVENT_ACTIVE;}
+        else if(a->age<windup+active+recovery)a->phase=WEAPON_RECOVERY;
+        else {a->phase=WEAPON_IDLE;result=WEAPON_EVENT_FINISH;if(a->buffer)result|=begin(a,s,d);}
+    }
     return result;
 }
 void weapon_action_suspend(WeaponAttack*a){

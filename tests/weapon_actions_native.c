@@ -64,6 +64,37 @@ static void melee(void){
     CHECK(!weapon_action_contains(&a,100,100,144,100));
     CHECK(!weapon_action_contains(&a,-1,100,100,100));
 }
+static void sword_contact_window(void){
+    WeaponAttack a;EquipmentStats s=stats(1);unsigned i,active=0;weapon_action_init(&a);
+    CHECK(tick(&a,&s,3,1,1,0)==WEAPON_EVENT_START);
+    CHECK(tick(&a,&s,3,0,0,0)==0&&a.phase==WEAPON_WINDUP&&a.age==1);
+    for(i=0;i<4;i++){
+        CHECK(tick(&a,&s,3,0,0,0)==WEAPON_EVENT_ACTIVE);
+        CHECK(a.phase==WEAPON_ACTIVE);
+        CHECK(weapon_action_contains(&a,100,100,129,100));
+        ++active;
+    }
+    CHECK(active==4&&a.age==5);
+    CHECK(weapon_action_mark_hit(&a,1));
+    CHECK(!weapon_action_can_hit(&a,1));
+    CHECK(tick(&a,&s,3,0,0,0)==0&&a.phase==WEAPON_RECOVERY&&a.age==6);
+    CHECK(!weapon_action_contains(&a,100,100,129,100));
+    for(i=0;i<11;i++)tick(&a,&s,3,0,0,0);
+    CHECK(a.phase==WEAPON_IDLE&&a.age==17);
+    tick(&a,&s,3,1,1,0);for(i=0;i<17;i++)tick(&a,&s,3,0,0,0);CHECK(a.phase==WEAPON_IDLE);
+    tick(&a,&s,3,1,1,0);
+    CHECK(a.combo==3&&a.damage_q4==48&&a.reach_px==35);
+    CHECK(tick(&a,&s,3,0,0,0)==0&&a.age==1);
+    CHECK(tick(&a,&s,3,0,0,0)==0&&a.age==2);
+    active=0;
+    for(i=0;i<4;i++){CHECK(tick(&a,&s,3,0,0,0)==WEAPON_EVENT_ACTIVE);++active;}
+    CHECK(active==4&&a.age==6&&a.phase==WEAPON_ACTIVE);
+    for(i=0;i<18;i++)tick(&a,&s,3,0,0,0);
+    CHECK(a.phase==WEAPON_IDLE&&a.age==24);
+    weapon_action_init(&a);s=stats(2);tick(&a,&s,0,1,1,0);active=0;
+    for(i=1;i<=9;i++){unsigned e=tick(&a,&s,0,0,0,0);if(e==WEAPON_EVENT_ACTIVE)++active;}
+    CHECK(active==3&&a.phase==WEAPON_RECOVERY);
+}
 static void buffers(void){
     WeaponAttack a;EquipmentStats s=stats(1);unsigned i,e;weapon_action_init(&a);tick(&a,&s,0,1,1,0);
     for(i=1;i<=16;i++)tick(&a,&s,0,0,i==15,0);
@@ -175,4 +206,4 @@ static void invalid_and_fuzz(void){
     CHECK(weapon_arrow_spawn(&arrow,&a,480,320));}
     }
 }
-int main(void){melee();buffers();bow();arrows();northern_reach_boundaries();invalid_and_fuzz();printf("weapon action checks: %u\n",checks);return 0;}
+int main(void){melee();sword_contact_window();buffers();bow();arrows();northern_reach_boundaries();invalid_and_fuzz();printf("weapon action checks: %u\n",checks);return 0;}
