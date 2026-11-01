@@ -167,8 +167,8 @@ def historical(c,args=None,chain_only=False):
 
 def player_control_docs():
     """Spoiler-free guides must teach the live B power, R call, and horizontal L browse."""
-    ui=json.loads((ROOT/'assets/ui_texts.json').read_text())
-    feedback=json.loads((ROOT/'assets/ui_texts_player_feedback.json').read_text())
+    ui=json.loads((ROOT/'assets/ui_texts.json').read_text(encoding='utf-8'))
+    feedback=json.loads((ROOT/'assets/ui_texts_player_feedback.json').read_text(encoding='utf-8'))
     assert ui['INTRO3A']=='Bで仲間の力。Rで呼ぶ・帰す。'
     assert ui['INTRO3B']=='L短押しで仲間切替。Aで剣。'
     assert ui['CONTROL2']=='B  仲間の力   L短押し  切替'
@@ -188,8 +188,8 @@ def player_control_docs():
     assert 'int input=pressed&~DIRECTIONS;' in journal
     assert 'if(input&B)' in journal and 'if(input&START)' in journal
     assert 'if(input&SELECT)return JOURNAL_CONSUMED;' in journal
-    guide=(ROOT/'docs/PLAY_JA.md').read_text()
-    readme=(ROOT/'README.md').read_text()
+    guide=(ROOT/'docs/PLAY_JA.md').read_text(encoding='utf-8')
+    readme=(ROOT/'README.md').read_text(encoding='utf-8')
     for line in (
         '- B：選んでいる仲間の力。帰している仲間は、出てきてその力を使う',
         '- R：仲間を呼ぶ／帰す。力は使わない',
