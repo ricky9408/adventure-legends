@@ -152,7 +152,8 @@ def launch():
     """Retry only a proved pre-game Python-heap collision. Game failures stay fatal."""
     script=Path(__file__).resolve()
     def run(number):
-        environment=dict(os.environ,CONNECTED_ROADS_ENGINE_CHILD='1')
+        environment=dict(os.environ,CONNECTED_ROADS_ENGINE_CHILD='1',
+                         CONNECTED_ROAD_FIXTURES=str(FIXTURES.resolve()))
         return subprocess.run([sys.executable,str(script)],cwd=ROOT,env=environment,text=True,capture_output=True)
     def record(number,result,collision):
         print(f'Connected roads engine attempt {number}: exit {result.returncode}'+
