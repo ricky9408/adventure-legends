@@ -65,23 +65,36 @@ static void melee(void){
     CHECK(!weapon_action_contains(&a,-1,100,100,100));
 }
 static void sword_contact_window(void){
-    WeaponAttack a;EquipmentStats s=stats(1);unsigned i,active=0;weapon_action_init(&a);
+    WeaponAttack a;EquipmentStats s=stats(1);unsigned i,active;weapon_action_init(&a);
     CHECK(tick(&a,&s,3,1,1,0)==WEAPON_EVENT_START);
     CHECK(tick(&a,&s,3,0,0,0)==0&&a.phase==WEAPON_WINDUP&&a.age==1);
-    for(i=0;i<4;i++){
+    CHECK(tick(&a,&s,3,0,0,0)==WEAPON_EVENT_ACTIVE&&a.phase==WEAPON_ACTIVE&&a.age==2);
+    CHECK(weapon_action_contains(&a,100,100,129,100));
+    CHECK(weapon_action_mark_hit(&a,1));
+    for(i=0;i<3;i++){
         CHECK(tick(&a,&s,3,0,0,0)==WEAPON_EVENT_ACTIVE);
         CHECK(a.phase==WEAPON_ACTIVE);
         CHECK(weapon_action_contains(&a,100,100,129,100));
-        ++active;
+        /* The one-hit ledger stays consumed for the rest of this swing. */
+        CHECK(!weapon_action_can_hit(&a,1));
+        CHECK(!weapon_action_mark_hit(&a,1));
     }
-    CHECK(active==4&&a.age==5);
-    CHECK(weapon_action_mark_hit(&a,1));
-    CHECK(!weapon_action_can_hit(&a,1));
+    CHECK(a.age==5&&a.combo==1&&a.damage_q4==32&&a.reach_px==29);
     CHECK(tick(&a,&s,3,0,0,0)==0&&a.phase==WEAPON_RECOVERY&&a.age==6);
     CHECK(!weapon_action_contains(&a,100,100,129,100));
     for(i=0;i<11;i++)tick(&a,&s,3,0,0,0);
     CHECK(a.phase==WEAPON_IDLE&&a.age==17);
-    tick(&a,&s,3,1,1,0);for(i=0;i<17;i++)tick(&a,&s,3,0,0,0);CHECK(a.phase==WEAPON_IDLE);
+    /* Middle cut uses the same four-update window and the authored 32/29 cut. */
+    CHECK(tick(&a,&s,3,1,1,0)==WEAPON_EVENT_START);
+    CHECK(a.combo==2&&a.damage_q4==32&&a.reach_px==29&&a.phase==WEAPON_WINDUP);
+    CHECK(tick(&a,&s,3,0,0,0)==0&&a.phase==WEAPON_WINDUP&&a.age==1);
+    for(i=0;i<4;i++){
+        CHECK(tick(&a,&s,3,0,0,0)==WEAPON_EVENT_ACTIVE);
+        CHECK(a.phase==WEAPON_ACTIVE);
+    }
+    CHECK(a.age==5&&a.combo==2&&a.damage_q4==32&&a.reach_px==29);
+    for(i=0;i<12;i++)tick(&a,&s,3,0,0,0);
+    CHECK(a.phase==WEAPON_IDLE&&a.age==17);
     tick(&a,&s,3,1,1,0);
     CHECK(a.combo==3&&a.damage_q4==48&&a.reach_px==35);
     CHECK(tick(&a,&s,3,0,0,0)==0&&a.age==1);

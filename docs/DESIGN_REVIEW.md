@@ -116,8 +116,8 @@ Filed issues use `[priority][area]` in the title. This token can open issues
 and cannot create or apply labels.
 
 1. **P1, this pass.** [#23](https://github.com/ricky9408/adventure-legends/issues/23).
-   Sword contact lasts four updates. Swing length, damage, reach, and one hit
-   per target stay authored. Lance and bow timings stay authored.
+   Sword contact lasts four updates. Swing length, damage, reach, and the
+   one-hit-per-swing ledger stay authored. Lance and bow timings stay authored.
 2. **P1.** [#24](https://github.com/ricky9408/adventure-legends/issues/24).
    Correct `docs/PLAY_JA.md` so B, R, and held L match the ROM.
 3. **P1.** [#25](https://github.com/ricky9408/adventure-legends/issues/25).
