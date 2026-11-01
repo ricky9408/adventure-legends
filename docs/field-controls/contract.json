@@ -6991,6 +6991,7 @@
     "assets/ui_texts_return.json": "333d95369920d9ba7c801c027f82ab366a9215edc02480bf0e15772de08fe872",
     "assets/underwater_ui.json": "bb5d3db2c13f7a08b1da13f7c460875c0d637ed54ada7771f2942d520bd54542",
     "docs/GAMEPLAY_CI.md": "337c97f448168db42ef585e5cb9d51cf5a26fc7eb5a8218e8accdb5d979f9a8a",
+    "docs/PLAY_JA.md": "20dc3b8ee21b95ed0a7122ffcf390efe935c21959e50b525b9a715823a0128f2",
     "src/companion_guide_text_data/part_039.inc": "975082f06ff49060db1a9d8a2b99825af7c37d7f7369a8ce950fb7495a04ebc7",
     "src/companion_guide_text_data/part_041.inc": "c00240d5d5d8498a614262bec4bf133af17abb39bd3ba068ffeb499dd785c8d4",
     "src/companion_guide_text_data/part_045.inc": "95ea5a0257790e40731a2f7b6542ea019d9c3f1f8fa8d56ce2a329f14b374287",
@@ -7399,7 +7400,7 @@
     "tools/run_return_native.py": "c592fcec74b0751eb65b552d2945013097e368085b3881c45b72d893b55e967b",
     "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc"
   },
-  "inverse_sha256": "f8bd7472348048810843ca17533d07e77babcc944ce3595fba0bbdd21dee343c",
+  "inverse_sha256": "5a9397e60915fae8271c9a830e93d628626e33f1ca7ddadeeb6b1d38b57cf773",
   "name": "field-controls-audio-successor",
   "parent_commit": "4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8",
   "parent_files": {
