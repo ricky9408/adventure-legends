@@ -5,10 +5,10 @@ Uses validated synthetic SRAM checkpoints. Position placement is explicitly
 synthetic host setup; this does not claim controller-earned travel or timing.
 """
 from pathlib import Path
-import ctypes as C,hashlib,json,os,re,subprocess,tempfile
+import ctypes as C,hashlib,json,os,re,subprocess,sys,tempfile
 from test_save5 import Save
 from test_connected_roads_geometry import Road
-from player_feedback_host_mapping import reserve_gba_pages
+from player_feedback_host_mapping import policy,reserve_gba_pages
 
 ROOT=Path(__file__).resolve().parents[1]
 FIXTURES=Path(os.environ.get('CONNECTED_ROAD_FIXTURES',ROOT/'build/connected-road-checkpoints-r0'))
@@ -148,4 +148,24 @@ def main():
         put('toast_ticks',70);lib.game_road_step();assert get('toast_ticks')==70
         result={'passed':True,'scope':__doc__,'geometry_rows':len(rows),'real_engine_road_samples':len(samples),'lateral_endpoint_cases':10,'real_doorway_roundtrips':4,'descending_stairs_with_canonical_load_retry':len(stairs),'old_action_shortcut_checks':7,'companion_summon_recall_replacement_edges':4,'staged_same_position_warp_cancel':True,'redirect_cancels_arrival':True,'load_cancels_arrival':True,'closed_fence_preserves_actions':True,'fixture_provenance_sha256':hashlib.sha256((FIXTURES/'provenance.json').read_bytes()).hexdigest()}
         print(json.dumps(result,indent=2))
-if __name__=='__main__':main()
+def launch():
+    """Retry only a proved pre-game Python-heap collision. Game failures stay fatal."""
+    script=Path(__file__).resolve()
+    def run(number):
+        environment=dict(os.environ,CONNECTED_ROADS_ENGINE_CHILD='1',
+                         CONNECTED_ROAD_FIXTURES=str(FIXTURES.resolve()))
+        return subprocess.run([sys.executable,str(script)],cwd=ROOT,env=environment,text=True,capture_output=True)
+    def record(number,result,collision):
+        print(f'Connected roads engine attempt {number}: exit {result.returncode}'+
+              (' (proved pre-game Python heap overlap)' if collision else ''),flush=True)
+        if result.returncode==0:
+            report=json.loads(result.stdout)
+            assert report['passed'] is True and report['real_engine_road_samples']==11
+            print(result.stdout,end='')
+        elif collision is None:
+            print(result.stdout,end='')
+            print(result.stderr,file=sys.stderr,end='')
+    return policy.run_attempts(run,record)
+if __name__=='__main__':
+    if os.environ.get('CONNECTED_ROADS_ENGINE_CHILD')=='1':main()
+    else:raise SystemExit(launch())

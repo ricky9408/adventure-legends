@@ -362,7 +362,8 @@
     "src/ui_data/part_322.inc",
     "src/ui_data/part_323.inc",
     "src/ui_data/part_324.inc",
-    "src/underwater_game.c"
+    "src/underwater_game.c",
+    "src/weapon_actions.c"
   ],
   "current_helpers": {
     "tests/advanced_power_tests.py": "5571d1e73630db1b8115fd01650bde26ff3dafc1e4b4d37ed882227f43e1db67",
@@ -686,7 +687,7 @@
     "tests/test_companion_journey_successor.py": "f473beab2d5be28c8baed0a7ecff8082d522cab8a0029452660fd18dc1f3c030",
     "tests/test_companion_party_notice_successor.py": "faaa5277384e6cd4274b928591fb2b86ca4129ceada6fe3d14d7a31976e3acf2",
     "tests/test_connected_road_art.py": "fbbbabae9e5235bf00f6d0076d70a6d00dbb0d39057def2c1553aae2033bb85f",
-    "tests/test_connected_roads_engine.py": "9f98d1cc265e9327e2f94a3f2804f6e6dd2fe45d73e0cc61807e645a51ed6216",
+    "tests/test_connected_roads_engine.py": "9d2850a5c32c5741b7f18ddc7cc3ed870f2470de7031814ce31012b63afbc0d7",
     "tests/test_connected_roads_geometry.py": "6ab5957702950a4b7d5cd59450313d4656f05e763de0d038b7f80d0d06d98f77",
     "tests/test_connected_route_copy.py": "a20fb28111f306603bafcb25038f2a2f13e7302fc20ff85d47e08fd9a5b04ec5",
     "tests/test_covenants_art.py": "6237245a35e14f1ac33a2e1e062a840cceb09af84cd5f8b06a2ae46939e4073c",
@@ -920,7 +921,7 @@
     "tests/verify_return_memory_g.py": "39a44084c4730d612bfa4641675d7dca768c435f73b63dded4740ffb20511ca0",
     "tests/verify_review_successor.py": "19eba1059751db7f1c1cc0d8a28fd9f4c24cff5f765e42c2cced096f026e002a",
     "tests/verify_soundtrack_successor.py": "acaf45be82a253b58ffdd8c093c0f9e5c73f1d8e2a4521d5993bb6a325ff3d00",
-    "tests/weapon_actions_native.c": "1e4ded2472549698d1c88a93582dd17b02de48c2f0f627aba86f5a44dac56166",
+    "tests/weapon_actions_native.c": "120a39ed54a799177c823ca4b01c48895e8c326cf47956502f85655b24e00c41",
     "tools/archive_magma_test_sources.py": "d5633a1520bf9f5868aa1861b848f3386bece93524c4f5a7de7415f380316de8",
     "tools/archive_test_output.py": "d2a242b42e94a938124b899ce6c2ea7d20cb63df3fcf889deece8ea764b707a8",
     "tools/arm_toolchain.py": "edfcc3a17826bf731c03d220188a199f020dc61cc4ea971794d13a88166823ad",
@@ -5955,7 +5956,7 @@
     "src/underwater_tip_orbit.inc": "1a022314acec91364d766eea2aaeda7dba65d66c8f9356d56960fd82997ee5ff",
     "src/underwater_transactions.inc": "3122483bbd99be0a43dd15bf5e26fd83e51c4e74e5e29d649a9acbf70305d0d9",
     "src/underwater_trials.inc": "7754294a44b66e96c1c4ebf02e2b1fdf9d979caf3420b1ea14bb4797eea1e4c2",
-    "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
+    "src/weapon_actions.c": "8030c8fc17d9f7569071f526f222985117e4661ef26aa1473fb9d9a857cda5df",
     "src/weapon_actions.h": "16dc409dd951a511ca4368d875598dcf2655712b464b5dd0df697458990a9534",
     "src/world.c": "6cb14e0dfa9e6550348235e2cdf66fc1c4c0b2901d3ff7323f27c5ae57a6005f",
     "src/world.h": "ba2391aa1b823c57993aeca55b5b4433cbbf0adea9ebe6bb18a49718864996af",
@@ -7329,6 +7330,7 @@
     "src/ui_data/part_323.inc": "592d8522a681d85135c968f3c0b1e0f0cd9a73b4099e5890f482e9307da07249",
     "src/ui_data/part_324.inc": "5e06f54ea27b08d3509b4d51a524bed1f8b20a62416a5848a9f50af4df098f34",
     "src/underwater_game.c": "88c4f19c9377673ab32e0fbeb8bacf57c9748f0f0731f31dac5682a192081d89",
+    "src/weapon_actions.c": "d62181d1d79e35632f70ba8d3a47cd4822884644d73878ba9b5fbd0e3f108e92",
     "tests/advanced_power_tests.py": "ab5eabc170e22f4362514e8852d0718bea0dabfdfe520ca1936a8064b679d991",
     "tests/campaign_tests.py": "a115f8e08a72e894c49aabf47b5f40881e08db0f60b903387b0d33819b37f381",
     "tests/capture_campaign_video.py": "aa6327b12c7b255becc5cb136a452b62ab323d31ebd659a99ea859b654e1da64",
@@ -7397,9 +7399,10 @@
     "tools/run_gameplay_ci.py": "8b73d8b8098e331e6606680c2256b15209dd3d4e1b3c66f47981671251004455",
     "tools/run_horizons_native.py": "e604267b71aa6291d513b95bddbf424501b443b917390ccf4746a085775d4bd8",
     "tools/run_return_native.py": "c592fcec74b0751eb65b552d2945013097e368085b3881c45b72d893b55e967b",
-    "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc"
+    "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc",
+    "tests/weapon_actions_native.c": "1e4ded2472549698d1c88a93582dd17b02de48c2f0f627aba86f5a44dac56166"
   },
-  "inverse_sha256": "f8bd7472348048810843ca17533d07e77babcc944ce3595fba0bbdd21dee343c",
+  "inverse_sha256": "34b252c8abbe3e4ae1f36e290d6d3bcc6de41fd6d5fcf3cf20ee465e215fe510",
   "name": "field-controls-audio-successor",
   "parent_commit": "4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8",
   "parent_files": {

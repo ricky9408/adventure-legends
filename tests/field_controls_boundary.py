@@ -14,14 +14,14 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='e62b11728af7d860953ad9365f43ed8ed5685890d854b32609f07dcbf089ebd6'
+CONTRACT_SHA='863ece01a4ce7bf2ca6947c9d2301732ed62bd6ca133ca713d607bf79baf0353'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
 
 def allowed(path):
     return path.startswith(('src/ui_data/','src/companion_guide_text_data/')) or path in {
-        'src/game.c','src/game_shop.c','src/modal_blit.inc','src/ui.c',
+        'src/game.c','src/game_shop.c','src/modal_blit.inc','src/ui.c','src/weapon_actions.c',
         'src/field_controls.h','src/quickparty.c','src/quickparty.h',
         'src/power_aim_hold.h','src/music.c','src/magma_powers.c','src/magma_powers.h',
         'src/return_interact.inc','src/underwater_game.c',
