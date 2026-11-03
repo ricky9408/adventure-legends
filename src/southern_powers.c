@@ -23,6 +23,8 @@ int southern_power_kind,southern_power_time,southern_power_form;
 int southern_power_direction,southern_power_origin_x,southern_power_origin_y;
 int southern_power_age,southern_power_cooldown,southern_power_cast_time;
 int southern_power_phase;
+static enum PowerFailure last_failure;
+enum PowerFailure southern_power_failure(void){return last_failure;}
 typedef struct {short x,y,dx,dy,error;unsigned char life,stage,harmless,pad;} Missile;
 static Missile missiles[3];
 static short previous_x[6],previous_y[6];
@@ -239,25 +241,28 @@ static void missile(unsigned n,int x,int y,int dx,int dy,int harmless){
 int southern_power_side(unsigned command,int side){
     CreatureInstance *c;const CreatureAbility *a;unsigned base,cd,i,target=6;int x1,y1,x2,y2;
     int dx,dy;
-    if(command<23||command>42||ability_cd||southern_power_time||hitstop||
-       (side!=-1&&side!=1)||face<0||face>3)return 0;
+    last_failure=POWER_FAILURE_MISMATCH;
+    if(command<23||command>42||(side!=-1&&side!=1)||face<0||face>3)return 0;
+    if(ability_cd||southern_power_time||hitstop){last_failure=POWER_FAILURE_WAIT;return 0;}
     c=progression_selected();a=creatures_ability(command);
     if(!c||!creatures_instance_validate(c)||c->selected_command>1||
        c->equipped[c->selected_command]!=command||!creatures_command_learned(c->form_id,c->level,command)||
-       !a||a->phase!=phases[(command-23)/2]||a->cooldown_updates<90||solid(px,py))return 0;
+       !a||a->phase!=phases[(command-23)/2]||a->cooldown_updates<90)return 0;
+    if(solid(px,py)){last_failure=POWER_FAILURE_BLOCKED;return 0;}
     dx=fx[face];dy=fy[face];x1=px+dx*24+dy*12;y1=py+dy*24-dx*12;
     x2=px+dx*24-dy*12;y2=py+dy*24+dx*12;
     if(command==23){x1=cx+dy*8;y1=cy-dx*8;x2=px+dx*12+dy*18;y2=py+dy*12-dx*18;
-        if(!clear(cx,cy,x1,y1))return 0;}
+        if(!clear(cx,cy,x1,y1)){last_failure=POWER_FAILURE_BLOCKED;return 0;}}
     if(command==24){x1=px+dx*16+dy*16;y1=py+dy*16-dx*16;x2=px+dx*40;y2=py+dy*40;}
     if(command==26){x1=px+dx*16+dy*12;y1=py+dy*16-dx*12;x2=px+dx*28-dy*12;y2=py+dy*28+dx*12;}
     if(command==31||command==32){x1=px-dy*12*side;y1=py+dx*12*side;x2=x1;y2=y1;}
     if(command==35||command==36){x1=px+dx*20+dy*16;y1=py+dy*20-dx*16;x2=px+dx*20-dy*16;y2=py+dy*20+dx*16;}
-    if(command==29||command==39||command==40){target=aimed_target(px,py,face,6,command==29);if(target>=6)return 0;
+    if(command==29||command==39||command==40){target=aimed_target(px,py,face,6,command==29);if(target>=6){last_failure=POWER_FAILURE_AIM;return 0;}
         x1=x2=enemies[target].x;y1=y2=enemies[target].y;}
     if((command==23||command==24||command==26||command==28||command==31||command==32||command==34||command==35||command==36)&&
-       (!clear(px,py,x1,y1)||!clear(x1,y1,x2,y2)||!clear(px,py,x2,y2)))return 0;
-    if(!northern_powers_tiles_claim(NORTHERN_TILES_SOUTHERN))return 0;
+       (!clear(px,py,x1,y1)||!clear(x1,y1,x2,y2)||!clear(px,py,x2,y2))){last_failure=POWER_FAILURE_BLOCKED;return 0;}
+    if(!northern_powers_tiles_claim(NORTHERN_TILES_SOUTHERN)){last_failure=POWER_FAILURE_WAIT;return 0;}
+    last_failure=POWER_FAILURE_NONE;
     southern_power_kind=(int)command;southern_power_form=c->form_id;caster_id=c->instance_id;
     southern_power_direction=face;southern_power_origin_x=px;southern_power_origin_y=py;
     southern_power_phase=a->phase;southern_power_age=0;southern_power_time=lifetimes[command-23];

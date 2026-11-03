@@ -30,6 +30,7 @@ void progression_refresh(void){progression_revision++;}
 void save_game(void){saved++;if(!save5_validate(&adventure_save))invalid++;}
 void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;game_state=2;}
 void toast(int a){last_toast=(unsigned)a;}
+unsigned toast_id(void){return last_toast;}
 void text(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void centered(int a,int b,int c){(void)a;(void)b;(void)c;}
 void box(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
@@ -128,6 +129,12 @@ def value(n):return ctypes.c_int.in_dll(L,n).value
 def byte(n):return ctypes.c_ubyte.in_dll(L,n).value
 class NorthRuntime(unittest.TestCase):
  def setUp(self):L.fresh()
+ def test_wrong_power_at_a_tagged_place_gives_selection_hint(self):
+  self.recruits();self.assertEqual(L.entry(24,0),1)
+  L.at(120,80);L.select_cmd(13)
+  self.assertEqual(L.north_game_power(13),1)
+  self.assertEqual(L.toast_id(),2000+list(UI).index('NT_WRONG'))
+  self.assertEqual(L.qo(16),0)
  def test_persistent_four_bearings_and_camera_translation(self):
   # Each bearing remains visible without a toast. Signed arrow tips distinguish
   # the two directions that share the existing junction actor artwork.

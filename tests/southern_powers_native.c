@@ -89,6 +89,22 @@ static void shot(unsigned i,int x,int y,int dx,int dy,int life,int owner){
 }
 static void updates(unsigned n){while(n--){southern_powers_tick();regional_powers_tick();if(ability_cd&&!hitstop)ability_cd--;}}
 static void expect_damage(unsigned i,unsigned q4){if(enemy_hp_q4[i]!=160-(int)q4)fprintf(stderr,"command%d age%d enemy%u actual%d expected%d\n",southern_power_kind,southern_power_age,i,enemy_hp_q4[i],160-(int)q4);assert(enemy_hp_q4[i]==160-(int)q4);}
+static void test_failure_feedback(void){
+    setup(24);ability_cd=3;assert(!southern_power(24));
+    assert(southern_power_failure()==POWER_FAILURE_WAIT);
+    assert(power_failure_text(southern_power_failure())==TX_COOLDOWN);
+    assert(ability_cd==3&&!southern_power_time);
+    setup(24);wall(116,84,1,1);assert(!southern_power(24));
+    assert(southern_power_failure()==POWER_FAILURE_BLOCKED);
+    assert(power_failure_text(southern_power_failure())==TX_MG_BLOCKED);
+    assert(!ability_cd&&!southern_power_time);
+    setup(24);absent=1;assert(!southern_power(24));
+    assert(southern_power_failure()==POWER_FAILURE_MISMATCH);
+    assert(power_failure_text(southern_power_failure())==TX_C_POWER_MISMATCH);
+    assert(!ability_cd&&!southern_power_time);
+    setup(24);assert(southern_power(24));
+    assert(southern_power_failure()==POWER_FAILURE_NONE);
+}
 static void test_every_command(void){
     unsigned c;
     for(c=23;c<=42;c++){
@@ -379,7 +395,7 @@ static void test_mark_sight_cache(void){int before,i;
     paired_long_setup();southern_powers_draw();southern_powers_reset();solid_calls=0;before=draws;southern_powers_draw();
     assert(draws==before&&!solid_calls&&!southern_powers_busy());
 }
-int main(void){assert(creatures_catalog_validate());test_every_command();test_snapshot_pause_and_invalid();
+int main(void){assert(creatures_catalog_validate());test_failure_feedback();test_every_command();test_snapshot_pause_and_invalid();
     test_guards_and_aim();test_windup_and_echo();test_windup_cast_boundaries();test_projectiles_and_interceptions();test_geometry_once_and_walls();
     test_decoys_and_lease();test_real_weapons_and_gear();test_pose_and_dynamic_geometry();test_cached_crescent_equivalence();test_mark_sight_cache();test_render_stress();
     puts("PASS Southern host integration: all20 real roles, directional and spent guards, explicit delayed weapon echoes, split/return/ricochet, LOS/corners, recycled identities, one-hit ledgers, snapshot/freeze/reset, field-only feedback, shared tile lease, bounded drawing. Not cartridge controller proof.");return 0;}
