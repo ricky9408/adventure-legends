@@ -197,6 +197,7 @@ def player_control_docs():
         '- Lを押したまま左右、Lを離す：持っている仲間から選ぶ。Bでやめる',
         '- SELECT：使いません',
         'Aは押し直したときだけ決定します。Bはひとつ前へ、STARTは冒険へ戻ります。',
+        'Lを離して確定してからSTARTでメニューを開き、「技・進化」を選びます。',
         '送るのは左右だけで、上下や斜めでは動きません。',
         'Bのあとに方向や「離す」の案内が出たら、ボタンを離して、あらためて押してみましょう。'):
         assert line in guide,'Japanese guide drifted from the live controls: '+line
