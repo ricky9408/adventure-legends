@@ -98,6 +98,13 @@ static void test_failure_feedback(void){
     assert(southern_power_failure()==POWER_FAILURE_BLOCKED);
     assert(power_failure_text(southern_power_failure())==TX_MG_BLOCKED);
     assert(!ability_cd&&!southern_power_time);
+    setup(39);enemy(0,124,100,10);wall(112,100,1,1);
+    assert(!southern_power(39));
+    assert(southern_power_failure()==POWER_FAILURE_BLOCKED);
+    assert(!ability_cd&&!southern_power_time);
+    setup(39);assert(!southern_power(39));
+    assert(southern_power_failure()==POWER_FAILURE_AIM);
+    assert(power_failure_text(southern_power_failure())==TX_SP_AIM_CLEAR);
     setup(24);absent=1;assert(!southern_power(24));
     assert(southern_power_failure()==POWER_FAILURE_MISMATCH);
     assert(power_failure_text(southern_power_failure())==TX_C_POWER_MISMATCH);
