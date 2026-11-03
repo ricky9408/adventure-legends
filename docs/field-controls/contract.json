@@ -6992,6 +6992,7 @@
     "assets/ui_texts_return.json": "333d95369920d9ba7c801c027f82ab366a9215edc02480bf0e15772de08fe872",
     "assets/underwater_ui.json": "bb5d3db2c13f7a08b1da13f7c460875c0d637ed54ada7771f2942d520bd54542",
     "docs/GAMEPLAY_CI.md": "337c97f448168db42ef585e5cb9d51cf5a26fc7eb5a8218e8accdb5d979f9a8a",
+    "docs/PLAY_JA.md": "20dc3b8ee21b95ed0a7122ffcf390efe935c21959e50b525b9a715823a0128f2",
     "src/companion_guide_text_data/part_039.inc": "975082f06ff49060db1a9d8a2b99825af7c37d7f7369a8ce950fb7495a04ebc7",
     "src/companion_guide_text_data/part_041.inc": "c00240d5d5d8498a614262bec4bf133af17abb39bd3ba068ffeb499dd785c8d4",
     "src/companion_guide_text_data/part_045.inc": "95ea5a0257790e40731a2f7b6542ea019d9c3f1f8fa8d56ce2a329f14b374287",
@@ -7391,6 +7392,7 @@
     "tests/treasure_full_journey.py": "d442ef9a5f826576597bd3bb663b9110d77ac962789cd264026ecd3616909621",
     "tests/underwater_collection_route.py": "fcdba2f202c96214aad45ed711d6f211d5cfb383fddda8ba8a94bc2c132a2f89",
     "tests/underwater_journey.py": "e6ff183a9f2e178e954584eebdf54f51a5943100d0499fbad092cc2c7c6f6b6e",
+    "tests/weapon_actions_native.c": "1e4ded2472549698d1c88a93582dd17b02de48c2f0f627aba86f5a44dac56166",
     "tools/ci-requirements.txt": "963af3203aee693bc2e804e0b4e4d0fa765fafd9bafeb402c0b51a7d3ec42fd9",
     "tools/host_production_guard.py": "d9ef47ef3bab62f908cb1bc57e1ba7833dce8a73cdc9f48eb61f82d8af00a985",
     "tools/run_connected_roads_host.py": "22a851f637c17f12446c57c550ea69d4c09ee5c294810e32b3c0584897ec79dc",
@@ -7399,10 +7401,9 @@
     "tools/run_gameplay_ci.py": "8b73d8b8098e331e6606680c2256b15209dd3d4e1b3c66f47981671251004455",
     "tools/run_horizons_native.py": "e604267b71aa6291d513b95bddbf424501b443b917390ccf4746a085775d4bd8",
     "tools/run_return_native.py": "c592fcec74b0751eb65b552d2945013097e368085b3881c45b72d893b55e967b",
-    "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc",
-    "tests/weapon_actions_native.c": "1e4ded2472549698d1c88a93582dd17b02de48c2f0f627aba86f5a44dac56166"
+    "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc"
   },
-  "inverse_sha256": "34b252c8abbe3e4ae1f36e290d6d3bcc6de41fd6d5fcf3cf20ee465e215fe510",
+  "inverse_sha256": "30e05d897faa0d7c4765a5d0b2dae721250b30ad50600eaf7b9348afa59fe336",
   "name": "field-controls-audio-successor",
   "parent_commit": "4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8",
   "parent_files": {

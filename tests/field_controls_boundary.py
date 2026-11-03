@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='863ece01a4ce7bf2ca6947c9d2301732ed62bd6ca133ca713d607bf79baf0353'
+CONTRACT_SHA='d3e643acbe54aaffec90f71809a80f0a1216eb1e5358cae5498230858c5874a0'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -165,7 +165,59 @@ def historical(c,args=None,chain_only=False):
         subprocess.run(command,cwd=view,check=True,env={**os.environ,'PYTHONPATH':str(view/'tests')})
 
 
+def player_control_docs():
+    """Spoiler-free guides must teach the live B power, R call, and horizontal L browse."""
+    ui=json.loads((ROOT/'assets/ui_texts.json').read_text(encoding='utf-8'))
+    feedback=json.loads((ROOT/'assets/ui_texts_player_feedback.json').read_text(encoding='utf-8'))
+    assert ui['INTRO3A']=='Bで仲間の力。Rで呼ぶ・帰す。'
+    assert ui['INTRO3B']=='L短押しで仲間切替。Aで剣。'
+    assert ui['CONTROL2']=='B  仲間の力   L短押し  切替'
+    assert ui['CONTROL3']=='R  呼ぶ・帰す    START  続ける'
+    assert feedback['PF_CONTROLS_1']=='B 仲間の力   R 呼ぶ・帰す'
+    assert feedback['PF_CONTROLS_2']=='L短押し 切替\u3000長押し＋左右 全仲間'
+    assert feedback['PF_CONTROLS_3']=='Lを離す 決定   B やめる'
+    assert feedback['PF_HUB_KEYS']=='十字 選ぶ  A 決定  B 戻る'
+    assert feedback['PF_BACK_CLOSE']=='B 戻る   START 閉じる'
+    quick=(ROOT/'src/quickparty.c').read_text()
+    assert 'if(dir==LEFT||dir==RIGHT)' in quick
+    assert 'if(pressed&(B|START))' in quick
+    assert 'else if(tap)quickparty_cycle();' in quick
+    controls=(ROOT/'src/field_controls.h').read_text().replace(' ','')
+    assert 'FIELD_POWER_B=2' in controls and 'FIELD_COMPANION_R=256' in controls
+    journal=(ROOT/'src/journal_nav.c').read_text()
+    assert 'int input=pressed&~DIRECTIONS;' in journal
+    assert 'if(input&B)' in journal and 'if(input&START)' in journal
+    assert 'if(input&SELECT)return JOURNAL_CONSUMED;' in journal
+    guide=(ROOT/'docs/PLAY_JA.md').read_text(encoding='utf-8')
+    readme=(ROOT/'README.md').read_text(encoding='utf-8')
+    for line in (
+        '- B：選んでいる仲間の力。帰している仲間は、出てきてその力を使う',
+        '- R：仲間を呼ぶ／帰す。力は使わない',
+        '- Lを短く押す：編成している次の仲間へ切り替え',
+        '- Lを押したまま左右、Lを離す：持っている仲間から選ぶ。Bでやめる',
+        '- SELECT：使いません',
+        'Aは押し直したときだけ決定します。Bはひとつ前へ、STARTは冒険へ戻ります。',
+        'Lを離して確定してからSTARTでメニューを開き、「技・進化」を選びます。',
+        '送るのは左右だけで、上下や斜めでは動きません。',
+        'RとBを一緒に押したときは、力をもう一度使う前に両方を離し、Bを押し直します。',
+        'Bのあとに方向や「離す」の案内が出たら、ボタンを離して、あらためて押してみましょう。'):
+        assert line in guide,'Japanese guide drifted from the live controls: '+line
+    for line in ('上・右・下・左','４枠','B：仲間を呼ぶ／帰す','R：呼び出している仲間の力','L＋十字','Lを押したまま十字'):
+        assert line not in guide,'Japanese guide still teaches a retired control: '+line
+    for name in (feedback[key] for key in feedback if key.startswith('PF_REGION_')):
+        assert name not in guide,'Japanese guide names a later region: '+name
+    for line in (
+        '| B | Use the selected companion’s power; a recalled companion joins you automatically |',
+        '| R | Call or recall your companion |',
+        '| Hold L, then Left/Right; release L | Browse every owned companion, including reserves; B cancels |',
+        '| Select | Unused |',
+        'B goes back one level; Start closes. Directional browsing repeats while held; A confirms on a fresh press.'):
+        assert line in readme,'README drifted from the live controls: '+line
+    assert '| B | Call or recall' not in readme and 'four directional' not in readme.lower()
+
+
 def verify(chain=True):
+    player_control_docs()
     c=load();authenticate(c,state(c))
     if chain:historical(c,chain_only=True)
     return c,None
