@@ -42,7 +42,7 @@ def main():
  for name,cmd,extra in routed:
   if cmd[1]=='tests/verify_review_successor.py':cmd[1]='tests/field_controls_boundary.py'
   elif name=='test_review_successor':cmd[1]='tests/field_controls_boundary.py';cmd.append('--parent-tests')
- commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime','test_field_controls','test_field_carousel','test_field_preview_cancel','test_field_context_cancel','test_current_field_controls','test_save_badge_cache','test_play_strip_ranges','test_short_l')]
+ commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime','test_field_controls','test_field_carousel','test_field_preview_cancel','test_field_context_cancel','test_current_field_controls','test_power_failure_dispatch','test_northern_powers','test_southern_powers','test_save_badge_cache','test_play_strip_ranges','test_short_l')]
  report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}
  def save():(out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  save()
