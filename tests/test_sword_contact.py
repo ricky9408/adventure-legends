@@ -30,8 +30,8 @@ parts = [function(gear, name) for name in
          ('game_health_hurt', 'game_enemy_stagger', 'game_enemy_hurt',
           'clear_path', 'game_melee_hit')]
 parts += [function(game, name) for name in
-          ('damage_amount', 'damage_phase', 'damage', 'update_charger_contact',
-           'sword_blocks_contact',
+          ('damage_amount', 'damage_phase', 'damage', 'sword_blocks_contact',
+           'update_charger_contact',
            'update_enemies', 'update_boss', 'shot_segment_clear', 'update_shots')]
 
 with tempfile.TemporaryDirectory(prefix='sword-contact-') as temporary:

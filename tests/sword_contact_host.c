@@ -22,7 +22,7 @@ int covenants_power_time,horizons_power_time,return_power_time;
 int enemy_hp_q4[6];unsigned char enemy_phases[6],enemy_stagger_ticks[6];
 unsigned char slowed_enemies[6],ordinary_hostile_shots[12],shot_effects[12],shot_phases[12];
 unsigned short covenants_wave_shots;unsigned char covenants_wave_enemies;
-static int wall_x=-1,wall_y=-1,melee_events;
+static int wall_x=-1,wall_y=-1,melee_events,southern_guard_calls,magma_guard_calls;
 
 int ab(int n){return n<0?-n:n;}
 int sign(int n){return (n>0)-(n<0);}
@@ -62,8 +62,8 @@ void kill_enemy(Enemy*e){e->hp=0;}
 unsigned southern_powers_windup(unsigned i,unsigned n){(void)i;return n;}
 void southern_powers_approach(unsigned i,int*x,int*y){(void)i;(void)x;(void)y;}
 void southern_powers_weapon_hit(unsigned i){(void)i;melee_events++;}
-int southern_powers_melee_guard(unsigned i,int x,int y){(void)i;(void)x;(void)y;return 0;}
-int magma_powers_melee_guard(unsigned i,int x,int y){(void)i;(void)x;(void)y;return 0;}
+int southern_powers_melee_guard(unsigned i,int x,int y){(void)i;(void)x;(void)y;southern_guard_calls++;return 0;}
+int magma_powers_melee_guard(unsigned i,int x,int y){(void)i;(void)x;(void)y;magma_guard_calls++;return 0;}
 int enemy_tactics_update(unsigned i){(void)i;return 0;}
 int fire_shot(int x,int y,int dx,int dy,int owner){(void)x;(void)y;(void)dx;(void)dy;(void)owner;return -1;}
 void game_boss_health_set(unsigned n){(void)n;}
@@ -98,6 +98,7 @@ static void reset(void){
     weapon_action.reach_px=29;weapon_action.half_width_px=12;
     weapon_action.damage_q4=16;weapon_action.element=COMBAT_NEUTRAL_PHASE;
     invuln=guard_invuln=stone_guard=hitstop=frame=melee_events=0;
+    southern_guard_calls=magma_guard_calls=0;
     wall_x=wall_y=-1;boss_hp=boss_time=boss_armor=boss_flash=torches=0;
 }
 static void enemy(int x,int y){
@@ -108,8 +109,10 @@ int main(void){
     reset();enemy(100,100);update_enemies();
     assert(melee_events==1&&enemies[0].hp==1&&weapon_action.hit_mask==1);
     assert(hero_hp_q4==96&&invuln==0);
-    enemies[0].x=100;enemies[0].y=100;update_enemies();
+    assert(southern_guard_calls==1&&magma_guard_calls==1);
+    enemies[0].x=100;enemies[0].y=86;update_enemies();
     assert(hero_hp_q4==96&&invuln==0);
+    assert(southern_guard_calls==2&&magma_guard_calls==2);
     weapon_action.phase=WEAPON_RECOVERY;update_enemies();
     assert(hero_hp_q4==80&&invuln==80);
 
