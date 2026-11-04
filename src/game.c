@@ -158,7 +158,7 @@ int dialogue_action,dialogue_seen,dialog_speakers[6];
 /* Acknowledgement does not turn a failed write into a successful one. */
 int save_failure_notice;
 int save_notice_visible(void){return save_failure_notice&&game_state!=PLAY&&game_state!=TITLE&&game_state!=SAVE_PENDING;}
-int save_notice_left(void){return (240-ui_texts[TX_C_SAVE_FAILED].width-10)/2;}
+COLD int save_notice_left(void){return (240-ui_texts[TX_C_SAVE_FAILED].width-10)/2;}
 
 int gfx_props_room=-1;u32 gfx_props_progress=0xFFFFFFFF;
 COLD void enter_room(int,int);
@@ -516,7 +516,7 @@ void draw_actors(void){int i,anim=(swing||weapon_action.phase==WEAPON_CHARGING||
 /* Direct Sound music is independent of the existing PSG1 effects. */
 COLD void sound_init(void){music_init();}
 COLD void sfx(int id){REG16(0x04000060)=id==1?0x21:0;REG16(0x04000062)=id==3?0xA180:0x8180;REG16(0x04000064)=0x8000|(id==1?1850:id==2?1700:id==3?1200:1950);}
-void toast(int id){toast_id=id;toast_ticks=110;field_goal_detail=0;}
+COLD void toast(int id){toast_id=id;toast_ticks=110;field_goal_detail=0;}
 COLD void field_goal_input(unsigned input){
  if(!(input&KEY_SELECT)||game_state!=PLAY||quickparty_open||quickparty_visible)return;
  {JourneyGoal goal=journey_goal_read(&adventure_save,chapter_flags,(unsigned)room);
@@ -526,7 +526,7 @@ static inline u32 play_toast_cache_key(void){
  if(game_state!=PLAY)return 0;
  return field_goal_detail&&toast_ticks?TX_COUNT+(u32)toast_id*TX_COUNT+(u32)field_goal_detail:(u32)toast_id;
 }
-void acknowledge_save_failure(void){save_failure_notice=0;if(toast_id==TX_C_SAVE_FAILED)toast_ticks=0;}
+COLD void acknowledge_save_failure(void){save_failure_notice=0;if(toast_id==TX_C_SAVE_FAILED)toast_ticks=0;}
 COLD void dialogue(int a,int b,int next){
  if(a==TX_RG_LOCKED_A||a==TX_NT_LOCKED_A||a==TX_ST_LOCKED_A||a==TX_MG_LOCKED||a==TX_UW_LOCKED||a==TX_RT_LOCKED||a==TX_HZ_LOCKED||a==TX_HZ_LOCKED_FINAL||a==TX_CV_LOCKED){
   if(locked_notice_room==room&&locked_notice_text==a&&near(px,py,locked_notice_x,locked_notice_y,24))return;
@@ -1028,7 +1028,7 @@ void draw_campaign_background(void);
 COLD void draw_map(void){int mx=48,my=56,mw=144,mh=76;box(8,31,224,122);centered(TX_MAP,35,GOLD);rect(mx,my,mw,mh,PAL_PINE3);rect(mx,my+WORLD_RIVER_Y*mh/WORLD_H,mw,6,PAL_WATER3);line(mx+WORLD_SPAWN_X*mw/WORLD_W,my+mh-2,mx+WORLD_BRIDGE_CENTER_X*mw/WORLD_W,my+22,CREAM);line(mx+27,my+22,mx+110,my+22,CREAM);line(mx+110,my+22,mx+110,my+4,CREAM);if(bridge_open)rect(mx+68,my+35,8,10,GOLD);rect(mx+WORLD_CAMP_X*mw/WORLD_W-2,my+WORLD_CAMP_Y*mh/WORLD_H-2,5,5,PAL_FIRE2);rect(mx+WORLD_CHEST_X*mw/WORLD_W-2,my+WORLD_CHEST_Y*mh/WORLD_H-2,5,5,relic_found?PAL_STONE2:GOLD);rect(mx+WORLD_TEMPLE_X*mw/WORLD_W-3,my+WORLD_TEMPLE_Y*mh/WORLD_H-3,7,7,CREAM);rect(mx+px*mw/WORLD_W-2,my+py*mh/WORLD_H-2,5,5,PAL_HEART);centered(TX_MAP_KEYS,136,CREAM);}
 #include "title_route_drawing.inc"
 COLD int quest_id(void){if((unsigned)room-70u<8u)return covenants_game_quest_text();if((unsigned)room-62u<8u)return horizons_game_quest_text();if((unsigned)room-54u<8u)return return_game_quest_text();if((unsigned)(room-46)<8u)return underwater_game_quest_text();if(((unsigned)(room-38)<8u))return magma_game_quest_text();if(south_game_is_room((unsigned)room))return south_game_quest_text();if(north_game_is_room((unsigned)room))return north_game_quest_text();if(region_game_is_room((unsigned)room))return region_game_quest_text();if(room==14)return TX_T_WIND_HINT1;if(room==15)return TX_T_STONE_HINT1;if(room<4&&(chapter_flags&SAVE4_CORE_CLEAR))return chapter_flags&SAVE4_ENDING_SEEN?TX_C_QUEST_COMPLETE:TX_C_QUEST_RETURN;if(room<4&&(chapter_flags&SAVE4_SKY_CLEAR))return TX_C_QUEST_ACT3;if(room<4&&(chapter_flags&SAVE4_GROVE_CLEAR))return TX_C_QUEST_ACT2;if(room==0)return TX_QUEST0;if(room==1)return bridge_open?TX_QUEST2:TX_QUEST1;if(room==2)return torches==3?TX_QUEST4:TX_QUEST3;if(room==3)return TX_QUEST5;{const int q[]={TX_C_QUEST_ACT2,TX_C_QUEST_SKY_VANE,TX_C_QUEST_SKY_PATROL,TX_C_QUEST_SKY_RELAY,TX_C_QUEST_SKY_BOSS,TX_C_QUEST_ACT3,TX_C_QUEST_CORE_WEIGHTS,TX_C_QUEST_CORE_ROOTS,TX_C_QUEST_CORE_LAMPS,TX_C_QUEST_CORE_BOSS};return q[room-4];}}
-int game_save_badge_id(void){if(save_notice_visible())return 0;if(save_failed)return TX_FB_SAVE_ERROR;if(game_state==EVENT_PENDING)return TX_FB_WORKING;if(game_state==SAVE_PENDING||economy_pending()||later_rewards_pending()||save_feedback_badge()==1||(save_requested&&!save5_preflight_active()))return TX_FB_SAVING;return save_feedback_badge()==2?TX_FB_SAVED:0;}
+COLD int game_save_badge_id(void){if(save_notice_visible())return 0;if(save_failed)return TX_FB_SAVE_ERROR;if(game_state==EVENT_PENDING)return TX_FB_WORKING;if(game_state==SAVE_PENDING||economy_pending()||later_rewards_pending()||save_feedback_badge()==1||(save_requested&&!save5_preflight_active()))return TX_FB_SAVING;return save_feedback_badge()==2?TX_FB_SAVED:0;}
 COLD int game_save_badge_left(void){int id=game_save_badge_id();return id?192-ui_texts[id].width:240;}
 /* Immutable badge pixels are keyed only by their text ID; durable save state
  * still decides which badge is shown and when it changes. */
@@ -1464,8 +1464,9 @@ volatile unsigned render_profile_vblank_cycles,render_profile_vblank_start,rende
 /* All late CPU/DMA/IRQ work is charged to this completed update. The idle
  * wait for VBlank is excluded; start/end scanlines prove publication fits. */
 COLD void complete_presentation(unsigned active_cost,unsigned update_cost,unsigned save_cost,unsigned render_cost,unsigned music_cost){
+ unsigned started=cycle_now(),first_line=REG16(0x04000006),late;
  int goal_left,goal_right,goal_window=field_goal_window(&goal_left,&goal_right);
- unsigned started=cycle_now(),first_line=REG16(0x04000006),late=publish_scene_actors();
+ late=publish_scene_actors();
  obj_commit();REG16(0x04000050)=0x00FF;REG16(0x04000054)=game_display_brightness();
  /* Do not erase whole actors where only a few pixels cross the card. */
  if(goal_window){REG16(0x04000040)=(goal_left<<8)|goal_right;REG16(0x04000044)=(122<<8)|154;REG16(0x04000048)=0x24;REG16(0x0400004A)=0x34;}
