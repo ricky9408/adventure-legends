@@ -47,15 +47,13 @@ jobs:
           set -euo pipefail
           rm -f /etc/apt/sources.list.d/debian.sources
           packages=(ca-certificates curl git build-essential pkg-config libmgba-dev python3 python3-venv python3-pil python3-numpy python3-scipy ffmpeg fonts-noto-cjk fonts-dejavu-core)
-          for attempt in 1 2; do
-            for mirror in snapshot-cloudflare.debian.org snapshot.debian.org; do
-              printf 'deb [check-valid-until=no] http://%s/archive/debian/20250910T000000Z trixie main\n' "$mirror" > /etc/apt/sources.list
-              if timeout --kill-after=10s 90s apt-get -o APT::Update::Error-Mode=any -o Acquire::Retries=3 update &&
-                 apt-get -o Acquire::Retries=3 install --yes --no-install-recommends "${packages[@]}"; then
-                exit 0
-              fi
-            done
-            if [[ "$attempt" != 2 ]]; then sleep 10; fi
+          for mirror in snapshot-cloudflare.debian.org snapshot.debian.org; do
+            printf 'deb [check-valid-until=no] http://%s/archive/debian/20250910T000000Z trixie main\n' "$mirror" > /etc/apt/sources.list
+            if timeout --kill-after=10s 90s apt-get -o APT::Update::Error-Mode=any -o Acquire::Retries=3 update &&
+               timeout --kill-after=10s 420s apt-get -o Acquire::Retries=3 --download-only install --yes --no-install-recommends "${packages[@]}"; then
+              apt-get --no-download install --yes --no-install-recommends "${packages[@]}"
+              exit 0
+            fi
           done
           exit 1
       - name: Check out candidate without persistent credentials
