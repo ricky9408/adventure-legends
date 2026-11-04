@@ -25,7 +25,7 @@ volatile unsigned int chapter_flags;
 volatile int room;
 int game_state,quickparty_open,quickparty_visible,toast_id,toast_ticks,field_goal_detail;
 int px,py,invuln,save_calls;
-int camera_x,camera_y,obj_count,fixture_hint,fixture_reward;
+int camera_x,camera_y,obj_count,fixture_hint,fixture_reward,scene_present_phase;
 ObjEntry obj_entries[128];int obj_depth[128];
 const UiText ui_texts[TX_COUNT]={
  [TX_JG_BEGIN]={.width=100},[TX_JG_BEGIN_DETAIL]={.width=120}
@@ -50,7 +50,7 @@ static void reset(void){
  memset(&adventure_save,0,sizeof adventure_save);
  game_state=PLAY;room=0;chapter_flags=0;quickparty_open=quickparty_visible=0;
  toast_id=toast_ticks=field_goal_detail=0;px=120;py=126;invuln=save_calls=0;
- obj_count=fixture_hint=fixture_reward=0;
+ obj_count=fixture_hint=fixture_reward=scene_present_phase=0;
 }
 int main(void){
  static Save5State before;
@@ -84,15 +84,17 @@ int main(void){
  game_state=PAUSE;assert(play_toast_cache_key()==0);
 
  reset();field_goal_input(KEY_SELECT);
- obj_add(0,112,115,16,16,1,126,0);assert(obj_count==0);
- obj_add(0,0,123,16,16,1,126,0);assert(obj_count==1);
- obj_add(0,112,154,16,16,1,170,0);assert(obj_count==2);
- obj_count=0;fixture_hint=1;
- obj_add(0,112,115,16,16,1,126,0);assert(obj_count==1);
- obj_count=0;fixture_hint=0;fixture_reward=1;
- obj_add(0,122,115,16,16,1,126,0);assert(obj_count==1);
- obj_count=0;fixture_reward=0;toast(TX_SUMMONED);
- obj_add(0,112,115,16,16,1,126,0);assert(obj_count==1);
- puts("PASS field Select goals, modal guards, unchanged player/save, journal parity, cache key, sprite legibility");
+ {int left=-1,right=-1;
+  assert(field_goal_window(&left,&right)&&left==54&&right==186);
+  obj_add(0,112,115,16,16,1,126,0);assert(obj_count==1);
+  obj_add(0,0,123,16,16,1,126,0);assert(obj_count==2);
+  obj_add(0,112,154,16,16,1,170,0);assert(obj_count==3);
+  fixture_hint=1;assert(!field_goal_window(&left,&right));fixture_hint=0;
+  fixture_reward=1;assert(!field_goal_window(&left,&right));fixture_reward=0;
+  quickparty_visible=1;assert(!field_goal_window(&left,&right));quickparty_visible=0;
+  scene_present_phase=1;assert(!field_goal_window(&left,&right));scene_present_phase=0;
+  toast(TX_SUMMONED);assert(!field_goal_window(&left,&right));
+ }
+ puts("PASS field Select goals, modal guards, unchanged player/save, journal parity, cache key, partial sprites");
  return 0;
 }

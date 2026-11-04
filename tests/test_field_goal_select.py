@@ -10,7 +10,7 @@ SOURCE = (ROOT / 'src/game.c').read_text(encoding='utf-8')
 
 
 def function(name):
-    match = re.search(r'^(?:COLD |static inline )?(?:void|u32) ' + name + r'\([^;{}]*\)\s*\{',
+    match = re.search(r'^(?:COLD |static inline )?(?:void|u32|int) ' + name + r'\([^;{}]*\)\s*\{',
                       SOURCE, re.MULTILINE)
     assert match, f'Missing production function {name}'
     start = match.start()
@@ -31,7 +31,7 @@ assert update.index('field_goal_input((unsigned)pressed)') < update.index('field
 with tempfile.TemporaryDirectory(prefix='field-goal-select-') as temporary:
     out = Path(temporary)
     (out / 'field_goal_select.inc').write_text(
-        '\n'.join(function(name) for name in ('toast', 'field_goal_input', 'play_toast_cache_key', 'obj_add')) + '\n',
+        '\n'.join(function(name) for name in ('toast', 'field_goal_input', 'play_toast_cache_key', 'field_goal_window', 'obj_add')) + '\n',
         encoding='utf-8')
     common = ['cc', '-std=c99', '-O1', '-Wall', '-Wextra', '-Werror', '-pedantic',
               '-Isrc', '-I' + str(out), 'tests/field_goal_select_host.c',

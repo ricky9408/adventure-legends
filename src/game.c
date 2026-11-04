@@ -170,7 +170,6 @@ COLD void game_road_interrupt(void);
 int game_display_state(void);
 int game_save_badge_id(void);
 int game_save_badge_left(void);
-COLD int play_hint_text(void);
 u32 cycle_now(void);
 COLD void save_frame(void);
 COLD int event_frame(void);
@@ -399,11 +398,6 @@ void obj_add(int off,int x,int y,int w,int h,int priority,int depth,int flip){in
  if(save_notice_visible()){int left=save_notice_left();if(x+w>left&&x<240-left&&y+h>SAVE_NOTICE_Y&&y<SAVE_NOTICE_Y+SAVE_NOTICE_H)return;}
  if(x+w>136&&x<200&&y+h>3&&y<20){int left=game_save_badge_left();if(left<200&&x+w>left)return;}
  if(game_state==PLAY&&x+w>5&&x<121&&y+h>122&&y<139&&game_shop_reward_visible())return;
- if(game_state==PLAY&&field_goal_detail&&toast_ticks&&y+h>122&&y<154&&!quickparty_visible&&!game_shop_reward_visible()){
-  int width=ui_texts[toast_id].width>ui_texts[field_goal_detail].width?ui_texts[toast_id].width:ui_texts[field_goal_detail].width;
-  int left=(228-width)/2;
-  if(x+w>left&&x<left+width+12&&!play_hint_text())return;
- }
  /* Menus are background pixels: hide actors where a panel covers them. */
  if(priority==1||priority==2){int display=game_display_state();if(quickparty_visible&&x+w>26&&x<214&&y+h>29&&y<160)return;if(display==PAUSE||display==11||game_state==13||game_state==DEAD||game_state==EVOLVE_CONFIRM||game_state==EVOLVE_ANIM)return;if(display==DIALOG&&y+h>99)return;}
  if(w==16&&h==16)size=1;else if(w==32&&h==32)size=2;else if(w==32&&h==16){shape=1;size=2;}else if(w==32&&h==8){shape=1;size=1;}else if(w==16&&h==8){shape=1;size=0;}
@@ -1071,6 +1065,13 @@ u16 field_goal_pixels[120*32] __attribute__((aligned(4)));
 int play_hint_ids[4];unsigned play_hint_cursor;
 int play_notice_valid,play_notice_toast,play_notice_hint,play_notice_cache_disabled;
 int field_goal_cached_title=-1,field_goal_cached_detail=-1;
+COLD int field_goal_window(int *left,int *right){
+ int width,w;
+ if(game_state!=PLAY||quickparty_visible||scene_present_phase||!toast_ticks||!field_goal_detail||play_hint_text()||game_shop_reward_visible())return 0;
+ width=ui_texts[toast_id].width>ui_texts[field_goal_detail].width?ui_texts[toast_id].width:ui_texts[field_goal_detail].width;
+ w=width+12;if(w>240)return 0;
+ *left=(240-w)/2;*right=*left+w;return 1;
+}
 COLD void draw_field_goal_card(int title,int detail,int build_cache){
  int width=ui_texts[title].width>ui_texts[detail].width?ui_texts[title].width:ui_texts[detail].width;
  int x,y,w=width+12;u16 *target=screen;
@@ -1463,8 +1464,12 @@ volatile unsigned render_profile_vblank_cycles,render_profile_vblank_start,rende
 /* All late CPU/DMA/IRQ work is charged to this completed update. The idle
  * wait for VBlank is excluded; start/end scanlines prove publication fits. */
 COLD void complete_presentation(unsigned active_cost,unsigned update_cost,unsigned save_cost,unsigned render_cost,unsigned music_cost){
+ int goal_left,goal_right,goal_window=field_goal_window(&goal_left,&goal_right);
  unsigned started=cycle_now(),first_line=REG16(0x04000006),late=publish_scene_actors();
- obj_commit();REG16(0x04000050)=0x00FF;REG16(0x04000054)=game_display_brightness();REG16(0x04000000)=0x1444|(page?0x10:0);page^=1;
+ obj_commit();REG16(0x04000050)=0x00FF;REG16(0x04000054)=game_display_brightness();
+ /* Do not erase whole actors where only a few pixels cross the card. */
+ if(goal_window){REG16(0x04000040)=(goal_left<<8)|goal_right;REG16(0x04000044)=(122<<8)|154;REG16(0x04000048)=0x24;REG16(0x0400004A)=0x34;}
+ REG16(0x04000000)=0x1444|(page?0x10:0)|(goal_window?0x2000:0);page^=1;
  render_actors_cycles+=late;
  render_profile_serial++;
  render_profile_update=update_cost;render_profile_save=save_cost;render_profile_render=render_cost+late;render_profile_music=music_cost;

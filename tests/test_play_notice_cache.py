@@ -29,7 +29,7 @@ head=r'''
 #define MAGMA_HINT_LANDING 1
 typedef uint8_t u8;typedef uint16_t u16;typedef uint32_t u32;
 u16 *screen;int world_mask_active,world_mask_left,world_mask_right,world_mask_top,world_mask_bottom;
-int game_state=PLAY,toast_ticks,toast_id,field_goal_detail,fixture_hint,fixture_reward;
+int game_state=PLAY,toast_ticks,toast_id,field_goal_detail,fixture_hint,fixture_reward,quickparty_visible,scene_present_phase;
 int game_shop_reward_visible(void){return fixture_reward;}
 int covenants_hint_text(void){return fixture_hint;}
 int horizons_hint_text(void){return 0;} int return_hint_text(void){return 0;}
