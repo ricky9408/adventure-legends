@@ -212,7 +212,7 @@ def player_control_docs():
         '| B | Use the selected companion’s power; a recalled companion joins you automatically |',
         '| R | Call or recall your companion |',
         '| Hold L, then Left/Right; release L | Browse every owned companion, including reserves; B cancels |',
-        '| Select | Unused |',
+        '| Select | Show the current journey goal and next clue in the field |',
         'B goes back one level; Start closes. Directional browsing repeats while held; A confirms on a fresh press.'):
         assert line in readme,'README drifted from the live controls: '+line
     assert '| B | Call or recall' not in readme and 'four directional' not in readme.lower()
