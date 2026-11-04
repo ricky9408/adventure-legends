@@ -97,7 +97,7 @@ FIELDS = (
     'cache_valid', 'cache_fields', 'room', 'play_strip_reuses', 'modal_world_row',
     'cached_armor', 'scene_present_phase', 'save_requested',
     'save_feedback_ordinary', 'save_feedback_background', 'save_ordinary_defer',
-    'toast_ticks',
+    'toast_ticks', 'field_goal_detail',
 )
 
 

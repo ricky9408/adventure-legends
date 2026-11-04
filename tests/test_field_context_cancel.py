@@ -32,7 +32,7 @@ DRIVER = r'''
 #include <stdlib.h>
 
 #define COLD
-enum { PLAY=1, KEY_B=2, B=2, R=256, TX_RT_WAIT=1001 };
+enum { PLAY=1, KEY_B=2, B=2, KEY_SELECT=4, R=256, TX_RT_WAIT=1001 };
 static int room,game_state,reset_pending,reset_confirm,invite_confirm,repeat_active;
 static int reach_x,reach_y,reach_allowed,prompt_x,prompt_y,prompt_allowed;
 static unsigned close_calls,prompt_calls,toast_calls,assertions,cases;
@@ -73,21 +73,22 @@ static void reset_ownership(void) {
  unsigned pressed,extra,pending;int area;
  const unsigned held_extra[]={0,B,R|B};
  /* Every physical-key mask, including B+R and B+A, is owned by a pending
-  * reset. R, held B without an edge, and all unrelated buttons never cancel.
+  * reset. Select dismisses the warning without consuming the goal action;
+  * R, held B without an edge, and unrelated buttons never cancel.
   * Each call begins with independent synthetic state, not a personal save. */
  for(area=46;area<=53;area++)for(pending=0;pending<=1;pending++)
   for(pressed=0;pressed<1024;pressed++)for(extra=0;extra<3;extra++) {
    int consumed=(pending&&(pressed&B))!=0;
    setup(area);reset_pending=(int)pending;
    expect_underwater(pressed,pressed|held_extra[extra],consumed,
-                     consumed?0:(int)pending);
+                     consumed||(pressed&KEY_SELECT)?0:(int)pending);
   }
  for(area=54;area<=61;area++)for(pending=0;pending<=1;pending++)
   for(pressed=0;pressed<1024;pressed++)for(extra=0;extra<3;extra++) {
    int consumed=(pending&&(pressed&B))!=0;
    setup(area);reset_confirm=(int)pending;
    expect_return(pressed,pressed|held_extra[extra],consumed,
-                 consumed?0:(int)pending,0,0);
+                 consumed||(pressed&KEY_SELECT)?0:(int)pending,0,0);
   }
  /* A cancellation consumes exactly the confirming edge. A later B is free
   * for the field ability, and continuing to hold B is not another edge. */
@@ -100,6 +101,22 @@ static void reset_ownership(void) {
   setup(area);reset_confirm=1;
   expect_return(B,B,1,0,0,0);expect_return(0,B,0,0,0,0);
   expect_return(B,B,0,0,0,0);
+ }
+ for(area=46;area<=53;area++) {
+  setup(area);reset_pending=1;
+  expect_underwater(KEY_SELECT,KEY_SELECT,0,0);
+  expect_underwater(B,B,0,0);
+ }
+ for(area=54;area<=61;area++) {
+  setup(area);reset_confirm=invite_confirm=1;
+  expect_return(KEY_SELECT,KEY_SELECT,0,0,0,0);
+  expect_return(B,B,0,0,0,0);
+  setup(area);reset_confirm=1;
+  expect_return(B|KEY_SELECT,B|KEY_SELECT,1,0,0,0);
+ }
+ for(area=46;area<=53;area++) {
+  setup(area);reset_pending=1;
+  expect_underwater(B|KEY_SELECT,B|KEY_SELECT,1,0);
  }
 }
 

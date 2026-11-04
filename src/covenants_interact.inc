@@ -28,6 +28,7 @@ COLD int covenants_game_input(unsigned pressed,unsigned held){
  if((pressed&B)&&(reset_confirm||invite_confirm||porch_confirm)){
   reset_confirm=invite_confirm=porch_confirm=0;toast(TX_CV_STILL_OPEN);return 1;
  }
+ if(pressed&KEY_SELECT){reset_confirm=invite_confirm=porch_confirm=0;return 0;}
  return 0;
 }
 static COLD int invitation(unsigned i){

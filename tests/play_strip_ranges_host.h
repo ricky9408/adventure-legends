@@ -17,7 +17,7 @@ typedef struct {
  int cache_valid[2];u32 cache_fields[2][CACHE_FIELDS];
  u16 modal_world_row[2][112];int cached_armor[2];
  int scene_present_phase,save_requested,save_feedback_ordinary;
- int save_feedback_background,save_ordinary_defer,toast_ticks;
+ int save_feedback_background,save_ordinary_defer,toast_ticks,field_goal_detail;
  unsigned boss,reward,hints[6],overlay_serial,save_calls;
 } StripState;
 

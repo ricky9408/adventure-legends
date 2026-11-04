@@ -69,6 +69,16 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.return_game_interact(),1);self.l.tick()
   self.assertEqual(self.l.return_game_interact(),1);self.assertEqual(self.l.reset_confirmation(),0)
   self.assertEqual(self.l.get_setting(0),0,'only a second A may reset partial mechanisms')
+ def test_goal_button_cancels_hidden_reset_confirmation(self):
+  self.intro();self.entry(55);self.act(64,112)
+  self.at(16,144,1);self.assertEqual(self.l.return_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1)
+  self.assertEqual(self.l.return_game_input(4,4),0)
+  self.assertEqual(self.l.reset_confirmation(),0);self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.return_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1);self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.return_game_input(6,6),1)
+  self.assertEqual(self.l.reset_confirmation(),0);self.assertEqual(self.l.get_setting(0),1)
  def test_main_both_arm_orders(self):
   self.chapter();self.setUp();self.intro();self.south();self.north();self.finale()
  def test_minimal_route_both_orders_no_evolution_or_new_gear(self):

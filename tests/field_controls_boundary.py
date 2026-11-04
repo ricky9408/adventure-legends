@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='2b825e3ae28bd17311147d90a8fe8505551f5c42d49af25a2e8fe41e8886291d'
+CONTRACT_SHA='29595d81f4f7d0088acdb8dc9c2b98f41b0b797772d605b6d7cd3b8e22757702'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -26,7 +26,9 @@ def allowed(path):
         'src/power_failure.h','src/northern_powers.c','src/northern_powers.h',
         'src/southern_powers.c','src/southern_powers.h',
         'src/power_aim_hold.h','src/music.c','src/magma_powers.c','src/magma_powers.h',
-        'src/return_interact.inc','src/underwater_game.c',
+        'src/covenants_game.c','src/covenants_interact.inc',
+        'src/horizons_game.c','src/horizons_interact.inc',
+        'src/return_game.c','src/return_interact.inc','src/underwater_game.c',
         'assets/campaign_dialogue.json','assets/companion_guide_commands.json',
         'assets/companion_guide_commands/commands_065_096.json',
         'assets/companion_guide_commands/commands_097_128.json',
@@ -197,7 +199,7 @@ def player_control_docs():
         '- R：仲間を呼ぶ／帰す。力は使わない',
         '- Lを短く押す：編成している次の仲間へ切り替え',
         '- Lを押したまま左右、Lを離す：持っている仲間から選ぶ。Bでやめる',
-        '- SELECT：使いません',
+        '- SELECT：フィールドで今の旅の目的と次の手がかりを見る',
         'Aは押し直したときだけ決定します。Bはひとつ前へ、STARTは冒険へ戻ります。',
         'Lを離して確定してからSTARTでメニューを開き、「技・進化」を選びます。',
         '送るのは左右だけで、上下や斜めでは動きません。',
@@ -212,7 +214,7 @@ def player_control_docs():
         '| B | Use the selected companion’s power; a recalled companion joins you automatically |',
         '| R | Call or recall your companion |',
         '| Hold L, then Left/Right; release L | Browse every owned companion, including reserves; B cancels |',
-        '| Select | Unused |',
+        '| Select | Show the current journey goal and next clue in the field |',
         'B goes back one level; Start closes. Directional browsing repeats while held; A confirms on a fresh press.'):
         assert line in readme,'README drifted from the live controls: '+line
     assert '| B | Call or recall' not in readme and 'four directional' not in readme.lower()

@@ -23,7 +23,7 @@ Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulato
 | Hold L, then Left/Right; release L | Browse every owned companion, including reserves; B cancels |
 | R | Call or recall your companion |
 | Start | Open or close the menu |
-| Select | Unused |
+| Select | Show the current journey goal and next clue in the field |
 
 People and puzzles use A. Exterior roads connect at the north, south, east or west boundary of the map. On a scrolling map, the edge of the current camera view is not a map exit. Walk through building doors and stairs where the scenery leads into them. Closed routes show a visible barrier and a brief hint without opening a dialogue. Deliberately talking to people and examining objects still uses A. Area names appear on arrival; the corner companion bar shows power recovery.
 

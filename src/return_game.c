@@ -15,6 +15,7 @@
 #define PLAY 1
 #define A 1
 #define B 2
+#define KEY_SELECT 4
 #define UP 64
 #define DOWN 128
 extern volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;

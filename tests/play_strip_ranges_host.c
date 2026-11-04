@@ -33,7 +33,8 @@ void oracle_draw_notices(StripState *s,int cached) {
  unsigned i,hint=0;(void)cached;
  for(i=0;i<6;i++)hint|=s->hints[i];
  if(hint)draw_pattern(s,138,157,31,212,0x100000u+hint);
- else if(s->toast_ticks)draw_pattern(s,143,160,43,196,0x200000u);
+ else if(s->field_goal_detail&&s->toast_ticks&&!s->reward)draw_pattern(s,122,154,17,222,0x500000u);
+ else if(s->toast_ticks&&!s->field_goal_detail)draw_pattern(s,143,160,43,196,0x200000u);
 }
 void oracle_draw_reward(StripState *s) {
  /* Deliberately fill to y160: this is a conservative superset of current
@@ -76,6 +77,7 @@ static void compare(void) {
   }
  }
  CHECK(candidate.play_strip_reuses==reference.play_strip_reuses);
+ CHECK(candidate.field_goal_detail==reference.field_goal_detail);
  CHECK(candidate.scene_present_phase==reference.scene_present_phase);
  CHECK(candidate.save_ordinary_defer==reference.save_ordinary_defer);
  CHECK(candidate.save_calls==reference.save_calls);
@@ -97,13 +99,14 @@ static void select_page(int p) {
  candidate.page=reference.page=p;
  candidate.screen=candidate.bitmap[p];reference.screen=reference.bitmap[p];
 }
-/* mask: toast, six distinct hint providers, boss, reward. */
+/* mask: toast, six distinct hint providers, boss, reward, goal card. */
 static void overlays(unsigned mask) {
  unsigned i;
  candidate.toast_ticks=reference.toast_ticks=(mask&1u)!=0;
  for(i=0;i<6;i++)candidate.hints[i]=reference.hints[i]=(mask>>(i+1))&1u;
  candidate.boss=reference.boss=(mask>>7)&1u;
  candidate.reward=reference.reward=(mask>>8)&1u;
+ candidate.field_goal_detail=reference.field_goal_detail=(mask>>9)&1u;
  candidate.overlay_serial=reference.overlay_serial=random_word();
 }
 static void make_key(u32 key[CACHE_FIELDS]) {
@@ -150,9 +153,9 @@ static void step(unsigned mask,int p,int change_world) {
  reuses++;
  /* Capture/restore/overlay must leave all rows above its union untouched.
   * For a widened old strip, only the new prefix may change the raw buffer. */
- n=(unsigned)((candidate.reward||(old_raw&&old_top==122))?122:138)*120;
+ n=(unsigned)((candidate.reward||candidate.field_goal_detail||(old_raw&&old_top==122))?122:138)*120;
  CHECK(memcmp(before_frame,candidate.screen,n*sizeof(u16))==0);
- if(old_raw&&old_top==138&&candidate.reward) {
+ if(old_raw&&old_top==138&&(candidate.reward||candidate.field_goal_detail)) {
   CHECK(candidate.play_strip_top[p]==122);
   CHECK(memcmp(candidate.play_world_strip[p],before_frame+122*120,16*120*sizeof(u16))==0);
   CHECK(memcmp(candidate.play_world_strip[p]+16*120,before_strip+16*120,22*120*sizeof(u16))==0);
@@ -172,6 +175,13 @@ static void explicit_transitions(void) {
    u32 key[CACHE_FIELDS];reset();select_page(p);overlays(modes[first]);make_key(key);
    full_frame(key);step(modes[next],p,0);step(256,p,0);step(2,p,0);step(0,p,0);
   }
+}
+static void goal_transitions(void) {
+ const unsigned modes[]={0,1,2,256};
+ for(int p=0;p<2;p++)for(unsigned i=0;i<sizeof modes/sizeof modes[0];i++) {
+  u32 key[CACHE_FIELDS];reset();select_page(p);overlays(modes[i]);make_key(key);
+  full_frame(key);step(513,p,0);step(515,p,0);step(769,p,0);step(0,p,0);
+ }
 }
 /* Logical input ownership starts on L press, before a panel is visible.
  * It must not invalidate underlay provenance or suppress normal strip redraw. */
@@ -299,7 +309,7 @@ static void invalid_range_guards(void) {
  }
 }
 int main(void) {
- explicit_transitions();selector_arming();key_guards();scene_handoffs();randomized();invalid_range_guards();
+ explicit_transitions();goal_transitions();selector_arming();key_guards();scene_handoffs();randomized();invalid_range_guards();
  printf("%u full-frame comparisons; %u scene handoffs; %u accepted reuses; "
         "%u refused reuses; %u invalid-range checks; %u arming/resume cases; %u assertions passed\n",
         frames,handoffs,reuses,rejections,invalid_ranges,arming_cases,checks);
