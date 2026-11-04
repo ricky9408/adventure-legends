@@ -81,6 +81,8 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.reset_confirmation(),0)
   self.assertEqual(self.l.horizons_game_interact(),1)
   self.assertEqual(self.l.reset_confirmation(),1)
+  self.assertEqual(self.l.horizons_game_input(6,6),1)
+  self.assertEqual(self.l.reset_confirmation(),0)
  def test_main_both_orders(self):
   self.chapter();self.setUp();self.chapter(True)
  def test_all_four_personal_trials_and_rehearsal(self):

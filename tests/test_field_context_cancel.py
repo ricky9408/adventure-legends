@@ -78,14 +78,14 @@ static void reset_ownership(void) {
   * Each call begins with independent synthetic state, not a personal save. */
  for(area=46;area<=53;area++)for(pending=0;pending<=1;pending++)
   for(pressed=0;pressed<1024;pressed++)for(extra=0;extra<3;extra++) {
-   int consumed=(pending&&(pressed&B)&&!(pressed&KEY_SELECT))!=0;
+   int consumed=(pending&&(pressed&B))!=0;
    setup(area);reset_pending=(int)pending;
    expect_underwater(pressed,pressed|held_extra[extra],consumed,
                      consumed||(pressed&KEY_SELECT)?0:(int)pending);
   }
  for(area=54;area<=61;area++)for(pending=0;pending<=1;pending++)
   for(pressed=0;pressed<1024;pressed++)for(extra=0;extra<3;extra++) {
-   int consumed=(pending&&(pressed&B)&&!(pressed&KEY_SELECT))!=0;
+   int consumed=(pending&&(pressed&B))!=0;
    setup(area);reset_confirm=(int)pending;
    expect_return(pressed,pressed|held_extra[extra],consumed,
                  consumed||(pressed&KEY_SELECT)?0:(int)pending,0,0);
@@ -111,6 +111,12 @@ static void reset_ownership(void) {
   setup(area);reset_confirm=invite_confirm=1;
   expect_return(KEY_SELECT,KEY_SELECT,0,0,0,0);
   expect_return(B,B,0,0,0,0);
+  setup(area);reset_confirm=1;
+  expect_return(B|KEY_SELECT,B|KEY_SELECT,1,0,0,0);
+ }
+ for(area=46;area<=53;area++) {
+  setup(area);reset_pending=1;
+  expect_underwater(B|KEY_SELECT,B|KEY_SELECT,1,0);
  }
 }
 
