@@ -31,7 +31,7 @@ assert update.index('field_goal_input((unsigned)pressed)') < update.index('field
 with tempfile.TemporaryDirectory(prefix='field-goal-select-') as temporary:
     out = Path(temporary)
     (out / 'field_goal_select.inc').write_text(
-        '\n'.join(function(name) for name in ('toast', 'field_goal_input', 'play_toast_cache_key')) + '\n',
+        '\n'.join(function(name) for name in ('toast', 'field_goal_input', 'play_toast_cache_key', 'obj_add')) + '\n',
         encoding='utf-8')
     common = ['cc', '-std=c99', '-O1', '-Wall', '-Wextra', '-Werror', '-pedantic',
               '-Isrc', '-I' + str(out), 'tests/field_goal_select_host.c',

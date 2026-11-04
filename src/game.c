@@ -170,6 +170,7 @@ COLD void game_road_interrupt(void);
 int game_display_state(void);
 int game_save_badge_id(void);
 int game_save_badge_left(void);
+COLD int play_hint_text(void);
 u32 cycle_now(void);
 COLD void save_frame(void);
 COLD int event_frame(void);
@@ -398,6 +399,11 @@ void obj_add(int off,int x,int y,int w,int h,int priority,int depth,int flip){in
  if(save_notice_visible()){int left=save_notice_left();if(x+w>left&&x<240-left&&y+h>SAVE_NOTICE_Y&&y<SAVE_NOTICE_Y+SAVE_NOTICE_H)return;}
  if(x+w>136&&x<200&&y+h>3&&y<20){int left=game_save_badge_left();if(left<200&&x+w>left)return;}
  if(game_state==PLAY&&x+w>5&&x<121&&y+h>122&&y<139&&game_shop_reward_visible())return;
+ if(game_state==PLAY&&field_goal_detail&&toast_ticks&&y+h>122&&y<154&&!quickparty_visible&&!game_shop_reward_visible()){
+  int width=ui_texts[toast_id].width>ui_texts[field_goal_detail].width?ui_texts[toast_id].width:ui_texts[field_goal_detail].width;
+  int left=(228-width)/2;
+  if(x+w>left&&x<left+width+12&&!play_hint_text())return;
+ }
  /* Menus are background pixels: hide actors where a panel covers them. */
  if(priority==1||priority==2){int display=game_display_state();if(quickparty_visible&&x+w>26&&x<214&&y+h>29&&y<160)return;if(display==PAUSE||display==11||game_state==13||game_state==DEAD||game_state==EVOLVE_CONFIRM||game_state==EVOLVE_ANIM)return;if(display==DIALOG&&y+h>99)return;}
  if(w==16&&h==16)size=1;else if(w==32&&h==32)size=2;else if(w==32&&h==16){shape=1;size=2;}else if(w==32&&h==8){shape=1;size=1;}else if(w==16&&h==8){shape=1;size=0;}
