@@ -25,6 +25,7 @@ static COLD void clear_prompts(void){
 }
 COLD int covenants_game_input(unsigned pressed,unsigned held){
  (void)held;if(game_state!=PLAY)return 0;clear_prompts();
+ if(pressed&KEY_SELECT){reset_confirm=invite_confirm=porch_confirm=0;return 0;}
  if((pressed&B)&&(reset_confirm||invite_confirm||porch_confirm)){
   reset_confirm=invite_confirm=porch_confirm=0;toast(TX_CV_STILL_OPEN);return 1;
  }

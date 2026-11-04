@@ -18,6 +18,7 @@
 #define PLAY 1
 #define A 1
 #define B 2
+#define KEY_SELECT 4
 #define RIGHT 16
 #define LEFT 32
 #define UP 64

@@ -73,6 +73,14 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.horizons_game_interact(),1);self.l.tick()
   self.assertEqual(self.l.horizons_game_interact(),1);self.assertEqual(self.l.reset_confirmation(),0)
   self.assertEqual(self.l.get_setting(0),3,'reset reconstructs committed fair work')
+ def test_goal_button_cancels_hidden_reset_confirmation(self):
+  self.intro();self.at(16,304,1)
+  self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1)
+  self.assertEqual(self.l.horizons_game_input(4,4),0)
+  self.assertEqual(self.l.reset_confirmation(),0)
+  self.assertEqual(self.l.horizons_game_interact(),1)
+  self.assertEqual(self.l.reset_confirmation(),1)
  def test_main_both_orders(self):
   self.chapter();self.setUp();self.chapter(True)
  def test_all_four_personal_trials_and_rehearsal(self):

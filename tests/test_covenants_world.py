@@ -96,6 +96,14 @@ class World(unittest.TestCase):
   self.assertEqual(self.l.covenants_game_interact(),1);self.tick()
   self.assertEqual(self.l.covenants_game_interact(),1);self.assertEqual(self.l.confirmation(0),0)
   self.assertEqual(self.l.get_setting(0),0,'only a second A may discard partial work')
+ def test_goal_button_cancels_hidden_reset_confirmation(self):
+  self.entry(70);self.hit(0,105,106,120,240)
+  self.at(40,308,1);self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(self.l.confirmation(0),1)
+  self.assertEqual(self.l.covenants_game_input(4,4),0)
+  self.assertEqual(self.l.confirmation(0),0);self.assertEqual(self.l.get_setting(0),1)
+  self.assertEqual(self.l.covenants_game_interact(),1)
+  self.assertEqual(self.l.confirmation(0),1);self.assertEqual(self.l.get_setting(0),1)
  def test_off_axis_invitation_retains_prompt_and_facing_away_revokes_it(self):
   H.fulfill(self.l,self.s,1);self.l.adopt_fixture(H.generation());self.entry(70)
   before=self.l.creatures_roster_count(C.byref(self.s.roster))

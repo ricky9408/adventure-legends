@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='01e7579778493cbbea3d98ea375410a3293edddf3bd11df9790edbd6e05bb790'
+CONTRACT_SHA='0c0b7d70f7c6b888ba93a73d69aceb4fa2e09e207a17f4c4a7500953a017f3d7'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -26,7 +26,9 @@ def allowed(path):
         'src/power_failure.h','src/northern_powers.c','src/northern_powers.h',
         'src/southern_powers.c','src/southern_powers.h',
         'src/power_aim_hold.h','src/music.c','src/magma_powers.c','src/magma_powers.h',
-        'src/return_interact.inc','src/underwater_game.c',
+        'src/covenants_game.c','src/covenants_interact.inc',
+        'src/horizons_game.c','src/horizons_interact.inc',
+        'src/return_game.c','src/return_interact.inc','src/underwater_game.c',
         'assets/campaign_dialogue.json','assets/companion_guide_commands.json',
         'assets/companion_guide_commands/commands_065_096.json',
         'assets/companion_guide_commands/commands_097_128.json',

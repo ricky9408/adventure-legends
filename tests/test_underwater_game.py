@@ -90,6 +90,12 @@ class UnderwaterWorld(unittest.TestCase):
   self.assertEqual(toast(),'TX_UW_RESET_CONFIRM','turning away must require a new first A')
   L.underwater_game_input(2,0);self.act(32,288,1)
   self.assertEqual(toast(),'TX_UW_RESET_CONFIRM','B must cancel the pending reset')
+ def test_goal_button_cancels_hidden_reset_confirmation(self):
+  self.entry(46);self.act(32,288,1)
+  self.assertEqual(toast(),'TX_UW_RESET_CONFIRM')
+  self.assertEqual(L.underwater_game_input(4,4),0)
+  self.act(32,288,1)
+  self.assertEqual(toast(),'TX_UW_RESET_CONFIRM')
  def main(self):
   self.guarantees();self.entry(50);self.field(0,49);self.field(1,52);self.target(120,104);self.assertEqual(L.qo(40),1,toast())
   self.entry(51);self.field(0,52);self.at(312,112);L.tick(1);self.field(1);self.target(240,80);self.assertEqual(L.qo(40),3)
