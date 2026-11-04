@@ -43,6 +43,7 @@ void region_pixels_actor(unsigned key,const unsigned char*p,int x,int y){(void)x
 #include "enemy_update_source.inc"
 static void reset(void){
  memset(enemies,0,sizeof enemies);memset(shots,0,sizeof shots);
+ memset(&weapon_action,0,sizeof weapon_action);
  memset(enemy_clocks,0,sizeof enemy_clocks);memset(enemy_windups,0,sizeof enemy_windups);
  memset(enemy_aimx,0,sizeof enemy_aimx);memset(enemy_aimy,0,sizeof enemy_aimy);
  memset(rooted_enemies,0,sizeof rooted_enemies);memset(slowed_enemies,0,sizeof slowed_enemies);
@@ -129,6 +130,14 @@ int main(void){
  reset();rush();slowed_enemies[3]=1;frame=1;enemy_tactics_update(3);assert(enemies[3].x==200&&enemy_clocks[3]==-18);
  frame=2;enemy_tactics_update(3);assert(enemies[3].x==203&&enemy_clocks[3]==-17);
  reset();rush();px=210;slowed_enemies[3]=1;frame=0;tick(1);assert(enemies[3].x==200&&enemy_clocks[3]==-18&&damage_calls==1);
+ reset();enemy_clocks[3]=-1;enemy_aimx[3]=1;px=209;
+ weapon_action.phase=WEAPON_ACTIVE;weapon_action.weapon_class=EQUIPMENT_SWORD;
+ weapon_action.direction=3;weapon_action.reach_px=29;weapon_action.half_width_px=12;
+ tick(1);assert(enemies[3].x==203&&damage_calls==0&&southern_guard_calls==1&&magma_guard_calls==1);
+ reset();enemy_clocks[3]=-1;enemy_aimx[3]=1;px=213;
+ weapon_action.phase=WEAPON_ACTIVE;weapon_action.weapon_class=EQUIPMENT_SWORD;
+ weapon_action.direction=3;weapon_action.reach_px=29;weapon_action.half_width_px=12;
+ tick(1);assert(enemies[3].x==203&&damage_calls==1&&southern_guard_calls==1&&magma_guard_calls==1);
  reset();enemy_tactics_draw(3);assert(draw_calls==1&&art_key==20480&&art_pixels);
  tick(1);enemy_tactics_draw(3);assert(draw_calls==2&&art_key==20487);
  reset();enemies[3].kind=0;enemy_tactics_update(3);assert(enemy_windups[3]==0);enemy_tactics_update(6);enemy_tactics_draw(6);

@@ -4,9 +4,9 @@ from pathlib import Path
 import json,subprocess,hashlib
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'build/enemy-tactics-host';OUT.mkdir(parents=True,exist_ok=True)
-source=(ROOT/'src/game.c').read_text();start=source.index('static COLD void update_charger_contact');end=source.index('\nvoid campaign_boss_update',start)
+source=(ROOT/'src/game.c').read_text();start=source.index('static int sword_blocks_contact');end=source.index('\nvoid campaign_boss_update',start)
 (OUT/'enemy_update_source.inc').write_text(source[start:end]+'\n')
-common=['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Isrc','-I'+str(OUT),'tests/enemy_tactics_host.c','src/enemy_tactics.c']
+common=['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-Isrc','-I'+str(OUT),'tests/enemy_tactics_host.c','src/enemy_tactics.c','src/weapon_actions.c','src/equipment_data.c']
 logs={}
 for name,flags in [('strict',[]),('sanitized',['-fsanitize=address,undefined','-fno-omit-frame-pointer'])]:
  exe=OUT/name;subprocess.run([*common,*flags,'-o',str(exe)],cwd=ROOT,check=True)
