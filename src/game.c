@@ -122,7 +122,7 @@ typedef struct { int x,y,dx,dy,life,owner; } Shot;
 /* Stable named symbols intentionally retained for emulator QA inspection. */
 volatile int game_state, room, px, py, hp, spirit, summoned, bridge_open, torches, boss_hp;
 volatile int boss_armor, boss_x, boss_y, has_save, quest_started, ticks, deaths, kills;
-int face, walk, invuln, swing, sword_cd, ability_cd, ability_max, heal_cd, cx,cy, toast_id,toast_ticks;
+int face, walk, invuln, swing, sword_cd, ability_cd, ability_max, heal_cd, cx,cy, toast_id,toast_ticks,field_goal_detail;
 volatile unsigned int render_cycles, worst_render_cycles;
 int frame, page, keys, pressed, prev_keys, dpage,dcount,dafter,dialog_lines[12];
 int restoring_checkpoint;
@@ -340,7 +340,7 @@ unsigned play_strip_reuses;
 #define OBJ_HUD_ACTION 14656
 #define OBJ_HUD_COOLDOWN 14720
 COLD void capture_play_strip(void){
- int top=game_shop_reward_visible()?122:138;
+ int top=game_shop_reward_visible()||(field_goal_detail&&toast_ticks)?122:138;
  if(game_state!=PLAY||quickparty_visible){play_strip_valid[page]=play_strip_clean[page]=0;return;}
  if(!boss_active()&&!toast_ticks&&!game_shop_reward_visible()&&!southern_powers_hint()&&!magma_powers_hint()&&!underwater_powers_hint()&&!return_powers_hint()&&!horizons_powers_hint()&&!covenants_powers_hint()){play_strip_valid[page]=0;play_strip_clean[page]=1;return;}
 #ifndef GAME_HOST_TEST
@@ -516,7 +516,16 @@ void draw_actors(void){int i,anim=(swing||weapon_action.phase==WEAPON_CHARGING||
 /* Direct Sound music is independent of the existing PSG1 effects. */
 COLD void sound_init(void){music_init();}
 COLD void sfx(int id){REG16(0x04000060)=id==1?0x21:0;REG16(0x04000062)=id==3?0xA180:0x8180;REG16(0x04000064)=0x8000|(id==1?1850:id==2?1700:id==3?1200:1950);}
-void toast(int id){toast_id=id;toast_ticks=110;}
+void toast(int id){toast_id=id;toast_ticks=110;field_goal_detail=0;}
+COLD void field_goal_input(unsigned input){
+ if(!(input&KEY_SELECT)||game_state!=PLAY||quickparty_open||quickparty_visible)return;
+ {JourneyGoal goal=journey_goal_read(&adventure_save,chapter_flags,(unsigned)room);
+  toast(goal.title);field_goal_detail=goal.detail;}
+}
+static inline u32 play_toast_cache_key(void){
+ if(game_state!=PLAY)return 0;
+ return field_goal_detail&&toast_ticks?TX_COUNT+(u32)toast_id*TX_COUNT+(u32)field_goal_detail:(u32)toast_id;
+}
 void acknowledge_save_failure(void){save_failure_notice=0;if(toast_id==TX_C_SAVE_FAILED)toast_ticks=0;}
 COLD void dialogue(int a,int b,int next){
  if(a==TX_RG_LOCKED_A||a==TX_NT_LOCKED_A||a==TX_ST_LOCKED_A||a==TX_MG_LOCKED||a==TX_UW_LOCKED||a==TX_RT_LOCKED||a==TX_HZ_LOCKED||a==TX_HZ_LOCKED_FINAL||a==TX_CV_LOCKED){
@@ -536,7 +545,7 @@ COLD int check_save(void){return save5_has_valid();}
 #include "covenants_engine.inc"
 COLD int southern_hint_text(void);
 COLD int play_hint_text(void){int hint=covenants_hint_text();if(!hint)hint=horizons_hint_text();if(!hint)hint=return_hint_text();if(!hint)hint=underwater_hint_text();if(!hint)hint=magma_powers_hint()==MAGMA_HINT_LANDING?TX_MP_LANDING:southern_hint_text();return hint;}
-COLD void tick_play_toast(void){if(game_state==PLAY&&toast_ticks&&!play_hint_text())toast_ticks--;}
+COLD void tick_play_toast(void){if(game_state==PLAY&&toast_ticks&&!play_hint_text()&&(!field_goal_detail||!game_shop_reward_visible()))toast_ticks--;}
 COLD int game_power_aim_hold(unsigned held){int holding=0;
  holding|=underwater_powers_hold_input(held);holding|=return_powers_hold_input(held);
  holding|=horizons_powers_hold_input(held);holding|=magma_powers_hold_input(held);
@@ -682,7 +691,7 @@ COLD void start_game(int resume){
  }
  reset_start_game(0);
 }
-COLD void reset_start_game(int resume){int oldsave=has_save;game_roads_reset();save5_cancel_background();save5_take_preempted();save_feedback_reset();scene_present_phase=0;scene_restore_world_tiles=0;scene_actor_pending=0;play_strip_valid[0]=play_strip_valid[1]=play_strip_clean[0]=play_strip_clean[1]=0;play_strip_reuses=0;travel_feedback_reset();locked_notice_room=-1;game_shop_reset();arrival_input_mask=0;title_option=0;save_ordinary_defer=0;save_dedup_pending=0;save_begin_cycles=save_begin_max_cycles=save_step_cycles=save_step_max_cycles=0;game_story_reward_cancel();covenants_cooldown_owned=covenants_walk_direction=0;covenants_game_reset();horizons_game_reset();return_game_reset();return_powers_reset();horizons_powers_reset();covenants_powers_reset();return_legacy_reset();underwater_game_reset();underwater_powers_reset();south_game_reset();southern_powers_reset();magma_game_reset();magma_powers_reset();quickparty_reset(keys);quickparty_menu_slot=quickparty_menu_candidate=0;restoring_checkpoint=0;progression_new();zero(enemies,sizeof enemies);zero(shots,sizeof shots);zero(impacts,sizeof impacts);frame=0;room=0;px=120;py=126;max_hp=6;game_health_refresh(1);game_attacks_reset();gear_menu_reset();relic_found=camp_unlocked=0;roll_ticks=roll_cd=combo_step=combo_timer=attack_buffer=0;loaded_save_version=0;journal_tab=0;chapter_flags=room_flags=optional_flags=story_seen=0;checkpoint_spawn=0;stone_guard=guard_invuln=transition_lock=0;spirit=0;summoned=0;bridge_open=0;torches=0;boss_hp=12;quest_started=0;completed=0;face=0;walk=0;invuln=0;swing=0;sword_cd=0;ability_cd=0;ability_max=75;heal_cd=0;toast_ticks=0;seen_temple=0;seen_boss=0;deaths=0;kills=0;ticks=0;cx=136;cy=126;px_q8=px*256;py_q8=py*256;cx_q8=cx*256;cy_q8=cy*256;walk_phase=0;hitstop=0;transition=0;game_state=PLAY;game_companion_reseat();camera_update(1);
+COLD void reset_start_game(int resume){int oldsave=has_save;game_roads_reset();save5_cancel_background();save5_take_preempted();save_feedback_reset();scene_present_phase=0;scene_restore_world_tiles=0;scene_actor_pending=0;play_strip_valid[0]=play_strip_valid[1]=play_strip_clean[0]=play_strip_clean[1]=0;play_strip_reuses=0;travel_feedback_reset();locked_notice_room=-1;game_shop_reset();arrival_input_mask=0;title_option=0;save_ordinary_defer=0;save_dedup_pending=0;save_begin_cycles=save_begin_max_cycles=save_step_cycles=save_step_max_cycles=0;game_story_reward_cancel();covenants_cooldown_owned=covenants_walk_direction=0;covenants_game_reset();horizons_game_reset();return_game_reset();return_powers_reset();horizons_powers_reset();covenants_powers_reset();return_legacy_reset();underwater_game_reset();underwater_powers_reset();south_game_reset();southern_powers_reset();magma_game_reset();magma_powers_reset();quickparty_reset(keys);quickparty_menu_slot=quickparty_menu_candidate=0;restoring_checkpoint=0;progression_new();zero(enemies,sizeof enemies);zero(shots,sizeof shots);zero(impacts,sizeof impacts);frame=0;room=0;px=120;py=126;max_hp=6;game_health_refresh(1);game_attacks_reset();gear_menu_reset();relic_found=camp_unlocked=0;roll_ticks=roll_cd=combo_step=combo_timer=attack_buffer=0;loaded_save_version=0;journal_tab=0;chapter_flags=room_flags=optional_flags=story_seen=0;checkpoint_spawn=0;stone_guard=guard_invuln=transition_lock=0;spirit=0;summoned=0;bridge_open=0;torches=0;boss_hp=12;quest_started=0;completed=0;face=0;walk=0;invuln=0;swing=0;sword_cd=0;ability_cd=0;ability_max=75;heal_cd=0;toast_ticks=field_goal_detail=0;seen_temple=0;seen_boss=0;deaths=0;kills=0;ticks=0;cx=136;cy=126;px_q8=px*256;py_q8=py*256;cx_q8=cx*256;cy_q8=cy*256;walk_phase=0;hitstop=0;transition=0;game_state=PLAY;game_companion_reseat();camera_update(1);
 #ifdef EMBERBOND_POLISHED_ART
  {int i,n=0;for(i=0;i<FOREGROUND_CANOPY_COUNT;i++)if(foreground_canopies[i].room==0)obj_upload(foreground_canopy_data[i],32,32,OBJ_CANOPY+(n++)*1024);}
 #endif
@@ -975,13 +984,13 @@ void update(void){int dx=0,dy=0,return_input=0,aim_holding=0,context_owned=0;Fie
  context_owned=game_field_context_input();
  if(context_owned)game_power_preview_cancel();
  if(event_frame()||game_state!=PLAY)return;
+ if(!context_owned&&(pressed&KEY_SELECT))field_goal_input((unsigned)pressed);
  controls=field_controls_read(&field_controls,(unsigned)keys,(unsigned)pressed);
  if(!context_owned&&controls.companion_pressed)game_field_companion_toggle();
  if(area_ticks)area_ticks--;if(invuln)invuln--;if(ability_cd)ability_cd--;if(!ability_cd)covenants_cooldown_owned=0;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;aim_holding=game_power_aim_hold(summoned&&!context_owned&&!controls.companion_pressed?controls.power_held:0);advanced_tick();regional_powers_tick();northern_powers_tick();game_geometry_sync();southern_powers_tick();magma_powers_tick();if(underwater_power_time||underwater_power_cast_time)underwater_powers_tick();if(return_power_time||return_power_cast_time)return_powers_tick();if(horizons_power_time||horizons_power_cast_time)horizons_powers_tick();if(covenants_power_time||covenants_power_cast_time)covenants_powers_tick();if(event_frame())return;game_combat_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;
  if(context_owned){walk=0;game_attacks_suspend();goto movement_done;}
  if(summoned){underwater_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(return_power_time)return_input=return_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(horizons_power_time)return_input|=horizons_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(covenants_power_time)return_input|=covenants_powers_input(controls.power_pressed);}
  if(keys&KEY_LEFT){dx=-1;face=2;}if(keys&KEY_RIGHT){dx=1;face=3;}if(keys&KEY_UP){dy=-1;face=1;}if(keys&KEY_DOWN){dy=1;face=0;}if(swing||weapon_action.phase==WEAPON_WINDUP||weapon_action.phase==WEAPON_ACTIVE)face=weapon_action.direction;walk=(dx||dy)&&!aim_holding;if(walk)walk_phase++;
- /* Select has no field action and no input grants dodge invulnerability. */
  if(aim_holding)walk=0;else{int speed=advanced_guard_charges?224:gear_stats.speed_q8,diag=advanced_guard_charges?158:gear_stats.diagonal_q8;if(weapon_action.phase==WEAPON_CHARGING){speed=speed*3/4;diag=diag*3/4;}move_player(dx*(dx&&dy?diag:speed),dy*(dx&&dy?diag:speed));}
  if(game_road_step()||walk_entry())return;
  game_attack_update(keys,pressed);
@@ -1052,12 +1061,42 @@ COLD void draw_play_hint(void){if(game_state==PLAY){int hint=play_hint_text();if
  * The uncached routines above remain the same-ROM differential reference. */
 u16 play_notice_pixels[120*22] __attribute__((aligned(4)));
 u16 play_hint_pixels[4][120*19] __attribute__((aligned(4)));
+u16 field_goal_pixels[120*32] __attribute__((aligned(4)));
 int play_hint_ids[4];unsigned play_hint_cursor;
 int play_notice_valid,play_notice_toast,play_notice_hint,play_notice_cache_disabled;
+int field_goal_cached_title=-1,field_goal_cached_detail=-1;
+COLD void draw_field_goal_card(int title,int detail,int build_cache){
+ int width=ui_texts[title].width>ui_texts[detail].width?ui_texts[title].width:ui_texts[detail].width;
+ int x,y,w=width+12;u16 *target=screen;
+ x=(240-w)/2;
+ if(play_notice_cache_disabled||world_mask_active||w>240)goto uncached;
+ if(field_goal_cached_title!=title||field_goal_cached_detail!=detail){
+  if(!build_cache)goto uncached;
+  screen=field_goal_pixels;box(x,0,w,32);centered(title,1,GOLD);centered(detail,16,CREAM);
+  screen=target;field_goal_cached_title=title;field_goal_cached_detail=detail;
+ }
+ for(y=0;y<32;y++){
+  int first=(x+1)>>1,last=(x+w)>>1;u16 *src=field_goal_pixels+y*120,*dst=target+(122+y)*120;
+  if(x&1)dst[x>>1]=(dst[x>>1]&255)|(src[x>>1]&0xff00);
+  if((x+w)&1)dst[last]=(dst[last]&0xff00)|(src[last]&255);
+#ifndef GAME_HOST_TEST
+  REG32(0x040000D4)=(u32)(src+first);REG32(0x040000D8)=(u32)(dst+first);REG32(0x040000DC)=0x80000000|(last-first);
+#else
+  {int i;for(i=first;i<last;i++)dst[i]=src[i];}
+#endif
+ }
+ return;
+uncached:
+ box(x,122,w,32);centered(title,123,GOLD);centered(detail,138,CREAM);
+}
 COLD void draw_play_notices(int build_cache){
  int tid,hid,tx=0,tw=0,hx=0,hw=0,y;u16 *target=screen,*notice_source=play_notice_pixels;
  if(game_state!=PLAY)return;
- hid=play_hint_text();tid=toast_ticks&&!hid?toast_id:-1;
+ hid=play_hint_text();
+ if(toast_ticks&&field_goal_detail&&!hid&&!game_shop_reward_visible()){
+  draw_field_goal_card(toast_id,field_goal_detail,build_cache);return;
+ }
+ tid=toast_ticks&&!hid&&!field_goal_detail?toast_id:-1;
  if(tid<0&&!hid)return;
  if(tid>=0){tw=ui_texts[tid].width+10;tx=(240-tw)/2;}
  if(hid){hw=ui_texts[hid].width+12;hx=(240-hw)/2;}
@@ -1200,7 +1239,7 @@ COLD int reuse_play_strip(const u32*key){unsigned i;int raw;
   * overlay; never restore an uninitialized raw buffer or invent new keys. */
  if(!raw)capture_play_strip();
  if(raw){int top=play_strip_top[page];
-  if(top>122&&game_shop_reward_visible()){
+  if(top>122&&(game_shop_reward_visible()||(field_goal_detail&&toast_ticks))){
 #ifndef GAME_HOST_TEST
    REG32(0x040000D4)=(u32)(screen+122*120);REG32(0x040000D8)=(u32)play_world_strip[page];REG32(0x040000DC)=0x84000000|((top-122)*60);
 #else
@@ -1285,7 +1324,7 @@ void render(void){render_world_cycles=render_card_cycles=render_actors_cycles=0;
   /* Retain the exact last confirmation and OAM until publication. */
   copy_previous_bitmap();return;
  }
- game_geometry_sync();u32 key[CACHE_FIELDS]={room,game_state,spirit,summoned,bridge_open,torches,dpage,game_state==PLAY&&toast_ticks>0,game_state==PLAY?toast_id:0,has_save,journal_tab,room_flags,chapter_flags,optional_flags,game_state==DIALOG?dialog_lines[dpage*2]:-1,game_state==DIALOG?dialog_lines[dpage*2+1]:-1,game_state==DIALOG?dialog_speakers[dpage]:-1,scrolling_room()?camera_x:0,scrolling_room()?camera_y:0,progression_revision,area_ticks>0,quickparty_revision,save_notice_visible(),gear_menu_revision,region_game_revision,north_game_revision,south_game_revision,game_state==PLAY?southern_powers_hint():0,magma_game_revision,game_state==PLAY?magma_powers_hint():0,underwater_game_revision,game_state==PLAY?underwater_powers_hint():0,return_game_revision,game_state==PLAY?return_powers_hint():0,horizons_game_revision,game_state==PLAY?horizons_powers_hint():0,covenants_game_revision,game_state==PLAY?covenants_powers_hint():0,journal_nav_revision,game_save_badge_id(),game_shop_revision,game_state==WIN?ending_credits_revision:(unsigned)title_option,game_shop_reward_visible(),save_failed,game_display_state()};int i,changed=!cache_valid[page],world_changed=!cache_valid[page],other=page^1,reusable=quickparty_visible&&cache_valid[page^1];
+ game_geometry_sync();u32 key[CACHE_FIELDS]={room,game_state,spirit,summoned,bridge_open,torches,dpage,game_state==PLAY&&toast_ticks>0,play_toast_cache_key(),has_save,journal_tab,room_flags,chapter_flags,optional_flags,game_state==DIALOG?dialog_lines[dpage*2]:-1,game_state==DIALOG?dialog_lines[dpage*2+1]:-1,game_state==DIALOG?dialog_speakers[dpage]:-1,scrolling_room()?camera_x:0,scrolling_room()?camera_y:0,progression_revision,area_ticks>0,quickparty_revision,save_notice_visible(),gear_menu_revision,region_game_revision,north_game_revision,south_game_revision,game_state==PLAY?southern_powers_hint():0,magma_game_revision,game_state==PLAY?magma_powers_hint():0,underwater_game_revision,game_state==PLAY?underwater_powers_hint():0,return_game_revision,game_state==PLAY?return_powers_hint():0,horizons_game_revision,game_state==PLAY?horizons_powers_hint():0,covenants_game_revision,game_state==PLAY?covenants_powers_hint():0,journal_nav_revision,game_save_badge_id(),game_shop_revision,game_state==WIN?ending_credits_revision:(unsigned)title_option,game_shop_reward_visible(),save_failed,game_display_state()};int i,changed=!cache_valid[page],world_changed=!cache_valid[page],other=page^1,reusable=quickparty_visible&&cache_valid[page^1];
  screen=(u16*)(page?0x0600A000:0x06000000);for(i=0;i<CACHE_FIELDS;i++){if(cache_fields[page][i]!=key[i]){changed=1;if(i!=21)world_changed=1;}if(i!=21&&cache_fields[other][i]!=key[i])reusable=0;}
  /* Picker-only changes cannot alter the frozen world. A moving camera may
   * leave this back page stale; reuse the other bitmap ONLY when every world
