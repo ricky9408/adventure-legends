@@ -1,5 +1,6 @@
 #ifndef EMBERBOND_SOUTHERN_POWERS_H
 #define EMBERBOND_SOUTHERN_POWERS_H
+#include "power_failure.h"
 /* Commands23..42. One cast, <=3 internal projectiles, <=6 target ledger entries.
  * Tick once only on active gameplay, AFTER modal/hitstop/selector early returns.
  * Reset at room/death/new/load. Global ability_cd is not reset on party swap. */
@@ -8,6 +9,7 @@ extern int southern_power_direction,southern_power_origin_x,southern_power_origi
 extern int southern_power_age,southern_power_cooldown,southern_power_cast_time;
 extern int southern_power_phase;
 int southern_power(unsigned command);
+enum PowerFailure southern_power_failure(void);
 /* Explicit -1=left / +1=right relative to the snapshotted facing, for command32. */
 int southern_power_side(unsigned command,int side);
 int southern_powers_can_aim(void);

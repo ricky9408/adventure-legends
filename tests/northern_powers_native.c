@@ -87,6 +87,22 @@ static void shot(unsigned i,int x,int y,int dx,int dy,int life,int owner){
 }
 static void updates(unsigned n){while(n--){northern_powers_tick();if(ability_cd)ability_cd--;}}
 static void expect_damage(unsigned i,unsigned q4){assert(enemy_hp_q4[i]==160-(int)q4);}
+static void test_failure_feedback(void){
+    setup(15);ability_cd=4;assert(!northern_power(15));
+    assert(northern_power_failure()==POWER_FAILURE_WAIT);
+    assert(power_failure_text(northern_power_failure())==TX_COOLDOWN);
+    assert(ability_cd==4&&!northern_power_time);
+    setup(15);wall(124,100,1,1);assert(!northern_power(15));
+    assert(northern_power_failure()==POWER_FAILURE_BLOCKED);
+    assert(power_failure_text(northern_power_failure())==TX_MG_BLOCKED);
+    assert(!ability_cd&&!northern_power_time);
+    setup(15);absent=1;assert(!northern_power(15));
+    assert(northern_power_failure()==POWER_FAILURE_MISMATCH);
+    assert(power_failure_text(northern_power_failure())==TX_C_POWER_MISMATCH);
+    assert(!ability_cd&&!northern_power_time);
+    setup(15);assert(northern_power(15));
+    assert(northern_power_failure()==POWER_FAILURE_NONE);
+}
 static void test_every_command(void){
     unsigned c;
     for(c=13;c<=22;c++){
@@ -312,7 +328,7 @@ static void test_feedback_and_tiles_concurrency(void){
     assert(!northern_powers_tiles_claim(99));northern_powers_reset();advanced_reset();
 }
 int main(void){
-    assert(creatures_catalog_validate());test_every_command();test_selection_and_snapshot();
+    assert(creatures_catalog_validate());test_failure_feedback();test_every_command();test_selection_and_snapshot();
     test_delays_and_ledgers();test_walls_displacement_and_phase();
     test_reflection_generation_and_reset();test_render_sweep();test_cancelled_effects();test_feedback_and_tiles_concurrency();
     puts("PASS Northern host C: ten commands, sparse validation, Q4/phase damage, delays, hit ledgers, swept displacement/LOS, bent wake, 90-degree generation-safe reflection, reset/freeze/snapshots, feedback, bounded lifetimes, shared OBJ lease, legacy advanced effect + two arrows");

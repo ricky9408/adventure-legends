@@ -41,6 +41,8 @@ static unsigned char enemy_hits,redirect_count;
 static unsigned short shot_serial[12],turned_serial[12],friendly_serial[12];
 static unsigned short turned_slots,friendly_slots;
 static unsigned tile_owner,tile_generation,cast_tile_generation;
+static enum PowerFailure last_failure;
+enum PowerFailure northern_power_failure(void){return last_failure;}
 typedef struct { unsigned char phase,lifetime; } PowerSpec;
 static const PowerSpec specs[10]={
     {CREATURE_WOOD,18},{CREATURE_WOOD,60},
@@ -235,14 +237,17 @@ static int prepare_geometry(unsigned command,int x,int y,int direction,
 int northern_power(unsigned command){
     CreatureInstance *c;const CreatureAbility *ability;const PowerSpec *spec;
     int x1,y1,x2,y2;unsigned base,cooldown;
-    if(command<13||command>22||ability_cd||northern_power_time||regional_power_time)return 0;
+    last_failure=POWER_FAILURE_MISMATCH;
+    if(command<13||command>22)return 0;
+    if(ability_cd||northern_power_time||regional_power_time){last_failure=POWER_FAILURE_WAIT;return 0;}
     c=progression_selected();ability=creatures_ability(command);spec=&specs[command-13];
     if(!c||!creatures_instance_validate(c)||!creatures_form(c->form_id)||
        c->selected_command>1||c->equipped[c->selected_command]!=command||
        !creatures_command_learned(c->form_id,c->level,command)||!ability||
        ability->phase!=spec->phase||ability->cooldown_updates<90||face<0||face>3)return 0;
-    if(!prepare_geometry(command,px,py,face,&x1,&y1,&x2,&y2))return 0;
-    if(!northern_powers_tiles_claim(NORTHERN_TILES_NORTHERN))return 0;
+    if(!prepare_geometry(command,px,py,face,&x1,&y1,&x2,&y2)){last_failure=POWER_FAILURE_BLOCKED;return 0;}
+    if(!northern_powers_tiles_claim(NORTHERN_TILES_NORTHERN)){last_failure=POWER_FAILURE_WAIT;return 0;}
+    last_failure=POWER_FAILURE_NONE;
     base=ability->cooldown_updates;cooldown=game_power_cooldown(base);
     if(cooldown<base-GAME_MAX_POWER_RECOVERY)cooldown=base-GAME_MAX_POWER_RECOVERY;
     if(cooldown>base)cooldown=base;

@@ -1,5 +1,6 @@
 #ifndef EMBERBOND_NORTHERN_POWERS_H
 #define EMBERBOND_NORTHERN_POWERS_H
+#include "power_failure.h"
 /* Combat-only commands 13..22. These never dispatch field capabilities.
  * Call tick exactly once per active gameplay update, after pause/hitstop/picker
  * returns. Reset on room change, death and new/load game. All code stays in ROM. */
@@ -7,6 +8,7 @@ extern int northern_power_kind, northern_power_time, northern_power_form;
 extern int northern_power_direction, northern_power_origin_x, northern_power_origin_y;
 extern int northern_power_age, northern_power_cooldown, northern_power_cast_time;
 int northern_power(unsigned command);
+enum PowerFailure northern_power_failure(void);
 /* Field-only success feedback. Does not start combat, touch the shared lease,
  * change cooldown, or block gear. Refuses to overwrite a live combat snapshot. */
 int northern_powers_feedback(unsigned command);
