@@ -73,6 +73,7 @@ int advanced_power(unsigned c){(void)c;return 0;}
 void game_health_heal(unsigned n){(void)n;}
 int near(int x,int y,int tx,int ty,int r){(void)x;(void)y;(void)tx;(void)ty;(void)r;return 0;}
 void save_game(void){}
+void spawn_forest_rangers(void){}
 void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;}
 int boss_active(void){return 0;}
 int fire_shot(int x,int y,int dx,int dy,int owner){(void)x;(void)y;(void)dx;(void)dy;(void)owner;return -1;}
