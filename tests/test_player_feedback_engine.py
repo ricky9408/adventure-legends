@@ -400,7 +400,8 @@ static void reference_ending_presentation(void){
  assert (enemies[1].x,enemies[1].y,enemies[1].hp,enemies[1].kind)==(326,238,4,2)
  assert (enemies[3].x,enemies[3].y,enemies[3].hp,enemies[3].kind)==(412,92,4,2)
  assert (C.c_int*6).in_dll(lib,'enemy_hp_q4')[1]==64
- lib.spawn_enemies()
+ drain();lib.start_game(1);drain()
+ assert get('room')==1 and get('bridge_open')==1
  assert enemies[0].hp==2 and enemies[1].hp==4 and enemies[3].hp==4
  put('game_state',1);put('room',21);put('transition_lock',1000);put('keys',0);lib.save5_quest_set_state(C.byref(live.quests),9,1);lib.region_game_reset()
  source=(ROOT/'src/region_game.c').read_text();row=re.search(r'garden_stones\[3\]\[2\]=\{(.*?)\};',source).group(1)
