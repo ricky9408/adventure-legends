@@ -387,11 +387,22 @@ static void reference_ending_presentation(void){
  while lib.economy_step()==1:pass
  assert live.economy.supplies[1]==0 and get('ability_cd')==53
  lib.start_game(1);drain();assert live.economy.supplies[1]==0 and get('ability_cd')==0
- put('room',1);lib.spawn_enemies();enemies=(Enemy*6).in_dll(lib,'enemies')
+ put('room',1);put('bridge_open',0);lib.spawn_enemies();enemies=(Enemy*6).in_dll(lib,'enemies')
+ assert [(e.x,e.y,e.hp,e.kind) for e in enemies if e.hp]==[(184,232,2,0),(290,102,2,0),(108,91,2,0)]
  before_xp=sum(live.roster.instances[n].xp for n in live.roster.party if n<160);before_gold=live.economy.gold;before_kills=get('kills');enemies[0].hp=0
  lib.kill_enemy(C.byref(enemies[0]));xp=sum(live.roster.instances[n].xp for n in live.roster.party if n<160)-before_xp
  assert live.economy.gold-before_gold==6 and get('game_shop_reward_gold')==6 and get('game_shop_reward_xp')==xp
  lib.kill_enemy(C.byref(enemies[0]));assert live.economy.gold==before_gold+6 and get('kills')==before_kills+1
+ put('px',240);put('py',215);put('spirit',1);put('summoned',1);put('ability_cd',0)
+ lib.ability_apply()
+ assert get('bridge_open')==1
+ assert enemies[0].hp==0
+ assert (enemies[1].x,enemies[1].y,enemies[1].hp,enemies[1].kind)==(326,238,4,2)
+ assert (enemies[3].x,enemies[3].y,enemies[3].hp,enemies[3].kind)==(412,92,4,2)
+ assert (C.c_int*6).in_dll(lib,'enemy_hp_q4')[1]==64
+ drain();lib.start_game(1);drain()
+ assert get('room')==1 and get('bridge_open')==1
+ assert enemies[0].hp==2 and enemies[1].hp==4 and enemies[3].hp==4
  put('game_state',1);put('room',21);put('transition_lock',1000);put('keys',0);lib.save5_quest_set_state(C.byref(live.quests),9,1);lib.region_game_reset()
  source=(ROOT/'src/region_game.c').read_text();row=re.search(r'garden_stones\[3\]\[2\]=\{(.*?)\};',source).group(1)
  stones=[tuple(map(int,v)) for v in re.findall(r'\{(\d+),(\d+)\}',row)];assert len(stones)==3

@@ -600,8 +600,14 @@ COLD void camera_update(int snap){int tx,ty;if(!scrolling_room()){camera_x=camer
  if(snap){camera_fx=tx*256;camera_fy=ty*256;}else{if(ab(tx*256-camera_fx)<4)camera_fx=tx*256;else camera_fx+=(tx*256-camera_fx)/4;if(ab(ty*256-camera_fy)<4)camera_fy=ty*256;else camera_fy+=(ty*256-camera_fy)/4;}
  camera_x=camera_fx>>8;camera_y=camera_fy>>8;
 }
+COLD void spawn_forest_rangers(void){
+ enemies[1]=(Enemy){326,238,4,0,2};enemies[3]=(Enemy){412,92,4,0,2};
+ enemy_hp_q4[1]=enemies[1].hp*16;enemy_hp_q4[3]=enemies[3].hp*16;
+ enemy_phases[1]=enemy_phases[3]=COMBAT_NEUTRAL_PHASE;
+ enemy_stagger_ticks[1]=enemy_stagger_ticks[3]=0;
+}
 COLD void spawn_enemies(void){defeated_enemy_mask=0;covenants_wave_enemies=0;covenants_wave_shots=0;zero(enemies,sizeof enemies);zero(shots,sizeof shots);zero(ordinary_hostile_shots,sizeof ordinary_hostile_shots);zero(impacts,sizeof impacts);zero(enemy_clocks,sizeof enemy_clocks);zero(enemy_windups,sizeof enemy_windups);
- if(room==1){enemies[0]=(Enemy){184,232,2,0,0};enemies[1]=(Enemy){326,238,4,0,2};enemies[2]=(Enemy){290,102,2,0,0};enemies[3]=(Enemy){412,92,4,0,2};enemies[4]=(Enemy){108,91,2,0,0};}
+ if(room==1){enemies[0]=(Enemy){184,232,2,0,0};enemies[2]=(Enemy){290,102,2,0,0};enemies[4]=(Enemy){108,91,2,0,0};if(bridge_open)spawn_forest_rangers();}
  if(room==17){enemies[0]=(Enemy){184,264,4,0,0};enemies[1]=(Enemy){312,248,4,0,0};enemies[2]=(Enemy){400,240,6,0,2};enemies[3]=(Enemy){152,112,4,0,0};enemies[4]=(Enemy){296,88,6,0,2};}
  if(room==2){enemies[0]=(Enemy){55,113,2,0,1};enemies[1]=(Enemy){184,110,2,0,1};}
  if(room>=4&&room<14){const CampaignRoom*d=&campaign_rooms[room-4];int i;if(room==6&&(room_flags&CF_SKY_PATROL_CLEAR))return;for(i=0;i<d->enemy_count;i++)enemies[i]=(Enemy){d->enemies[i].x,d->enemies[i].y,d->enemies[i].hp,0,d->enemies[i].kind};}}
@@ -816,7 +822,7 @@ COLD void ability_apply(void){int i;legacy_ability_success=0;legacy_ability_shot
  if(command>=13&&command<=22){if(north_game_power(command)){ability_max=ability_cd=game_power_cooldown(creatures_ability(command)->cooldown_updates);northern_powers_feedback(command);sfx(2);}else if(!(legacy_ability_success=northern_power(command)))toast(power_failure_text(northern_power_failure()));return;}
  ability_max=ability_cd=game_power_cooldown(75);sfx(2);if(north_game_power(command))return;if(region_game_power(command))return;if(trial_event(trials_power(room,px,py,spirit)))return;if(campaign_power()){legacy_ability_success=1;return;}if(command>=9&&command<=11){legacy_ability_success=regional_power(command);return;}
 
- if(spirit==1){legacy_ability_success=1;if(room==1&&!bridge_open&&near(px,py,WORLD_BRIDGE_CENTER_X,WORLD_BRIDGE_Y,55)){bridge_open=1;save_game();dialogue(TX_BRIDGE1,TX_BRIDGE2,PLAY);return;}if(progression_command()>4&&advanced_power(progression_command())){legacy_ability_success=1;return;}if(!heal_cd&&hero_hp_q4<gear_stats.max_hp_q4){game_health_heal(16);heal_cd=360;toast(TX_HEALED);}for(i=0;i<MAX_ENEMIES;i++)if(enemies[i].hp&&near(px,py,enemies[i].x,enemies[i].y,47)){enemies[i].flash=35;enemies[i].x+=sign(enemies[i].x-px)*6;enemies[i].y+=sign(enemies[i].y-py)*6;}return;}
+ if(spirit==1){legacy_ability_success=1;if(room==1&&!bridge_open&&near(px,py,WORLD_BRIDGE_CENTER_X,WORLD_BRIDGE_Y,55)){bridge_open=1;spawn_forest_rangers();save_game();dialogue(TX_BRIDGE1,TX_BRIDGE2,PLAY);return;}if(progression_command()>4&&advanced_power(progression_command())){legacy_ability_success=1;return;}if(!heal_cd&&hero_hp_q4<gear_stats.max_hp_q4){game_health_heal(16);heal_cd=360;toast(TX_HEALED);}for(i=0;i<MAX_ENEMIES;i++)if(enemies[i].hp&&near(px,py,enemies[i].x,enemies[i].y,47)){enemies[i].flash=35;enemies[i].x+=sign(enemies[i].x-px)*6;enemies[i].y+=sign(enemies[i].y-py)*6;}return;}
  if(room==2){int before=torches;if(near(px,py,64,64,42))torches|=1;if(near(px,py,176,64,42))torches|=2;if(before!=torches){save_game();if(torches==3)dialogue(TX_GATE1,TX_GATE2,PLAY);return;}}
  if(room==3&&boss_active()&&!boss_armor&&near(px,py,boss_x,boss_y,84)){boss_armor=210;boss_flash=12;toast(TX_EXPOSED);fire_shot(cx,cy,sign(boss_x-cx)*2,sign(boss_y-cy)*2,0);return;}
  if(progression_command()>4&&advanced_power(progression_command())){legacy_ability_success=1;return;}
