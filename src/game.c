@@ -602,7 +602,7 @@ COLD void camera_update(int snap){int tx,ty;if(!scrolling_room()){camera_x=camer
 }
 COLD void spawn_forest_rangers(void){
  enemies[1]=(Enemy){326,238,4,0,2};enemies[3]=(Enemy){412,92,4,0,2};
- enemy_hp_q4[1]=enemy_hp_q4[3]=64;
+ enemy_hp_q4[1]=enemies[1].hp*16;enemy_hp_q4[3]=enemies[3].hp*16;
  enemy_phases[1]=enemy_phases[3]=COMBAT_NEUTRAL_PHASE;
  enemy_stagger_ticks[1]=enemy_stagger_ticks[3]=0;
 }
