@@ -11,6 +11,7 @@ SOURCE = (ROOT / 'src/game.c').read_text(encoding='utf-8')
 
 
 def function(name):
+    """Return the production dialogue function for the host fixture."""
     match = re.search(r'^COLD (?:void|int) ' + name + r'\([^;{}]*\)\s*\{', SOURCE, re.M)
     assert match, f'Missing production function {name}'
     start = match.start()
@@ -72,13 +73,23 @@ static void visit(unsigned flags,int first,int pages,int action){
  assert(dialogue_action==action&&heals==1&&saves==1);
  assert(chapter_flags==flags&&optional_flags==0&&story_seen==0);
 }
+static void absent(int first,int second){
+ int i;for(i=0;i<dcount*2;i++)assert(dialog_lines[i]!=first&&dialog_lines[i]!=second);
+}
 int main(void){
  visit(0,TX_C_ELDER_ACT1_0_0,1,0);
+ absent(TX_C_ELDER_ACT2_2_0,TX_C_ELDER_ACT2_2_1);
+ absent(TX_C_ELDER_FINAL_3_0,TX_C_ELDER_FINAL_3_1);
  visit(SAVE4_GROVE_CLEAR,TX_C_ELDER_ACT2_0_0,3,0);
  assert(dialog_lines[2]==TX_C_ELDER_ACT2_1_0);
  assert(dialog_lines[4]==TX_C_ELDER_ACT2_2_0);
  assert(dialog_lines[5]==TX_C_ELDER_ACT2_2_1);
+ absent(TX_C_ELDER_FINAL_3_0,TX_C_ELDER_FINAL_3_1);
  visit(SAVE4_GROVE_CLEAR|SAVE4_SKY_CLEAR,TX_C_ELDER_ACT3_0_0,2,0);
+ assert(dialog_lines[1]==TX_C_ELDER_ACT3_0_1);
+ assert(dialog_lines[2]==TX_C_ELDER_ACT3_1_0);
+ assert(dialog_lines[3]==TX_C_ELDER_ACT3_1_1);
+ absent(TX_C_ELDER_FINAL_3_0,TX_C_ELDER_FINAL_3_1);
  visit(SAVE4_GROVE_CLEAR|SAVE4_SKY_CLEAR|SAVE4_CORE_CLEAR,
        TX_C_ELDER_FINAL_0_0,6,2);
  assert(dialog_lines[6]==TX_C_ELDER_FINAL_3_0);
