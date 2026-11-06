@@ -32,9 +32,12 @@ assert 'スープ' in ''.join(story['ELDER_ACT2']['pages'][-1])
 assert '三つの灯' in ''.join(story['ELDER_FINAL']['pages'][-1])
 assert '食卓' in ''.join(story['ELDER_FINAL']['pages'][-1])
 assert 'パン' in ''.join(story['ENDING_FRIENDS']['pages'][-1])
+assert '森' in story['ENDING_FRIENDS']['pages'][-1][0]
+assert 'スープ' in story['ENDING_FRIENDS']['pages'][-1][0]
 for scene, page in (('ELDER_ACT2', 2), ('ELDER_FINAL', 3)):
     for line, text in enumerate(story[scene]['pages'][page]):
         assert ui[f'C_{scene}_{page}_{line}'] == text
+assert ui['C_ENDING_FRIENDS_1_0'] == story['ENDING_FRIENDS']['pages'][-1][0]
 assert len(story['ELDER_FINAL']['pages']) + len(story['ENDING_FRIENDS']['pages']) == 6
 
 fixture = r'''
