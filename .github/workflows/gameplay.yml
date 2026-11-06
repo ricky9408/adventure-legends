@@ -25,6 +25,8 @@ jobs:
     timeout-minutes: 90
     strategy:
       fail-fast: false
+      # Avoid simultaneous large downloads from the signed snapshot backend.
+      max-parallel: 1
       matrix:
         suite: [host, native]
     # Official Debian 13 image and signed package snapshot are immutable.
