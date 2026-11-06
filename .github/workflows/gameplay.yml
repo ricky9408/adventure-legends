@@ -62,6 +62,20 @@ jobs:
               apt-get -o "Dir::Cache::archives=$archive_dir" --no-download install --yes --no-install-recommends "${packages[@]}"
               exit 0
             fi
+            if [[ "$mirror" == snapshot-cloudflare.debian.org ]]; then
+              # Do not accept a current-mirror replacement without the signed snapshot's exact hash.
+              fallback=libxcursor1_1%3a1.2.3-1_amd64.deb
+              fallback_sha=bb0dbf58b804faaa74ed9efdae61c4b14bb0b4855680798f63e5ca6a4954976b
+              if timeout --kill-after=10s 30s /usr/lib/apt/apt-helper download-file \
+                   http://deb.debian.org/debian/pool/main/libx/libxcursor/libxcursor1_1.2.3-1_amd64.deb \
+                   "$archive_dir/partial/$fallback" \
+                   "SHA256:$fallback_sha" &&
+                 printf '%s  %s\n' "$fallback_sha" "$archive_dir/partial/$fallback" | sha256sum --check --status; then
+                mv "$archive_dir/partial/$fallback" "$archive_dir/$fallback"
+              else
+                rm -f "$archive_dir/partial/$fallback"
+              fi
+            fi
           done
           exit 1
       - name: Check out candidate without persistent credentials
