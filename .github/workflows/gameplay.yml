@@ -25,6 +25,8 @@ jobs:
     timeout-minutes: 90
     strategy:
       fail-fast: false
+      # Avoid simultaneous large downloads from the signed snapshot backend.
+      max-parallel: 1
       matrix:
         suite: [host, native]
     # Official Debian 13 image and signed package snapshot are immutable.
@@ -53,12 +55,27 @@ jobs:
           packages=(ca-certificates curl git build-essential pkg-config libmgba-dev python3 python3-venv python3-pil python3-numpy python3-scipy ffmpeg fonts-noto-cjk fonts-dejavu-core)
           archive_dir=/var/cache/apt/snapshot-archives
           mkdir -p "$archive_dir/partial"
-          for mirror in snapshot-cloudflare.debian.org snapshot.debian.org; do
+          # Do not discard verified progress after two timeout-limited mirrors.
+          for mirror in snapshot-cloudflare.debian.org snapshot.debian.org snapshot-cloudflare.debian.org; do
             printf 'deb [check-valid-until=no] http://%s/archive/debian/20250910T000000Z trixie main\n' "$mirror" > /etc/apt/sources.list
             if timeout --kill-after=10s 90s apt-get -o APT::Update::Error-Mode=any -o Acquire::Retries=3 update &&
                timeout --kill-after=10s 420s apt-get -o "Dir::Cache::archives=$archive_dir" -o Acquire::Retries=3 --download-only install --yes --no-install-recommends "${packages[@]}"; then
               apt-get -o "Dir::Cache::archives=$archive_dir" --no-download install --yes --no-install-recommends "${packages[@]}"
               exit 0
+            fi
+            if [[ "$mirror" == snapshot-cloudflare.debian.org ]]; then
+              # Do not accept a current-mirror replacement without the signed snapshot's exact hash.
+              fallback=libxcursor1_1%3a1.2.3-1_amd64.deb
+              fallback_sha=bb0dbf58b804faaa74ed9efdae61c4b14bb0b4855680798f63e5ca6a4954976b
+              if timeout --kill-after=10s 30s /usr/lib/apt/apt-helper download-file \
+                   http://deb.debian.org/debian/pool/main/libx/libxcursor/libxcursor1_1.2.3-1_amd64.deb \
+                   "$archive_dir/partial/$fallback" \
+                   "SHA256:$fallback_sha" &&
+                 printf '%s  %s\n' "$fallback_sha" "$archive_dir/partial/$fallback" | sha256sum --check --status; then
+                mv "$archive_dir/partial/$fallback" "$archive_dir/$fallback"
+              else
+                rm -f "$archive_dir/partial/$fallback"
+              fi
             fi
           done
           exit 1

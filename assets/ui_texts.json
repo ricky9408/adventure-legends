@@ -205,8 +205,8 @@
   "C_ENDING_FRIENDS_SPEAKER": "四つの契約",
   "C_ENDING_FRIENDS_0_0": "フウリ「次は、どこへ行こう？」",
   "C_ENDING_FRIENDS_0_1": "コハク「今夜は、ここにいよう」",
-  "C_ENDING_FRIENDS_1_0": "ミドリ「里に、花を咲かせよう」",
-  "C_ENDING_FRIENDS_1_1": "ホムラ「火の番なら、任せて！」",
+  "C_ENDING_FRIENDS_1_0": "ミドリ「森に花咲いた。スープ飲も」",
+  "C_ENDING_FRIENDS_1_1": "ホムラ「パンの火は任せて！」",
   "C_ELDER_POSTGAME_SPEAKER": "灯守り リュマ",
   "C_ELDER_POSTGAME_0_0": "お帰り。灯は今日もあたたかい。",
   "C_ELDER_POSTGAME_0_1": "旅の話を、何度でも聞かせて。",
@@ -1380,5 +1380,9 @@
   "UW_PORTAL_WAIT_A": "この貝の昇降機で、真珠路へ。",
   "UW_PORTAL_WAIT_B": "先に「山に息を通そう」の報告を。",
   "FONT_CREDIT": "FONT: GeeBee / GBJ",
-  "FONT_URL": "GeeBee https://geebeegb.itch.io/gbj"
+  "FONT_URL": "GeeBee https://geebeegb.itch.io/gbj",
+  "C_ELDER_ACT2_2_0": "お帰り。森の灯が戻ったね。",
+  "C_ELDER_ACT2_2_1": "約束のパンとスープを分けよう。",
+  "C_ELDER_FINAL_3_0": "三つの灯がつながった今夜は、",
+  "C_ELDER_FINAL_3_1": "いつもの食卓に、スープを並べよう。"
 }

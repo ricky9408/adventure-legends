@@ -80,6 +80,9 @@ if uw_english.exists() or uw_japanese.exists():
     assert uw_english.exists() and uw_japanese.exists(), 'Underwater localization is incomplete'
     assert set(json.loads(uw_english.read_text()))==set(json.loads(uw_japanese.read_text())), 'Underwater message keys drifted'
 texts.update({'FONT_CREDIT':'FONT: GeeBee / GBJ','FONT_URL':'GeeBee https://geebeegb.itch.io/gbj'})
+# Keep existing text IDs stable; new homecoming pages belong after the released UI namespace.
+for name in ('C_ELDER_ACT2_2_0','C_ELDER_ACT2_2_1','C_ELDER_FINAL_3_0','C_ELDER_FINAL_3_1'):
+    texts[name]=texts.pop(name)
 items=[]
 for name,text in texts.items():
     h=10 if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL','FONT_CREDIT','FONT_URL') else 15
