@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='4889bbad660ce3a117292c7f4c585b0c9bda43bc5ac4ef35648909c83b84a8b8'
+CONTRACT_SHA='f39a2a2a2b7550e4383cb1b58d0e37e21df5f71c12c6ef801e8695298270869e'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -23,7 +23,7 @@ def allowed(path):
     return path.startswith(('src/ui_data/','src/companion_guide_text_data/')) or path in {
         'src/game.c','src/game_shop.c','src/modal_blit.inc','src/ui.c','src/ui.h',
         'src/campaign_rules.c','src/weapon_actions.c',
-        'src/field_controls.h','src/quickparty.c','src/quickparty.h',
+        'src/field_controls.h','src/quickparty.c','src/quickparty.h','src/journal_nav.c',
         'src/power_failure.h','src/northern_powers.c','src/northern_powers.h',
         'src/southern_powers.c','src/southern_powers.h',
         'src/power_aim_hold.h','src/music.c','src/magma_powers.c','src/magma_powers.h',

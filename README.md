@@ -24,6 +24,7 @@ Open `emberbond.gba` in [mGBA](https://mgba.io/) or another accurate GBA emulato
 | R | Call or recall your companion |
 | Start | Open or close the menu |
 | Select | Show the current journey goal and next clue in the field |
+| Hold a direction, then tap L | Step a short distance that way. The step stops against walls, the closed river, and a locked route, and it does not grant invulnerability |
 
 People and puzzles use A. Exterior roads connect at the north, south, east or west boundary of the map. On a scrolling map, the edge of the current camera view is not a map exit. Walk through building doors and stairs where the scenery leads into them. Closed routes show a visible barrier and a brief hint without opening a dialogue. Deliberately talking to people and examining objects still uses A. Area names appear on arrival; the corner companion bar shows power recovery.
 
