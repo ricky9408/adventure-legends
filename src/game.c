@@ -1478,6 +1478,15 @@ void draw_campaign_background(void){const CampaignRoom*d=&campaign_rooms[room-4]
 }
 
 unsigned int cycle_now(void){u16 hi,lo,hi2;do{hi=REG16(0x0400010C);lo=REG16(0x04000108);hi2=REG16(0x0400010C);}while(hi!=hi2);return ((u32)hi<<16)|lo;}
+extern void music_irq(void);
+/* music_irq samples IF once. A VBlank that arrives while it rewinds PCM DMA
+ * stays pending but never reaches the BIOS wait flag, so that blank is skipped.
+ * The BIOS IRQ dispatcher branches without a Thumb exchange, so this entry
+ * stays ARM, then latches that VBlank after the rewind. */
+#ifndef GAME_HOST_TEST
+__attribute__((target("arm"),section(".text.rom"),noinline,long_call))
+#endif
+void frame_irq(void){music_irq();if(REG16(0x04000202)&1){REG16(0x04000202)=1;REG16(0x03007FF8)|=1;}}
 volatile unsigned render_profile_vblank_cycles,render_profile_vblank_start,render_profile_vblank_end,render_profile_deferred_actors,render_profile_commit;
 /* All late CPU/DMA/IRQ work is charged to this completed update. The idle
  * wait for VBlank is excluded; start/end scanlines prove publication fits. */
@@ -1500,7 +1509,7 @@ COLD void complete_presentation(unsigned active_cost,unsigned update_cost,unsign
  render_cycles=active_cost+render_profile_vblank_cycles;render_profile_frame=(unsigned)frame;render_profile_serial++;
  if(render_cycles>worst_render_cycles)worst_render_cycles=render_cycles;
 }
-int main(void){int i;REG16(0x04000208)=0;REG16(0x04000000)=0x80;REG16(0x04000204)=0x4317;for(i=0;i<256;i++)((volatile u16*)0x05000000)[i]=game_palette[i];REG16(0x04000020)=256;REG16(0x04000026)=256;REG16(0x04000022)=0;REG16(0x04000024)=0;REG32(0x04000028)=0;REG32(0x0400002C)=0;page=0;has_save=0;game_state=LOAD_PENDING;load_boot_check=1;load_present_wait=2;load_resume_phase=0;save5_load_begin(0);sound_init();obj_init();REG16(0x0400000C)=3;REG16(0x0400010C)=0;REG16(0x0400010E)=0x84;REG16(0x04000108)=0;REG16(0x0400010A)=0x80;while(1){
+int main(void){int i;REG16(0x04000208)=0;REG16(0x04000000)=0x80;REG16(0x04000204)=0x4317;for(i=0;i<256;i++)((volatile u16*)0x05000000)[i]=game_palette[i];REG16(0x04000020)=256;REG16(0x04000026)=256;REG16(0x04000022)=0;REG16(0x04000024)=0;REG32(0x04000028)=0;REG32(0x0400002C)=0;page=0;has_save=0;game_state=LOAD_PENDING;load_boot_check=1;load_present_wait=2;load_resume_phase=0;save5_load_begin(0);sound_init();REG32(0x03007FFC)=(u32)frame_irq;obj_init();REG16(0x0400000C)=3;REG16(0x0400010C)=0;REG16(0x0400010E)=0x84;REG16(0x04000108)=0;REG16(0x0400010A)=0x80;while(1){
  u32 started=cycle_now(),phase_started,update_cost,save_cost,render_cost,music_cost,active_cost;
  save_begin_cycles=save_step_cycles=0;
  keys=(~REG16(0x04000130))&1023;pressed=keys&~prev_keys;prev_keys=keys;
