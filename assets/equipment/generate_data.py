@@ -93,9 +93,17 @@ def generate():
     lines += ['    default: return "Empty";', '    }', '}', '',
               'const char *equipment_description(unsigned id, unsigned line) {',
               '    if (line > 1) return "";', '    switch (id) {']
+    # Keep published catalogs byte-authentic while correcting current player copy.
+    descriptions = json.loads((ROOT / 'assets/equipment/player_descriptions.json').read_text())
+    assert isinstance(descriptions, dict)
+    assert set(descriptions) <= {str(x['id']) for x in items}
+    assert all(isinstance(pair, list) and len(pair) == 2 and
+               all(isinstance(line, str) for line in pair)
+               for pair in descriptions.values()), 'player descriptions must be pairs of strings'
     for x in items:
-        assert len(x['description']) == 2
-        a, b = map(json.dumps, x['description'])
+        description = descriptions.get(str(x['id']), x['description'])
+        assert len(description) == 2
+        a, b = map(json.dumps, description)
         lines.append('    case %d: return line ? %s : %s;' % (x['id'], b, a))
     lines += ['    default: return "";', '    }', '}', '']
     result = '\n'.join(lines)

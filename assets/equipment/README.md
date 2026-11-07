@@ -11,6 +11,13 @@ Run `python3 assets/equipment/generate_data.py`, or pass `--check` to verify the
 committed generated `src/equipment_data.c`. The generated C source remains below 32 KB; there are no generated include fragments. The 512-entry definition
 table is 12,288 ROM bytes, including disabled zero-filled identities.
 
+`player_descriptions.json` is the current player-copy authority for the listed
+item IDs. It overrides only the two description lines when generating C; other
+items retain their catalog descriptions. The catalog and released snapshots keep
+their exact historical prose and compatibility hashes. In current play, the old
+roll-recovery bonus contributes to companion-power recovery, so current copy
+must not promise a dodge. Stats, IDs, source mappings and saves are unchanged.
+
 Only one unique instance of each authored item can exist. Bag records do not
 compact. Record zero permanently contains protected item 1, the Wayfarer Sword.
 Rank is zero, quantity is one for occupied records, and empty records are all

@@ -128,7 +128,7 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 33: return line ? "Defense +2; speed -4." : "A half-heart of padding.";
     case 34: return line ? "Defense +4; speed -8." : "A heart of layered armor.";
     case 49: return line ? "Walking speed +8." : "Light soles for the trail.";
-    case 50: return line ? "Roll cooldown -3." : "Sure footing after a dodge.";
+    case 50: return line ? "Power cooldown -3." : "Sure footing for another companion power.";
     case 65: return line ? "Maximum health +half-heart." : "A packmaker's sturdy belt.";
     case 81: return line ? "Power cooldown -4." : "A clear note for companions.";
     case 82: return line ? "Defense +1; stagger +1." : "A ring that steadies the hand.";
@@ -136,12 +136,12 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 11: return line ? "Attack +2; defense +1." : "A balanced harbor thrust.";
     case 19: return line ? "Attack +1; range +12." : "A lighter arrow that travels farther.";
     case 35: return line ? "Defense +1; health +1/4 heart." : "Light padding leaves your stride free.";
-    case 51: return line ? "Speed +4; roll recovery -1." : "Sure steps and a quicker second roll.";
+    case 51: return line ? "Speed +4; power recovery -1." : "Sure steps and quicker companion powers.";
     case 83: return line ? "Defense +1; power recovery -2." : "A measured balance of guard and focus.";
     case 4: return line ? "Reach +1; stagger +1." : "A light cut that interrupts.";
     case 12: return line ? "Reach +4; no attack bonus." : "A long point for careful spacing.";
     case 36: return line ? "Defense +3; speed -2." : "A breezy guard without padding.";
-    case 52: return line ? "Roll cooldown -4; speed -4." : "Soft soles steady the next roll.";
+    case 52: return line ? "Power cooldown -4; speed -4." : "Soft soles steady the next companion power.";
     case 66: return line ? "Power cooldown -1." : "A quarter-heart reserve.";
     case 84: return line ? "Stagger +2; speed -4." : "A firm strike with a slower step.";
     case 20: return line ? "Attack +2; reach +6." : "A steady short-lane bow.";
@@ -158,15 +158,15 @@ const char *equipment_description(unsigned id, unsigned line) {
     case 86: return line ? "No breathing meter or route permission." : "An optional underwater sidegrade.";
     case 21: return line ? "Speed +4; arrow range +8." : "A light bow for the returning road.";
     case 39: return line ? "Defense +3; health +4; speed -2." : "A steady layer for familiar paths.";
-    case 55: return line ? "Speed +4; roll cooldown -2." : "Easy steps over the homeward boards.";
+    case 55: return line ? "Speed +4; power cooldown -2." : "Easy steps over the homeward boards.";
     case 69: return line ? "Health +4; power cooldown -3." : "Carry the last reed delivery gently.";
     case 87: return line ? "Guard +1; speed -2; power -1." : "Stagger +1 with a patient step.";
     case 7: return line ? "Walking speed -2." : "Attack +1; reach +1; stagger +1.";
     case 14: return line ? "Health +4; reach +2; speed -2." : "A lance with a padded grip.";
-    case 56: return line ? "Health +8; roll -1; speed -2." : "Soft soles for sheltered paths.";
+    case 56: return line ? "Health +8; power recovery -1; speed -2." : "Soft soles for sheltered paths.";
     case 88: return line ? "Power wait -5; speed -2." : "A ring that catches the quiet.";
     case 40: return line ? "Walking speed -4." : "Defense +1; health +16.";
-    case 89: return line ? "Walking speed -4." : "Roll wait -1; power wait -4.";
+    case 89: return line ? "Walking speed -4." : "Power wait -5.";
     default: return "";
     }
 }
