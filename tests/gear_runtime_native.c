@@ -11,11 +11,14 @@
 #include "advanced_powers.h"
 #include "south_game.h"
 #include "obj_layout.h"
+#include "ui.h"
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6];Shot shots[12];Save5State adventure_save;
-/* Chapter machines are absent from this bounded world; native chapter QA covers them. */
-int north_game_target(int*x,int*y,int*r){(void)x;(void)y;(void)r;return 0;}
+/* One synthetic machine can refuse a shot. Real chapter QA covers the rooms. */
+static int chapter_reject;
+volatile int boss_state,boss_phase;
+int north_game_target(int*x,int*y,int*r){if(!chapter_reject)return 0;if(x)*x=120;if(y)*y=100;if(r)*r=12;return 1;}
 int north_game_weapon_hit(unsigned c,int x,int y,unsigned d){(void)c;(void)x;(void)y;(void)d;return 0;}
 int south_game_target(int*x,int*y,int*r){(void)x;(void)y;(void)r;return 0;}
 int south_game_weapon_hit(unsigned c,int x,int y,unsigned d){(void)c;(void)x;(void)y;(void)d;return 0;}
@@ -26,14 +29,16 @@ int keys,gfx_slash_frame,face,roll_ticks,swing,sword_cd,combo_step,combo_timer,a
 int ability_cd,ability_max,enemy_windups[6],enemy_clocks[6];
 static unsigned char vram[16384];
 static int wall_x=-100,wall_y=-100,boss_live;
+static int spark_n,sound_n,toast_n,last_sound,last_toast;
 int solid(int x,int y){return x<0||y<0||x>=480||y>=320||x==wall_x||y==wall_y;}
 int near(int x,int y,int tx,int ty,int radius){return abs(x-tx)+abs(y-ty)<radius;}
 int boss_active(void){return boss_live;}
 int try_interaction(void){return 0;}
 void move_player(int x,int y){px+=x/256;py+=y/256;}
 CreatureInstance *progression_selected(void){return 0;}
-void impact(int x,int y){(void)x;(void)y;}
-void sfx(int n){(void)n;}
+void impact(int x,int y){(void)x;(void)y;spark_n++;}
+void sfx(int n){last_sound=n;sound_n++;}
+void toast(int id){last_toast=id;toast_n++;}
 void kill_enemy(Enemy*e){e->hp=0;}
 int region_game_practice_hit(unsigned c,int x,int y){(void)c;(void)x;(void)y;return 0;}
 void obj_upload(const unsigned char *p,int w,int h,int off){assert(p&&w>0&&h>0&&w<=32&&h<=32&&off>=0&&off+w*h<=16384);memcpy(vram+off,p,(size_t)w*h);}
@@ -110,9 +115,39 @@ int main(void){
     wall_x=dx?100+dx*10:-100;wall_y=dy?100+dy*10:-100;
     player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,(unsigned char)d,32,0,0,255,{0,0}};
     for(i=0;i<4;i++)game_arrows_update();assert(boss_hp_q4==320&&!player_arrows[0].active);
-    wall_x=wall_y=-100;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,(unsigned char)d,32,0,0,255,{0,0}};game_arrows_update();assert(boss_hp_q4==304&&!player_arrows[0].active);boss_live=0;
+    wall_x=wall_y=-100;spark_n=sound_n=toast_n=0;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,(unsigned char)d,32,0,0,255,{0,0}};game_arrows_update();assert(boss_hp_q4==304&&!player_arrows[0].active&&spark_n==1&&sound_n==1&&last_sound==4&&boss_flash==16&&toast_n==0);boss_live=0;
  }}
+ /* Closed moss armor: the shot is spent, HP stays, and the armored line shows. */
+ memset(enemies,0,sizeof enemies);boss_live=1;room=3;boss_state=boss_phase=0;boss_armor=0;boss_flash=0;boss_x=120;boss_y=100;game_boss_health_set(20);wall_x=wall_y=-100;
+ spark_n=sound_n=toast_n=0;last_toast=-1;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,3,32,0,0,255,{0,0}};player_arrows[1].active=0;
+ game_arrows_update();
+ assert(boss_hp_q4==320&&boss_hp==20&&boss_flash==0&&!player_arrows[0].active);
+ assert(spark_n==1&&toast_n==1&&last_toast==TX_ARMORED&&sound_n==0);
+ /* Sky and core windows shut: still no HP, and the line is the one that boss already shows. */
+ room=8;boss_state=4;spark_n=sound_n=toast_n=0;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,3,32,0,0,255,{0,0}};
+ game_arrows_update();
+ assert(boss_hp_q4==320&&spark_n==1&&toast_n==1&&last_toast==TX_C_WIND_WINDOW&&sound_n==0);
+ room=13;boss_state=4;boss_phase=0;spark_n=sound_n=toast_n=0;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,3,32,0,0,255,{0,0}};
+ game_arrows_update();
+ assert(boss_hp_q4==320&&spark_n==1&&toast_n==1&&last_toast==TX_C_NEED_STONE&&sound_n==0);
+ /* Open armor, flash clear: one damage tick, spark, and the hit sound. */
+ room=3;boss_armor=1;boss_flash=0;spark_n=sound_n=toast_n=0;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,3,32,0,0,255,{0,0}};
+ game_arrows_update();
+ assert(boss_hp_q4==304&&boss_flash==16&&!player_arrows[0].active&&spark_n==1&&sound_n==1&&last_sound==4&&toast_n==0);
+ /* A second shot while the boss is still flashing does not spend HP again. */
+ spark_n=sound_n=toast_n=0;player_arrows[0]=(WeaponArrow){100*256,100*256,112*256,1024,1,3,32,0,0,255,{0,0}};
+ game_arrows_update();
+ assert(boss_hp_q4==304&&boss_flash==16&&spark_n==1&&sound_n==0&&toast_n==0);
+ /* Lighthouse, sunwell, caldera, and guardian each keep a refused shot visible. */
+ boss_live=0;chapter_reject=1;game_boss_health_set(20);
+ {static const int rooms[]={29,37,45,53};
+  static const int lines[]={TX_NT_WARN,TX_ST_WARN,TX_MG_WARN,TX_UW_NOT_YET};
+  unsigned m;for(m=0;m<4;m++){unsigned n;room=rooms[m];spark_n=sound_n=toast_n=0;
+   player_arrows[0]=(WeaponArrow){100*256,100*256,160*256,1024,1,3,32,0,0,255,{0,0}};
+   for(n=0;n<6&&player_arrows[0].active;n++)game_arrows_update();
+   assert(!player_arrows[0].active&&spark_n==1&&toast_n==1&&last_toast==lines[m]&&sound_n==0&&boss_hp_q4==320);}}
+ chapter_reject=0;room=0;boss_live=0;
  later_passive_checks();
- puts("PASS four-direction wall/target/boss LOS and exactly-once hit ledger; actual runtime: fractional HP/no-heal100cycles, cooldown cache, two arrows+pin+phase glyph separation, projectile locks, separate stagger timer");
+ puts("PASS four-direction wall/target/boss LOS and exactly-once hit ledger; closed boss and rejected machine shots deflect; actual runtime: fractional HP/no-heal100cycles, cooldown cache, two arrows+pin+phase glyph separation, projectile locks, separate stagger timer");
  return 0;
 }
