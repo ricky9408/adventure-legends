@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='7aa651dfff34f23924ab8487e56bb11a7d38fd5e8b221e6beccfc2cda78961b4'
+CONTRACT_SHA='4889bbad660ce3a117292c7f4c585b0c9bda43bc5ac4ef35648909c83b84a8b8'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -37,8 +37,9 @@ def allowed(path):
         'assets/regional_shop_text_metrics.json','src/regional_shop_text_data/part_001.inc',
         'assets/companion_guide_commands/commands_065_096.json',
         'assets/companion_guide_commands/commands_097_128.json',
-        'assets/companion_guide_text_metrics.json','assets/covenants_power_ui.json',
-        'assets/covenants_ui_texts.json','assets/generate_ui.py','assets/generate_companion_guide.py',
+        'assets/companion_guide_text_metrics.json',        'assets/covenants_power_ui.json',
+        'assets/covenants_ui_texts.json','assets/covenants_world/ui_english_developer.json',
+        'assets/generate_ui.py','assets/generate_companion_guide.py',
         'assets/horizons_region/dialogue_ja.json','assets/horizons_ui.json','assets/magma_ui.json',
         'assets/player_feedback_ui.json','assets/return_region/dialogue.json',
         'assets/return_region/dialogue_ja.json','assets/ui_texts.json',
