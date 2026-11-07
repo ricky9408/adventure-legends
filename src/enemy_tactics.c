@@ -20,10 +20,44 @@ static COLD void recover(unsigned i){
  enemy_windups[i]=0;enemy_clocks[i]=ENEMY_CHARGE_RECOVERY;
  enemy_aimx[i]=enemy_aimy[i]=0;
 }
+static COLD void post_recover(unsigned i){
+ enemy_windups[i]=0;enemy_clocks[i]=ENEMY_POST_RECOVERY;
+ enemy_aimx[i]=enemy_aimy[i]=0;
+}
+/* Holds its post until the hero is close, shows the braced pose for the
+ * warning, then shoves a short locked lane. The existing spark is the tell.
+ * Contact starts only once the shove is moving. A wall ends it in place. */
+static COLD int post_update(unsigned i){
+ Enemy*e=&enemies[i];int dx,dy,n;
+ if(e->flash||enemy_stagger_ticks[i]||rooted_enemies[i]){post_recover(i);return 0;}
+ if(enemy_clocks[i]>0){enemy_clocks[i]--;return 0;}
+ if(enemy_windups[i]>0){
+  if(--enemy_windups[i]==0)enemy_clocks[i]=-ENEMY_POST_STEPS;
+  return 0;
+ }
+ if(enemy_clocks[i]<0){
+  if(slowed_enemies[i]&&(frame&1))return 1;
+  for(n=0;n<ENEMY_POST_SPEED;n++){
+   int x=e->x+enemy_aimx[i],y=e->y+enemy_aimy[i];
+   if(solid(x,y)){post_recover(i);return n>0;}e->x=x;e->y=y;
+  }
+  if(++enemy_clocks[i]==0)post_recover(i);
+  return 1;
+ }
+ dx=px-e->x;dy=py-e->y;
+ if(magnitude(dx)+magnitude(dy)>ENEMY_POST_RANGE)return 0;
+ enemy_aimx[i]=enemy_aimy[i]=0;
+ if(magnitude(dx)>magnitude(dy))enemy_aimx[i]=dx<0?-1:1;
+ else enemy_aimy[i]=dy<0?-1:1;
+ enemy_windups[i]=(int)southern_powers_windup(i,ENEMY_POST_WARNING);
+ return 0;
+}
 COLD int enemy_tactics_update(unsigned i){
  Enemy*e;int dx,dy,n;
  if(i>=6||game_state!=1)return 0;
- e=&enemies[i];if(e->kind!=ENEMY_LANE_CHARGER||e->hp<=0)return 0;
+ e=&enemies[i];if(e->hp<=0)return 0;
+ if(e->kind==ENEMY_SENTRY)return post_update(i);
+ if(e->kind!=ENEMY_LANE_CHARGER)return 0;
  /* All existing attacks/roots can interrupt the warning or rush. Releasing a
   * root never resumes a stale aimed attack. The engine owns hitstop/modal freeze. */
  if(e->flash||enemy_stagger_ticks[i]||rooted_enemies[i]){recover(i);return 0;}
@@ -53,13 +87,17 @@ COLD int enemy_tactics_update(unsigned i){
  return 0;
 }
 COLD void enemy_tactics_draw(unsigned i){
- unsigned direction=0,pose,index;
- if(i>=6||enemies[i].kind!=ENEMY_LANE_CHARGER)return;
+ unsigned direction=0,pose,index,key;
+ const unsigned char (*sheet)[256];
+ if(i>=6)return;
+ if(enemies[i].kind==ENEMY_SENTRY){sheet=sentry_pixels;key=20512u;}
+ else if(enemies[i].kind==ENEMY_LANE_CHARGER){sheet=charger_pixels;key=20480u;}
+ else return;
  if(enemy_windups[i]||enemy_clocks[i]<0){
   direction=enemy_aimy[i]<0?1u:enemy_aimx[i]<0?2u:enemy_aimx[i]>0?3u:0u;
  }
  pose=enemy_windups[i]>0;index=pose*4+direction;
- /* Same single 16x16 regional cache entry as a ranger. No resident OBJ growth,
-  * extra actor slot, or new effect object; the existing spark marks warning. */
- region_pixels_actor(20480u+index,charger_pixels[index],enemies[i].x,enemies[i].y);
+ /* One 16x16 regional cache entry. The braced post is its own pose; the
+  * existing spark marks that tell and the charger's warning. No resident OBJ. */
+ region_pixels_actor(key+index,sheet[index],enemies[i].x,enemies[i].y);
 }
