@@ -151,7 +151,7 @@
       "pages": [
         [
           "光ってから、弾が飛んでくる。",
-          "回避か風で、近づく道を作れ。"
+          "風で弾を消し、近づく道を作れ。"
         ]
       ]
     },
@@ -457,7 +457,7 @@
     "BRIDGE_STAYS": "橋と重しは、そのまま残る",
     "CONTROL_CYCLE": "L短押し 切替　長押し＋左右 全仲間",
     "CONTROL_SUMMON": "R 呼ぶ・帰す　A 剣・会話",
-    "CONTROL_DODGE": "SELECT  回避　START  しおり",
+    "CONTROL_DODGE": "START 旅のメニュー",
     "RETRY_ROOM": "A  部屋の入口から再挑戦"
   },
   "npc_priority": [
