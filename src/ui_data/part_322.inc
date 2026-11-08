@@ -43,7 +43,7 @@ const UiText ui_texts[TX_COUNT] = {
 {121,15,0,{txt_THANKS_0,txt_THANKS_1},{215,210}},
 {103,15,0,{txt_RESTART_0,txt_RESTART_1},{140,141}},
 {109,15,0,{txt_DEAD_0,txt_DEAD_1},{178,179}},
-{127,15,0,{txt_RETRY_0,txt_RETRY_1},{250,246}},
+{115,15,0,{txt_RETRY_0,txt_RETRY_1},{206,204}},
 {61,15,0,{txt_PAUSE_0,txt_PAUSE_1},{110,105}},
 {181,15,0,{txt_CONTROL1_0,txt_CONTROL1_1},{219,218}},
 {163,15,0,{txt_CONTROL2_0,txt_CONTROL2_1},{273,274}},

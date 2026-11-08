@@ -17,7 +17,7 @@ def main():
  assert unchanged(),'Current source must match the frozen build'
  production=ProductionGuard()
  commands=[('retained-62',[sys.executable,'tools/run_connected_roads_host.py','--field-controls-successor','--output',str(out/'retained-62')],{})]
- names=['test_no_removed_dodge_text','test_journey_goals','test_field_goal_select','test_field_step','test_journey_arrival_latch','test_journey_map','test_village_homecoming','test_companion_guide','test_shared_text_spans','test_play_notice_cache','test_retained_ui_story_successor','test_regional_quest_events','verify_late_renderer']
+ names=['test_retry_location','test_no_removed_dodge_text','test_journey_goals','test_field_goal_select','test_field_step','test_journey_arrival_latch','test_journey_map','test_village_homecoming','test_companion_guide','test_shared_text_spans','test_play_notice_cache','test_retained_ui_story_successor','test_regional_quest_events','verify_late_renderer']
  commands += [(n,[sys.executable,'tests/'+n+'.py'],{}) for n in names]
  
  for name,cmd,extra in commands:
