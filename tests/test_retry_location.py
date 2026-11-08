@@ -14,11 +14,12 @@ forest = re.search(r' if\(r==1\)\{px=fromnorth[^\n]+', source).group()
 assert 'centered(retry_location_text(),94,CREAM)' in source
 texts = json.loads((ROOT / 'assets/ui_texts.json').read_text())
 assert texts['RETRY'] == 'A  たき火から再挑戦'
+assert texts['RETRY_CHECKPOINT'] == 'A  休んだ場所から再挑戦'
 assert texts['C_RETRY_ROOM'] == 'A  部屋の入口から再挑戦'
 assert "'RETRY':'A  たき火から再挑戦'" in (ROOT / 'assets/generate_ui.py').read_text()
 assert 'enter_room(room,room>=16?checkpoint_spawn:2)' in retry
 spans = ''.join(p.read_text() for p in sorted((ROOT / 'src/ui_data').glob('part_*.inc')))
-for name in ('RETRY', 'C_RETRY_ROOM'):
+for name in ('RETRY', 'C_RETRY_ROOM', 'RETRY_CHECKPOINT'):
     metadata = re.search(r'\{(\d+),(\d+),0,\{txt_' + name + r'_0,txt_' + name + r'_1\}', spans)
     assert metadata and int(metadata[1]) <= 196 and int(metadata[2]) <= 15, name
 
@@ -62,6 +63,24 @@ static void check(int r,int camp,int spawn,int expected){
  }
 }
 int main(void){
+ const int anchors[][2]={{16,2},{17,2},{22,2},{23,2},{30,2},{31,2},{38,3},{39,3},{46,2},{47,2},{54,2},{55,2},{62,4},{65,3},{70,4},{74,3}};
+ unsigned i;
+ for(i=0;i<sizeof anchors/sizeof anchors[0];i++){
+  check(anchors[i][0],1,anchors[i][1],TX_RETRY_CHECKPOINT);
+  check(anchors[i][0],1,0,TX_C_RETRY_ROOM);
+  check(anchors[i][0],1,1,TX_C_RETRY_ROOM);
+ }
+ check(38,1,2,TX_C_RETRY_ROOM);
+ check(39,1,2,TX_C_RETRY_ROOM);
+ check(48,1,2,TX_C_RETRY_ROOM);
+ check(51,1,2,TX_C_RETRY_ROOM);
+ check(52,1,2,TX_C_RETRY_ROOM);
+ check(63,1,2,TX_C_RETRY_ROOM);
+ check(63,1,3,TX_C_RETRY_ROOM);
+ check(65,1,2,TX_C_RETRY_ROOM);
+ check(74,1,2,TX_C_RETRY_ROOM);
+ check(62,1,3,TX_C_RETRY_ROOM);
+ check(70,1,3,TX_C_RETRY_ROOM);
  check(1,0,0,TX_C_RETRY_ROOM);
  check(1,1,2,TX_RETRY);
  check(2,1,1,TX_C_RETRY_ROOM);

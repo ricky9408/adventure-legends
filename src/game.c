@@ -1043,7 +1043,7 @@ void copy_overworld(void){int y;const u8 *atlas=(camera_x&1)?overworld_bitmap_od
 void draw_campaign_background(void);
 #include "region_drawing.inc"
 #include "world_drawing.inc"
-COLD int retry_location_text(void){return room==1&&camp_unlocked?TX_RETRY:TX_C_RETRY_ROOM;}
+COLD int retry_location_text(void){if(room==1&&camp_unlocked)return TX_RETRY;if((checkpoint_spawn==2&&(room==16||room==17||room==22||room==23||room==30||room==31||room==46||room==47||room==54||room==55))||(checkpoint_spawn==3&&(room==38||room==39||room==65||room==74))||(checkpoint_spawn==4&&(room==62||room==70)))return TX_RETRY_CHECKPOINT;return TX_C_RETRY_ROOM;}
 
 COLD void draw_map(void){int mx=48,my=56,mw=144,mh=76;box(8,31,224,122);centered(TX_MAP,35,GOLD);rect(mx,my,mw,mh,PAL_PINE3);rect(mx,my+WORLD_RIVER_Y*mh/WORLD_H,mw,6,PAL_WATER3);line(mx+WORLD_SPAWN_X*mw/WORLD_W,my+mh-2,mx+WORLD_BRIDGE_CENTER_X*mw/WORLD_W,my+22,CREAM);line(mx+27,my+22,mx+110,my+22,CREAM);line(mx+110,my+22,mx+110,my+4,CREAM);if(bridge_open)rect(mx+68,my+35,8,10,GOLD);rect(mx+WORLD_CAMP_X*mw/WORLD_W-2,my+WORLD_CAMP_Y*mh/WORLD_H-2,5,5,PAL_FIRE2);rect(mx+WORLD_CHEST_X*mw/WORLD_W-2,my+WORLD_CHEST_Y*mh/WORLD_H-2,5,5,relic_found?PAL_STONE2:GOLD);rect(mx+WORLD_TEMPLE_X*mw/WORLD_W-3,my+WORLD_TEMPLE_Y*mh/WORLD_H-3,7,7,CREAM);rect(mx+px*mw/WORLD_W-2,my+py*mh/WORLD_H-2,5,5,PAL_HEART);centered(TX_MAP_KEYS,136,CREAM);}
 #include "title_route_drawing.inc"

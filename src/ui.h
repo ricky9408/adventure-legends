@@ -2201,6 +2201,7 @@ enum {
  TX_C_ELDER_ACT2_2_1,
  TX_C_ELDER_FINAL_3_0,
  TX_C_ELDER_FINAL_3_1,
+ TX_RETRY_CHECKPOINT,
  TX_COUNT };
 extern const UiText ui_texts[TX_COUNT];
 #endif
