@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='2ffae035f65e5aae19840ec4830bb798150d9fd5af5254378b161a3d08b8ebab'
+CONTRACT_SHA='d6bf78c84f450cb1ff7be56555c3fcb2835caabcabb70df4db5f79b2a6205f44'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 

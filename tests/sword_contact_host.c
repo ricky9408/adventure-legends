@@ -3,7 +3,7 @@
 #include <string.h>
 #include "weapon_actions.h"
 #include "combat_rules.h"
-#include "enemy_types.h"
+#include "enemy_tactics.h"
 #include "ui.h"
 
 #define COLD
