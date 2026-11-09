@@ -22,7 +22,7 @@ texts={
  'WIN1':'最後の闇が、静かにほどけた。','WIN2':'守り神は、また森の夢を見る。',
  'WIN3':'里に、あたたかな灯が戻った。','WIN4':'ふたりの仲間と、次の旅へ。',
  'COMPLETE':'灯をつなぐ者', 'THANKS':'冒険してくれて、ありがとう', 'RESTART':'START  タイトルへ',
- 'DEAD':'灯は、まだ消えない', 'RETRY':'A  祠の記憶から再挑戦',
+ 'DEAD':'灯は、まだ消えない', 'RETRY':'A  たき火から再挑戦',
  'PAUSE':'旅のしおり', 'CONTROL1':'十字キー  移動     A  剣・会話', 'CONTROL2':'B  仲間の力   L短押し  切替',
  'CONTROL3':'R  呼ぶ・帰す    START  続ける', 'CONTROL4':'ミドリは橋を育て、傷を癒す', 'CONTROL5':'ホムラは炎で台座と鎧を破る',
  'QUEST0':'目的：里を北へ出る', 'QUEST1':'目的：ミドリで川に橋を育てる', 'QUEST2':'目的：北東の祠へ進む',
@@ -83,6 +83,7 @@ texts.update({'FONT_CREDIT':'FONT: GeeBee / GBJ','FONT_URL':'GeeBee https://geeb
 # Keep existing text IDs stable; new homecoming pages belong after the released UI namespace.
 for name in ('C_ELDER_ACT2_2_0','C_ELDER_ACT2_2_1','C_ELDER_FINAL_3_0','C_ELDER_FINAL_3_1'):
     texts[name]=texts.pop(name)
+texts['RETRY_CHECKPOINT']='A  休んだ場所から再挑戦'
 items=[]
 for name,text in texts.items():
     h=10 if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL','FONT_CREDIT','FONT_URL') else 15

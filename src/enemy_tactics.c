@@ -7,7 +7,7 @@
 #endif
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 extern Enemy enemies[6];
-extern volatile int px,py,game_state;
+extern volatile int px,py,game_state,room;
 extern int frame,enemy_clocks[6],enemy_windups[6],enemy_aimx[6],enemy_aimy[6];
 extern int rooted_enemies[6];
 extern unsigned char slowed_enemies[6],enemy_stagger_ticks[6];
@@ -56,7 +56,7 @@ COLD int enemy_tactics_update(unsigned i){
  Enemy*e;int dx,dy,n;
  if(i>=6||game_state!=1)return 0;
  e=&enemies[i];if(e->hp<=0)return 0;
- if(e->kind==ENEMY_SENTRY)return post_update(i);
+ if(enemy_is_court_sentry(e->kind,room))return post_update(i);
  if(e->kind!=ENEMY_LANE_CHARGER)return 0;
  /* All existing attacks/roots can interrupt the warning or rush. Releasing a
   * root never resumes a stale aimed attack. The engine owns hitstop/modal freeze. */
@@ -90,7 +90,7 @@ COLD void enemy_tactics_draw(unsigned i){
  unsigned direction=0,pose,index,key;
  const unsigned char (*sheet)[256];
  if(i>=6)return;
- if(enemies[i].kind==ENEMY_SENTRY){sheet=sentry_pixels;key=20512u;}
+ if(enemy_is_court_sentry(enemies[i].kind,room)){sheet=sentry_pixels;key=20512u;}
  else if(enemies[i].kind==ENEMY_LANE_CHARGER){sheet=charger_pixels;key=20480u;}
  else return;
  if(enemy_windups[i]||enemy_clocks[i]<0){

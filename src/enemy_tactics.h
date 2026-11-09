@@ -1,6 +1,8 @@
 #ifndef ADVENTURE_ENEMY_TACTICS_H
 #define ADVENTURE_ENEMY_TACTICS_H
 #include "enemy_types.h"
+/* Kind 1 also names the early cave chasers; only the court owns this behavior. */
+static inline int enemy_is_court_sentry(int kind,int area){return kind==ENEMY_SENTRY&&area==53;}
 enum { ENEMY_CHARGE_RANGE=64,
        ENEMY_CHARGE_WARNING=42, ENEMY_CHARGE_STEPS=18,
        ENEMY_CHARGE_SPEED=3, ENEMY_CHARGE_RECOVERY=90,
