@@ -105,6 +105,7 @@ static void hold(unsigned duration,int direction){
  unsigned i;
  for(i=1;i<=duration;i++){
   CHECK(step(L|direction));CHECK(quickparty_open);
+  CHECK(!quickparty_directional_tap);
   CHECK(quickparty_visible==(i>=13));
   CHECK(validations<=13);
   if(i<=12){CHECK(quickparty_candidate==EMPTY);CHECK(quickparty_revision==before_picker);}
@@ -126,6 +127,7 @@ static void neutral_durations(void){
   target=duration&&duration<=12&&count>1?1:initial;
   change=target!=initial;picker_delta=duration>=13?2:change;
   CHECK(step(0)==(duration!=0));CHECK(!quickparty_open&&!quickparty_visible);
+  CHECK(!quickparty_directional_tap);
   selected(&before,target,change,0,picker_delta);
   CHECK(!step(0));selected(&before,target,change,0,picker_delta);
  }
@@ -190,8 +192,11 @@ static void directional_short_and_release_edge(void){
  static const int dirs[]={16,32,64,128,16|32,16|64,DIRECTIONS};
  static const unsigned durations[]={1,11,12};unsigned d,h;
  for(d=0;d<sizeof(dirs)/sizeof(dirs[0]);d++)for(h=0;h<3;h++){
-  Save5State before;fixture(5);before=adventure_save;
-  hold(durations[h],dirs[d]);CHECK(step(0));unchanged(&before);
+  Save5State before;  fixture(5);before=adventure_save;
+  hold(durations[h],dirs[d]);CHECK(step(0));
+  if(dirs[d]==16||dirs[d]==32||dirs[d]==64||dirs[d]==128)CHECK(quickparty_directional_tap==dirs[d]);
+  else CHECK(!quickparty_directional_tap);
+  unchanged(&before);
   CHECK(!quickparty_open&&!quickparty_visible&&quickparty_revision==before_picker);
  }
  for(d=0;d<sizeof(dirs)/sizeof(dirs[0]);d++){
@@ -206,6 +211,12 @@ static void directional_short_and_release_edge(void){
   CHECK(!filtered_held&&!filtered_pressed);CHECK(!step(0));
   CHECK(!step(dirs[d]));CHECK(filtered_held==dirs[d]&&filtered_pressed==dirs[d]);
  }
+ /* L pressed before any direction is still the picker, not a step. */
+ fixture(5);{Save5State before=adventure_save;CHECK(step(L));CHECK(step(L|64));CHECK(step(0));
+  CHECK(!quickparty_directional_tap);unchanged(&before);}
+ /* A direction already held, then a short L tap, publishes that axis. */
+ fixture(5);{Save5State before=adventure_save;CHECK(!step(64));CHECK(step(L|64));CHECK(step(0));
+  CHECK(quickparty_directional_tap==64);unchanged(&before);}
 }
 static void bounded_publish_and_long_repeats(void){
  Save5State before;unsigned i;
@@ -234,7 +245,7 @@ static void bounded_publish_and_long_repeats(void){
  /* A horizontal hold starts one visible step after arming, with no repeat
   * delay accrued invisibly. Reserve selection updates exactly one slot. */
  fixture(5);before=adventure_save;hold(13,LEFT);CHECK(quickparty_candidate==4);
- CHECK(step(0));CHECK(adventure_save.roster.party[0]==4);
+ CHECK(step(0));CHECK(!quickparty_directional_tap);CHECK(adventure_save.roster.party[0]==4);
  CHECK(adventure_save.roster.selected_party==0&&ordinary_saves==1&&!saves);
  CHECK(changes==1&&reseats==1&&progression_revision==before_progression+1);
  CHECK(!memcmp(adventure_save.roster.instances,before.roster.instances,sizeof(before.roster.instances)));

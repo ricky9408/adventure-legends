@@ -22,6 +22,8 @@ extern void save_game_ordinary(void) __attribute__((weak));
 #define DIRECTIONS 240
 #define RIGHT 16
 #define LEFT 32
+#define UP 64
+#define DOWN 128
 #define HANDOFF (1|B|4|START|DIRECTIONS|256)
 #define EMPTY CREATURE_EMPTY_SLOT
 #define INK 1
@@ -34,7 +36,8 @@ int quickparty_menu_slot,quickparty_menu_candidate;
 int quickparty_menu_detail;
 unsigned quickparty_menu_command;
 static int blocked,menu_notice,handoff_mask,repeat_direction,repeat_updates;
-static int had_direction;
+static int had_direction,step_axis;
+int quickparty_directional_tap;
 /* A preview is an index of occupied, valid physical roster records. Neither
  * discovery/obtained history nor form identity stands in for an individual. */
 static CreatureU8 field_slots[CREATURE_ROSTER_CAPACITY];
@@ -88,15 +91,15 @@ void quickparty_reset(int held){
  if(game_state!=3||quickparty_open){quickparty_menu_detail=0;quickparty_menu_command=0;companion_guide_page=0;}
  if(quickparty_open)handoff_mask|=held&HANDOFF;
  if(quickparty_visible)changed();
- quickparty_open=quickparty_visible=had_direction=0;quickparty_candidate=EMPTY;quickparty_hold_updates=0;field_count=field_cursor=field_scan=0;field_current=EMPTY;repeat_direction=repeat_updates=0;blocked=(held&L)!=0;
+ quickparty_open=quickparty_visible=had_direction=0;quickparty_candidate=EMPTY;quickparty_hold_updates=0;field_count=field_cursor=field_scan=0;field_current=EMPTY;repeat_direction=repeat_updates=0;blocked=(held&L)!=0;step_axis=quickparty_directional_tap=0;
 }
 int quickparty_update(int held,int pressed){unsigned dir=held&DIRECTIONS;
  /* L is deliberately never filtered: modal resets must see physical release.
   * After a cancellation, the world can resume with only held inputs masked. */
  if(blocked){if(!(held&L))blocked=0;return 0;}
- if(!quickparty_open){if(!(pressed&L))return 0;quickparty_open=1;quickparty_visible=0;field_begin();quickparty_hold_updates=0;had_direction=0;repeat_direction=repeat_updates=0;}
+ if(!quickparty_open){if(!(pressed&L))return 0;quickparty_open=1;quickparty_visible=0;field_begin();quickparty_hold_updates=0;had_direction=0;repeat_direction=repeat_updates=0;step_axis=(int)(held&DIRECTIONS);}
  if(pressed&(B|START)){quickparty_reset(held);if(pressed&START){journal_nav_open();game_state=3;}return 1;}
- if(!(held&L)){int choice=quickparty_candidate,tap=!had_direction&&quickparty_hold_updates<=QUICKPARTY_TAP_UPDATES;quickparty_reset(held);if(choice!=EMPTY)field_commit((unsigned)choice);else if(tap)quickparty_cycle();return 1;}
+ if(!(held&L)){int choice=quickparty_candidate,axis=step_axis,tap=!had_direction&&quickparty_hold_updates<=QUICKPARTY_TAP_UPDATES,directional=had_direction&&choice==EMPTY&&quickparty_hold_updates<=QUICKPARTY_TAP_UPDATES&&(axis==RIGHT||axis==LEFT||axis==UP||axis==DOWN);quickparty_reset(held);if(choice!=EMPTY)field_commit((unsigned)choice);else if(tap)quickparty_cycle();else if(directional)quickparty_directional_tap=axis;return 1;}
  if(quickparty_hold_updates<32767)quickparty_hold_updates++;
  /* Preserve the user's exact original short-L party cycle: any held
   * direction disqualifies the <=12-update tap, including ambiguous axes. */

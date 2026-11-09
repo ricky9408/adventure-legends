@@ -7,6 +7,10 @@
 /* open owns/pauses field input from the L press. visible draws the complete
  * carousel after its hidden preparation interval; never draw a partial list. */
 extern int quickparty_open,quickparty_visible,quickparty_candidate,quickparty_hold_updates;
+/* One held cardinal captured on the L press. A release within the short-tap
+ * window, with no roster commit, publishes that axis for the field step.
+ * A neutral tap and the long picker leave this at 0. */
+extern int quickparty_directional_tap;
 extern unsigned quickparty_revision;
 extern int quickparty_menu_slot,quickparty_menu_candidate;
 extern int quickparty_menu_detail;
