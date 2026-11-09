@@ -18,6 +18,7 @@
 #include "horizons_powers.h"
 #include "covenants_powers.h"
 #include "covenants_game.h"
+#include "ui.h"
 typedef unsigned char u8;
 typedef struct {int x,y,hp,flash,kind;} Enemy;
 typedef struct {int x,y,dx,dy,life,owner;} Shot;
@@ -27,6 +28,10 @@ extern volatile int hp,max_hp,px,py,boss_hp,boss_x,boss_y,room;
 extern int keys,gfx_slash_frame,face,roll_ticks,swing,sword_cd,combo_step,combo_timer,attack_buffer,swing_damage,slash_id,hitstop,boss_flash,boss_armor;
 extern int solid(int,int),near(int,int,int,int,int),boss_active(void),try_interaction(void);
 extern void move_player(int,int),sfx(int),impact(int,int),kill_enemy(Enemy*);
+/* Empty stand-ins so host suites that never reach a shot still link.
+ * The ROM's strong toast and boss state replace them. */
+__attribute__((weak)) void toast(int id){(void)id;}
+__attribute__((weak)) volatile int boss_state,boss_phase;
 extern void obj_upload(const u8*,int,int,int),obj_add(int,int,int,int,int,int,int,int);
 extern int region_game_practice_hit(unsigned,int,int);
 EquipmentStats gear_stats;
@@ -134,6 +139,23 @@ int game_melee_hit(unsigned target,int x,int y,int boss){
     return weapon_action_mark_hit(&weapon_action,target);
 }
 static int arrow_solid(void*context,int x,int y){(void)context;return solid(x,y);}
+/* Same closed-window lines boss_banner already chooses. Armor down is not a hit. */
+static int boss_shut_line(void){
+    if(room==3)return TX_ARMORED;
+    if(boss_state==5)return TX_C_BOSS_EXPOSED;
+    if(room==8)return boss_state==4?TX_C_WIND_WINDOW:TX_C_BOSS_WARN;
+    if(boss_state==6)return TX_C_PHASE_CHANGE;
+    if(boss_state!=4)return TX_C_BOSS_WARN;
+    return boss_phase==0?TX_C_NEED_STONE:boss_phase==1?TX_C_NEED_WIND:TX_C_NEED_FIRE;
+}
+static int machine_shut_line(void){
+    if((unsigned)(room-22)<8u)return TX_NT_WARN;
+    if((unsigned)(room-30)<8u)return TX_ST_WARN;
+    if((unsigned)(room-38)<8u)return TX_MG_WARN;
+    if((unsigned)(room-46)<8u)return TX_UW_NOT_YET;
+    return TX_TOUCHHINT;
+}
+static void shot_deflect(int x,int y,int line){impact(x,y);toast(line);}
 static int arrow_target(void*context,int x,int y){
     WeaponArrow*a=(WeaponArrow*)context;unsigned i;
     if(room==16&&near(x,y,440,280,9)){region_game_practice_hit(EQUIPMENT_BOW,440,280);return 1;}
@@ -144,10 +166,15 @@ static int arrow_target(void*context,int x,int y){
     }
     {int tx,ty,radius;if(chapter_target(&tx,&ty,&radius)&&near(x,y,tx,ty,radius)&&clear_path(x,y,tx,ty)){
         unsigned damage=combat_damage_q4(a->damage_q4,a->attack_q4,0,a->element,COMBAT_NEUTRAL_PHASE,0);
-        if(chapter_hit(EQUIPMENT_BOW,tx,ty,damage,(unsigned)(a-player_arrows)+1,magma_arrow_tokens[a-player_arrows])){impact(tx,ty);sfx(4);}return 1;
+        if(chapter_hit(EQUIPMENT_BOW,tx,ty,damage,(unsigned)(a-player_arrows)+1,magma_arrow_tokens[a-player_arrows])){impact(tx,ty);sfx(4);}
+        else shot_deflect(tx,ty,machine_shut_line());
+        return 1;
     }}
     if(boss_active()&&near(x,y,boss_x,boss_y,20)&&clear_path(x,y,boss_x,boss_y)){
-        if(boss_armor&&!boss_flash){game_boss_hurt(a->damage_q4==48?32:16,a->attack_q4,a->element);boss_flash=16;impact(x,y);sfx(4);}return 1;
+        if(boss_armor&&!boss_flash){game_boss_hurt(a->damage_q4==48?32:16,a->attack_q4,a->element);boss_flash=16;impact(x,y);sfx(4);}
+        else if(boss_armor)impact(x,y);
+        else shot_deflect(x,y,boss_shut_line());
+        return 1;
     }
     return 0;
 }
