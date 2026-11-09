@@ -13,7 +13,12 @@ for name,flags in [('strict',[]),('sanitized',['-fsanitize=address,undefined','-
  r=subprocess.run([str(exe)],cwd=ROOT,check=True,capture_output=True,text=True);logs[name]=r.stdout;print(r.stdout)
  # This tests the real update function; no copied tactics algorithm or reward fixture.
 assert '{328,56,5,ENEMY_LANE_CHARGER,4}' in (ROOT/'src/magma_game.c').read_text()
+court=(ROOT/'src/underwater_game.c').read_text()
+assert '{32,40,4,0,2},{208,40,4,ENEMY_SENTRY,0}' in court
+assert 'if(room==2){enemies[0]=(Enemy){55,113,2,0,1};enemies[1]=(Enemy){184,110,2,0,1};}' in source
+assert 'economy_award_combat(&adventure_save,e->kind==2?10u:6u)' in source
+assert 'if(enemy_windups[i])obj_add(OBJ_SPARK' in source
 assert source.index('if(hitstop){hitstop--;return;}')<source.index('update_enemies();')
 assert 'zero(enemy_clocks,sizeof enemy_clocks);zero(enemy_windups,sizeof enemy_windups)' in source
-files=['src/enemy_tactics.c','src/enemy_tactics.h','src/enemy_tactics_art.inc','src/game.c','src/magma_game.c','tests/enemy_tactics_host.c']
+files=['src/enemy_tactics.c','src/enemy_tactics.h','src/enemy_tactics_art.inc','src/game.c','src/magma_game.c','src/underwater_game.c','tests/enemy_tactics_host.c']
 (OUT/'report.json').write_text(json.dumps({'scope':'host production update integration plus ASan/UBSan; native controller evidence separate','logs':logs,'sources':{f:hashlib.sha256((ROOT/f).read_bytes()).hexdigest()for f in files}},indent=2)+'\n')

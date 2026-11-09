@@ -8,10 +8,10 @@ typedef struct {int x,y,dx,dy,life,owner;} Shot;
 #define MAX_ENEMIES 6
 #define PLAY 1
 Enemy enemies[6];Shot shots[12];WeaponAttack weapon_action;
-volatile int px,py,game_state;
+volatile int px,py,game_state,room;
 int frame,enemy_clocks[6],enemy_windups[6],enemy_aimx[6],enemy_aimy[6],rooted_enemies[6];
 unsigned char slowed_enemies[6],enemy_stagger_ticks[6],enemy_phases[6],shot_phases[12],ordinary_hostile_shots[12];
-int hitstop,room,invuln,guard_invuln;
+int hitstop,invuln,guard_invuln;
 unsigned char covenants_wave_enemies;
 unsigned short covenants_wave_shots;
 static int wall_x,wall_y,damage_calls,shot_calls,kill_calls,melee,draw_calls;
@@ -48,7 +48,7 @@ static void reset(void){
  memset(enemy_aimx,0,sizeof enemy_aimx);memset(enemy_aimy,0,sizeof enemy_aimy);
  memset(rooted_enemies,0,sizeof rooted_enemies);memset(slowed_enemies,0,sizeof slowed_enemies);
  memset(enemy_stagger_ticks,0,sizeof enemy_stagger_ticks);
- enemies[3]=(Enemy){200,100,5,0,ENEMY_LANE_CHARGER};px=250;py=100;game_state=PLAY;
+ enemies[3]=(Enemy){200,100,5,0,ENEMY_LANE_CHARGER};px=250;py=100;game_state=PLAY;room=53;
  wall_x=wall_y=-1;damage_calls=shot_calls=kill_calls=melee=draw_calls=hitstop=0;
  invuln=guard_invuln=southern_guard=magma_guard=southern_guard_calls=magma_guard_calls=0;
  enemy_phases[3]=4;damage_phase_seen=255;
@@ -107,6 +107,59 @@ static void terminal_contacts(void){
  }
  puts("PASS contact gate leaves player-projectile hits and ordinary/ranger body contact unchanged");
 }
+static void court_post(void){
+ unsigned char planted[256],braced[256];
+ /* Overlapping hero. The tell neither chases nor deals contact; the shove does. */
+ reset();enemies[3].hp=0;
+ enemies[1]=(Enemy){200,100,4,0,ENEMY_SENTRY};enemy_phases[1]=0;px=210;py=100;
+ tick(1);assert(enemy_windups[1]==ENEMY_POST_WARNING&&enemies[1].x==200&&damage_calls==0&&shot_calls==0);
+ tick(ENEMY_POST_WARNING-1);assert(enemy_windups[1]==1&&enemies[1].x==200&&damage_calls==0&&shot_calls==0);
+ tick(1);assert(enemy_windups[1]==0&&enemy_clocks[1]==-ENEMY_POST_STEPS&&enemies[1].x==200&&damage_calls==0&&shot_calls==0);
+ tick(1);assert(enemies[1].x==200+ENEMY_POST_SPEED&&damage_calls==1&&shot_calls==0);
+ /* Same post and budget: a slime steps in and touches on the first update. */
+ reset();enemies[3].hp=0;
+ enemies[1]=(Enemy){200,100,4,0,ENEMY_SLIME};enemy_phases[1]=0;px=210;py=100;
+ tick(1);assert(damage_calls==1&&shot_calls==0&&enemies[1].kind==ENEMY_SLIME);
+ tick(ENEMY_POST_WARNING);assert(enemies[1].x!=200&&shot_calls==0);
+ /* A ranger on that post fires. The sentry finishes its shove with no shot. */
+ reset();enemies[3].hp=0;
+ enemies[1]=(Enemy){200,100,4,0,ENEMY_RANGER};enemy_phases[1]=0;px=210;py=100;
+ tick(31);assert(shot_calls==1);
+ reset();enemies[3].hp=0;
+ enemies[1]=(Enemy){200,100,4,0,ENEMY_SENTRY};enemy_phases[1]=0;px=240;py=100;
+ tick(1+ENEMY_POST_WARNING+ENEMY_POST_STEPS);assert(shot_calls==0);
+ assert(enemies[1].x==200+ENEMY_POST_SPEED*ENEMY_POST_STEPS);
+ assert(enemy_clocks[1]==ENEMY_POST_RECOVERY&&damage_calls==0);
+ /* First microstep and the second pixel of a shove both stop on solid(). */
+ reset();enemies[3].hp=0;
+ enemies[1]=(Enemy){200,100,4,0,ENEMY_SENTRY};enemy_clocks[1]=-2;enemy_aimx[1]=1;px=240;py=100;wall_x=201;
+ tick(1);assert(enemies[1].x==200&&enemy_clocks[1]==ENEMY_POST_RECOVERY&&damage_calls==0&&shot_calls==0);
+ reset();enemies[3].hp=0;
+ enemies[1]=(Enemy){200,100,4,0,ENEMY_SENTRY};enemy_clocks[1]=-2;enemy_aimx[1]=1;px=240;py=100;wall_x=202;
+ tick(1);assert(enemies[1].x==201&&enemy_clocks[1]==ENEMY_POST_RECOVERY&&shot_calls==0);
+ tick(3);assert(enemies[1].x==201&&enemy_clocks[1]==ENEMY_POST_RECOVERY-3);
+ /* Planted pose, then the braced tell. Production still draws the spark while winding. */
+ reset();enemies[3].hp=0;enemies[1]=(Enemy){200,100,4,0,ENEMY_SENTRY};
+ enemy_tactics_draw(1);assert(draw_calls==1&&art_key==20512u&&art_pixels);
+ memcpy(planted,art_pixels,sizeof planted);
+ px=250;py=100;tick(1);enemy_tactics_draw(1);
+ assert(enemy_windups[1]==ENEMY_POST_WARNING&&art_key==20519u&&art_pixels);
+ memcpy(braced,art_pixels,sizeof braced);assert(memcmp(planted,braced,sizeof planted)!=0);
+ puts("PASS: court post holds through its braced spark tell, shoves without a slime step or ranger shot, and stops on solid()");
+}
+static void cave_chasers(void){
+ unsigned i;
+ static const int spawns[2][2]={{55,113},{184,110}};
+ for(i=0;i<2;i++){
+  reset();room=2;enemies[3].hp=0;
+  enemies[i]=(Enemy){spawns[i][0],spawns[i][1],2,0,ENEMY_SENTRY};
+  px=enemies[i].x+10;py=enemies[i].y;frame=0;
+  tick(1);assert(damage_calls==1&&enemy_windups[i]==0&&enemy_clocks[i]==0&&shot_calls==0);
+  tick(12);assert(enemies[i].x>spawns[i][0]&&enemy_windups[i]==0&&shot_calls==0);
+  enemy_tactics_draw(i);assert(draw_calls==0);
+ }
+ puts("PASS: both existing cave sentries retain chase, immediate contact, and ordinary art");
+}
 int main(void){
  unsigned i;int x;
  reset();tick(1);assert(enemy_windups[3]==42&&enemies[3].x==200&&shot_calls==0);
@@ -142,5 +195,6 @@ int main(void){
  tick(1);enemy_tactics_draw(3);assert(draw_calls==2&&art_key==20487);
  reset();enemies[3].kind=0;enemy_tactics_update(3);assert(enemy_windups[3]==0);enemy_tactics_update(6);enemy_tactics_draw(6);
  terminal_contacts();
- puts("PASS:42-update warning, locked lane,18-step rush,90-update recovery, thin-wall probes, damage gating, interrupt/modal/dead/reset/slow guards, same actor cache");return 0;
+ puts("PASS:42-update warning, locked lane,18-step rush,90-update recovery, thin-wall probes, damage gating, interrupt/modal/dead/reset/slow guards, same actor cache");
+ court_post();cave_chasers();return 0;
 }

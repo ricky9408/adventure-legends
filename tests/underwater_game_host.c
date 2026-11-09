@@ -3,6 +3,7 @@
 #include <string.h>
 #include <limits.h>
 #include "underwater_game.h"
+#include "enemy_types.h"
 #include "assets.h"
 #include "underwater_art.h"
 #include "underwater_quests.h"
@@ -82,7 +83,7 @@ void direction(int k){keys=k;game_state=1;}
 unsigned trial(unsigned slot){return slot<160?adventure_save.roster.instances[slot].trial_flags:0;}
 unsigned level(unsigned slot){return slot<160?adventure_save.roster.instances[slot].level:0;}
 unsigned bond(unsigned slot){return slot<160?adventure_save.roster.instances[slot].bond:0;}
-unsigned encounter_spawns(unsigned area){const UnderwaterEnemySpawn*e;unsigned n=underwater_game_enemy_spawns(area,&e),i;int oldroom=room;room=(int)area;for(i=0;i<n;i++)if(underwater_game_solid(e[i].x,e[i].y)||e[i].phase>=5||(e[i].kind!=0&&e[i].kind!=2)||!e[i].hp){room=oldroom;return 255;}room=oldroom;return n;}
+unsigned encounter_spawns(unsigned area){const UnderwaterEnemySpawn*e;unsigned n=underwater_game_enemy_spawns(area,&e),i;int oldroom=room;room=(int)area;for(i=0;i<n;i++)if(underwater_game_solid(e[i].x,e[i].y)||e[i].phase>=5||(e[i].kind!=ENEMY_SLIME&&e[i].kind!=ENEMY_SENTRY&&e[i].kind!=ENEMY_RANGER)||!e[i].hp){room=oldroom;return 255;}room=oldroom;return n;}
 unsigned max_camera_actors(void){const UnderwaterEnemySpawn*e;unsigned n=underwater_game_enemy_spawns((unsigned)room,&e),i,max=0;int x,y,mx=(room==46||room==47||room==48||room==51)?240:0,my=(room==46||room==47||room==48||room==51)?160:0;for(y=0;y<=my;y++)for(x=0;x<=mx;x++){unsigned count=draw(x,y);for(i=0;i<n;i++)if(e[i].kind==2&&e[i].x-x>-8&&e[i].x-x<248&&e[i].y-y>-8&&e[i].y-y<168)count++;if(count>max)max=count;}if(room>=46&&room<=53&&max>camera_maxima[room-46])camera_maxima[room-46]=max;return max;}
 int collision_equivalence(void){unsigned a,i;int x,y,old=room;for(a=46;a<=53;a++){const UnderwaterArtRoom*r=&underwater_art_rooms[a-46];room=(int)a;for(y=-6;y<r->height+6;y++)for(x=-6;x<r->width+6;x++){int expected=x<5||y<5||x>r->width-6||y>r->height-6;for(i=0;i<r->solid_count;i++){const UnderwaterArtRect*s=&r->solids[i];if(x+5>=s->x&&x-5<s->x+s->w&&y+5>=s->y&&y-5<s->y+s->h)expected=1;}if(underwater_game_geometry_solid(a,x,y)!=expected){room=old;return (int)a;}}if(!underwater_game_solid(INT_MIN,INT_MAX)||!underwater_game_solid(INT_MAX,INT_MIN)){room=old;return -1;}}room=old;return 0;}
 
