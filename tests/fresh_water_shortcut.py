@@ -44,7 +44,7 @@ class WaterRoute(RegionalJourney):
   self.check(self.state().quests.objectives[1]==3,'actual handle and Nature power restore dry road')
   self.act(120,232);self.cast(4,98,44);self.cast(7,184,88);self.act(184,88)
   self.check(self.quest(2)==3 and sum(c.flags&1 and c.form_id==13 for c in self.roster().instances)==1,'reeds and wind care recruit exactly one base Water companion')
-  self.assign(3,13);self.select_form(13);identity=self.selected().instance_id;self.snapshot('water-recruited')
+  self.assign(3,13);self.select_form(13);identity=self.selected().instance_id;self.live_observation('water-recruited')
   self.courtyard_entry();self.cast(13,64,86)
   self.check(self.e.bytes(self.sym['region_game_pool_levels'],2)==bytes((1,0)),'first real Water cast fills only the first paired pool before reset')
   self.act(48,132);self.check(self.e.bytes(self.sym['region_game_pool_levels'],2)==bytes(2),'ordinary A reset clears partially filled paired pools')
