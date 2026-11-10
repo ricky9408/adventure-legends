@@ -5,9 +5,11 @@
 #include "combat_rules.h"
 #include "enemy_tactics.h"
 #include "ui.h"
+#include "save5.h"
 
 #define COLD
 #define MAX_ENEMIES 6
+#define KEY_A 1
 #define PLAY 1
 #define DEAD 4
 #define SHOT_EFFECT_FIRE 1
@@ -16,6 +18,8 @@ typedef struct {int x,y,dx,dy,life,owner;} Shot;
 Enemy enemies[6];Shot shots[12];EquipmentStats gear_stats;WeaponAttack weapon_action;
 volatile int px,py;
 int hero_hp_q4,hp,game_state,invuln,guard_invuln,stone_guard,advanced_guard_charges;
+Save5State adventure_save;
+int pressed,checkpoint_spawn,ability_cd,heal_cd,entered_room,entered_spawn;
 int deaths,summoned,hitstop,room,frame,torches,boss_hp,boss_x,boss_y,boss_time,boss_armor,boss_flash;
 int enemy_clocks[6],enemy_windups[6],enemy_aimx[6],enemy_aimy[6],rooted_enemies[6];
 int covenants_power_time,horizons_power_time,return_power_time;
@@ -77,6 +81,8 @@ int southern_powers_intercept_shot(unsigned i,int x,int y,int nx,int ny,int host
 int northern_powers_shot_is_reflected(unsigned i){(void)i;return 0;}
 void save_game(void){}
 void dialogue(int a,int b,int state){(void)a;(void)b;(void)state;}
+void game_health_refresh(int fill){(void)fill;assert(!"unexpected health refresh");}
+void enter_room(int r,int spawn){entered_room=r;entered_spawn=spawn;}
 void game_health_hurt(unsigned base,unsigned phase);
 void game_enemy_stagger(unsigned i,unsigned bonus);
 void game_enemy_hurt(unsigned i,unsigned base,unsigned attack,unsigned phase);
@@ -114,22 +120,63 @@ int main(void){
     assert(hero_hp_q4==96&&invuln==0);
     assert(southern_guard_calls==2&&magma_guard_calls==2);
     weapon_action.phase=WEAPON_RECOVERY;update_enemies();
-    assert(hero_hp_q4==80&&invuln==80);
+    assert(hero_hp_q4==80&&invuln==40);
 
     reset();enemy(100,100);enemies[0].flash=2;update_enemies();
     assert(melee_events==0&&hero_hp_q4==96&&invuln==0);
 
     reset();enemy(100,85);update_enemies();
-    assert(melee_events==0&&hero_hp_q4==80&&invuln==80);
+    assert(melee_events==0&&hero_hp_q4==80&&invuln==40);
 
     reset();enemy(100,100);weapon_action.weapon_class=EQUIPMENT_LANCE;update_enemies();
-    assert(melee_events==1&&hero_hp_q4==80&&invuln==80);
+    assert(melee_events==1&&hero_hp_q4==80&&invuln==40);
 
     reset();shots[0]=(Shot){100,95,0,0,2,1};shot_phases[0]=COMBAT_NEUTRAL_PHASE;
-    update_shots();assert(hero_hp_q4==80&&invuln==80);
+    update_shots();assert(hero_hp_q4==80&&invuln==40);
 
     reset();boss_hp=3;boss_x=100;boss_y=100;update_boss();
-    assert(hero_hp_q4==80&&invuln==80);
+    assert(hero_hp_q4==80&&invuln==40);
+    reset();weapon_action.phase=WEAPON_RECOVERY;enemy(100,95);
+    update_enemies();assert(hero_hp_q4==80&&invuln==40);
+    for(int elapsed=1;elapsed<40;elapsed++){
+        mercy_tick();enemies[0].x=100;enemies[0].y=95;
+        update_enemies();
+        assert(hero_hp_q4==80&&invuln==40-elapsed);
+    }
+    mercy_tick();assert(invuln==0);
+    enemies[0].x=100;enemies[0].y=95;update_enemies();
+    assert(hero_hp_q4==64&&invuln==40);
+    update_enemies();assert(hero_hp_q4==64&&invuln==40);
+
+    reset();damage_amount(0,COMBAT_NEUTRAL_PHASE);
+    damage_amount(256,COMBAT_NEUTRAL_PHASE);
+    assert(hero_hp_q4==96&&invuln==0);
+    guard_invuln=1;damage_amount(16,COMBAT_NEUTRAL_PHASE);
+    assert(hero_hp_q4==96&&invuln==0);
+    guard_invuln=0;stone_guard=1;advanced_guard_charges=1;
+    damage_amount(16,COMBAT_NEUTRAL_PHASE);
+    assert(hero_hp_q4==96&&invuln==0&&guard_invuln==24);
+
+    for(unsigned location=0;location<2;location++){
+        Save5State before;
+        reset();memset(&adventure_save,0x5a,sizeof adventure_save);
+        memcpy(&before,&adventure_save,sizeof before);room=location?38:1;checkpoint_spawn=3;
+        hero_hp_q4=16;hp=1;deaths=0;summoned=1;
+        shots[0].life=9;ability_cd=9;heal_cd=10;
+        damage_amount(16,COMBAT_NEUTRAL_PHASE);
+        assert(hp==0&&hero_hp_q4==0&&game_state==DEAD&&deaths==1);
+        assert(invuln==40&&!summoned&&!shots[0].life);
+        assert(!memcmp(&before,&adventure_save,sizeof before));
+        damage_amount(16,COMBAT_NEUTRAL_PHASE);assert(deaths==1);
+        entered_room=entered_spawn=-1;pressed=0;retry_input();
+        assert(hp==0&&game_state==DEAD&&entered_room==-1);
+        pressed=KEY_A;retry_input();
+        assert(hero_hp_q4==96&&hp==6&&game_state==PLAY);
+        assert(!ability_cd&&!heal_cd&&entered_room==room);
+        assert(entered_spawn==(location?3:2));
+        assert(!memcmp(&before,&adventure_save,sizeof before));
+    }
+    puts("PASS 40-update mercy, unchanged guard and full-health death retry with persistent state retained");
     puts("PASS real melee and damage paths: hit/inside arc, outside arc, recovery, hostile shot, boss contact");
     return 0;
 }

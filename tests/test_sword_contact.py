@@ -27,12 +27,19 @@ def function(source, name):
 game = (ROOT / 'src/game.c').read_text(encoding='utf-8')
 gear = (ROOT / 'src/gear_runtime.c').read_text(encoding='utf-8')
 parts = [function(gear, name) for name in
-         ('game_health_hurt', 'game_enemy_stagger', 'game_enemy_hurt',
+         ('game_health_hurt', 'game_health_fill', 'game_enemy_stagger', 'game_enemy_hurt',
           'clear_path', 'game_melee_hit')]
 parts += [function(game, name) for name in
           ('damage_amount', 'damage_phase', 'damage', 'sword_blocks_contact',
            'update_charger_contact',
            'update_enemies', 'update_boss', 'shot_segment_clear', 'update_shots')]
+
+update = function(game, 'update')
+assert update.count('if(invuln)invuln--;') == 1
+assert update.index('if(invuln)invuln--;') < update.index('update_enemies()')
+parts.append('void mercy_tick(void){' + re.search(r'if\(invuln\)invuln--;', update).group() + '}')
+retry = re.search(r' if\(game_state==DEAD\)\{if\(pressed&KEY_A\)[^\n]+', update).group()
+parts.append('void retry_input(void){' + retry + '}')
 
 with tempfile.TemporaryDirectory(prefix='sword-contact-') as temporary:
     out = Path(temporary)

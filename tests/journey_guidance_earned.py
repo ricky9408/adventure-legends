@@ -60,6 +60,7 @@ class Evidence:
         self.failures = []
         self.inputs = []
         self.snapshots = {}
+        self.observations = {}
         self.transitions = []
         self.visits = []
         self.edges = []
@@ -165,6 +166,19 @@ class Evidence:
                 'owned_forms':[c.form_id for c in s.roster.instances if c.flags&1],
                 'individuals':[{'id':c.instance_id,'form':c.form_id,'level':c.level,'bond':c.bond} for c in s.roster.instances if c.flags&1],
                 'equipped_items':self.equipped_items()}
+    def boss_observation(self, name):
+        return self.live_observation(name)
+
+    def live_observation(self, name):
+        # Durable snapshots can wait for background saves; doing so here would
+        # idle through an attack and invalidate the event being observed.
+        path = self.out / (name + '.png')
+        self.e.screenshot(path)
+        self.observations[name] = {
+            'path': str(path), **self.proof_state(), 'frame': self.e.frame,
+            'provenance': 'live controller observation; no frames advanced; not a durable save checkpoint',
+        }
+
     def snapshot(self, name, settle=True):
         if settle: self.drain_background()
         self.raw_step(3)
@@ -240,6 +254,8 @@ class Evidence:
               'snapshots':self.snapshots,'visited_rooms':self.visits,'transitions':self.transitions,
               'coverage':self.coverage,'acquisitions':self.acquisitions,'cases':self.cases,'metrics':self.metrics,
               'field_controls':getattr(self,'field_control_events',[]),
+              'combat_observations':getattr(self,'observations',{}),
+              'live_observations':getattr(self,'observations',{}),
               'completed_chapters':self.history,'last_chapter_selected_forms':sorted(set(self.main_selections)),
               'final':self.proof_state(),'inputs_sha256':sha(self.out/'controller-inputs.jsonl.gz'),
               'native_frames_sha256':sha(self.out/'native-frames.jsonl.gz'),

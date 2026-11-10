@@ -767,6 +767,9 @@ class CampaignRun(CurrentFieldControls):
         target=min(candidates,key=lambda p:abs(p[0]-self.get('px'))+abs(p[1]-self.get('py')))
         self.navigate(*target,radius=2)
 
+    def boss_observation(self, name):
+        return self.snapshot(name)
+
     def boss_fight(self,room):
         # State IDs are the explicit engine contract, kept separate from art IDs.
         recover, exposed = 4,5
@@ -779,10 +782,10 @@ class CampaignRun(CurrentFieldControls):
             self.check(self.get('game_state')==PLAY,f'boss {room}: player remains alive') if self.get('game_state')!=PLAY else None
             state=self.get('boss_state');phase=self.get('boss_phase')
             if room==8 and self.get('boss_hp')<=10 and state==0 and not enraged_captured:
-                self.snapshot('kazane-enraged-aim');enraged_captured=True
+                self.boss_observation('kazane-enraged-aim');enraged_captured=True
             seen_states.add(state);seen_phases.add(phase)
             if (phase,state) not in captured:
-                self.snapshot(f'boss-{room}-phase-{phase}-state-{state}');captured.add((phase,state))
+                self.boss_observation(f'boss-{room}-phase-{phase}-state-{state}');captured.add((phase,state))
             if self.exhaustive and phase not in retreat_phases:
                 self.boss_retreat_cases(room,phase);retreat_phases.add(phase)
             if self.get('boss_hp') != last_hp:

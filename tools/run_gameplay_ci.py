@@ -153,6 +153,7 @@ def main():
         stage('native-bridge', ['sh', 'tools/build_mgba_bridge.sh'])
         stage('ci-runner-tests', [python, '-m', 'unittest', 'discover', '-s', 'tests',
                                   '-p', 'test_gameplay_ci.py'])
+        stage('boss-observation-tests', [python, 'tests/test_boss_observation.py'])
         stage('review-inventory-preflight', [python, '-c',
               "import sys; sys.path.insert(0,'tests'); "
               "from field_controls_boundary import verify; "
