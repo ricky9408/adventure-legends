@@ -402,6 +402,9 @@ return 1;
 return door(dest,spawn);
 }}
 if(room==30){
+if(close(224,144)){say(TX_ST_WELCOME_A,TX_ST_WELCOME_B);
+return 1;
+}
 if(face==1&&near(px,py,80,136,18))return door(32,0);
 if(close(240,264)){persist();
 enter_room(22,0);
