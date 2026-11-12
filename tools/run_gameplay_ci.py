@@ -154,6 +154,7 @@ def main():
         stage('ci-runner-tests', [python, '-m', 'unittest', 'discover', '-s', 'tests',
                                   '-p', 'test_gameplay_ci.py'])
         stage('sunlace-welcome-tests', [python, 'tests/test_sunlace_welcome.py'])
+        stage('north-chapter-closure-tests', [python, 'tests/test_north_chapter_closure.py'])
         stage('boss-observation-tests', [python, 'tests/test_boss_observation.py'])
         stage('review-inventory-preflight', [python, '-c',
               "import sys; sys.path.insert(0,'tests'); "

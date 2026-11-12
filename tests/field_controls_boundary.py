@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='5b35cd538a51f147fb4d9ebdb27bbec98a45b06053bac1095e927b02cd730ec8'
+CONTRACT_SHA='6fc86210735b64a5468d2d9147f851a41739ded9e2b08d706d4f99ae7d821f51'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -35,7 +35,7 @@ def allowed(path):
         'assets/campaign_dialogue.json','assets/companion_guide_commands.json',
         'assets/equipment/README.md','assets/equipment/generate_data.py',
         'assets/equipment/player_descriptions.json','src/equipment_data.c',
-        'assets/region/ui_additions.json','assets/regional_shop_labels.json',
+        'assets/region/ui_additions.json','assets/northern_region/ui_additions.json','assets/regional_shop_labels.json',
         'assets/regional_shop_text_metrics.json','src/regional_shop_text_data/part_001.inc',
         'assets/companion_guide_commands/commands_065_096.json',
         'assets/companion_guide_commands/commands_097_128.json',
