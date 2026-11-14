@@ -18,7 +18,8 @@ assert texts['ST_CLUE24A'] == region['ST_CLUE24A'] == 'ミナ：水のレンズ�
 assert texts['ST_CLUE24B'] == region['ST_CLUE24B'] == '仲間を選び、印の前でＢ'
 south = (ROOT / 'src/south_game.c').read_text()
 assert '{TX_ST_CLUE24A,TX_ST_CLUE24B}' in south
-assert 'if(npc_close(400,192)){talk(24);' in south
+assert 'if(npc_close(400,192)){if(done(24))mina_talk();else talk(24);' in south
+assert 'if(done(24)&&close(400,216))return mina_plant();' in south
 source = (ROOT / 'src/game_shop.c').read_text()
 code = r'''
 #include <assert.h>

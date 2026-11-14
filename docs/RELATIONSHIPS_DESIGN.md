@@ -26,9 +26,8 @@ Each person's goals remain meaningful outside their relationship to the player.
 
 1. **Completed foundation: isolated relationship core.** Four independent event ledgers,
    hidden derived affinity, explicit dating/marriage milestones, deterministic
-   validation and tests. Scene progression is still not connected to the ROM.
-   This is not a claim that the game currently has playable romantic scenes.
-2. **Current slice: persistence and admission.** Content13 adds the ledger;
+   validation and tests.
+2. **Completed foundation: persistence and admission.** Content13 adds the ledger;
    see [storage and verification](RELATIONSHIPS_SAVE13.md). Preserve revision1–12 policy and every historical
    fixture/hash. Append a typed four-byte ledger without repurposing reserved
    bytes in a released schema. Update blocking/incremental load, streamed
@@ -36,12 +35,14 @@ Each person's goals remain meaningful outside their relationship to the player.
    together. Existing adventures start all four routes unrecorded; loading may
    not invent relationship events or repeat earned chapter rewards. Existing
    completed quests may unlock a new meeting scene, not count as having seen it.
-3. **One complete playable route first (Mina).** Meet during the existing chapter,
+3. **Current slice: one complete playable route first (Mina).** Meet during the existing chapter,
    invitation after the report, return to plant together, personal scene, explicit
    dating choice, then a separately paced proposal/marriage scene. Keep chapter
    clues and receipts available and prevent interaction priority from swallowing
    quests, shops or doors. Do not ship all four routes as shallow repeated text.
-4. **Other routes, then multi-partner scene coverage.** Different activities,
+   The implemented route and its earned-play evidence are described in
+   [Mina's route](MINA_ROUTE.md).
+4. **Future: other routes, then multi-partner scene coverage.** Different activities,
    cadence, dialogue, visual identity and home/epilogue reactions. An additional
    relationship requires an explicit conversation about existing relationships,
    with agreement from the people involved. Multiple spouse bits are allowed;
@@ -79,7 +80,9 @@ silent change to legal event masks.
 - GBA build/header, ROM/RAM/stack budget checks and Japanese text width/glyph
   validation. No heap or unbounded relationship loops.
 - Native mGBA controller test for meeting → cancel → reopen → accept → save → cold
-  Continue, repeated reports and two marriages. Include screenshot review of
+  Continue and repeated reports. Include screenshot review of
   each meaningful state; synthetic host calls are not gameplay proof.
+- Two independently earned marriages remain a gate for the later multi-partner
+  slice, when a second playable route and consent conversation exist.
 - Independent review and exact-head CI. Do not merge the playable slice on the
   strength of the core tests alone. Physical hardware remains separately untested.

@@ -7,6 +7,7 @@ import ctypes as C,itertools,json,os,subprocess,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='south-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/southern_region/ui_additions.json').read_text())
+UI.update(json.loads((ROOT/'assets/relationships_ui.json').read_text()))
 UI.update({'MG_RESERVED': '', 'MG_RESERVEDB': ''})  # Host-only imported current capacity-refusal labels
 (OUT/'south_game_test_ui.h').write_text('enum{'+','.join('TX_'+k+'='+str(3000+i) for i,k in enumerate(UI))+'};\n')
 HARNESS=r'''
@@ -29,6 +30,8 @@ unsigned progression_command(void){CreatureInstance*c=progression_selected();ret
 void progression_refresh(void){progression_revision++;}
 void save_game(void){saved++;if(!save5_validate(&adventure_save))invalid++;}
 void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;game_state=2;}
+void addpage(int a,int b){(void)a;(void)b;}
+void dialogue_speaker(int speaker){(void)speaker;}
 void toast(int a){last_toast=(unsigned)a;}
 void text(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void centered(int a,int b,int c){(void)a;(void)b;(void)c;}
@@ -54,6 +57,9 @@ unsigned source(unsigned t){return southern_source_claimed(&adventure_save,t);}
 unsigned flags(unsigned b){return adventure_save.quests.region_flags[b];}
 unsigned roster_count(void){return creatures_roster_count(&adventure_save.roster);}
 unsigned invalid_saves(void){return invalid;}
+unsigned mina_events(void){return adventure_save.relationships.events[REL_MINA];}
+unsigned save_calls(void){return saved;}
+void other_partner(void){adventure_save.relationships.events[REL_EDDA]=15;}
 int valid(void){return save5_validate(&adventure_save);}
 void snapshot_state(void){snapshot=adventure_save;}
 int unchanged(void){return !memcmp(&snapshot,&adventure_save,sizeof snapshot);}
@@ -73,7 +79,7 @@ unsigned max_camera_actors(void){const SouthEnemySpawn*e;unsigned n=south_game_e
 int collision_equivalence(void){unsigned a,i;int x,y,old=room;for(a=30;a<=37;a++){const SouthArtRoom*r=&south_art_rooms[a-30];room=(int)a;for(y=-6;y<r->height+6;y++)for(x=-6;x<r->width+6;x++){int expected=x<5||y<5||x>r->width-6||y>r->height-6;for(i=0;i<r->solid_count;i++){const SouthArtRect*s=&r->solids[i];if(x+5>=s->x&&x-5<s->x+s->w&&y+5>=s->y&&y-5<s->y+s->h)expected=1;}if(south_game_solid(x,y)!=expected){room=old;return (int)a;}}if(!south_game_solid(INT_MIN,INT_MAX)||!south_game_solid(INT_MAX,INT_MIN)){room=old;return -1;}}room=old;return 0;}
 '''
 (OUT/'h.c').write_text(HARNESS)
-sources=['src/south_game.c','src/south_art.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c']
+sources=['src/south_game.c','src/south_art.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/relationships.c']
 subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DSOUTH_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),str(OUT/'h.c'),*sources,*(['-fsanitize=undefined','-fno-sanitize-recover=all'] if os.environ.get('SOUTH_SANITIZE') else []),'-o',str(OUT/'test.so')],cwd=ROOT,check=True)
 L=C.CDLL(str(OUT/'test.so'))
 class Puzzle(C.Structure):_fields_=[('mirror',C.c_ubyte*2),('shade',C.c_ubyte)]
@@ -89,10 +95,19 @@ def puzzle(t):return Puzzle((C.c_ubyte*2)(t[0],t[1]),t[2])
 class SouthRuntime(unittest.TestCase):
  def setUp(self):SRAM[:]=FIXTURE;self.assertEqual(L.fresh(),1)
  def entry(self,r,s=0):self.assertEqual(L.entry(r,s),1);self.assertLessEqual(L.max_camera_actors(),20,(r,s))
- def act(self,x,y):L.at(x,y);self.assertEqual(L.south_game_interact(),1,(val('room'),x,y))
+ def resolve_quest(self):
+  if not L.south_game_quest_pending():return
+  self.assertEqual(L.south_game_quest_seal(),1)
+  L.modal(10)
+  for _ in range(120):
+   status=L.south_game_quest_prepare()
+   if status!=1:break
+  self.assertEqual(status,2)
+  L.modal(1);self.assertEqual(L.south_game_quest_commit(),1)
+ def act(self,x,y):L.at(x,y);self.assertEqual(L.south_game_interact(),1,(val('room'),x,y));self.resolve_quest()
  def power(self,x,y,form=None,want=1):
   if form:self.assertLess(L.select_form(form),160)
-  L.at(x,y);self.assertEqual(L.south_game_power(0),want,(val('room'),x,y,form))
+  L.at(x,y);self.assertEqual(L.south_game_power(0),want,(val('room'),x,y,form));self.resolve_quest()
  def guarantees(self):
   self.entry(30);self.act(144,176);self.act(192,192);self.act(192,240);self.act(192,208);self.act(144,176);self.assertEqual(L.qs(22),3)
   self.entry(31);self.act(352,176);self.act(304,208);self.act(352,208);self.act(352,176);self.assertEqual(L.qs(23),3);self.assertEqual(L.valid(),1)
@@ -129,14 +144,40 @@ class SouthRuntime(unittest.TestCase):
   self.entry(30);self.assertEqual(L.entry(34,0),0);self.guarantees();self.entry(34);L.snapshot_state();self.act(112,72);self.assertEqual(L.qo(24),0);self.power(112,120,85,2);self.assertEqual(L.qo(24),0);self.power(112,120,79);self.assertEqual(L.qo(24),1)
   self.entry(35);self.act(112,72);self.act(96,104);self.act(176,96);self.assertEqual(L.qo(24),1);self.power(208,104,79,2);self.assertEqual(L.qo(24),1);self.power(208,104,85);self.assertEqual(L.qo(24),3);self.assertEqual(L.invalid_saves(),0)
  def test_power_capability_is_selected_active_and_command_independent(self):
-  self.guarantees();self.entry(34);self.act(112,72);L.select_form(79);L.summon(0);self.power(112,120,want=2);self.assertEqual(L.qo(24),0);L.summon(1);L.at(112,120);self.assertEqual(L.south_game_power(0xffffffff),1);self.assertEqual(L.qo(24),1)
+  self.guarantees();self.entry(34);self.act(112,72);L.select_form(79);L.summon(0);self.power(112,120,want=2);self.assertEqual(L.qo(24),0);L.summon(1);L.at(112,120);self.assertEqual(L.south_game_power(0xffffffff),1);self.resolve_quest();self.assertEqual(L.qo(24),1)
  def test_all_exits_resets_and_modal_freeze(self):
   self.main_to37();self.act(120,112);L.modal(3);t=byte('south_game_machine_ticks');L.tick(200);self.assertEqual(byte('south_game_machine_ticks'),t);self.assertEqual(L.south_game_power(27),0);self.assertEqual(L.south_game_interact(),0)
   for area in range(32,38):
    self.entry(area);L.snapshot_state();self.act(48,132);self.assertEqual(L.qo(24),7);self.assertEqual(L.unchanged(),1);self.act(120,148);self.assertEqual(val('room'),30 if area==32 else 31 if area in (33,34) else area-1)
  def test_boss_all_weapon_classes_damage_only_exposure_and_mobile_telegraph(self):
   for w in (1,2,3):
-   self.setUp();self.main_to37();self.act(120,112);L.at(24,112);L.weapon(w);self.assertEqual(L.south_game_weapon_hit(w,120,64,144),0);L.tick(60);self.assertEqual(byte('south_game_machine_stage'),2);L.tick(40);self.assertEqual(byte('south_game_machine_stage'),3);self.assertEqual(L.hurt(),0);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),0);self.act(192,112);L.at(152,84);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),1);self.assertEqual(L.qo(24),15);self.act(120,112);self.assertEqual(L.qs(24),3);self.assertEqual(L.roundtrip(),1);self.act(120,112);self.assertEqual(val('room'),30)
+   self.setUp();self.main_to37();self.act(120,112);L.at(24,112);L.weapon(w);self.assertEqual(L.south_game_weapon_hit(w,120,64,144),0);L.tick(60);self.assertEqual(byte('south_game_machine_stage'),2);L.tick(40);self.assertEqual(byte('south_game_machine_stage'),3);self.assertEqual(L.hurt(),0);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),0);self.act(192,112);L.at(152,84);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),1);self.resolve_quest();self.assertEqual(L.qo(24),15);self.act(120,112);self.assertEqual(L.qs(24),3);self.assertEqual(L.roundtrip(),1);self.act(120,112);self.assertEqual(val('room'),37)
+ def test_mina_plant_return_story_and_separate_choices(self):
+  self.main_to37();self.act(120,112);L.at(24,112);L.tick(100);self.act(192,112);L.at(152,84)
+  self.assertEqual(L.south_game_weapon_hit(1,152,64,144),1);self.resolve_quest()
+  self.act(120,112);self.assertEqual(L.qs(24),3)
+  self.entry(30);self.assertEqual(L.mina_events(),0)
+  self.act(400,208);self.assertEqual(L.south_game_mina_dialogue_pending(),0)
+  self.act(400,232);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
+  L.south_game_mina_cancel_dialogue();self.assertEqual(L.mina_events(),0)
+  self.act(400,232);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
+  self.entry(31);self.entry(30)
+  self.assertEqual(L.south_game_mina_dialogue_pending(),0)
+  self.assertEqual(L.mina_events(),0)
+  for previous,next_event in ((0,1),(1,3),(3,7),(7,15),(15,31)):
+   if previous:
+    self.entry(31);self.entry(30)
+   self.assertEqual(L.mina_events(),previous)
+   self.act(400,232 if not previous else 208)
+   self.assertEqual(L.south_game_mina_dialogue_pending(),1)
+   if previous in (7,15):
+    L.south_game_mina_cancel_dialogue();self.assertEqual(L.mina_events(),previous)
+    self.act(400,208);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
+   before=L.save_calls();L.south_game_mina_finish_dialogue()
+   self.assertEqual(L.mina_events(),next_event)
+   self.assertEqual(L.save_calls(),before+1)
+   self.act(400,208);self.assertEqual(L.south_game_mina_dialogue_pending(),0)
+  self.assertEqual(L.roundtrip(),1)
  def optional(self):
   self.guarantees();self.entry(31)
   for xy in ((128,224),(160,224),(144,208),(128,80),(160,80),(384,240),(416,240),(400,208),(256,144),(224,144),(256,112)):self.act(*xy)
@@ -202,7 +243,7 @@ class SouthRuntime(unittest.TestCase):
   self.act(344,224);self.assertEqual(L.qo(25),4);self.assertEqual(L.qs(27),0)
   # The same standing point, turned right, deliberately addresses the porter.
   L.at(344,224);C.c_int.in_dll(L,'face').value=3
-  self.assertEqual(L.south_game_interact(),1);self.assertEqual(L.qs(27),1);self.assertEqual(L.qo(25),4)
+  self.assertEqual(L.south_game_interact(),1);self.resolve_quest();self.assertEqual(L.qs(27),1);self.assertEqual(L.qo(25),4)
   # His original below/left/right approaches remain usable without touching
   # the stall. Repeat-talk does not fabricate a delivery objective.
   for x,y,facing in ((352,240,1),(336,224,3),(368,224,2),(352,208,0)):

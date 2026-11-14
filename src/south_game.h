@@ -34,6 +34,9 @@ int south_game_commit_enter(void);
 void south_game_cancel_enter(void);
 int south_game_solid(int x,int y);
 int south_game_interact(void);
+int south_game_mina_dialogue_pending(void);
+void south_game_mina_cancel_dialogue(void);
+void south_game_mina_finish_dialogue(void);
 /* 0: no field target; 1: success; 2: rejected target, no cooldown/resource. */
 int south_game_power(unsigned command);
 void south_game_tick(void);

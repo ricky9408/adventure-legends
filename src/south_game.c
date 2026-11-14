@@ -6,6 +6,7 @@
 #include "progression.h"
 #include "connected_roads.h"
 #include "assets.h"
+#include "relationships.h"
 #ifdef SOUTH_GAME_HOST_TEST
 #include "south_game_test_ui.h"
 #else
@@ -23,7 +24,7 @@
 extern volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
 extern volatile unsigned chapter_flags;
 extern int face,keys,journal_tab;
-extern void enter_room(int,int),save_game(void),dialogue(int,int,int),toast(int),text(int,int,int,int),centered(int,int,int),box(int,int,int,int);
+extern void enter_room(int,int),save_game(void),dialogue(int,int,int),addpage(int,int),dialogue_speaker(int),toast(int),text(int,int,int,int),centered(int,int,int),box(int,int,int,int);
 extern void rect(int,int,int,int,unsigned char),line(int,int,int,int,int),game_region_warp(int,int);
 unsigned south_game_revision,south_game_journal_selection;
 SouthPuzzle south_game_puzzle;
@@ -31,6 +32,7 @@ unsigned char south_game_machine_stage,south_game_machine_ticks,south_game_machi
 static unsigned char demo,hood,quiet,roots,drain,panels,ripple,runnel,pins,sun,loft,moisture,alignment,overflow,door_notice,machine_hit;
 static short machine_x=88;
 static unsigned dirty;
+static unsigned char mina_entry_events,mina_pending;
 typedef struct { unsigned char family,capability;
 unsigned char area[3];
 short xy[3][2];
@@ -199,6 +201,7 @@ trial_bits=trial_revealed=0;
 trial_id=0;
 }
 static COLD void reset_scene(void){rq_cancel();south_game_puzzle.mirror[0]=south_game_puzzle.mirror[1]=(unsigned char)(room==36);
+mina_pending=0;mina_entry_events=adventure_save.relationships.events[REL_MINA];
 south_game_puzzle.shade=1;
 if(room>=34&&room<=36&&(rq_objectives(24)&(1u<<(room-34)))){south_game_puzzle.mirror[0]=south_game_puzzle.mirror[1]=(unsigned char)(room!=36);
 south_game_puzzle.shade=0;
@@ -378,6 +381,49 @@ return 1;
 }return trial_mark(i);
 }return 0;
 }
+/* The receipt stays with quest24. Its garden invitation starts only after that
+ * reward is claimed; each later scene needs a new entry into the harbor. */
+static COLD void mina_scene(unsigned event,int a,int b,int c,int d){
+ if(mina_pending||room!=30||!done(24)||
+    adventure_save.relationships.events[REL_MINA]!=mina_entry_events)return;
+ mina_pending=(unsigned char)(event+1);
+ dialogue(a,b,PLAY);addpage(c,d);dialogue_speaker(TX_MN_NAME);
+}
+static COLD void mina_chatter(int a,int b){dialogue(a,b,PLAY);dialogue_speaker(TX_MN_NAME);}
+static COLD void mina_talk(void){unsigned stage=adventure_save.relationships.events[REL_MINA],i;
+ if(stage!=mina_entry_events){mina_chatter(TX_MN_LATER_A,TX_MN_LATER_B);return;}
+ if(stage==0){mina_chatter(TX_MN_INVITE_A,TX_MN_INVITE_B);return;}
+ if(stage==1){mina_scene(REL_RETURN_VISIT,TX_MN_GROW_A,TX_MN_GROW_B,TX_MN_GROW_C,TX_MN_GROW_D);return;}
+ if(stage==3){mina_scene(REL_PERSONAL_STORY,TX_MN_STORY_A,TX_MN_STORY_B,TX_MN_STORY_C,TX_MN_STORY_D);return;}
+ if(stage==7||stage==15){
+  for(i=0;i<REL_PERSON_COUNT;i++)if(i!=REL_MINA&&
+      relationships_stage(&adventure_save.relationships,i)>=REL_PARTNER){
+   mina_chatter(TX_MN_OTHERS_A,TX_MN_OTHERS_B);return;
+  }
+  if(stage==7)mina_scene(REL_ACCEPT_DATING,TX_MN_DATE_A,TX_MN_DATE_B,TX_MN_DATE_C,TX_MN_DATE_CHOICE);
+  else mina_scene(REL_ACCEPT_MARRIAGE,TX_MN_WED_A,TX_MN_WED_B,TX_MN_WED_C,TX_MN_WED_CHOICE);
+  return;
+ }
+ mina_chatter(stage==31?TX_MN_SPOUSE_A:TX_MN_LATER_A,stage==31?TX_MN_SPOUSE_B:TX_MN_LATER_B);
+}
+static COLD int mina_plant(void){
+ if(adventure_save.relationships.events[REL_MINA]==0&&mina_entry_events==0){
+  mina_scene(REL_SHARED_TASK,TX_MN_PLANT_A,TX_MN_PLANT_B,TX_MN_PLANT_C,TX_MN_PLANT_D);
+ }else mina_chatter(TX_MN_PLOT_A,TX_MN_PLOT_B);
+ return 1;
+}
+int south_game_mina_dialogue_pending(void){return mina_pending!=0;}
+void south_game_mina_cancel_dialogue(void){mina_pending=0;}
+void south_game_mina_finish_dialogue(void){unsigned event;
+ if(!mina_pending)return;
+ event=mina_pending-1u;mina_pending=0;
+ if(room!=30||!done(24)||
+    adventure_save.relationships.events[REL_MINA]!=mina_entry_events||
+    !relationships_record(&adventure_save.relationships,REL_MINA,event))return;
+ changed();save_game();
+ if(event==REL_ACCEPT_DATING)toast(TX_MN_DATE_YES);
+ if(event==REL_ACCEPT_MARRIAGE)toast(TX_MN_WED_YES);
+}
 COLD int south_game_interact(void){unsigned i;
 if(game_state!=PLAY||!south_game_is_room((unsigned)room))return 0;
 /* Rest must enqueue before the ordinary interaction path synchronizes or
@@ -423,9 +469,10 @@ return 1;
 return 1;
 }if(npc_close(48,160)){talk(29);
 return 1;
-}if(npc_close(400,192)){talk(24);
+}if(npc_close(400,192)){if(done(24))mina_talk();else talk(24);
 return 1;
 }
+if(done(24)&&close(400,216))return mina_plant();
 if(close(192,176)){demo^=1;
 changed();
 if(demo&&offer(22))objective(22,1);

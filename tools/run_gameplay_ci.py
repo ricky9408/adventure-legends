@@ -296,6 +296,17 @@ def main():
             campaign = json.loads((out/'full-main/summary.json').read_text())
             if not campaign['accepted'] or not campaign['complete_fresh_main_journey'] or not campaign['presented_journey_pacing_passed'] or campaign['candidate']['rom_sha256'] != rom_sha:
                 raise RuntimeError('Fresh main campaign or its unwaived presentation cadence did not pass')
+            stage('mina-earned-route', [python, 'tests/mina_route_native.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--source-root', str(ROOT),
+                  '--source-manifest', str(ROOT/'build/source-hashes.json'),
+                  '--output', str(out/'mina-route'), '--expected-rom-sha', rom_sha,
+                  '--expected-symbols-sha', snapshots[-1]['emberbond.sym'],
+                  '--expected-elf-sha', snapshots[-1]['emberbond.elf'],
+                  '--expected-manifest-sha', snapshots[-1]['source-hashes.json']], timeout=900)
+            mina = json.loads((out/'mina-route/mina-summary.json').read_text())
+            if not mina['accepted'] or not mina['controller_only'] or mina['game_ram_writes'] or mina['machine_state_imports'] or mina['historical_progress_imports'] or mina['candidate']['rom_sha256'] != rom_sha:
+                raise RuntimeError('Mina route did not earn and retain its events through controller input')
             stage('synthetic-audio-diagnostics', common + ['--cases', 'synthetic',
                   '--output', str(out / 'synthetic-audio')], timeout=600)
             if args.extended_audio:
@@ -321,6 +332,7 @@ def main():
                                 'fresh_reserve_checks': reserve['checks'],
                                 'fresh_reserve_metrics': reserve['metrics'],
                                 'fresh_main_checks': campaign['passed_checks'],
+                                'mina_route_checks': mina['passed_checks'],
                                 'fresh_main_rooms': campaign['visited_rooms'],
                                 'fresh_main_presented_cadence_passed': campaign['presented_journey_pacing_passed']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.

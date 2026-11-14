@@ -28,6 +28,7 @@ assert font.native_font().size==12
 
 global_texts={}
 for path in (ROOT/'assets').glob('ui_texts*.json'):global_texts.update(json.loads(path.read_text()))
+global_texts.update(json.loads((ROOT/'assets/relationships_ui.json').read_text()))
 families=[('ui',global_texts,'txt_'),
  ('companion_guide_text',json.loads((ROOT/'assets/companion_guide_text_metrics.json').read_text()),'cg_'),
  ('growth_journal_text',json.loads((ROOT/'assets/growth_journal_metrics.json').read_text()),'gj_'),

@@ -17,10 +17,11 @@ with tempfile.TemporaryDirectory(prefix='sunlace-welcome-') as tmp:
         'int lines[2]; void dialogue(int a,int b,int c){lines[0]=a;lines[1]=b;(void)c;game_state=2;}')
     harness += '\nint game_road_collision(unsigned r,int x,int y){(void)r;(void)x;(void)y;return -1;}\nint game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}\n'
     ui = json.loads((ROOT / 'assets/southern_region/ui_additions.json').read_text())
+    ui.update(json.loads((ROOT / 'assets/relationships_ui.json').read_text()))
     ui.update({'MG_RESERVED': '', 'MG_RESERVEDB': ''})
     (out / 'south_game_test_ui.h').write_text('enum{'+','.join('TX_'+k+'='+str(3000+i) for i,k in enumerate(ui))+'};\n')
     (out / 'h.c').write_text(harness)
-    sources = ['south_game','south_art','southern_quests','northern_quests','save5','save4','equipment','equipment_data','creatures','creature_data']
+    sources = ['south_game','south_art','southern_quests','northern_quests','save5','save4','equipment','equipment_data','creatures','creature_data','relationships']
     for sanitize in (False, True):
         libpath = out / ('san.so' if sanitize else 'test.so')
         subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC',

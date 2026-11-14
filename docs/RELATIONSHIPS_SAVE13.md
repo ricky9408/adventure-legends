@@ -1,8 +1,9 @@
 # Relationship persistence, content13
 
-This slice adds storage, not playable romance scenes. The event core remains
-unconnected to people/dialogue. Current normal adventures therefore retain empty
-personal ledgers until the scene slice is implemented.
+This document records the content13 storage slice as delivered in PR #59. That
+slice added storage before any playable romance scenes. The later Mina scene
+adapter is documented in [Mina's route](MINA_ROUTE.md); the wire format and
+historical evidence below remain the content13 contract.
 
 ## Wire and memory contract
 
@@ -55,5 +56,6 @@ Candidate ROM SHA-256:
 Native report/input traces/screenshots are generated under the chosen test output
 folder; CI runs the same dedicated travel test and retains its artifacts.
 
-Independent final review, exact-head hosted CI and postmerge verification remain
-release gates. Physical GBA hardware and playable personal scenes are untested.
+The figures above certify the original storage candidate, including its synthetic
+relationship input. They are not evidence that events were earned through play.
+Physical GBA hardware was not tested in that slice.

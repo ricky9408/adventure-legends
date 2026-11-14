@@ -14,7 +14,9 @@ def build(region,synthetic=False):
  if region=='south':
   tree=ast.parse((ROOT/'tests/test_south_game.py').read_text())
   harness=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='HARNESS' for t in n.targets))
-  ui=json.loads((ROOT/'assets/southern_region/ui_additions.json').read_text());ui.update(MG_RESERVED='',MG_RESERVEDB='')
+  ui=json.loads((ROOT/'assets/southern_region/ui_additions.json').read_text())
+  ui.update(json.loads((ROOT/'assets/relationships_ui.json').read_text()))
+  ui.update(MG_RESERVED='',MG_RESERVEDB='')
  else:
   harness=(ROOT/'tests/magma_game_host.c').read_text();ui=json.loads((ROOT/'assets/magma_region/dialogue.json').read_text())
  (out/f'{region}_game_test_ui.h').write_text('enum{'+','.join('TX_'+k+'='+str(3000+i) for i,k in enumerate(ui))+'};\n')
@@ -31,6 +33,7 @@ int probe_fullgear(void){unsigned i;for(i=1;i<48;i++){memset(&adventure_save.equ
 '''
  (out/'host.c').write_text(harness)
  sources=[ROOT/'src'/f'{s}.c' for s in [region+'_art','magma_quests','southern_quests','northern_quests','save5','save4','equipment','equipment_data','creatures','creature_data']]
+ if region=='south':sources.append(ROOT/'src/relationships.c')
  if synthetic:
   data=(ROOT/'src/equipment_data.c').read_text();marker='const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {\n'
   rows=''.join(f'    [{i}] = {{{i}, 1, 0, 0, 255, {{0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}}}},\n' for i in range(100,147))
