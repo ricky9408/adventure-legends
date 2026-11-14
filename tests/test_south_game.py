@@ -160,6 +160,10 @@ class SouthRuntime(unittest.TestCase):
   self.act(400,208);self.assertEqual(L.south_game_mina_dialogue_pending(),0)
   self.act(400,232);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
   L.south_game_mina_cancel_dialogue();self.assertEqual(L.mina_events(),0)
+  self.act(400,232);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
+  self.entry(31);self.entry(30)
+  self.assertEqual(L.south_game_mina_dialogue_pending(),0)
+  self.assertEqual(L.mina_events(),0)
   for previous,next_event in ((0,1),(1,3),(3,7),(7,15),(15,31)):
    if previous:
     self.entry(31);self.entry(30)
