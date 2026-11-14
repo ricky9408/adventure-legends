@@ -806,7 +806,7 @@
     "tests/test_region_game.py": "f822586d06e395c17fef111af7a8b23cb5dcb5471ebb22a9acc7f75424a80b23",
     "tests/test_regional_adapters.py": "37fd26584ef31987c2da94e430db6f1caeb3045221d7bdeb897e6d1b9f4af8b6",
     "tests/test_regional_creature_art.py": "60788e523a307ecab74f251d0e6c7343d0aee21aa3d30821b673b3cf14db299c",
-    "tests/test_regional_quest_events.py": "150f05ee1953a5eddc24c3a492e50718dc48e1c4d73a84cda7f6a3fc9c5bf3d0",
+    "tests/test_regional_quest_events.py": "64278b51a3d672a320356d34301d1d2b5c4208ca44f73bdb985c3d24b4fff005",
     "tests/test_regional_quest_runtime.py": "e59c55c3782335385ef8124d71683bf587c1232dedfe5a4854faafb42eccb35a",
     "tests/test_regional_quests.py": "3a02f571e7ce60ecbd0a58b6afeae50ab54d0ef6a140706f29fb20f618c46314",
     "tests/test_regional_shop_positions.py": "1065ae5cd4e1516ec52fd29408c626d33cdc09057e80203c36dd95279da13138",
@@ -7400,6 +7400,7 @@
     "tests/test_play_notice_cache.py": "109116c83d1b06a5b5013b3489c9368e60ab13bc564fdbcf632c5d02caa41aea",
     "tests/test_player_feedback_engine.py": "6484e376d304632bc924d5ebeb59b9911782b65f1cc1d98969b10e8e309dd350",
     "tests/test_player_feedback_menu.py": "13c6181fdad861906aa38a245080c44c9c23e1e124d4caf5c3c4c6a5a88ac6f4",
+    "tests/test_regional_quest_events.py": "150f05ee1953a5eddc24c3a492e50718dc48e1c4d73a84cda7f6a3fc9c5bf3d0",
     "tests/test_return_history_differential.py": "f1c5ba52c89e3e4afba53747af9c4c334fd2ee7960fa51d2523aacf1a9ade855",
     "tests/test_return_world.py": "104a4749ddc8b8d8213e25d24fedd4fc5b5eeba896268541a8fb281a3bd08d57",
     "tests/test_save5.py": "fdc799c6517be0ce6f62ce40c58477eb377cab32fdf47523363cf0ea6f501e44",
@@ -7426,7 +7427,7 @@
     "tools/run_return_native.py": "c592fcec74b0751eb65b552d2945013097e368085b3881c45b72d893b55e967b",
     "tools/run_underwater_native.py": "84649ad11ed944e9009e7e231d7fdee64ef597cb82f48710d714df7a0b86bdcc"
   },
-  "inverse_sha256": "486b947af029f134a05545ff2313de0fc3ee71efa6dd404b2046939d492a8a9b",
+  "inverse_sha256": "f9e7d919f48386dea454e8fc32a96c685192f89494f90ee9c832675122421013",
   "name": "field-controls-audio-successor",
   "parent_commit": "4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8",
   "parent_files": {
