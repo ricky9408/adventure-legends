@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='8dd10a4b5023ccfff3dbfa74441a0b195371203ab222709edddb7e340dccfd38'
+CONTRACT_SHA='790986ee75a5c68e97a218748c65f29957573f76526b30fe540e693b741b233c'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -25,6 +25,7 @@ def allowed(path):
         'src/campaign_rules.c','src/weapon_actions.c',
         'src/enemy_tactics.c','src/enemy_tactics.h','src/enemy_tactics_art.inc',
         'assets/generate_enemy_tactics.py','assets/enemy_tactics_preview.png',
+        'src/relationships.c','src/relationships.h',
         'src/field_controls.h','src/quickparty.c','src/quickparty.h','src/journal_nav.c',
         'src/power_failure.h','src/northern_powers.c','src/northern_powers.h',
         'src/southern_powers.c','src/southern_powers.h',

@@ -153,6 +153,7 @@ def main():
         stage('native-bridge', ['sh', 'tools/build_mgba_bridge.sh'])
         stage('ci-runner-tests', [python, '-m', 'unittest', 'discover', '-s', 'tests',
                                   '-p', 'test_gameplay_ci.py'])
+        stage('relationship-core-tests', [python, 'tests/test_relationships.py'])
         stage('sunlace-welcome-tests', [python, 'tests/test_sunlace_welcome.py'])
         stage('north-chapter-closure-tests', [python, 'tests/test_north_chapter_closure.py'])
         stage('southern-chapter-closure-tests', [python, 'tests/test_southern_chapter_closure.py'])
