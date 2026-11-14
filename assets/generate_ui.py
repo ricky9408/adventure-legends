@@ -140,7 +140,7 @@ for i,part in enumerate(parts):(folder/f'part_{i:03}.inc').write_text(part)
 (ROOT/'src/ui.c').write_text('#include "ui.h"\n/* Generated text masks; edit assets/generate_ui.py. */\n'+''.join(f'#include "ui_data/part_{i:03}.inc"\n' for i in range(len(parts))))
 # Preserve the released metadata dictionary under its75KB artifact limit.
 # Runtime enum/raster order above remains a single append-only namespace.
-legacy={k:v for k,v in texts.items() if not k.startswith(('RT_','E_RT_','RP_','HZ_','E_HZ_','HP_','CV_','E_CV_','CP_','PF_','FB_','EC_','JG_'))}
+legacy={k:v for k,v in texts.items() if not k.startswith(('RT_','E_RT_','RP_','HZ_','E_HZ_','HP_','CV_','E_CV_','CP_','PF_','FB_','EC_','JG_','MN_'))}
 horizons={k:v for k,v in texts.items() if k.startswith(('HZ_','E_HZ_','HP_'))}
 returns={k:v for k,v in texts.items() if k.startswith(('RT_','E_RT_','RP_'))}
 (ROOT/'assets/ui_texts.json').write_text(json.dumps(legacy,ensure_ascii=False,indent=2)+'\n')
