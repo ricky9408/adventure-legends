@@ -1,8 +1,9 @@
 # Relationship persistence, content13
 
 This document records the content13 storage slice as delivered in PR #59. That
-slice added storage before any playable romance scenes. The later Mina scene
-adapter is documented in [Mina's route](MINA_ROUTE.md); the wire format and
+slice added storage before any playable romance scenes. The later Mina and Edda
+scene adapters are documented in [Mina's route](MINA_ROUTE.md) and
+[Edda's route](EDDA_ROUTE.md); the wire format and
 historical evidence below remain the content13 contract.
 
 ## Wire and memory contract

@@ -6,6 +6,7 @@
 #include "progression.h"
 #include "connected_roads.h"
 #include "assets.h"
+#include "relationships.h"
 #ifdef NORTH_GAME_HOST_TEST
 #include "north_game_test_ui.h"
 #else
@@ -23,12 +24,13 @@
 extern volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
 extern volatile unsigned chapter_flags;
 extern int face,keys,journal_tab;
-extern void enter_room(int,int),save_game(void),dialogue(int,int,int),toast(int),text(int,int,int,int),centered(int,int,int),box(int,int,int,int);
+extern void enter_room(int,int),save_game(void),dialogue(int,int,int),addpage(int,int),dialogue_speaker(int),toast(int),text(int,int,int,int),centered(int,int,int),box(int,int,int,int);
 extern void rect(int,int,int,int,unsigned char),line(int,int,int,int,int);
 unsigned north_game_revision,north_game_journal_selection;
 NorthPuzzle north_game_puzzle;
 unsigned char north_game_machine_stage,north_game_machine_ticks,north_game_machine_hp;
 static unsigned char forecast,tender_steps,heat_held,fragile_step,compass_step,machine_couplings,machine_hit,door_notice;
+static unsigned char edda_entry_events,edda_pending;
 static unsigned dirty;
 static const short spawns[8][5][2]={{{240,284},{240,36},{104,208},{88,144},{384,144}},{{240,284},{400,72},{80,264},{0,0},{0,0}},{{120,132}},{{120,132}},{{120,132}},{{120,132}},{{120,132}},{{120,132}}};
 static const unsigned char counts[8]={5,3,1,1,1,1,1,1};
@@ -78,6 +80,7 @@ COLD void north_game_reset(void){unsigned bit=room>=26&&room<=28?1u<<(room-26):0
 }
 COLD int north_game_enter(unsigned area,unsigned spawn){int r;sync();if(!north_game_is_room(area)||spawn>=counts[area-22]||!northern_can_enter(&adventure_save,area))return 0;
  room=(int)area;checkpoint_spawn=(int)spawn;px=spawns[area-22][spawn][0];py=spawns[area-22][spawn][1];north_game_reset();door_notice=0;
+ edda_pending=0;edda_entry_events=adventure_save.relationships.events[REL_EDDA];
  r=northern_visit(&adventure_save,area);if(r==NORTH_CHANGED)dirty=1;
  if(area>=26)offer(21);
  adventure_save.campaign.room=(Save4U8)area;adventure_save.campaign.spawn=(Save4U8)spawn;persist();return 1;
@@ -98,6 +101,41 @@ static COLD void puzzle_action(unsigned act){int r=north_puzzle_step(&north_game
  if(r<0){toast(TX_NT_BLOCKED);return;}changed();toast(act==NORTH_ACTION_TURN?railtext[north_game_puzzle.rail]:act==NORTH_ACTION_WEIGHT?TX_NT_WEIGHT:TX_NT_REELED);
  if(north_puzzle_solved(&north_game_puzzle,(unsigned)room)){objective(21,1u<<(room-26));persist();toast(TX_NT_SOLVED);}
 }
+static COLD void edda_scene(unsigned event,int a,int b,int c,int d){
+ if(edda_pending||room!=22||!done(21)||
+    adventure_save.relationships.events[REL_EDDA]!=edda_entry_events)return;
+ edda_pending=(unsigned char)(event+1);
+ dialogue(a,b,PLAY);addpage(c,d);dialogue_speaker(TX_ED_NAME);
+}
+static COLD void edda_chatter(int a,int b){dialogue(a,b,PLAY);dialogue_speaker(TX_ED_NAME);}
+static COLD void edda_letter(void){unsigned stage=adventure_save.relationships.events[REL_EDDA],i;
+ if(stage!=edda_entry_events){edda_chatter(TX_ED_LATER_A,TX_ED_LATER_B);return;}
+ if(stage==0){edda_scene(REL_SHARED_TASK,TX_ED_LABEL_A,TX_ED_LABEL_B,TX_ED_LABEL_C,TX_ED_LABEL_D);return;}
+ if(stage==1){edda_scene(REL_RETURN_VISIT,TX_ED_RETURN_A,TX_ED_RETURN_B,TX_ED_RETURN_C,TX_ED_RETURN_D);return;}
+ if(stage==3){edda_scene(REL_PERSONAL_STORY,TX_ED_STORY_A,TX_ED_STORY_B,TX_ED_STORY_C,TX_ED_STORY_D);return;}
+ if(stage==7||stage==15){
+  for(i=0;i<REL_PERSON_COUNT;i++)if(i!=REL_EDDA&&
+      relationships_stage(&adventure_save.relationships,i)>=REL_PARTNER){
+   edda_chatter(TX_ED_OTHERS_A,TX_ED_OTHERS_B);return;
+  }
+  if(stage==7)edda_scene(REL_ACCEPT_DATING,TX_ED_DATE_A,TX_ED_DATE_B,TX_ED_DATE_C,TX_ED_DATE_CHOICE);
+  else edda_scene(REL_ACCEPT_MARRIAGE,TX_ED_WED_A,TX_ED_WED_B,TX_ED_WED_C,TX_ED_WED_CHOICE);
+  return;
+ }
+ edda_chatter(stage==31?TX_ED_SPOUSE_A:TX_ED_LATER_A,stage==31?TX_ED_SPOUSE_B:TX_ED_LATER_B);
+}
+COLD int north_game_edda_dialogue_pending(void){return edda_pending!=0;}
+COLD void north_game_edda_cancel_dialogue(void){edda_pending=0;}
+COLD void north_game_edda_finish_dialogue(void){unsigned event;
+ if(!edda_pending)return;
+ event=edda_pending-1u;edda_pending=0;
+ if(room!=22||!done(21)||
+    adventure_save.relationships.events[REL_EDDA]!=edda_entry_events||
+    !relationships_record(&adventure_save.relationships,REL_EDDA,event))return;
+ changed();save_game();
+ if(event==REL_ACCEPT_DATING)toast(TX_ED_DATE_YES);
+ if(event==REL_ACCEPT_MARRIAGE)toast(TX_ED_WED_YES);
+}
 COLD int north_game_interact(void){unsigned i;dirty=0;sync();if(game_state!=PLAY)return 0;
  if(room==16){if(game_road_managed&&game_road_managed(16,22))return 0;if(!close(400,280)||!game_region_entry_safe())return 0;if(!northern_can_enter(&adventure_save,22)){say(TX_NT_ENTRY_A,TX_NT_ENTRY_B);return 1;}enter_room(22,0);return 1;}
  if(!north_game_is_room((unsigned)room))return 0;
@@ -113,6 +151,7 @@ COLD int north_game_interact(void){unsigned i;dirty=0;sync();if(game_state!=PLAY
   if(close(416,208)){talk(done(15)?19:15);return 1;}
   if(close(160,224)||close(304,224)){if(!state(11)){toast(TX_NT_FIRST);return 1;}objective(11,close(160,224)?1:2);persist();toast(TX_NT_LINE);return 1;}
   if(close(240,192)){say(TX_NT_WELCOME_A,TX_NT_WELCOME_B);return 1;}
+  if(done(21)&&close(192,176)){edda_letter();return 1;}
  }else if(room==23){
   if(face==1&&near(px,py,400,65,18))return door(26,0);
   if(close(80,248)){northern_anchor(&adventure_save,23);game_health_fill();checkpoint_spawn=2;dirty=1;say(TX_NT_REST_A,TX_NT_REST_B);return 1;}
@@ -202,7 +241,7 @@ COLD void north_game_draw_journal(void){static const int s[4]={TX_NT_UNSEEN,TX_N
 COLD int north_game_menu_input(int k){if(journal_tab!=JOURNAL_TAB)return 0;if(k&UP){north_game_journal_selection=(north_game_journal_selection+10)%11;changed();return 1;}if(k&DOWN){north_game_journal_selection=(north_game_journal_selection+1)%11;changed();return 1;}return 0;}
 COLD void north_game_draw_actors(void){unsigned i;if(room==16){return;}
  if(!north_game_is_room((unsigned)room))return;
- if(room==22){north_actor(NORTH_SPR_EDDA,168,192);north_actor(NORTH_SPR_NERI,312,192);north_actor(NORTH_SPR_PELL,64,192);north_actor(NORTH_SPR_TOVE,384,160);north_actor(NORTH_SPR_IVEN,416,208);north_actor(adventure_save.quests.anchors[1]&1?NORTH_SPR_REST_LIT:NORTH_SPR_REST,104,192);north_actor(NORTH_SPR_FORECAST,240,192);
+ if(room==22){north_actor(NORTH_SPR_EDDA,168,192);north_actor(NORTH_SPR_NERI,312,192);north_actor(NORTH_SPR_PELL,64,192);north_actor(NORTH_SPR_TOVE,384,160);north_actor(NORTH_SPR_IVEN,416,208);north_actor(adventure_save.quests.anchors[1]&1?NORTH_SPR_REST_LIT:NORTH_SPR_REST,104,192);north_actor(NORTH_SPR_FORECAST,240,192);if(done(21))north_actor(NORTH_SPR_CHART_DRY,192,176);
   north_actor(adventure_save.quests.objectives[11]&1?NORTH_SPR_HANDLE_DONE:NORTH_SPR_HANDLE,160,224);north_actor(adventure_save.quests.objectives[11]&2?NORTH_SPR_HANDLE_DONE:NORTH_SPR_HANDLE,304,224);if(done(21))north_actor(NORTH_SPR_BEACON_LIT,240,216);
  }else if(room==23){north_actor(north_game_puzzle.rail&1?NORTH_SPR_JUNCTION_EW:NORTH_SPR_JUNCTION_NS,240,192);north_actor(NORTH_SPR_BEARING,320,192);north_actor(NORTH_SPR_NERI,352,160);north_actor(NORTH_SPR_FERRY_SIGN,112,96);north_actor(NORTH_SPR_TENDER,144+(int)tender_steps*8,112);north_actor(NORTH_SPR_FORECAST,176,144);north_actor(adventure_save.quests.anchors[1]&2?NORTH_SPR_REST_LIT:NORTH_SPR_REST,80,248);
   {static const short xy[3][2]={{176,224},{288,112},{368,240}};for(i=0;i<3;i++)north_actor(adventure_save.quests.objectives[15]&(1u<<i)?NORTH_SPR_SOCKET:NORTH_SPR_MARKER,xy[i][0],xy[i][1]);}

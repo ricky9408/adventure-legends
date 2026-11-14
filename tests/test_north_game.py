@@ -8,6 +8,7 @@ import ctypes,json,os,subprocess,sys,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='north-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/northern_region/ui_additions.json').read_text())
+UI.update(json.loads((ROOT/'assets/relationships_ui.json').read_text()))
 UI.update({'MG_RESERVED': '', 'MG_RESERVEDB': ''})  # Host-only imported current capacity-refusal labels
 (OUT/'north_game_test_ui.h').write_text('enum {\n'+''.join(f'TX_{k}={2000+i},\n' for i,k in enumerate(UI))+'};\n')
 HARNESS=r'''
@@ -17,6 +18,7 @@ HARNESS=r'''
 #include "north_art.h"
 #include "northern_quests.h"
 #include "progression.h"
+#include "relationships.h"
 Save5State adventure_save;
 unsigned progression_revision,progression_forms[PROGRESSION_SPIRIT_COUNT];
 volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
@@ -29,6 +31,8 @@ unsigned progression_command(void){CreatureInstance*c=progression_selected();ret
 void progression_refresh(void){progression_revision++;}
 void save_game(void){saved++;if(!save5_validate(&adventure_save))invalid++;}
 void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;game_state=2;}
+void addpage(int a,int b){(void)a;(void)b;}
+void dialogue_speaker(int speaker){(void)speaker;}
 void toast(int a){last_toast=(unsigned)a;}
 unsigned toast_id(void){return last_toast;}
 void text(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
@@ -91,6 +95,8 @@ unsigned roster_count(void){return creatures_roster_count(&adventure_save.roster
 unsigned gear_count(void){return equipment_count(&adventure_save.equipment);}
 unsigned invalid_saves(void){return invalid;}
 unsigned saved_calls(void){return saved;}
+unsigned edda_events(void){return adventure_save.relationships.events[REL_EDDA];}
+void mina_partner(unsigned events){adventure_save.relationships.events[REL_MINA]=(unsigned char)events;}
 int valid(void){return save5_validate(&adventure_save);}
 void snapshot_state(void){snapshot=adventure_save;}
 int unchanged(void){return !memcmp(&snapshot,&adventure_save,sizeof snapshot);}
@@ -109,7 +115,7 @@ unsigned trial(unsigned form){unsigned i;for(i=0;i<160;i++)if(adventure_save.ros
 unsigned level(unsigned form){unsigned i;for(i=0;i<160;i++)if(adventure_save.roster.instances[i].form_id==form)return adventure_save.roster.instances[i].level;return 0;}
 '''
 (OUT/'h.c').write_text(HARNESS.replace('__wrap_equipment_claim_many','equipment_claim_many') if sys.platform=='darwin' else HARNESS)
-sources=['src/north_game.c','src/northern_quests.c','src/north_art.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c']
+sources=['src/north_game.c','src/northern_quests.c','src/north_art.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/relationships.c']
 sanitize=['-fsanitize=undefined','-fno-sanitize-recover=all'] if os.environ.get('NORTH_SANITIZE') else []
 wrap=['-Wl,--wrap=equipment_claim_many']
 if sys.platform=='darwin':
@@ -162,6 +168,44 @@ class NorthRuntime(unittest.TestCase):
   self.assertEqual(L.claim(q),3)
  def recruits(self):
   self.assertEqual(L.entry(22,0),1);self.grant(11);self.grant(13)
+ def test_edda_dispatch_return_story_and_separate_choices(self):
+  self.recruits()
+  L.at(192,176);self.assertEqual(L.north_game_interact(),0)
+  self.grant(21);self.assertEqual(L.entry(22,0),1)
+  self.assertEqual(L.edda_events(),0)
+  before=L.qs(16);self.act(192,176)
+  self.assertEqual(L.qs(16),before)
+  self.assertEqual(L.north_game_edda_dialogue_pending(),1)
+  L.north_game_edda_cancel_dialogue();self.assertEqual(L.edda_events(),0)
+  self.act(192,176);self.assertEqual(L.north_game_edda_dialogue_pending(),1)
+  self.assertEqual(L.entry(23,0),1);self.assertEqual(L.entry(22,0),1)
+  L.north_game_edda_finish_dialogue();self.assertEqual(L.edda_events(),0)
+  for previous,after in ((0,1),(1,3),(3,7),(7,15),(15,31)):
+   self.assertEqual(L.edda_events(),previous)
+   self.act(192,176);self.assertEqual(L.north_game_edda_dialogue_pending(),1)
+   if previous in (7,15):
+    L.north_game_edda_cancel_dialogue();self.assertEqual(L.edda_events(),previous)
+    self.act(192,176);self.assertEqual(L.north_game_edda_dialogue_pending(),1)
+   saves=L.saved_calls();L.north_game_edda_finish_dialogue()
+   self.assertEqual(L.edda_events(),after)
+   self.assertEqual(L.saved_calls(),saves+1)
+   self.act(192,176);self.assertEqual(L.north_game_edda_dialogue_pending(),0)
+   self.assertEqual(L.edda_events(),after)
+   self.assertEqual(L.entry(23,0),1);self.assertEqual(L.entry(22,0),1)
+  self.assertEqual(L.qs(21),3)
+  self.assertEqual(L.invalid_saves(),0);self.assertEqual(L.valid(),1)
+ def test_edda_friendship_does_not_override_existing_partner(self):
+  self.recruits();self.grant(21);self.assertEqual(L.entry(22,0),1)
+  for expected in (1,3,7):
+   self.act(192,176);L.north_game_edda_finish_dialogue()
+   self.assertEqual(L.edda_events(),expected)
+   self.assertEqual(L.entry(23,0),1);self.assertEqual(L.entry(22,0),1)
+  L.mina_partner(15);self.act(192,176)
+  self.assertEqual(L.north_game_edda_dialogue_pending(),0)
+  self.assertEqual(L.edda_events(),7)
+  L.mina_partner(0);self.assertEqual(L.entry(23,0),1);self.assertEqual(L.entry(22,0),1)
+  self.act(192,176);self.assertEqual(L.north_game_edda_dialogue_pending(),1)
+  L.north_game_edda_finish_dialogue();self.assertEqual(L.edda_events(),15)
  def test_exhaustive_collision_original_predicate_equivalence(self):
   self.assertEqual(L.collision_equivalence(),0)
   self.assertEqual(ctypes.c_uint.in_dll(L,'collision_checks').value,827778)
