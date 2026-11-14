@@ -36,7 +36,7 @@ print(f'PASS {checked} official atlas mappings, original hashes, full pixel equa
 
 # Independently padded actual-raster check catches metric/monochrome edge drift.
 chars=set(chr(i) for i in range(32,127))
-for path in (ROOT/'assets').glob('ui_texts*.json'):
+for path in (*((ROOT/'assets').glob('ui_texts*.json')),ROOT/'assets/relationships_ui.json'):
  for text in json.loads(path.read_text()).values():chars.update(text)
 for ch in chars:
  if glyph(ch) is not None:continue
