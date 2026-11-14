@@ -131,7 +131,7 @@ class LoadJobTests(unittest.TestCase):
                 corrupt[bank:bank+SIZE] = repair_crc(body)
             self.reset(); self.put(corrupt)
             self.run_reader()
-        corrupt = bytearray(image); corrupt[B+5088] = 1
+        corrupt = bytearray(image); corrupt[B+5092] = 1
         self.reset(); self.put(corrupt)
         self.assertEqual(self.run_reader()[0], 1)
 
@@ -140,6 +140,7 @@ class LoadJobTests(unittest.TestCase):
         self.store(s)
         old = bytearray(self.sram)
         old[A+12:A+14] = (11).to_bytes(2, 'little')
+        old[A+6:A+8] = (5088).to_bytes(2, 'little')
         old[A:A+SIZE] = repair_crc(old[A:A+SIZE])
         self.reset(); self.put(old)
         self.assertEqual(self.run_reader()[0], 1)
@@ -173,6 +174,7 @@ class LoadJobTests(unittest.TestCase):
                 bad[A+4944] &= ~4
             else:
                 bad[A+12:A+14] = (11).to_bytes(2, 'little')
+                bad[A+6:A+8] = (5088).to_bytes(2, 'little')
             bad[A:A+SIZE] = repair_crc(bad[A:A+SIZE])
             self.reset(); self.put(bad)
             self.assertEqual(self.run_reader()[0], 0)

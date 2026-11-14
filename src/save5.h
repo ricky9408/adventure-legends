@@ -4,6 +4,7 @@
 #include "creatures.h"
 #include "equipment.h"
 #include "economy_types.h"
+#include "relationships.h"
 
 /* v5 never writes SRAM 0..0x1ff, including every v2/v3 byte and both v4 banks.
  * Every multibyte wire field is explicitly little endian.
@@ -15,21 +16,22 @@
  * revision6 (89 forms/37 items, Underwater quests38..45/areas46..53). Revision1
  * installs only starter equipment; revision2/3/4/5->6 preserves existing typed bytes
  * and adds no recruit, trial, quest, gear, visit or reward on load. Revision7 adds Return quests46..53/areas54..61,104 forms/42 items. All writes
- * use revision12, adding paid gear/story receipts at5080/5081 to the32-byte
+ * use revision13, appending four relationship event bytes at5088. Revision12
+ * added paid gear/story receipts at5080/5081 to the32-byte
  * revision10 wallet/pouch at5056. Revision11 preserves four later boss receipts at5079. Revision10 is immutable
  * (128 forms/48 items,quests60..63/areas70..77). Revision8
  * is immutable Shared Horizons C (120 forms/46 items,quests54..59/areas62..69).
- * Exact immutable revisions1..11 authenticate prior banks before migration. No new source,
+ * Exact revisions1..12 authenticate prior banks before migration. No new source,
  * history, visit, trial or equipment is awarded on load. Unknown revisions and
  * cross-revision content are rejected. */
 enum {
     SAVE5_BANK_A = 0x0200, SAVE5_BANK_B = 0x1A00,
-    SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5088,
-    SAVE5_CONTENT_REVISION = 12, SAVE5_COMMIT = 0xA5,
+    SAVE5_BANK_SIZE = 6144, SAVE5_USED_SIZE = 5092,
+    SAVE5_CONTENT_REVISION = 13, SAVE5_COMMIT = 0xA5,
     SAVE5_HEADER_OFFSET = 0, SAVE5_CAMPAIGN_OFFSET = 32,
     SAVE5_COLLECTION_OFFSET = 96, SAVE5_INSTANCES_OFFSET = 160,
     SAVE5_PARTY_OFFSET = 4000, SAVE5_QUEST_OFFSET = 4032,
-    SAVE5_EQUIPMENT_OFFSET = 4544, SAVE5_ECONOMY_OFFSET = 5056, SAVE5_RESERVED_OFFSET = 5088,
+    SAVE5_EQUIPMENT_OFFSET = 4544, SAVE5_ECONOMY_OFFSET = 5056, SAVE5_RELATIONSHIPS_OFFSET = 5088, SAVE5_RESERVED_OFFSET = 5092,
     SAVE5_CRC_OFFSET = 16, SAVE5_COMMIT_OFFSET = 20,
     SAVE5_RECOMMENDED_BUDGET = 1024, SAVE5_MAX_BUDGET = 3072,
     SAVE5_IDLE = 0, SAVE5_BUSY = 1, SAVE5_DONE = 2, SAVE5_FAILED = 3
@@ -60,6 +62,7 @@ typedef struct Save5State {
     Save5Quests quests;
     EquipmentState equipment;
     EconomyState economy;
+    RelationshipState relationships;
 } Save5State;
 
 /* Read-only, blocking startup/transition operation. Failure leaves out intact.

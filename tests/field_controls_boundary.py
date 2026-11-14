@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='790986ee75a5c68e97a218748c65f29957573f76526b30fe540e693b741b233c'
+CONTRACT_SHA='5d9403f34acb0f4059bb7d9ce35b146637fe9bd1ab3b8cd82d4fdb022cc27a56'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -26,6 +26,8 @@ def allowed(path):
         'src/enemy_tactics.c','src/enemy_tactics.h','src/enemy_tactics_art.inc',
         'assets/generate_enemy_tactics.py','assets/enemy_tactics_preview.png',
         'src/relationships.c','src/relationships.h',
+        'src/save5.c','src/save5.h','src/save5_history_eval.inc',
+        'src/save5_load_job.inc','src/save5_preflight.inc',
         'src/field_controls.h','src/quickparty.c','src/quickparty.h','src/journal_nav.c',
         'src/power_failure.h','src/northern_powers.c','src/northern_powers.h',
         'src/southern_powers.c','src/southern_powers.h',

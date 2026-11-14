@@ -39,14 +39,14 @@ class EconomyHistory(unittest.TestCase):
   b=bytes(repair_crc(b));old=OldSave();verdict=self.old.history_probe_bank(b,A,C.byref(old));self.assertIn(verdict,(0,1))
   if expected is not None:self.assertEqual(verdict,expected,label)
   for l in (self.new,self.poisoned):
-   out=Save();self.assertEqual(l.history_probe_bank(b,B,C.byref(out)),verdict,label);self.assertEqual(bytes(out),bytes(old)+(bytes(32)if verdict else bytes([204])*32),(label,'exact decoded bytes'))
+   out=Save();self.assertEqual(l.history_probe_bank(b,B,C.byref(out)),verdict,label);self.assertEqual(bytes(out),bytes(old)+(bytes(36)if verdict else bytes([204])*36),(label,'exact decoded bytes'))
  def test_genuine9_full48_explicit10_no_gains(self):
   self.assertEqual(sum(bool(x.item_id)for x in self.base.equipment.bag),48)
   for name,image in self.images:
    old=OldSave();self.assertEqual(self.old.history_probe_image(image,C.byref(old)),1)
    for l in (self.new,self.poisoned):
-    out=Save();self.assertEqual(l.history_probe_image(image,C.byref(out)),1);self.assertEqual(bytes(out),bytes(old)+bytes(32));self.assertEqual(l.save5_validate_revision(C.byref(out),9),1)
-   s=Save.from_buffer_copy(bytes(old)+bytes(32));b=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(s),b),1);self.assertEqual(bytes(b)[12:14],b'\x0c\0');self.assertEqual(bytes(b)[6:8],(5088).to_bytes(2,'little'));self.assertEqual(self.old.history_probe_bank(b,A,C.byref(OldSave())),0)
+    out=Save();self.assertEqual(l.history_probe_image(image,C.byref(out)),1);self.assertEqual(bytes(out),bytes(old)+bytes(36));self.assertEqual(l.save5_validate_revision(C.byref(out),9),1)
+   s=Save.from_buffer_copy(bytes(old)+bytes(36));b=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(s),b),1);self.assertEqual(bytes(b)[12:14],b'\x0d\0');self.assertEqual(bytes(b)[6:8],(5092).to_bytes(2,'little'));self.assertEqual(self.old.history_probe_bank(b,A,C.byref(OldSave())),0)
    out=Save();self.assertEqual(self.new.history_probe_bank(b,B,C.byref(out)),1);self.assertEqual(compare_state(out),compare_state(s))
  def test_genuine_revisions1_to8_unchanged(self):
   images=[(r,n,(ROOT/f'tests/fixtures/v5-revision{r}'/n).read_bytes())for r,n,_ in FIXTURES]
@@ -56,7 +56,7 @@ class EconomyHistory(unittest.TestCase):
   for r,name,image in images:
    old=OldSave();self.assertEqual(self.old.history_probe_image(image,C.byref(old)),1,name)
    for l in (self.new,self.poisoned):
-    out=Save();self.assertEqual(l.history_probe_image(image,C.byref(out)),1,name);self.assertEqual(bytes(out),bytes(old)+bytes(32),name);self.assertEqual(l.save5_validate_revision(C.byref(out),r),1,name)
+    out=Save();self.assertEqual(l.history_probe_image(image,C.byref(out)),1,name);self.assertEqual(bytes(out),bytes(old)+bytes(36),name);self.assertEqual(l.save5_validate_revision(C.byref(out),r),1,name)
  def test_all128_forms_exhaustive_masks_commands_record_bytes(self):
   rows=json.loads((ROOT/'assets/history/creatures-v9.json').read_text())['forms'];self.assertEqual(len(rows),128)
   for row in rows:
@@ -72,16 +72,16 @@ class EconomyHistory(unittest.TestCase):
  def test_each_decoded_state_byte_and_zero_new_extension(self):
   seed=bytes(self.base)
   for pos in range(len(seed)):
-   raw=bytearray(seed);raw[pos]^=(1,2,4,8,16,32,64,128,255)[pos%9];old=OldSave.from_buffer_copy(raw);want=self.old.save5_validate_revision(C.byref(old),9);new=Save.from_buffer_copy(raw+bytes(32))
+   raw=bytearray(seed);raw[pos]^=(1,2,4,8,16,32,64,128,255)[pos%9];old=OldSave.from_buffer_copy(raw);want=self.old.save5_validate_revision(C.byref(old),9);new=Save.from_buffer_copy(raw+bytes(36))
    for l in (self.new,self.poisoned):self.assertEqual(l.save5_validate_revision(C.byref(new),9),want,pos)
-  for pos in range(32):
-   s=Save.from_buffer_copy(seed+bytes(32));raw=(C.c_ubyte*32).from_buffer(s.economy);raw[pos]=1
+  for pos in range(36):
+   s=Save.from_buffer_copy(seed+bytes(36));raw=(C.c_ubyte*36).from_buffer(s,Save.economy.offset);raw[pos]=1
    for l in (self.new,self.poisoned):self.assertEqual(l.save5_validate_revision(C.byref(s),9),0,pos)
  def test_crc_valid_bank_mutations_and_unknown_revisions(self):
   for pos in (*range(32,47),*range(4032,4296),*range(4544,5056),96+15,112+15,160+16):
    for value in (0,1,3,7,15,31,63,127,128,254,255):
     b=bytearray(self.seed);b[pos]=value;self.bank(b,(pos,value))
-  for revision in (0,13,255,256,65535):
+  for revision in (0,14,255,256,65535):
    b=bytearray(self.seed);b[12:14]=revision.to_bytes(2,'little');self.bank(b,revision,0)
   for pos in range(5056,6144):
    b=bytearray(self.seed);b[pos]=1;self.bank(b,('reserved',pos),0)
@@ -89,13 +89,13 @@ class EconomyHistory(unittest.TestCase):
   s=OldSave.from_buffer_copy(bytes(self.base));legends=[i for i,c in enumerate(s.roster.instances)if c.form_id>=121];self.assertEqual(len(legends),8)
   s.roster.party[:]=(legends[0],legends[1],255,255);s.roster.selected_party=0;self.assertEqual(self.old.save5_validate_revision(C.byref(s),9),0)
   for l in (self.new,self.poisoned):
-   new=Save.from_buffer_copy(bytes(s)+bytes(32));self.assertEqual(l.save5_validate_revision(C.byref(new),9),0)
+   new=Save.from_buffer_copy(bytes(s)+bytes(36));self.assertEqual(l.save5_validate_revision(C.byref(new),9),0)
   b=bytearray(self.seed);b[4000:4005]=bytes((*s.roster.party,0));self.bank(b,'two legends',0)
  def test_full160_roster_non_authoritative_credit(self):
   s=OldSave.from_buffer_copy(bytes(self.base));template=Instance.from_buffer_copy(bytes(s.roster.instances[0]));template.flags=1
   for i in range(160):
    if not s.roster.instances[i].form_id:s.roster.instances[i]=template;s.roster.instances[i].instance_id=s.roster.next_instance_id;s.roster.next_instance_id+=1
   s.roster.expedition_events[:]=bytes([255])*64;s.roster.lifetime_field_aid[:]=bytes([255])*16;self.assertEqual(self.old.save5_validate_revision(C.byref(s),9),1)
-  for l in (self.new,self.poisoned):self.assertEqual(l.save5_validate_revision(C.byref(Save.from_buffer_copy(bytes(s)+bytes(32))),9),1)
+  for l in (self.new,self.poisoned):self.assertEqual(l.save5_validate_revision(C.byref(Save.from_buffer_copy(bytes(s)+bytes(36))),9),1)
   b=(C.c_ubyte*SIZE)();self.assertEqual(self.old.history_encode(C.byref(s),b),1);self.bank(bytes(b),'full160',1)
 if __name__=='__main__':unittest.main(verbosity=2)

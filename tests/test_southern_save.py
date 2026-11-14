@@ -102,7 +102,7 @@ class SouthernSaveTests(base.Save5Tests):
         self.assertTrue(provenance['controller_only']);self.assertEqual(provenance['game_ram_writes'],0)
         self.put(data);s=self.load();self.assertEqual(bytes(self.sram),data)
         src=max((A,B),key=lambda o:int.from_bytes(data[o+8:o+12],'little'));dst=B if src==A else A
-        self.store(s);written=bytes(self.sram[dst:dst+SIZE]);self.assertEqual(written[12:14],b'\x08\0')
+        self.store(s);written=bytes(self.sram[dst:dst+SIZE]);self.assertEqual(written[12:14],b'\x0d\0')
         self.assertEqual(written[32:],data[src+32:src+SIZE]);self.assertEqual(bytes(self.sram[src:src+SIZE]),data[src:src+SIZE])
         self.assertEqual(bytes(s.quests.region_flags[2:]),bytes(30))
 
@@ -222,7 +222,7 @@ class SouthernSaveTests(base.Save5Tests):
         for revision,forms in ((1,base.LEGACY_ENABLED),(2,base.REVISION2_ENABLED),(3,base.ENABLED)):
             for form in forms:
                 s=self.fresh(3);slot=self.lib.creatures_grant(C.byref(s.roster),form,50,0,0,0)
-                self.reset();self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=revision.to_bytes(2,'little')
+                self.reset();self.store(s);b=bytearray(self.sram[A:A+SIZE]);b[12:14]=revision.to_bytes(2,'little');b[6:8]=(5056).to_bytes(2,'little')
                 if revision==1:b[4032:4296]=bytes(264);b[4544:5056]=bytes(512)
                 offset=160+24*slot
                 # New/current commands must never leak into any old snapshot.
@@ -239,7 +239,7 @@ class SouthernSaveTests(base.Save5Tests):
     def test_south_old_revisions_reject_every_new_typed_field_item_form(self):
         self.store(self.fresh(3));original=bytes(self.sram[A:A+SIZE])
         for revision in (1,2,3):
-            b=bytearray(original);b[12:14]=revision.to_bytes(2,'little')
+            b=bytearray(original);b[12:14]=revision.to_bytes(2,'little');b[6:8]=(5056).to_bytes(2,'little')
             if revision==1:b[4544:5056]=bytes(512)
             mutations=[(4248+2,1),(4280+2,1)]
             mutations += [(4248+8,1<<i) for i in range(8)]+[(4248+18,1<<i) for i in range(2)]

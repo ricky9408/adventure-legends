@@ -130,8 +130,8 @@ class LaterRewardsCodecTests(unittest.TestCase):
         newer = bytes(self.current.ram[B:B + SIZE])
         self.assertEqual(bytes(self.current.ram[A:A + SIZE]), self.bank)
         self.assertEqual(bytes(self.current.ram[:A]), original[:A])
-        self.assertEqual(newer[12:14], bytes((12, 0)))
-        self.assertEqual(newer[6:8], (5088).to_bytes(2, 'little'))
+        self.assertEqual(newer[12:14], bytes((13, 0)))
+        self.assertEqual(newer[6:8], (5092).to_bytes(2, 'little'))
         self.assertEqual(newer[32:], self.bank[32:])
         self.assertEqual(compare_state(self.read(self.current, newer)), compare_state(s))
 
@@ -159,20 +159,21 @@ class LaterRewardsCodecTests(unittest.TestCase):
             install(self.current)
             self.assertEqual(self.current.save5_store(C.byref(s)), 1)
             bank = bytes(self.current.ram[A:A + SIZE])
-            self.assertEqual(bank[12:14], bytes((12, 0)))
+            self.assertEqual(bank[12:14], bytes((13, 0)))
             self.assertEqual(bank[5079], receipt)
             self.assertEqual(bank[5080:5088], bytes(8))
             self.assertEqual(compare_state(self.read(self.current, bank)), compare_state(s))
-            # Current writers use12, but revision11-compatible receipts retain
+            # Current writers use13, but revision11-compatible receipts retain
             # their original acceptance and do not gain either new receipt.
             prior11 = bytearray(bank)
             prior11[12:14] = (11).to_bytes(2, 'little')
+            prior11[6:8] = (5088).to_bytes(2, 'little')
             self.assertEqual(compare_state(self.read(self.current, repair_crc(prior11))), compare_state(s))
             for offset in range(5080, 5088):
                 bad = bytearray(prior11)
                 bad[offset] = 1
                 self.read(self.current, repair_crc(bad), False)
-        for revision in (0, 13, 255, 256, 65535):
+        for revision in (0, 14, 255, 256, 65535):
             bad = bytearray(bank)
             bad[12:14] = revision.to_bytes(2, 'little')
             self.read(self.current, repair_crc(bad), False)

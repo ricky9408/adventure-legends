@@ -48,18 +48,18 @@ class EconomyTests(unittest.TestCase):
   self.assertEqual(self.l.economy_award_combat(C.byref(s),0xffffffff),9999);self.assertEqual(self.l.economy_award_combat(C.byref(s),0xffffffff),0)
   self.assertEqual(self.l.save5_store(C.byref(s)),1);self.assertEqual(compare_state(self.reload()),compare_state(s))
  def test_purchase_use_upgrade_reload(self):
-  s=self.fresh(gold=200);gear=bytes(s.equipment)
+  s=self.fresh(gold=200);s.relationships[:]=[31,15,7,3];gear=bytes(s.equipment)
   for item in range(3):self.job(s,'economy_begin_purchase',item)
   self.assertEqual((s.economy.gold,s.economy.upgrade),(38,1));self.assertEqual(self.l.economy_attack_bonus(C.byref(s)),1)
   self.assertEqual(self.l.economy_begin_purchase(C.byref(s),2),0);self.assertEqual(self.l.economy_last_error(),5)
   for item in range(2):self.job(s,'economy_begin_use',item)
   self.assertEqual(self.l.economy_begin_use(C.byref(s),0),0);self.assertEqual(self.l.economy_last_error(),7);self.assertEqual(bytes(s.equipment),gear);self.assertEqual(compare_state(self.reload()),compare_state(s))
-  bank=bytes(self.ram[A:A+SIZE]);self.assertEqual(bank[6:8],(5088).to_bytes(2,'little'));self.assertEqual(bank[12:14],b'\x0c\0')
+  bank=bytes(self.ram[A:A+SIZE]);self.assertEqual(bank[6:8],(5092).to_bytes(2,'little'));self.assertEqual(bank[12:14],b'\x0d\0')
  def test_content12_receipts_keep_revision11_wallet_exact(self):
   s=self.fresh(1,gold=200);s.quests.region_flags[0]=1
   self.assertEqual(self.l.save5_validate_revision(C.byref(s),11),1)
   self.assertEqual(self.l.save5_store(C.byref(s)),1);prior=bytearray(self.ram[A:A+SIZE])
-  prior[12:14]=(11).to_bytes(2,'little');prior=repair_crc(prior)
+  prior[12:14]=(11).to_bytes(2,'little');prior[6:8]=(5088).to_bytes(2,'little');prior=repair_crc(prior)
   self.ram[A:A+SIZE]=prior
   ref=C.c_uint();self.assertEqual(self.l.equipment_purchase(C.byref(s.equipment),2,C.byref(ref)),0)
   s.economy.reserved[0]=1;s.economy.spent=96;s.economy.gold=104
@@ -171,7 +171,7 @@ class EconomyTests(unittest.TestCase):
   s=self.fresh(1,gold);s.quests.region_flags[0]=1;s.campaign.room=16;s.campaign.spawn=0
   self.assertEqual(self.l.save5_validate(C.byref(s)),1);return s
  def test_regional_stock_access_and_existing_supply_history(self):
-  s=self.market_fresh();before=bytes(s)
+  s=self.market_fresh();s.relationships[:]=[31,15,7,3];before=bytes(s)
   self.assertEqual(self.l.economy_begin_purchase(C.byref(s),0),0)
   self.assertEqual(self.l.economy_begin_market_purchase(C.byref(s),4),0)
   self.assertEqual(bytes(s),before)

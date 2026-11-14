@@ -52,7 +52,7 @@ class UnderwaterHistoricalDifferential(unittest.TestCase):
   for revision,name,data in self.images:
    self.assertEqual(self.old.history_probe_image(data,C.byref(self.oldout)),1,name);self.assertEqual(self.new.history_probe_image(data,C.byref(self.newout)),1,name);self.assertEqual(bytes(self.oldout),bytes(self.newout))
    previous=compare_state(self.newout);out=(C.c_ubyte*SIZE)();self.assertEqual(self.new.history_encode(C.byref(self.newout),out),1,name)
-   self.assertEqual(bytes(out[12:14]),b'\x0c\x00');self.assertEqual(self.new.history_probe_bank(out,A,C.byref(self.newout)),1,name);self.assertEqual(compare_state(self.newout),previous)
+   self.assertEqual(bytes(out[12:14]),b'\x0d\x00');self.assertEqual(self.new.history_probe_bank(out,A,C.byref(self.newout)),1,name);self.assertEqual(compare_state(self.newout),previous)
    for src in (A,B):
     bank=data[src:src+SIZE];self.assertEqual(bytes(repair_crc(bank)),bank,name)
     for dst in (A,B):self.compare(bank,1,'original',dst)

@@ -22,7 +22,7 @@ for revision,name in [(7,'return-h-earned104-52.sav'),(8,'horizons-all120-64-col
  row=next(r for r in provenance['fixtures']if (r.get('path')or r.get('file','')).endswith(name))
  inputs.append((ROOT/f'tests/fixtures/v5-revision{revision}'/name,row['sha256'],'authenticated historical SRAM'))
 inputs.append((ROOT/'tests/fixtures/snapshot-copy/synthetic-full160-gear48-room43.sav','35390f2c949d75cd5dcaff6eb264bb493e869bfd7afb914c4caac124eb402494','synthetic valid full160/48 room43 state used by native controller diagnostic'))
-assert C.sizeof(Save)==4976
+assert C.sizeof(Save)==4980
 results=[]
 for index,(p,want,kind)in enumerate(inputs):
  assert sha(p)==want,('Snapshot fixture changed',str(p))

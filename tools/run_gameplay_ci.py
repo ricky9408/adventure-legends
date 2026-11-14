@@ -154,6 +154,7 @@ def main():
         stage('ci-runner-tests', [python, '-m', 'unittest', 'discover', '-s', 'tests',
                                   '-p', 'test_gameplay_ci.py'])
         stage('relationship-core-tests', [python, 'tests/test_relationships.py'])
+        stage('relationship-save-tests', [python, 'tests/test_relationship_save.py'])
         stage('sunlace-welcome-tests', [python, 'tests/test_sunlace_welcome.py'])
         stage('north-chapter-closure-tests', [python, 'tests/test_north_chapter_closure.py'])
         stage('southern-chapter-closure-tests', [python, 'tests/test_southern_chapter_closure.py'])
@@ -255,6 +256,14 @@ def main():
             loading = json.loads((out/'cold-continue/report.json').read_text())
             if loading['result'] != 'PASS' or loading['rom_sha256'] != rom_sha:
                 raise RuntimeError('Bounded cold Continue did not pass the exact candidate')
+            stage('relationship-save-travel', [python, 'tests/relationship_save_native.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--output', str(out/'relationship-save')], timeout=600)
+            relationship = json.loads((out/'relationship-save/report.json').read_text())
+            if (relationship['result'] != 'PASS' or relationship['rom_sha256'] != rom_sha
+                    or relationship['bridge_sha256'] != digest(bridge)
+                    or relationship['game_ram_writes'] or relationship['machine_state_imports']):
+                raise RuntimeError('Relationship save travel did not pass the exact candidate')
             stage('field-carousel-capacity', [python, 'tests/field_carousel_capacity_native.py',
                   '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
                   '--bridge', bridge, '--source-root', str(ROOT), '--expected-rom-sha', rom_sha,

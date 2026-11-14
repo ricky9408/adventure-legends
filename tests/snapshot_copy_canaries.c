@@ -14,7 +14,7 @@ int main(void) {
     unsigned char *input = malloc(reserve), *output = malloc(reserve);
     unsigned char *expected = malloc(length);
     assert(input && output && expected);
-    assert(length == 4976 && length % 32 == 16); /* Actual four-word tail. */
+    assert(length == 4980 && length % 32 == 20); /* Actual five-word tail. */
     for (alignment = 0; alignment < 8; ++alignment) {
         unsigned offset = 32 + 4 * alignment;
         Save5State *src = (Save5State *)(input + offset);
@@ -38,6 +38,6 @@ int main(void) {
         }
     }
     free(input); free(output); free(expected);
-    puts("PASS: 2,080 full-byte copies + self-copies; all natural alignment offsets; both canaries; four-word tail");
+    puts("PASS: 2,080 full-byte copies + self-copies; all natural alignment offsets; both canaries; five-word tail");
     return 0;
 }

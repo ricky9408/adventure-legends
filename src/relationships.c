@@ -8,11 +8,7 @@ static int events_valid(unsigned events)
 
 int relationships_valid(const RelationshipState *state)
 {
-    unsigned i;
-    if (!state) return 0;
-    for (i = 0; i < REL_PERSON_COUNT; ++i)
-        if (!events_valid(state->events[i])) return 0;
-    return 1;
+    return relationships_state_valid(state);
 }
 
 unsigned relationships_affinity(const RelationshipState *state, unsigned person)

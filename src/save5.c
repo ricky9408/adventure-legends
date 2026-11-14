@@ -19,6 +19,7 @@ typedef Save4U32 Save5AliasU32 __attribute__((__may_alias__));
  * That region is cleared before the snapshot CRC or first SRAM write. */
 static union { Save4U8 bytes[SAVE5_BANK_SIZE]; Save5State state; } scratch;
 static Save4U8 snapshot_economy[32];
+static RelationshipState snapshot_relationships;
 typedef char save5_economy_width[(sizeof(EconomyState)==32)?1:-1];
 static const Save4U32 crc_table[256] = {
     0x00000000u, 0x77073096u, 0xEE0E612Cu, 0x990951BAu, 0x076DC419u, 0x706AF48Fu, 0xE963A535u, 0x9E6495A3u,
@@ -726,7 +727,7 @@ int save5_later_claims_validate(const Save5Quests *q,const EconomyState *e) {
     return 1;
 }
 int save5_validate(const Save5State *s) {
-    return s && save5_campaign_validate(&s->campaign) &&
+    return s && relationships_state_valid(&s->relationships) && save5_campaign_validate(&s->campaign) &&
         creatures_roster_validate_revision(&s->roster,save5_creature_revision(11)) && save5_quests_validate(&s->quests) &&
         quest_campaign_validate(&s->campaign, &s->quests) &&
         quest_creatures_validate(&s->quests, s->roster.obtained, s->roster.rewards,
@@ -763,6 +764,7 @@ static void snapshot_metadata(void) {
     Save5State *s = &scratch.state;
     Save4U8 *b = scratch.bytes + META_BASE;
     encode_economy(snapshot_economy,&s->economy);
+    snapshot_relationships=s->relationships;
     encode_campaign(b, &s->campaign);
     copy_bytes(b + 15, s->roster.party, 4); b[19] = s->roster.selected_party;
     put32(b + 20, s->roster.next_instance_id);
@@ -788,6 +790,7 @@ static void snapshot_finish(void) {
     copy_bytes(b + 4520, m + 296, 16);
     copy_bytes(b + 4544, m + META_EQUIPMENT, 512);
     copy_bytes(b + SAVE5_ECONOMY_OFFSET,snapshot_economy,32);
+    copy_bytes(b + SAVE5_RELATIONSHIPS_OFFSET,snapshot_relationships.events,4);
 }
 
 /* Streaming checks never call the whole-inventory validator. Quest objectives
@@ -821,7 +824,7 @@ enum { SCAN_HEADER, SCAN_CAMPAIGN, SCAN_COLLECTION, SCAN_COLLECTION_RESERVED,
        SCAN_QUEST_FLAGS, SCAN_QUEST_ANCHORS, SCAN_BOND, SCAN_EVENTS,
        SCAN_CREDIT_RESERVED, SCAN_EQUIPMENT_RECORD, SCAN_EQUIPMENT_REFS,
        SCAN_EQUIPMENT_SETTINGS, SCAN_EQUIPMENT_SEEN, SCAN_EQUIPMENT_WALLET,
-       SCAN_EQUIPMENT_CLAIMS, SCAN_EQUIPMENT_RESERVED, SCAN_ECONOMY, SCAN_PADDING };
+       SCAN_EQUIPMENT_CLAIMS, SCAN_EQUIPMENT_RESERVED, SCAN_ECONOMY, SCAN_RELATIONSHIPS, SCAN_PADDING };
 
 static int bit(const Save4U8 *p, unsigned n) { return (p[n >> 3] >> (n & 7)) & 1; }
 static void set_bit(Save4U8 *p, unsigned n) { p[n >> 3] |= (Save4U8)(1u << (n & 7)); }
@@ -835,7 +838,7 @@ static int scan_header(void) {
     const Save4U8 *b = scan.block;
     if (b[0] != 0x45 || b[1] != 0x42 || b[2] != 5 || b[3] != 32 ||
         get16(b + 4) != SAVE5_BANK_SIZE ||
-        get16(b + 6) != ((get16(b+12)>=10) ? 5088 : 5056) ||
+        get16(b + 6) != (get16(b+12)>=13 ? 5092 : get16(b+12)>=10 ? 5088 : 5056) ||
         (get16(b + 12) < 1 || get16(b + 12) > SAVE5_CONTENT_REVISION) ||
         b[20] != (scan.memory ? 0 : SAVE5_COMMIT) ||
         !zero_bytes(b + 14, 2) || !zero_bytes(b + 21, 11)) return 0;
@@ -1120,10 +1123,15 @@ static unsigned scan_run(unsigned budget) {
             case SCAN_ECONOMY: {
                 EconomyState e;decode_economy(&e,scan.block);
                 if(!(scan.revision==10 ? history10_economy_validate(&e,scan.campaign.chapter_flags) :
-                    economy_state_validate_revision(&e,scan.campaign.chapter_flags,scan.revision) &&
+                    economy_state_validate_revision(&e,scan.campaign.chapter_flags,scan.revision>=13?12:scan.revision) &&
                     save5_later_claims_validate(&scan.quests,&e) &&
                     save5_economy_sources_validate(&scan.quests,&scan.equipment,&e,scan.collection[32])))scan.valid=0;
-                scan_next(SCAN_PADDING,1056);charge=32;break;
+                scan_next(scan.revision>=13?SCAN_RELATIONSHIPS:SCAN_PADDING,scan.revision>=13?4:1056);charge=32;break;
+            }
+            case SCAN_RELATIONSHIPS: {
+                RelationshipState r;copy_bytes(r.events,scan.block,4);
+                if(!relationships_state_valid(&r))scan.valid=0;
+                scan_next(SCAN_PADDING,1052);charge=4;break;
             }
             default: break;
             }
@@ -1193,6 +1201,7 @@ static unsigned decode_valid_bank(Save5State *s, unsigned offset, Save4U32 seque
         read_bytes(s->equipment.reward_claims, offset + 5024, 8);
     }
     if(revision>=10){read_bytes(b,offset+SAVE5_ECONOMY_OFFSET,32);decode_economy(&s->economy,b);}
+    if(revision>=13)read_bytes(s->relationships.events,offset+SAVE5_RELATIONSHIPS_OFFSET,4);
     normalize_resume(&s->campaign, revision);
     return revision;
 }
