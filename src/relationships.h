@@ -14,8 +14,8 @@ typedef struct {
     unsigned char events[REL_PERSON_COUNT];
 } RelationshipState;
 
-/* Scenes are not connected yet. Save5 content13 records this ledger; older
- * revisions must keep the new bytes zero rather than inventing past events. */
+/* Content13 stores this ledger; older revisions must keep the new bytes zero
+ * rather than inventing past events. */
 /* Header-local validation lets standalone save-codec tools share the same
  * four-byte rule without pulling scene or relationship runtime objects in. */
 static inline int relationships_state_valid(const RelationshipState *state)

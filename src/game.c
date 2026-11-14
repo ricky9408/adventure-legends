@@ -534,6 +534,7 @@ COLD void dialogue(int a,int b,int next){
  }
  dialog_lines[0]=a;dialog_lines[1]=b;dialog_speakers[0]=room==0?TX_ELDER:room==3?TX_BOSS:TX_SUBTITLE;dpage=0;dcount=1;dafter=next;dialogue_action=dialogue_seen=0;game_state=DIALOG;}
 COLD void addpage(int a,int b){if(dcount>=6)return;dialog_lines[dcount*2]=a;dialog_lines[dcount*2+1]=b;dialog_speakers[dcount]=dialog_speakers[0];dcount++;}
+void dialogue_speaker(int speaker){int i;for(i=0;i<dcount;i++)dialog_speakers[i]=speaker;}
 COLD void make_save(CampaignSave *v,int r,int spawn){zero(v,sizeof *v);v->room=r;v->spawn=spawn;v->chapter_flags=chapter_flags;v->bridge=bridge_open;v->torches=torches;v->relic=relic_found;v->camp=camp_unlocked;v->room_flags=room_flags;v->optional_flags=optional_flags;v->story_seen=story_seen;v->spirit=spirit<4?spirit:0;}
 COLD void save_at(int r,int spawn){if(r==14||r==15){r=0;spawn=3;}make_save(&adventure_save.campaign,r,spawn);/* Only verified DONE clears failure. */if(!save_requested){save_feedback_ordinary=save_ordinary_scope!=0;save_ordinary_defer=save_feedback_ordinary?2:0;}else if(!save_ordinary_scope)save_feedback_ordinary=0;save_requested=1;save_feedback_requests++;saved_room=r;}
 COLD void save_game(void){save_at(room,checkpoint_spawn);}
@@ -594,7 +595,7 @@ COLD void save_frame(void){unsigned status;
 }
 COLD void show_scene(int id,int action,unsigned seen){const CampaignDialogue*d=&campaign_dialogues[id];int i;dpage=0;dcount=d->pages;dafter=PLAY;dialogue_action=action;dialogue_seen=seen;for(i=0;i<dcount;i++){dialog_lines[i*2]=d->lines[i*2];dialog_lines[i*2+1]=d->lines[i*2+1];dialog_speakers[i]=d->speaker;}game_state=DIALOG;}
 COLD void append_scene(int id){const CampaignDialogue*d=&campaign_dialogues[id];int i;for(i=0;i<d->pages&&dcount<6;i++){dialog_lines[dcount*2]=d->lines[i*2];dialog_lines[dcount*2+1]=d->lines[i*2+1];dialog_speakers[dcount++]=d->speaker;}}
-COLD void finish_dialogue(void){story_seen|=dialogue_seen;game_state=dafter;if(dialogue_action==1)enter_room(0,3);else if(dialogue_action==2){if(!(chapter_flags&SAVE4_ENDING_SEEN)){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);}game_state=WIN;ending_credits_begin();}else if(dialogue_seen)save_game_ordinary();if(game_state==PLAY)acknowledge_save_failure();dialogue_action=dialogue_seen=0;}
+COLD void finish_dialogue(void){story_seen|=dialogue_seen;game_state=dafter;if(dialogue_action==1)enter_room(0,3);else if(dialogue_action==2){if(!(chapter_flags&SAVE4_ENDING_SEEN)){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);}game_state=WIN;ending_credits_begin();}else if(dialogue_seen)save_game_ordinary();south_game_mina_finish_dialogue();if(game_state==PLAY)acknowledge_save_failure();dialogue_action=dialogue_seen=0;}
 COLD void camera_update(int snap){int tx,ty;if(!scrolling_room()){camera_x=camera_y=camera_fx=camera_fy=0;return;}
  tx=px-120;ty=py-80;if(tx<0)tx=0;if(tx>world_width()-240)tx=world_width()-240;if(ty<0)ty=0;if(ty>world_height()-160)ty=world_height()-160;
  if(snap){camera_fx=tx*256;camera_fy=ty*256;}else{if(ab(tx*256-camera_fx)<4)camera_fx=tx*256;else camera_fx+=(tx*256-camera_fx)/4;if(ab(ty*256-camera_fy)<4)camera_fy=ty*256;else camera_fy+=(ty*256-camera_fy)/4;}
@@ -994,7 +995,7 @@ void update(void){int dx=0,dy=0,return_input=0,aim_holding=0,context_owned=0;Fie
  if(save_begin_pending){save_begin_pending=0;save5_set_preemptible(0);save_feedback_capture(&adventure_save);if(!progression_save_begin())save_completion_pending=SAVE5_FAILED;return;}status=progression_save_step();if(status==SAVE5_DONE||status==SAVE5_FAILED)save_completion_pending=status;return;}
  if(game_state==EVOLVE_CONFIRM){progression_confirm_input(pressed);return;}
  if(game_state==EVOLVE_ANIM){progression_evolution_tick();return;}
- if(game_state==DIALOG){if(pressed&KEY_A){sfx(4);if(++dpage>=dcount)finish_dialogue();}return;}
+ if(game_state==DIALOG){if((pressed&KEY_B)&&south_game_mina_dialogue_pending()){south_game_mina_cancel_dialogue();game_state=PLAY;return;}if(pressed&KEY_A){sfx(4);if(++dpage>=dcount)finish_dialogue();}return;}
  if(game_state==PAUSE){int input=journal_nav_keys(keys,pressed),nav;if(journal_tab==JOURNAL_ITEMS&&game_shop_confirm&&(input&KEY_B)){game_shop_items_input(input);return;}nav=journal_nav_input(input);if(nav==JOURNAL_CLOSE){game_shop_cancel_items();acknowledge_save_failure();game_state=PLAY;return;}if(nav==JOURNAL_CONSUMED)return;if(game_shop_items_input(input)||quickparty_menu_input(input)||progression_menu_input(input)||gear_menu_input(input)||region_game_menu_input(input)||north_game_menu_input(input)||south_game_menu_input(input)||magma_game_menu_input(input)||underwater_game_menu_input(input)||return_game_menu_input(input)||horizons_game_menu_input(input)||covenants_game_menu_input(input))return;if((input&KEY_A)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);}return;}
  if(game_state==DEAD){if(pressed&KEY_A){game_health_fill();ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,room>=16?checkpoint_spawn:2);}return;}
  if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;if(!ending_credits_returns_to_field())enter_room(0,3);}return;}

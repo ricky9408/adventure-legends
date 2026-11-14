@@ -84,6 +84,9 @@ texts.update({'FONT_CREDIT':'FONT: GeeBee / GBJ','FONT_URL':'GeeBee https://geeb
 for name in ('C_ELDER_ACT2_2_0','C_ELDER_ACT2_2_1','C_ELDER_FINAL_3_0','C_ELDER_FINAL_3_1'):
     texts[name]=texts.pop(name)
 texts['RETRY_CHECKPOINT']='A  休んだ場所から再挑戦'
+for key,value in json.loads((ROOT/'assets/relationships_ui.json').read_text()).items():
+    assert key not in texts,key
+    texts[key]=value
 items=[]
 for name,text in texts.items():
     h=10 if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL','FONT_CREDIT','FONT_URL') else 15

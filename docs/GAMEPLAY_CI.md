@@ -62,6 +62,14 @@ contracts remain pinned and separate from current runtime evidence.
   for durable rewards; B must return to the same field position. Every presented
   frame must pass timing. This proves the main route and guaranteed recruits,
   not acquisition of all128 forms or every optional quest.
+- **Fresh Mina route:** a separate empty-SRAM campaign earns the Southern
+  conservatory report and quest24 reward, then uses controller input to plant,
+  revisit, hear Mina's personal story, accept dating and later marriage. B
+  cancels planting and both romantic choices without changing the relationship
+  ledger. Repeated talks cannot repeat an event. SRAM snapshots and cold Continue
+  verify event masks 0→1→3→7→15→31; screenshots and input traces are retained
+  under `mina-route/`. This proves one earned route, not another person's route
+  or multiple marriages.
 
 ## Reproduce locally
 
