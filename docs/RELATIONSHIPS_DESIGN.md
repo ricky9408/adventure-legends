@@ -35,14 +35,18 @@ Each person's goals remain meaningful outside their relationship to the player.
    together. Existing adventures start all four routes unrecorded; loading may
    not invent relationship events or repeat earned chapter rewards. Existing
    completed quests may unlock a new meeting scene, not count as having seen it.
-3. **Current slice: one complete playable route first (Mina).** Meet during the existing chapter,
+3. **Completed playable route: Mina.** Meet during the existing chapter,
    invitation after the report, return to plant together, personal scene, explicit
    dating choice, then a separately paced proposal/marriage scene. Keep chapter
    clues and receipts available and prevent interaction priority from swallowing
    quests, shops or doors. Do not ship all four routes as shallow repeated text.
    The implemented route and its earned-play evidence are described in
    [Mina's route](MINA_ROUTE.md).
-4. **Future: other routes, then multi-partner scene coverage.** Different activities,
+4. **Current slice: Edda's complete harbor route.** The Northern reward reveals
+   a dispatch document. Sort cargo labels together, return to hear the delivery
+   arrived, listen to her own decision about an unsent letter, then choose dating
+   and marriage on separate visits. See [Edda's route](EDDA_ROUTE.md).
+5. **Future: remaining routes, then multi-partner scene coverage.** Different activities,
    cadence, dialogue, visual identity and home/epilogue reactions. An additional
    relationship requires an explicit conversation about existing relationships,
    with agreement from the people involved. Multiple spouse bits are allowed;

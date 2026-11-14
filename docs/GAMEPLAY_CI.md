@@ -70,6 +70,13 @@ contracts remain pinned and separate from current runtime evidence.
   verify event masks 0→1→3→7→15→31; screenshots and input traces are retained
   under `mina-route/`. This proves one earned route, not another person's route
   or multiple marriages.
+- **Fresh Edda route:** another empty-SRAM campaign earns the Northern beacon
+  reward, sorts dispatch labels with Edda, returns for the delivery and letter
+  scenes, and explicitly accepts dating and later marriage. B cancels dispatch
+  and both romantic choices; return visits and repeat checks keep the ordered
+  ledger honest. SRAM snapshots and cold Continue verify masks
+  0→1→3→7→15→31. Screenshots and traces are retained under `edda-route/`.
+  Concurrent dating and marriage remain blocked pending mutual consent scenes.
 
 ## Reproduce locally
 

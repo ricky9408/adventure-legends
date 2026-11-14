@@ -332,3 +332,7 @@
 #include "ui_data/part_329.inc"
 #include "ui_data/part_330.inc"
 #include "ui_data/part_331.inc"
+#include "ui_data/part_332.inc"
+#include "ui_data/part_333.inc"
+#include "ui_data/part_334.inc"
+#include "ui_data/part_335.inc"
