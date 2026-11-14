@@ -62,7 +62,7 @@ On failure, the last successful record remains. Open Start → Controls → A Re
 
 Before upgrading, copy the ordinary `.sav` as a backup. Match ROM/save basenames, such as `emberbond.gba` and `emberbond.sav`, choose Continue with A, and wait for loading. Transfer ordinary SRAM across versions, not emulator save states.
 
-This update writes Save5 content revision 11. Ordinary saves from Village Morning G7, Connected Roads C4, Experience Polish P2 and Player Feedback R7 (content10) migrate forward without resetting progress. Supported formats2–4 and Save5 revisions1–9 also migrate. A cold Continue uses the retained safe checkpoint, which can differ from the transient position just after a road crossing. Never open a migrated content11 save in an older ROM; use the untouched pre-upgrade backup when returning to an earlier release.
+This update writes Save5 content revision 13. Supported formats2–4 and Save5 revisions1–12 migrate forward without resetting progress. The four new personal-event bytes start empty for older adventures; loading does not invent relationship events. Relationship scenes are not playable yet. A cold Continue uses the retained safe checkpoint, which can differ from the transient position just after a road crossing. Never open a migrated content13 save in an older ROM; use the untouched pre-upgrade backup when returning to an earlier release.
 
 To intentionally replace progress, select New Adventure with Up/Down and A, then confirm again with A. B or Start cancels the replacement prompt.
 

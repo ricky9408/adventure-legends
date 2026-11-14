@@ -63,13 +63,13 @@ class ReturnSpawnTests(unittest.TestCase):
   (ROOT/'build/current-host-evidence/underwater-return-spawns/host.json').write_text(json.dumps(report,indent=2)+'\n')
  def clone(self,complete=True):return Save.from_buffer_copy(self.complete if complete else self.old)
  def test_current_writer_cannot_be_relabelled_as_historical_template(self):
-  self.assertEqual(int.from_bytes(self.current_template[12:14],'little'),12)
-  self.assertEqual(int.from_bytes(self.current_template[6:8],'little'),5088)
+  self.assertEqual(int.from_bytes(self.current_template[12:14],'little'),13)
+  self.assertEqual(int.from_bytes(self.current_template[6:8],'little'),5092)
   self.assertEqual(int.from_bytes(self.template[6:8],'little'),5056)
   bank=encode_state(self.current_template,self.clone(),6)
   self.assertEqual(bytes(repair_crc(bank)),bank)
   self.assertEqual(int.from_bytes(bank[12:14],'little'),6)
-  self.assertEqual(int.from_bytes(bank[6:8],'little'),5088)
+  self.assertEqual(int.from_bytes(bank[6:8],'little'),5092)
   self.lib.save5_test_reset_writer();self.lib.sram[:]=bytes([255])*32768;self.lib.sram[A:A+SIZE]=bank
   before=bytes(self.lib.sram);out=Save.from_buffer_copy(bytes([0x91])*C.sizeof(Save));out_before=bytes(out)
   self.assertEqual(self.lib.save5_load(C.byref(out)),0)

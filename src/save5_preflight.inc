@@ -124,10 +124,11 @@ unsigned save5_preflight_step(Save4U32 token,unsigned budget) {
  case 9:ok=equipment_refs_validate(&s->equipment);break;
  case 10:ok=equipment_reserved_validate(&s->equipment);break;
  case 11:ok=quest_equipment_validate(&s->quests,&s->equipment)&&economy_state_validate(&s->economy,s->campaign.chapter_flags)&&save5_later_claims_validate(&s->quests,&s->economy)&&save5_economy_sources_validate(&s->quests,&s->equipment,&s->economy,s->roster.rewards[0]);break;
+ case 12:ok=relationships_state_valid(&s->relationships);break;
  default:preflight.status=SAVE5_FAILED;return SAVE5_FAILED;
  }
  if(!ok)preflight.status=SAVE5_FAILED;
- else if(++preflight.phase==12)preflight.status=SAVE5_DONE;
+ else if(++preflight.phase==13)preflight.status=SAVE5_DONE;
  return preflight.status;
 }
 

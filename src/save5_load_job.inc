@@ -9,7 +9,7 @@ enum {
  LOAD_CAMPAIGN, LOAD_CREATURES, LOAD_SOUTH, LOAD_MAGMA, LOAD_WATER,
  LOAD_RETURN, LOAD_HORIZONS, LOAD_COVENANTS, LOAD_GEAR_RECORDS,
  LOAD_GEAR_REFS, LOAD_GEAR_SEEN, LOAD_GEAR_CLAIMS, LOAD_ECONOMY,
- LOAD_PUBLISH
+ LOAD_RELATIONSHIPS, LOAD_PUBLISH
 };
 static struct {
  Save5State *out;
@@ -18,7 +18,7 @@ static struct {
 } loader;
 unsigned save5_load_status(void){return loader.status;}
 unsigned save5_load_progress(void){return loader.progress;}
-unsigned save5_load_progress_total(void){return 2u*SAVE5_BANK_SIZE+28u*256u;}
+unsigned save5_load_progress_total(void){return 2u*SAVE5_BANK_SIZE+29u*256u;}
 void save5_load_cancel(void){loader.status=SAVE5_IDLE;loader.out=0;loader.progress=0;}
 int save5_load_begin(Save5State *out){
  if(writer_status==SAVE5_BUSY||save5_preflight_active()||loader.status==SAVE5_BUSY)return 0;
@@ -114,6 +114,7 @@ unsigned save5_load_step(unsigned budget){
    read_bytes(s->equipment.equipped,o+4928,5);read_bytes(s->equipment.seen,o+4944,64);read_bytes(s->equipment.reward_claims,o+5024,8);
   }
   if(r>=10){read_bytes(b,o+SAVE5_ECONOMY_OFFSET,32);decode_economy(&s->economy,b);}
+  if(r>=13)read_bytes(s->relationships.events,o+SAVE5_RELATIONSHIPS_OFFSET,4);
   normalize_resume(&s->campaign,r);loader.index=0;break;
  }
  case LOAD_INSTANCES:
@@ -176,8 +177,9 @@ unsigned save5_load_step(unsigned budget){
    (r>=11?quest_equipment_validate(&s->quests,&s->equipment):history_equipment_claims_validate(&s->quests,&s->equipment,r)));break;
  case LOAD_ECONOMY:
   ok=r<10?zero_bytes((const Save4U8*)&s->economy,32):r==10?history10_economy_validate(&s->economy,s->campaign.chapter_flags):
-   economy_state_validate_revision(&s->economy,s->campaign.chapter_flags,r)&&save5_later_claims_validate(&s->quests,&s->economy)&&
+   economy_state_validate_revision(&s->economy,s->campaign.chapter_flags,r>=13?12:r)&&save5_later_claims_validate(&s->quests,&s->economy)&&
    save5_economy_sources_validate(&s->quests,&s->equipment,&s->economy,s->roster.rewards[0]);break;
+ case LOAD_RELATIONSHIPS:ok=r<13?zero_bytes(s->relationships.events,4):relationships_state_valid(&s->relationships);break;
  case LOAD_PUBLISH:
   if(loader.out)copy_state(loader.out,s);
   loader.out=0;loader.status=SAVE5_DONE;loader.progress=save5_load_progress_total();return SAVE5_DONE;

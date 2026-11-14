@@ -24,12 +24,12 @@ Each person's goals remain meaningful outside their relationship to the player.
 
 ## Small, verifiable delivery units
 
-1. **This change: isolated relationship core.** Four independent event ledgers,
+1. **Completed foundation: isolated relationship core.** Four independent event ledgers,
    hidden derived affinity, explicit dating/marriage milestones, deterministic
-   validation and tests. It is intentionally not linked into the ROM yet. This
-   is not a claim that the game currently has romantic scenes or persistence.
-2. **Persistence and admission.** Review a new Save5 content revision before
-   adding any runtime state. Preserve revision1–12 policy and every historical
+   validation and tests. Scene progression is still not connected to the ROM.
+   This is not a claim that the game currently has playable romantic scenes.
+2. **Current slice: persistence and admission.** Content13 adds the ledger;
+   see [storage and verification](RELATIONSHIPS_SAVE13.md). Preserve revision1–12 policy and every historical
    fixture/hash. Append a typed four-byte ledger without repurposing reserved
    bytes in a released schema. Update blocking/incremental load, streamed
    validation, writer/preflight, migration, metadata packing and source inventory

@@ -23,7 +23,7 @@ import unittest
 from test_save4 import CampaignSave, AUTHENTIC_FIXTURES, legacy, record, fields, state
 
 ROOT = Path(__file__).resolve().parents[1]
-A, B, SIZE, USED = 0x200, 0x1A00, 6144, 5088
+A, B, SIZE, USED = 0x200, 0x1A00, 6144, 5092
 IDLE, BUSY, DONE, FAILED = range(4)
 LEGACY_ENABLED = (1, 2, 4, 5, 7, 8, 10, 11)
 REVISION2_ENABLED = LEGACY_ENABLED + (13, 14, 16)
@@ -87,7 +87,7 @@ class Economy(C.Structure):
 
 class Save(C.Structure):
     _fields_ = [('campaign', CampaignSave), ('roster', Roster),
-                ('quests', Quests), ('equipment', Equipment), ('economy', Economy)]
+                ('quests', Quests), ('equipment', Equipment), ('economy', Economy), ('relationships', C.c_ubyte * 4)]
 
 
 def repair_crc(b):
@@ -100,7 +100,7 @@ def repair_crc(b):
 
 
 def compare_state(s):
-    return fields(s.campaign), bytes(s.roster), bytes(s.quests), bytes(s.equipment), bytes(s.economy)
+    return fields(s.campaign), bytes(s.roster), bytes(s.quests), bytes(s.equipment), bytes(s.economy), bytes(s.relationships)
 
 
 # (filename, full32KiB SHA256, exact A32bytes, exact B32bytes)
@@ -249,7 +249,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(compare_state(got), compare_state(s))
         self.assertEqual((got.campaign.sequence, got.campaign.loaded_version), (1, 5))
         b = bytes(self.sram[A:A+SIZE])
-        self.assertEqual(b[:8], b'EB\x05\x20\x00\x18\xe0\x13')
+        self.assertEqual(b[:8], b'EB\x05\x20\x00\x18\xe4\x13')
         self.assertEqual(b[20], 0xA5)
         self.assertEqual(b, repair_crc(b))
         self.assertEqual(b[160+20:160+24], b'\xef\xbe\xad\xde')
@@ -330,7 +330,7 @@ class Save5Tests(unittest.TestCase):
         s = self.fresh()
         self.store(s)
         good = bytes(self.sram[A:A+SIZE])
-        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 13),
+        mutations = [(0, 0), (2, 6), (3, 31), (4, 1), (6, 0), (12, 14),
                      (14, 1), (21, 1), (32, 14), (34, 2), (46, 3), (47, 1),
                      (112+15, 255), (112, 0), (128, 0), (144, 1),
                      (160+1, 0x81), (160+2, 2), (160+3, 101), (160+8, 0),
@@ -617,7 +617,7 @@ class Save5Tests(unittest.TestCase):
         self.assertEqual(bytes(migrated.roster.lifetime_field_aid), original[4520:4536])
         self.store(migrated)
         newest = bytes(self.sram[B if offset == A else A:(B if offset == A else A)+SIZE])
-        self.assertEqual(newest[12:14], bytes((12,0)))
+        self.assertEqual(newest[12:14], bytes((13,0)))
         self.assertEqual(newest[96:4032], original[96:4032])
         self.assertEqual(newest[4296:4544], original[4296:4544])
         self.assertEqual(bytes(self.sram[:A]), old[:A])
@@ -1021,7 +1021,7 @@ class Save5Tests(unittest.TestCase):
         self.store(migrated)
         destination=B if offset==A else A
         written=bytes(self.sram[destination:destination+SIZE])
-        self.assertEqual(written[12:14],b'\x0c\x00')
+        self.assertEqual(written[12:14],b'\x0d\x00')
         self.assertEqual(written[32:],bank[32:],'migration changed earned campaign, roster, commands, credits, quests or equipment')
         self.assertEqual(bytes(self.sram[offset:offset+SIZE]),bank)
         self.assertEqual(bytes(self.sram[:A]),data[:A])
