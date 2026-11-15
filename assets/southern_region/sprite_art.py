@@ -1,19 +1,11 @@
 """Original Southern civic actors and mechanical 16px state icons."""
-from generate_assets import Art
+from generate_assets import resident_sprite,Art
 NAMES='GUIDE TAILOR MARKET RAIN PORTER CURATOR REST FERRY MIRROR_SLASH MIRROR_BACK HOOD SOCKET CLOCK SHADE_CLOSED SHADE_OPEN RAIN_PIPE HANDLE TRIAL CATCH ROOT DRAIN RIPPLE RESET TORN AWNING GATE WATER_LENS NOTICE RECEIVER CLOTH PLATE CORD BEACON MACHINE_IDLE MACHINE_WARN MACHINE_OPEN DONE REST_LIT'.split()
 NPCS=set(NAMES[:6]);# These sprites are original 16x16 living civic characters and mechanical icons.
 def sprite(n):
  a=Art(16,16,'transparent')
  if n in NPCS:
-  idx=NAMES.index(n);cloth=['water2','fire2','purple2','pine3','gold1','rose3'][idx]
-  a.e((2,12,13,15),'shadow');a.r((4,11,6,14),'wood0');a.r((9,11,11,14),'wood0');a.p([(4,6),(10,6),(12,9),(11,13),(4,13),(2,9)],cloth);a.l([(5,7),(5,11)],'white')
-  a.r((5,2,10,6),'skin0' if idx%2 else 'skin1');a.r((4,1,11,3),'wood0');a.dot(9,4,'ink');a.dot(7,4,'ink');a.l([(7,6),(9,6)],'skin2')
-  if n=='GUIDE':a.r((10,7,14,10),'plaster');a.l([(11,8),(13,8)],'water2')
-  if n=='TAILOR':a.r((1,7,4,10),'fire1');a.l([(2,8),(4,10)],'white');a.l([(11,7),(14,6)],'silver')
-  if n=='MARKET':a.r((1,0,14,2),'wood4');a.r((4,0,10,1),'plaster');a.r((11,9,15,12),'wood3')
-  if n=='RAIN':a.l([(12,12),(13,2)],'wood1',2);a.e((11,0,15,4),'water4')
-  if n=='PORTER':a.r((0,5,4,11),'wood1');a.r((1,6,3,9),'wood4')
-  if n=='CURATOR':a.r((10,8,14,11),'gold4');a.l([(11,9),(13,9)],'wood3')
+  return resident_sprite('south',n)
  elif n.startswith('REST'):
   a.r((2,11,13,14),'stone2');a.r((5,4,10,12),'plaster');a.e((3,1,12,8),'gold1');a.e((5,3,10,6),'gold4' if n=='REST_LIT' else 'water3');a.l([(2,0),(13,0)],'fire2',2)
  elif n=='FERRY':

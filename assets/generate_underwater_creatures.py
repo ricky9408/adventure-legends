@@ -539,6 +539,6 @@ def verify(manifest,world_successor=None):
         report.update({'arm_compile':'passed','arm_rom_object_bytes':sections[0],'arm_data_bytes':sections[1],'arm_bss_bytes':sections[2],'max_arm_stack_bytes':max(stack),'max_include_bytes':manifest['max_include_bytes']})
     (OUT/'validation.json').write_text(json.dumps(report,indent=2)+'\n');return {k:v for k,v in report.items() if k not in ('output_sha256','pixel_validation')}
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--verify',action='store_true');parser.add_argument('--world-successor',choices=['connected-roads-c4']);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--verify',action='store_true');parser.add_argument('--world-successor',choices=['connected-roads-c4','lantern-trails-r1']);args=parser.parse_args()
     manifest=generate(args.world_successor);print(json.dumps(verify(manifest,args.world_successor) if args.verify else {'generated_forms':FORM_IDS,'data_bytes':manifest['data_bytes'],'max_include_bytes':manifest['max_include_bytes']},indent=2))
 if __name__=='__main__':main()

@@ -27,6 +27,12 @@ MUSIC_INPUTS.update({'assets/music/lanterns/lanterns-gba-16384-s8.raw': 'a9ada6f
 # Reviewed regional source/render binary inputs. Hash checked on every export.
 MUSIC_INPUTS.update(json.loads((ROOT/'assets/music/regional/binary-input-pins.json').read_text()))
 MUSIC_INPUTS.update(json.loads((ROOT/'assets/music/selected/binary-input-pins.json').read_text()))
+FONT_INPUTS = {
+ 'assets/fonts/pixelmplus/PixelMplus12-Regular.ttf': '02f19467ea7cc235cc06c570b7f6c3b0a12a6f682bc8d74c43f2d323d97bcd12',
+ 'assets/fonts/pixelmplus/LICENSE_E': '907e9f5ac24cba6ce2523cd2a66d6ba143e082c685344dfa8d30ef12f67410a0',
+ 'assets/fonts/k8x12/k8x12.bdf': '97361b327b410c2cd6e8fe87ed3873387229e76af13829931d6987f267585277',
+ 'assets/fonts/k8x12/author-license.html': '12c9aa5378f9cc2ef420eb942d6ccaada2a8703a8662334187f43c4ddb891e7a',
+}
 # Redundant large contact sheets are reproducible with make assets. Individual
 # region/camera PNGs remain included; these are not ROM inputs or test fixtures.
 # Exact oversized historical reports ship as deterministic gzip, with raw hashes
@@ -99,9 +105,11 @@ def source_files():
                 assert packed.is_file() and gzip.decompress(packed.read_bytes())==p.read_bytes(), 'Missing/lossy compressed evidence: '+str(rel)
                 continue
             if p.name=='.gitignore':files.append(p);continue
-            if p.suffix not in EXTENSIONS and rel.as_posix() not in MUSIC_INPUTS and rel.as_posix()!='tests/fixtures/v5-revision5-minimal/ancestry/southern-minimal8-input.bin':continue
+            if p.suffix not in EXTENSIONS and rel.as_posix() not in MUSIC_INPUTS and rel.as_posix() not in FONT_INPUTS and rel.as_posix()!='tests/fixtures/v5-revision5-minimal/ancestry/southern-minimal8-input.bin':continue
             if rel.as_posix() in MUSIC_INPUTS:
                 assert hashlib.sha256(p.read_bytes()).hexdigest()==MUSIC_INPUTS[rel.as_posix()], 'Unreviewed music input'
+            if rel.as_posix() in FONT_INPUTS:
+                assert hashlib.sha256(p.read_bytes()).hexdigest()==FONT_INPUTS[rel.as_posix()], 'Unreviewed font input'
             if p.suffix=='.bin':
                 assert p.stat().st_size==32768 and hashlib.sha256(p.read_bytes()).hexdigest()=='968066ed983bd48fc2af0d7ffeb79f635624037ef2099809fd00c97aaa04cc0c', 'Unreviewed binary fixture'
             if p.suffix=='.sav' and not str(rel).startswith('tests/fixtures/'):continue
@@ -111,7 +119,7 @@ def source_files():
 def main():
     OUT.mkdir(exist_ok=True)
     files=source_files()
-    manifest={'schema':1,'purpose':'Owner-selected 23-cue soundtrack and PSG jingle, exact unpadded PCM, preserved78room routing and gameplay/save/font; current evidence and historical limits','files':[]}
+    manifest={'schema':1,'purpose':'Lantern Trails art and story redesign; reproducible78room source, original23cue soundtrack, revision13 saves and complete native font authoring inputs; current evidence and historical limits','files':[]}
     target=OUT/'Adventure-Legends-Emberbond-source.zip'
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
         for p in files:

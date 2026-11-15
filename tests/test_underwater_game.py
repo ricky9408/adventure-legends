@@ -104,9 +104,19 @@ class UnderwaterWorld(unittest.TestCase):
   self.entry(51);self.field(0,52);self.at(312,112);L.tick(1);self.field(1);self.target(240,80);self.assertEqual(L.qo(40),3)
   self.entry(52);self.act(80,96);self.field(0,49);self.target(120,112);self.assertEqual(L.qo(40),7)
   self.entry(53);self.field(0,49);self.field(1,52);self.target(176,80);self.target(120,112)
-  for _ in range(3):
-   self.at(24,136);L.tick(108);self.assertEqual(b('underwater_game_guardian_stage'),3);self.assertEqual(L.underwater_game_weapon_hit(1,120,48,16,0,L.underwater_game_action_begin(0)),1)
-  self.assertEqual(L.settle_events(),1);self.assertEqual(L.qo(40),15);self.entry(46);self.target(120,72);self.assertEqual(L.qs(40),3);self.assertEqual(L.roundtrip(),1)
+  for hit in range(3):
+   self.at(24,136);L.tick(108);self.assertEqual(b('underwater_game_guardian_stage'),3)
+   spoken=L.get_dialogue_count();token=L.underwater_game_action_begin(0)
+   self.assertEqual(L.underwater_game_weapon_hit(1,120,48,16,0,token),1)
+   self.assertEqual(L.get_dialogue_count(),spoken+int(hit==2))
+   if hit==2:
+    self.assertEqual(v('game_state'),2,'the final opening gives the guardian a spoken response')
+    self.assertEqual([L.get_dialogue_line(i)for i in (0,1)],[IDS['TX_UW_GUARDIAN_DONE'],IDS['TX_UW_GUARDIAN_HOME']])
+    self.assertEqual(L.underwater_game_weapon_hit(1,120,48,16,0,token),0)
+    self.assertEqual(L.get_dialogue_count(),spoken+1,'the same swing cannot repeat the goodbye')
+  self.assertEqual(L.settle_events(),1);self.assertEqual(L.qo(40),15)
+  self.assertEqual(v('game_state'),2,'settling the earned objective preserves the dialogue')
+  self.entry(46);self.target(120,72);self.assertEqual(L.qs(40),3);self.assertEqual(L.roundtrip(),1)
  def sources(self):
   self.main();self.entry(48);self.target(112,92);self.target(144,92);self.target(64,224);self.target(96,224)
   self.entry(47);self.target(352,160);self.target(376,184)

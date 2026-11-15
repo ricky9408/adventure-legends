@@ -20,7 +20,7 @@ code = r'''
 #define COLD
 #define PLAY 1
 enum {TX_NT_RETURN_A, TX_NT_RETURN_B, TX_ST_RETURN_A, TX_ST_RETURN_B,
-      TX_MG_END, TX_MG_ENDB, TX_UW_END, TX_UW_HOME};
+      TX_MG_END, TX_MG_ENDB, TX_UW_END, TX_UW_HOME, TX_UW_ENDB};
 int receipt_later, receipt_fresh, return_state, receipt_boss, calls, first, second;
 void dialogue(int a,int b,int state){assert(state==PLAY);first=a;second=b;calls++;}
 ''' + function(source, 'finish_later_story') + r'''

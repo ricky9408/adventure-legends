@@ -25,7 +25,7 @@ class HorizonsCatalogTests(unittest.TestCase):
         cls.c = load_json(ROOT / 'assets/creatures/catalog.json')
         cls.e = load_json(ROOT / 'assets/creatures/enabled.json')
         cls.lock = load_json(ROOT / 'assets/creatures/identity-lock.json')
-        cls.plan = load_json(ROOT / 'docs/horizons-design/shared_horizons_plan.json')
+        cls.plan = load_json(ROOT / 'assets/horizons_region/source_plan.json')
 
     def test_exact_append_and_reserved_namespaces(self):
         self.assertEqual(validate(self.c, self.lock), [])
@@ -49,6 +49,18 @@ class HorizonsCatalogTests(unittest.TestCase):
         self.assertFalse(any(indexes[1][122:]))
         self.assertEqual(len({s['family_id'] for s in self.c['slots'] if s['id'] in e['enabled_form_ids']}), 52)
         self.assertEqual(len(CAPABILITY_MASKS), 30)
+
+    def test_portable_plan_preserves_shipped_geometry_and_creature_briefs(self):
+        geometry = load_json(ROOT / 'assets/horizons_region/geometry.json')['rooms']
+        manifest = load_json(ROOT / 'assets/horizons_creatures/manifest.json')
+        self.assertEqual(self.plan['forms'], manifest['briefs'])
+        self.assertEqual([a['id'] for a in self.plan['areas']], list(range(62, 70)))
+        for area, room in zip(self.plan['areas'], geometry):
+            self.assertEqual(area['id'], room['id'])
+            self.assertEqual(area['size'], [room['width'], room['height']])
+            self.assertEqual(area['safe_spine'], room['safe_spine'])
+            self.assertEqual({str(s['id']):s['center'] for s in area['spawns']}, room['spawns'])
+            self.assertEqual(area['reset_point'], room['reset'])
 
     def test_every_form_and_command_matches_the_finite_plan(self):
         forms = {f['id']:f for f in self.c['forms']}

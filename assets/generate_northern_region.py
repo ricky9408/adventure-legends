@@ -9,7 +9,7 @@ import hashlib,json,random,sys
 from PIL import Image,ImageDraw
 import connected_road_art as roads
 sys.dont_write_bytecode=True
-from generate_assets import Art,P,PAL,COLORS,color_background,tree,flowers
+from generate_assets import resident_sprite,Art,P,PAL,COLORS,color_background,tree,flowers
 from generate_region import paths,terrace,water,bridge,soft_ground,verify_room,odd_bitmap,cbytes,paste_sprite
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/northern_region';SRC=ROOT/'src'
 CONTRACT=json.loads((OUT/'contract.json').read_text());ROOMS=[];SPRITES=[]
@@ -235,10 +235,7 @@ def interior(i):
 def sprite(n):
  a=Art(16,16,'transparent')
  if n in NAMES[:5]:
-  coats=['rose3','gold1','water2','pine3','purple2'];c=coats[NAMES.index(n)]
-  a.e((2,12,13,15),'shadow');a.r((4,11,6,14),'wood0');a.r((9,11,11,14),'wood0');a.p([(4,6),(11,6),(13,11),(10,13),(4,12),(2,10)],c);a.r((5,2,10,6),'skin1');a.r((4,1,11,3),'wood1');a.dot(9,4,'ink');a.l([(5,7),(9,7)],'gold4')
-  if n=='EDDA':a.l([(2,8),(1,3)],'wood3');a.e((0,0,3,4),'gold2')
-  if n=='NERI':a.r((10,7,14,9),'stone4')
+  return resident_sprite('north',n)
  elif n.startswith('CART') or n=='TENDER':
   a.e((0,12,15,15),'shadow');a.r((2,3,13,11),'wood0');a.r((3,4,12,10),'wood3');a.l([(3,4),(12,4)],'wood5');a.r((3,12,5,14),'stone1');a.r((10,12,12,14),'stone1');glyph(a,8,7,0 if n=='CART_LIGHT' else 1)
   if n=='TENDER':a.p([(0,6),(7,11),(15,6),(12,12),(7,14),(3,12)],'water2');a.l([(1,7),(7,12),(14,7)],'water4')

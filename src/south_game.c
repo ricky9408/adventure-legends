@@ -367,7 +367,8 @@ default:return 1;
 }}
 static COLD int trial_power(void){unsigned i;
 if(trial_index>=10)return 0;
-for(i=0;i<3;i++)if(trial_near(i)){if(!participant())return wrong(TX_ST_TRIAL_SAME);
+for(i=0;i<3;i++){
+if(trial_near(i)){if(!participant())return wrong(TX_ST_TRIAL_SAME);
 if(!field(trials[trial_index].capability,trials[trial_index].xy[i][0],trials[trial_index].xy[i][1]))return wrong(TX_ST_WRONG);
 if(trial_bits&(1u<<i))return wrong(TX_ST_TRIAL_ALREADY);
 if(!trial_setting(i)){trial_bits=trial_revealed=0;
@@ -379,7 +380,9 @@ changed();
 toast(TX_ST_CURRENT);
 return 1;
 }return trial_mark(i);
-}return 0;
+}
+}
+return 0;
 }
 /* The receipt stays with quest24. Its garden invitation starts only after that
  * reward is claimed; each later scene needs a new entry into the harbor. */

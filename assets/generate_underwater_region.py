@@ -12,7 +12,7 @@ import hashlib, json, math, random, sys
 from PIL import Image, ImageDraw
 import connected_road_art as roads
 sys.dont_write_bytecode = True
-from generate_assets import Art, P, PAL, COLORS
+from generate_assets import resident_sprite,Art, P, PAL, COLORS
 from generate_region import odd_bitmap, cbytes, verify_room, paste_sprite
 from generate_northern_region import collision_bands
 ROOT=Path(__file__).resolve().parents[1]
@@ -391,24 +391,8 @@ def court():
 def sprite(n):
  a=Art(16,16,'transparent')
  if n in NPCS or n in('KEEPER_WORK','WORKER_WORK'):
-  base='KEEPER'if n=='KEEPER_WORK'else'SHELLWRIGHT'if n=='WORKER_WORK'else n
-  coat={'KEEPER':'jade','SHELLWRIGHT':'coral','COOK':'pearl','FRAMER':'brass','DANCER':'coral_shade'}[base]
-  ell(a,(2,12,13,15),'shadow');rect(a,(4,11,6,14),'deep');rect(a,(9,11,11,14),'deep')
-  poly(a,[(4,7),(10,7),(13,11),(11,13),(4,13),(2,10)],coat);line(a,[(5,9),(6,12)],'pearl_mid'if base!='COOK'else'jade')
-  rect(a,(5,3,10,8),'skin2');rect(a,(4,2,11,4),'wood1');dot(a,6,6,'ink');dot(a,9,6,'ink');line(a,[(7,8),(9,8)],'skin1')
-  if base=='KEEPER':
-   poly(a,[(3,3),(5,0),(10,0),(12,3)],'pearl');line(a,[(6,1),(8,3),(10,1)],'jade');rect(a,(10,8,14,11),'brass');rect(a,(11,8,13,10),'pearl');line(a,[(12,8),(12,10)],'jade')
-  elif base=='SHELLWRIGHT':
-   rect(a,(3,2,12,3),'brass_lit');rect(a,(6,8,10,12),'jade_dark');line(a,[(12,7),(13,12)],'brass');line(a,[(11,7),(14,7)],'pearl',2)
-  elif base=='COOK':
-   ell(a,(3,0,11,4),'pearl');ell(a,(6,0,13,4),'pearl');rect(a,(5,4,11,4),'jade');rect(a,(5,9,10,13),'coral');ell(a,(0,9,5,12),'brass_lit');dot(a,2,9,'jade')
-  elif base=='FRAMER':
-   line(a,[(5,1),(10,1)],'jade');rect(a,(11,7,15,12),'brass');rect(a,(12,8,14,11),'deep');line(a,[(2,7),(3,12)],'pearl_mid')
-  else:
-   poly(a,[(3,4),(1,1),(5,2),(7,0),(8,3)],'coral_lit');line(a,[(4,9),(1,7)],'skin2',2);line(a,[(11,8),(14,5)],'skin2',2);poly(a,[(3,11),(12,10),(14,13),(9,12),(6,14)],'jade_glow')
-  if n.endswith('_WORK'):
-   rect(a,(10,8,14,10),'skin2');line(a,[(10,7),(15,7)],'pearl'if base=='KEEPER'else'brass_lit');dot(a,14,6,'white')
-  return a
+  base='KEEPER' if n=='KEEPER_WORK' else 'SHELLWRIGHT' if n=='WORKER_WORK' else n
+  return resident_sprite('underwater',base,work=n.endswith('_WORK'))
  if n in('REST','REST_LIT'):
   ell(a,(1,10,14,15),'shadow');ell(a,(1,8,14,13),'brass');ell(a,(2,7,13,11),'pearl');ell(a,(4,7,11,10),'jade')
   for dx,dy in[(-4,-1),(0,-4),(4,-1)]:line(a,[(8,8),(8+dx,4+dy)],'jade_glow'if n=='REST'else'brass_lit',2)

@@ -12,7 +12,7 @@ import hashlib, json, random, sys
 from PIL import Image, ImageDraw, ImageFilter
 import connected_road_art as roads
 sys.dont_write_bytecode = True
-from generate_assets import Art, COLORS, P, PAL, color_background, tree, flowers, stone
+from generate_assets import resident_sprite,Art, COLORS, P, PAL, color_background, tree, flowers, stone
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets' / 'region'
@@ -573,36 +573,8 @@ def garden():
 
 
 def npc_sprite(kind):
-    a=Art(16,16,'transparent')
-    # Six distinct residents: silhouette, work wear, headwear and carried detail.
-    coats=[('wood1','wood3','gold3'),('purple1','purple3','flower1'),('water0','water2','leafwarm'),('rose1','rose4','gold3'),('pine1','pine4','gold4'),('wood2','wood4','water3')]
-    edge,body,trim=coats[kind]
-    a.e((3,13,13,15),'shadow')
-    a.r((5,12,7,14),'wood0');a.r((9,12,11,14),'wood0')
-    a.r((5,13,6,13),'wood3');a.r((9,13,10,13),'wood3')
-    a.p([(5,6),(10,6),(12,8),(13,12),(10,13),(5,13),(3,11),(4,8)],edge)
-    a.r((5,7,10,11),body);a.l([(7,7),(7,11)],trim);a.r((5,11,10,11),trim)
-    a.r((3,8,4,11),'skin1');a.r((11,8,12,10),'skin2')
-    a.p([(5,2),(10,2),(11,4),(10,7),(6,7),(4,5)],'skin0')
-    a.r((5,3,10,5),'skin2');a.r((6,6,9,6),'skin1');a.dot(6,4,'ink');a.dot(9,4,'ink')
-    a.r((5,1,10,2),'wood0');a.r((4,2,5,4),'wood0')
-    if kind==0: # Broad smith's headscarf, leather apron and hammer.
-        a.r((5,1,10,2),'water1');a.r((5,1,10,1),'water4');a.r((5,8,10,12),'wood1');a.r((6,9,9,11),'wood3')
-        a.l([(12,11),(13,6)],'wood4');a.r((11,5,15,7),'stone1');a.r((12,5,15,5),'stone4')
-    elif kind==1: # Weaver's knot and diagonal teal sash with a visible spool.
-        a.e((8,0,12,3),'wood0');a.dot(11,1,'gold3');a.l([(5,7),(10,11)],'water3',2)
-        a.r((12,9,14,12),'gold3');a.r((11,8,15,8),'wood3');a.r((11,12,15,12),'wood3');a.l([(12,10),(14,10)],'water2')
-    elif kind==2: # Reed warden's broad conical hat and staff.
-        a.p([(2,3),(7,0),(9,0),(14,3),(14,4),(2,4)],'wood1');a.p([(3,3),(7,1),(9,1),(13,3)],'wood4');a.l([(5,2),(10,2)],'wood5')
-        a.l([(13,6),(13,14)],'wood2');a.dot(13,5,'leafwarm');a.l([(11,7),(13,8)],'skin2')
-    elif kind==3: # Shrine keeper's tidy cap and offering tray.
-        a.r((5,0,10,2),'rose1');a.r((6,0,9,1),'rose4');a.r((4,9,12,11),'wood1');a.r((4,9,12,9),'gold3');a.dot(8,8,'flower1')
-    elif kind==4: # Apprentice's short sleeves and bright training headband.
-        a.r((5,1,10,3),'wood0');a.r((4,3,11,3),'rose4');a.dot(3,3,'rose5');a.r((6,8,10,10),'pine4')
-        a.l([(12,12),(14,8)],'wood4');a.dot(14,7,'wood5')
-    else:
-        a.r((5,1,10,2),'wood4');a.r((4,2,11,2),'wood5');a.r((5,8,10,12),'plaster');a.r((6,10,9,11),'water2');a.r((11,10,14,12),'wood2');a.l([(11,10),(14,10)],'gold3')
-    return a
+    name=('SMITH','WEAVER','WARDEN','REST_KEEPER','APPRENTICE','MERCHANT')[kind]
+    return resident_sprite('reed',name)
 
 
 def sprite(name):

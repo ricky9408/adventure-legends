@@ -107,4 +107,3 @@
 #include "north_art_data/part_105.inc"
 #include "north_art_data/part_106.inc"
 #include "north_art_data/part_107.inc"
-#include "north_art_data/part_108.inc"

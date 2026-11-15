@@ -1205,7 +1205,7 @@
     "arm32_room_table_bytes": 120,
     "rom_payload_bytes": 779256,
     "chunks": 98,
-    "largest_chunk_bytes": 32000,
+    "largest_chunk_bytes": 31998,
     "chunk_limit_bytes": 32000
   }
 }

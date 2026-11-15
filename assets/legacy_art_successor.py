@@ -33,6 +33,9 @@ def authoring_definitions(path):
             for node in tree.body if isinstance(node,(ast.FunctionDef,ast.ClassDef))}
 
 def validate_reviewed_successor(root,contract_path,contract,successor):
+    if successor == 'lantern-trails-r1':
+        from redesign_art_guard import validate
+        return validate(root, contract_path, contract)
     assert successor==SUCCESSOR_ID,('Unknown reviewed successor',successor)
     reviewed=json.loads((root/SUCCESSOR_FILE).read_text())
     assert reviewed['successor']==successor

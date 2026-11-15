@@ -51,7 +51,7 @@
     {
       "terrain": "GRASS",
       "path": "assets/northern_region/headland_roads.png",
-      "sha256": "24387d4034a6201b1a638ddbdcaeb42f5f39c03cb46d90fe67dae8ccd8e29b11",
+      "sha256": "b8b80d71fe984323242627b5e8e2e4fcd0a10c9072a4d8ec8c52409884e5720e",
       "crop": [
         118,
         170,
@@ -62,7 +62,7 @@
     {
       "terrain": "WATER",
       "path": "assets/northern_region/hearthwake_quay.png",
-      "sha256": "c23c6af6a92ee2d54992f4b120133e743b1a83cf5541a9cf63284e9d956a3293",
+      "sha256": "0e39af5b7e6ba2f20ddbcb44c03d3343ac267c7bd0a80ae85a2f5d9a4356439d",
       "crop": [
         116,
         271,
@@ -73,7 +73,7 @@
     {
       "terrain": "TIMBER",
       "path": "assets/northern_region/hearthwake_quay.png",
-      "sha256": "c23c6af6a92ee2d54992f4b120133e743b1a83cf5541a9cf63284e9d956a3293",
+      "sha256": "0e39af5b7e6ba2f20ddbcb44c03d3343ac267c7bd0a80ae85a2f5d9a4356439d",
       "crop": [
         104,
         190,

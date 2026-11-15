@@ -27,6 +27,12 @@ elif command -v pkg-config >/dev/null 2>&1 && pkg-config --exists libmgba; then
   # shellcheck disable=SC2046
   "$CC" -std=c11 -D_GNU_SOURCE -O2 -fPIC "$SHARED" "$HERE/mgba_bridge.c" \
     $(pkg-config --cflags --libs libmgba) -o "$OUTPUT"
+elif [ "$(uname -s)" = Darwin ] && command -v brew >/dev/null 2>&1 && \
+     MGBA_PREFIX=$(brew --prefix mgba 2>/dev/null) && \
+     [ -f "$MGBA_PREFIX/include/mgba/core/core.h" ]; then
+  # Homebrew's mGBA does not publish a pkg-config file.
+  "$CC" -std=c11 -D_GNU_SOURCE -O2 -fPIC "$SHARED" "$HERE/mgba_bridge.c" \
+    -I"$MGBA_PREFIX/include" -L"$MGBA_PREFIX/lib" -lmgba -o "$OUTPUT"
 else
   # Debian's libmgba-dev can expose standard include/library locations without
   # a .pc file. A normal linker invocation supports that arrangement.

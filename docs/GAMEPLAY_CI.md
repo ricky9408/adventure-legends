@@ -4,7 +4,7 @@
 manual **Actions → Gameplay regression → Run workflow** requests. Host and native
 lanes run independently. An optional manual checkbox adds exhaustive two-loop
 regional audio diagnostics. An older run of the same PR/ref is cancelled when a
-new commit arrives. Jobs have a 60-minute ceiling with separately bounded setup/upload steps and a
+new commit arrives. Jobs have a 90-minute ceiling with separately bounded setup/upload steps and a
 45-minute regression budget (leaving time to upload failure evidence); the expanded
 host aggregate has a 40-minute subprocess limit, and each other build/test subprocess
 also has a bounded timeout and its entire process group is stopped on timeout.
@@ -127,6 +127,11 @@ same setup commands. Debian supplies Python 3.13, NumPy 2.2.4 and SciPy 1.15.3.
 CI creates an isolated venv with those system packages, then installs only the
 hash-pinned official Pillow 13.0.0 CPython 3.13/manylinux x86_64 wheel from PyPI.
 The requirements file intentionally rejects other wheel builds/interpreters.
+The Linux wheel uses zlib 1.3.1; the macOS wheel uses zlib-ng, which can produce
+different compressed PNG bytes for identical pixels. Author release assets in
+this pinned Linux environment so exact-byte regeneration checks also pass on a
+clean checkout. This encoding constraint does not affect ordinary ROM builds
+from the shipped C arrays.
 On a prepared Debian 13 host with `python3-venv` installed:
 
 ```sh

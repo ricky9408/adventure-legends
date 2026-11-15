@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "design_version": "SHARED_HORIZONS",
-  "design_manifest_sha256": "913aded4088452c5d34dcd316274edc7cef5689f69a127b9a7188165b6409b1d",
+  "design_manifest_sha256": "610bd18b624f74b3cec817a2a8a11063ca0cc007f047b9228c7803eb78a1ebfe",
   "generator": "assets/generate_horizons_creatures.py",
   "form_ids": [
     105,
@@ -47,7 +47,7 @@
   ],
   "status": "ART ONLY: these are authored sprite sheets and art-review composites, not emulator captures, obtainability proof, live-rendering proof or gameplay acceptance.",
   "rights": "Original code-native pixel geometry, authored from silhouettes and anatomy in the Shared Horizons brief. No traced, downloaded, image-generated or third-party creature pixels.",
-  "generator_sha256": "e0b534f24b95fb656bbe9d0e0a229f59c826a11f72d074a0f1d23aa186f0e784",
+  "generator_sha256": "ecbad5f53dffa1827cf50ebfae6c35ed69191ea525159f923cab9b8fed5052a9",
   "codegen_sha256": "8377ade9cf1d2b6b56008d83940bd29d9e739c9ad8d9bc28bed5e2572189131d",
   "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
   "data_bytes": 131088,

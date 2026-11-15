@@ -45,7 +45,7 @@
   ],
   "status": "ART ONLY: sprite sheets and composites are not emulator captures, proof of obtainability, live rendering, frame budget or VRAM/state acceptance.",
   "rights": "Original code-native pixel geometry. No Nintendo/Pokemon extraction, tracing, image extraction or third-party raster inputs.",
-  "generator_sha256": "2a4cbb6d9eabb3ad495aeb1c206e5411d7f082c50a8e68b872ec2118fb99c88f",
+  "generator_sha256": "4228357bfebee932c34e88421789082a2757823d67b6af79d949f492f0091bb2",
   "codegen_sha256": "e843aecec4355478c0c32079bc783f5b382a01ebee6ea83de920591be3cc0a55",
   "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
   "data_bytes": 122895,
@@ -144,11 +144,11 @@
     },
     {
       "path": "assets/evolutions/canopykeeper_field.png",
-      "sha256": "b13ce308f69b3a6e9d81ae4f7a9b6d4c689be86e33d0cdc2cbff69e0fe2d2fe1"
+      "sha256": "20d8f8035b0246e1cc5aaf7d42a05e0a7ca863f7fe1f9461a5120daabbec6d99"
     },
     {
       "path": "assets/evolutions/canopykeeper_portrait.png",
-      "sha256": "dcb6cd60a4f9ede0b182695cfa9a5d1fab420f16233b0a34fb6b408a3563a210"
+      "sha256": "efea7159fffc9897544e1c7200fcb79e47e84082ef4c4594c876d73092ec135a"
     },
     {
       "path": "assets/evolutions/windweaver_field.png",
@@ -1590,10 +1590,10 @@
     "baseline": "Return I art start; existing companion pixels and palette remain read-only",
     "files": 95,
     "unchanged": false,
-    "reviewed_world_successor": "connected-roads-c4",
-    "reviewed_background_file_exceptions": 27,
-    "protected_creature_palette_arrays_unchanged": true,
-    "unchanged_historical_files": 68
+    "reviewed_world_successor": "lantern-trails-r1",
+    "reviewed_art_file_exceptions": 29,
+    "shared_palette_and_array_layout_unchanged": true,
+    "unchanged_historical_files": 66
   },
   "silhouette_comparison": {
     "current_unique_front_masks": 15,

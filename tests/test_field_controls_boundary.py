@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Current controls bytes fail closed; historical 4005 bytes/modes stay exact."""
-import base64,copy,gzip,json,stat,unittest
+import base64,copy,gzip,json,stat,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 import field_controls_boundary as boundary
@@ -21,9 +21,42 @@ class BoundaryTests(unittest.TestCase):
                       'proofs: tests/selected_music_boundary.py',
                       'protected: assets/music/selected/catalog.json',
                       'unexpected src/unreviewed.c','deleted tests/current_field_controls.py',
-                      'inverse tampering','contract tampering'):
+                      'inverse tampering','redesign scope tampering','contract tampering'):
             self.assertIn(label,rejected)
         self.assertGreater(len(rejected),len(self.c['current_helpers']))
+
+    def test_redesign_scope_is_explicit_and_hash_bound(self):
+        raw=(boundary.ROOT/boundary.REDESIGN_SCOPE_PATH).read_bytes()
+        paths=boundary.redesign_scope(raw)
+        self.assertTrue(paths)
+        self.assertTrue(all(boundary.allowed(path,paths) for path in paths))
+        self.assertFalse(boundary.allowed('assets/redesign/unreviewed.png',paths))
+        with self.assertRaisesRegex(AssertionError,'scope changed'):
+            boundary.redesign_scope(raw+b' ')
+        for invalid in ('src/*.c','../src/game.c','assets/music/unreviewed.json','tests/unreviewed.py'):
+            scope=json.loads(raw);scope['additional_paths']=[invalid]
+            modified=json.dumps(scope).encode()
+            with patch.object(boundary,'REDESIGN_SCOPE_SHA',boundary.sha(modified)):
+                with self.assertRaises(AssertionError):boundary.redesign_scope(modified)
+
+    def test_optional_contact_sheets_do_not_change_release_inventory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            for name in ('src/game.c','assets/region/room.png','linker.ld','Makefile','LICENSE'):
+                path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'reviewed')
+            exported=boundary.production_inventory(root)
+            previews=('region_preview_native.png','region_preview_2x.png',
+                      'native_camera_sheet.png','native_camera_sheet_2x.png')
+            for name in previews:(root/'assets/region'/name).write_bytes(b'generated preview')
+            self.assertEqual(boundary.production_inventory(root),exported)
+            for name in ('assets/region/unreviewed.png','assets/other/region_preview_native.png',
+                         'src/region_preview_native.png'):
+                path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'unreviewed')
+                self.assertIn(name,boundary.production_inventory(root))
+                self.assertNotEqual(boundary.production_inventory(root),exported)
+                path.unlink()
+            (root/'assets/region/room.png').write_bytes(b'changed cartridge art')
+            self.assertNotEqual(boundary.production_inventory(root),exported)
 
     def test_exact_tree_modes_and_independent_housekeeping(self):
         original=Path.read_bytes;live_ignore=boundary.ROOT/'.gitignore';reads=[]

@@ -35,7 +35,7 @@ class CodegenTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.codegen=load('horizons_codegen_tests',ROOT/'assets/horizons_creatures/codegen.py')
-        cls.names=tuple(f['name'] for f in json.loads((ROOT/'docs/horizons-design/shared_horizons_plan.json').read_text())['forms'])
+        cls.names=tuple(f['name'] for f in json.loads((ROOT/'assets/horizons_region/source_plan.json').read_text())['forms'])
     def setUp(self):
         tmp=tempfile.TemporaryDirectory(prefix='horizons-art-emitter-');self.addCleanup(tmp.cleanup);self.root=Path(tmp.name)
         # Leaf-specific markers catch every transpose, duplication and omission.

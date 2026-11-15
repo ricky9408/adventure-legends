@@ -868,22 +868,22 @@
   },
   "title": {
     "text_safe_zone": [
-      20,
-      32,
-      137,
-      70
+      40,
+      28,
+      164,
+      118
     ]
   },
   "credits": "All character, environment, and prop artwork is original code-native pixel art authored for Emberbond. No third-party art assets used.",
   "collision_notes": "Static obstacle rectangles approximate opaque geometry. Engine should add world bounds and dynamic river/bridge, gate, and brazier obstacles. Small bushes, grass, floor rings, flowers, and fallen branch are decorative and walkable. Tree rects are inset slightly from foliage. Coordinates are x,y,width,height.",
   "art_direction": {
-    "revision": 3,
+    "revision": 4,
     "principles": [
       "Layered scalloped leaf volumes and visible trunk roots",
       "Warm sunlit planes against cool contour shadows",
       "Sparse clustered floor detail and unobstructed routes",
-      "Original auburn-haired teal-coat hero with golden trailing scarf",
-      "Four directional contact/passing walk poses; directional fox and hovering leaf companion"
+      "Original lantern keeper with auburn hair, teal coat, golden scarf and bronze satchel",
+      "Four articulated contact/passing poses; ember-tailed fox and green suspended seed companion"
     ],
     "reference_links": [
       {

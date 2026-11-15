@@ -1,0 +1,305 @@
+{
+  "authoring_definitions": {
+    "Art": "bd70850f9cbd16bf5ee32b84c50adf5aee6e745b5e1d060ebad46c95a1ec1591",
+    "boss": "daf573c92f7aa1d2eeab7ba62a1580eb8f53da7d4c4358f021bd389bc9cf88ef",
+    "bush": "bc4d49362e79db23e46140b9214d71cba93b1bd773cb4b9e1cf74e3391a610d3",
+    "color_background": "4e377966575ffd7d85da25008cc375b693c5886b8743fdfaca57a89ed613db42",
+    "elder": "953b7040042cfe7ec040ba55d4af10303b05da1848cd7c270ad0857b0333a284",
+    "emit_array": "65932c35ed5017f49982e82620f573256bb3d4dd6b1fb15135c3688e5a61d99c",
+    "emit_image_tensor": "4e21f4bb2226f54bf04a0b1a4b93e6efff9b9a7d97c4d17642a986ea8c10fd61",
+    "fence": "b66426577b72736b0e5d7133daa9ed3d136e6b3bb2d86d42878645daf64b4487",
+    "flame": "945c1b0f2ebbd08883824f8df5c215c52346da3886708bbdce1da9774654fe92",
+    "flowers": "756dfeaaee7f31a46a81697948b6bc92bb4466aa088a9f7dc19108e73481a6d9",
+    "foreground_canopy": "965eff28f216c9479101fe45f37521c7e8a824465cbba0eae6faf34c7e56756a",
+    "forest": "43c400f7e945e14cacb53d6b0c90affc825173bdf7fbe9ff936b2fdffe348200",
+    "fox": "74cc94c346dc7786df154ba84589680cfcc33f94c1c643a99553b55116eb021b",
+    "fox_direction": "9da958129f6022711676570a33d2d90d6be851e66cae4023beb4b617459f84dc",
+    "golem": "171aa0bc96c19ecfe8c15126e8d1f824da474f4d12806102aafdc3793d9cfa1c",
+    "heart": "072da17c1bd0015b9db7572b790c61a2418c45d872a1b39a21c44a861a2e2120",
+    "hero": "5fc63294ec9bcf2125b51039c35612944ab650f047ae029a8e1e5ab693bef6f1",
+    "house": "9c2176082471cda64536a9db242318fdafc7310ba369e303509ff0182a89f110",
+    "lamp": "f4e8bfd14b027b17f0b52ebf07d1d385ea7a9b015fb6259a95ee149fae395c9d",
+    "leaf": "e28e0c16015527001b6c4debf7104801847cd943979299e02b14f134b7ba82a1",
+    "leaf_cluster": "c078a1498e925799579aa391434f6f1f377236a83247a955dbf11eaddd29c58a",
+    "leaf_direction": "8c7fdc0f4ad726b16ecdc4fe4f33b81ef4bc1e0f3af8a7f2532a1858c3813e49",
+    "light_pool": "4bd326d1f503692ca03fc23ccc9f91c632f3e0f1a481126244a992519747843e",
+    "main": "375a2eaf6b789b52c807a758de9a627479e103ac8c75e474ecaf27936d0fce02",
+    "masonry": "88c40dda8390907fafdd54cf76cb077110b629ce7b36e936fc9fc9fd8d816927",
+    "path": "d31a21366783b796edf054126ec8ec8f743f60f44e9a85c7b7caa4983f275f2e",
+    "projectile": "23f9172fc17f05d6aaac71d3a974b922186ff01eb8a839c4e12270cbeb17b604",
+    "resident_sprite": "fa2149739424bc0c380187bc4d8d8732ce79ac4abc0400d32f0b71f5d5c00acb",
+    "shadow_sprite": "0c7acd83bea598e30eb84524a1763adaee43b3df45bafb2422b92cb1e42f36e3",
+    "shrine": "f3ff612e5af385c04d0aeaaf17b4aa63389a11308acc0a4498a11c0fd355af89",
+    "slime": "bede667b02ac9c1fd438d0179009fec7d83312d1d686791c5cee7dd414e4d875",
+    "split_generated_source": "ddad2256b386c2207273f2eecc541c3085e8d9f3f94a68219c5039cc37f61f08",
+    "stone": "b8c8096cf1b146963e5fc599a0180f11ddee0e229b6b1aaed3d71c8aff14355a",
+    "temple": "37ed7b5582eba95bf1a246d2ab29c9f351ff147e4447b54a551a471af08bf37e",
+    "terrain": "bb31212b9b7a2991c62714dd3a82625bd2b3b3b77d53e5208381ca7bf84473ac",
+    "title": "93c23ffc1c1f6cfaddad54f89e68cf5f78c0167af2eeeff318490319f69d87ea",
+    "tree": "7d048a443ef5da42f7c7515ab97efaa71e4f6c999caebf0d7ace83cae11394e8",
+    "village": "f4f001ec38acd4af14ba16f056f3cad51be9bc96300f15bf7d9596d766a105df"
+  },
+  "authoring_sources": {
+    "assets/generate_assets.py": "0c4b05fbb9f0a5fb13b0ae9ef3ad8e650fa9a61fa25cb23400dd836436671d84",
+    "assets/generate_evolutions.py": "d515b4eff9cf86a25e4395046bb5734e5e760d0df7eb8c268fde39c7298ba464",
+    "assets/horizons_region/source_plan.json": "610bd18b624f74b3cec817a2a8a11063ca0cc007f047b9228c7803eb78a1ebfe",
+    "assets/redesign_characters.py": "1aaa33daa888798ee481ef84a7f9ea85c5f6a7581cdbd0229423d78d80efc69e"
+  },
+  "base_arrays": {
+    "background_boss": {
+      "declaration": "const unsigned char background_boss[38400]",
+      "parent_initializer_sha256": "e09720c004ec68fa41fdd88fa0b24a7712bbc9b65a0a889e3ee3547ee77d3b99",
+      "successor_initializer_sha256": "0f05740134c5920131bda03bb97fc9dfd1710d2644a5436e6fc9971ebeee2651"
+    },
+    "background_forest": {
+      "declaration": "const unsigned char background_forest[38400]",
+      "parent_initializer_sha256": "6a22ca1da2a21575cf74ca4800c2c4fe3b838c8b2a3b04152b0baa3256976027",
+      "successor_initializer_sha256": "57a4b54f1a9849154e5f8d0a641981fd189525e246a8a1fe9ecefe25cb55a72e"
+    },
+    "background_temple": {
+      "declaration": "const unsigned char background_temple[38400]",
+      "parent_initializer_sha256": "09616ba2cb565cd0c5e9b7b9faff0e7de00cf63a4190515fb28250db3c3c8041",
+      "successor_initializer_sha256": "09616ba2cb565cd0c5e9b7b9faff0e7de00cf63a4190515fb28250db3c3c8041"
+    },
+    "background_title": {
+      "declaration": "const unsigned char background_title[38400]",
+      "parent_initializer_sha256": "0f2194927a5c0829ba0163938ed82fc99dab36520de94fe5692982c70dae7c2d",
+      "successor_initializer_sha256": "48a8c209f075608ee8773928d8e82164146801efd79668c829b6ddd3d5c3d160"
+    },
+    "background_village": {
+      "declaration": "const unsigned char background_village[38400]",
+      "parent_initializer_sha256": "b3041af1c94523359f50b1848575756cbe890fb91f7f02cfbb16504eaf4f1d88",
+      "successor_initializer_sha256": "7b75dc855079c9902767d7200cba250f1f5635b4ba8904281edaacb2c3d02800"
+    },
+    "backgrounds": {
+      "declaration": "const unsigned char * const backgrounds[BACK_COUNT]",
+      "parent_initializer_sha256": "725644d81b978030e40c9446e808bb6ce6159ce7b23090661542c5892adcecec",
+      "successor_initializer_sha256": "725644d81b978030e40c9446e808bb6ce6159ce7b23090661542c5892adcecec"
+    },
+    "boss_data": {
+      "declaration": "const unsigned char boss_data[1024]",
+      "parent_initializer_sha256": "04fa45c6a3060e8c5430abaaaa5652cba36e65c15bb91af49ccc31577efacb24",
+      "successor_initializer_sha256": "ed1b0ffd3d0a4b265f58ebcab3bc3510dba13b5e508108b4a559b2d02f01792b"
+    },
+    "boss_shadow": {
+      "declaration": "const unsigned char boss_shadow[512]",
+      "parent_initializer_sha256": "3fd5a99fff6ca153ccca2ce6c06cbd13b24ce541f3a612b9388de5578e62a7e9",
+      "successor_initializer_sha256": "3fd5a99fff6ca153ccca2ce6c06cbd13b24ce541f3a612b9388de5578e62a7e9"
+    },
+    "companion_direction_frames": {
+      "declaration": "const unsigned char companion_direction_frames[2][4][4][256]",
+      "parent_initializer_sha256": "20265fef606fec397f6738764404c3c2449f295ac24d7ba93a1f3ed063b6c731",
+      "successor_initializer_sha256": "3ceda464d3648771e22ecd2b251b15cb99e763a34c4b806761db817defccf613"
+    },
+    "companion_frames": {
+      "declaration": "const unsigned char companion_frames[2][4][256]",
+      "parent_initializer_sha256": "475df10c2afe05e2118aa6b518264caf9514377082bd719af862e8c0f6ce9095",
+      "successor_initializer_sha256": "a1da934d6fd64a5128a623be8d8b314fa4410ba77c974466c2760c71018176d9"
+    },
+    "foreground_canopies": {
+      "declaration": "const ForegroundCanopy foreground_canopies[FOREGROUND_CANOPY_COUNT]",
+      "parent_initializer_sha256": "89f3c6f462ad2df5338ab19b2688d12534332a7bac2366f701509428c78736f0",
+      "successor_initializer_sha256": "89f3c6f462ad2df5338ab19b2688d12534332a7bac2366f701509428c78736f0"
+    },
+    "foreground_canopy_data": {
+      "declaration": "const unsigned char foreground_canopy_data[6][1024]",
+      "parent_initializer_sha256": "83ce6f1ee8876ab4d1dc0063117ba754eb35a706f52753895097e02221876321",
+      "successor_initializer_sha256": "d081481e9ed831d6fedac3a5b344e3b6b87b743afaa885149674c0494e499e45"
+    },
+    "game_palette": {
+      "declaration": "const unsigned short game_palette[256]",
+      "parent_initializer_sha256": "d4e647300f711ab4e744ecd429aaa5a2dd93354914d51c7bf44ddaf95d5d0df3",
+      "successor_initializer_sha256": "d4e647300f711ab4e744ecd429aaa5a2dd93354914d51c7bf44ddaf95d5d0df3"
+    },
+    "hero_frames": {
+      "declaration": "const unsigned char hero_frames[4][4][256]",
+      "parent_initializer_sha256": "a74d5cf7656423f87fe8052400d1b80ae3568dfb1946b5f1bfd0242d1371c6ed",
+      "successor_initializer_sha256": "899a24672c9df6f73deab31f78ca79ef7c6eb1a13920417c292030420cb41d37"
+    },
+    "hero_shadow": {
+      "declaration": "const unsigned char hero_shadow[256]",
+      "parent_initializer_sha256": "51115a781e4d432472043213c677b235348c334fb60548e612dfb1d3c3fb08f4",
+      "successor_initializer_sha256": "51115a781e4d432472043213c677b235348c334fb60548e612dfb1d3c3fb08f4"
+    },
+    "sprite_data": {
+      "declaration": "const unsigned char sprite_data[SPR_COUNT][256]",
+      "parent_initializer_sha256": "f10da7640f79c2b2d8b23fbeaa788a8b09d83f095fd9151cf237bb793ed95711",
+      "successor_initializer_sha256": "f6ed2adf020bf36f0db62307cc3ce33cd9248ed77764aa70be7215a396babc9a"
+    }
+  },
+  "base_asset_parts": [
+    "src/asset_data/part_000.inc",
+    "src/asset_data/part_001.inc",
+    "src/asset_data/part_002.inc",
+    "src/asset_data/part_003.inc",
+    "src/asset_data/part_004.inc",
+    "src/asset_data/part_005.inc",
+    "src/asset_data/part_006.inc",
+    "src/asset_data/part_007.inc",
+    "src/asset_data/part_008.inc",
+    "src/asset_data/part_009.inc",
+    "src/asset_data/part_010.inc",
+    "src/asset_data/part_011.inc",
+    "src/asset_data/part_012.inc",
+    "src/asset_data/part_013.inc",
+    "src/asset_data/part_014.inc",
+    "src/asset_data/part_015.inc",
+    "src/asset_data/part_016.inc",
+    "src/asset_data/part_017.inc",
+    "src/asset_data/part_018.inc",
+    "src/asset_data/part_019.inc",
+    "src/asset_data/part_020.inc",
+    "src/asset_data/part_021.inc",
+    "src/asset_data/part_022.inc",
+    "src/asset_data/part_023.inc",
+    "src/asset_data/part_024.inc"
+  ],
+  "historical_contracts": {
+    "assets/return_creatures/legacy_prefix_sha256.json": {
+      "contract_sha256": "57483b15434e299f115901cac00c2da57b0ab50fd5c724ccaf686e521ba2d33d",
+      "reviewed_exceptions": {
+        "assets/generate_assets.py": {
+          "historical_sha256": "117c080a184f0fe3bd629e0c195cb30ced642b74a4f98dc48e641c4d1b5fa9dc",
+          "successor_sha256": "0c4b05fbb9f0a5fb13b0ae9ef3ad8e650fa9a61fa25cb23400dd836436671d84"
+        },
+        "src/asset_data/part_000.inc": {
+          "historical_sha256": "d4aa561215d2b9e2e99d690ee00a9fc6c5f995512e8497d775e9e4c1d8a8aef8",
+          "successor_sha256": "ee60d4386a90cff3067f4faaf054a5972dbec31992defbb0f3040b5f5cc71613"
+        },
+        "src/asset_data/part_001.inc": {
+          "historical_sha256": "ea06738d35e48c5785b66e55ed219cf0d6308ef679658b7753933e890f393b60",
+          "successor_sha256": "19de8ac209c818dc6148172c8191cba648900fefd3a1621257ac72b463eda0e5"
+        },
+        "src/asset_data/part_002.inc": {
+          "historical_sha256": "c3327302d183d01811404784e0a1e502555cd953a3f943d9ca472dbcb0c9bc9e",
+          "successor_sha256": "e046ebd19c6d4725c8621742a5dbf9b1e8d6e48c6edf795242449ac6f06afc52"
+        },
+        "src/asset_data/part_003.inc": {
+          "historical_sha256": "fc3f47ee5e13bc959e68469a56a041465ce67105b494832deaffa4ffcd48018a",
+          "successor_sha256": "d244e35c6b7aa6a6fac0fcd9552d14fe0b81aa6c4fbeeda421328ceca99403c0"
+        },
+        "src/asset_data/part_004.inc": {
+          "historical_sha256": "0457643d555a39032a18753f150cc2a1a28d6aa402a8c5f97e86e4749c277a3e",
+          "successor_sha256": "fbd10f75efedba0b146841dffeb552d26fed4e059f0e606b540af3417c5a3aa2"
+        },
+        "src/asset_data/part_005.inc": {
+          "historical_sha256": "9956445147752ab66f449ca58af3c21b3a216b1d87e273707266c418d8470330",
+          "successor_sha256": "ef77e6beeccf6ae7a3ecfd96e69a4c59f092bb5b687d873faa4e1f4a47b30ef4"
+        },
+        "src/asset_data/part_006.inc": {
+          "historical_sha256": "f85ef39fc4bc2be0612108adc7c06f22b92aebd74b53b2aa717e4032d111c672",
+          "successor_sha256": "7983f2bfc8d4abeff31b89fbcb9cd985faf06e6bf1fa9eeaf7917ee5614d0dfd"
+        },
+        "src/asset_data/part_007.inc": {
+          "historical_sha256": "358acbba0f090e2688ee96ffbe1b9ae89ed56ffe5390a81ac216545d6b24be35",
+          "successor_sha256": "d2189b149f82188706b798138e31aa8436abc1d6e2b4e6b8f49ecaea1fe81dec"
+        },
+        "src/asset_data/part_008.inc": {
+          "historical_sha256": "835ad0994c62412f53c07749e5162eeffbd453da7d7eab453466d47daa1dbbe4",
+          "successor_sha256": "b5215d46e40077bcad8facc1904fc2a8809d660bb6126e108d9c5b7c92ec1ae9"
+        },
+        "src/asset_data/part_009.inc": {
+          "historical_sha256": "2bf7efa5d0ace01dbc9c3ed336f2bc800aaf442180289135a3119153d8fa0af4",
+          "successor_sha256": "dbd4e0a913c72eb90b06f57e300402778e5e8ee60f066ae7d6c6f92cc05a067f"
+        },
+        "src/asset_data/part_010.inc": {
+          "historical_sha256": "d7e3133600bbb8fbded0a24acbba22a5c47210162aa8fcd4f4eb1e6da76b2e66",
+          "successor_sha256": "c52b8f0e998d68e24b2b010102f059af2a108946022ce008fdd99494c21c49ce"
+        },
+        "src/asset_data/part_011.inc": {
+          "historical_sha256": "1313a15248de7d2e8891ea8ab084ffe38f12b38307b9c5a42c1a33e77c24ebfd",
+          "successor_sha256": "b70a4fe7eb9b3e86372193b217301f8fab63bc740511a7dd994571b4845682b0"
+        },
+        "src/asset_data/part_012.inc": {
+          "historical_sha256": "4daec9b81537075270cbe6cbf78726781f4ef79cbc94987851af1a81d38ede0e",
+          "successor_sha256": "62c3979b55374a15f0a54908a367619a9b62a14e49dc0c444def85d673922462"
+        },
+        "src/asset_data/part_013.inc": {
+          "historical_sha256": "ad01eb5e58a1186506795407f32d8c99b6489f2c3d06147a992899656e3cb1e3",
+          "successor_sha256": "e03255594caf81b001f48936c2b8f84aa8edf3206d0fc52e316a2b4f3c8c999d"
+        },
+        "src/asset_data/part_014.inc": {
+          "historical_sha256": "4f137f80ff21cc7ef24ff5c27f18971c9c7847cca6ab4229d27c589cc5669b04",
+          "successor_sha256": "a8b29e5431a476d577bf1592c84c007afe85601162c0dde52924d5af85266000"
+        },
+        "src/asset_data/part_015.inc": {
+          "historical_sha256": "c36b0eec57761aafb9a2fe3c78bb7c6c5ae75c9c2dec76b190c2d95d9b4266fa",
+          "successor_sha256": "0f9a6cc833a3c8e6587d635b4b5ec77d28592b901895c9f5cfeee35f09d95225"
+        },
+        "src/asset_data/part_016.inc": {
+          "historical_sha256": "b92afa0a20a074dd017b749ab631be1fe71ab35efdc5034a3dc06c5444869d9f",
+          "successor_sha256": "fe59239204af76ca777008e5ad1465d01e048d96e716b5b9cb626c098c74de0a"
+        },
+        "src/asset_data/part_017.inc": {
+          "historical_sha256": "430486d5e7164b1aa9eafecca9eb414c394afcf739648fba3100260a063e8a98",
+          "successor_sha256": "7b7684fe24ad7b9b7aceb81987023d42fd79b542f8b7388874f4bf9d6064db28"
+        },
+        "src/asset_data/part_018.inc": {
+          "historical_sha256": "0c12b14d41ec72366901d73a239436ed45300a99ef6ea3a3b6224892db2a77f7",
+          "successor_sha256": "89fb043ec7eccf27ff7c9f477cdff7f93a008a8f8d97b39faeee28e738249cde"
+        },
+        "src/asset_data/part_019.inc": {
+          "historical_sha256": "77f17dc5e421f2ebaac2c0d66d7b0b5421ae256336fb98444d4774ce7a7389b5",
+          "successor_sha256": "453dd0ebb68a35831e38a6d694242a115305e623ff102a807657e535abd3a7a9"
+        },
+        "src/asset_data/part_020.inc": {
+          "historical_sha256": "86d1afb36af2d980a0d90de15a49757a64cc93e8cefdb0e7d7f04a364184cc35",
+          "successor_sha256": "67286d605f8b8194d84f1eeaf426a39f47f17e0c7888db6f08b15405ae43a31e"
+        },
+        "src/asset_data/part_021.inc": {
+          "historical_sha256": "ac68f277ec9c898fe56365758dff4e62e1b9f1da0f233dcd44e9d808027a7734",
+          "successor_sha256": "fbd427f599405ea9768d4ce3a5365ae3cbcfcda6f330ed4b1b605ed87017648d"
+        },
+        "src/asset_data/part_022.inc": {
+          "historical_sha256": "5bc1d067bd0cb5d9215b961324b46a8bffa73a80c8434542016a8fcdf830677a",
+          "successor_sha256": "69854dcc527d0b273a0e1d8a9da643246b23908b177a606938f8979cee6247e9"
+        },
+        "src/asset_data/part_023.inc": {
+          "historical_sha256": "5bde8569ccd6091837058af4fbb929e13021fc5cab8217d062b5e7b98b37af2e",
+          "successor_sha256": "d4d3e514c8a5b700c52b27d718c143ffcc5cf0a11bbf4e3e6f47d5921dca6762"
+        },
+        "src/asset_data/part_024.inc": {
+          "historical_sha256": "b845b19f326085df7af25f1823c79a903eb3b591a679895e3a21c319e8a2edff",
+          "successor_sha256": "7098977959631b9b771d2e7311acf159547fc5abaced0d36b65896f275fdfa85"
+        },
+        "src/asset_data/part_025.inc": {
+          "historical_sha256": "231d4ce5a2e40d5a84e602c284983383a699e15d200dcf600f07dc073a34392b",
+          "successor_sha256": null
+        },
+        "src/evolution_art_data/part_000.inc": {
+          "historical_sha256": "f9acafd08c2d78c5e451c15da7eb34d52315ec2c886d11d23af98ec0d2b9c0fa",
+          "successor_sha256": "454083eb6d27f1ed53b028a623b61b0e531e0da98a6a1194428a3596e7770559"
+        },
+        "src/evolution_art_data/part_001.inc": {
+          "historical_sha256": "de124cebb46ac134b425eb8916404dc854c9d7248e75ad4cb697a33473c70fc9",
+          "successor_sha256": "85fabc63614f7db997ceb1051f46f0a77756dfe80f2e268d229a3ae6a4f3516f"
+        }
+      }
+    },
+    "assets/underwater_creatures/legacy_prefix_sha256.json": {
+      "contract_sha256": "44559c077835fcb9a2a8bb9356337353e301d720ad58a6659c145e72aeee8faf",
+      "reviewed_exceptions": {
+        "src/asset_data/part_000.inc": {
+          "historical_sha256": "d4aa561215d2b9e2e99d690ee00a9fc6c5f995512e8497d775e9e4c1d8a8aef8",
+          "successor_sha256": "ee60d4386a90cff3067f4faaf054a5972dbec31992defbb0f3040b5f5cc71613"
+        }
+      }
+    }
+  },
+  "parent_successor": "connected-roads-c4",
+  "reviewed_arrays": [
+    "background_boss",
+    "background_forest",
+    "background_title",
+    "background_village",
+    "boss_data",
+    "companion_direction_frames",
+    "companion_frames",
+    "foreground_canopy_data",
+    "hero_frames",
+    "sprite_data"
+  ],
+  "schema": 1,
+  "scope": "Authored art identity, not gameplay or subjective-quality evidence.",
+  "successor": "lantern-trails-r1"
+}

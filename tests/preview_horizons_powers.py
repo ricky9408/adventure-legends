@@ -13,7 +13,7 @@ out=ROOT/'assets/horizons_powers';raw=ROOT/'build/horizons-powers-host/runtime-s
 subprocess.run([str(ROOT/'build/horizons-powers-host/strict')],check=True,env=dict(os.environ,HORIZONS_POWER_PREVIEW=str(raw)))
 data=raw.read_bytes();assert len(data)==16*4*104*80
 sheet=Image.new('RGB',(864,836),(24,31,43));draw=ImageDraw.Draw(sheet)
-forms=json.loads((ROOT/'docs/horizons-design/shared_horizons_plan.json').read_text())['forms']
+forms=json.loads((ROOT/'assets/horizons_region/source_plan.json').read_text())['forms']
 for i,f in enumerate(forms):
  x=(i%2)*432;y=(i//2)*104
  draw.text((x+8,y+2),f"{f['signature_command']}  {f['name']} / {f['ability']['name']}",fill=(255,240,204))

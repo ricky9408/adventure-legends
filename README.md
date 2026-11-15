@@ -1,6 +1,14 @@
 # Adventure Legends: Emberbond — 灯の契約
 
-An original Game Boy Advance action-adventure about a small light and the companions who travel beside you.
+An original Game Boy Advance action-adventure about a lantern keeper, an
+unfinished breakfast, and the companions who help reopen the way home. Follow
+a quiet river into the forest, learn what your companions can do, and return
+to people whose lives your repairs have changed.
+
+The Lantern Trails redesign gives the keeper and companions new silhouettes,
+regional residents distinct working clothes and tools, and the chapter endings
+a shared story about light and welcome. [Design direction](docs/REDESIGN.md) ·
+[Story](docs/STORY_DIRECTION.md) · [Pixel-art authoring](assets/redesign/README.md)
 
 The complete adventure has 78 areas, 128 companion forms across 60 families,
 48 equipment items and 64 global quests. This release brings 23 original regional
@@ -62,7 +70,7 @@ On failure, the last successful record remains. Open Start → Controls → A Re
 
 Before upgrading, copy the ordinary `.sav` as a backup. Match ROM/save basenames, such as `emberbond.gba` and `emberbond.sav`, choose Continue with A, and wait for loading. Transfer ordinary SRAM across versions, not emulator save states.
 
-This update writes Save5 content revision 13. Supported formats2–4 and Save5 revisions1–12 migrate forward without resetting progress. The four new personal-event bytes start empty for older adventures; loading does not invent relationship events. Relationship scenes are not playable yet. A cold Continue uses the retained safe checkpoint, which can differ from the transient position just after a road crossing. Never open a migrated content13 save in an older ROM; use the untouched pre-upgrade backup when returning to an earlier release.
+This update writes Save5 content revision 13. Supported formats2–4 and Save5 revisions1–12 migrate forward without resetting progress. The four new personal-event bytes start empty for older adventures; loading does not invent relationship events. Mina, Edda and Ressa have playable personal routes after their regional reports, with separate visits and explicit dating and marriage choices. Lyra's route and the conversations required to begin another romantic relationship are not implemented. A cold Continue uses the retained safe checkpoint, which can differ from the transient position just after a road crossing. Never open a migrated content13 save in an older ROM; use the untouched pre-upgrade backup when returning to an earlier release.
 
 To intentionally replace progress, select New Adventure with Up/Down and A, then confirm again with A. B or Start cancels the replacement prompt.
 
@@ -76,7 +84,15 @@ Requires GNU Make, Python 3 and ARM bare-metal GCC. Generated data ships with so
 
 Output: `build/emberbond.gba`, plus ELF/map/symbols. [Tool setup](tools/README.md) describes the isolated official Debian packages used in verification.
 
-`make assets` regenerates original graphics, text, creature tables and puzzle data. It explicitly selects the reviewed Connected Roads world successor for the two historical creature-prefix guards; see [the generation contract](assets/connected_roads_legacy_art_contract.README.md). It needs Pillow and the Noto Sans CJK font used by the generator. Generated C arrays remain in bounded include chunks; do not combine them into huge monolithic files.
+`make assets` regenerates original graphics, text, creature tables and puzzle data.
+It explicitly selects the reviewed Lantern Trails art successor for the two
+historical creature-prefix guards; see [the generation contract](assets/redesign/README.md).
+For byte-identical release assets, use the pinned Linux Pillow 13.0.0 wheel and
+font dependencies in [the CI setup](docs/GAMEPLAY_CI.md). macOS Pillow can encode
+identical PNG pixels differently because its wheel uses zlib-ng. Ordinary ROM
+builds use the shipped arrays and work with the supported toolchains above.
+Generated C arrays remain in bounded include chunks; do not combine them into
+huge monolithic files.
 
 ## Test and capture
 
@@ -127,16 +143,21 @@ and compiled dependencies are excluded.
 
 ## Credits and limits
 
-Project licensing is recorded in LICENSE. The original project world, characters, code-native pixel art and original regional music are credited in the ending roll. Third-party GBJ, Noto and DejaVu fonts retain their separate usage permissions and license notices; see assets/fonts. Handheld top-down adventures inspire readability and movement; no Nintendo characters, maps, music or extracted game art are included. The standard cartridge boot-identification header is included for GBA compatibility.
+Project licensing is recorded in LICENSE. The original project world, characters, code-native pixel art and original regional music are credited in the ending roll. PixelMplus, k8x12, GBJ, Noto and DejaVu retain their separate usage permissions and license notices; see assets/fonts. Handheld top-down adventures inspire readability and movement; no Nintendo characters, maps, music or extracted game art are included. The standard cartridge boot-identification header is included for GBA compatibility.
 
-Physical GBA hardware, flash cartridges, other emulator/compiler releases and
-the macOS native bridge-build path are unverified. Source/signal checks and
+Physical GBA hardware, flash cartridges and emulator/compiler releases beyond
+the recorded test environment are unverified. Source/signal checks and
 emulator capture do not establish subjective listening quality. The hosted gameplay regression workflow and local reproduction steps are
 described below; review the exact candidate checks before merging.
 
-## GBJ font successor
+## Native Japanese text
 
-GBJ / GBJ-Slim by **GeeBee**: https://geebeegb.itch.io/gbj. Both official atlas/config pairs are included untouched. The GBA pipeline precompiles their native pixels into UiRuns; no GB Studio engine is required. All story, menu, map, companion, gear and treasure labels use GBJ where available. Kanji and unsupported symbols use Noto Sans CJK Bold at 10px; lowercase uses DejaVu Sans at 8px. Existing compact dynamic stat digits and the authored title wordmark are intentionally retained to preserve narrow numeric cells and performance. See [font provenance and usage](assets/fonts/gbj/README.md).
+Japanese prose and menus use PixelMplus12 at its native 12-pixel size. Compact
+shop summaries and gear units use the native k8x12 bitmap. Small ASCII footers
+retain GBJ-Slim and DejaVu8; original GBJ and Noto inputs remain available for
+historical validation. The build precompiles text into pixel spans, with no
+font decoder in the cartridge. Dynamic stat digits and the title wordmark
+retain their existing layouts. See [font provenance and usage](assets/fonts/README_NATIVE.md).
 
 Regenerate font text only with `make font-assets` (Pillow, fonts-noto-cjk, fonts-dejavu-core required); `make assets` also includes it through the existing individual generators. Native GBJ glyphs are never rescaled. Existing text IDs and vertical layout boxes are retained. All contributor, asset and tool credits, including GeeBee and the official URL, appear only in the ending roll. Source legal notices remain bundled. The title has no author-credit footer.
 
@@ -149,5 +170,6 @@ reproducible builds, current host/sanitizer checks and bounded native mGBA
 controller/save/menu/early-combat tests on pull requests and main pushes. It
 retains logs, replay inputs, test saves, screenshots and native audio/video for
 debugging. See [coverage, limitations and local replay](docs/GAMEPLAY_CI.md).
-Synthetic diagnostics and inherited cold-Continue stalls are labeled separately;
-this is not a complete campaign or physical-hardware certification.
+Synthetic diagnostics and inherited cold-Continue stalls are labeled separately.
+The fresh main route and earned relationship routes are distinct gates; they
+do not certify every optional collection route or physical hardware.

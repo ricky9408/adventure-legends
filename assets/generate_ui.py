@@ -7,7 +7,7 @@ import json
 ROOT=Path(__file__).resolve().parents[1]
 texts={
  'SUBTITLE':'灯の契約', 'START':'START  はじめる', 'CONTINUE':'START  つづきから', 'NEW':'SELECT  新しい冒険',
- 'TAGLINE':'小さな灯が、森を変える。','VILLAGE':'灯守りの里','FOREST':'こもれびの川','TEMPLE':'忘れられた祠','BOSS':'森の心臓',
+ 'TAGLINE':'小さな灯で、帰り道をつなぐ。','VILLAGE':'灯守りの里','FOREST':'こもれびの川','TEMPLE':'忘れられた祠','BOSS':'森の心臓',
  'ELDER':'灯守り リュマ','FOX':'ホムラ','LEAF':'ミドリ',
  'INTRO1A':'森の灯が、消えかけている。','INTRO1B':'奥の祠で、守り神が眠れずにいる。',
  'INTRO2A':'この剣と、ふたつの契約を授けよう。','INTRO2B':'ホムラは炎。ミドリは芽吹きの精。',
@@ -31,7 +31,7 @@ texts={
  'BHUD':'B 力', 'RHUD':'R 呼ぶ・帰す', 'LHUD':'L 切替', 'NEXT':'A ▼', 'SAVED':'記録しました', 'HEALED':'傷が癒えた',
  'NEEDSUMMON':'Bで仲間の力を使おう', 'COOLDOWN':'力をためている…', 'SUMMONED':'いっしょに行こう',
  'FIREHINT':'炎は台座の近くから放とう', 'TOUCHHINT':'炎を当てると、鎧が崩れる',
- 'ENDINGSMALL':'EMBERBOND / THE LANTERNS', 'BUILD':'ORIGINAL GBA HOMEBREW  v0.3',
+ 'ENDINGSMALL':'EMBERBOND / THE LANTERNS', 'BUILD':'LANTERN TRAILS',
  'EXPLORE1':'STARTで旅のメニューを開く。', 'EXPLORE2':'寄り道には、小さな発見がある。',
  'CAMP1':'たき火のぬくもりが、傷を癒す。', 'CAMP2':'次はここから、旅を続けられる。',
  'RELIC1':'命のかけらを見つけた！', 'RELIC2':'ハートの最大数が、２つ増えた。',
@@ -87,6 +87,8 @@ texts['RETRY_CHECKPOINT']='A  休んだ場所から再挑戦'
 for key,value in json.loads((ROOT/'assets/relationships_ui.json').read_text()).items():
     assert key not in texts,key
     texts[key]=value
+# Inserting beside the chapter's old labels would renumber released UI IDs.
+texts['UW_GUARDIAN_HOME']=texts.pop('UW_GUARDIAN_HOME')
 items=[]
 for name,text in texts.items():
     h=10 if name in ('ENDINGSMALL','BUILD','C_FINAL_SMALL','FONT_CREDIT','FONT_URL') else 15

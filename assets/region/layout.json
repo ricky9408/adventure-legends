@@ -902,8 +902,8 @@
           160
         ]
       ],
-      "bitmap_sha256": "b2cf2f1808e12ecfbcdaa3e0aaa9d97c8f5e74eae0412d590c5d7877a3eee6da",
-      "odd_bitmap_sha256": "0b1886fb73008babec92364b1f4ffcff6cb124d2bd0add3882acc0487d38661a",
+      "bitmap_sha256": "258746d1c889cc8e7f658802f39e9ec07f8b9e9b09591b20958988428b0301f9",
+      "odd_bitmap_sha256": "834dea1fe34f6f9ce5d0229a614b1667594c9071b0b6b34c4c477107f1acd5b4",
       "dma_camera_checks": 1446
     },
     {
@@ -1557,8 +1557,8 @@
           160
         ]
       ],
-      "bitmap_sha256": "2bfc16f44908210ff8d721836cb09980de0fdae3cb726f6a6078755d1c37ecb6",
-      "odd_bitmap_sha256": "2eb1d40e5a39f03f4e66476cfdb90b17cc9f7b88363ebfeb8674258efaa2fa8c",
+      "bitmap_sha256": "c7e3730b13f94382909dbeb0902624e29979b9806a669eea3c6722a94a40391e",
+      "odd_bitmap_sha256": "f4ef54904ff798d681131e7536ae48388d88f6b0546acfd883dcf27100b3a545",
       "dma_camera_checks": 1446
     },
     {
@@ -2617,7 +2617,7 @@
     "arm32_room_table_bytes": 120,
     "rom_payload_bytes": 779256,
     "chunks": 98,
-    "largest_chunk_bytes": 32000,
+    "largest_chunk_bytes": 31998,
     "chunk_limit_bytes": 32000
   },
   "proof_file": "validation.json",

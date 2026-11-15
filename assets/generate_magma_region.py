@@ -8,7 +8,7 @@ import hashlib,json,random,sys
 from PIL import Image,ImageDraw
 import connected_road_art as roads
 sys.dont_write_bytecode=True
-from generate_assets import Art,P,PAL,COLORS,color_background
+from generate_assets import resident_sprite,Art,P,PAL,COLORS,color_background
 from generate_region import odd_bitmap,cbytes,verify_room,paste_sprite
 from generate_northern_region import collision_bands
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/magma_region';SRC=ROOT/'src'
@@ -70,26 +70,10 @@ def tree(a,r,x,y,s=1):
  solid(r,'living_tree_trunk',(x-3,y-11,6,12))
 def sprite(n):
  if n.endswith('_WORK') or n=='SEN_STEP':
-  base=n.split('_')[0];a=sprite(base)
-  a.r((4,10,6,12),'skin2');a.r((9,8,13,10),'skin2')
-  if base=='NEMI':a.e((10,6,14,10),'fire2');a.l([(11,6),(14,6)],'gold3')
-  elif base=='OMI':a.l([(12,10),(15,13)],'water3');a.dot(14,14,'water4')
-  elif base=='TAVI':a.r((11,6,14,9),'water3');a.l([(12,7),(14,7)],'water4')
-  elif base=='PELL':a.l([(1,6),(5,10)],'gold3');a.dot(1,5,'white')
-  elif base=='SEN':a.r((4,13,6,15),'wood1');a.r((10,12,12,14),'wood1')
-  else:a.r((11,7,14,10),'plaster')
-  return a
+  return resident_sprite('magma',n.split('_')[0],work=n.endswith('_WORK'),step=int(n=='SEN_STEP'))
  a=Art(16,16,'transparent')
  if n in NPCS:
-  i=NAMES.index(n);coat=['fire2','water2','pine3','water3','purple2','gold2'][i]
-  a.e((2,12,13,15),'shadow');a.r((5,11,7,14),'wood1');a.r((9,11,11,14),'wood1');a.p([(4,7),(11,7),(13,11),(11,13),(4,13),(3,10)],coat);a.r((5,3,11,8),'skin2');a.r((4,2,11,4),'wood1');a.dot(6,6,'ink');a.dot(10,6,'ink');a.l([(7,8),(9,8)],'skin1')
-  if n=='RESSA':a.r((2,1,12,3),'gold3');a.r((11,9,14,11),'stone4')
-  elif n=='NEMI':a.r((5,9,10,12),'plaster');a.e((0,9,4,13),'fire1')
-  elif n=='OMI':a.r((1,3,14,4),'grassgold');a.r((4,1,11,3),'grassgold');a.l([(13,8),(13,15)],'wood3')
-  elif n=='TAVI':a.r((4,1,12,3),'water3');a.r((1,10,4,13),'water2')
-  elif n=='SEN':a.r((10,7,14,12),'wood3');a.l([(5,8),(10,12)],'gold4')
-  else:a.r((2,9,5,12),'gold4');a.dot(3,10,'deep')
-  return a
+  return resident_sprite('magma',n)
  if n in ['BRICK','BRICK_HOT','BAFFLE','SHOE']:
   a.e((1,11,14,15),'shadow');a.r((2,4,13,13),'stone1');a.r((2,3,13,9),'plaster'if n!='BAFFLE'else'water2');a.l([(3,3),(12,3)],'white');a.l([(4,6),(11,6)],'water3');a.r((6,8,9,10),'deep');a.l([(6,8),(9,8)],'water4')
   if n=='BRICK_HOT':a.r((4,4,11,6),'gold3');a.dot(6,2,'fire2');a.dot(10,1,'gold3')

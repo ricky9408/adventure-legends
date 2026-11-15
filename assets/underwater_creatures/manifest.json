@@ -61,7 +61,7 @@
   ],
   "status": "ART ONLY: sprite sheets and scene composites are not emulator captures or proof of unlocks, live rendering, or acceptance.",
   "rights": "Original code-native pixel geometry. No Nintendo/Pokemon extraction, tracing, or third-party raster inputs.",
-  "generator_sha256": "c0c32a1529ef6f6a05062546ab3b7a47b0cda282e31c8c21d3199f720db2c499",
+  "generator_sha256": "abfe18735f8446a2bc33c305af67025b01c2272cb63b30d91b33188f1d585732",
   "codegen_sha256": "91ec0196a184f2a58808d939461f493f9df8d3f9b50bae605e7305277067856c",
   "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
   "data_bytes": 196632,
@@ -1204,9 +1204,9 @@
     "baseline": "0a8b05c3e24d02bd350a11c32289fb5686641535",
     "files": 48,
     "unchanged": false,
-    "reviewed_world_successor": "connected-roads-c4",
-    "reviewed_background_file_exceptions": 1,
-    "protected_creature_palette_arrays_unchanged": true,
+    "reviewed_world_successor": "lantern-trails-r1",
+    "reviewed_art_file_exceptions": 1,
+    "shared_palette_and_array_layout_unchanged": true,
     "unchanged_historical_files": 47
   },
   "silhouette_comparison": {

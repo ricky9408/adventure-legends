@@ -180,7 +180,8 @@ class RegionArtTests(unittest.TestCase):
                 # Run the unchanged complete source closure privately so omitted
                 # optional sheets never enter the authenticated candidate assets.
                 private=Path(tmp)/'source';(private/'assets').mkdir(parents=True);(private/'src').mkdir()
-                for name in ('generate_region.py','generate_assets.py','connected_road_art.py','connected_roads.json'):
+                for name in ('generate_region.py','generate_assets.py','redesign_characters.py',
+                             'connected_road_art.py','connected_roads.json'):
                     shutil.copy2(ROOT/'assets'/name,private/'assets'/name)
                 shutil.copytree(OUT,private/'assets/region')
                 shutil.copytree(ROOT/'src/region_art_data',private/'src/region_art_data')
