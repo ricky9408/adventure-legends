@@ -7,12 +7,13 @@
 #include "magma_art.h"
 #include "magma_quests.h"
 #include "progression.h"
+#include "relationships.h"
 Save5State adventure_save;
 unsigned progression_revision,progression_forms[PROGRESSION_SPIRIT_COUNT];
 volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
 volatile unsigned chapter_flags;
 int face,keys,journal_tab;
-static unsigned saved,invalid,hurt_calls,actors,last_toast,weapon_class=1;
+static unsigned saved,invalid,hurt_calls,actors,last_toast,last_dialogue_a,weapon_class=1;
 static int overlay_sweep_x=-1,overlay_sweep_y=-1;
 static unsigned host_save_queued,host_auto_settle=1,anchor_prepare_calls,host_save_writes,health_fills;
 static int host_finish_save(void);
@@ -29,7 +30,9 @@ static int host_finish_save(void){int oldstate=game_state;if(!host_save_queued)r
  if(!save5_validate(&adventure_save)||!save5_store(&adventure_save)){host_save_queued=0;invalid++;game_state=oldstate;return 0;}
  host_save_queued=0;host_save_writes++;game_state=oldstate;return 1;
 }
-void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;game_state=2;}
+void dialogue(int a,int b,int c){last_dialogue_a=(unsigned)a;(void)b;(void)c;game_state=2;}
+void addpage(int a,int b){(void)a;(void)b;}
+void dialogue_speaker(int a){(void)a;}
 void toast(int a){last_toast=(unsigned)a;}
 void text(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void centered(int a,int b,int c){(void)a;(void)b;(void)c;}
@@ -58,7 +61,21 @@ unsigned invalid_saves(void){return invalid;}
 int valid(void){return save5_validate(&adventure_save);}
 void snapshot_state(void){snapshot=adventure_save;}
 int unchanged(void){return !memcmp(&snapshot,&adventure_save,sizeof snapshot);}
-int roundtrip(void){Save5State r;if(!host_finish_save())return 0;if(!save5_store(&adventure_save)||!save5_load(&r))return 0;return !memcmp(&adventure_save.quests,&r.quests,sizeof r.quests)&&!memcmp(&adventure_save.roster,&r.roster,sizeof r.roster)&&!memcmp(&adventure_save.equipment,&r.equipment,sizeof r.equipment);}
+int roundtrip(void){Save5State r;if(!host_finish_save())return 0;if(!save5_store(&adventure_save)||!save5_load(&r))return 0;return !memcmp(&adventure_save.quests,&r.quests,sizeof r.quests)&&!memcmp(&adventure_save.roster,&r.roster,sizeof r.roster)&&!memcmp(&adventure_save.equipment,&r.equipment,sizeof r.equipment)&&!memcmp(&adventure_save.relationships,&r.relationships,sizeof r.relationships);}
+unsigned relationship_events(unsigned person){return person<REL_PERSON_COUNT?adventure_save.relationships.events[person]:255;}
+int host_partner(unsigned person){unsigned event;if(person>=REL_PERSON_COUNT)return 0;for(event=0;event<=REL_ACCEPT_DATING;event++)if(!relationships_record(&adventure_save.relationships,person,event))return 0;return save5_validate(&adventure_save);}
+unsigned host_dialogue_first(void){return last_dialogue_a;}
+int host_ressa_ready(void){unsigned q,bit;int result;
+ for(q=30;q<=32;q++){
+  if(magma_quest_offer(&adventure_save,q)!=MAGMA_CHANGED)return 0;
+  for(bit=1;bit<=magma_quest_mask(q);bit<<=1){
+   result=magma_quest_objective(&adventure_save,q,bit);
+   if(result!=MAGMA_CHANGED&&result!=MAGMA_NOW_READY)return 0;
+  }
+  if(magma_quest_claim(&adventure_save,q)!=MAGMA_REWARDED)return 0;
+ }
+ return save5_validate(&adventure_save);
+}
 void tick(unsigned n){while(n--)magma_game_tick();}
 void modal(unsigned m){game_state=(int)m;}
 void summon(unsigned m){summoned=(int)m;}

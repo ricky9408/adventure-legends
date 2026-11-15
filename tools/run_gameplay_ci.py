@@ -155,6 +155,11 @@ def main():
                                   '-p', 'test_gameplay_ci.py'])
         stage('relationship-core-tests', [python, 'tests/test_relationships.py'])
         stage('relationship-save-tests', [python, 'tests/test_relationship_save.py'])
+        stage('ressa-host-route-tests', [python, 'tests/test_magma_game.py',
+              'MagmaRuntime.test_ressa_route_requires_completed_scenes_and_separate_visits',
+              'MagmaRuntime.test_ressa_romance_waits_when_another_partner_exists',
+              'MagmaRuntime.test_ressa_marriage_waits_if_existing_partner_appears',
+              'MagmaRuntime.test_ressa_pending_choice_rechecks_existing_partner'])
         stage('sunlace-welcome-tests', [python, 'tests/test_sunlace_welcome.py'])
         stage('north-chapter-closure-tests', [python, 'tests/test_north_chapter_closure.py'])
         stage('southern-chapter-closure-tests', [python, 'tests/test_southern_chapter_closure.py'])
@@ -318,6 +323,17 @@ def main():
             edda = json.loads((out/'edda-route/edda-summary.json').read_text())
             if not edda['accepted'] or not edda['controller_only'] or edda['game_ram_writes'] or edda['machine_state_imports'] or edda['historical_progress_imports'] or edda['candidate']['rom_sha256'] != rom_sha:
                 raise RuntimeError('Edda route did not earn and retain its events through controller input')
+            stage('ressa-earned-route', [python, 'tests/ressa_route_native.py',
+                  '--rom', str(ROOT/'build/emberbond.gba'), '--symbols', str(ROOT/'build/emberbond.sym'),
+                  '--bridge', bridge, '--source-root', str(ROOT),
+                  '--source-manifest', str(ROOT/'build/source-hashes.json'),
+                  '--output', str(out/'ressa-route'), '--expected-rom-sha', rom_sha,
+                  '--expected-symbols-sha', snapshots[-1]['emberbond.sym'],
+                  '--expected-elf-sha', snapshots[-1]['emberbond.elf'],
+                  '--expected-manifest-sha', snapshots[-1]['source-hashes.json']], timeout=900)
+            ressa = json.loads((out/'ressa-route/ressa-summary.json').read_text())
+            if not ressa['accepted'] or not ressa['controller_only'] or ressa['game_ram_writes'] or ressa['machine_state_imports'] or ressa['historical_progress_imports'] or ressa['candidate']['rom_sha256'] != rom_sha:
+                raise RuntimeError('Ressa route did not earn and retain its events through controller input')
             stage('synthetic-audio-diagnostics', common + ['--cases', 'synthetic',
                   '--output', str(out / 'synthetic-audio')], timeout=600)
             if args.extended_audio:
@@ -345,6 +361,7 @@ def main():
                                 'fresh_main_checks': campaign['passed_checks'],
                                 'mina_route_checks': mina['passed_checks'],
                                 'edda_route_checks': edda['passed_checks'],
+                                'ressa_route_checks': ressa['passed_checks'],
                                 'fresh_main_rooms': campaign['visited_rooms'],
                                 'fresh_main_presented_cadence_passed': campaign['presented_journey_pacing_passed']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.

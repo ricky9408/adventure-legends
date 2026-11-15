@@ -77,6 +77,13 @@ contracts remain pinned and separate from current runtime evidence.
   ledger honest. SRAM snapshots and cold Continue verify masks
   0→1→3→7→15→31. Screenshots and traces are retained under `edda-route/`.
   Concurrent dating and marriage remain blocked pending mutual consent scenes.
+- **Fresh Ressa route:** an empty-SRAM campaign earns the original Magma kiln
+  reward, shapes and fires an imperfect dish with Ressa, hears her personal
+  story, then explicitly accepts dating and marriage on separate visits. B
+  defers the craft scene and both romantic choices; repeated talks cannot
+  advance the ledger. Saved masks 0→1→3→7→15→31, cold Continue and a married
+  revisit are retained under `ressa-route/`. Another existing partner blocks
+  Ressa's romantic transition until mutual consent scenes are authored.
 
 ## Reproduce locally
 

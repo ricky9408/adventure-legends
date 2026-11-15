@@ -42,11 +42,15 @@ Each person's goals remain meaningful outside their relationship to the player.
    quests, shops or doors. Do not ship all four routes as shallow repeated text.
    The implemented route and its earned-play evidence are described in
    [Mina's route](MINA_ROUTE.md).
-4. **Current slice: Edda's complete harbor route.** The Northern reward reveals
+4. **Completed playable route: Edda.** The Northern reward reveals
    a dispatch document. Sort cargo labels together, return to hear the delivery
    arrived, listen to her own decision about an unsent letter, then choose dating
    and marriage on separate visits. See [Edda's route](EDDA_ROUTE.md).
-5. **Future: remaining routes, then multi-partner scene coverage.** Different activities,
+5. **Current slice: Ressa's complete kiln route.** After the original Magma
+   reward, shape an imperfect dish together, return to see it fired, listen to
+   Ressa's own story about hidden failures, then choose dating and marriage on
+   separate visits. See [Ressa's route](RESSA_ROUTE.md).
+6. **Future: Lyra, then multi-partner scene coverage.** Different activities,
    cadence, dialogue, visual identity and home/epilogue reactions. An additional
    relationship requires an explicit conversation about existing relationships,
    with agreement from the people involved. Multiple spouse bits are allowed;
