@@ -5,9 +5,11 @@ from pathlib import Path
 import ctypes as C,json,subprocess,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='magma-runtime-');OUT=Path(TMP.name)
-UI=json.loads((ROOT/'assets/magma_region/dialogue.json').read_text());IDS={'TX_'+k:3000+i for i,k in enumerate(UI)}
+UI=json.loads((ROOT/'assets/magma_region/dialogue.json').read_text())
+UI.update(json.loads((ROOT/'assets/relationships_ui.json').read_text()))
+IDS={'TX_'+k:3000+i for i,k in enumerate(UI)}
 (OUT/'magma_game_test_ui.h').write_text('enum{'+','.join(k+'='+str(v)for k,v in IDS.items())+'};\n')
-sources=['src/magma_game.c','src/magma_art.c','src/magma_quests.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c']
+sources=['src/magma_game.c','src/magma_art.c','src/magma_quests.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/relationships.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c']
 subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DMAGMA_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),'tests/magma_game_host.c',*sources,'-Wl,--wrap=magma_anchor','-o',str(OUT/'test.so')],cwd=ROOT,check=True)
 L=C.CDLL(str(OUT/'test.so'))
 class Puzzle(C.Structure):_fields_=[('cell',C.c_ubyte*2),('heat',C.c_ubyte),('brace',C.c_ubyte)]
@@ -57,6 +59,81 @@ class MagmaRuntime(unittest.TestCase):
   for q in range(33,38):self.assertEqual(L.qs(q),3,(q,toast()))
   self.assertEqual(L.valid(),1);self.assertEqual(L.invalid_saves(),0)
  def test_real_module_minimal_guaranteed_route(self):self.main()
+ def test_ressa_route_requires_completed_scenes_and_separate_visits(self):
+  self.entry(38);self.assertEqual(L.host_ressa_ready(),1);self.entry(38)
+  self.assertEqual(L.relationship_events(1),0)
+  self.target(160,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),0,'original quest NPC retains priority')
+  self.target(192,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),1)
+  L.magma_game_ressa_cancel_dialogue();self.assertEqual(L.relationship_events(1),0)
+  self.target(192,176);L.magma_game_ressa_finish_dialogue()
+  self.assertEqual(L.relationship_events(1),1)
+  self.target(192,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),0,'same visit cannot earn a second event')
+  self.assertEqual(L.host_dialogue_first(),IDS['TX_RS_LATER_A'])
+  self.entry(39);self.entry(38)
+  self.target(192,176)
+  self.entry(39);L.magma_game_ressa_finish_dialogue()
+  self.assertEqual(L.relationship_events(1),1,'interrupted visit records nothing')
+  for before,after in ((1,3),(3,7),(7,15),(15,31)):
+   self.entry(38)
+   self.assertEqual(L.relationship_events(1),before)
+   self.target(192,176)
+   if before>=7:
+    L.magma_game_ressa_cancel_dialogue()
+    self.assertEqual(L.relationship_events(1),before,'deferred romance records nothing')
+    self.target(192,176)
+   L.magma_game_ressa_finish_dialogue()
+   self.assertEqual(L.relationship_events(1),after)
+   self.assertEqual(L.valid(),1)
+   self.entry(39)
+  self.entry(38);self.target(192,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),0)
+  self.assertEqual(L.host_dialogue_first(),IDS['TX_RS_SPOUSE_A'])
+  self.assertEqual(L.relationship_events(1),31)
+  self.assertEqual(L.roundtrip(),1)
+ def test_ressa_romance_waits_when_another_partner_exists(self):
+  self.entry(38);self.assertEqual(L.host_ressa_ready(),1);self.entry(38)
+  for before,after in ((0,1),(1,3),(3,7)):
+   self.assertEqual(L.relationship_events(1),before)
+   self.target(192,176);L.magma_game_ressa_finish_dialogue()
+   self.assertEqual(L.relationship_events(1),after)
+   self.entry(39);self.entry(38)
+  self.assertEqual(L.host_partner(2),1)
+  self.target(192,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),0)
+  self.assertEqual(L.host_dialogue_first(),IDS['TX_RS_OTHERS_A'])
+  self.assertEqual(L.relationship_events(1),7)
+  self.assertEqual(L.relationship_events(2),15)
+  self.assertEqual(L.roundtrip(),1)
+ def test_ressa_marriage_waits_if_existing_partner_appears(self):
+  self.entry(38);self.assertEqual(L.host_ressa_ready(),1);self.entry(38)
+  for before,after in ((0,1),(1,3),(3,7),(7,15)):
+   self.assertEqual(L.relationship_events(1),before)
+   self.target(192,176);L.magma_game_ressa_finish_dialogue()
+   self.assertEqual(L.relationship_events(1),after)
+   self.entry(39);self.entry(38)
+  self.assertEqual(L.host_partner(2),1)
+  self.target(192,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),0)
+  self.assertEqual(L.host_dialogue_first(),IDS['TX_RS_OTHERS_A'])
+  self.assertEqual(L.relationship_events(1),15)
+  self.assertEqual(L.relationship_events(2),15)
+  self.assertEqual(L.roundtrip(),1)
+ def test_ressa_pending_choice_rechecks_existing_partner(self):
+  self.entry(38);self.assertEqual(L.host_ressa_ready(),1);self.entry(38)
+  for before,after in ((0,1),(1,3),(3,7)):
+   self.target(192,176);L.magma_game_ressa_finish_dialogue()
+   self.assertEqual(L.relationship_events(1),after)
+   self.entry(39);self.entry(38)
+  self.target(192,176)
+  self.assertEqual(L.magma_game_ressa_dialogue_pending(),1)
+  self.assertEqual(L.host_partner(2),1)
+  L.magma_game_ressa_finish_dialogue()
+  self.assertEqual(L.relationship_events(1),7)
+  self.assertEqual(L.relationship_events(2),15)
+  self.assertEqual(L.roundtrip(),1)
  def test_all_seven_invitations_and_six_optional_stories(self):self.optional();self.assertEqual(L.roundtrip(),1)
  def test_static_engine_collision_and_spawns(self):
   self.assertEqual(L.collision_equivalence(),0)

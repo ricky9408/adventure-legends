@@ -7,6 +7,7 @@
 #include "magma_quests.h"
 #include "progression.h"
 #include "assets.h"
+#include "relationships.h"
 #ifdef MAGMA_GAME_HOST_TEST
 #include "magma_game_test_ui.h"
 #else
@@ -28,7 +29,7 @@
 extern volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,camera_x,camera_y;
 extern volatile unsigned chapter_flags;
 extern int face,keys,journal_tab;
-extern void enter_room(int,int),save_game(void),dialogue(int,int,int),toast(int),text(int,int,int,int),centered(int,int,int),box(int,int,int,int);
+extern void enter_room(int,int),save_game(void),dialogue(int,int,int),addpage(int,int),dialogue_speaker(int),toast(int),text(int,int,int,int),centered(int,int,int),box(int,int,int,int);
 extern void rect(int,int,int,int,unsigned char),line(int,int,int,int,int),game_region_warp(int,int);
 unsigned magma_game_revision,magma_game_journal_selection;
 MagmaPuzzle magma_game_puzzle;
@@ -38,6 +39,7 @@ static unsigned char grab=255,lesson_x=144,screen_x=128,hood,guide,seed,wind,bru
 static unsigned char shelf,pot_hood,pots,clapper,sound,spill,second,carrying,door_notice,reg_divert,reg_lane,reg_hit,reg_window_hit,action_hits;
 static unsigned action_token[4];
 static unsigned char dirty,branch_visible;
+static unsigned char ressa_entry_events,ressa_pending;
 /* Small staged rest transaction; no save/roster copy and no skipped validation. */
 static unsigned char pending_anchor_area,pending_anchor_spawn,pending_anchor_checkpoint;
 static unsigned short world_clock;
@@ -101,6 +103,44 @@ COLD int magma_game_quest_commit(void){unsigned q;int result,has_claim,show,a,b,
 static const int qnames[8]={TX_MG_Q30,TX_MG_Q31,TX_MG_Q32,TX_MG_Q33,TX_MG_Q34,TX_MG_Q35,TX_MG_Q36,TX_MG_Q37};
 static const int clues[8][2]={{TX_MG_CLUE30A,TX_MG_CLUE30B},{TX_MG_CLUE31A,TX_MG_CLUE31B},{TX_MG_CLUE32A,TX_MG_CLUE32B},{TX_MG_CLUE33A,TX_MG_CLUE33B},{TX_MG_CLUE34A,TX_MG_CLUE34B},{TX_MG_CLUE35A,TX_MG_CLUE35B},{TX_MG_CLUE36A,TX_MG_CLUE36B},{TX_MG_CLUE37A,TX_MG_CLUE37B}};
 static COLD void talk(unsigned q){if(q==33&&state(q)==1&&rq_objectives(q)==3)objective(q,4);if(state(q)>=2){claim(q);return;}if(offer(q))say(clues[q-30][0],clues[q-30][1]);else say(TX_MG_LOCKED,TX_MG_LOCKEDB);}
+static COLD void ressa_scene(unsigned event,int a,int b,int c,int d){
+ if(ressa_pending||room!=38||!done(32)||
+    adventure_save.relationships.events[REL_RESSA]!=ressa_entry_events)return;
+ ressa_pending=(unsigned char)(event+1);
+ dialogue(a,b,PLAY);addpage(c,d);dialogue_speaker(TX_RS_NAME);
+}
+static COLD void ressa_chatter(int a,int b){dialogue(a,b,PLAY);dialogue_speaker(TX_RS_NAME);}
+static COLD void ressa_tile(void){unsigned stage=adventure_save.relationships.events[REL_RESSA],i;
+ if(stage!=ressa_entry_events){ressa_chatter(TX_RS_LATER_A,TX_RS_LATER_B);return;}
+ if(stage==0){ressa_scene(REL_SHARED_TASK,TX_RS_TILE_A,TX_RS_TILE_B,TX_RS_TILE_C,TX_RS_TILE_D);return;}
+ if(stage==1){ressa_scene(REL_RETURN_VISIT,TX_RS_RETURN_A,TX_RS_RETURN_B,TX_RS_RETURN_C,TX_RS_RETURN_D);return;}
+ if(stage==3){ressa_scene(REL_PERSONAL_STORY,TX_RS_STORY_A,TX_RS_STORY_B,TX_RS_STORY_C,TX_RS_STORY_D);return;}
+ if(stage==7||stage==15){
+  for(i=0;i<REL_PERSON_COUNT;i++)if(i!=REL_RESSA&&
+      relationships_stage(&adventure_save.relationships,i)>=REL_PARTNER){
+   ressa_chatter(TX_RS_OTHERS_A,TX_RS_OTHERS_B);return;
+  }
+  if(stage==7)ressa_scene(REL_ACCEPT_DATING,TX_RS_DATE_A,TX_RS_DATE_B,TX_RS_DATE_C,TX_RS_DATE_CHOICE);
+  else ressa_scene(REL_ACCEPT_MARRIAGE,TX_RS_WED_A,TX_RS_WED_B,TX_RS_WED_C,TX_RS_WED_CHOICE);
+  return;
+ }
+ ressa_chatter(stage==31?TX_RS_SPOUSE_A:TX_RS_LATER_A,stage==31?TX_RS_SPOUSE_B:TX_RS_LATER_B);
+}
+COLD int magma_game_ressa_dialogue_pending(void){return ressa_pending!=0;}
+COLD void magma_game_ressa_cancel_dialogue(void){ressa_pending=0;}
+COLD void magma_game_ressa_finish_dialogue(void){unsigned event,i;
+ if(!ressa_pending)return;
+ event=ressa_pending-1u;ressa_pending=0;
+ if(room!=38||!done(32)||
+    adventure_save.relationships.events[REL_RESSA]!=ressa_entry_events)return;
+ if(event>=REL_ACCEPT_DATING)
+  for(i=0;i<REL_PERSON_COUNT;i++)if(i!=REL_RESSA&&
+      relationships_stage(&adventure_save.relationships,i)>=REL_PARTNER)return;
+ if(!relationships_record(&adventure_save.relationships,REL_RESSA,event))return;
+ changed();save_game();
+ if(event==REL_ACCEPT_DATING)toast(TX_RS_DATE_YES);
+ if(event==REL_ACCEPT_MARRIAGE)toast(TX_RS_WED_YES);
+}
 static CreatureInstance*active(void){CreatureInstance*c=progression_selected();unsigned p=adventure_save.roster.selected_party,s;if(!summoned||p>=4)return 0;s=adventure_save.roster.party[p];if(s>=160||c!=&adventure_save.roster.instances[s]||!creatures_instance_validate(c))return 0;return c;}
 static int line_clear(int tx,int ty){const MagmaArtRoom*r;unsigned j,k;int ox=0,oy=0,dx=tx-px,dy=ty-py,n=ab(dx)>ab(dy)?ab(dx):ab(dy),i,x,y;if(!magma_game_is_room((unsigned)room)||n>128)return 0;
 r=&magma_art_rooms[room-38];for(i=1;i<n;i++){x=px+dx*i/n;y=py+dy*i/n;for(j=0;j<r->solid_count;j++){const MagmaArtRect*b=&r->solids[j];if(x>=b->x&&x<b->x+b->w&&y>=b->y&&y<b->y+b->h)return 0;}if(room>=42&&room<=44)for(k=0;k<magma_puzzle_count((unsigned)room);k++)if(magma_puzzle_position(&magma_game_puzzle,(unsigned)room,k,&ox,&oy)&&(ox!=tx||oy!=ty)&&x>=ox-6&&x<ox+6&&y>=oy-6&&y<oy+6)return 0;}return 1;}
@@ -111,7 +151,7 @@ static int has_branch(unsigned token){return magma_branch_hint_available(&advent
 static COLD int recruit(unsigned token,int valid,int repeat,int hint){int r;if(!repeat&&magma_source_claimed(&adventure_save,token)){toast(TX_MG_KNOWN);return 1;}if(!valid){toast(hint);return 1;}if(repeat){if(!magma_queue_recruit(token))result(MAGMA_INVALID);return 1;}r=magma_field_recruit(&adventure_save,token);if(r==MAGMA_REWARDED){if(!repeat){unsigned aid=magma_source_aid(token);if(aid<128)creatures_credit_event(&adventure_save.roster,384+aid,120,CREATURE_CREDIT_FIELD_AID);}dirty=1;progression_refresh();persist();toast(TX_MG_RECRUITED);}else result(r);return r==MAGMA_REWARDED?3:1;}
 static COLD void discover(unsigned bit){int r=magma_discover(&adventure_save,bit);if(r==MAGMA_CHANGED||r==MAGMA_NOW_READY){dirty=1;changed();}}
 static void clear_trial(void){trial_index=trial_slot=255;trial_bits=trial_aux=trial_order=0;trial_id=0;}
-static void reset_scene(void){unsigned bi;rq_cancel();magma_game_cancel_event();if(magma_scene<0xffffffffu)++magma_scene;else magma_scene=0;branch_visible=0;for(bi=0;bi<160;bi++){unsigned f=adventure_save.roster.instances[bi].form_id;if(f==38||f==39)branch_visible|=1;if(f==41||f==42)branch_visible|=2;if(f==44||f==45)branch_visible|=4;if(f==47||f==48)branch_visible|=8;}if(trial_index==0)trial_aux=0;magma_puzzle_reset(&magma_game_puzzle,(unsigned)room);grab=255;lesson_x=144;/* The Q35 screen stays in its storage bay after the authored route
+static void reset_scene(void){unsigned bi;rq_cancel();magma_game_cancel_event();ressa_pending=0;ressa_entry_events=adventure_save.relationships.events[REL_RESSA];if(magma_scene<0xffffffffu)++magma_scene;else magma_scene=0;branch_visible=0;for(bi=0;bi<160;bi++){unsigned f=adventure_save.roster.instances[bi].form_id;if(f==38||f==39)branch_visible|=1;if(f==41||f==42)branch_visible|=2;if(f==44||f==45)branch_visible|=4;if(f==47||f==48)branch_visible|=8;}if(trial_index==0)trial_aux=0;magma_puzzle_reset(&magma_game_puzzle,(unsigned)room);grab=255;lesson_x=144;/* The Q35 screen stays in its storage bay after the authored route
  * repair. This durable objective never supplies a trial or teaching proof. */
 screen_x=(unsigned char)((rq_objectives(35)&1)?176:128);hood=guide=seed=wind=brush=samples=hooks=bypass=basin=0;shelf=pot_hood=pots=clapper=sound=spill=second=door_notice=reg_divert=reg_hit=reg_window_hit=action_hits=0;action_token[0]=action_token[1]=action_token[2]=action_token[3]=0;reg_lane=0;world_clock=0;magma_game_machine_stage=(unsigned char)((rq_objectives(32)&8)?5:0);magma_game_machine_ticks=0;magma_game_machine_hp=(unsigned char)(magma_game_machine_stage==5?0:192);changed();}
 static struct {Save4U32 token;unsigned phase,revision,chapter,scene;int x,y,facing;} magma_anchor_job;
@@ -206,6 +246,7 @@ COLD int magma_game_interact(void){unsigned i;int x,y,r;if(game_state!=PLAY||!ma
   if(close(lesson_x,232))return begin_grab(2);
   if(close(224,208)){hood^=1;changed();if(hood&&offer(30))objective(30,2);persist();toast(hood?TX_MG_HOOD_OPEN:TX_MG_HOOD_CLOSED);return 1;}
   if(npc_close(160,176)){if(!done(30))talk(30);else if(state(32)>=2)talk(32);else say(TX_MG_RESSA,TX_MG_RESSAB);return 1;}
+  if(done(32)&&close(192,176)){ressa_tile();return 1;}
   if(npc_close(96,176)){talk(33);return 1;}if(npc_close(384,176)){talk(36);return 1;}
   if(close(112,248)){rest();return 1;}if(close(384,208)){if(offer(36))objective(36,1);say(TX_MG_PELL,TX_MG_PELLB);return 1;}
   if(close(304,208)){say(TX_MG_BRANCH,TX_MG_BRANCHB);return 1;}

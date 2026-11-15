@@ -14,7 +14,7 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='fa2321f007cf8143c1ca74bb08411beaf83cb316c028fccf1d4eb8e95612c929'
+CONTRACT_SHA='6d534c652a27d7a10eebdd1770974e725909503300fb85f35dd82a1e2db4b5af'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
@@ -31,6 +31,7 @@ def allowed(path):
         'src/field_controls.h','src/quickparty.c','src/quickparty.h','src/journal_nav.c',
         'src/power_failure.h','src/northern_powers.c','src/northern_powers.h',
         'src/southern_powers.c','src/southern_powers.h',
+        'src/magma_game.c','src/magma_game.h','src/magma_game_draw.inc',
         'src/power_aim_hold.h','src/music.c','src/magma_powers.c','src/magma_powers.h',
         'src/covenants_game.c','src/covenants_interact.inc',
         'src/horizons_game.c','src/horizons_interact.inc',

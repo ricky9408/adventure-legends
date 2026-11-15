@@ -595,7 +595,7 @@ COLD void save_frame(void){unsigned status;
 }
 COLD void show_scene(int id,int action,unsigned seen){const CampaignDialogue*d=&campaign_dialogues[id];int i;dpage=0;dcount=d->pages;dafter=PLAY;dialogue_action=action;dialogue_seen=seen;for(i=0;i<dcount;i++){dialog_lines[i*2]=d->lines[i*2];dialog_lines[i*2+1]=d->lines[i*2+1];dialog_speakers[i]=d->speaker;}game_state=DIALOG;}
 COLD void append_scene(int id){const CampaignDialogue*d=&campaign_dialogues[id];int i;for(i=0;i<d->pages&&dcount<6;i++){dialog_lines[dcount*2]=d->lines[i*2];dialog_lines[dcount*2+1]=d->lines[i*2+1];dialog_speakers[dcount++]=d->speaker;}}
-COLD void finish_dialogue(void){story_seen|=dialogue_seen;game_state=dafter;if(dialogue_action==1)enter_room(0,3);else if(dialogue_action==2){if(!(chapter_flags&SAVE4_ENDING_SEEN)){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);}game_state=WIN;ending_credits_begin();}else if(dialogue_seen)save_game_ordinary();south_game_mina_finish_dialogue();north_game_edda_finish_dialogue();if(game_state==PLAY)acknowledge_save_failure();dialogue_action=dialogue_seen=0;}
+COLD void finish_dialogue(void){story_seen|=dialogue_seen;game_state=dafter;if(dialogue_action==1)enter_room(0,3);else if(dialogue_action==2){if(!(chapter_flags&SAVE4_ENDING_SEEN)){chapter_flags|=SAVE4_ENDING_SEEN;completed=1;save_at(0,3);}game_state=WIN;ending_credits_begin();}else if(dialogue_seen)save_game_ordinary();south_game_mina_finish_dialogue();north_game_edda_finish_dialogue();magma_game_ressa_finish_dialogue();if(game_state==PLAY)acknowledge_save_failure();dialogue_action=dialogue_seen=0;}
 COLD void camera_update(int snap){int tx,ty;if(!scrolling_room()){camera_x=camera_y=camera_fx=camera_fy=0;return;}
  tx=px-120;ty=py-80;if(tx<0)tx=0;if(tx>world_width()-240)tx=world_width()-240;if(ty<0)ty=0;if(ty>world_height()-160)ty=world_height()-160;
  if(snap){camera_fx=tx*256;camera_fy=ty*256;}else{if(ab(tx*256-camera_fx)<4)camera_fx=tx*256;else camera_fx+=(tx*256-camera_fx)/4;if(ab(ty*256-camera_fy)<4)camera_fy=ty*256;else camera_fy+=(ty*256-camera_fy)/4;}
@@ -970,8 +970,10 @@ COLD int begin_homecoming_credits(void){
  game_attacks_suspend();game_state=WIN;ending_credits_offer_homecoming();return 1;
 }
 static COLD int cancel_relationship_dialogue(void){
- if(!south_game_mina_dialogue_pending()&&!north_game_edda_dialogue_pending())return 0;
- south_game_mina_cancel_dialogue();north_game_edda_cancel_dialogue();game_state=PLAY;return 1;
+ if(!south_game_mina_dialogue_pending()&&!north_game_edda_dialogue_pending()&&
+    !magma_game_ressa_dialogue_pending())return 0;
+ south_game_mina_cancel_dialogue();north_game_edda_cancel_dialogue();
+ magma_game_ressa_cancel_dialogue();game_state=PLAY;return 1;
 }
 void update(void){int dx=0,dy=0,return_input=0,aim_holding=0,context_owned=0;FieldControlInput controls;frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY){quickparty_reset(keys);field_controls_reset(&field_controls,(unsigned)keys);}else{int party;quickparty_filter_input(&keys,&pressed);if(pressed&KEY_L)game_power_preview_cancel();party=quickparty_update(keys,pressed);if(quickparty_directional_tap){unsigned axis=(unsigned)quickparty_directional_tap;quickparty_directional_tap=0;if(!hitstop)field_step_try(axis);}if(party)return;}if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
  if(begin_homecoming_credits())return;

@@ -15,9 +15,9 @@ reward and chapter progression remain separate.
 
 Current cross-partner consent is conservative: if another person's ledger says
 dating or marriage, Mina's dating or marriage offer pauses with an explanatory
-conversation. A full conversation and additional marriages await another
-playable route. Edda has a separate playable harbor route; Ressa and Lyra do not
-yet have playable relationship scenes.
+conversation. A full conversation and additional marriages await a separate
+consent slice. Edda and Ressa have their own playable routes; Lyra does not yet
+have one.
 There is no physical GBA hardware run.
 
 ## Reproduce the earned route

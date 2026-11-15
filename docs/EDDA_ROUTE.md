@@ -21,8 +21,8 @@ If Mina or another person already has a dating or marriage event, Edda's dating
 and marriage choices pause. Mina's route likewise pauses those choices when
 Edda is a partner. Multiple relationships require authored conversations and
 agreement from everyone involved; this slice does not implement them. Ressa
-and Lyra still have no playable romance scenes. Physical GBA hardware was not
-tested.
+has a separate playable kiln route; Lyra still has no playable romance scene.
+Physical GBA hardware was not tested.
 
 ## Earned route evidence
 

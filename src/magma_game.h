@@ -69,6 +69,9 @@ int magma_puzzle_solved(const MagmaPuzzle *,unsigned area);
 int magma_game_input(unsigned pressed,unsigned held);
 int magma_game_grabbed(void);
 int magma_game_interact(void);
+int magma_game_ressa_dialogue_pending(void);
+void magma_game_ressa_cancel_dialogue(void);
+void magma_game_ressa_finish_dialogue(void);
 int magma_game_power(unsigned command); /*0 no target,1 success,2 rejected*/
 void magma_game_tick(void);
 /* Death/load/new game: clears incomplete participant-bound trial evidence.

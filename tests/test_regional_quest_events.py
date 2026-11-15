@@ -19,6 +19,7 @@ def build(region,synthetic=False):
   ui.update(MG_RESERVED='',MG_RESERVEDB='')
  else:
   harness=(ROOT/'tests/magma_game_host.c').read_text();ui=json.loads((ROOT/'assets/magma_region/dialogue.json').read_text())
+  ui.update(json.loads((ROOT/'assets/relationships_ui.json').read_text()))
  (out/f'{region}_game_test_ui.h').write_text('enum{'+','.join('TX_'+k+'='+str(3000+i) for i,k in enumerate(ui))+'};\n')
  harness+='\n#include "'+region+'_game.c"\n'
  harness+=r'''
@@ -32,8 +33,7 @@ int probe_patch(void){int r=rq_commit_patch();rq_cancel();return r;}
 int probe_fullgear(void){unsigned i;for(i=1;i<48;i++){memset(&adventure_save.equipment.bag[i],0,sizeof(EquipmentRecord));adventure_save.equipment.bag[i].item_id=99+i;adventure_save.equipment.bag[i].quantity=1;adventure_save.equipment.seen[(99+i)>>3]|=1u<<((99+i)&7);}adventure_save.equipment.equipped[0]=0;for(i=1;i<5;i++)adventure_save.equipment.equipped[i]=255;return save5_validate(&adventure_save);}
 '''
  (out/'host.c').write_text(harness)
- sources=[ROOT/'src'/f'{s}.c' for s in [region+'_art','magma_quests','southern_quests','northern_quests','save5','save4','equipment','equipment_data','creatures','creature_data']]
- if region=='south':sources.append(ROOT/'src/relationships.c')
+ sources=[ROOT/'src'/f'{s}.c' for s in [region+'_art','magma_quests','southern_quests','northern_quests','save5','save4','relationships','equipment','equipment_data','creatures','creature_data']]
  if synthetic:
   data=(ROOT/'src/equipment_data.c').read_text();marker='const EquipmentDefinition equipment_definitions[EQUIPMENT_DEFINITION_CAPACITY] = {\n'
   rows=''.join(f'    [{i}] = {{{i}, 1, 0, 0, 255, {{0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}}}},\n' for i in range(100,147))
