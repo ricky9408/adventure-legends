@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Current controls bytes fail closed; historical 4005 bytes/modes stay exact."""
-import base64,copy,gzip,json,stat,unittest
+import base64,copy,gzip,json,stat,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 import field_controls_boundary as boundary
@@ -38,6 +38,25 @@ class BoundaryTests(unittest.TestCase):
             modified=json.dumps(scope).encode()
             with patch.object(boundary,'REDESIGN_SCOPE_SHA',boundary.sha(modified)):
                 with self.assertRaises(AssertionError):boundary.redesign_scope(modified)
+
+    def test_optional_contact_sheets_do_not_change_release_inventory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            for name in ('src/game.c','assets/region/room.png','linker.ld','Makefile','LICENSE'):
+                path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'reviewed')
+            exported=boundary.production_inventory(root)
+            previews=('region_preview_native.png','region_preview_2x.png',
+                      'native_camera_sheet.png','native_camera_sheet_2x.png')
+            for name in previews:(root/'assets/region'/name).write_bytes(b'generated preview')
+            self.assertEqual(boundary.production_inventory(root),exported)
+            for name in ('assets/region/unreviewed.png','assets/other/region_preview_native.png',
+                         'src/region_preview_native.png'):
+                path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'unreviewed')
+                self.assertIn(name,boundary.production_inventory(root))
+                self.assertNotEqual(boundary.production_inventory(root),exported)
+                path.unlink()
+            (root/'assets/region/room.png').write_bytes(b'changed cartridge art')
+            self.assertNotEqual(boundary.production_inventory(root),exported)
 
     def test_exact_tree_modes_and_independent_housekeeping(self):
         original=Path.read_bytes;live_ignore=boundary.ROOT/'.gitignore';reads=[]

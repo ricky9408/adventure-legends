@@ -15,11 +15,26 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='df3ad17c1485968fb6216440e320a06545aec5de28262e63ba9d6b4cc50236c7'
+CONTRACT_SHA='35c87111cdb6ed60e9a55deb87576f2376f5ed1e412f48e6251710837fb11281'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
 REDESIGN_SCOPE_PATH='docs/redesign/production-scope.json'
-REDESIGN_SCOPE_SHA='be25958f8853452caf2b239c185931b72a1c2fdedd5fb37f70c6e0e96229348c'
+REDESIGN_SCOPE_SHA='9b4c8e109a21d916e256db08fb1f2160700c6fcd91b3bffaa707b64733e4e238'
 sha=lambda data:hashlib.sha256(data).hexdigest()
+OPTIONAL_PREVIEWS=frozenset({
+    'assets/region/region_preview_native.png','assets/region/region_preview_2x.png',
+    'assets/region/native_camera_sheet.png','assets/region/native_camera_sheet_2x.png'})
+
+
+def production_inventory(root=None):
+    root=ROOT if root is None else root
+    # These exact contact sheets are omitted from Git and source exports;
+    # broad ignore rules would also hide unreviewed cartridge inputs.
+    inventory={p.relative_to(root).as_posix():sha(p.read_bytes())
+        for folder in ('src','assets') for p in (root/folder).rglob('*')
+        if p.is_file() and '__pycache__' not in p.parts
+        and p.relative_to(root).as_posix() not in OPTIONAL_PREVIEWS}
+    inventory.update({p:sha((root/p).read_bytes()) for p in ('linker.ld','Makefile','LICENSE')})
+    return inventory
 
 
 def legacy_allowed(path):
@@ -139,10 +154,7 @@ def load(contract_bytes=None):
 
 
 def state(c):
-    production={p.relative_to(ROOT).as_posix():sha(p.read_bytes())
-        for folder in ('src','assets') for p in (ROOT/folder).rglob('*')
-        if p.is_file() and '__pycache__' not in p.parts}
-    production.update({p:sha((ROOT/p).read_bytes()) for p in ('linker.ld','Makefile','LICENSE')})
+    production=production_inventory()
     return {'production':production,'helpers':helper_inventory(),
         'proofs':{p:sha((ROOT/p).read_bytes()) for p in c['immutable_proofs']},
         'protected':{p:sha((ROOT/p).read_bytes()) for p in c['protected_inputs']},

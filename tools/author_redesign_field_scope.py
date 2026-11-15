@@ -21,10 +21,7 @@ def candidates(root):
     assert boundary.sha(raw)==boundary.CONTRACT_SHA,'current field contract was not authenticated'
     contract=json.loads(raw)
     old=contract['parent_production']
-    current={p.relative_to(root).as_posix():boundary.sha(p.read_bytes())
-             for folder in ('src','assets') for p in (root/folder).rglob('*')
-             if p.is_file() and '__pycache__' not in p.parts}
-    current.update({p:boundary.sha((root/p).read_bytes()) for p in ('Makefile','LICENSE','linker.ld')})
+    current=boundary.production_inventory(root)
     delta={p for p in old.keys()|current.keys() if old.get(p)!=current.get(p)}
     protected={p for p in delta if boundary.protected_input(p)}
     assert not protected,('protected input changed',sorted(protected))

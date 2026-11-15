@@ -20,10 +20,7 @@ def main():
     hashes={p:boundary.sha(data) for p,data in parent.items()}
     selected=json.loads(parent['docs/selected-music/contract.json'])
     assert boundary.sha(parent['docs/selected-music/contract.json'])==boundary.SELECTED_CONTRACT_SHA
-    production={p.relative_to(root).as_posix():boundary.sha(p.read_bytes())
-        for folder in ('src','assets') for p in (root/folder).rglob('*')
-        if p.is_file() and '__pycache__' not in p.parts}
-    production.update({p:boundary.sha((root/p).read_bytes()) for p in ('Makefile','LICENSE','linker.ld')})
+    production=boundary.production_inventory(root)
     old={p:h for p,h in hashes.items() if boundary.production_path(p)}
     assert old==selected['current_production']
     changed={p for p in old.keys()&production.keys() if old[p]!=production[p]}
