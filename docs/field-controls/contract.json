@@ -821,7 +821,7 @@
     "tests/test_region_game.py": "f822586d06e395c17fef111af7a8b23cb5dcb5471ebb22a9acc7f75424a80b23",
     "tests/test_regional_adapters.py": "37fd26584ef31987c2da94e430db6f1caeb3045221d7bdeb897e6d1b9f4af8b6",
     "tests/test_regional_creature_art.py": "60788e523a307ecab74f251d0e6c7343d0aee21aa3d30821b673b3cf14db299c",
-    "tests/test_regional_quest_events.py": "64278b51a3d672a320356d34301d1d2b5c4208ca44f73bdb985c3d24b4fff005",
+    "tests/test_regional_quest_events.py": "eb66fd47b6ef7d9ac6a4df8b6d06def6f13c2d3501c501b96223f1032476902d",
     "tests/test_regional_quest_runtime.py": "e59c55c3782335385ef8124d71683bf587c1232dedfe5a4854faafb42eccb35a",
     "tests/test_regional_quests.py": "3a02f571e7ce60ecbd0a58b6afeae50ab54d0ef6a140706f29fb20f618c46314",
     "tests/test_regional_shop_positions.py": "1065ae5cd4e1516ec52fd29408c626d33cdc09057e80203c36dd95279da13138",
