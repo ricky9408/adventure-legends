@@ -1625,13 +1625,13 @@
   ],
   "generated": {
     "bitmap_bytes": 153600,
-    "bitmap_sha256": "eedfb7697a2ab53ec1426a24e047eaa1642e442eef59972c4e29baadfb91f55b",
+    "bitmap_sha256": "6dcec9ca1c52e62e6cb73ec5c2abd7b9b3004d5a0fb2ab9b114c99fbecf4fed6",
     "odd_bitmap_bytes": 153600,
-    "odd_bitmap_sha256": "323b0ab4ec10567ced8c0a442b2396a1f63deafed202957b3a7163ec48caf399",
+    "odd_bitmap_sha256": "cfa984d4edb86c321130cd2b9e1eb5a4f5675a69420a3d2a765a554b745493f8",
     "odd_bitmap_shift": "Each row: odd[x]=original[min(x+1,W-1)]. Rows never bleed into the next row.",
     "bitmap_alignment_bytes": 4,
     "chunks": 37,
-    "largest_chunk_bytes": 32766,
+    "largest_chunk_bytes": 32761,
     "chunk_limit_bytes": 32768
   },
   "previews": [

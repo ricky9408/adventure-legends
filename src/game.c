@@ -975,7 +975,8 @@ static COLD int cancel_relationship_dialogue(void){
  south_game_mina_cancel_dialogue();north_game_edda_cancel_dialogue();
  magma_game_ressa_cancel_dialogue();game_state=PLAY;return 1;
 }
-void update(void){int dx=0,dy=0,return_input=0,aim_holding=0,context_owned=0;FieldControlInput controls;frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY){quickparty_reset(keys);field_controls_reset(&field_controls,(unsigned)keys);}else{int party;quickparty_filter_input(&keys,&pressed);if(pressed&KEY_L)game_power_preview_cancel();party=quickparty_update(keys,pressed);if(quickparty_directional_tap){unsigned axis=(unsigned)quickparty_directional_tap;quickparty_directional_tap=0;if(!hitstop)field_step_try(axis);}if(party)return;}if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
+#include "field_update.inc"
+void update(void){frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY){quickparty_reset(keys);field_controls_reset(&field_controls,(unsigned)keys);}else{int party;quickparty_filter_input(&keys,&pressed);if(pressed&KEY_L)game_power_preview_cancel();party=quickparty_update(keys,pressed);if(quickparty_directional_tap){unsigned axis=(unsigned)quickparty_directional_tap;quickparty_directional_tap=0;if(!hitstop)field_step_try(axis);}if(party)return;}if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
  if(begin_homecoming_credits())return;
  if(game_shop_update())return;
  if(game_state==EVENT_PENDING){event_step();if(game_state!=EVENT_PENDING)game_road_cancel();return;}
@@ -1005,46 +1006,9 @@ void update(void){int dx=0,dy=0,return_input=0,aim_holding=0,context_owned=0;Fie
  if(game_state==PAUSE){int input=journal_nav_keys(keys,pressed),nav;if(journal_tab==JOURNAL_ITEMS&&game_shop_confirm&&(input&KEY_B)){game_shop_items_input(input);return;}nav=journal_nav_input(input);if(nav==JOURNAL_CLOSE){game_shop_cancel_items();acknowledge_save_failure();game_state=PLAY;return;}if(nav==JOURNAL_CONSUMED)return;if(game_shop_items_input(input)||quickparty_menu_input(input)||progression_menu_input(input)||gear_menu_input(input)||region_game_menu_input(input)||north_game_menu_input(input)||south_game_menu_input(input)||magma_game_menu_input(input)||underwater_game_menu_input(input)||return_game_menu_input(input)||horizons_game_menu_input(input)||covenants_game_menu_input(input))return;if((input&KEY_A)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);}return;}
  if(game_state==DEAD){if(pressed&KEY_A){game_health_fill();ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,room>=16?checkpoint_spawn:2);}return;}
  if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;if(!ending_credits_returns_to_field())enter_room(0,3);}return;}
- ticks++;{int i;for(i=0;i<6;i++)if(impacts[i].life)impacts[i].life--;}if(hitstop){hitstop--;return;}if(pressed&KEY_START){journal_nav_open();game_state=PAUSE;return;}/* Contextual B cancellation owns the press before any power release.
- * R recall runs before power ticks, so a held preview cannot fire on hiding. */
- context_owned=game_field_context_input();
- if(context_owned)game_power_preview_cancel();
- if(event_frame()||game_state!=PLAY)return;
- if(!context_owned&&(pressed&KEY_SELECT))field_goal_input((unsigned)pressed);
- controls=field_controls_read(&field_controls,(unsigned)keys,(unsigned)pressed);
- if(!context_owned&&controls.companion_pressed)game_field_companion_toggle();
- if(step_cd)step_cd--;if(area_ticks)area_ticks--;if(invuln)invuln--;if(ability_cd)ability_cd--;if(!ability_cd)covenants_cooldown_owned=0;if(heal_cd)heal_cd--;if(stone_guard)stone_guard--;aim_holding=game_power_aim_hold(summoned&&!context_owned&&!controls.companion_pressed?controls.power_held:0);advanced_tick();regional_powers_tick();northern_powers_tick();game_geometry_sync();southern_powers_tick();magma_powers_tick();if(underwater_power_time||underwater_power_cast_time)underwater_powers_tick();if(return_power_time||return_power_cast_time)return_powers_tick();if(horizons_power_time||horizons_power_cast_time)horizons_powers_tick();if(covenants_power_time||covenants_power_cast_time)covenants_powers_tick();if(event_frame())return;game_combat_tick();if(guard_invuln)guard_invuln--;if(power_effect)power_effect--;if(transition_lock)transition_lock--;
- if(context_owned){walk=0;game_attacks_suspend();goto movement_done;}
- if(summoned){underwater_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(return_power_time)return_input=return_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(horizons_power_time)return_input|=horizons_powers_input(controls.power_pressed|(unsigned)(aim_holding&240));if(covenants_power_time)return_input|=covenants_powers_input(controls.power_pressed);}
- if(keys&KEY_LEFT){dx=-1;face=2;}if(keys&KEY_RIGHT){dx=1;face=3;}if(keys&KEY_UP){dy=-1;face=1;}if(keys&KEY_DOWN){dy=1;face=0;}if(swing||weapon_action.phase==WEAPON_WINDUP||weapon_action.phase==WEAPON_ACTIVE)face=weapon_action.direction;walk=(dx||dy)&&!aim_holding;if(walk)walk_phase++;
- if(aim_holding)walk=0;else{int speed=advanced_guard_charges?224:gear_stats.speed_q8,diag=advanced_guard_charges?158:gear_stats.diagonal_q8;if(weapon_action.phase==WEAPON_CHARGING){speed=speed*3/4;diag=diag*3/4;}move_player(dx*(dx&&dy?diag:speed),dy*(dx&&dy?diag:speed));}
- if(game_road_step()||walk_entry())return;
- game_attack_update(keys,pressed);
- if(event_frame())return;
- /* A deferred rest must freeze before another hostile simulation update.
-  * SaveFrame paints the notice now; proof and snapshot occur on later frames. */
- if(save_requested&&(room==38||room==39)&&magma_game_save_prepare_pending()){save_frame();return;}
- /* An A interaction may have opened dialogue. Do not let a simultaneous B
-  * start a cast after the action state has already changed. */
- if(game_state!=PLAY)return;
- if((controls.power_pressed&FIELD_POWER_ACTION)&&!(return_input&2))game_field_ability();
- if(event_frame())return;
- if(game_state!=PLAY)return;
- movement_done:
- /* Only these rooms can move physical props after the opening tick.
-  * Keep both unconditional pre-tick and pre-draw checks for every area. */
- if(room==15||room==20||(unsigned)room-38u<40u)game_geometry_sync();
- game_companion_follow();
-
- update_shots();if((unsigned)room-54u<24u)return_legacy_tick();game_arrows_update();update_enemies();if(room==3||room==8||room==13)update_boss();region_game_tick();north_game_tick();south_game_tick();magma_game_tick();underwater_game_tick();if((unsigned)room-54u<8u)return_game_tick();if((unsigned)room-62u<8u)horizons_game_tick();if((unsigned)room-70u<8u)covenants_game_tick();if(room==0||room==62)covenants_game_tick_old();if(event_frame())return;if(game_state!=PLAY)return;
- if(room==6&&!(room_flags&CF_SKY_PATROL_CLEAR)){int i,alive=0;for(i=0;i<MAX_ENEMIES;i++)alive+=enemies[i].hp>0;if(!alive){room_flags|=CF_SKY_PATROL_CLEAR;save_game();show_scene(CD_PATROL_CLEAR,0,0);return;}}
- if(region_game_is_room((unsigned)room)||north_game_is_room((unsigned)room)||south_game_is_room((unsigned)room)||((unsigned)(room-38)<16u)){}
- else if(trials_is_room(room)){int dest=trials_exit(room,px,py);if(!transition_lock&&(keys&KEY_DOWN)&&dest>=0)enter_room(dest,0);}
- else if(room>=4&&room<14){const CampaignRoom*d=&campaign_rooms[room-4];if(!transition_lock&&px>=108&&px<=132){if(d->north_room!=0&&py<=39&&(keys&KEY_UP)&&(progress_bits()&d->north_flags)==d->north_flags)enter_room(d->north_room,d->north_spawn);else if(py>=140&&(keys&KEY_DOWN)&&!game_road_managed((unsigned)room,d->south_room))enter_room(d->south_room,d->south_spawn);}}
- else if(room==1){if(py<=31&&px>=WORLD_TEMPLE_GATE_X&&px<WORLD_TEMPLE_GATE_X+WORLD_TEMPLE_GATE_W)enter_room(2,0);else if(!game_road_managed(1,0)&&py>=WORLD_VILLAGE_EXIT_Y&&ab(px-WORLD_VILLAGE_EXIT_X)<18)enter_room(0,1);}
- else if(py<=31&&px>100&&px<140){if(room<3&&!game_road_managed((unsigned)room,(unsigned)room+1))enter_room(room+1,0);}else if(py>=149&&px>100&&px<140&&room>0&&room<=3)enter_room(room-1,1);
- camera_update(0);
+ field_update();
 }
+
 COLD void draw_sword(void){int d=face,phase=13-swing,ox=d==2?-15:d==3?15:0,oy=d==1?-15:d==0?15:0;int x=px+ox,y=py+oy;line(px,py-2,x,y,WHITE);if(d<2){line(x-12+phase,y-3,x+8,y+2,GOLD);line(x-11+phase,y-2,x+8,y+3,CREAM);}else{line(x-3,y-12+phase,x+2,y+8,GOLD);line(x-2,y-11+phase,x+3,y+8,CREAM);} }
 /* The world occupies all160 rows. HUD pixels are small transparent OBJ. */
 void copy_overworld(void){int y;const u8 *atlas=(camera_x&1)?overworld_bitmap_odd:overworld_bitmap;int sx=camera_x&~1;if(COPY_OPAQUE_MODAL_BITMAP&&copy_modal_background(overworld_bitmap,overworld_bitmap_odd,WORLD_W))return;for(y=0;y<160;y++){REG32(0x040000D4)=(u32)(atlas+(camera_y+y)*WORLD_W+sx);REG32(0x040000D8)=(u32)(screen+y*120);REG32(0x040000DC)=0x80000000|120;}}

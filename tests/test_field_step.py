@@ -25,6 +25,7 @@ def function(name):
 
 
 update = SOURCE[SOURCE.index('void update(void)'):SOURCE.index('COLD void draw_sword(void)')]
+update += (ROOT / 'src/field_update.inc').read_text()
 assert 'roll_ticks=roll_cd=roll_dx=roll_dy=0;' in update
 assert 'if(step_cd)step_cd--;' in update
 assert 'field_step_try(axis)' in update

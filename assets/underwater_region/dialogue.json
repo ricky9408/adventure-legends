@@ -8,8 +8,8 @@
   "UW_NOT_YET": "Something is still out of place.",
   "UW_RECEIVED": "A new chapter belongs to you.",
   "UW_RECEIVEDB": "Check your journal and companions.",
-  "UW_END": "Both processions found a home.",
-  "UW_ENDB": "Nacreway remembers them together.",
+  "UW_END": "Shiori: I can welcome everyone home.",
+  "UW_ENDB": "Take the copied map to the village desk.",
   "UW_HOME": "There is always room to return.",
   "UW_LOCKED": "The archive needs both lessons.",
   "UW_LOCKEDB": "Follow the keeper and shellwright.",
@@ -88,7 +88,7 @@
   "UW_COURT": "Read both pages. Listen to the relief.",
   "UW_COURTB": "Ballast opens the shelter; watch its crest.",
   "UW_GUARDIAN_WAKE": "Its crest shows the coming sweep.",
-  "UW_GUARDIAN_DONE": "The guardian settles into memory.",
+  "UW_GUARDIAN_DONE": "Guardian: I will no longer close the road.",
   "UW_GUARDIAN_REST": "One opening. Its next sweep is drawn.",
   "UW_JOINT_OPEN": "Strike the pale joint with your weapon.",
   "UW_ECHO_NEEDED": "Inkbud's own echo can read this edge.",
@@ -121,7 +121,7 @@
   "UW_Q43": "The Quiet Seat",
   "UW_Q44": "Glass from Two Shores",
   "UW_Q45": "A Way to Come Home",
-  "UW_CLUE38A": "Compare the two shell-plaque edges.",
+  "UW_CLUE38A": "Keeper Shiori: Compare the shell rims.",
   "UW_CLUE38B": "Tell the keeper which edge is hollow.",
   "UW_CLUE39A": "Try the manual shelf both ways.",
   "UW_CLUE39B": "Walk the Commons return loop.",
@@ -186,5 +186,6 @@
   "UW_TRIAL15A": "Choose three corners around the motif.",
   "UW_TRIAL15B": "Echo the frame; leave the fourth dim.",
   "UW_PORTAL_WAIT_A": "Beyond this shell lift lies Nacreway.",
-  "UW_PORTAL_WAIT_B": "First, tell Ressa the mountain is safe."
+  "UW_PORTAL_WAIT_B": "First, tell Ressa the mountain is safe.",
+  "UW_GUARDIAN_HOME": "Go to the people waiting beyond it."
 }

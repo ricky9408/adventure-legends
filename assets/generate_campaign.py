@@ -18,6 +18,7 @@ OUT = ROOT / 'assets'
 SRC = ROOT / 'src'
 P = {}; PAL = []; RGB = []; Art = None
 import connected_road_art as roads
+from redesign_characters import windsail
 DIRECTIONS = ('down', 'up', 'left', 'right')
 PROP_NAMES = ('VANE','WEIGHT','WELL','FIRE_SOCKET','NATURE_SOCKET','WIND_SOCKET',
               'STONE_SOCKET','BRAZIER','LAMP','REST','SIGN','CHIME')
@@ -342,43 +343,7 @@ def background(room):
 
 
 def fuuri(direction,frame):
-    a=Art(16,16,'transparent'); bob=(0,-1,0,1)[frame]
-    # Cream moth-spirit with lavender feather wings, small face, split ribbon tail.
-    def p(pts,c):a.p([(x,y+bob) for x,y in pts],c)
-    def l(pts,c):a.l([(x,y+bob) for x,y in pts],c)
-    def dot(x,y,c):a.dot(x,y+bob,c)
-    if direction in ('down','up'):
-        wing=(0,1,2,1)[frame]
-        p([(6,6),(3,2+wing),(1,3+wing),(0,7),(2,10),(5,10),(6,8)],'purple1')
-        p([(6,6),(3,3+wing),(1,4+wing),(1,7),(3,9),(5,8)],'white')
-        p([(1,7),(3,5+wing),(5,7),(4,9)],'purple3')
-        p([(9,6),(12,2+wing),(14,3+wing),(15,7),(13,10),(10,10),(9,8)],'purple1')
-        p([(9,6),(12,3+wing),(14,4+wing),(14,7),(12,9),(10,8)],'white')
-        p([(14,7),(12,5+wing),(10,7),(11,9)],'purple3')
-        p([(6,10),(5+frame%2,14),(7,12),(8,10),(10,13),(10-frame%2,15),(8,12)],'wood4')
-        l([(6,11),(6,13)],'white');l([(9,11),(10,13)],'white')
-        p([(7,3),(9,4),(10,6),(10,10),(8,12),(5,10),(5,6),(6,4)],'purple1')
-        p([(7,4),(9,5),(9,10),(7,11),(6,9),(6,5)],'flower1')
-        p([(6,3),(4,1),(5,0),(7,3)],'white');p([(9,3),(11,1),(10,0),(8,3)],'white')
-        if direction=='down':
-            dot(6,7,'ink');dot(9,7,'ink');dot(7,9,'gold2')
-            dot(6,6,'white');dot(9,6,'white')
-        else:
-            l([(7,5),(7,9),(8,10)],'purple3');dot(8,6,'white')
-    else:
-        # Author right-facing view, mirror for left.
-        shift=(0,1,2,1)[frame]
-        p([(6,7),(4,2+shift),(1,3+shift),(2,7),(5,10)],'purple1')
-        p([(5,7),(3,3+shift),(2,4+shift),(3,7),(5,9)],'white')
-        p([(7,8),(5,4+shift),(3,6+shift),(5,11),(7,10)],'purple3')
-        p([(5,10),(2,12),(0,11),(1,14),(4,13),(7,11)],'wood4')
-        l([(1,12),(3,12),(6,10)],'white')
-        p([(8,4),(11,4),(13,6),(13,10),(10,12),(7,11),(6,7)],'purple1')
-        p([(9,5),(11,5),(12,7),(12,10),(10,11),(8,10),(7,7)],'flower1')
-        p([(10,4),(9,1),(10,0),(12,4)],'white')
-        dot(12,7,'ink');dot(11,6,'white');dot(13,9,'gold2')
-        if direction=='left':a.im=a.im.transpose(Image.Transpose.FLIP_LEFT_RIGHT);a.d=ImageDraw.Draw(a.im)
-    return a
+    return windsail(Art,direction,frame)
 
 
 def kohaku(direction,frame):

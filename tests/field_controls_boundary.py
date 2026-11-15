@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Authenticate current field controls/audio and preserve exact 4005 proofs.
+"""Authenticate current game inputs and preserve exact 4005 proofs.
 
 Historical views supply source-only inherited proofs. Every current gameplay,
 geometry, controller input and native ROM gate stays on the actual current tree.
+Redesign additions require the separately pinned list of exact reviewed paths.
 """
 from contextlib import contextmanager
 from pathlib import Path
@@ -14,12 +15,14 @@ PARENT_COMMIT='4005fa2c9e7cf7bcc92576b16753dc4022b8a5a8'
 PARENT_TREE='b56a6e59968c2ed873dfa2c14fadb6cc8c1d3f91'
 CONTRACT_PATH='docs/field-controls/contract.json'
 INVERSE_PATH='docs/field-controls/parent-inverse.json.gz'
-CONTRACT_SHA='6d534c652a27d7a10eebdd1770974e725909503300fb85f35dd82a1e2db4b5af'
+CONTRACT_SHA='df3ad17c1485968fb6216440e320a06545aec5de28262e63ba9d6b4cc50236c7'
 SELECTED_CONTRACT_SHA='e5d70fa79ab143cbef6ac20fa2449659318233b2bfb303d700baeb5b9421720e'
+REDESIGN_SCOPE_PATH='docs/redesign/production-scope.json'
+REDESIGN_SCOPE_SHA='be25958f8853452caf2b239c185931b72a1c2fdedd5fb37f70c6e0e96229348c'
 sha=lambda data:hashlib.sha256(data).hexdigest()
 
 
-def allowed(path):
+def legacy_allowed(path):
     return path.startswith(('src/ui_data/','src/companion_guide_text_data/')) or path in {
         'src/south_game.c','src/south_game.h','src/north_game.c','src/north_game.h','src/game.c','src/game_shop.c','src/gear_runtime.c','src/modal_blit.inc','src/ui.c','src/ui.h',
         'src/campaign_rules.c','src/weapon_actions.c',
@@ -53,6 +56,27 @@ def allowed(path):
         'assets/ui_texts_covenants.json','assets/ui_texts_horizons.json',
         'assets/ui_texts_player_feedback.json','assets/ui_texts_return.json','assets/underwater_ui.json',
         'Makefile'}
+
+
+def redesign_scope(raw=None,root=None):
+    root=ROOT if root is None else root
+    raw=(root/REDESIGN_SCOPE_PATH).read_bytes() if raw is None else raw
+    assert sha(raw)==REDESIGN_SCOPE_SHA,'redesign production scope changed or not authored'
+    scope=json.loads(raw)
+    assert scope['schema']==1 and scope['name']=='lantern-trails-redesign-production-scope'
+    assert scope['parent_commit']==PARENT_COMMIT and scope['parent_tree']==PARENT_TREE
+    paths=scope['additional_paths']
+    assert paths==sorted(set(paths)),'redesign scope must contain exact unique paths'
+    for path in paths:
+        safe_path(path)
+        assert production_path(path) and not protected_input(path),'protected or non-production redesign path'
+        assert not any(mark in path for mark in ('*','?','[',']')),'redesign scope cannot contain patterns'
+        assert not legacy_allowed(path),'redesign scope must list only the additional reviewed paths'
+    return frozenset(paths)
+
+
+def allowed(path,redesign=None):
+    return legacy_allowed(path) or path in (redesign_scope() if redesign is None else redesign)
 
 
 def protected_input(path):
@@ -98,7 +122,11 @@ def load(contract_bytes=None):
     old,new=c['parent_production'],c['current_production']
     changed={p for p in old.keys()&new.keys() if old[p]!=new[p]}
     assert changed==set(c['changed']) and set(c['added'])==new.keys()-old.keys() and set(c['removed'])==old.keys()-new.keys()
-    assert all(allowed(p) for p in changed|set(c['added'])|set(c['removed'])),'unapproved production delta'
+    redesign=redesign_scope()
+    assert c['redesign_scope_sha256']==REDESIGN_SCOPE_SHA,'redesign scope not bound to current production'
+    delta=changed|set(c['added'])|set(c['removed'])
+    assert redesign=={p for p in delta if not legacy_allowed(p)},'redesign scope and production delta differ'
+    assert all(allowed(p,redesign) for p in delta),'unapproved production delta'
     assert set(c['protected_inputs'])=={p for p in c['parent_files'] if protected_input(p)}
     assert all(c['parent_files'][p]==v and (not production_path(p) or new.get(p)==v)
                for p,v in c['protected_inputs'].items()),'approved music/font/license/build boundary changed'
@@ -118,6 +146,7 @@ def state(c):
     return {'production':production,'helpers':helper_inventory(),
         'proofs':{p:sha((ROOT/p).read_bytes()) for p in c['immutable_proofs']},
         'protected':{p:sha((ROOT/p).read_bytes()) for p in c['protected_inputs']},
+        'redesign_scope':sha((ROOT/REDESIGN_SCOPE_PATH).read_bytes()),
         'inverse':sha((ROOT/INVERSE_PATH).read_bytes())}
 
 
@@ -129,6 +158,7 @@ def authenticate(c,s):
         ('protected','protected_inputs','approved music/font/license/build input changed')):
         assert s[actual]==c[expected],message
     assert s['inverse']==c['inverse_sha256'],'field controls inverse changed'
+    assert s['redesign_scope']==c['redesign_scope_sha256'],'redesign production scope changed'
 
 
 def negatives(c,s):
@@ -154,6 +184,9 @@ def negatives(c,s):
     try:authenticate(c,{**s,'inverse':'0'*64})
     except AssertionError:rejected.append('inverse tampering')
     else:raise AssertionError('accepted inverse tampering')
+    try:authenticate(c,{**s,'redesign_scope':'0'*64})
+    except AssertionError:rejected.append('redesign scope tampering')
+    else:raise AssertionError('accepted redesign scope tampering')
     try:load((ROOT/CONTRACT_PATH).read_bytes()+b' ')
     except AssertionError:rejected.append('contract tampering')
     else:raise AssertionError('accepted contract tampering')

@@ -89,15 +89,15 @@ def ground(a):
              (x+rx//2,y-ry+3),(x+rx,y-ry//3),(x+rx-3,y+ry//2),
              (x+rx//2,y+ry),(x-rx//2,y+ry-2),(x-rx,y+ry//3)], 'grass3')
     # Sparse clustered mottling: large plain areas remain calm behind actors.
-    for _ in range(190):
+    for _ in range(120):
         x, y = rng.randrange(W), rng.randrange(H)
         rx, ry = rng.randrange(4, 15), rng.randrange(2, 5)
         a.p([(x-rx,y),(x-rx+3,y-ry),(x+rx-4,y-ry),(x+rx,y),
              (x+rx-3,y+ry),(x-rx+4,y+ry)], rng.choice(['grass2','grass3','grass3','grass4']))
-    for _ in range(880):
+    for _ in range(420):
         x, y = rng.randrange(2,W-3), rng.randrange(2,H-3)
         a.r((x, y, x+rng.randrange(1,4), y), rng.choice(['grass1','grass2','grass3','grass4']))
-    for _ in range(155):
+    for _ in range(72):
         x, y = rng.randrange(4,W-4), rng.randrange(6,H-4)
         a.l([(x-2,y),(x-1,y-2),(x,y),(x+2,y-1)],'grass4')
         a.dot(x-1,y+1,'grass1')

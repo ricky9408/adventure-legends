@@ -164,6 +164,10 @@ def main():
         stage('north-chapter-closure-tests', [python, 'tests/test_north_chapter_closure.py'])
         stage('southern-chapter-closure-tests', [python, 'tests/test_southern_chapter_closure.py'])
         stage('magma-chapter-closure-tests', [python, 'tests/test_magma_chapter_closure.py'])
+        stage('underwater-chapter-closure-tests', [python, 'tests/test_underwater_chapter_closure.py'])
+        stage('field-update-stages', [python, 'tests/test_field_update.py'])
+        stage('redesign-art-boundary', [python, 'tests/test_redesign_art.py'])
+        stage('lantern-art-layout', [python, 'tests/test_lantern_art.py'])
         stage('boss-observation-tests', [python, 'tests/test_boss_observation.py'])
         stage('review-inventory-preflight', [python, '-c',
               "import sys; sys.path.insert(0,'tests'); "

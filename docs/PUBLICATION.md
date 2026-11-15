@@ -1,8 +1,10 @@
 # Source publication
 
-This checkout publishes the accepted 78-room release with 23 original music cues,
-Save5 content revision 11, companion collection browsing, equipment and treasures,
-connected roads, native GBJ text and the ending credits. Existing GitHub history
+This checkout contains the 78-room adventure with 23 original music cues,
+Save5 content revision 13, companion collection browsing, equipment and treasures,
+connected roads, native Japanese text and the ending credits. The Lantern Trails
+redesign retains the playable Mina, Edda and Ressa routes and records its own
+verification separately from the historical releases. Existing GitHub history
 and unrelated tracked files are retained. Obsolete generated UI chunks are removed.
 
 The source-focused publication excludes new raw development traces, emulator

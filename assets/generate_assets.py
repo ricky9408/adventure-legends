@@ -5,7 +5,7 @@ Run with Python 3 + Pillow. The shared palette is quantized to native GBA RGB555
 """
 from pathlib import Path
 from PIL import Image, ImageDraw
-import math, random, json
+import math, random, json, importlib.util
 try:
     import connected_road_art as roads
 except ModuleNotFoundError:
@@ -14,6 +14,8 @@ except ModuleNotFoundError:
     _roads_spec=importlib.util.spec_from_file_location('connected_road_art',Path(__file__).with_name('connected_road_art.py'))
     roads=importlib.util.module_from_spec(_roads_spec);_roads_spec.loader.exec_module(roads)
 ROOT=Path(__file__).resolve().parents[1]
+_character_spec=importlib.util.spec_from_file_location('redesign_characters',Path(__file__).with_name('redesign_characters.py'))
+characters=importlib.util.module_from_spec(_character_spec);_character_spec.loader.exec_module(characters)
 OUT=ROOT/'assets'; SRC=ROOT/'src'; OUT.mkdir(exist_ok=True); SRC.mkdir(exist_ok=True)
 # Index zero is reserved for transparency, including sprite backgrounds.
 COLORS=[
@@ -84,6 +86,9 @@ for n,h in COLORS:
     rgb.append(tuple((int(h[k:k+2],16)>>3)*255//31 for k in (1,3,5)))
 rgb += [(0,0,0)]*(256-len(rgb))
 PAL=[x for c in rgb for x in c]
+def resident_sprite(region,name,work=False,step=0):
+    return characters.resident(Art,region,name,work,step)
+
 class Art:
     def __init__(self,w=240,h=160,bg='grass1'):
         self.im=Image.new('P',(w,h),P[bg]); self.im.putpalette(PAL); self.d=ImageDraw.Draw(self.im)
@@ -106,15 +111,15 @@ def terrain(a,seed=1,base='grass1'):
     a.r((0,0,239,159),base)
     # Quiet floor planes make creatures and interactable silhouettes easy to read.
     # Detail is arranged into islands rather than uniform screen-wide noise.
-    for i in range(31):
+    for i in range(23):
         x=R.randrange(240);y=R.randrange(24,160);w=R.randrange(7,19)
         a.p([(x-w,y),(x-w+4,y-3),(x+w-3,y-3),(x+w,y),(x+w-4,y+3),(x-w+3,y+2)],'grass1' if base=='grass0' else 'grass2')
-    for i in range(160):
+    for i in range(88):
         x=R.randrange(240); y=R.randrange(25,160)
         c=R.choice(['grass0','grass2','grass2','grass3'])
         a.r((x,y,x+2,y),c)
         if R.random()<.25: a.dot(x+1,y-1,c)
-    for i in range(44):
+    for i in range(24):
         x=R.randrange(240);y=R.randrange(25,160)
         a.l([(x-2,y),(x-1,y-2),(x,y),(x+2,y-1)],'grass3')
         a.dot(x-1,y+1,'grass0')
@@ -157,8 +162,9 @@ def leaf_cluster(a,x,y,r=9,lit=False,s=1):
     if lit:
         poly([(-r+3,-5),(-r+5,-r+2),(0,-r+1),(2,-r+4),(-2,-r+4),(-4,-3),(-r+3,-3)],'pine5')
         a.l([(x+(-r+5)*s,y+(-r+2)*s),(x-1*s,y+(-r+2)*s)],'leaflight')
-    for dx,dy in [(-5,-3),(1,-2),(-3,3),(4,2)]:
-        a.l([(x+dx*s,y+dy*s),(x+(dx+2)*s,y+(dy-1)*s),(x+(dx+3)*s,y+dy*s)],'pine4' if dy<0 else 'pine1')
+    a.p([(x-5*s,y-3*s),(x-3*s,y-5*s),(x,y-5*s),(x-1*s,y-3*s)],'pine5' if lit else 'pine4')
+    a.l([(x+2*s,y+3*s),(x+4*s,y+2*s),(x+6*s,y+2*s)],'pine1')
+    a.l([(x-4*s,y+3*s),(x-2*s,y+4*s),(x+1*s,y+4*s)],'pine2')
     a.dot(x-3*s,y-5*s,'leaflight' if lit else 'pine5')
 
 def tree(a,x,y,s=1,seed=0):
@@ -360,130 +366,40 @@ def boss():
     return a
 
 def title():
-    a=Art(bg='dusk0')
-    for y,c in [(0,'night'),(21,'dusk0'),(45,'dusk1'),(65,'dusk2'),(79,'dusk3'),(97,'dusk4')]: a.r((0,y,239,159),c)
-    # Stars and the amber rising moon.
-    for x,y in [(17,17),(44,32),(83,16),(158,13),(213,29),(227,13),(190,39),(109,28)]:a.dot(x,y,'gold4')
-    a.e((174,25,202,53),'dusk3');a.e((177,27,199,49),'sun');a.r((175,46,203,49),'dusk2')
-    a.p([(0,81),(17,61),(35,68),(65,40),(94,75),(120,54),(157,89),(178,68),(211,78),(239,52),(239,115),(0,115)],'purple1')
-    a.p([(36,73),(65,40),(89,71),(74,60),(68,61),(63,52),(56,65),(53,62)],'fog')
-    a.p([(0,101),(26,89),(47,100),(75,78),(103,102),(126,87),(162,105),(184,81),(215,99),(239,84),(239,124),(0,124)],'water0')
-    a.r((0,113,239,159),'water1')
-    for y in range(115,158,4):
-        for x in range((y%3)*9,240,37):a.r((x,y,x+12+(y%7),y),'water2')
-    for x,y,w in [(160,116,35),(169,120,21),(172,126,16),(179,131,9),(164,115,25)]:a.r((x,y,x+w,y),'dusk3')
-    # Far ruin with waterfall.
-    a.p([(156,107),(161,86),(166,81),(188,82),(195,107)],'stone0');a.r((166,67,171,92),'stone1');a.r((183,68,188,91),'stone1');a.p([(164,69),(174,61),(181,61),(190,69)],'stone2');a.r((170,69,184,72),'stone3');a.r((173,72,181,92),'night')
-    a.p([(165,107),(167,101),(173,102),(173,119),(169,123),(164,121)],'water3');a.l([(169,106),(169,119)],'water4')
-    # Foreground hero lookout cliff, fern silhouettes, firelit shrine.
-    a.p([(0,117),(31,114),(42,119),(62,114),(75,122),(105,121),(120,132),(127,160),(0,160)],'ink')
-    a.p([(0,114),(31,110),(42,114),(61,110),(74,118),(103,117),(118,129),(125,134),(0,138)],'pine1')
-    a.l([(0,114),(31,110),(42,114),(61,110),(74,118),(103,117),(118,129)],'pine3',2)
-    a.r((24,139,86,142),'stone0');a.l([(28,137),(92,137)],'stone1')
-    shrine(a,30,116);tree(a,5,137,1.6,12)
-    for x in (3,20,94,109,118,230):
-        a.l([(x,159),(x-2,145),(x+1,150),(x+5,144)],'pine0',2)
-    a.p([(204,160),(207,144),(214,138),(220,143),(225,131),(232,127),(240,134),(240,160)],'pine0')
+    a=Art(bg='night')
+    for y,c in [(0,'deep'),(27,'night'),(111,'water0'),(133,'deep')]:
+        a.r((0,y,239,159),c)
+    for x,y in [(16,13),(41,21),(106,12),(153,18),(194,8),(234,39)]:a.dot(x,y,'gold4')
+    a.e((210,12,226,28),'dusk2');a.e((212,13,224,25),'sun')
+    a.p([(0,94),(8,78),(18,84),(24,75),(34,95),(39,105),(0,114)],'purple1')
+    a.p([(205,101),(208,84),(212,92),(220,69),(231,84),(239,78),(239,115)],'purple1')
+    a.p([(0,112),(8,102),(17,108),(27,97),(39,113),(0,130)],'pine0')
+    a.p([(196,112),(209,102),(224,108),(239,97),(239,138),(213,132)],'water0')
+    a.r((0,116,239,131),'water0')
+    for x,y,w in [(8,119,19),(213,120,16),(221,125,10),(34,125,8)]:a.l([(x,y),(x+w,y)],'water1')
+    a.p([(211,108),(212,93),(215,88),(220,88),(224,94),(225,108)],'stone0')
+    a.r((215,88,221,104),'stone1');a.r((216,92,220,99),'night')
+    a.p([(212,89),(217,84),(220,84),(224,89)],'stone2')
+    a.r((217,94,219,97),'gold2');a.dot(218,94,'gold4')
+    a.p([(0,131),(14,126),(31,129),(40,137),(44,160),(0,160)],'ink')
+    a.p([(0,130),(15,125),(29,128),(38,136),(0,143)],'pine1')
+    a.l([(0,130),(15,125),(29,128),(38,136)],'pine3')
+    for x in (2,8,232,238):
+        a.l([(x,159),(x-1,149),(x+3,144)],'pine0',2)
     return a
 
 SPR_NAMES=['HERO_DOWN_0','HERO_DOWN_1','HERO_UP_0','HERO_UP_1','HERO_LEFT_0','HERO_LEFT_1','HERO_RIGHT_0','HERO_RIGHT_1','FOX_0','FOX_1','LEAF_0','LEAF_1','SLIME_0','SLIME_1','ELDER','HEART_FULL','HEART_EMPTY','FLAME_0','FLAME_1','PROJECTILE']
 
 def hero(direction,frame):
-    """Four authored walk poses. 0 is the stable idle/passing silhouette."""
-    a=Art(16,16,'transparent');b=-1 if frame==2 else 0
-    # These opposite contacts and the raised passing frame eliminate paper sliding.
-    leftfoot=(4,13,6,15);rightfoot=(9,13,11,15)
-    if frame==1:leftfoot=(3,13,6,15);rightfoot=(9,12,11,13)
-    if frame==3:leftfoot=(4,12,6,13);rightfoot=(9,13,12,15)
-    if frame==2:leftfoot=(5,13,7,14);rightfoot=(9,13,11,14)
-    for x0,y0,x1,y1 in (leftfoot,rightfoot):
-        a.r((x0,y0,x1,y1),'ink');a.r((x0+1,y0,x1,y0),'wood2');a.dot(x0+1,y1-1,'wood3')
-    # Golden scarf is physically trailing instead of attached to the front face.
-    sy=9+b+(1 if frame==3 else 0)
-    if direction in ('right','left'):
-        a.p([(7,8+b),(4,sy-1),(1,sy-2),(1,sy),(4,sy+1),(7,10+b)],'gold0')
-        a.l([(2,sy-1),(4,sy),(6,9+b)],'gold3')
-    else:
-        a.p([(10,8+b),(12,sy),(14,sy-1),(14,sy+1),(11,sy+2),(9,9+b)],'gold0')
-        a.l([(11,sy),(13,sy+1),(14,sy)],'gold3')
-    # Coat, leather belt, satchel strap, and opposed arm swing.
-    a.p([(5,8+b),(10,8+b),(12,10+b),(11,13+b),(4,13+b),(3,10+b)],'ink')
-    a.r((4,9+b,11,11+b),'teal0');a.r((5,9+b,10,12+b),'teal1');a.l([(5,10+b),(5,11+b)],'teal2');a.r((4,12+b,11,12+b),'blue0')
-    arm=1 if frame==1 else -1 if frame==3 else 0
-    a.r((3,9+b+arm,3,11+b+arm),'ink');a.dot(3,10+b+arm,'skin1')
-    a.r((12,9+b-arm,12,11+b-arm),'ink');a.dot(12,10+b-arm,'skin2')
-    a.l([(9,9+b),(7,11+b)],'wood0');a.dot(8,10+b,'wood4');a.r((8,12+b,9,12+b),'gold2')
-    if direction=='up':
-        a.p([(3,4+b),(4,2+b),(6,1+b),(10,1+b),(12,3+b),(12,7+b),(10,9+b),(5,9+b),(3,7+b)],'ink')
-        a.p([(4,4+b),(5,2+b),(10,2+b),(11,4+b),(11,7+b),(9,8+b),(5,7+b)],'fire0')
-        a.p([(4,4+b),(6,2+b),(10,2+b),(11,4+b),(9,3+b),(8,5+b),(6,4+b),(5,6+b)],'fire1')
-        a.l([(6,2+b),(9,2+b)],'fire3');a.dot(5,3+b,'fire2');a.r((5,8+b,10,9+b),'gold2');a.dot(5,8+b,'gold4')
-        # Small clasp, rather than accidental rear-facing eyes.
-        a.r((6,10+b,9,11+b),'teal0');a.dot(7,10+b,'teal2')
-    elif direction=='down':
-        a.p([(3,4+b),(4,2+b),(6,1+b),(10,1+b),(12,3+b),(12,7+b),(10,9+b),(5,9+b),(3,7+b)],'ink')
-        a.r((4,4+b,11,7+b),'skin1');a.r((5,4+b,10,8+b),'skin2')
-        a.p([(3,4+b),(5,1+b),(10,1+b),(12,3+b),(12,5+b),(10,4+b),(9,3+b),(7,4+b),(5,4+b),(4,6+b),(3,6+b)],'fire0')
-        a.p([(4,3+b),(6,2+b),(10,2+b),(11,3+b),(8,3+b),(7,4+b),(5,4+b)],'fire2');a.r((5,2+b,8,2+b),'fire3')
-        a.dot(5,6+b,'ink');a.dot(10,6+b,'ink');a.dot(7,8+b,'skin0');a.dot(4,7+b,'skin0')
-        a.r((5,9+b,10,9+b),'gold2');a.dot(5,9+b,'gold4')
-    else:
-        # True profile: one eye, protruding nose, back hair, near-side arm.
-        a.p([(3,4+b),(5,1+b),(9,1+b),(11,2+b),(12,4+b),(12,5+b),(13,6+b),(13,7+b),(11,8+b),(10,9+b),(5,9+b),(3,7+b)],'ink')
-        a.p([(8,4+b),(11,4+b),(11,6+b),(12,6+b),(12,7+b),(11,7+b),(10,8+b),(7,8+b)],'skin2')
-        a.p([(3,4+b),(5,1+b),(9,1+b),(11,2+b),(12,4+b),(10,4+b),(9,3+b),(8,5+b),(7,6+b),(8,8+b),(5,8+b),(3,6+b)],'fire0')
-        a.p([(4,3+b),(6,2+b),(9,2+b),(10,3+b),(7,3+b),(6,5+b),(4,5+b)],'fire2')
-        a.r((6,2+b,8,2+b),'fire3');a.dot(11,5+b,'ink');a.dot(10,8+b,'skin0');a.dot(7,6+b,'skin1')
-        a.r((6,9+b,10,9+b),'gold2');a.dot(9,9+b,'gold4')
-        a.r((8+arm,10+b,10+arm,12+b),'teal0');a.dot(10+arm,12+b,'skin2')
-        if direction=='left':a.im=a.im.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-    return a
+    return characters.keeper(Art,direction,frame)
 
 def fox_direction(direction,frame):
-    a=Art(16,16,'transparent');b=-1 if frame==2 else 0;t=(0,1,0,-1)[frame]
-    if direction in ('left','right'):
-        # Side gait has a clear forward muzzle and separately moving tipped tail.
-        a.p([(5,9+b),(3,8+b),(2,5+t),(0,4+t),(0,10+t),(3,12+b),(6,12+b)],'ink')
-        a.p([(4,9+b),(2,8+b),(1,6+t),(1,10+b),(4,11+b)],'fire2');a.r((0,4+t,1,6+t),'white')
-        a.r((4,10+b,10,13+b),'ink');a.r((4,10+b,9,12+b),'fire1');a.r((5,9+b,10,11+b),'fire2')
-        for x,y in ((5-(frame==1),13+(frame==3)),(9+(frame==1),13+(frame==1))):
-            a.r((x,y-1,x+1,min(15,y+1)),'ink');a.dot(x,y,'fire2')
-        a.p([(7,7+b),(7,1+b),(9,2+b),(10,4+b),(12,2+b),(13,3+b),(13,6+b),(15,7+b),(15,9+b),(12,11+b),(9,11+b),(7,9+b)],'ink')
-        a.p([(8,7+b),(8,3+b),(10,5+b),(12,4+b),(12,7+b),(14,8+b),(12,10+b),(9,10+b)],'fire2')
-        a.dot(8,3+b,'rose2');a.r((10,6+b,12,7+b),'fire3');a.dot(12,7+b,'ink');a.dot(15,8+b,'ink');a.l([(11,9+b),(13,9+b)],'white');a.dot(10,10+b,'white')
-        if direction=='left':a.im=a.im.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-    else:
-        a.p([(9,11),(12,10+t),(14,6+t),(15,7+t),(15,12),(12,14),(8,13)],'ink');a.p([(10,11),(13,11),(14,8+t),(14,12),(11,13)],'fire2');a.r((14,7+t,15,9+t),'white')
-        a.r((3,12,5,14+(frame==1)),'ink');a.r((8,12,10,14+(frame==3)),'ink');a.dot(4,13,'fire2');a.dot(9,13,'fire2')
-        a.r((4,9+b,10,12+b),'fire0');a.r((5,9+b,9,12+b),'fire2')
-        a.p([(2,7+b),(2,1+b),(4,2+b),(6,5+b),(8,5+b),(10,1+b),(12,1+b),(12,7+b),(11,10+b),(8,12+b),(4,11+b),(2,9+b)],'ink')
-        a.p([(3,6+b),(3,2+b),(5,5+b),(9,5+b),(11,2+b),(11,7+b),(10,9+b),(8,11+b),(4,10+b),(3,9+b)],'fire2')
-        a.r((4,5+b,10,7+b),'fire3');a.dot(3,3+b,'rose2');a.dot(11,3+b,'rose2')
-        if direction=='down':
-            a.dot(4,7+b,'ink');a.dot(10,7+b,'ink');a.p([(4,9+b),(6,8+b),(8,9+b),(10,8+b),(9,10+b),(7,11+b),(5,10+b)],'white');a.dot(7,9+b,'ink')
-        else:
-            a.p([(4,8+b),(7,6+b),(10,8+b),(8,11+b),(5,10+b)],'fire1');a.r((6,7+b,8,8+b),'fire2')
-    return a
+    return characters.emberfox(Art,direction,frame)
 
 def fox(frame):return fox_direction('down',frame)
 
 def leaf_direction(direction,frame):
-    a=Art(16,16,'transparent');b=(0,-1,0,1)[frame];t=(0,1,0,-1)[frame]
-    a.p([(6,5+b),(3,4+b),(2,2+b),(5,2+b),(7,4+b),(10,1+b),(13,1+b),(12,4+b),(10,6+b)],'ink')
-    a.p([(6,4+b),(3,3+b),(4,2+b),(7,5+b),(10,2+b),(12,2+b),(10,4+b),(9,5+b)],'teal2');a.dot(10,2+b,'white')
-    if frame==2:
-        a.dot(2,2+b,'transparent');a.dot(3,2+b,'teal2');a.dot(12,1+b,'transparent');a.dot(13,2+b,'teal2')
-    a.e((2,5+b,13,13+b),'ink');a.e((3,6+b,12,12+b),'blue1');a.e((4,6+b,11,10+b),'blue2');a.r((5,6+b,9,7+b),'blue3')
-    a.l([(1,10+b),(2,9+b-(frame==2)),(3,10+b)],'teal2');a.l([(12,10+b),(13,9+b+t),(14,10+b+t)],'teal2')
-    if direction=='down':
-        a.dot(5,9+b,'ink');a.dot(10,9+b,'ink');a.dot(7,11+b,'white');a.dot(4,10+b,'teal2')
-    elif direction=='up':
-        a.r((6,8+b,9,8+b),'blue1');a.l([(5,9+b),(7,11+b),(10,9+b)],'blue1')
-    else:
-        a.dot(10,9+b,'ink');a.dot(12,10+b,'white');a.dot(5,10+b,'teal2')
-        if direction=='left':a.im=a.im.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-    a.r((4,13+b,5,13+b),'teal0');a.r((9,13+b,11,13+b),'teal0')
-    return a
+    return characters.leafseed(Art,direction,frame)
 
 def leaf(frame):return leaf_direction('down',frame)
 
@@ -513,10 +429,7 @@ def slime(frame):
     return a
 
 def elder():
-    a=Art(16,16,'transparent')
-    a.r((11,4,12,15),'wood0');a.r((11,4,11,14),'wood4');a.p([(5,8),(9,8),(12,14),(3,14)],'ink');a.p([(5,9),(9,9),(10,13),(4,13)],'purple2');a.r((7,10,8,13),'gold2')
-    a.e((2,1,12,10),'ink');a.e((3,2,11,9),'silver');a.r((4,4,10,7),'skin1');a.r((5,4,9,7),'skin2');a.dot(5,5,'ink');a.dot(9,5,'ink');a.r((4,2,10,3),'white');a.p([(4,7),(6,6),(7,7),(9,6),(10,7),(8,10),(6,10)],'white');a.dot(7,7,'skin0');a.r((3,14,5,15),'wood0');a.r((8,14,10,15),'wood0');a.dot(11,3,'gold3')
-    return a
+    return characters.resident(Art,'village','ELDER')
 
 def heart(full):
     a=Art(16,16,'transparent');pts=[(2,3),(5,2),(8,4),(11,2),(14,3),(15,6),(13,9),(8,14),(3,9),(1,6)]
@@ -525,27 +438,13 @@ def heart(full):
     return a
 
 def flame(frame):
-    a=Art(16,16,'transparent');a.p([(8,1),(11,5),(11,8),(13,6),(14,10),(12,14),(7,15),(3,13),(2,9),(5,5),(5,9),(8,6)],'fire0')
-    a.p([(8,2+frame),(10,6),(9,10),(12,8),(12,12),(10,14),(6,14),(4,12),(4,9),(7,7)],'fire2');a.p([(8,8),(10,12),(8,14),(6,12)],'gold4');a.dot(8,11,'white')
-    return a
+    return characters.flame(Art,frame)
 
 def projectile():
-    a=Art(16,16,'transparent');a.p([(2,8),(6,5),(7,3),(11,4),(13,7),(12,11),(8,12),(4,10)],'fire0');a.e((5,5,12,11),'fire2');a.e((7,6,11,9),'gold4');a.dot(9,7,'white');a.dot(2,10,'gold1');return a
+    return characters.projectile(Art)
 
 def golem():
-    a=Art(32,32,'transparent')
-    # A compact moss golem, with slab shoulders, roots, and amber heart.
-    a.r((7,24,13,30),'ink');a.r((20,24,26,30),'ink');a.r((8,24,12,28),'stone2');a.r((21,24,25,28),'stone2');a.r((7,29,13,30),'stone0');a.r((20,29,26,30),'stone0')
-    a.p([(6,10),(12,6),(22,6),(27,11),(27,23),(23,27),(10,27),(6,23)],'ink');a.p([(8,11),(12,8),(21,8),(25,12),(25,22),(22,25),(11,25),(8,22)],'stone1');a.p([(9,11),(13,9),(21,9),(23,12),(23,19),(19,23),(10,22)],'stone2')
-    # Massive arms, asymmetrical vegetation.
-    for x,y in [(1,11),(25,12)]:
-        a.p([(x,y+2),(x+2,y),(x+5,y),(x+6,y+3),(x+5,y+12),(x+1,y+12),(x,y+9)],'ink');a.r((x+1,y+2,x+4,y+10),'stone2');a.r((x+1,y+2,x+3,y+4),'stone4');a.r((x+1,y+9,x+4,y+11),'stone0')
-    a.p([(8,7),(10,2),(22,2),(25,7),(23,13),(10,13)],'ink');a.p([(10,7),(11,3),(21,3),(23,7),(22,11),(11,11)],'stone2');a.r((12,4,20,5),'stone4');a.r((11,8,22,10),'stone0');a.r((12,8,14,9),'gold2');a.r((19,8,21,9),'gold2');a.dot(13,8,'gold4');a.dot(20,8,'gold4')
-    a.p([(16,13),(22,18),(17,24),(11,19)],'stone0');a.p([(16,14),(21,18),(17,22),(12,19)],'gold0');a.p([(16,15),(19,18),(17,21),(14,19)],'gold2');a.p([(16,16),(18,18),(17,20),(15,19)],'gold4')
-    for x,y,w in [(9,3,6),(17,2,6),(5,11,5),(24,12,6),(8,22,4),(21,24,4)]:
-        a.r((x,y,x+w,y+2),'pine1');a.r((x+1,y-1,x+w-1,y),'moss1');a.r((x+2,y-1,x+w-2,y-1),'moss3')
-    a.l([(10,14),(9,17),(11,20)],'stone0');a.l([(22,14),(23,17),(22,20)],'stone1');a.r((3,22,5,23),'moss1');a.dot(22,4,'flower0');a.dot(23,3,'flower1')
-    return a
+    return characters.hearthwarden(Art)
 
 def split_generated_source(source_path):
     """Keep generated C in deterministic, reviewable line-aligned chunks."""
@@ -601,7 +500,7 @@ def main():
     canopies=[color_background(Art(32,32,'transparent') if room==0 else foreground_canopy(room,int(x>0)),bnames[room]) for x,y,room in canopy_positions]
     # Paste actors AFTER scenery remapping so their exact original colors also
     # remain unchanged in the title illustration.
-    for spr,pos in [(sprites[0],(72,103)),(sprites[8],(88,108))]:
+    for spr,pos in [(sprites[2],(12,125)),(sprites[8],(27,131))]:
         backgrounds[4].im.paste(spr.im,pos,Image.frombytes('L',spr.im.size,bytes(255 if p else 0 for p in spr.im.tobytes())))
     for name,bg in zip(bnames,backgrounds):
         bg.im.save(OUT/f'{name}.png');bg.im.resize((960,640),Image.Resampling.NEAREST).save(OUT/f'{name}_4x.png')
@@ -655,7 +554,7 @@ enum {\n'''
       'forest':{'spawn':[120,140],'solid_rectangles':[[0,20,35,140],[207,20,33,140],[35,36,31,37],[180,40,27,37],[35,119,29,35],[182,120,25,32],[92,19,11,24],[138,19,11,24]],'north_exit':[107,19,26,14],'south_exit':[107,150,26,10],'props':{'gate_opening':[106,20,29,23],'lamps':[[90,47],[150,47]],'river':[0,78,240,13],'bridge_zone':[108,76,24,18],'bridge_requires_leaf':True}},
       'temple':{'spawn':[120,140],'solid_rectangles':[[0,0,23,160],[217,0,23,160],[23,0,80,31],[138,0,79,31],[55,56,18,18],[167,56,18,18],[34,36,14,16],[188,36,14,16],[35,129,14,16],[189,129,14,16]],'north_exit':[107,16,26,17],'south_exit':[106,150,28,10],'props':{'braziers':[[64,64],[176,64]],'gate':[103,12,35,20],'gate_closed_is_visual_only':True,'ritual_disc':[120,106]}},
       'boss':{'spawn':[120,139],'solid_rectangles':[[0,0,25,160],[215,0,25,160],[25,0,190,24]],'south_exit':[108,150,24,10],'props':{'boss_spawn':[120,67],'central_arena_clear':[40,40,160,100]}},
-      'title':{'text_safe_zone':[20,32,137,70]},
+      'title':{'text_safe_zone':[40,28,164,118]},
       'credits':'All character, environment, and prop artwork is original code-native pixel art authored for Emberbond. No third-party art assets used.'}
     # Accurate collision footprints. Foliage tufts and tiny bushes are decorative;
     # tree canopy silhouettes, buildings, monuments, fences, and columns are solid.
@@ -680,7 +579,7 @@ enum {\n'''
     manifest['forest']['dynamic_rectangles']=[{'kind':'river','rect':[0,76,240,18],'exception_when_bridge_open':[108,76,24,18]}]
     manifest['forest']['suggested_enemy_centers']=[[77,120],[174,118],[167,65]]
     manifest['temple']['dynamic_rectangles']=[{'kind':'brazier','rect':[55,56,18,18]},{'kind':'brazier','rect':[167,56,18,18]},{'kind':'closed_gate','rect':[103,12,35,20]}]
-    manifest['art_direction']={'revision':3,'principles':['Layered scalloped leaf volumes and visible trunk roots','Warm sunlit planes against cool contour shadows','Sparse clustered floor detail and unobstructed routes','Original auburn-haired teal-coat hero with golden trailing scarf','Four directional contact/passing walk poses; directional fox and hovering leaf companion'], 'reference_links':[{'kind':'Official screenshot page','url':'https://www.nintendo.com/jp/games/feature/nintendo-classics/a-8665_j/index.html'},{'kind':'Official Nintendo UK trailer','url':'https://www.youtube.com/watch?v=cSIDghMWVMA'},{'kind':'Official product page','url':'https://www.nintendo.com/en-gb/Games/Game-Boy-Advance/The-Legend-of-Zelda-The-Minish-Cap-267486.html'}],'rights':'Reference pages were used for high-level aesthetic research only. No screenshot pixels, maps, sprites, audio, ROMs, or animation frames are included or traced.'}
+    manifest['art_direction']={'revision':4,'principles':['Layered scalloped leaf volumes and visible trunk roots','Warm sunlit planes against cool contour shadows','Sparse clustered floor detail and unobstructed routes','Original lantern keeper with auburn hair, teal coat, golden scarf and bronze satchel','Four articulated contact/passing poses; ember-tailed fox and green suspended seed companion'], 'reference_links':[{'kind':'Official screenshot page','url':'https://www.nintendo.com/jp/games/feature/nintendo-classics/a-8665_j/index.html'},{'kind':'Official Nintendo UK trailer','url':'https://www.youtube.com/watch?v=cSIDghMWVMA'},{'kind':'Official product page','url':'https://www.nintendo.com/en-gb/Games/Game-Boy-Advance/The-Legend-of-Zelda-The-Minish-Cap-267486.html'}],'rights':'Reference pages were used for high-level aesthetic research only. No screenshot pixels, maps, sprites, audio, ROMs, or animation frames are included or traced.'}
     manifest['art_direction']['background_palette']={
         'style':'Sunlit grass and foliage, warm cream paths, lighter temple stone, warm twilight',
         'method':'Hand-authored per-material scene ramps; palette-index remapping only',

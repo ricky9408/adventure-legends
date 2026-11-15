@@ -62,7 +62,7 @@
  ],
  "provenance": "Original authored geometry and indexed native RGB555 palette",
  "input_sha256": {
-  "assets/generate_covenants_region.py": "5f700c40330ec7a8526787744532317bb6ac84f0d1876cd463a75c9ed9576bf7",
+  "assets/generate_covenants_region.py": "3fc9f93a4d81660adb21d6cfbb1655bd13babadb064f143a41fe7e443aaf5c69",
   "assets/covenants_world/source_plan.json": "4d6b5e3ea98b015cd22ab3506507718b2d38ac638e16651134d380b7ebfa769e"
  },
  "files": {
@@ -71,443 +71,443 @@
    "bytes": 419
   },
   "assets/covenants_world/actors_4x.png": {
-   "sha256": "8724434f2dee7201ea5f32de315c0d5d471a51b988acd7d6cdb01affaf181b8a",
-   "bytes": 6182
+   "sha256": "30f07c28592b46392eedf2eefcce51bd49c2e806423c85f03213e7e7a3448c22",
+   "bytes": 7326
   },
   "assets/covenants_world/actors_gray_4x.png": {
-   "sha256": "d2a87e6b847139c6134c0849b0ea7aa527e4344fccf30b0ac6be2f0321db7e19",
-   "bytes": 4273
+   "sha256": "9f0b81e6ae46cccc25c95e27b4b1ea5f3958c3345026891d044ce064b1c309fb",
+   "bytes": 4856
   },
   "assets/covenants_world/actors_native.png": {
-   "sha256": "feb9c021e039aa6220d9e55ccb4224004ba6efd4d58c37e5ee05c2e252f0ed23",
-   "bytes": 3328
+   "sha256": "a48f056966caf3f63ab8312a562df0186fd747a1e21d0a9d11c6c974d2b414d0",
+   "bytes": 4420
   },
   "assets/covenants_world/camera/room70_0_0.png": {
-   "sha256": "a8bcf34285df586e6e93b9f3026c6fa95d07233ad044a96b9bf07d5dbda74641",
-   "bytes": 2324
+   "sha256": "6b26d0f51391cac7a712354cda44a8d5ef10b75acb47721da65e5e35c71de650",
+   "bytes": 2392
   },
   "assets/covenants_world/camera/room70_240_160.png": {
-   "sha256": "ce94ffd4f2a3a198dacc5506d083497b576b0675832e29f524b9b809de8940dd",
-   "bytes": 2446
+   "sha256": "1df2d8efc919a2a0348943fe7f7992f08e3bac97bc6e3f978378daee7fe4eae0",
+   "bytes": 2467
   },
   "assets/covenants_world/camera/room71_0_0.png": {
-   "sha256": "cd04c7a9e74400b8cb79618203c129c5b21cb12c6f33cc768b78cf488f54ea7a",
+   "sha256": "a8677b889e3dfaf428d964a5345056b3c404953d2365d8080b44e29d74652b1b",
    "bytes": 2308
   },
   "assets/covenants_world/camera/room71_0_160.png": {
-   "sha256": "dae4053eea0d63125a9cac42b6c0fb74a476ee52b34f5886ad6e4c7fe32f9a94",
-   "bytes": 2633
+   "sha256": "7f3521af06efc131420aa7951e0f1dd3ecf1ef9c4917356cbf45a1d418399f19",
+   "bytes": 2666
   },
   "assets/covenants_world/camera/room72_0_0.png": {
-   "sha256": "48fe7c71e80f4aeac94a8a912a135340c0be5874c2cd0b5a928b9711a0cc81a9",
-   "bytes": 2533
+   "sha256": "f2f66670ee293bf9eea616033929bdffe5cee160794d6fed96d3df0819a0016d",
+   "bytes": 2565
   },
   "assets/covenants_world/camera/room72_240_0.png": {
-   "sha256": "18db682bb02211591a0e700c653640edd42f38fa70d1a212bcbc7f5fc01cb773",
-   "bytes": 2262
+   "sha256": "629af1a2259c72e2ada2be19c41b56b5968e86d098fbbeaaf1c1fb2617cf19b6",
+   "bytes": 2285
   },
   "assets/covenants_world/camera/room73_0_0.png": {
-   "sha256": "d5ae86f3c704d821a60b3d829cbfcfbc9cd471913b08bfdecb3212942064c7eb",
-   "bytes": 2541
+   "sha256": "fac4f1cf82613f76fa5d47a6acfb7c9424b69fe22192695f39d8190a929cad78",
+   "bytes": 2607
   },
   "assets/covenants_world/camera/room74_0_0.png": {
-   "sha256": "b71210a3d53c9e0bf39ecc0bb89f1e6cf8a4d6a7737c728896d9157aa701ba7d",
-   "bytes": 2517
+   "sha256": "f9a2e7a8f0481d91942e6c22a43810ed4eee1c06e807d8b9dd55d2b59b23368a",
+   "bytes": 2542
   },
   "assets/covenants_world/camera/room74_240_160.png": {
-   "sha256": "16c4581a584fc9928dbcbaa895c714a6c8f309bfb6555877b2204039e3e9b014",
-   "bytes": 2107
+   "sha256": "377d464d02c5ea0cdcf0a3b8d190edccd0aecc547c54382b81f5ef2200844dd6",
+   "bytes": 2132
   },
   "assets/covenants_world/camera/room75_0_0.png": {
-   "sha256": "94005b8bc4997b94941efd97b54a897354807f8cc1bd6b9b903bec9fdff6a89e",
-   "bytes": 2411
+   "sha256": "2e66d8d34b239ff3468bf82b67f03a9dbbc5da5758751f5edd68c224184d3258",
+   "bytes": 2397
   },
   "assets/covenants_world/camera/room75_0_160.png": {
-   "sha256": "591110910d0c2ee702bf096aea6138a4a1c399ab1b182a3daa518311ee3167b8",
-   "bytes": 2711
+   "sha256": "bd814c3c80361808b5de57b8f38192067eb5f9f2a1ee6911c165403c69fa9ebf",
+   "bytes": 2712
   },
   "assets/covenants_world/camera/room76_0_0.png": {
-   "sha256": "4fc72158187362618a125d916c1474b209014b9dee0424a1bf93c399449cfaa8",
-   "bytes": 2230
+   "sha256": "0438cc8e9dd1ac6c24006fdbb645cc58c7d70a8f4b05473b2c8c5104543f04f9",
+   "bytes": 2254
   },
   "assets/covenants_world/camera/room76_240_0.png": {
-   "sha256": "4195979ab0c887faeecd6bf0c4f5b7ae45ea31760adf688279294b5ec5569559",
-   "bytes": 2235
+   "sha256": "138a7ecc7b487fb8cd5f2086c99ac454a3e14ea2b7b7969a00570bf3ac59de8c",
+   "bytes": 2240
   },
   "assets/covenants_world/camera/room77_0_0.png": {
-   "sha256": "4858e5a794661c00b2a3a4343427175281d32288d20c6303049027efdcb0d764",
-   "bytes": 3105
+   "sha256": "7e42db1ea8ce8453b5eaf7ee2e56109e8b09f5e969df7a286c7816134f721497",
+   "bytes": 3221
   },
   "assets/covenants_world/camera_4x.png": {
-   "sha256": "8f6b2524c4d48de9ca7c49f1770015cd7222788c61fcafb2fa8253437614e1a9",
-   "bytes": 100520
+   "sha256": "51865bbfe07c7ebf5830534d4cc8ced7cc3a73490ffe559b9873f70d93123ef5",
+   "bytes": 99606
   },
   "assets/covenants_world/camera_native.png": {
-   "sha256": "d762d891e38ee3bb468b5a80724510a43013342eca524217d42b0a06b4457666",
-   "bytes": 42592
+   "sha256": "81f3a599c92956d8b751b8daaa289c385a03514a38fd4db57f1d1fda5bb619fe",
+   "bytes": 42274
   },
   "assets/covenants_world/developer_scene_sheet_4x.png": {
-   "sha256": "a5e2ec9bbd61c02498d734f1f4612eba13004f2f77b74d15db1a05b1e31c4f06",
-   "bytes": 145348
+   "sha256": "9976faf9e23361a1f04bf1a514a63d8fcb808b75b6ab118427daeb6c9703db2d",
+   "bytes": 144475
   },
   "assets/covenants_world/developer_scene_sheet_gray.png": {
-   "sha256": "d4c98b9d5bd2e484f5ab7f7835a32c82333bd3d0b52437be875cbe727a7863e1",
-   "bytes": 36530
+   "sha256": "639ff8092542ae062cc9bde4e71dc7b5b4049774781c4a6e0abc6ff7025af91e",
+   "bytes": 35019
   },
   "assets/covenants_world/developer_scene_sheet_native.png": {
-   "sha256": "41ebcf20cc4f5fb2a54e66512b21fc8c4a07dda12b230e7d71bd0a3d6362b65a",
-   "bytes": 53019
+   "sha256": "3cac4c203988df57e4489a5348e3aadb4e1541dfe4e4474a7a4dbc8878ac5113",
+   "bytes": 52568
   },
   "assets/covenants_world/geometry.json": {
    "sha256": "b7f40b1cb64c88cf1783a06a8171f7d5246a1427758b742540fa11d461cb5867",
    "bytes": 31773
   },
   "assets/covenants_world/room70.png": {
-   "sha256": "e3fd1d7dd2ea1d0d47d850443070b1cfa8bf6dbb4b2fbc52ce89d3b560067ab8",
-   "bytes": 5753
+   "sha256": "ae3420ba10d96b755ba7b02a6cfa37b8612a68957f45c0254ca0d379d742257a",
+   "bytes": 5678
   },
   "assets/covenants_world/room70_4x.png": {
-   "sha256": "982f36213b4276434e72f029cf225fbaeaf387c24cdbbde9c6457dfd4778be9b",
-   "bytes": 22726
+   "sha256": "3c87fc5a78c867a098ffae97f87cfd4b32f26c0182a9581625ddb737075f4ad8",
+   "bytes": 21601
   },
   "assets/covenants_world/room70_gray.png": {
-   "sha256": "53b2cae6f4fc1f9d362868bc87a07f54c22170a2cde3b8014b05561b18abe8b8",
-   "bytes": 6532
+   "sha256": "fccbd19c73dc035421ae715620fc60751cd07e3618890002811cb36425ab7ae3",
+   "bytes": 6035
   },
   "assets/covenants_world/room70_gray_4x.png": {
-   "sha256": "43a97a945cb6ec58b1d5a877738a24987ac0017752dc186a4d3d51ffe4a1915c",
-   "bytes": 13914
+   "sha256": "b1965b2de9176126925c8c6aeff413f762cca73e65def8887a905c7923b7f494",
+   "bytes": 13156
   },
   "assets/covenants_world/room70_staged.png": {
-   "sha256": "bf42403d57f9e85c68502d470eaf775682de79429306da3f423edbfa94edd5ad",
-   "bytes": 6257
+   "sha256": "2e1af646e6a7ccae4ac3e33abce44828c47bad61a93328ff36f376d7a723355d",
+   "bytes": 6350
   },
   "assets/covenants_world/room70_staged_4x.png": {
-   "sha256": "08e4fe782b854b64b6e80d24ee39bcad24c673479ecfd487002d4c94fd22017e",
-   "bytes": 23570
+   "sha256": "9d36ed63cfe2fef7d0f775d3140fd59facf504ad5e890eafce99f16d3fca9958",
+   "bytes": 22816
   },
   "assets/covenants_world/room71.png": {
-   "sha256": "1d9e5cc03a22820f77dd77783ed9072902aeb94db4425bc843208be6755629ba",
-   "bytes": 3776
+   "sha256": "70102e4138dae9a756cdbcf1134994751f594b58db405dc1fdf95087d870a22f",
+   "bytes": 3721
   },
   "assets/covenants_world/room71_4x.png": {
-   "sha256": "8732e1dd00ea2b8913c88992b3b2802b74eb209b5ad7ab8aafc74199d08cc403",
-   "bytes": 12662
+   "sha256": "8f185286fbb99460e2c86f1e1375140f7f44987d40ff867676987431611f58e4",
+   "bytes": 13244
   },
   "assets/covenants_world/room71_gray.png": {
-   "sha256": "8fb4c70b2b591aa60872ad743441aeacdfa43fc9f9b41a75cb1544186cd1e88e",
-   "bytes": 4169
+   "sha256": "824ad4f206b2b69eab65bab1ea6cb3fcdc917acfa0846c9a8c688553b0f51a36",
+   "bytes": 3937
   },
   "assets/covenants_world/room71_gray_4x.png": {
-   "sha256": "35a059b901dd1f1bb480a3dbea72b011d631229921b5f73aa85efe5021acd91b",
-   "bytes": 9366
+   "sha256": "dcccb2c996a7afab327d5c947727c29afe137200c49a963797833b470271b78e",
+   "bytes": 8853
   },
   "assets/covenants_world/room71_staged.png": {
-   "sha256": "5101c452d2a1f61ca4bf92f5c15b21e359c139889461551bc96b0bdb21d8f29a",
-   "bytes": 4033
+   "sha256": "ae0add489a5c612c8761cde9fe504992e47e57c9a5f42a6915a5312e8600c89c",
+   "bytes": 4071
   },
   "assets/covenants_world/room71_staged_4x.png": {
-   "sha256": "738fbeffd10f2fe70923a6a0554d3cc5992b1d07b61ab8f118a190c7804ae80e",
-   "bytes": 13041
+   "sha256": "33d6f5fd6d633da7c261e5e89e10266b6f2de7d6ffd03ec7d36f8c61ec75b3a5",
+   "bytes": 13820
   },
   "assets/covenants_world/room72.png": {
-   "sha256": "5399010c86e4cfcc145755aa49c6386fbc0f1d53212bfe99efd26b4ff8aac249",
-   "bytes": 3477
+   "sha256": "6e5efff55abd74cfb32a195f258883a90ccb75aef1cd3bde952453f2ce583a39",
+   "bytes": 3440
   },
   "assets/covenants_world/room72_4x.png": {
-   "sha256": "088844f9205a6c65fa63ecff666a21dbe93d4693edb0f96cd15646bf861f4ecb",
-   "bytes": 11259
+   "sha256": "8a03a465de002caef3d29d2f9f7fd2394d7191a0d5393ebaea48e17303d6dff6",
+   "bytes": 10931
   },
   "assets/covenants_world/room72_gray.png": {
-   "sha256": "806640703ed64237030fb4efcdac32a9e67085a01f38bfb90a17f53a8999ed61",
-   "bytes": 3471
+   "sha256": "3067ae0273c569a2fc603ec9a234f241118cff30d9869ec89cad91b0f5e8f4aa",
+   "bytes": 3256
   },
   "assets/covenants_world/room72_gray_4x.png": {
-   "sha256": "f5fec2c2720eda44643d67618c9ce7c79fa6e495994205b7fe7496673670dd38",
-   "bytes": 7216
+   "sha256": "28eb006ec8a83783db8e412df2b64414c12ba08041dd488bb34de4b6b34f3fc1",
+   "bytes": 6841
   },
   "assets/covenants_world/room72_staged.png": {
-   "sha256": "460b67d962aebfcf4b006949a4b8705afccfcf0332db1416d59e9e7e00b18ed2",
-   "bytes": 3745
+   "sha256": "2e405758775d562279ed02a4133ab020c3b28ea3eb8dd69b97299ce4fc099156",
+   "bytes": 3769
   },
   "assets/covenants_world/room72_staged_4x.png": {
-   "sha256": "1d5d9941f3b06f28bed167bebdc5ac6782cb204e0e34dfeeea04e46dbf233130",
-   "bytes": 11741
+   "sha256": "c78edefa56acb61a4282d5e7b7b3289dfb2f3cbc9a658745f8be700bf1e5e9ca",
+   "bytes": 11597
   },
   "assets/covenants_world/room73.png": {
-   "sha256": "246d806e23329f6a76212f6a847c4e474ece50dcba8cfe6c971d37a700ebb210",
-   "bytes": 2352
+   "sha256": "1525d628954ce94be3f528b02da316ad4f53d8ec1234b71e14897ad042bab125",
+   "bytes": 2371
   },
   "assets/covenants_world/room73_4x.png": {
-   "sha256": "82620abc229eeaf335e640a7f423db94ba4e3969511f102c0e94b0e16779b9c2",
-   "bytes": 7412
+   "sha256": "d6189ca0d2a8eedcf33ab258ab1f0b8027c919bf206b596e279adbd6f3f5f0c8",
+   "bytes": 7068
   },
   "assets/covenants_world/room73_gray.png": {
-   "sha256": "9d8659d6f1c09ea1ff21775e69d4b2e302d8c086b9d3ae634f60e37c64dad8c0",
-   "bytes": 2128
+   "sha256": "dd71327061da963775d70bd1734e2e77c880d8bb06fc9b2cac79a6ef4e8531fa",
+   "bytes": 2014
   },
   "assets/covenants_world/room73_gray_4x.png": {
-   "sha256": "26bea2f89baacf833a86135b038a014244a6275eb22f8d5c771fbfa4b8864686",
-   "bytes": 4718
+   "sha256": "c3b97696bdb2ef7108cafb9b47d6def04e8f5f0f97244717a7c2f949b5ec817c",
+   "bytes": 4472
   },
   "assets/covenants_world/room73_staged.png": {
-   "sha256": "d5ae86f3c704d821a60b3d829cbfcfbc9cd471913b08bfdecb3212942064c7eb",
-   "bytes": 2541
+   "sha256": "fac4f1cf82613f76fa5d47a6acfb7c9424b69fe22192695f39d8190a929cad78",
+   "bytes": 2607
   },
   "assets/covenants_world/room73_staged_4x.png": {
-   "sha256": "38c0354c761ae194df6060e5667f8683f5d6ffe57a28749af55bd46272d63399",
-   "bytes": 7558
+   "sha256": "1b2dd01d940ec501837d1761157939b27401817d925742f410cc6321562c52f1",
+   "bytes": 7444
   },
   "assets/covenants_world/room74.png": {
-   "sha256": "741922ccd7cf701ae105ba12674a89c04eacf0f711f7bda443b86103334abecb",
-   "bytes": 5561
+   "sha256": "c89dde35a34d59c119863adfa4ff4c535b0b61b2ddc25407b683b56fe5786e1d",
+   "bytes": 5526
   },
   "assets/covenants_world/room74_4x.png": {
-   "sha256": "d6d16662840ed866beb77592bbd779f503fd19320fad2fc5d26a8eef6c51cec3",
-   "bytes": 21718
+   "sha256": "dbef7e7ba92f2f7a3e031fd5ccafb566790c60ae764a11caaae5454c09d746b2",
+   "bytes": 20868
   },
   "assets/covenants_world/room74_gray.png": {
-   "sha256": "cf83d788ecbc8c07e4cefe8bddaa78de8d1bc1de28b0bc932c786f862f10fe16",
-   "bytes": 6463
+   "sha256": "e6652f9e269c5df43100c9292cdc6a5b55e095af78d938536d45f7d594c3b323",
+   "bytes": 6025
   },
   "assets/covenants_world/room74_gray_4x.png": {
-   "sha256": "64a2be75a5cde0c38ef7fe9a4a42a75d008d1ec30c3dede089bf039066b49298",
-   "bytes": 13492
+   "sha256": "0dae8fd8398196c502fd21cb29061592fb9dff820f7b11dfb477d1cc5ab4e8c5",
+   "bytes": 12796
   },
   "assets/covenants_world/room74_staged.png": {
-   "sha256": "7b5483c00cf09f821896808a57aff4ef0622567a84f9b060f2cdb319d686f33a",
-   "bytes": 6055
+   "sha256": "e04e24a67767c668f0991c5e160eb4e8a74ee204de4b99f73b2d3e620372eb95",
+   "bytes": 6169
   },
   "assets/covenants_world/room74_staged_4x.png": {
-   "sha256": "ab0e95b7e3d338374e1a6ed6190427dbd2d1ddc9560ccfdc2989555f4d3002bf",
-   "bytes": 22652
+   "sha256": "15a94981fee5d86a148570f738bbc9d832319270ffa1e3e7ccd24e1f83f848da",
+   "bytes": 22142
   },
   "assets/covenants_world/room75.png": {
-   "sha256": "f6a5a6845df759212f01043169dc22e37795d9371feefd4983662b5274feaf0a",
-   "bytes": 4008
+   "sha256": "4505c02bb62504b50d7dcb16adddd23eaca4377db3c4ba6a889ec26f39fe3d31",
+   "bytes": 3959
   },
   "assets/covenants_world/room75_4x.png": {
-   "sha256": "aaeb9b4294b0cd57876de620178095b311f3799ae8057a060c8f9ca2e5db13c5",
-   "bytes": 13366
+   "sha256": "f42ba55167035e784460dc44ba30f0116dc9af5ed1aef30b00f7a68e19f9bf5c",
+   "bytes": 13571
   },
   "assets/covenants_world/room75_gray.png": {
-   "sha256": "c3f46d77b4882ecf2b9469e66cee5acd8d72ebcad1401d3747a11af38cad30e5",
-   "bytes": 4323
+   "sha256": "f8ef6c1536aa870d96ed05ff3e74ed059c76b1f7ee47423625c7025b2099d672",
+   "bytes": 4103
   },
   "assets/covenants_world/room75_gray_4x.png": {
-   "sha256": "64f7ed7f9fad5d8eb08828f566f83eca8c98ea46e7cc6407488a75b137519d64",
-   "bytes": 9940
+   "sha256": "87a0275e938b9ccb4d706a441988a9fd7eace7f1591fc04ffc6f5e2cc1d69932",
+   "bytes": 9383
   },
   "assets/covenants_world/room75_staged.png": {
-   "sha256": "906ed04c8c8edc77d7d9781c9836056767ae188eb8f3e0acfce8f7a24f6163c7",
-   "bytes": 4197
+   "sha256": "3227497485b165eebd673bba497c7697f8d9438131d243dc3da44e7303135f66",
+   "bytes": 4170
   },
   "assets/covenants_world/room75_staged_4x.png": {
-   "sha256": "cd14430bb49c190ffb3bb7a4eef3f1b8d07890e52e8bd01587b32a5b6021e94a",
-   "bytes": 13604
+   "sha256": "5fd04fa0d1945b098ad8838d00f397649c6018ad296c34717dbd153ca60348ba",
+   "bytes": 13971
   },
   "assets/covenants_world/room76.png": {
-   "sha256": "05510662268364e5dc9091b9eeb591177b39d6943d1cbdcecc214e956f744f93",
-   "bytes": 3165
+   "sha256": "effff1638fd456310f0eb49452a7e38f68eadd86c05f6a0bf05176a50b884c13",
+   "bytes": 3086
   },
   "assets/covenants_world/room76_4x.png": {
-   "sha256": "592334a026da143ae2011235238bcc71c81b3c23efcee12471d3c551203315f5",
-   "bytes": 11135
+   "sha256": "92279224d5b1cf90e6e699ffd43a76ea836412ed82f478d9fe82f4ef4e0f69bd",
+   "bytes": 10626
   },
   "assets/covenants_world/room76_gray.png": {
-   "sha256": "8c72b58f010f286b754ca95efa84441fd6f0bdc07d02ea97dbe69fb5e4c708b6",
-   "bytes": 3084
+   "sha256": "e4e28693279804d60b2ce76fc6d974769371f980542c2ec6bbeac80d87b24b64",
+   "bytes": 2914
   },
   "assets/covenants_world/room76_gray_4x.png": {
-   "sha256": "97dabd16f0574c6212f7129f5273bada05d135f92bddfca7557d5929c4b46cbd",
-   "bytes": 6755
+   "sha256": "0d3e0dd212b4000b4f1451c98c33c047d7331db8e5a414645e07ccd799d51793",
+   "bytes": 6404
   },
   "assets/covenants_world/room76_staged.png": {
-   "sha256": "2bc288198dd17632ff6ca689542b16c9c7936a3815e65512642b1c218ea8d896",
-   "bytes": 3426
+   "sha256": "5a2441c9e2e21602ac80ae6b89c5ac8e0205d4f887829640a21047bc695d56de",
+   "bytes": 3421
   },
   "assets/covenants_world/room76_staged_4x.png": {
-   "sha256": "a605929b0f67587dca507a1215cd60f3bfec65413d46356047e34d4668ca40b9",
-   "bytes": 11545
+   "sha256": "e58c7b139a5cd0198cd673b3883fb00fa4fe60673260856a42a27ace1f68b205",
+   "bytes": 11245
   },
   "assets/covenants_world/room77.png": {
-   "sha256": "b59fde8e6e69ee3e24ab4428f5a27f165a327e6babe1426c2e445f21d58b48ca",
-   "bytes": 2890
+   "sha256": "b1ba48d9366ac861e3654a35a470f6bffd1af46970a6c7a4c950b083479451b5",
+   "bytes": 2911
   },
   "assets/covenants_world/room77_4x.png": {
-   "sha256": "2f31f48e2b0f6aad7a2b6c4a91eda5cc4a549b5ae90552ec8708089edf4b8c27",
-   "bytes": 7610
+   "sha256": "ce801ea70e78393627c118869e26c8f865e099a9d4f9bd136bf720f6520868be",
+   "bytes": 7707
   },
   "assets/covenants_world/room77_gray.png": {
-   "sha256": "78110964979e2f50326d1ee677cd8f2354376abc460216e03711c55b9dd62a2f",
-   "bytes": 2918
+   "sha256": "bc39cfb7f46dd077ff595618b765677360370f9f3098082f9915ff5ca066614a",
+   "bytes": 2764
   },
   "assets/covenants_world/room77_gray_4x.png": {
-   "sha256": "5019d013a515e5a827b3437b00fe184fb932d7515f0c549d3b810cd8d8589457",
-   "bytes": 5903
+   "sha256": "a3a9a607226afc3f46dc671902a6f019c1346052bc7b1d92161f303e2953eaf9",
+   "bytes": 5546
   },
   "assets/covenants_world/room77_staged.png": {
-   "sha256": "4858e5a794661c00b2a3a4343427175281d32288d20c6303049027efdcb0d764",
-   "bytes": 3105
+   "sha256": "7e42db1ea8ce8453b5eaf7ee2e56109e8b09f5e969df7a286c7816134f721497",
+   "bytes": 3221
   },
   "assets/covenants_world/room77_staged_4x.png": {
-   "sha256": "7bf63b540e582408c0d7595194d6858fb1842d122ab0574ae50f24163947b4b0",
-   "bytes": 7870
+   "sha256": "9d91dba8fb0ace658f5f5fcc642eeb4a77cdc0fda6b4bd7405443edfbe420cb4",
+   "bytes": 8148
   },
   "assets/covenants_world/spoiler_free/reed_homes_4x.png": {
-   "sha256": "0034a09248837f719a182ac057965842ba1abc7c7f6b7b111582f30d41a1a83e",
-   "bytes": 6219
+   "sha256": "69898365ad13e05a419c65db9fe9a646b9817775baafb2a1419a5639fa7424fb",
+   "bytes": 6737
   },
   "assets/covenants_world/spoiler_free/reed_homes_native.png": {
-   "sha256": "815fa7d35a9948a8a5d9fb5adad561c0812f5e843662eebe32b2570df35c2573",
-   "bytes": 2253
+   "sha256": "27ec4136ba64d313c08630e07ec92e87249011387ecc7397714360db275deb8d",
+   "bytes": 2272
   },
   "assets/covenants_world/spoiler_free/water_steps_4x.png": {
-   "sha256": "6a495fcaf99f4eedbcb3344ae2556922e77dcfad61d7545e3f95a08878a7b44f",
-   "bytes": 6790
+   "sha256": "c3ccde1edf68aeb5312c435b3af6c67ec4dad3fccec6203407c0da521545c6e1",
+   "bytes": 6866
   },
   "assets/covenants_world/spoiler_free/water_steps_native.png": {
-   "sha256": "31683400a475e121fd98725017c6a68709f2f2023c315b937b202e72fbb19562",
-   "bytes": 2229
+   "sha256": "812cdb921cba32227ec414ed1b671a5c1fa1e210cff8b75e31be8cc3ea919168",
+   "bytes": 2276
   },
   "assets/covenants_world/sprites/ballast.png": {
-   "sha256": "b15d50fbed747f8250abff837e42c51cffdda53862e1bdee2b589a8fedd3ea90",
-   "bytes": 904
+   "sha256": "0e9c4cb926848937f5e73bd0311652980ba9eb34ef57c61fc23be9407b0c24c2",
+   "bytes": 907
   },
   "assets/covenants_world/sprites/bowl.png": {
-   "sha256": "506d839a72aee119cf6c4079fa4a92e75243cd3454174888a8d530ff8d75c00e",
+   "sha256": "08e0cf30f4ac7016b8a56adf482478abf827d92cd8d42ca490096be71481c10e",
    "bytes": 893
   },
   "assets/covenants_world/sprites/bowl_cool.png": {
-   "sha256": "8d3892ac9965115caa6bce9a4544382816d54b2cbdd7e9565357e5815c7faeb0",
+   "sha256": "c0f0eb9153b21d9e770d6e98ab7593433fc13d90b72931272b51f4d05ff244a3",
    "bytes": 893
   },
   "assets/covenants_world/sprites/ferry.png": {
-   "sha256": "6fc3ce982b962f7b8ebb668826f602d6b268107b436af0e172a7f81de351a976",
-   "bytes": 899
+   "sha256": "c2ea0845b26b6521583b146012136de82bfa4748edb0ee4bf3911e59eaa31846",
+   "bytes": 901
   },
   "assets/covenants_world/sprites/ferry_keeper.png": {
-   "sha256": "d0015452adc171729559ed11f621cfc2744528104bfc2ed3d61695b50c8e33f8",
-   "bytes": 927
+   "sha256": "58e617096db075b9a19998ab3bc641a87f677cefb4dbac5240605559c6a14c70",
+   "bytes": 946
   },
   "assets/covenants_world/sprites/fulfilled.png": {
-   "sha256": "44a34dcdf48782688774687b820e317cfff7f6206037752507edad347ac9e807",
+   "sha256": "64e560b15464c0d294bc0033a5dae6cf91c50a587b5db5a474d1964dc307a5d8",
    "bytes": 903
   },
   "assets/covenants_world/sprites/grower.png": {
-   "sha256": "130e5380338c5c68bb2eef146c6517d9bab46dd2ee46eff34b9b616b1c3e379e",
-   "bytes": 917
+   "sha256": "eeb22154efb4b0b5cfbaa0223d81612e3bcdb10f801d276f93ee00e3e7fba6be",
+   "bytes": 953
   },
   "assets/covenants_world/sprites/hot_plate.png": {
-   "sha256": "cdab14ab439fbfe476920c234976c7c2866749a8488fb66c2394a8df1468792e",
-   "bytes": 902
+   "sha256": "7d6063a732dae33d10260634e8b315283ab22d225c6f5651492b0132be4c51b2",
+   "bytes": 904
   },
   "assets/covenants_world/sprites/invite.png": {
-   "sha256": "e03d7dece49351b06e5da7201085978fe4d107f5cc62916c3ebf8d3c725dd77e",
-   "bytes": 894
+   "sha256": "f17fc54ecd8c418c1f6559c0362c183452bf15b890bc6dfb524d26717feed911",
+   "bytes": 893
   },
   "assets/covenants_world/sprites/kiln_keeper.png": {
-   "sha256": "a5a52648065820d9c791002f7c5930fb93dc3048a6303a29adff24bd835859e3",
-   "bytes": 923
+   "sha256": "80b0eeaf2fafb945ddfb234a3ed77eed939b52be8ddd2d47ba214da881c0be40",
+   "bytes": 943
   },
   "assets/covenants_world/sprites/lens.png": {
-   "sha256": "91a4ec03a4ac88b755ff977bae9d561ecb5d041faa757248328bf60523916456",
-   "bytes": 905
+   "sha256": "88976a34d65a9a4b6ff1c06b53d3f265f54a5f5457bfc6f852f5919c1594a64d",
+   "bytes": 907
   },
   "assets/covenants_world/sprites/manual.png": {
-   "sha256": "d3b1bf3a56f7585f230815e84034250b7ce7fd840ac2bffaa7894324093fc6fa",
-   "bytes": 876
+   "sha256": "4554ec4adcc15c2aa9beaca40c37705c11d5d390430d03e1274970d4a76db2cd",
+   "bytes": 877
   },
   "assets/covenants_world/sprites/neighbor.png": {
-   "sha256": "1009e1d486dc2164eba0cd69eaca5ab89a92eabfba091be4a89012944b9443e0",
-   "bytes": 916
+   "sha256": "5554e97b0f9d9af70796c00c9b399449cf9845cdbd245e668f232efd42df0add",
+   "bytes": 948
   },
   "assets/covenants_world/sprites/notice.png": {
    "sha256": "af8b874dfb32a94ce10bc00d68d2c745d0abfdc7f603093a9a9b49f8e8397298",
    "bytes": 878
   },
   "assets/covenants_world/sprites/passenger.png": {
-   "sha256": "577cb9d5f7dad3b146998a093ab0e5037da34a46ef27319de0f20b8fc6bfbabd",
-   "bytes": 916
+   "sha256": "49761182dfaceb5d0d3232b9dcee46474c720d0a8b25f36cf315f3f62e0a8598",
+   "bytes": 939
   },
   "assets/covenants_world/sprites/passenger_step_a.png": {
-   "sha256": "9fdafcce4369f7123ebca9d1bdd9658169b41a1dbeb01ff5d768d3bfc1ab2942",
-   "bytes": 914
+   "sha256": "0e9b2587cef6887749d4656da1b209f94e91d3be4c33694904cbdc93549a5a59",
+   "bytes": 937
   },
   "assets/covenants_world/sprites/passenger_step_b.png": {
-   "sha256": "c95d3783667270e98cccc3212e135c2393757c4a7997d3de88706c5a49d21fee",
-   "bytes": 914
+   "sha256": "69cdee86e2aa6fa79febba908e2073b52af71351ee57fbdfc71eb562a757fbcb",
+   "bytes": 936
   },
   "assets/covenants_world/sprites/porch_left.png": {
-   "sha256": "2eff82143b2f9d6e238b1268fdf4cc0e858ef6fab2d026ec25cd005ca70558de",
-   "bytes": 897
+   "sha256": "831cf34a44166dcf44f6e8bcb4f9a72e6d0cb2e3257c149e62fc08593c42f157",
+   "bytes": 899
   },
   "assets/covenants_world/sprites/porch_marks.png": {
-   "sha256": "d2b7286695106e405bc439263c3ad1b86fb12106748707099730eaef9e49c45a",
-   "bytes": 902
+   "sha256": "62252c54f5d4902ee70b24a8db4382db8f7a5980f079097199ae1b7c846bf33b",
+   "bytes": 904
   },
   "assets/covenants_world/sprites/porch_right.png": {
-   "sha256": "9de0a6ea2fc636a8567db1daadb721c954b4e0d6269805e2e8fad1bcbd32f180",
-   "bytes": 893
+   "sha256": "2c66738612d222b1db6ee0cbf3d59a81fddeb0703a815b83d1929feb2aa63932",
+   "bytes": 894
   },
   "assets/covenants_world/sprites/practice.png": {
-   "sha256": "1f80fd6bd0bb9ad0587f2f718e9dd0b00440185e8cac6bdc04361465736ecff6",
-   "bytes": 900
+   "sha256": "edf512dd26bf8aacab23ef9d72fef858eac019b441e6cfa72f06eec448f95e3d",
+   "bytes": 901
   },
   "assets/covenants_world/sprites/quiet_pin.png": {
-   "sha256": "23e2ef572075a141237cd786374c70ac4f57c8fd85f23129add705cb28f56628",
-   "bytes": 896
+   "sha256": "0d078941e1721d0491ca99a3b9aef10dcd78da8a49a48f933bab0f746196766d",
+   "bytes": 900
   },
   "assets/covenants_world/sprites/repairer.png": {
-   "sha256": "0b71b83d15b354fbb5ce34d51e2b80c4f2ffd19452b3a25b4e6c5d86a36cb9a7",
-   "bytes": 925
+   "sha256": "866283372636c6ceb2db1f18222556d478542df8d21f0eab1c487374d2facca0",
+   "bytes": 940
   },
   "assets/covenants_world/sprites/reset.png": {
-   "sha256": "37c5c8016400b936fc077af3205d4c49a216cf728cf6d402a910d20876ce23ae",
-   "bytes": 897
+   "sha256": "a822638f5ded2c6f9c8e09a9ecc3973b2a340dff6bf15d558e899aa1ac92cf42",
+   "bytes": 895
   },
   "assets/covenants_world/sprites/rest.png": {
-   "sha256": "aeae1e999e323fbbe5123174d68ba6bfa0901f79546fd8e8fe095f8060043fe8",
-   "bytes": 908
-  },
-  "assets/covenants_world/sprites/rest_lit.png": {
-   "sha256": "2994ee537f8d1a3c8a25e365b29fc62713e810a821604171ba251a1f6cb8fa23",
-   "bytes": 909
-  },
-  "assets/covenants_world/sprites/seed_keeper.png": {
-   "sha256": "6be60a55c01467a7bb33be7acaaa6017d491391278d92e1fe091ec26d67c5f69",
-   "bytes": 923
-  },
-  "assets/covenants_world/sprites/seed_keeper_step_a.png": {
-   "sha256": "f56f9dbc56a6b5b3c5f5cdab3c76ad95b27a399e534ff4e2d3dedb7291fd0bfa",
-   "bytes": 920
-  },
-  "assets/covenants_world/sprites/seed_keeper_step_b.png": {
-   "sha256": "7bee6f49dcae90ab2fa20f68597fc2bb64724e11d637996a7d3e785de6d1625f",
-   "bytes": 921
-  },
-  "assets/covenants_world/sprites/shade_screen.png": {
-   "sha256": "80617cae648c618a6e70e10ed2d50213aecf7b5efe4ab6242a862e10ad50c8bd",
-   "bytes": 890
-  },
-  "assets/covenants_world/sprites/shutter.png": {
-   "sha256": "0b3b439d375131b91f536c16c934287e1b626f48572916b1d54074fe239fc1bc",
-   "bytes": 914
-  },
-  "assets/covenants_world/sprites/shutter_loose.png": {
-   "sha256": "a467939a459893b218677966b87ec648839a5d24b87874b8960a1881ec58f998",
-   "bytes": 906
-  },
-  "assets/covenants_world/sprites/steward.png": {
-   "sha256": "91dcf7845627f971492078fdd252cb167020af570857e30e86c064a2c105d779",
-   "bytes": 923
-  },
-  "assets/covenants_world/sprites/strainer.png": {
-   "sha256": "2bb5f27386ed829f21584267444c91d4efb3545b69ac196fb21b4701429a4b01",
+   "sha256": "97401e7d71fb3dfca823989c515b4d9e21fe8e8a28c816ba2c71afa5e8c1c5c6",
    "bytes": 907
   },
+  "assets/covenants_world/sprites/rest_lit.png": {
+   "sha256": "090a7caa8c838e1a18e4d15788988792c16ee8113067f625ddce87e9823d5f91",
+   "bytes": 907
+  },
+  "assets/covenants_world/sprites/seed_keeper.png": {
+   "sha256": "703b7fd39dab065051c696a6f08eca192451931d99f7ab951485608964666f2c",
+   "bytes": 945
+  },
+  "assets/covenants_world/sprites/seed_keeper_step_a.png": {
+   "sha256": "d45af2ef7db5ec04defa032c8e981c040d6ec5095606e03d5365959377f7562a",
+   "bytes": 948
+  },
+  "assets/covenants_world/sprites/seed_keeper_step_b.png": {
+   "sha256": "586b1c26ac3f61814d395f9958ea8f6b7f28d150bb2a7747ce1d9aa721eaa0dc",
+   "bytes": 937
+  },
+  "assets/covenants_world/sprites/shade_screen.png": {
+   "sha256": "bea7a95f6251d645e81e9358b8bc1f96312d452ec964c445c7298acd893f074b",
+   "bytes": 891
+  },
+  "assets/covenants_world/sprites/shutter.png": {
+   "sha256": "ffae567a6bb803ead3b96e37a65e5205db820c5c43d6671b020cffdbaa2817a3",
+   "bytes": 910
+  },
+  "assets/covenants_world/sprites/shutter_loose.png": {
+   "sha256": "0979cd7f3bab2837d4618e93755d120aaf18c2169973eae4a1c6ac4dfb3d556c",
+   "bytes": 909
+  },
+  "assets/covenants_world/sprites/steward.png": {
+   "sha256": "30f8ef0fdfb4d8bdc158ab45c19adc4cb2701e8640deb3eb49a888acf2a38e07",
+   "bytes": 954
+  },
+  "assets/covenants_world/sprites/strainer.png": {
+   "sha256": "1a59c0f7cf1a8e27bd4c0cb4693b7d6f53ba8b0335bbf957973b6961c18bbbbb",
+   "bytes": 908
+  },
   "assets/covenants_world/sprites/trial.png": {
-   "sha256": "b1ffbb44b8d8a5a8800c0dedd1aa8e9a9bc987b311e5cbeccb805f326da96acd",
+   "sha256": "dc7d811655b6544bd27c7d2fd04dd89e1cf91830d05048f55c6353338707702a",
    "bytes": 903
   },
   "assets/covenants_world/sprites/vent_closed.png": {
@@ -519,32 +519,32 @@
    "bytes": 871
   },
   "assets/covenants_world/sprites/waiting_place.png": {
-   "sha256": "533e6b903de5ceabf4f5bea1fa250489e179add2998883e1345eaa1c6c5ed5e0",
+   "sha256": "efff24b1ddd5cc7b976a4b8e0404086c1b05311c182e7983b39d50e39a502fc7",
    "bytes": 896
   },
   "assets/covenants_world/sprites/walker.png": {
-   "sha256": "72e59f373ad218cc9f6198a5f19b9070d6c54eb50c85c3ad4af94107ca3d8666",
-   "bytes": 924
+   "sha256": "5516f3b2866462df969d3e0225a4eb5f90c7c6239fd412be342bea4787c1c40d",
+   "bytes": 946
   },
   "assets/covenants_world/sprites/walker_step_a.png": {
-   "sha256": "29c400c7458c992a6941b74a199b9819820d8438fff930b3f6a5566b14d5221e",
-   "bytes": 920
+   "sha256": "14c88fa7b0becd082bbb1a45a47593255ed157dea85768bda008308eb493c1fe",
+   "bytes": 949
   },
   "assets/covenants_world/sprites/walker_step_b.png": {
-   "sha256": "dd8cc12c9a7561563fb05f0ea04fafb1f4abf70b00ef36fbf7c291fee8cd63b5",
-   "bytes": 919
+   "sha256": "47d26be00fa7f87852bbba75ab46ede4a341deb12bbcebf9331f87324ced0832",
+   "bytes": 950
   },
   "assets/covenants_world/sprites/warm_seam.png": {
-   "sha256": "478fc5d0a69cebfce3f985dd045546643ff77760cf7af5bac238080974bfa570",
-   "bytes": 908
+   "sha256": "3a827887152a7bc49cf3c4004703f9141ef55194c5c2b462d0a83223b0fc6820",
+   "bytes": 909
   },
   "assets/covenants_world/sprites/watcher.png": {
-   "sha256": "6b2ec917e3269822f79bff185fce5e38978e82a99d332a78aacc2f29caadbd62",
-   "bytes": 920
+   "sha256": "1e2a2c8b16af0506a8bc509671f9df40870d2ecd1cf212b081b104d0de39b088",
+   "bytes": 944
   },
   "assets/covenants_world/sprites/water_inlet.png": {
-   "sha256": "9fe2a35fbd588866e2f6063914544583eb2a8b138fa67d66f9d5af6a4f029487",
-   "bytes": 905
+   "sha256": "520cba08e27d2c8c6993eb8094c6a05ee9e71a69b11ae9ab13527b45516a57e9",
+   "bytes": 906
   },
   "assets/covenants_world/validation.json": {
    "sha256": "1e351288d25e2be387fc8bda7440bea45cc5679fc86a5bb9d74d0b3b0d82ede9",
@@ -1191,12 +1191,12 @@
    "bytes": 28926
   },
   "src/covenants_art_data/part_158.inc": {
-   "sha256": "70b6d879836b13f441d8d4e9ae951d936f5aa772f6f2e376f97a01bb78a47bba",
-   "bytes": 28914
+   "sha256": "98bc5a352ad9109ded89170e214b18020283e96868f42be9f90f9bf36765b4aa",
+   "bytes": 28943
   },
   "src/covenants_art_data/part_159.inc": {
-   "sha256": "18d8e98caa0f4dbfa20d908de593c45d386cd191406b5d011d404345290cf426",
-   "bytes": 7574
+   "sha256": "2454600ec740be5537543b4fc55041248bf53bd7f4b83c7e0d0de12d9d28f6c2",
+   "bytes": 7110
   }
  }
 }

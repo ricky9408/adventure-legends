@@ -24,10 +24,10 @@
   "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
   "data_bytes": 20484,
   "runtime_bss_bytes": 0,
-  "max_include_bytes": 32762,
+  "max_include_bytes": 32711,
   "include_bytes": [
-    32762,
-    21072
+    32711,
+    20753
   ],
   "frame_ticks_suggestion": 8,
   "anchor": [
@@ -57,6 +57,7 @@
       4,
       6,
       7,
+      8,
       9,
       10,
       12,
@@ -75,17 +76,13 @@
       49,
       50,
       51,
-      56,
-      58,
-      59,
-      60,
       65,
       67,
       69,
+      70,
+      71,
       73,
-      78,
-      79,
-      80
+      88
     ],
     "transparent_zero": true,
     "existing_actor_palette_only": true,

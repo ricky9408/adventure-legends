@@ -2293,6 +2293,7 @@ enum {
  TX_RS_DATE_YES,
  TX_RS_WED_YES,
  TX_RS_NAME,
+ TX_UW_GUARDIAN_HOME,
  TX_COUNT };
 extern const UiText ui_texts[TX_COUNT];
 #endif

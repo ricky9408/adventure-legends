@@ -21,9 +21,23 @@ class BoundaryTests(unittest.TestCase):
                       'proofs: tests/selected_music_boundary.py',
                       'protected: assets/music/selected/catalog.json',
                       'unexpected src/unreviewed.c','deleted tests/current_field_controls.py',
-                      'inverse tampering','contract tampering'):
+                      'inverse tampering','redesign scope tampering','contract tampering'):
             self.assertIn(label,rejected)
         self.assertGreater(len(rejected),len(self.c['current_helpers']))
+
+    def test_redesign_scope_is_explicit_and_hash_bound(self):
+        raw=(boundary.ROOT/boundary.REDESIGN_SCOPE_PATH).read_bytes()
+        paths=boundary.redesign_scope(raw)
+        self.assertTrue(paths)
+        self.assertTrue(all(boundary.allowed(path,paths) for path in paths))
+        self.assertFalse(boundary.allowed('assets/redesign/unreviewed.png',paths))
+        with self.assertRaisesRegex(AssertionError,'scope changed'):
+            boundary.redesign_scope(raw+b' ')
+        for invalid in ('src/*.c','../src/game.c','assets/music/unreviewed.json','tests/unreviewed.py'):
+            scope=json.loads(raw);scope['additional_paths']=[invalid]
+            modified=json.dumps(scope).encode()
+            with patch.object(boundary,'REDESIGN_SCOPE_SHA',boundary.sha(modified)):
+                with self.assertRaises(AssertionError):boundary.redesign_scope(modified)
 
     def test_exact_tree_modes_and_independent_housekeeping(self):
         original=Path.read_bytes;live_ignore=boundary.ROOT/'.gitignore';reads=[]

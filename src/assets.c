@@ -26,4 +26,3 @@
 #include "asset_data/part_022.inc"
 #include "asset_data/part_023.inc"
 #include "asset_data/part_024.inc"
-#include "asset_data/part_025.inc"

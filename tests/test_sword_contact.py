@@ -35,6 +35,7 @@ parts += [function(game, name) for name in
            'update_enemies', 'update_boss', 'shot_segment_clear', 'update_shots')]
 
 update = function(game, 'update')
+update += (ROOT / 'src/field_update.inc').read_text()
 assert update.count('if(invuln)invuln--;') == 1
 assert update.index('if(invuln)invuln--;') < update.index('update_enemies()')
 parts.append('void mercy_tick(void){' + re.search(r'if\(invuln\)invuln--;', update).group() + '}')

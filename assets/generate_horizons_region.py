@@ -9,7 +9,7 @@ import connected_road_art as roads
 from collections import deque
 import json,random,hashlib,sys
 sys.dont_write_bytecode=True
-from generate_assets import Art,P
+from generate_assets import resident_sprite,Art,P
 from generate_region import odd_bitmap,cbytes,occupancy
 from generate_northern_region import collision_bands
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/horizons_region';SRC=ROOT/'src'
@@ -264,13 +264,7 @@ def decor(a,r):
 def sprite(n):
  a=Art(16,16,'transparent')
  if n in NAMES[:7]:
-  a.e((2,13,14,15),'shadow');a.r((4,11,6,14),'wood1');a.r((10,11,12,14),'wood1');a.p([(4,7),(11,7),(13,12),(3,12)],'water3' if n in ('SCRIBE','HOST','HOST_WORK') else 'rose3' if n=='STORYTELLER' else 'gold2');a.r((5,2,11,7),'skin2');a.r((4,1,12,3),'wood1');a.dot(7,5,'ink');a.dot(10,5,'ink');a.l([(8,7),(10,7)],'skin0')
-  if n in ('PORTER','PORTER_WORK'):a.r((0,6,4,12),'wood2');a.l([(1,8),(4,8)],'gold3')
-  elif n=='SCRIBE':a.r((11,8,15,12),'white');a.l([(12,9),(14,11)],'water1')
-  elif n=='STORYTELLER':a.p([(2,2),(7,0),(13,2)],'rose4');a.l([(0,9),(4,8)],'skin2',2)
-  elif n=='JOINER':a.r((12,5,14,13),'wood1');a.r((10,5,15,7),'silver')
-  else:a.r((3,2,13,3),'water4')
-  if n.endswith('WORK'):a.l([(10,8),(15,6)],'skin2',2)
+  return resident_sprite('horizons',n.replace('_WORK',''),work=n.endswith('_WORK'))
  elif n in ('REST','REST_LIT','WAX'):
   a.e((1,10,14,15),'stone2');a.l([(3,12),(12,9),(3,9),(12,12)],'wood2',2);a.p([(5,11),(4,6),(7,8),(8,2),(12,9),(10,12)],'fire2' if n!='REST' else 'gold1');a.p([(7,11),(8,6),(10,10)],'gold3')
  elif n in ('RESET','TRIAL','NOTICE'):
@@ -298,7 +292,7 @@ def audit(r):
  return {'reachable_pixels':sum(seen),'all_spawns_reset_and_cardinal_work_approaches':True}
 
 def main():
- OUT.mkdir(exist_ok=True);plan=json.loads((ROOT/'docs/horizons-design/shared_horizons_plan.json').read_text());rooms=[];lines=[];budget=0;proof={};sheet=Image.new('RGB',(960,1280));cameras=Image.new('RGB',(960,640))
+ OUT.mkdir(exist_ok=True);plan=json.loads((ROOT/'assets/horizons_region/source_plan.json').read_text());rooms=[];lines=[];budget=0;proof={};sheet=Image.new('RGB',(960,1280));cameras=Image.new('RGB',(960,640))
  header='''/* Generated Shared Horizons original pixels. */\n#ifndef EMBERBOND_HORIZONS_ART_H\n#define EMBERBOND_HORIZONS_ART_H\ntypedef struct { short x,y,w,h; } HorizonsArtRect;\ntypedef struct { unsigned short width,height; const unsigned char *bitmap,*bitmap_odd; const HorizonsArtRect *solids; unsigned short solid_count; const unsigned short *collision_rows,*collision_bands; } HorizonsArtRoom;\nextern const HorizonsArtRoom horizons_art_rooms[8];\nenum {\n'''+''.join(f' HORIZONS_SPR_{n}={i},\n' for i,n in enumerate(NAMES))+' HORIZONS_SPR_COUNT=20 };\nextern const unsigned char horizons_sprites[20][256];\n#endif\n'
  for i,area in enumerate(plan['areas']):
   n=area['id'];w,h=area['size'];r={'id':n,'key':'room'+str(n),'width':w,'height':h,'safe_spine':area['safe_spine'],'spawns':{str(s['id']):s['center'] for s in area['spawns']},'solids':[{'rect':s} for s in SOLIDS[n]+DECOR_SOLIDS[n]],'objects':EXTRA[n],'field_targets':TARGETS[n],'reset':area['reset_point']}

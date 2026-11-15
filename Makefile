@@ -88,10 +88,10 @@ assets:
 	$(PYTHON) assets/generate_magma_region.py
 	$(PYTHON) assets/generate_magma_creatures.py
 	$(PYTHON) assets/generate_underwater_region.py
-	$(PYTHON) assets/generate_underwater_creatures.py --world-successor connected-roads-c4
+	$(PYTHON) assets/generate_underwater_creatures.py --world-successor lantern-trails-r1
 	$(PYTHON) assets/generate_return_region.py
 	$(PYTHON) assets/generate_return_trials.py
-	$(PYTHON) assets/generate_return_creatures.py --world-successor connected-roads-c4
+	$(PYTHON) assets/generate_return_creatures.py --world-successor lantern-trails-r1
 	$(PYTHON) assets/generate_return_powers.py
 	$(PYTHON) assets/generate_horizons_region.py
 	$(PYTHON) assets/generate_horizons_creatures.py

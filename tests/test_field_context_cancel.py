@@ -224,14 +224,15 @@ def source_order_contract():
     """Source inspection only: this is not an executed update-loop proof."""
     source = (ROOT / 'src/game.c').read_text()
     update = extract(source, 'void update(void)')
+    update += (ROOT / 'src/field_update.inc').read_text()
     order = (
         'context_owned=game_field_context_input();',
-        'if(context_owned)game_power_preview_cancel();',
+        'if(input->context_owned)game_power_preview_cancel();',
         'controls=field_controls_read(',
         'aim_holding=game_power_aim_hold(',
         'underwater_powers_tick();',
-        'if(context_owned){walk=0;game_attacks_suspend();goto movement_done;}',
-        'underwater_powers_input(controls.power_pressed',
+        'if(input->context_owned){walk=0;game_attacks_suspend();return 1;}',
+        'underwater_powers_input(power)',
         'game_field_ability();',
     )
     positions = [update.index(fragment) for fragment in order]

@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw
 import connected_road_art as roads
 import argparse, hashlib, io, json, random, sys
 sys.dont_write_bytecode=True
-from generate_assets import Art,P
+from generate_assets import resident_sprite,Art,P
 from generate_region import odd_bitmap,cbytes,occupancy
 from generate_northern_region import collision_bands
 ROOT=Path(__file__).resolve().parents[1]
@@ -296,24 +296,10 @@ def draw_room(r):
 def sprite(n):
  a=Art(16,16,'transparent')
  if '_STEP_' in n:
-  base,step=n.split('_STEP_');a=sprite(base);a.r((0,12,15,15),'transparent');a.e((2,13,13,15),'shadow')
-  a.r((4,11 if step=='A' else 13,6,13 if step=='A' else 14),'wood1');a.r((10,13 if step=='A' else 11,12,14 if step=='A' else 13),'wood1')
-  a.l([(4,11),(11,11)],'gold2' if base=='WALKER' else 'rose4' if base=='SEED_KEEPER' else 'pine3')
-  return a
+  base,step=n.split('_STEP_')
+  return resident_sprite('covenants',base,step=1 if step=='A' else 2)
  if n in NAMES[:10]:
-  idx=NAMES.index(n);skin=['skin2','skin1','skin2','skin0','skin1'][idx%5];coat=['water3','pine4','rose3','gold2','water2','rose4','water3','rose3','purple3','pine3'][idx]
-  a.e((2,13,13,15),'shadow');a.r((4,11,6,14),'wood1');a.r((10,11,12,14),'wood1');a.p([(5,7),(10,7),(13,12),(3,12)],coat);a.r((5,2,10,7),skin);a.r((4,1,11,3),'wood1');a.dot(6,5,'ink');a.dot(9,5,'ink');a.l([(7,7),(9,7)],'skin0')
-  a.l([(3,9),(4,7)],skin,2);a.l([(11,7),(13,9)],skin,2)
-  if n=='STEWARD':a.r((3,1,12,2),'water4');a.r((11,8,15,11),'gold4');a.l([(12,9),(14,9)],'water2')
-  if n=='GROWER':a.l([(2,3),(13,3)],'wood4',2);a.r((12,9,15,12),'wood2');a.dot(13,8,'pine5')
-  if n=='KILN_KEEPER':a.r((5,8,10,12),'gold4');a.dot(7,10,'rose3');a.r((0,8,3,11),'rose3')
-  if n=='WALKER':a.l([(1,7),(1,14)],'wood2');a.l([(12,5),(14,10)],'wood4',2)
-  if n=='REPAIRER':a.r((11,8,15,10),'silver');a.l([(13,7),(13,13)],'wood1');a.r((6,8,9,11),'gold3')
-  if n=='SEED_KEEPER':a.r((0,8,4,12),'gold4');a.dot(2,9,'pine2');a.l([(2,10),(3,11)],'pine3')
-  if n=='FERRY_KEEPER':a.l([(0,3),(0,13)],'wood1');a.r((0,3,3,5),'gold3');a.r((4,1,11,2),'water4')
-  if n=='WATCHER':a.r((11,7,14,12),'wood1');a.r((12,8,13,10),'gold3');a.r((3,1,12,2),'rose4')
-  if n=='NEIGHBOR':a.r((4,1,11,2),'silver');a.l([(11,8),(14,11)],skin,2)
-  if n=='PASSENGER':a.r((0,9,4,13),'wood3');a.l([(1,8),(3,8)],'wood1')
+  return resident_sprite('covenants',n)
  elif n in ('REST','REST_LIT'):
   a.e((1,11,14,15),'stone2');a.l([(4,11),(11,13),(4,13),(11,11)],'wood1',2);a.p([(4,10),(6,6),(7,9),(9,3),(12,11),(9,13),(6,12)],'fire2' if n=='REST_LIT' else 'gold1');a.p([(7,11),(9,7),(10,11)],'gold4')
  elif n in ('RESET','NOTICE','TRIAL','PRACTICE'):

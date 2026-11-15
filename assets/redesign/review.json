@@ -1,0 +1,21 @@
+{
+  "native_actor_size": [
+    16,
+    16
+  ],
+  "native_boss_size": [
+    32,
+    32
+  ],
+  "palette_entries": 178,
+  "added_runtime_ram_bytes": 0,
+  "selected_study": 1,
+  "selection": "Teal coat, auburn crown and trailing gold scarf remain distinct on light paths and dark foliage; the small bronze satchel leaves both hands and feet readable.",
+  "review_scope": "Authoring previews; emulator capture and frame timing remain separate acceptance evidence.",
+  "resident_count": 49,
+  "references": [
+    "https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude",
+    "https://shmuplations.com/miyamotodesign/",
+    "https://github.com/agent-skills-hub/agent-skills-hub/blob/main/skills/game-development/game-design/SKILL.md"
+  ]
+}

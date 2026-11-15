@@ -581,7 +581,7 @@
           1
         ]
       ],
-      "bitmap_sha256": "1a558e39ad037c25b53a6cd1202d4ec7930f1e196e8e6598f4adaa038aebeff3",
+      "bitmap_sha256": "709ea49faa3a9076e4540d1047900803a088a3c04f2b3302b0ddd7f6ed04af9c",
       "collision_lookup": {
         "unique_bands": 28,
         "maximum_intervals": 5,
@@ -936,7 +936,7 @@
           1
         ]
       ],
-      "bitmap_sha256": "8b2a96d6f708a8581dc658b984d07707282791b9aaf0d113335ad7f9cf85ce03",
+      "bitmap_sha256": "f1f5eb0cdfd5aaaa28ffaf442649879e8077f17cf9228a6c6cb4382b1dab8eab",
       "collision_lookup": {
         "unique_bands": 15,
         "maximum_intervals": 4,
@@ -2238,7 +2238,7 @@
     "collision_lookup_bytes": 4048,
     "alignment_bytes": 12,
     "arm32_room_table_bytes": 224,
-    "largest_include_bytes": 31998,
+    "largest_include_bytes": 31999,
     "sprite_bytes": 8192
   }
 }

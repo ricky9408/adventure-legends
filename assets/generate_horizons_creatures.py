@@ -10,7 +10,7 @@ sys.dont_write_bytecode=True
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/horizons_creatures'
 sys.path.insert(0,str(ROOT/'assets'))
 from magma_palette import Art as BaseArt, P, PAL, rgb as RGB, COLORS
-PLAN=ROOT/'docs/horizons-design/shared_horizons_plan.json'
+PLAN=ROOT/'assets/horizons_region/source_plan.json'
 BRIEFS=json.loads(PLAN.read_text())['forms']
 FORM_IDS=tuple(range(105,121));NAMES=tuple(f['name'] for f in BRIEFS);KEYS=tuple(n.lower() for n in NAMES)
 DIRECTIONS=('down','up','left','right')

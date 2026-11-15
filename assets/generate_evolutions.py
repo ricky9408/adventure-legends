@@ -102,7 +102,7 @@ def hearthkeeper(direction, frame):
 
 
 def canopykeeper(direction, frame):
-    """Three teal leaves form an inverted canopy over a suspended blue seed."""
+    """Three green leaves form an inverted canopy over a suspended amber seed."""
     a=Art(16,16,'transparent')
     bob=(0,-1,0,0)[frame]; lean=(0,0,1,-1)[frame]
     side=direction in ('left','right')
@@ -111,36 +111,36 @@ def canopykeeper(direction, frame):
     def dot(x,y,c):a.dot(x,y+bob,c)
     # A quiet empty band makes the seed visibly hang rather than form a torso.
     seedx=8 if side else 7
-    l([(7,7),(seedx,10)],'teal0')
-    l([(seedx,8),(seedx,10)],'water4')
+    l([(7,7),(seedx,10)],'pine0')
+    l([(seedx,8),(seedx,10)],'leaflight')
     # Back/center leaf has its own pointed silhouette.
     p([(5,6),(5,3),(7,1),(9,2),(11,5),(9,7)],'ink')
-    p([(6,5),(6,3),(7,2),(9,3),(10,5),(8,6)],'teal1')
-    l([(7,2),(7,5),(8,6)],'water4')
+    p([(6,5),(6,3),(7,2),(9,3),(10,5),(8,6)],'pine2')
+    l([(7,2),(7,5),(8,6)],'leaflight')
     # Outer leaves open on alternate beats, with no whole-sprite scaling.
     ly=(0,1,0,-1)[frame];ry=(0,-1,1,0)[frame]
     p([(7,6),(4,3+ly),(1,3+ly),(0,5+ly),(2,7),(6,8),(8,7)],'ink')
-    p([(6,6),(4,4+ly),(1,4+ly),(2,6),(6,7)],'teal1')
-    l([(1,4+ly),(4,5+ly),(6,6)],'teal2');dot(2,4+ly,'water4')
+    p([(6,6),(4,4+ly),(1,4+ly),(2,6),(6,7)],'pine2')
+    l([(1,4+ly),(4,5+ly),(6,6)],'pine4');dot(2,4+ly,'leaflight')
     p([(7,6),(10,4+ry),(14,3+ry),(15,5+ry),(13,7),(9,8),(7,7)],'ink')
-    p([(9,6),(11,5+ry),(14,4+ry),(13,6),(10,7)],'teal2')
-    l([(10,6),(12,5+ry),(14,4+ry)],'water4')
+    p([(9,6),(11,5+ry),(14,4+ry),(13,6),(10,7)],'pine4')
+    l([(10,6),(12,5+ry),(14,4+ry)],'leaflight')
     # Woven hem is a shallow V under the canopy, not a solid skirt.
-    l([(2,7),(4,8),(6,7),(8,8),(10,7),(12,8),(14,6)],'teal0')
-    dot(4,7,'water4');dot(11,7,'water4')
+    l([(2,7),(4,8),(6,7),(8,8),(10,7),(12,8),(14,6)],'pine0')
+    dot(4,7,'leaflight');dot(11,7,'leaflight')
     p([(seedx-1,10),(seedx+2,10),(seedx+3,12),(seedx+1,14),(seedx-1,13),(seedx-2,12)],'ink')
-    p([(seedx-1,11),(seedx+1,10),(seedx+2,12),(seedx+1,13),(seedx-1,12)],'blue2')
-    l([(seedx-1,11),(seedx+1,11)],'blue3')
+    p([(seedx-1,11),(seedx+1,10),(seedx+2,12),(seedx+1,13),(seedx-1,12)],'moss1')
+    l([(seedx-1,11),(seedx+1,11)],'moss3')
     if direction=='down':dot(seedx-1,12,'ink');dot(seedx+2,12,'ink');dot(seedx,13,'white')
-    elif direction=='up':dot(seedx,12,'blue1');dot(seedx+1,13,'teal2')
+    elif direction=='up':dot(seedx,12,'moss0');dot(seedx+1,13,'pine4')
     else:dot(seedx+2,12,'ink');dot(seedx,13,'white')
-    l([(seedx-1,13),(seedx-2+lean,14),(seedx-3+lean,14)],'teal0')
-    l([(seedx+1,13),(seedx+2-lean,14),(seedx+3-lean,14)],'teal2')
+    l([(seedx-1,13),(seedx-2+lean,14),(seedx-3+lean,14)],'pine0')
+    l([(seedx+1,13),(seedx+2-lean,14),(seedx+3-lean,14)],'pine4')
     if side:
         # Side leaf conceals part of the back panel; seed is off-axis.
-        l([(6,4),(8,5),(11,6)],'teal0')
+        l([(6,4),(8,5),(11,6)],'pine0')
         if direction=='left':mirrored(a)
-    elif direction=='up':l([(5,5),(7,6),(10,5)],'teal0')
+    elif direction=='up':l([(5,5),(7,6),(10,5)],'pine0')
     return a
 
 
@@ -265,24 +265,24 @@ def portrait_canopykeeper():
     a=Art(32,32,'transparent')
     # Three leaves and the open band below their braided rim stay recognizable.
     a.p([(10,12),(10,6),(15,1),(19,3),(23,11),(18,16)],'ink')
-    a.p([(12,11),(12,6),(15,3),(18,4),(21,10),(18,13)],'teal1')
-    a.l([(15,3),(15,8),(18,12)],'water4');a.l([(15,8),(18,7)],'teal2')
+    a.p([(12,11),(12,6),(15,3),(18,4),(21,10),(18,13)],'pine2')
+    a.l([(15,3),(15,8),(18,12)],'leaflight');a.l([(15,8),(18,7)],'pine4')
     a.p([(16,13),(9,6),(4,5),(1,7),(2,12),(7,16),(14,17),(17,15)],'ink')
-    a.p([(14,13),(8,7),(4,6),(2,8),(3,11),(8,14),(14,16)],'teal1')
-    a.p([(3,7),(7,7),(11,11),(6,10)],'teal2')
-    a.l([(3,8),(8,11),(14,14)],'water4');a.l([(7,11),(8,8)],'teal0')
+    a.p([(14,13),(8,7),(4,6),(2,8),(3,11),(8,14),(14,16)],'pine2')
+    a.p([(3,7),(7,7),(11,11),(6,10)],'pine4')
+    a.l([(3,8),(8,11),(14,14)],'leaflight');a.l([(7,11),(8,8)],'pine0')
     a.p([(16,13),(23,7),(28,5),(30,7),(29,12),(25,16),(18,17),(15,15)],'ink')
-    a.p([(18,13),(24,8),(28,7),(29,8),(27,12),(23,14),(18,16)],'teal2')
-    a.l([(28,7),(25,11),(18,14)],'water4');a.l([(25,11),(26,13)],'teal0')
-    a.l([(5,14),(8,17),(11,15),(14,18),(17,16),(20,18),(23,15),(26,16)],'teal0')
-    a.l([(7,14),(9,16),(12,15)],'water4');a.l([(18,16),(20,17),(23,15)],'water4')
-    a.l([(15,16),(15,20),(16,22)],'teal0');a.l([(16,16),(16,21)],'water4')
+    a.p([(18,13),(24,8),(28,7),(29,8),(27,12),(23,14),(18,16)],'pine4')
+    a.l([(28,7),(25,11),(18,14)],'leaflight');a.l([(25,11),(26,13)],'pine0')
+    a.l([(5,14),(8,17),(11,15),(14,18),(17,16),(20,18),(23,15),(26,16)],'pine0')
+    a.l([(7,14),(9,16),(12,15)],'leaflight');a.l([(18,16),(20,17),(23,15)],'leaflight')
+    a.l([(15,16),(15,20),(16,22)],'pine0');a.l([(16,16),(16,21)],'leaflight')
     a.p([(13,21),(17,20),(21,23),(21,26),(17,29),(13,28),(10,25),(11,22)],'ink')
-    a.p([(13,22),(17,21),(19,23),(20,25),(17,27),(13,27),(11,25),(12,23)],'blue1')
-    a.p([(13,22),(17,22),(19,24),(16,25),(12,24)],'blue2')
-    a.l([(13,22),(16,22)],'blue3');a.dot(13,25,'ink');a.dot(18,24,'ink');a.dot(16,27,'white')
-    a.l([(13,27),(11,29),(8,28)],'teal0');a.l([(16,28),(17,30),(20,30),(21,28)],'teal2')
-    a.l([(17,28),(15,30),(12,30)],'teal0')
+    a.p([(13,22),(17,21),(19,23),(20,25),(17,27),(13,27),(11,25),(12,23)],'moss0')
+    a.p([(13,22),(17,22),(19,24),(16,25),(12,24)],'moss1')
+    a.l([(13,22),(16,22)],'moss3');a.dot(13,25,'ink');a.dot(18,24,'ink');a.dot(16,27,'white')
+    a.l([(13,27),(11,29),(8,28)],'pine0');a.l([(16,28),(17,30),(20,30),(21,28)],'pine4')
+    a.l([(17,28),(15,30),(12,30)],'pine0')
     return a
 
 

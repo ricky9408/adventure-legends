@@ -1,3 +1,0 @@
- {240,160,north_background_relay_gallery,0,north_relay_gallery_solids,5,north_relay_gallery_collision_rows,north_relay_gallery_collision_bands },
- {240,160,north_background_beacon_crown,0,north_beacon_crown_solids,7,north_beacon_crown_collision_rows,north_beacon_crown_collision_bands },
-};

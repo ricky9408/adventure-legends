@@ -23,9 +23,10 @@ def function(name):
 
 
 update = SOURCE[SOURCE.index('void update(void)'):SOURCE.index('COLD void draw_sword(void)')]
+update += (ROOT / 'src/field_update.inc').read_text()
 assert update.index('quickparty_update(keys,pressed)') < update.index('field_goal_input((unsigned)pressed)')
 assert update.index('if(pressed&KEY_START)') < update.index('field_goal_input((unsigned)pressed)')
-assert update.index('if(event_frame()||game_state!=PLAY)return;') < update.index('field_goal_input((unsigned)pressed)')
+assert update.index('if(event_frame()||game_state!=PLAY)return 0;') < update.index('field_goal_input((unsigned)pressed)')
 assert update.index('field_goal_input((unsigned)pressed)') < update.index('field_controls_read(')
 
 with tempfile.TemporaryDirectory(prefix='field-goal-select-') as temporary:

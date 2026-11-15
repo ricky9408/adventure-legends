@@ -22,6 +22,8 @@ volatile int room,px,py,game_state,summoned,transition_lock,checkpoint_spawn,cam
 volatile unsigned chapter_flags;
 int face,keys,journal_tab;
 static unsigned saved,invalid,hurt_calls,actors,last_toast,weapon_class=1;
+static unsigned dialogue_calls;
+static int dialogue_lines[2];
 unsigned char underwater_host_pixels[240*160];
 static int capture_pixels;
 static void pixel(int x,int y,unsigned c){if(capture_pixels&&x>=0&&x<240&&y>=0&&y<160)underwater_host_pixels[y*240+x]=(unsigned char)c;}
@@ -43,7 +45,9 @@ static int host_finish_save(void){int oldstate=game_state;if(!host_finish_events
  if(!save5_validate(&adventure_save)||!save5_store(&adventure_save)){host_save_queued=0;invalid++;game_state=oldstate;return 0;}
  host_save_queued=0;host_save_writes++;game_state=oldstate;return 1;
 }
-void dialogue(int a,int b,int c){(void)a;(void)b;(void)c;game_state=2;}
+void dialogue(int a,int b,int c){(void)c;dialogue_lines[0]=a;dialogue_lines[1]=b;dialogue_calls++;game_state=2;}
+unsigned get_dialogue_count(void){return dialogue_calls;}
+int get_dialogue_line(unsigned i){return i<2?dialogue_lines[i]:-1;}
 void toast(int a){last_toast=(unsigned)a;}
 void text(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void centered(int a,int b,int c){(void)a;(void)b;(void)c;}

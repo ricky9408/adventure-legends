@@ -13,12 +13,15 @@ DRIVER=r'''
 #include "south_game.h"
 unsigned reference_south_puzzle_beam(const SouthPuzzle*,unsigned,SouthBeam[4]);
 int main(void){unsigned area,bits,i;
- for(area=34;area<=36;area++)for(bits=0;bits<8;bits++){
+ for(area=34;area<=36;area++){
+ for(bits=0;bits<8;bits++){
   SouthPuzzle p={{bits&1,(bits>>1)&1},(bits>>2)&1};SouthBeam b[4]={{0}};
   unsigned n=reference_south_puzzle_beam(&p,area,b);printf("%u",n);
   for(i=0;i<4;i++)printf(" %d %d %d %d %u",b[i].x1,b[i].y1,b[i].x2,b[i].y2,b[i].end_kind);
   puts("");
- }return 0;
+ }
+ }
+ return 0;
 }
 '''
 def generated():

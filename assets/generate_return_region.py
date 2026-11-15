@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw
 import connected_road_art as roads
 import sys,json,hashlib,random,math
 sys.dont_write_bytecode=True
-from generate_assets import Art,P,PAL,COLORS
+from generate_assets import resident_sprite,Art,P,PAL,COLORS
 from generate_region import odd_bitmap,cbytes,occupancy,paste_sprite
 from generate_northern_region import collision_bands
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/return_region';SRC=ROOT/'src'
@@ -326,13 +326,7 @@ def draw_room(r):
 def sprite(n):
  a=Art(16,16,'transparent')
  if n in NAMES[:7]:
-  base=n.replace('_WORK','');a.e((2,13,14,15),'shadow');a.r((5,11,7,14),'wood1');a.r((10,11,12,14),'wood1');a.p([(4,7),(11,7),(13,12),(3,12)],'pine3'if base=='GARDENER'else'water2'if base=='WEAVER'else'rose3');a.r((5,2,11,7),'skin2');a.r((4,1,12,3),'wood1');a.dot(7,5,'ink');a.dot(10,5,'ink');a.l([(8,7),(10,7)],'skin0')
-  if base=='GARDENER':a.r((2,2,14,3),'gold2');a.r((5,0,11,2),'gold1');a.l([(13,8),(14,14)],'wood3')
-  elif base=='BELLMAKER':a.r((3,1,13,2),'silver');a.r((12,7,15,9),'gold2')
-  elif base=='PORTER':a.r((0,6,4,12),'wood2');a.l([(1,7),(3,10)],'gold3')
-  elif base=='WEAVER':a.l([(2,8),(2,12),(13,12)],'gold2');a.r((1,9,3,10),'water4')
-  elif base=='GUIDE':a.p([(3,3),(7,0),(12,3)],'rose4');a.r((12,7,15,12),'white')
-  if n.endswith('_WORK'):a.l([(10,8),(15,6)],'skin2',2)
+  return resident_sprite('return',n.replace('_WORK',''),work=n.endswith('_WORK'))
  elif n in ['REST','REST_LIT','HEARTH']:
   a.e((1,10,14,15),'stone2');a.l([(3,12),(12,9),(3,9),(12,12)],'wood2',2);a.p([(5,11),(4,6),(7,8),(8,2),(12,9),(10,12)],'fire2'if n!='REST'else'gold1');a.p([(7,11),(8,6),(10,10)],'gold3')
  elif n in ['NOTICE','TRIAL','RESET']:

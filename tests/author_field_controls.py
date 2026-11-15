@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Freeze reviewed current controls/audio bytes and an exact 4005 source inverse.
+"""Freeze reviewed current game bytes and an exact 4005 source inverse.
 
 Reads immutable parent Git blobs and the reviewed working tree. The inverse is
 proof-only: it is never used to build a release ROM or as current gameplay data.
@@ -13,6 +13,7 @@ import field_controls_boundary as boundary
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--repo',type=Path,required=True)
+    p.add_argument('--check',action='store_true',help='Validate reviewed scope and report prospective hashes without writing')
     a=p.parse_args();root=a.repo.resolve()
     parent,modes=tree(root,boundary.PARENT_COMMIT)
     assert boundary.git_tree(parent,modes)==boundary.PARENT_TREE
@@ -27,7 +28,10 @@ def main():
     assert old==selected['current_production']
     changed={p for p in old.keys()&production.keys() if old[p]!=production[p]}
     added=production.keys()-old.keys();removed=old.keys()-production.keys()
-    assert all(boundary.allowed(p) for p in changed|added|removed),('unapproved runtime delta',sorted(changed|added|removed))
+    redesign=boundary.redesign_scope(root=root)
+    delta=changed|added|removed
+    assert redesign=={p for p in delta if not boundary.legacy_allowed(p)},'redesign scope and production delta differ'
+    assert all(boundary.allowed(p,redesign) for p in delta),('unapproved runtime delta',sorted(delta))
     protected={p:h for p,h in hashes.items() if boundary.protected_input(p)}
     assert {p for p in production if boundary.protected_input(p)}=={p for p in old if boundary.protected_input(p)}
     immutable=boundary.immutable_paths(hashes,selected)
@@ -44,6 +48,7 @@ def main():
        'scope':'Exact current production/helper bytes; historical source-only proofs restore every 4005 byte and mode. Historical fixtures never establish current controls or feed a release build.',
        'parent_files':hashes,'parent_modes':modes,'parent_production':old,
        'current_production':production,'current_helpers':boundary.helper_inventory(root),
+       'redesign_scope_sha256':boundary.REDESIGN_SCOPE_SHA,
        'historical_helpers':selected['current_helpers'],
        'immutable_proofs':{p:hashes[p] for p in sorted(immutable)},'protected_inputs':protected,
        'changed':sorted(changed),'added':sorted(added),'removed':sorted(removed),
@@ -52,10 +57,12 @@ def main():
     raw=(json.dumps(c,indent=2,sort_keys=True)+'\n').encode()
     verifier=root/'tests/field_controls_boundary.py';source=verifier.read_text()
     source,n=re.subn(r"^CONTRACT_SHA='[^']+'$","CONTRACT_SHA='"+boundary.sha(raw)+"'",source,flags=re.M);assert n==1
-    for name,data in ((boundary.CONTRACT_PATH,raw),(boundary.INVERSE_PATH,packed)):
-        target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
-    verifier.write_text(source)
+    if not a.check:
+        for name,data in ((boundary.CONTRACT_PATH,raw),(boundary.INVERSE_PATH,packed)):
+            target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+        verifier.write_text(source)
     print(json.dumps({'contract_sha256':boundary.sha(raw),'inverse_sha256':boundary.sha(packed),
+        'check_only':a.check,'redesign_scope_sha256':boundary.REDESIGN_SCOPE_SHA,
         'parent_tree':boundary.PARENT_TREE,'parent_files':len(parent),'changed_production':len(changed),
         'added_production':len(added),'current_helpers':len(c['current_helpers']),
         'protected_inputs':len(protected),'immutable_proofs':len(immutable),'inverse_files':len(restored)}))

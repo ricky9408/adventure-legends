@@ -61,7 +61,7 @@
   ],
   "status": "ART ONLY: sprite sheets and scene composites are not emulator captures or proof of unlocks, live rendering, or acceptance.",
   "rights": "Original code-native pixel geometry. No Nintendo/Pokemon extraction, tracing, or third-party raster inputs.",
-  "generator_sha256": "c0c32a1529ef6f6a05062546ab3b7a47b0cda282e31c8c21d3199f720db2c499",
+  "generator_sha256": "abfe18735f8446a2bc33c305af67025b01c2272cb63b30d91b33188f1d585732",
   "codegen_sha256": "91ec0196a184f2a58808d939461f493f9df8d3f9b50bae605e7305277067856c",
   "palette_sha256": "801748aad75ae435a769bb8f86d9ebd68e95237bc28691d2acd6083e091ee80f",
   "data_bytes": 196632,
@@ -99,7 +99,7 @@
         242,
         260
       ],
-      "sha256": "ee5b615154c8c5c5ac852519ba686fc0082436323602d9fb5b57d5f611de0131"
+      "sha256": "1eee278d9d14a16f6637e6cad67298d7349d2329bc747dd2c9054ad5a90cf14b"
     },
     {
       "name": "SILT",
@@ -110,7 +110,7 @@
         250,
         238
       ],
-      "sha256": "5b0c5f1f5cdd30e8609cdf16bd3b8f2a4a60f217e6e40a3629fd55592873d2c4"
+      "sha256": "a25fe1bb76e194e72a17ee8f177deee171b044ce9cd11dad707da7681758afef"
     },
     {
       "name": "KELP",
@@ -121,7 +121,7 @@
         208,
         200
       ],
-      "sha256": "cf0f31297b885abe28fc638e636934a82c41ccfa0955cb6836c54e8db41ca2b1"
+      "sha256": "0e22ce61cc3e69eeeddc9a3eae2d643fbad70313c07df21c53b88d9e4d4aad60"
     },
     {
       "name": "CHALK",
@@ -132,7 +132,7 @@
         248,
         200
       ],
-      "sha256": "3cd63b5cc7ea6a5c957ee3a980069d5fd03517ba36bb2348eb127f9d199543a8"
+      "sha256": "f1d59d72ae0ee0db225e25600c032d7968b9e90c1114278987c9b41f5b52cbe1"
     },
     {
       "name": "SHADE",
@@ -143,7 +143,7 @@
         126,
         212
       ],
-      "sha256": "35280863c3f306407db19cf4b61e54e69c6b3db7ee2ffc4511f27e8f3a96f7e2"
+      "sha256": "4633db37a9837453571f53998dec0bd4a3b4ce977c88f687915c0b5df945a544"
     }
   ],
   "anchor": [
@@ -1204,10 +1204,10 @@
     "baseline": "0a8b05c3e24d02bd350a11c32289fb5686641535",
     "files": 48,
     "unchanged": false,
-    "reviewed_world_successor": "connected-roads-c4",
-    "reviewed_background_file_exceptions": 1,
-    "protected_creature_palette_arrays_unchanged": true,
-    "unchanged_historical_files": 47
+    "reviewed_world_successor": "lantern-trails-r1",
+    "reviewed_art_file_exceptions": 2,
+    "shared_palette_and_array_layout_unchanged": true,
+    "unchanged_historical_files": 46
   },
   "silhouette_comparison": {
     "current_unique_front_masks": 24,

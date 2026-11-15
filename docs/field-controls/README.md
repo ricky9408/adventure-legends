@@ -35,3 +35,41 @@ make ARM_PREFIX=/path/to/toolchain/bin/arm-none-eabi-
 Two clean builds must reproduce the candidate. A source manifest alone does not prove that incremental object files came from the intended compiler. Hosted artifacts are built and verified independently; linker versions can produce different ROM hashes from identical source.
 
 Fresh campaign routes, historical/synthetic fixtures, host oracles and visual inspection are distinct evidence. None establishes complete fresh acquisition of all 128 forms, every optional quest, subjective enjoyment or physical-device behavior.
+
+## Reviewing a redesign boundary
+
+The Lantern Trails redesign adds an exact path list at
+`docs/redesign/production-scope.json`. The verifier pins its SHA-256 and the
+current field contract binds the same identity. This extends the reviewed
+production set without exempting an art directory or changing any inherited
+proof. Current bytes and helper inventories still require exact hashes.
+
+Finish deterministic asset generation and review all source/test changes before
+authoring the boundary. First list the additional paths without changing it:
+
+```sh
+python3 -B tools/author_redesign_field_scope.py --list-candidates \
+  > build/redesign-field-paths-review.json
+```
+
+Review that explicit list against the generator and runtime changes. Authoring
+accepts only the complete sorted list of additional changed paths; wildcards,
+extra paths, protected inputs and omitted changes are rejected. Then pin that
+reviewed scope and inspect the prospective current contract/inverse hashes:
+
+```sh
+python3 -B tools/author_redesign_field_scope.py \
+  --reviewed-paths build/redesign-field-paths-review.json
+python3 -B tests/author_field_controls.py --repo . --check
+```
+
+After review, run `tests/author_field_controls.py --repo .` without `--check`
+to freeze current production and helpers. It reads the original Git blobs,
+checks the exact 4005 tree identity and modes, and adds only the original bytes
+needed to reconstruct that parent from the changed checkout. Existing proof
+contracts and archives remain byte-identical. Run the boundary negative tests
+and the normal host/native suites after freezing. A later helper or production
+edit invalidates the freeze and requires review again.
+
+The authoring tools establish reviewed identities. They do not establish good
+art, gameplay quality, successful regeneration or passing tests.
