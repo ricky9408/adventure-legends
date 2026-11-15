@@ -77,7 +77,7 @@
         300,
         286
       ],
-      "sha256": "d271bc90365187ed4df476f73995ba79c13fc040a2d607d316c5904c79abebd3"
+      "sha256": "1299ff7353c396c132498ea19ad74944b233e71480cc8b5cb354e0940c41a53f"
     },
     {
       "name": "OLD CREAM",
@@ -88,7 +88,7 @@
         64,
         120
       ],
-      "sha256": "f379d02a1faf785aa1c36d39a767720ba7aaebb8b33ccaa04c53fe8c6dd67264"
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
     },
     {
       "name": "OLD TEAL",
@@ -99,7 +99,7 @@
         56,
         311
       ],
-      "sha256": "f379d02a1faf785aa1c36d39a767720ba7aaebb8b33ccaa04c53fe8c6dd67264"
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
     },
     {
       "name": "RETURN GRASS",
@@ -110,7 +110,7 @@
         232,
         216
       ],
-      "sha256": "9058e0aadbd7164764a08a6d17776baf08e35447eeccd9e9dadd018ff40026e6"
+      "sha256": "deb91cab3e378c94267348ed53051a1c3caa065d458c7ae038d261554becebd0"
     },
     {
       "name": "RETURN CREAM",
@@ -121,7 +121,7 @@
         288,
         136
       ],
-      "sha256": "19fc1c82cc91a874d9fdfbf9d4b7b25b22da9bac496423e28c3f5af8c31cc31a"
+      "sha256": "c7b12adbdbc1a52758dd43731db3fff795b21fd9414c6879500d84919963f75b"
     },
     {
       "name": "RETURN TEAL",
@@ -132,87 +132,87 @@
         176,
         128
       ],
-      "sha256": "7de6bf08decbec750644149a634f71109ce1eb9abb41df7fa8779191954c81ed"
+      "sha256": "bd17c8572d562feac4ef09824643fbd141a3c1b410c1d80769d1bac1cf7238dd"
     },
     {
       "path": "assets/evolutions/hearthkeeper_field.png",
-      "sha256": "5fce40bc02e959e0e9bdca12feea005be2f33339bda20d9598d74c27b8fc69e0"
+      "sha256": "2d70907ed9b9fa88b19f05173bd748a5f22c76e93f7c6c72d36af7ffaba29778"
     },
     {
       "path": "assets/evolutions/hearthkeeper_portrait.png",
-      "sha256": "cd552c25472e174849ada3459fbff8ef803c6d3c0b6948f3ca1fe32e6c4f03c5"
+      "sha256": "45948f959560d7c1223cb29a6d39d307cc0c150fa93155e1cda2043fa94ae422"
     },
     {
       "path": "assets/evolutions/canopykeeper_field.png",
-      "sha256": "4f6075f0deb74da1cb7783945f42c3ff4e8eced81cb5057708f9afe790bca2bd"
+      "sha256": "20d8f8035b0246e1cc5aaf7d42a05e0a7ca863f7fe1f9461a5120daabbec6d99"
     },
     {
       "path": "assets/evolutions/canopykeeper_portrait.png",
-      "sha256": "5c31969204cba18ebf8ebfda6bceeb071fc4acae018fec15469a9058ed13284f"
+      "sha256": "efea7159fffc9897544e1c7200fcb79e47e84082ef4c4594c876d73092ec135a"
     },
     {
       "path": "assets/evolutions/windweaver_field.png",
-      "sha256": "d3ede13290e3fa61e9a88c4db2991c01198846c3af1856447c9954053cd36110"
+      "sha256": "37255ce41e21efaae741d9a531280d858a3250b4e3c072828e80373abd08c7fc"
     },
     {
       "path": "assets/evolutions/windweaver_portrait.png",
-      "sha256": "08f67ddf48210292104d3a3debc8f8451575b9d079e454fec201cf4e6726906d"
+      "sha256": "3da3d03b1227d362b7ae9cd41081819a39043df502e4c0a43efc23f314eddeb3"
     },
     {
       "path": "assets/evolutions/archwarden_field.png",
-      "sha256": "bcfc754d408e65ee26ce81a1ef92b90be04285ebeeb9c7c13227609f57cb3ba2"
+      "sha256": "12fe55ec6b87c0b3bdf057fa2d4d60a163b4c7a56de4ee91c48fef964bba0a18"
     },
     {
       "path": "assets/evolutions/archwarden_portrait.png",
-      "sha256": "ba7c5018e2388d8c6875b88a1905bb89e3dacaed741ace36e320c581839e2b76"
+      "sha256": "4054550b742342b318c157f77e2f00467a00f763d5026466152280091cb22169"
     },
     {
       "path": "assets/regional_creatures/tidewheel_walk.png",
-      "sha256": "e8debeb64a49432da931fb4db9b9dc530f7efe0664952861cfafa26997a2bbb6"
+      "sha256": "6e18fac3a8de261dca20e45e0555cffa779e50da62b5b6e66c6679cbdeed1e60"
     },
     {
       "path": "assets/regional_creatures/tidewheel_portrait.png",
-      "sha256": "ec7722ec1bef787ae336129ca66bc0d9c67d4fedd2d0723bc91445bffb42eb19"
+      "sha256": "896af0467592f37780f4bab791ac45384809795ac5232d4a73361dc27eebe3c5"
     },
     {
       "path": "assets/regional_creatures/chimeclasp_walk.png",
-      "sha256": "edf9f82c06a638bf73a1391c7e57d58d6188f3b3a38debafe4aa2b7b1acb41f9"
+      "sha256": "beff9d5979508846de35888ddb7c3bacf530241939da6a8d11ec9e88530bb677"
     },
     {
       "path": "assets/regional_creatures/chimeclasp_portrait.png",
-      "sha256": "c2b5c75592cad21e703dfac3a4fbfea3ec37cda3b61354562e64613f736e356c"
+      "sha256": "44d399ae3b4fa76293bf1d6b9fcc86337ee88816ae68bdecafd6b883d7fe6b46"
     },
     {
       "path": "assets/northern_creatures/loomcrown_walk.png",
-      "sha256": "6c7c6f4193b1a629cef71499308492f7ced9b1952aeaa72880b39b163c7d8f13"
+      "sha256": "065123618f952a6a1691b8cf639529547b43b98f9fc2671d6e07a67233265379"
     },
     {
       "path": "assets/northern_creatures/loomcrown_portrait.png",
-      "sha256": "96c4d6d673d37963c531d6abdbedbee342daf241e77c967612dc3372a57078a5"
+      "sha256": "ad6e7cf485faa455e1276c861bf6b7e04104f227e1c804e292df99387a103a93"
     },
     {
       "path": "assets/northern_creatures/kilnbarrow_walk.png",
-      "sha256": "849216576f5c0e9aa71d81881f80282d6fc8cfbf91613d9bd39b2d3ec3c655bd"
+      "sha256": "5381ac46e1193b40919baabf225d685af35e5f716a78a09765aa03c6c2b93808"
     },
     {
       "path": "assets/northern_creatures/kilnbarrow_portrait.png",
-      "sha256": "c518297a7a0ed4cd119b44801e23a4fda5ba194318ca24b1bf98b4f809ce6ff5"
+      "sha256": "af40006c8f61e80dd462034b35f7327e3456e9d6c05711924130540079e9f4c9"
     },
     {
       "path": "assets/southern_creatures/boughvault_walk.png",
-      "sha256": "a5b92b32dd721d4fcd6e277952e3cf49117d13923558d8de9f07eaa5b1b8ad7b"
+      "sha256": "c66d26f6629537e99291fc776fb3bf4130f2061aa991301251cc473f806df14c"
     },
     {
       "path": "assets/southern_creatures/boughvault_portrait.png",
-      "sha256": "4ea02bfd512bb682c659bd543d7230759289b90f587da6a28565f9a723bdc101"
+      "sha256": "35ab22aaf0b5d414ad1111781b1786c1f3973bfa91779c95da2a49c718590e8f"
     },
     {
       "path": "assets/southern_creatures/dunescoop_walk.png",
-      "sha256": "ba6448ee70993063ab549f86a533e456a5b10bede9a72bb30df11de45da5cc72"
+      "sha256": "dfe5f3a80580ead7b7d28211bcd19c14a5f43538d1f264cee606fc441b424a75"
     },
     {
       "path": "assets/southern_creatures/dunescoop_portrait.png",
-      "sha256": "1e47498dba2ce33d1d34aced0a7d22f2b351aa1d932075daf7dfd33cc16b6db6"
+      "sha256": "09d8f925d7912be1b18d48f5e5ec05ccb6e94c29829ce5e576ea5224bedda9cc"
     }
   ],
   "anchor": [

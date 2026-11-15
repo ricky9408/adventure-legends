@@ -87,8 +87,12 @@ Output: `build/emberbond.gba`, plus ELF/map/symbols. [Tool setup](tools/README.m
 `make assets` regenerates original graphics, text, creature tables and puzzle data.
 It explicitly selects the reviewed Lantern Trails art successor for the two
 historical creature-prefix guards; see [the generation contract](assets/redesign/README.md).
-Use Pillow 13.0.0 and the documented font dependencies. Generated C arrays
-remain in bounded include chunks; do not combine them into huge monolithic files.
+For byte-identical release assets, use the pinned Linux Pillow 13.0.0 wheel and
+font dependencies in [the CI setup](docs/GAMEPLAY_CI.md). macOS Pillow can encode
+identical PNG pixels differently because its wheel uses zlib-ng. Ordinary ROM
+builds use the shipped arrays and work with the supported toolchains above.
+Generated C arrays remain in bounded include chunks; do not combine them into
+huge monolithic files.
 
 ## Test and capture
 

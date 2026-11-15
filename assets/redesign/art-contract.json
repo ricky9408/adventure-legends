@@ -279,10 +279,6 @@
     "assets/underwater_creatures/legacy_prefix_sha256.json": {
       "contract_sha256": "44559c077835fcb9a2a8bb9356337353e301d720ad58a6659c145e72aeee8faf",
       "reviewed_exceptions": {
-        "assets/magma_creatures/released65_silhouettes_native.png": {
-          "historical_sha256": "5acdcd640232a53735648dfbfad415700a91fc315f592a1a8c671b7f068422d0",
-          "successor_sha256": "5bfd2e6f3a639824cfe3b673e96722ec7dc2d3a29b24c83b844d4789cbec49de"
-        },
         "src/asset_data/part_000.inc": {
           "historical_sha256": "d4aa561215d2b9e2e99d690ee00a9fc6c5f995512e8497d775e9e4c1d8a8aef8",
           "successor_sha256": "ee60d4386a90cff3067f4faaf054a5972dbec31992defbb0f3040b5f5cc71613"

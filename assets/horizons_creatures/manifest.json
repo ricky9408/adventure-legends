@@ -79,7 +79,7 @@
         300,
         286
       ],
-      "sha256": "d271bc90365187ed4df476f73995ba79c13fc040a2d607d316c5904c79abebd3"
+      "sha256": "1299ff7353c396c132498ea19ad74944b233e71480cc8b5cb354e0940c41a53f"
     },
     {
       "name": "OLD CREAM",
@@ -90,7 +90,7 @@
         64,
         120
       ],
-      "sha256": "f379d02a1faf785aa1c36d39a767720ba7aaebb8b33ccaa04c53fe8c6dd67264"
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
     },
     {
       "name": "OLD TEAL",
@@ -101,7 +101,7 @@
         56,
         311
       ],
-      "sha256": "f379d02a1faf785aa1c36d39a767720ba7aaebb8b33ccaa04c53fe8c6dd67264"
+      "sha256": "ec99a602e0a5c4a780f4ac0eed7966388f5278a9f3531cd9cb4fbd3d41becd09"
     },
     {
       "name": "RETURN GRASS",
@@ -112,7 +112,7 @@
         232,
         216
       ],
-      "sha256": "9058e0aadbd7164764a08a6d17776baf08e35447eeccd9e9dadd018ff40026e6"
+      "sha256": "deb91cab3e378c94267348ed53051a1c3caa065d458c7ae038d261554becebd0"
     },
     {
       "name": "RETURN CREAM",
@@ -123,7 +123,7 @@
         288,
         136
       ],
-      "sha256": "19fc1c82cc91a874d9fdfbf9d4b7b25b22da9bac496423e28c3f5af8c31cc31a"
+      "sha256": "c7b12adbdbc1a52758dd43731db3fff795b21fd9414c6879500d84919963f75b"
     },
     {
       "name": "RETURN TEAL",
@@ -134,7 +134,7 @@
         176,
         128
       ],
-      "sha256": "7de6bf08decbec750644149a634f71109ce1eb9abb41df7fa8779191954c81ed"
+      "sha256": "bd17c8572d562feac4ef09824643fbd141a3c1b410c1d80769d1bac1cf7238dd"
     }
   ],
   "anchor": [
@@ -1310,7 +1310,7 @@
       }
     ],
     "source": "assets/return_creatures/released104_silhouettes_native.png",
-    "source_sha256": "5cfff7dcb3ce8b4aa2354dcc00da1153708b6c24d425946e75bad1a8d0fd3450"
+    "source_sha256": "622d6f6dc29d9a11c6e38a339032cd23dc8699d4597ad8ac86697ff75743145a"
   },
   "terrain_visibility_minimum_opaque": 0.820755,
   "terrain_visibility_minimum_boundary": 0.791667

@@ -99,7 +99,7 @@
         242,
         260
       ],
-      "sha256": "1eee278d9d14a16f6637e6cad67298d7349d2329bc747dd2c9054ad5a90cf14b"
+      "sha256": "ee5b615154c8c5c5ac852519ba686fc0082436323602d9fb5b57d5f611de0131"
     },
     {
       "name": "SILT",
@@ -110,7 +110,7 @@
         250,
         238
       ],
-      "sha256": "a25fe1bb76e194e72a17ee8f177deee171b044ce9cd11dad707da7681758afef"
+      "sha256": "5b0c5f1f5cdd30e8609cdf16bd3b8f2a4a60f217e6e40a3629fd55592873d2c4"
     },
     {
       "name": "KELP",
@@ -121,7 +121,7 @@
         208,
         200
       ],
-      "sha256": "0e22ce61cc3e69eeeddc9a3eae2d643fbad70313c07df21c53b88d9e4d4aad60"
+      "sha256": "cf0f31297b885abe28fc638e636934a82c41ccfa0955cb6836c54e8db41ca2b1"
     },
     {
       "name": "CHALK",
@@ -132,7 +132,7 @@
         248,
         200
       ],
-      "sha256": "f1d59d72ae0ee0db225e25600c032d7968b9e90c1114278987c9b41f5b52cbe1"
+      "sha256": "3cd63b5cc7ea6a5c957ee3a980069d5fd03517ba36bb2348eb127f9d199543a8"
     },
     {
       "name": "SHADE",
@@ -143,7 +143,7 @@
         126,
         212
       ],
-      "sha256": "4633db37a9837453571f53998dec0bd4a3b4ce977c88f687915c0b5df945a544"
+      "sha256": "35280863c3f306407db19cf4b61e54e69c6b3db7ee2ffc4511f27e8f3a96f7e2"
     }
   ],
   "anchor": [
@@ -1205,9 +1205,9 @@
     "files": 48,
     "unchanged": false,
     "reviewed_world_successor": "lantern-trails-r1",
-    "reviewed_art_file_exceptions": 2,
+    "reviewed_art_file_exceptions": 1,
     "shared_palette_and_array_layout_unchanged": true,
-    "unchanged_historical_files": 46
+    "unchanged_historical_files": 47
   },
   "silhouette_comparison": {
     "current_unique_front_masks": 24,

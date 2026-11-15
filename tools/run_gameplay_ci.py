@@ -123,9 +123,10 @@ def main():
         stage('tool-versions', [python, '-c',
               "import os,subprocess,sys; sys.path.insert(0,'tools'); "
               "from arm_toolchain import resolve_arm_tools; "
-              "from PIL import __version__ as pil, ImageFont; import numpy,scipy; "
-              "print('Pillow',pil,'NumPy',numpy.__version__,'SciPy',scipy.__version__); "
+              "from PIL import __version__ as pil, ImageFont, features; import numpy,scipy; "
+              "print('Pillow',pil,'PNG zlib',features.version_codec('zlib'),'NumPy',numpy.__version__,'SciPy',scipy.__version__); "
               "assert pil == '13.0.0', 'Pixel generation requires pinned Pillow 13.0.0; see docs/GAMEPLAY_CI.md'; "
+              "assert features.version_codec('zlib') == '1.3.1', 'Byte-identical PNGs require the pinned Linux Pillow wheel; see docs/GAMEPLAY_CI.md'; "
               "[ImageFont.truetype(p,12,index=0) for p in "
               "['/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',"
               "'/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf']]; "
