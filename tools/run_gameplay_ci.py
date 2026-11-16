@@ -157,6 +157,7 @@ def main():
         stage('relationship-core-tests', [python, 'tests/test_relationships.py'])
         stage('relationship-save-tests', [python, 'tests/test_relationship_save.py'])
         stage('ressa-host-route-tests', [python, 'tests/test_magma_game.py',
+              'MagmaRuntime.test_ressa_bowl_hint_matches_earned_interaction_and_is_read_only',
               'MagmaRuntime.test_ressa_route_requires_completed_scenes_and_separate_visits',
               'MagmaRuntime.test_ressa_romance_waits_when_another_partner_exists',
               'MagmaRuntime.test_ressa_marriage_waits_if_existing_partner_appears',

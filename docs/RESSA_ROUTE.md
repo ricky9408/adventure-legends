@@ -5,8 +5,10 @@ remains hidden in the existing content13 relationship ledger; no save wire or
 historical-bank rule changes.
 
 After the original Magma kiln reward and quest32 claim, a small imperfect dish
-appears on Ressa's worktable in Kilnstep. The player can help shape it. On a
-later visit the dish comes out of the kiln; another visit lets Ressa explain
+appears on Ressa's worktable in Kilnstep. A nearby, correctly faced A cue marks
+the bowl after the reward, while Ressa keeps priority when addressed directly.
+The player can help shape it. On a later visit the dish comes out of the kiln;
+another visit lets Ressa explain
 why she once hid flawed work and why she now keeps this dish. Separate later
 visits offer explicit choices to date and to marry. A final A completes each
 scene. B defers it without adding an event, and an interrupted dialogue is
@@ -27,7 +29,8 @@ The native `ressa-earned-route` Gameplay CI stage runs
 `tests/ressa_route_native.py` from empty SRAM. It earns the original and Magma
 chapter rewards with controller input, then checks B cancellation, separate
 visits, masks `0, 1, 3, 7, 15, 31`, repeat talks, cold Continue and a married
-revisit. `ressa-summary.json` is the bounded acceptance record; scene PNGs and
+revisit. It also checks the actual OAM A cue at the earned bowl and captures a
+field screenshot. `ressa-summary.json` is the bounded acceptance record; scene PNGs and
 input traces are retained under `ressa-route/`. The campaign driver stops after
 Magma, so its generic `summary.json` does not claim all nine chapters. Host
 tests use synthetic quest completion to check event admission, interruption,
