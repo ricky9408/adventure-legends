@@ -127,6 +127,13 @@ static COLD void ressa_tile(void){unsigned stage=adventure_save.relationships.ev
  ressa_chatter(stage==31?TX_RS_SPOUSE_A:TX_RS_LATER_A,stage==31?TX_RS_SPOUSE_B:TX_RS_LATER_B);
 }
 COLD int magma_game_ressa_dialogue_pending(void){return ressa_pending!=0;}
+/* Ressa takes A first when the player also faces her beside the bowl. */
+COLD int magma_game_ressa_target_hint(int*x,int*y){
+ if(room!=38||game_state!=PLAY||!done(32)||!close(192,176)||npc_close(160,176))return 0;
+ if(x)*x=192;
+ if(y)*y=176;
+ return 1;
+}
 COLD void magma_game_ressa_cancel_dialogue(void){ressa_pending=0;}
 COLD void magma_game_ressa_finish_dialogue(void){unsigned event,i;
  if(!ressa_pending)return;

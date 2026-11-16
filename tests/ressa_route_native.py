@@ -9,6 +9,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'tests'), str(ROOT / 'tools')]
 import treasure_full_journey as journey
+from interaction_readability_native import check_hint
 from test_save5 import Save
 from northern_journey import newest_bank
 
@@ -75,6 +76,11 @@ def ressa_magma_route(run):
     run.check(run.quest(32) == 3 and ressa_events(run) == 0,
               'original kiln reward is earned before Ressa events')
     run.snapshot('ressa-quest-earned')
+    run.goto(192, 192, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (192, 176), 'earned Ressa bowl A cue')
+    run.e.screenshot(run.out / 'ressa-bowl-a-cue.png')
 
     conversation(run, 0, 'tile', cancel=True)
     for before, after, label in ((0, 1, 'tile'), (1, 3, 'firing'),

@@ -70,6 +70,7 @@ int magma_game_input(unsigned pressed,unsigned held);
 int magma_game_grabbed(void);
 int magma_game_interact(void);
 int magma_game_ressa_dialogue_pending(void);
+int magma_game_ressa_target_hint(int *x,int *y);
 void magma_game_ressa_cancel_dialogue(void);
 void magma_game_ressa_finish_dialogue(void);
 int magma_game_power(unsigned command); /*0 no target,1 success,2 rejected*/
