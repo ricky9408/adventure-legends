@@ -112,7 +112,11 @@ static inline __attribute__((always_inline)) int collision_rect_horizons(Collisi
 }while(0)
 COLD int game_collision_rects(int x0,int y0,int x1,int y1,short out[][4],unsigned cap){
  CollisionRectBuilder b;unsigned area=(unsigned)room,i;int seams;
+#ifdef ADVENTURE_CONNECTED_ROAD_RUNTIME
+ seams=game_road_box_touched(area,x0,y0,x1,y1);
+#else
  seams=game_road_box_touched&&game_road_box_touched(area,x0,y0,x1,y1);
+#endif
  if(seams){
 #ifdef ADVENTURE_CONNECTED_ROAD_RUNTIME
   if((area<22u||area>=46u)&&(area<62u||area>=70u))return -1;

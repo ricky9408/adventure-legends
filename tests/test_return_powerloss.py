@@ -29,6 +29,6 @@ class ReturnPowerloss(unittest.TestCase):
       self.assertEqual(bytes(lib.sram[:A]),initial[:A]);self.assertEqual(bytes(lib.sram[preserved:preserved+SIZE]),initial[preserved:preserved+SIZE]);checks+=1
      lib.save5_test_fail_after(-1);rows.append({'transaction':name,'destination':destination,'cut_positions':SIZE+2})
     print(name,'both banks every cutoff pass',flush=True)
-   out=ROOT/'docs/evidence/return-save-powerloss.json';out.parent.mkdir(parents=True,exist_ok=True)
+   out=ROOT/'build/return-save-powerloss.json';out.parent.mkdir(parents=True,exist_ok=True)
    out.write_text(json.dumps({'scope':'Synthetic host Return transactions; not native acquisition','result':'PASS','source_sha256':lib.source_hashes,'source_unchanged':runtime_hashes()==lib.source_hashes,'checks':checks,'transactions':rows,'seconds':round(time.monotonic()-start,3),'source_fixture_sha256':FIXTURE_SHA},indent=2)+'\n')
 if __name__=='__main__':unittest.main(verbosity=2)

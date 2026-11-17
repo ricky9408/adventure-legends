@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "project": "adventure-legends",
+  "checks": [
+    {
+      "id": "inventory",
+      "layer": "static",
+      "command": [
+        "python3",
+        "tools/trust/check.py",
+        "inventory"
+      ],
+      "timeout_seconds": 120,
+      "artifacts": [
+        "inventory.json",
+        "contract-negatives.log",
+        "adapter-negatives.log"
+      ]
+    },
+    {
+      "id": "build",
+      "layer": "static",
+      "command": [
+        "python3",
+        "tools/trust/check.py",
+        "build"
+      ],
+      "timeout_seconds": 600,
+      "artifacts": [
+        "build.json",
+        "candidate/emberbond.gba",
+        "candidate/emberbond.elf",
+        "candidate/emberbond.sym",
+        "candidate/emberbond.map",
+        "candidate/source-hashes.json"
+      ]
+    },
+    {
+      "id": "gameplay",
+      "layer": "runtime",
+      "command": [
+        "python3",
+        "tests/trust/test_gameplay_properties.py"
+      ],
+      "timeout_seconds": 300,
+      "artifacts": [
+        "gameplay-results.json"
+      ]
+    },
+    {
+      "id": "persistence",
+      "layer": "runtime",
+      "command": [
+        "python3",
+        "tests/trust/test_persistence.py"
+      ],
+      "timeout_seconds": 300,
+      "artifacts": [
+        "persistence-review.json"
+      ]
+    },
+    {
+      "id": "platform",
+      "layer": "runtime",
+      "command": [
+        "python3",
+        "tools/trust/check.py",
+        "platform"
+      ],
+      "timeout_seconds": 120,
+      "artifacts": [
+        "platform.json"
+      ]
+    },
+    {
+      "id": "native",
+      "layer": "runtime",
+      "command": [
+        "python3",
+        "tools/trust/check.py",
+        "native"
+      ],
+      "timeout_seconds": 180,
+      "artifacts": [
+        "native.json",
+        "fresh/frames.jsonl.gz",
+        "start-held/frames.jsonl.gz",
+        "continued/frames.jsonl.gz",
+        "fresh/title.png",
+        "fresh/opening.png",
+        "fresh/village.png",
+        "fresh/journal.png",
+        "fresh/movement.png",
+        "start-held/opening.png",
+        "start-held/village.png",
+        "continued/continue.png",
+        "earned.sav",
+        "observer.so"
+      ]
+    },
+    {
+      "id": "assets",
+      "layer": "static",
+      "command": [
+        "python3",
+        "tools/trust/check.py",
+        "assets"
+      ],
+      "timeout_seconds": 1500,
+      "artifacts": [
+        "assets.json",
+        "asset-runtime.json"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "start-continue",
+      "user_path": "Blank cartridge -> title -> opening -> village -> cold Continue",
+      "expectation": "Held buttons cannot skip story pages; only completion publishes a save; Continue restores the earned village",
+      "checks": [
+        "native",
+        "persistence"
+      ]
+    },
+    {
+      "id": "movement",
+      "user_path": "Walk or step near walls and corners in each region",
+      "expectation": "Every accepted position is collision-free and steps stop at barriers",
+      "checks": [
+        "gameplay",
+        "native"
+      ]
+    },
+    {
+      "id": "combat",
+      "user_path": "Equip a weapon -> combine upgrades -> attack across obstacles",
+      "expectation": "Composed stats remain valid and projectiles cannot skip intervening walls",
+      "checks": [
+        "gameplay"
+      ]
+    },
+    {
+      "id": "companion-input",
+      "user_path": "Use power, recall and companion-selection button sequences",
+      "expectation": "Each input chord has one owner and cancelled actions do not leak into a power cast",
+      "checks": [
+        "gameplay"
+      ]
+    },
+    {
+      "id": "journal",
+      "user_path": "Open journal -> browse with held and fresh directions -> return",
+      "expectation": "Browsing cannot move the player or alter the saved adventure",
+      "checks": [
+        "native"
+      ]
+    },
+    {
+      "id": "durable-progress",
+      "user_path": "Earn reward -> save -> interrupt any written byte -> reload",
+      "expectation": "Reload yields a whole committed state; replay cannot duplicate XP, gear or rewards",
+      "checks": [
+        "persistence"
+      ]
+    },
+    {
+      "id": "legacy-continue",
+      "user_path": "Load an independently encoded starter save from each prior revision",
+      "expectation": "Revisions 1 through 13 migrate without accepting impossible persistent states",
+      "checks": [
+        "persistence"
+      ]
+    },
+    {
+      "id": "presentation",
+      "user_path": "Boot, read the opening, browse menus and move with music",
+      "expectation": "Measured frames present within budget, audio has no faults and PCM copies preserve exact periodic samples",
+      "checks": [
+        "native",
+        "platform"
+      ]
+    },
+    {
+      "id": "return-route-reachability",
+      "user_path": "Enter each Return area -> approach exits, landmarks and trial targets",
+      "expectation": "Every declared dynamic obstacle state preserves reachable required landing points and interaction approaches",
+      "checks": [
+        "platform"
+      ]
+    }
+  ]
+}

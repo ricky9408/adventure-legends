@@ -194,7 +194,8 @@ void journey_map_begin(void){map.valid=0;}
 void journey_map_open(void){unsigned i,a=(unsigned)room<78?(unsigned)room:0;
  if(!map.valid||map.origin!=a){
   build_knowledge();map.place=(unsigned char)a;prepare_exits();map.origin=(unsigned char)a;map.home_count=map.count;
-  for(i=0;i<map.count;i++)map.home_exits[i]=map.exits[i];map.valid=1;
+  for(i=0;i<map.count;i++)map.home_exits[i]=map.exits[i];
+  map.valid=1;
  }
  map.place=map.origin;map.count=map.home_count;
  for(i=0;i<map.count;i++)map.exits[i]=map.home_exits[i];

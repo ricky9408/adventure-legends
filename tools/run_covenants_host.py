@@ -22,10 +22,9 @@ def main():
  for name in ('covenants-art-host','covenants-powers-host','covenants-practice-geometry','covenants-world-review','covenants-geometry-review'):
   source=ROOT/'build'/name
   if source.exists():assert source.is_dir() and not source.is_symlink();source.rename(prior/name);moved.append(str(source.relative_to(ROOT)))
- for name in ('build/covenants-engine-host.json','build/covenants-camera-host.json','build/covenants-presentation-host.json','build/story-rewards-host.json','docs/evidence/covenants-save-powerloss.json'):
+ for name in ('build/covenants-engine-host.json','build/covenants-camera-host.json','build/covenants-presentation-host.json','build/story-rewards-host.json','build/covenants-save-powerloss.json'):
   source=ROOT/name
   if source.is_file():dest=prior/name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
- (ROOT/'docs/evidence').mkdir(parents=True,exist_ok=True)
  names=['test_covenants_catalog','test_covenants_history','test_covenants_transactions','test_covenants_powerloss','test_covenants_sanitizers','test_covenants_art','test_covenants_creature_art','test_covenants_camera','test_covenants_engine','test_covenants_field_dispatch','test_covenants_presentation','test_covenants_party_notice','test_covenants_world','test_covenants_powers','test_covenants_practice_geometry','check_covenants_geometry','check_covenants_world_arm','check_covenants_field_feasibility','test_story_rewards','test_story_reward_finish']
  commands=[([sys.executable,'tests/'+name+'.py'],{})for name in names]
  asan=subprocess.check_output(['cc','-print-file-name=libasan.so'],text=True).strip();assert Path(asan).is_file()

@@ -43,5 +43,6 @@ class HorizonsPowerloss(unittest.TestCase):
       out=Save();self.assertEqual(l.save5_load(C.byref(out)),1);self.assertEqual(compare_state(out),oldkey)
       self.assertEqual(bytes(l.sram[preserved:preserved+SIZE]),initial[preserved:preserved+SIZE]);checks+=1
     rows.append(dict(transaction=name,every_write=exhaustive,cutoffs_per_bank=len(bounds),corrupt_readbacks_per_bank=8));print(name,'passed',flush=True)
-   (ROOT/'docs/evidence/horizons-save-powerloss.json').write_text(json.dumps(dict(scope='Host-only content8 interrupted writers; no native acquisition assertion',result='PASS',checks=checks,transactions=rows,seconds=round(time.monotonic()-started,3),fixture_sha256=FIXTURE_SHA,source_sha256=l.source_hashes,source_unchanged=runtime_hashes()==l.source_hashes),indent=2)+'\n')
+   (ROOT/'build').mkdir(parents=True,exist_ok=True)
+   (ROOT/'build/horizons-save-powerloss.json').write_text(json.dumps(dict(scope='Host-only content8 interrupted writers; no native acquisition assertion',result='PASS',checks=checks,transactions=rows,seconds=round(time.monotonic()-started,3),fixture_sha256=FIXTURE_SHA,source_sha256=l.source_hashes,source_unchanged=runtime_hashes()==l.source_hashes),indent=2)+'\n')
 if __name__=='__main__':unittest.main(verbosity=2)
