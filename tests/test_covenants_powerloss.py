@@ -35,5 +35,6 @@ class CovenantsPowerloss(unittest.TestCase):
       out=Save();self.assertEqual(l.save5_load(C.byref(out)),1);self.assertEqual(compare_state(out),oldkey);checks+=1
     rows.append(dict(transaction=name,every_write=exhaustive,cutoffs_per_bank=len(bounds),corrupt_readbacks_per_bank=10));print(name,'passed',flush=True)
    report=dict(scope='Host-only content9 interrupted writers; no native acquisition assertion',result='PASS',checks=checks,transactions=rows,seconds=round(time.monotonic()-started,3),fixture_sha256=FIXTURE_SHA,source_sha256=l.source_hashes,source_unchanged=runtime_hashes()==l.source_hashes)
-   (ROOT/'docs/evidence/covenants-save-powerloss.json').write_text(json.dumps(report,indent=2)+'\n')
+   (ROOT/'build').mkdir(parents=True,exist_ok=True)
+   (ROOT/'build/covenants-save-powerloss.json').write_text(json.dumps(report,indent=2)+'\n')
 if __name__=='__main__':unittest.main(verbosity=2)

@@ -21,7 +21,7 @@ TARGET := $(BUILD)/emberbond
 NORTHERN_ARGS = --rom $(TARGET).gba --symbols $(TARGET).sym --expected-rom-sha $$( $(PYTHON) tools/file_sha256.py $(TARGET).gba ) --expected-symbols-sha $$( $(PYTHON) tools/file_sha256.py $(TARGET).sym )
 CPUFLAGS := -mcpu=arm7tdmi -mthumb-interwork
 CFLAGS := $(CPUFLAGS) -mthumb -O2 -g -std=c99 -ffreestanding -fno-builtin \
-          -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra \
+          -fno-strict-aliasing -fomit-frame-pointer -Wall -Wextra -Werror \
           -MMD -MP
 ASFLAGS := $(CPUFLAGS) -marm -g -x assembler-with-cpp
 LDFLAGS := $(CPUFLAGS) -mthumb -nostdlib -Wl,-T,linker.ld,-Map,$(TARGET).map
@@ -29,6 +29,16 @@ OBJECTS := $(BUILD)/startup.o $(BUILD)/music.o $(BUILD)/music_data.o $(BUILD)/ga
 
 .PHONY: all clean tools assets test-tools test test-campaign test-systems test-quickparty test-quickparty-evolved test-equipment test-regional test-northern test-northern-host quickparty-video gameplay-video developer-video
 all: $(TARGET).gba
+
+.PHONY: test-trust test-trust-host
+test-trust:
+	$(PYTHON) tools/trust/run.py run --root .
+
+test-trust-host:
+	$(PYTHON) tools/trust/check.py inventory --output build/trust-review/inventory-current
+	$(PYTHON) tests/trust/test_gameplay_properties.py
+	$(PYTHON) tests/trust/test_persistence.py
+	$(PYTHON) tools/trust/check.py platform --output build/trust-review/platform-current
 
 .PHONY: test-enemy-tactics-host
 test-enemy-tactics-host:
@@ -104,6 +114,7 @@ assets:
 	$(PYTHON) tools/generate_feedback_title.py
 	$(PYTHON) tools/generate_southern_beams.py
 	$(PYTHON) tools/generate_font_credits.py
+	$(PYTHON) tools/generate_music.py
 
 tools:
 	./tools/install_tools.sh
@@ -445,7 +456,7 @@ test-gear-preview-host: all
 	$(PYTHON) tests/test_companion_guide.py
 
 .PHONY: test-equipment-rewards-host test-historical-workflows
-test: test-equipment-rewards-host
+test: test-trust
 test-equipment-rewards-host: all
 	$(PYTHON) tools/archive_test_output.py build/equipment-rewards-host-current
 	$(PYTHON) tools/run_equipment_rewards_host.py --output build/equipment-rewards-host-current

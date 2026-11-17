@@ -30,20 +30,12 @@ def main():
  for name,cmd,extra in commands:
   if name=='test_native_japanese_font':cmd += ['--rom',str(ROOT/'build/emberbond.gba'),'--symbols',str(ROOT/'build/emberbond.sym')]
  commands += [('later-reward-all-write-cuts',[sys.executable,'tests/test_later_rewards.py','--full-cuts'],{})]
- # Explicit current release routing. Historical contracts are unmodified;
- # source-only inverse tests and current behavior are distinct report rows.
- routed=[]
- for name,cmd,extra in commands:
-  if name=='test_retained_ui_story_successor':name='historical-g5-story-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--historical-ui']
-  elif name=='retained-parent-negatives':name='historical-g5-parent-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--historical-ui','--parent']
-  elif name=='verify_late_renderer':name='soundtrack-boundary-and-historical-renderer';cmd=[sys.executable,'tests/verify_review_successor.py']
-  elif name=='test_renderer_equipment_successor':name='historical-renderer-negatives';cmd=[sys.executable,'tests/verify_review_successor.py','--renderer-negatives']
-  routed.append((name,cmd,extra))
- for name,cmd,extra in routed:
-  if cmd[1]=='tests/verify_review_successor.py':cmd[1]='tests/field_controls_boundary.py'
-  elif name=='test_review_successor':cmd[1]='tests/field_controls_boundary.py';cmd.append('--parent-tests')
+ historical={'test_retained_ui_story_successor','retained-parent-negatives','verify_late_renderer','test_renderer_equipment_successor','test_review_successor'}
+ retired=[{'name':name,'command':cmd,'reason':'Archived production/UI byte identity is historical evidence, not a requirement on current code.','replacements':['current-contract-negatives','current-core-asset-regeneration','retained/current-return-geometry']} for name,cmd,extra in commands if name in historical]
+ routed=[(name,cmd,extra)for name,cmd,extra in commands if name not in historical]
+ routed += [('current-contract-negatives',[sys.executable,'tests/trust/test_contracts.py'],{}),('current-core-asset-regeneration',[sys.executable,'tools/trust/assets.py','--output',str(out/'current-art/report.json')],{})]
  commands=routed+[(name,[sys.executable,'tests/'+name+'.py'],{})for name in ('test_gbj_font','test_gbj_all_spans','test_ending_credits_host','test_soundtrack_runtime','test_field_controls','test_field_update','test_lantern_art','test_redesign_art','test_field_carousel','test_field_preview_cancel','test_field_context_cancel','test_current_field_controls','test_power_failure_dispatch','test_northern_powers','test_southern_powers','test_save_badge_cache','test_play_strip_ranges','test_short_l')]
- report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[]}
+ report={'scope':__doc__,'result':'RUNNING','runtime_manifest_sha256':sha(manifest),'candidate':{n:sha(ROOT/'build'/n)for n in ('emberbond.gba','emberbond.elf','emberbond.sym')},'runs':[],'retired_historical_contracts':retired,'replacement_limitations':['Byte consistency does not establish artistic quality or every old rendering invariant.','Historical contracts remain runnable as archived-tree diagnostics; their bytes have not been refreshed.']}
  def save():(out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  save()
  for i,(name,cmd,extra)in enumerate(commands):

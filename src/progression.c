@@ -224,7 +224,10 @@ static void growth_digit_blit(unsigned digit,int x,int y){
 static void number(unsigned n,int x,int y){unsigned value[3]={0,0,0},i;int started=0;
  /* Real level/bond callers are <=100. Rare host probes retain the original
   * low-three-digit behavior; valid menu values take no division path. */
- if(n>=1000)n%=1000;while(n>=100){n-=100;value[0]++;}while(n>=10){n-=10;value[1]++;}value[2]=n;
+ if(n>=1000)n%=1000;
+ while(n>=100){n-=100;value[0]++;}
+ while(n>=10){n-=10;value[1]++;}
+ value[2]=n;
  for(i=0;i<3;i++)if(value[i]||started||i==2){growth_digit_blit(value[i],x,y);x+=8;started=1;}
 }
 
@@ -342,7 +345,10 @@ void progression_draw_tab(void){CreatureInstance*c=progression_selected();unsign
 #include "progression_evolution_job.inc"
 int progression_menu_input(int pressed){
     CreatureInstance*c;int direction=pressed&240;
-    if(journal_tab!=3)return 0;if(pressed&(2|8))return 0;c=progression_selected();if(!c)return 1;
+    if(journal_tab!=3)return 0;
+    if(pressed&(2|8))return 0;
+    c=progression_selected();
+    if(!c)return 1;
     if(pressed&4)return 0;
     if(progression_menu_detail){
         if(direction==16||direction==32){command_candidate(c,direction==16?1:-1);return 1;}

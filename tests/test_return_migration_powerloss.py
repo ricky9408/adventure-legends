@@ -28,5 +28,5 @@ class ReturnMigrationPowerloss(unittest.TestCase):
        target=A if destination=='A' else B;self.assertEqual(bytes(lib.sram[target+12:target+14]),b'\x08\x00')
       checks+=1
      rows.append({'fixture':name,'sha256':sha,'destination':destination,'cuts':SIZE+2});print(name,destination,'every cutoff passed',flush=True)
-   path=ROOT/'docs/evidence/return-migration-powerloss.json';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps({'scope':'Authenticated native-earned input, synthetic host interruption test. No machine states imported.','result':'PASS','source_sha256':lib.source_hashes,'source_unchanged':runtime_hashes()==lib.source_hashes,'checks':checks,'seconds':round(time.monotonic()-start,3),'cases':rows},indent=2)+'\n')
+   path=ROOT/'build/return-migration-powerloss.json';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps({'scope':'Authenticated native-earned input, synthetic host interruption test. No machine states imported.','result':'PASS','source_sha256':lib.source_hashes,'source_unchanged':runtime_hashes()==lib.source_hashes,'checks':checks,'seconds':round(time.monotonic()-start,3),'cases':rows},indent=2)+'\n')
 if __name__=='__main__':unittest.main(verbosity=2)

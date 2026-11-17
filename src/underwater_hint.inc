@@ -36,7 +36,9 @@ COLD int underwater_game_target_hint(int*x,int*y){
    if(room==51&&p->x==144&&(!adventure_save.quests.region_flags[20]||underwater_source_claimed(&adventure_save,7)))visible=0;
    if(room==53&&p->x==208){if(road_region_managed(53,46)||underwater_game_guardian_stage!=4)continue;return 0;}
    if(!visible)return 0;
-   if(x)*x=p->x;if(y)*y=p->y;return 1;
+   if(x)*x=p->x;
+   if(y)*y=p->y;
+   return 1;
   }
  }
  return 0;

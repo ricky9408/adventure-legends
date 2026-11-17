@@ -216,10 +216,13 @@ void rect(int x,int y,int w,int h,u8 c){
  int left,right,odd_left,odd_right,words,row;__UINTPTR_TYPE__ dst;u32 fill=(u32)c*0x01010101u;
  if(world_mask_active&&game_world_rect_hidden(x,y,w,h))return;
  if(x<0){w+=x;x=0;}if(y<0){h+=y;y=0;}
- if(x+w>240)w=240-x;if(y+h>160)h=160-y;if(w<1||h<1)return;
+ if(x+w>240)w=240-x;
+ if(y+h>160)h=160-y;
+ if(w<1||h<1)return;
  left=x;right=x+w;odd_left=left&1;odd_right=right&1;
  dst=(__UINTPTR_TYPE__)(screen+y*120+(left>>1));
- if(odd_left)left++;if(odd_right)right--;
+ if(odd_left)left++;
+ if(odd_right)right--;
  words=(right-left)>>1;
  /* Advance a byte address, avoiding a dead pointer beyond the final row
   * when screen names a smaller cached notice surface. */
@@ -778,8 +781,13 @@ COLD int game_clear_box(int x0,int y0,int x1,int y1){
 }
 int solid(int x,int y){
  extern int game_road_collision(unsigned,int,int) __attribute__((weak));
- int i;if(room<16&&game_road_collision){int road=game_road_collision((unsigned)room,x,y);if(road>=0)return road;}/* Numeric chapter routing keeps each legacy collision probe constant-cost
-  * as new chapters are added. Invalid rooms still fall through the old guards. */
+ int i;
+ if((unsigned)room>=78u)return 1;
+ if(room<16
+#ifndef ADVENTURE_CONNECTED_ROAD_RUNTIME
+    &&game_road_collision
+#endif
+ ){int road=game_road_collision((unsigned)room,x,y);if(road>=0)return road;}
  if(room>=16){if(room<38){if(room>=30)return south_game_solid(x,y);if(room>=22)return north_game_solid(x,y);return region_game_solid(x,y);}if(room<46)return magma_game_solid(x,y);if(room<54)return underwater_game_solid(x,y);if(room<62)return return_game_solid(x,y);if(room<70)return horizons_game_solid(x,y);if(room<78)return covenants_game_solid(x,y);}
  if(trials_is_room(room))return trials_solid(room,x,y);
  if(room>=4&&room<14){const CampaignRoom*d=&campaign_rooms[room-4];int k;unsigned pr=progress_bits();if(x<12||x>=228||y<32||y>=148)return 1;for(k=0;k<5;k++){int xx=x+(k?(k&1?-4:4):0),yy=y+(k?(k&2?-4:4):0);for(i=0;i<d->solid_count;i++){const CampaignBlock*b=&d->solids[i];if(xx>=b->x&&xx<b->x+b->w&&yy>=b->y&&yy<b->y+b->h)return 1;}for(i=0;i<d->block_count;i++){const CampaignBlock*b=&d->blocks[i];if((pr&b->flags)!=b->flags&&xx>=b->x&&xx<b->x+b->w&&yy>=b->y&&yy<b->y+b->h)return 1;}}return 0;}
@@ -791,10 +799,17 @@ int solid(int x,int y){
  if(room==3&&y<39)return 1;
  return 0;
 }
-void move_player(int dx,int dy){while(dx||dy){int sx=dx>256?256:dx<-256?-256:dx,sy=dy>256?256:dy<-256?-256:dy;int nx=px_q8+sx,ny=py_q8+sy;if(!solid(nx>>8,py))px_q8=nx;if(!solid(px,ny>>8))py_q8=ny;px=px_q8>>8;py=py_q8>>8;dx-=sx;dy-=sy;}}
-/* One committed step along a single cardinal. Every pixel goes through solid().
- * 12px is the full distance; 18 active frames must pass before another step.
- * This does not touch invuln, guard_invuln, roll_ticks, or roll_cd. */
+void move_player(int dx,int dy){
+ while(dx||dy){
+  int sx=dx>256?256:dx<-256?-256:dx,sy=dy>256?256:dy<-256?-256:dy;
+  int nx=px_q8+sx,ny=py_q8+sy;
+  if(!solid(nx>>8,py))px_q8=nx;
+  px=px_q8>>8;
+  if(!solid(px,ny>>8))py_q8=ny;
+  py=py_q8>>8;
+  dx-=sx;dy-=sy;
+ }
+}
 COLD int field_step_try(unsigned axis){
  int dx,dy;
  if(step_cd||(axis!=KEY_LEFT&&axis!=KEY_RIGHT&&axis!=KEY_UP&&axis!=KEY_DOWN))return 0;

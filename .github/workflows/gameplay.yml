@@ -90,6 +90,19 @@ jobs:
           sh tools/install_tools.sh
           python3 -m venv --system-site-packages build/ci-venv
           build/ci-venv/bin/python -m pip install --no-deps --require-hashes --only-binary=:all: --index-url https://pypi.org/simple -r tools/ci-requirements.txt
+      - name: Verify independent behavioral contracts and evidence
+        if: matrix.suite == 'host'
+        timeout-minutes: 25
+        run: |
+          export PATH="$PWD/build/ci-venv/bin:$PATH"
+          trust_exit=0
+          receipt=$(python3 tools/trust/run.py run --root .) || trust_exit=$?
+          if [[ -n "$receipt" && -f "$receipt" ]]; then
+            mkdir -p build/trust-evidence
+            cp -R "$(dirname "$receipt")/." build/trust-evidence/
+          fi
+          test "$trust_exit" = 0
+          python3 tools/trust/run.py gate --root . --receipt "$receipt"
       - name: Run clean build and gameplay gates
         timeout-minutes: 47
         env:
@@ -106,7 +119,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: gameplay-${{ matrix.suite }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: build/ci-${{ matrix.suite }}/
+          path: |
+            build/ci-${{ matrix.suite }}/
+            build/trust-evidence/
           if-no-files-found: warn
           retention-days: 7
           compression-level: 6
