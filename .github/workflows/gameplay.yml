@@ -94,6 +94,7 @@ jobs:
         if: matrix.suite == 'host'
         timeout-minutes: 25
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           export PATH="$PWD/build/ci-venv/bin:$PATH"
           trust_exit=0
           receipt=$(python3 tools/trust/run.py run --root .) || trust_exit=$?
