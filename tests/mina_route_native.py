@@ -14,6 +14,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'tests'), str(ROOT / 'tools')]
 import treasure_full_journey as journey
+from interaction_readability_native import check_hint
 from test_save5 import Save
 from northern_journey import newest_bank
 
@@ -56,6 +57,11 @@ def mina_south_route(run):
     run.check(run.quest(24) == 3 and mina_events(run) == 0,
               'quest24 is earned and Mina starts with no recorded event')
     run.snapshot('mina-quest-earned')
+    run.goto(400, 230, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (400, 216), 'earned Mina garden A cue')
+    run.e.screenshot(run.out / 'mina-garden-a-cue.png')
 
     run.goto(400, 206, radius=4)
     run.face(1)
@@ -94,6 +100,10 @@ def mina_south_route(run):
     run.cold_reboot('mina-marriage')
     run.check(mina_events(run) == 31 and run.quest(24) == 3,
               'cold Continue preserves marriage and the original chapter receipt')
+    run.goto(400, 230, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (400, 216), 'Mina garden A cue survives cold Continue')
     run.snapshot('mina-cold-continue')
     run.coverage.append('mina-quest-earned-plant-return-story-dating-marriage-cold-continue')
     run.chapter_checkpoint('south-main')

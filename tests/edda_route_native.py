@@ -13,6 +13,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'tests'), str(ROOT / 'tools')]
 import treasure_full_journey as journey
+from interaction_readability_native import check_hint
 from test_save5 import Save
 from northern_journey import NorthernJourney, newest_bank
 
@@ -65,6 +66,11 @@ def edda_north_route(run):
     run.check(run.quest(21) == 3 and edda_events(run) == 0,
               'original Northern reward is earned before Edda events')
     run.snapshot('edda-quest-earned')
+    run.goto(192, 176, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (192, 176), 'earned Edda dispatch A cue')
+    run.e.screenshot(run.out / 'edda-dispatch-a-cue.png')
 
     conversation(run, 0, 'dispatch', cancel=True)
     for before, after, label in ((0, 1, 'dispatch'), (1, 3, 'delivery'),
@@ -88,6 +94,10 @@ def edda_north_route(run):
     run.cold_reboot('edda-marriage')
     run.check(edda_events(run) == 31 and run.quest(21) == 3,
               'cold Continue retains Edda marriage and Northern reward')
+    run.goto(192, 176, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (192, 176), 'Edda dispatch A cue survives cold Continue')
     run.snapshot('edda-cold-continue')
     run.coverage.append('edda-quest-earned-dispatch-delivery-letter-dating-marriage-cold-continue')
     run.chapter_checkpoint('north-main')

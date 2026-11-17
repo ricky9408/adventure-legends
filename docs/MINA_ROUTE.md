@@ -5,7 +5,9 @@ relationship ledger is hidden; dialogue and revisits show the change.
 
 After reopening the Southern conservatory and claiming quest24's original
 reward, Mina invites the player to the garden plot beside her. Interacting with
-the plot plants together. On a later harbor visit, the first growth brings a
+the plot plants together. A contextual A glyph appears over the plot when the
+player can interact with it; Mina's own conversation retains priority. On a
+later harbor visit, the first growth brings a
 second shared scene. Another visit opens Mina's personal story about her fear
 of failing the seedlings. Later visits offer explicit choices to date and then
 to marry. Every relationship event requires the final A of its scene; B cancels

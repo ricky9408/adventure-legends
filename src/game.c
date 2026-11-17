@@ -459,7 +459,9 @@ void draw_floating_hud(void){int code=(int)progression_current_form()*2+summoned
 /* Read-only interaction query uses the same strict-first target as A. */
 COLD void draw_contextual_a_hint(void){int x,y,found=0;
  if(game_state!=PLAY||quickparty_visible||scene_present_phase||game_shop_in_range())return;
- if(room==38)found=magma_game_ressa_target_hint(&x,&y);
+ if(room==22)found=north_game_edda_target_hint(&x,&y);
+ else if(room==30)found=south_game_mina_target_hint(&x,&y);
+ else if(room==38)found=magma_game_ressa_target_hint(&x,&y);
  else if((unsigned)(room-46)<8u)found=underwater_game_target_hint(&x,&y);
  else if((unsigned)(room-54)<8u)found=return_game_target_hint(&x,&y);
  else if((unsigned)(room-62)<8u)found=horizons_game_target_hint(&x,&y);

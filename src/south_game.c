@@ -416,6 +416,13 @@ static COLD int mina_plant(void){
  return 1;
 }
 int south_game_mina_dialogue_pending(void){return mina_pending!=0;}
+/* Mina's conversation has first claim on A beside the plot. */
+COLD int south_game_mina_target_hint(int*x,int*y){
+ if(room!=30||game_state!=PLAY||!done(24)||!close(400,216)||npc_close(400,192))return 0;
+ if(x)*x=400;
+ if(y)*y=216;
+ return 1;
+}
 void south_game_mina_cancel_dialogue(void){mina_pending=0;}
 void south_game_mina_finish_dialogue(void){unsigned event;
  if(!mina_pending)return;

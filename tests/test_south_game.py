@@ -42,6 +42,8 @@ void south_actor(unsigned a,int x,int y){(void)a;if(x-camera_x>-8&&x-camera_x<24
 void region_form_actor(unsigned a,int x,int y){south_actor(a,x,y);}
 void game_health_fill(void){}
 void game_region_warp(int x,int y){px=x;py=y;}
+int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
+int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
 unsigned game_weapon_class(void){return weapon_class;}
 void game_north_hurt(unsigned d){hurt_calls+=d;}
 void enter_room(int r,int s){if(r>=30)south_game_enter((unsigned)r,(unsigned)s);else{room=r;checkpoint_spawn=s;}}
@@ -153,10 +155,23 @@ class SouthRuntime(unittest.TestCase):
   for w in (1,2,3):
    self.setUp();self.main_to37();self.act(120,112);L.at(24,112);L.weapon(w);self.assertEqual(L.south_game_weapon_hit(w,120,64,144),0);L.tick(60);self.assertEqual(byte('south_game_machine_stage'),2);L.tick(40);self.assertEqual(byte('south_game_machine_stage'),3);self.assertEqual(L.hurt(),0);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),0);self.act(192,112);L.at(152,84);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),1);self.resolve_quest();self.assertEqual(L.qo(24),15);self.act(120,112);self.assertEqual(L.qs(24),3);self.assertEqual(L.roundtrip(),1);self.act(120,112);self.assertEqual(val('room'),37)
  def test_mina_plant_return_story_and_separate_choices(self):
+  x,y=C.c_int(),C.c_int()
+  self.entry(30);L.at(400,232)
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
   self.main_to37();self.act(120,112);L.at(24,112);L.tick(100);self.act(192,112);L.at(152,84)
   self.assertEqual(L.south_game_weapon_hit(1,152,64,144),1);self.resolve_quest()
   self.act(120,112);self.assertEqual(L.qs(24),3)
   self.entry(30);self.assertEqual(L.mina_events(),0)
+  L.at(400,232);L.snapshot_state()
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),1)
+  self.assertEqual((x.value,y.value),(400,216))
+  self.assertEqual(L.unchanged(),1)
+  L.at(400,208);self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
+  L.at(376,232);self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
+  L.at(400,232);C.c_int.in_dll(L,'face').value=0
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
+  L.at(400,232);L.modal(2)
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
   self.act(400,208);self.assertEqual(L.south_game_mina_dialogue_pending(),0)
   self.act(400,232);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
   L.south_game_mina_cancel_dialogue();self.assertEqual(L.mina_events(),0)
