@@ -13,7 +13,8 @@ extern void box(int,int,int,int),text(int,int,int,int),centered(int,int,int),rec
 unsigned companion_guide_page;
 void companion_guide_text(unsigned label,int x,int y,int color){
  const UiText*t;const UiRun*r;unsigned n,ink;unsigned short*base;
- if(label>=CG_COUNT)return;t=&companion_guide_texts[label];
+ if(label>=CG_COUNT)return;
+ t=&companion_guide_texts[label];
  if(x<0||y<0||x+t->width>240||y+t->height>160)return;
  if(text_spans){text_spans(t,x,y,color);return;}
  r=t->runs[x&1];n=t->count[x&1];ink=(unsigned)color*257u;base=screen+y*120+(x>>1);
@@ -29,7 +30,9 @@ void companion_guide_center(unsigned label,int y,int color){if(label<CG_COUNT)co
  * No save encoding or instance allocation is changed. */
 int companion_guide_number(unsigned value,unsigned places,int x,int y,int color){
  unsigned digits[3],i;int cell=companion_guide_texts[CG_PARTY_DIGIT_0].width;
- if(value>999)value=999;if(places<1)places=1;if(places>3)places=3;
+ if(value>999)value=999;
+ if(places<1)places=1;
+ if(places>3)places=3;
  digits[0]=value/100;digits[1]=(value/10)%10;digits[2]=value%10;
  for(i=3-places;i<3;i++){companion_guide_text(CG_PARTY_DIGIT_0+digits[i],x,y,color);x+=cell;}
  return x;

@@ -1,5 +1,4 @@
-/* Original village morning. No campaign flags, codec fields or SRAM writes
- * exist here. Only completing/skipping requests the ordinary initial save. */
+/* Original village morning. */
 #include "opening_scene.h"
 #include "opening_scene_data.h"
 #include "assets.h"
@@ -44,8 +43,6 @@ static OPENING_CODE void opening_finish(void){
 }
 OPENING_CODE void opening_scene_update(void){
  if(opening_clock<240)opening_clock++;
- /* Both title/confirmation controls must be released before either can act.
-  * Later pages use hardware pressed edges, never held-key auto-advance. */
  if(!opening_armed){if(!(keys&(1|8)))opening_armed=1;return;}
  if(pressed&8){opening_finish();return;}
  if(pressed&1){if(++opening_page>=OPENING_SCENE_PAGES){opening_page=OPENING_SCENE_PAGES-1;opening_finish();}else opening_clock=0;}

@@ -63,7 +63,7 @@ void game_gear_bonus_stats(EquipmentStats*stats){
  stats->speed_q8=(unsigned short)(speed>EQUIPMENT_MAX_SPEED_Q8?EQUIPMENT_MAX_SPEED_Q8:speed);
  stats->diagonal_q8=(unsigned short)((stats->speed_q8*181u+128u)>>8);
  stats->defense_q4=(unsigned char)(defense>EQUIPMENT_MAX_DEFENSE_Q4?EQUIPMENT_MAX_DEFENSE_Q4:defense);
- stats->attack_q4=(unsigned char)(attack>32u?32u:attack);
+ stats->attack_q4=(unsigned char)(attack>EQUIPMENT_MAX_ATTACK_Q4?EQUIPMENT_MAX_ATTACK_Q4:attack);
  stats->power_cooldown=(unsigned char)(EQUIPMENT_BASE_POWER_COOLDOWN-recovery);
 }
 unsigned game_gear_hp(void){return (unsigned)hero_hp_q4;}

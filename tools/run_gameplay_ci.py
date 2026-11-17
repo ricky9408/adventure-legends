@@ -19,6 +19,9 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tools'))
+from trust.contracts import input_snapshot, require_unchanged, runtime_snapshot
+
 BUILD_FILES = ('emberbond.gba', 'emberbond.elf', 'emberbond.sym', 'emberbond.map',
                'source-hashes.json')
 
@@ -120,6 +123,16 @@ def main():
 
     python = sys.executable
     try:
+        input_before = input_snapshot(ROOT)
+        write_json(out / 'input-hashes-before.json', input_before)
+        report['input_freshness'] = {
+            'before': 'input-hashes-before.json',
+            'before_sha256': digest(out / 'input-hashes-before.json'),
+            'count': len(input_before),
+            'scope': 'All Git-visible repository inputs except build/dist/.trust/runs, plus every runtime source path',
+            'passed': False,
+        }
+        save()
         stage('tool-versions', [python, '-c',
               "import os,subprocess,sys; sys.path.insert(0,'tools'); "
               "from arm_toolchain import resolve_arm_tools; "
@@ -171,20 +184,14 @@ def main():
         stage('redesign-art-boundary', [python, 'tests/test_redesign_art.py'])
         stage('lantern-art-layout', [python, 'tests/test_lantern_art.py'])
         stage('boss-observation-tests', [python, 'tests/test_boss_observation.py'])
-        stage('review-inventory-preflight', [python, '-c',
-              "import sys; sys.path.insert(0,'tests'); "
-              "from field_controls_boundary import verify; "
-              "c,_=verify(chain=False); "
-              "print('Exact production inventory PASS:',len(c['current_production']),'files')"])
+        stage('review-inventory-preflight', [python, 'tools/trust/contracts.py',
+              '--output', str(out / 'inventory.json')])
         if args.suite in ('all', 'host'):
             stage('archive-host-output', [python, 'tools/archive_test_output.py',
                   'build/equipment-rewards-host-current'])
             try:
-                stage('host', ['make', 'test'], timeout=2400)
+                stage('host', ['make', 'test-equipment-rewards-host'], timeout=2400)
             finally:
-                # Preserve the canonical Makefile byte-for-byte: historical
-                # authoring contracts intentionally pin it. Copy only this
-                # aggregate's known generated directory, including failures.
                 host_output = ROOT / 'build/equipment-rewards-host-current'
                 if host_output.is_dir():
                     shutil.copytree(host_output, out / 'host')
@@ -293,6 +300,7 @@ def main():
             commit = subprocess.check_output(['git', '-c', 'safe.directory='+str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
             stage('fresh-reserve-recruit', [python, 'tests/fresh_reserve_notice.py',
                   '--source-root', str(ROOT), '--bridge', bridge, '--expected-commit', commit,
+                  '--expected-manifest-sha', snapshots[-1]['source-hashes.json'],
                   '--output', str(out/'fresh-reserve')], timeout=600)
             reserve = json.loads((out/'fresh-reserve/summary.json').read_text())
             if not reserve['accepted'] or not reserve['controller_only'] or reserve['candidate']['rom_sha256'] != rom_sha or not reserve.get('earned_field_controls') or any(reserve['provenance'][key] for key in ('game_ram_writes', 'machine_state_imports', 'historical_progress_imports')):
@@ -372,8 +380,13 @@ def main():
                                 'fresh_main_presented_cadence_passed': campaign['presented_journey_pacing_passed']}
         # Test-only additions must not accidentally mutate frozen runtime inputs.
         frozen = json.loads((ROOT / 'build/source-hashes.json').read_text())
-        if any(digest(ROOT / name) != expected for name, expected in frozen.items()):
-            raise RuntimeError('Runtime sources changed during regression checks')
+        require_unchanged(frozen, runtime_snapshot(ROOT))
+        input_after = input_snapshot(ROOT)
+        write_json(out / 'input-hashes-after.json', input_after)
+        require_unchanged(input_before, input_after)
+        report['input_freshness'].update(
+            after='input-hashes-after.json',
+            after_sha256=digest(out / 'input-hashes-after.json'), passed=True)
         report['result'] = 'PASS'
     except Exception as error:
         report['result'] = 'FAIL'

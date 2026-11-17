@@ -27,7 +27,9 @@ COLD int return_game_target_hint(int*x,int*y){
    if(room==60&&p->x==208){if(road_region_managed(60,61))continue;if(target_reach(p->x,p->y,pass))return 0;continue;}
    if(!target_reach(p->x,p->y,pass))continue;
    if((room==55&&p->x==208&&done(47)&&!repeat_active&&(repeat_used&1))||(room==58&&p->x==400&&done(49)&&!repeat_active&&(repeat_used&2)))return 0;
-   if(x)*x=p->x;if(y)*y=p->y;return 1;
+   if(x)*x=p->x;
+   if(y)*y=p->y;
+   return 1;
   }
  }
  return 0;

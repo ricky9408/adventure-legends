@@ -7,7 +7,7 @@ sys.path.insert(0,str(ROOT/'tests'))
 from covenants_host_support import runtime_hashes
 SUITES=['tools/check_covenants_history.py','tests/test_covenants_transactions.py','tests/test_covenants_history.py','tests/test_covenants_sanitizers.py','tests/test_covenants_powerloss.py']
 def main():
- output=ROOT/'docs/evidence/covenants-persistence-host';output.mkdir(parents=True,exist_ok=True)
+ output=ROOT/'build/covenants-persistence-host';output.mkdir(parents=True,exist_ok=True)
  sources=runtime_hashes();results=[]
  for name in SUITES:
   log=output/(Path(name).stem+'.log');start=time.monotonic()

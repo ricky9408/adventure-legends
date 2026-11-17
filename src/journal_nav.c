@@ -71,17 +71,20 @@ int journal_nav_input(int input){int direction=input&DIRECTIONS;
  if(journal_tab==JOURNAL_COLLECTION){int result=collection_journal_input(input);if(result==COLLECTION_OPEN_PARTY){unsigned member=collection_journal_instance();enter(JOURNAL_PARTY);if(member<CREATURE_ROSTER_CAPACITY)quickparty_menu_candidate=(int)member;}changed();return JOURNAL_CONSUMED;}
  if(journal_tab==JOURNAL_QUESTS){unsigned count=quest_count();if((unsigned)journal_nav_quest>=count)journal_nav_quest=0;
   if(direction){if(direction==UP)journal_nav_quest=journal_nav_quest?journal_nav_quest-1:(int)count-1;else if(direction==DOWN)journal_nav_quest=(unsigned)(journal_nav_quest+1)<count?journal_nav_quest+1:0;else return JOURNAL_CONSUMED;changed();return JOURNAL_CONSUMED;}
-  if(input&A)enter(journal_nav_quest?journal_nav_quest+4:JOURNAL_GOAL);return JOURNAL_CONSUMED;
+  if(input&A)enter(journal_nav_quest?journal_nav_quest+4:JOURNAL_GOAL);
+  return JOURNAL_CONSUMED;
  }
  if(journal_tab>=JOURNAL_REGION_FIRST&&journal_tab<=JOURNAL_REGION_LAST){const struct QuestList*list=&quest_lists[journal_tab-JOURNAL_REGION_FIRST];
-  if(journal_nav_detail)return JOURNAL_CONSUMED;if(*list->selection>=list->count)*list->selection=0;
+  if(journal_nav_detail)return JOURNAL_CONSUMED;
+  if(*list->selection>=list->count)*list->selection=0;
   if(direction){if(direction==UP)*list->selection=*list->selection?*list->selection-1:list->count-1;else if(direction==DOWN)*list->selection=*list->selection+1<list->count?*list->selection+1:0;else return JOURNAL_CONSUMED;changed();return JOURNAL_CONSUMED;}
   if(input&A){journal_nav_detail=1;changed();}return JOURNAL_CONSUMED;
  }
  if(journal_tab==JOURNAL_GOAL)return !direction&&(input&A)?JOURNAL_DISPATCH:JOURNAL_CONSUMED;
  if(journal_tab==JOURNAL_CONTROLS){if(!direction&&(input&A)&&save_failed)save_game();return JOURNAL_CONSUMED;}
  if(journal_tab==JOURNAL_MAP){if(journey_map_input&&(input&(A|DIRECTIONS))){journey_map_input(input);changed();}return JOURNAL_CONSUMED;}
- if(direction&&(direction!=RIGHT&&direction!=LEFT&&direction!=UP&&direction!=DOWN))return JOURNAL_CONSUMED;return JOURNAL_DISPATCH;
+ if(direction&&(direction!=RIGHT&&direction!=LEFT&&direction!=UP&&direction!=DOWN))return JOURNAL_CONSUMED;
+ return JOURNAL_DISPATCH;
 }
 /* SELECT shows the journey goal. A short L tap while one direction is held steps.
  * Line: SELECT 目的  L＋方向で一歩 */
@@ -97,7 +100,10 @@ int journal_nav_draw(void){unsigned i;
  if(journal_tab>=JOURNAL_REGION_FIRST&&journal_tab<=JOURNAL_REGION_LAST&&!journal_nav_detail){const struct QuestList*list=&quest_lists[journal_tab-JOURNAL_REGION_FIRST];unsigned selection=*list->selection<list->count?*list->selection:0,first=selection>4?selection-4:0;
   box(8,31,224,123);centered(list->title,33,GOLD);
   for(i=first;i<list->count&&i<first+5;i++){int y=52+(int)(i-first)*16;if(i==selection)rect(13,y,214,16,PAL_STONE2);text(list->names[i],14,y,i==selection?GOLD:CREAM);}
-  if(first)rect(224,49,3,2,GOLD);if(first+5<list->count)rect(224,132,3,2,GOLD);centered(TX_PF_QUEST_KEYS,137,TEAL);return 1;
+  if(first)rect(224,49,3,2,GOLD);
+  if(first+5<list->count)rect(224,132,3,2,GOLD);
+  centered(TX_PF_QUEST_KEYS,137,TEAL);
+  return 1;
  }
  if(journal_tab==JOURNAL_HUB){static const int labels[8]={TX_PF_ITEMS,TX_PF_GEAR,TX_PF_PARTY,TX_PF_GROWTH,TX_PF_MAP,TX_PF_QUESTS,TX_PF_CONTROLS,TX_PF_RESUME};box(8,31,224,123);centered(TX_PF_HUB,33,GOLD);
   for(i=0;i<9;i++){int x=17+(int)(i&1)*108,y=51+(int)(i>>1)*16;if((int)i==journal_nav_category)rect(x-3,y-1,102,16,PAL_STONE2);if(i<8)text(labels[i],x,y,(int)i==journal_nav_category?GOLD:CREAM);else growth_goals_text(GJ_COLLECTION,x,y,(int)i==journal_nav_category?GOLD:CREAM);}centered(TX_PF_HUB_KEYS,136,TEAL);return 1;
