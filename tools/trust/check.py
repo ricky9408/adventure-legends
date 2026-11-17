@@ -37,32 +37,50 @@ def environment():
 
 def run(command, output, name, env, timeout=600):
     print('Running', name, flush=True)
+    managed = os.name == 'posix' and os.environ.get('TRUST_PROCESS_GROUP_MANAGED') == '1'
+    owns_group = os.name == 'posix' and not managed
+    child_env = {**env, 'TRUST_PROCESS_GROUP_MANAGED': '1'} if os.name == 'posix' else env
+    process = None
+    cancelled = False
+    interruptible = False
+
     def interrupted(_signal, _frame):
-        raise VerificationInterrupted('Outer verification was interrupted')
-    previous_handler = signal.signal(signal.SIGTERM, interrupted)
+        nonlocal cancelled
+        cancelled = True
+        # A raising handler during Popen can discard the only child handle.
+        if interruptible:
+            raise VerificationInterrupted('Outer verification was interrupted')
+
+    previous_handlers = {number: signal.getsignal(number)
+                         for number in (signal.SIGTERM, signal.SIGINT)}
     try:
+        for number in previous_handlers:
+            signal.signal(number, interrupted)
         with (output / (name + '.log')).open('w') as log:
-            process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=log,
-                                       stderr=subprocess.STDOUT, start_new_session=True)
-            try:
-                code = process.wait(timeout=timeout)
-            except (subprocess.TimeoutExpired, KeyboardInterrupt, VerificationInterrupted):
+            process = subprocess.Popen(command, cwd=ROOT, env=child_env, stdout=log,
+                                       stderr=subprocess.STDOUT, start_new_session=owns_group)
+            interruptible = True
+            if cancelled:
+                raise VerificationInterrupted('Outer verification was interrupted')
+            code = process.wait(timeout=timeout)
+    finally:
+        interruptible = False
+        try:
+            if process is not None:
                 try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
-                try:
-                    process.wait(timeout=0.05)
-                except subprocess.TimeoutExpired:
-                    pass
-                try:
-                    os.killpg(process.pid, signal.SIGKILL)
+                    # Nested supervisors stay in the owner's group even if they stop responding.
+                    if owns_group:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    elif process.poll() is None:
+                        process.kill()
                 except ProcessLookupError:
                     pass
                 process.wait()
-                raise
-    finally:
-        signal.signal(signal.SIGTERM, previous_handler)
+        finally:
+            for number, handler in previous_handlers.items():
+                signal.signal(number, handler)
+    if cancelled:
+        raise VerificationInterrupted('Outer verification was interrupted')
     if code:
         print((output / (name + '.log')).read_text()[-8000:], file=sys.stderr)
         raise RuntimeError(f'{name} failed with exit status {code}')
@@ -168,18 +186,14 @@ def assets(output, env):
                  '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
         pinned = (__version__ == '13.0.0' and features.version_codec('zlib') == '1.3.1'
                   and all(Path(path).is_file() for path in fonts))
-    if pinned:
-        command = [sys.executable, 'tools/trust/assets.py', '--full', '--output', str(output / 'assets.json')]
-        runtime = {'python': sys.version, 'platform': platform.platform()}
-    else:
-        image = env.get('TRUST_LINUX_IMAGE', 'codex-pillow-compat:20261027')
-        image_id = subprocess.check_output(['docker', 'image', 'inspect', image, '--format', '{{.Id}}'], text=True).strip()
-        command = ['docker', 'run', '--rm', '--pull=never', '--platform', 'linux/amd64',
-                   '--mount', f'type=bind,source={ROOT},target=/source,readonly',
-                   '--mount', f'type=bind,source={output},target=/evidence',
-                   image_id, '/opt/pillow13/bin/python', '/source/tools/trust/assets.py',
-                   '--root', '/source', '--full', '--output', '/evidence/assets.json']
-        runtime = {'container_image': image_id}
+    if not pinned:
+        raise RuntimeError('Full asset verification requires Pillow 13.0.0, zlib 1.3.1, '
+                           'NotoSansCJK-Bold.ttc and DejaVuSans.ttf in the pinned Linux runtime. '
+                           'Run make test inside the documented pinned Linux container; '
+                           'automatic Docker launching is disabled because its daemon-owned work '
+                           'cannot be contained by the verifier process group.')
+    command = [sys.executable, 'tools/trust/assets.py', '--full', '--output', str(output / 'assets.json')]
+    runtime = {'python': sys.version, 'platform': platform.platform()}
     run(command, output, 'asset-generation', env, timeout=1200)
     (output / 'asset-runtime.json').write_text(json.dumps(runtime, indent=2) + '\n')
 

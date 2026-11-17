@@ -71,14 +71,16 @@ class PlatformContracts(unittest.TestCase):
         before = 'if(cursor==length)'
         self.assertEqual(header.count(before), 1)
         result = self.periodic(header.replace(before, 'if(cursor>=length-1)'))
-        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertEqual(result.stderr, '')
 
     def test_pcm_oracle_rejects_repeated_first_samples(self):
         header = (ROOT / 'src/music_copy.h').read_text()
         before = 'dst[i]=src[cursor+i]'
         self.assertEqual(header.count(before), 1)
         result = self.periodic(header.replace(before, 'dst[i]=src[0]'))
-        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(result.returncode, 4, result.stderr)
+        self.assertEqual(result.stderr, '')
 
     def link(self, iwram_size, ewram_size=0, rom_size=0):
         compiler = resolve_arm_tools('gcc')['gcc']

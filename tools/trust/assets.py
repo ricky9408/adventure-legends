@@ -26,30 +26,55 @@ class GenerationInterrupted(Exception):
 
 
 def run_generator(command, *, cwd, env, timeout):
-    def interrupted(_signal, _frame):
-        raise GenerationInterrupted('Asset generation was interrupted')
+    managed = os.name == 'posix' and os.environ.get('TRUST_PROCESS_GROUP_MANAGED') == '1'
+    owns_group = os.name == 'posix' and not managed
+    child_env = {**env, 'TRUST_PROCESS_GROUP_MANAGED': '1'} if os.name == 'posix' else env
+    cancelled = False
+    interruptible = False
 
-    previous_handler = signal.signal(signal.SIGTERM, interrupted)
+    def interrupted(_signal, _frame):
+        nonlocal cancelled
+        cancelled = True
+        # Spawn and cleanup must retain control until the child can be reaped.
+        if interruptible:
+            raise GenerationInterrupted('Asset generation was interrupted')
+
+    previous_handlers = {number: signal.getsignal(number)
+                         for number in (signal.SIGTERM, signal.SIGINT)}
     process = None
     try:
-        process = subprocess.Popen(command, cwd=cwd, env=env, stdout=subprocess.PIPE,
-                                   stderr=subprocess.PIPE, text=True, start_new_session=True)
+        for number in previous_handlers:
+            signal.signal(number, interrupted)
+        process = subprocess.Popen(command, cwd=cwd, env=child_env, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, text=True, start_new_session=owns_group)
+        interruptible = True
+        if cancelled:
+            raise GenerationInterrupted('Asset generation was interrupted')
         stdout, stderr = process.communicate(timeout=timeout)
         if process.returncode:
             raise subprocess.CalledProcessError(process.returncode, command, stdout, stderr)
-        return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
     finally:
-        if process is not None:
-            try:
-                os.killpg(process.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-            process.wait()
-            if process.stdout:
-                process.stdout.close()
-            if process.stderr:
-                process.stderr.close()
-        signal.signal(signal.SIGTERM, previous_handler)
+        interruptible = False
+        try:
+            if process is not None:
+                try:
+                    if owns_group:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    elif process.poll() is None:
+                        process.kill()
+                except ProcessLookupError:
+                    pass
+                process.wait()
+                if process.stdout:
+                    process.stdout.close()
+                if process.stderr:
+                    process.stderr.close()
+        finally:
+            for number, handler in previous_handlers.items():
+                signal.signal(number, handler)
+    if cancelled:
+        raise GenerationInterrupted('Asset generation was interrupted')
+    return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
 
 
 def digest(path):

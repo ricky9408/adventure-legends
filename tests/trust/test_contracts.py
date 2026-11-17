@@ -214,6 +214,51 @@ class ContractMutationTests(unittest.TestCase):
 
 
 class GeneratorLifecycleTests(unittest.TestCase):
+    def setUp(self):
+        environment = mock.patch.dict(os.environ)
+        environment.start()
+        self.addCleanup(environment.stop)
+        os.environ.pop('TRUST_PROCESS_GROUP_MANAGED', None)
+
+    @unittest.skipUnless(os.name == 'posix', 'Signal handoff requires POSIX')
+    def test_signal_during_spawn_handoff_cleans_generator_and_restores_handlers(self):
+        from test_adapters import wait_file, require_exited, kill_remaining
+        for cancellation in (signal.SIGTERM, signal.SIGINT):
+            with self.subTest(signal=cancellation), tempfile.TemporaryDirectory(prefix='trust-generator-handoff-') as directory:
+                root = Path(directory)
+                ready = root / 'generator.pid'
+                command = [sys.executable, '-c', 'import os,signal,time; from pathlib import Path; '
+                           'signal.signal(signal.SIGTERM,signal.SIG_IGN); '
+                           f'Path({str(ready)!r}).write_text(str(os.getpid())); time.sleep(30)']
+                original_popen = subprocess.Popen
+                processes = []
+                previous = {number: signal.getsignal(number) for number in (signal.SIGTERM, signal.SIGINT)}
+
+                def launch(*args, **kwargs):
+                    process = original_popen(*args, **kwargs)
+                    processes.append(process)
+                    wait_file(ready)
+                    os.kill(os.getpid(), cancellation)
+                    return process
+
+                try:
+                    with mock.patch.object(assets.subprocess, 'Popen', side_effect=launch):
+                        with self.assertRaises((assets.GenerationInterrupted, KeyboardInterrupt)):
+                            assets.run_generator(command, cwd=root, env=os.environ.copy(), timeout=10)
+                    self.assertEqual(1, len(processes))
+                    require_exited(self, [processes[0].pid])
+                    self.assertEqual(previous, {number: signal.getsignal(number) for number in previous})
+                finally:
+                    kill_remaining([process.pid for process in processes])
+                    for process in processes:
+                        process.wait(timeout=5)
+                        if process.stdout:
+                            process.stdout.close()
+                        if process.stderr:
+                            process.stderr.close()
+                    for number, handler in previous.items():
+                        signal.signal(number, handler)
+
     def test_generator_exit_and_timeout_leave_no_running_descendant(self):
         for outcome in ('success', 'failure', 'timeout'):
             with self.subTest(outcome=outcome), tempfile.TemporaryDirectory(prefix='trust-generator-') as directory:

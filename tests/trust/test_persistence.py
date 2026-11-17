@@ -2,6 +2,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -16,6 +17,12 @@ SOURCES = (
     "equipment_data.c", "economy.c", "story_rewards.c", "progression_events.c",
 )
 EVIDENCE = []
+
+
+def require_check_failure(result, function, condition):
+    diagnostic = re.escape(function) + r":\d+: " + re.escape(condition)
+    if result.returncode != 1 or result.stdout or not re.fullmatch(diagnostic, result.stderr.strip()):
+        raise AssertionError(f"Expected CHECK failure in {function}: {condition}; got {result.returncode}: {result.stderr}")
 
 
 class PersistenceProperties(unittest.TestCase):
@@ -91,26 +98,30 @@ class PersistenceProperties(unittest.TestCase):
         mutations = (
             (
                 "overwrite-current-save", "save5.c", "atomic",
+                "atomic_save5_smoke", "save5_load(&loaded)",
                 "writer_destination = active == 0 ? SAVE5_BANK_B : SAVE5_BANK_A;",
                 "writer_destination = active == 0 ? SAVE5_BANK_A : SAVE5_BANK_B;",
             ),
             (
                 "duplicate-event-credit", "creatures.c", "credits",
+                "creature_credits", "creatures_credit_event(&roster, event, UINT_MAX, CREATURE_CREDIT_ENCOUNTER) == 0",
                 "if (bit_get(r->expedition_events, event)) return 0;",
                 "if (0) return 0;",
             ),
             (
                 "duplicate-unique-purchase", "equipment.c", "gear",
+                "party_and_gear", "equipment_purchase(&gear, 2, 0) == EQUIPMENT_DUPLICATE",
                 "if(equipment_seen(s,id))return EQUIPMENT_DUPLICATE;",
                 "if(0)return EQUIPMENT_DUPLICATE;",
             ),
             (
                 "publish-purchase-before-save", "economy.c", "economy",
+                "economy_transactions", "!memcmp(&original, &before, sizeof before)",
                 "transaction.live=s;transaction.operation=operation;",
                 "s->economy=transaction.next;transaction.live=s;transaction.operation=operation;",
             ),
         )
-        for name, filename, case, original, changed in mutations:
+        for name, filename, case, function, condition, original, changed in mutations:
             with self.subTest(mutation=name):
                 source = (ROOT / "src" / filename).read_text()
                 self.assertEqual(1, source.count(original), "Mutation must alter one intended production statement")
@@ -118,9 +129,23 @@ class PersistenceProperties(unittest.TestCase):
                 mutant.write_text(source.replace(original, changed, 1))
                 binary = self.compile_probe(name, (filename, mutant))
                 completed = subprocess.run([str(binary), case], cwd=ROOT, capture_output=True, text=True, timeout=120)
-                self.assertNotEqual(0, completed.returncode, "Behavioral oracle accepted seeded defect " + name)
-                self.assertIn(":", completed.stderr)
+                require_check_failure(completed, function, condition)
                 EVIDENCE.append({"mutation": name, "status": "rejected", "case": case, "diagnostic": completed.stderr.strip()})
+
+    def test_unrelated_failures_do_not_count_as_seeded_defect_detection(self):
+        for code, stdout, stderr in (
+            (0, "", "atomic_save5_smoke:98: save5_load(&loaded)\n"),
+            (-11, "", "Segmentation fault: 11\n"),
+            (1, "", "ERROR: AddressSanitizer: heap-buffer-overflow\n"),
+            (1, "", "save5.c:98: runtime error: index out of bounds\n"),
+            (1, "", "atomic_save5_smoke:98: loaded.money == 7\n"),
+            (1, "", "another_case:98: save5_load(&loaded)\n"),
+            (1, "passed\n", "atomic_save5_smoke:98: save5_load(&loaded)\n"),
+        ):
+            with self.subTest(code=code, stderr=stderr):
+                result = subprocess.CompletedProcess([], code, stdout, stderr)
+                with self.assertRaises(AssertionError):
+                    require_check_failure(result, "atomic_save5_smoke", "save5_load(&loaded)")
 
 
 def write_report(result):

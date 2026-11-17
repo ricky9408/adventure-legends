@@ -279,31 +279,31 @@ def _run_check(root: Path, run_dir: Path, check: dict) -> dict:
     started = time.monotonic()
     returncode = None
     reasons = []
-    environment = dict(os.environ, TRUST_EVIDENCE_DIR=str(evidence), PYTHONDONTWRITEBYTECODE="1")
+    environment = dict(os.environ, TRUST_EVIDENCE_DIR=str(evidence), PYTHONDONTWRITEBYTECODE="1",
+                       TRUST_PROCESS_GROUP_MANAGED="1" if os.name == "posix" else "0")
     process = None
-    completed = False
-    cancelled = False
+    cancelled = None
     interruptible = False
 
-    def interrupted(_signal, _frame):
+    def interrupted(signum, _frame):
         nonlocal cancelled
-        cancelled = True
+        cancelled = cancelled or signum
         # Raising during spawn can lose the child handle; raising during cleanup can strand descendants.
         if interruptible:
-            raise _RunInterrupted("Run interrupted by SIGTERM")
+            raise _RunInterrupted(f"Run interrupted by {signal.Signals(cancelled).name}")
 
-    previous_handler = None
-    if threading.current_thread() is threading.main_thread():
-        previous_handler = signal.signal(signal.SIGTERM, interrupted)
+    previous_handlers = {}
     try:
+        if threading.current_thread() is threading.main_thread():
+            for signum in (signal.SIGTERM, signal.SIGINT):
+                previous_handlers[signum] = signal.signal(signum, interrupted)
         with stdout.open("wb") as out, stderr.open("wb") as err:
             process = subprocess.Popen(check["command"], cwd=root, env=environment, stdout=out, stderr=err, shell=False, start_new_session=os.name == "posix")
             interruptible = True
             if cancelled:
-                raise _RunInterrupted("Run interrupted by SIGTERM")
+                raise _RunInterrupted(f"Run interrupted by {signal.Signals(cancelled).name}")
             try:
                 returncode = process.wait(timeout=check["timeout_seconds"])
-                completed = True
                 if returncode:
                     reasons.append(f"Command exited with status {returncode}")
             except subprocess.TimeoutExpired:
@@ -313,14 +313,14 @@ def _run_check(root: Path, run_dir: Path, check: dict) -> dict:
     finally:
         interruptible = False
         try:
-            if process is not None and (not completed or cancelled):
+            if process is not None:
                 _terminate(process)
                 returncode = process.returncode
         finally:
-            if previous_handler is not None:
-                signal.signal(signal.SIGTERM, previous_handler)
+            for signum, previous_handler in previous_handlers.items():
+                signal.signal(signum, previous_handler)
     if cancelled:
-        raise _RunInterrupted("Run interrupted by SIGTERM")
+        raise _RunInterrupted(f"Run interrupted by {signal.Signals(cancelled).name}")
     artifacts = {}
     for artifact in check["artifacts"]:
         relative = f"{check['id']}/{artifact}"

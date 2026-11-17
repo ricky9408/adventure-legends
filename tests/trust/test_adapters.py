@@ -29,6 +29,44 @@ ADAPTER = load_module("trust_adapter_under_test", "check.py")
 NATIVE = load_module("trust_native_under_test", "native_probe.py")
 
 
+def process_running(pid):
+    if sys.platform.startswith("linux"):
+        try:
+            state = Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()[0]
+        except FileNotFoundError:
+            return False
+        return state != "Z"
+    state = subprocess.run(["ps", "-o", "stat=", "-p", str(pid)], capture_output=True, text=True, check=False).stdout.strip()
+    return bool(state) and not state.startswith("Z")
+
+
+def wait_file(path, timeout=5):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if path.is_file() and path.read_text():
+            return path.read_text()
+        time.sleep(0.01)
+    raise AssertionError(f"Process did not publish readiness: {path}")
+
+
+def require_exited(test, pids):
+    deadline = time.monotonic() + 3
+    alive = list(pids)
+    while alive and time.monotonic() < deadline:
+        alive = [pid for pid in alive if process_running(pid)]
+        if alive:
+            time.sleep(0.01)
+    test.assertFalse(alive, f"Cancelled processes still running: {alive}")
+
+
+def kill_remaining(pids):
+    for pid in pids:
+        try:
+            os.kill(pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+
+
 class HarnessPinProperties(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix="trust-pin-")
@@ -184,12 +222,131 @@ class ChildProcessProperties(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory(prefix="trust-child-adapter-")
         self.addCleanup(temporary.cleanup)
         self.output = Path(temporary.name).resolve()
+        environment = patch.dict(os.environ)
+        environment.start()
+        self.addCleanup(environment.stop)
+        os.environ.pop("TRUST_PROCESS_GROUP_MANAGED", None)
+
+    @unittest.skipUnless(os.name == "posix", "Signal handoff requires POSIX")
+    def test_signal_after_spawn_before_handle_assignment_cannot_leak_child(self):
+        for cancellation in (signal.SIGTERM, signal.SIGINT):
+            with self.subTest(signal=cancellation):
+                ready = self.output / f"handoff-{cancellation}.pid"
+                command = [sys.executable, "-c", "import os,signal,time; from pathlib import Path; "
+                           "signal.signal(signal.SIGTERM,signal.SIG_IGN); "
+                           f"Path({str(ready)!r}).write_text(str(os.getpid())); time.sleep(30)"]
+                original_popen = subprocess.Popen
+                processes = []
+                previous = {number: signal.getsignal(number) for number in (signal.SIGTERM, signal.SIGINT)}
+
+                def launch(*args, **kwargs):
+                    process = original_popen(*args, **kwargs)
+                    processes.append(process)
+                    wait_file(ready)
+                    os.kill(os.getpid(), cancellation)
+                    return process
+
+                try:
+                    with patch.object(ADAPTER.subprocess, "Popen", side_effect=launch):
+                        with self.assertRaises((ADAPTER.VerificationInterrupted, KeyboardInterrupt)):
+                            ADAPTER.run(command, self.output, f"handoff-{cancellation}", os.environ.copy())
+                    self.assertEqual(1, len(processes))
+                    require_exited(self, [processes[0].pid])
+                    self.assertEqual(previous, {number: signal.getsignal(number) for number in previous})
+                finally:
+                    kill_remaining([process.pid for process in processes])
+                    for process in processes:
+                        process.wait(timeout=5)
+                    for number, handler in previous.items():
+                        signal.signal(number, handler)
+
+    @unittest.skipUnless(os.name == "posix", "Process groups require POSIX")
+    def test_stopped_asset_supervisor_cannot_strand_make_or_its_child(self):
+        for managed in (False, True):
+            with self.subTest(managed=managed):
+                directory = self.output / ("managed" if managed else "standalone")
+                directory.mkdir()
+                (directory / "worker.py").write_text(
+                    "import os,signal,time\nfrom pathlib import Path\n"
+                    "signal.signal(signal.SIGTERM,signal.SIG_IGN)\n"
+                    "Path('worker.pid').write_text(str(os.getpid()))\ntime.sleep(30)\n")
+                (directory / "Makefile").write_text(
+                    "all:\n\t@echo $$PPID > make.pid; exec " + sys.executable + " worker.py\n")
+                supervisor = directory / "assets-supervisor.py"
+                supervisor.write_text(
+                    "import importlib.util,os\nfrom pathlib import Path\n"
+                    f"spec=importlib.util.spec_from_file_location('assets',{str(ROOT / 'tools/trust/assets.py')!r})\n"
+                    "module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)\n"
+                    "Path('assets.pid').write_text(str(os.getpid()))\n"
+                    "module.run_generator(['make'],cwd=Path.cwd(),env=os.environ.copy(),timeout=30)\n")
+                launcher = (
+                    "import importlib.util,os\nfrom pathlib import Path\n"
+                    "Path('adapter.pid').write_text(str(os.getpid()))\n"
+                    f"spec=importlib.util.spec_from_file_location('check',{str(ROOT / 'tools/trust/check.py')!r})\n"
+                    "module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)\n"
+                    "module.ROOT=Path.cwd()\n"
+                    f"module.run([{sys.executable!r},{str(supervisor)!r}],Path.cwd(),'assets',os.environ.copy(),timeout=30)\n")
+                env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+                command = [sys.executable, "-c", launcher]
+                if managed:
+                    subprocess.run(["git", "init", "-q", str(directory)], check=True)
+                    (directory / ".trust").mkdir()
+                    runtime = "import os; from pathlib import Path; Path(os.environ['TRUST_EVIDENCE_DIR'],'result.json').write_text('{}')"
+                    policy = {"version": 1, "project": "nested-cancellation", "checks": [
+                        {"id": "assets", "layer": "static", "command": command, "timeout_seconds": 30},
+                        {"id": "observed", "layer": "runtime", "command": [sys.executable, "-c", runtime],
+                         "timeout_seconds": 5, "artifacts": ["result.json"]}],
+                        "features": [{"id": "generation", "user_path": "generate", "expectation": "complete",
+                                      "checks": ["observed"]}]}
+                    (directory / ".trust/policy.json").write_text(json.dumps(policy))
+                    command = [sys.executable, str(ROOT / "tools/trust/run.py"), "run", "--root", str(directory)]
+                process = subprocess.Popen(command, cwd=directory, env=env,
+                                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+                pids = []
+                try:
+                    pids = [int(wait_file(directory / name)) for name in ("assets.pid", "make.pid", "worker.pid", "adapter.pid")]
+                    self.assertEqual(4, len(set(pids)))
+                    self.assertTrue(all(process_running(pid) for pid in pids))
+                    os.kill(pids[0], signal.SIGSTOP)
+                    process.send_signal(signal.SIGTERM)
+                    process.wait(timeout=5)
+                    self.assertNotEqual(0, process.returncode)
+                    require_exited(self, pids)
+                    self.assertFalse(any(json.loads(path.read_text())["passed"] for path in directory.rglob("receipt.json")))
+                finally:
+                    pids.extend(int(path.read_text()) for path in directory.glob("*.pid") if path.read_text().strip())
+                    kill_remaining([process.pid, *pids])
+                    process.wait(timeout=5)
+
+    @unittest.skipUnless(os.name == "posix", "Process groups require POSIX")
+    def test_normal_child_exit_cleans_background_descendants(self):
+        ready = self.output / "background.pid"
+        child = f"import os,time; from pathlib import Path; Path({str(ready)!r}).write_text(str(os.getpid())); time.sleep(30)"
+        driver = ("import subprocess,sys,time; from pathlib import Path; "
+                  f"subprocess.Popen([sys.executable,'-c',{child!r}],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+                  f"while not Path({str(ready)!r}).exists(): time.sleep(0.01)\n")
+        pid = None
+        try:
+            ADAPTER.run([sys.executable, "-c", driver], self.output, "background", os.environ.copy())
+            pid = int(wait_file(ready))
+            require_exited(self, [pid])
+        finally:
+            if pid is not None:
+                kill_remaining([pid])
 
     def test_failed_child_is_not_reported_as_success(self):
         with self.assertRaises(RuntimeError):
             ADAPTER.run([sys.executable, "-c", "print('diagnostic'); raise SystemExit(7)"],
                         self.output, "failed", os.environ.copy(), timeout=5)
         self.assertIn("diagnostic", (self.output / "failed.log").read_text())
+
+    def test_missing_pinned_asset_runtime_fails_without_starting_docker(self):
+        with patch.object(ADAPTER.importlib.util, "find_spec", return_value=None), \
+                patch.object(ADAPTER.subprocess, "Popen") as spawned:
+            with self.assertRaisesRegex(RuntimeError, "Pillow 13.0.0.*pinned Linux.*automatic Docker"):
+                ADAPTER.assets(self.output, os.environ.copy())
+        spawned.assert_not_called()
+        self.assertFalse((self.output / "assets.json").exists())
 
     @unittest.skipUnless(os.name == "posix", "Runner process-group cleanup requires POSIX")
     def test_pinned_runner_sigterm_stops_checks_and_descendants_without_passing_evidence(self):
@@ -204,8 +361,8 @@ class ChildProcessProperties(unittest.TestCase):
                 markers = [prefix.with_suffix(".check-survived"), prefix.with_suffix(".child-survived")]
                 disposition = "signal.signal(signal.SIGTERM, signal.SIG_IGN); " if ignore_term else ""
                 child_code = (
-                    "import signal, time; from pathlib import Path; " + disposition +
-                    f"Path({str(child_ready)!r}).touch(); time.sleep(0.8); "
+                    "import os, signal, time; from pathlib import Path; " + disposition +
+                    f"Path({str(child_ready)!r}).write_text(str(os.getpid())); time.sleep(0.8); "
                     f"Path({str(markers[1])!r}).touch(); time.sleep(20)"
                 )
                 check_code = (
@@ -246,7 +403,7 @@ class ChildProcessProperties(unittest.TestCase):
                     stdout, stderr = process.communicate(timeout=5)
                     self.assertNotEqual(0, process.returncode, stdout + stderr)
                     self.assertNotIn("Traceback (most recent call last)", stderr)
-                    time.sleep(0.9)
+                    require_exited(self, [check_pid, int(child_ready.read_text())])
                     self.assertFalse(any(path.exists() for path in markers), "Cancelled work continued running")
                     self.assertFalse(any(json.loads(path.read_text())["passed"] for path in root.rglob("receipt.json")))
                 finally:
@@ -278,22 +435,41 @@ class ChildProcessProperties(unittest.TestCase):
             signal.signal(signal.SIGTERM, original)
 
     def child_command(self, marker, ready=None):
-        descendant = ("import signal,time; from pathlib import Path; signal.signal(signal.SIGTERM, signal.SIG_IGN); "
+        child_ready = marker.with_suffix(".child-pid")
+        ready = ready or marker.with_suffix(".parent-pid")
+        descendant = ("import os,signal,time; from pathlib import Path; signal.signal(signal.SIGTERM, signal.SIG_IGN); "
+                      f"Path({str(child_ready)!r}).write_text(str(os.getpid())); "
                       "time.sleep(0.7); Path(" + repr(str(marker)) + ").touch()")
         parent = "import os,signal,subprocess,sys,time; from pathlib import Path; signal.signal(signal.SIGTERM, signal.SIG_IGN); "
-        parent += "subprocess.Popen([sys.executable,'-c'," + repr(descendant) + "]); "
-        if ready:
-            parent += "Path(" + repr(str(ready)) + ").write_text(str(os.getpid())); "
+        parent += "subprocess.Popen([sys.executable,'-c'," + repr(descendant) + "])\n"
+        parent += f"while not Path({str(child_ready)!r}).exists(): time.sleep(0.01)\n"
+        parent += "Path(" + repr(str(ready)) + ").write_text(str(os.getpid())); "
         parent += "time.sleep(30)"
         return [sys.executable, "-c", parent]
 
     @unittest.skipUnless(os.name == "posix", "Adapter process-group cleanup requires POSIX")
     def test_timeout_terminates_descendants_even_when_sigterm_is_ignored(self):
         marker = self.output / "orphan-wrote"
-        with self.assertRaises(subprocess.TimeoutExpired):
-            ADAPTER.run(self.child_command(marker), self.output, "timeout", os.environ.copy(), timeout=0.15)
-        time.sleep(0.8)
-        self.assertFalse(marker.exists())
+        ready = marker.with_suffix(".parent-pid")
+        original_popen = subprocess.Popen
+        pids = []
+
+        def launch(*args, **kwargs):
+            process = original_popen(*args, **kwargs)
+            pids.append(process.pid)
+            wait_file(ready)
+            pids.append(int(wait_file(marker.with_suffix(".child-pid"))))
+            return process
+
+        try:
+            with patch.object(ADAPTER.subprocess, "Popen", side_effect=launch):
+                with self.assertRaises(subprocess.TimeoutExpired):
+                    ADAPTER.run(self.child_command(marker), self.output, "timeout", os.environ.copy(), timeout=0.15)
+            self.assertEqual(2, len(pids))
+            require_exited(self, pids)
+            self.assertFalse(marker.exists())
+        finally:
+            kill_remaining(pids)
 
     @unittest.skipUnless(os.name == "posix", "Adapter process-group cleanup requires POSIX")
     def test_outer_termination_cleans_child_group_before_outer_kill_deadline(self):
@@ -322,7 +498,7 @@ class ChildProcessProperties(unittest.TestCase):
                 except ProcessLookupError:
                     pass
             process.wait(timeout=5)
-            time.sleep(0.6)
+            require_exited(self, [child_group, int(wait_file(marker.with_suffix(".child-pid")))])
             self.assertFalse(marker.exists())
             cleanup_child = False
         finally:

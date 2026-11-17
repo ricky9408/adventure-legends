@@ -6,6 +6,12 @@ The pinned shared runner is in `tools/trust/vendor/`; `run.py` verifies its hash
 
 ```sh
 make test-trust-host
+```
+
+`test-trust-host` is partial local feedback, not full acceptance. Inside the
+prepared Linux verification environment, run:
+
+```sh
 make test
 python3 tools/trust/run.py gate --root . --receipt /printed/path/receipt.json
 ```
@@ -18,10 +24,15 @@ Source edits invalidate its receipt. Outputs live in `.trust/runs/`.
 Local requirements: Python 3.11+, Git, a C compiler with ASan/UBSan, ARM GCC and
 mGBA development headers. `ARM_PREFIX` or `DEVKITARM` selects the ARM toolchain;
 the local adapter also recognizes `/opt/devkitpro/devkitARM`. `HOST_CC` selects
-the host compiler. Full asset regeneration needs the pinned Pillow 13.0.0 Linux
-environment and Noto/DejaVu fonts. On this Mac the adapter uses the prepared
-`codex-pillow-compat:20261027` image by its resolved digest, with network pulls
-disabled. `TRUST_LINUX_IMAGE` can select another prepared compatible image.
+the host compiler. Full asset regeneration requires Pillow 13.0.0, zlib 1.3.1,
+`/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc` and
+`/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf` in the current runtime.
+The prepared `codex-pillow-compat:20261027` Linux image supplies these through
+`/opt/pillow13/bin/python`; select that Python on `PATH` before `make test`.
+GitHub prepares the same requirements through the pinned workflow dependencies.
+The adapter fails if these requirements are absent. It does not launch Docker:
+the container or CI job owner controls that external lifecycle, while the runner
+owns process groups inside the verification environment.
 
 The existing broader campaign routes remain supplemental regression checks:
 

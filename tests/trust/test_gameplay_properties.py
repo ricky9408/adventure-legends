@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import tempfile
@@ -24,6 +25,13 @@ def execute(arguments, label, directory):
     (directory / (label + ".stdout.log")).write_text(result.stdout)
     (directory / (label + ".stderr.log")).write_text(result.stderr)
     return result
+
+
+def require_check_failure(result, condition):
+    diagnostic = (re.escape(str(HERE / "gameplay_properties.c")) + r":\d+: " +
+                  re.escape(condition) + r" \(room=-?\d+ px=-?\d+ py=-?\d+\)")
+    if result.returncode != 1 or result.stdout or not re.fullmatch(diagnostic, result.stderr.strip()):
+        raise AssertionError(f"Expected CHECK failure: {condition}; got {result.returncode}: {result.stderr}")
 
 
 def main():
@@ -72,15 +80,18 @@ def main():
 
     mutations = [
         ("diagonal_uses_previous_x", "game", "movement",
+         "!solid(px,py)",
          "px=px_q8>>8;\n  if(!solid(px,ny>>8))py_q8=ny;",
          "if(!solid(px,ny>>8))py_q8=ny;\n  px=px_q8>>8;"),
         ("bonus_exceeds_weapon_contract", "gear_runtime", "combat",
+         "stats.attack_q4>=attack&&stats.attack_q4<=EQUIPMENT_MAX_ATTACK_Q4",
          "attack>EQUIPMENT_MAX_ATTACK_Q4?EQUIPMENT_MAX_ATTACK_Q4:attack", "attack>32u?32u:attack"),
         ("arrow_skips_wall_pixels", "weapon_actions", "arrows",
+         "!arrow.active&&scenario.hit==0",
          "step=remaining>256u?256u:remaining;", "step=remaining;"),
     ]
     rejected = {}
-    for name, module, scenario, old, new in mutations:
+    for name, module, scenario, condition, old, new in mutations:
         source = (ROOT / "src" / (module + ".c")).read_text()
         if source.count(old) != 1:
             raise AssertionError(f"Mutation location changed: {name}; review this negative control")
@@ -89,8 +100,7 @@ def main():
         replacement = compile_source(changed, name)
         mutant = link(name, {module: replacement})
         result = execute([str(mutant), scenario], "mutant-" + name, directory)
-        if result.returncode != 1:
-            raise AssertionError(f"Mutation did not fail its behavioral assertion: {name}: {result.returncode}")
+        require_check_failure(result, condition)
         rejected[name] = {"rejected": True, "scenario": scenario, "reason": result.stderr.strip()}
 
     source = (ROOT / "src" / "field_controls.h").read_text()
@@ -103,8 +113,7 @@ def main():
                                     ['-DGAMEPLAY_CONTROLS_HEADER="' + str(changed) + '"'])
     mutant = link("companion_chord_casts_power", driver_object=changed_driver)
     result = execute([str(mutant), "controls"], "mutant-companion_chord_casts_power", directory)
-    if result.returncode != 1:
-        raise AssertionError("Companion chord mutation did not fail its behavioral assertion")
+    require_check_failure(result, "!!(actual.power_held&256u)==(!!(buttons&1u)&&!blocked)")
     rejected["companion_chord_casts_power"] = {"rejected": True, "scenario": "controls", "reason": result.stderr.strip()}
     after = {str(p.relative_to(ROOT)): digest(p) for p in inputs}
     if before != after:

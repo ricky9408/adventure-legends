@@ -15,7 +15,8 @@ oracles. The executable acceptance map is `.trust/policy.json`; `make test` runs
 | Active checks pinned obsolete production bytes | Keep historical fixtures intact; replace active historical-identity rows with current behavior checks | Explicit retired-command inventory, source graph, geometry and regeneration checks |
 | Optional generators were not covered by reproducible builds | Regenerate in a disposable copy; include selected PCM generation | Compare production source bytes and existing asset semantics |
 | Cached bytecode and sibling modules could bypass source pins | Reject unpinned vendor files and disable bytecode writing | Malicious-cache and sibling-import negative controls |
-| Cancellation and nested timeouts could leave checks or generators running | Forward interruption through a dedicated exception and terminate child groups | Cancellation and timeout descendant-process tests |
+| Completed checks, cancellation and nested timeouts could leave local verification processes running | Share an owned process group through nested verification; clean it on every exit | Recorded descendant PIDs must exit, including when an intermediate supervisor is stopped |
+| Seeded-defect evidence could accept unrelated crashes | Require the intended behavioral assertion and exit status | Reject sanitizer diagnostics, signals and unrelated assertions as mutation evidence |
 
 New behavior checks exercise actual production C. They cover movement, collision
 enumeration, input ownership, modal clocks, weapon bounds, projectile occlusion,
