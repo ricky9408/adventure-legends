@@ -43,6 +43,11 @@ def conversation(run, expected, label, cancel=False):
 
 def edda_north_route(run):
     run.guidance('first-arrival')
+    run.goto(192, 176, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (192, 176), 'unearned Edda dispatch has no A cue', visible=False)
+    run.e.screenshot(run.out / 'edda-dispatch-before-reward.png')
     run.act(168, 208)
     for x in (304, 160):
         run.act(x, 224)
@@ -71,6 +76,11 @@ def edda_north_route(run):
     run.step(8)
     check_hint(run, (192, 176), 'earned Edda dispatch A cue')
     run.e.screenshot(run.out / 'edda-dispatch-a-cue.png')
+    run.goto(180, 184, radius=1)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (192, 176), 'Edda quest conversation takes A before dispatch', visible=False)
+    run.e.screenshot(run.out / 'edda-conversation-priority.png')
 
     conversation(run, 0, 'dispatch', cancel=True)
     for before, after, label in ((0, 1, 'dispatch'), (1, 3, 'delivery'),
@@ -80,6 +90,11 @@ def edda_north_route(run):
             run.entry(23)
             run.entry(22)
         run.check(edda_events(run) == before, label + ' waits for its own visit')
+        if before == 1:
+            run.goto(192, 176, radius=4)
+            run.face(1)
+            run.step(8)
+            check_hint(run, (192, 176), 'Edda dispatch A cue on return visit')
         if before in (7, 15):
             conversation(run, before, label, cancel=True)
         conversation(run, before, label)

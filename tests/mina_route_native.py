@@ -48,6 +48,11 @@ def conversation(run, place, expected, label, cancel=False):
 def mina_south_route(run):
     south = journey.journey.SouthernJourney
     run.guidance('first-arrival')
+    run.goto(400, 230, radius=4)
+    run.face(1)
+    run.step(8)
+    check_hint(run, (400, 216), 'unearned Mina garden has no A cue', visible=False)
+    run.e.screenshot(run.out / 'mina-garden-before-reward.png')
     south.recruits_main(run)
     for area in (34, 35, 36):
         south.puzzle_room(run, area)
@@ -63,8 +68,11 @@ def mina_south_route(run):
     check_hint(run, (400, 216), 'earned Mina garden A cue')
     run.e.screenshot(run.out / 'mina-garden-a-cue.png')
 
-    run.goto(400, 206, radius=4)
+    run.goto(400, 206, radius=1)
     run.face(1)
+    run.step(8)
+    check_hint(run, (400, 216), 'Mina conversation takes A before garden', visible=False)
+    run.e.screenshot(run.out / 'mina-conversation-priority.png')
     run.tap('A')
     run.check(run.get('game_state') == 2 and mina_events(run) == 0,
               'Mina invites planting without awarding relationship progress')
@@ -86,6 +94,11 @@ def mina_south_route(run):
         run.entry(31)
         run.entry(30)
         run.check(mina_events(run) == before, label + ' waits for a separate harbor visit')
+        if before == 1:
+            run.goto(400, 230, radius=4)
+            run.face(1)
+            run.step(8)
+            check_hint(run, (400, 216), 'Mina garden A cue on return visit')
         if before in (7, 15):
             conversation(run, 'mina', before, label, cancel=True)
         conversation(run, 'mina', before, label)

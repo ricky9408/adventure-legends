@@ -68,16 +68,17 @@ contracts remain pinned and separate from current runtime evidence.
   cancels planting and both romantic choices without changing the relationship
   ledger. Repeated talks cannot repeat an event. SRAM snapshots and cold Continue
   verify event masks 0→1→3→7→15→31; screenshots and input traces are retained
-  under `mina-route/`. The controller checks the garden A cue after the reward
-  and after cold Continue. This proves one earned route, not another person's route
-  or multiple marriages.
+  under `mina-route/`. The controller checks the garden A cue before and after
+  the reward, beside Mina, on return, and after cold Continue. This proves one
+  earned route, not another person's route or multiple marriages.
 - **Fresh Edda route:** another empty-SRAM campaign earns the Northern beacon
   reward, sorts dispatch labels with Edda, returns for the delivery and letter
   scenes, and explicitly accepts dating and later marriage. B cancels dispatch
   and both romantic choices; return visits and repeat checks keep the ordered
   ledger honest. SRAM snapshots and cold Continue verify masks
   0→1→3→7→15→31. Screenshots and traces are retained under `edda-route/`.
-  The dispatch A cue is checked after the reward and after cold Continue.
+  The dispatch A cue is checked before and after the reward, beside Edda, on
+  return, and after cold Continue.
   Concurrent dating and marriage remain blocked pending mutual consent scenes.
 - **Fresh Ressa route:** an empty-SRAM campaign earns the original Magma kiln
   reward, shapes and fires an imperfect dish with Ressa, hears her personal
