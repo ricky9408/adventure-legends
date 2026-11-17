@@ -3,7 +3,7 @@
 This verifies module behavior, NOT controller-native collection/obtainability.
 """
 from pathlib import Path
-import ctypes as C,itertools,json,os,subprocess,tempfile,unittest
+import ctypes as C,itertools,json,os,subprocess,sys,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='south-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/southern_region/ui_additions.json').read_text())
@@ -78,7 +78,10 @@ unsigned encounter_spawns(unsigned area){const SouthEnemySpawn*e;unsigned n=sout
 unsigned max_camera_actors(void){const SouthEnemySpawn*e;unsigned n=south_game_enemy_spawns((unsigned)room,&e),i,max=0;int x,y,mx=room<32?240:0,my=room<32?160:0;for(y=0;y<=my;y++)for(x=0;x<=mx;x++){unsigned count=draw(x,y);for(i=0;i<n;i++)if(e[i].kind==2&&e[i].x-x>-8&&e[i].x-x<248&&e[i].y-y>-8&&e[i].y-y<168)count++;if(count>max)max=count;}if(room>=30&&room<=37&&max>camera_maxima[room-30])camera_maxima[room-30]=max;return max;}
 int collision_equivalence(void){unsigned a,i;int x,y,old=room;for(a=30;a<=37;a++){const SouthArtRoom*r=&south_art_rooms[a-30];room=(int)a;for(y=-6;y<r->height+6;y++)for(x=-6;x<r->width+6;x++){int expected=x<5||y<5||x>r->width-6||y>r->height-6;for(i=0;i<r->solid_count;i++){const SouthArtRect*s=&r->solids[i];if(x+5>=s->x&&x-5<s->x+s->w&&y+5>=s->y&&y-5<s->y+s->h)expected=1;}if(south_game_solid(x,y)!=expected){room=old;return (int)a;}}if(!south_game_solid(INT_MIN,INT_MAX)||!south_game_solid(INT_MAX,INT_MIN)){room=old;return -1;}}room=old;return 0;}
 '''
-(OUT/'h.c').write_text(HARNESS)
+(OUT/'h.c').write_text(HARNESS + (
+    '\nint game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}'
+    '\nint game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}\n'
+    if sys.platform == 'darwin' else ''))
 sources=['src/south_game.c','src/south_art.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/relationships.c']
 subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DSOUTH_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),str(OUT/'h.c'),*sources,*(['-fsanitize=undefined','-fno-sanitize-recover=all'] if os.environ.get('SOUTH_SANITIZE') else []),'-o',str(OUT/'test.so')],cwd=ROOT,check=True)
 L=C.CDLL(str(OUT/'test.so'))
@@ -153,10 +156,23 @@ class SouthRuntime(unittest.TestCase):
   for w in (1,2,3):
    self.setUp();self.main_to37();self.act(120,112);L.at(24,112);L.weapon(w);self.assertEqual(L.south_game_weapon_hit(w,120,64,144),0);L.tick(60);self.assertEqual(byte('south_game_machine_stage'),2);L.tick(40);self.assertEqual(byte('south_game_machine_stage'),3);self.assertEqual(L.hurt(),0);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),0);self.act(192,112);L.at(152,84);self.assertEqual(L.south_game_weapon_hit(w,152,64,144),1);self.resolve_quest();self.assertEqual(L.qo(24),15);self.act(120,112);self.assertEqual(L.qs(24),3);self.assertEqual(L.roundtrip(),1);self.act(120,112);self.assertEqual(val('room'),37)
  def test_mina_plant_return_story_and_separate_choices(self):
+  x,y=C.c_int(),C.c_int()
+  self.entry(30);L.at(400,232)
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
   self.main_to37();self.act(120,112);L.at(24,112);L.tick(100);self.act(192,112);L.at(152,84)
   self.assertEqual(L.south_game_weapon_hit(1,152,64,144),1);self.resolve_quest()
   self.act(120,112);self.assertEqual(L.qs(24),3)
   self.entry(30);self.assertEqual(L.mina_events(),0)
+  L.at(400,232);L.snapshot_state()
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),1)
+  self.assertEqual((x.value,y.value),(400,216))
+  self.assertEqual(L.unchanged(),1)
+  L.at(400,208);self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
+  L.at(376,232);self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
+  L.at(400,232);C.c_int.in_dll(L,'face').value=0
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
+  L.at(400,232);L.modal(2)
+  self.assertEqual(L.south_game_mina_target_hint(C.byref(x),C.byref(y)),0)
   self.act(400,208);self.assertEqual(L.south_game_mina_dialogue_pending(),0)
   self.act(400,232);self.assertEqual(L.south_game_mina_dialogue_pending(),1)
   L.south_game_mina_cancel_dialogue();self.assertEqual(L.mina_events(),0)

@@ -125,6 +125,13 @@ static COLD void edda_letter(void){unsigned stage=adventure_save.relationships.e
  edda_chatter(stage==31?TX_ED_SPOUSE_A:TX_ED_LATER_A,stage==31?TX_ED_SPOUSE_B:TX_ED_LATER_B);
 }
 COLD int north_game_edda_dialogue_pending(void){return edda_pending!=0;}
+/* Edda's original quest conversation wins where the two A ranges overlap. */
+COLD int north_game_edda_target_hint(int*x,int*y){
+ if(room!=22||game_state!=PLAY||!done(21)||!close(192,176)||close(168,192))return 0;
+ if(x)*x=192;
+ if(y)*y=176;
+ return 1;
+}
 COLD void north_game_edda_cancel_dialogue(void){edda_pending=0;}
 COLD void north_game_edda_finish_dialogue(void){unsigned event;
  if(!edda_pending)return;

@@ -34,7 +34,13 @@ The adapter fails if these requirements are absent. It does not launch Docker:
 the container or CI job owner controls that external lifecycle, while the runner
 owns process groups inside the verification environment.
 
-The existing broader campaign routes remain supplemental regression checks:
+The existing broader campaign routes remain supplemental regression checks.
+The empty-SRAM Mina and Edda routes check their optional A cues before and
+after the original reward, beside the resident whose conversation takes
+priority, on a return visit, and after saved cold Continue. Their OAM, input,
+SRAM and frame records remain scoped to those earned routes.
+
+Run the broader lanes separately:
 
 ```sh
 python3 tools/run_gameplay_ci.py --suite host --output build/ci-host-new

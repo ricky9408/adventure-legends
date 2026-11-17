@@ -6,7 +6,9 @@ no save format or old-bank rule changes.
 
 After the original Northern beacon repair and quest21 reward, a dispatch
 document appears on the quay beside Edda. Interacting with it lets the two
-sort cargo labels and load the next boat. A later quay visit confirms the
+sort cargo labels and load the next boat. A contextual A glyph marks the
+document only where A reaches it; Edda's quest conversation retains priority.
+A later quay visit confirms the
 delivery. Edda then tells the player about an undelivered apology to a friend;
 she decides to send it herself. On separate later visits she asks whether the
 player wants to date, and then whether they want to marry. Both choices require
