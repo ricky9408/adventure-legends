@@ -3,7 +3,7 @@
 This verifies module behavior, NOT controller-native collection/obtainability.
 """
 from pathlib import Path
-import ctypes as C,itertools,json,os,subprocess,tempfile,unittest
+import ctypes as C,itertools,json,os,subprocess,sys,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
 TMP=tempfile.TemporaryDirectory(prefix='south-runtime-');OUT=Path(TMP.name)
 UI=json.loads((ROOT/'assets/southern_region/ui_additions.json').read_text())
@@ -42,8 +42,6 @@ void south_actor(unsigned a,int x,int y){(void)a;if(x-camera_x>-8&&x-camera_x<24
 void region_form_actor(unsigned a,int x,int y){south_actor(a,x,y);}
 void game_health_fill(void){}
 void game_region_warp(int x,int y){px=x;py=y;}
-int game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}
-int game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}
 unsigned game_weapon_class(void){return weapon_class;}
 void game_north_hurt(unsigned d){hurt_calls+=d;}
 void enter_room(int r,int s){if(r>=30)south_game_enter((unsigned)r,(unsigned)s);else{room=r;checkpoint_spawn=s;}}
@@ -80,7 +78,10 @@ unsigned encounter_spawns(unsigned area){const SouthEnemySpawn*e;unsigned n=sout
 unsigned max_camera_actors(void){const SouthEnemySpawn*e;unsigned n=south_game_enemy_spawns((unsigned)room,&e),i,max=0;int x,y,mx=room<32?240:0,my=room<32?160:0;for(y=0;y<=my;y++)for(x=0;x<=mx;x++){unsigned count=draw(x,y);for(i=0;i<n;i++)if(e[i].kind==2&&e[i].x-x>-8&&e[i].x-x<248&&e[i].y-y>-8&&e[i].y-y<168)count++;if(count>max)max=count;}if(room>=30&&room<=37&&max>camera_maxima[room-30])camera_maxima[room-30]=max;return max;}
 int collision_equivalence(void){unsigned a,i;int x,y,old=room;for(a=30;a<=37;a++){const SouthArtRoom*r=&south_art_rooms[a-30];room=(int)a;for(y=-6;y<r->height+6;y++)for(x=-6;x<r->width+6;x++){int expected=x<5||y<5||x>r->width-6||y>r->height-6;for(i=0;i<r->solid_count;i++){const SouthArtRect*s=&r->solids[i];if(x+5>=s->x&&x-5<s->x+s->w&&y+5>=s->y&&y-5<s->y+s->h)expected=1;}if(south_game_solid(x,y)!=expected){room=old;return (int)a;}}if(!south_game_solid(INT_MIN,INT_MAX)||!south_game_solid(INT_MAX,INT_MIN)){room=old;return -1;}}room=old;return 0;}
 '''
-(OUT/'h.c').write_text(HARNESS)
+(OUT/'h.c').write_text(HARNESS + (
+    '\nint game_road_managed(unsigned a,unsigned b){(void)a;(void)b;return 0;}'
+    '\nint game_road_collision(unsigned a,int x,int y){(void)a;(void)x;(void)y;return -1;}\n'
+    if sys.platform == 'darwin' else ''))
 sources=['src/south_game.c','src/south_art.c','src/southern_quests.c','src/northern_quests.c','src/save5.c','src/save4.c','src/equipment.c','src/equipment_data.c','src/creatures.c','src/creature_data.c','src/relationships.c']
 subprocess.run(['cc','-std=c99','-O2','-Wall','-Wextra','-Werror','-pedantic','-shared','-fPIC','-DSOUTH_GAME_HOST_TEST','-DSAVE5_HOST_TEST','-DSAVE4_HOST_TEST','-Isrc','-I'+str(OUT),str(OUT/'h.c'),*sources,*(['-fsanitize=undefined','-fno-sanitize-recover=all'] if os.environ.get('SOUTH_SANITIZE') else []),'-o',str(OUT/'test.so')],cwd=ROOT,check=True)
 L=C.CDLL(str(OUT/'test.so'))
