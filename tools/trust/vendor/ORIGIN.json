@@ -1,10 +1,10 @@
 {
   "project": "agentic-trust",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": {
-    "trustkit/__init__.py": "91447944015cec709e8aa7655f7e9d64e1e4508e7023a57fe3746911c0fc6fed",
+    "trustkit/__init__.py": "ae739b3e3b817044ada923b44ba82c752fe8b7c2133908d58fff8fd4b5146298",
     "trustkit/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
     "trustkit/cli.py": "4c9da42aea1b916f568ad90879454cc22285b68d80ba610953d77fc320d27aaa",
-    "trustkit/engine.py": "818663a3280571651924bf8133101d88617e0f7ca6bbb57411d74b074af399ad"
+    "trustkit/engine.py": "be00ef103e44c33b2c58b88ea0bf7469cf14659897364f7084dbb4524ec03a9c"
   }
 }

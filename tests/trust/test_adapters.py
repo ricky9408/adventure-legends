@@ -191,6 +191,74 @@ class ChildProcessProperties(unittest.TestCase):
                         self.output, "failed", os.environ.copy(), timeout=5)
         self.assertIn("diagnostic", (self.output / "failed.log").read_text())
 
+    @unittest.skipUnless(os.name == "posix", "Runner process-group cleanup requires POSIX")
+    def test_pinned_runner_sigterm_stops_checks_and_descendants_without_passing_evidence(self):
+        root = self.output / "repository"
+        root.mkdir()
+        subprocess.run(["git", "init", "-q", str(root)], check=True)
+        (root / ".trust").mkdir()
+        for ignore_term in (False, True):
+            with self.subTest(ignore_term=ignore_term):
+                prefix = self.output / str(ignore_term)
+                ready, child_ready = prefix.with_suffix(".ready"), prefix.with_suffix(".child-ready")
+                markers = [prefix.with_suffix(".check-survived"), prefix.with_suffix(".child-survived")]
+                disposition = "signal.signal(signal.SIGTERM, signal.SIG_IGN); " if ignore_term else ""
+                child_code = (
+                    "import signal, time; from pathlib import Path; " + disposition +
+                    f"Path({str(child_ready)!r}).touch(); time.sleep(0.8); "
+                    f"Path({str(markers[1])!r}).touch(); time.sleep(20)"
+                )
+                check_code = (
+                    "import os, signal, subprocess, sys, time; from pathlib import Path; " + disposition +
+                    f"subprocess.Popen([sys.executable, '-c', {child_code!r}]); "
+                    f"child_ready = Path({str(child_ready)!r})\n"
+                    "while not child_ready.exists(): time.sleep(0.01)\n"
+                    f"Path({str(ready)!r}).write_text(str(os.getpid())); time.sleep(0.8); "
+                    f"Path({str(markers[0])!r}).touch(); time.sleep(20)"
+                )
+                runtime = "import os; from pathlib import Path; Path(os.environ['TRUST_EVIDENCE_DIR'], 'observed.json').write_text('{}')"
+                policy = {
+                    "version": 1, "project": "cancellation",
+                    "checks": [
+                        {"id": "active", "layer": "static", "command": [sys.executable, "-c", check_code], "timeout_seconds": 20},
+                        {"id": "behavior", "layer": "runtime", "command": [sys.executable, "-c", runtime],
+                         "timeout_seconds": 5, "artifacts": ["observed.json"]},
+                    ],
+                    "features": [{"id": "observed", "user_path": "run", "expectation": "evidence", "checks": ["behavior"]}],
+                }
+                (root / ".trust/policy.json").write_text(json.dumps(policy))
+                process = subprocess.Popen(
+                    [sys.executable, str(ROOT / "tools/trust/run.py"), "run", "--root", str(root)],
+                    env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}, stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE, text=True, start_new_session=True,
+                )
+                check_pid = None
+                try:
+                    deadline = time.monotonic() + 5
+                    while not ready.exists() and process.poll() is None and time.monotonic() < deadline:
+                        time.sleep(0.01)
+                    self.assertTrue(ready.exists(), "The check and descendant must start before cancellation")
+                    check_pid = int(ready.read_text())
+                    process.send_signal(signal.SIGTERM)
+                    if ignore_term:
+                        time.sleep(0.05)
+                        process.send_signal(signal.SIGTERM)
+                    stdout, stderr = process.communicate(timeout=5)
+                    self.assertNotEqual(0, process.returncode, stdout + stderr)
+                    self.assertNotIn("Traceback (most recent call last)", stderr)
+                    time.sleep(0.9)
+                    self.assertFalse(any(path.exists() for path in markers), "Cancelled work continued running")
+                    self.assertFalse(any(json.loads(path.read_text())["passed"] for path in root.rglob("receipt.json")))
+                finally:
+                    if process.poll() is None:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    process.communicate(timeout=5)
+                    if check_pid is not None:
+                        try:
+                            os.killpg(check_pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
+
     def test_spawn_failure_restores_original_signal_handler(self):
         original = signal.getsignal(signal.SIGTERM)
         try:

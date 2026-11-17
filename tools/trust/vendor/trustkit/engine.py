@@ -9,12 +9,17 @@ import signal
 import stat
 import subprocess
 import tempfile
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
 
 class TrustError(Exception):
+    pass
+
+
+class _RunInterrupted(TrustError):
     pass
 
 
@@ -275,22 +280,47 @@ def _run_check(root: Path, run_dir: Path, check: dict) -> dict:
     returncode = None
     reasons = []
     environment = dict(os.environ, TRUST_EVIDENCE_DIR=str(evidence), PYTHONDONTWRITEBYTECODE="1")
+    process = None
+    completed = False
+    cancelled = False
+    interruptible = False
+
+    def interrupted(_signal, _frame):
+        nonlocal cancelled
+        cancelled = True
+        # Raising during spawn can lose the child handle; raising during cleanup can strand descendants.
+        if interruptible:
+            raise _RunInterrupted("Run interrupted by SIGTERM")
+
+    previous_handler = None
+    if threading.current_thread() is threading.main_thread():
+        previous_handler = signal.signal(signal.SIGTERM, interrupted)
     try:
         with stdout.open("wb") as out, stderr.open("wb") as err:
             process = subprocess.Popen(check["command"], cwd=root, env=environment, stdout=out, stderr=err, shell=False, start_new_session=os.name == "posix")
+            interruptible = True
+            if cancelled:
+                raise _RunInterrupted("Run interrupted by SIGTERM")
             try:
                 returncode = process.wait(timeout=check["timeout_seconds"])
+                completed = True
                 if returncode:
                     reasons.append(f"Command exited with status {returncode}")
             except subprocess.TimeoutExpired:
-                _terminate(process)
-                returncode = process.returncode
                 reasons.append(f"Command timed out after {check['timeout_seconds']} seconds")
-            except KeyboardInterrupt:
-                _terminate(process)
-                raise
     except (OSError, ValueError) as exc:
         reasons.append(f"Command could not run: {exc}")
+    finally:
+        interruptible = False
+        try:
+            if process is not None and (not completed or cancelled):
+                _terminate(process)
+                returncode = process.returncode
+        finally:
+            if previous_handler is not None:
+                signal.signal(signal.SIGTERM, previous_handler)
+    if cancelled:
+        raise _RunInterrupted("Run interrupted by SIGTERM")
     artifacts = {}
     for artifact in check["artifacts"]:
         relative = f"{check['id']}/{artifact}"
