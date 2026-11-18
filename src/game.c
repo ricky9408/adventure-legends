@@ -993,6 +993,8 @@ static COLD int cancel_relationship_dialogue(void){
  south_game_mina_cancel_dialogue();north_game_edda_cancel_dialogue();
  magma_game_ressa_cancel_dialogue();game_state=PLAY;return 1;
 }
+/* Do not keep the rare death retry in IWRAM beside the frame-critical update. */
+COLD void update_dead(void){if(pressed&KEY_A){game_health_fill();ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,room>=16?checkpoint_spawn:2);}}
 #include "field_update.inc"
 void update(void){frame++;if(game_state==LOAD_PENDING){update_loading();return;}if(game_state==OPENING_SCENE){opening_scene_update();return;}if(scene_present_phase){arrival_input_mask|=keys&(KEY_A|KEY_B|KEY_R|KEY_START|KEY_L|KEY_SELECT);pressed=0;walk=0;return;}if(locked_notice_room!=room||!near(px,py,locked_notice_x,locked_notice_y,24))locked_notice_room=-1;roll_ticks=roll_cd=roll_dx=roll_dy=0;save_feedback_tick();game_shop_tick();arrival_input_mask&=keys;keys&=~arrival_input_mask;pressed&=~arrival_input_mask;if(game_state!=PLAY||quickparty_open||(pressed&KEY_L))game_attacks_suspend();if(game_state!=PLAY){quickparty_reset(keys);field_controls_reset(&field_controls,(unsigned)keys);}else{int party;quickparty_filter_input(&keys,&pressed);if(pressed&KEY_L)game_power_preview_cancel();party=quickparty_update(keys,pressed);if(quickparty_directional_tap){unsigned axis=(unsigned)quickparty_directional_tap;quickparty_directional_tap=0;if(!hitstop)field_step_try(axis);}if(party)return;}if(transition)transition--;tick_play_toast();if(game_state==TITLE||game_state==NEW_GAME_CONFIRM){update_title();return;}
  if(begin_homecoming_credits())return;
@@ -1022,7 +1024,7 @@ void update(void){frame++;if(game_state==LOAD_PENDING){update_loading();return;}
  if(game_state==EVOLVE_ANIM){progression_evolution_tick();return;}
  if(game_state==DIALOG){if((pressed&KEY_B)&&cancel_relationship_dialogue())return;if(pressed&KEY_A){sfx(4);if(++dpage>=dcount)finish_dialogue();}return;}
  if(game_state==PAUSE){int input=journal_nav_keys(keys,pressed),nav;if(journal_tab==JOURNAL_ITEMS&&game_shop_confirm&&(input&KEY_B)){game_shop_items_input(input);return;}nav=journal_nav_input(input);if(nav==JOURNAL_CLOSE){game_shop_cancel_items();acknowledge_save_failure();game_state=PLAY;return;}if(nav==JOURNAL_CONSUMED)return;if(game_shop_items_input(input)||quickparty_menu_input(input)||progression_menu_input(input)||gear_menu_input(input)||region_game_menu_input(input)||north_game_menu_input(input)||south_game_menu_input(input)||magma_game_menu_input(input)||underwater_game_menu_input(input)||return_game_menu_input(input)||horizons_game_menu_input(input)||covenants_game_menu_input(input))return;if((input&KEY_A)&&journal_tab==0&&(chapter_flags&SAVE4_ENDING_SEEN)){show_scene(CD_ELDER_FINAL,2,0);append_scene(CD_ENDING_FRIENDS);}return;}
- if(game_state==DEAD){if(pressed&KEY_A){game_health_fill();ability_cd=0;heal_cd=0;game_state=PLAY;enter_room(room,room>=16?checkpoint_spawn:2);}return;}
+ if(game_state==DEAD){update_dead();return;}
  if(game_state==WIN){if(ending_credits_update()){game_state=PLAY;if(!ending_credits_returns_to_field())enter_room(0,3);}return;}
  field_update();
 }
