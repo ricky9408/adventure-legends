@@ -1042,14 +1042,20 @@ COLD int game_save_badge_id(void){if(save_notice_visible())return 0;if(save_fail
 COLD int game_save_badge_left(void){int id=game_save_badge_id();return id?192-ui_texts[id].width:240;}
 /* Immutable badge pixels are keyed only by their text ID; durable save state
  * still decides which badge is shown and when it changes. */
-u16 save_badge_pixels[120*17] __attribute__((aligned(4)));
-int save_badge_cached_id;
+u16 save_badge_pixels[2][120*17] __attribute__((aligned(4)));
+int save_badge_cached_id[2];
+COLD void prepare_save_badge(int id,int slot){int w=ui_texts[id].width+8,left=200-w;u16*target=screen;
+ screen=save_badge_pixels[slot];box(left,0,w,17);text(id,left+4,0,TEAL);screen=target;save_badge_cached_id[slot]=id;
+}
 COLD void game_draw_save_badge(void){
- int id=game_save_badge_id(),row;if(id){int w=ui_texts[id].width+8,left=200-w,first=(left+1)>>1;u16*target=screen;
+ int id=game_save_badge_id(),row;if(id){int w=ui_texts[id].width+8,left=200-w,first=(left+1)>>1,slot=id==TX_FB_SAVING;u16*target=screen;
   if(world_mask_active||w>200){box(left,3,w,17);text(id,left+4,3,TEAL);return;}
-  if(save_badge_cached_id!=id){screen=save_badge_pixels;box(left,0,w,17);text(id,left+4,0,TEAL);screen=target;save_badge_cached_id=id;}
+  if(save_badge_cached_id[slot]!=id)prepare_save_badge(id,slot);
+  /* Do not rasterize Saving on the first critical save frame: the preceding
+   * Working card has slack, while that save frame can miss VBlank. */
+  if(id==TX_FB_WORKING&&save_badge_cached_id[1]!=TX_FB_SAVING)prepare_save_badge(TX_FB_SAVING,1);
   for(row=0;row<17;row++){
-   const u16*src=save_badge_pixels+row*120;u16*dst=target+(row+3)*120;
+   const u16*src=save_badge_pixels[slot]+row*120;u16*dst=target+(row+3)*120;
    if(left&1)dst[left>>1]=(dst[left>>1]&255)|(src[left>>1]&0xff00);
 #ifndef GAME_HOST_TEST
    REG32(0x040000D4)=(u32)(src+first);REG32(0x040000D8)=(u32)(dst+first);REG32(0x040000DC)=0x80000000|(100-first);
