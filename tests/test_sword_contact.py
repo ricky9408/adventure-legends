@@ -39,8 +39,9 @@ update += (ROOT / 'src/field_update.inc').read_text()
 assert update.count('if(invuln)invuln--;') == 1
 assert update.index('if(invuln)invuln--;') < update.index('update_enemies()')
 parts.append('void mercy_tick(void){' + re.search(r'if\(invuln\)invuln--;', update).group() + '}')
-retry = re.search(r' if\(game_state==DEAD\)\{if\(pressed&KEY_A\)[^\n]+', update).group()
-parts.append('void retry_input(void){' + retry + '}')
+assert 'if(game_state==DEAD){update_dead();return;}' in update
+parts.append(function(game, 'update_dead'))
+parts.append('void retry_input(void){update_dead();}')
 
 with tempfile.TemporaryDirectory(prefix='sword-contact-') as temporary:
     out = Path(temporary)

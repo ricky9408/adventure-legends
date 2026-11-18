@@ -9,7 +9,8 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 source = (ROOT / 'src/game.c').read_text()
 label = re.search(r'COLD int retry_location_text\(void\)\{[^\n]+', source).group()
-retry = re.search(r' if\(game_state==DEAD\)\{if\(pressed&KEY_A\)[^\n]+', source).group()
+retry = re.search(r'COLD void update_dead\(void\)\{[^\n]+', source).group()
+assert 'if(game_state==DEAD){update_dead();return;}' in source
 forest = re.search(r' if\(r==1\)\{px=fromnorth[^\n]+', source).group()
 assert 'centered(retry_location_text(),94,CREAM)' in source
 texts = json.loads((ROOT / 'assets/ui_texts.json').read_text())
@@ -44,7 +45,8 @@ void enter_room(int r,int fromnorth){
  FOREST
 }
 LABEL
-void retry_input(void){RETRY}
+RETRY_HELPER
+void retry_input(void){update_dead();}
 static void check(int r,int camp,int spawn,int expected){
  room=r;camp_unlocked=camp;checkpoint_spawn=spawn;game_state=DEAD;
  hp=0;max_hp=8;ability_cd=9;heal_cd=10;
@@ -90,7 +92,7 @@ int main(void){
  puts("PASS retry labels, forest coordinates, entry indices, and retry state");
  return 0;
 }
-'''.replace('FOREST',forest).replace('LABEL',label).replace('RETRY}',retry+'}')
+'''.replace('FOREST',forest).replace('LABEL',label).replace('RETRY_HELPER',retry)
 with tempfile.TemporaryDirectory(prefix='retry-location-') as temporary:
     out = Path(temporary)
     test = out / 'retry.c'
