@@ -29,6 +29,10 @@ COLD void event_step(void){
  else if(resting){if(!south_game_commit_rest()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
  else if(branch){if(!magma_game_commit_event()){save_failed=save_failure_notice=1;toast(TX_UW_NOT_YET);return;}}
  else if(underwater_game_take_transition(&area,&spawn))enter_room((int)area,(int)spawn);
+ /* A completed Return event may spend most of this frame validating its
+  * reward. Present the committed scene before starting its critical save so
+  * that a cold redraw cannot delay the next VBlank. */
+ if(homeward&&game_state==PLAY&&save_requested&&!scene_present_phase)scene_present_phase=1;
  save_frame();
 }
 COLD int underwater_portal_interact(void){if(room!=38||!near(px,py,416,224,23)||!game_region_entry_safe())return 0;if(!underwater_game_can_enter(46)){dialogue(TX_UW_PORTAL_WAIT_A,TX_UW_PORTAL_WAIT_B,PLAY);return 1;}enter_room(46,0);return 1;}
