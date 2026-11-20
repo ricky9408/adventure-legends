@@ -1521,10 +1521,13 @@ int main(void){int i;REG16(0x04000208)=0;REG16(0x04000000)=0x80;REG16(0x04000204
   * continues; optional foreground refill resumes on the next warm update. */
  if(!scene_actor_pending&&cycle_now()-started<260000){music_update((unsigned)room,(unsigned)game_state);music_service();}
  horizons_audio_poll();music_cost=cycle_now()-phase_started;active_cost=cycle_now()-started;
- /* BIOS waits for the next VBlank flag while halting the CPU. Timer1 IRQ
-  * continues its independent PCM DMA rewind during the wait. */
+ /* VBlankIntrWait discards a blank that arrived during Timer1's PCM rewind.
+  * IntrWait consumes the pending flag. A late blank cannot leave enough time
+  * for the slowest actor upload, so keep waiting for a safe one. */
 #ifndef GAME_HOST_TEST
- __asm__ volatile("swi 0x05" : : : "r0","r1","r2","r3","r12","lr","cc","memory");
+ for(;;){register u32 clear __asm__("r0")=0,mask __asm__("r1")=1;u16 line;
+  __asm__ volatile("swi 0x04" : "+r"(clear),"+r"(mask) : : "r2","r3","r12","lr","cc","memory");
+  line=REG16(0x04000006);if(line>=160&&line<=164)break;}
 #endif
  complete_presentation(active_cost,update_cost,save_cost,render_cost,music_cost);
  }return 0;}
