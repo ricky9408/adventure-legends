@@ -1479,14 +1479,12 @@ void draw_campaign_background(void){const CampaignRoom*d=&campaign_rooms[room-4]
 
 unsigned int cycle_now(void){u16 hi,lo,hi2;do{hi=REG16(0x0400010C);lo=REG16(0x04000108);hi2=REG16(0x0400010C);}while(hi!=hi2);return ((u32)hi<<16)|lo;}
 extern void music_irq(void);
-/* music_irq samples IF once. A VBlank that arrives while it rewinds PCM DMA
- * stays pending but never reaches the BIOS wait flag, so that blank is skipped.
- * The BIOS IRQ dispatcher branches without a Thumb exchange, so this entry
- * stays ARM, then latches that VBlank after the rewind. */
+/* music_irq acknowledges only its IF snapshot. Do not clear a VBlank that
+ * arrived during PCM rewind: the pending IRQ must wake the BIOS wait next. */
 #ifndef GAME_HOST_TEST
 __attribute__((target("arm"),section(".text.rom"),noinline,long_call))
 #endif
-void frame_irq(void){music_irq();if(REG16(0x04000202)&1){REG16(0x04000202)=1;REG16(0x03007FF8)|=1;}}
+void frame_irq(void){music_irq();}
 volatile unsigned render_profile_vblank_cycles,render_profile_vblank_start,render_profile_vblank_end,render_profile_deferred_actors,render_profile_commit;
 /* All late CPU/DMA/IRQ work is charged to this completed update. The idle
  * wait for VBlank is excluded; start/end scanlines prove publication fits. */
