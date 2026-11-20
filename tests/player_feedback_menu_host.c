@@ -57,6 +57,39 @@ static void fresh(unsigned form){
 static void repeat(void){unsigned i;journal_nav_open();assert(journal_nav_keys(16,16)==16);for(i=0;i<17;i++)assert(!journal_nav_keys(16,0));assert(journal_nav_keys(16,0)==16);for(i=0;i<5;i++)assert(!journal_nav_keys(16,0));assert(journal_nav_keys(16,0)==16);
  assert(!journal_nav_keys(0,0));assert(journal_nav_keys(64,64)==64);assert(journal_nav_keys(1,1)==1);for(i=0;i<100;i++)assert(!journal_nav_keys(1,0));assert(journal_nav_input(journal_nav_keys(48,48))==1&&journal_nav_category==0);assert(journal_nav_input(journal_nav_keys(24,24))==2);
 }
+static void confirm_keeps_current_selection(void){unsigned i;int input;
+ journal_nav_open();
+ assert(journal_nav_input(journal_nav_keys(128,128))==JOURNAL_CONSUMED&&journal_nav_category==2);
+ for(i=0;i<17;i++)assert(!journal_nav_keys(128,0));
+ input=journal_nav_keys(129,1);
+ assert(input==1);
+ assert(journal_nav_input(input)==JOURNAL_CONSUMED&&journal_tab==JOURNAL_PARTY);
+ for(i=0;i<24;i++)assert(!journal_nav_keys(128,0));
+ assert(!journal_nav_keys(0,0));
+ assert(journal_nav_keys(128,128)==128);
+ journal_nav_open();
+ input=journal_nav_keys(129,129);
+ assert(input==1);
+ assert(journal_nav_input(input)==JOURNAL_CONSUMED&&journal_tab==JOURNAL_ITEMS);
+ journal_nav_open();
+ input=journal_nav_keys(131,131);
+ assert(input==3&&journal_nav_input(input)==JOURNAL_CLOSE);
+ journal_nav_open();
+ input=journal_nav_keys(137,137);
+ assert(input==9&&journal_nav_input(input)==JOURNAL_CLOSE);
+ journal_nav_open();
+ input=journal_nav_keys(133,133);
+ assert(input==5&&journal_nav_input(input)==JOURNAL_CONSUMED&&journal_tab==JOURNAL_HUB);
+ journal_nav_open();journal_nav_category=5;
+ assert(journal_nav_input(1)==JOURNAL_CONSUMED&&journal_tab==JOURNAL_QUESTS);
+ assert(journal_nav_input(journal_nav_keys(128,128))==JOURNAL_CONSUMED&&journal_nav_quest==1);
+ for(i=0;i<17;i++)assert(!journal_nav_keys(128,0));
+ input=journal_nav_keys(129,1);
+ assert(input==1&&journal_nav_input(input)==JOURNAL_CONSUMED&&journal_tab==JOURNAL_REGION_FIRST);
+ for(i=0;i<24;i++)assert(!journal_nav_keys(128,0));
+ assert(!journal_nav_keys(0,0));
+ assert(journal_nav_keys(128,128)==128);
+}
 static void navigation(void){unsigned r,i;static const unsigned count[]={11,11,18,24,24,21,10,12};journal_nav_open();assert(journal_tab==13);assert(journal_nav_input(16)==1&&journal_nav_category==1);assert(journal_nav_input(1)==1&&journal_tab==4);assert(journal_nav_input(3)==1&&journal_tab==13&&!saves);assert(journal_nav_input(9)==2&&!saves);
  journal_nav_category=5;assert(journal_nav_input(1)==1&&journal_tab==14);assert(journal_nav_input(1)==1&&journal_tab==0);assert(journal_nav_input(1)==0&&journal_tab==0);assert(journal_nav_input(2)==1&&journal_tab==14);
  for(r=0;r<8;r++){journal_nav_quest=(int)r+1;assert(journal_nav_input(1)==1&&journal_tab==(int)r+5&&!journal_nav_detail);for(i=0;i<count[r]+1;i++)assert(journal_nav_input(128)==1);assert(journal_nav_input(1)==1&&journal_nav_detail);assert(journal_nav_input(128)==1&&journal_nav_detail);assert(journal_nav_input(2)==1&&!journal_nav_detail&&journal_tab==(int)r+5);assert(journal_nav_input(2)==1&&journal_tab==14);}
@@ -120,4 +153,4 @@ static void committed_boundary(void){Save5State recovered;unsigned char bank[327
  puts("PASS evolution commit handoff: immutable lease, cancel chord ignored after commit, publish once, complete old/new SRAM records");
 }
 void menu_visual_checks(void);
-int main(void){fresh(1);repeat();navigation();equipment();party();field_picker();growth();committed_boundary();fresh(1);menu_visual_checks();puts("PASS actual menu C: repeat/backstack, equipment preview/commit/busy, party ownership/swap/last member/legendary, held-L picker, command preview and fresh-A evolution/cancel");return 0;}
+int main(void){fresh(1);repeat();confirm_keeps_current_selection();navigation();equipment();party();field_picker();growth();committed_boundary();fresh(1);menu_visual_checks();puts("PASS actual menu C: repeat/backstack, confirm priority, equipment preview/commit/busy, party ownership/swap/last member/legendary, held-L picker, command preview and fresh-A evolution/cancel");return 0;}

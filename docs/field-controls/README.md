@@ -6,7 +6,7 @@ A short neutral L press retains the existing next-occupied-party-slot switch, in
 
 The hold interval prepares at most 13 physical roster records per update with the complete existing validator. The list remains hidden until all 160 positions have been checked. Input ownership pauses play immediately; a separate visibility flag controls panel drawing, opaque bitmap masks, actor occlusion and reward display. Existing reward and Horizons performance pause logic continues to use ownership. No validation cache, save decoder change or save schema change is introduced.
 
-The native loop uses BIOS VBlankIntrWait with VBlank and Timer1 interrupts enabled. Approved PCM, cue routing and PSG arrangements are unchanged. Pixel-identical box, hint, save-badge and notice-strip optimizations reduce rendering work while preserving complete backing buffers and world/viewport guards.
+The native loop uses BIOS IntrWait for VBlank with VBlank and Timer1 interrupts enabled. It retains a VBlank that arrives during the PCM timer interrupt and waits until scanlines 160–164 before publishing the frame. Approved PCM, cue routing and PSG arrangements are unchanged. Pixel-identical box, hint, save-badge and notice-strip optimizations reduce rendering work while preserving complete backing buffers and world/viewport guards.
 
 ## Verification
 
