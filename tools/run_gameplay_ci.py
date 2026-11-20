@@ -181,6 +181,7 @@ def main():
         stage('magma-chapter-closure-tests', [python, 'tests/test_magma_chapter_closure.py'])
         stage('underwater-chapter-closure-tests', [python, 'tests/test_underwater_chapter_closure.py'])
         stage('field-update-stages', [python, 'tests/test_field_update.py'])
+        stage('journal-confirm-priority', [python, 'tests/test_player_feedback_menu.py'])
         stage('redesign-art-boundary', [python, 'tests/test_redesign_art.py'])
         stage('lantern-art-layout', [python, 'tests/test_lantern_art.py'])
         stage('boss-observation-tests', [python, 'tests/test_boss_observation.py'])

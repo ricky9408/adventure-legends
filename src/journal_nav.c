@@ -21,7 +21,7 @@ extern void box(int,int,int,int),rect(int,int,int,int,unsigned char),text(int,in
 extern void text_spans(const UiText *text,int x,int y,int color);
 unsigned journal_nav_revision;
 int journal_nav_category,journal_nav_quest,journal_nav_detail;
-static unsigned repeat_direction,repeat_delay;
+static unsigned repeat_direction,repeat_delay,confirm_held_direction;
 #define A 1
 #define B 2
 #define SELECT 4
@@ -39,8 +39,12 @@ static const unsigned char destinations[9]={JOURNAL_ITEMS,JOURNAL_GEAR,JOURNAL_P
 static unsigned quest_count(void){unsigned pages=journal_page_count();if(pages<5)return 1;if(pages>13)pages=13;return pages-4;}
 static void changed(void){journal_nav_revision++;}
 static void enter(int page){journal_tab=page;journal_nav_detail=0;repeat_direction=repeat_delay=0;if(page==JOURNAL_GEAR)gear_menu_reset();else if(page==JOURNAL_PARTY)quickparty_menu_reset();else if(page==JOURNAL_GROWTH)progression_menu_reset();else if(page==JOURNAL_COLLECTION)collection_journal_open();else if(page==JOURNAL_MAP&&journey_map_open)journey_map_open();changed();}
-void journal_nav_open(void){if(journey_map_begin)journey_map_begin();journal_nav_category=0;journal_nav_quest=0;enter(JOURNAL_HUB);}
+void journal_nav_open(void){if(journey_map_begin)journey_map_begin();journal_nav_category=0;journal_nav_quest=0;confirm_held_direction=0;enter(JOURNAL_HUB);}
 int journal_nav_keys(int held,int pressed){unsigned direction=(unsigned)held&DIRECTIONS;int input=pressed&~DIRECTIONS;
+ if(direction!=confirm_held_direction)confirm_held_direction=0;
+ /* A cannot share a repeat tick or carry its held direction to the next page. */
+ if(pressed&A){confirm_held_direction=direction==RIGHT||direction==LEFT||direction==UP||direction==DOWN?direction:0;repeat_direction=repeat_delay=0;return input;}
+ if(confirm_held_direction)return input;
  if(direction!=RIGHT&&direction!=LEFT&&direction!=UP&&direction!=DOWN){repeat_direction=repeat_delay=0;return input|(pressed&DIRECTIONS);}
  if(direction!=repeat_direction){repeat_direction=direction;repeat_delay=18;return input|(int)direction;}
  if(pressed&(B|START)){repeat_direction=repeat_delay=0;return input;}
