@@ -288,16 +288,16 @@ class RegionRuntimeTests(unittest.TestCase):
             self.enter(area);LIB.test_unsummon();self.at(120,149);self.assertEqual(LIB.region_game_solid(120,149),0);LIB.test_keys(128,0);LIB.region_game_tick();self.assertEqual(LIB.test_last_room(),17 if area==19 else 16)
         self.enter(16);self.at(240,304);LIB.test_keys(128,0);LIB.test_lock(1);LIB.region_game_tick();self.assertEqual(get_int('room'),16);LIB.test_lock(0);LIB.region_game_tick();self.assertEqual(get_int('room'),1);self.assertEqual(LIB.test_campaign_spawn(),0)
 
-    def test_garden_real_separate_rolls_wrong_order_and_reentry(self):
+    def test_garden_walking_sequence_ignores_repeat_and_resets_on_reentry(self):
         self.town();self.enter(21);self.interact(64,136)
-        def sensor(x,y,rolling):self.at(x,y);LIB.test_keys(0,rolling);LIB.region_game_tick()
-        sensor(72,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[0])
-        sensor(120,72,8);self.assertEqual(bytes_array('region_game_garden_step',1),[0])
-        sensor(72,72,0);sensor(72,72,8);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
-        sensor(120,72,7);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
+        def sensor(x,y,legacy_roll_ticks):self.at(x,y);LIB.test_keys(0,legacy_roll_ticks);LIB.region_game_tick()
+        sensor(72,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
+        sensor(72,72,8);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
+        sensor(120,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[2])
+        sensor(72,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
         self.enter(16);self.enter(21);self.assertEqual(bytes_array('region_game_garden_step',1),[0])
         for x,y in ((72,72),(120,72),(168,104)):
-            sensor(x,y,0);sensor(x,y,8)
+            sensor(x,y,0)
         self.assertEqual(self.state(9),2);self.assertEqual(LIB.test_variable(9),3);self.interact(184,64);self.assertEqual(self.state(9),3)
         self.enter(21);self.assertEqual(bytes_array('region_game_garden_step',1),[3]);self.assertEqual(LIB.test_invalid_saves(),0)
 
