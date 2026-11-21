@@ -13,7 +13,7 @@ def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);flags=p.add_mutually_exclusive_group();flags.add_argument('--journey-ui-successor',action='store_true');flags.add_argument('--journey-story-ui-successor',action='store_true');flags.add_argument('--soundtrack-successor',action='store_true');flags.add_argument('--field-controls-successor',action='store_true');a=p.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=False)
  manifest=ROOT/'build/source-hashes.json';runtime=json.loads(manifest.read_text());base=ROOT/'tools/run_player_feedback_host.py'
  names=next(ast.literal_eval(n.value) for n in ast.walk(ast.parse(base.read_text())) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='names' for t in n.targets))
- extras=['test_connected_roads_geometry','test_connected_roads_engine','test_connected_road_art','test_trials','test_region_art','test_north_art','test_south_art','test_magma_art','test_underwater_art','test_return_geometry','test_horizons_geometry','test_underwater_return_spawns','test_connected_route_copy']
+ extras=['test_connected_roads_geometry','test_connected_roads_engine','test_connected_road_art','test_trials','test_region_art','test_region_game','test_north_art','test_south_art','test_magma_art','test_underwater_art','test_return_geometry','test_horizons_geometry','test_underwater_return_spawns','test_connected_route_copy']
  names=list(dict.fromkeys(names+extras))
  if not names:raise RuntimeError('Host test selection is empty')
  def unchanged():return all(sha(ROOT/k)==v for k,v in runtime.items())
