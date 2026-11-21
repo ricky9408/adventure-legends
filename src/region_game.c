@@ -183,7 +183,7 @@ COLD int region_game_interact(void){int r;event_dirty=0;sync_chapter();if(game_s
  }
  if(room==18){
   if(reset_interaction(128))return 1;
-  if(close_to(96,64,24)){
+  if(close_to(96,64,24)||(ready(Q_METAL)&&!done(Q_METAL)&&close_to(128,64,24))){
    if(!done(Q_METAL)){offer(Q_METAL);if(ready(Q_METAL))claim_scene(Q_METAL);else say(TX_RG_FOUNDRY_A,TX_RG_FOUNDRY_B);}
    else if(ready(Q_RING))claim_scene(Q_RING);else{offer(Q_RING);say(TX_RG_BELL_REPAIR_A,TX_RG_BELL_REPAIR_B);}
    return 1;
@@ -335,7 +335,9 @@ COLD void region_game_draw_actors(void){unsigned m;if(room==1){if(chapter_flags&
   if(!done(Q_WATER))region_form_actor(13,216,72);
   region_actor(REGION_SPR_NPC_WARDEN,348,268);region_actor(REGION_SPR_SIGN_TIDE,384,80);
  }else if(room==18){
-  if(ready(Q_METAL)&&!done(Q_METAL))region_form_actor(16,96,64);else region_actor((region_game_foundry_step==3||done(Q_RING))?REGION_SPR_BELL_RING:REGION_SPR_BELL_IDLE,96,64);
+  region_actor((region_game_foundry_step==3||done(Q_RING))?REGION_SPR_BELL_RING:REGION_SPR_BELL_IDLE,96,64);
+  /* Keep the bell at its power target while Metal waits beside it for A. */
+  if(ready(Q_METAL)&&!done(Q_METAL))region_form_actor(16,128,64);
   region_actor((region_game_foundry_step||(adventure_save.quests.objectives[Q_CRAFT]&1))?REGION_SPR_FURNACE_LIT:REGION_SPR_FURNACE_IDLE,48,56);
   region_actor(done(Q_LATCH)?REGION_SPR_LATCH_OPEN:REGION_SPR_LATCH_CLOSED,184,56);
   region_actor(region_game_foundry_step>=2?REGION_SPR_PLATE_DOWN:REGION_SPR_PLATE_UP,80,104);region_actor(ready(Q_CRAFT)?REGION_SPR_PLATE_DOWN:REGION_SPR_PLATE_UP,152,104);region_actor(REGION_SPR_RESET_IDLE,32,128);
