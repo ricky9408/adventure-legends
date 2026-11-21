@@ -20,6 +20,7 @@ OUT=Path(TMP.name)
 HARNESS=r'''
 #include <string.h>
 #include "region_game.h"
+#include "region_art.h"
 #include "regional_quests.h"
 #include "progression.h"
 #include "region_game_test_ui.h"
@@ -30,6 +31,7 @@ volatile unsigned chapter_flags;
 int face,keys,journal_tab;
 static unsigned save_calls,invalid_saves,health_calls,actor_calls,last_a,last_b,last_toast,weapon_class=1,entry_safe=1,bag_full;
 static int last_room=-1,last_spawn=-1;
+int bell_actor_x,bell_actor_kind,metal_actor_x;
 static Save5State snapshot;
 CreatureInstance *progression_selected(void){unsigned p=adventure_save.roster.selected_party,s;if(p>=4)return 0;s=adventure_save.roster.party[p];return s<160?&adventure_save.roster.instances[s]:0;}
 unsigned progression_command(void){CreatureInstance*c=progression_selected();return c?c->equipped[c->selected_command]:0;}
@@ -43,8 +45,8 @@ void box(int a,int b,int c,int d){(void)a;(void)b;(void)c;(void)d;}
 void rect(int a,int b,int c,int d,unsigned char e){(void)a;(void)b;(void)c;(void)d;(void)e;}
 void line(int a,int b,int c,int d,int e){(void)a;(void)b;(void)c;(void)d;(void)e;}
 void sprite(const unsigned char*a,int b,int c,int d,int e,int f){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;}
-void region_actor(unsigned a,int b,int c){(void)a;(void)b;(void)c;actor_calls++;}
-void region_form_actor(unsigned a,int b,int c){(void)a;(void)b;(void)c;actor_calls++;}
+void region_actor(unsigned a,int b,int c){(void)c;if(a==REGION_SPR_BELL_IDLE||a==REGION_SPR_BELL_RING){bell_actor_x=b;bell_actor_kind=(int)a;}actor_calls++;}
+void region_form_actor(unsigned a,int b,int c){(void)c;if(a==16)metal_actor_x=b;actor_calls++;}
 int game_region_entry_safe(void){return (int)entry_safe;}
 void game_health_fill(void){health_calls++;}
 unsigned game_weapon_class(void){return weapon_class;}
@@ -98,7 +100,7 @@ void test_all_wishes(void){unsigned i;for(i=0;i<160;i++){CreatureInstance*c=&adv
 int test_water_evolve(void){unsigned i;for(i=0;i<160;i++)if(adventure_save.roster.instances[i].form_id==13)return (int)creatures_evolve(&adventure_save.roster,i,(chapter_flags&7)|8,1,1);return -1;}
 unsigned test_water_trial(void){unsigned i;for(i=0;i<160;i++)if(adventure_save.roster.instances[i].form_id==13||adventure_save.roster.instances[i].form_id==14)return adventure_save.roster.instances[i].trial_flags;return 0;}
 int test_roundtrip(void){Save5State restored;if(!save5_store(&adventure_save)||!save5_load(&restored))return 0;return !memcmp(&restored.quests,&adventure_save.quests,sizeof restored.quests)&&!memcmp(&restored.roster,&adventure_save.roster,sizeof restored.roster)&&!memcmp(&restored.equipment,&adventure_save.equipment,sizeof restored.equipment);}
-unsigned test_draw(void){actor_calls=0;region_game_draw_actors();region_game_draw_overlay();region_game_draw_journal();return actor_calls;}
+unsigned test_draw(void){actor_calls=0;bell_actor_x=bell_actor_kind=metal_actor_x=-1;region_game_draw_actors();region_game_draw_overlay();region_game_draw_journal();return actor_calls;}
 void test_menu(unsigned selection){journal_tab=5;region_game_journal_selection=selection;}
 void test_crates(int a,int b,int c,int d){region_game_crates[0][0]=(short)a;region_game_crates[0][1]=(short)b;region_game_crates[1][0]=(short)c;region_game_crates[1][1]=(short)d;}
 '''
@@ -242,6 +244,18 @@ class RegionRuntimeTests(unittest.TestCase):
         count=LIB.test_equipment();self.at(184,72);self.assertEqual(LIB.region_game_power(11),0);self.assertEqual(LIB.test_equipment(),count)
         self.assertEqual(LIB.test_invalid_saves(),0);self.assertEqual(LIB.test_roundtrip(),1)
 
+    def test_ready_metal_stands_beside_visible_bell_and_accepts_a(self):
+        self.water();self.enter(18)
+        LIB.test_draw();self.assertEqual((get_int('bell_actor_x'),get_int('bell_actor_kind'),get_int('metal_actor_x')),(96,15,-1))
+        self.power(1,48,72);self.power(9,80,120);self.power(3,96,80)
+        self.assertEqual(self.state(3),2)
+        self.assertLessEqual(LIB.test_draw(),20)
+        self.assertEqual((get_int('bell_actor_x'),get_int('bell_actor_kind'),get_int('metal_actor_x')),(96,16,128))
+        self.assertEqual(self.interact(128,80),1)
+        self.assertEqual(self.state(3),3)
+        LIB.test_draw();self.assertEqual((get_int('bell_actor_x'),get_int('bell_actor_kind'),get_int('metal_actor_x')),(96,16,-1))
+        self.assertEqual(LIB.test_invalid_saves(),0);self.assertEqual(LIB.test_roundtrip(),1)
+
     def test_paired_pools_base_water_trial_reset_and_evolved_shortcut(self):
         self.water();self.enter(19);self.interact(64,130);self.power(9,64,86);self.assertEqual(bytes_array('region_game_pool_levels',2),[0,0])
         self.interact(48,132);self.assertEqual(bytes_array('region_game_valves',2),[0,0])
@@ -274,16 +288,16 @@ class RegionRuntimeTests(unittest.TestCase):
             self.enter(area);LIB.test_unsummon();self.at(120,149);self.assertEqual(LIB.region_game_solid(120,149),0);LIB.test_keys(128,0);LIB.region_game_tick();self.assertEqual(LIB.test_last_room(),17 if area==19 else 16)
         self.enter(16);self.at(240,304);LIB.test_keys(128,0);LIB.test_lock(1);LIB.region_game_tick();self.assertEqual(get_int('room'),16);LIB.test_lock(0);LIB.region_game_tick();self.assertEqual(get_int('room'),1);self.assertEqual(LIB.test_campaign_spawn(),0)
 
-    def test_garden_real_separate_rolls_wrong_order_and_reentry(self):
+    def test_garden_walking_sequence_ignores_repeat_and_resets_on_reentry(self):
         self.town();self.enter(21);self.interact(64,136)
-        def sensor(x,y,rolling):self.at(x,y);LIB.test_keys(0,rolling);LIB.region_game_tick()
-        sensor(72,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[0])
-        sensor(120,72,8);self.assertEqual(bytes_array('region_game_garden_step',1),[0])
-        sensor(72,72,0);sensor(72,72,8);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
-        sensor(120,72,7);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
+        def sensor(x,y,legacy_roll_ticks):self.at(x,y);LIB.test_keys(0,legacy_roll_ticks);LIB.region_game_tick()
+        sensor(72,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
+        sensor(72,72,8);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
+        sensor(120,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[2])
+        sensor(72,72,0);self.assertEqual(bytes_array('region_game_garden_step',1),[1])
         self.enter(16);self.enter(21);self.assertEqual(bytes_array('region_game_garden_step',1),[0])
         for x,y in ((72,72),(120,72),(168,104)):
-            sensor(x,y,0);sensor(x,y,8)
+            sensor(x,y,0)
         self.assertEqual(self.state(9),2);self.assertEqual(LIB.test_variable(9),3);self.interact(184,64);self.assertEqual(self.state(9),3)
         self.enter(21);self.assertEqual(bytes_array('region_game_garden_step',1),[3]);self.assertEqual(LIB.test_invalid_saves(),0)
 
