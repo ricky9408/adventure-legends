@@ -200,6 +200,12 @@ void journey_map_open(void){unsigned i,a=(unsigned)room<78?(unsigned)room:0;
  map.place=map.origin;map.count=map.home_count;
  for(i=0;i<map.count;i++)map.exits[i]=map.home_exits[i];
  select_place(map.place);map.exit=map.overview=map.from_list=0;
+ if(map.origin==0&&!(chapter_flags&SAVE4_CORE_CLEAR)){
+  unsigned target=(chapter_flags&SAVE4_SKY_CLEAR)?9:4;
+  /* Leave the pre-boss and locked routes at their familiar starting cursor. */
+  if(chapter_flags&(SAVE4_GROVE_CLEAR|SAVE4_SKY_CLEAR))
+   for(i=0;i<map.count;i++)if(map.exits[i].target==target&&map.exits[i].open){map.exit=(unsigned char)i;break;}
+ }
 }
 void journey_map_reset(void){journey_map_begin();journey_map_open();}
 unsigned journey_map_selected_place(void){return map.place;}

@@ -135,4 +135,19 @@ static void navigation(void){Save5State before;unsigned revision;fresh();before=
  assert(journey_map_selected_place()==60&&!journey_map_is_known(61));draw();assert(!drawn_text[TX_RT_ROOM61]);capture("fresh-known-maproom-hides-onward-name");
  puts("PASS A choose, B nested back, Start close, Select unused, reopening resets, no travel/save mutation");
 }
-int main(void){topology();gates_and_secrets();knowledge_bitset_equivalence();layouts_and_purity();navigation();printf("Host map captures: %u\n",captures);return 0;}
+static void campaign_route_focus(void){Save5State before;JourneyMapExit e;unsigned expected,stage;
+ for(stage=0;stage<4;stage++){
+  fresh();chapter_flags=stage==0?0:stage==1?SAVE4_GROVE_CLEAR:
+                stage==2?SAVE4_GROVE_CLEAR|SAVE4_SKY_CLEAR:
+                         SAVE4_GROVE_CLEAR|SAVE4_SKY_CLEAR|SAVE4_CORE_CLEAR;
+  before=adventure_save;journey_map_reset();expected=stage==1?1:stage==2?3:0;
+  assert(journey_map_selected_exit()==expected);
+  assert(journey_map_exit(0,expected,&e)&&e.open);
+  journey_map_input(1);assert(journey_map_overview());journey_map_input(2);
+  assert(!journey_map_overview()&&journey_map_selected_exit()==expected);
+  room=1;journey_map_reset();assert(journey_map_selected_exit()==0);
+  assert(!memcmp(&before,&adventure_save,sizeof before));
+ }
+ puts("PASS village map opens on the newly available campaign route, keeps prior/default cursors, and never changes save bytes");
+}
+int main(void){topology();gates_and_secrets();knowledge_bitset_equivalence();layouts_and_purity();navigation();campaign_route_focus();printf("Host map captures: %u\n",captures);return 0;}
